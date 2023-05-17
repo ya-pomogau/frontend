@@ -1,11 +1,9 @@
 import "./assets/styles/index.css";
-import logo from "shared/ui/react-logo/logo.svg";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>

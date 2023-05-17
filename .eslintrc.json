@@ -12,6 +12,7 @@
     "plugin:import/typescript",
     "airbnb",
     "plugin:react/jsx-runtime",
+    "plugin:storybook/recommended",
     "prettier"
   ],
   "settings": {
@@ -31,9 +32,26 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-    "import/extensions": [2, { "ignorePackages": true }],
+    "react/jsx-props-no-spreading": "off",
+    "react/function-component-definition": "off",
+    "react/require-default-props": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".tsx"]
+      }
+    ],
+    "import/extensions": [
+      2,
+      {
+        "ignorePackages": true
+      }
+    ],
     "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.stories.ts"] }
+    ],
     "no-unused-vars": "off"
   }
 }
