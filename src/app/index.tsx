@@ -1,5 +1,5 @@
-import './assets/styles/index.css';
-import logo from 'shared/ui/react-logo/logo.svg';
+import "./assets/styles/index.css";
+import logo from "shared/ui/react-logo/logo.svg";
 
 function App() {
   return (
@@ -13,7 +13,8 @@ function App() {
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           Learn React
         </a>
       </header>
