@@ -1,23 +1,9 @@
 import "./assets/styles/index.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { AppRoutes } from "../pages";
+import { withProviders } from "./providers";
 
-export default App;
+function App() {
+  return <AppRoutes />;
+}
+export default withProviders(App);

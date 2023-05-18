@@ -1,25 +1,13 @@
+import type { ButtonHTMLAttributes } from "react";
+import classnames from "classnames";
 import styles from "./styles.module.css";
 
-interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  extClassName?: string;
   primary?: boolean;
-  /**
-   * What background color to use
-   */
   backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
   size?: "small" | "medium" | "large";
-  /**
-   * Button contents
-   */
   label: string;
-  /**
-   * Optional click handler
-   */
   onClick?: () => void;
 }
 
@@ -27,6 +15,7 @@ interface ButtonProps {
  * Primary UI component for user interaction
  */
 export const Button = ({
+  extClassName,
   primary = false,
   size = "medium",
   backgroundColor,
@@ -39,11 +28,12 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={[
+      className={classnames(
         styles["storybook-button"],
         styles[`storybook-button--${size}`],
         mode,
-      ].join(" ")}
+        extClassName
+      )}
       style={{ backgroundColor }}
       {...props}
     >

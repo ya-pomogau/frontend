@@ -37,6 +37,7 @@
     "@storybook/react": "^7.0.12",
     "@storybook/react-webpack5": "^7.0.12",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@types/compose-function": "^0.0.30",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "babel-plugin-named-exports-order": "^0.0.2",
