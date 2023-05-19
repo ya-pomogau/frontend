@@ -25,6 +25,6 @@ export const CategoriesBackground = ({
       "text_size_small"
     )}
   >
-    {content}
+    <div className={styles["categories-background-content"]}>{content}</div>
   </div>
 );

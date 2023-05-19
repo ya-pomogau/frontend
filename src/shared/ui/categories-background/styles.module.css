@@ -15,7 +15,6 @@
   width: 100%;
   height: 100%;
   clip-path: polygon(0% 0%, 100% 30%, 93% 100%, 0% 100%);
-  z-index: -10;
 }
 
 .categories-background--primary.categories-background::before {
@@ -41,4 +40,8 @@
 .categories-background--large {
   padding-left: 30px;
   max-width: 215px;
+}
+
+.categories-background-content {
+  z-index: 10;
 }
