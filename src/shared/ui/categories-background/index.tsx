@@ -20,7 +20,9 @@ export const CategoriesBackground = ({
       styles["categories-background"],
       styles[`categories-background--${size}`],
       styles[`categories-background--${theme}`],
-      extClassName
+      extClassName,
+      "text",
+      "text_size_small"
     )}
   >
     {content}

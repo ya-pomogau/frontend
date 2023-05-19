@@ -3,7 +3,7 @@
   align-items: center;
   height: 25px;
   box-sizing: border-box;
-  color: #ffffff;
+  color: var(--colors-interface-white);
   position: relative;
 }
 
@@ -19,19 +19,19 @@
 }
 
 .categories-background--primary.categories-background::before {
-  background-color: #9798c9;
+  background-color: var(--colors-interface-primary-additional);
 }
 
 .categories-background--secondary.categories-background::before {
-  background-color: #818c99;
+  background-color: var(--colors-interface-additional);
 }
 
 .categories-background--success.categories-background::before {
-  background-color: #acca3e;
+  background-color: var(--colors-interface-yellow);
 }
 
 .categories-background--warning.categories-background::before {
-  background-color: #f9bc90;
+  background-color: var(--colors-interface-orange-soft);
 }
 
 .categories-background--medium {
