@@ -1,0 +1,44 @@
+.categories-background {
+  display: flex;
+  align-items: center;
+  height: 25px;
+  box-sizing: border-box;
+  color: #ffffff;
+  position: relative;
+}
+
+.categories-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 0%, 100% 30%, 93% 100%, 0% 100%);
+  z-index: -10;
+}
+
+.categories-background--primary.categories-background::before {
+  background-color: #9798c9;
+}
+
+.categories-background--secondary.categories-background::before {
+  background-color: #818c99;
+}
+
+.categories-background--success.categories-background::before {
+  background-color: #acca3e;
+}
+
+.categories-background--warning.categories-background::before {
+  background-color: #f9bc90;
+}
+
+.categories-background--medium {
+  padding-left: 15px;
+  max-width: 169px;
+}
+.categories-background--large {
+  padding-left: 30px;
+  max-width: 215px;
+}
