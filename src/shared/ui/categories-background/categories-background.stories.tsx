@@ -3,9 +3,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CategoriesBackground } from ".";
 
 const meta: Meta<typeof CategoriesBackground> = {
-  title: "Example/CategoriesBackground",
+  title: "CategoriesBackground",
   component: CategoriesBackground,
   tags: ["autodocs"],
+  argTypes: {
+    content: { type: "string" },
+  },
 };
 
 export default meta;
