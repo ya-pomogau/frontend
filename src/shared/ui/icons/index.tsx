@@ -22,30 +22,7 @@ export * from "./vk-icon"
 export * from "./done-icon"
 
 
-
 export type TStatusIcons = {
-  CalendarIcon: FC<IIconProps>;
-  ClockIcon: FC<IIconProps>;
-  ReadMessageIcon: FC<IIconProps>; 
-  MenuIcon: FC<IIconProps>;
-  PhoneIcon: FC<IIconProps>;
-  EmpyMessageIcon: FC<IIconProps>;
-  ExitIcon: FC<IIconProps>;
-  PersonIcon: FC<IIconProps>;
-  WriteMessageIcon: FC<IIconProps>;
-  LockIcon: FC<IIconProps>;
-  LocationIcon: FC<IIconProps>;
-  SettingsIcon: FC<IIconProps>;
-  ArrowIcon: FC<IIconProps>;
-  PinIcon: FC<IIconProps>;
-  SendIcon: FC<IIconProps>;
-  EditIcon: FC<IIconProps>;
-  CloseIcon: FC<IIconProps>;
-  VkIcon: FC<IIconProps>;
-  DoneIcon: FC<IIconProps>;
-};
-
-export type TIcons = {
   CalendarIcon: FC<IIconProps>;
   ClockIcon: FC<IIconProps>;
   ReadMessageIcon: FC<IIconProps>;
@@ -65,5 +42,4 @@ export type TIcons = {
   CloseIcon: FC<IIconProps>;
   VkIcon: FC<IIconProps>;
   DoneIcon: FC<IIconProps>;
-  
-} & TStatusIcons;
+};
