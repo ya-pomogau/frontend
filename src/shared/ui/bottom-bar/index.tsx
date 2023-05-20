@@ -1,8 +1,8 @@
-export interface IBotBarProps {
+export interface IBottomBarProps {
   className?: string;
 }
 
-export const BotBar = ({ className }: IBotBarProps) => (
+export const BottomBar = ({ className }: IBottomBarProps) => (
   <div className={className}>
     <svg
       width="1440"

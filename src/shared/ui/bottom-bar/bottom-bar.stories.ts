@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { BotBar } from ".";
+import { BottomBar } from ".";
 
 const meta = {
   title: "Bottom-bar",
-  component: BotBar,
-} as Meta<typeof BotBar>;
+  component: BottomBar,
+} as Meta<typeof BottomBar>;
 
 export default meta;
 
