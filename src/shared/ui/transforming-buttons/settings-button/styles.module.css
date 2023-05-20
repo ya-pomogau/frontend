@@ -1,0 +1,13 @@
+.setting-button {
+    background-image: url(./img/default.svg);
+    width: 32px;
+    height: 32px;
+}
+
+.setting-button:hover {
+    background-image: url(./img/hover.svg),
+    url(./img/hover2.svg);
+    transition: var(--transition-hover);
+    width: 35px;
+    height: 35px;
+}
