@@ -1,9 +1,8 @@
 import "./assets/styles/index.css";
-
-import Checkbox from "shared/ui/checkbox";
+import { DefaultCheckboxIcon } from "shared/ui/checkbox/checkbox-icon";
 import { AppRoutes } from "../pages";
 import { withProviders } from "./providers";
-
+import Checkbox from "../shared/ui/checkbox";
 // function App() {
 //   return <AppRoutes />;
 // }
@@ -11,10 +10,12 @@ import { withProviders } from "./providers";
 function App() {
   return (
     <Checkbox
-      label="test"
-      id="1221"
+      id="22"
+      name="22"
+      checked
       onClickCheckbox={() => console.log("test")}
-      checked={false}
+      label="blabla"
+      icon={<DefaultCheckboxIcon />}
     />
   );
 }
