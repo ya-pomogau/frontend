@@ -20,6 +20,19 @@ import { EditIcon } from "./edit-icon";
 import { CloseIcon } from "./closee-icon";
 import { VkIcon } from "./vk-icon";
 import { DoneIcon } from "./done-icon";
+import { ActiveApplicationIcon } from "./active-application-icon";
+import { RegistrationIcon } from "./registration-icon";
+import { StatisticIcon } from "./statistic-icon";
+import { BallsIcon } from "./balls-icon";
+import { BlockIcon } from "./block-icon";
+import { ContactsIcon } from "./contacts-icon";
+import { FilterIcon } from "./filter-icon";
+import { FinishedApplicationIcon } from "./finished-application-icon";
+import { KeyIcon } from "./key-icon";
+import { MapApplicationIcon } from "./map-application-icon";
+import { MapIcon } from "./map-icon";
+import { PopularIcon } from "./popular-icon";
+import { CompletedApplicationIcon } from "./completed-application-icon";
 
 const icons = {
   CalendarIcon,
@@ -41,6 +54,19 @@ const icons = {
   CloseIcon,
   VkIcon,
   DoneIcon,
+  ActiveApplicationIcon,
+  BallsIcon,
+  BlockIcon,
+  CompletedApplicationIcon,
+  RegistrationIcon,
+  StatisticIcon,
+  ContactsIcon,
+  FilterIcon,
+  FinishedApplicationIcon,
+  KeyIcon,
+  MapApplicationIcon,
+  MapIcon,
+  PopularIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
