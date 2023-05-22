@@ -1,6 +1,6 @@
 import { getColor, IIconProps } from "./utils";
 
-export const EmpyMessageIcon = ({ color, ...props }: IIconProps) => (
+export const EmptyMessageIcon = ({ color, ...props }: IIconProps) => (
   <svg
     width="24"
     height="24"
