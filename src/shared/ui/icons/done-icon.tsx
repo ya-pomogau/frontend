@@ -1,9 +1,9 @@
 import { getColor, IIconProps } from "./utils";
 
-export const DoneIcon = ({ color, ...props }: IIconProps) => (
+export const DoneIcon = ({ color, size = "24", ...props }: IIconProps) => (
   <svg
-    width="24"
-    height="24"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     fill={getColor(color)}
     xmlns="http://www.w3.org/2000/svg"
