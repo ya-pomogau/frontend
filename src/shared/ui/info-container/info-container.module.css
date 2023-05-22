@@ -39,3 +39,9 @@
   left: 0;
   z-index: 10;
 }
+
+.info-container-personal-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

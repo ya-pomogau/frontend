@@ -4,6 +4,7 @@ import { InfoContainerContent } from ".";
 const meta: Meta<typeof InfoContainerContent> = {
   title: "InfoContainerContent",
   component: InfoContainerContent,
+  tags: ["autodocs"],
 };
 
 export default meta;
