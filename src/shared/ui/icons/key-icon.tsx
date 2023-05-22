@@ -4,7 +4,7 @@ export const KeyIcon = ({ color, size = "24", ...props }: IIconProps) => (
   <svg
     width={size}
     height={size}
-    viewBox="0 0 32 32"
+    viewBox="0 0 24 24"
     fill={getColor(color)}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
