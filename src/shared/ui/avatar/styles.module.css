@@ -1,43 +1,12 @@
 .avatar {
+  display: block;
+  margin: 0;
+  padding: 0;
   border: none;
   border-radius: 50%;
-}
-
-.avatar--small {
-  width: 30px;
-  height: 30px;
-}
-
-.avatar--medium {
-  width: 44px;
-  height: 44px;
-}
-
-.avatar--large {
-  width: 60px;
-  height: 60px;
-}
-
-.avatar--elarge {
   width: 120px;
   height: 120px;
-}
-
-
-@media all and (min-width: 1025px) {
-
-  .avatar--medium {
-    width: 60px;
-    height: 60px;
-  }
-
-  .avatar--large {
-    width: 100px;
-    height: 100px;
-  }
-
-  .avatar--elarge {
-    width: 175px;
-    height: 175px;
-  }
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
 }
