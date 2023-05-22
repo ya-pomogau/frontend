@@ -1,0 +1,41 @@
+.info-container-frame {
+  max-width: 295px;
+  min-height: 362px;
+  position: relative;
+}
+
+.info-container-image {
+  display: block;
+  width: 100%;
+  /* border: 4px solid var(--colors-interface-primary); */
+  position: absolute;
+  top: 88px;
+  box-sizing: border-box;
+}
+
+.info-container-avatar {
+  width: 175px;
+  height: 175px;
+  border-radius: 512px;
+  background-color: var(--colors-interface-primary-additional);
+  position: absolute;
+  left: calc(50% - 175px / 2);
+  top: 0px;
+}
+
+.info-container-content {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  color: var(--colors-interface-primary);
+}
+
+.info-container-button-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
