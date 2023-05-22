@@ -10,11 +10,11 @@ interface IInfoContainerContent {
 }
 
 export const InfoContainerContent = ({
-  name = "cmdknsfd",
-  id,
-  phoneNumber,
-  address,
-  description,
+  name = "Иванов Иван Иванович",
+  id = 112233,
+  phoneNumber = "+7(000) 000 000",
+  address = "ул. Цветной бульвар, 43",
+  description = "Я люблю музыку, книги и кошек",
 }: IInfoContainerContent) => (
   <>
     <p
@@ -56,7 +56,7 @@ export const InfoContainerContent = ({
           "text"
         )}
       >
-        Тел.:
+        Тел.: &nbsp;
       </span>
       {phoneNumber}
     </p>
@@ -77,7 +77,7 @@ export const InfoContainerContent = ({
           "text"
         )}
       >
-        Адрес:
+        Адрес: &nbsp;
       </span>
       {address}
     </p>
@@ -97,7 +97,7 @@ export const InfoContainerContent = ({
           "text"
         )}
       >
-        О себе:
+        О себе: &nbsp;
       </span>
       {description}
     </p>
