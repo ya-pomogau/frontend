@@ -13,11 +13,11 @@
 }
 
 .checkbox-icon--wrapper {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-sizing: border-box;
   margin-right: 14px;
   width: 20px;
   height: 20px;
@@ -32,10 +32,12 @@
 
 .checkbox-icon {
   position: absolute;
+  width: 100%;
+  height: 100%;
   visibility: hidden;
 }
 
-.checkbox-icon--wrapper:disabled {
+.checkbox:disabled+label > .checkbox-icon--wrapper {
   opacity: .4;
 }
 

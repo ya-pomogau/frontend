@@ -24,7 +24,7 @@ export const Checkbox: FC<CheckboxProps> = ({
       id={id}
       name={id}
       onChange={onClickCheckbox}
-      defaultChecked={checked}
+      checked={checked}
       {...props}
     />
     <label
