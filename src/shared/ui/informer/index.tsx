@@ -21,11 +21,7 @@ export const Informer = ({ text, extClassName, icon }: InformerProps) => (
       {icon || <img src={HeartIcon} alt="Сердeчное рукопожатие" />}
     </div>
     <span
-      className={classnames(
-        "text-inter",
-        "text_size_large",
-        styles["informer-text"]
-      )}
+      className={classnames("text", "text_size_large", styles["informer-text"])}
     >
       {text}
     </span>
