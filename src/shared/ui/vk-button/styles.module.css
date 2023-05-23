@@ -1,0 +1,38 @@
+.vk-button {
+  display: flex;
+  padding: 8px 14px 7px 16px;
+  align-items: center;
+  justify-content: center;
+  color: var(--colors-interface-white);
+  background-color: var(--colors-interface-primary);
+  border: none;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+
+.vk-button:hover {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.vk-button:disabled {
+  cursor: default;
+  background-color: var(--colors-interface-additional);
+}
+
+.vk-button-content {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.vk-button-img {
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  box-sizing: border-box;
+}
+
+.vk-button-label {
+  display: flex;
+  align-items: center;
+  text-align: start;
+}

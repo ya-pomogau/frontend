@@ -1,0 +1,119 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background: transparent;
+  transition: background-color 1s;
+  cursor: pointer;
+  color: var(--colors-interface-white);
+  border: none;
+  box-sizing: border-box;
+}
+
+.button--partial {
+  background: linear-gradient(
+    to right,
+    var(--colors-interface-white) 50%,
+    var(--colors-interface-primary) 50%
+  );
+  border: 1px solid var(--colors-interface-primary);
+}
+
+.button--partial:hover,
+.button--partial:disabled {
+  background: transparent;
+  border: none;
+}
+
+.button--primary {
+  background-color: var(--colors-interface-primary);
+}
+
+.button--primary:hover,
+.button--partial:hover {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.button--secondary {
+  color: var(--colors-interface-primary);
+  background-color: var(--colors-interface-white);
+  border: 1px solid var(--colors-interface-primary);
+}
+
+.button--primary--pressed,
+.button--secondary--pressed {
+  color: var(--colors-interface-white);
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.button--secondary:hover {
+  color: var(--colors-interface-white);
+  background-color: var(--colors-interface-blue-strong);
+}
+.button--secondary:disabled,
+.button--primary:disabled,
+.button--partial {
+  cursor: default;
+}
+
+.button--secondary:disabled {
+  color: var(--colors-interface-primary-additional);
+  border: 1px solid var(--colors-interface-primary-additional);
+  background-color: var(--colors-interface-white);
+}
+
+.button--primary:disabled {
+  background-color: var(--colors-interface-additional);
+}
+
+.button--partial:disabled {
+  background-color: var(--colors-interface-additional);
+}
+
+.button--partial:disabled > .button-content--partial {
+  color: var(--colors-interface-white);
+}
+
+.button--small {
+  padding: 8px 7px;
+}
+
+.button--medium {
+  padding: 11px 16px;
+}
+
+.button--large {
+  padding: 8px 28px;
+}
+
+.button-content {
+  width: 92px;
+  height: 16px;
+}
+
+.button-content--partial {
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(
+    to right,
+    var(--colors-interface-primary) 50%,
+    var(--colors-interface-white) 50%
+  );
+}
+
+.button--partial:hover > .button-content--partial {
+  color: var(--colors-interface-white);
+}
+
+.button--secondary--small {
+  padding: 7px 4px;
+}
+
+.button--secondary--medium {
+  padding: 8px 15px;
+}
+
+.button--secondary--large {
+  padding: 8px 27px;
+}

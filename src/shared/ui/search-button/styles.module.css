@@ -1,0 +1,47 @@
+.arrow-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  background: transparent;
+  transition: background-color 1s;
+  cursor: pointer;
+  color: var(--colors-interface-white);
+  border: none;
+  box-sizing: border-box;
+  position: relative;
+  padding: 12px 0 9px 0;
+  width: 170px;
+}
+
+.arrow-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 0%, 100% 30%, 93% 100%, 0% 100%);
+  background-color: var(--colors-interface-primary);
+  transition: background-color 1s;
+}
+
+.arrow-button:hover.arrow-button::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.arrow-button--pressed.arrow-button::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.arrow-button:disabled {
+  cursor: default;
+}
+
+.arrow-button:disabled.arrow-button::before {
+  background-color: var(--colors-interface-additional);
+}
+
+.arrow-button-content {
+  z-index: 10;
+}

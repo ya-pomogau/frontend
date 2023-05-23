@@ -1,0 +1,23 @@
+.edit-button {
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--colors-interface-primary);
+  border: none;
+}
+
+.edit-button:disabled {
+  cursor: default;
+}
+
+.edit-button-content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.edit-button-img {
+  width: 20px;
+  height: 18px;
+  border: 1px solid red;
+  box-sizing: border-box;
+}

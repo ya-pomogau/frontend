@@ -1,0 +1,52 @@
+.card-button {
+  display: flex;
+  align-items: center;
+  background-color: var(--colors-interface-primary);
+  color: var(--colors-interface-white);
+  border: none;
+  cursor: pointer;
+  height: 114px;
+}
+
+@media (max-width: 360px) {
+  .card-button {
+    width: 200px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 735px) {
+  .card-button {
+    width: 224px;
+  }
+}
+
+@media (min-width: 736px) {
+  .card-button {
+    width: 276px;
+  }
+}
+.card-button-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 50px;
+}
+
+.card-button-content {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-button-label {
+  display: flex;
+  align-items: center;
+  width: 148px;
+  text-align: start;
+}
+
+.card-button--pressed {
+  background-color: var(--colors-interface-blue-strong);
+}
