@@ -28,7 +28,7 @@ export const Button = ({
       styles[`button--${buttonType}`],
       styles[`button--${size}`],
       styles[`button--${buttonType}--${size}`],
-      styles[isPressed ? `button--${buttonType}--pressed` : ""],
+      { [styles[`button--${buttonType}--pressed`]]: isPressed },
       extClassName,
       "text",
       "text_size_small"
@@ -38,8 +38,8 @@ export const Button = ({
   >
     <div
       className={classnames(
-        styles["button-content"],
-        styles[`button-content--${buttonType}`]
+        styles.buttonContent,
+        styles[`buttonContent--${buttonType}`]
       )}
     >
       {label}

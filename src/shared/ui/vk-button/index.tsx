@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 import classnames from "classnames";
+import { VkIcon } from "../icons/vk-icon";
 import styles from "./styles.module.css";
 
 interface VkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,9 +27,9 @@ export const VkButton = ({
     disabled={disabled}
     {...props}
   >
-    <div className={styles["vk-button-content"]}>
-      <div className={styles["vk-button-img"]} />
-      <div className={styles["vk-button-label"]}>{label}</div>
+    <div className={styles["vk-buttonContent"]}>
+      <VkIcon size="24" color="white" />
+      <span className={styles["vk-buttonLabel"]}>{label}</span>
     </div>
   </button>
 );

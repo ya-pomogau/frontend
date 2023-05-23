@@ -6,6 +6,9 @@ const meta: Meta<typeof ArrowButton> = {
   title: "Buttons/ArrowButton",
   component: ArrowButton,
   tags: ["autodocs"],
+  argTypes: {
+    icon: { type: "string" },
+  },
 };
 
 export default meta;

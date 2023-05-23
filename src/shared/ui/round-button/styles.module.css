@@ -1,11 +1,22 @@
 .round-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   border-radius: 50%;
   background-color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-additional);
   background-repeat: no-repeat;
   background-position: center;
-  transition: background-color 1s;
+  transition: var(--transition-hover);
+  background-size: 18px;
+  background-position: center;
+}
+
+.round-buttonImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .round-button:hover {
@@ -40,10 +51,6 @@
   height: 82px;
 }
 
-.round-button--phone {
-  background-image: url("./phone.svg");
-}
-
 .round-button--location--pressed {
   background-color: var(--colors-interface-blue-navy);
 }
@@ -63,8 +70,4 @@
 .round-button:disabled {
   background-color: var(--colors-interface-additional);
   cursor: default;
-}
-
-.round-button--default {
-  background-image: none;
 }

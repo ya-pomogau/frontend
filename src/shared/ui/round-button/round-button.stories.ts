@@ -6,6 +6,9 @@ const meta: Meta<typeof RoundButton> = {
   title: "Buttons/RoundButton",
   component: RoundButton,
   tags: ["autodocs"],
+  argTypes: {
+    customIcon: { type: "string" },
+  },
 };
 
 export default meta;

@@ -4,7 +4,7 @@
   justify-content: center;
   height: 30px;
   background: transparent;
-  transition: background-color 1s;
+  transition: var(--transition-hover);
   cursor: pointer;
   color: var(--colors-interface-white);
   border: none;
@@ -71,7 +71,7 @@
   background-color: var(--colors-interface-additional);
 }
 
-.button--partial:disabled > .button-content--partial {
+.button--partial:disabled > .buttonContent--partial {
   color: var(--colors-interface-white);
 }
 
@@ -87,12 +87,12 @@
   padding: 8px 28px;
 }
 
-.button-content {
+.buttonContent {
   width: 92px;
   height: 16px;
 }
 
-.button-content--partial {
+.buttonContent--partial {
   color: transparent;
   background-clip: text;
   background-image: linear-gradient(
@@ -102,7 +102,7 @@
   );
 }
 
-.button--partial:hover > .button-content--partial {
+.button--partial:hover > .buttonContent--partial {
   color: var(--colors-interface-white);
 }
 

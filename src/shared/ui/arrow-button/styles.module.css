@@ -1,16 +1,15 @@
 .arrow-button {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 34px;
   background: transparent;
-  transition: background-color 1s;
   cursor: pointer;
   color: var(--colors-interface-white);
   border: none;
   box-sizing: border-box;
   position: relative;
-  padding: 12px 0 9px 0;
+  padding: 12px 0 8px 9px;
   width: 170px;
 }
 
@@ -23,7 +22,7 @@
   height: 100%;
   clip-path: polygon(0% 0%, 100% 30%, 93% 100%, 0% 100%);
   background-color: var(--colors-interface-primary);
-  transition: background-color 1s;
+  transition: var(--transition-hover);
 }
 
 .arrow-button:hover.arrow-button::before {
@@ -42,6 +41,10 @@
   background-color: var(--colors-interface-additional);
 }
 
-.arrow-button-content {
+.arrow-buttonContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   z-index: 10;
 }

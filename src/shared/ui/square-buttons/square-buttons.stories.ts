@@ -6,6 +6,9 @@ const meta: Meta<typeof SquareButton> = {
   title: "Buttons/SquareButton",
   component: SquareButton,
   tags: ["autodocs"],
+  argTypes: {
+    icon: { type: "string" },
+  },
 };
 
 export default meta;
@@ -23,7 +26,7 @@ export const EditButton: Story = {
   },
 };
 
-export const ConformButton: Story = {
+export const ConfirmButton: Story = {
   args: {
     buttonType: "confirm",
   },

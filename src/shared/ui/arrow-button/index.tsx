@@ -1,5 +1,6 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import classnames from "classnames";
+import { ArrowIcon } from "../icons/arrow-icon";
 import styles from "./styles.module.css";
 
 interface ArrowButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,6 +9,7 @@ interface ArrowButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   label: string;
   isPressed?: boolean;
+  icon?: ReactNode;
 }
 
 export const ArrowButton = ({
@@ -15,13 +17,14 @@ export const ArrowButton = ({
   disabled,
   label,
   isPressed,
+  icon,
   ...props
 }: ArrowButtonProps) => (
   <button
     type="button"
     className={classnames(
       styles["arrow-button"],
-      styles[isPressed ? `arrow-button--pressed` : ""],
+      { [styles["arrow-button--pressed"]]: isPressed },
       extClassName,
       "text",
       "text_size_medium"
@@ -29,6 +32,9 @@ export const ArrowButton = ({
     disabled={disabled}
     {...props}
   >
-    <div className={styles["arrow-button-content"]}>{label}</div>
+    <div className={styles["arrow-buttonContent"]}>
+      {icon || <ArrowIcon size="32" color="white" />}
+      <span>{label}</span>
+    </div>
   </button>
 );

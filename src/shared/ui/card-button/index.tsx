@@ -21,16 +21,16 @@ export const CardButton = ({
     type="button"
     className={classnames(
       styles["card-button"],
-      styles[isPressed ? "card-button--pressed" : ""],
+      { [styles["card-button--pressed"]]: isPressed },
       extClassName,
       "text",
       "text_size_medium"
     )}
     {...props}
   >
-    <div className={styles["card-button-content"]}>
-      <div className={styles["card-button-img"]}>{icon}</div>
-      <div className={styles["card-button-label"]}>{label}</div>
+    <div className={styles["card-buttonContent"]}>
+      <div className={styles["card-buttonImg"]}>{icon}</div>
+      <span className={styles["card-buttonLabel"]}>{label}</span>
     </div>
   </button>
 );
