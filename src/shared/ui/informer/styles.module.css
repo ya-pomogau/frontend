@@ -6,11 +6,11 @@
   color: var(--colors-interface-primary-additional);
 }
 
-.informer--with-text {
+.informer--withText {
   gap: 10px;
 }
 
-.informer-img-block {
+.informer-imgBlock {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,6 +21,11 @@
   background-color: var(--colors-interface-primary-additional);
 }
 
-.informer-text {
+.informerText {
   text-align: center;
+}
+
+.informerImg {
+  width: 56px;
+  height: 50px;
 }
