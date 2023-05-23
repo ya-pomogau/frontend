@@ -15,7 +15,7 @@ const meta: Meta<typeof CardButton> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const Icon = <CompletedApplicationIcon size="32" color="white" />;
+const Icon = <CompletedApplicationIcon size="54" color="white" />;
 
 export const Default: Story = {
   args: {
