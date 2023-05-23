@@ -21,6 +21,14 @@
   position: absolute;
   left: calc(50% - 175px / 2);
   top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-container-svg {
+  width: 75px;
+  height: 125px;
 }
 
 .info-container-content {
