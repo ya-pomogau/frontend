@@ -1,0 +1,25 @@
+.button {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--colors-interface-primary-additional);
+  transition: all 200ms linear, opacity 50ms linear;
+  cursor: pointer;
+  position: relative;
+  background-color: var(--colors-interface-white);
+}
+
+.button:active {
+  opacity: 0.6;
+}
+
+.button:hover {
+  background-color: #eceef6;
+}
+
+.button__icon {
+  position: absolute;
+  top: 47%;
+  right: 55%;
+  transform: translate(50%, -50%);
+}
