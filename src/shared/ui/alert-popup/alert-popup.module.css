@@ -1,0 +1,6 @@
+.container {
+  width: 370px;
+  max-height: 236px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 32px rgba(0, 0, 0, 0.16);
+  background-color: var(--colors-interface-white);
+}
