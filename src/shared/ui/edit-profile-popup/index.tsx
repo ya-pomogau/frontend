@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { ReactNode } from "react";
 import { OverlayingPopup } from "../overlaying-popup";
-import styles from "./alert-popup.module.css";
+import styles from "./edit-profile-popup.module.css";
 
-interface IAlertPopup {
+interface IEditProfilePopup {
   isOpened?: boolean;
   onClose?: () => void;
   extClassName?: string;
@@ -11,13 +11,13 @@ interface IAlertPopup {
   children?: ReactNode;
 }
 
-export const AlertPopup = ({
+export const EditProfilePopup = ({
   isOpened,
   onClose,
   extClassName,
   title = "Благодарю за отзывчивость",
   children,
-}: IAlertPopup) => (
+}: IEditProfilePopup) => (
   <OverlayingPopup isOpened={isOpened} onClose={onClose}>
     <div className={classNames(styles.container, extClassName)}>
       <p

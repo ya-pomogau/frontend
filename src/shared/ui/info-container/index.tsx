@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./info-container.module.css";
 import { SettingsButton } from "../transforming-buttons/settings-button/index";
 import { Avatar } from "../avatar";
+import { PersonIcon } from "../icons/person-icon";
 
 interface IInfoContainerProps {
   icon?: string | React.ReactNode;
@@ -39,11 +40,10 @@ export const InfoContainer = ({
         />
       </div>
     ) : (
-      <div
-        className={classNames(styles["info-container-avatar"], extClassName)}
-      >
-        {icon}
-      </div>
+      <PersonIcon
+        color="white"
+        className={classNames(styles["info-container-avatar"])}
+      />
     )}
     <div className={classNames(styles["info-container-content"], extClassName)}>
       {children}

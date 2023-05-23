@@ -4,7 +4,6 @@ import { AlertPopup } from ".";
 const meta: Meta<typeof AlertPopup> = {
   title: "Alert-Popup",
   component: AlertPopup,
-  tags: ["autodocs"],
 };
 
 export default meta;
