@@ -62,7 +62,7 @@ export const disabledRadioButton: Story = {
   },
 };
 
-export const groupRadioButtons = (args: typeof RadioButton) => (
+export const groupRadioButtons = () => (
   <>
     <RadioButton label="1 km" name="group" id="test" />
     <RadioButton label="5 km" name="group" id="test-2" defaultChecked />
