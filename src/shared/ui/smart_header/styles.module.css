@@ -1,7 +1,7 @@
 .smart-header_container {
     width: 100%;
     min-width: 384px;
-    border: 2px solid var(--colors-interface-blue-strong);
+    border: 2px solid var(--colors-interface-primary);
     display: flex;
     justify-content: space-between;
     padding: 22px 30px;
@@ -50,7 +50,7 @@
 @media all and (max-width: 1025px) {
 
     .smart-header_container {
-        border: 1px solid var(--colors-interface-blue-strong);
+        border: 1px solid var(--colors-interface-primary);
         padding: 15px;
     }
 
