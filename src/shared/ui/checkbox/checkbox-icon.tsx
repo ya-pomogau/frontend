@@ -6,7 +6,6 @@ interface DefaultCheckboxIconProps {
 export const DefaultCheckboxIcon = ({
   color = "var(--colors-interface-background)",
   size = "16",
-  ...props
 }: DefaultCheckboxIconProps) => (
   <svg
     width={size}

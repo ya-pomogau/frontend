@@ -1,8 +1,5 @@
-import React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import Checkbox from "shared/ui/checkbox";
-import { DefaultCheckboxIcon } from "./checkbox-icon";
 
 const meta: Meta<typeof Checkbox> = {
   title: "UI / Checkbox",
@@ -38,7 +35,6 @@ export const UncheckedCheckbox: Story = {
     checked: false,
     disabled: false,
     id: "test-1",
-    icon: <DefaultCheckboxIcon />,
   },
 };
 
@@ -48,7 +44,6 @@ export const CheckedCheckbox: Story = {
     checked: true,
     disabled: false,
     id: "test-2",
-    icon: <DefaultCheckboxIcon />,
   },
 };
 
@@ -58,6 +53,5 @@ export const DisabledCheckbox: Story = {
     checked: false,
     disabled: true,
     id: "test-3",
-    icon: <DefaultCheckboxIcon />,
   },
 };
