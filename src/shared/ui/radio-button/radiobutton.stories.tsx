@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import RadioButton from "shared/ui/radiobutton";
+import RadioButton from "shared/ui/radio-button";
 
 const meta: Meta<typeof RadioButton> = {
-  title: "UI / Radiobutton",
+  title: "Radio button",
   component: RadioButton,
   tags: ["autodocs"],
   parameters: {
@@ -39,33 +39,35 @@ const meta: Meta<typeof RadioButton> = {
 export default meta;
 type Story = StoryObj<typeof RadioButton>;
 
-export const defaultRadioButton: Story = {
+export const DefaultRadioButton: Story = {
   args: {
     label: "1km",
-    checked: false,
     disabled: false,
     id: "test-1",
   },
 };
 
-export const checkedRadioButton: Story = {
+export const CheckedRadioButton: Story = {
   args: {
-    ...defaultRadioButton.args,
-    checked: true,
+    defaultChecked: true,
+    label: "1km",
+    disabled: false,
+    id: "test-2",
   },
 };
 
-export const disabledRadioButton: Story = {
+export const DisabledRadioButton: Story = {
   args: {
-    ...defaultRadioButton.args,
     disabled: true,
+    label: "1km",
+    id: "test-3",
   },
 };
 
-export const groupRadioButtons = () => (
+export const GroupRadioButtons = () => (
   <>
-    <RadioButton label="1 km" name="group" id="test" />
-    <RadioButton label="5 km" name="group" id="test-2" defaultChecked />
-    <RadioButton label="113 km" name="group" id="test-3" disabled />
+    <RadioButton label="1 km" name="group" id="test-4" />
+    <RadioButton label="5 km" name="group" id="test-5" defaultChecked />
+    <RadioButton label="113 km" name="group" id="test-6" disabled />
   </>
 );
