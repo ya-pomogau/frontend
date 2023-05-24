@@ -12,16 +12,16 @@
   margin-right: 10px;
   box-sizing: border-box;
   user-select: none;
-  /*TODO: решить с кнопками */
   padding: 5px 20px;
-  max-width: 66px;
-  max-height: 24px;
+  width: 66px;
+  height: 24px;
   border: 1px solid var(--colors-interface-primary);
   background-color: var(--colors-interface-white);
 
   color: var(--colors-interface-black);
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 
   transition: var(--transition-hover);
 }
