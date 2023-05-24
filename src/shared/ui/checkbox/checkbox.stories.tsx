@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Checkbox from "shared/ui/checkbox";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "UI / Checkbox",
+  title: "Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
   parameters: {
@@ -32,7 +32,7 @@ type Story = StoryObj<typeof Checkbox>;
 export const UncheckedCheckbox: Story = {
   args: {
     label: "Unchecked Checkbox",
-    checked: false,
+    defaultChecked: false,
     disabled: false,
     id: "test-1",
   },
@@ -41,7 +41,7 @@ export const UncheckedCheckbox: Story = {
 export const CheckedCheckbox: Story = {
   args: {
     label: "Checked Checkbox",
-    checked: true,
+    defaultChecked: true,
     disabled: false,
     id: "test-2",
   },
@@ -50,7 +50,7 @@ export const CheckedCheckbox: Story = {
 export const DisabledCheckbox: Story = {
   args: {
     label: "Disabled Checkbox",
-    checked: false,
+    defaultChecked: false,
     disabled: true,
     id: "test-3",
   },
