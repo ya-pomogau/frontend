@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, FC, InputHTMLAttributes } from "react";
+import { FC, InputHTMLAttributes } from "react";
 import classnames from "classnames";
 import styles from "./styles.module.css";
 import { DefaultCheckboxIcon } from "./checkbox-icon";
