@@ -35,6 +35,13 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": ["label"],
+        "depth": 3
+      }
+    ],
     "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": "off",
     "react/require-default-props": "off",

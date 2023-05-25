@@ -5,6 +5,13 @@
   background-color: var(--colors-interface-white);
   padding: 31px 30px 50px 30px;
   box-sizing: border-box;
+  position: relative;
+}
+
+.exitButton {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .headerWrapper {
@@ -24,8 +31,27 @@
   margin: 0;
 }
 
-.imageWrapper {
+.contentWrapper {
   display: flex;
   margin-top: 25px;
   justify-content: center;
+  width: 100%;
+  height: 101px;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 735px) {
+  .container {
+    width: 263px;
+    max-height: 154px;
+    padding: 29px 15px;
+  }
+  .contentWrapper {
+    height: 51px;
+    margin-top: 20px;
+  }
 }

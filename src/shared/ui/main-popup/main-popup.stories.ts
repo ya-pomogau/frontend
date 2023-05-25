@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { OverlayingPopup } from ".";
+import { MainPopup } from ".";
 
-const meta: Meta<typeof OverlayingPopup> = {
-  title: "OverlayingPopup",
-  component: OverlayingPopup,
+const meta: Meta<typeof MainPopup> = {
+  title: "MainPopup",
+  component: MainPopup,
   tags: ["autodocs"],
 };
 

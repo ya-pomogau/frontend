@@ -1,0 +1,58 @@
+.container {
+  width: 287px;
+  max-height: 281px;
+  background-color: var(--colors-interface-white);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 32px rgba(0, 0, 0, 0.16);
+
+  padding: 20px 39px 20px 33px;
+  box-sizing: border-box;
+}
+
+.headerWrapper {
+  display: flex;
+}
+
+.avatar {
+  width: 51px;
+  height: 51px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 43px 0 20px;
+  box-sizing: border-box;
+  color: var(--colors-interface-primary);
+}
+
+.labelForName {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.labelForPhoneNumber {
+  display: flex;
+  align-items: center;
+  margin-bottom: 11px;
+}
+
+.labelForAddress {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 144px;
+  padding: 0;
+  margin-left: 0;
+  border: none;
+  border-bottom: 0.2px solid var(--colors-interface-primary);
+  color: var(--colors-interface-primary);
+}
+
+.wrapper-input-desc {
+  width: 50px;
+  display: inline-block;
+}
