@@ -12,8 +12,8 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 62px !important;
-  height: 62px !important;
+  width: 62px;
+  height: 62px;
   transform: translate(107px, -31px);
 }
 

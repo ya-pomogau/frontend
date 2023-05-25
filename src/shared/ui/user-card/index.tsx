@@ -1,8 +1,8 @@
 import {ReactNode} from "react";
 import classnames from "classnames";
-import styles from "./styles.module.css";
 import { Avatar } from "../avatar";
 
+import styles from "./styles.module.css";
 
 interface UserCardProps {
   extClassName?: string, 
