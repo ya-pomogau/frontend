@@ -30,8 +30,8 @@
   height: 32px;
 }
 
-.round-button--phone--pressed,
-.round-button--message--pressed {
+.round-button--phone:active,
+.round-button--message:active {
   background-color: var(--colors-interface-primary);
 }
 
@@ -51,7 +51,7 @@
   height: 82px;
 }
 
-.round-button--location--pressed {
+.round-button--location:active {
   background-color: var(--colors-interface-blue-navy);
 }
 
@@ -63,7 +63,7 @@
   background-color: var(--colors-interface-blue-strong);
 }
 
-.round-button--add--pressed {
+.round-button--add:active {
   background-color: var(--colors-interface-blue-strong);
 }
 

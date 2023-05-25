@@ -8,7 +8,7 @@ const meta: Meta<typeof CardButton> = {
   component: CardButton,
   tags: ["autodocs"],
   argTypes: {
-    icon: { type: "string" },
+    customIcon: { type: "string" },
   },
 };
 
@@ -20,14 +20,13 @@ const Icon = <CompletedApplicationIcon size="54" color="white" />;
 export const Default: Story = {
   args: {
     label: "Обозначение карточки",
-    icon: Icon,
+    customIcon: Icon,
   },
 };
 
 export const Pressed: Story = {
   args: {
     label: "Обозначение карточки",
-    isPressed: true,
-    icon: Icon,
+    customIcon: Icon,
   },
 };

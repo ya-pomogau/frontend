@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import classnames from "classnames";
 import styles from "./styles.module.css";
 
@@ -6,43 +6,45 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
   buttonType: "primary" | "secondary" | "partial";
   onClick?: () => void;
-  disabled?: boolean;
   label: string;
-  size?: "small" | "medium" | "large";
-  isPressed?: boolean;
+  size?: "small" | "medium" | "large" | "extraLarge";
+  customIcon?: ReactNode;
 }
 
 export const Button = ({
   extClassName,
   buttonType,
-  disabled,
   label,
   size = "small",
-  isPressed,
+  customIcon,
   ...props
-}: ButtonProps) => (
-  <button
-    type="button"
-    className={classnames(
-      styles.button,
-      styles[`button--${buttonType}`],
-      styles[`button--${size}`],
-      styles[`button--${buttonType}--${size}`],
-      { [styles[`button--${buttonType}--pressed`]]: isPressed },
-      extClassName,
-      "text",
-      "text_size_small"
-    )}
-    disabled={disabled}
-    {...props}
-  >
-    <div
+}: ButtonProps) => {
+  const isExtraLarge = size === "extraLarge";
+  return (
+    <button
+      type="button"
       className={classnames(
-        styles.buttonContent,
-        styles[`buttonContent--${buttonType}`]
+        styles.button,
+        styles[`button--${buttonType}`],
+        styles[`button--${size}`],
+        styles[`button--${buttonType}--${size}`],
+        extClassName,
+        "text",
+        "text_size_small",
+        { text_size_medium: isExtraLarge }
       )}
+      {...props}
     >
-      {label}
-    </div>
-  </button>
-);
+      <div
+        className={classnames(
+          styles.buttonContent,
+          styles[`buttonContent--${buttonType}`],
+          { [styles[`buttonContent--${size}`]]: isExtraLarge }
+        )}
+      >
+        {customIcon}
+        <span>{label}</span>
+      </div>
+    </button>
+  );
+};

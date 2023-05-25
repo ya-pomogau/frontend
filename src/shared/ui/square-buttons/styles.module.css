@@ -40,7 +40,7 @@
   background-color: var(--colors-interface-primary);
 }
 
-.square-button--close--pressed.square-button::before {
+.square-button--close:active.square-button::before {
   background-color: var(--colors-interface-primary-additional);
 }
 
@@ -53,7 +53,7 @@
   background-color: var(--colors-interface-cyan);
 }
 
-.square-button--edit--pressed.square-button::before {
+.square-button--edit:active.square-button::before {
   background-color: var(--colors-interface-blue-strong);
 }
 
@@ -66,7 +66,7 @@
   background-color: var(--colors-interface-green);
 }
 
-.square-button--confirm--pressed.square-button::before {
+.square-button--confirm:active.square-button::before {
   background-color: var(--colors-interface-blue-strong);
 }
 .square-button:disabled {

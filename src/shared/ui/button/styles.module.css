@@ -41,8 +41,8 @@
   border: 1px solid var(--colors-interface-primary);
 }
 
-.button--primary--pressed,
-.button--secondary--pressed {
+.button--primary:active,
+.button--secondary:active {
   color: var(--colors-interface-white);
   background-color: var(--colors-interface-blue-strong);
 }
@@ -76,20 +76,30 @@
 }
 
 .button--small {
-  padding: 8px 7px;
+  padding: 8px 17px;
 }
 
 .button--medium {
-  padding: 11px 16px;
+  padding: 8px 19px;
 }
 
 .button--large {
   padding: 8px 28px;
 }
 
+.button--extraLarge {
+  padding: 8px 14px;
+  height: 35px;
+}
+
 .buttonContent {
-  width: 92px;
-  height: 16px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.buttonContent--extraLarge {
+  gap: 10px;
 }
 
 .buttonContent--partial {
@@ -107,13 +117,13 @@
 }
 
 .button--secondary--small {
-  padding: 7px 4px;
+  padding: 7px 15px;
 }
 
 .button--secondary--medium {
-  padding: 8px 15px;
+  padding: 7px 17px;
 }
 
 .button--secondary--large {
-  padding: 8px 27px;
+  padding: 7px 27px;
 }

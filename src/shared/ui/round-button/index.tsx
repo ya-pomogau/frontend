@@ -9,9 +9,7 @@ import styles from "./styles.module.css";
 interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
   buttonType: "phone" | "message" | "location" | "add" | "default";
-  disabled?: boolean;
   onClick?: () => void;
-  isPressed?: boolean;
   customIcon?: ReactNode;
   size?: "small" | "medium" | "large";
 }
@@ -26,8 +24,6 @@ const defautlIcons = {
 export const RoundButton = ({
   extClassName,
   buttonType,
-  disabled,
-  isPressed,
   customIcon,
   size,
   ...props
@@ -38,10 +34,8 @@ export const RoundButton = ({
       styles["round-button"],
       styles[`round-button--${buttonType}`],
       styles[`round-button--${size}`],
-      { [styles[`round-button--${buttonType}--pressed`]]: isPressed },
       extClassName
     )}
-    disabled={disabled}
     {...props}
   >
     <div className={styles["round-buttonImg"]}>

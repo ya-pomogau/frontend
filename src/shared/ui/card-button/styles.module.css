@@ -51,6 +51,6 @@
   text-align: start;
 }
 
-.card-button--pressed {
+.card-button:active {
   background-color: var(--colors-interface-blue-strong);
 }

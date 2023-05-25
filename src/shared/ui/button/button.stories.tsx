@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from ".";
+import { VkIcon } from "../icons/vk-icon";
 
 const meta: Meta<typeof Button> = {
   title: "Buttons/Button",
   component: Button,
   tags: ["autodocs"],
+  argTypes: {
+    disabled: { type: "boolean" },
+    customIcon: { type: "string" },
+  },
 };
 
 export default meta;
@@ -38,5 +43,14 @@ export const Disabled: Story = {
     buttonType: "primary",
     label: "Применить",
     disabled: true,
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    buttonType: "primary",
+    label: "Войти через ВКонтакте",
+    size: "extraLarge",
+    customIcon: <VkIcon size="24" color="white" />,
   },
 };

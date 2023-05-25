@@ -7,13 +7,11 @@ interface EditButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
   onClick?: () => void;
   label: string;
-  disabled?: boolean;
 }
 
 export const EditButton = ({
   extClassName,
   label,
-  disabled,
   ...props
 }: EditButtonProps) => (
   <button
@@ -25,7 +23,6 @@ export const EditButton = ({
       "text_size_small",
       "p-0"
     )}
-    disabled={disabled}
     {...props}
   >
     <div className={styles["edit-buttonContent"]}>

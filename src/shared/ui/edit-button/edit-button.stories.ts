@@ -6,6 +6,9 @@ const meta: Meta<typeof EditButton> = {
   title: "Buttons/EditButton",
   component: EditButton,
   tags: ["autodocs"],
+  argTypes: {
+    disabled: { type: "boolean" },
+  },
 };
 
 export default meta;

@@ -8,6 +8,7 @@ const meta: Meta<typeof RoundButton> = {
   tags: ["autodocs"],
   argTypes: {
     customIcon: { type: "string" },
+    disabled: { type: "boolean" },
   },
 };
 

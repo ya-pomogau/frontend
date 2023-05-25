@@ -29,7 +29,7 @@
   background-color: var(--colors-interface-blue-strong);
 }
 
-.arrow-button--pressed.arrow-button::before {
+.arrow-button:active.arrow-button::before {
   background-color: var(--colors-interface-blue-strong);
 }
 

@@ -7,7 +7,8 @@ const meta: Meta<typeof SquareButton> = {
   component: SquareButton,
   tags: ["autodocs"],
   argTypes: {
-    icon: { type: "string" },
+    customIcon: { type: "string" },
+    disabled: { type: "boolean" },
   },
 };
 

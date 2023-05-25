@@ -5,15 +5,13 @@ import styles from "./styles.module.css";
 interface CardButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
   onClick?: () => void;
-  isPressed?: boolean;
-  icon?: ReactNode;
+  customIcon?: ReactNode;
   label: string;
 }
 
 export const CardButton = ({
   extClassName,
-  isPressed,
-  icon,
+  customIcon,
   label,
   ...props
 }: CardButtonProps) => (
@@ -21,7 +19,6 @@ export const CardButton = ({
     type="button"
     className={classnames(
       styles["card-button"],
-      { [styles["card-button--pressed"]]: isPressed },
       extClassName,
       "text",
       "text_size_medium"
@@ -29,7 +26,7 @@ export const CardButton = ({
     {...props}
   >
     <div className={styles["card-buttonContent"]}>
-      <div className={styles["card-buttonImg"]}>{icon}</div>
+      <div className={styles["card-buttonImg"]}>{customIcon}</div>
       <span className={styles["card-buttonLabel"]}>{label}</span>
     </div>
   </button>
