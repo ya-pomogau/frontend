@@ -42,3 +42,12 @@
     padding: 29px 15px;
   }
 }
+
+.confirmButton {
+  margin-top: 33px;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+}

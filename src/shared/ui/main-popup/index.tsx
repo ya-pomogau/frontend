@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { Avatar } from "../avatar";
 import { OverlayingPopup } from "../overlaying-popup";
+import { SquareButton } from "../square-buttons";
 import styles from "./main-popup.module.css";
 
 interface IMainPopupProps {
@@ -24,9 +25,7 @@ export const MainPopup = ({
 }: IMainPopupProps) => (
   <OverlayingPopup isOpened={isOpened} onClose={onClose}>
     <div className={classNames(styles.container, extClassName)}>
-      <button type="button" className={styles.exitButton}>
-        exit
-      </button>
+      <SquareButton buttonType="close" extClassName={styles.exitButton} />
       <div className={classNames(styles.headerWrapper)}>
         <Avatar avatarLink={avatarLink} avatarName={avatarName} />
         <div className={classNames(styles.profileDesc)}>

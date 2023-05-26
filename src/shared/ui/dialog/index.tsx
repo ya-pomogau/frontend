@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { OverlayingPopup } from "../overlaying-popup";
 import { Informer } from "../informer";
 import styles from "./dialog.module.css";
+import { SquareButton } from "../square-buttons";
+import { Button } from "../button";
 
 interface IDialogProps {
   isOpened?: boolean;
@@ -25,9 +27,7 @@ export const Dialog = ({
   <OverlayingPopup isOpened={isOpened} onClose={onClose}>
     <div className={classNames(styles.container, extClassName)}>
       {isExitButton && (
-        <button type="button" className={styles.exitButton}>
-          exit
-        </button>
+        <SquareButton buttonType="close" extClassName={styles.exitButton} />
       )}
       <p
         className={classNames(
@@ -43,9 +43,13 @@ export const Dialog = ({
       {isAlertDialog ? (
         <Informer extClassName={styles.informer} />
       ) : (
-        <button type="button" className={styles.confirmButton}>
-          ok
-        </button>
+        <div className={styles.buttonWrapper}>
+          <Button
+            label="Хочу"
+            buttonType="primary"
+            extClassName={styles.confirmButton}
+          />
+        </div>
       )}
     </div>
   </OverlayingPopup>

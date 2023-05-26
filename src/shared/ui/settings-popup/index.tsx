@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { Avatar } from "../avatar";
+import { Button } from "../button";
 import { OverlayingPopup } from "../overlaying-popup";
 import styles from "./settings-popup.module.css";
 
@@ -31,6 +32,11 @@ export const SettingsPopup = ({
           avatarLink={avatarLink}
           avatarName={avatarName}
           extClassName={styles.avatar}
+        />
+        <Button
+          label="Изменить фото"
+          buttonType="secondary"
+          extClassName={styles.settingsButton}
         />
       </div>
       <form className={classNames(styles.form)}>
@@ -98,6 +104,18 @@ export const SettingsPopup = ({
               className={classNames(styles.input)}
             />
           </label>
+        </div>
+        <div className={styles.buttonsWrapper}>
+          <Button
+            label="Сохранить"
+            buttonType="primary"
+            extClassName={styles.saveButton}
+          />
+          <Button
+            label="Выход"
+            buttonType="secondary"
+            extClassName={styles.unsaveButton}
+          />
         </div>
       </form>
     </div>

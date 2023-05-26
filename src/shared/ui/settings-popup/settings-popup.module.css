@@ -16,6 +16,7 @@
 
 .headerWrapper {
   display: flex;
+  align-items: flex-end;
 }
 
 .avatar {
@@ -26,7 +27,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   padding: 43px 0 20px;
   box-sizing: border-box;
   color: var(--colors-interface-primary);
@@ -61,4 +61,26 @@
 .wrapper-input-desc {
   width: 50px;
   display: inline-block;
+}
+
+.saveButton {
+  margin: 20px 0 5px;
+}
+
+.unsaveButton {
+  color: var(--colors-interface-primary);
+  border: none;
+}
+
+.buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settingsButton {
+  color: var(--colors-interface-primary);
+  border: none;
+  text-decoration: underline;
+  padding-bottom: 0;
 }
