@@ -1,0 +1,22 @@
+.edit-button {
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--colors-interface-primary);
+  border: none;
+  transition: var(--transition-hover);
+}
+
+.edit-button:hover {
+  opacity: 0.6;
+}
+
+.edit-button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.edit-buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
