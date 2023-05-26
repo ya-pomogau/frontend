@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .input {
@@ -49,4 +50,16 @@
 
 .for_storybook {
   width: 350px;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+.icon:hover {
+  opacity: 0.6;
 }
