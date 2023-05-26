@@ -1,9 +1,9 @@
 import { getColor, IIconProps } from "./utils";
 
-export const BallsIcon = ({ color, ...props }: IIconProps) => (
+export const BallsIcon = ({ color, size = "24", ...props  }: IIconProps) => (
   <svg
-    width="32"
-    height="32"
+    width={size}
+    height={size}
     viewBox="0 0 32 32"
     fill={getColor(color)}
     xmlns="http://www.w3.org/2000/svg"
