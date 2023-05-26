@@ -28,6 +28,12 @@
   gap: 42px;
 }
 
+@media (max-width: 360px) {
+  .phoneInfo {
+    gap: 10px;
+  }
+}
+
 .chat {
   display: flex;
   flex-direction: column;
@@ -43,11 +49,17 @@
   overflow-y: auto;
 }
 
+.inputWrapper {
+  display: flex;
+  gap: 10px;
+}
+
 .input {
-  height: 37px;
+  width: 100%;
 }
 
 .input > div > input {
+  height: 37px;
   font-size: 12px;
   line-height: 14px;
 }
@@ -55,4 +67,10 @@
   color: var(--colors-interface-primary);
   font-size: 12px;
   line-height: 14px;
+}
+
+.button {
+  width: 37px;
+  height: 37px;
+  padding: 10px;
 }

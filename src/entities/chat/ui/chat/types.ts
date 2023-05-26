@@ -5,7 +5,7 @@ export interface IMessage {
   date: Date;
 }
 
-export interface IInterlocutorInfo {
+export interface IChatmateInfo {
   userId: string;
   userAvatarLink: string;
   name: string;

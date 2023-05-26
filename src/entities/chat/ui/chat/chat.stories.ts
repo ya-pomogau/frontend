@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    interlocutorInfo: {
+    chatmateInfo: {
       userId: "1",
       name: "Иванов Иван Иванович",
       phone: "+7(000) 000-00-00",

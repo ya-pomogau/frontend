@@ -98,6 +98,10 @@
   align-items: center;
 }
 
+.buttonContent--withoutLabel {
+  gap: 0;
+}
+
 .buttonContent--extraLarge {
   gap: 10px;
 }

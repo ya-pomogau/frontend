@@ -4,7 +4,9 @@ import { PinIcon } from "shared/ui/icons/pin-icon";
 import { Avatar } from "shared/ui/avatar";
 import { Message } from "shared/ui/message";
 import { Input } from "shared/ui/input";
-import { IMessage, IInterlocutorInfo } from "./types";
+import { Button } from "shared/ui/button";
+import { SendIcon } from "shared/ui/icons/send-icon";
+import { IMessage, IChatmateInfo } from "./types";
 import { sortMessages } from "./libs/utils";
 import styles from "./styles.module.css";
 
@@ -12,18 +14,18 @@ interface ChatProps {
   extClassName?: string;
   messagesWrapperExtClassName?: string;
   messages: IMessage[];
-  interlocutorInfo: IInterlocutorInfo;
-  onInputChange: (value: string) => void;
+  chatmateInfo: IChatmateInfo;
   onAttachFileClick?: () => void;
+  onMessageSend: (message: string) => void;
 }
 
 export const Chat = ({
   extClassName,
   messagesWrapperExtClassName,
   messages,
-  interlocutorInfo,
-  onInputChange,
+  chatmateInfo,
   onAttachFileClick,
+  onMessageSend,
 }: ChatProps) => {
   const [inputValue, setInputValue] = useState<string>("");
   const sortedMessages = sortMessages(messages);
@@ -31,14 +33,19 @@ export const Chat = ({
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setInputValue(value);
-    onInputChange(value);
   };
+
+  const handleSendClick = () => {
+    onMessageSend(inputValue);
+  };
+
+  const getBtnIcon = () => <SendIcon size="24" color="white" />;
 
   return (
     <div className={classnames(styles.chatWrapper, extClassName)}>
       <Avatar
         avatarName="Фотография собеседника"
-        avatarLink={interlocutorInfo.userAvatarLink}
+        avatarLink={chatmateInfo.userAvatarLink}
         extClassName={styles.avatar}
       />
 
@@ -52,9 +59,9 @@ export const Chat = ({
               "text_type_regular"
             )}
           >
-            {interlocutorInfo.name}
+            {chatmateInfo.name}
           </h1>
-          {interlocutorInfo?.phone && (
+          {chatmateInfo?.phone && (
             <div className={styles.phoneInfo}>
               <span
                 className={classnames(
@@ -66,7 +73,7 @@ export const Chat = ({
                 Тел.:
               </span>
               <span className={classnames("text", "text_size_medium")}>
-                {interlocutorInfo.phone}
+                {chatmateInfo.phone}
               </span>
             </div>
           )}
@@ -81,7 +88,7 @@ export const Chat = ({
             {sortedMessages?.map((message) => (
               <Message
                 type={
-                  message.userId === interlocutorInfo.userId
+                  message.userId === chatmateInfo.userId
                     ? "incoming"
                     : "outgoing"
                 }
@@ -100,6 +107,14 @@ export const Chat = ({
               customIcon={
                 <PinIcon size="24" color="blue" onClick={onAttachFileClick} />
               }
+            />
+            <Button
+              buttonType="primary"
+              customIcon={getBtnIcon()}
+              size="small"
+              onClick={handleSendClick}
+              extClassName={styles.button}
+              disabled={!inputValue}
             />
           </div>
         </div>
