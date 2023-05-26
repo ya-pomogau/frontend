@@ -1,9 +1,9 @@
 export interface IBottomBarProps {
-  className?: string;
+  extClassName?: string;
 }
 
-export const BottomBar = ({ className }: IBottomBarProps) => (
-  <div className={className}>
+export const BottomBar = ({ extClassName }: IBottomBarProps) => (
+  <div className={extClassName}>
     <svg
       width="1440"
       height="75"

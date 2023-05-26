@@ -17,7 +17,7 @@ export const getColor = (color: TIconColor) => {
 
 export interface IIconProps<T = "24"> {
   color: TIconColor;
-  size?: T | "24" | "32" | "54";
+  size?: '24' | '32' | '46' | '54';
   className?: string;
   onClick?:
     | (() => void)

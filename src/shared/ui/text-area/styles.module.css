@@ -1,0 +1,56 @@
+.container {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: calc(100% - 26px);
+  resize: none;
+  padding: 12px;
+  transition: var(--transition-hover);
+  color: var(--colors-interface-primary);
+  border: 1px solid var(--colors-interface-primary-additional);
+  box-sizing: border-box;
+}
+
+.input_whithout_label {
+  composes: input;
+  height: 100%;
+}
+
+.input::placeholder {
+  color: var(--colors-interface-additional);
+}
+
+.input:hover {
+  border-color: var(--colors-interface-blue-navy);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--colors-interface-blue-navy);
+}
+
+.label {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--colors-interface-primary);
+  margin-bottom: 8px;
+}
+
+.sign {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  color: var(--colors-interface-additional);
+}
+
+.for_storybook {
+  width: 440px;
+  height: 170px;
+}
