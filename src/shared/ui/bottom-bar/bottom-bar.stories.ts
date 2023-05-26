@@ -4,6 +4,7 @@ import { BottomBar } from ".";
 const meta = {
   title: "BottomBar",
   component: BottomBar,
+  tags: ["autodocs"],
 } as Meta<typeof BottomBar>;
 
 export default meta;
