@@ -4,9 +4,15 @@
   --colors-interface-primary: #2e3192;
   --colors-interface-primary-additional: #9798c9;
   --colors-interface-background: #fbfdff;
-  --colors-interface-line: linear-gradient(90deg, #ffffff, #2e3192, #ffffff);
+  --colors-interface-line: linear-gradient(
+    90deg,
+    #ffffff 10%,
+    #2e3192,
+    #ffffff 90%
+  );
   --colors-interface-additional: #818c99;
   --colors-interface-yorkshire-cloud: #b8c1cc;
+  --colors-interface-blue-very-soft: #b8e4fa;
   --colors-interface-blue-soft: #addef9;
   --colors-interface-blue-navy: #0091c7;
   --colors-interface-blue-strong: #0071bc;
