@@ -7,16 +7,18 @@ interface IInfoContainerContent {
   phoneNumber?: string;
   address?: string;
   description?: string;
+  extClassName?: string;
 }
 
 export const InfoContainerContent = ({
-  name = "Иванов Иван Иванович",
-  id = 112233,
-  phoneNumber = "+7(000) 000 000",
-  address = "ул. Цветной бульвар, 43",
-  description = "Я люблю музыку, книги и кошек",
+  name,
+  id,
+  phoneNumber,
+  address,
+  description,
+  extClassName,
 }: IInfoContainerContent) => (
-  <>
+  <div className={extClassName}>
     <p
       className={classNames(
         "m-0",
@@ -101,5 +103,5 @@ export const InfoContainerContent = ({
       </span>
       {description}
     </p>
-  </>
+  </div>
 );
