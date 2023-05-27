@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.exitButton {
+.exitButtonWrapper {
   position: absolute;
   top: 0;
   right: 0;

@@ -29,7 +29,7 @@ export const OverlayingPopup = ({
         id="label"
       >
         <div
-          className={classNames(styles.overlay, extClassName)}
+          className={classNames(styles.overlay)}
           role="button"
           tabIndex={0}
           onClick={onClose}

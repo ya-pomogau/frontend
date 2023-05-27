@@ -6,7 +6,7 @@ import styles from "./main-popup.module.css";
 
 interface IMainPopupProps {
   isOpened?: boolean;
-  onClose?: () => void;
+  onClose: () => void;
   extClassName?: string;
   name?: string;
   phoneNumber?: string;

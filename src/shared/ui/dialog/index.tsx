@@ -27,7 +27,9 @@ export const Dialog = ({
   <OverlayingPopup isOpened={isOpened} onClose={onClose}>
     <div className={classNames(styles.container, extClassName)}>
       {isExitButton && (
-        <SquareButton buttonType="close" extClassName={styles.exitButton} />
+        <div className={styles.exitButtonWrapper}>
+          <SquareButton buttonType="close" />
+        </div>
       )}
       <p
         className={classNames(
