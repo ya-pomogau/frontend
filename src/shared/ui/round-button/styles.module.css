@@ -1,0 +1,73 @@
+.round-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: var(--colors-interface-primary);
+  border: 1px solid var(--colors-interface-additional);
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: var(--transition-hover);
+  background-size: 18px;
+  background-position: center;
+}
+
+.round-buttonImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-button:hover {
+  background-color: var(--colors-interface-blue-navy);
+}
+
+.round-button--phone,
+.round-button--message,
+.round-button--small {
+  width: 32px;
+  height: 32px;
+}
+
+.round-button--phone:active,
+.round-button--message:active {
+  background-color: var(--colors-interface-primary);
+}
+
+.round-button--medium,
+.round-button--location {
+  width: 54px;
+  height: 54px;
+}
+
+.round-button--location {
+  border: none;
+}
+
+.round-button--large,
+.round-button--add {
+  width: 82px;
+  height: 82px;
+}
+
+.round-button--location:active {
+  background-color: var(--colors-interface-blue-navy);
+}
+
+.round-button--add {
+  border: 1px solid var(--colors-interface-background);
+}
+
+.round-button--add:hover {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.round-button--add:active {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.round-button:disabled {
+  background-color: var(--colors-interface-additional);
+  cursor: default;
+}

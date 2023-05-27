@@ -1,0 +1,78 @@
+.square-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.square-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 87%, 3% 100%);
+  transition: var(--transition-hover);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.square-buttonImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  width: 24px;
+  height: 20px;
+}
+
+.square-button--close.square-button::before {
+  background-color: var(--colors-interface-primary-additional);
+}
+
+.square-button--close:hover.square-button::before {
+  background-color: var(--colors-interface-primary);
+}
+
+.square-button--close:active.square-button::before {
+  background-color: var(--colors-interface-primary-additional);
+}
+
+.square-button--edit.square-button::before {
+  background-color: var(--colors-interface-blue-strong);
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.square-button--edit:hover.square-button::before {
+  background-color: var(--colors-interface-cyan);
+}
+
+.square-button--edit:active.square-button::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.square-button--confirm.square-button::before {
+  background-color: var(--colors-interface-cyan);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.square-button--confirm:hover.square-button::before {
+  background-color: var(--colors-interface-green);
+}
+
+.square-button--confirm:active.square-button::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+.square-button:disabled {
+  cursor: default;
+}
+
+.square-button:disabled.square-button::before {
+  background-color: var(--colors-interface-additional);
+}
