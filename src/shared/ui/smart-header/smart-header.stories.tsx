@@ -20,7 +20,7 @@ const meta: Meta<typeof SmartHeader> = {
     filterIcon: {
       description: "Иконка фильтра",
     },
-    handlerFilter: {
+    onClick: {
       description: "Обработчик кнопки фильтр",
     },
   },

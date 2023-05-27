@@ -1,4 +1,4 @@
-.smart-header_container {
+.smartHeader__container {
     width: 100%;
     min-width: 384px;
     border: 2px solid var(--colors-interface-primary);
@@ -9,21 +9,21 @@
     align-items: center;
 }
 
-.smart-header_block {
+.smartHeader__block {
     display: flex;
     align-items: center;
 }
 
-.text {
-    padding: 0;
-    margin: 0;
+.settingText {
     color: var(--colors-interface-primary);
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
 }
 
-.setting-icon {
+.filterText {
+    color: var(--colors-interface-primary);
+    margin-right: 10px;
+}
+
+.settingIcon {
     display: flex;
     margin-right: 15px;
     box-sizing: border-box;
@@ -33,7 +33,6 @@
 
 .filterButton {
     display: flex;
-    margin-left: 10px;
     border: none;
     padding: 0;
     background-color: transparent;
@@ -49,23 +48,26 @@
 
 @media all and (max-width: 1025px) {
 
-    .smart-header_container {
+    .smartHeader__container {
         border: 1px solid var(--colors-interface-primary);
         padding: 15px;
     }
 
-    .text {
+    .settingText {
         font-size: 16px;
+        line-height: 19px;
     }
 
-    .setting-icon {
+    .settingIcon {
         margin-right: 10px;
     }
-    .setting-icon {
+
+    .settingIcon {
         max-width: 30px;
         max-height: 30px;
     }
-    .filterButton {
+
+    .filterButton svg {
         max-width: 30px;
         max-height: 30px;
     }
@@ -73,7 +75,7 @@
 }
 
 @media all and (max-width: 414px) {
-    .text {
+    .settingText {
         max-width: 141px;
     }
 }
