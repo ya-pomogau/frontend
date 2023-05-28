@@ -13,11 +13,10 @@ const meta: Meta<typeof PageLayout> = {
       description: "Наполнение правой части страницы",
     },
     content: {
-      description: "компонент ContentLayout",
+      description: "Компонент ContentLayout",
     },
     extClassName: {
-      description:
-        "классы для дополнительной стилизации контента наполнения страницы",
+      description: "Классы для дополнительной стилизации контента наполнения страницы",
     },
   },
 };

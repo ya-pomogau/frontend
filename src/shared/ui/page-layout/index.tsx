@@ -14,7 +14,7 @@ export const PageLayout = ({
   side, 
   content,
 }: PageLayoutProps) => (
-  <div className={classnames(styles.content, extClassName)}>
+  <div className={classnames(styles.main, extClassName)}>
     <div className={styles.side}> {side} </div>
     <div className={styles.content}> {content} </div>
   </div>
