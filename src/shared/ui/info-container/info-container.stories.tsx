@@ -14,10 +14,13 @@ type Story = StoryObj<typeof meta>;
 
 export const WithoutContent: Story = {};
 
-// export const WithContent: Story = {
-//   render: (args) => (
-//     <InfoContainer {...args}>
-//       <Default {...Default.args} />
-//     </InfoContainer>
-//   ),
-// };
+export const WithContent: Story = {
+  // render: (args) => (
+  //   <InfoContainer {...args}>
+  //     <Default {...Default.args} />
+  //   </InfoContainer>
+  // ),
+  args: {
+    children: <Default {...Default.args} />,
+  },
+};

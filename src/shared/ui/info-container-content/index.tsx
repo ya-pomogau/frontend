@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 import styles from "./info-container-content.module.css";
 
 interface IInfoContainerContent {
