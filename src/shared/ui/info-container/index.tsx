@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import React from "react";
+import { ReactNode } from "react";
 import styles from "./info-container.module.css";
 import { SettingsButton } from "../transforming-buttons/settings-button/index";
 import { Avatar } from "../avatar";
 
 interface IInfoContainerProps {
   extClassName?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
   link?: string;
   avatarName: string;
 }

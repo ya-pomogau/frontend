@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { InfoContainer } from ".";
-import { Default } from "../info-container-content/info-container-content.stories";
+import { Default as InfoContainerContentStory } from "../info-container-content/info-container-content.stories";
+import { InfoContainerContent } from "../info-container-content/index";
 
 const meta: Meta<typeof InfoContainer> = {
   title: "InfoContainer",
@@ -15,12 +16,9 @@ type Story = StoryObj<typeof meta>;
 export const WithoutContent: Story = {};
 
 export const WithContent: Story = {
-  // render: (args) => (
-  //   <InfoContainer {...args}>
-  //     <Default {...Default.args} />
-  //   </InfoContainer>
-  // ),
-  args: {
-    children: <Default {...Default.args} />,
-  },
+  render: (args) => (
+    <InfoContainer {...args}>
+      <InfoContainerContent {...InfoContainerContentStory.args} />
+    </InfoContainer>
+  ),
 };
