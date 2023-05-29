@@ -1,0 +1,33 @@
+.fieldset {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: none;
+}
+
+.legend {
+  width: 100%;
+  padding: 10px 0 5px;
+  border-bottom: 1px solid var(--colors-interface-yorkshire-cloud);
+}
+
+.content {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.content[data-view='COLUMN'] {
+  flex-direction: column;
+}
+
+.content[data-view='ROW'] {
+  flex-direction: row;
+}
+
+.content[data-view='TWO_COLUMN'] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 192px));
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: column;
+}
