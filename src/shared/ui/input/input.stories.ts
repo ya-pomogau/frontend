@@ -10,6 +10,9 @@ const meta = {
     error: {
       control: "boolean",
     },
+    customIcon: {
+      type: "string",
+    },
   },
 } as Meta<typeof Input>;
 

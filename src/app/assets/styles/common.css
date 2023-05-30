@@ -19,6 +19,7 @@
   --colors-interface-pink: #c9006d;
   --colors-interface-pink-soft: #e163b3;
   --colors-interface-red-soft: #fd6868;
+  --colors-interface-ford-white: #e0e0e0;
 
   --transition-hover: all 100ms ease-out;
   --common-element-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),

@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
   buttonType: "primary" | "secondary" | "partial";
   onClick?: () => void;
-  label: string;
+  label?: string;
   size?: "small" | "medium" | "large" | "extraLarge";
   customIcon?: ReactNode;
 }
@@ -39,7 +39,8 @@ export const Button = ({
         className={classnames(
           styles.buttonContent,
           styles[`buttonContent--${buttonType}`],
-          { [styles[`buttonContent--${size}`]]: isExtraLarge }
+          { [styles[`buttonContent--${size}`]]: isExtraLarge },
+          { [styles["buttonContent--withoutLabel"]]: !label }
         )}
       >
         {customIcon}
