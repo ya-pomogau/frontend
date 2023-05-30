@@ -5,6 +5,20 @@ const meta: Meta<typeof SettingsPopup> = {
   title: "SettingsPopup",
   component: SettingsPopup,
   tags: ["autodocs"],
+  argTypes: {
+    name: {
+      description: "Имя пользователя",
+    },
+    phoneNumber: {
+      description: "Номер телефона",
+    },
+    address: {
+      description: "Адрес пользователя",
+    },
+    extClassName: {
+      description: "Класс для дополнительной стилизации",
+    },
+  },
 };
 
 export default meta;

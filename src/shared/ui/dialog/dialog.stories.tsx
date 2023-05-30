@@ -15,6 +15,9 @@ const meta: Meta<typeof Dialog> = {
     isConfirmDialog: {
       description: "Диалоговое окно, требующее подтверждения/отмены действия",
     },
+    extClassName: {
+      description: "Класс для дополнительной стилизации",
+    },
   },
 };
 
@@ -25,7 +28,6 @@ type Story = StoryObj<typeof meta>;
 export const AlertDialog: Story = {
   args: {
     title: "Благодарю за отзывчивость",
-    isOpened: true,
     isAlertDialog: true,
   },
 };
@@ -34,7 +36,6 @@ export const ConfirmDialog: Story = {
   args: {
     title: "Вы точно хотите отменить заявку?",
     isExitButton: true,
-    isOpened: true,
     isConfirmDialog: true,
   },
 };

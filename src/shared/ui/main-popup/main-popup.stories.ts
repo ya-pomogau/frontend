@@ -5,6 +5,17 @@ const meta: Meta<typeof MainPopup> = {
   title: "MainPopup",
   component: MainPopup,
   tags: ["autodocs"],
+  argTypes: {
+    name: {
+      description: "Имя пользователя",
+    },
+    phoneNumber: {
+      description: "Номер телефона",
+    },
+    extClassName: {
+      description: "Класс для дополнительной стилизации",
+    },
+  },
 };
 
 export default meta;
