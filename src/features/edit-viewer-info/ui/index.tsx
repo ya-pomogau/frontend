@@ -9,7 +9,7 @@ interface EditViewerInfoProps {
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
-  handlerAvatar?: () => void;
+  handlerAvatar: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClickSave: () => void;
   onClickExit: () => void;
