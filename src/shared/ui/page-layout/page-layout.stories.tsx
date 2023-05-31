@@ -27,6 +27,6 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: { 
     side: <h2> Side </h2>,
-    content: <ContentLayout smart = {<h2> тут должен быть Контейнер смарт заголовка страницы</h2>} > <h2>Контент</h2> </ContentLayout>
+    content: <ContentLayout heading = {<h2> тут должен быть Контейнер смарт заголовка страницы</h2>} > <h2>Контент</h2> </ContentLayout>
   },  
 };

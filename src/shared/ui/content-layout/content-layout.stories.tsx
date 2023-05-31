@@ -7,7 +7,7 @@ const meta: Meta<typeof ContentLayout> = {
   tags: ["autodocs"],
 
   argTypes: {
-    smart: {
+    heading: {
       description: "Наполнение страницы, должно быть 2 компонента ",
     },
     children: {
@@ -15,10 +15,7 @@ const meta: Meta<typeof ContentLayout> = {
     },
     extClassName: {
       description: "Классы для дополнительной стилизации",
-    },
-    isShowSmartHeaderInMobile: {
-      description: "Прячет smart панель в мобильной версии сайта",
-    },
+    },    
   },
 };
 
@@ -27,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    smart: <h2> тут должен быть Контейнер смарт заголовка страницы</h2>    
+    heading: <h2> тут должен быть Контейнер смарт заголовка страницы</h2>    
   },
   render: (args) => (
     <ContentLayout {...args}>
@@ -36,14 +33,3 @@ export const Example: Story = {
   ),
 };
 
-export const ExampleNoSmartInModal: Story = {
-  args: {
-    smart: <h2> тут должен быть Контейнер смарт заголовка страницы</h2>,
-    isShowSmartHeaderInMobile: false
-  },
-  render: (args) => (
-    <ContentLayout {...args}>
-      <h2> Тут должен быть основной контент страницы</h2>
-    </ContentLayout>
-  ),
-};
