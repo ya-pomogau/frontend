@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Desktop: Story = {
   args: {
-    isNonMobile: true,
+    isMobile: false,
     category: "категория",
     date: "24.10.2022",
     time: "16:00",
@@ -36,7 +36,7 @@ export const Desktop: Story = {
 
 export const Mobile: Story = {
   args: {
-    isNonMobile: false,
+    isMobile: true,
     category: "категория",
     date: "24.10.2022",
     time: "16:00",
