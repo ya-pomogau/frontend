@@ -15,6 +15,12 @@
   background-color: white;
 }
 
+@media screen and (max-width: 735px) {
+  .task_container {
+    width: 270px;
+  }
+}
+
 .close_icon {
   position: absolute;
   top: 12px;
@@ -60,6 +66,13 @@
   margin-bottom: 10px;
   font-size: 20px;
   line-height: 24px;
+}
+
+@media screen and (max-width: 735px) {
+  .task_recipient_name {
+    font-size: 16px;
+    line-height: 20px;
+  }
 }
 
 .task_recipient_phone {
