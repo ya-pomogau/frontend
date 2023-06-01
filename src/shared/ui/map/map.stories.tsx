@@ -8,7 +8,7 @@ const meta = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <YMaps query={{ lang: 'en_RU', load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}>
+      <YMaps query={{ load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}>
         <Story />
       </YMaps>
     )
