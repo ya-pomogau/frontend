@@ -2,13 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { PageLayout } from ".";
 import { ContentLayout } from "../content-layout";
 
-
 const meta: Meta<typeof PageLayout> = {
-  title: "PageLayout",
+  title: "uikit/PageLayout",
   component: PageLayout,
   tags: ["autodocs"],
 
-  argTypes: {   
+  argTypes: {
     side: {
       description: "Наполнение правой части страницы",
     },
@@ -16,7 +15,8 @@ const meta: Meta<typeof PageLayout> = {
       description: "Компонент ContentLayout",
     },
     extClassName: {
-      description: "Классы для дополнительной стилизации контента наполнения страницы",
+      description:
+        "Классы для дополнительной стилизации контента наполнения страницы",
     },
   },
 };
@@ -25,8 +25,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
-  args: { 
+  args: {
     side: <h2> Side </h2>,
-    content: <ContentLayout heading = {<h2> тут должен быть Контейнер смарт заголовка страницы</h2>} > <h2>Контент</h2> </ContentLayout>
-  },  
+    content: (
+      <ContentLayout
+        heading={<h2> тут должен быть Контейнер смарт заголовка страницы</h2>}
+      >
+        {" "}
+        <h2>Контент</h2>{" "}
+      </ContentLayout>
+    ),
+  },
 };

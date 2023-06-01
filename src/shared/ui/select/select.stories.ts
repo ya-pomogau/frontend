@@ -3,7 +3,7 @@ import { Select } from ".";
 import styles from "./styles.module.css";
 
 const meta = {
-  title: "Select",
+  title: "uikit/FormElements/Select",
   component: Select,
   tags: ["autodocs"],
   argTypes: {

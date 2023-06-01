@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Logo } from ".";
 
 const meta = {
-  title: "Logo",
+  title: "uikit/Logo",
   component: Logo,
   tags: ["autodocs"],
 } as Meta<typeof Logo>;

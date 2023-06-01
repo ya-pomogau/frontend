@@ -4,7 +4,7 @@ import { CardButton } from ".";
 import { CompletedApplicationIcon } from "../icons/completed-application-icon";
 
 const meta: Meta<typeof CardButton> = {
-  title: "Buttons/CardButton",
+  title: "uikit/Buttons/CardButton",
   component: CardButton,
   tags: ["autodocs"],
   argTypes: {

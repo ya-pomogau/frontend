@@ -4,7 +4,7 @@ import { Chat } from ".";
 import { getMockMessages } from "./libs/utils";
 
 const meta: Meta<typeof Chat> = {
-  title: "Chat",
+  title: "entities/Chat",
   component: Chat,
   tags: ["autodocs"],
 };

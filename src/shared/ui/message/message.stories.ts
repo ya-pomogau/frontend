@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Message } from ".";
 
 const meta: Meta<typeof Message> = {
-  title: "Message",
+  title: "uikit/Message",
   component: Message,
   tags: ["autodocs"],
 };

@@ -3,7 +3,7 @@ import { TextArea } from ".";
 import styles from "./styles.module.css";
 
 const meta = {
-  title: "TextArea",
+  title: "uikit/FormElements/TextArea",
   component: TextArea,
   tags: ["autodocs"],
 } as Meta<typeof TextArea>;

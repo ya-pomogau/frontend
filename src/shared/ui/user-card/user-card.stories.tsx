@@ -3,7 +3,7 @@ import { UserCard } from ".";
 import { SettingsButton } from "../transforming-buttons/settings-button";
 
 const meta: Meta<typeof UserCard> = {
-  title: "UserCard",
+  title: "uikit/UserCard",
   component: UserCard,
   tags: ["autodocs"],
 
@@ -53,7 +53,11 @@ export const ExampleButtons: Story = {
   },
   render: (args) => (
     <UserCard {...args}>
-      <SettingsButton onClick={() => {console.log("меня нажали") }}/>
+      <SettingsButton
+        onClick={() => {
+          console.log("меня нажали");
+        }}
+      />
     </UserCard>
   ),
 };

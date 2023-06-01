@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ContentLayout } from ".";
 
 const meta: Meta<typeof ContentLayout> = {
-  title: "ContentLayout",
+  title: "uikit/ContentLayout",
   component: ContentLayout,
   tags: ["autodocs"],
 
@@ -15,7 +15,7 @@ const meta: Meta<typeof ContentLayout> = {
     },
     extClassName: {
       description: "Классы для дополнительной стилизации",
-    },    
+    },
   },
 };
 
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    heading: <h2> тут должен быть Контейнер смарт заголовка страницы</h2>    
+    heading: <h2> тут должен быть Контейнер смарт заголовка страницы</h2>,
   },
   render: (args) => (
     <ContentLayout {...args}>
@@ -32,4 +32,3 @@ export const Example: Story = {
     </ContentLayout>
   ),
 };
-

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Informer } from ".";
 
 const meta: Meta<typeof Informer> = {
-  title: "Informer",
+  title: "uikit/Informer",
   component: Informer,
   tags: ["autodocs"],
   argTypes: {
