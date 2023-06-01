@@ -2,7 +2,7 @@ import type { ReactNode, ButtonHTMLAttributes } from "react";
 import classnames from "classnames";
 import styles from "./styles.module.css";
 import { EditIcon } from "../icons/edit-icon";
-import { CloseIcon } from "../icons/closee-icon";
+import { CloseIcon } from "../icons/close-icon";
 import { DoneIcon } from "../icons/done-icon";
 
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

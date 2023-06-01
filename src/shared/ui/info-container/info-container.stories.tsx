@@ -4,7 +4,7 @@ import { Default as InfoContainerContentStory } from "../info-container-content/
 import { InfoContainerContent } from "../info-container-content/index";
 
 const meta: Meta<typeof InfoContainer> = {
-  title: "InfoContainer",
+  title: "uikit/InfoContainer",
   component: InfoContainer,
   tags: ["autodocs"],
 };

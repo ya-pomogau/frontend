@@ -3,27 +3,30 @@ import { YMaps } from "@pbe/react-yandex-maps";
 import { YandexMap } from ".";
 
 const meta = {
-  title: "YandexMap",
+  title: "uikit/YandexMap",
   component: YandexMap,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <YMaps query={{ load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}>
+      <YMaps
+        query={{
+          load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon",
+        }}
+      >
         <Story />
       </YMaps>
-    )
+    ),
   ],
   argTypes: {
     onClick: {
-      description: "Обработчик кнопки Откликнуться"
-    }
-  }
+      description: "Обработчик кнопки Откликнуться",
+    },
+  },
 } as Meta<typeof YandexMap>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-
 
 export const Default: Story = {
   args: {
@@ -33,7 +36,7 @@ export const Default: Story = {
     mapSettings: {
       latitude: 59.93,
       longitude: 30.31,
-      zoom: 15
+      zoom: 15,
     },
     tasks: [
       {
@@ -44,7 +47,8 @@ export const Default: Story = {
         avatarName: "example",
         recipientName: "Иванов Иван Иванович",
         recipientPhoneNumber: "+7(000) ***-**-**",
-        description: "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
+        description:
+          "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
         count: "4",
       },
       {
@@ -55,9 +59,10 @@ export const Default: Story = {
         avatarName: "example",
         recipientName: "Иванов Иван Иванович",
         recipientPhoneNumber: "+7(000) ***-**-**",
-        description: "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
+        description:
+          "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
         count: "4",
-      }
-    ]
-  }
+      },
+    ],
+  },
 };

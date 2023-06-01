@@ -4,7 +4,7 @@ import { Button } from ".";
 import { VkIcon } from "../icons/vk-icon";
 
 const meta: Meta<typeof Button> = {
-  title: "Buttons/Button",
+  title: "uikit/Buttons/Button",
   component: Button,
   tags: ["autodocs"],
   argTypes: {

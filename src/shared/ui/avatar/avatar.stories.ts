@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Avatar } from ".";
 
 const meta: Meta<typeof Avatar> = {
-  title: "Avatar",
+  title: "uikit/Avatar",
   component: Avatar,
   tags: ["autodocs"],
 

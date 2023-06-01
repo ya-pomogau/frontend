@@ -17,7 +17,7 @@ import { ArrowIcon } from "./arrow-icon";
 import { PinIcon } from "./pin-icon";
 import { SendIcon } from "./send-icon";
 import { EditIcon } from "./edit-icon";
-import { CloseIcon } from "./closee-icon";
+import { CloseIcon } from "./close-icon";
 import { VkIcon } from "./vk-icon";
 import { DoneIcon } from "./done-icon";
 import { ActiveApplicationIcon } from "./active-application-icon";

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SettingsPopup } from ".";
 
 const meta: Meta<typeof SettingsPopup> = {
-  title: "SettingsPopup",
+  title: "uikit/SettingsPopup",
   component: SettingsPopup,
   tags: ["autodocs"],
   argTypes: {

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { EditButton } from ".";
 
 const meta: Meta<typeof EditButton> = {
-  title: "Buttons/EditButton",
+  title: "uikit/Buttons/EditButton",
   component: EditButton,
   tags: ["autodocs"],
   argTypes: {

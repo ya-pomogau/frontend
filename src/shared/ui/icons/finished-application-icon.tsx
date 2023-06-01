@@ -1,6 +1,10 @@
 import { getColor, IIconProps } from "./utils";
 
-export const FinishedApplicationIcon = ({ color, size = "24", ...props }: IIconProps) => (
+export const FinishedApplicationIcon = ({
+  color,
+  size = "24",
+  ...props
+}: IIconProps) => (
   <svg
     width={size}
     height={size}

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Dialog } from ".";
 
 const meta: Meta<typeof Dialog> = {
-  title: "Dialog",
+  title: "uikit/Dialog",
   component: Dialog,
   tags: ["autodocs"],
   argTypes: {
