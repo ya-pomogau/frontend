@@ -1,4 +1,3 @@
-
 export interface Data {
   id: number;
   recipientAdressCoordinates: [number, number];

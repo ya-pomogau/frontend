@@ -2,7 +2,6 @@ import { Meta, StoryObj } from "@storybook/react";
 import { TextArea } from ".";
 import styles from "./styles.module.css";
 
-
 const meta = {
   title: "TextArea",
   component: TextArea,
@@ -18,7 +17,7 @@ export const Default: Story = {
     name: "task",
     label: "Опишите задачу",
     placeholder: "Например: Помогите выгулять собаку.",
-  }
+  },
 };
 
 export const Size440x170px: Story = {
@@ -26,7 +25,6 @@ export const Size440x170px: Story = {
     name: "task",
     label: "Опишите задачу",
     placeholder: "Например: Помогите выгулять собаку.",
-    extClassName: styles.for_storybook
-  }
+    extClassName: styles.for_storybook,
+  },
 };
-
