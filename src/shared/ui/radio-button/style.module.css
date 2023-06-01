@@ -1,0 +1,50 @@
+.radiobutton {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.fakeRadiobutton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 10px;
+  box-sizing: border-box;
+  user-select: none;
+  padding: 5px 20px;
+  width: 66px;
+  height: 24px;
+  border: 1px solid var(--colors-interface-primary);
+  background-color: var(--colors-interface-white);
+
+  color: var(--colors-interface-black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  transition: var(--transition-hover);
+}
+
+.radiobutton:hover + .fakeRadiobutton {
+  opacity: 0.4;
+  background-color: var(--colors-interface-primary);
+  border-color: var(--colors-interface-primary);
+  color: var(--colors-interface-white);
+  transition: var(--transition-hover);
+}
+
+.radiobutton:checked + .fakeRadiobutton {
+  opacity: 1;
+  background-color: var(--colors-interface-primary);
+  border-color: var(--colors-interface-primary);
+  color: var(--colors-interface-white);
+}
+
+.radiobutton:disabled + .fakeRadiobutton {
+  cursor: not-allowed;
+  opacity: 0.4;
+  background-color: var(--colors-interface-white);
+  border-color: var(--colors-interface-primary);
+  color: var(--colors-interface-primary);
+}

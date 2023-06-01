@@ -47,7 +47,7 @@
     "import/extensions": [
       2,
       {
-        "ignorePackages": true
+        "json": "always"
       }
     ],
     "import/prefer-default-export": "off",

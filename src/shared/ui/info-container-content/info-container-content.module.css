@@ -1,0 +1,16 @@
+.info-id-wrapper {
+  opacity: 0.5;
+  padding-bottom: 10px;
+}
+
+.info-name-wrapper {
+  padding-bottom: 5px;
+}
+
+.info-phoneNumber-wrapper {
+  padding-bottom: 10px;
+}
+
+.info-address-wrapper {
+  padding-bottom: 10px;
+}

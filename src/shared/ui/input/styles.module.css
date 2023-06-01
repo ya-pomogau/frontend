@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input {
+  padding: 12px;
+  transition: var(--transition-hover);
+  height: 44px;
+  color: var(--colors-interface-primary);
+  border: 1px solid var(--colors-interface-primary-additional);
+  box-sizing: border-box;
+}
+
+.input_error {
+  composes: input;
+  border-color: var(--colors-interface-orange);
+}
+
+.input::placeholder {
+  color: var(--colors-interface-additional);
+}
+
+.input:hover {
+  border-color: var(--colors-interface-blue-navy);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--colors-interface-blue-navy);
+}
+
+.label {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--colors-interface-primary);
+  margin-bottom: 8px;
+}
+
+.error {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: var(--colors-interface-orange);
+}
+
+.for_storybook {
+  width: 350px;
+}
+
+.icon {
+  display: flex;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+@media (max-width: 360px) {
+  .icon {
+    right: 0;
+  }
+}
+
+.icon:hover,
+.icon:active {
+  opacity: 0.6;
+}
