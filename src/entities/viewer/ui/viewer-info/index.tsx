@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { StoreState } from "app/store";
+import { RootState } from "app/store";
 import { useDispatch, useSelector } from "react-redux";
 import { InfoContainer } from "shared/ui/info-container";
 import { InfoContainerContent } from "shared/ui/info-container-content";
@@ -24,7 +24,7 @@ export const ViewerInfo = ({ roleForStoryBook }: ViewerInfoProps) => {
     completedTasksCount = 0,
     tasksCount = 0,
     ...otherInfo
-  } = useSelector((state: StoreState) => state.viewer.viewerInfo);
+  } = useSelector((state: RootState) => state.viewer.viewerInfo);
 
   const isRecipient = useMemo(() => role === "recipient", [role]);
   const isVolunteer = useMemo(() => role === "volunteer", [role]);
