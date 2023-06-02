@@ -6,7 +6,7 @@ import Checkbox from "../checkbox";
 import RadioButton from "../radio-button";
 
 const meta: Meta<typeof Fieldset> = {
-  title: "Fieldset",
+  title: "uikit/FormElements/Fieldset",
   component: Fieldset,
   tags: ["autodocs"],
   parameters: {
