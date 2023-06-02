@@ -30,6 +30,7 @@ export const InfoContainer = ({
           avatarLink={link}
           avatarName={avatarName}
           extClassName={styles["info-container-avatar"]}
+          size="large"
         />
       </div>
     ) : (

@@ -39,6 +39,8 @@
   top: 50%;
   left: 30px;
   color: var(--colors-interface-primary);
+  max-width: 265px;
+  width: 100%;
 }
 
 .info-container-button-wrapper {

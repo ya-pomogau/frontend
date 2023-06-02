@@ -4,19 +4,26 @@ import styles from "./styles.module.css";
 
 interface imageProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
-  avatarLink: string; 
+  avatarLink: string;
   avatarName: string;
+  size?: "medium" | "large";
 }
 
 export const Avatar = ({
-  extClassName,  
+  extClassName,
   avatarLink = "https://i.pravatar.cc/300",
   avatarName,
+  size = "medium",
   ...props
 }: imageProps) => (
   <img
     src={avatarLink}
     alt={avatarName}
-    className={classnames( styles.avatar, extClassName)}
+    className={classnames(
+      styles.avatar,
+      styles[`avatar--${size}`],
+      extClassName
+    )}
     {...props}
-  />);
+  />
+);

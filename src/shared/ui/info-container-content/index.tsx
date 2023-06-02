@@ -84,25 +84,27 @@ export const InfoContainerContent = ({
       </span>
       {address}
     </p>
-    <p
-      className={classNames(
-        "m-0",
-        "text_size_small",
-        "text_type_regular",
-        "text"
-      )}
-    >
-      <span
+    {description && (
+      <p
         className={classNames(
           "m-0",
           "text_size_small",
-          "text_type_bold",
+          "text_type_regular",
           "text"
         )}
       >
-        О себе: &nbsp;
-      </span>
-      {description}
-    </p>
+        <span
+          className={classNames(
+            "m-0",
+            "text_size_small",
+            "text_type_bold",
+            "text"
+          )}
+        >
+          О себе: &nbsp;
+        </span>
+        {description}
+      </p>
+    )}
   </div>
 );
