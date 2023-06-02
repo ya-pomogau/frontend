@@ -13,7 +13,7 @@ export const CardButton = ({
   extClassName,
   customIcon,
   label,
-  ...props
+  ...args
 }: CardButtonProps) => (
   <button
     type="button"
@@ -23,7 +23,7 @@ export const CardButton = ({
       "text",
       "text_size_medium"
     )}
-    {...props}
+    {...args}
   >
     <div className={styles["card-buttonContent"]}>
       <div className={styles["card-buttonImg"]}>{customIcon}</div>

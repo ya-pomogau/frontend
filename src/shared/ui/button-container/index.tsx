@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import styles from "./styles.module.css";
 
-interface ButtonContainerProps {
+export interface ButtonContainerProps {
   border?: "sea" | "main" | "mobile";
   size?: "web" | "mob";
   children?: React.ReactNode;
