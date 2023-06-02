@@ -18,8 +18,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-right: 10px;
-  margin-top: 18px;
+  margin: 6px 10px 0 0;
 }
 
 .dataWrapper {

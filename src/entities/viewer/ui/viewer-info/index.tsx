@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { RootState } from "app/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { InfoContainer } from "shared/ui/info-container";
 import { InfoContainerContent } from "shared/ui/info-container-content";
 import { VolunteerInfo } from "./volunteer-info/volunteer-info";
@@ -11,10 +11,14 @@ import styles from "./styles.module.css";
 
 interface ViewerInfoProps {
   roleForStoryBook?: TRole;
+  onClickSettingsButton: () => void;
 }
 
-export const ViewerInfo = ({ roleForStoryBook }: ViewerInfoProps) => {
-  const dispatch = useDispatch();
+export const ViewerInfo = ({
+  roleForStoryBook,
+  onClickSettingsButton,
+}: ViewerInfoProps) => {
+  const dispatch = useAppDispatch();
   const {
     name,
     avatarLink,
@@ -24,7 +28,7 @@ export const ViewerInfo = ({ roleForStoryBook }: ViewerInfoProps) => {
     completedTasksCount = 0,
     tasksCount = 0,
     ...otherInfo
-  } = useSelector((state: RootState) => state.viewer.viewerInfo);
+  } = useAppSelector((state: RootState) => state.viewer.viewerInfo);
 
   const isRecipient = useMemo(() => role === "recipient", [role]);
   const isVolunteer = useMemo(() => role === "volunteer", [role]);
@@ -36,25 +40,26 @@ export const ViewerInfo = ({ roleForStoryBook }: ViewerInfoProps) => {
   }, [dispatch, roleForStoryBook]);
 
   return (
-    <InfoContainer avatarName={name} link={avatarLink}>
+    <InfoContainer
+      avatarName={name}
+      link={avatarLink}
+      onClickSettingsButton={onClickSettingsButton}
+    >
       <div className={styles.contentWrapper}>
         <InfoContainerContent {...otherInfo} name={name} />
-        {(isRecipient || isVolunteer) && (
-          <div className={styles.additionalInfoWrapper}>
-            {isRecipient && (
-              <RecipientInfo
-                tasksCount={tasksCount}
-                completedTasksCount={completedTasksCount}
-              />
-            )}
-            {isVolunteer && (
-              <VolunteerInfo
-                score={score}
-                virtualKey={virtualKey}
-                completedTasksCount={completedTasksCount}
-              />
-            )}
-          </div>
+
+        {isRecipient && (
+          <RecipientInfo
+            tasksCount={tasksCount}
+            completedTasksCount={completedTasksCount}
+          />
+        )}
+        {isVolunteer && (
+          <VolunteerInfo
+            score={score}
+            virtualKey={virtualKey}
+            completedTasksCount={completedTasksCount}
+          />
         )}
       </div>
     </InfoContainer>

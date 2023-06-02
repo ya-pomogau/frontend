@@ -4,17 +4,9 @@
   padding: 0;
   border: none;
   border-radius: 50%;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
   object-position: center;
   overflow: hidden;
-}
-
-.avatar--medium {
-  width: 120px;
-  height: 120px;
-}
-
-.avatar--large {
-  width: 175px;
-  height: 175px;
 }

@@ -11,4 +11,5 @@ export interface IUserInfo {
   virtualKey?: boolean;
   completedTasksCount?: number;
   tasksCount?: number;
+  description: string;
 }
