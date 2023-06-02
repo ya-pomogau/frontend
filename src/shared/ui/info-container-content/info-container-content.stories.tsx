@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { InfoContainerContent } from ".";
 
 const meta: Meta<typeof InfoContainerContent> = {
-  title: "InfoContainerContent",
+  title: "uikit/InfoContainerContent",
   component: InfoContainerContent,
   tags: ["autodocs"],
 };

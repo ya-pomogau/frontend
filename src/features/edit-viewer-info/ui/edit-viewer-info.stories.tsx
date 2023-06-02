@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { EditViewerInfo } from ".";
 
 const meta: Meta<typeof EditViewerInfo> = {
-  title: "EditViewerInfo",
+  title: "features/EditViewerInfo",
   component: EditViewerInfo,
   tags: ["autodocs"],
   argTypes: {},

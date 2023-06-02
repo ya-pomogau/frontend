@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Checkbox from "shared/ui/checkbox";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Checkbox",
+  title: "uikit/FormElements/Checkbox",
   component: Checkbox,
   tags: ["autodocs"],
   parameters: {

@@ -1,0 +1,21 @@
+.main {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.side {
+  display: none;
+}
+
+@media all and (min-width: 700px) {
+  .main {
+    grid-template-columns: 295px 1fr;
+    column-gap: 20px;
+  }
+
+  .side {
+    display: block;
+  }
+}

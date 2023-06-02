@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SquareButton } from ".";
 
 const meta: Meta<typeof SquareButton> = {
-  title: "Buttons/SquareButton",
+  title: "uikit/Buttons/SquareButton",
   component: SquareButton,
   tags: ["autodocs"],
   argTypes: {

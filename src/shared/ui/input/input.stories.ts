@@ -3,7 +3,7 @@ import { Input } from ".";
 import styles from "./styles.module.css";
 
 const meta = {
-  title: "Input",
+  title: "uikit/FormElements/Input",
   component: Input,
   tags: ["autodocs"],
   argTypes: {

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CategoriesBackground } from ".";
 
 const meta: Meta<typeof CategoriesBackground> = {
-  title: "CategoriesBackground",
+  title: "uikit/CategoriesBackground",
   component: CategoriesBackground,
   tags: ["autodocs"],
   argTypes: {

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Icon } from ".";
 
 const meta: Meta<typeof Icon> = {
-  title: "Icons",
+  title: "uikit/Icons",
   component: Icon,
   tags: ["autodocs"],
 };

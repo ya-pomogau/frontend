@@ -27,7 +27,7 @@
 }
 
 .radiobutton:hover + .fakeRadiobutton {
-  opacity: .4;
+  opacity: 0.4;
   background-color: var(--colors-interface-primary);
   border-color: var(--colors-interface-primary);
   color: var(--colors-interface-white);
@@ -43,7 +43,7 @@
 
 .radiobutton:disabled + .fakeRadiobutton {
   cursor: not-allowed;
-  opacity: .4;
+  opacity: 0.4;
   background-color: var(--colors-interface-white);
   border-color: var(--colors-interface-primary);
   color: var(--colors-interface-primary);

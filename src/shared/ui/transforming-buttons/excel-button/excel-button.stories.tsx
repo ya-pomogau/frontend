@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ExcelButton } from ".";
 
 const meta = {
-  title: "ExcelButton",
+  title: "uikit/Buttons/ExcelButton",
   component: ExcelButton,
   tags: ["autodocs"],
 } satisfies Meta<typeof ExcelButton>;

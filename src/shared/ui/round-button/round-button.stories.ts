@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { RoundButton } from ".";
 
 const meta: Meta<typeof RoundButton> = {
-  title: "Buttons/RoundButton",
+  title: "uikit/Buttons/RoundButton",
   component: RoundButton,
   tags: ["autodocs"],
   argTypes: {

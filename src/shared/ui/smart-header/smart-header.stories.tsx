@@ -4,7 +4,7 @@ import { FilterIcon } from "../icons/filter-icon";
 import { ActiveApplicationIcon } from "../icons/active-application-icon";
 
 const meta: Meta<typeof SmartHeader> = {
-  title: "SmartHeader",
+  title: "uikit/SmartHeader",
   component: SmartHeader,
   tags: ["autodocs"],
   argTypes: {
