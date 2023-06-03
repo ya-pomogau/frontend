@@ -13,7 +13,7 @@
   box-sizing: border-box;
 }
 
-.info-container-avatar {
+.info-container-avatarWrapper {
   width: 175px;
   height: 175px;
   border-radius: 512px;
@@ -24,6 +24,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.info-container-avatar {
+  min-width: 175px;
+  min-height: 175px;
 }
 
 .info-container-svg {
@@ -39,6 +44,8 @@
   top: 50%;
   left: 30px;
   color: var(--colors-interface-primary);
+  max-width: 265px;
+  width: 100%;
 }
 
 .info-container-button-wrapper {

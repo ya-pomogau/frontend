@@ -9,6 +9,7 @@ interface IInfoContainerProps {
   children?: ReactNode;
   link?: string;
   avatarName: string;
+  onClickSettingsButton: () => void;
 }
 
 export const InfoContainer = ({
@@ -16,6 +17,7 @@ export const InfoContainer = ({
   children,
   link,
   avatarName,
+  onClickSettingsButton,
   ...rest
 }: IInfoContainerProps) => (
   <div className={classNames(styles["info-container-frame"], extClassName)}>
@@ -25,7 +27,7 @@ export const InfoContainer = ({
       alt="рамка для профиля"
     />
     {link ? (
-      <div className={classNames(styles["info-container-avatar"])}>
+      <div className={classNames(styles["info-container-avatarWrapper"])}>
         <Avatar
           avatarLink={link}
           avatarName={avatarName}
@@ -33,7 +35,7 @@ export const InfoContainer = ({
         />
       </div>
     ) : (
-      <div className={classNames(styles["info-container-avatar"])}>
+      <div className={classNames(styles["info-container-avatarWrapper"])}>
         <svg
           className={classNames(styles["info-container-svg"])}
           viewBox="0 0 75 125"
@@ -54,7 +56,10 @@ export const InfoContainer = ({
     <div className={classNames(styles["info-container-content"])}>
       {children}
     </div>
-    <SettingsButton extClassName={styles["info-container-button-wrapper"]} />
+    <SettingsButton
+      extClassName={styles["info-container-button-wrapper"]}
+      onClick={onClickSettingsButton}
+    />
     <div
       className={classNames(styles["info-container-personal-counter"])}
       {...rest}
