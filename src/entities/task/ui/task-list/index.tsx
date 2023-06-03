@@ -1,8 +1,11 @@
+import { nanoid } from "nanoid";
 import classNames from "classnames";
 import { Informer } from "shared/ui/informer";
 import { RoundButton } from "shared/ui/round-button";
 import { Task } from "../task";
+
 import styles from "./styles.module.css";
+
 
 
 
@@ -59,7 +62,7 @@ export const TaskList = ({
         {tasks.map((item) => {
           if (item.confirmStatus) {
             return (
-              <li>
+              <li key={nanoid()}>
                 <Task
                   category={item.category}
                   isMobile={isMobile}
@@ -83,7 +86,7 @@ export const TaskList = ({
           }
 
           return (
-            <li>
+            <li key={nanoid()}>
               <Task
                 category={item.category}
                 isMobile={isMobile}
@@ -113,7 +116,7 @@ export const TaskList = ({
     return (
       <ul className={classNames(styles.content,"list", "p-0",extClassName)}>
         {tasks.map((item) => (
-          <li>
+          <li key={nanoid()}>
             <Task
               category={item.category}
               isMobile={isMobile}
