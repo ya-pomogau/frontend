@@ -6,13 +6,13 @@ interface CardButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
   onClick?: () => void;
   customIcon?: ReactNode;
-  label: string;
+  text: string;
 }
 
 export const CardButton = ({
   extClassName,
   customIcon,
-  label,
+  text,
   ...props
 }: CardButtonProps) => (
   <button
@@ -27,7 +27,7 @@ export const CardButton = ({
   >
     <div className={styles["card-buttonContent"]}>
       <div className={styles["card-buttonImg"]}>{customIcon}</div>
-      <span className={styles["card-buttonLabel"]}>{label}</span>
+      <span className={styles["card-buttonLabel"]}>{text}</span>
     </div>
   </button>
 );
