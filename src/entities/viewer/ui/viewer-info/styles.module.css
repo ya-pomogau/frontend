@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  gap: 25px;
+  gap: 5px;
 }
 
 .volunteerInfo {
@@ -18,7 +18,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 6px 10px 0 0;
+  margin: 26px 9px 0 0;
 }
 
 .dataWrapper {
