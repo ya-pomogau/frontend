@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 import { Avatar } from "../avatar";
 import { SquareButton } from "../square-buttons";
 import styles from "./main-popup.module.css";
@@ -9,6 +10,7 @@ interface IMainPopupProps {
   phoneNumber?: string;
   avatarName: string;
   avatarLink: string;
+  children?: React.ReactNode;
 }
 
 export const MainPopup = ({
@@ -17,6 +19,7 @@ export const MainPopup = ({
   avatarLink,
   avatarName,
   phoneNumber,
+  children,
 }: IMainPopupProps) => (
   <div className={classNames(styles.container, extClassName)}>
     <SquareButton buttonType="close" extClassName={styles.exitButton} />
@@ -54,5 +57,6 @@ export const MainPopup = ({
         </div>
       </div>
     </div>
+    {children}
   </div>
 );
