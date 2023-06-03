@@ -28,7 +28,7 @@ export const ViewerInfo = ({
     completedTasksCount = 0,
     tasksCount = 0,
     ...otherInfo
-  } = useAppSelector((state: RootState) => state.viewer.viewerInfo);
+  } = useAppSelector((state: RootState) => state.viewer);
 
   const isRecipient = useMemo(() => role === "recipient", [role]);
   const isVolunteer = useMemo(() => role === "volunteer", [role]);
