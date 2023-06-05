@@ -16,6 +16,6 @@ export const ContentLayout = ({
 }: ContentLayoutProps) => (
   <div className={classnames(styles.content, extClassName)}>
     <div className={styles.smart}>{heading}</div>
-    <div>{children}</div>
+    <div className={styles.list}>{children}</div>
   </div>
 );
