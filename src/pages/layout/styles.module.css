@@ -1,0 +1,41 @@
+.main {
+  height: 884px;
+  padding: 0 92px;
+  margin-top: 30px;
+  position: relative;
+}
+
+@media screen and (max-width:1300px) {
+  .main {
+    padding: 0 25px;
+  }
+}
+
+@media screen and (max-width:920px) {
+  .main {
+    height: calc(100vh - 89px - 22px - 30px);
+  }
+}
+
+@media screen and (max-width:900px) {
+  .main {
+    height: calc(100vh - 53px - 22px - 30px);
+  }
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(255,255,255,0), rgb(255, 255, 255));
+  height: 152px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 22px;
+  overflow: hidden;
+}

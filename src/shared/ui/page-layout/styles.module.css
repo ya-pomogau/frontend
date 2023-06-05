@@ -9,7 +9,12 @@
   display: none;
 }
 
-@media all and (min-width: 700px) {
+.content {
+  overflow-y: auto;
+}
+
+
+@media all and (min-width: 920px) {
   .main {
     grid-template-columns: 295px 1fr;
     column-gap: 20px;
@@ -19,3 +24,4 @@
     display: block;
   }
 }
+

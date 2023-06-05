@@ -21,22 +21,20 @@ export const YandexMap = ({
   onClick,
   tasks,
 }: Props) => (
-  <div>
-    <Map
-      state={{
-        center: [mapSettings.latitude, mapSettings.longitude],
-        zoom: mapSettings.zoom,
-      }}
-      options={{
-        suppressMapOpenBlock: true,
-        yandexMapDisablePoiInteractivity: true,
-      }}
-      width={width}
-      height={height}
-    >
-      {tasks?.map((task) => (
-        <Mark {...task} onClick={onClick} key={task.id}/>
-      ))}
-    </Map>
-  </div>
+  <Map
+    state={{
+      center: [mapSettings.latitude, mapSettings.longitude],
+      zoom: mapSettings.zoom,
+    }}
+    options={{
+      suppressMapOpenBlock: true,
+      yandexMapDisablePoiInteractivity: true,
+    }}
+    width={width}
+    height={height}
+  >
+    {tasks?.map((task) => (
+      <Mark {...task} onClick={onClick} key={task.id} />
+    ))}
+  </Map>
 );
