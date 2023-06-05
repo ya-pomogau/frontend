@@ -5,9 +5,22 @@
   position: relative;
 }
 
+.overlay {
+  position: absolute;
+  bottom: 22px;
+  left: 384px;
+  background: linear-gradient(rgba(255,255,255,0), rgb(255, 255, 255));
+  height: 152px;
+  width: 100%;
+  pointer-events: none;
+}
+
 @media screen and (max-width:1300px) {
   .main {
     padding: 0 25px;
+  }
+  .overlay {
+    left: 318px;
   }
 }
 
@@ -15,22 +28,16 @@
   .main {
     height: calc(100vh - 89px - 22px - 30px);
   }
+  .overlay {
+    left: 0;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width:900px) {
   .main {
     height: calc(100vh - 53px - 22px - 30px);
   }
-}
-
-.overlay {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(255,255,255,0), rgb(255, 255, 255));
-  height: 152px;
-  width: 100%;
-  pointer-events: none;
 }
 
 .footer {

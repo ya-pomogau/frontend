@@ -41,6 +41,7 @@ body {
   max-width: 1440px;
   padding: 0;
   margin: 0 auto;
+  position: relative;
 }
 
 @media screen and (max-width:920px) {

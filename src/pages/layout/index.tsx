@@ -9,8 +9,8 @@ export function Layout() {
       <header><Header/></header>
       <main className={styles.main}>
         <Outlet />
-        <div className={styles.overlay} />
       </main>
+      <div className={styles.overlay} />
       <footer className={styles.footer}><BottomBar /></footer>
     </>
   );

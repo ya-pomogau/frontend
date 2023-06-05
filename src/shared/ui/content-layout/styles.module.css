@@ -13,6 +13,7 @@
 .list {
   overflow-y: auto;
   padding-right: 6px;
+  position: relative;
 }
 
 @media all and (max-width: 920px) {
