@@ -17,14 +17,14 @@ const Checkbox: FC<CheckboxProps> = ({
     <input
       className={styles.checkbox}
       type="checkbox"
-      id="233"
-      name="233"
+      id={id}
+      name={id}
       onChange={onChange}
       checked={checked}
       {...props}
     />
     <label
-      htmlFor="233"
+      htmlFor={id}
       className={classnames("text", "text_type_regular", "text_size_medium")}
     >
       <div className={styles.checkboxIconWrapper}>
