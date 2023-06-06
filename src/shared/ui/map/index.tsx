@@ -1,4 +1,4 @@
-import { Map } from "@pbe/react-yandex-maps";
+import { Map, YMaps } from "@pbe/react-yandex-maps";
 import { Data } from "./types";
 import { Mark } from "./Mark";
 
@@ -21,20 +21,22 @@ export const YandexMap = ({
   onClick,
   tasks,
 }: Props) => (
-  <Map
-    state={{
-      center: [mapSettings.latitude, mapSettings.longitude],
-      zoom: mapSettings.zoom,
-    }}
-    options={{
-      suppressMapOpenBlock: true,
-      yandexMapDisablePoiInteractivity: true,
-    }}
-    width={width}
-    height={height}
-  >
-    {tasks?.map((task) => (
-      <Mark {...task} onClick={onClick} key={task.id} />
-    ))}
-  </Map>
+  <YMaps query={{ load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}>
+    <Map
+      state={{
+        center: [mapSettings.latitude, mapSettings.longitude],
+        zoom: mapSettings.zoom,
+      }}
+      options={{
+        suppressMapOpenBlock: true,
+        yandexMapDisablePoiInteractivity: true,
+      }}
+      width={width}
+      height={height}
+    >
+      {tasks?.map((task) => (
+        <Mark {...task} onClick={onClick} key={task.id} />
+      ))}
+    </Map>
+  </YMaps>
 );
