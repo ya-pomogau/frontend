@@ -5,10 +5,10 @@ import { Icon } from "shared/ui/icons";
 import classnames from "classnames";
 import { Button } from "shared/ui/button";
 import styles from "./styles.module.css";
-import IUser from "../../types";
+import { IUser } from "../../types";
 
 interface RequestCardProps {
-  requestCardId: number;
+  requestCardId: string;
   // когда будет 1 интерфейс глобальный для пользователя - указать тут его
   user: IUser;
 }

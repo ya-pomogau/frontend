@@ -54,7 +54,7 @@ const meta: Meta<typeof RequestCard> = {
   argTypes: {
     requestCardId: {
       name: "requestCardId",
-      type: { name: "number", required: true },
+      type: { name: "string", required: true },
       description: "Уникальный номер карточки",
       table: {
         type: { summary: "number" },
@@ -71,21 +71,21 @@ export default meta;
 type Story = StoryObj<typeof RequestCard>;
 export const RequestCardNew: Story = {
   args: {
-    requestCardId: 1,
+    requestCardId: "1",
     user: testUser1,
   },
 };
 
 export const RequestCardWithKeys: Story = {
   args: {
-    requestCardId: 11,
+    requestCardId: "11",
     user: testUser2,
   },
 };
 
 export const RequestCardWithScore: Story = {
   args: {
-    requestCardId: 111,
+    requestCardId: "111",
     user: testUser3,
   },
 };

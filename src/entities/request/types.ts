@@ -1,4 +1,4 @@
-interface IUser {
+export interface IUser {
   userAvatar: string;
   userId: number;
   userName: string;
@@ -10,4 +10,7 @@ interface IUser {
   };
 }
 
-export default IUser;
+export interface IRequestCard {
+  requestCardId: string;
+  user: IUser;
+}
