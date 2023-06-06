@@ -1,0 +1,43 @@
+.dateContainer {
+  display: grid;
+  grid-template-columns: 140px 96px 50px 308px;
+  margin-top: 20px;
+}
+
+.checkbox {
+  margin: 10px 0 20px;
+  grid-column-start: 4;
+  border: 0.5px solid var(--colors-interface-ford-white);
+  padding: 12px 0 12px 14px;
+  display: flex;
+}
+
+.wrapperForDate {
+  width: 308px;
+  grid-column-start: 4;
+}
+
+.wrapperForTime {
+  grid-column-start: 2;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inputForTime {
+  border: 0.5px solid var(--colors-interface-ford-white);
+  padding: 10px;
+  box-sizing: border-box;
+  width: 96px;
+  outline: none;
+}
+
+.inputForTime::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+}

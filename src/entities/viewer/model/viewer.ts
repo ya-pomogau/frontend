@@ -19,7 +19,6 @@ export const viewerModel = createSlice({
   name: "viewer",
   reducers: {
     updateUserRole: (state, { payload }: PayloadAction<TRole>) => {
-      // eslint-disable-next-line no-param-reassign
       state.role = payload;
     },
   },

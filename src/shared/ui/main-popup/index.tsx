@@ -11,6 +11,7 @@ interface IMainPopupProps {
   avatarName: string;
   avatarLink: string;
   children?: React.ReactNode;
+  handleCloseClick: () => void;
 }
 
 export const MainPopup = ({
@@ -20,9 +21,14 @@ export const MainPopup = ({
   avatarName,
   phoneNumber,
   children,
+  handleCloseClick,
 }: IMainPopupProps) => (
   <div className={classNames(styles.container, extClassName)}>
-    <SquareButton buttonType="close" extClassName={styles.exitButton} />
+    <SquareButton
+      buttonType="close"
+      extClassName={styles.exitButton}
+      onClick={handleCloseClick}
+    />
     <div className={classNames(styles.headerWrapper)}>
       <Avatar avatarLink={avatarLink} avatarName={avatarName} />
       <div className={classNames(styles.profileDesc)}>

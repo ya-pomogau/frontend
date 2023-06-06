@@ -1,0 +1,32 @@
+.selectedText {
+  color: var(--colors-interface-orange);
+}
+
+.text {
+  margin: 5px 0;
+  grid-column-start: 2;
+}
+
+.addressContainer {
+  display: grid;
+  grid-template-columns: 140px 454px;
+  margin-top: 20px;
+}
+
+.input {
+  grid-column-start: 2;
+}
+
+.map {
+  grid-column-start: 2;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 45px;
+}
+
+.prevButton {
+  margin-right: 20px;
+}

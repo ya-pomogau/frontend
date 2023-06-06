@@ -1,0 +1,25 @@
+.taskContainer {
+  display: grid;
+  grid-template-columns: 140px 454px;
+  margin-top: 20px;
+}
+
+.select {
+  grid-column-start: 2;
+}
+
+.textarea {
+  grid-column-start: 2;
+  margin-top: 20px;
+  min-height: 195px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.prevButton {
+  margin-right: 20px;
+}

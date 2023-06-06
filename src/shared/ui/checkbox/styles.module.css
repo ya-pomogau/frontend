@@ -41,13 +41,13 @@
   opacity: 0.4;
 }
 
-.checkbox:hover + label > .checkboxIconWrapper {
+/* .checkbox:hover + label > .checkboxIconWrapper {
   cursor: pointer;
   background-color: var(--colors-interface-primary);
   border-color: var(--colors-interface-primary);
   opacity: 0.4;
   transition: var(--transition-hover);
-}
+} */
 
 .checkbox:checked + label > .checkboxIconWrapper {
   cursor: pointer;
