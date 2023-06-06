@@ -62,7 +62,9 @@ export const AddressStep = () => {
           </span>
           пишите его полностью.
         </p>
-        <YandexMap extClassName={styles.map} width="100%" height="159px" />
+        <div className={styles.map}>
+          <YandexMap width="100%" height="159px" />
+        </div>
       </div>
       <div className={styles.buttonWrapper}>
         <Button
