@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
-import ReactDatePicker, { ReactDatePickerCustomHeaderProps } from "react-datepicker";
+import ReactDatePicker, {
+  ReactDatePickerCustomHeaderProps,
+} from "react-datepicker";
 import ru from "date-fns/locale/ru";
 import { getMonth } from "./lib";
-import { StepButton } from '../step-button/index';
+import { StepButton } from "../step-button/index";
 import "./react-datepicker.css";
 import styles from "./styles.module.css";
 
@@ -37,32 +39,38 @@ function customHeader({
 }
 
 export interface IDatePickerProps {
-  value: Date;
+  // value: Date;
   onChangeValue: (date: Date) => void;
   isMobile?: boolean;
   filter?: (date: Date) => boolean;
+  extClassName?: string;
 }
 
 export function DatePicker({
-  value,
+  // value,
   onChangeValue,
   isMobile = false,
   filter,
+  extClassName,
 }: IDatePickerProps) {
-  const handleOnChange = (date: Date | null) => {
+  const handleOnChange = (date: Date) => {
     if (date) onChangeValue(date);
   };
 
   return (
     <ReactDatePicker
-      selected={value}
+      className={extClassName}
       onChange={handleOnChange}
       filterDate={filter}
       showPopperArrow={false}
       locale={ru}
       inline
       wrapperClassName={styles.datePicker}
-      calendarClassName={isMobile ? styles.dataPicker__calendar_mobile : styles.dataPicker__calendar}
+      calendarClassName={
+        isMobile
+          ? styles.dataPicker__calendar_mobile
+          : styles.dataPicker__calendar
+      }
       dateFormat="dd.MM.yyyy"
       fixedHeight
       renderCustomHeader={customHeader}

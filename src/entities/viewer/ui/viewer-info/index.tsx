@@ -30,7 +30,7 @@ export const ViewerInfo = ({
     ...otherInfo
   } = useAppSelector((state: RootState) => state.viewer);
 
-  const isRecipient = useMemo(() => role === "recipient", [role]);
+  const isRecipient = useMemo(() => role === "consumer", [role]);
   const isVolunteer = useMemo(() => role === "volunteer", [role]);
 
   useEffect(() => {

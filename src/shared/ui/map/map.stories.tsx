@@ -1,22 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { YMaps } from "@pbe/react-yandex-maps";
 import { YandexMap } from ".";
 
 const meta = {
   title: "uikit/YandexMap",
   component: YandexMap,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <YMaps
-        query={{
-          load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon",
-        }}
-      >
-        <Story />
-      </YMaps>
-    ),
-  ],
   argTypes: {
     onClick: {
       description: "Обработчик кнопки Откликнуться",

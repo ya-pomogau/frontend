@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { viewerModel } from "entities/viewer/model";
+import { createRequestModel } from "features/create-request/model/create-request";
 
 export const store = configureStore({
   reducer: {
     viewer: viewerModel.reducer,
+    createRequest: createRequestModel.reducer,
   },
 });
 

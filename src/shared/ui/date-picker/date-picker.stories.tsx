@@ -6,10 +6,10 @@ const meta: Meta<typeof DatePicker> = {
   component: DatePicker,
   tags: ["autodocs"],
   argTypes: {
-    value: {
-      description: "Текущая дата",
-      control: "date",
-    },
+    // value: {
+    //   description: "Текущая дата",
+    //   control: "date",
+    // },
     onChangeValue: {
       description: "Обработчик события изменения даты",
     },
@@ -25,14 +25,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    value: new Date(),
+    // value: new Date(),
     isMobile: false,
   },
 };
 
 export const Mobile: Story = {
   args: {
-    value: new Date(),
+    // value: new Date(),
     isMobile: true,
   },
 };

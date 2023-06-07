@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
 import { CardButton } from ".";
 import { CompletedApplicationIcon } from "../icons/completed-application-icon";
 
@@ -19,14 +18,14 @@ const Icon = <CompletedApplicationIcon size="54" color="white" />;
 
 export const Default: Story = {
   args: {
-    label: "Обозначение карточки",
+    text: "Обозначение карточки",
     customIcon: Icon,
   },
 };
 
 export const Pressed: Story = {
   args: {
-    label: "Обозначение карточки",
+    text: "Обозначение карточки",
     customIcon: Icon,
   },
 };

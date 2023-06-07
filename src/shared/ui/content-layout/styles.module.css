@@ -9,3 +9,15 @@
 .smart {
   display: block;
 }
+
+.list {
+  overflow-y: auto;
+  padding-right: 6px;
+  position: relative;
+}
+
+@media all and (max-width: 920px) {
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -10,6 +10,7 @@
   color: var(--colors-interface-additional);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
+  background-color: var(--colors-interface-white);
 }
 
 .select:hover {
