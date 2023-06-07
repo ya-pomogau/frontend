@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -130,6 +130,7 @@ export function ConsumerPage() {
       }
       content={
         <Routes>
+          <Route index element={<Navigate to="map" replace />} />
           <Route
             path="active"
             element={
