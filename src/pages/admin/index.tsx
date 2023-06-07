@@ -1,8 +1,7 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
 import { useState } from "react";
 import { PageLayout } from "../../shared/ui/page-layout";
-import styles from "./styles.module.css";
 import { ViewerInfo } from "../../entities/viewer";
 import { ButtonContainer } from "../../shared/ui/button-container";
 import { CardButton } from "../../shared/ui/card-button";
@@ -12,6 +11,7 @@ import { SmartHeader } from "../../shared/ui/smart-header";
 import { NotFoundPage } from "../not-found";
 import { Input } from "../../shared/ui/input";
 import { UserCard } from "../../shared/ui/user-card";
+import styles from "./styles.module.css";
 
 const numbersMock = {
   numberVolunteer: 2,
@@ -73,7 +73,7 @@ export function AdminPage() {
             />
           </div>
           <ButtonContainer>
-            <NavLink to="confirmation" className="link">
+            <NavLink to="requests" className="link">
               {({ isActive }) => (
                 <CardButton
                   customIcon={<Icon color="white" icon="BlockIcon" size="54" />}
@@ -95,7 +95,7 @@ export function AdminPage() {
                 />
               )}
             </NavLink>
-            <NavLink to="creation" className="link">
+            <NavLink to="tasks" className="link">
               {({ isActive }) => (
                 <CardButton
                   customIcon={
@@ -112,8 +112,9 @@ export function AdminPage() {
       }
       content={
         <Routes>
+          <Route index element={<Navigate to="requests" replace />} />
           <Route
-            path="confirmation/*"
+            path="requests"
             element={
               <ContentLayout
                 heading={
@@ -131,95 +132,85 @@ export function AdminPage() {
                   />
                 }
               >
-                <div>
-                  <div className={styles.tabContainer}>
-                    <NavLink to="volunteer" className="link">
-                      {({ isActive }) => (
-                        <div
+                <div className={styles.tabContainer}>
+                  <NavLink to="volunteer" className="link">
+                    {({ isActive }) => (
+                      <div
+                        className={classnames(
+                          isActive ? styles.tabContainer__itemActive : "",
+                          styles.tabContainer__item
+                        )}
+                      >
+                        {" "}
+                        <p
                           className={classnames(
-                            isActive ? styles.tabContainer__itemActive : "",
-                            styles.tabContainer__item
+                            isActive ? styles.tabContainer__textActive : "",
+                            "text",
+                            "p-0",
+                            "m-0",
+                            styles.tabContainer__text
                           )}
                         >
-                          {" "}
-                          <p
-                            className={classnames(
-                              isActive ? styles.tabContainer__textActive : "",
-                              "text",
-                              "p-0",
-                              "m-0",
-                              styles.tabContainer__text
-                            )}
-                          >
-                            Волонтеры
-                          </p>
-                          <span className={styles.tabContainer__number}>
-                            {numbersMock.numberVolunteer}
-                          </span>{" "}
-                        </div>
-                      )}
-                    </NavLink>
-                    <NavLink to="recipients" className="link">
-                      {({ isActive }) => (
-                        <div
+                          Волонтеры
+                        </p>
+                        <span className={styles.tabContainer__number}>
+                          {numbersMock.numberVolunteer}
+                        </span>{" "}
+                      </div>
+                    )}
+                  </NavLink>
+                  <NavLink to="recipients" className="link">
+                    {({ isActive }) => (
+                      <div
+                        className={classnames(
+                          isActive ? styles.tabContainer__itemActive : "",
+                          styles.tabContainer__item
+                        )}
+                      >
+                        {" "}
+                        <p
                           className={classnames(
-                            isActive ? styles.tabContainer__itemActive : "",
-                            styles.tabContainer__item
+                            isActive ? styles.tabContainer__textActive : "",
+                            "text",
+                            "p-0",
+                            "m-0",
+                            styles.tabContainer__text
                           )}
                         >
-                          {" "}
-                          <p
-                            className={classnames(
-                              isActive ? styles.tabContainer__textActive : "",
-                              "text",
-                              "p-0",
-                              "m-0",
-                              styles.tabContainer__text
-                            )}
-                          >
-                            Реципиенты
-                          </p>
-                          <span className={styles.tabContainer__number}>
-                            {numbersMock.numberRecipient}
-                          </span>{" "}
-                        </div>
-                      )}
-                    </NavLink>
-                    <NavLink to="notprocessed" className="link">
-                      {({ isActive }) => (
-                        <div
+                          Реципиенты
+                        </p>
+                        <span className={styles.tabContainer__number}>
+                          {numbersMock.numberRecipient}
+                        </span>{" "}
+                      </div>
+                    )}
+                  </NavLink>
+                  <NavLink to="notprocessed" className="link">
+                    {({ isActive }) => (
+                      <div
+                        className={classnames(
+                          isActive ? styles.tabContainer__itemActive : "",
+                          styles.tabContainer__item
+                        )}
+                      >
+                        {" "}
+                        <p
                           className={classnames(
-                            isActive ? styles.tabContainer__itemActive : "",
-                            styles.tabContainer__item
+                            isActive ? styles.tabContainer__textActive : "",
+                            "text",
+                            "p-0",
+                            "m-0",
+                            styles.tabContainer__text
                           )}
                         >
-                          {" "}
-                          <p
-                            className={classnames(
-                              isActive ? styles.tabContainer__textActive : "",
-                              "text",
-                              "p-0",
-                              "m-0",
-                              styles.tabContainer__text
-                            )}
-                          >
-                            Не обработанные
-                          </p>
-                          <span className={styles.tabContainer__number}>
-                            {numbersMock.numberNotProcessed}
-                          </span>{" "}
-                        </div>
-                      )}
-                    </NavLink>
-                  </div>
-                  <Routes>
-                    <Route path="volunteer" element={<div>volunteer</div>} />
-                    <Route path="recipients" element={<div>recipients</div>} />
-                    <Route
-                      path="notprocessed"
-                      element={<div>not processed</div>}
-                    />
-                  </Routes>
+                          Не обработанные
+                        </p>
+                        <span className={styles.tabContainer__number}>
+                          {numbersMock.numberNotProcessed}
+                        </span>{" "}
+                      </div>
+                    )}
+                  </NavLink>
                 </div>
               </ContentLayout>
             }
@@ -248,7 +239,7 @@ export function AdminPage() {
             }
           />
           <Route
-            path="creation"
+            path="tasks"
             element={
               <ContentLayout
                 heading={
