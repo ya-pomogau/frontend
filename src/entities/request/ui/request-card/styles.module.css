@@ -6,13 +6,13 @@
   max-width: 245px;
 }
 
-.staticInfoWrapper{
+.staticInfoWrapper {
   display: flex;
   align-items: center;
   overflow: hidden;
 }
 
-.staticInfo{
+.staticInfo {
   display: flex;
   gap: 10px;
 }

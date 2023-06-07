@@ -41,7 +41,7 @@
 .add_task_mobile {
   display: flex;
   flex-direction: column;
-  height: 106px;  
+  height: 106px;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -51,11 +51,9 @@
 }
 
 .title_add_list {
-  color: var(--colors-interface-primary-additional);  
+  color: var(--colors-interface-primary-additional);
 }
 
 .title_add_empty {
-  color: var(--colors-interface-primary);  
+  color: var(--colors-interface-primary);
 }
-
-
