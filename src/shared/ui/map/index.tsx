@@ -21,7 +21,9 @@ export const YandexMap = ({
   onClick,
   tasks,
 }: Props) => (
-  <YMaps query={{ load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}>
+  <YMaps
+    query={{ load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}
+  >
     <Map
       state={{
         center: [mapSettings.latitude, mapSettings.longitude],

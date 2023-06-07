@@ -22,7 +22,7 @@ export const OverlayingPopup = ({
     return null;
   }
   return (
-    <Portal>
+    <Portal isOpened>
       <div
         className={classNames(styles.popup, extClassName)}
         role="dialog"

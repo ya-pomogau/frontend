@@ -1,0 +1,108 @@
+.dateContainer {
+  display: grid;
+  grid-template-columns: 140px 96px 50px 308px;
+  margin-top: 20px;
+}
+
+.checkbox {
+  margin: 10px 0 20px;
+  grid-column-start: 4;
+  border: 0.5px solid var(--colors-interface-ford-white);
+  padding: 12px 0 12px 14px;
+  display: flex;
+}
+
+.wrapperForDate {
+  width: 308px;
+  grid-column-start: 4;
+}
+
+.wrapperForTime {
+  grid-column-start: 2;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inputForTime {
+  border: 0.5px solid var(--colors-interface-ford-white);
+  padding: 10px;
+  box-sizing: border-box;
+  width: 96px;
+  outline: none;
+}
+
+.inputForTime::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+}
+
+@media (min-width: 361px) and (max-width: 735px) {
+  .dateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+  }
+  .time {
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .date {
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .headerWrapper {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 240px;
+    height: 1px;
+    margin-top: 4px;
+  }
+  .headerWrapperForDatePicker {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 240px;
+    height: 1px;
+    margin-top: 4px;
+    margin-bottom: 20px;
+  }
+  .wrapperForTime {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapperForDate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 29px;
+    margin-bottom: 4px;
+  }
+  .inputForTime {
+    margin-top: 10px;
+  }
+  .datePicker {
+    margin-top: 20px;
+  }
+  .checkbox {
+    min-width: 197px;
+  }
+  .button {
+    justify-content: center;
+  }
+}

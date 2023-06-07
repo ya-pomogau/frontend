@@ -1,0 +1,63 @@
+.taskContainer {
+  display: grid;
+  grid-template-columns: 140px 454px;
+  margin-top: 20px;
+}
+
+.select {
+  grid-column-start: 2;
+}
+
+.textarea {
+  grid-column-start: 2;
+  margin-top: 20px;
+  min-height: 195px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.prevButton {
+  margin-right: 20px;
+}
+
+@media (min-width: 361px) and (max-width: 735px) {
+  .taskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 15px;
+  }
+  .headerWrapper {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 240px;
+    height: 1px;
+    margin-top: 4px;
+    margin-bottom: 17px;
+  }
+  .task {
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .textarea {
+    min-height: 0;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .buttonsWrapper {
+    margin-top: 178px;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+}
