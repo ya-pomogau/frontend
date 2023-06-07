@@ -43,6 +43,7 @@ export const SideBar: FC<ISideBarProps> = ({ links, position }) => (
     >
       {links.map((item) => (
         <SideBarItem
+          key={item.to}
           title={item.title}
           to={item.to}
           icon={item.icon}
