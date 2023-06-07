@@ -1,4 +1,4 @@
-export type TRole = "admin" | "recipient" | "volunteer";
+export type TRole = "consumer" | "volunteer" | "master" | "admin";
 
 export interface IUserInfo {
   name: string;

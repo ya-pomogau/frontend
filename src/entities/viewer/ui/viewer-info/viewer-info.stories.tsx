@@ -28,7 +28,7 @@ export const Admin: Story = {
 
 export const Recipient: Story = {
   args: {
-    roleForStoryBook: "recipient",
+    roleForStoryBook: "consumer",
   },
 };
 
