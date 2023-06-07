@@ -6,6 +6,8 @@
 
 [Бриф проекта](https://www.notion.so/3-9-4fb37047c4064717973bd79ab22a79b0)
 
+[Сторибук с UI компонентами](https://yapomogayu.github.io/frontend/)
+
 ### Технологии
 
 - NodeJS v18.15.0 (build)
