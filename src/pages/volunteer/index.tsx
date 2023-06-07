@@ -2,7 +2,7 @@ import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { YandexMap } from "shared/ui/map";
 import { NotFoundPage } from "pages/not-found";
 import { Icon } from "shared/ui/icons";
@@ -104,29 +104,23 @@ export function VolunteerPage() {
           </div>
           <ButtonContainer>
             <CardButton
-              customIcon={<Icon
-                color="white"
-                icon="MapApplicationIcon"
-                size="54"
-              />}
+              customIcon={
+                <Icon color="white" icon="MapApplicationIcon" size="54" />
+              }
               text="Карта заявок"
               onClick={() => navigate("map")}
             />
             <CardButton
-              customIcon={<Icon
-                color="white"
-                icon="ActiveApplicationIcon"
-                size="54"
-              />}
+              customIcon={
+                <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+              }
               text="Активные заяки"
               onClick={() => navigate("active")}
             />
             <CardButton
-              customIcon={<Icon
-                color="white"
-                icon="CompletedApplicationIcon"
-                size="54"
-              />}
+              customIcon={
+                <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+              }
               text="Завершенные заявки"
               onClick={() => navigate("completed")}
             />
@@ -135,6 +129,7 @@ export function VolunteerPage() {
       }
       content={
         <Routes>
+          <Route index element={<Navigate to="map" replace />} />
           <Route
             path="active"
             element={
