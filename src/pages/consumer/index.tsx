@@ -234,7 +234,6 @@ export function ConsumerPage() {
               </ContentLayout>
             }
           />
-
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       }
