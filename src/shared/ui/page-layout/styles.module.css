@@ -13,7 +13,6 @@
   overflow-y: auto;
 }
 
-
 @media all and (min-width: 920px) {
   .main {
     grid-template-columns: 295px 1fr;
@@ -24,4 +23,3 @@
     display: block;
   }
 }
-

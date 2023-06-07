@@ -9,24 +9,23 @@
   position: absolute;
   bottom: 22px;
   left: 384px;
-  background: linear-gradient(rgba(255,255,255,0), rgb(255, 255, 255));
+  background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
   height: 152px;
   width: calc(100% - 384px);
   pointer-events: none;
 }
 
-@media screen and (max-width:1300px) {
+@media screen and (max-width: 1300px) {
   .main {
     padding: 0 25px;
   }
   .overlay {
     left: 318px;
     width: calc(100% - 358px);
-
   }
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-width: 920px) {
   .main {
     height: calc(100vh - 89px - 22px - 30px);
   }
@@ -36,7 +35,7 @@
   }
 }
 
-@media screen and (max-width:900px) {
+@media screen and (max-width: 900px) {
   .main {
     height: calc(100vh - 53px - 22px - 30px);
   }
