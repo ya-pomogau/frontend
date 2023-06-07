@@ -8,14 +8,15 @@ import {
   changeCheckbox,
   changeStepIncrement,
 } from "features/create-request/model";
-import React from "react";
+import React, { useMemo } from "react";
 import { Button } from "shared/ui/button";
 import Checkbox from "shared/ui/checkbox";
 import { DatePicker } from "shared/ui/date-picker";
+import { formatDate } from "../../../libs/format-date";
 import styles from "./date-step.module.css";
 
 export const DateStep = () => {
-  const { time, termlessRequest } = useAppSelector(
+  const { time, termlessRequest, date } = useAppSelector(
     (state: RootState) => state.createRequest
   );
   const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ export const DateStep = () => {
   const handleCheckboxChange = () => {
     dispatch(changeCheckbox());
   };
+  const dateValue = useMemo((): Date => formatDate(date), [date]);
 
   return (
     <>
@@ -81,13 +83,15 @@ export const DateStep = () => {
             Дата
           </p>
           <div className={styles.headerWrapperForDatePicker} />
-          <DatePicker onChangeValue={handleDateValueChange} />
+          <DatePicker onChangeValue={handleDateValueChange} value={dateValue} />
         </div>
         <div className={styles.checkbox}>
           <Checkbox
             label="Бессрочно"
             onChange={handleCheckboxChange}
             checked={termlessRequest}
+            id="termlessRequest"
+            extClassName="text_size_medium"
           />
         </div>
       </div>

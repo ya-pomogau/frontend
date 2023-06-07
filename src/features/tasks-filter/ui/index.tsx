@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Tooltip } from "shared/ui/tooltip";
 import { Button } from "shared/ui/button";
-import { getQuery } from "../libs/get-query";
 import { RecipientFilter } from "./recipient-filter";
 import { AdminFilter } from "./admin-filter";
 import { IFilterValues, TRole } from "./types";
 import { VolunteerFilter } from "./volunteer-filter";
-import { formatDate } from "../libs/format-date";
+import { formatDate, getQuery } from "../libs";
 import styles from "./styles.module.css";
 
 interface TasksFilterProps {

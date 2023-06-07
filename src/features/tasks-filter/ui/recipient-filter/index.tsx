@@ -3,8 +3,8 @@ import { ChangeEvent } from "react";
 import Checkbox from "shared/ui/checkbox";
 import { CategoriesBlock } from "../categories-block";
 import { FilterItemsIds } from "../consts";
-import styles from "../styles.module.css";
 import { TRecipientFilter } from "../types";
+import styles from "../styles.module.css";
 
 interface Props {
   filter: TRecipientFilter;

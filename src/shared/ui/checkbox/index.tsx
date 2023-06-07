@@ -5,27 +5,34 @@ import { DefaultCheckboxIcon } from "./checkbox-icon";
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  extClassName?: string;
 }
 const Checkbox: FC<CheckboxProps> = ({
   label,
   id,
   onChange,
   checked,
+  extClassName,
   ...props
 }) => (
   <>
     <input
       className={styles.checkbox}
       type="checkbox"
-      id="id"
-      name="id"
+      id={id}
+      name={id}
       onChange={onChange}
       checked={checked}
       {...props}
     />
     <label
-      htmlFor="id"
-      className={classnames("text", "text_type_regular", "text_size_medium")}
+      htmlFor={id}
+      className={classnames(
+        "text",
+        "text_type_regular",
+        "text_size_small",
+        extClassName
+      )}
     >
       <div className={styles.checkboxIconWrapper}>
         <span className={styles.checkboxIcon}>

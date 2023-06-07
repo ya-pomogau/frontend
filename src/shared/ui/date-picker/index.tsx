@@ -39,7 +39,7 @@ function customHeader({
 }
 
 export interface IDatePickerProps {
-  // value: Date;
+  value: Date;
   onChangeValue: (date: Date) => void;
   isMobile?: boolean;
   filter?: (date: Date) => boolean;
@@ -47,7 +47,7 @@ export interface IDatePickerProps {
 }
 
 export function DatePicker({
-  // value,
+  value,
   onChangeValue,
   isMobile = false,
   filter,
@@ -59,6 +59,7 @@ export function DatePicker({
 
   return (
     <ReactDatePicker
+      selected={value}
       className={extClassName}
       onChange={handleOnChange}
       filterDate={filter}
