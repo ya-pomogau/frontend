@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ProfileReducer } from "entities/viewer/hoc";
+import { TasksFilter } from "features/tasks-filter/ui";
 import { Layout } from "./layout";
 import { UnauthPage } from "./demo";
 import { VolunteerPage } from "./volunteer";
@@ -14,7 +15,7 @@ import { NotFoundPage } from "./not-found";
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<TasksFilter userRole="admin" visible />}>
         <Route index element={<Navigate to="profile" replace />} />
         <Route path="profile" element={<ProfileReducer />} />
         <Route path="demo/*" element={<UnauthPage />} />
