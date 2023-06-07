@@ -17,11 +17,11 @@ export function AppRoutes() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Navigate to="profile" replace />} />
         <Route path="profile" element={<ProfileReducer />} />
-        <Route path="demo/*" element={<UnauthPage />} />
+        <Route path="profile/demo/*" element={<UnauthPage />} />
         <Route path="profile/volunteer/*" element={<VolunteerPage />} />
         <Route path="profile/consumer/*" element={<ConsumerPage />} />
-        <Route path="admin/*" element={<AdminPage />} />
-        <Route path="master/*" element={<MasterAdminPage />} />
+        <Route path="profile/admin/*" element={<AdminPage />} />
+        <Route path="profile/master/*" element={<MasterAdminPage />} />
         <Route path="blog/*" element={<BlogPage />} />
         <Route path="policy" element={<PolicyPage />} />
         <Route path="contacts/*" element={<ContactsPage />} />

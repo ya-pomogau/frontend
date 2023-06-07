@@ -105,17 +105,23 @@ export function ConsumerPage() {
           </div>
           <ButtonContainer>
             <CardButton
-              customIcon={<Icon color="white" icon="MapApplicationIcon" size="54" />}
+              customIcon={
+                <Icon color="white" icon="MapApplicationIcon" size="54" />
+              }
               text="Карта заявок"
               onClick={() => navigate("map")}
             />
             <CardButton
-              customIcon={<Icon color="white" icon="ActiveApplicationIcon" size="54" />}
+              customIcon={
+                <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+              }
               text="Активные заяки"
               onClick={() => navigate("active")}
             />
             <CardButton
-              customIcon={<Icon color="white" icon="CompletedApplicationIcon" size="54" />}
+              customIcon={
+                <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+              }
               text="Завершенные заявки"
               onClick={() => navigate("completed")}
             />
@@ -130,10 +136,18 @@ export function ConsumerPage() {
               <ContentLayout
                 heading={
                   <SmartHeader
-                    filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+                    filterIcon={
+                      <Icon color="blue" icon="FilterIcon" size="54" />
+                    }
                     filterText="Фильтр"
                     onClick={() => 1}
-                    settingIcon={<Icon  color="blue" icon="ActiveApplicationIcon" size="54"/>}
+                    settingIcon={
+                      <Icon
+                        color="blue"
+                        icon="ActiveApplicationIcon"
+                        size="54"
+                      />
+                    }
                     settingText="Активные заявки"
                     extClassName={styles.header}
                   />
@@ -141,7 +155,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="recipient"
+                  role="consumer"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -159,10 +173,18 @@ export function ConsumerPage() {
               <ContentLayout
                 heading={
                   <SmartHeader
-                    filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+                    filterIcon={
+                      <Icon color="blue" icon="FilterIcon" size="54" />
+                    }
                     filterText="Фильтр"
                     onClick={() => 1}
-                    settingIcon={<Icon color="blue" icon="CompletedApplicationIcon" size="54"/>}
+                    settingIcon={
+                      <Icon
+                        color="blue"
+                        icon="CompletedApplicationIcon"
+                        size="54"
+                      />
+                    }
                     settingText="Завершенные заявки"
                     extClassName={styles.header}
                   />
@@ -170,7 +192,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="recipient"
+                  role="consumer"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -188,10 +210,14 @@ export function ConsumerPage() {
               <ContentLayout
                 heading={
                   <SmartHeader
-                    filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+                    filterIcon={
+                      <Icon color="blue" icon="FilterIcon" size="54" />
+                    }
                     filterText="Фильтр"
                     onClick={() => 1}
-                    settingIcon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
+                    settingIcon={
+                      <Icon color="blue" icon="MapApplicationIcon" size="54" />
+                    }
                     settingText="Карта заявок"
                     extClassName={styles.header}
                   />
