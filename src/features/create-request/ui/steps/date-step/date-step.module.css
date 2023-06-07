@@ -41,3 +41,68 @@
 input[type="time"]::-webkit-calendar-picker-indicator {
   background: none;
 }
+
+@media (min-width: 361px) and (max-width: 735px) {
+  .dateContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+  }
+  .time {
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .date {
+    font-size: 24px;
+    line-height: 29px;
+  }
+  .headerWrapper {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 240px;
+    height: 1px;
+    margin-top: 4px;
+  }
+  .headerWrapperForDatePicker {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 240px;
+    height: 1px;
+    margin-top: 4px;
+    margin-bottom: 20px;
+  }
+  .wrapperForTime {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wrapperForDate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 29px;
+    margin-bottom: 4px;
+  }
+  .inputForTime {
+    margin-top: 10px;
+  }
+  .datePicker {
+    margin-top: 20px;
+  }
+  .checkbox {
+    min-width: 197px;
+  }
+  .button {
+    justify-content: center;
+  }
+}

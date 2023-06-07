@@ -12,7 +12,11 @@ import { Input } from "shared/ui/input";
 import { YandexMap } from "shared/ui/map";
 import styles from "./address-step.module.css";
 
-export const AddressStep = () => {
+interface IAddressProps {
+  isMobile?: boolean;
+}
+
+export const AddressStep = ({ isMobile }: IAddressProps) => {
   const { address } = useAppSelector((state: RootState) => state.createRequest);
   const dispatch = useAppDispatch();
 
@@ -31,40 +35,87 @@ export const AddressStep = () => {
   return (
     <>
       <div className={styles.addressContainer}>
-        <Input
-          label="Укажите место встречи"
-          placeholder="Например: ул. Нахимова, д.9, у подъезда №3"
-          value={address}
-          onChange={handleAddressValueChange}
-          name="address"
-          extClassName={styles.input}
-        />
-        <p
-          className={classNames(
-            "text",
-            "text_size_small",
-            "text_type_regular ",
-            "m-0",
-            styles.text
-          )}
-        >
-          * Будьте осторожны, если указываете домашний адрес,
-          <span
-            className={classNames(
-              "text",
-              "text_size_small",
-              "text_type_regular ",
-              "m-0",
-              styles.selectedText
-            )}
-          >
-            &nbsp;не&nbsp;
-          </span>
-          пишите его полностью.
-        </p>
-        <div className={styles.map}>
-          <YandexMap width="100%" height="159px" />
-        </div>
+        {isMobile ? (
+          <>
+            <p
+              className={classNames(
+                "text",
+                "text_size_small",
+                "text_type_regular ",
+                "m-0",
+                styles.place
+              )}
+            >
+              Место встречи
+            </p>
+            <div className={styles.headerWrapper} />
+            <div className={styles.map}>
+              <YandexMap width="270px" height="395px" />
+              <div className={styles.alertWrapper}>
+                <p
+                  className={classNames(
+                    "text",
+                    "text_size_small",
+                    "text_type_regular ",
+                    "m-0",
+                    styles.text
+                  )}
+                >
+                  * Будьте осторожны, если указываете домашний адрес,
+                  <span
+                    className={classNames(
+                      "text",
+                      "text_size_small",
+                      "text_type_regular ",
+                      "m-0",
+                      styles.selectedText
+                    )}
+                  >
+                    &nbsp;не&nbsp;
+                  </span>
+                  пишите его полностью.
+                </p>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <Input
+              label="Укажите место встречи"
+              placeholder="Например: ул. Нахимова, д.9, у подъезда №3"
+              value={address}
+              onChange={handleAddressValueChange}
+              name="address"
+              extClassName={styles.input}
+            />
+            <p
+              className={classNames(
+                "text",
+                "text_size_small",
+                "text_type_regular ",
+                "m-0",
+                styles.text
+              )}
+            >
+              * Будьте осторожны, если указываете домашний адрес,
+              <span
+                className={classNames(
+                  "text",
+                  "text_size_small",
+                  "text_type_regular ",
+                  "m-0",
+                  styles.selectedText
+                )}
+              >
+                &nbsp;не&nbsp;
+              </span>
+              пишите его полностью.
+            </p>
+            <div className={styles.map}>
+              <YandexMap width="100%" height="159px" />
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.buttonWrapper}>
         <Button

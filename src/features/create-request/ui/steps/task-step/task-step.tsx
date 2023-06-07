@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { RootState } from "app/store";
+import classNames from "classnames";
 import {
   addDescriptionForTask,
   addTypeOfTask,
@@ -14,9 +15,10 @@ import styles from "./task-step.module.css";
 
 interface ITaskStepProps {
   tasks: Array<{ value: string; label: string }>;
+  isMobile?: boolean;
 }
 
-export const TaskStep = ({ tasks }: ITaskStepProps) => {
+export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
   const { descriptionForTask, typeOfTask } = useAppSelector(
     (state: RootState) => state.createRequest
   );
@@ -44,25 +46,60 @@ export const TaskStep = ({ tasks }: ITaskStepProps) => {
   return (
     <>
       <div className={styles.taskContainer}>
-        <Select
-          selectedValue={typeOfTask}
-          label="Выберите тип задачи"
-          placeholder="Выберите тип задачи"
-          name="tasks"
-          onChange={handleTaskValueChange}
-          options={tasks}
-          extClassName={styles.select}
-        />
-        <TextArea
-          value={descriptionForTask}
-          label="Опишите задачу"
-          name="task"
-          placeholder="Например: Помогите выгулять собаку."
-          onChange={handleTaskDescValueChange}
-          extClassName={styles.textarea}
-        />
+        {isMobile ? (
+          <>
+            <p
+              className={classNames(
+                "text",
+                "text_size_small",
+                "text_type_regular ",
+                "m-0",
+                styles.task
+              )}
+            >
+              Дело
+            </p>
+            <div className={styles.headerWrapper} />
+            <Select
+              selectedValue={typeOfTask}
+              label="Выберите тип задачи"
+              placeholder="Выберите тип задачи"
+              name="tasks"
+              onChange={handleTaskValueChange}
+              options={tasks}
+              extClassName={styles.select}
+            />
+            <TextArea
+              value={descriptionForTask}
+              label="Опишите задачу"
+              name="task"
+              placeholder="Например: Помогите выгулять собаку."
+              onChange={handleTaskDescValueChange}
+              extClassName={styles.textarea}
+            />
+          </>
+        ) : (
+          <>
+            <Select
+              selectedValue={typeOfTask}
+              label="Выберите тип задачи"
+              placeholder="Выберите тип задачи"
+              name="tasks"
+              onChange={handleTaskValueChange}
+              options={tasks}
+              extClassName={styles.select}
+            />
+            <TextArea
+              value={descriptionForTask}
+              label="Опишите задачу"
+              name="task"
+              placeholder="Например: Помогите выгулять собаку."
+              onChange={handleTaskDescValueChange}
+              extClassName={styles.textarea}
+            />
+          </>
+        )}
       </div>
-
       <div className={styles.buttonsWrapper}>
         <Button
           buttonType="secondary"

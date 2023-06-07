@@ -8,7 +8,6 @@ import {
   changeCheckbox,
   changeStepIncrement,
 } from "features/create-request/model";
-
 import React from "react";
 import { Button } from "shared/ui/button";
 import Checkbox from "shared/ui/checkbox";
@@ -47,11 +46,13 @@ export const DateStep = () => {
               "text",
               "text_size_small",
               "text_type_regular ",
-              "m-0"
+              "m-0",
+              styles.time
             )}
           >
             Время
           </p>
+          <div className={styles.headerWrapper} />
           <input
             type="time"
             id="time"
@@ -73,11 +74,13 @@ export const DateStep = () => {
               "text",
               "text_size_small",
               "text_type_regular ",
-              "m-0"
+              "m-0",
+              styles.date
             )}
           >
             Дата
           </p>
+          <div className={styles.headerWrapperForDatePicker} />
           <DatePicker onChangeValue={handleDateValueChange} />
         </div>
         <div className={styles.checkbox}>

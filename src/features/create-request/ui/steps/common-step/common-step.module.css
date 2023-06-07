@@ -40,3 +40,46 @@
 .categories {
   margin-top: 20px;
 }
+
+@media (min-width: 361px) and (max-width: 735px) {
+  .container {
+    align-items: flex-start;
+    margin: 0;
+    padding: 20px;
+    min-width: 0;
+    padding: 15px;
+  }
+  .buttonsWrapper {
+    margin-top: 162px;
+    justify-content: center;
+  }
+  .task {
+    font-size: 24px;
+    line-height: 29px;
+    align-self: center;
+  }
+  .headerWrapper {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 240px;
+    height: 1px;
+    margin-top: 4px;
+    align-self: center;
+  }
+  .dateWrapper {
+    margin-top: 30px;
+  }
+  .typeOfTask {
+    margin-top: 5px;
+  }
+  .descriptionForTask {
+    margin-top: 10px;
+  }
+  .categories {
+    width: 169px;
+  }
+}

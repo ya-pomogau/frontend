@@ -43,6 +43,7 @@ export interface IDatePickerProps {
   onChangeValue: (date: Date) => void;
   isMobile?: boolean;
   filter?: (date: Date) => boolean;
+  extClassName?: string;
 }
 
 export function DatePicker({
@@ -50,6 +51,7 @@ export function DatePicker({
   onChangeValue,
   isMobile = false,
   filter,
+  extClassName,
 }: IDatePickerProps) {
   const handleOnChange = (date: Date) => {
     if (date) onChangeValue(date);
@@ -57,6 +59,7 @@ export function DatePicker({
 
   return (
     <ReactDatePicker
+      className={extClassName}
       onChange={handleOnChange}
       filterDate={filter}
       showPopperArrow={false}
