@@ -19,7 +19,7 @@ export function AppRoutes() {
         <Route path="profile" element={<ProfileReducer />} />
         <Route path="demo/*" element={<UnauthPage />} />
         <Route path="profile/volunteer/*" element={<VolunteerPage />} />
-        <Route path="consumer/*" element={<ConsumerPage />} />
+        <Route path="profile/consumer/*" element={<ConsumerPage />} />
         <Route path="admin/*" element={<AdminPage />} />
         <Route path="master/*" element={<MasterAdminPage />} />
         <Route path="blog/*" element={<BlogPage />} />
