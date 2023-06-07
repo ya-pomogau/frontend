@@ -1,0 +1,59 @@
+.styles_card-button__LEnmM {
+  display: flex;
+  align-items: center;
+  background-color: var(--colors-interface-primary);
+  color: var(--colors-interface-white);
+  border: none;
+  cursor: pointer;
+  height: 114px;
+  padding: 0 12px;
+}
+
+@media (max-width: 360px) {
+  .styles_card-button__LEnmM {
+    width: 200px;
+  }
+}
+
+@media (min-width: 361px) and (max-width: 735px) {
+  .styles_card-button__LEnmM {
+    width: 224px;
+    padding: 0 26px;
+  }
+}
+
+@media (min-width: 736px) {
+  .styles_card-button__LEnmM {
+    width: 276px;
+    padding: 0 30px;
+  }
+}
+.styles_card-button__LEnmM:disabled {
+  cursor: default;
+}
+
+.styles_card-buttonImg__CFkDz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.styles_card-buttonContent__QP2Ve {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.styles_card-buttonLabel__I4i0u {
+  display: flex;
+  align-items: center;
+  text-align: start;
+}
+
+.styles_card-button__LEnmM:active {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+
+/*# sourceMappingURL=shared-ui-card-button-card-button-stories.26b4439f.chunk.css.map*/

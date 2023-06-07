@@ -1,0 +1,48 @@
+.styles_link__OY\+e3 {
+  text-decoration: none;
+  list-style: none;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 12px;
+  min-width: 134px;
+  font-family: "Golos";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+.styles_link_active__8Jnip {
+  padding-bottom: 9px;
+  border-bottom: 4px solid #2e3192;
+}
+.styles_links__6lAxk {
+  display: flex;
+
+  margin: 0;
+  padding: 0;
+}
+.styles_link__title__3l7XI {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+.styles_link__icon__QJ7eU {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  justify-content: center;
+}
+.styles_nav__ZPFdF {
+  min-width: 200px;
+}
+@media (max-width: 1200px) {
+  .styles_link__OY\+e3 {
+    padding-bottom: 5px;
+    min-width: 70px;
+  }
+}
+
+
+/*# sourceMappingURL=widgets-header-navigation-side-bar-stories.2135247c.chunk.css.map*/

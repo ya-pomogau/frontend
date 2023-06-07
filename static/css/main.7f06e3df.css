@@ -1,0 +1,123 @@
+@font-face {
+  font-family: "Golos";
+  src: url(../../e214a16e8ae6b4697669.woff2) format("woff2"),
+    url(../../ee4278a57fc4ea9c5733.woff) format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Golos";
+  src: url(../../ae582e244fd754e381e0.woff2) format("woff2"),
+    url(../../b1395e91e001884eee01.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --colors-interface-white: #ffffff;
+  --colors-interface-black: #000000;
+  --colors-interface-primary: #2e3192;
+  --colors-interface-primary-additional: #9798c9;
+  --colors-interface-background: #fbfdff;
+  --colors-interface-line: linear-gradient(
+    90deg,
+    #ffffff 10%,
+    #2e3192,
+    #ffffff 90%
+  );
+  --colors-interface-additional: #818c99;
+  --colors-interface-yorkshire-cloud: #b8c1cc;
+  --colors-interface-blue-very-soft: #b8e4fa;
+  --colors-interface-blue-soft: #addef9;
+  --colors-interface-blue-navy: #0091c7;
+  --colors-interface-blue-strong: #0071bc;
+  --colors-interface-yellow: #acca3e;
+  --colors-interface-cyan: #00a99d;
+  --colors-interface-green: #009245;
+  --colors-interface-orange: #f37920;
+  --colors-interface-orange-bright: #fbb03b;
+  --colors-interface-orange-soft: #f9bc90;
+  --colors-interface-pink: #c9006d;
+  --colors-interface-pink-soft: #e163b3;
+  --colors-interface-red-soft: #fd6868;
+  --colors-interface-ford-white: #e0e0e0;
+
+  --transition-hover: all 100ms ease-out;
+  --common-element-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 10px 20px -5px rgba(0, 0, 0, 0.4);
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  height: 1024px;
+  max-width: 1440px;
+  padding: 0;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media screen and (max-width: 920px) {
+  #root {
+    height: 100vh;
+  }
+}
+
+.border {
+  border-width: 2px;
+  border-style: solid;
+}
+
+.text {
+  font-family: "Golos", sans-serif;
+}
+
+.text_size_small {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.text_size_medium {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.text_size_large {
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.text_type_regular {
+  font-weight: 400;
+}
+
+.text_type_bold {
+  font-weight: 700;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.list {
+  list-style: none;
+  list-style-type: none;
+}
+
+.link {
+  text-decoration: none;
+}
+
+
+
+
+/*# sourceMappingURL=main.7f06e3df.css.map*/

@@ -1,0 +1,84 @@
+.styles_square-button__7fbsO {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.styles_square-button__7fbsO::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-clip-path: polygon(0% 0%, 100% 0%, 100% 87%, 3% 100%);
+          clip-path: polygon(0% 0%, 100% 0%, 100% 87%, 3% 100%);
+  transition: var(--transition-hover);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.styles_square-buttonImg__W3YXf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  width: 24px;
+  height: 20px;
+}
+
+.styles_square-button--close__pkKu2.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-primary-additional);
+}
+
+.styles_square-button--close__pkKu2:hover.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-primary);
+}
+
+.styles_square-button--close__pkKu2:active.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-primary-additional);
+}
+
+.styles_square-button--edit__bEkgq.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-blue-strong);
+  -webkit-transform: matrix(1, 0, 0, -1, 0, 0);
+          transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.styles_square-button--edit__bEkgq:hover.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-cyan);
+}
+
+.styles_square-button--edit__bEkgq:active.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.styles_square-button--confirm__Kx27c.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-cyan);
+  -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+          transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.styles_square-button--confirm__Kx27c:hover.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-green);
+}
+
+.styles_square-button--confirm__Kx27c:active.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+.styles_square-button__7fbsO:disabled {
+  cursor: default;
+}
+
+.styles_square-button__7fbsO:disabled.styles_square-button__7fbsO::before {
+  background-color: var(--colors-interface-additional);
+}
+
+
+/*# sourceMappingURL=shared-ui-square-buttons-square-buttons-stories.e507f4cb.chunk.css.map*/

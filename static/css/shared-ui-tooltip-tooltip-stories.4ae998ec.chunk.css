@@ -1,0 +1,39 @@
+.styles_tooltip__JNtrO {
+  position: relative;
+  display: inline-block;
+  padding: 30px;
+  visibility: hidden;
+  max-width: 370px;
+  width: 100%;
+}
+
+.styles_tooltip__JNtrO,
+.styles_pointer__3UJEk {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 32px rgba(0, 0, 0, 0.16);
+  background-color: var(--colors-interface-white);
+  z-index: 10;
+}
+
+.styles_pointer__3UJEk {
+  position: absolute;
+  width: 20px;
+  height: 8px;
+  top: -8px;
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+          clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.styles_pointer--right__x5GST {
+  right: 4%;
+}
+
+.styles_pointer--center__TeyT7 {
+  right: 50%;
+}
+
+.styles_tooltip--visible__IymYz {
+  visibility: visible;
+}
+
+
+/*# sourceMappingURL=shared-ui-tooltip-tooltip-stories.4ae998ec.chunk.css.map*/

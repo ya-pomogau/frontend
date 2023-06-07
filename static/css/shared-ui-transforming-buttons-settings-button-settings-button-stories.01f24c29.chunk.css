@@ -1,0 +1,23 @@
+.styles_setting-button__1aJ35 {
+  background-image: url(../../966c32e6156426d7d42c.svg);
+  width: 32px;
+  height: 32px;
+  transition: var(--transition-hover);
+}
+
+.styles_setting-button__1aJ35:hover {
+  background-image: url(../../db700e1d41cfcd160d56.svg);
+}
+
+.styles_styles_button__pa-OB {
+  cursor: pointer;
+  background-position: center;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+
+/*# sourceMappingURL=shared-ui-transforming-buttons-settings-button-settings-button-stories.01f24c29.chunk.css.map*/

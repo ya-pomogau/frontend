@@ -1,0 +1,25 @@
+.styles_edit-button__-78Cy {
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--colors-interface-primary);
+  border: none;
+  transition: var(--transition-hover);
+}
+
+.styles_edit-button__-78Cy:hover {
+  opacity: 0.6;
+}
+
+.styles_edit-button__-78Cy:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.styles_edit-buttonContent__kYkpQ {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+/*# sourceMappingURL=shared-ui-edit-button-edit-button-stories.e8141aaf.chunk.css.map*/

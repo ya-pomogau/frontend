@@ -1,0 +1,54 @@
+.styles_arrow-button__gZ86M {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 34px;
+  background: transparent;
+  cursor: pointer;
+  color: var(--colors-interface-white);
+  border: none;
+  box-sizing: border-box;
+  position: relative;
+  padding: 12px 0 8px 9px;
+  width: 170px;
+}
+
+.styles_arrow-button__gZ86M::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-clip-path: polygon(0% 0%, 100% 30%, 93% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 100% 30%, 93% 100%, 0% 100%);
+  background-color: var(--colors-interface-primary);
+  transition: var(--transition-hover);
+}
+
+.styles_arrow-button__gZ86M:hover.styles_arrow-button__gZ86M::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.styles_arrow-button__gZ86M:active.styles_arrow-button__gZ86M::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.styles_arrow-button__gZ86M:disabled {
+  cursor: default;
+}
+
+.styles_arrow-button__gZ86M:disabled.styles_arrow-button__gZ86M::before {
+  background-color: var(--colors-interface-additional);
+}
+
+.styles_arrow-buttonContent__yeRBQ {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+
+/*# sourceMappingURL=shared-ui-arrow-button-arrow-button-stories.7f1331e8.chunk.css.map*/

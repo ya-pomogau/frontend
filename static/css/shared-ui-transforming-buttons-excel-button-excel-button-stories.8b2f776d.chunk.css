@@ -1,0 +1,23 @@
+.styles_excel-button__VUJWd {
+  background-image: url(../../d25a5beeca6a784ed58b.svg);
+  width: 32px;
+  height: 32px;
+}
+
+.styles_excel-button__VUJWd:hover {
+  background-image: url(../../21dadfb83d69c68e52b6.svg);
+  transition: var(--transition-hover);
+}
+
+.styles_styles_button__pa-OB {
+  cursor: pointer;
+  background-position: center;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+
+/*# sourceMappingURL=shared-ui-transforming-buttons-excel-button-excel-button-stories.8b2f776d.chunk.css.map*/
