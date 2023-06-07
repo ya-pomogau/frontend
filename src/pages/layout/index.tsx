@@ -6,12 +6,14 @@ import styles from "./styles.module.css";
 export function Layout() {
   return (
     <>
-      <header><Header/></header>
+      <Header />
       <main className={styles.main}>
         <Outlet />
       </main>
       <div className={styles.overlay} />
-      <footer className={styles.footer}><BottomBar /></footer>
+      <footer className={styles.footer}>
+        <BottomBar />
+      </footer>
     </>
   );
 }
