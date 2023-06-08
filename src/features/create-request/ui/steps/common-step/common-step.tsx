@@ -25,7 +25,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   };
 
   return (
-    <>
+    <div className={styles.mainWrapper}>
       <div
         className={classNames(
           "text",
@@ -150,6 +150,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
           onClick={handleSubmitClick}
         />
       </div>
-    </>
+    </div>
   );
 };

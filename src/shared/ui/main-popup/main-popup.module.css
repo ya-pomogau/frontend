@@ -28,3 +28,10 @@
 .phoneNumber {
   margin-left: 42px;
 }
+
+@media (min-width: 361px) and (max-width: 735px) {
+  .container {
+    width: 100vh;
+    height: 100vh;
+  }
+}

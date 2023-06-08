@@ -29,20 +29,7 @@ export const CreateRequest = ({
     dispatch(closePopup());
   };
 
-  return isMobile ? (
-    <div>
-      {currentStep === CurrentPage.DATE_STEP && <DateStep />}
-      {currentStep === CurrentPage.ADDRESS_STEP && (
-        <AddressStep isMobile={isMobile} />
-      )}
-      {currentStep === CurrentPage.TASK_STEP && (
-        <TaskStep tasks={tasks} isMobile={isMobile} />
-      )}
-      {currentStep === CurrentPage.COMMON_STEP && (
-        <CommonStep isMobile={isMobile} />
-      )}
-    </div>
-  ) : (
+  return (
     <Portal isOpened={isPopupOpen}>
       <OverlayingPopup isOpened={isPopupOpen}>
         <MainPopup
@@ -51,11 +38,18 @@ export const CreateRequest = ({
           avatarName={name}
           phoneNumber={phoneNumber}
           handleCloseClick={handleCloseClick}
+          isMobile
         >
           {currentStep === CurrentPage.DATE_STEP && <DateStep />}
-          {currentStep === CurrentPage.ADDRESS_STEP && <AddressStep />}
-          {currentStep === CurrentPage.TASK_STEP && <TaskStep tasks={tasks} />}
-          {currentStep === CurrentPage.COMMON_STEP && <CommonStep />}
+          {currentStep === CurrentPage.ADDRESS_STEP && (
+            <AddressStep isMobile={isMobile} />
+          )}
+          {currentStep === CurrentPage.TASK_STEP && (
+            <TaskStep tasks={tasks} isMobile={isMobile} />
+          )}
+          {currentStep === CurrentPage.COMMON_STEP && (
+            <CommonStep isMobile={isMobile} />
+          )}
         </MainPopup>
       </OverlayingPopup>
     </Portal>

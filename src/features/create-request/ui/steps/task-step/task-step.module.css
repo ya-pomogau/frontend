@@ -30,7 +30,12 @@
     flex-direction: column;
     align-items: center;
     margin: 0;
-    padding: 15px;
+  }
+  .mainWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
   }
   .headerWrapper {
     background: linear-gradient(
@@ -58,6 +63,5 @@
   .buttonsWrapper {
     margin-top: 178px;
     justify-content: center;
-    margin-bottom: 30px;
   }
 }
