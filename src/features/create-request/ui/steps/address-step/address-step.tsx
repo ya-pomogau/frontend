@@ -76,6 +76,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                   пишите его полностью.
                 </p>
               </div>
+              <div className={styles.wrapperForGradient} />
             </div>
           </>
         ) : (

@@ -44,7 +44,7 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
   };
 
   return (
-    <>
+    <div className={styles.mainWrapper}>
       <div className={styles.taskContainer}>
         {isMobile ? (
           <>
@@ -113,6 +113,6 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
           onClick={handleNextStepClick}
         />
       </div>
-    </>
+    </div>
   );
 };
