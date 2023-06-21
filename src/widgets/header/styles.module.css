@@ -24,7 +24,9 @@
 }
 .header__menu_active {
   visibility: visible;
+  z-index: 1;
   display: block;
+  background-color: var( --colors-interface-white);
 }
 .header__menu__container {
   position: relative;
@@ -32,6 +34,7 @@
 .header__sidebar__container {
   padding-left: 30px;
   padding-right: 30px;
+  padding-bottom: 20px;
 }
 .header__title__container {
   display: flex;
