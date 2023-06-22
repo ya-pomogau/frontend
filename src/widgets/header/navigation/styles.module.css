@@ -5,21 +5,23 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 12px;
   min-width: 134px;
   font-family: "Golos";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
+  box-sizing: border-box;
+  height: 52.5px;
+  padding-bottom: 5px;
+  margin: 0;
 }
 .link_active {
-  padding-bottom: 9px;
   border-bottom: 4px solid #2e3192;
+  box-sizing: border-box;
 }
 .links {
   display: flex;
-
   margin: 0;
   padding: 0;
 }
@@ -27,6 +29,11 @@
   margin: 0;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
+  height: 23.5px;
+}
+.link:hover{
+  border-bottom: 4px solid #2e3192;
 }
 .link__icon {
   display: flex;
