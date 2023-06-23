@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -94,7 +94,6 @@ const activeTasksMockData = [
 
 export function ConsumerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
-  const navigate = useNavigate();
 
   return (
     <PageLayout
@@ -104,27 +103,39 @@ export function ConsumerPage() {
             <ViewerInfo onClickSettingsButton={() => 1} />
           </div>
           <ButtonContainer>
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="MapApplicationIcon" size="54" />
-              }
-              text="Карта заявок"
-              onClick={() => navigate("map")}
-            />
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="ActiveApplicationIcon" size="54" />
-              }
-              text="Активные заяки"
-              onClick={() => navigate("active")}
-            />
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="CompletedApplicationIcon" size="54" />
-              }
-              text="Завершенные заявки"
-              onClick={() => navigate("completed")}
-            />
+            <NavLink to="map" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="MapApplicationIcon" size="54" />
+                  }
+                  text="Карта заявок"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
+            <NavLink to="active" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+                  }
+                  text="Активные заяки"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
+            <NavLink to="completed" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+                  }
+                  text="Завершенные заявки"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
           </ButtonContainer>
         </>
       }
