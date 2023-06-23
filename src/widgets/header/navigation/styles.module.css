@@ -1,26 +1,24 @@
 @import '../../../app/assets/styles/common.css';
 
 .link {
-  text-decoration: none;
-  list-style: none;
-  color: var(--colors-interface-black);
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-width: 134px;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  color: var(--colors-interface-black);
   font-family: "Golos";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  box-sizing: border-box;
-  height: 52.5px;
-  padding-bottom: 5px;
-  margin: 0;
 }
 .link_active {
+  padding-bottom: 5px;
   border-bottom: 4px solid var(--colors-interface-primary-additional);
-  box-sizing: border-box;
 }
 .links {
   display: flex;
@@ -28,13 +26,13 @@
   padding: 0;
 }
 .link__title {
-  margin: 0;
   display: flex;
   justify-content: center;
-  box-sizing: border-box;
-  height: 23.5px;
+  margin: 0;
+  padding: 0 7px 8px;
+  border-bottom: 4px solid transparent;
 }
-.link:hover{
+.link:hover .link__title{
   border-bottom: 4px solid var(--colors-interface-primary-additional);
 }
 .link__icon {
@@ -46,22 +44,35 @@
 .nav {
   min-width: 200px;
 }
+
 @media (max-width: 1200px) {
-  .link {
-    height: 34px;
-    padding-bottom: 5px;
-  }
-
-  .link:nth-child(3){
-    height: 50px;
-  }
-
-  .link__icon{
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
   .links{
-    gap: 34px !important;
+    height: unset;
+    align-items: flex-end;
+  }
+  .link{
+    min-width: unset;
+    padding: 0;
+  }
+  .link__title{
+    justify-content: flex-end;
+    padding: 2px 0 4px 0;
+    text-align: right;
+  }
+  .link__icon {
+    padding: 2px 0 4px 0;
+    border-bottom: 4px solid transparent;
+  }
+  .link:nth-child(2) .link__title {
+     margin-right: 3px;
+  }
+  .link:hover .link__title{
+    border-bottom: none;
+  }
+  .link:hover .link__icon{
+    border-bottom: none;
+  }
+  .link:hover {
+    border-bottom: 4px solid var(--colors-interface-primary-additional);
   }
 }

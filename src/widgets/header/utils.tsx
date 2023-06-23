@@ -21,11 +21,11 @@ export const positionConfigTop: ISideBarPosition = {
 
 export const positionConfigMenu: ISideBarPosition = {
   ulflexDirection: "column",
-  ulgap: 30,
+  ulgap: 33,
   element: {
     flexDirection: "row-reverse",
     justifyContent: "flex-start",
-    gap: 5,
+    gap: 0,
     textAlign: "right",
   },
 };
