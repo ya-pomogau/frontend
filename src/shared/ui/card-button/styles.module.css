@@ -15,6 +15,10 @@
   }
 }
 
+.card-button-active {
+  background-color: var(--colors-interface-blue-strong);
+}
+
 @media (min-width: 361px) and (max-width: 735px) {
   .card-button {
     width: 224px;

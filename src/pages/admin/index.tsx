@@ -67,10 +67,7 @@ export function AdminPage() {
       side={
         <>
           <div className={styles.viewer}>
-            <ViewerInfo
-              roleForStoryBook="admin"
-              onClickSettingsButton={() => 1}
-            />
+            <ViewerInfo onClickSettingsButton={() => 1} />
           </div>
           <ButtonContainer>
             <NavLink to="requests" className="link">
@@ -78,8 +75,7 @@ export function AdminPage() {
                 <CardButton
                   customIcon={<Icon color="white" icon="BlockIcon" size="54" />}
                   text="Подтверждение /Блокировка"
-                  extClassName={isActive ? styles.cardBlock : ""}
-                  onClick={() => 2}
+                  isActive={isActive}
                 />
               )}
             </NavLink>
@@ -90,8 +86,7 @@ export function AdminPage() {
                     <Icon color="white" icon="StatisticIcon" size="54" />
                   }
                   text="Статистика"
-                  extClassName={isActive ? styles.cardBlock : ""}
-                  onClick={() => 2}
+                  isActive={isActive}
                 />
               )}
             </NavLink>
@@ -102,8 +97,7 @@ export function AdminPage() {
                     <Icon color="white" icon="SettingsIcon" size="54" />
                   }
                   text="Создание / Редактирование заявки"
-                  extClassName={isActive ? styles.cardBlock : ""}
-                  onClick={() => 2}
+                  isActive={isActive}
                 />
               )}
             </NavLink>
