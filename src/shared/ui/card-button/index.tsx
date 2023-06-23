@@ -7,27 +7,35 @@ interface CardButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   customIcon?: ReactNode;
   text: string;
+  isActive?: boolean;
 }
 
 export const CardButton = ({
   extClassName,
   customIcon,
   text,
+  isActive,
   ...props
-}: CardButtonProps) => (
-  <button
-    type="button"
-    className={classnames(
-      styles["card-button"],
-      extClassName,
-      "text",
-      "text_size_medium"
-    )}
-    {...props}
-  >
-    <div className={styles["card-buttonContent"]}>
-      <div className={styles["card-buttonImg"]}>{customIcon}</div>
-      <span className={styles["card-buttonLabel"]}>{text}</span>
-    </div>
-  </button>
-);
+}: CardButtonProps) => {
+
+  const buttonActiveClass = isActive ? styles["card-button-active"] : "";
+
+  return (
+    <button
+      type="button"
+      className={classnames(
+        styles["card-button"],
+        buttonActiveClass,
+        extClassName,
+        "text",
+        "text_size_medium"
+      )}
+      {...props}
+    >
+      <div className={styles["card-buttonContent"]}>
+        <div className={styles["card-buttonImg"]}>{customIcon}</div>
+        <span className={styles["card-buttonLabel"]}>{text}</span>
+      </div>
+    </button>
+  )
+};
