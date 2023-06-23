@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ReactNode } from "react";
 import ReactDOM from "react-dom";
 
@@ -7,7 +8,7 @@ interface IPortalProps {
 }
 
 export const Portal = ({ children, isOpened }: IPortalProps) => {
-  if (!isOpened) {
+  if (isOpened === false) {
     return null;
   }
 

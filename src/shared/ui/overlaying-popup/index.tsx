@@ -5,7 +5,7 @@ import styles from "./overlaying-popup.module.css";
 
 interface IOverlayingPopupProps {
   children?: ReactNode;
-  isOpened?: boolean;
+  // isOpened?: boolean;
   onClose?: () => void;
   handleKeyDown?: () => void;
   extClassName?: string;
@@ -14,15 +14,10 @@ interface IOverlayingPopupProps {
 export const OverlayingPopup = ({
   children,
   onClose,
-  isOpened,
+  // isOpened,
   handleKeyDown,
   extClassName,
-}: IOverlayingPopupProps) => {
-  if (!isOpened) {
-    return null;
-  }
-  return (
-    <Portal isOpened>
+}: IOverlayingPopupProps) => (
       <div
         className={classNames(styles.popup, extClassName)}
         role="dialog"
@@ -38,6 +33,4 @@ export const OverlayingPopup = ({
         />
         {children}
       </div>
-    </Portal>
   );
-};

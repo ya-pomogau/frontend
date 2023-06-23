@@ -31,7 +31,7 @@ export const CreateRequest = ({
 
   return (
     <Portal isOpened={isPopupOpen}>
-      <OverlayingPopup isOpened={isPopupOpen}>
+      <OverlayingPopup>
         <MainPopup
           name={name}
           avatarLink={avatarLink}

@@ -1,7 +1,9 @@
+@import '../../../app/assets/styles/common.css';
+
 .link {
   text-decoration: none;
   list-style: none;
-  color: #000000;
+  color: var(--colors-interface-black);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +19,7 @@
   margin: 0;
 }
 .link_active {
-  border-bottom: 4px solid #2e3192;
+  border-bottom: 4px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
 }
 .links {
@@ -33,7 +35,7 @@
   height: 23.5px;
 }
 .link:hover{
-  border-bottom: 4px solid #2e3192;
+  border-bottom: 4px solid var(--colors-interface-primary-additional);
 }
 .link__icon {
   display: flex;
@@ -46,7 +48,20 @@
 }
 @media (max-width: 1200px) {
   .link {
+    height: 34px;
     padding-bottom: 5px;
-    min-width: 70px;
+  }
+
+  .link:nth-child(3){
+    height: 50px;
+  }
+
+  .link__icon{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .links{
+    gap: 34px !important;
   }
 }

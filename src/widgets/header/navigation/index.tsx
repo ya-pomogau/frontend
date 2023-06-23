@@ -16,8 +16,6 @@ const SideBarItem: FC<ISideBarElementProps> = ({
     setLink(location.pathname);
   });
 
-  console.log(link);
-
   return (
     <NavLink
       to={to}
