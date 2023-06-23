@@ -175,7 +175,6 @@ export function ConsumerPage() {
                   handleClickConfirmButton={() => 3}
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
-                  handleClickAddTaskButton={openCreateRequestPopup}
                   isStatusActive
                   tasks={activeTasksMockData}
                 />
