@@ -15,6 +15,7 @@
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 20px;
+  width: 190px;
 }
 
 @media screen and (min-width: 1440px) {
@@ -31,6 +32,7 @@
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 20px;
+  width: 190px;
 }
 
 .header__title__container {
@@ -43,7 +45,6 @@
   text-decoration: none;
   list-style: none;
   justify-content: center;
-  margin-left: 90px;
 }
 .menu__title {
   color: #2e3192;
