@@ -45,7 +45,13 @@
   min-width: 200px;
 }
 
-@media (max-width: 1200px) {
+@media screen and (min-width: 900px) and (max-width: 1200px){
+  .link{
+    min-width: unset;
+  }
+}
+
+@media (max-width: 900px) {
   .links{
     height: unset;
     align-items: flex-end;
