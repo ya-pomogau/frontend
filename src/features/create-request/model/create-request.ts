@@ -26,7 +26,7 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   descriptionForTask: "",
   currentStep: 1,
   termlessRequest: false,
-  isPopupOpen: false,
+  isPopupOpen: true,
 };
 
 export const createRequestModel = createSlice({
@@ -59,9 +59,6 @@ export const createRequestModel = createSlice({
       const decrement = (prev: number) => prev - 1;
       state.currentStep = decrement(state.currentStep);
     },
-    openPopup(state) {
-      state.isPopupOpen = true;
-    },
     closePopup(state) {
       state.currentStep = InitialStateForPopup.currentStep;
       state.address = InitialStateForPopup.address;
@@ -84,6 +81,5 @@ export const {
   changeStepIncrement,
   changeStepDecrement,
   changeCheckbox,
-  openPopup,
   closePopup,
 } = createRequestModel.actions;

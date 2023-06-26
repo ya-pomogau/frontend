@@ -1,4 +1,4 @@
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { NavLink, Navigate, useNavigate, Route, Routes } from "react-router-dom";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -11,8 +11,6 @@ import { TaskList } from "entities/task/ui/task-list";
 import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
-import { useDispatch } from "react-redux";
-import { openPopup } from '../../features/create-request/model/create-request';
 import styles from "./styles.module.css";
 
 
@@ -96,6 +94,7 @@ const activeTasksMockData:any = [
 
 export function ConsumerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
+  const navigate = useNavigate();
 
   return (
     <PageLayout
