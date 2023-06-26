@@ -57,6 +57,7 @@
 @media (max-width: 900px) {
   .links{
     align-items: flex-end;
+    margin-right: 10px;
   }
   .link{
     min-width: unset;
@@ -68,11 +69,15 @@
   .link:nth-child(1){
     margin-right: 6px;
   }
-  .link:nth-child(4){
-    margin-top: 0;
+  .link:nth-child(2){
+    margin-top: 5px;
   }
   .link:nth-child(3){
+    margin-top: 0;
     max-height: 49px;
+  }
+  .link:nth-child(4){
+    margin-top: 0;
   }
   .link_active .link__icon{
     margin-bottom: 4px;
