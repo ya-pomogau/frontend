@@ -47,7 +47,7 @@ body {
 
 @media screen and (max-width: 920px) {
   #root {
-    height: 100vh;
+    min-height: auto;
   }
 }
 
