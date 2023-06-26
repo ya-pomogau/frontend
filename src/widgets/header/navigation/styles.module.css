@@ -1,5 +1,10 @@
 @import '../../../app/assets/styles/common.css';
 
+.links {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
 .link {
   display: flex;
   flex-direction: column;
@@ -15,15 +20,10 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
+  padding: 0;
 }
 .link_active {
-  padding-bottom: 5px;
-  border-bottom: 4px solid var(--colors-interface-primary-additional);
-}
-.links {
-  display: flex;
-  margin: 0;
-  padding: 0;
+  border-bottom: 4px solid var(--colors-interface-primary);
 }
 .link__title {
   display: flex;
@@ -32,7 +32,10 @@
   padding: 0 7px 8px;
   border-bottom: 4px solid transparent;
 }
-.link:hover .link__title{
+.link_active .link__title{
+  padding-bottom: 4px;
+}
+.link:not(.link_active):hover .link__title{
   border-bottom: 4px solid var(--colors-interface-primary-additional);
 }
 .link__icon {
@@ -53,32 +56,46 @@
 
 @media (max-width: 900px) {
   .links{
-    height: unset;
     align-items: flex-end;
   }
   .link{
     min-width: unset;
     padding: 0;
+    align-items: center;
+    max-height: 29px;
+    margin-top: 3px;
+  }
+  .link:nth-child(1){
+    margin-right: 6px;
+  }
+  .link:nth-child(4){
+    margin-top: 0;
+  }
+  .link:nth-child(3){
+    max-height: 49px;
+  }
+  .link_active .link__icon{
+    margin-bottom: 4px;
   }
   .link__title{
-    justify-content: flex-end;
-    padding: 2px 0 4px 0;
-    text-align: right;
-  }
-  .link__icon {
-    padding: 2px 0 4px 0;
+    padding: 0 2px 8px 0;
     border-bottom: 4px solid transparent;
   }
-  .link:nth-child(2) .link__title {
-     margin-right: 3px;
+  .link__icon {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: center;
+    margin-bottom: 8px;
+    border-bottom: 4px solid transparent;
   }
-  .link:hover .link__title{
+  .link:not(.link_active):hover .link__title{
     border-bottom: none;
   }
-  .link:hover .link__icon{
+  .link:not(.link_active):hover .link__icon{
     border-bottom: none;
   }
-  .link:hover {
+  .link:not(.link_active):hover {
     border-bottom: 4px solid var(--colors-interface-primary-additional);
   }
 }

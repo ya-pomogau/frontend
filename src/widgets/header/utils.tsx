@@ -21,7 +21,7 @@ export const positionConfigTop: ISideBarPosition = {
 
 export const positionConfigMenu: ISideBarPosition = {
   ulflexDirection: "column",
-  ulgap: 33,
+  ulgap: 35,
   element: {
     flexDirection: "row-reverse",
     justifyContent: "flex-start",
@@ -53,14 +53,14 @@ export const linksTop: ISideBarElementProps[] = [
 ];
 export const linksMenuMobile: ISideBarElementProps[] = [
   {
-    title: "Личный кабинет",
-    to: "/profile",
-    icon: <PersonIcon color="blue" />,
-  },
-  {
     title: "Блог",
     to: "/blog",
     icon: <WriteMessageIcon color="blue" />,
+  },
+  {
+    title: "Личный кабинет",
+    to: "/profile",
+    icon: <PersonIcon color="blue" />,
   },
   {
     title: "Политика конфеденциальности",
