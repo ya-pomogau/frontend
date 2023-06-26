@@ -6,6 +6,7 @@
     "start": "react-scripts start",
     "storybook": "storybook dev -p 6006",
     "prettier": "prettier --check src/**/*.{ts,tsx,css}",
+    "prettier:format": "prettier --write src/**/*.{ts,tsx,css}",
     "lint": "eslint src/",
     "build": "react-scripts build",
     "build-storybook": "storybook build",

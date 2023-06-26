@@ -10,6 +10,7 @@ import { BlogPage } from "./blog";
 import { PolicyPage } from "./policy";
 import { ContactsPage } from "./contacts";
 import { NotFoundPage } from "./not-found";
+import { RegisterPage } from "./register";
 
 export function AppRoutes() {
   return (
@@ -25,6 +26,7 @@ export function AppRoutes() {
         <Route path="blog/*" element={<BlogPage />} />
         <Route path="policy" element={<PolicyPage />} />
         <Route path="contacts/*" element={<ContactsPage />} />
+        <Route path="register" element={<RegisterPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
