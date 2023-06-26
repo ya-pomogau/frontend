@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { useState, FC, SyntheticEvent } from "react";
 import { NavLink } from "react-router-dom";
 import { Logo } from "shared/ui/logo";
 import { SideBar } from "widgets/header/navigation";
@@ -19,6 +19,11 @@ const Header: FC = () => {
     name: "gosha",
     avatarLink: "https://i.pravatar.cc/300",
   };
+
+  const handleClick = (evt: SyntheticEvent) => {
+    evt.stopPropagation();
+    setMenuActive(!menuActive);
+  }
 
   return (
     <header className={styles.header}>
@@ -41,13 +46,13 @@ const Header: FC = () => {
 
         <div className={styles.header__menu__container}>
           <button
-            onClick={() => setMenuActive(!menuActive)}
+            onClick={handleClick}
             className={styles.header__button}
             type="button"
           >
-            <MenuIcon color="blue" />
+            <MenuIcon color="blue"/>
           </button>
-          {menuActive && <Menu setMenuActive={setMenuActive} />}
+          {menuActive && <Menu setMenuActive={setMenuActive} menuActive={menuActive} />}
         </div>
       </div>
     </header>
