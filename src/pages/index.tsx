@@ -1,7 +1,11 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { ProfileRouter } from "entities/viewer/hoc";
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+
+import { fetchUserData } from "entities/user/model";
+
 import { Layout } from "./layout";
-import { UnauthPage } from "./demo";
+import { UnauthPage } from "./unauth";
 import { VolunteerPage } from "./volunteer";
 import { ConsumerPage } from "./consumer";
 import { AdminPage } from "./admin";
@@ -9,22 +13,31 @@ import { MasterAdminPage } from "./master-admin";
 import { BlogPage } from "./blog";
 import { PolicyPage } from "./policy";
 import { ContactsPage } from "./contacts";
+import { ProfilePage } from "./profile";
 import { NotFoundPage } from "./not-found";
 
 export function AppRoutes() {
+  const dispatch = useAppDispatch();
+  const userRole = useAppSelector((state) => state.user.role);
+
+  useEffect(() => {
+    if(userRole) {
+      dispatch(fetchUserData());
+    }
+  }, [userRole, dispatch]);
+  
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Navigate to="profile" replace />} />
-        <Route path="profile" element={<ProfileRouter />} />
-        <Route path="profile/demo/*" element={<UnauthPage />} />
+        <Route index element={<UnauthPage />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="profile/volunteer/*" element={<VolunteerPage />} />
         <Route path="profile/consumer/*" element={<ConsumerPage />} />
         <Route path="profile/admin/*" element={<AdminPage />} />
         <Route path="profile/master/*" element={<MasterAdminPage />} />
         <Route path="blog/*" element={<BlogPage />} />
         <Route path="policy" element={<PolicyPage />} />
-        <Route path="contacts/*" element={<ContactsPage />} />
+        <Route path="contacts" element={<ContactsPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

@@ -1,11 +1,14 @@
 import { useState, FC } from "react";
 import { NavLink } from "react-router-dom";
+
+import { useAppSelector } from "app/hooks";
+import { useMediaQuery } from "shared/hooks/media-query";
+
 import { Logo } from "shared/ui/logo";
 import { SideBar } from "widgets/header/navigation";
 import { MenuIcon } from "shared/ui/icons/menu-icon";
 import { EmptyMessageIcon } from "shared/ui/icons/empty-message-icon";
 import { Avatar } from "shared/ui/avatar";
-import { useMediaQuery } from "shared/hooks/media-query";
 import {
   positionConfigTop,
   positionConfigMenu,
@@ -17,25 +20,20 @@ import styles from "./styles.module.css";
 
 const Header: FC = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
-  const auth = true;
 
   const isMobile = useMediaQuery("(max-width: 900px)");
-
-  const profile = {
-    name: "gosha",
-    avatarLink: "https://i.pravatar.cc/300",
-  };
+  const user = useAppSelector((state) => state.user.data);
 
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
         {isMobile && (
           <div className={`${styles.header__avatar} `}>
-            {auth && isMobile && (
+            {user && isMobile && (
               <Avatar
                 extClassName={styles.header__avatar}
-                avatarName={profile.name}
-                avatarLink={profile.avatarLink}
+                avatarName={user.fullname}
+                avatarLink={user.avatar}
               />
             )}{" "}
           </div>

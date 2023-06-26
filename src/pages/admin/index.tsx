@@ -2,7 +2,7 @@ import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
 import { useState } from "react";
 import { PageLayout } from "../../shared/ui/page-layout";
-import { ViewerInfo } from "../../entities/viewer";
+import { UserInfo } from "../../entities/user";
 import { ButtonContainer } from "../../shared/ui/button-container";
 import { CardButton } from "../../shared/ui/card-button";
 import { Icon } from "../../shared/ui/icons";
@@ -67,7 +67,7 @@ export function AdminPage() {
       side={
         <>
           <div className={styles.viewer}>
-            <ViewerInfo onClickSettingsButton={() => 1} />
+            <UserInfo onClickSettingsButton={() => 1} />
           </div>
           <ButtonContainer>
             <NavLink to="requests" className="link">

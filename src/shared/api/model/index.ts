@@ -1,5 +1,5 @@
 import { API_URL } from "config/api-config";
-import { TUserInfo } from "entities/viewer/types";
+import { TUserInfo } from "entities/user/types";
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : Promise.reject(res);
