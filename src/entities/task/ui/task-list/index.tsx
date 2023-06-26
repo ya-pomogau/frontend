@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import classNames from "classnames";
 import { Informer } from "shared/ui/informer";
 import { RoundButton } from "shared/ui/round-button";
-import { TRole } from "entities/viewer/types";
+import { TUserRole } from "entities/viewer/types";
 import { Task } from "../task";
 
 import styles from "./styles.module.css";
@@ -24,7 +24,7 @@ interface TaskProps {
 }
 
 interface TaskListProps {
-  role: TRole;
+  role: TUserRole;
   tasks: Array<TaskProps>;
   extClassName?: string;
   isStatusActive: boolean;

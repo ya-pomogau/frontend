@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { ProfileReducer } from "entities/viewer/hoc";
+import { ProfileRouter } from "entities/viewer/hoc";
 import { Layout } from "./layout";
 import { UnauthPage } from "./demo";
 import { VolunteerPage } from "./volunteer";
@@ -16,7 +16,7 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Navigate to="profile" replace />} />
-        <Route path="profile" element={<ProfileReducer />} />
+        <Route path="profile" element={<ProfileRouter />} />
         <Route path="profile/demo/*" element={<UnauthPage />} />
         <Route path="profile/volunteer/*" element={<VolunteerPage />} />
         <Route path="profile/consumer/*" element={<ConsumerPage />} />

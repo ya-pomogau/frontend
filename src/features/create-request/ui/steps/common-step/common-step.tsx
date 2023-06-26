@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { RootState } from "app/store";
 import classNames from "classnames";
 import { changeStepDecrement, closePopup } from "features/create-request/model";
 import { Button } from "shared/ui/button";
@@ -14,7 +13,7 @@ interface ICommonStepProps {
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
   const { time, address, typeOfTask, descriptionForTask, date } =
-    useAppSelector((state: RootState) => state.createRequest);
+    useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());

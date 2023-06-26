@@ -1,8 +1,8 @@
-export type TRole = "consumer" | "volunteer" | "master" | "admin";
+export type TUserRole = "consumer" | "volunteer" | "master" | "admin";
 
-export interface IUserInfo {
+export type TUserInfo = {
   name: string;
-  role: TRole;
+  role: TUserRole;
   id: number;
   phoneNumber: string;
   address: string;
@@ -12,4 +12,4 @@ export interface IUserInfo {
   completedTasksCount?: number;
   tasksCount?: number;
   description: string;
-}
+};

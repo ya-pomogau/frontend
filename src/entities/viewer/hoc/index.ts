@@ -1,1 +1,1 @@
-export * from "./route-reducer";
+export * from "./profile-router";

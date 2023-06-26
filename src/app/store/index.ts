@@ -4,7 +4,7 @@ import { createRequestModel } from "features/create-request/model/create-request
 
 export const store = configureStore({
   reducer: {
-    viewer: viewerModel.reducer,
+    user: viewerModel.reducer,
     createRequest: createRequestModel.reducer,
   },
 });

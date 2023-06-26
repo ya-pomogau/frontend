@@ -1,8 +1,9 @@
+import { useEffect } from "react";
+import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { YandexMap } from "shared/ui/map";
 import { NotFoundPage } from "pages/not-found";
 import { Icon } from "shared/ui/icons";
@@ -11,6 +12,7 @@ import { TaskList } from "entities/task/ui/task-list";
 import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
+import { setUserRole } from "entities/viewer/model";
 import styles from "./styles.module.css";
 
 const yandexMapMockData: Data[] = [
@@ -93,6 +95,10 @@ const activeTasksMockData = [
 
 export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
+
+  useEffect(() => {
+    setUserRole('volunteer');
+  }, []);
 
   return (
     <PageLayout
