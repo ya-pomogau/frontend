@@ -61,7 +61,7 @@ export const TaskList = ({
           extClassName
         )}
       >
-        {role === "consumer" && (
+        {role === "recipient" && (
           <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
             <RoundButton
               buttonType="add"
@@ -158,7 +158,7 @@ export const TaskList = ({
     );
   }
 
-  if (!tasks.length && isStatusActive && role === "consumer") {
+  if (!tasks.length && isStatusActive && role === "recipient") {
     return (
       <div
         className={classNames(

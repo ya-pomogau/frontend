@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { store } from "app/store";
 import { Provider } from "react-redux";
 
+import { store } from "app/store";
 import { UserInfo } from ".";
 
 const meta: Meta<typeof UserInfo> = {
@@ -28,7 +28,7 @@ export const Admin: Story = {
 
 export const Recipient: Story = {
   args: {
-    roleForStoryBook: "consumer",
+    roleForStoryBook: "recipient",
   },
 };
 

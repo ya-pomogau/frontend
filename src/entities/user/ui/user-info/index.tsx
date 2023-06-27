@@ -3,7 +3,7 @@ import { InfoContainer } from "shared/ui/info-container";
 import { InfoContainerContent } from "shared/ui/info-container-content";
 import { VolunteerInfo } from "./volunteer-info/volunteer-info";
 import { RecipientInfo } from "./recipient-info/recipient-info";
-import { TUserRole } from "../../types";
+import type { TUserRole } from "../../types";
 import styles from "./styles.module.css";
 
 interface UserInfoProps {
@@ -25,20 +25,25 @@ export const UserInfo = ({
         onClickSettingsButton={onClickSettingsButton}
       >
         <div className={styles.contentWrapper}>
-          <InfoContainerContent name={user.fullname} />
+          <InfoContainerContent 
+            id={user.id}
+            name={user.fullname}
+            phone={user.phone}
+            address={user.address}
+          />
 
-          {user.role === 'consumer' && (
+          {user.role === 'recipient' && (
             <RecipientInfo
-              tasksCount={user.tasksCount || 0}
-              completedTasksCount={user.completedTasksCount || 0}
+              tasksCount={0}
+              completedTasksCount={user.completed || 0}
             />
           )}
 
           {user.role === 'volunteer' && (
             <VolunteerInfo
-              score={user.score || 0}
-              virtualKey={user.virtualKey}
-              completedTasksCount={user.completedTasksCount || 0}
+              score={user.scores || 0}
+              virtualKey={user.keys}
+              completedTasksCount={user.completed || 0}
             />
           )}
         </div>

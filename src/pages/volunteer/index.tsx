@@ -109,7 +109,7 @@ export function VolunteerPage() {
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
+          <div className={styles.user}>
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
           <ButtonContainer>

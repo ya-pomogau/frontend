@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
+import { useAppDispatch } from "app/hooks";
+import { useMediaQuery } from "shared/hooks";
+
 import { UserInfo } from "entities/user";
 import { setUserRole } from "entities/user/model";
-import { useMediaQuery } from "shared/hooks";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
@@ -95,18 +97,19 @@ const activeTasksMockData = [
   },
 ];
 
-export function ConsumerPage() {
+export function RecipientPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setUserRole('consumer');
+    dispatch(setUserRole('recipient'));
   }, []);
 
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
+          <div className={styles.user}>
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
           <ButtonContainer>
@@ -174,7 +177,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -211,7 +214,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}

@@ -4,7 +4,7 @@ import {
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 
-import { api } from "shared/api";
+import { api } from "../../../shared/api";
 import type { TUserInfo, TUserRole } from "../types";
 
 type TUserState = {
@@ -12,6 +12,7 @@ type TUserState = {
   data: TUserInfo | null;
   isLoading: boolean;
   isFailed: boolean;
+  error?: string;
 }
 
 const initialState: TUserState = {
@@ -21,11 +22,11 @@ const initialState: TUserState = {
   isFailed: false,
 };
 
-export const fetchUserData = createAsyncThunk(
+export const fetchUserDataByRole = createAsyncThunk(
   'user/fetchData',
-  async () => {
+  async (role: TUserRole) => {
     const response = await api.getAllUsers();
-    return response[7];
+    return response.filter((user) => user.role === role)[0];
   }
 );
 
@@ -38,9 +39,20 @@ export const userModel = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUserData.fulfilled, (state, action) => {
-      state.data = action.payload;
-    })
+    builder
+      .addCase(fetchUserDataByRole.pending, (state) => {
+        state.isLoading = true;
+        state.isFailed = false;
+      })
+      .addCase(fetchUserDataByRole.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(fetchUserDataByRole.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isFailed = true;
+        state.error = action.error.message;
+      })
   },
 });
 

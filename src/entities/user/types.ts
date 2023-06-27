@@ -1,15 +1,18 @@
-export type TUserRole = "consumer" | "volunteer" | "master" | "admin";
+export type TUserRole = "recipient" | "volunteer" | "master" | "admin";
 
 export type TUserInfo = {
-  fullname: string;
-  role: TUserRole;
   id: number;
-  phoneNumber: string;
-  address: string;
+  fullname: string;
+  role: TUserRole | null;
+  vk: string;
   avatar: string;
-  score?: number;
-  virtualKey?: boolean;
-  completedTasksCount?: number;
-  tasksCount?: number;
-  description: string;
+  phone: string;
+  address: string;
+  coordinates: number[];
+  approved: boolean;
+  checked: boolean;
+  keys?: boolean;
+  adminStatus: number;
+  scores: number | null;
+  completed: number | null;
 };

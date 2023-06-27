@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 
-import { fetchUserData } from "entities/user/model";
+import { fetchUserDataByRole } from "entities/user/model";
 
 import { Layout } from "./layout";
 import { UnauthPage } from "./unauth";
 import { VolunteerPage } from "./volunteer";
-import { ConsumerPage } from "./consumer";
+import { RecipientPage } from "./recipient";
 import { AdminPage } from "./admin";
 import { MasterAdminPage } from "./master-admin";
 import { BlogPage } from "./blog";
@@ -22,7 +22,7 @@ export function AppRoutes() {
 
   useEffect(() => {
     if(userRole) {
-      dispatch(fetchUserData());
+      dispatch(fetchUserDataByRole(userRole));
     }
   }, [userRole, dispatch]);
   
@@ -32,7 +32,7 @@ export function AppRoutes() {
         <Route index element={<UnauthPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="profile/volunteer/*" element={<VolunteerPage />} />
-        <Route path="profile/consumer/*" element={<ConsumerPage />} />
+        <Route path="profile/recipient/*" element={<RecipientPage />} />
         <Route path="profile/admin/*" element={<AdminPage />} />
         <Route path="profile/master/*" element={<MasterAdminPage />} />
         <Route path="blog/*" element={<BlogPage />} />
