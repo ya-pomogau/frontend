@@ -26,7 +26,7 @@ export const SmartHeader = ({
     <div className={styles.smartHeader__block}>
       <button className={styles.filterButton} type="button"  {...props}>
         <p className={classnames(styles.filterText, "text", "text_size_medium", "m-0", "p-0")}>{filterText}</p>
-              {filterIcon}
+        {filterIcon}
       </button>
     </div>
   </div>

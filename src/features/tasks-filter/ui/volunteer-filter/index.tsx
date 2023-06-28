@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import classnames from "classnames";
 import { format, parseISO } from "date-fns";
 import { DatePicker } from "shared/ui/date-picker";
@@ -13,6 +14,11 @@ interface Props {
 }
 
 export const VolunteerFilter = ({ filter, onChange }: Props) => {
+  const [isCalenderMobil, setIsCalenderMobil] = useState(false);
+
+  if (filter.searchRadius === '') {
+    filter.searchRadius = '5';
+  }
   const handleDateChange = (date: Date) => {
     const formatedDate = format(date, "yyyy-MM-dd'T'HH:mm:ss");
     onChange("date", formatedDate);
@@ -22,14 +28,23 @@ export const VolunteerFilter = ({ filter, onChange }: Props) => {
     filter.searchRadius.includes(id) ? "primary" : "secondary";
 
   const handleRadiusButtonClick = (id: string) => {
-    let newValue;
-    if (filter.searchRadius.includes(id)) {
-      newValue = filter.searchRadius.filter((item) => item !== id);
-    } else {
-      newValue = [...filter.searchRadius, id];
-    }
-    onChange("searchRadius", newValue);
+    onChange("searchRadius", id);
   };
+
+  // определение того, в каком виде должен быть календарь: десктопном или мобильном, в том числе
+  // для случаев, когда изменение размера экрана происходит из-за изменения размера браузера
+  const setTypeCalender = () => {
+    if (window.innerWidth <= 768) {
+      setIsCalenderMobil(true);
+    } else {
+      setIsCalenderMobil(false);
+    }
+  };
+  useEffect(() => {
+    setTypeCalender();
+    window.addEventListener('resize', setTypeCalender);
+    return () => {window.removeEventListener('resize', setTypeCalender)};
+  }, []);
 
   return (
     <>
@@ -88,7 +103,7 @@ export const VolunteerFilter = ({ filter, onChange }: Props) => {
         <div>
           <DatePicker
             value={parseISO(filter.date)}
-            isMobile={false}
+            isMobile={isCalenderMobil}
             onChangeValue={handleDateChange}
           />
         </div>

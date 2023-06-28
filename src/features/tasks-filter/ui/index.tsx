@@ -12,15 +12,16 @@ import styles from "./styles.module.css";
 interface TasksFilterProps {
   userRole: TRole;
   visible: boolean;
+  changeVisible: () => void;
 }
 
-export const TasksFilter = ({ userRole, visible }: TasksFilterProps) => {
+export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     showByDate: false,
     categories: [],
     date: "",
-    searchRadius: [],
+    searchRadius: '',
   });
 
   const handleFilterChange = (
@@ -37,20 +38,38 @@ export const TasksFilter = ({ userRole, visible }: TasksFilterProps) => {
         params +=
           Array.isArray(value) && value.length ? `${key}=${value}&` : "";
       }
+      if (key === 'date' && value.length) {
+        const index = value.indexOf('T');
+        params += `${key}=${value.slice(0, index)}&`;
+      }
+      if (key === 'searchRadius' && value.length) {
+        params += `${key}=${value}&`;
+      }
     });
 
     setSearchParams(params);
+    changeVisible();
   };
-
+  function closeWithEsc(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      changeVisible();
+    }
+  }
   useEffect(() => {
     const queryParams = getQuery(searchParams);
     const dateFromQuery = queryParams?.date as string;
+    function getNewDate() {
+      const newDate = new Date();
+      return new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
+    }
     setFilterValues({
       ...filterValues,
       ...queryParams,
       date:
-        userRole === "volunteer" ? dateFromQuery || formatDate(new Date()) : "",
+        userRole === "volunteer" ? dateFromQuery || formatDate(getNewDate()) : "",
     });
+    document.addEventListener('keydown', closeWithEsc);
+    return () => {document.removeEventListener('keydown', closeWithEsc)};
   }, []);
 
   return (

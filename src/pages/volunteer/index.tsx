@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -11,6 +12,7 @@ import { TaskList } from "entities/task/ui/task-list";
 import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
+import { TasksFilter } from "features/tasks-filter/ui";
 import styles from "./styles.module.css";
 
 const yandexMapMockData: Data[] = [
@@ -92,6 +94,7 @@ const activeTasksMockData = [
 ];
 
 export function VolunteerPage() {
+  const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const isMobile = useMediaQuery("(max-width:1150px)");
 
   return (
@@ -220,18 +223,25 @@ export function VolunteerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                    }
-                    settingText="Карта заявок"
-                    extClassName={styles.header}
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      settingIcon={
+                        <Icon color="blue" icon="MapApplicationIcon" size="54" />
+                      }
+                      settingText="Карта заявок"
+                      extClassName={styles.header}
+                    />
+                    <TasksFilter
+                      userRole="volunteer"
+                      visible={isFilterVisibel}
+                      changeVisible={() => setIsFilterVisibel(false)}
+                    />
+                  </>
                 }
               >
                 <YandexMap

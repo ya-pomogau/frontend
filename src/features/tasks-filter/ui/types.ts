@@ -2,7 +2,7 @@ export interface IFilterValues {
   showByDate: boolean;
   categories: string[];
   date: string;
-  searchRadius: string[];
+  searchRadius: string;
 }
 
 export type TRecipientFilter = Omit<IFilterValues, "date">;
