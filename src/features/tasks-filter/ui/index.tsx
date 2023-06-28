@@ -42,7 +42,7 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
         const index = value.indexOf('T');
         params += `${key}=${value.slice(0, index)}&`;
       }
-      if (key === 'searchRadius' && value.length) {
+      if ((key === 'searchRadius' && value.length) || (key === 'showByDate' && value === true)) {
         params += `${key}=${value}&`;
       }
     });

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
@@ -11,6 +12,7 @@ import { TaskList } from "entities/task/ui/task-list";
 import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
+import { TasksFilter } from "features/tasks-filter/ui";
 
 import styles from "./styles.module.css";
 
@@ -93,6 +95,7 @@ const activeTasksMockData = [
 ];
 
 export function ConsumerPage() {
+  const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const isMobile = useMediaQuery("(max-width:1150px)");
 
   return (
@@ -147,22 +150,29 @@ export function ConsumerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon
-                        color="blue"
-                        icon="ActiveApplicationIcon"
-                        size="54"
-                      />
-                    }
-                    settingText="Активные заявки"
-                    extClassName={styles.header}
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      settingIcon={
+                        <Icon
+                          color="blue"
+                          icon="ActiveApplicationIcon"
+                          size="54"
+                        />
+                      }
+                      settingText="Активные заявки"
+                      extClassName={styles.header}
+                    />
+                    <TasksFilter
+                      userRole="recipient"
+                      visible={isFilterVisibel}
+                      changeVisible={() => setIsFilterVisibel(false)}
+                    />
+                  </>
                 }
               >
                 <TaskList
@@ -184,22 +194,29 @@ export function ConsumerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon
-                        color="blue"
-                        icon="CompletedApplicationIcon"
-                        size="54"
-                      />
-                    }
-                    settingText="Завершенные заявки"
-                    extClassName={styles.header}
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      settingIcon={
+                        <Icon
+                          color="blue"
+                          icon="CompletedApplicationIcon"
+                          size="54"
+                        />
+                      }
+                      settingText="Завершенные заявки"
+                      extClassName={styles.header}
+                    />
+                    <TasksFilter
+                      userRole="recipient"
+                      visible={isFilterVisibel}
+                      changeVisible={() => setIsFilterVisibel(false)}
+                    />
+                  </>
                 }
               >
                 <TaskList
@@ -222,16 +239,16 @@ export function ConsumerPage() {
               <ContentLayout
                 heading={
                   <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                    }
-                    settingText="Карта заявок"
-                    extClassName={styles.header}
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => 1}
+                      settingIcon={
+                        <Icon color="blue" icon="MapApplicationIcon" size="54" />
+                      }
+                      settingText="Карта заявок"
+                      extClassName={styles.header}
                   />
                 }
               >
