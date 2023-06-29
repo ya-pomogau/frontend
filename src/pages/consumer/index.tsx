@@ -102,7 +102,7 @@ export function ConsumerPage() {
           <div className={styles.viewer}>
             <ViewerInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
+          <ButtonContainer auth>
             <NavLink to="map" className="link">
               {({ isActive }) => (
                 <CardButton
