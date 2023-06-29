@@ -14,6 +14,11 @@
   cursor: pointer;
   padding-bottom: 23px;
 }
+
+.header__button:focus-visible {
+  outline: none;
+}
+
 .header__menu {
   left: -176px;
   width: 252px;
@@ -30,49 +35,6 @@
 }
 .header__menu__container {
   position: relative;
-}
-.header__sidebar__container {
-  padding-left: 30px;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
-.header__title__container {
-  display: flex;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: 200px;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 20px;
-  text-decoration: none;
-  list-style: none;
-  justify-content: center;
-}
-.menu__title {
-  color: #2e3192;
-  font-family: "Golos";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: auto;
-  margin-right: 0;
-  width: 132px;
-  text-align: right;
-}
-
-.menu__title__icon {
-  width: 32px;
-  height: 32px;
-  background-color: #2e3192;
-  margin-left: 5px;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-  margin-bottom: auto;
-  z-index: 2;
 }
 
 .header__avatar {
@@ -115,25 +77,8 @@
   .header__menu {
     left: -200px;
   }
-  .menu__title {
-    font-family: "Golos";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    width: 100%;
-    color: #fbfdff;
-    z-index: 2;
-  }
+  
   .header__title__container {
     border: none;
-  }
-  .header__title__background {
-    position: absolute;
-    right: -5px;
-    top: 20px;
   }
 }

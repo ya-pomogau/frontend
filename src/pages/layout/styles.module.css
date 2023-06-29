@@ -1,5 +1,5 @@
 .main {
-  height: 884px;
+  height: calc(100% - 141px);
   padding: 0 92px;
   margin-top: 30px;
   position: relative;
