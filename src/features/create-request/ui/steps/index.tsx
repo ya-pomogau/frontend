@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { RootState } from "app/store";
 import { closePopup } from "features/create-request/model";
 import { MainPopup } from "shared/ui/main-popup";
+import { Data } from "shared/ui/map/types";
 import { OverlayingPopup } from "shared/ui/overlaying-popup";
 import { Portal } from "shared/ui/portal";
 import { CurrentPage } from "../../types";
