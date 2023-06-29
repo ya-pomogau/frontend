@@ -13,9 +13,10 @@
   top: 88px;
   background-color: var(--colors-interface-white);
   padding-left: 30px;
-  padding-right: 30px;
+  padding-right: 20px;
   padding-bottom: 20px;
   width: 190px;
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16), 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
 }
 
 @media screen and (min-width: 1440px) {
@@ -33,6 +34,7 @@
   padding-right: 30px;
   padding-bottom: 20px;
   width: 190px;
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16), 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
 }
 
 .header__title__container {

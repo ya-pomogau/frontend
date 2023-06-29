@@ -67,6 +67,10 @@
     padding-right: 30px;
     padding-top: 10px;
   }
+  .header__sidebar__container{
+    margin-top: 10px;
+    padding-left: 25px;
+  }
   .header__button {
     padding-bottom: 8px;
   }
@@ -77,5 +81,4 @@
   .header__title__container {
     border: none;
   }
-  
 }
