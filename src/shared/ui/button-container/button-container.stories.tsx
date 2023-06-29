@@ -36,7 +36,7 @@ export const Authorized: Story = {
   },
 };
 
-export const Unuthorized: Story = {
+export const Unauthorized: Story = {
   args: {
     auth: false
   },
