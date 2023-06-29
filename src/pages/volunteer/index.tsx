@@ -144,7 +144,7 @@ export function VolunteerPage() {
           <div className={styles.user}>
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
+          <ButtonContainer auth>
             <NavLink to="map" className="link">
               {({ isActive }) => (
                 <CardButton

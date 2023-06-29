@@ -77,7 +77,7 @@ export function AdminPage() {
           <div className={styles.user}>
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
+          <ButtonContainer auth>
             <NavLink to="requests" className="link">
               {({ isActive }) => (
                 <CardButton
