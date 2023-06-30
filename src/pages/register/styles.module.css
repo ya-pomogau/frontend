@@ -5,3 +5,24 @@
 .viewer {
   margin-bottom: 30px;
 }
+
+.form {
+    width: 364px;
+    display: grid;
+    gap: 24px;
+    padding-top: 60px;
+    padding-left: 18px;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+    font-family: "Golos", sans-serif;
+    font-size: 24px;
+    line-height: 29px;
+    color: var(--colors-interface-primary);
+}
+
+.field {
+    width: 364px;
+}
