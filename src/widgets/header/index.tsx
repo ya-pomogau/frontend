@@ -1,5 +1,6 @@
 import { useState, FC, SyntheticEvent } from "react";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "app/hooks";
 import { Logo } from "shared/ui/logo";
 import { SideBar } from "widgets/header/navigation";
 import Menu from "widgets/header/menu";
@@ -11,14 +12,9 @@ import styles from "./styles.module.css";
 
 const Header: FC = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
-  const auth = true;
 
   const isMobile = useMediaQuery("(max-width: 900px)");
-
-  const profile = {
-    name: "gosha",
-    avatarLink: "https://i.pravatar.cc/300",
-  };
+  const user = useAppSelector((state) => state.user.data);
 
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
@@ -30,11 +26,11 @@ const Header: FC = () => {
       <div className={styles.header__container}>
         {isMobile && (
           <div className={`${styles.header__avatar} `}>
-            {auth && isMobile && (
+            {user && isMobile && (
               <Avatar
                 extClassName={styles.header__avatar}
-                avatarName={profile.name}
-                avatarLink={profile.avatarLink}
+                avatarName={user.fullname}
+                avatarLink={user.avatar}
               />
             )}{" "}
           </div>
