@@ -1,16 +1,21 @@
+import { useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-import { ViewerInfo } from "entities/viewer";
+
+import { useAppDispatch } from "app/hooks";
+import { useMediaQuery } from "shared/hooks";
+
+import { UserInfo } from "entities/user";
+import { setUserRole } from "entities/user/model";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
 import { YandexMap } from "shared/ui/map";
-import { NotFoundPage } from "pages/not-found";
-import { Icon } from "shared/ui/icons";
 import { Data } from "shared/ui/map/types";
+import { Icon } from "shared/ui/icons";
 import { TaskList } from "entities/task/ui/task-list";
-import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
+import { NotFoundPage } from "pages/not-found";
 
 import styles from "./styles.module.css";
 
@@ -92,17 +97,22 @@ const activeTasksMockData = [
   },
 ];
 
-export function ConsumerPage() {
+export function RecipientPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUserRole('recipient'));
+  }, []);
 
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
-            <ViewerInfo onClickSettingsButton={() => 1} />
+          <div className={styles.user}>
+            <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
+          <ButtonContainer auth>
             <NavLink to="map" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -167,7 +177,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -204,7 +214,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}

@@ -1,2 +1,2 @@
-export * as api from "./typicode";
-export * from "./model";
+// export * as api from "./typicode";
+export * as api from "./model";

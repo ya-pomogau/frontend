@@ -1,4 +1,4 @@
-import { ViewerInfo } from "entities/viewer";
+import { UserInfo } from "entities/user";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
@@ -11,6 +11,7 @@ import { FormEvent, useState } from "react";
 import { Button } from "shared/ui/button";
 import { VkIcon } from "shared/ui/icons/vk-icon";
 import styles from "./styles.module.css";
+
 
 export function RegisterPage() {
   const [name, setName] = useState('');
@@ -26,7 +27,7 @@ export function RegisterPage() {
       side={
         <>
           <div className={styles.viewer}>
-            <ViewerInfo onClickSettingsButton={() => 1} />
+          <UserInfo onClickSettingsButton={() => 1} />
           </div>
           <ButtonContainer>
             <NavLink to="map" className="link">
