@@ -1,5 +1,5 @@
+import React from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { RootState } from "app/store";
 import classNames from "classnames";
 import {
   addDescriptionForTask,
@@ -7,7 +7,6 @@ import {
   changeStepDecrement,
   changeStepIncrement,
 } from "features/create-request/model";
-import React from "react";
 import { Button } from "shared/ui/button";
 import { Select } from "shared/ui/select";
 import { TextArea } from "shared/ui/text-area";
@@ -20,7 +19,7 @@ interface ITaskStepProps {
 
 export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
   const { descriptionForTask, typeOfTask } = useAppSelector(
-    (state: RootState) => state.createRequest
+    (state) => state.createRequest
   );
 
   const dispatch = useAppDispatch();

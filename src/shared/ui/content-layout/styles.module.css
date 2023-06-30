@@ -12,7 +12,6 @@
 
 .list {
   overflow-y: auto;
-  padding-right: 6px;
   position: relative;
 }
 

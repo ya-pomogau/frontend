@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
-import { useState } from "react";
+import { useAppDispatch } from "app/hooks";
+import { setUserRole } from "entities/user/model";
 import { PageLayout } from "../../shared/ui/page-layout";
-import { ViewerInfo } from "../../entities/viewer";
+import { UserInfo } from "../../entities/user";
 import { ButtonContainer } from "../../shared/ui/button-container";
 import { CardButton } from "../../shared/ui/card-button";
 import { Icon } from "../../shared/ui/icons";
@@ -62,24 +64,26 @@ export function AdminPage() {
     user.userName.toLowerCase().includes(value.toLowerCase())
   );
 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUserRole('admin'));
+  }, []);
+
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
-            <ViewerInfo
-              roleForStoryBook="admin"
-              onClickSettingsButton={() => 1}
-            />
+          <div className={styles.user}>
+            <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
+          <ButtonContainer auth>
             <NavLink to="requests" className="link">
               {({ isActive }) => (
                 <CardButton
                   customIcon={<Icon color="white" icon="BlockIcon" size="54" />}
                   text="Подтверждение /Блокировка"
-                  extClassName={isActive ? styles.cardBlock : ""}
-                  onClick={() => 2}
+                  isActive={isActive}
                 />
               )}
             </NavLink>
@@ -90,8 +94,7 @@ export function AdminPage() {
                     <Icon color="white" icon="StatisticIcon" size="54" />
                   }
                   text="Статистика"
-                  extClassName={isActive ? styles.cardBlock : ""}
-                  onClick={() => 2}
+                  isActive={isActive}
                 />
               )}
             </NavLink>
@@ -102,8 +105,7 @@ export function AdminPage() {
                     <Icon color="white" icon="SettingsIcon" size="54" />
                   }
                   text="Создание / Редактирование заявки"
-                  extClassName={isActive ? styles.cardBlock : ""}
-                  onClick={() => 2}
+                  isActive={isActive}
                 />
               )}
             </NavLink>
