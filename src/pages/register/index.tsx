@@ -4,23 +4,22 @@ import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
 import { NavLink } from "react-router-dom";
 import { Icon } from "shared/ui/icons";
-import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
 import { Input } from "shared/ui/input";
-import { useState } from "react";
-
+import { FormEvent, useState } from "react";
 import { Button } from "shared/ui/button";
 import { VkIcon } from "shared/ui/icons/vk-icon";
 import styles from "./styles.module.css";
 
-
-
 export function RegisterPage() {
-  const isMobile = useMediaQuery("(max-width:1150px)");
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("Региcтрация:", name, phone,address);
+  };
 
   return (
     <PageLayout
@@ -78,7 +77,7 @@ export function RegisterPage() {
                 />
             }
             >
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={onSubmit}>
                 <p className={styles.title}>Зарегистрироваться</p>
 
                 <Input
@@ -113,6 +112,7 @@ export function RegisterPage() {
 
                 <Button
                     buttonType="primary"
+                    actionType="submit"
                     customIcon={<VkIcon color="white" size="24"/>}
                     label="Зарегистрироваться через ВКонтакте"
                     size="extraLarge"
