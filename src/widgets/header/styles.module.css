@@ -1,3 +1,5 @@
+@import '../../app/assets/styles/common.css';
+
 .header {
   width: 100%;
   border-bottom: 1px solid #e0e0e0;
@@ -12,9 +14,9 @@
   border: none;
   background-color: inherit;
   cursor: pointer;
-  padding-bottom: 13px;
+  padding-bottom: 12px;
 }
-.header__button_desktop {
+.header__button__container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,7 +28,7 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 14.4px;
-  color: rgba(46, 49, 146, 1);
+  color: var(--colors-interface-primary);
 }
 .header__menu {
   left: -176px;
@@ -62,7 +64,7 @@
   justify-content: center;
 }
 .menu__title {
-  color: #2e3192;
+  color: var(--colors-interface-primary);
   font-family: "Golos";
   font-style: normal;
   font-weight: 400;
@@ -79,7 +81,7 @@
 .menu__title__icon {
   width: 32px;
   height: 32px;
-  background-color: #2e3192;
+  background-color: var(--colors-interface-primary);
   margin-left: 5px;
   border-radius: 25px;
   display: flex;
