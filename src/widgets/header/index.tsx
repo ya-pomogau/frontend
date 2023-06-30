@@ -5,6 +5,7 @@ import { SideBar } from "widgets/header/navigation";
 import { MenuIcon } from "shared/ui/icons/menu-icon";
 import { EmptyMessageIcon } from "shared/ui/icons/empty-message-icon";
 import { Avatar } from "shared/ui/avatar";
+import { UnionIcon } from "shared/ui/icons/union-icon";
 import { useMediaQuery } from "shared/hooks/media-query";
 import {
   positionConfigTop,
@@ -14,6 +15,7 @@ import {
   linksMenu,
 } from "./utils";
 import styles from "./styles.module.css";
+
 
 const Header: FC = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
@@ -51,7 +53,7 @@ const Header: FC = () => {
             className={styles.header__button}
             type="button"
           >
-            <MenuIcon color="blue" />
+            {isMobile ? <MenuIcon color="blue" /> : <div className={styles.header__button_desktop}><span className={styles.header__button__text}>Меню</span><UnionIcon color="blue" /></div>}
           </button>
           <div
             className={`${styles.header__menu} ${

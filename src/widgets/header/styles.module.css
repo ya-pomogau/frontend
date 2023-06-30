@@ -12,7 +12,21 @@
   border: none;
   background-color: inherit;
   cursor: pointer;
-  padding-bottom: 23px;
+  padding-bottom: 13px;
+}
+.header__button_desktop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.header__button__text{
+  font-family: "Golos";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.4px;
+  color: rgba(46, 49, 146, 1);
 }
 .header__menu {
   left: -176px;
