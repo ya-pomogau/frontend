@@ -78,9 +78,10 @@ export function RegisterPage() {
                 />
             }
             >
-            <form className={styles.form} onSubmit={onSubmit}>
-                <p className={styles.title}>Зарегистрироваться</p>
 
+            <p className={styles.title}>Зарегистрироваться</p>
+            
+            <form className={styles.form} onSubmit={onSubmit}>
                 <Input
                     extClassName={styles.field}
                     label="ФИО"
@@ -101,15 +102,18 @@ export function RegisterPage() {
                     type="tel"
                 />
 
-                <Input
-                    extClassName={styles.field}
-                    label="Адрес"
-                    name="address"
-                    value={address}
-                    onChange={(event) => setAddress(event.currentTarget.value)}
-                    placeholder="ул. Нахимова, д.9, у подъезда №3"
-                    type="text"
-                />
+                <div>
+                    <Input
+                        extClassName={styles.field}
+                        label="Адрес"
+                        name="address"
+                        value={address}
+                        onChange={(event) => setAddress(event.currentTarget.value)}
+                        placeholder="ул. Нахимова, д.9, у подъезда №3"
+                        type="text"
+                    />
+                    <p className={styles.text}>Укажите адрес и мы подберем ближайшее к вам задание</p>
+                </div>
 
                 <Button
                     buttonType="primary"
