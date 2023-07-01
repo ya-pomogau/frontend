@@ -11,13 +11,10 @@ interface Props {
 
 export const AdminFilter = ({ filter, onChange }: Props) => {
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    let newValue;
     if (target.checked) {
-      newValue = [...filter, target.id];
-    } else {
-      newValue = filter.filter((item) => item !== target.id);
+      const newValue = [target.id];
+      onChange("categories", newValue);
     }
-    onChange("categories", newValue);
   };
 
   return (

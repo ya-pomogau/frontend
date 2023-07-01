@@ -1,6 +1,7 @@
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
 import { useState } from "react";
+import { TasksFilter } from "features/tasks-filter/ui";
 import { PageLayout } from "../../shared/ui/page-layout";
 import { ViewerInfo } from "../../entities/viewer";
 import { ButtonContainer } from "../../shared/ui/button-container";
@@ -58,6 +59,7 @@ const userMock = [
 ];
 export function AdminPage() {
   const [value, setValue] = useState("");
+  const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const filter = userMock.filter((user) =>
     user.userName.toLowerCase().includes(value.toLowerCase())
   );
@@ -112,18 +114,25 @@ export function AdminPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon color="blue" icon="BlockIcon" size="54" />
-                    }
-                    settingText="Подтверждение / Блокировка"
-                    extClassName={styles.header}
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      settingIcon={
+                        <Icon color="blue" icon="BlockIcon" size="54" />
+                      }
+                      settingText="Подтверждение / Блокировка"
+                      extClassName={styles.header}
+                    />
+                    <TasksFilter
+                      userRole="admin"
+                      visible={isFilterVisibel}
+                      changeVisible={() => setIsFilterVisibel(false)}
+                    />
+                  </>
                 }
               >
                 <div className={styles.tabContainer}>
@@ -237,18 +246,25 @@ export function AdminPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon color="blue" icon="SettingsIcon" size="54" />
-                    }
-                    settingText="Создание / Редактирование заявки"
-                    extClassName={styles.header}
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      settingIcon={
+                        <Icon color="blue" icon="SettingsIcon" size="54" />
+                      }
+                      settingText="Создание / Редактирование заявки"
+                      extClassName={styles.header}
+                    />
+                    <TasksFilter
+                      userRole="admin"
+                      visible={isFilterVisibel}
+                      changeVisible={() => setIsFilterVisibel(false)}
+                    />
+                  </>
                 }
               >
                 <div>

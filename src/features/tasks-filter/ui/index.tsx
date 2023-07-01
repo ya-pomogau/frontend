@@ -50,11 +50,6 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
     setSearchParams(params);
     changeVisible();
   };
-  function closeWithEsc(e: KeyboardEvent) {
-    if (e.key === 'Escape') {
-      changeVisible();
-    }
-  }
   useEffect(() => {
     const queryParams = getQuery(searchParams);
     const dateFromQuery = queryParams?.date as string;
@@ -68,8 +63,6 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
       date:
         userRole === "volunteer" ? dateFromQuery || formatDate(getNewDate()) : "",
     });
-    document.addEventListener('keydown', closeWithEsc);
-    return () => {document.removeEventListener('keydown', closeWithEsc)};
   }, []);
 
   return (
@@ -77,6 +70,7 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
       pointerPosition="right"
       visible={visible}
       extClassName={styles.tooltip}
+      changeVisible={changeVisible}
     >
       <div className={styles.wrapper}>
         {userRole === "admin" && (
