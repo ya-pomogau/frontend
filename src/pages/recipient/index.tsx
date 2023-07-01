@@ -113,17 +113,6 @@ export function RecipientPage() {
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
           <ButtonContainer auth>
-            <NavLink to="map" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon color="white" icon="MapApplicationIcon" size="54" />
-                  }
-                  text="Карта заявок"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
             <NavLink to="active" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -151,7 +140,7 @@ export function RecipientPage() {
       }
       content={
         <Routes>
-          <Route index element={<Navigate to="map" replace />} />
+          <Route index element={<Navigate to="active" replace />} />
           <Route
             path="active"
             element={
@@ -222,35 +211,6 @@ export function RecipientPage() {
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
                   tasks={[]}
-                />
-              </ContentLayout>
-            }
-          />
-          <Route
-            path="map"
-            element={
-              <ContentLayout
-                heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                    }
-                    settingText="Карта заявок"
-                    extClassName={styles.header}
-                  />
-                }
-              >
-                <YandexMap
-                  tasks={yandexMapMockData}
-                  mapSettings={{ latitude: 59.93, longitude: 30.31, zoom: 15 }}
-                  width="100%"
-                  height="100%"
-                  onClick={() => 3}
                 />
               </ContentLayout>
             }
