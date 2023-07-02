@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useMediaQuery } from "shared/hooks";
 
 import { UserInfo } from "entities/user";
 import { setUserRole } from "entities/user/model";
+import { fetchTasksByVolunteerId } from "entities/task/model";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
@@ -132,10 +133,17 @@ const activeTasksMockData = [
 export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
   const dispatch = useAppDispatch();
+  const user = useAppSelector((store) => store.user.data);
 
   useEffect(() => {
     dispatch(setUserRole('volunteer'));
   }, [dispatch]);
+
+  useEffect(() => {
+    if(user) {
+      dispatch(fetchTasksByVolunteerId(user?.id));
+    }
+  }, [dispatch, user]);
 
   return (
     <PageLayout

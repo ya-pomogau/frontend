@@ -13,3 +13,14 @@ export const getAllUsers = async (): Promise<TUserInfo[]> => {
     throw new Error('API exception');
   }
 };
+
+// TODO Add type for Task entity
+export const getAllTasks = async (): Promise<any[]> => {
+  try {
+    const res = await fetch(`${API_URL}/tasks`);
+    return await checkResponse(res);
+  } catch (err) {
+    // TODO Exception handling
+    throw new Error('API exception');
+  }
+};
