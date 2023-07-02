@@ -15,6 +15,9 @@
   background-color: inherit;
   cursor: pointer;
   padding-bottom: 12px;
+  margin-left: 20px;
+  margin-bottom: 4px;
+  max-width: 68px;
 }
 .header__button__container {
   display: flex;
@@ -34,7 +37,6 @@
 .header__button:focus-visible {
   outline: none;
 }
-
 .header__menu {
   left: -176px;
   width: 252px;
@@ -48,6 +50,9 @@
   z-index: 1;
   display: block;
   background-color: var(--colors-interface-white);
+}
+.header__logo{
+  margin-bottom: 5px;
 }
 .header__menu__container {
   position: relative;
@@ -106,9 +111,7 @@
   min-width: min-content;
   margin: 0 auto;
   height: 44px;
-  padding-top: 44px;
-  padding-left: 92px;
-  padding-right: 92px;
+  padding-top: 45px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;

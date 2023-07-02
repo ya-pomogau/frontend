@@ -37,7 +37,7 @@ const Header: FC = () => {
             )}{" "}
           </div>
         )}
-        <NavLink to="/">
+        <NavLink className={styles.header__logo} to="/">
           <Logo />
         </NavLink>
         {!isMobile && <SideBar position={positionConfigTop} links={linksTop} />}
