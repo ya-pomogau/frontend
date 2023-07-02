@@ -29,7 +29,7 @@ const SideBarItem: FC<ISideBarElementProps> = ({
         textAlign: position?.textAlign,
       }}
     >
-      <div className={`${styles.link__icon} `}> {icon}</div>
+      <div className={`${styles.link__icon} `}>{icon}</div>
       <p className={`${styles.link__title} `}>{title}</p>
     </NavLink>
   );

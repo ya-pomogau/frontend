@@ -30,6 +30,11 @@
   line-height: 14.4px;
   color: var(--colors-interface-primary);
 }
+
+.header__button:focus-visible {
+  outline: none;
+}
+
 .header__menu {
   left: -176px;
   width: 252px;
@@ -42,7 +47,7 @@
   visibility: visible;
   z-index: 1;
   display: block;
-  background-color: var( --colors-interface-white);
+  background-color: var(--colors-interface-white);
 }
 .header__menu__container {
   position: relative;
@@ -121,31 +126,18 @@
     padding-right: 30px;
     padding-top: 10px;
   }
+  .header__sidebar__container{
+    margin-top: 10px;
+    padding-left: 25px;
+  }
   .header__button {
     padding-bottom: 8px;
   }
   .header__menu {
     left: -200px;
   }
-  .menu__title {
-    font-family: "Golos";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    width: 100%;
-    color: #fbfdff;
-    z-index: 2;
-  }
+  
   .header__title__container {
     border: none;
-  }
-  .header__title__background {
-    position: absolute;
-    right: -5px;
-    top: 10px;
   }
 }

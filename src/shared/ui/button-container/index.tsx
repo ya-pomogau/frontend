@@ -1,17 +1,20 @@
 import React from "react";
 import classnames from "classnames";
+import { Icon } from "../icons";
 import styles from "./styles.module.css";
 
 export interface ButtonContainerProps {
   border?: "sea" | "main" | "mobile";
   size?: "web" | "mob";
   children?: React.ReactNode;
+  auth?: boolean;
 }
 
 export const ButtonContainer: React.FC<ButtonContainerProps> = ({
   border = "sea",
   size = "web",
   children,
+  auth,
 }) => (
   <div
     className={classnames(
@@ -22,5 +25,10 @@ export const ButtonContainer: React.FC<ButtonContainerProps> = ({
     style={{ border }}
   >
     {children}
+    {!auth && (
+      <div className={styles.overlay}>
+        <Icon color="white" icon="LockIcon" size="196" />
+      </div>
+    )}
   </div>
 );

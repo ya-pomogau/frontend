@@ -1,16 +1,21 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { ViewerInfo } from "entities/viewer";
+import { useEffect } from "react";
+import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+
+import { useAppDispatch } from "app/hooks";
+import { useMediaQuery } from "shared/hooks";
+
+import { UserInfo } from "entities/user";
+import { setUserRole } from "entities/user/model";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
 import { YandexMap } from "shared/ui/map";
-import { NotFoundPage } from "pages/not-found";
-import { Icon } from "shared/ui/icons";
 import { Data } from "shared/ui/map/types";
+import { Icon } from "shared/ui/icons";
 import { TaskList } from "entities/task/ui/task-list";
-import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
+import { NotFoundPage } from "pages/not-found";
 
 import styles from "./styles.module.css";
 
@@ -92,45 +97,50 @@ const activeTasksMockData = [
   },
 ];
 
-export function ConsumerPage() {
+export function RecipientPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUserRole('recipient'));
+  }, []);
 
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
-            <ViewerInfo onClickSettingsButton={() => 1} />
+          <div className={styles.user}>
+            <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="MapApplicationIcon" size="54" />
-              }
-              text="Карта заявок"
-              onClick={() => navigate("map")}
-            />
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="ActiveApplicationIcon" size="54" />
-              }
-              text="Активные заяки"
-              onClick={() => navigate("active")}
-            />
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="CompletedApplicationIcon" size="54" />
-              }
-              text="Завершенные заявки"
-              onClick={() => navigate("completed")}
-            />
+          <ButtonContainer auth>
+            <NavLink to="active" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+                  }
+                  text="Активные заяки"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
+            <NavLink to="completed" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+                  }
+                  text="Завершенные заявки"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
           </ButtonContainer>
         </>
       }
       content={
         <Routes>
-          <Route index element={<Navigate to="map" replace />} />
+          <Route index element={<Navigate to="active" replace />} />
           <Route
             path="active"
             element={
@@ -156,7 +166,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -193,7 +203,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -201,35 +211,6 @@ export function ConsumerPage() {
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
                   tasks={[]}
-                />
-              </ContentLayout>
-            }
-          />
-          <Route
-            path="map"
-            element={
-              <ContentLayout
-                heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                    }
-                    settingText="Карта заявок"
-                    extClassName={styles.header}
-                  />
-                }
-              >
-                <YandexMap
-                  tasks={yandexMapMockData}
-                  mapSettings={{ latitude: 59.93, longitude: 30.31, zoom: 15 }}
-                  width="100%"
-                  height="100%"
-                  onClick={() => 3}
                 />
               </ContentLayout>
             }

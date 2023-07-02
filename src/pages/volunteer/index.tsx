@@ -1,16 +1,22 @@
-import { ViewerInfo } from "entities/viewer";
+import { useEffect } from "react";
+import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+
+import { useAppDispatch } from "app/hooks";
+import { useMediaQuery } from "shared/hooks";
+
+import { UserInfo } from "entities/user";
+import { setUserRole } from "entities/user/model";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { YandexMap } from "shared/ui/map";
-import { NotFoundPage } from "pages/not-found";
 import { Icon } from "shared/ui/icons";
 import { Data } from "shared/ui/map/types";
 import { TaskList } from "entities/task/ui/task-list";
-import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
+import { NotFoundPage } from "pages/not-found";
+
 import styles from "./styles.module.css";
 
 const yandexMapMockData: Data[] = [
@@ -89,41 +95,89 @@ const activeTasksMockData = [
     time: "16:00",
     title: "Заголовок",
   },
+  {
+    activeStatus: true,
+    address: "ул. Потолочного д. 9",
+    avatarLink: "https://i.pravatar.cc/300",
+    avatarName: "example",
+    category: "категория",
+    confirmStatus: false,
+    count: "3",
+    date: "24.10.2022",
+    description:
+      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
+    recipientName: "Иванов Иван Иванович",
+    recipientPhoneNumber: "+7(000) 000-00-00",
+    time: "16:00",
+    title: "Заголовок",
+  },
+  {
+    activeStatus: true,
+    address: "ул. Потолочного д. 9",
+    avatarLink: "https://i.pravatar.cc/300",
+    avatarName: "example",
+    category: "категория",
+    confirmStatus: false,
+    count: "3",
+    date: "24.10.2022",
+    description:
+      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
+    recipientName: "Иванов Иван Иванович",
+    recipientPhoneNumber: "+7(000) 000-00-00",
+    time: "16:00",
+    title: "Заголовок",
+  },
 ];
 
 export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUserRole('volunteer'));
+  }, [dispatch]);
 
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
-            <ViewerInfo onClickSettingsButton={() => 1} />
+          <div className={styles.user}>
+            <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="MapApplicationIcon" size="54" />
-              }
-              text="Карта заявок"
-              onClick={() => navigate("map")}
-            />
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="ActiveApplicationIcon" size="54" />
-              }
-              text="Активные заяки"
-              onClick={() => navigate("active")}
-            />
-            <CardButton
-              customIcon={
-                <Icon color="white" icon="CompletedApplicationIcon" size="54" />
-              }
-              text="Завершенные заявки"
-              onClick={() => navigate("completed")}
-            />
+          <ButtonContainer auth>
+            <NavLink to="map" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="MapApplicationIcon" size="54" />
+                  }
+                  text="Карта заявок"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
+            <NavLink to="active" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+                  }
+                  text="Активные заяки"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
+            <NavLink to="completed" className="link">
+              {({ isActive }) => (
+                <CardButton
+                  customIcon={
+                    <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+                  }
+                  text="Завершенные заявки"
+                  isActive={isActive}
+                />
+              )}
+            </NavLink>
           </ButtonContainer>
         </>
       }

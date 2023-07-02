@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { store } from "app/store";
 import { Provider } from "react-redux";
 
-import { ViewerInfo } from ".";
+import { store } from "app/store";
+import { UserInfo } from ".";
 
-const meta: Meta<typeof ViewerInfo> = {
-  title: "Entities/ViewerInfo",
-  component: ViewerInfo,
+const meta: Meta<typeof UserInfo> = {
+  title: "Entities/UserInfo",
+  component: UserInfo,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
@@ -28,7 +28,7 @@ export const Admin: Story = {
 
 export const Recipient: Story = {
   args: {
-    roleForStoryBook: "consumer",
+    roleForStoryBook: "recipient",
   },
 };
 

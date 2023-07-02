@@ -15,8 +15,7 @@ export const Default: Story = {
   args: {
     name: "Иванов Иван Иванович",
     id: 112233,
-    phoneNumber: "+7(000) 000 000",
+    phone: "+7(000) 000 000",
     address: "ул. Цветной бульвар, 43",
-    description: "Я люблю музыку, книги и кошек",
   },
 };
