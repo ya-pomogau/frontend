@@ -43,7 +43,6 @@ export const Tooltip = ({
       document.removeEventListener('click', closeWithClickOutTooltip);
     };
   }, []);
-  console.log(visible);
   return (
     <div
       className={classnames(styles.tooltip, extClassName, {

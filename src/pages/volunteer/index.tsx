@@ -149,22 +149,29 @@ export function VolunteerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon
-                        color="blue"
-                        icon="ActiveApplicationIcon"
-                        size="54"
-                      />
-                    }
-                    settingText="Активные заявки"
-                    extClassName={styles.header}
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      settingIcon={
+                        <Icon
+                          color="blue"
+                          icon="ActiveApplicationIcon"
+                          size="54"
+                        />
+                      }
+                      settingText="Активные заявки"
+                      extClassName={styles.header}
+                    />
+                    <TasksFilter
+                      userRole="volunteer"
+                      visible={isFilterVisibel}
+                      changeVisible={() => setIsFilterVisibel(false)}
+                    />
+                  </>
                 }
               >
                 <TaskList
@@ -186,22 +193,29 @@ export function VolunteerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon
-                        color="blue"
-                        icon="CompletedApplicationIcon"
-                        size="54"
-                      />
-                    }
-                    settingText="Завершенные заявки"
-                    extClassName={styles.header}
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      settingIcon={
+                        <Icon
+                          color="blue"
+                          icon="CompletedApplicationIcon"
+                          size="54"
+                        />
+                      }
+                      settingText="Завершенные заявки"
+                      extClassName={styles.header}
+                    />
+                    <TasksFilter
+                      userRole="volunteer"
+                      visible={isFilterVisibel}
+                      changeVisible={() => setIsFilterVisibel(false)}
+                    />
+                  </>
                 }
               >
                 <TaskList

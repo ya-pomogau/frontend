@@ -22,8 +22,10 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
     categories: [],
     date: "",
     searchRadius: '',
+    sortBy: ''
   });
 
+  // сохранение выбранных параметров фильтра
   const handleFilterChange = (
     name: string,
     value: string | string[] | boolean
@@ -31,6 +33,7 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
     setFilterValues({ ...filterValues, [name]: value });
   };
 
+  // обработка выбора параметров фильтра: сохранение выбора в адресную строку и закрытие фильтра
   const handleAcceptClick = () => {
     let params = "?";
     Object.entries(filterValues).forEach(([key, value]) => {
@@ -42,7 +45,8 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
         const index = value.indexOf('T');
         params += `${key}=${value.slice(0, index)}&`;
       }
-      if ((key === 'searchRadius' && value.length) || (key === 'showByDate' && value === true)) {
+      if ((key === 'searchRadius' || 'sortBy' && value.length) || 
+        (key === 'showByDate' && value === true)) {
         params += `${key}=${value}&`;
       }
     });
@@ -51,8 +55,11 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
     changeVisible();
   };
   useEffect(() => {
+    // получение query-параметров в виде объекта
     const queryParams = getQuery(searchParams);
+    // получение искомой даты из query-параметров
     const dateFromQuery = queryParams?.date as string;
+    // получение текущей даты (без времени внутри суток)
     function getNewDate() {
       const newDate = new Date();
       return new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
