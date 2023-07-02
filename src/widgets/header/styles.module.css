@@ -31,7 +31,7 @@
   visibility: visible;
   z-index: 1;
   display: block;
-  background-color: var( --colors-interface-white);
+  background-color: var(--colors-interface-white);
 }
 .header__menu__container {
   position: relative;
