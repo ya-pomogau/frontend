@@ -96,6 +96,13 @@ const activeTasksMockData = [
 
 export function ConsumerPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const openFilter = () => {
+    if (isFilterVisibel === false) {
+      setTimeout(() => {
+        setIsFilterVisibel(true);
+      });
+    }
+  };
   const isMobile = useMediaQuery("(max-width:1150px)");
 
   return (
@@ -156,7 +163,7 @@ export function ConsumerPage() {
                         <Icon color="blue" icon="FilterIcon" size="54" />
                       }
                       filterText="Фильтр"
-                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      onClick={openFilter}
                       settingIcon={
                         <Icon
                           color="blue"
@@ -200,7 +207,7 @@ export function ConsumerPage() {
                         <Icon color="blue" icon="FilterIcon" size="54" />
                       }
                       filterText="Фильтр"
-                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      onClick={openFilter}
                       settingIcon={
                         <Icon
                           color="blue"

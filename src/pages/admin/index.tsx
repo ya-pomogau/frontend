@@ -60,6 +60,13 @@ const userMock = [
 export function AdminPage() {
   const [value, setValue] = useState("");
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const openFilter = () => {
+    if (isFilterVisibel === false) {
+      setTimeout(() => {
+        setIsFilterVisibel(true);
+      });
+    }
+  };
   const filter = userMock.filter((user) =>
     user.userName.toLowerCase().includes(value.toLowerCase())
   );
@@ -120,7 +127,7 @@ export function AdminPage() {
                         <Icon color="blue" icon="FilterIcon" size="54" />
                       }
                       filterText="Фильтр"
-                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      onClick={openFilter}
                       settingIcon={
                         <Icon color="blue" icon="BlockIcon" size="54" />
                       }
@@ -252,7 +259,7 @@ export function AdminPage() {
                         <Icon color="blue" icon="FilterIcon" size="54" />
                       }
                       filterText="Фильтр"
-                      onClick={() => setIsFilterVisibel(!isFilterVisibel)}
+                      onClick={openFilter}
                       settingIcon={
                         <Icon color="blue" icon="SettingsIcon" size="54" />
                       }
