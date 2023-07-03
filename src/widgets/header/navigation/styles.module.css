@@ -2,8 +2,9 @@
 
 .links {
   display: flex;
-  margin: 0;
+  margin: 0 0 0 60px;
   padding: 0;
+  min-width: fit-content;
 }
 .link {
   display: flex;
@@ -21,6 +22,9 @@
   font-size: 16px;
   line-height: 19px;
   padding: 0;
+}
+.link:nth-child(2){
+  min-width: 120px;
 }
 .link_active {
   border-bottom: 4px solid var(--colors-interface-primary);
@@ -57,6 +61,7 @@
 @media (max-width: 900px) {
   .links{
     align-items: flex-end;
+    margin-left: 0;
     margin-right: 10px;
   }
   .link{

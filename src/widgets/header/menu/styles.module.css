@@ -29,6 +29,7 @@
   position: absolute;
   right: 22px;
   top: 82px;
+  padding-top: 10px;
   background-color: var(--colors-interface-white);
   padding-left: 30px;
   padding-right: 30px;
@@ -93,6 +94,6 @@
   .header__title__background {
     position: absolute;
     right: -5px;
-    top: 10px;
+    top: 19px;
   }
 }
