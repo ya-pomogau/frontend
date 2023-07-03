@@ -102,7 +102,7 @@ export function AdminPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="SettingsIcon" size="54" />
+                    <Icon color="white" icon="CreateApplication" size="54" />
                   }
                   text="Создание / Редактирование заявки"
                   isActive={isActive}
