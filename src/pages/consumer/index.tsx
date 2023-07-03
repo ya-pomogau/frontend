@@ -174,11 +174,10 @@ export function ConsumerPage() {
                       settingText="Активные заявки"
                       extClassName={styles.header}
                     />
-                    <TasksFilter
+                    {isFilterVisibel && <TasksFilter
                       userRole="recipient"
-                      visible={isFilterVisibel}
                       changeVisible={() => setIsFilterVisibel(false)}
-                    />
+                    />}
                   </>
                 }
               >
@@ -218,11 +217,10 @@ export function ConsumerPage() {
                       settingText="Завершенные заявки"
                       extClassName={styles.header}
                     />
-                    <TasksFilter
+                    {isFilterVisibel && <TasksFilter
                       userRole="recipient"
-                      visible={isFilterVisibel}
                       changeVisible={() => setIsFilterVisibel(false)}
-                    />
+                    />}
                   </>
                 }
               >

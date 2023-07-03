@@ -173,11 +173,10 @@ export function VolunteerPage() {
                       settingText="Активные заявки"
                       extClassName={styles.header}
                     />
-                    <TasksFilter
+                    {isFilterVisibel && <TasksFilter
                       userRole="volunteer"
-                      visible={isFilterVisibel}
                       changeVisible={() => setIsFilterVisibel(false)}
-                    />
+                    />}
                   </>
                 }
               >
@@ -217,11 +216,10 @@ export function VolunteerPage() {
                       settingText="Завершенные заявки"
                       extClassName={styles.header}
                     />
-                    <TasksFilter
+                    {isFilterVisibel && <TasksFilter
                       userRole="volunteer"
-                      visible={isFilterVisibel}
                       changeVisible={() => setIsFilterVisibel(false)}
-                    />
+                    />}
                   </>
                 }
               >
@@ -257,11 +255,10 @@ export function VolunteerPage() {
                       settingText="Карта заявок"
                       extClassName={styles.header}
                     />
-                    <TasksFilter
+                    {isFilterVisibel &&  <TasksFilter
                       userRole="volunteer"
-                      visible={isFilterVisibel}
                       changeVisible={() => setIsFilterVisibel(false)}
-                    />
+                    />}
                   </>
                 }
               >

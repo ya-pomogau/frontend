@@ -134,11 +134,10 @@ export function AdminPage() {
                       settingText="Подтверждение / Блокировка"
                       extClassName={styles.header}
                     />
-                    <TasksFilter
+                    {isFilterVisibel && <TasksFilter
                       userRole="admin"
-                      visible={isFilterVisibel}
                       changeVisible={() => setIsFilterVisibel(false)}
-                    />
+                    />}
                   </>
                 }
               >
@@ -266,11 +265,10 @@ export function AdminPage() {
                       settingText="Создание / Редактирование заявки"
                       extClassName={styles.header}
                     />
-                    <TasksFilter
+                    {isFilterVisibel && <TasksFilter
                       userRole="admin"
-                      visible={isFilterVisibel}
                       changeVisible={() => setIsFilterVisibel(false)}
-                    />
+                    />}
                   </>
                 }
               >

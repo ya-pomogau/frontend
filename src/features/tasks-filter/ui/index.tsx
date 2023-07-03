@@ -11,11 +11,11 @@ import styles from "./styles.module.css";
 
 interface TasksFilterProps {
   userRole: TRole;
-  visible: boolean;
+  visible?: boolean;
   changeVisible: () => void;
 }
 
-export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterProps) => {
+export const TasksFilter = ({ userRole, visible=true, changeVisible }: TasksFilterProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     categories: [],
