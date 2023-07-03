@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useMediaQuery } from "shared/hooks";
 
 import { UserInfo } from "entities/user";
@@ -132,6 +132,7 @@ const activeTasksMockData = [
 export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
   const dispatch = useAppDispatch();
+  const isAuth = !!(useAppSelector((store) => store.user.role));
 
   useEffect(() => {
     dispatch(setUserRole('volunteer'));
@@ -144,7 +145,7 @@ export function VolunteerPage() {
           <div className={styles.user}>
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer auth>
+          <ButtonContainer auth={isAuth}>
             <NavLink to="map" className="link">
               {({ isActive }) => (
                 <CardButton
