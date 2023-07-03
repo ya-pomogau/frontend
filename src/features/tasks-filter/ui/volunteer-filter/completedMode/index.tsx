@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const CompletedMode = ({ filter, onChange }: Props) => (
-  <SortByBlock filter={filter} onChange={onChange}/>
+  <SortByBlock filter={filter} onChange={onChange} userRole="volunteer"/>
 );

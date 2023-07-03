@@ -17,7 +17,6 @@ export const Tooltip = ({
   pointerPosition = "right",
   changeVisible
 }: TooltipProps) => {
-  const aaa = visible;
   const tooltipRef = useRef<HTMLDivElement>(null);
   function closeWithEsc(e: KeyboardEvent) {
     if (e.key === 'Escape' && changeVisible) {
@@ -27,7 +26,8 @@ export const Tooltip = ({
   function closeWithClickOutTooltip(e: MouseEvent) {
     const target = e.target as HTMLElement;
     if (!target.classList.value.includes('filterButton') &&
-      !target.parentElement?.classList.value.includes('filterButton')) {
+      !target.parentElement?.classList.value.includes('filterButton') &&
+      !target.parentElement?.parentElement?.classList.value.includes('filterButton')) {
       if (!tooltipRef.current?.contains(target) && 
         changeVisible && 
         tooltipRef.current?.classList.value.includes('visible')) {

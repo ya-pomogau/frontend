@@ -6,7 +6,7 @@ import { RecipientFilter } from "./recipient-filter";
 import { AdminFilter } from "./admin-filter";
 import { IFilterValues, TRole } from "./types";
 import { VolunteerFilter } from "./volunteer-filter";
-import { formatDate, getQuery } from "../libs";
+import { getQuery } from "../libs";
 import styles from "./styles.module.css";
 
 interface TasksFilterProps {
@@ -18,7 +18,6 @@ interface TasksFilterProps {
 export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
-    showByDate: false,
     categories: [],
     date: "",
     searchRadius: '',
@@ -37,38 +36,21 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
   const handleAcceptClick = () => {
     let params = "?";
     Object.entries(filterValues).forEach(([key, value]) => {
-      if (value) {
-        params +=
-          Array.isArray(value) && value.length ? `${key}=${value}&` : "";
-      }
       if (key === 'date' && value.length) {
         const index = value.indexOf('T');
         params += `${key}=${value.slice(0, index)}&`;
-      }
-      if ((key === 'searchRadius' || 'sortBy' && value.length) || 
-        (key === 'showByDate' && value === true)) {
+      } else if (value.length) {
         params += `${key}=${value}&`;
       }
     });
-
     setSearchParams(params);
     changeVisible();
   };
   useEffect(() => {
-    // получение query-параметров в виде объекта
     const queryParams = getQuery(searchParams);
-    // получение искомой даты из query-параметров
-    const dateFromQuery = queryParams?.date as string;
-    // получение текущей даты (без времени внутри суток)
-    function getNewDate() {
-      const newDate = new Date();
-      return new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
-    }
     setFilterValues({
       ...filterValues,
       ...queryParams,
-      date:
-        userRole === "volunteer" ? dateFromQuery || formatDate(getNewDate()) : "",
     });
   }, []);
 
@@ -93,7 +75,7 @@ export const TasksFilter = ({ userRole, visible, changeVisible }: TasksFilterPro
           />
         )}
 
-        {userRole === "volunteer" && filterValues.date && (
+        {userRole === "volunteer" && (
           <VolunteerFilter
             filter={filterValues}
             onChange={handleFilterChange}

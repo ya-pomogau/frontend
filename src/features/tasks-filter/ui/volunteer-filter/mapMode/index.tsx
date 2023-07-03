@@ -30,6 +30,11 @@ export const MapMode = ({ filter, onChange, modeOfProfile }: Props) => {
       setIsCalenderMobil(false);
     }
   };
+  // получение текущей даты (без времени внутри суток)
+  function getNewDate() {
+    const newDate = new Date();
+    return new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
+  }
   useEffect(() => {
     setTypeCalender();
     window.addEventListener('resize', setTypeCalender);
@@ -54,7 +59,7 @@ export const MapMode = ({ filter, onChange, modeOfProfile }: Props) => {
         </div>
         <div>
           <DatePicker
-            value={parseISO(filter.date)}
+            value={filter.date ? parseISO(filter.date) : getNewDate()}
             isMobile={isCalenderMobil}
             onChangeValue={handleDateChange}
           />

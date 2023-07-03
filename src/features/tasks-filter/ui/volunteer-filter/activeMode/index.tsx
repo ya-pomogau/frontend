@@ -9,9 +9,8 @@ interface Props {
   modeOfProfile: string;
 }
 
-export const ActiveMode = ({ filter, onChange, modeOfProfile }: Props) => 
-  <>
-    <SortByBlock filter={filter.sortBy} onChange={onChange}/>
+export const ActiveMode = ({ filter, onChange, modeOfProfile }: Props) => (<>
+    <SortByBlock filter={filter.sortBy} onChange={onChange} userRole="volunteer"/>
     <CategoriesBlock filter={filter.categories} onChange={onChange}/>
     <RadiusBlock filter={filter.searchRadius} onChange={onChange} modeOfProfile={modeOfProfile} />
-  </>
+  </>)

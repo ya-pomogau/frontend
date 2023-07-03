@@ -12,7 +12,7 @@ interface Props {
 
 export const VolunteerFilter = ({ filter, onChange }: Props) => {
 
-  // определяем текущий вариант профиля волонтёра
+  // определяем текущий вариант профиля волонтёра по пути в URL
   const pathnameAsArray = useLocation().pathname.slice(1).split('/');
   const indexOfVolunteerInArray = pathnameAsArray.indexOf('volunteer');
   const currentModeOfProfile = pathnameAsArray[indexOfVolunteerInArray + 1];

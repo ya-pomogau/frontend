@@ -6,9 +6,10 @@ import Checkbox from "shared/ui/checkbox";
 interface Props {
   filter: string;
   onChange: (name: string, value: string[] | string) => void;
+  userRole: string;
 }
 
-export const SortByBlock = ({ filter, onChange }: Props) => {
+export const SortByBlock = ({ filter, onChange, userRole }: Props) => {
   const handleCheckboxChange = ({target}: ChangeEvent<HTMLInputElement>) => {
     onChange("sortBy", target.id);
   };
@@ -19,23 +20,26 @@ export const SortByBlock = ({ filter, onChange }: Props) => {
     view={FieldsetView.COLUMN}
   >
     <Checkbox
-      checked={filter === "byDate"}
-      id="byDate"
+      checked={filter === "date"}
+      id="date"
       label="По дате"
       onChange={handleCheckboxChange}
     />
-    <Checkbox
-      checked={filter === "decreasingPrice"}
-      id="decreasingPrice"
-      label="По убывающей цене"
-      onChange={handleCheckboxChange}
-    />
-    <Checkbox
-      checked={filter === "increasingPrice"}
-      id="increasingPrice"
-      label="По возрастающей цене"
-      onChange={handleCheckboxChange}
-    />
+    {userRole === "volunteer" &&
+      <>
+        <Checkbox
+          checked={filter === "decreasingPrice"}
+          id="decreasingPrice"
+          label="По убывающей цене"
+          onChange={handleCheckboxChange}
+        />
+        <Checkbox
+          checked={filter === "increasingPrice"}
+          id="increasingPrice"
+          label="По возрастающей цене"
+          onChange={handleCheckboxChange}
+        />
+      </>
+    }
   </Fieldset>)
 };
-  
