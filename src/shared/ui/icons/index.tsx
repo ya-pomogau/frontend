@@ -34,6 +34,7 @@ import { MapIcon } from "./map-icon";
 import { PopularIcon } from "./popular-icon";
 import { CompletedApplicationIcon } from "./completed-application-icon";
 import { ProgressIcon } from "./progress-icon";
+import { CreateApplication } from "./create-application-icon";
 
 const icons = {
   CalendarIcon,
@@ -69,6 +70,7 @@ const icons = {
   MapIcon,
   PopularIcon,
   ProgressIcon,
+  CreateApplication
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
