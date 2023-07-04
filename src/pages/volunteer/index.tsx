@@ -134,6 +134,7 @@ export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user.data);
+  const isAuth = !!(useAppSelector((store) => store.user.role));
 
   useEffect(() => {
     dispatch(setUserRole('volunteer'));
@@ -152,7 +153,7 @@ export function VolunteerPage() {
           <div className={styles.user}>
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer auth>
+          <ButtonContainer auth={isAuth}>
             <NavLink to="map" className="link">
               {({ isActive }) => (
                 <CardButton

@@ -6,9 +6,11 @@ import { SideBar } from "widgets/header/navigation";
 import Menu from "widgets/header/menu";
 import { MenuIcon } from "shared/ui/icons/menu-icon";
 import { Avatar } from "shared/ui/avatar";
+import { UnionIcon } from "shared/ui/icons/union-icon";
 import { useMediaQuery } from "shared/hooks/media-query";
 import { positionConfigTop, linksTop } from "./utils";
 import styles from "./styles.module.css";
+
 
 const Header: FC = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
@@ -35,7 +37,7 @@ const Header: FC = () => {
             )}{" "}
           </div>
         )}
-        <NavLink to="/">
+        <NavLink className={styles.header__logo} to="/">
           <Logo />
         </NavLink>
         {!isMobile && <SideBar position={positionConfigTop} links={linksTop} />}
@@ -46,7 +48,7 @@ const Header: FC = () => {
             className={styles.header__button}
             type="button"
           >
-            <MenuIcon color="blue"/>
+            {isMobile ? <MenuIcon color="blue" /> : <div className={styles.header__button__container}><span className={styles.header__button__text}>Меню</span><UnionIcon color="blue" /></div>}
           </button>
           {menuActive && <Menu setMenuActive={setMenuActive} menuActive={menuActive} />}
         </div>

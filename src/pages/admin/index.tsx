@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { setUserRole } from "entities/user/model";
 import { PageLayout } from "../../shared/ui/page-layout";
 import { UserInfo } from "../../entities/user";
@@ -63,12 +63,12 @@ export function AdminPage() {
   const filter = userMock.filter((user) =>
     user.userName.toLowerCase().includes(value.toLowerCase())
   );
-
+  const isAuth = !!(useAppSelector((store) => store.user.role));
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(setUserRole('admin'));
-  }, []);
+  }, [dispatch]);
 
   return (
     <PageLayout
@@ -77,7 +77,7 @@ export function AdminPage() {
           <div className={styles.user}>
             <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer auth>
+          <ButtonContainer auth={isAuth}>
             <NavLink to="requests" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -102,7 +102,7 @@ export function AdminPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="SettingsIcon" size="54" />
+                    <Icon color="white" icon="CreateApplication" size="54" />
                   }
                   text="Создание / Редактирование заявки"
                   isActive={isActive}
