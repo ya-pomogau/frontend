@@ -1,8 +1,10 @@
+/* eslint-disable import/no-duplicates */
 import { ReactNode } from "react";
 import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
 } from "react-datepicker";
 import ru from "date-fns/locale/ru";
+import { subDays } from "date-fns";
 import { getMonth } from "./lib";
 import { StepButton } from "../step-button/index";
 import "./react-datepicker.css";
@@ -44,6 +46,7 @@ export interface IDatePickerProps {
   isMobile?: boolean;
   filter?: (date: Date) => boolean;
   extClassName?: string;
+  minDate?: Date | null;
 }
 
 export function DatePicker({
@@ -52,6 +55,7 @@ export function DatePicker({
   isMobile = false,
   filter,
   extClassName,
+  minDate = subDays(new Date(), 0)
 }: IDatePickerProps) {
   const handleOnChange = (date: Date) => {
     if (date) onChangeValue(date);
@@ -76,6 +80,7 @@ export function DatePicker({
       fixedHeight
       renderCustomHeader={customHeader}
       dayClassName={() => styles.dataPicker__calendarWeekDay}
+      minDate={minDate}
     />
   );
 }

@@ -10,10 +10,6 @@ interface Props {
 }
 
 export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
-  // установление изначального значения радиуса поиска активных заявок
-  if (filter === '' && modeOfProfile === 'map') {
-    filter = FilterItemsIds.RADIUS_5;
-  }
   // определение внешнего вида копки радуса с учетом текущего выбора фильтра
   const getRadiusButtonType = (id: string) =>
     filter === id ? "primary" : "secondary";
@@ -25,6 +21,11 @@ export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
       onChange("searchRadius", id);
     }
   };
+  // установление изначального значения радиуса поиска активных заявок
+  if (filter === '' && modeOfProfile === 'map') {
+    filter = FilterItemsIds.RADIUS_5;
+    setTimeout(() => {handleRadiusButtonClick(FilterItemsIds.RADIUS_5)});
+  }
 
   return (
     <div className={styles.filterBlock}>

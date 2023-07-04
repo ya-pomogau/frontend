@@ -33,7 +33,9 @@ export const MapMode = ({ filter, onChange, modeOfProfile }: Props) => {
   // получение текущей даты (без времени внутри суток)
   function getNewDate() {
     const newDate = new Date();
-    return new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
+    const newDateWithoutTime = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate());
+    setTimeout(() => {handleDateChange(newDateWithoutTime)});
+    return newDateWithoutTime;
   }
   useEffect(() => {
     setTypeCalender();
