@@ -25,7 +25,7 @@ export const Tooltip = ({
   }
   function closeWithClickOutTooltip(e: MouseEvent) {
     const target = e.target as HTMLElement;
-    if (!tooltipRef.current?.contains(target) && 
+    if (!(target.closest('.tooltip') === tooltipRef.current) && 
       changeVisible && 
       tooltipRef.current?.classList.value.includes('visible')) {
       changeVisible();
@@ -43,7 +43,7 @@ export const Tooltip = ({
     <div
       className={classnames(styles.tooltip, extClassName, {
         [styles["tooltip--visible"]]: visible,
-      })}
+      }, 'tooltip')}
       ref={tooltipRef}
     >
       <div

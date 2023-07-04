@@ -10,6 +10,6 @@ interface Props {
 export const RecipientFilter = ({ filter, onChange }: Props) => (
   <>
     <SortByBlock filter={filter.sortBy} onChange={onChange} userRole="recipient"/>
-    <CategoriesBlock filter={filter.categories} onChange={onChange} />
+    <CategoriesBlock selectedCategories={filter.categories} onChange={onChange} />
   </>
 );

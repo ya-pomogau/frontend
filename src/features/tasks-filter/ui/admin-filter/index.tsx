@@ -1,61 +1,39 @@
-import classnames from "classnames";
-import { ChangeEvent } from "react";
-import Checkbox from "shared/ui/checkbox";
-import { FilterItemsIds } from "../consts";
-import styles from "../styles.module.css";
+import { JSX } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { UserCategoriesBlock } from "../userCategories-block";
+import { SortByBlock } from "../sortBy-block";
+import { CategoriesBlock } from "../categories-block";
+import { IFilterValues } from "../types";
 
 interface Props {
-  filter: string[];
-  onChange: (name: string, value: string[]) => void;
+  filter: IFilterValues;
+  onChange: (name: string, value: string | string[]) => void;
 }
 
 export const AdminFilter = ({ filter, onChange }: Props) => {
-  const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    if (target.checked) {
-      const newValue = [target.id];
-      onChange("categories", newValue);
-    }
-  };
+  // определяем текущий вариант профиля волонтёра по пути в URL
+  const pathnameAsArray = useLocation().pathname.slice(1).split('/');
+  const currentModeOfProfile = pathnameAsArray[pathnameAsArray.indexOf('admin') + 1];
+  const params = useParams();
 
-  return (
-    <div className={styles.filterBlock}>
-      <div
-        className={classnames(
-          styles.filterBlockTitle,
-          "text",
-          "text_size_small",
-          "text_type_bold"
-        )}
-      >
-        Категория
-      </div>
-      <div className={styles.checkboxesWrapper}>
-        <Checkbox
-          label="Все"
-          checked={filter.includes(FilterItemsIds.ALL)}
-          id={FilterItemsIds.ALL}
-          onChange={handleCheckboxChange}
-        />
-        <Checkbox
-          label="Волонтеры"
-          checked={filter.includes(FilterItemsIds.VOLUNTEER)}
-          id={FilterItemsIds.VOLUNTEER}
-          onChange={handleCheckboxChange}
-        />
+  let currentModeOfFilter: JSX.Element = <span>1</span>;
+  switch (currentModeOfProfile) {
+    case "requests":
+      currentModeOfFilter = <UserCategoriesBlock filter={filter.categories} onChange={onChange}/>;
+      break;
+    case 'tasks':
+      if (!Object.keys(params).includes('recipientId')) {
+        currentModeOfFilter = <UserCategoriesBlock filter={filter.categories} onChange={onChange}/>;
+      } else {
+        currentModeOfFilter = <>
+          <SortByBlock filter={filter.sortBy} onChange={onChange} userRole="recipient"/>
+          <CategoriesBlock selectedCategories={filter.categories} onChange={onChange} />
+        </>;
+      }
+      break;
+    default:
+      currentModeOfFilter = <span>Для такого вида профиля волонтёра нет подходящего фильтра</span>;
+  }
 
-        <Checkbox
-          label="Реципиенты"
-          checked={filter.includes(FilterItemsIds.RECIPIENT)}
-          id={FilterItemsIds.RECIPIENT}
-          onChange={handleCheckboxChange}
-        />
-        <Checkbox
-          label="Не обработанные"
-          checked={filter.includes(FilterItemsIds.UNHANDLED)}
-          id={FilterItemsIds.UNHANDLED}
-          onChange={handleCheckboxChange}
-        />
-      </div>
-    </div>
-  );
+  return currentModeOfFilter;
 };

@@ -64,7 +64,7 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible }: TasksFilt
       <div className={styles.wrapper}>
         {userRole === "admin" && (
           <AdminFilter
-            filter={filterValues.categories}
+            filter={filterValues}
             onChange={handleFilterChange}
           />
         )}
