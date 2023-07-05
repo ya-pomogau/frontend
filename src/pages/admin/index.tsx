@@ -130,7 +130,6 @@ export function AdminPage() {
                       <Icon color="blue" icon="BlockIcon" size="54" />
                     }
                     settingText="Подтверждение / Блокировка"
-                    extClassName={styles.header}
                   />
                 }
               >
@@ -232,7 +231,6 @@ export function AdminPage() {
                       <Icon color="blue" icon="StatisticIcon" size="54" />
                     }
                     settingText="Статистика"
-                    extClassName={styles.header}
                   />
                 }
               >
@@ -255,7 +253,6 @@ export function AdminPage() {
                       <Icon color="blue" icon="SettingsIcon" size="54" />
                     }
                     settingText="Создание / Редактирование заявки"
-                    extClassName={styles.header}
                   />
                 }
               >

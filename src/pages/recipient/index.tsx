@@ -132,7 +132,6 @@ export function RecipientPage() {
                       />
                     }
                     settingText="Активные заявки"
-                    extClassName={styles.header}
                   />
                 }
               >
@@ -169,7 +168,6 @@ export function RecipientPage() {
                       />
                     }
                     settingText="Завершенные заявки"
-                    extClassName={styles.header}
                   />
                 }
               >

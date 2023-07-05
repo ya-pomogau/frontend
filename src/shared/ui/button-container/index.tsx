@@ -8,6 +8,7 @@ export interface ButtonContainerProps {
   size?: "web" | "mob";
   children?: React.ReactNode;
   auth?: boolean;
+  extClassName?: string;
 }
 
 export const ButtonContainer: React.FC<ButtonContainerProps> = ({
@@ -15,12 +16,14 @@ export const ButtonContainer: React.FC<ButtonContainerProps> = ({
   size = "web",
   children,
   auth,
+  extClassName
 }) => (
   <div
     className={classnames(
       styles.button__container,
       styles[`button__container--${size}`],
-      styles[`button__container--${border}`]
+      styles[`button__container--${border}`],
+      extClassName
     )}
     style={{ border }}
   >

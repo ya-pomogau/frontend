@@ -38,7 +38,7 @@ export function AppRoutes() {
         <Route path="profile/master/*" element={<MasterAdminPage />} />
         <Route path="blog/*" element={<BlogPage />} />
         <Route path="policy" element={<PolicyPage />} />
-        <Route path="contacts" element={<ContactsPage />} />
+        <Route path="contacts/*" element={<ContactsPage />} />
         <Route path="register" element={<RegisterPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
