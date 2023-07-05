@@ -1,31 +1,17 @@
-import { nanoid } from "nanoid";
 import classNames from "classnames";
+import { nanoid } from "nanoid";
+import { format } from "date-fns";
 import { Informer } from "shared/ui/informer";
 import { RoundButton } from "shared/ui/round-button";
 import { TUserRole } from "entities/user/types";
+import { TTask } from "entities/task/types";
 import { Task } from "../task";
 
 import styles from "./styles.module.css";
 
-interface TaskProps {
-  category: string;
-  date: string;
-  time: string;
-  address: string;
-  title: string;
-  description: string;
-  count: string;
-  avatarName: string;
-  avatarLink: string;
-  recipientName: string;
-  recipientPhoneNumber: string;
-  activeStatus: boolean;
-  confirmStatus: boolean;
-}
-
 interface TaskListProps {
   role: TUserRole;
-  tasks: Array<TaskProps>;
+  tasks: Array<TTask>;
   extClassName?: string;
   isStatusActive: boolean;
   isMobile: boolean;
@@ -50,7 +36,7 @@ export const TaskList = ({
   handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
-  if (tasks.length > 0 && isStatusActive) {
+  if (tasks.length > 0) {
     return (
       <ul
         className={classNames(
@@ -78,82 +64,36 @@ export const TaskList = ({
             </h2>
           </li>
         )}
-        {tasks.map((item) => {
-          if (item.confirmStatus) {
-            return (
-              <li key={nanoid()}>
-                <Task
-                  category={item.category}
-                  isMobile={isMobile}
-                  date={item.date}
-                  time={item.time}
-                  address={item.address}
-                  title={item.title}
-                  description={item.description}
-                  count={item.count}
-                  avatarName={item.avatarName}
-                  avatarLink={item.avatarLink}
-                  recipientName={item.recipientName}
-                  recipientPhoneNumber={item.recipientPhoneNumber}
-                  handleClickPnoneButton={handleClickPnoneButton}
-                  handleClickMessageButton={handleClickMessageButton}
-                  handleClickConfirmButton={handleClickConfirmButton}
-                  handleClickCloseButton={handleClickCloseButton}
-                />
-              </li>
-            );
-          }
-
-          return (
+        {
+        tasks.map((item) => (
             <li key={nanoid()}>
               <Task
-                category={item.category}
+                category={item.category.name}
                 isMobile={isMobile}
-                date={item.date}
-                time={item.time}
+                date={format(new Date(item.date), 'dd.MM.yyyy')}
+                time={format(new Date(item.date), 'kk.mm')}
                 address={item.address}
                 title={item.title}
                 description={item.description}
-                count={item.count}
-                avatarName={item.avatarName}
-                avatarLink={item.avatarLink}
-                recipientName={item.recipientName}
-                recipientPhoneNumber={item.recipientPhoneNumber}
+                count={item.category.scope}
+                avatar={item.recipient.avatar}
+                completed={item.completed}
+                recipientName={item.recipient.fullname}
+                recipientPhoneNumber={item.recipient.phone}
                 handleClickPnoneButton={handleClickPnoneButton}
                 handleClickMessageButton={handleClickMessageButton}
-                handleClickCloseButton={handleClickCloseButton}
-                handleClickEditButton={handleClickEditButton}
+                handleClickConfirmButton={
+                  !item.completed ? handleClickConfirmButton : undefined
+                }
+                handleClickCloseButton={
+                  isStatusActive ? handleClickCloseButton : undefined
+                }
+                handleClickEditButton={
+                  isStatusActive ? handleClickEditButton : undefined
+                }
               />
             </li>
-          );
-        })}
-      </ul>
-    );
-  }
-
-  if (tasks.length > 0 && !isStatusActive) {
-    return (
-      <ul className={classNames(styles.content, "list", "p-0", extClassName)}>
-        {tasks.map((item) => (
-          <li key={nanoid()}>
-            <Task
-              category={item.category}
-              isMobile={isMobile}
-              date={item.date}
-              time={item.time}
-              address={item.address}
-              title={item.title}
-              description={item.description}
-              count={item.count}
-              avatarName={item.avatarName}
-              avatarLink={item.avatarLink}
-              recipientName={item.recipientName}
-              recipientPhoneNumber={item.recipientPhoneNumber}
-              handleClickPnoneButton={handleClickPnoneButton}
-              handleClickMessageButton={handleClickMessageButton}
-            />
-          </li>
-        ))}
+          ))}
       </ul>
     );
   }

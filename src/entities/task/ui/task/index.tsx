@@ -1,10 +1,12 @@
+import { useState } from "react";
+import classNames from "classnames";
+
 import { Avatar } from "shared/ui/avatar";
 import { CategoriesBackground } from "shared/ui/categories-background";
 import { Icon } from "shared/ui/icons";
-import classNames from "classnames";
-import { useState } from "react";
 import { RoundButton } from "shared/ui/round-button";
 import { SquareButton } from "shared/ui/square-buttons";
+
 import styles from "./styles.module.css";
 
 interface Props {
@@ -15,9 +17,9 @@ interface Props {
   address: string;
   title: string;
   description: string;
-  count: string;
-  avatarName: string;
-  avatarLink: string;
+  count: number;
+  avatar: string;
+  completed: boolean;
   recipientName: string;
   recipientPhoneNumber: string;
   handleClickPnoneButton?: () => void;
@@ -37,8 +39,8 @@ export const Task = ({
   title,
   description,
   count,
-  avatarName,
-  avatarLink,
+  avatar,
+  completed,
   recipientName,
   recipientPhoneNumber,
   handleClickPnoneButton,
@@ -66,12 +68,31 @@ export const Task = ({
             size="medium"
             extClassName={styles.mobile_category}
           />
-          <SquareButton buttonType="close" onClick={handleClickCloseButton} />
+          {handleClickConfirmButton && (
+            <SquareButton
+              buttonType="confirm"
+              onClick={handleClickConfirmButton}
+            />
+          )}
+          {handleClickCloseButton && (
+            <SquareButton
+              buttonType="close"
+              onClick={handleClickCloseButton}
+              extClassName={styles.button_edit}
+            />
+          )}
+          {handleClickEditButton && (
+            <SquareButton
+              buttonType="edit"
+              onClick={handleClickEditButton}
+              extClassName={styles.button_edit}
+            />
+          )}
         </div>
         <div className={styles.mobile_recipient_bio}>
           <Avatar
-            avatarName={avatarName}
-            avatarLink={avatarLink}
+            avatarName={recipientName}
+            avatarLink={avatar}
             extClassName={styles.mobile_avatar}
           />
           <div>
@@ -82,10 +103,15 @@ export const Task = ({
           </div>
         </div>
         <div className={styles.mobile_buttons_call}>
-          <RoundButton buttonType="phone" onClick={handleClickPnoneButton} />
+          <RoundButton 
+            buttonType="phone"
+            onClick={handleClickPnoneButton}
+            disabled={completed}
+          />
           <RoundButton
             buttonType="message"
             onClick={handleClickMessageButton}
+            disabled={completed}
           />
         </div>
         <div className={styles.mobile_section_description}>
@@ -167,6 +193,7 @@ export const Task = ({
       </div>
     );
   }
+
   return (
     <div className={classNames(styles.container_main, "text", extClassName)}>
       <div className={styles.container}>
@@ -195,7 +222,7 @@ export const Task = ({
             />
             <p className="m-0">{time}</p>
           </div>
-          <div className={styles.date}>
+          <div className={styles.address}>
             <Icon
               color="blue"
               icon="LocationIcon"
@@ -234,8 +261,8 @@ export const Task = ({
       <div className={styles.container}>
         <div className={styles.section_right}>
           <Avatar
-            avatarName={avatarName}
-            avatarLink={avatarLink}
+            avatarName={recipientName}
+            avatarLink={avatar}
             extClassName={styles.avatar}
           />
           <p className={`${styles.recipient_name} m-0 text_size_medium`}>
@@ -245,10 +272,15 @@ export const Task = ({
             {recipientPhoneNumber}
           </p>
           <div className={styles.buttons_call}>
-            <RoundButton buttonType="phone" onClick={handleClickPnoneButton} />
+            <RoundButton 
+              buttonType="phone"
+              onClick={handleClickPnoneButton}
+              disabled={completed}
+            />
             <RoundButton
               buttonType="message"
               onClick={handleClickMessageButton}
+              disabled={completed}
             />
           </div>
         </div>

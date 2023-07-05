@@ -1,24 +1,25 @@
 /* DESKTOP */
 .container_main {
   display: flex;
-  /* width: 889px; */
   width: 100%;
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
   padding-bottom: 20px;
-  justify-content: space-between;
 }
 
 .container {
   display: flex;
 }
 
+.container:nth-of-type(1) {
+  flex-grow: 1;
+}
+
 .section_left {
   display: flex;
   flex-direction: column;
-  min-width: 175px;
-  max-width: 175px;
+  width: 175px;
 }
 
 .category {
@@ -33,6 +34,14 @@
   margin-bottom: 8px;
 }
 
+.address {
+  display: flex;
+  align-items: center;
+  color: var(--colors-interface-primary);
+  gap: 3px;
+  padding-right: 20px;
+}
+
 .icon {
   min-width: 24px;
   min-height: 24px;
@@ -41,6 +50,7 @@
 .title {
   color: var(--colors-interface-primary-additional);
   margin: 38px 0 9px 0;
+  max-width: 363px;
 }
 
 .description {
@@ -150,18 +160,18 @@
 /* MOBILE */
 .mobile_container_main {
   border: 1px solid var(--colors-interface-blue-very-soft);
-  width: 100%;
-  /* width: 364px; */
   height: 100%;
 }
 
 .mobile_header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 20px;
 }
 
 .mobile_category {
   min-width: 170px;
+  margin-right: auto;
 }
 
 .mobile_recipient_bio {

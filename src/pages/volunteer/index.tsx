@@ -47,94 +47,13 @@ const yandexMapMockData: Data[] = [
   },
 ];
 
-const activeTasksMockData = [
-  {
-    activeStatus: true,
-    address: "ул. Потолочного д. 9",
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    category: "категория",
-    confirmStatus: true,
-    count: "3",
-    date: "24.10.2022",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) 000-00-00",
-    time: "16:00",
-    title: "Заголовок",
-  },
-  {
-    activeStatus: true,
-    address: "ул. Потолочного д. 9",
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    category: "категория",
-    confirmStatus: false,
-    count: "3",
-    date: "24.10.2022",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) 000-00-00",
-    time: "16:00",
-    title: "Заголовок",
-  },
-  {
-    activeStatus: true,
-    address: "ул. Потолочного д. 9",
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    category: "категория",
-    confirmStatus: true,
-    count: "3",
-    date: "24.10.2022",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) 000-00-00",
-    time: "16:00",
-    title: "Заголовок",
-  },
-  {
-    activeStatus: true,
-    address: "ул. Потолочного д. 9",
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    category: "категория",
-    confirmStatus: false,
-    count: "3",
-    date: "24.10.2022",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) 000-00-00",
-    time: "16:00",
-    title: "Заголовок",
-  },
-  {
-    activeStatus: true,
-    address: "ул. Потолочного д. 9",
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    category: "категория",
-    confirmStatus: false,
-    count: "3",
-    date: "24.10.2022",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) 000-00-00",
-    time: "16:00",
-    title: "Заголовок",
-  },
-];
-
 export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
   const dispatch = useAppDispatch();
+
   const user = useAppSelector((store) => store.user.data);
   const isAuth = !!(useAppSelector((store) => store.user.role));
+  const { tasks } = useAppSelector((store) => store.tasks);
 
   useEffect(() => {
     dispatch(setUserRole('volunteer'));
@@ -225,7 +144,7 @@ export function VolunteerPage() {
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
                   isStatusActive
-                  tasks={activeTasksMockData}
+                  tasks={tasks.filter((item) => !item.completed)}
                 />
               </ContentLayout>
             }
@@ -262,7 +181,7 @@ export function VolunteerPage() {
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
-                  tasks={[]}
+                  tasks={tasks.filter((item) => item.completed)}
                 />
               </ContentLayout>
             }
