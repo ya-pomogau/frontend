@@ -42,7 +42,6 @@ export const UserCategoriesBlock = ({ filter, onChange }: Props) => {
           id={FilterItemsIds.VOLUNTEER}
           onChange={handleCheckboxChange}
         />
-
         <Checkbox
           label="Реципиенты"
           checked={filter.includes(FilterItemsIds.RECIPIENT)}

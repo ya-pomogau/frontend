@@ -1,5 +1,5 @@
+import { useRef } from "react";
 import classnames from "classnames";
-import { ChangeEvent } from "react";
 import Checkbox from "shared/ui/checkbox";
 import { FilterItemsIds } from "../consts";
 import styles from "../styles.module.css";
@@ -10,18 +10,25 @@ interface Props {
 }
 
 export const CategoriesBlock = ({ selectedCategories, onChange }: Props) => {
-  const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    let newValue;
-    if (target.checked) {
-      newValue = [...selectedCategories, target.id];
-    } else {
-      newValue = selectedCategories.filter((item) => item !== target.id);
+  const categoriesBlockRef = useRef<HTMLDivElement>(null);
+  const checkboxName = 'taskCategory';
+  const handleCheckboxChange = () => {
+    const form = categoriesBlockRef.current?.closest('form');
+    const checkboxList = form && form.elements.namedItem(checkboxName);
+    const newListe: string[] = [];
+    if (checkboxList instanceof RadioNodeList) {
+      const list = Array.prototype.slice.call(checkboxList) as HTMLInputElement[];
+      list.forEach((item) => {
+        if (item.checked) {
+          newListe.push(item.value);
+        };
+      })
     }
-    onChange("categories", newValue);
+    onChange("categories", newListe);
   };
 
   return (
-    <div className={styles.filterBlock}>
+    <div className={styles.filterBlock} ref={categoriesBlockRef}>
       <div
         className={classnames(
           styles.filterBlockTitle,
@@ -35,12 +42,14 @@ export const CategoriesBlock = ({ selectedCategories, onChange }: Props) => {
       <div className={styles.checkboxesWrapper}>
         <div className={styles.row}>
           <Checkbox
+            name='taskCategory'
             label="Категория 1"
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_1)}
             id={FilterItemsIds.CATEGORY_1}
             onChange={handleCheckboxChange}
           />
           <Checkbox
+            name='taskCategory'
             label="Категория 2"
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_2)}
             id={FilterItemsIds.CATEGORY_2}
@@ -49,12 +58,14 @@ export const CategoriesBlock = ({ selectedCategories, onChange }: Props) => {
         </div>
         <div className={styles.row}>
           <Checkbox
+            name='taskCategory'
             label="Категория 3"
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_3)}
             id={FilterItemsIds.CATEGORY_3}
             onChange={handleCheckboxChange}
           />
           <Checkbox
+            name='taskCategory'
             label="Категория 4"
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_4)}
             id={FilterItemsIds.CATEGORY_4}
@@ -63,12 +74,14 @@ export const CategoriesBlock = ({ selectedCategories, onChange }: Props) => {
         </div>
         <div className={styles.row}>
           <Checkbox
+            name='taskCategory'
             label="Категория 5"
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_5)}
             id={FilterItemsIds.CATEGORY_5}
             onChange={handleCheckboxChange}
           />
           <Checkbox
+            name='taskCategory'
             label="Категория 6"
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_6)}
             id={FilterItemsIds.CATEGORY_6}

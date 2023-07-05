@@ -1,4 +1,5 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect, useRef, CSSProperties } from "react";
+import { createPortal } from "react-dom";
 import classnames from "classnames";
 import styles from "./styles.module.css";
 
@@ -8,6 +9,7 @@ interface TooltipProps {
   children: ReactNode;
   pointerPosition?: "right" | "center";
   changeVisible?: () => void;
+  elementStyles?: CSSProperties
 }
 
 export const Tooltip = ({
@@ -15,7 +17,8 @@ export const Tooltip = ({
   visible,
   children,
   pointerPosition = "right",
-  changeVisible
+  changeVisible,
+  elementStyles
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
   function closeWithEsc(e: KeyboardEvent) {
@@ -25,9 +28,7 @@ export const Tooltip = ({
   }
   function closeWithClickOutTooltip(e: MouseEvent) {
     const target = e.target as HTMLElement;
-    if (!(target.closest('.tooltip') === tooltipRef.current) && 
-      changeVisible && 
-      tooltipRef.current?.classList.value.includes('visible')) {
+    if (changeVisible && target.classList.value.includes('bottomLayer')) {
       changeVisible();
     }
   }
@@ -39,12 +40,14 @@ export const Tooltip = ({
       document.removeEventListener('click', closeWithClickOutTooltip);
     };
   }, []);
-  return (
+
+  const tooltip = <div className={styles.bottomLayer}>
     <div
       className={classnames(styles.tooltip, extClassName, {
         [styles["tooltip--visible"]]: visible,
       }, 'tooltip')}
       ref={tooltipRef}
+      style={elementStyles}
     >
       <div
         className={classnames(
@@ -54,5 +57,7 @@ export const Tooltip = ({
       />
       {children}
     </div>
-  )
+  </div>;
+
+  return createPortal(tooltip, document.body);
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Tooltip } from "shared/ui/tooltip";
 import { Button } from "shared/ui/button";
@@ -13,15 +13,20 @@ interface TasksFilterProps {
   userRole: TRole;
   visible?: boolean;
   changeVisible: () => void;
+  position: {top: number, right: number};
 }
 
-export const TasksFilter = ({ userRole, visible=true, changeVisible }: TasksFilterProps) => {
+export const TasksFilter = ({ userRole, visible=true, changeVisible, position }: TasksFilterProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     categories: [],
     date: "",
     searchRadius: '',
     sortBy: ''
+  });
+  const [filterPosition, setFilterPosition] = useState({
+    top: '0px',
+    right: '0px',
   });
 
   // сохранение выбранных параметров фильтра
@@ -37,8 +42,12 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible }: TasksFilt
     let params = "?";
     Object.entries(filterValues).forEach(([key, value]) => {
       if (key === 'date' && value.length) {
-        const index = value.indexOf('T');
-        params += `${key}=${value.slice(0, index)}&`;
+        if (value.includes('T')) {
+          const index = value.indexOf('T');
+          params += `${key}=${value.slice(0, index)}&`;
+        } else {
+          params += `${key}=${value}&`;
+        }
       } else if (value.length) {
         params += `${key}=${value}&`;
       }
@@ -46,11 +55,15 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible }: TasksFilt
     setSearchParams(params);
     changeVisible();
   };
-  useEffect(() => {
+  useLayoutEffect(() => {
     const queryParams = getQuery(searchParams);
     setFilterValues({
       ...filterValues,
       ...queryParams,
+    });
+    setFilterPosition({
+      top: `${position.top}px`,
+      right: `${window.innerWidth - position.right - 10}px`
     });
   }, []);
 
@@ -60,37 +73,38 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible }: TasksFilt
       visible={visible}
       extClassName={styles.tooltip}
       changeVisible={changeVisible}
+      elementStyles={filterPosition}
     >
-      <div className={styles.wrapper}>
-        {userRole === "admin" && (
-          <AdminFilter
-            filter={filterValues}
-            onChange={handleFilterChange}
-          />
-        )}
-        {userRole === "recipient" && (
-          <RecipientFilter
-            filter={filterValues}
-            onChange={handleFilterChange}
-          />
-        )}
-
-        {userRole === "volunteer" && (
-          <VolunteerFilter
-            filter={filterValues}
-            onChange={handleFilterChange}
-          />
-        )}
-
-        <div className={styles.buttonWrapper}>
-          <Button
-            label="Применить"
-            buttonType="primary"
-            size="medium"
-            onClick={handleAcceptClick}
-          />
+      <form name='formFilter'>
+        <div className={styles.wrapper}>
+          {userRole === "admin" && (
+            <AdminFilter
+              filter={filterValues}
+              onChange={handleFilterChange}
+            />
+          )}
+          {userRole === "recipient" && (
+            <RecipientFilter
+              filter={filterValues}
+              onChange={handleFilterChange}
+            />
+          )}
+          {userRole === "volunteer" && (
+            <VolunteerFilter
+              filter={filterValues}
+              onChange={handleFilterChange}
+            />
+          )}
+          <div className={styles.buttonWrapper}>
+            <Button
+              label="Применить"
+              buttonType="primary"
+              size="medium"
+              onClick={handleAcceptClick}
+            />
+          </div>
         </div>
-      </div>
+      </form>
     </Tooltip>
   );
 };

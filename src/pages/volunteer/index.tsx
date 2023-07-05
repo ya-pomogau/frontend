@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -95,9 +95,16 @@ const activeTasksMockData = [
 
 export function VolunteerPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
-  const openFilter = () => {
+  // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
+  const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
+  // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
+  const openFilter = (e: MouseEvent) => {
     if (isFilterVisibel === false) {
+      const buttonRect = e.currentTarget?.getBoundingClientRect();
       setTimeout(() => {
+        if (buttonRect) {
+          setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+        }
         setIsFilterVisibel(true);
       });
     }
@@ -176,6 +183,7 @@ export function VolunteerPage() {
                     {isFilterVisibel && <TasksFilter
                       userRole="volunteer"
                       changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
                     />}
                   </>
                 }
@@ -219,6 +227,7 @@ export function VolunteerPage() {
                     {isFilterVisibel && <TasksFilter
                       userRole="volunteer"
                       changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
                     />}
                   </>
                 }
@@ -258,6 +267,7 @@ export function VolunteerPage() {
                     {isFilterVisibel &&  <TasksFilter
                       userRole="volunteer"
                       changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
                     />}
                   </>
                 }

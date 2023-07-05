@@ -69,14 +69,14 @@ export function DatePicker({
       filterDate={filter}
       showPopperArrow={false}
       locale={ru}
-      inline
+      inline={window.innerWidth > 768 || false}
       wrapperClassName={styles.datePicker}
       calendarClassName={
         isMobile
           ? styles.dataPicker__calendar_mobile
           : styles.dataPicker__calendar
       }
-      dateFormat="dd.MM.yyyy"
+      dateFormat="dd MMMM yyyy"
       fixedHeight
       renderCustomHeader={customHeader}
       dayClassName={() => styles.dataPicker__calendarWeekDay}

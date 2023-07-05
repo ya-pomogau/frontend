@@ -1,6 +1,6 @@
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import { TasksFilter } from "features/tasks-filter/ui";
 import { PageLayout } from "../../shared/ui/page-layout";
 import { ViewerInfo } from "../../entities/viewer";
@@ -60,9 +60,16 @@ const userMock = [
 export function AdminPage() {
   const [value, setValue] = useState("");
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
-  const openFilter = () => {
+  // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
+  const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
+  // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
+  const openFilter = (e: MouseEvent) => {
     if (isFilterVisibel === false) {
+      const buttonRect = e.currentTarget?.getBoundingClientRect();
       setTimeout(() => {
+        if (buttonRect) {
+          setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+        }
         setIsFilterVisibel(true);
       });
     }
@@ -137,6 +144,7 @@ export function AdminPage() {
                     {isFilterVisibel && <TasksFilter
                       userRole="admin"
                       changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
                     />}
                   </>
                 }
@@ -268,6 +276,7 @@ export function AdminPage() {
                     {isFilterVisibel && <TasksFilter
                       userRole="admin"
                       changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
                     />}
                   </>
                 }

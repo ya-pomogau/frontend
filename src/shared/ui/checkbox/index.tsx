@@ -13,6 +13,7 @@ const Checkbox: FC<CheckboxProps> = ({
   onChange,
   checked,
   extClassName,
+  name,
   ...props
 }) => (
   <>
@@ -20,9 +21,10 @@ const Checkbox: FC<CheckboxProps> = ({
       className={styles.checkbox}
       type="checkbox"
       id={id}
-      name={id}
+      name={name || id}
       onChange={onChange}
       checked={checked}
+      value={id}
       {...props}
     />
     <label
