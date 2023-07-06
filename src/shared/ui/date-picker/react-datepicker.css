@@ -526,7 +526,8 @@
 .react-datepicker__month-text--today,
 .react-datepicker__quarter-text--today,
 .react-datepicker__year-text--today {
-  font-weight: bold;
+  background-color: var(--colors-interface-primary);
+  color: var(--colors-interface-white);
 }
 .react-datepicker__day--highlighted,
 .react-datepicker__month-text--highlighted,
@@ -666,6 +667,7 @@
 .react-datepicker__quarter-text--disabled:hover,
 .react-datepicker__year-text--disabled:hover {
   background-color: transparent;
+  color: #ccc;
 }
 
 .react-datepicker__month-text.react-datepicker__month--selected:hover,

@@ -1,8 +1,9 @@
 /* eslint-disable import/no-duplicates */
-import { ReactNode } from "react";
+import React, { ReactNode, forwardRef } from "react";
 import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
 } from "react-datepicker";
+import classnames from "classnames";
 import ru from "date-fns/locale/ru";
 import { subDays } from "date-fns";
 import { getMonth } from "./lib";
@@ -39,6 +40,27 @@ function customHeader({
     </div>
   );
 }
+
+
+const CustomInput = forwardRef((
+    { value, onClick }: {value: any, onClick: any},
+    ref: React.Ref<HTMLButtonElement>
+  ) => (
+    <button
+      type="button"
+      className={classnames(
+        styles.customInput,
+        'text',
+        'text_size_small',
+        'text_type_regular'
+      )}
+      onClick={onClick}
+      ref={ref}
+    >
+      {value}
+    </button>
+  )
+);
 
 export interface IDatePickerProps {
   value: Date;
@@ -81,6 +103,7 @@ export function DatePicker({
       renderCustomHeader={customHeader}
       dayClassName={() => styles.dataPicker__calendarWeekDay}
       minDate={minDate}
+      customInput={<CustomInput value={undefined} onClick={undefined} />}
     />
   );
 }

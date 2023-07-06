@@ -63,10 +63,18 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible, position }:
   
   useEffect(() => {
     const queryParams = getQuery(searchParams);
-    setFilterValues({
-      ...filterValues,
-      ...queryParams,
-    });
+    if (window.innerWidth > 768) {
+      setFilterValues({
+        ...filterValues,
+        ...queryParams,
+      });
+    } else {
+      setTimeout(() => {setFilterValues({
+          ...filterValues,
+          ...queryParams,
+        });
+      });
+    }
   }, []);
 
   return (
