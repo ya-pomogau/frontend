@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, CSSProperties } from "react";
+import { ReactNode, useEffect, useRef, CSSProperties, useCallback } from "react";
 import { createPortal } from "react-dom";
 import classnames from "classnames";
 import styles from "./styles.module.css";
@@ -21,17 +21,17 @@ export const Tooltip = ({
   elementStyles
 }: TooltipProps) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
-  function closeWithEsc(e: KeyboardEvent) {
+  const closeWithEsc = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape' && changeVisible) {
       changeVisible();
     }
-  }
-  function closeWithClickOutTooltip(e: MouseEvent) {
+  }, [changeVisible]);
+  const closeWithClickOutTooltip = useCallback((e: MouseEvent) => {
     const target = e.target as HTMLElement;
     if (changeVisible && target.classList.value.includes('bottomLayer')) {
       changeVisible();
     }
-  }
+  }, [changeVisible]);
   useEffect(() => {
     document.addEventListener('keydown', closeWithEsc);
     document.addEventListener('click', closeWithClickOutTooltip);
@@ -39,7 +39,7 @@ export const Tooltip = ({
       document.removeEventListener('keydown', closeWithEsc);
       document.removeEventListener('click', closeWithClickOutTooltip);
     };
-  }, []);
+  }, [closeWithClickOutTooltip, closeWithEsc]);
 
   const tooltip = <div className={styles.bottomLayer}>
     <div
