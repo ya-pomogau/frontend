@@ -85,6 +85,7 @@ export function RegisterPage() {
                     <form className={styles.form} onSubmit={onSubmit}>
                         <Input
                             extClassName={styles.field}
+                            required
                             label="ФИО"
                             name="name"
                             value={name}
@@ -95,6 +96,7 @@ export function RegisterPage() {
 
                         <Input
                             extClassName={styles.field}
+                            required
                             label="Телефон"
                             name="phone"
                             value={phone}
@@ -105,6 +107,9 @@ export function RegisterPage() {
 
                         <div>
                             <InputAddress
+                                inputAttributes={{
+                                    required: true
+                                }}
                                 initialValue=''
                                 name='address'
                                 onChange={setAddress}
