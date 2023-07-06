@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Tooltip } from "shared/ui/tooltip";
 import { Button } from "shared/ui/button";
@@ -55,15 +55,17 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible, position }:
     setSearchParams(params);
     changeVisible();
   };
-  useLayoutEffect(() => {
+  const setPosition = useCallback(() => setFilterPosition({
+    top: `${position.top}px`,
+    right: `${window.innerWidth - position.right - 10}px`
+  }), [position.top, position.right]);
+  useMemo(() => {setPosition()}, [setPosition]);
+  
+  useEffect(() => {
     const queryParams = getQuery(searchParams);
     setFilterValues({
       ...filterValues,
       ...queryParams,
-    });
-    setFilterPosition({
-      top: `${position.top}px`,
-      right: `${window.innerWidth - position.right - 10}px`
     });
   }, []);
 
