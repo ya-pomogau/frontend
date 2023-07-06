@@ -23,6 +23,32 @@ export function RegisterPage() {
         console.log("Региcтрация:", name, phone, address);
     };
 
+    // const isNumberValid = (phoneNumber: string) => {
+    //     if (!phoneNumber.startsWith('8') && !phoneNumber.startsWith('+7')) {
+    //       return false;
+    //     }
+    //     if (phoneNumber.replace(/\D/g, '').length !== 11) {
+    //       return false;
+    //     }
+    //     return true;
+    //   };
+    
+    //   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const currentValue = e.currentTarget.value;
+    //     setValue(currentValue);
+    //     if (!isNumberValid(currentValue)) {
+    //       setError('Указан некорректный номер');
+    //       inputRef.current?.setCustomValidity('Указан некорректный номер');
+    //     } else {
+    //       setError(undefined);
+    //       inputRef.current?.setCustomValidity('');
+    //     }
+    
+    //     if (onChange) {
+    //       onChange(currentValue);
+    //     }
+    //   };
+
     return (
         <PageLayout
             side={
@@ -103,6 +129,8 @@ export function RegisterPage() {
                             onChange={(event) => setPhone(event.currentTarget.value)}
                             placeholder="+7 (000) 000 00 00"
                             type="tel"
+                            pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"
+                            title="+7 (123) 456 78 90"
                         />
 
                         <div>
