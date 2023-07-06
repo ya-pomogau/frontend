@@ -47,6 +47,7 @@ export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
           extClassName={styles.radiusButton}
           id={FilterItemsIds.RADIUS_1}
           onClick={() => handleRadiusButtonClick(FilterItemsIds.RADIUS_1)}
+          actionType="button"
         />
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_3)}
@@ -55,6 +56,7 @@ export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
           extClassName={styles.radiusButton}
           id={FilterItemsIds.RADIUS_3}
           onClick={() => handleRadiusButtonClick(FilterItemsIds.RADIUS_3)}
+          actionType="button"
         />
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_5)}
@@ -63,6 +65,7 @@ export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
           extClassName={styles.radiusButton}
           id={FilterItemsIds.RADIUS_5}
           onClick={() => handleRadiusButtonClick(FilterItemsIds.RADIUS_5)}
+          actionType="button"
         />
       </div>
     </div>
