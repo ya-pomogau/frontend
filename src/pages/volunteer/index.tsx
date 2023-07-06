@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import { ViewerInfo } from "entities/viewer";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -95,20 +95,31 @@ const activeTasksMockData = [
 
 export function VolunteerPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
   const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
+  const getButtonPosition = () => {
+    const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
+    if (buttonRect) {
+      setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+    }
+  };
   const openFilter = (e: MouseEvent) => {
     if (isFilterVisibel === false) {
-      const buttonRect = e.currentTarget?.getBoundingClientRect();
+      buttonFilterRef.current = e.currentTarget;
       setTimeout(() => {
-        if (buttonRect) {
-          setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
-        }
+        getButtonPosition();
         setIsFilterVisibel(true);
       });
     }
   };
+  useEffect(() => {
+    window.addEventListener('resize', getButtonPosition);
+    return () => {
+      window.removeEventListener('resize', getButtonPosition);
+    };
+  }, []);
   const isMobile = useMediaQuery("(max-width:1150px)");
 
   return (

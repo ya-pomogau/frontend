@@ -1,6 +1,6 @@
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import { TasksFilter } from "features/tasks-filter/ui";
 import { PageLayout } from "../../shared/ui/page-layout";
 import { ViewerInfo } from "../../entities/viewer";
@@ -60,20 +60,31 @@ const userMock = [
 export function AdminPage() {
   const [value, setValue] = useState("");
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
   const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
+  const getButtonPosition = () => {
+    const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
+    if (buttonRect) {
+      setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+    }
+  };
   const openFilter = (e: MouseEvent) => {
     if (isFilterVisibel === false) {
-      const buttonRect = e.currentTarget?.getBoundingClientRect();
+      buttonFilterRef.current = e.currentTarget;
       setTimeout(() => {
-        if (buttonRect) {
-          setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
-        }
+        getButtonPosition();
         setIsFilterVisibel(true);
       });
     }
   };
+  useEffect(() => {
+    window.addEventListener('resize', getButtonPosition);
+    return () => {
+      window.removeEventListener('resize', getButtonPosition);
+    };
+  }, []);
   const filter = userMock.filter((user) =>
     user.userName.toLowerCase().includes(value.toLowerCase())
   );
