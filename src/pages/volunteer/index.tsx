@@ -131,7 +131,6 @@ export function VolunteerPage() {
                       />
                     }
                     settingText="Активные заявки"
-                    extClassName={styles.header}
                   />
                 }
               >
@@ -168,7 +167,6 @@ export function VolunteerPage() {
                       />
                     }
                     settingText="Завершенные заявки"
-                    extClassName={styles.header}
                   />
                 }
               >
@@ -201,7 +199,6 @@ export function VolunteerPage() {
                       <Icon color="blue" icon="MapApplicationIcon" size="54" />
                     }
                     settingText="Карта заявок"
-                    extClassName={styles.header}
                   />
                 }
               >
