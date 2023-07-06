@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
   buttonType: "primary" | "secondary" | "partial";
+  actionType?: "submit" | "reset" | "button";
   onClick?: () => void;
   label?: string;
   size?: "small" | "medium" | "large" | "extraLarge";
@@ -14,6 +15,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({
   extClassName,
   buttonType,
+  actionType,
   label,
   size = "small",
   customIcon,
@@ -22,7 +24,8 @@ export const Button = ({
   const isExtraLarge = size === "extraLarge";
   return (
     <button
-      type="button"
+      // eslint-disable-next-line react/button-has-type
+      type={actionType}
       className={classnames(
         styles.button,
         styles[`button--${buttonType}`],

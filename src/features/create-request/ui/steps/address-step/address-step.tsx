@@ -1,3 +1,5 @@
+import React from "react";
+import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Button } from "shared/ui/button";
 import {
@@ -5,9 +7,7 @@ import {
   changeStepDecrement,
   changeStepIncrement,
 } from "features/create-request/model";
-import React from "react";
-import { RootState } from "app/store";
-import classNames from "classnames";
+
 import { Input } from "shared/ui/input";
 import { YandexMap } from "shared/ui/map";
 import styles from "./address-step.module.css";
@@ -17,7 +17,7 @@ interface IAddressProps {
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
-  const { address } = useAppSelector((state: RootState) => state.createRequest);
+  const { address } = useAppSelector((state) => state.createRequest);
   const dispatch = useAppDispatch();
 
   const handleAddressValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,47 +1,22 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-import { ViewerInfo } from "entities/viewer";
+
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useMediaQuery } from "shared/hooks";
+
+import { UserInfo } from "entities/user";
+import { setUserRole } from "entities/user/model";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
-import { YandexMap } from "shared/ui/map";
-import { NotFoundPage } from "pages/not-found";
 import { Icon } from "shared/ui/icons";
-import { Data } from "shared/ui/map/types";
 import { TaskList } from "entities/task/ui/task-list";
-import { useMediaQuery } from "shared/hooks";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
 import { TasksFilter } from "features/tasks-filter/ui";
-
+import { NotFoundPage } from "pages/not-found";
 import styles from "./styles.module.css";
 
-const yandexMapMockData: Data[] = [
-  {
-    id: 0,
-    recipientAdressCoordinates: [59.927, 30.308],
-    isUrgentTask: true,
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) ***-**-**",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    count: "4",
-  },
-  {
-    id: 1,
-    recipientAdressCoordinates: [59.932, 30.312],
-    isUrgentTask: false,
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) ***-**-**",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    count: "4",
-  },
-];
 
 const activeTasksMockData = [
   {
@@ -94,7 +69,10 @@ const activeTasksMockData = [
   },
 ];
 
-export function ConsumerPage() {
+export function RecipientPage() {
+  const isMobile = useMediaQuery("(max-width:1150px)");
+  const dispatch = useAppDispatch();
+  const isAuth = !!(useAppSelector((store) => store.user.role));
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
@@ -116,32 +94,21 @@ export function ConsumerPage() {
     }
   };
   useEffect(() => {
+    dispatch(setUserRole('recipient'));
     window.addEventListener('resize', getButtonPosition);
     return () => {
       window.removeEventListener('resize', getButtonPosition);
     };
-  }, []);
-  const isMobile = useMediaQuery("(max-width:1150px)");
+  }, [dispatch]);
 
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
-            <ViewerInfo onClickSettingsButton={() => 1} />
+          <div className={styles.user}>
+            <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
-            <NavLink to="map" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon color="white" icon="MapApplicationIcon" size="54" />
-                  }
-                  text="Карта заявок"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
+          <ButtonContainer auth={isAuth}>
             <NavLink to="active" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -169,7 +136,7 @@ export function ConsumerPage() {
       }
       content={
         <Routes>
-          <Route index element={<Navigate to="map" replace />} />
+          <Route index element={<Navigate to="active" replace />} />
           <Route
             path="active"
             element={
@@ -190,7 +157,6 @@ export function ConsumerPage() {
                         />
                       }
                       settingText="Активные заявки"
-                      extClassName={styles.header}
                     />
                     {isFilterVisibel && <TasksFilter
                       userRole="recipient"
@@ -202,7 +168,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -234,7 +200,6 @@ export function ConsumerPage() {
                         />
                       }
                       settingText="Завершенные заявки"
-                      extClassName={styles.header}
                     />
                     {isFilterVisibel && <TasksFilter
                       userRole="recipient"
@@ -246,7 +211,7 @@ export function ConsumerPage() {
               >
                 <TaskList
                   // eslint-disable-next-line jsx-a11y/aria-role
-                  role="consumer"
+                  role="recipient"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
@@ -254,35 +219,6 @@ export function ConsumerPage() {
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
                   tasks={[]}
-                />
-              </ContentLayout>
-            }
-          />
-          <Route
-            path="map"
-            element={
-              <ContentLayout
-                heading={
-                  <SmartHeader
-                      filterIcon={
-                        <Icon color="blue" icon="FilterIcon" size="54" />
-                      }
-                      filterText="Фильтр"
-                      onClick={() => 1}
-                      settingIcon={
-                        <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                      }
-                      settingText="Карта заявок"
-                      extClassName={styles.header}
-                  />
-                }
-              >
-                <YandexMap
-                  tasks={yandexMapMockData}
-                  mapSettings={{ latitude: 59.93, longitude: 30.31, zoom: 15 }}
-                  width="100%"
-                  height="100%"
-                  onClick={() => 3}
                 />
               </ContentLayout>
             }

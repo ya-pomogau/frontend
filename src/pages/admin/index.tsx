@@ -1,9 +1,11 @@
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
-import { useState, MouseEvent, useRef, useEffect } from "react";
 import { TasksFilter } from "features/tasks-filter/ui";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { setUserRole } from "entities/user/model";
 import { PageLayout } from "../../shared/ui/page-layout";
-import { ViewerInfo } from "../../entities/viewer";
+import { UserInfo } from "../../entities/user";
 import { ButtonContainer } from "../../shared/ui/button-container";
 import { CardButton } from "../../shared/ui/card-button";
 import { Icon } from "../../shared/ui/icons";
@@ -88,15 +90,21 @@ export function AdminPage() {
   const filter = userMock.filter((user) =>
     user.userName.toLowerCase().includes(value.toLowerCase())
   );
+  const isAuth = !!(useAppSelector((store) => store.user.role));
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUserRole('admin'));
+  }, [dispatch]);
 
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
-            <ViewerInfo onClickSettingsButton={() => 1} />
+          <div className={styles.user}>
+            <UserInfo onClickSettingsButton={() => 1} />
           </div>
-          <ButtonContainer>
+          <ButtonContainer auth={isAuth}>
             <NavLink to="requests" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -121,7 +129,7 @@ export function AdminPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="SettingsIcon" size="54" />
+                    <Icon color="white" icon="CreateApplication" size="54" />
                   }
                   text="Создание / Редактирование заявки"
                   isActive={isActive}
@@ -150,7 +158,6 @@ export function AdminPage() {
                         <Icon color="blue" icon="BlockIcon" size="54" />
                       }
                       settingText="Подтверждение / Блокировка"
-                      extClassName={styles.header}
                     />
                     {isFilterVisibel && <TasksFilter
                       userRole="admin"
@@ -258,7 +265,6 @@ export function AdminPage() {
                       <Icon color="blue" icon="StatisticIcon" size="54" />
                     }
                     settingText="Статистика"
-                    extClassName={styles.header}
                   />
                 }
               >
@@ -282,7 +288,6 @@ export function AdminPage() {
                         <Icon color="blue" icon="SettingsIcon" size="54" />
                       }
                       settingText="Создание / Редактирование заявки"
-                      extClassName={styles.header}
                     />
                     {isFilterVisibel && <TasksFilter
                       userRole="admin"

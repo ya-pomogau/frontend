@@ -4,7 +4,7 @@
   border: 2px solid var(--colors-interface-primary);
   display: flex;
   justify-content: space-between;
-  padding: 22px 30px;
+  padding: 16px 30px;
   box-sizing: border-box;
   align-items: center;
 }

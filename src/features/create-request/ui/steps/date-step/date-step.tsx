@@ -1,14 +1,13 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { RootState } from "app/store";
-import moment from "moment";
+import React, { useMemo } from "react";
 import classNames from "classnames";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import moment from "moment";
 import {
   addDate,
   addTime,
   changeCheckbox,
   changeStepIncrement,
 } from "features/create-request/model";
-import React, { useMemo } from "react";
 import { Button } from "shared/ui/button";
 import Checkbox from "shared/ui/checkbox";
 import { DatePicker } from "shared/ui/date-picker";
@@ -17,7 +16,7 @@ import styles from "./date-step.module.css";
 
 export const DateStep = () => {
   const { time, termlessRequest, date } = useAppSelector(
-    (state: RootState) => state.createRequest
+    (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
 

@@ -1,22 +1,19 @@
 import classNames from "classnames";
-import React from "react";
 import styles from "./info-container-content.module.css";
 
 interface IInfoContainerContent {
   name?: string;
   id?: number;
-  phoneNumber?: string;
+  phone?: string;
   address?: string;
-  description?: string;
   extClassName?: string;
 }
 
 export const InfoContainerContent = ({
   name,
   id,
-  phoneNumber,
+  phone,
   address,
-  description,
   extClassName,
 }: IInfoContainerContent) => (
   <div className={extClassName}>
@@ -61,7 +58,7 @@ export const InfoContainerContent = ({
       >
         Тел.: &nbsp;
       </span>
-      {phoneNumber}
+      {phone}
     </p>
     <p
       className={classNames(
@@ -84,27 +81,5 @@ export const InfoContainerContent = ({
       </span>
       {address}
     </p>
-    {description && (
-      <p
-        className={classNames(
-          "m-0",
-          "text_size_small",
-          "text_type_regular",
-          "text"
-        )}
-      >
-        <span
-          className={classNames(
-            "m-0",
-            "text_size_small",
-            "text_type_bold",
-            "text"
-          )}
-        >
-          О себе: &nbsp;
-        </span>
-        {description}
-      </p>
-    )}
   </div>
 );
