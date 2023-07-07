@@ -3,11 +3,12 @@ import { InfoContainer } from "shared/ui/info-container";
 import { InfoContainerContent } from "shared/ui/info-container-content";
 import { VolunteerInfo } from "./volunteer-info/volunteer-info";
 import { RecipientInfo } from "./recipient-info/recipient-info";
-import type { TUserRole } from "../../types";
+import type { UserRole } from "../../types";
+
 import styles from "./styles.module.css";
 
 interface UserInfoProps {
-  roleForStoryBook?: TUserRole;
+  roleForStoryBook?: UserRole;
   onClickSettingsButton: () => void;
 }
 
@@ -35,15 +36,14 @@ export const UserInfo = ({
           {user.role === 'recipient' && (
             <RecipientInfo
               tasksCount={0}
-              completedTasksCount={user.completed || 0}
+              completedTasksCount={0}
             />
           )}
 
           {user.role === 'volunteer' && (
             <VolunteerInfo
               score={user.scores || 0}
-              virtualKey={user.keys}
-              completedTasksCount={user.completed || 0}
+              hasKey={user.keys}
             />
           )}
         </div>

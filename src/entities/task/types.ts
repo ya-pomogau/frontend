@@ -1,8 +1,6 @@
-import { TUserInfo } from "entities/user/types";
+import { UserInfo } from "entities/user/types";
 
-export type TUserRole = "recipient" | "volunteer" | "master" | "admin";
-
-export type TTask = {
+export type Task = {
   id: number;
   title: string;
   category: {
@@ -14,9 +12,9 @@ export type TTask = {
   description: string;
   completed: boolean;
   confirmed: boolean;
-  recipient: TUserInfo;
-  volunteer: TUserInfo | null;
+  recipient: UserInfo;
+  volunteer: UserInfo | null;
   address: string;
-  coordinates: number;
+  coordinates: [number, number];
   chatId: number | null;
 };

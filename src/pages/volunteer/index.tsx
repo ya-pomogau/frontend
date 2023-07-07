@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "app/hooks";
@@ -7,45 +7,17 @@ import { useMediaQuery } from "shared/hooks";
 import { UserInfo } from "entities/user";
 import { setUserRole } from "entities/user/model";
 import { fetchTasksByVolunteerId } from "entities/task/model";
+import { TaskList } from "entities/task/ui/task-list";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
 import { YandexMap } from "shared/ui/map";
 import { Icon } from "shared/ui/icons";
-import { Data } from "shared/ui/map/types";
-import { TaskList } from "entities/task/ui/task-list";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
 import { NotFoundPage } from "pages/not-found";
 
 import styles from "./styles.module.css";
-
-const yandexMapMockData: Data[] = [
-  {
-    id: 0,
-    recipientAdressCoordinates: [59.927, 30.308],
-    isUrgentTask: true,
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) ***-**-**",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    count: "4",
-  },
-  {
-    id: 1,
-    recipientAdressCoordinates: [59.932, 30.312],
-    isUrgentTask: false,
-    avatarLink: "https://i.pravatar.cc/300",
-    avatarName: "example",
-    recipientName: "Иванов Иван Иванович",
-    recipientPhoneNumber: "+7(000) ***-**-**",
-    description:
-      "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-    count: "4",
-  },
-];
 
 export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
@@ -53,7 +25,7 @@ export function VolunteerPage() {
 
   const user = useAppSelector((store) => store.user.data);
   const isAuth = !!(useAppSelector((store) => store.user.role));
-  const { tasks } = useAppSelector((store) => store.tasks);
+  const { tasks, isLoading } = useAppSelector((store) => store.tasks);
 
   useEffect(() => {
     dispatch(setUserRole('volunteer'));
@@ -61,7 +33,7 @@ export function VolunteerPage() {
 
   useEffect(() => {
     if(user) {
-      dispatch(fetchTasksByVolunteerId(user?.id));
+      dispatch(fetchTasksByVolunteerId(user.id));
     }
   }, [dispatch, user]);
 
@@ -135,15 +107,15 @@ export function VolunteerPage() {
                 }
               >
                 <TaskList
-                  // eslint-disable-next-line jsx-a11y/aria-role
-                  role="volunteer"
+                  userRole="volunteer"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
                   isStatusActive
-                  tasks={tasks.filter((item) => !item.completed)}
+                  tasks={tasks.active}
+                  isLoading={isLoading}
                 />
               </ContentLayout>
             }
@@ -171,15 +143,15 @@ export function VolunteerPage() {
                 }
               >
                 <TaskList
-                  // eslint-disable-next-line jsx-a11y/aria-role
-                  role="volunteer"
+                  userRole="volunteer"
                   isMobile={isMobile}
                   handleClickCloseButton={() => 2}
                   handleClickConfirmButton={() => 3}
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
-                  tasks={tasks.filter((item) => item.completed)}
+                  tasks={tasks.completed}
+                  isLoading={isLoading}
                 />
               </ContentLayout>
             }
@@ -203,8 +175,12 @@ export function VolunteerPage() {
                 }
               >
                 <YandexMap
-                  tasks={yandexMapMockData}
-                  mapSettings={{ latitude: 59.93, longitude: 30.31, zoom: 15 }}
+                  tasks={tasks.available}
+                  mapSettings={{ 
+                    latitude: user ? user.coordinates[0] : 59.938955, 
+                    longitude: user ? user.coordinates[1] : 30.315644, 
+                    zoom: 15 
+                  }}
                   width="100%"
                   height="100%"
                   onClick={() => 3}

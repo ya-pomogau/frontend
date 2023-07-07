@@ -1,36 +1,34 @@
 /* eslint-disable react/no-this-in-sfc */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { Placemark, useYMaps } from "@pbe/react-yandex-maps";
 import React from "react";
+import { Placemark, useYMaps } from "@pbe/react-yandex-maps";
 import "./styles.css";
 
-type Props = {
+type MarkProps = {
   id: number;
-  recipientAdressCoordinates: [number, number];
+  coordinates: [number, number];
   isUrgentTask: boolean;
-  recipientName?: string;
-  recipientPhoneNumber?: string;
-  avatarName?: string;
-  avatarLink?: string;
+  fullName?: string;
+  phone?: string;
+  avatar?: string;
   description?: string;
-  count?: string;
+  count?: number;
   onClick?: () => void;
 };
 
 export const Mark = React.memo(
   ({
     id,
-    recipientAdressCoordinates,
+    coordinates,
     isUrgentTask,
-    recipientName,
-    recipientPhoneNumber,
-    avatarName,
-    avatarLink,
+    fullName,
+    phone,
+    avatar,
     description,
     count,
     onClick,
-  }: Props) => {
+  }: MarkProps) => {
     const ymaps = useYMaps(["templateLayoutFactory"]);
 
     if (!ymaps ) return null;
@@ -74,12 +72,12 @@ export const Mark = React.memo(
           </svg>
         </div>
         <div class="task_bio">
-          <img src="{{properties.avatarLink}}" alt={{properties.avatarName}} class="task_avatar"/>
+          <img src="{{properties.avatar}}" alt={{properties.fullName}} class="task_avatar"/>
           <div>
             <p class="task_recipient_name">
-              {{properties.recipientName}}
+              {{properties.fullName}}
             </p>
-            <p class="task_recipient_phone">{{properties.recipientPhoneNumber}}</p>
+            <p class="task_recipient_phone">{{properties.phone}}</p>
           </div>
         </div>
         <div class="task_description_container">
@@ -149,7 +147,7 @@ export const Mark = React.memo(
 
     return (
       <Placemark
-        geometry={recipientAdressCoordinates}
+        geometry={coordinates}
         options={{
           iconLayout: Iconlayout,
           balloonLayout: Balloonlayout,
@@ -159,10 +157,9 @@ export const Mark = React.memo(
         }}
         properties={{
           isUrgentTask,
-          recipientName,
-          recipientPhoneNumber,
-          avatarName,
-          avatarLink,
+          fullName,
+          phone,
+          avatar,
           description,
           count,
         }}

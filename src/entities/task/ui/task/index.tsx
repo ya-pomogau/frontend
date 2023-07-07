@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classNames from "classnames";
+import format from "date-fns/format";
 
 import { Avatar } from "shared/ui/avatar";
 import { CategoriesBackground } from "shared/ui/categories-background";
@@ -9,17 +10,17 @@ import { SquareButton } from "shared/ui/square-buttons";
 
 import styles from "./styles.module.css";
 
-interface Props {
+interface TaskItemProps {
   isMobile: boolean;
   category: string;
   date: string;
-  time: string;
   address: string;
   title: string;
   description: string;
   count: number;
   avatar: string;
   completed: boolean;
+  confirmed: boolean;
   recipientName: string;
   recipientPhoneNumber: string;
   handleClickPnoneButton?: () => void;
@@ -30,17 +31,17 @@ interface Props {
   extClassName?: string;
 }
 
-export const Task = ({
+export const TaskItem = ({
   isMobile,
   category,
   date,
-  time,
   address,
   title,
   description,
   count,
   avatar,
   completed,
+  confirmed,
   recipientName,
   recipientPhoneNumber,
   handleClickPnoneButton,
@@ -49,7 +50,7 @@ export const Task = ({
   handleClickCloseButton,
   handleClickEditButton,
   extClassName,
-}: Props) => {
+}: TaskItemProps) => {
   const [isHidden, setIsHidden] = useState(true);
 
   if (isMobile) {
@@ -106,12 +107,12 @@ export const Task = ({
           <RoundButton 
             buttonType="phone"
             onClick={handleClickPnoneButton}
-            disabled={completed}
+            disabled={completed && confirmed}
           />
           <RoundButton
             buttonType="message"
             onClick={handleClickMessageButton}
-            disabled={completed}
+            disabled={completed && confirmed}
           />
         </div>
         <div className={styles.mobile_section_description}>
@@ -157,7 +158,7 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{date}</p>
+            <p className="m-0">{format(new Date(date), 'dd.MM.yyyy')}</p>
           </div>
           <div
             className={classNames(
@@ -172,7 +173,7 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{time}</p>
+            <p className="m-0">{format(new Date(date), 'kk.mm')}</p>
           </div>
         </div>
         <div
@@ -211,7 +212,7 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{date}</p>
+            <p className="m-0">{format(new Date(date), 'dd.MM.yyyy')}</p>
           </div>
           <div className={classNames(styles.date, "text_size_large")}>
             <Icon
@@ -220,7 +221,7 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{time}</p>
+            <p className="m-0">{format(new Date(date), 'kk.mm')}</p>
           </div>
           <div className={styles.address}>
             <Icon
@@ -275,12 +276,12 @@ export const Task = ({
             <RoundButton 
               buttonType="phone"
               onClick={handleClickPnoneButton}
-              disabled={completed}
+              disabled={completed && confirmed}
             />
             <RoundButton
               buttonType="message"
               onClick={handleClickMessageButton}
-              disabled={completed}
+              disabled={completed && confirmed}
             />
           </div>
         </div>

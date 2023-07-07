@@ -5,17 +5,17 @@ import {
 } from "@reduxjs/toolkit";
 
 import { api } from "../../../shared/api";
-import type { TUserInfo, TUserRole } from "../types";
+import type { UserInfo, UserRole } from "../types";
 
-type TUserState = {
-  role: TUserRole | null;
-  data: TUserInfo | null;
+type UserState = {
+  role: UserRole | null;
+  data: UserInfo | null;
   isLoading: boolean;
   isFailed: boolean;
   error?: string;
 }
 
-const initialState: TUserState = {
+const initialState: UserState = {
   role: null,
   data: null,
   isLoading: false,
@@ -24,7 +24,7 @@ const initialState: TUserState = {
 
 export const fetchUserDataByRole = createAsyncThunk(
   'user/fetchData',
-  async (role: TUserRole) => {
+  async (role: UserRole) => {
     const response = await api.getAllUsers();
     return response.filter((user) => user.role === role)[0];
   }
@@ -34,7 +34,7 @@ export const userModel = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserRole: (state, { payload }: PayloadAction<TUserRole>) => {
+    setUserRole: (state, { payload }: PayloadAction<UserRole>) => {
       state.role = payload;
     },
   },
