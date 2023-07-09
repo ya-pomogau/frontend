@@ -25,7 +25,7 @@ export function VolunteerPage() {
 
   const user = useAppSelector((store) => store.user.data);
   const isAuth = !!(useAppSelector((store) => store.user.role));
-  const { tasks, isLoading } = useAppSelector((store) => store.tasks);
+  const { tasks } = useAppSelector((store) => store.tasks);
 
   useEffect(() => {
     dispatch(setUserRole('volunteer'));
@@ -115,7 +115,6 @@ export function VolunteerPage() {
                   handleClickPnoneButton={() => 6}
                   isStatusActive
                   tasks={tasks.active}
-                  isLoading={isLoading}
                 />
               </ContentLayout>
             }
@@ -151,7 +150,6 @@ export function VolunteerPage() {
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
                   tasks={tasks.completed}
-                  isLoading={isLoading}
                 />
               </ContentLayout>
             }

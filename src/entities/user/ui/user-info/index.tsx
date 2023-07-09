@@ -3,17 +3,14 @@ import { InfoContainer } from "shared/ui/info-container";
 import { InfoContainerContent } from "shared/ui/info-container-content";
 import { VolunteerInfo } from "./volunteer-info/volunteer-info";
 import { RecipientInfo } from "./recipient-info/recipient-info";
-import type { UserRole } from "../../types";
 
 import styles from "./styles.module.css";
 
 interface UserInfoProps {
-  roleForStoryBook?: UserRole;
   onClickSettingsButton: () => void;
 }
 
 export const UserInfo = ({
-  roleForStoryBook,
   onClickSettingsButton,
 }: UserInfoProps) => {
   const user = useAppSelector((state) => state.user.data);

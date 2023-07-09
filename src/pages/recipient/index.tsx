@@ -22,7 +22,6 @@ export function RecipientPage() {
   const dispatch = useAppDispatch();
 
   const isAuth = !!(useAppSelector((store) => store.user.role));
-  const { isLoading } = useAppSelector((store) => store.tasks);
 
   useEffect(() => {
     dispatch(setUserRole('recipient'));
@@ -95,7 +94,6 @@ export function RecipientPage() {
                   handleClickPnoneButton={() => 6}
                   isStatusActive
                   tasks={[]}
-                  isLoading={isLoading}
                 />
               </ContentLayout>
             }
@@ -131,7 +129,6 @@ export function RecipientPage() {
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
                   tasks={[]}
-                  isLoading={isLoading}
                 />
               </ContentLayout>
             }

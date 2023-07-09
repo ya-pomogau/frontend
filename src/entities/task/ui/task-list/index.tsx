@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { nanoid } from "nanoid";
 
+import { useAppSelector } from "app/hooks";
+
 import { Informer } from "shared/ui/informer";
 import { RoundButton } from "shared/ui/round-button";
 import type { UserRole } from "entities/user/types";
@@ -15,7 +17,6 @@ interface TaskListProps {
   extClassName?: string;
   isStatusActive: boolean;
   isMobile: boolean;
-  isLoading: boolean;
   handleClickPnoneButton: () => void;
   handleClickMessageButton: () => void;
   handleClickConfirmButton: () => void;
@@ -30,7 +31,6 @@ export const TaskList = ({
   extClassName,
   isStatusActive,
   isMobile,
-  isLoading,
   handleClickPnoneButton,
   handleClickMessageButton,
   handleClickConfirmButton,
@@ -38,36 +38,39 @@ export const TaskList = ({
   handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
-  if (tasks.length > 0) {
-    return (
-      <ul
-        className={classNames(
-          styles.content,
-          "list",
-          "p-0",
-          "m-0",
-          extClassName
-        )}
-      >
-        {userRole === "recipient" && (
-          <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
-            <RoundButton
-              buttonType="add"
-              onClick={handleClickAddTaskButton}
-              size={isMobile ? "medium" : "large"}
-              extClassName={styles.add_task_icon}
-            />
-            <h2
-              className={`${styles.title_add_list} ${
-                isMobile ? "text_size_medium" : "text_size_large"
-              } text_type_regular`}
-            >
-              Создать заявку
-            </h2>
-          </li>
-        )}
-        {
-        tasks.map((item) => (
+  const isLoading = useAppSelector((store) => store.tasks.isLoading);
+
+  return (
+    <>
+      {!isLoading && tasks.length > 0 && (
+        <ul
+          className={classNames(
+            styles.content,
+            "list",
+            "p-0",
+            "m-0",
+            extClassName
+          )}
+        >
+          {userRole === "recipient" && (
+            <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
+              <RoundButton
+                buttonType="add"
+                onClick={handleClickAddTaskButton}
+                size={isMobile ? "medium" : "large"}
+                extClassName={styles.add_task_icon}
+              />
+              <h2
+                className={`${styles.title_add_list} ${
+                  isMobile ? "text_size_medium" : "text_size_large"
+                } text_type_regular`}
+              >
+                Создать заявку
+              </h2>
+            </li>
+          )}
+
+          {tasks.map((item) =>
             <li key={nanoid()}>
               <TaskItem
                 category={item.category.name}
@@ -95,62 +98,45 @@ export const TaskList = ({
                 }
               />
             </li>
-          ))}
-      </ul>
-    );
-  }
+            )
+          }
+        </ul>
+      )}
 
-  if (!tasks.length && isStatusActive && userRole === "recipient") {
-    return (
-      <div
+      {!isLoading && tasks.length === 0 && isStatusActive && (
+        <div
+          className={classNames(
+            isMobile ? styles.content_empty_mobile : styles.content_empty,
+            extClassName
+          )}
+        >
+          <Informer text="У Вас пока нет заявок" />
+
+          {userRole === "recipient" && 
+            <>
+              <p className={`${styles.title_add_empty} text_size_large text_type_regular`}>
+                {" "}
+                Хотите создать заявку?
+              </p>
+              <RoundButton
+                buttonType="add"
+                onClick={handleClickAddTaskButton}
+                size="large" 
+              />
+            </>}
+        </div>
+      )}
+
+      {!isLoading && tasks.length === 0 && !isStatusActive && (
+        <div
         className={classNames(
           isMobile ? styles.content_empty_mobile : styles.content_empty,
           extClassName
         )}
-      >
-        {!isLoading && (
-          <>
-            <Informer text="У Вас пока нет заявок" />
-            <p className={`${styles.title_add_empty} text_size_large text_type_regular`}>
-              {" "}
-              Хотите создать заявку?
-            </p>
-            <RoundButton
-              buttonType="add"
-              onClick={handleClickAddTaskButton}
-              size="large" 
-            />
-          </>
-        )}
-      </div>
-    );
-  }
-
-  if (!tasks.length && isStatusActive && userRole === "volunteer") {
-    return (
-      <div
-        className={classNames(
-          isMobile ? styles.content_empty_mobile : styles.content_empty,
-          extClassName
-        )}
-      >
-        {isLoading && <Informer text="У Вас пока нет заявок" />}
-      </div>
-    );
-  }
-
-  if (!tasks.length && !isStatusActive) {
-    return (
-      <div
-        className={classNames(
-          isMobile ? styles.content_empty_mobile : styles.content_empty,
-          extClassName
-        )}
-      >
-        {isLoading && <Informer text="У Вас нет завершенных заявок" />}
-      </div>
-    );
-  }
-
-  return null;
-};
+        >
+          <Informer text="У Вас нет завершенных заявок" />
+        </div>
+      )}
+    </>
+  );
+};  
