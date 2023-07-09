@@ -9,14 +9,14 @@ import { VolunteerFilter } from "./volunteer-filter";
 import { getQuery } from "../libs";
 import styles from "./styles.module.css";
 
-interface TasksFilterProps {
+interface FilterProps {
   userRole: TRole;
   visible?: boolean;
   changeVisible: () => void;
   position: {top: number, right: number};
 }
 
-export const TasksFilter = ({ userRole, visible=true, changeVisible, position }: TasksFilterProps) => {
+export const Filter = ({ userRole, visible=true, changeVisible, position }: FilterProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     categories: [],

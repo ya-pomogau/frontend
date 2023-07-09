@@ -1,7 +1,7 @@
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
-import { TasksFilter } from "features/tasks-filter/ui";
+import { Filter } from "features/tasks-filter/ui";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { setUserRole } from "entities/user/model";
 import { PageLayout } from "../../shared/ui/page-layout";
@@ -156,7 +156,7 @@ export function AdminPage() {
                       }
                       settingText="Подтверждение / Блокировка"
                     />
-                    {isFilterVisibel && <TasksFilter
+                    {isFilterVisibel && <Filter
                       userRole="admin"
                       changeVisible={() => setIsFilterVisibel(false)}
                       position={buttonPosition}
@@ -286,7 +286,7 @@ export function AdminPage() {
                       }
                       settingText="Создание / Редактирование заявки"
                     />
-                    {isFilterVisibel && <TasksFilter
+                    {isFilterVisibel && <Filter
                       userRole="admin"
                       changeVisible={() => setIsFilterVisibel(false)}
                       position={buttonPosition}

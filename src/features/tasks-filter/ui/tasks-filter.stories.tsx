@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
 
-import { TasksFilter } from ".";
+import { Filter } from ".";
 
-const meta: Meta<typeof TasksFilter> = {
+const meta: Meta<typeof Filter> = {
   title: "features/TasksFilter",
-  component: TasksFilter,
+  component: Filter,
   tags: ["autodocs"],
   decorators: [
     (Story) => (
