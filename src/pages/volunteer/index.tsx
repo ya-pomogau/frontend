@@ -140,13 +140,12 @@ export function VolunteerPage() {
     }
   };
   const openFilter = (e: MouseEvent) => {
+    e.stopPropagation();
     if (isFilterVisibel === false) {
       buttonFilterRef.current = e.currentTarget;
-      setTimeout(() => {
-        getButtonPosition();
-        setIsFilterVisibel(true);
-      });
+      getButtonPosition();
     }
+    setTimeout(() => setIsFilterVisibel(!isFilterVisibel));
   };
   useEffect(() => {
     window.addEventListener('resize', getButtonPosition);

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, ChangeEvent } from "react";
 import classnames from "classnames";
 import Checkbox from "shared/ui/checkbox";
 import { FilterItemsIds } from "../consts";
@@ -11,20 +11,14 @@ interface Props {
 
 export const CategoriesBlock = ({ selectedCategories, onChange }: Props) => {
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
-  const checkboxName = 'taskCategory';
-  const handleCheckboxChange = () => {
-    const form = categoriesBlockRef.current?.closest('form');
-    const checkboxList = form && form.elements.namedItem(checkboxName);
-    const newListe: string[] = [];
-    if (checkboxList instanceof RadioNodeList) {
-      const list = Array.prototype.slice.call(checkboxList) as HTMLInputElement[];
-      list.forEach((item) => {
-        if (item.checked) {
-          newListe.push(item.value);
-        };
-      })
+  const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    let newValue;
+    if (target.checked) {
+      newValue = [...selectedCategories, target.id];
+    } else {
+      newValue = selectedCategories.filter((item) => item !== target.id);
     }
-    onChange("categories", newListe);
+    onChange("categories", newValue);
   };
 
   return (

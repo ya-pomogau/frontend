@@ -20,7 +20,7 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible, position }:
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     categories: [],
-    date: "",
+    date: '',
     searchRadius: '',
     sortBy: ''
   });
@@ -41,14 +41,7 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible, position }:
   const handleAcceptClick = () => {
     let params = "?";
     Object.entries(filterValues).forEach(([key, value]) => {
-      if (key === 'date' && value.length) {
-        if (value.includes('T')) {
-          const index = value.indexOf('T');
-          params += `${key}=${value.slice(0, index)}&`;
-        } else {
-          params += `${key}=${value}&`;
-        }
-      } else if (value.length) {
+      if (value.length) {
         params += `${key}=${value}&`;
       }
     });
@@ -110,6 +103,7 @@ export const TasksFilter = ({ userRole, visible=true, changeVisible, position }:
               label="Применить"
               buttonType="primary"
               size="medium"
+              actionType="button"
               onClick={handleAcceptClick}
             />
           </div>

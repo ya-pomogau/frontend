@@ -13,7 +13,7 @@ export const CalenderBlock = ({onChange, filterDate}: Props) => {
   const [isCalenderMobil, setIsCalenderMobil] = useState(false);
   
   const handleDateChange = (date: Date) => {
-    const formatedDate = format(date, "yyyy-MM-dd'T'HH:mm:ss");
+    const formatedDate = format(date, "yyyy-MM-dd");
     onChange("date", formatedDate);
   };
 

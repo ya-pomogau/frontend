@@ -73,13 +73,10 @@ export function AdminPage() {
     }
   };
   const openFilter = (e: MouseEvent) => {
-    if (isFilterVisibel === false) {
-      buttonFilterRef.current = e.currentTarget;
-      setTimeout(() => {
-        getButtonPosition();
-        setIsFilterVisibel(true);
-      });
-    }
+    e.stopPropagation();
+    buttonFilterRef.current = e.currentTarget;
+    getButtonPosition();
+    setIsFilterVisibel(!isFilterVisibel);
   };
   useEffect(() => {
     window.addEventListener('resize', getButtonPosition);

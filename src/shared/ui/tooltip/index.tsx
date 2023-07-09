@@ -20,6 +20,7 @@ export const Tooltip = ({
   changeVisible,
   elementStyles
 }: TooltipProps) => {
+  const modalRoot = document.getElementById('modal') as HTMLElement;
   const tooltipRef = useRef<HTMLDivElement>(null);
   const closeWithEsc = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape' && changeVisible) {
@@ -28,7 +29,7 @@ export const Tooltip = ({
   }, [changeVisible]);
   const closeWithClickOutTooltip = useCallback((e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (changeVisible && target.classList.value.includes('bottomLayer')) {
+    if (changeVisible && !target.closest('.tooltip') && (target.getRootNode() === document)) {
       changeVisible();
     }
   }, [changeVisible]);
@@ -41,7 +42,7 @@ export const Tooltip = ({
     };
   }, [closeWithClickOutTooltip, closeWithEsc]);
 
-  const tooltip = <div className={styles.bottomLayer}>
+  const tooltip = 
     <div
       className={classnames(styles.tooltip, extClassName, {
         [styles["tooltip--visible"]]: visible,
@@ -56,8 +57,7 @@ export const Tooltip = ({
         )}
       />
       {children}
-    </div>
-  </div>;
+    </div>;
 
-  return createPortal(tooltip, document.body);
+  return createPortal(tooltip, modalRoot);
 };
