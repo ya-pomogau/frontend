@@ -1,23 +1,26 @@
+import { useState } from "react";
+import classNames from "classnames";
+import format from "date-fns/format";
+
 import { Avatar } from "shared/ui/avatar";
 import { CategoriesBackground } from "shared/ui/categories-background";
 import { Icon } from "shared/ui/icons";
-import classNames from "classnames";
-import { useState } from "react";
 import { RoundButton } from "shared/ui/round-button";
 import { SquareButton } from "shared/ui/square-buttons";
+
 import styles from "./styles.module.css";
 
-interface Props {
+interface TaskItemProps {
   isMobile: boolean;
   category: string;
   date: string;
-  time: string;
   address: string;
   title: string;
   description: string;
-  count: string;
-  avatarName: string;
-  avatarLink: string;
+  count: number;
+  avatar: string;
+  completed: boolean;
+  confirmed: boolean;
   recipientName: string;
   recipientPhoneNumber: string;
   handleClickPnoneButton?: () => void;
@@ -28,17 +31,17 @@ interface Props {
   extClassName?: string;
 }
 
-export const Task = ({
+export const TaskItem = ({
   isMobile,
   category,
   date,
-  time,
   address,
   title,
   description,
   count,
-  avatarName,
-  avatarLink,
+  avatar,
+  completed,
+  confirmed,
   recipientName,
   recipientPhoneNumber,
   handleClickPnoneButton,
@@ -47,7 +50,7 @@ export const Task = ({
   handleClickCloseButton,
   handleClickEditButton,
   extClassName,
-}: Props) => {
+}: TaskItemProps) => {
   const [isHidden, setIsHidden] = useState(true);
 
   if (isMobile) {
@@ -66,12 +69,31 @@ export const Task = ({
             size="medium"
             extClassName={styles.mobile_category}
           />
-          <SquareButton buttonType="close" onClick={handleClickCloseButton} />
+          {handleClickConfirmButton && (
+            <SquareButton
+              buttonType="confirm"
+              onClick={handleClickConfirmButton}
+            />
+          )}
+          {handleClickCloseButton && (
+            <SquareButton
+              buttonType="close"
+              onClick={handleClickCloseButton}
+              extClassName={styles.button_edit}
+            />
+          )}
+          {handleClickEditButton && (
+            <SquareButton
+              buttonType="edit"
+              onClick={handleClickEditButton}
+              extClassName={styles.button_edit}
+            />
+          )}
         </div>
         <div className={styles.mobile_recipient_bio}>
           <Avatar
-            avatarName={avatarName}
-            avatarLink={avatarLink}
+            avatarName={recipientName}
+            avatarLink={avatar}
             extClassName={styles.mobile_avatar}
           />
           <div>
@@ -82,10 +104,15 @@ export const Task = ({
           </div>
         </div>
         <div className={styles.mobile_buttons_call}>
-          <RoundButton buttonType="phone" onClick={handleClickPnoneButton} />
+          <RoundButton 
+            buttonType="phone"
+            onClick={handleClickPnoneButton}
+            disabled={completed && confirmed}
+          />
           <RoundButton
             buttonType="message"
             onClick={handleClickMessageButton}
+            disabled={completed && confirmed}
           />
         </div>
         <div className={styles.mobile_section_description}>
@@ -131,7 +158,7 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{date}</p>
+            <p className="m-0">{format(new Date(date), 'dd.MM.yyyy')}</p>
           </div>
           <div
             className={classNames(
@@ -146,7 +173,7 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{time}</p>
+            <p className="m-0">{format(new Date(date), 'kk.mm')}</p>
           </div>
         </div>
         <div
@@ -167,6 +194,7 @@ export const Task = ({
       </div>
     );
   }
+
   return (
     <div className={classNames(styles.container_main, "text", extClassName)}>
       <div className={styles.container}>
@@ -184,7 +212,7 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{date}</p>
+            <p className="m-0">{format(new Date(date), 'dd.MM.yyyy')}</p>
           </div>
           <div className={classNames(styles.date, "text_size_large")}>
             <Icon
@@ -193,9 +221,9 @@ export const Task = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{time}</p>
+            <p className="m-0">{format(new Date(date), 'kk.mm')}</p>
           </div>
-          <div className={styles.date}>
+          <div className={styles.address}>
             <Icon
               color="blue"
               icon="LocationIcon"
@@ -234,8 +262,8 @@ export const Task = ({
       <div className={styles.container}>
         <div className={styles.section_right}>
           <Avatar
-            avatarName={avatarName}
-            avatarLink={avatarLink}
+            avatarName={recipientName}
+            avatarLink={avatar}
             extClassName={styles.avatar}
           />
           <p className={`${styles.recipient_name} m-0 text_size_medium`}>
@@ -245,10 +273,15 @@ export const Task = ({
             {recipientPhoneNumber}
           </p>
           <div className={styles.buttons_call}>
-            <RoundButton buttonType="phone" onClick={handleClickPnoneButton} />
+            <RoundButton 
+              buttonType="phone"
+              onClick={handleClickPnoneButton}
+              disabled={completed && confirmed}
+            />
             <RoundButton
               buttonType="message"
               onClick={handleClickMessageButton}
+              disabled={completed && confirmed}
             />
           </div>
         </div>

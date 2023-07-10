@@ -16,11 +16,12 @@ export const PageLayout = ({
   side, 
   content,
 }: PageLayoutProps) => {
-  const isLoading = useAppSelector((state) => state.user.isLoading);
+  const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
+  const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
 
   return (
     <>
-      {isLoading && <Loader />}
+      {(isLoadingUserData || isLoadingTasksData) && <Loader />}
 
       <div className={classnames(styles.main, extClassName)}>
         <div className={styles.side}> {side} </div>

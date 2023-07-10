@@ -1,18 +1,17 @@
-export type TUserRole = "recipient" | "volunteer" | "master" | "admin";
+export type UserRole = "recipient" | "volunteer" | "master" | "admin";
 
-export type TUserInfo = {
+export type UserInfo = {
   id: number;
   fullname: string;
-  role: TUserRole | null;
+  role: UserRole | null;
   vk: string;
   avatar: string;
   phone: string;
   address: string;
   coordinates: number[];
   approved: boolean;
-  checked: boolean;
+  checked?: boolean;
   keys?: boolean;
-  adminStatus: number;
-  scores: number | null;
-  completed: number | null;
+  adminStatus?: number;
+  scores?: number | null;
 };

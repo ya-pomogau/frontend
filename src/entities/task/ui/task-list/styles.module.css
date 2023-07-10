@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+.content:last-child {
+  margin-bottom: 60px;
+}
+
 .content_empty {
   display: flex;
   flex-direction: column;

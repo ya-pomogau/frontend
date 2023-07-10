@@ -1,15 +1,47 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Provider } from 'react-redux';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+
 import { TaskList } from ".";
+
+const MockedState = {
+  tasks: {
+    available: [],
+    active: [],
+    completed: [],
+  },
+  isLoading: false,
+  isFailed: false,
+};
+
+// eslint-disable-next-line react/prop-types
+const Mockstore = ({ initialState, children }: Record<any, any>) => (
+  <Provider
+    store={configureStore({
+      reducer: {
+        tasks: createSlice({
+          name: 'tasks',
+          initialState,
+          reducers: {},
+        }).reducer,
+      },
+    })}
+  >
+    {children}
+  </Provider>
+);
 
 const meta: Meta<typeof TaskList> = {
   title: "Entities/TaskList",
   component: TaskList,
   tags: ["autodocs"],
-
+  decorators: [
+    (story) => <Mockstore initialState={MockedState}>{story()}</Mockstore>,
+  ],
   argTypes: {
     tasks: {
       description:
-        "массив отфильтрованных заявок, фильтрация по значению в объекте 'activeStatus' ",
+        "массив отфильтрованных заявок",
     },
     extClassName: {
       description: "Дополнительный класс для контейнера компонента",
@@ -48,36 +80,86 @@ export const ExampleActive: Story = {
   args: {
     tasks: [
       {
-        category: "категория",
-        date: "24.10.2022",
-        time: "16:00",
-        address: "ул. Потолочного д. 9",
-        title: "Заголовок",
-        description:
-          "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-        count: "3",
-        avatarLink: "https://i.pravatar.cc/300",
-        avatarName: "example",
-        recipientName: "Иванов Иван Иванович",
-        recipientPhoneNumber: "+7(000) 000-00-00",
-        activeStatus: true,
-        confirmStatus: true,
+        id: 14,
+        title: 'Название задачи 14',
+        category: {
+          id: 1,
+          name: 'Название категории 1',
+          scope: 10,
+        },
+        date: '2023-07-09T17:30Z',
+        description: 'Короткое описание для задачи номер 14.',
+        completed: false,
+        confirmed: false,
+        recipient: {
+          id: 4,
+          fullname: 'Реципиентов Алексей Борисович',
+          role: 'recipient',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
+          phone: '+7 (916) 123-45-67',
+          address: 'ул. Нахимова, д. 9',
+          coordinates: [59.941871, 30.223494],
+          approved: true,
+        },
+        volunteer: {
+          id: 7,
+          fullname: 'Волонтеров Петр Петрович',
+          role: 'volunteer',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
+          phone: '+7 (926) 123-45-67',
+          address: 'ул. Кораблестроителей, 19к1',
+          coordinates: [59.942575, 30.216757],
+          approved: true,
+          checked: true,
+          keys: true,
+          scores: 2500,
+        },
+        address: 'ул. Нахимова, д. 9',
+        coordinates: [59.941871, 30.223494],
+        chatId: null,
       },
       {
-        category: "категория",
-        date: "24.10.2022",
-        time: "16:00",
-        address: "ул. Потолочного д. 9",
-        title: "Заголовок",
-        description:
-          "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-        count: "3",
-        avatarLink: "https://i.pravatar.cc/300",
-        avatarName: "example",
-        recipientName: "Иванов Иван Иванович",
-        recipientPhoneNumber: "+7(000) 000-00-00",
-        activeStatus: true,
-        confirmStatus: false,
+        id: 19,
+        title: 'Достаточно длинное название для задачи 19',
+        category: {
+          id: 6,
+          name: 'Название категории 6',
+          scope: 60,
+        },
+        date: '2023-07-06T17:30Z',
+        description: 'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+        completed: true,
+        confirmed: false,
+        recipient: {
+          id: 5,
+          fullname: 'Реципиентов Игорь Витальевич',
+          role: 'recipient',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg',
+          phone: '+7 (916) 123-45-67',
+          address: 'ул. Наличная, 28/16В',
+          coordinates: [59.941335, 30.227995],
+          approved: true,
+        },
+        volunteer: {
+          id: 7,
+          fullname: 'Волонтеров Петр Петрович',
+          role: 'volunteer',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
+          phone: '+7 (926) 123-45-67',
+          address: 'ул. Кораблестроителей, 19к1',
+          coordinates: [59.942575, 30.216757],
+          approved: true,
+          checked: true,
+          keys: true,
+          scores: 2500,
+        },
+        address: 'ул. Наличная, 28/16В',
+        coordinates: [59.941871, 30.223494],
+        chatId: null,
       },
     ],
     handleClickPnoneButton: () => console.log("кликнули на телефон"),
@@ -95,36 +177,86 @@ export const ExampleNotActive: Story = {
   args: {
     tasks: [
       {
-        category: "категория",
-        date: "24.10.2022",
-        time: "16:00",
-        address: "ул. Потолочного д. 9",
-        title: "Заголовок",
-        description:
-          "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-        count: "3",
-        avatarLink: "https://i.pravatar.cc/300",
-        avatarName: "example",
-        recipientName: "Иванов Иван Иванович",
-        recipientPhoneNumber: "+7(000) 000-00-00",
-        activeStatus: false,
-        confirmStatus: true,
+        id: 15,
+        title: 'Задача 15',
+        category: {
+          id: 2,
+          name: 'Название категории 2',
+          scope: 20,
+        },
+        date: '2023-05-31T17:30Z',
+        description: 'Описание задачи 15 (срок задачи прошел, задача завершена и подтверждена)',
+        completed: true,
+        confirmed: true,
+        recipient: {
+          id: 4,
+          fullname: 'Реципиентов Алексей Борисович',
+          role: 'recipient',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
+          phone: '+7 (916) 123-45-67',
+          address: 'ул. Нахимова, д. 9',
+          coordinates: [59.941871, 30.223494],
+          approved: true,
+        },
+        volunteer: {
+          id: 7,
+          fullname: 'Волонтеров Петр Петрович',
+          role: 'volunteer',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
+          phone: '+7 (926) 123-45-67',
+          address: 'ул. Кораблестроителей, 19к1',
+          coordinates: [59.942575, 30.216757],
+          approved: true,
+          checked: true,
+          keys: true,
+          scores: 2500,
+        },
+        address: 'ул. Нахимова, д. 9',
+        coordinates: [59.941871, 30.223494],
+        chatId: 5678,
       },
       {
-        category: "категория",
-        date: "24.10.2022",
-        time: "16:00",
-        address: "ул. Потолочного д. 9",
-        title: "Заголовок",
-        description:
-          "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.",
-        count: "3",
-        avatarLink: "https://i.pravatar.cc/300",
-        avatarName: "example",
-        recipientName: "Иванов Иван Иванович",
-        recipientPhoneNumber: "+7(000) 000-00-00",
-        activeStatus: false,
-        confirmStatus: false,
+        id: 27,
+        title: 'Задача 27',
+        category: {
+          id: 2,
+          name: 'Название категории 2',
+          scope: 20,
+        },
+        date: '2023-07-01T08:00Z',
+        description: 'Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.',
+        completed: true,
+        confirmed: true,
+        recipient: {
+          id: 6,
+          fullname: 'Реципиентов Иван Николаевич',
+          role: 'recipient',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
+          phone: '+7 (999) 123-45-67',
+          address: 'переулок Каховского, 3',
+          coordinates: [59.952520, 30.243239],
+          approved: true,
+        },
+        volunteer: {
+          id: 7,
+          fullname: 'Волонтеров Петр Петрович',
+          role: 'volunteer',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
+          phone: '+7 (926) 123-45-67',
+          address: 'ул. Кораблестроителей, 19к1',
+          coordinates: [59.942575, 30.216757],
+          approved: true,
+          checked: true,
+          keys: true,
+          scores: 2500,
+        },
+        address: 'переулок Каховского, 3',
+        coordinates: [59.95252, 30.243239],
+        chatId: null,
       },
     ],
     handleClickPnoneButton: () => console.log("кликнули на телефон"),
