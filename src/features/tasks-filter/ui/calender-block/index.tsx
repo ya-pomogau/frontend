@@ -56,6 +56,7 @@ export const CalenderBlock = ({onChange, filterDate}: Props) => {
           value={filterDate ? parseISO(filterDate) : getNewDate()}
           isMobile={isCalenderMobil}
           onChangeValue={handleDateChange}
+          inline={window.innerWidth > 768 || false}
         />
       </div>
     </div>

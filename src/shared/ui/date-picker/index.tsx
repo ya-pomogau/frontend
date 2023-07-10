@@ -69,6 +69,7 @@ export interface IDatePickerProps {
   filter?: (date: Date) => boolean;
   extClassName?: string;
   minDate?: Date | null;
+  inline?: boolean;
 }
 
 export function DatePicker({
@@ -77,7 +78,8 @@ export function DatePicker({
   isMobile = false,
   filter,
   extClassName,
-  minDate = subDays(new Date(), 0)
+  minDate = subDays(new Date(), 0),
+  inline = true,
 }: IDatePickerProps) {
   const handleOnChange = (date: Date) => {
     if (date) onChangeValue(date);
@@ -91,7 +93,7 @@ export function DatePicker({
       filterDate={filter}
       showPopperArrow={false}
       locale={ru}
-      inline={window.innerWidth > 768 || false}
+      inline={inline}
       wrapperClassName={styles.datePicker}
       calendarClassName={
         isMobile

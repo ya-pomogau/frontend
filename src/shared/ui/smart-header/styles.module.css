@@ -34,13 +34,17 @@
 .filterButton {
   display: flex;
   border: none;
-  outline: none;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
   justify-content: center;
   align-items: center;
   transition: var(--transition-hover);
+  outline-offset: 5px;
+}
+
+.filterButton:focus {
+  outline: 1px solid var(--colors-interface-primary);
 }
 
 .filterButton:hover {
