@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Tooltip } from "shared/ui/tooltip";
 import { Button } from "shared/ui/button";
@@ -6,23 +6,30 @@ import { RecipientFilter } from "./recipient-filter";
 import { AdminFilter } from "./admin-filter";
 import { IFilterValues, TRole } from "./types";
 import { VolunteerFilter } from "./volunteer-filter";
-import { formatDate, getQuery } from "../libs";
+import { getQuery } from "../libs";
 import styles from "./styles.module.css";
 
-interface TasksFilterProps {
+interface FilterProps {
   userRole: TRole;
-  visible: boolean;
+  visible?: boolean;
+  changeVisible: () => void;
+  position: {top: number, right: number};
 }
 
-export const TasksFilter = ({ userRole, visible }: TasksFilterProps) => {
+export const Filter = ({ userRole, visible=true, changeVisible, position }: FilterProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
-    showByDate: false,
     categories: [],
-    date: "",
-    searchRadius: [],
+    date: '',
+    searchRadius: '',
+    sortBy: ''
+  });
+  const [filterPosition, setFilterPosition] = useState({
+    top: '0px',
+    right: '0px',
   });
 
+  // сохранение выбранных параметров фильтра
   const handleFilterChange = (
     name: string,
     value: string | string[] | boolean
@@ -30,27 +37,37 @@ export const TasksFilter = ({ userRole, visible }: TasksFilterProps) => {
     setFilterValues({ ...filterValues, [name]: value });
   };
 
+  // обработка выбора параметров фильтра: сохранение выбора в адресную строку и закрытие фильтра
   const handleAcceptClick = () => {
     let params = "?";
     Object.entries(filterValues).forEach(([key, value]) => {
-      if (value) {
-        params +=
-          Array.isArray(value) && value.length ? `${key}=${value}&` : "";
+      if (value.length) {
+        params += `${key}=${value}&`;
       }
     });
-
     setSearchParams(params);
+    changeVisible();
   };
-
+  const setPosition = useCallback(() => setFilterPosition({
+    top: `${position.top}px`,
+    right: `${window.innerWidth - position.right - 10}px`
+  }), [position.top, position.right]);
+  useMemo(() => {setPosition()}, [setPosition]);
+  
   useEffect(() => {
     const queryParams = getQuery(searchParams);
-    const dateFromQuery = queryParams?.date as string;
-    setFilterValues({
-      ...filterValues,
-      ...queryParams,
-      date:
-        userRole === "volunteer" ? dateFromQuery || formatDate(new Date()) : "",
-    });
+    if (window.innerWidth > 768) {
+      setFilterValues({
+        ...filterValues,
+        ...queryParams,
+      });
+    } else {
+      setTimeout(() => {setFilterValues({
+          ...filterValues,
+          ...queryParams,
+        });
+      });
+    }
   }, []);
 
   return (
@@ -58,37 +75,40 @@ export const TasksFilter = ({ userRole, visible }: TasksFilterProps) => {
       pointerPosition="right"
       visible={visible}
       extClassName={styles.tooltip}
+      changeVisible={changeVisible}
+      elementStyles={filterPosition}
     >
-      <div className={styles.wrapper}>
-        {userRole === "admin" && (
-          <AdminFilter
-            filter={filterValues.categories}
-            onChange={handleFilterChange}
-          />
-        )}
-        {userRole === "recipient" && (
-          <RecipientFilter
-            filter={filterValues}
-            onChange={handleFilterChange}
-          />
-        )}
-
-        {userRole === "volunteer" && filterValues.date && (
-          <VolunteerFilter
-            filter={filterValues}
-            onChange={handleFilterChange}
-          />
-        )}
-
-        <div className={styles.buttonWrapper}>
-          <Button
-            label="Применить"
-            buttonType="primary"
-            size="medium"
-            onClick={handleAcceptClick}
-          />
+      <form name='formFilter'>
+        <div className={styles.wrapper}>
+          {userRole === "admin" && (
+            <AdminFilter
+              filter={filterValues}
+              onChange={handleFilterChange}
+            />
+          )}
+          {userRole === "recipient" && (
+            <RecipientFilter
+              filter={filterValues}
+              onChange={handleFilterChange}
+            />
+          )}
+          {userRole === "volunteer" && (
+            <VolunteerFilter
+              filter={filterValues}
+              onChange={handleFilterChange}
+            />
+          )}
+          <div className={styles.buttonWrapper}>
+            <Button
+              label="Применить"
+              buttonType="primary"
+              size="medium"
+              actionType="button"
+              onClick={handleAcceptClick}
+            />
+          </div>
         </div>
-      </div>
+      </form>
     </Tooltip>
   );
 };

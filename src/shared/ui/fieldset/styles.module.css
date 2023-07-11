@@ -11,6 +11,10 @@
   border-bottom: 1px solid var(--colors-interface-yorkshire-cloud);
 }
 
+.fieldset:first-of-type .legend {
+  padding-top: 0;
+}
+
 .content {
   display: flex;
   gap: 12px;

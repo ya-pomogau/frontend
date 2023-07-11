@@ -17,7 +17,12 @@ export const getQuery = (search: URLSearchParams): Query => {
   const result: Query = {};
   queryEntries.forEach(([key, value]) => {
     if (Array.isArray(value)) {
-      result[key] = value.length === 1 ? value[0] : value;
+      if (key === 'categories') {
+        value = value[0].split(',');
+        result[key] = value;
+      } else {
+        result[key] = value.length === 1 ? value[0] : value;
+      }
     } else {
       result[key] = typeof value === "boolean" ? !!value : value;
     }

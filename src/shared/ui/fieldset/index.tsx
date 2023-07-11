@@ -14,7 +14,7 @@ const Fieldset: FC<FieldsetProps> = ({
   children,
   ...props
 }) => (
-  <fieldset className={styles.fieldset}>
+  <fieldset {...props} className={styles.fieldset}>
     <legend
       className={classnames(
         styles.legend,

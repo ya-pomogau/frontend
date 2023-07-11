@@ -2,6 +2,7 @@
   padding: 22px 30px 34px 30px;
   max-width: 370px;
   box-sizing: border-box;
+  position: absolute;
 }
 
 .wrapper {
@@ -44,4 +45,14 @@
 .radiusButton {
   width: 65px;
   height: 24px;
+}
+
+.calendar{
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .tooltip {
+    max-width: 320px;
+  }
 }
