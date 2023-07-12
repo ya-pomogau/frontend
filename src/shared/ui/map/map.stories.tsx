@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { YandexMap } from ".";
+import YandexMap from ".";
 
 const meta = {
   title: "uikit/YandexMap",

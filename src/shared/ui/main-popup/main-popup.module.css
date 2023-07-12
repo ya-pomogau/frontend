@@ -16,6 +16,11 @@
   display: flex;
 }
 
+.avatar {
+  width: 52px;
+  height: 52px;
+}
+
 .profileDesc {
   margin-left: 20px;
 }

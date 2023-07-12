@@ -1,6 +1,6 @@
 .taskContainer {
   display: grid;
-  grid-template-columns: 140px 454px;
+  grid-template-columns: 76px 454px;
   margin-top: 20px;
 }
 

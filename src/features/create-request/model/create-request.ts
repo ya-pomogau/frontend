@@ -8,6 +8,7 @@ export type TInitialStateForPopup = {
   time: string;
   date: string;
   address: string;
+  coordinates: [number, number] | undefined;
   typeOfTask: string;
   descriptionForTask: string;
   currentStep: number;
@@ -22,11 +23,12 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   time: "00:00",
   date: moment().format("DD.MM.YYYY"),
   address: "",
+  coordinates: undefined,
   typeOfTask: "",
   descriptionForTask: "",
   currentStep: 1,
   termlessRequest: false,
-  isPopupOpen: true,
+  isPopupOpen: false,
 };
 
 export const createRequestModel = createSlice({
@@ -40,7 +42,8 @@ export const createRequestModel = createSlice({
       state.time = action.payload;
     },
     addAddress(state, action) {
-      state.address = action.payload;
+      state.address = action.payload.additinalAddress;
+      state.coordinates = action.payload.coords
     },
     addTypeOfTask(state, action) {
       state.typeOfTask = action.payload;
@@ -59,9 +62,12 @@ export const createRequestModel = createSlice({
       const decrement = (prev: number) => prev - 1;
       state.currentStep = decrement(state.currentStep);
     },
+    openPopup(state) {
+      state.isPopupOpen = true;
+    },
     closePopup(state) {
       state.currentStep = InitialStateForPopup.currentStep;
-      state.address = InitialStateForPopup.address;
+      // state.address = InitialStateForPopup.address;
       state.date = InitialStateForPopup.date;
       state.descriptionForTask = InitialStateForPopup.descriptionForTask;
       state.termlessRequest = InitialStateForPopup.termlessRequest;
@@ -81,5 +87,6 @@ export const {
   changeStepIncrement,
   changeStepDecrement,
   changeCheckbox,
+  openPopup,
   closePopup,
 } = createRequestModel.actions;

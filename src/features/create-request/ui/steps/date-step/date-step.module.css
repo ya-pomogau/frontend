@@ -1,6 +1,6 @@
 .dateContainer {
   display: grid;
-  grid-template-columns: 140px 96px 50px 308px;
+  grid-template-columns: 76px 96px 50px 308px;
   margin-top: 20px;
 }
 

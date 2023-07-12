@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Button } from "shared/ui/button";
@@ -8,8 +7,8 @@ import {
   changeStepIncrement,
 } from "features/create-request/model";
 
-import { Input } from "shared/ui/input";
-import { YandexMap } from "shared/ui/map";
+import YandexMap from "shared/ui/map";
+import { InputAddress } from "shared/ui/input-address";
 import styles from "./address-step.module.css";
 
 interface IAddressProps {
@@ -17,11 +16,16 @@ interface IAddressProps {
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
-  const { address } = useAppSelector((state) => state.createRequest);
+  const { address, coordinates } = useAppSelector(
+    (state) => state.createRequest
+  );
   const dispatch = useAppDispatch();
 
-  const handleAddressValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(addAddress(e.target.value));
+  const handleAddressValueChange = (
+    additinalAddress: string,
+    coords: [number, number] | undefined = undefined
+  ) => {
+    dispatch(addAddress({ additinalAddress, coords }));
   };
 
   const handleNextStepClick = () => {
@@ -50,7 +54,12 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             </p>
             <div className={styles.headerWrapper} />
             <div className={styles.map}>
-              <YandexMap width="270px" height="395px" />
+              <YandexMap
+                width="270px"
+                height="395px"
+                coordinates={coordinates}
+                mapSettings={ coordinates ? { latitude: coordinates[0], longitude: coordinates[1], zoom: 15 } : undefined}
+              />
               <div className={styles.alertWrapper}>
                 <p
                   className={classNames(
@@ -81,10 +90,9 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           </>
         ) : (
           <>
-            <Input
+            <InputAddress
               label="Укажите место встречи"
-              placeholder="Например: ул. Нахимова, д.9, у подъезда №3"
-              value={address}
+              initialValue={address}
               onChange={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
@@ -113,7 +121,12 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               пишите его полностью.
             </p>
             <div className={styles.map}>
-              <YandexMap width="100%" height="159px" />
+              <YandexMap
+                width="100%"
+                height="159px"
+                coordinates={coordinates}
+                mapSettings={ coordinates ? { latitude: coordinates[0], longitude: coordinates[1], zoom: 15 } : undefined}
+              />
             </div>
           </>
         )}

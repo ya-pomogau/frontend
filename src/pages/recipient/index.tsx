@@ -14,6 +14,8 @@ import { TaskList } from "entities/task/ui/task-list";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
 import { NotFoundPage } from "pages/not-found";
+import { Request } from "features/create-request";
+import { openPopup } from "features/create-request/model";
 
 import styles from "./styles.module.css";
 
@@ -22,6 +24,7 @@ export function RecipientPage() {
   const dispatch = useAppDispatch();
 
   const isAuth = !!(useAppSelector((store) => store.user.role));
+  const { isPopupOpen } = useAppSelector((store) => store.createRequest)
 
   useEffect(() => {
     dispatch(setUserRole('recipient'));
@@ -92,9 +95,11 @@ export function RecipientPage() {
                   handleClickConfirmButton={() => 3}
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
+                  handleClickAddTaskButton={() => dispatch(openPopup())}
                   isStatusActive
                   tasks={[]}
                 />
+                {isPopupOpen && <Request tasks={[{value: "1", label: "2"}]} isMobile={isMobile}/>}
               </ContentLayout>
             }
           />

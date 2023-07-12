@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { closePopup } from "features/create-request/model";
 import { MainPopup } from "shared/ui/main-popup";
@@ -9,17 +10,13 @@ import { CommonStep } from "./common-step/common-step";
 import { DateStep } from "./date-step/date-step";
 import { TaskStep } from "./task-step/task-step";
 
-export interface ICreateRequestProps {
+export interface RequestProps {
   tasks: Array<{ value: string; label: string }>;
-  isMobile: boolean;
+  isMobile?: boolean;
 }
 
-export const CreateRequest = ({
-  tasks,
-  isMobile = true,
-}: ICreateRequestProps) => {
+export const Request = ({ tasks, isMobile = true }: RequestProps) => {
   const dispatch = useAppDispatch();
-
   const { avatarLink, name, phoneNumber, currentStep, isPopupOpen } =
     useAppSelector((state) => state.createRequest);
 
@@ -27,16 +24,30 @@ export const CreateRequest = ({
     dispatch(closePopup());
   };
 
+  const closeByEsc = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      dispatch(closePopup());
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", closeByEsc);
+    return () => {
+      document.removeEventListener("keydown", closeByEsc);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Portal isOpened={isPopupOpen}>
-      <OverlayingPopup isOpened={isPopupOpen}>
+      <OverlayingPopup isOpened={isPopupOpen} onClose={handleCloseClick}>
         <MainPopup
           name={name}
           avatarLink={avatarLink}
           avatarName={name}
           phoneNumber={phoneNumber}
           handleCloseClick={handleCloseClick}
-          isMobile
+          isMobile={isMobile}
         >
           {currentStep === CurrentPage.DATE_STEP && <DateStep />}
           {currentStep === CurrentPage.ADDRESS_STEP && (
