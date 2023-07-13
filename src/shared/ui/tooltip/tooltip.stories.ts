@@ -7,6 +7,9 @@ const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
   tags: ["autodocs"],
   argTypes: {
+    visible: {
+      description: "Определяет видимость окна"
+    },
     children: { type: "string" },
   },
 };
