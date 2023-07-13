@@ -54,7 +54,7 @@
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/*.stories.ts"] }
+      { "devDependencies": ["**/*.stories.ts*"] }
     ],
     "no-unused-vars": "off"
   }

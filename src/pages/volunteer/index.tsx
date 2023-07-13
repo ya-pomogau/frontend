@@ -1,5 +1,6 @@
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useMediaQuery } from "shared/hooks";
 import { UserInfo } from "entities/user";
@@ -15,6 +16,7 @@ import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
 import { Filter } from "features/tasks-filter/ui";
 import { NotFoundPage } from "pages/not-found";
+
 import styles from "./styles.module.css";
 
 export function VolunteerPage() {
@@ -65,7 +67,7 @@ export function VolunteerPage() {
       side={
         <>
           <div className={styles.user}>
-            <UserInfo onClickSettingsButton={() => 1} />
+            <UserInfo />
           </div>
           <ButtonContainer auth={isAuth}>
             <NavLink to="map" className="link">

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Provider } from "react-redux";
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { withRouter } from 'storybook-addon-react-router-v6';
 
 import { UserInfo } from ".";
 
@@ -83,7 +84,13 @@ const mockedRecipientState = {
   isFailed: false,
 };
 
-// eslint-disable-next-line react/prop-types
+const unauthorizedState = {
+  role: null,
+  data: null,
+  isLoading: false,
+  isFailed: false,
+};
+
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
   <Provider
     store={configureStore({
@@ -104,6 +111,7 @@ const meta: Meta<typeof UserInfo> = {
   title: "Entities/UserInfo",
   component: UserInfo,
   tags: ["autodocs"],
+  decorators: [withRouter],
 };
 
 export default meta;
@@ -133,4 +141,8 @@ export const Master: Story = {
   ],
 };
 
-
+export const Unauthorized: Story = {
+  decorators: [
+    (story) => <Mockstore initialState={unauthorizedState}>{story()}</Mockstore>,
+  ],
+};

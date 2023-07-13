@@ -99,7 +99,7 @@ export function AdminPage() {
       side={
         <>
           <div className={styles.user}>
-            <UserInfo onClickSettingsButton={() => 1} />
+            <UserInfo />
           </div>
           <ButtonContainer auth={isAuth}>
             <NavLink to="requests" className="link">

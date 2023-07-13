@@ -53,7 +53,7 @@ export function RecipientPage() {
       side={
         <>
           <div className={styles.user}>
-            <UserInfo onClickSettingsButton={() => 1} />
+            <UserInfo />
           </div>
           <ButtonContainer auth={isAuth}>
             <NavLink to="active" className="link">

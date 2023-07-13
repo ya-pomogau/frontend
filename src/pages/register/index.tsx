@@ -1,8 +1,9 @@
+import { NavLink } from "react-router-dom";
+
 import { UserInfo } from "entities/user";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
-import { NavLink } from "react-router-dom";
 import { Icon } from "shared/ui/icons";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
@@ -11,8 +12,8 @@ import { FormEvent, useState } from "react";
 import { Button } from "shared/ui/button";
 import { VkIcon } from "shared/ui/icons/vk-icon";
 import { InputAddress } from "shared/ui/input-address";
-import styles from "./styles.module.css";
 
+import styles from "./styles.module.css";
 
 export function RegisterPage() {
     const [name, setName] = useState('');
@@ -28,7 +29,7 @@ export function RegisterPage() {
             side={
                 <>
                     <div className={styles.viewer}>
-                        <UserInfo onClickSettingsButton={() => 1} />
+                        <UserInfo />
                     </div>
                     <ButtonContainer>
                         <NavLink to="map" className="link">
