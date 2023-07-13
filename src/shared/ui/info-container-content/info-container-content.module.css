@@ -7,7 +7,14 @@
   padding-bottom: 5px;
 }
 
-.info-phoneNumber-wrapper {
+.info-field-title {
+  display: inline-block;
+  min-width: 53px;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+
+.info-phone-wrapper {
   padding-bottom: 10px;
 }
 
