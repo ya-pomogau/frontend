@@ -14,7 +14,11 @@ import { DatePicker } from "shared/ui/date-picker";
 import { formatDate } from "../../../libs/format-date";
 import styles from "./date-step.module.css";
 
-export const DateStep = () => {
+interface IDateStepProps {
+  isMobile?: boolean;
+}
+
+export const DateStep = ({ isMobile }: IDateStepProps) => {
   const { time, termlessRequest, date } = useAppSelector(
     (state) => state.createRequest
   );
@@ -44,11 +48,9 @@ export const DateStep = () => {
         <div className={styles.wrapperForTime}>
           <p
             className={classNames(
+              styles.time,
               "text",
-              "text_size_small",
               "text_type_regular ",
-              "m-0",
-              styles.time
             )}
           >
             Время
@@ -73,16 +75,14 @@ export const DateStep = () => {
           <p
             className={classNames(
               "text",
-              "text_size_small",
               "text_type_regular ",
-              "m-0",
               styles.date
             )}
           >
             Дата
           </p>
           <div className={styles.headerWrapperForDatePicker} />
-          <DatePicker onChangeValue={handleDateValueChange} value={dateValue} />
+          <DatePicker onChangeValue={handleDateValueChange} value={dateValue} isMobile={isMobile}/>
         </div>
         <div className={styles.checkbox}>
           <Checkbox

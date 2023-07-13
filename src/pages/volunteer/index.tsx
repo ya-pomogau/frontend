@@ -1,9 +1,7 @@
-import { useEffect } from "react";
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useMediaQuery } from "shared/hooks";
-
 import { UserInfo } from "entities/user";
 import { setUserRole } from "entities/user/model";
 import { fetchTasksByVolunteerId } from "entities/task/model";
@@ -15,11 +13,36 @@ import YandexMap from "shared/ui/map";
 import { Icon } from "shared/ui/icons";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
+import { Filter } from "features/tasks-filter/ui";
 import { NotFoundPage } from "pages/not-found";
-
 import styles from "./styles.module.css";
 
 export function VolunteerPage() {
+  const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const buttonFilterRef = useRef<Element>();
+  // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
+  const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
+  // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
+  const getButtonPosition = () => {
+    const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
+    if (buttonRect) {
+      setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+    }
+  };
+  const openFilter = (e: MouseEvent) => {
+    e.stopPropagation();
+    if (isFilterVisibel === false) {
+      buttonFilterRef.current = e.currentTarget;
+      getButtonPosition();
+    }
+    setTimeout(() => setIsFilterVisibel(!isFilterVisibel));
+  };
+  useEffect(() => {
+    window.addEventListener('resize', getButtonPosition);
+    return () => {
+      window.removeEventListener('resize', getButtonPosition);
+    };
+  }, []);
   const isMobile = useMediaQuery("(max-width:1150px)");
   const dispatch = useAppDispatch();
 
@@ -89,21 +112,28 @@ export function VolunteerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon
-                        color="blue"
-                        icon="ActiveApplicationIcon"
-                        size="54"
-                      />
-                    }
-                    settingText="Активные заявки"
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={openFilter}
+                      settingIcon={
+                        <Icon
+                          color="blue"
+                          icon="ActiveApplicationIcon"
+                          size="54"
+                        />
+                      }
+                      settingText="Активные заявки"
+                    />
+                    {isFilterVisibel && <Filter
+                      userRole="volunteer"
+                      changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
+                    />}
+                  </>
                 }
               >
                 <TaskList
@@ -124,21 +154,28 @@ export function VolunteerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon
-                        color="blue"
-                        icon="CompletedApplicationIcon"
-                        size="54"
-                      />
-                    }
-                    settingText="Завершенные заявки"
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={openFilter}
+                      settingIcon={
+                        <Icon
+                          color="blue"
+                          icon="CompletedApplicationIcon"
+                          size="54"
+                        />
+                      }
+                      settingText="Завершенные заявки"
+                    />
+                    {isFilterVisibel && <Filter
+                      userRole="volunteer"
+                      changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
+                    />}
+                  </>
                 }
               >
                 <TaskList
@@ -159,17 +196,24 @@ export function VolunteerPage() {
             element={
               <ContentLayout
                 heading={
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={() => 1}
-                    settingIcon={
-                      <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                    }
-                    settingText="Карта заявок"
-                  />
+                  <>
+                    <SmartHeader
+                      filterIcon={
+                        <Icon color="blue" icon="FilterIcon" size="54" />
+                      }
+                      filterText="Фильтр"
+                      onClick={openFilter}
+                      settingIcon={
+                        <Icon color="blue" icon="MapApplicationIcon" size="54" />
+                      }
+                      settingText="Карта заявок"
+                    />
+                    {isFilterVisibel &&  <Filter
+                      userRole="volunteer"
+                      changeVisible={() => setIsFilterVisibel(false)}
+                      position={buttonPosition}
+                    />}
+                  </>
                 }
               >
                 <YandexMap

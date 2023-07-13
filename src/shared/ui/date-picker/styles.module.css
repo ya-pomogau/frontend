@@ -22,7 +22,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;
 }
 
 .datePicker__headerMonth {
@@ -37,4 +36,15 @@
   font-weight: 400;
   font-size: 12px;
   border-radius: 2px;
+}
+
+.customInput{
+  display: block;
+  width: 260px;
+  text-align: left;
+  border: 1px solid var(--colors-interface-ford-white);
+  padding: 0 0 0 10px;
+  background-color: inherit;
+  color: var(--colors-interface-additional);
+  height: 34px;
 }

@@ -50,7 +50,6 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
             <p
               className={classNames(
                 "text",
-                "text_size_small",
                 "text_type_regular ",
                 "m-0",
                 styles.task

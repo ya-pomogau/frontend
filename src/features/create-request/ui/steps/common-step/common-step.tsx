@@ -29,7 +29,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         className={classNames(
           "text",
           "text_type_regular",
-          "m-0",
           styles.container
         )}
       >
@@ -50,12 +49,11 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               className={classNames(
                 "text",
                 "text_type_bold",
-                "m-0",
                 styles.dateWrapper
               )}
             >
               <p className={classNames("text_size_medium", "m-0")}>{date}</p>
-              <p className={classNames("text_size_medium", "m-0", styles.time)}>
+              <p className={classNames("text_size_medium", styles.time)}>
                 {time}
               </p>
             </div>
@@ -73,7 +71,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               className={classNames(
                 "text_size_medium",
                 "text_type_bold ",
-                "m-0",
                 styles.typeOfTask
               )}
             >
@@ -100,7 +97,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               <p className={classNames("text_size_large", "m-0")}>{date}</p>
-              <p className={classNames("text_size_large", "m-0", styles.time)}>
+              <p className={classNames("text_size_large", styles.time)}>
                 {time}
               </p>
             </div>
@@ -118,7 +115,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               className={classNames(
                 "text_size_medium",
                 "text_type_bold ",
-                "m-0",
                 styles.typeOfTask
               )}
             >
@@ -127,7 +123,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <p
               className={classNames(
                 "text_size_medium",
-                "m-0",
                 styles.descriptionForTask
               )}
             >

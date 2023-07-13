@@ -49,7 +49,7 @@ export const Request = ({ tasks, isMobile = true }: RequestProps) => {
           handleCloseClick={handleCloseClick}
           isMobile={isMobile}
         >
-          {currentStep === CurrentPage.DATE_STEP && <DateStep />}
+          {currentStep === CurrentPage.DATE_STEP && <DateStep isMobile={isMobile}/>}
           {currentStep === CurrentPage.ADDRESS_STEP && (
             <AddressStep isMobile={isMobile} />
           )}

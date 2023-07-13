@@ -44,7 +44,6 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             <p
               className={classNames(
                 "text",
-                "text_size_small",
                 "text_type_regular ",
                 "m-0",
                 styles.place
@@ -53,10 +52,16 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               Место встречи
             </p>
             <div className={styles.headerWrapper} />
+            <InputAddress
+              initialValue={address}
+              onChange={handleAddressValueChange}
+              name="address"
+              extClassName={styles.input}
+            />
             <div className={styles.map}>
               <YandexMap
-                width="270px"
-                height="395px"
+                width="260px"
+                height="350px"
                 coordinates={coordinates}
                 mapSettings={ coordinates ? { latitude: coordinates[0], longitude: coordinates[1], zoom: 15 } : undefined}
               />
@@ -102,11 +107,11 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                 "text",
                 "text_size_small",
                 "text_type_regular ",
-                "m-0",
                 styles.text
               )}
             >
-              * Будьте осторожны, если указываете домашний адрес,
+              * Будьте осторожны, если указываете домашний<br/> 
+              адрес,
               <span
                 className={classNames(
                   "text",

@@ -9,12 +9,17 @@
 
 .addressContainer {
   display: grid;
-  grid-template-columns: 76px 454px;
+  grid-template-columns: 72px 454px;
   margin-top: 20px;
 }
 
 .input {
   grid-column-start: 2;
+}
+
+.place {
+  font-size: 12px;
+  line-height: 14px;
 }
 
 .map {
@@ -24,14 +29,14 @@
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
-  margin-top: 45px;
+  margin-top: 37.5px;
 }
 
 .prevButton {
   margin-right: 20px;
 }
 
-@media (min-width: 361px) and (max-width: 735px) {
+@media (max-width: 735px) {
   .addressContainer {
     display: flex;
     flex-direction: column;
@@ -54,7 +59,7 @@
     margin-top: 4px;
   }
   .map {
-    margin-top: 17px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,7 +73,8 @@
   .alertWrapper {
     width: 270px;
     position: absolute;
-    bottom: calc(100vh - 552px);
+    bottom: 0;
+    left: 0;
     z-index: 3;
   }
   .wrapperForGradient {
@@ -79,9 +85,13 @@
     position: absolute;
     background: linear-gradient(
       0deg,
-      #ffffff 57.81%,
+      #ffffff 10%,
       rgba(255, 255, 255, 0) 100%
     );
     z-index: 2;
+  }
+  .input {
+    width: 100%;
+    margin-top: 10px;
   }
 }

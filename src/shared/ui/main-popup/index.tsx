@@ -34,7 +34,11 @@ export const MainPopup = ({
           onClick={handleCloseClick}
         />
         <div className={classNames(styles.headerWrapper)}>
-          <Avatar avatarLink={avatarLink} avatarName={avatarName} extClassName={styles.avatar}/>
+          <Avatar
+            avatarLink={avatarLink}
+            avatarName={avatarName}
+            extClassName={styles.avatar}
+          />
           <div className={classNames(styles.profileDesc)}>
             <p
               className={classNames(
@@ -73,6 +77,11 @@ export const MainPopup = ({
         </div>
       </>
     )}
+    {isMobile && <SquareButton
+      buttonType="close"
+      extClassName={styles.exitButton}
+      onClick={handleCloseClick}
+    />}
     {children}
   </div>
 );

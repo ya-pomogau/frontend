@@ -1,7 +1,12 @@
 .taskContainer {
   display: grid;
-  grid-template-columns: 76px 454px;
+  grid-template-columns: 76px 450px;
   margin-top: 20px;
+}
+
+.task {
+  font-size: 12px;
+  line-height: 14px;
 }
 
 .select {
@@ -24,7 +29,7 @@
   margin-right: 20px;
 }
 
-@media (min-width: 361px) and (max-width: 735px) {
+@media (max-width: 735px) {
   .taskContainer {
     display: flex;
     flex-direction: column;
@@ -32,10 +37,10 @@
     margin: 0;
   }
   .mainWrapper {
+    width: 260px;
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: space-between;
   }
   .headerWrapper {
     background: linear-gradient(
@@ -55,13 +60,14 @@
   }
   .textarea {
     min-height: 0;
-    height: 125px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     width: 100%;
   }
   .buttonsWrapper {
-    margin-top: 178px;
+    margin-top: 180px;
     justify-content: center;
+    margin-bottom: 8px;
   }
 }

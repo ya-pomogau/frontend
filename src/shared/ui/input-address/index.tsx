@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { YMaps, useYMaps } from "@pbe/react-yandex-maps";
+import { useYMaps } from "@pbe/react-yandex-maps";
 import { Input } from "../input";
 
 interface InputAddressProps {
@@ -14,7 +14,7 @@ interface InputAddressProps {
   inputAttributes?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
-const InputWithSuggest: React.FC<InputAddressProps> = (props) => {
+export const InputAddress: React.FC<InputAddressProps> = (props) => {
   const { initialValue, onChange, inputAttributes = {}, ...otherProps } = props;
   const [address, setAddress] = useState(initialValue);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,9 +57,3 @@ const InputWithSuggest: React.FC<InputAddressProps> = (props) => {
 
   return <Input {...inputProps} />;
 };
-
-export const InputAddress: React.FC<InputAddressProps> = (props) => (
-//   <YMaps enterprise query={{ apikey: "0cdc3c9a-36a5-482d-8090-9c74d8d5f92e" }}>
-    <InputWithSuggest {...props} />
-//   </YMaps>
-);

@@ -68,11 +68,11 @@ export const createRequestModel = createSlice({
     closePopup(state) {
       state.currentStep = InitialStateForPopup.currentStep;
       // state.address = InitialStateForPopup.address;
-      state.date = InitialStateForPopup.date;
-      state.descriptionForTask = InitialStateForPopup.descriptionForTask;
-      state.termlessRequest = InitialStateForPopup.termlessRequest;
-      state.time = InitialStateForPopup.time;
-      state.typeOfTask = InitialStateForPopup.typeOfTask;
+      // state.date = InitialStateForPopup.date;
+      // state.descriptionForTask = InitialStateForPopup.descriptionForTask;
+      // state.termlessRequest = InitialStateForPopup.termlessRequest;
+      // state.time = InitialStateForPopup.time;
+      // state.typeOfTask = InitialStateForPopup.typeOfTask;
       state.isPopupOpen = false;
     },
   },
