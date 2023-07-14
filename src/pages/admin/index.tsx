@@ -1,7 +1,7 @@
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import classnames from "classnames";
-import { Filter } from "features/tasks-filter/ui";
+import { Filter } from "features/filter/ui";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { setUserRole } from "entities/user/model";
 import { PageLayout } from "../../shared/ui/page-layout";
