@@ -1,26 +1,26 @@
 import { useAppSelector } from "app/hooks";
+
 import { InfoContainer } from "shared/ui/info-container";
 import { InfoContainerContent } from "shared/ui/info-container-content";
-import { VolunteerInfo } from "./volunteer-info/volunteer-info";
-import { RecipientInfo } from "./recipient-info/recipient-info";
+import { VolunteerInfo } from "./volunteer-info";
+import { RecipientInfo } from "./recipient-info";
+import { UnauthorizedUser } from "./unauthorized-user";
 
 import styles from "./styles.module.css";
 
-interface UserInfoProps {
-  onClickSettingsButton: () => void;
-}
-
-export const UserInfo = ({
-  onClickSettingsButton,
-}: UserInfoProps) => {
+export const UserInfo = () => {
   const user = useAppSelector((state) => state.user.data);
 
+  const handleOpenSettingClick = () => {
+    console.log('Open settings modal');
+  };
+
   return (
-    user && (
+    user ? (
       <InfoContainer
-        avatarName={user.fullname}
-        link={user.avatar}
-        onClickSettingsButton={onClickSettingsButton}
+        name={user.fullname}
+        avatar={user.avatar}
+        onClickSettingsButton={handleOpenSettingClick}
       >
         <div className={styles.contentWrapper}>
           <InfoContainerContent 
@@ -42,9 +42,13 @@ export const UserInfo = ({
               score={user.scores || 0}
               hasKey={user.keys}
             />
-          )}
+          )} 
         </div>
       </InfoContainer>
+    ) : (
+      <InfoContainer name="Незарегистрированный пользователь">
+        <UnauthorizedUser />
+      </InfoContainer>      
     )
   );
 };
