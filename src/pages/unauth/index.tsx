@@ -59,7 +59,7 @@ export function UnauthPage() {
           <div className={styles.user}>
             <UserInfo />
           </div>
-          <ButtonContainer auth={isAuth}>
+          <ButtonContainer>
             <NavLink to="map" className="link">
               {({ isActive }) => (
                 <CardButton
