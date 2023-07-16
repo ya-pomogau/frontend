@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Button } from "shared/ui/button";
 import {
-  addAddress,
+  setAddress,
   changeStepDecrement,
   changeStepIncrement,
 } from "features/create-request/model";
@@ -23,11 +23,11 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const handleAddressValueChange = (
     additinalAddress: string,
-    coords: [number, number] | undefined = undefined
+    coords?: [number, number]
   ) => {
-    dispatch(addAddress({ additinalAddress, coords }));
+    dispatch(setAddress({ additinalAddress, coords }));
   };
-
+  
   const handleNextStepClick = () => {
     dispatch(changeStepIncrement());
   };
@@ -54,7 +54,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             <div className={styles.headerWrapper} />
             <InputAddress
               initialValue={address}
-              onChange={handleAddressValueChange}
+              inputChange={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
             />
@@ -98,7 +98,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             <InputAddress
               label="Укажите место встречи"
               initialValue={address}
-              onChange={handleAddressValueChange}
+              inputChange={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
             />

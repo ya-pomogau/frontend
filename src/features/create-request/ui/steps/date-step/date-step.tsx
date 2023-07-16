@@ -1,17 +1,16 @@
 import React, { useMemo } from "react";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import moment from "moment";
+import { format, parse } from 'date-fns';
 import {
-  addDate,
-  addTime,
+  setDate,
+  setTime,
   changeCheckbox,
   changeStepIncrement,
 } from "features/create-request/model";
 import { Button } from "shared/ui/button";
 import Checkbox from "shared/ui/checkbox";
 import { DatePicker } from "shared/ui/date-picker";
-import { formatDate } from "../../../libs/format-date";
 import styles from "./date-step.module.css";
 
 interface IDateStepProps {
@@ -21,16 +20,16 @@ interface IDateStepProps {
 export const DateStep = ({ isMobile }: IDateStepProps) => {
   const { time, termlessRequest, date } = useAppSelector(
     (state) => state.createRequest
-  );
+    );
   const dispatch = useAppDispatch();
 
   const handleDateValueChange = (value: Date) => {
-    const formatedDate = moment(value).format("DD.MM.YYYY");
-    dispatch(addDate(formatedDate));
+    const formatedDate = format(value, "dd.MM.yyyy");
+    dispatch(setDate(formatedDate));
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(addTime(e.target.value));
+    dispatch(setTime(e.target.value));
   };
 
   const handleNextStepClick = () => {
@@ -40,7 +39,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   const handleCheckboxChange = () => {
     dispatch(changeCheckbox());
   };
-  const dateValue = useMemo((): Date => formatDate(date), [date]);
+  const dateValue = useMemo((): Date => parse(date, "dd.MM.yyyy", new Date()), [date]);
 
   return (
     <>

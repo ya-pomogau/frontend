@@ -1,5 +1,6 @@
 import React from "react";
 import { Map, YMaps } from "@pbe/react-yandex-maps";
+import { API_KEY } from "config/ymaps";
 
 import type { Task } from "entities/task/types";
 import { isTaskUrgent } from "shared/libs/utils";
@@ -30,7 +31,7 @@ const YandexMap = ({
     enterprise
     query={{
       load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon",
-      apikey: "0cdc3c9a-36a5-482d-8090-9c74d8d5f92e",
+      apikey: API_KEY,
     }}
   >
     <Map

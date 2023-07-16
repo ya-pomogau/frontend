@@ -25,3 +25,13 @@ export const getAllTasks = async (): Promise<Task[]> => {
     throw new Error('API exception');
   }
 };
+
+export const getAllCategories = async (): Promise<{id: number, name: string}[]> => {
+  try {
+    const res = await fetch(`${API_URL}/category`);
+    return await checkResponse(res);
+  } catch (err) {
+    // TODO Exception handling
+    throw new Error('API exception');
+  }
+};

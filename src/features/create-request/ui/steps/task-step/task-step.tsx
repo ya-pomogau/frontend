@@ -2,10 +2,10 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import classNames from "classnames";
 import {
-  addDescriptionForTask,
-  addTypeOfTask,
+  setDescriptionForTask,
   changeStepDecrement,
   changeStepIncrement,
+  setCategory,
 } from "features/create-request/model";
 import { Button } from "shared/ui/button";
 import { Select } from "shared/ui/select";
@@ -13,25 +13,26 @@ import { TextArea } from "shared/ui/text-area";
 import styles from "./task-step.module.css";
 
 interface ITaskStepProps {
-  tasks: Array<{ value: string; label: string }>;
   isMobile?: boolean;
 }
 
-export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, typeOfTask } = useAppSelector(
+export const TaskStep = ({ isMobile }: ITaskStepProps) => {
+  const { descriptionForTask, categories, category } = useAppSelector(
     (state) => state.createRequest
   );
-
   const dispatch = useAppDispatch();
 
+  const optionsForSelect = categories.map((item) => ({ value: String(item.id), label: item.name }))
+  console.log(category)
+
   const handleTaskValueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(addTypeOfTask(e.target.value));
+    dispatch(setCategory({value: e.target.value, label: e.target[+e.target.value].firstChild?.nodeValue}));
   };
 
   const handleTaskDescValueChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    dispatch(addDescriptionForTask(e.target.value));
+    dispatch(setDescriptionForTask(e.target.value));
   };
 
   const handleNextStepClick = () => {
@@ -59,12 +60,12 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
             </p>
             <div className={styles.headerWrapper} />
             <Select
-              selectedValue={typeOfTask}
+              selectedValue={category.value}
               label="Выберите тип задачи"
               placeholder="Выберите тип задачи"
               name="tasks"
               onChange={handleTaskValueChange}
-              options={tasks}
+              options={optionsForSelect}
               extClassName={styles.select}
             />
             <TextArea
@@ -79,12 +80,12 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
         ) : (
           <>
             <Select
-              selectedValue={typeOfTask}
+              selectedValue={category.value}
               label="Выберите тип задачи"
               placeholder="Выберите тип задачи"
               name="tasks"
               onChange={handleTaskValueChange}
-              options={tasks}
+              options={optionsForSelect}
               extClassName={styles.select}
             />
             <TextArea

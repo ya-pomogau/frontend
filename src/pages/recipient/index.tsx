@@ -141,11 +141,7 @@ export function RecipientPage() {
                   tasks={[]}
                 />
                 {isPopupOpen && (
-                  <Request
-                    tasks={[
-                      { value: "Выгулять собаку", label: "Выгулять собаку" },
-                    ]}
-                    isMobile={isMobileForPopup}
+                  <Request isMobile={isMobileForPopup}
                   />
                 )}
               </ContentLayout>

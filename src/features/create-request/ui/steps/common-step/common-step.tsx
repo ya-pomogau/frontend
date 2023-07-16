@@ -12,7 +12,7 @@ interface ICommonStepProps {
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const { time, address, typeOfTask, descriptionForTask, date } =
+  const { time, address, category, descriptionForTask, date } =
     useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
@@ -64,7 +64,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content="Категория"
+              content={category.label}
               extClassName={styles.categories}
             />
             <p
@@ -74,7 +74,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.typeOfTask
               )}
             >
-              {typeOfTask}
+              13
             </p>
             <p
               className={classNames(
@@ -108,7 +108,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content="Категория"
+              content={category.label}
               extClassName={styles.categories}
             />
             <p
@@ -118,7 +118,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.typeOfTask
               )}
             >
-              {typeOfTask}
+              123
             </p>
             <p
               className={classNames(

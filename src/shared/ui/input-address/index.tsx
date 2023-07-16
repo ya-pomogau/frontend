@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import { Input } from "../input";
 
-interface InputAddressProps {
+interface InputAddressProps extends React.InputHTMLAttributes<HTMLInputElement> {
   initialValue: string;
   name: string;
-  onChange: (address: string, coord?: [number, number] | undefined) => void;
+  inputChange: (address: string, coord?: [number, number]) => void;
   label?: string;
   extClassName?: string;
   error?: boolean;
@@ -15,7 +15,7 @@ interface InputAddressProps {
 }
 
 export const InputAddress: React.FC<InputAddressProps> = (props) => {
-  const { initialValue, onChange, inputAttributes = {}, ...otherProps } = props;
+  const { initialValue, inputChange, inputAttributes = {}, ...otherProps } = props;
   const [address, setAddress] = useState(initialValue);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ymaps: any = useYMaps(["SuggestView", "geocode"]);
@@ -37,10 +37,10 @@ export const InputAddress: React.FC<InputAddressProps> = (props) => {
         // Координаты геообъекта.
         const coords = firstGeoObject.geometry.getCoordinates();
 
-        onChange(e.get("item").value, coords);
+        inputChange(e.get("item").value, coords);
       });
     });
-  }, [ymaps, id, onChange]);
+  }, [ymaps, id, inputChange]);
 
   const inputProps = {
     ...inputAttributes,
@@ -49,7 +49,7 @@ export const InputAddress: React.FC<InputAddressProps> = (props) => {
     value: address,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
       setAddress(event.target.value);
-      onChange(event.target.value);
+      inputChange(event.target.value);
     },
     placeholder: "ул. Нахимова, д.9, у подъезда №3",
     type: "text",
