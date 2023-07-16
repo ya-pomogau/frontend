@@ -106,9 +106,7 @@ export function RegisterPage() {
                         />
                     }
                 >
-
-                    <p className={styles.title}>Зарегистрироваться</p>
-
+          <p className={styles.title}>Зарегистрироваться</p>
                     <form className={styles.form} onSubmit={onSubmit}>
                         <Input
                             extClassName={styles.field}
@@ -141,21 +139,21 @@ export function RegisterPage() {
                                 }}
                                 initialValue=''
                                 name='address'
-                                onChange={setAddress}
+                                inputChange={setAddress}
                             />
                             <p className={styles.text}>Укажите адрес и мы подберем ближайшее к вам задание</p>
                         </div>
 
-                        <Button
-                            buttonType="primary"
-                            actionType="submit"
-                            customIcon={<VkIcon color="white" size="24" />}
-                            label="Зарегистрироваться через ВКонтакте"
-                            size="extraLarge"
-                        />
-                    </form>
-                </ContentLayout>
-            }
-        />
-    );
+            <Button
+              buttonType="primary"
+              actionType="submit"
+              customIcon={<VkIcon color="white" size="24" />}
+              label="Зарегистрироваться через ВКонтакте"
+              size="extraLarge"
+            />
+          </form>
+        </ContentLayout>
+      }
+    />
+  );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from "classnames";
 import { ReactNode } from "react";
 import { Portal } from "../portal";
@@ -7,7 +8,6 @@ interface IOverlayingPopupProps {
   children?: ReactNode;
   isOpened?: boolean;
   onClose?: () => void;
-  handleKeyDown?: () => void;
   extClassName?: string;
 }
 
@@ -15,7 +15,6 @@ export const OverlayingPopup = ({
   children,
   onClose,
   isOpened,
-  handleKeyDown,
   extClassName,
 }: IOverlayingPopupProps) => {
   if (!isOpened) {
@@ -33,7 +32,6 @@ export const OverlayingPopup = ({
           role="button"
           tabIndex={0}
           onClick={onClose}
-          onKeyDown={handleKeyDown}
           aria-labelledby="label"
         />
         {children}

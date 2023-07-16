@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "app/hooks";
@@ -15,23 +15,27 @@ import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
 import { Filter } from "features/filter/ui";
 import { NotFoundPage } from "pages/not-found";
+import { Request } from "features/create-request";
+import { openPopup } from "features/create-request/model";
 
 import styles from "./styles.module.css";
 
 export function RecipientPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
+  const isMobileForPopup = useMediaQuery("(max-width:735px)");
+
   const dispatch = useAppDispatch();
 
-  const isAuth = !!(useAppSelector((store) => store.user.role));
+  const isAuth = !!useAppSelector((store) => store.user.role);
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
-  const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
   const getButtonPosition = () => {
     const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
     if (buttonRect) {
-      setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+      setButtonPosition({ top: buttonRect.bottom, right: buttonRect.right });
     }
   };
   const openFilter = (e: MouseEvent) => {
@@ -40,11 +44,13 @@ export function RecipientPage() {
     getButtonPosition();
     setIsFilterVisibel(!isFilterVisibel);
   };
+  const { isPopupOpen } = useAppSelector((store) => store.createRequest);
+
   useEffect(() => {
-    dispatch(setUserRole('recipient'));
-    window.addEventListener('resize', getButtonPosition);
+    dispatch(setUserRole("recipient"));
+    window.addEventListener("resize", getButtonPosition);
     return () => {
-      window.removeEventListener('resize', getButtonPosition);
+      window.removeEventListener("resize", getButtonPosition);
     };
   }, [dispatch]);
 
@@ -60,7 +66,11 @@ export function RecipientPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+                    <Icon
+                      color="white"
+                      icon="ActiveApplicationIcon"
+                      size="54"
+                    />
                   }
                   text="Активные заяки"
                   isActive={isActive}
@@ -71,7 +81,11 @@ export function RecipientPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+                    <Icon
+                      color="white"
+                      icon="CompletedApplicationIcon"
+                      size="54"
+                    />
                   }
                   text="Завершенные заявки"
                   isActive={isActive}
@@ -105,11 +119,13 @@ export function RecipientPage() {
                       }
                       settingText="Активные заявки"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="recipient"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="recipient"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >
@@ -120,9 +136,14 @@ export function RecipientPage() {
                   handleClickConfirmButton={() => 3}
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
+                  handleClickAddTaskButton={() => dispatch(openPopup())}
                   isStatusActive
                   tasks={[]}
                 />
+                {isPopupOpen && (
+                  <Request isMobile={isMobileForPopup}
+                  />
+                )}
               </ContentLayout>
             }
           />
@@ -147,11 +168,13 @@ export function RecipientPage() {
                       }
                       settingText="Завершенные заявки"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="recipient"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="recipient"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >

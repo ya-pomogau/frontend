@@ -1,5 +1,7 @@
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { YMaps } from "@pbe/react-yandex-maps";
+import { API_KEY } from "config/ymaps";
 
 import { store } from "./store";
 import { AppRoutes } from "../pages";
@@ -10,7 +12,15 @@ function App() {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <AppRoutes />
+        <YMaps
+          enterprise
+          query={{
+            load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon",
+            apikey: API_KEY,
+          }}
+        >
+          <AppRoutes />
+        </YMaps>
       </Provider>
     </BrowserRouter>
   );

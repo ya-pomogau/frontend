@@ -1,4 +1,6 @@
+import React from "react";
 import { Map, YMaps } from "@pbe/react-yandex-maps";
+import { API_KEY } from "config/ymaps";
 
 import type { Task } from "entities/task/types";
 import { isTaskUrgent } from "shared/libs/utils";
@@ -14,17 +16,23 @@ type YandexMapProps = {
   };
   tasks?: Task[];
   onClick?: () => void;
+  coordinates?: [number, number];
 };
 
-export const YandexMap = ({
+const YandexMap = ({
   width = 500,
   height = 500,
   mapSettings = { latitude: 59.93, longitude: 30.31, zoom: 15 },
   onClick,
   tasks,
+  coordinates,
 }: YandexMapProps) => (
   <YMaps
-    query={{ load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}
+    enterprise
+    query={{
+      load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon",
+      apikey: API_KEY,
+    }}
   >
     <Map
       state={{
@@ -39,7 +47,7 @@ export const YandexMap = ({
       height={height}
     >
       {tasks?.map((task) => (
-        <Mark 
+        <Mark
           id={task.id}
           coordinates={task.coordinates}
           isUrgentTask={isTaskUrgent(task.date)}
@@ -49,9 +57,12 @@ export const YandexMap = ({
           description={task.description}
           count={task.category.scope}
           onClick={onClick}
-          key={task.id} 
+          key={task.id}
         />
       ))}
+      <Mark coordinates={coordinates} />
     </Map>
   </YMaps>
 );
+
+export default React.memo(YandexMap);

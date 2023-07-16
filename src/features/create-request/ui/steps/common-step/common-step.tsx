@@ -12,7 +12,7 @@ interface ICommonStepProps {
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const { time, address, typeOfTask, descriptionForTask, date } =
+  const { time, address, category, descriptionForTask, date } =
     useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
@@ -29,7 +29,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         className={classNames(
           "text",
           "text_type_regular",
-          "m-0",
           styles.container
         )}
       >
@@ -50,12 +49,11 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               className={classNames(
                 "text",
                 "text_type_bold",
-                "m-0",
                 styles.dateWrapper
               )}
             >
               <p className={classNames("text_size_medium", "m-0")}>{date}</p>
-              <p className={classNames("text_size_medium", "m-0", styles.time)}>
+              <p className={classNames("text_size_medium", styles.time)}>
                 {time}
               </p>
             </div>
@@ -66,18 +64,17 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content="Категория"
+              content={category.label}
               extClassName={styles.categories}
             />
             <p
               className={classNames(
                 "text_size_medium",
                 "text_type_bold ",
-                "m-0",
                 styles.typeOfTask
               )}
             >
-              {typeOfTask}
+              13
             </p>
             <p
               className={classNames(
@@ -100,7 +97,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               <p className={classNames("text_size_large", "m-0")}>{date}</p>
-              <p className={classNames("text_size_large", "m-0", styles.time)}>
+              <p className={classNames("text_size_large", styles.time)}>
                 {time}
               </p>
             </div>
@@ -111,23 +108,21 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content="Категория"
+              content={category.label}
               extClassName={styles.categories}
             />
             <p
               className={classNames(
                 "text_size_medium",
                 "text_type_bold ",
-                "m-0",
                 styles.typeOfTask
               )}
             >
-              {typeOfTask}
+              123
             </p>
             <p
               className={classNames(
                 "text_size_medium",
-                "m-0",
                 styles.descriptionForTask
               )}
             >

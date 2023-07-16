@@ -10,7 +10,7 @@ import { TaskList } from "entities/task/ui/task-list";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
 import { SmartHeader } from "shared/ui/smart-header";
-import { YandexMap } from "shared/ui/map";
+import YandexMap from "shared/ui/map";
 import { Icon } from "shared/ui/icons";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
