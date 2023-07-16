@@ -6,7 +6,6 @@ interface IInfoContainerContent {
   id?: number;
   phone?: string;
   address?: string;
-  extClassName?: string;
 }
 
 export const InfoContainerContent = ({
@@ -14,9 +13,8 @@ export const InfoContainerContent = ({
   id,
   phone,
   address,
-  extClassName,
 }: IInfoContainerContent) => (
-  <div className={extClassName}>
+  <>
     <p
       className={classNames(
         "m-0",
@@ -45,7 +43,7 @@ export const InfoContainerContent = ({
         "text_size_small",
         "text_type_regular",
         "text",
-        styles["info-phoneNumber-wrapper"]
+        styles["info-phone-wrapper"]
       )}
     >
       <span
@@ -53,7 +51,8 @@ export const InfoContainerContent = ({
           "m-0",
           "text_size_small",
           "text_type_bold",
-          "text"
+          "text",
+          styles["info-field-title"]
         )}
       >
         Тел.: &nbsp;
@@ -74,12 +73,13 @@ export const InfoContainerContent = ({
           "m-0",
           "text_size_small",
           "text_type_bold",
-          "text"
+          "text",
+          styles["info-field-title"]
         )}
       >
         Адрес: &nbsp;
       </span>
       {address}
     </p>
-  </div>
+  </>
 );

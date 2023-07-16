@@ -26,6 +26,36 @@ export const getAllTasks = async (): Promise<Task[]> => {
   }
 };
 
+export const getAvailableTasks = async (): Promise<Task[]> => {
+  try {
+    const res = await fetch(`${API_URL}/tasks/available`);
+    return await checkResponse(res);
+  } catch (err) {
+    // TODO Exception handling
+    throw new Error('API exception');
+  }
+};
+
+export const getActiveTasks = async (): Promise<Task[]> => {
+  try {
+    const res = await fetch(`${API_URL}/tasks/active`);
+    return await checkResponse(res);
+  } catch (err) {
+    // TODO Exception handling
+    throw new Error('API exception');
+  }
+};
+
+export const getCompletedTasks = async (): Promise<Task[]> => {
+  try {
+    const res = await fetch(`${API_URL}/tasks/completed`);
+    return await checkResponse(res);
+  } catch (err) {
+    // TODO Exception handling
+    throw new Error('API exception');
+  }
+};
+
 export const getAllCategories = async (): Promise<{id: number, name: string}[]> => {
   try {
     const res = await fetch(`${API_URL}/category`);

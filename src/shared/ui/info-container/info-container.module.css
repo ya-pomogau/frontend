@@ -2,28 +2,22 @@
   max-width: 295px;
   min-height: 362px;
   position: relative;
+  overflow: hidden;
 }
 
-.info-container-image {
+.info-container-border {
   display: block;
-  width: 100%;
-  /* border: 4px solid var(--colors-interface-primary); */
   position: absolute;
   top: 88px;
-  box-sizing: border-box;
+  z-index: -1;
 }
 
 .info-container-avatarWrapper {
   width: 175px;
   height: 175px;
+  margin: 0 auto;
   border-radius: 512px;
   background-color: var(--colors-interface-primary-additional);
-  position: absolute;
-  left: calc(50% - 175px / 2);
-  top: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .info-container-avatar {
@@ -31,27 +25,10 @@
   min-height: 175px;
 }
 
-.info-container-svg {
-  width: 75px;
-  height: 125px;
-}
-
-.info-container-content {
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
+.info-container-settings-button {
   position: absolute;
-  top: 50%;
-  left: 30px;
-  color: var(--colors-interface-primary);
-  max-width: 265px;
-  width: 100%;
-}
-
-.info-container-button-wrapper {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: -8px;
+  left: -7px;
   z-index: 10;
 }
 

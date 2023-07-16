@@ -1,24 +1,32 @@
 .contentWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
   min-height: 147px;
+  box-sizing: border-box;
+  padding: 0 20px 0 30px;
+  margin-top: 3px;
+  color: var(--colors-interface-primary);
+}
+
+.buttonsWrapper {
+  margin: 30px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .volunteerInfo {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: flex-end;
-  margin-right: 46px;
+  margin: auto 0 0 53px;
 }
 
 .recipientInfo {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 30px 9px 0 0;
+position: absolute;
+bottom: 10px;
+right: 10px;
 }
 
 .dataWrapper {
@@ -27,6 +35,10 @@
   gap: 5px;
 }
 
-.count {
-  color: var(--colors-interface-primary);
+.nested-buttons {
+  width: 196px;
+}
+
+.registration-button {
+  color: var(--colors-interface-background);
 }

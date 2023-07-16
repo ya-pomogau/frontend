@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { FadeLoader } from "react-spinners";
+import FadeLoader from "react-spinners/FadeLoader";
 import styles from "./styles.module.css";
 
 export const Loader = () => (

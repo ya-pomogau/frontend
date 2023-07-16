@@ -13,7 +13,7 @@ import { Icon } from "shared/ui/icons";
 import { TaskList } from "entities/task/ui/task-list";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
-import { Filter } from "features/tasks-filter/ui";
+import { Filter } from "features/filter/ui";
 import { NotFoundPage } from "pages/not-found";
 import { Request } from "features/create-request";
 import { openPopup } from "features/create-request/model";
@@ -59,7 +59,7 @@ export function RecipientPage() {
       side={
         <>
           <div className={styles.user}>
-            <UserInfo onClickSettingsButton={() => 1} />
+            <UserInfo />
           </div>
           <ButtonContainer auth={isAuth}>
             <NavLink to="active" className="link">
