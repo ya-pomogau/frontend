@@ -11,7 +11,7 @@ import { YandexMap } from "shared/ui/map";
 import { Icon } from "shared/ui/icons";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
-import { Filter } from "features/tasks-filter/ui";
+import { Filter } from "features/filter/ui";
 
 import styles from "./styles.module.css";
 
