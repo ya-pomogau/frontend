@@ -1,7 +1,9 @@
-import type { ButtonHTMLAttributes } from "react";
-import classnames from "classnames";
-import { EditIcon } from "../icons/edit-icon";
-import styles from "./styles.module.css";
+import type { ButtonHTMLAttributes } from 'react';
+import classnames from 'classnames';
+
+import { EditIcon } from '../icons/edit-icon';
+
+import styles from './styles.module.css';
 
 interface EditButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -17,15 +19,15 @@ export const EditButton = ({
   <button
     type="button"
     className={classnames(
-      styles["edit-button"],
+      styles['edit-button'],
       extClassName,
-      "text",
-      "text_size_small",
-      "p-0"
+      'text',
+      'text_size_small',
+      'p-0'
     )}
     {...props}
   >
-    <div className={styles["edit-buttonContent"]}>
+    <div className={styles['edit-buttonContent']}>
       <EditIcon size="24" color="blue" />
       <span>{label}</span>
     </div>

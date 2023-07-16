@@ -1,4 +1,4 @@
-import { getColor, IIconProps } from "./utils";
+import { getColor, IIconProps } from './utils';
 
 export const CompletedApplicationIcon = ({ color, ...props }: IIconProps) => (
   <svg

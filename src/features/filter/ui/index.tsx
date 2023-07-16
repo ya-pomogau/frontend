@@ -1,28 +1,35 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
-import { Tooltip } from "shared/ui/tooltip";
-import { Button } from "shared/ui/button";
-import { RecipientFilter } from "./recipient-filter";
-import { AdminFilter } from "./admin-filter";
-import { IFilterValues, TRole } from "./types";
-import { VolunteerFilter } from "./volunteer-filter";
-import { getQuery } from "../libs";
-import styles from "./styles.module.css";
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import { Tooltip } from 'shared/ui/tooltip';
+import { Button } from 'shared/ui/button';
+import { RecipientFilter } from './recipient-filter';
+import { AdminFilter } from './admin-filter';
+import { IFilterValues, TRole } from './types';
+import { VolunteerFilter } from './volunteer-filter';
+import { getQuery } from '../libs';
+
+import styles from './styles.module.css';
 
 interface FilterProps {
   userRole: TRole;
   visible?: boolean;
   changeVisible: () => void;
-  position: {top: number, right: number};
+  position: { top: number; right: number };
 }
 
-export const Filter = ({ userRole, visible=true, changeVisible, position }: FilterProps) => {
+export const Filter = ({
+  userRole,
+  visible = true,
+  changeVisible,
+  position,
+}: FilterProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     categories: [],
     date: '',
     searchRadius: '',
-    sortBy: ''
+    sortBy: '',
   });
   const [filterPosition, setFilterPosition] = useState({
     top: '0px',
@@ -39,7 +46,7 @@ export const Filter = ({ userRole, visible=true, changeVisible, position }: Filt
 
   // обработка выбора параметров фильтра: сохранение выбора в адресную строку и закрытие фильтра
   const handleAcceptClick = () => {
-    let params = "?";
+    let params = '?';
     Object.entries(filterValues).forEach(([key, value]) => {
       if (value.length) {
         params += `${key}=${value}&`;
@@ -48,12 +55,18 @@ export const Filter = ({ userRole, visible=true, changeVisible, position }: Filt
     setSearchParams(params);
     changeVisible();
   };
-  const setPosition = useCallback(() => setFilterPosition({
-    top: `${position.top}px`,
-    right: `${window.innerWidth - position.right - 10}px`
-  }), [position.top, position.right]);
-  useMemo(() => {setPosition()}, [setPosition]);
-  
+  const setPosition = useCallback(
+    () =>
+      setFilterPosition({
+        top: `${position.top}px`,
+        right: `${window.innerWidth - position.right - 10}px`,
+      }),
+    [position.top, position.right]
+  );
+  useMemo(() => {
+    setPosition();
+  }, [setPosition]);
+
   useEffect(() => {
     const queryParams = getQuery(searchParams);
     if (window.innerWidth > 768) {
@@ -62,7 +75,8 @@ export const Filter = ({ userRole, visible=true, changeVisible, position }: Filt
         ...queryParams,
       });
     } else {
-      setTimeout(() => {setFilterValues({
+      setTimeout(() => {
+        setFilterValues({
           ...filterValues,
           ...queryParams,
         });
@@ -78,21 +92,18 @@ export const Filter = ({ userRole, visible=true, changeVisible, position }: Filt
       changeVisible={changeVisible}
       elementStyles={filterPosition}
     >
-      <form name='formFilter'>
+      <form name="formFilter">
         <div className={styles.wrapper}>
-          {userRole === "admin" && (
-            <AdminFilter
-              filter={filterValues}
-              onChange={handleFilterChange}
-            />
+          {userRole === 'admin' && (
+            <AdminFilter filter={filterValues} onChange={handleFilterChange} />
           )}
-          {userRole === "recipient" && (
+          {userRole === 'recipient' && (
             <RecipientFilter
               filter={filterValues}
               onChange={handleFilterChange}
             />
           )}
-          {userRole === "volunteer" && (
+          {userRole === 'volunteer' && (
             <VolunteerFilter
               filter={filterValues}
               onChange={handleFilterChange}

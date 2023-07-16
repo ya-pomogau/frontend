@@ -1,8 +1,8 @@
-export interface ILogoProps {
+export interface LogoProps {
   extClassName?: string;
 }
 
-export const Logo = ({ extClassName }: ILogoProps) => (
+export const Logo = ({ extClassName }: LogoProps) => (
   <div className={extClassName}>
     <svg
       width="135"

@@ -1,8 +1,8 @@
-import { Map, YMaps } from "@pbe/react-yandex-maps";
+import { Map, YMaps } from '@pbe/react-yandex-maps';
 
-import type { Task } from "entities/task/types";
-import { isTaskUrgent } from "shared/libs/utils";
-import { Mark } from "./Mark";
+import type { Task } from 'entities/task/types';
+import { isTaskUrgent } from 'shared/libs/utils';
+import { Mark } from './Mark';
 
 type YandexMapProps = {
   width?: string | number;
@@ -24,7 +24,7 @@ export const YandexMap = ({
   tasks,
 }: YandexMapProps) => (
   <YMaps
-    query={{ load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon" }}
+    query={{ load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon' }}
   >
     <Map
       state={{
@@ -39,7 +39,7 @@ export const YandexMap = ({
       height={height}
     >
       {tasks?.map((task) => (
-        <Mark 
+        <Mark
           id={task.id}
           coordinates={task.coordinates}
           isUrgentTask={isTaskUrgent(task.date)}
@@ -49,7 +49,7 @@ export const YandexMap = ({
           description={task.description}
           count={task.category.scope}
           onClick={onClick}
-          key={task.id} 
+          key={task.id}
         />
       ))}
     </Map>

@@ -1,37 +1,37 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import RadioButton from "shared/ui/radio-button";
+import type { Meta, StoryObj } from '@storybook/react';
+import RadioButton from 'shared/ui/radio-button';
 
 const meta: Meta<typeof RadioButton> = {
-  title: "uikit/FormElements/RadioButton",
+  title: 'uikit/FormElements/RadioButton',
   component: RadioButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
-        component: "Радиокнопки для форм и фильтров",
+        component: 'Радиокнопки для форм и фильтров',
       },
     },
   },
   argTypes: {
     label: {
-      description: "Текст для кнопки",
+      description: 'Текст для кнопки',
       required: true,
     },
     checked: {
-      description: "Состояние радиокнопки",
+      description: 'Состояние радиокнопки',
       options: [false, true],
-      control: { type: "radio" },
+      control: { type: 'radio' },
     },
     disabled: {
-      description: "Неактивная (заблокированная) радиокнопка",
+      description: 'Неактивная (заблокированная) радиокнопка',
       options: [false, true],
-      control: { type: "radio" },
+      control: { type: 'radio' },
     },
     id: {
-      description: "Обязательно указывать id",
+      description: 'Обязательно указывать id',
     },
     name: {
-      description: "Указывать одинаковый name для группы радиокнопок",
+      description: 'Указывать одинаковый name для группы радиокнопок',
     },
   },
 };
@@ -41,26 +41,26 @@ type Story = StoryObj<typeof RadioButton>;
 
 export const DefaultRadioButton: Story = {
   args: {
-    label: "1km",
+    label: '1km',
     disabled: false,
-    id: "test-1",
+    id: 'test-1',
   },
 };
 
 export const CheckedRadioButton: Story = {
   args: {
     defaultChecked: true,
-    label: "1km",
+    label: '1km',
     disabled: false,
-    id: "test-2",
+    id: 'test-2',
   },
 };
 
 export const DisabledRadioButton: Story = {
   args: {
     disabled: true,
-    label: "1km",
-    id: "test-3",
+    label: '1km',
+    id: 'test-3',
   },
 };
 

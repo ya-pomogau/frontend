@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { ArrowButton } from ".";
+import { ArrowButton } from '.';
 
 const meta: Meta<typeof ArrowButton> = {
-  title: "uikit/Buttons/ArrowButton",
+  title: 'uikit/Buttons/ArrowButton',
   component: ArrowButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    customIcon: { type: "string" },
-    disabled: { type: "boolean" },
+    customIcon: { type: 'string' },
+    disabled: { type: 'boolean' },
   },
 };
 
@@ -17,13 +17,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    label: "Поиск",
+    label: 'Поиск',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: "Поиск",
+    label: 'Поиск',
     disabled: true,
   },
 };

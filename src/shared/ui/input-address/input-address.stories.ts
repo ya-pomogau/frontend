@@ -1,17 +1,17 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { InputAddress } from ".";
-import styles from "./styles.module.css";
+import { Meta, StoryObj } from '@storybook/react';
+import { InputAddress } from '.';
+import styles from './styles.module.css';
 
 const meta = {
-  title: "uikit/FormElements/InputAddress",
+  title: 'uikit/FormElements/InputAddress',
   component: InputAddress,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     error: {
-      control: "boolean",
+      control: 'boolean',
     },
     customIcon: {
-      type: "string",
+      type: 'string',
     },
   },
 } as Meta<typeof InputAddress>;
@@ -22,26 +22,26 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    name: "address",
-    label: "Адрес",
+    name: 'address',
+    label: 'Адрес',
     error: false,
   },
 };
 
 export const Error: Story = {
   args: {
-    name: "address",
-    label: "Адрес",
+    name: 'address',
+    label: 'Адрес',
     error: true,
     errorText:
-      "Не введен адрес. Пожалуйста, укажите адрес, по которому требуется помощь!",
+      'Не введен адрес. Пожалуйста, укажите адрес, по которому требуется помощь!',
   },
 };
 
 export const Width350px: Story = {
   args: {
-    name: "address",
-    label: "Адрес",
+    name: 'address',
+    label: 'Адрес',
     error: false,
     extClassName: styles.for_storybook,
   },

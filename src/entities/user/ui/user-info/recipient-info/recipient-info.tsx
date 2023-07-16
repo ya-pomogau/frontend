@@ -1,6 +1,7 @@
-import classnames from "classnames";
-import { ProgressIcon } from "shared/ui/icons/progress-icon";
-import styles from "../styles.module.css";
+import classnames from 'classnames';
+import { ProgressIcon } from 'shared/ui/icons/progress-icon';
+
+import styles from '../styles.module.css';
 
 interface RecipientInfoProps {
   tasksCount: number;
@@ -13,7 +14,7 @@ export const RecipientInfo = ({
 }: RecipientInfoProps) => (
   <div className={styles.recipientInfo}>
     <div className={styles.dataWrapper}>
-      <span className={classnames("text", "text_size_small", styles.count)}>
+      <span className={classnames('text', 'text_size_small', styles.count)}>
         {`${completedTasksCount} из ${tasksCount}`}
       </span>
       <ProgressIcon size="32" color="blue" />

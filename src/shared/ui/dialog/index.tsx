@@ -1,8 +1,10 @@
-import classNames from "classnames";
-import { Informer } from "../informer";
-import styles from "./dialog.module.css";
-import { SquareButton } from "../square-buttons";
-import { Button } from "../button";
+import classNames from 'classnames';
+
+import { Informer } from '../informer';
+import { SquareButton } from '../square-buttons';
+import { Button } from '../button';
+
+import styles from './dialog.module.css';
 
 interface IDialogProps {
   title?: string;
@@ -27,9 +29,9 @@ export const Dialog = ({
     )}
     <p
       className={classNames(
-        "text",
-        "text_size_medium",
-        "text_type_bold ",
+        'text',
+        'text_size_medium',
+        'text_type_bold ',
         styles.headerText
       )}
     >

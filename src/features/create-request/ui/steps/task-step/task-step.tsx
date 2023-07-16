@@ -1,16 +1,18 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   addDescriptionForTask,
   addTypeOfTask,
   changeStepDecrement,
   changeStepIncrement,
-} from "features/create-request/model";
-import { Button } from "shared/ui/button";
-import { Select } from "shared/ui/select";
-import { TextArea } from "shared/ui/text-area";
-import styles from "./task-step.module.css";
+} from 'features/create-request/model';
+import { Button } from 'shared/ui/button';
+import { Select } from 'shared/ui/select';
+import { TextArea } from 'shared/ui/text-area';
+
+import styles from './task-step.module.css';
 
 interface ITaskStepProps {
   tasks: Array<{ value: string; label: string }>;
@@ -49,10 +51,10 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
           <>
             <p
               className={classNames(
-                "text",
-                "text_size_small",
-                "text_type_regular ",
-                "m-0",
+                'text',
+                'text_size_small',
+                'text_type_regular ',
+                'm-0',
                 styles.task
               )}
             >

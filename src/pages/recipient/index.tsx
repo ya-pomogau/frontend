@@ -1,37 +1,37 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useMediaQuery } from "shared/hooks";
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useMediaQuery } from 'shared/hooks';
 
-import { UserInfo } from "entities/user";
-import { setUserRole } from "entities/user/model";
-import { ContentLayout } from "shared/ui/content-layout";
-import { PageLayout } from "shared/ui/page-layout";
-import { SmartHeader } from "shared/ui/smart-header";
-import { Icon } from "shared/ui/icons";
-import { TaskList } from "entities/task/ui/task-list";
-import { ButtonContainer } from "shared/ui/button-container";
-import { CardButton } from "shared/ui/card-button";
-import { Filter } from "features/filter/ui";
-import { NotFoundPage } from "pages/not-found";
+import { UserInfo } from 'entities/user';
+import { setUserRole } from 'entities/user/model';
+import { ContentLayout } from 'shared/ui/content-layout';
+import { PageLayout } from 'shared/ui/page-layout';
+import { SmartHeader } from 'shared/ui/smart-header';
+import { Icon } from 'shared/ui/icons';
+import { TaskList } from 'entities/task/ui/task-list';
+import { ButtonContainer } from 'shared/ui/button-container';
+import { CardButton } from 'shared/ui/card-button';
+import { Filter } from 'features/filter/ui';
+import { NotFoundPage } from 'pages/not-found';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export function RecipientPage() {
-  const isMobile = useMediaQuery("(max-width:1150px)");
+  const isMobile = useMediaQuery('(max-width:1150px)');
   const dispatch = useAppDispatch();
 
-  const isAuth = !!(useAppSelector((store) => store.user.role));
+  const isAuth = !!useAppSelector((store) => store.user.role);
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
-  const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
   const getButtonPosition = () => {
     const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
     if (buttonRect) {
-      setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+      setButtonPosition({ top: buttonRect.bottom, right: buttonRect.right });
     }
   };
   const openFilter = (e: MouseEvent) => {
@@ -60,7 +60,11 @@ export function RecipientPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+                    <Icon
+                      color="white"
+                      icon="ActiveApplicationIcon"
+                      size="54"
+                    />
                   }
                   text="Активные заяки"
                   isActive={isActive}
@@ -71,7 +75,11 @@ export function RecipientPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+                    <Icon
+                      color="white"
+                      icon="CompletedApplicationIcon"
+                      size="54"
+                    />
                   }
                   text="Завершенные заявки"
                   isActive={isActive}
@@ -105,11 +113,13 @@ export function RecipientPage() {
                       }
                       settingText="Активные заявки"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="recipient"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="recipient"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >
@@ -147,11 +157,13 @@ export function RecipientPage() {
                       }
                       settingText="Завершенные заявки"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="recipient"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="recipient"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >

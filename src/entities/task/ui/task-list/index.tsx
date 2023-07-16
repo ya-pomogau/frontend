@@ -1,15 +1,15 @@
-import classNames from "classnames";
-import { nanoid } from "nanoid";
+import classNames from 'classnames';
+import { nanoid } from 'nanoid';
 
-import { useAppSelector } from "app/hooks";
+import { useAppSelector } from 'app/hooks';
 
-import { Informer } from "shared/ui/informer";
-import { RoundButton } from "shared/ui/round-button";
-import type { UserRole } from "entities/user/types";
-import type { Task } from "entities/task/types";
-import { TaskItem } from "../task";
+import { Informer } from 'shared/ui/informer';
+import { RoundButton } from 'shared/ui/round-button';
+import type { UserRole } from 'entities/user/types';
+import type { Task } from 'entities/task/types';
+import { TaskItem } from '../task';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface TaskListProps {
   userRole: UserRole;
@@ -46,23 +46,23 @@ export const TaskList = ({
         <ul
           className={classNames(
             styles.content,
-            "list",
-            "p-0",
-            "m-0",
+            'list',
+            'p-0',
+            'm-0',
             extClassName
           )}
         >
-          {userRole === "recipient" && (
+          {userRole === 'recipient' && (
             <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
               <RoundButton
                 buttonType="add"
                 onClick={handleClickAddTaskButton}
-                size={isMobile ? "medium" : "large"}
+                size={isMobile ? 'medium' : 'large'}
                 extClassName={styles.add_task_icon}
               />
               <h2
                 className={`${styles.title_add_list} ${
-                  isMobile ? "text_size_medium" : "text_size_large"
+                  isMobile ? 'text_size_medium' : 'text_size_large'
                 } text_type_regular`}
               >
                 Создать заявку
@@ -70,7 +70,7 @@ export const TaskList = ({
             </li>
           )}
 
-          {tasks.map((item) =>
+          {tasks.map((item) => (
             <li key={nanoid()}>
               <TaskItem
                 category={item.category.name}
@@ -88,7 +88,9 @@ export const TaskList = ({
                 handleClickPnoneButton={handleClickPnoneButton}
                 handleClickMessageButton={handleClickMessageButton}
                 handleClickConfirmButton={
-                  item.completed && !item.confirmed ? handleClickConfirmButton : undefined
+                  item.completed && !item.confirmed
+                    ? handleClickConfirmButton
+                    : undefined
                 }
                 handleClickCloseButton={
                   isStatusActive ? handleClickCloseButton : undefined
@@ -98,8 +100,7 @@ export const TaskList = ({
                 }
               />
             </li>
-            )
-          }
+          ))}
         </ul>
       )}
 
@@ -112,31 +113,34 @@ export const TaskList = ({
         >
           <Informer text="У Вас пока нет заявок" />
 
-          {userRole === "recipient" && 
+          {userRole === 'recipient' && (
             <>
-              <p className={`${styles.title_add_empty} text_size_large text_type_regular`}>
-                {" "}
+              <p
+                className={`${styles.title_add_empty} text_size_large text_type_regular`}
+              >
+                {' '}
                 Хотите создать заявку?
               </p>
               <RoundButton
                 buttonType="add"
                 onClick={handleClickAddTaskButton}
-                size="large" 
+                size="large"
               />
-            </>}
+            </>
+          )}
         </div>
       )}
 
       {!isLoading && tasks.length === 0 && !isStatusActive && (
         <div
-        className={classNames(
-          isMobile ? styles.content_empty_mobile : styles.content_empty,
-          extClassName
-        )}
+          className={classNames(
+            isMobile ? styles.content_empty_mobile : styles.content_empty,
+            extClassName
+          )}
         >
           <Informer text="У Вас нет завершенных заявок" />
         </div>
       )}
     </>
   );
-};  
+};

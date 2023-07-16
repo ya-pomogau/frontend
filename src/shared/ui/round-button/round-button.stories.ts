@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { RoundButton } from ".";
+import { RoundButton } from '.';
 
 const meta: Meta<typeof RoundButton> = {
-  title: "uikit/Buttons/RoundButton",
+  title: 'uikit/Buttons/RoundButton',
   component: RoundButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    customIcon: { type: "string" },
-    disabled: { type: "boolean" },
+    customIcon: { type: 'string' },
+    disabled: { type: 'boolean' },
   },
 };
 
@@ -17,38 +17,38 @@ type Story = StoryObj<typeof meta>;
 
 export const PhoneButton: Story = {
   args: {
-    buttonType: "phone",
+    buttonType: 'phone',
   },
 };
 
 export const MessageButton: Story = {
   args: {
-    buttonType: "message",
+    buttonType: 'message',
   },
 };
 
 export const LocationButton: Story = {
   args: {
-    buttonType: "location",
+    buttonType: 'location',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    buttonType: "location",
+    buttonType: 'location',
     disabled: true,
   },
 };
 
 export const AddButton: Story = {
   args: {
-    buttonType: "add",
+    buttonType: 'add',
   },
 };
 
 export const DefaultButton: Story = {
   args: {
-    buttonType: "default",
-    size: "small",
+    buttonType: 'default',
+    size: 'small',
   },
 };

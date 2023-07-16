@@ -1,7 +1,9 @@
-import { FC, HTMLAttributes, ReactNode } from "react";
-import classnames from "classnames";
-import styles from "./styles.module.css";
-import { FieldsetView } from "./utils";
+import { FC, HTMLAttributes, ReactNode } from 'react';
+import classnames from 'classnames';
+
+import { FieldsetView } from './utils';
+
+import styles from './styles.module.css';
 
 interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
   title: string;
@@ -18,9 +20,9 @@ const Fieldset: FC<FieldsetProps> = ({
     <legend
       className={classnames(
         styles.legend,
-        "text",
-        "text_size_small",
-        "text_type_bold"
+        'text',
+        'text_size_small',
+        'text_type_bold'
       )}
     >
       {title}

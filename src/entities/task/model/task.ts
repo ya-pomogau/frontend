@@ -1,17 +1,14 @@
-import {
-  createSlice,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { api } from "../../../shared/api";
-import type { Task } from "../types";
+import { api } from '../../../shared/api';
+import type { Task } from '../types';
 
 type TasksState = {
   tasks: Task[];
   isLoading: boolean;
   isFailed: boolean;
   error?: string;
-}
+};
 
 const initialState: TasksState = {
   tasks: [],
@@ -44,7 +41,7 @@ export const fetchCompletedTasks = createAsyncThunk(
 );
 
 export const taskModel = createSlice({
-  name: "task",
+  name: 'task',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -87,6 +84,6 @@ export const taskModel = createSlice({
         state.isLoading = false;
         state.isFailed = true;
         state.error = action.error.message;
-      })
+      });
   },
 });

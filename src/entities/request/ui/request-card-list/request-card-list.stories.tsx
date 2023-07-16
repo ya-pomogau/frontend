@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import RequestCardList from "./index";
+import type { Meta, StoryObj } from '@storybook/react';
+import RequestCardList from './index';
 
 const hard = [
   {
-    requestCardId: "ewew1221212",
+    requestCardId: 'ewew1221212',
     user: {
       userAvatar:
-        "https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg",
+        'https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg',
       userId: 1,
-      userName: "TESTOV Test Testovich",
-      userPhoneNumber: "7 777 777 77 77",
+      userName: 'TESTOV Test Testovich',
+      userPhoneNumber: '7 777 777 77 77',
       info: {
         keys: 0,
         completedTasks: 12,
@@ -18,13 +18,13 @@ const hard = [
     },
   },
   {
-    requestCardId: "ewew1221212",
+    requestCardId: 'ewew1221212',
     user: {
       userAvatar:
-        "https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg",
+        'https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg',
       userId: 2,
-      userName: "TESTOV Test Testovich",
-      userPhoneNumber: "7 777 777 77 77",
+      userName: 'TESTOV Test Testovich',
+      userPhoneNumber: '7 777 777 77 77',
       info: {
         keys: 1,
         completedTasks: 22,
@@ -33,13 +33,13 @@ const hard = [
     },
   },
   {
-    requestCardId: "ewew1221212",
+    requestCardId: 'ewew1221212',
     user: {
       userAvatar:
-        "https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg",
+        'https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg',
       userId: 3,
-      userName: "TESTOV Test Testovich",
-      userPhoneNumber: "7 777 777 77 77",
+      userName: 'TESTOV Test Testovich',
+      userPhoneNumber: '7 777 777 77 77',
       info: {
         keys: 0,
         completedTasks: 0,
@@ -48,13 +48,13 @@ const hard = [
     },
   },
   {
-    requestCardId: "ewew1221212",
+    requestCardId: 'ewew1221212',
     user: {
       userAvatar:
-        "https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg",
+        'https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg',
       userId: 4,
-      userName: "TESTOV Test Testovich",
-      userPhoneNumber: "7 777 777 77 77",
+      userName: 'TESTOV Test Testovich',
+      userPhoneNumber: '7 777 777 77 77',
       info: {
         keys: 0,
         completedTasks: 12,
@@ -65,22 +65,22 @@ const hard = [
 ];
 
 const meta: Meta<typeof RequestCardList> = {
-  title: "Entities/RequestCardList",
+  title: 'Entities/RequestCardList',
   component: RequestCardList,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
-        component: "Список карточек с заявками",
+        component: 'Список карточек с заявками',
       },
     },
   },
   argTypes: {
     cards: {
-      name: "cards",
-      description: "Передается массив с карточками",
+      name: 'cards',
+      description: 'Передается массив с карточками',
       table: {
-        type: { summary: "IRequestCard" },
+        type: { summary: 'IRequestCard' },
       },
     },
   },

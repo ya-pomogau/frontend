@@ -1,4 +1,5 @@
 type Query = Record<string, string | string[] | boolean>;
+
 export const getQuery = (search: URLSearchParams): Query => {
   const query: Record<string, string[]> = {};
   const searchEntries = search.entries();
@@ -24,7 +25,7 @@ export const getQuery = (search: URLSearchParams): Query => {
         result[key] = value.length === 1 ? value[0] : value;
       }
     } else {
-      result[key] = typeof value === "boolean" ? !!value : value;
+      result[key] = typeof value === 'boolean' ? !!value : value;
     }
   });
 

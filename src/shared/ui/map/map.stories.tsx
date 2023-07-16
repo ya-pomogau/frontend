@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { YandexMap } from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { YandexMap } from '.';
 
 const meta = {
-  title: "uikit/YandexMap",
+  title: 'uikit/YandexMap',
   component: YandexMap,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     onClick: {
-      description: "Обработчик кнопки Откликнуться",
+      description: 'Обработчик кнопки Откликнуться',
     },
   },
 } as Meta<typeof YandexMap>;
@@ -36,7 +36,8 @@ export const Default: Story = {
           scope: 20,
         },
         date: '2023-07-10T19:30Z',
-        description: 'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!',
+        description:
+          'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!',
         completed: false,
         confirmed: false,
         recipient: {
@@ -44,7 +45,8 @@ export const Default: Story = {
           fullname: 'Реципиентов Игорь Витальевич',
           role: 'recipient',
           vk: 'https://vk.com/id123456789',
-          avatar: 'https://w0.peakpx.com/wallpaper/216/581/,HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg',
+          avatar:
+            'https://w0.peakpx.com/wallpaper/216/581/,HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'ул. Наличная, 28/16В',
           coordinates: [59.941335, 30.227995],
@@ -57,32 +59,32 @@ export const Default: Story = {
       },
       {
         id: 24,
-          title: 'Задача 24',
-          category: {
-            id: 5,
-            name: 'Название категории 5',
-            scope: 50,
-          },
-          date: '2023-07-07T07:00Z',
-          description: 'Описание задачи 24',
-          completed: false,
-          confirmed: false,
-          recipient: {
-            id: 6,
-            fullname: 'Реципиентов Иван Николаевич',
-            role: 'recipient',
-            vk: 'https://vk.com/id123456789',
-            avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
-            phone: '+7 (916) 123-45-67',
-            address: 'переулок Каховского, 3',
-            coordinates: [59.952520, 30.243239],
-            approved: true,
-          },
-          volunteer: null,
+        title: 'Задача 24',
+        category: {
+          id: 5,
+          name: 'Название категории 5',
+          scope: 50,
+        },
+        date: '2023-07-07T07:00Z',
+        description: 'Описание задачи 24',
+        completed: false,
+        confirmed: false,
+        recipient: {
+          id: 6,
+          fullname: 'Реципиентов Иван Николаевич',
+          role: 'recipient',
+          vk: 'https://vk.com/id123456789',
+          avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
+          phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
-          coordinates: [59.952520, 30.243239],
-          chatId: null,
-      }
+          coordinates: [59.95252, 30.243239],
+          approved: true,
+        },
+        volunteer: null,
+        address: 'переулок Каховского, 3',
+        coordinates: [59.95252, 30.243239],
+        chatId: null,
+      },
     ],
   },
 };

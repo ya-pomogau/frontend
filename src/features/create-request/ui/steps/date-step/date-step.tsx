@@ -1,18 +1,20 @@
-import React, { useMemo } from "react";
-import classNames from "classnames";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import moment from "moment";
+import React, { useMemo } from 'react';
+import classNames from 'classnames';
+import moment from 'moment';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   addDate,
   addTime,
   changeCheckbox,
   changeStepIncrement,
-} from "features/create-request/model";
-import { Button } from "shared/ui/button";
-import Checkbox from "shared/ui/checkbox";
-import { DatePicker } from "shared/ui/date-picker";
-import { formatDate } from "../../../libs/format-date";
-import styles from "./date-step.module.css";
+} from 'features/create-request/model';
+import { Button } from 'shared/ui/button';
+import Checkbox from 'shared/ui/checkbox';
+import { DatePicker } from 'shared/ui/date-picker';
+import { formatDate } from '../../../libs/format-date';
+
+import styles from './date-step.module.css';
 
 export const DateStep = () => {
   const { time, termlessRequest, date } = useAppSelector(
@@ -21,7 +23,7 @@ export const DateStep = () => {
   const dispatch = useAppDispatch();
 
   const handleDateValueChange = (value: Date) => {
-    const formatedDate = moment(value).format("DD.MM.YYYY");
+    const formatedDate = moment(value).format('DD.MM.YYYY');
     dispatch(addDate(formatedDate));
   };
 
@@ -44,10 +46,10 @@ export const DateStep = () => {
         <div className={styles.wrapperForTime}>
           <p
             className={classNames(
-              "text",
-              "text_size_small",
-              "text_type_regular ",
-              "m-0",
+              'text',
+              'text_size_small',
+              'text_type_regular ',
+              'm-0',
               styles.time
             )}
           >
@@ -62,9 +64,9 @@ export const DateStep = () => {
             value={time}
             required
             className={classNames(
-              "text",
-              "text_size_small",
-              "text_type_regular ",
+              'text',
+              'text_size_small',
+              'text_type_regular ',
               styles.inputForTime
             )}
           />
@@ -72,10 +74,10 @@ export const DateStep = () => {
         <div className={styles.wrapperForDate}>
           <p
             className={classNames(
-              "text",
-              "text_size_small",
-              "text_type_regular ",
-              "m-0",
+              'text',
+              'text_size_small',
+              'text_type_regular ',
+              'm-0',
               styles.date
             )}
           >

@@ -16,7 +16,8 @@
   padding-right: 20px;
   padding-bottom: 20px;
   width: 190px;
-  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16), 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
 }
 
 @media screen and (min-width: 1440px) {
@@ -35,7 +36,8 @@
   padding-right: 30px;
   padding-bottom: 20px;
   width: 190px;
-  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16), 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
 }
 
 .header__title__container {
@@ -49,9 +51,10 @@
   list-style: none;
   justify-content: center;
 }
+
 .menu__title {
   color: #2e3192;
-  font-family: "Golos";
+  font-family: 'Golos';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -79,7 +82,7 @@
 
 @media (max-width: 900px) {
   .menu__title {
-    font-family: "Golos";
+    font-family: 'Golos';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -91,6 +94,7 @@
     color: #fbfdff;
     z-index: 2;
   }
+
   .header__title__background {
     position: absolute;
     right: -5px;

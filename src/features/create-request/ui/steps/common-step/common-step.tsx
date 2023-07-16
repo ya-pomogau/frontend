@@ -1,10 +1,12 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import classNames from "classnames";
-import { changeStepDecrement, closePopup } from "features/create-request/model";
-import { Button } from "shared/ui/button";
-import { LocationIcon } from "shared/ui/icons/location-icon";
-import { CategoriesBackground } from "shared/ui/categories-background";
-import styles from "./common-step.module.css";
+import classNames from 'classnames';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { changeStepDecrement, closePopup } from 'features/create-request/model';
+import { Button } from 'shared/ui/button';
+import { LocationIcon } from 'shared/ui/icons/location-icon';
+import { CategoriesBackground } from 'shared/ui/categories-background';
+
+import styles from './common-step.module.css';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -27,9 +29,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     <div className={styles.mainWrapper}>
       <div
         className={classNames(
-          "text",
-          "text_type_regular",
-          "m-0",
+          'text',
+          'text_type_regular',
+          'm-0',
           styles.container
         )}
       >
@@ -37,9 +39,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
           <>
             <p
               className={classNames(
-                "text",
-                "text_type_regular ",
-                "m-0",
+                'text',
+                'text_type_regular ',
+                'm-0',
                 styles.task
               )}
             >
@@ -48,20 +50,20 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <div className={styles.headerWrapper} />
             <div
               className={classNames(
-                "text",
-                "text_type_bold",
-                "m-0",
+                'text',
+                'text_type_bold',
+                'm-0',
                 styles.dateWrapper
               )}
             >
-              <p className={classNames("text_size_medium", "m-0")}>{date}</p>
-              <p className={classNames("text_size_medium", "m-0", styles.time)}>
+              <p className={classNames('text_size_medium', 'm-0')}>{date}</p>
+              <p className={classNames('text_size_medium', 'm-0', styles.time)}>
                 {time}
               </p>
             </div>
             <div className={styles.addressWrapper}>
               <LocationIcon color="blue" />
-              <p className={classNames("m-0", "text_size_medium")}>{address}</p>
+              <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
             </div>
             <CategoriesBackground
               theme="primary"
@@ -71,9 +73,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             />
             <p
               className={classNames(
-                "text_size_medium",
-                "text_type_bold ",
-                "m-0",
+                'text_size_medium',
+                'text_type_bold ',
+                'm-0',
                 styles.typeOfTask
               )}
             >
@@ -81,8 +83,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </p>
             <p
               className={classNames(
-                "text_size_medium",
-                "m-0",
+                'text_size_medium',
+                'm-0',
                 styles.descriptionForTask
               )}
             >
@@ -93,20 +95,20 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
           <>
             <div
               className={classNames(
-                "text",
-                "text_type_regular",
-                "m-0",
+                'text',
+                'text_type_regular',
+                'm-0',
                 styles.dateWrapper
               )}
             >
-              <p className={classNames("text_size_large", "m-0")}>{date}</p>
-              <p className={classNames("text_size_large", "m-0", styles.time)}>
+              <p className={classNames('text_size_large', 'm-0')}>{date}</p>
+              <p className={classNames('text_size_large', 'm-0', styles.time)}>
                 {time}
               </p>
             </div>
             <div className={styles.addressWrapper}>
               <LocationIcon color="blue" />
-              <p className={classNames("m-0", "text_size_medium")}>{address}</p>
+              <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
             </div>
             <CategoriesBackground
               theme="primary"
@@ -116,9 +118,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             />
             <p
               className={classNames(
-                "text_size_medium",
-                "text_type_bold ",
-                "m-0",
+                'text_size_medium',
+                'text_type_bold ',
+                'm-0',
                 styles.typeOfTask
               )}
             >
@@ -126,8 +128,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </p>
             <p
               className={classNames(
-                "text_size_medium",
-                "m-0",
+                'text_size_medium',
+                'm-0',
                 styles.descriptionForTask
               )}
             >

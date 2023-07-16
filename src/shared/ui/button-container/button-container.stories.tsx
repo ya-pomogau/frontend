@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ButtonContainer, ButtonContainerProps } from ".";
-import { Default as CardButtonStory } from "../card-button/card-button.stories";
-import { CardButton } from "../card-button/index";
+import type { Meta, StoryObj } from '@storybook/react';
+import { ButtonContainer, ButtonContainerProps } from '.';
+import { Default as CardButtonStory } from '../card-button/card-button.stories';
+import { CardButton } from '../card-button/index';
 
 type WrapperProps = ButtonContainerProps;
 
@@ -18,13 +18,13 @@ export function Wrapper({ border, size, auth }: WrapperProps) {
   );
 }
 const meta: Meta<typeof Wrapper> = {
-  title: "uikit/ButtonContainer",
+  title: 'uikit/ButtonContainer',
   component: Wrapper,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
   args: {
-    auth: false
-  }
+    auth: false,
+  },
 };
 
 export default meta;
@@ -32,12 +32,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Authorized: Story = {
   args: {
-    auth: true
+    auth: true,
   },
 };
 
 export const Unauthorized: Story = {
   args: {
-    auth: false
+    auth: false,
   },
 };

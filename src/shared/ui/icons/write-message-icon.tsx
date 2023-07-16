@@ -1,8 +1,8 @@
-import { getColor, IIconProps } from "./utils";
+import { getColor, IIconProps } from './utils';
 
 export const WriteMessageIcon = ({
   color,
-  size = "24",
+  size = '24',
   ...props
 }: IIconProps) => (
   <svg

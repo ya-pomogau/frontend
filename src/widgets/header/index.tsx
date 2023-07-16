@@ -1,27 +1,28 @@
-import { useState, FC, SyntheticEvent } from "react";
-import { NavLink } from "react-router-dom";
-import { useAppSelector } from "app/hooks";
-import { Logo } from "shared/ui/logo";
-import { SideBar } from "widgets/header/navigation";
-import Menu from "widgets/header/menu";
-import { MenuIcon } from "shared/ui/icons/menu-icon";
-import { Avatar } from "shared/ui/avatar";
-import { UnionIcon } from "shared/ui/icons/union-icon";
-import { useMediaQuery } from "shared/hooks/media-query";
-import { positionConfigTop, linksTop } from "./utils";
-import styles from "./styles.module.css";
+import { useState, FC, SyntheticEvent } from 'react';
+import { NavLink } from 'react-router-dom';
 
+import { useAppSelector } from 'app/hooks';
+import { Logo } from 'shared/ui/logo';
+import { SideBar } from 'widgets/header/navigation';
+import Menu from 'widgets/header/menu';
+import { MenuIcon } from 'shared/ui/icons/menu-icon';
+import { Avatar } from 'shared/ui/avatar';
+import { UnionIcon } from 'shared/ui/icons/union-icon';
+import { useMediaQuery } from 'shared/hooks/media-query';
+import { positionConfigTop, linksTop } from './utils';
+
+import styles from './styles.module.css';
 
 const Header: FC = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
 
-  const isMobile = useMediaQuery("(max-width: 900px)");
+  const isMobile = useMediaQuery('(max-width: 900px)');
   const user = useAppSelector((state) => state.user.data);
 
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
     setMenuActive(!menuActive);
-  }
+  };
 
   return (
     <header className={styles.header}>
@@ -34,7 +35,7 @@ const Header: FC = () => {
                 avatarName={user.fullname}
                 avatarLink={user.avatar}
               />
-            )}{" "}
+            )}{' '}
           </div>
         )}
         <NavLink className={styles.header__logo} to="/">
@@ -48,9 +49,18 @@ const Header: FC = () => {
             className={styles.header__button}
             type="button"
           >
-            {isMobile ? <MenuIcon color="blue" /> : <div className={styles.header__button__container}><span className={styles.header__button__text}>Меню</span><UnionIcon color="blue" /></div>}
+            {isMobile ? (
+              <MenuIcon color="blue" />
+            ) : (
+              <div className={styles.header__button__container}>
+                <span className={styles.header__button__text}>Меню</span>
+                <UnionIcon color="blue" />
+              </div>
+            )}
           </button>
-          {menuActive && <Menu setMenuActive={setMenuActive} menuActive={menuActive} />}
+          {menuActive && (
+            <Menu setMenuActive={setMenuActive} menuActive={menuActive} />
+          )}
         </div>
       </div>
     </header>

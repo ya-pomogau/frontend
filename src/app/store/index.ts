@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 
-import { userModel } from "entities/user/model";
-import { taskModel } from "entities/task/model";
-import { createRequestModel } from "features/create-request/model/create-request";
+import { userModel } from 'entities/user/model';
+import { taskModel } from 'entities/task/model';
+import { createRequestModel } from 'features/create-request/model/create-request';
 
 export const store = configureStore({
   reducer: {

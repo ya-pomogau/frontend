@@ -1,11 +1,13 @@
-import { FC } from "react";
-import { UserCard } from "shared/ui/user-card";
-import { CategoriesBackground } from "shared/ui/categories-background";
-import { Icon } from "shared/ui/icons";
-import classnames from "classnames";
-import { Button } from "shared/ui/button";
-import styles from "./styles.module.css";
-import { IUser } from "../../types";
+import { FC } from 'react';
+import classnames from 'classnames';
+
+import { UserCard } from 'shared/ui/user-card';
+import { CategoriesBackground } from 'shared/ui/categories-background';
+import { Icon } from 'shared/ui/icons';
+import { Button } from 'shared/ui/button';
+import { IUser } from '../../types';
+
+import styles from './styles.module.css';
 
 interface RequestCardProps {
   requestCardId: string;
@@ -18,7 +20,7 @@ const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
   const { keys, completedTasks, score } = info;
   // хардкод: непонятно от чего зависит отображение цвета полоски
   // eslint-disable-next-line no-nested-ternary
-  const theme = keys > 0 ? "success" : score === 0 ? "warning" : "secondary";
+  const theme = keys > 0 ? 'success' : score === 0 ? 'warning' : 'secondary';
   return (
     <UserCard
       userId={userId}
@@ -35,11 +37,11 @@ const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
         <ul
           className={classnames(
             styles.staticInfo,
-            "text",
-            "text_size_small",
-            "list",
-            "p-0",
-            "m-0"
+            'text',
+            'text_size_small',
+            'list',
+            'p-0',
+            'm-0'
           )}
         >
           <li className={styles.staticInfoItem}>
@@ -47,7 +49,7 @@ const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
               color="blue"
               icon="BallsIcon"
               onClick={() => {
-                console.log("test click score icon");
+                console.log('test click score icon');
               }}
               size="32"
             />
@@ -59,7 +61,7 @@ const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
                 color="blue"
                 icon="KeyIcon"
                 onClick={() => {
-                  console.log("test click keys icon");
+                  console.log('test click keys icon');
                 }}
                 size="24"
               />
@@ -71,7 +73,7 @@ const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
               color="blue"
               icon="FinishedApplicationIcon"
               onClick={() => {
-                console.log("test click finishedTasks icon");
+                console.log('test click finishedTasks icon');
               }}
               size="24"
             />
@@ -79,12 +81,12 @@ const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
           </li>
         </ul>
       </div>
-      <ul className={classnames(styles.buttonsWrapper, "list", "m-0", "p-0")}>
+      <ul className={classnames(styles.buttonsWrapper, 'list', 'm-0', 'p-0')}>
         <Button
-          buttonType={keys <= 0 && score > 0 ? "partial" : "primary"}
+          buttonType={keys <= 0 && score > 0 ? 'partial' : 'primary'}
           label="Подтвердить"
           onClick={() => {
-            console.log("on 1 buttonclick");
+            console.log('on 1 buttonclick');
           }}
           disabled={Boolean(keys)}
         />
@@ -92,14 +94,14 @@ const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
           buttonType="secondary"
           label="Заброкировать"
           onClick={() => {
-            console.log("on 2 buttonclick");
+            console.log('on 2 buttonclick');
           }}
         />
         <Button
           buttonType="secondary"
           label="Дать ключи"
           onClick={() => {
-            console.log("on 3 buttonclick");
+            console.log('on 3 buttonclick');
           }}
           disabled={Boolean(keys)}
         />

@@ -9,7 +9,7 @@
 
 .task_container {
   position: relative;
-  font-family: "Golos", sans-serif;
+  font-family: 'Golos', sans-serif;
   width: 310px;
   padding: 30px 30px 20px 30px;
   background-color: white;
@@ -40,7 +40,7 @@
   border: 10px solid transparent;
   border-bottom-color: white;
   bottom: 100%;
-  content: "";
+  content: '';
   position: absolute;
   left: 175px;
 }
@@ -89,7 +89,7 @@
 }
 
 .task_description {
-  font: 16px/20px "Golos", sans-serif;
+  font: 16px/20px 'Golos', sans-serif;
   margin: 0;
   margin-top: 10px;
 }
@@ -149,7 +149,7 @@
   background-color: var(--colors-interface-primary);
   border: none;
   color: white;
-  font-family: "Golos", sans-serif;
+  font-family: 'Golos', sans-serif;
   font-size: 12px;
   line-height: 14px;
   padding: 8px 28px;
@@ -166,7 +166,7 @@
   background-color: #d60080;
   border: none;
   color: white;
-  font-family: "Golos", sans-serif;
+  font-family: 'Golos', sans-serif;
   font-size: 12px;
   line-height: 14px;
   padding: 8px 28px;

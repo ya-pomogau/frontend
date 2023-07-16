@@ -1,9 +1,11 @@
-import classnames from "classnames";
-import React from "react";
-import { Avatar } from "../../../shared/ui/avatar";
-import { Button } from "../../../shared/ui/button";
-import { Input } from "../../../shared/ui/input";
-import styles from "./styles.module.css";
+import React from 'react';
+import classnames from 'classnames';
+
+import { Avatar } from '../../../shared/ui/avatar';
+import { Button } from '../../../shared/ui/button';
+import { Input } from '../../../shared/ui/input';
+
+import styles from './styles.module.css';
 
 interface EditViewerInfoProps {
   extClassName?: string;
@@ -42,28 +44,28 @@ export const EditViewerInfo = ({
           onClick={handlerAvatar}
           className={classnames(
             styles.avatarBlock__button,
-            "text",
-            "text_size_small"
+            'text',
+            'text_size_small'
           )}
           type="button"
         >
           Изменить фото
         </button>
       </div>
-      <ul className={classnames(styles.infoBlock, "list")}>
+      <ul className={classnames(styles.infoBlock, 'list')}>
         <li className={styles.infoBlock__item}>
           <p
             className={classnames(
               styles.infoBlock__text,
-              "text",
-              "text_size_small",
-              "m-0",
-              "p-0",
-              "text_type_bold"
+              'text',
+              'text_size_small',
+              'm-0',
+              'p-0',
+              'text_type_bold'
             )}
           >
-            {" "}
-            Имя:{" "}
+            {' '}
+            Имя:{' '}
           </p>
           <Input
             type="text"
@@ -78,15 +80,15 @@ export const EditViewerInfo = ({
           <p
             className={classnames(
               styles.infoBlock__text,
-              "text",
-              "text_size_small",
-              "m-0",
-              "p-0",
-              "text_type_bold"
+              'text',
+              'text_size_small',
+              'm-0',
+              'p-0',
+              'text_type_bold'
             )}
           >
-            {" "}
-            Тел.:{" "}
+            {' '}
+            Тел.:{' '}
           </p>
           <Input
             type="text"
@@ -101,15 +103,15 @@ export const EditViewerInfo = ({
           <p
             className={classnames(
               styles.infoBlock__text,
-              "text",
-              "text_size_small",
-              "m-0",
-              "p-0",
-              "text_type_bold"
+              'text',
+              'text_size_small',
+              'm-0',
+              'p-0',
+              'text_type_bold'
             )}
           >
-            {" "}
-            Адрес:{" "}
+            {' '}
+            Адрес:{' '}
           </p>
           <Input
             type="text"

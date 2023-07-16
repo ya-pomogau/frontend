@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
-import classnames from "classnames";
+import { ReactNode } from 'react';
+import classnames from 'classnames';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface ContentLayoutProps {
   extClassName?: string;

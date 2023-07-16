@@ -1,34 +1,45 @@
-import { useState, MouseEvent, useRef, useEffect } from "react";
-import { NavLink, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { useState, MouseEvent, useRef, useEffect } from 'react';
+import {
+  NavLink,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useMediaQuery } from "shared/hooks";
-import { UserInfo } from "entities/user";
-import { setUserRole } from "entities/user/model";
-import { fetchAvailableTasks, fetchActiveTasks, fetchCompletedTasks } from "entities/task/model";
-import { TaskList } from "entities/task/ui/task-list";
-import { ContentLayout } from "shared/ui/content-layout";
-import { PageLayout } from "shared/ui/page-layout";
-import { SmartHeader } from "shared/ui/smart-header";
-import { YandexMap } from "shared/ui/map";
-import { Icon } from "shared/ui/icons";
-import { ButtonContainer } from "shared/ui/button-container";
-import { CardButton } from "shared/ui/card-button";
-import { Filter } from "features/filter/ui";
-import { NotFoundPage } from "pages/not-found";
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useMediaQuery } from 'shared/hooks';
 
-import styles from "./styles.module.css";
+import { UserInfo } from 'entities/user';
+import { setUserRole } from 'entities/user/model';
+import {
+  fetchAvailableTasks,
+  fetchActiveTasks,
+  fetchCompletedTasks,
+} from 'entities/task/model';
+import { TaskList } from 'entities/task/ui/task-list';
+import { ContentLayout } from 'shared/ui/content-layout';
+import { PageLayout } from 'shared/ui/page-layout';
+import { SmartHeader } from 'shared/ui/smart-header';
+import { YandexMap } from 'shared/ui/map';
+import { Icon } from 'shared/ui/icons';
+import { ButtonContainer } from 'shared/ui/button-container';
+import { CardButton } from 'shared/ui/card-button';
+import { Filter } from 'features/filter/ui';
+import { NotFoundPage } from 'pages/not-found';
+
+import styles from './styles.module.css';
 
 export function VolunteerPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
-  const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
   const getButtonPosition = () => {
     const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
     if (buttonRect) {
-      setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+      setButtonPosition({ top: buttonRect.bottom, right: buttonRect.right });
     }
   };
   const openFilter = (e: MouseEvent) => {
@@ -45,13 +56,13 @@ export function VolunteerPage() {
       window.removeEventListener('resize', getButtonPosition);
     };
   }, []);
-  const isMobile = useMediaQuery("(max-width:1150px)");
+  const isMobile = useMediaQuery('(max-width:1150px)');
   const dispatch = useAppDispatch();
 
   const { pathname } = useLocation();
 
   const user = useAppSelector((store) => store.user.data);
-  const isAuth = !!(useAppSelector((store) => store.user.role));
+  const isAuth = !!useAppSelector((store) => store.user.role);
   const { tasks } = useAppSelector((store) => store.tasks);
 
   useEffect(() => {
@@ -59,14 +70,14 @@ export function VolunteerPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    if(user) {
-      if(pathname.includes('/map')) {
+    if (user) {
+      if (pathname.includes('/map')) {
         dispatch(fetchAvailableTasks());
       }
-      if(pathname.includes('/active')) {
+      if (pathname.includes('/active')) {
         dispatch(fetchActiveTasks());
       }
-      if(pathname.includes('/completed')) {
+      if (pathname.includes('/completed')) {
         dispatch(fetchCompletedTasks());
       }
     }
@@ -95,7 +106,11 @@ export function VolunteerPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="ActiveApplicationIcon" size="54" />
+                    <Icon
+                      color="white"
+                      icon="ActiveApplicationIcon"
+                      size="54"
+                    />
                   }
                   text="Активные заяки"
                   isActive={isActive}
@@ -106,7 +121,11 @@ export function VolunteerPage() {
               {({ isActive }) => (
                 <CardButton
                   customIcon={
-                    <Icon color="white" icon="CompletedApplicationIcon" size="54" />
+                    <Icon
+                      color="white"
+                      icon="CompletedApplicationIcon"
+                      size="54"
+                    />
                   }
                   text="Завершенные заявки"
                   isActive={isActive}
@@ -140,11 +159,13 @@ export function VolunteerPage() {
                       }
                       settingText="Активные заявки"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="volunteer"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="volunteer"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >
@@ -182,11 +203,13 @@ export function VolunteerPage() {
                       }
                       settingText="Завершенные заявки"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="volunteer"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="volunteer"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >
@@ -216,24 +239,30 @@ export function VolunteerPage() {
                       filterText="Фильтр"
                       onClick={openFilter}
                       settingIcon={
-                        <Icon color="blue" icon="MapApplicationIcon" size="54" />
+                        <Icon
+                          color="blue"
+                          icon="MapApplicationIcon"
+                          size="54"
+                        />
                       }
                       settingText="Карта заявок"
                     />
-                    {isFilterVisibel &&  <Filter
-                      userRole="volunteer"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="volunteer"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >
                 <YandexMap
                   tasks={tasks}
-                  mapSettings={{ 
-                    latitude: user ? user.coordinates[0] : 59.938955, 
-                    longitude: user ? user.coordinates[1] : 30.315644, 
-                    zoom: 15 
+                  mapSettings={{
+                    latitude: user ? user.coordinates[0] : 59.938955,
+                    longitude: user ? user.coordinates[1] : 30.315644,
+                    zoom: 15,
                   }}
                   width="100%"
                   height="100%"

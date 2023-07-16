@@ -1,13 +1,15 @@
-import type { ReactNode, ButtonHTMLAttributes } from "react";
-import classnames from "classnames";
-import styles from "./styles.module.css";
-import { EditIcon } from "../icons/edit-icon";
-import { CloseIcon } from "../icons/close-icon";
-import { DoneIcon } from "../icons/done-icon";
+import type { ReactNode, ButtonHTMLAttributes } from 'react';
+import classnames from 'classnames';
+
+import { EditIcon } from '../icons/edit-icon';
+import { CloseIcon } from '../icons/close-icon';
+import { DoneIcon } from '../icons/done-icon';
+
+import styles from './styles.module.css';
 
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
-  buttonType: "close" | "edit" | "confirm";
+  buttonType: 'close' | 'edit' | 'confirm';
   onClick?: () => void;
   customIcon?: ReactNode;
 }
@@ -27,13 +29,13 @@ export const SquareButton = ({
   <button
     type="button"
     className={classnames(
-      styles["square-button"],
+      styles['square-button'],
       styles[`square-button--${buttonType}`],
       extClassName
     )}
     {...props}
   >
-    <div className={styles["square-buttonImg"]}>
+    <div className={styles['square-buttonImg']}>
       {customIcon || defautlIcons[buttonType]}
     </div>
   </button>

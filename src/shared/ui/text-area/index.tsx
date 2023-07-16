@@ -1,7 +1,9 @@
-import React, { useMemo } from "react";
-import cn from "classnames";
-import { nanoid } from "nanoid";
-import styles from "./styles.module.css";
+/* eslint-disable import/no-named-as-default-member */
+import React, { useMemo } from 'react';
+import cn from 'classnames';
+import { nanoid } from 'nanoid';
+
+import styles from './styles.module.css';
 
 interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
@@ -11,6 +13,7 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   extClassName?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
   (
     { value, name, onChange, label, extClassName, placeholder, ...props },
@@ -19,20 +22,17 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
     const id = nanoid();
 
     const inputClass = label ? styles.input : styles.input_whithout_label;
-    const sign = useMemo(() => (
-      // eslint-disable-next-line no-nested-ternary
-      value
-        ? value.length <= 300
-          ? 300 - value.length
-          : "0"
-        : "300"
-    ), [value]); 
-    
+    const sign = useMemo(
+      () =>
+        // eslint-disable-next-line no-nested-ternary
+        value ? (value.length <= 300 ? 300 - value.length : '0') : '300',
+      [value]
+    );
 
     return (
       <div className={cn(styles.container, extClassName)}>
         {label && (
-          <label className={cn(styles.label, "text")} htmlFor={id}>
+          <label className={cn(styles.label, 'text')} htmlFor={id}>
             {label}
           </label>
         )}
@@ -41,13 +41,13 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
           value={value}
           name={name}
           onChange={onChange}
-          className={cn(inputClass, "text", "text_size_medium")}
+          className={cn(inputClass, 'text', 'text_size_medium')}
           placeholder={placeholder}
           id={id}
           maxLength={300}
           {...props}
         />
-        <p className={cn(styles.sign, "text", "m-0")}>{`${sign} знаков`}</p>
+        <p className={cn(styles.sign, 'text', 'm-0')}>{`${sign} знаков`}</p>
       </div>
     );
   }

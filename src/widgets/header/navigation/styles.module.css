@@ -6,6 +6,7 @@
   padding: 0;
   min-width: fit-content;
 }
+
 .link {
   display: flex;
   flex-direction: column;
@@ -16,19 +17,22 @@
   text-decoration: none;
   list-style: none;
   color: var(--colors-interface-black);
-  font-family: "Golos";
+  font-family: 'Golos';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
   padding: 0;
 }
-.link:nth-child(2){
+
+.link:nth-child(2) {
   min-width: 120px;
 }
+
 .link_active {
   border-bottom: 4px solid var(--colors-interface-primary);
 }
+
 .link__title {
   display: flex;
   justify-content: center;
@@ -36,58 +40,62 @@
   padding: 0 7px 8px;
   border-bottom: 4px solid transparent;
 }
-.link_active .link__title{
+
+.link_active .link__title {
   padding-bottom: 4px;
 }
-.link:not(.link_active):hover .link__title{
+
+.link:not(.link_active):hover .link__title {
   border-bottom: 4px solid var(--colors-interface-primary-additional);
 }
+
 .link__icon {
   display: flex;
   margin-top: auto;
   margin-bottom: auto;
   justify-content: center;
 }
+
 .nav {
   min-width: 200px;
 }
 
-@media screen and (min-width: 900px) and (max-width: 1200px){
-  .link{
+@media screen and (min-width: 900px) and (max-width: 1200px) {
+  .link {
     min-width: unset;
   }
 }
 
 @media (max-width: 900px) {
-  .links{
+  .links {
     align-items: flex-end;
     margin-left: 0;
     margin-right: 10px;
   }
-  .link{
+  .link {
     min-width: unset;
     padding: 0;
     align-items: center;
     max-height: 29px;
     margin-top: 3px;
   }
-  .link:nth-child(1){
+  .link:nth-child(1) {
     margin-right: 6px;
   }
-  .link:nth-child(2){
+  .link:nth-child(2) {
     margin-top: 5px;
   }
-  .link:nth-child(3){
+  .link:nth-child(3) {
     margin-top: 0;
     max-height: 49px;
   }
-  .link:nth-child(4){
+  .link:nth-child(4) {
     margin-top: 0;
   }
-  .link_active .link__icon{
+  .link_active .link__icon {
     margin-bottom: 4px;
   }
-  .link__title{
+  .link__title {
     padding: 0 2px 8px 0;
     border-bottom: 4px solid transparent;
   }
@@ -99,12 +107,13 @@
     margin-bottom: 8px;
     border-bottom: 4px solid transparent;
   }
-  .link:not(.link_active):hover .link__title{
+  .link:not(.link_active):hover .link__title {
     border-bottom: none;
   }
-  .link:not(.link_active):hover .link__icon{
+  .link:not(.link_active):hover .link__icon {
     border-bottom: none;
   }
+
   .link:not(.link_active):hover {
     border-bottom: 4px solid var(--colors-interface-primary-additional);
   }

@@ -1,8 +1,8 @@
 export interface ISideBarElementPosition {
-  flexDirection: "row" | "column" | "row-reverse";
-  justifyContent: "flex-start" | "center" | "flex-end";
+  flexDirection: 'row' | 'column' | 'row-reverse';
+  justifyContent: 'flex-start' | 'center' | 'flex-end';
   gap: number;
-  textAlign: "center" | "right" | "left";
+  textAlign: 'center' | 'right' | 'left';
 }
 export interface ISideBarElementProps {
   title: string;
@@ -11,7 +11,7 @@ export interface ISideBarElementProps {
   position?: ISideBarElementPosition;
 }
 export interface ISideBarPosition {
-  ulflexDirection: "row" | "column" | "row-reverse";
+  ulflexDirection: 'row' | 'column' | 'row-reverse';
   ulgap: number;
   element: ISideBarElementPosition;
 }

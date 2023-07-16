@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
-import cn from "classnames";
-import { nanoid } from "nanoid";
-import styles from "./styles.module.css";
+import React, { useMemo } from 'react';
+import cn from 'classnames';
+import { nanoid } from 'nanoid';
+import styles from './styles.module.css';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
@@ -36,7 +36,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const errorToRender = useMemo(
       () =>
         error && errorText ? (
-          <span className={cn(styles.error, "text")}>{errorText}</span>
+          <span className={cn(styles.error, 'text')}>{errorText}</span>
         ) : null,
       [error, errorText]
     );
@@ -46,7 +46,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={extClassName}>
         {label && (
-          <label className={cn(styles.label, "text")} htmlFor={id}>
+          <label className={cn(styles.label, 'text')} htmlFor={id}>
             {label}
           </label>
         )}
@@ -56,7 +56,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type={type}
             name={name}
             value={value}
-            className={cn(inputClass, "text", "text_size_medium")}
+            className={cn(inputClass, 'text', 'text_size_medium')}
             onChange={onChange}
             placeholder={placeholder}
             id={id}

@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import moment from "moment";
+import { createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 export type TInitialStateForPopup = {
   name: string;
@@ -16,21 +16,21 @@ export type TInitialStateForPopup = {
 };
 
 export const InitialStateForPopup: TInitialStateForPopup = {
-  name: "Иванов Иван Иванович",
-  avatarLink: "https://i.pravatar.cc/300",
-  phoneNumber: "+7(000) 000-00-00",
-  time: "00:00",
-  date: moment().format("DD.MM.YYYY"),
-  address: "",
-  typeOfTask: "",
-  descriptionForTask: "",
+  name: 'Иванов Иван Иванович',
+  avatarLink: 'https://i.pravatar.cc/300',
+  phoneNumber: '+7(000) 000-00-00',
+  time: '00:00',
+  date: moment().format('DD.MM.YYYY'),
+  address: '',
+  typeOfTask: '',
+  descriptionForTask: '',
   currentStep: 1,
   termlessRequest: false,
   isPopupOpen: true,
 };
 
 export const createRequestModel = createSlice({
-  name: "create-request",
+  name: 'create-request',
   initialState: InitialStateForPopup,
   reducers: {
     addDate(state, action) {
