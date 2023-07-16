@@ -13,7 +13,7 @@ import { Icon } from "shared/ui/icons";
 import { TaskList } from "entities/task/ui/task-list";
 import { ButtonContainer } from "shared/ui/button-container";
 import { CardButton } from "shared/ui/card-button";
-import { Filter } from "features/tasks-filter/ui";
+import { Filter } from "features/filter/ui";
 import { NotFoundPage } from "pages/not-found";
 
 import styles from "./styles.module.css";
