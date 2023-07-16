@@ -2,37 +2,44 @@ import {
   createSlice,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
-import isFuture from "date-fns/isFuture";
 
 import { api } from "../../../shared/api";
 import type { Task } from "../types";
 
 type TasksState = {
-  tasks: {
-    available: Task[],
-    active: Task[],
-    completed: Task[],
-  };
+  tasks: Task[];
   isLoading: boolean;
   isFailed: boolean;
   error?: string;
 }
 
 const initialState: TasksState = {
-  tasks: {
-    available: [],
-    active: [],
-    completed: [],
-  },
+  tasks: [],
   isLoading: false,
   isFailed: false,
 };
 
-export const fetchTasksByVolunteerId = createAsyncThunk(
-  'task/fetchData',
-  async (id: number) => {
-    const response = await api.getAllTasks();
-    return { id, tasks: response };
+export const fetchAvailableTasks = createAsyncThunk(
+  'task/fetchData/available',
+  async () => {
+    const response = await api.getAvailableTasks();
+    return response;
+  }
+);
+
+export const fetchActiveTasks = createAsyncThunk(
+  'task/fetchData/active',
+  async () => {
+    const response = await api.getActiveTasks();
+    return response;
+  }
+);
+
+export const fetchCompletedTasks = createAsyncThunk(
+  'task/fetchData/completed',
+  async () => {
+    const response = await api.getCompletedTasks();
+    return response;
   }
 );
 
@@ -42,31 +49,41 @@ export const taskModel = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTasksByVolunteerId.pending, (state) => {
+      .addCase(fetchAvailableTasks.pending, (state) => {
         state.isLoading = true;
         state.isFailed = false;
       })
-      .addCase(fetchTasksByVolunteerId.fulfilled, (state, action) => {
-        const { id, tasks } = action.payload;
-
-        state.tasks = {
-          available: tasks.filter((task) => 
-            task.volunteer === null &&
-            isFuture(new Date(task.date))
-          ),
-          active: tasks.filter((task) => 
-            task.volunteer?.id === id &&
-            (!task.completed || !task.confirmed)
-          ),
-          completed: tasks.filter((task) => 
-            task.volunteer?.id === id &&
-            task.completed &&
-            task.confirmed
-          ),
-        };
+      .addCase(fetchAvailableTasks.fulfilled, (state, action) => {
+        state.tasks = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchTasksByVolunteerId.rejected, (state, action) => {
+      .addCase(fetchAvailableTasks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isFailed = true;
+        state.error = action.error.message;
+      })
+      .addCase(fetchActiveTasks.pending, (state) => {
+        state.isLoading = true;
+        state.isFailed = false;
+      })
+      .addCase(fetchActiveTasks.fulfilled, (state, action) => {
+        state.tasks = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchActiveTasks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isFailed = true;
+        state.error = action.error.message;
+      })
+      .addCase(fetchCompletedTasks.pending, (state) => {
+        state.isLoading = true;
+        state.isFailed = false;
+      })
+      .addCase(fetchCompletedTasks.fulfilled, (state, action) => {
+        state.tasks = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchCompletedTasks.rejected, (state, action) => {
         state.isLoading = false;
         state.isFailed = true;
         state.error = action.error.message;

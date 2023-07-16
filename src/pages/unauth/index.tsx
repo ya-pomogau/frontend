@@ -1,7 +1,8 @@
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import { useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { fetchAvailableTasks } from "entities/task/model";
 import { UserInfo } from "entities/user";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -17,6 +18,8 @@ import styles from "./styles.module.css";
 export function UnauthPage() {
   const isAuth = !!(useAppSelector((store) => store.user.role));
   const { tasks } = useAppSelector((store) => store.tasks);
+
+  const dispatch = useAppDispatch();
 
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
@@ -50,6 +53,10 @@ export function UnauthPage() {
     return () => {
       window.removeEventListener('resize', getButtonPosition);
     };
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchAvailableTasks());
   }, []);
 
   return (
@@ -135,7 +142,7 @@ export function UnauthPage() {
           }
         >
           <YandexMap
-            tasks={tasks.available}
+            tasks={tasks}
             width="100%"
             height="100%"
             onClick={() => 3}

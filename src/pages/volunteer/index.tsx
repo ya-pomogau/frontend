@@ -1,11 +1,11 @@
 import { useState, MouseEvent, useRef, useEffect } from "react";
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { NavLink, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useMediaQuery } from "shared/hooks";
 import { UserInfo } from "entities/user";
 import { setUserRole } from "entities/user/model";
-import { fetchTasksByVolunteerId } from "entities/task/model";
+import { fetchAvailableTasks, fetchActiveTasks, fetchCompletedTasks } from "entities/task/model";
 import { TaskList } from "entities/task/ui/task-list";
 import { ContentLayout } from "shared/ui/content-layout";
 import { PageLayout } from "shared/ui/page-layout";
@@ -48,6 +48,8 @@ export function VolunteerPage() {
   const isMobile = useMediaQuery("(max-width:1150px)");
   const dispatch = useAppDispatch();
 
+  const { pathname } = useLocation();
+
   const user = useAppSelector((store) => store.user.data);
   const isAuth = !!(useAppSelector((store) => store.user.role));
   const { tasks } = useAppSelector((store) => store.tasks);
@@ -58,9 +60,17 @@ export function VolunteerPage() {
 
   useEffect(() => {
     if(user) {
-      dispatch(fetchTasksByVolunteerId(user.id));
+      if(pathname.includes('/map')) {
+        dispatch(fetchAvailableTasks());
+      }
+      if(pathname.includes('/active')) {
+        dispatch(fetchActiveTasks());
+      }
+      if(pathname.includes('/completed')) {
+        dispatch(fetchCompletedTasks());
+      }
     }
-  }, [dispatch, user]);
+  }, [dispatch, pathname, user]);
 
   return (
     <PageLayout
@@ -146,7 +156,7 @@ export function VolunteerPage() {
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
                   isStatusActive
-                  tasks={tasks.active}
+                  tasks={tasks}
                 />
               </ContentLayout>
             }
@@ -188,7 +198,7 @@ export function VolunteerPage() {
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
                   isStatusActive={false}
-                  tasks={tasks.completed}
+                  tasks={tasks}
                 />
               </ContentLayout>
             }
@@ -219,7 +229,7 @@ export function VolunteerPage() {
                 }
               >
                 <YandexMap
-                  tasks={tasks.available}
+                  tasks={tasks}
                   mapSettings={{ 
                     latitude: user ? user.coordinates[0] : 59.938955, 
                     longitude: user ? user.coordinates[1] : 30.315644, 
