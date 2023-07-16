@@ -1,51 +1,69 @@
-import { createSlice } from '@reduxjs/toolkit';
-import moment from 'moment';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { format } from 'date-fns';
+import { api } from '../../../shared/api';
 
 export type TInitialStateForPopup = {
-  name: string;
-  avatarLink: string;
-  phoneNumber: string;
   time: string;
   date: string;
   address: string;
-  typeOfTask: string;
+  coordinates: [number, number] | undefined;
+  categories: {
+    id: number;
+    name: string;
+  }[];
+  category: {
+    value: string;
+    label: string;
+  };
   descriptionForTask: string;
   currentStep: number;
   termlessRequest: boolean;
   isPopupOpen: boolean;
 };
 
+export const fetchCategories = createAsyncThunk(
+  'create-request/fetchCategory',
+  async () => {
+    const data = await api.getAllCategories();
+    return data;
+  }
+);
+
 export const InitialStateForPopup: TInitialStateForPopup = {
-  name: 'Иванов Иван Иванович',
-  avatarLink: 'https://i.pravatar.cc/300',
-  phoneNumber: '+7(000) 000-00-00',
-  time: '00:00',
-  date: moment().format('DD.MM.YYYY'),
+  time: '',
+  date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
-  typeOfTask: '',
+  coordinates: undefined,
+  categories: [],
+  category: {
+    value: '',
+    label: '',
+  },
   descriptionForTask: '',
   currentStep: 1,
   termlessRequest: false,
-  isPopupOpen: true,
+  isPopupOpen: false,
 };
 
 export const createRequestModel = createSlice({
   name: 'create-request',
   initialState: InitialStateForPopup,
   reducers: {
-    addDate(state, action) {
+    setDate(state, action) {
       state.date = action.payload;
     },
-    addTime(state, action) {
+    setTime(state, action) {
       state.time = action.payload;
     },
-    addAddress(state, action) {
-      state.address = action.payload;
+    setAddress(state, action) {
+      state.address = action.payload.additinalAddress;
+      state.coordinates = action.payload.coords;
     },
-    addTypeOfTask(state, action) {
-      state.typeOfTask = action.payload;
+    setCategory(state, action) {
+      state.category.value = action.payload.value;
+      state.category.label = action.payload.label;
     },
-    addDescriptionForTask(state, action) {
+    setDescriptionForTask(state, action) {
       state.descriptionForTask = action.payload;
     },
     changeCheckbox(state) {
@@ -59,27 +77,30 @@ export const createRequestModel = createSlice({
       const decrement = (prev: number) => prev - 1;
       state.currentStep = decrement(state.currentStep);
     },
+    openPopup(state) {
+      state.isPopupOpen = true;
+    },
     closePopup(state) {
       state.currentStep = InitialStateForPopup.currentStep;
-      state.address = InitialStateForPopup.address;
-      state.date = InitialStateForPopup.date;
-      state.descriptionForTask = InitialStateForPopup.descriptionForTask;
-      state.termlessRequest = InitialStateForPopup.termlessRequest;
-      state.time = InitialStateForPopup.time;
-      state.typeOfTask = InitialStateForPopup.typeOfTask;
       state.isPopupOpen = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchCategories.fulfilled, (state, action) => {
+      state.categories = action.payload;
+    });
   },
 });
 
 export const {
-  addAddress,
-  addDate,
-  addDescriptionForTask,
-  addTime,
-  addTypeOfTask,
+  setAddress,
+  setDate,
+  setDescriptionForTask,
+  setTime,
+  setCategory,
   changeStepIncrement,
   changeStepDecrement,
   changeCheckbox,
+  openPopup,
   closePopup,
 } = createRequestModel.actions;

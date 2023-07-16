@@ -6,9 +6,9 @@ import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import './styles.css';
 
 type MarkProps = {
-  id: number;
-  coordinates: [number, number];
-  isUrgentTask: boolean;
+  id?: number;
+  coordinates?: [number, number];
+  isUrgentTask?: boolean;
   fullName?: string;
   phone?: string;
   avatar?: string;
@@ -130,11 +130,11 @@ export const Mark = React.memo(
           buttonRead.addEventListener('click', onReadClick);
 
           // Добавляем слушатель на кпонку "Закрыть окно".
-          const buttonClose = taskContainer.querySelector('.close_icon');
+          const buttonClose = taskContainer.querySelector(".close_icon");
           const onCloseClick = () => {
             this.getData().map.balloon.close();
           };
-          buttonClose.addEventListener('click', onCloseClick);
+          buttonClose.addEventListener("click", onCloseClick);
 
           // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
           const button = taskContainer

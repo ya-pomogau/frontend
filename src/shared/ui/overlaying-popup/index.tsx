@@ -1,13 +1,14 @@
-import classNames from 'classnames';
 import { ReactNode } from 'react';
+import classNames from 'classnames';
+
 import { Portal } from '../portal';
+
 import styles from './overlaying-popup.module.css';
 
 interface OverlayingPopupProps {
   children?: ReactNode;
   isOpened?: boolean;
   onClose?: () => void;
-  handleKeyDown?: () => void;
   extClassName?: string;
 }
 
@@ -15,7 +16,6 @@ export const OverlayingPopup = ({
   children,
   onClose,
   isOpened,
-  handleKeyDown,
   extClassName,
 }: OverlayingPopupProps) => {
   if (!isOpened) {
@@ -34,7 +34,6 @@ export const OverlayingPopup = ({
           role="button"
           tabIndex={0}
           onClick={onClose}
-          onKeyDown={handleKeyDown}
           aria-labelledby="label"
         ></div>
         {children}

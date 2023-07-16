@@ -6,10 +6,12 @@ interface IPortalProps {
   isOpened: boolean;
 }
 
+const modalRoot = document.getElementById("modal") as HTMLElement;
+
 export const Portal = ({ children, isOpened }: IPortalProps) => {
   if (!isOpened) {
     return null;
   }
 
-  return ReactDOM.createPortal(children, document.body);
+  return ReactDOM.createPortal(children, modalRoot);
 };

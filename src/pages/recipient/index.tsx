@@ -15,11 +15,15 @@ import { ButtonContainer } from 'shared/ui/button-container';
 import { CardButton } from 'shared/ui/card-button';
 import { Filter } from 'features/filter/ui';
 import { NotFoundPage } from 'pages/not-found';
+import { Request } from 'features/create-request';
+import { openPopup } from 'features/create-request/model';
 
 import styles from './styles.module.css';
 
 export function RecipientPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
+  const isMobileForPopup = useMediaQuery('(max-width:735px)');
+
   const dispatch = useAppDispatch();
 
   const isAuth = !!useAppSelector((store) => store.user.role);
@@ -40,6 +44,8 @@ export function RecipientPage() {
     getButtonPosition();
     setIsFilterVisibel(!isFilterVisibel);
   };
+  const { isPopupOpen } = useAppSelector((store) => store.createRequest);
+
   useEffect(() => {
     dispatch(setUserRole('recipient'));
     window.addEventListener('resize', getButtonPosition);
@@ -130,9 +136,11 @@ export function RecipientPage() {
                   handleClickConfirmButton={() => 3}
                   handleClickMessageButton={() => 5}
                   handleClickPnoneButton={() => 6}
+                  handleClickAddTaskButton={() => dispatch(openPopup())}
                   isStatusActive
                   tasks={[]}
                 />
+                {isPopupOpen && <Request isMobile={isMobileForPopup} />}
               </ContentLayout>
             }
           />

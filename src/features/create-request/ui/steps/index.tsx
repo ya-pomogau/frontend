@@ -1,55 +1,69 @@
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { closePopup } from 'features/create-request/model';
+import { closePopup, fetchCategories } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
-import { Portal } from 'shared/ui/portal';
+import { CurrentPage } from '../../types';
 import { AddressStep } from './address-step/address-step';
 import { CommonStep } from './common-step/common-step';
 import { DateStep } from './date-step/date-step';
 import { TaskStep } from './task-step/task-step';
-import { CurrentPage } from '../../types';
 
-export interface CreateRequestProps {
-  tasks: Array<{ value: string; label: string }>;
-  isMobile: boolean;
+export interface RequestProps {
+  isMobile?: boolean;
 }
 
-export const CreateRequest = ({
-  tasks,
-  isMobile = true,
-}: CreateRequestProps) => {
+export const Request = ({ isMobile = true }: RequestProps) => {
   const dispatch = useAppDispatch();
-
-  const { avatarLink, name, phoneNumber, currentStep, isPopupOpen } =
-    useAppSelector((state) => state.createRequest);
+  const { currentStep, isPopupOpen } = useAppSelector(
+    (state) => state.createRequest
+  );
+  const data = useAppSelector((state) => state.user.data);
 
   const handleCloseClick = () => {
     dispatch(closePopup());
   };
 
+  const closeByEsc = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      dispatch(closePopup());
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', closeByEsc);
+    dispatch(fetchCategories());
+    return () => {
+      document.removeEventListener('keydown', closeByEsc);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!data) return null;
+
   return (
-    <Portal isOpened={isPopupOpen}>
-      <OverlayingPopup isOpened={isPopupOpen}>
-        <MainPopup
-          name={name}
-          avatarLink={avatarLink}
-          avatarName={name}
-          phoneNumber={phoneNumber}
-          handleCloseClick={handleCloseClick}
-          isMobile
-        >
-          {currentStep === CurrentPage.DATE_STEP && <DateStep />}
-          {currentStep === CurrentPage.ADDRESS_STEP && (
-            <AddressStep isMobile={isMobile} />
-          )}
-          {currentStep === CurrentPage.TASK_STEP && (
-            <TaskStep tasks={tasks} isMobile={isMobile} />
-          )}
-          {currentStep === CurrentPage.COMMON_STEP && (
-            <CommonStep isMobile={isMobile} />
-          )}
-        </MainPopup>
-      </OverlayingPopup>
-    </Portal>
+    <OverlayingPopup isOpened={isPopupOpen} onClose={handleCloseClick}>
+      <MainPopup
+        name={data.fullname}
+        avatarLink={data.avatar}
+        avatarName={data.fullname}
+        phoneNumber={data.phone}
+        handleCloseClick={handleCloseClick}
+        isMobile={isMobile}
+      >
+        {currentStep === CurrentPage.DATE_STEP && (
+          <DateStep isMobile={isMobile} />
+        )}
+        {currentStep === CurrentPage.ADDRESS_STEP && (
+          <AddressStep isMobile={isMobile} />
+        )}
+        {currentStep === CurrentPage.TASK_STEP && (
+          <TaskStep isMobile={isMobile} />
+        )}
+        {currentStep === CurrentPage.COMMON_STEP && (
+          <CommonStep isMobile={isMobile} />
+        )}
+      </MainPopup>
+    </OverlayingPopup>
   );
 };

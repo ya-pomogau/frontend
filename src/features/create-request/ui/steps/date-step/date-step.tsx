@@ -1,34 +1,35 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
-import moment from 'moment';
-
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { format, parse } from 'date-fns';
 import {
-  addDate,
-  addTime,
+  setDate,
+  setTime,
   changeCheckbox,
   changeStepIncrement,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import Checkbox from 'shared/ui/checkbox';
 import { DatePicker } from 'shared/ui/date-picker';
-import { formatDate } from '../../../libs/format-date';
-
 import styles from './date-step.module.css';
 
-export const DateStep = () => {
+interface IDateStepProps {
+  isMobile?: boolean;
+}
+
+export const DateStep = ({ isMobile }: IDateStepProps) => {
   const { time, termlessRequest, date } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
 
   const handleDateValueChange = (value: Date) => {
-    const formatedDate = moment(value).format('DD.MM.YYYY');
-    dispatch(addDate(formatedDate));
+    const formatedDate = format(value, 'dd.MM.yyyy');
+    dispatch(setDate(formatedDate));
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(addTime(e.target.value));
+    dispatch(setTime(e.target.value));
   };
 
   const handleNextStepClick = () => {
@@ -38,21 +39,16 @@ export const DateStep = () => {
   const handleCheckboxChange = () => {
     dispatch(changeCheckbox());
   };
-  const dateValue = useMemo((): Date => formatDate(date), [date]);
+  const dateValue = useMemo(
+    (): Date => parse(date, 'dd.MM.yyyy', new Date()),
+    [date]
+  );
 
   return (
     <>
       <div className={styles.dateContainer}>
         <div className={styles.wrapperForTime}>
-          <p
-            className={classNames(
-              'text',
-              'text_size_small',
-              'text_type_regular ',
-              'm-0',
-              styles.time
-            )}
-          >
+          <p className={classNames(styles.time, 'text', 'text_type_regular ')}>
             Время
           </p>
           <div className={styles.headerWrapper} />
@@ -72,19 +68,15 @@ export const DateStep = () => {
           />
         </div>
         <div className={styles.wrapperForDate}>
-          <p
-            className={classNames(
-              'text',
-              'text_size_small',
-              'text_type_regular ',
-              'm-0',
-              styles.date
-            )}
-          >
+          <p className={classNames('text', 'text_type_regular ', styles.date)}>
             Дата
           </p>
           <div className={styles.headerWrapperForDatePicker} />
-          <DatePicker onChangeValue={handleDateValueChange} value={dateValue} />
+          <DatePicker
+            onChangeValue={handleDateValueChange}
+            value={dateValue}
+            isMobile={isMobile}
+          />
         </div>
         <div className={styles.checkbox}>
           <Checkbox
