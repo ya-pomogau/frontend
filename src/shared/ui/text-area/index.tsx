@@ -5,7 +5,8 @@ import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 
-interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -14,7 +15,7 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 // eslint-disable-next-line react/display-name
-export const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
+export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     { value, name, onChange, label, extClassName, placeholder, ...props },
     ref

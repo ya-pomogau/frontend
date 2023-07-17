@@ -1,7 +1,7 @@
 import { SortByBlock } from '../../sortBy-block';
 import { CategoriesBlock } from '../../categories-block';
 import { RadiusBlock } from '../../radius-block';
-import { TVolunteerFilter } from '../../types';
+import type { TVolunteerFilter } from '../../types';
 
 interface ActiveModeProps {
   filter: TVolunteerFilter;

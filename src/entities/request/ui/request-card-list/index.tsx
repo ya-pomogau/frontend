@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import classnames from 'classnames';
 
 import RequestCard from '../request-card';
@@ -10,10 +9,10 @@ interface RequestCardListProps {
   cards: IRequestCard[];
 }
 
-const RequestCardList: FC<RequestCardListProps> = ({ cards }) => (
+const RequestCardList = ({ cards }: RequestCardListProps) => (
   <ul className={classnames(styles.list, 'list', 'p-0', 'm-0')}>
     {cards.map((card) => (
-      <li>
+      <li key={card.requestCardId}>
         <RequestCard requestCardId={card.requestCardId} user={card.user} />
       </li>
     ))}

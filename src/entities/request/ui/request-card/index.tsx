@@ -1,11 +1,10 @@
-import { FC } from 'react';
 import classnames from 'classnames';
 
 import { UserCard } from 'shared/ui/user-card';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import { Icon } from 'shared/ui/icons';
 import { Button } from 'shared/ui/button';
-import { IUser } from '../../types';
+import type { IUser } from '../../types';
 
 import styles from './styles.module.css';
 
@@ -15,12 +14,13 @@ interface RequestCardProps {
   user: IUser;
 }
 
-const RequestCard: FC<RequestCardProps> = ({ requestCardId, user }) => {
+const RequestCard = ({ requestCardId, user }: RequestCardProps) => {
   const { userId, userName, userPhoneNumber, userAvatar, info } = user;
   const { keys, completedTasks, score } = info;
   // хардкод: непонятно от чего зависит отображение цвета полоски
   // eslint-disable-next-line no-nested-ternary
   const theme = keys > 0 ? 'success' : score === 0 ? 'warning' : 'secondary';
+
   return (
     <UserCard
       userId={userId}

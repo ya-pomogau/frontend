@@ -1,7 +1,7 @@
 import { CategoriesBlock } from '../../categories-block';
-import { TVolunteerFilter } from '../../types';
 import { RadiusBlock } from '../../radius-block';
 import { CalenderBlock } from '../../calender-block/index';
+import type { TVolunteerFilter } from '../../types';
 
 interface MapModeProps {
   filter: TVolunteerFilter;

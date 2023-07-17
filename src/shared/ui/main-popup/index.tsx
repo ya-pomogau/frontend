@@ -79,11 +79,13 @@ export const MainPopup = ({
         </div>
       </>
     )}
-    {isMobile && <SquareButton
-      buttonType="close"
-      extClassName={styles.exitButton}
-      onClick={handleCloseClick}
-    />}
+    {isMobile && (
+      <SquareButton
+        buttonType="close"
+        extClassName={styles.exitButton}
+        onClick={handleCloseClick}
+      />
+    )}
     {children}
   </div>
 );

@@ -1,6 +1,6 @@
 import { CategoriesBlock } from '../categories-block';
 import { SortByBlock } from '../sortBy-block';
-import { TRecipientFilter } from '../types';
+import type { TRecipientFilter } from '../types';
 
 interface RecipientFilterProps {
   filter: TRecipientFilter;

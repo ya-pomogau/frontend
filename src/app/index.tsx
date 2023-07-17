@@ -1,8 +1,8 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { YMaps } from '@pbe/react-yandex-maps';
-import { API_KEY } from 'config/ymaps';
 
+import { YMAPS_API_KEY } from 'config/ymaps';
 import { store } from './store';
 import { AppRoutes } from '../pages';
 
@@ -16,7 +16,7 @@ function App() {
           enterprise
           query={{
             load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
-            apikey: API_KEY,
+            apikey: YMAPS_API_KEY,
           }}
         >
           <AppRoutes />

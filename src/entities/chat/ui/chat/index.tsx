@@ -97,6 +97,7 @@ export const Chat = ({
                 }
                 messageText={message.message}
                 avatarLink={message.userAvatarLink}
+                key={message.id}
               />
             ))}
           </div>

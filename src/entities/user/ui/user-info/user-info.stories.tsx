@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Provider } from 'react-redux';
-import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { withRouter } from 'storybook-addon-react-router-v6';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 
 import { UserInfo } from '.';
 

@@ -1,5 +1,7 @@
+/* eslint-disable import/no-named-as-default-member */
 import React, { useEffect, useMemo, useState } from 'react';
 import { useYMaps } from '@pbe/react-yandex-maps';
+
 import { Input } from '../input';
 
 interface InputAddressProps
@@ -15,13 +17,14 @@ interface InputAddressProps
   inputAttributes?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
-export const InputAddress: React.FC<InputAddressProps> = (props) => {
+export const InputAddress = (props: InputAddressProps) => {
   const {
     initialValue,
     inputChange,
     inputAttributes = {},
     ...otherProps
   } = props;
+
   const [address, setAddress] = useState(initialValue);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ymaps: any = useYMaps(['SuggestView', 'geocode']);

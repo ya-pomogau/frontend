@@ -9,6 +9,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'shared/hooks';
+
 import { UserInfo } from 'entities/user';
 import { setUserRole } from 'entities/user/model';
 import {

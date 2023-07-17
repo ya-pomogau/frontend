@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
 
 import { FieldsetView } from './utils';
@@ -10,12 +10,13 @@ interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
   view: FieldsetView;
   children: ReactNode;
 }
-const Fieldset: FC<FieldsetProps> = ({
+
+const Fieldset = ({
   title,
   view = FieldsetView.COLUMN,
   children,
   ...props
-}) => (
+}: FieldsetProps) => (
   <fieldset {...props} className={styles.fieldset}>
     <legend
       className={classnames(
@@ -32,4 +33,5 @@ const Fieldset: FC<FieldsetProps> = ({
     </div>
   </fieldset>
 );
+
 export default Fieldset;

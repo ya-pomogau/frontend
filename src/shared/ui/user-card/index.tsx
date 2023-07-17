@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import classnames from 'classnames';
+
 import { Avatar } from '../avatar';
 
 import styles from './styles.module.css';

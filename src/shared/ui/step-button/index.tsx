@@ -7,7 +7,7 @@ type TIconArrow = {
   extClassName?: string;
 };
 
-const IconArrow: React.FC<TIconArrow> = ({ direction, extClassName }) => (
+const IconArrow = ({ direction, extClassName }: TIconArrow) => (
   <svg
     className={extClassName}
     width="22"
@@ -36,13 +36,13 @@ type TStepButton = {
   HTMLButtonElement
 >;
 
-export const StepButton: React.FC<TStepButton> = ({
+export const StepButton = ({
   type = 'button',
   direction,
   buttonClassName,
   iconClassName,
   ...props
-}) => (
+}: TStepButton) => (
   <button className={cn(styles.button, buttonClassName)} {...props} type={type}>
     <IconArrow
       direction={direction}

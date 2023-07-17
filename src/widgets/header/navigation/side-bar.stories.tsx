@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
+
 import { WriteMessageIcon } from 'shared/ui/icons/write-message-icon';
 import { PersonIcon } from 'shared/ui/icons/person-icon';
 import { LockIcon } from 'shared/ui/icons/lock-icon';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
+
 import { SideBar } from './index';
 
 const meta: Meta<typeof SideBar> = {

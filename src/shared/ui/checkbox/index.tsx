@@ -1,7 +1,9 @@
 import { InputHTMLAttributes } from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.css';
+
 import { DefaultCheckboxIcon } from './checkbox-icon';
+
+import styles from './styles.module.css';
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;

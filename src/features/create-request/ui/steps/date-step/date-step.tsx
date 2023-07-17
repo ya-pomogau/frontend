@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { format, parse } from 'date-fns';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDate,
   setTime,
@@ -11,6 +12,7 @@ import {
 import { Button } from 'shared/ui/button';
 import Checkbox from 'shared/ui/checkbox';
 import { DatePicker } from 'shared/ui/date-picker';
+
 import styles from './date-step.module.css';
 
 interface IDateStepProps {

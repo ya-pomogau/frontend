@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Button } from 'shared/ui/button';
 import {
@@ -6,9 +7,9 @@ import {
   changeStepDecrement,
   changeStepIncrement,
 } from 'features/create-request/model';
-
 import YandexMap from 'shared/ui/map';
 import { InputAddress } from 'shared/ui/input-address';
+
 import styles from './address-step.module.css';
 
 interface IAddressProps {

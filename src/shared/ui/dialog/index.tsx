@@ -6,7 +6,7 @@ import { Button } from '../button';
 
 import styles from './dialog.module.css';
 
-interface IDialogProps {
+interface DialogProps {
   title?: string;
   isExitButton?: boolean;
   isAlertDialog?: boolean;
@@ -20,7 +20,7 @@ export const Dialog = ({
   isAlertDialog = false,
   isConfirmDialog = false,
   extClassName,
-}: IDialogProps) => (
+}: DialogProps) => (
   <div className={classNames(styles.container, extClassName)}>
     {isExitButton && (
       <div className={styles.exitButtonWrapper}>

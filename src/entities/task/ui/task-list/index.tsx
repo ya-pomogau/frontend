@@ -5,9 +5,9 @@ import { useAppSelector } from 'app/hooks';
 
 import { Informer } from 'shared/ui/informer';
 import { RoundButton } from 'shared/ui/round-button';
+import { TaskItem } from '../task';
 import type { UserRole } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
-import { TaskItem } from '../task';
 
 import styles from './styles.module.css';
 

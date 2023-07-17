@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { UserCategoriesBlock } from '../userCategories-block';
 import { SortByBlock } from '../sortBy-block';
 import { CategoriesBlock } from '../categories-block';
-import { IFilterValues } from '../types';
+import type { IFilterValues } from '../types';
 
 interface AdminFilterProps {
   filter: IFilterValues;

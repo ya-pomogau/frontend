@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { closePopup, fetchCategories } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';

@@ -78,7 +78,6 @@ const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
         links={isMobile ? linksMenuMobile : linksMenu}
       />
     </div>,
-    // </div>,
     modalRoot
   );
 };

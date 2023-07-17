@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/no-this-in-sfc */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
@@ -130,11 +132,11 @@ export const Mark = React.memo(
           buttonRead.addEventListener('click', onReadClick);
 
           // Добавляем слушатель на кпонку "Закрыть окно".
-          const buttonClose = taskContainer.querySelector(".close_icon");
+          const buttonClose = taskContainer.querySelector('.close_icon');
           const onCloseClick = () => {
             this.getData().map.balloon.close();
           };
-          buttonClose.addEventListener("click", onCloseClick);
+          buttonClose.addEventListener('click', onCloseClick);
 
           // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
           const button = taskContainer

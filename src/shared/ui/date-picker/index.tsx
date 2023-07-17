@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 /* eslint-disable import/no-duplicates */
 import React, { ReactNode, forwardRef } from 'react';
 import ReactDatePicker, {
@@ -6,8 +7,10 @@ import ReactDatePicker, {
 import classnames from 'classnames';
 import ru from 'date-fns/locale/ru';
 import { subDays } from 'date-fns';
+
 import { getMonth } from './lib';
 import { StepButton } from '../step-button/index';
+
 import './react-datepicker.css';
 import styles from './styles.module.css';
 

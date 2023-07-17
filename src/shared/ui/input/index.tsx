@@ -1,6 +1,9 @@
+/* eslint-disable react/display-name */
+/* eslint-disable import/no-named-as-default-member */
 import React, { useMemo } from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
+
 import styles from './styles.module.css';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {

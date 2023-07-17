@@ -4,6 +4,7 @@ export const getQuery = (search: URLSearchParams): Query => {
   const query: Record<string, string[]> = {};
   const searchEntries = search.entries();
   let searchEntry = searchEntries.next();
+
   while (!searchEntry.done) {
     const [key, value] = searchEntry.value;
     if (query[key] !== undefined) {

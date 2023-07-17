@@ -6,6 +6,7 @@ import styles from './style.module.css';
 interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
+
 const RadioButton = ({
   label,
   id,

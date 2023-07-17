@@ -1,9 +1,10 @@
 import { JSX } from 'react';
 import { useLocation } from 'react-router-dom';
-import { TVolunteerFilter } from '../types';
+
 import { MapMode } from './mapMode';
 import { CompletedMode } from './completedMode';
 import { ActiveMode } from './activeMode';
+import type { TVolunteerFilter } from '../types';
 
 interface VolunteerFilterProps {
   filter: TVolunteerFilter;

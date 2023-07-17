@@ -1,12 +1,12 @@
-import {
-  ISideBarPosition,
-  ISideBarElementProps,
-} from 'widgets/header/navigation/types';
 import { WriteMessageIcon } from 'shared/ui/icons/write-message-icon';
 import { PersonIcon } from 'shared/ui/icons/person-icon';
 import { LockIcon } from 'shared/ui/icons/lock-icon';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { ExitIcon } from 'shared/ui/icons/exit-icon';
+import type {
+  ISideBarPosition,
+  ISideBarElementProps,
+} from 'widgets/header/navigation/types';
 
 export const positionConfigTop: ISideBarPosition = {
   ulflexDirection: 'row',

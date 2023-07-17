@@ -56,7 +56,9 @@ export const getCompletedTasks = async (): Promise<Task[]> => {
   }
 };
 
-export const getAllCategories = async (): Promise<{id: number, name: string}[]> => {
+export const getAllCategories = async (): Promise<
+  { id: number; name: string }[]
+> => {
   try {
     const res = await fetch(`${API_URL}/category`);
     return await checkResponse(res);

@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+
 import { BottomBar } from 'shared/ui/bottom-bar';
 import Header from 'widgets/header';
 

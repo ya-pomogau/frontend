@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Input } from '.';
+
 import styles from './styles.module.css';
 
 const meta = {

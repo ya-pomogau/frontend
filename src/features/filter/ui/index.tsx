@@ -5,9 +5,9 @@ import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
 import { RecipientFilter } from './recipient-filter';
 import { AdminFilter } from './admin-filter';
-import { IFilterValues, TRole } from './types';
 import { VolunteerFilter } from './volunteer-filter';
 import { getQuery } from '../libs';
+import type { IFilterValues, TRole } from './types';
 
 import styles from './styles.module.css';
 

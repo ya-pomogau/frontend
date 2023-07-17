@@ -83,11 +83,7 @@
     bottom: 0;
     left: 0;
     position: absolute;
-    background: linear-gradient(
-      0deg,
-      #ffffff 10%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    background: linear-gradient(0deg, #ffffff 10%, rgba(255, 255, 255, 0) 100%);
     z-index: 2;
   }
   .input {

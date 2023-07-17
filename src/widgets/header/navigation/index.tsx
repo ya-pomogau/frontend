@@ -1,16 +1,11 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { ISideBarElementProps, ISideBarProps } from './types';
+import type { ISideBarElementProps, ISideBarProps } from './types';
 
 import styles from './styles.module.css';
 
-const SideBarItem: FC<ISideBarElementProps> = ({
-  title,
-  to,
-  icon,
-  position,
-}) => {
+const SideBarItem = ({ title, to, icon, position }: ISideBarElementProps) => {
   const { pathname } = useLocation();
   const [link, setLink] = useState<string>('');
 
@@ -37,7 +32,7 @@ const SideBarItem: FC<ISideBarElementProps> = ({
   );
 };
 
-export const SideBar: FC<ISideBarProps> = ({ links, position }) => (
+export const SideBar = ({ links, position }: ISideBarProps) => (
   <nav className={`${styles.nav} `}>
     <ul
       className={`${styles.links} `}

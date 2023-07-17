@@ -2,7 +2,6 @@ import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import classNames from 'classnames';
 
 import useForm from 'shared/hooks/use-form';
-
 import { ButtonContainer } from 'shared/ui/button-container';
 import { CardButton } from 'shared/ui/card-button';
 import { ContentLayout } from 'shared/ui/content-layout';

@@ -28,6 +28,7 @@ export const Tooltip = ({
   elementStyles,
 }: TooltipProps) => {
   const modalRoot = document.getElementById('modal') as HTMLElement;
+
   const tooltipRef = useRef<HTMLDivElement>(null);
   const closeWithEsc = useCallback(
     (e: KeyboardEvent) => {
@@ -37,6 +38,7 @@ export const Tooltip = ({
     },
     [changeVisible]
   );
+
   const closeWithClickOutTooltip = useCallback(
     (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -50,6 +52,7 @@ export const Tooltip = ({
     },
     [changeVisible]
   );
+
   useEffect(() => {
     document.addEventListener('keydown', closeWithEsc);
     document.addEventListener('click', closeWithClickOutTooltip);

@@ -18,7 +18,7 @@ const hard = [
     },
   },
   {
-    requestCardId: 'ewew1221212',
+    requestCardId: 'ewew1221213',
     user: {
       userAvatar:
         'https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg',
@@ -33,7 +33,7 @@ const hard = [
     },
   },
   {
-    requestCardId: 'ewew1221212',
+    requestCardId: 'ewew1221214',
     user: {
       userAvatar:
         'https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg',
@@ -48,7 +48,7 @@ const hard = [
     },
   },
   {
-    requestCardId: 'ewew1221212',
+    requestCardId: 'ewew1221215',
     user: {
       userAvatar:
         'https://kartinkived.ru/wp-content/uploads/2021/12/avatarka-dlya-vatsapa-marshmellou.jpg',
