@@ -91,99 +91,44 @@ export function RegisterPage() {
         >
           <p className={styles.title}>Зарегистрироваться</p>
 
-    return (
-        <PageLayout
-            side={
-                <>
-                    <div className={styles.viewer}>
-                        <UserInfo />
-                    </div>
-                    <ButtonContainer>
-                        <NavLink to="map" className="link">
-                            {({ isActive }) => (
-                                <CardButton
-                                    customIcon={
-                                        <Icon color="white" icon="MapApplicationIcon" size="54" />
-                                    }
-                                    text="Карта заявок"
-                                    isActive={isActive}
-                                />
-                            )}
-                        </NavLink>
-                        <NavLink to="active" className="link">
-                            {({ isActive }) => (
-                                <CardButton
-                                    customIcon={
-                                        <Icon color="white" icon="ActiveApplicationIcon" size="54" />
-                                    }
-                                    text="Активные заяки"
-                                    isActive={isActive}
-                                />
-                            )}
-                        </NavLink>
-                        <NavLink to="completed" className="link">
-                            {({ isActive }) => (
-                                <CardButton
-                                    customIcon={
-                                        <Icon color="white" icon="CompletedApplicationIcon" size="54" />
-                                    }
-                                    text="Завершенные заявки"
-                                    isActive={isActive}
-                                />
-                            )}
-                        </NavLink>
-                    </ButtonContainer>
-                </>
-            }
-            content={
-                <ContentLayout
-                    heading={
-                        <SmartHeader
-                            settingIcon={
-                                <Icon color="blue" icon="RegistrationIcon" size="54" />
-                            }
-                            settingText="Регистрация"
-                            extClassName={styles.header}
-                        />
-                    }
-                >
-          <p className={styles.title}>Зарегистрироваться</p>
-                    <form className={styles.form} onSubmit={onSubmit}>
-                        <Input
-                            extClassName={styles.field}
-                            required
-                            label="ФИО"
-                            name="name"
-                            value={name}
-                            onChange={(event) => setName(event.currentTarget.value)}
-                            placeholder="ФИО"
-                            type="text"
-                        />
+          <form className={styles.form} onSubmit={onSubmit}>
+            <Input
+              extClassName={styles.field}
+              required
+              label="ФИО"
+              name="name"
+              value={name}
+              onChange={(event) => setName(event.currentTarget.value)}
+              placeholder="ФИО"
+              type="text"
+            />
 
-                        <Input
-                            extClassName={styles.field}
-                            required
-                            label="Телефон"
-                            name="phone"
-                            value={phone}
-                            onChange={(event) => setPhone(event.currentTarget.value)}
-                            placeholder="+7 (000) 000 00 00"
-                            type="tel"
-                            pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"
-                            title="+7 (123) 456 78 90"
-                        />
+            <Input
+              extClassName={styles.field}
+              required
+              label="Телефон"
+              name="phone"
+              value={phone}
+              onChange={(event) => setPhone(event.currentTarget.value)}
+              placeholder="+7 (000) 000 00 00"
+              type="tel"
+              pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"
+              title="+7 (123) 456 78 90"
+            />
 
-                        <div>
-                            <InputAddress
-                                inputAttributes={{
-                                    required: true
-                                }}
-                                initialValue=''
-                                name='address'
-                                inputChange={setAddress}
-                            />
-                            <p className={styles.text}>Укажите адрес и мы подберем ближайшее к вам задание</p>
-                        </div>
+            <div>
+              {/* <InputAddress
+                inputAttributes={{
+                  required: true,
+                }}
+                initialValue=""
+                name="address"
+                onChange={setAddress}
+              /> */}
+              <p className={styles.text}>
+                Укажите адрес и мы подберем ближайшее к вам задание
+              </p>
+            </div>
 
             <Button
               buttonType="primary"
