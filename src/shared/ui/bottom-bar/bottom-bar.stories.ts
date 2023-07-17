@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { BottomBar } from ".";
+import { Meta, StoryObj } from '@storybook/react';
+import { BottomBar } from '.';
 
 const meta = {
-  title: "uikit/BottomBar",
+  title: 'uikit/BottomBar',
   component: BottomBar,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof BottomBar>;
 
 export default meta;

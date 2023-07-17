@@ -1,30 +1,38 @@
-import classnames from "classnames";
-import { Button } from "shared/ui/button";
-import styles from "../styles.module.css";
-import { FilterItemsIds } from "../consts";
+import classnames from 'classnames';
 
-interface Props {
+import { Button } from 'shared/ui/button';
+import { FilterItemsIds } from '../consts';
+
+import styles from '../styles.module.css';
+
+interface RadiusBlockProps {
   filter: string;
   onChange: (name: string, value: string[] | string) => void;
   modeOfProfile: string;
 }
 
-export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
+export const RadiusBlock = ({
+  filter,
+  onChange,
+  modeOfProfile,
+}: RadiusBlockProps) => {
   // определение внешнего вида копки радуса с учетом текущего выбора фильтра
   const getRadiusButtonType = (id: string) =>
-    filter === id ? "primary" : "secondary";
+    filter === id ? 'primary' : 'secondary';
   // изменение текущего состояния фильтра в части радиуса
   const handleRadiusButtonClick = (id: string) => {
     if (filter === id && modeOfProfile !== 'map') {
-      onChange("searchRadius", "");
+      onChange('searchRadius', '');
     } else {
-      onChange("searchRadius", id);
+      onChange('searchRadius', id);
     }
   };
   // установление изначального значения радиуса поиска активных заявок
   if (filter === '' && modeOfProfile === 'map') {
     filter = FilterItemsIds.RADIUS_5;
-    setTimeout(() => {handleRadiusButtonClick(FilterItemsIds.RADIUS_5)});
+    setTimeout(() => {
+      handleRadiusButtonClick(FilterItemsIds.RADIUS_5);
+    });
   }
 
   return (
@@ -32,9 +40,9 @@ export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
       <div
         className={classnames(
           styles.filterBlockTitle,
-          "text",
-          "text_size_small",
-          "text_type_bold"
+          'text',
+          'text_size_small',
+          'text_type_bold'
         )}
       >
         Радиус поиска
@@ -69,5 +77,5 @@ export const RadiusBlock = ({ filter, onChange, modeOfProfile }: Props) => {
         />
       </div>
     </div>
-  )
+  );
 };

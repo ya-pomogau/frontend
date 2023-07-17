@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 export enum CurrentPage {
   DATE_STEP = 1,
   ADDRESS_STEP = 2,

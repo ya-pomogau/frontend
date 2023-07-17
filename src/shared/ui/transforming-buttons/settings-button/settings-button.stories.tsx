@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { SettingsButton } from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { SettingsButton } from '.';
 
 const meta: Meta<typeof SettingsButton> = {
-  title: "uikit/Buttons/SettingsButton",
+  title: 'uikit/Buttons/SettingsButton',
   component: SettingsButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;

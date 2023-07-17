@@ -1,15 +1,18 @@
+/* eslint-disable react/display-name */
 /* eslint-disable import/no-duplicates */
-import React, { ReactNode, forwardRef } from "react";
+import React, { ReactNode, forwardRef } from 'react';
 import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
-} from "react-datepicker";
-import classnames from "classnames";
-import ru from "date-fns/locale/ru";
-import { subDays } from "date-fns";
-import { getMonth } from "./lib";
-import { StepButton } from "../step-button/index";
-import "./react-datepicker.css";
-import styles from "./styles.module.css";
+} from 'react-datepicker';
+import classnames from 'classnames';
+import ru from 'date-fns/locale/ru';
+import { subDays } from 'date-fns';
+
+import { getMonth } from './lib';
+import { StepButton } from '../step-button/index';
+
+import './react-datepicker.css';
+import styles from './styles.module.css';
 
 function customHeader({
   date,
@@ -41,9 +44,9 @@ function customHeader({
   );
 }
 
-
-const CustomInput = forwardRef((
-    { value, onClick }: {value: any, onClick: any},
+const CustomInput = forwardRef(
+  (
+    { value, onClick }: { value: any; onClick: any },
     ref: React.Ref<HTMLButtonElement>
   ) => (
     <button

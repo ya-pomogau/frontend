@@ -1,10 +1,11 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import classNames from "classnames";
-import { ReactNode } from "react";
-import { Portal } from "../portal";
-import styles from "./overlaying-popup.module.css";
+import { ReactNode } from 'react';
+import classNames from 'classnames';
 
-interface IOverlayingPopupProps {
+import { Portal } from '../portal';
+
+import styles from './overlaying-popup.module.css';
+
+interface OverlayingPopupProps {
   children?: ReactNode;
   isOpened?: boolean;
   onClose?: () => void;
@@ -16,10 +17,11 @@ export const OverlayingPopup = ({
   onClose,
   isOpened,
   extClassName,
-}: IOverlayingPopupProps) => {
+}: OverlayingPopupProps) => {
   if (!isOpened) {
     return null;
   }
+
   return (
     <Portal isOpened>
       <div
@@ -33,7 +35,7 @@ export const OverlayingPopup = ({
           tabIndex={0}
           onClick={onClose}
           aria-labelledby="label"
-        />
+        ></div>
         {children}
       </div>
     </Portal>

@@ -1,11 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { BrowserRouter } from "react-router-dom";
-import Header from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { BrowserRouter } from 'react-router-dom';
+
+import Header from '.';
 
 const meta = {
-  title: "widgets/Header",
+  title: 'widgets/Header',
   component: Header,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <BrowserRouter>

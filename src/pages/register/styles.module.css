@@ -7,28 +7,28 @@
 }
 
 .form {
-    width: 364px;
-    display: grid;
-    gap: 24px;
-    padding-left: 18px;
+  width: 364px;
+  display: grid;
+  gap: 24px;
+  padding-left: 18px;
 }
 
 .title {
-    margin: 0;
-    padding: 40px 18px 12px;
-    font-family: "Golos", sans-serif;
-    font-size: 24px;
-    line-height: 29px;
-    color: var(--colors-interface-primary);
+  margin: 0;
+  padding: 40px 18px 12px;
+  font-family: 'Golos', sans-serif;
+  font-size: 24px;
+  line-height: 29px;
+  color: var(--colors-interface-primary);
 }
 
 .field {
-    width: 364px;
+  width: 364px;
 }
 
 .text {
-    font-family: "Golos", sans-serif;
-    font-size: 12px;
-    line-height: 14px;
-    padding-bottom: 6px;
+  font-family: 'Golos', sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  padding-bottom: 6px;
 }

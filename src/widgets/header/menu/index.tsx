@@ -1,23 +1,25 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import ReactDOM from "react-dom";
-import { useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
-import { SideBar } from "widgets/header/navigation";
-import { EmptyMessageIcon } from "shared/ui/icons/empty-message-icon";
-import { useMediaQuery } from "shared/hooks";
-import { positionConfigMenu, linksMenuMobile, linksMenu } from "../utils";
-import styles from "./styles.module.css";
+import { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
+import { NavLink } from 'react-router-dom';
 
-const modalRoot = document.getElementById("modal") as HTMLElement;
+import { SideBar } from 'widgets/header/navigation';
+import { EmptyMessageIcon } from 'shared/ui/icons/empty-message-icon';
+import { useMediaQuery } from 'shared/hooks';
+import { positionConfigMenu, linksMenuMobile, linksMenu } from '../utils';
 
-interface Props {
+import styles from './styles.module.css';
+
+const modalRoot = document.getElementById('modal') as HTMLElement;
+
+interface MenuProps {
   setMenuActive: (arg: boolean) => void;
   menuActive: boolean;
 }
 
-const Menu = ({ setMenuActive, menuActive}: Props) => {
-  const isMobile = useMediaQuery("(max-width: 900px)");
+const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
+  const isMobile = useMediaQuery('(max-width: 900px)');
   const ref = useRef(null);
 
   const closeByOverlay = (evt: MouseEvent) => {
@@ -27,17 +29,18 @@ const Menu = ({ setMenuActive, menuActive}: Props) => {
   };
 
   const closeByEsc = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       setMenuActive(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", closeByEsc);
-    document.addEventListener("click", closeByOverlay);
+    document.addEventListener('keydown', closeByEsc);
+    document.addEventListener('click', closeByOverlay);
+
     return () => {
-      document.removeEventListener("keydown", closeByEsc);
-      document.removeEventListener("click", closeByOverlay);
+      document.removeEventListener('keydown', closeByEsc);
+      document.removeEventListener('click', closeByOverlay);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -75,7 +78,6 @@ const Menu = ({ setMenuActive, menuActive}: Props) => {
         links={isMobile ? linksMenuMobile : linksMenu}
       />
     </div>,
-    // </div>,
     modalRoot
   );
 };

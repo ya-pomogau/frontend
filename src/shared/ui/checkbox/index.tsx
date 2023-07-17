@@ -1,13 +1,16 @@
-import { FC, InputHTMLAttributes } from "react";
-import classnames from "classnames";
-import styles from "./styles.module.css";
-import { DefaultCheckboxIcon } from "./checkbox-icon";
+import { InputHTMLAttributes } from 'react';
+import classnames from 'classnames';
+
+import { DefaultCheckboxIcon } from './checkbox-icon';
+
+import styles from './styles.module.css';
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   extClassName?: string;
 }
-const Checkbox: FC<CheckboxProps> = ({
+
+const Checkbox = ({
   label,
   id,
   onChange,
@@ -15,7 +18,7 @@ const Checkbox: FC<CheckboxProps> = ({
   extClassName,
   name,
   ...props
-}) => (
+}: CheckboxProps) => (
   <>
     <input
       className={styles.checkbox}
@@ -30,9 +33,9 @@ const Checkbox: FC<CheckboxProps> = ({
     <label
       htmlFor={id}
       className={classnames(
-        "text",
-        "text_type_regular",
-        "text_size_small",
+        'text',
+        'text_type_regular',
+        'text_size_small',
         extClassName
       )}
     >

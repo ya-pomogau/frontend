@@ -1,10 +1,12 @@
-import classNames from "classnames";
-import { Informer } from "../informer";
-import styles from "./dialog.module.css";
-import { SquareButton } from "../square-buttons";
-import { Button } from "../button";
+import classNames from 'classnames';
 
-interface IDialogProps {
+import { Informer } from '../informer';
+import { SquareButton } from '../square-buttons';
+import { Button } from '../button';
+
+import styles from './dialog.module.css';
+
+interface DialogProps {
   title?: string;
   isExitButton?: boolean;
   isAlertDialog?: boolean;
@@ -18,7 +20,7 @@ export const Dialog = ({
   isAlertDialog = false,
   isConfirmDialog = false,
   extClassName,
-}: IDialogProps) => (
+}: DialogProps) => (
   <div className={classNames(styles.container, extClassName)}>
     {isExitButton && (
       <div className={styles.exitButtonWrapper}>
@@ -27,9 +29,9 @@ export const Dialog = ({
     )}
     <p
       className={classNames(
-        "text",
-        "text_size_medium",
-        "text_type_bold ",
+        'text',
+        'text_size_medium',
+        'text_type_bold ',
         styles.headerText
       )}
     >

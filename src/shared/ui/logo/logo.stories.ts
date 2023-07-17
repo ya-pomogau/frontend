@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { Logo } from ".";
+import { Meta, StoryObj } from '@storybook/react';
+import { Logo } from '.';
 
 const meta = {
-  title: "uikit/Logo",
+  title: 'uikit/Logo',
   component: Logo,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } as Meta<typeof Logo>;
 
 export default meta;

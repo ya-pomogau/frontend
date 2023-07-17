@@ -1,14 +1,15 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
-import classnames from "classnames";
-import styles from "./styles.module.css";
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import classnames from 'classnames';
+
+import styles from './styles.module.css';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
-  buttonType: "primary" | "secondary" | "partial";
-  actionType?: "submit" | "reset" | "button";
+  buttonType: 'primary' | 'secondary' | 'partial';
+  actionType?: 'submit' | 'reset' | 'button';
   onClick?: () => void;
   label?: string;
-  size?: "small" | "medium" | "large" | "extraLarge";
+  size?: 'small' | 'medium' | 'large' | 'extraLarge';
   customIcon?: ReactNode;
 }
 
@@ -17,11 +18,11 @@ export const Button = ({
   buttonType,
   actionType,
   label,
-  size = "small",
+  size = 'small',
   customIcon,
   ...props
 }: ButtonProps) => {
-  const isExtraLarge = size === "extraLarge";
+  const isExtraLarge = size === 'extraLarge';
   return (
     <button
       // eslint-disable-next-line react/button-has-type
@@ -32,8 +33,8 @@ export const Button = ({
         styles[`button--${size}`],
         styles[`button--${buttonType}--${size}`],
         extClassName,
-        "text",
-        "text_size_small",
+        'text',
+        'text_size_small',
         { text_size_medium: isExtraLarge }
       )}
       {...props}
@@ -43,7 +44,7 @@ export const Button = ({
           styles.buttonContent,
           styles[`buttonContent--${buttonType}`],
           { [styles[`buttonContent--${size}`]]: isExtraLarge },
-          { [styles["buttonContent--withoutLabel"]]: !label }
+          { [styles['buttonContent--withoutLabel']]: !label }
         )}
       >
         {customIcon}

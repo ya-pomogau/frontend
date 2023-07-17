@@ -1,7 +1,8 @@
-import classNames from "classnames";
-import styles from "./info-container-content.module.css";
+import classNames from 'classnames';
 
-interface IInfoContainerContent {
+import styles from './info-container-content.module.css';
+
+interface InfoContainerContentProps {
   name?: string;
   id?: number;
   phone?: string;
@@ -13,46 +14,46 @@ export const InfoContainerContent = ({
   id,
   phone,
   address,
-}: IInfoContainerContent) => (
+}: InfoContainerContentProps) => (
   <>
     <p
       className={classNames(
-        "m-0",
-        "text_size_medium",
-        "text_type_regular",
-        "text",
-        styles["info-name-wrapper"]
+        'm-0',
+        'text_size_medium',
+        'text_type_regular',
+        'text',
+        styles['info-name-wrapper']
       )}
     >
       {name}
     </p>
     <p
       className={classNames(
-        "m-0",
-        "text_size_small",
-        "text_type_regular",
-        "text",
-        styles["info-id-wrapper"]
+        'm-0',
+        'text_size_small',
+        'text_type_regular',
+        'text',
+        styles['info-id-wrapper']
       )}
     >
       ID {id}
     </p>
     <p
       className={classNames(
-        "m-0",
-        "text_size_small",
-        "text_type_regular",
-        "text",
-        styles["info-phone-wrapper"]
+        'm-0',
+        'text_size_small',
+        'text_type_regular',
+        'text',
+        styles['info-phone-wrapper']
       )}
     >
       <span
         className={classNames(
-          "m-0",
-          "text_size_small",
-          "text_type_bold",
-          "text",
-          styles["info-field-title"]
+          'm-0',
+          'text_size_small',
+          'text_type_bold',
+          'text',
+          styles['info-field-title']
         )}
       >
         Тел.: &nbsp;
@@ -61,20 +62,20 @@ export const InfoContainerContent = ({
     </p>
     <p
       className={classNames(
-        "m-0",
-        "text_size_small",
-        "text_type_regular",
-        "text",
-        styles["info-address-wrapper"]
+        'm-0',
+        'text_size_small',
+        'text_type_regular',
+        'text',
+        styles['info-address-wrapper']
       )}
     >
       <span
         className={classNames(
-          "m-0",
-          "text_size_small",
-          "text_type_bold",
-          "text",
-          styles["info-field-title"]
+          'm-0',
+          'text_size_small',
+          'text_type_bold',
+          'text',
+          styles['info-field-title']
         )}
       >
         Адрес: &nbsp;

@@ -1,10 +1,10 @@
-import { SortByBlock } from "../../sortBy-block";
+import { SortByBlock } from '../../sortBy-block';
 
-interface Props {
+interface CompletedModeProps {
   filter: string;
   onChange: (name: string, value: string[] | string) => void;
 }
 
-export const CompletedMode = ({ filter, onChange }: Props) => (
-  <SortByBlock filter={filter} onChange={onChange} userRole="volunteer"/>
+export const CompletedMode = ({ filter, onChange }: CompletedModeProps) => (
+  <SortByBlock filter={filter} onChange={onChange} userRole="volunteer" />
 );

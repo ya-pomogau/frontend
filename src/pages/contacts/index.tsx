@@ -1,25 +1,25 @@
-import { TaskList } from "entities/task/ui/task-list";
-import { NotFoundPage } from "pages/not-found";
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-import { useMediaQuery } from "shared/hooks";
-import { ButtonContainer } from "shared/ui/button-container";
-import { CardButton } from "shared/ui/card-button";
-import { ContentLayout } from "shared/ui/content-layout";
-import { Icon } from "shared/ui/icons";
-import { PageLayout } from "shared/ui/page-layout";
-import { SmartHeader } from "shared/ui/smart-header";
-import classNames from "classnames";
-import { Input } from "shared/ui/input";
-import useForm from "shared/hooks/use-form";
-import { TextArea } from "shared/ui/text-area";
-import { Button } from "shared/ui/button";
-import styles from "./styles.module.css";
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import classNames from 'classnames';
+
+import useForm from 'shared/hooks/use-form';
+import { ButtonContainer } from 'shared/ui/button-container';
+import { CardButton } from 'shared/ui/card-button';
+import { ContentLayout } from 'shared/ui/content-layout';
+import { Icon } from 'shared/ui/icons';
+import { PageLayout } from 'shared/ui/page-layout';
+import { SmartHeader } from 'shared/ui/smart-header';
+import { Input } from 'shared/ui/input';
+import { TextArea } from 'shared/ui/text-area';
+import { Button } from 'shared/ui/button';
+import { NotFoundPage } from 'pages/not-found';
+
+import styles from './styles.module.css';
 
 export function ContactsPage() {
   const { values, handleChange } = useForm({
-    firstName: "",
-    email: "",
-    message: "",
+    firstName: '',
+    email: '',
+    message: '',
   });
 
   return (
@@ -69,9 +69,9 @@ export function ContactsPage() {
                 <div className={styles.container}>
                   <h2
                     className={classNames(
-                      "text",
-                      "text_size_large",
-                      "text_type_regular",
+                      'text',
+                      'text_size_large',
+                      'text_type_regular',
                       styles.title
                     )}
                   >
@@ -80,9 +80,9 @@ export function ContactsPage() {
                   <a
                     href="mailto:www@yandex.ru"
                     className={classNames(
-                      "text",
-                      "text_size_large",
-                      "text_type_regular",
+                      'text',
+                      'text_size_large',
+                      'text_type_regular',
                       styles.link
                     )}
                   >
@@ -92,9 +92,9 @@ export function ContactsPage() {
                 <div className={styles.container}>
                   <h2
                     className={classNames(
-                      "text",
-                      "text_size_large",
-                      "text_type_regular",
+                      'text',
+                      'text_size_large',
+                      'text_type_regular',
                       styles.title
                     )}
                   >
@@ -102,9 +102,9 @@ export function ContactsPage() {
                   </h2>
                   <a
                     className={classNames(
-                      "text",
-                      "text_size_large",
-                      "text_type_regular",
+                      'text',
+                      'text_size_large',
+                      'text_type_regular',
                       styles.link
                     )}
                     href="https://vk.com/me2help"

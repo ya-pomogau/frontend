@@ -23,7 +23,7 @@
   height: 20px;
   flex-shrink: 0;
   flex-grow: 0;
-  content: "";
+  content: '';
   border: 2px solid var(--colors-interface-yorkshire-cloud);
   border-radius: 4px;
   transition: var(--transition-hover);

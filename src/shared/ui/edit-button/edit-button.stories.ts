@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { EditButton } from ".";
+import { EditButton } from '.';
 
 const meta: Meta<typeof EditButton> = {
-  title: "uikit/Buttons/EditButton",
+  title: 'uikit/Buttons/EditButton',
   component: EditButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    disabled: { type: "boolean" },
+    disabled: { type: 'boolean' },
   },
 };
 
@@ -16,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: "Изменить дату и время",
+    label: 'Изменить дату и время',
   },
 };

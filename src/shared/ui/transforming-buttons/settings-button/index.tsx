@@ -1,7 +1,8 @@
-import classnames from "classnames";
-import { ButtonHTMLAttributes } from "react";
-import styles from "./styles.module.css";
-import stylesButton from "../styles.module.css";
+import { ButtonHTMLAttributes } from 'react';
+import classnames from 'classnames';
+
+import styles from './styles.module.css';
+import stylesButton from '../styles.module.css';
 
 interface SettingsButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -15,12 +16,12 @@ export const SettingsButton = ({
   <button
     type="button"
     className={classnames(
-      styles["setting-button"],
+      styles['setting-button'],
       stylesButton.styles_button,
       extClassName
     )}
     {...props}
   >
-    {" "}
+    {' '}
   </button>
 );

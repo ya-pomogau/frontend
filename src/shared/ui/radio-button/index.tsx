@@ -1,18 +1,20 @@
-import { FC, InputHTMLAttributes } from "react";
-import classnames from "classnames";
-import styles from "./style.module.css";
+import { InputHTMLAttributes } from 'react';
+import classnames from 'classnames';
+
+import styles from './style.module.css';
 
 interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
-const RadioButton: FC<RadioButtonProps> = ({
+
+const RadioButton = ({
   label,
   id,
   name,
   onChange,
   checked,
   ...props
-}) => (
+}: RadioButtonProps) => (
   <>
     <input
       type="radio"
@@ -27,9 +29,9 @@ const RadioButton: FC<RadioButtonProps> = ({
       htmlFor={id}
       className={classnames(
         styles.fakeRadiobutton,
-        "text",
-        "text_type_regular",
-        "text_size_small"
+        'text',
+        'text_type_regular',
+        'text_size_small'
       )}
     >
       {label}

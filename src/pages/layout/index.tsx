@@ -1,7 +1,9 @@
-import { Outlet } from "react-router-dom";
-import { BottomBar } from "shared/ui/bottom-bar";
-import Header from "widgets/header";
-import styles from "./styles.module.css";
+import { Outlet } from 'react-router-dom';
+
+import { BottomBar } from 'shared/ui/bottom-bar';
+import Header from 'widgets/header';
+
+import styles from './styles.module.css';
 
 export function Layout() {
   return (

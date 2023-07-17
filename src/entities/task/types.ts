@@ -1,4 +1,4 @@
-import { UserInfo } from "entities/user/types";
+import { UserInfo } from 'entities/user/types';
 
 export type Task = {
   id: number;
@@ -7,7 +7,7 @@ export type Task = {
     id: number;
     name: string;
     scope: number;
-  }
+  };
   date: string;
   description: string;
   completed: boolean;

@@ -1,10 +1,10 @@
-import React from "react";
-import { Map, YMaps } from "@pbe/react-yandex-maps";
-import { API_KEY } from "config/ymaps";
+import React from 'react';
+import { Map, YMaps } from '@pbe/react-yandex-maps';
+import { YMAPS_API_KEY } from 'config/ymaps';
 
-import type { Task } from "entities/task/types";
-import { isTaskUrgent } from "shared/libs/utils";
-import { Mark } from "./Mark";
+import { isTaskUrgent } from 'shared/libs/utils';
+import { Mark } from './Mark';
+import type { Task } from 'entities/task/types';
 
 type YandexMapProps = {
   width?: string | number;
@@ -30,8 +30,8 @@ const YandexMap = ({
   <YMaps
     enterprise
     query={{
-      load: "Map,Placemark,map.addon.balloon,geoObject.addon.balloon",
-      apikey: API_KEY,
+      load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
+      apikey: YMAPS_API_KEY,
     }}
   >
     <Map

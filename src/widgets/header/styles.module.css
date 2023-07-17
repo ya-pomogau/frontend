@@ -4,11 +4,13 @@
   width: 100%;
   border-bottom: 1px solid #e0e0e0;
 }
+
 .header_title {
   padding: 0;
   margin: 0;
   color: aliceblue;
 }
+
 .header__button {
   background-repeat: no-repeat;
   border: none;
@@ -19,14 +21,16 @@
   margin-bottom: 4px;
   max-width: 68px;
 }
+
 .header__button__container {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
 }
-.header__button__text{
-  font-family: "Golos";
+
+.header__button__text {
+  font-family: 'Golos';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -37,6 +41,7 @@
 .header__button:focus-visible {
   outline: none;
 }
+
 .header__menu {
   left: -176px;
   width: 252px;
@@ -45,23 +50,28 @@
   visibility: hidden;
   display: none;
 }
+
 .header__menu_active {
   visibility: visible;
   z-index: 1;
   display: block;
   background-color: var(--colors-interface-white);
 }
-.header__logo{
+
+.header__logo {
   margin-bottom: 5px;
 }
+
 .header__menu__container {
   position: relative;
 }
+
 .header__sidebar__container {
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 20px;
 }
+
 .header__title__container {
   display: flex;
   padding-top: 20px;
@@ -73,9 +83,10 @@
   list-style: none;
   justify-content: center;
 }
+
 .menu__title {
   color: var(--colors-interface-primary);
-  font-family: "Golos";
+  font-family: 'Golos';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -106,6 +117,7 @@
   max-height: 42px;
   padding-bottom: 8px;
 }
+
 .header__container {
   max-width: 1256px;
   min-width: min-content;
@@ -116,12 +128,14 @@
   justify-content: space-between;
   align-items: flex-end;
 }
+
 @media (max-width: 1050px) {
   .header__container {
     padding-left: 72px;
     padding-right: 72px;
   }
 }
+
 @media (max-width: 900px) {
   .header__container {
     height: 42px;
@@ -129,17 +143,20 @@
     padding-right: 30px;
     padding-top: 10px;
   }
-  .header__sidebar__container{
+
+  .header__sidebar__container {
     margin-top: 10px;
     padding-left: 25px;
   }
+
   .header__button {
     padding-bottom: 8px;
   }
+
   .header__menu {
     left: -200px;
   }
-  
+
   .header__title__container {
     border: none;
   }

@@ -1,8 +1,10 @@
 type Query = Record<string, string | string[] | boolean>;
+
 export const getQuery = (search: URLSearchParams): Query => {
   const query: Record<string, string[]> = {};
   const searchEntries = search.entries();
   let searchEntry = searchEntries.next();
+
   while (!searchEntry.done) {
     const [key, value] = searchEntry.value;
     if (query[key] !== undefined) {
@@ -24,7 +26,7 @@ export const getQuery = (search: URLSearchParams): Query => {
         result[key] = value.length === 1 ? value[0] : value;
       }
     } else {
-      result[key] = typeof value === "boolean" ? !!value : value;
+      result[key] = typeof value === 'boolean' ? !!value : value;
     }
   });
 

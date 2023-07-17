@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Provider } from "react-redux";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Provider } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-import { InfoContainer } from ".";
+import { InfoContainer } from '.';
 
 const mockedVolunteerState = {
   role: 'volunteer',
@@ -11,7 +11,8 @@ const mockedVolunteerState = {
     fullname: 'Волонтеров Петр Петрович',
     role: 'volunteer',
     vk: 'https://vk.com/id123456789',
-    avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
+    avatar:
+      'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
     phone: '+7 (901) 123-45-67',
     address: 'ул. Кораблестроителей, 19к1',
     coordinates: [59.942575, 30.216757],
@@ -41,9 +42,9 @@ const Mockstore = ({ initialState, children }: Record<any, any>) => (
 );
 
 const meta: Meta<typeof InfoContainer> = {
-  title: "uikit/InfoContainer",
+  title: 'uikit/InfoContainer',
   component: InfoContainer,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -54,12 +55,16 @@ export const Default: Story = {
     avatar: mockedVolunteerState.data.avatar,
   },
   decorators: [
-    (story) => <Mockstore initialState={mockedVolunteerState}>{story()}</Mockstore>,
+    (story) => (
+      <Mockstore initialState={mockedVolunteerState}>{story()}</Mockstore>
+    ),
   ],
 };
 
 export const WithoutAvatar: Story = {
   decorators: [
-    (story) => <Mockstore initialState={mockedVolunteerState}>{story()}</Mockstore>,
+    (story) => (
+      <Mockstore initialState={mockedVolunteerState}>{story()}</Mockstore>
+    ),
   ],
 };

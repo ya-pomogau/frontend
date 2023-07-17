@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Icon } from ".";
+import { Icon } from '.';
 
 const meta: Meta<typeof Icon> = {
-  title: "uikit/Icons",
+  title: 'uikit/Icons',
   component: Icon,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;
@@ -14,8 +14,8 @@ type Story = StoryObj<typeof Icon>;
 
 export const Playground: Story = {
   args: {
-    color: "blue",
-    size: "24",
-    icon: "CalendarIcon",
+    color: 'blue',
+    size: '24',
+    icon: 'CalendarIcon',
   },
 };

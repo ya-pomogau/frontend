@@ -1,20 +1,17 @@
-import { useState, useEffect, FC } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { ISideBarElementProps, ISideBarProps } from "./types";
-import styles from "./styles.module.css";
+import { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
-const SideBarItem: FC<ISideBarElementProps> = ({
-  title,
-  to,
-  icon,
-  position,
-}) => {
-  const location = useLocation();
-  const [link, setLink] = useState<string>("");
+import type { ISideBarElementProps, ISideBarProps } from './types';
+
+import styles from './styles.module.css';
+
+const SideBarItem = ({ title, to, icon, position }: ISideBarElementProps) => {
+  const { pathname } = useLocation();
+  const [link, setLink] = useState<string>('');
 
   useEffect(() => {
-    setLink(location.pathname);
-  });
+    setLink(pathname);
+  }, [pathname]);
 
   return (
     <NavLink
@@ -35,7 +32,7 @@ const SideBarItem: FC<ISideBarElementProps> = ({
   );
 };
 
-export const SideBar: FC<ISideBarProps> = ({ links, position }) => (
+export const SideBar = ({ links, position }: ISideBarProps) => (
   <nav className={`${styles.nav} `}>
     <ul
       className={`${styles.links} `}

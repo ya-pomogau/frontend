@@ -24,9 +24,9 @@
 }
 
 .recipientInfo {
-position: absolute;
-bottom: 10px;
-right: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .dataWrapper {

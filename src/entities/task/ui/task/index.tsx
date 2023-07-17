@@ -1,14 +1,14 @@
-import { useState } from "react";
-import classNames from "classnames";
-import format from "date-fns/format";
+import { useState } from 'react';
+import classNames from 'classnames';
+import format from 'date-fns/format';
 
-import { Avatar } from "shared/ui/avatar";
-import { CategoriesBackground } from "shared/ui/categories-background";
-import { Icon } from "shared/ui/icons";
-import { RoundButton } from "shared/ui/round-button";
-import { SquareButton } from "shared/ui/square-buttons";
+import { Avatar } from 'shared/ui/avatar';
+import { CategoriesBackground } from 'shared/ui/categories-background';
+import { Icon } from 'shared/ui/icons';
+import { RoundButton } from 'shared/ui/round-button';
+import { SquareButton } from 'shared/ui/square-buttons';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 interface TaskItemProps {
   isMobile: boolean;
@@ -58,7 +58,7 @@ export const TaskItem = ({
       <div
         className={classNames(
           styles.mobile_container_main,
-          "text",
+          'text',
           extClassName
         )}
       >
@@ -104,7 +104,7 @@ export const TaskItem = ({
           </div>
         </div>
         <div className={styles.mobile_buttons_call}>
-          <RoundButton 
+          <RoundButton
             buttonType="phone"
             onClick={handleClickPnoneButton}
             disabled={completed && confirmed}
@@ -137,7 +137,7 @@ export const TaskItem = ({
             } text text_size_medium`}
             onClick={() => setIsHidden(!isHidden)}
           >
-            {isHidden ? "Читать" : "Свернуть"}
+            {isHidden ? 'Читать' : 'Свернуть'}
           </button>
         </div>
         <div className={styles.icon_finish_container}>
@@ -148,8 +148,8 @@ export const TaskItem = ({
           <div
             className={classNames(
               styles.mobile_date,
-              "text_size_medium",
-              "text_type_bold"
+              'text_size_medium',
+              'text_type_bold'
             )}
           >
             <Icon
@@ -163,8 +163,8 @@ export const TaskItem = ({
           <div
             className={classNames(
               styles.mobile_date,
-              "text_size_medium",
-              "text_type_bold"
+              'text_size_medium',
+              'text_type_bold'
             )}
           >
             <Icon
@@ -179,8 +179,8 @@ export const TaskItem = ({
         <div
           className={classNames(
             styles.mobile_address,
-            "text_size_medium",
-            "text_type_bold"
+            'text_size_medium',
+            'text_type_bold'
           )}
         >
           <Icon
@@ -196,7 +196,7 @@ export const TaskItem = ({
   }
 
   return (
-    <div className={classNames(styles.container_main, "text", extClassName)}>
+    <div className={classNames(styles.container_main, 'text', extClassName)}>
       <div className={styles.container}>
         <div className={styles.section_left}>
           <CategoriesBackground
@@ -205,7 +205,7 @@ export const TaskItem = ({
             size="medium"
             extClassName={styles.category}
           />
-          <div className={classNames(styles.date, "text_size_large")}>
+          <div className={classNames(styles.date, 'text_size_large')}>
             <Icon
               color="blue"
               icon="CalendarIcon"
@@ -214,7 +214,7 @@ export const TaskItem = ({
             />
             <p className="m-0">{format(new Date(date), 'dd.MM.yyyy')}</p>
           </div>
-          <div className={classNames(styles.date, "text_size_large")}>
+          <div className={classNames(styles.date, 'text_size_large')}>
             <Icon
               color="blue"
               icon="ClockIcon"
@@ -251,7 +251,7 @@ export const TaskItem = ({
             } text text_size_medium`}
             onClick={() => setIsHidden(!isHidden)}
           >
-            {isHidden ? "Читать" : "Свернуть"}
+            {isHidden ? 'Читать' : 'Свернуть'}
           </button>
           <div className={styles.icon_balls_container}>
             <Icon color="blue" icon="BallsIcon" size="46" />
@@ -273,7 +273,7 @@ export const TaskItem = ({
             {recipientPhoneNumber}
           </p>
           <div className={styles.buttons_call}>
-            <RoundButton 
+            <RoundButton
               buttonType="phone"
               onClick={handleClickPnoneButton}
               disabled={completed && confirmed}

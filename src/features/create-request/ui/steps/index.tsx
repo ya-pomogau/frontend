@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { closePopup, fetchCategories } from "features/create-request/model";
-import { MainPopup } from "shared/ui/main-popup";
-import { OverlayingPopup } from "shared/ui/overlaying-popup";
-import { CurrentPage } from "../../types";
-import { AddressStep } from "./address-step/address-step";
-import { CommonStep } from "./common-step/common-step";
-import { DateStep } from "./date-step/date-step";
-import { TaskStep } from "./task-step/task-step";
+import { useEffect } from 'react';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { closePopup, fetchCategories } from 'features/create-request/model';
+import { MainPopup } from 'shared/ui/main-popup';
+import { OverlayingPopup } from 'shared/ui/overlaying-popup';
+import { CurrentPage } from '../../types';
+import { AddressStep } from './address-step/address-step';
+import { CommonStep } from './common-step/common-step';
+import { DateStep } from './date-step/date-step';
+import { TaskStep } from './task-step/task-step';
 
 export interface RequestProps {
   isMobile?: boolean;
@@ -25,16 +26,16 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   };
 
   const closeByEsc = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       dispatch(closePopup());
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", closeByEsc);
+    document.addEventListener('keydown', closeByEsc);
     dispatch(fetchCategories());
     return () => {
-      document.removeEventListener("keydown", closeByEsc);
+      document.removeEventListener('keydown', closeByEsc);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -1,43 +1,42 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import Fieldset from "./index";
-import { FieldsetView } from "./utils";
-import Checkbox from "../checkbox";
-import RadioButton from "../radio-button";
+import type { Meta, StoryObj } from '@storybook/react';
+import Fieldset from './index';
+import { FieldsetView } from './utils';
+import Checkbox from '../checkbox';
+import RadioButton from '../radio-button';
 
 const meta: Meta<typeof Fieldset> = {
-  title: "uikit/FormElements/Fieldset",
+  title: 'uikit/FormElements/Fieldset',
   component: Fieldset,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
         component:
-          "Используется для группировки нескольких элементов (формы, фильтры)",
+          'Используется для группировки нескольких элементов (формы, фильтры)',
       },
     },
   },
   argTypes: {
     title: {
-      name: "title",
-      type: { name: "string", required: true },
-      description: "Заголовок для группы элементов",
+      name: 'title',
+      type: { name: 'string', required: true },
+      description: 'Заголовок для группы элементов',
       table: {
-        type: { summary: "string" },
+        type: { summary: 'string' },
       },
     },
     view: {
-      name: "view",
-      type: { name: "string", required: true },
+      name: 'view',
+      type: { name: 'string', required: true },
       options: [
         FieldsetView.ROW,
         FieldsetView.COLUMN,
         FieldsetView.TWO_COLUMNS,
       ],
-      control: { type: "select" },
+      control: { type: 'select' },
       defaultValue: { summary: FieldsetView.ROW },
       description:
-        "Один из возможных типов отображения: 1 строка, 1 столбец, 2 столбца",
+        'Один из возможных типов отображения: 1 строка, 1 столбец, 2 столбца',
       table: {
         type: { summary: "'ROW' |'COLUMN' | 'TWO_COLUMNS'" },
       },
@@ -49,7 +48,7 @@ export default meta;
 type Story = StoryObj<typeof Fieldset>;
 export const DedaultFieldset: Story = {
   args: {
-    title: "Заголовок",
+    title: 'Заголовок',
   },
 };
 export const FieldsetOneColumn: Story = {
@@ -61,7 +60,7 @@ export const FieldsetOneColumn: Story = {
     </Fieldset>
   ),
   args: {
-    title: "Отображать",
+    title: 'Отображать',
   },
 };
 
@@ -74,7 +73,7 @@ export const FieldsetOneRow: Story = {
     </Fieldset>
   ),
   args: {
-    title: "Радиус поиска",
+    title: 'Радиус поиска',
   },
 };
 
@@ -90,6 +89,6 @@ export const FieldsetTwoColumns: Story = {
     </Fieldset>
   ),
   args: {
-    title: "Категория",
+    title: 'Категория',
   },
 };

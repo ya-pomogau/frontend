@@ -1,7 +1,8 @@
-import classnames from "classnames";
-import { ButtonHTMLAttributes } from "react";
-import styles from "./styles.module.css";
-import stylesButton from "../styles.module.css";
+import { ButtonHTMLAttributes } from 'react';
+import classnames from 'classnames';
+
+import styles from './styles.module.css';
+import stylesButton from '../styles.module.css';
 
 interface ExcelButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -12,12 +13,12 @@ export const ExcelButton = ({ extClassName, ...props }: ExcelButtonProps) => (
   <button
     type="button"
     className={classnames(
-      styles["excel-button"],
+      styles['excel-button'],
       stylesButton.styles_button,
       extClassName
     )}
     {...props}
   >
-    {" "}
+    {' '}
   </button>
 );

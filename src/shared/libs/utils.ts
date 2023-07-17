@@ -1,3 +1,4 @@
-import differenceInMilliseconds from "date-fns/differenceInMilliseconds";
+import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 
-export const isTaskUrgent = (date: string): boolean => differenceInMilliseconds(new Date(date), new Date()) < 86400000;
+export const isTaskUrgent = (date: string): boolean =>
+  differenceInMilliseconds(new Date(date), new Date()) < 86400000;

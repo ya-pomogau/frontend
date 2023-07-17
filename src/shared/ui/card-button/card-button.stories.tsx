@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { CardButton } from ".";
-import { CompletedApplicationIcon } from "../icons/completed-application-icon";
+import type { Meta, StoryObj } from '@storybook/react';
+import { CardButton } from '.';
+import { CompletedApplicationIcon } from '../icons/completed-application-icon';
 
 const meta: Meta<typeof CardButton> = {
-  title: "uikit/Buttons/CardButton",
+  title: 'uikit/Buttons/CardButton',
   component: CardButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    customIcon: { type: "string" },
+    customIcon: { type: 'string' },
   },
 };
 
@@ -18,14 +18,14 @@ const Icon = <CompletedApplicationIcon size="54" color="white" />;
 
 export const Default: Story = {
   args: {
-    text: "Обозначение карточки",
+    text: 'Обозначение карточки',
     customIcon: Icon,
   },
 };
 
 export const Pressed: Story = {
   args: {
-    text: "Обозначение карточки",
+    text: 'Обозначение карточки',
     customIcon: Icon,
   },
 };

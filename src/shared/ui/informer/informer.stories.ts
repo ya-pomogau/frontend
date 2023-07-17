@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Informer } from ".";
+import { Informer } from '.';
 
 const meta: Meta<typeof Informer> = {
-  title: "uikit/Informer",
+  title: 'uikit/Informer',
   component: Informer,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    icon: { type: "string" },
+    icon: { type: 'string' },
   },
 };
 
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const WithText: Story = {
   args: {
-    text: "У Вас пока нет открытых заявок",
+    text: 'У Вас пока нет открытых заявок',
   },
 };
 

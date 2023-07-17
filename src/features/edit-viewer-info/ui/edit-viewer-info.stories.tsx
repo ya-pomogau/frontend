@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { EditViewerInfo } from ".";
+import { EditViewerInfo } from '.';
 
 const meta: Meta<typeof EditViewerInfo> = {
-  title: "features/EditViewerInfo",
+  title: 'features/EditViewerInfo',
   component: EditViewerInfo,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {},
 };
 

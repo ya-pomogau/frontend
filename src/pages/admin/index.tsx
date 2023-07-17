@@ -1,20 +1,22 @@
-import { useState, MouseEvent, useRef, useEffect } from "react";
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
-import classnames from "classnames";
-import { Filter } from "features/filter/ui";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { setUserRole } from "entities/user/model";
-import { PageLayout } from "../../shared/ui/page-layout";
-import { UserInfo } from "../../entities/user";
-import { ButtonContainer } from "../../shared/ui/button-container";
-import { CardButton } from "../../shared/ui/card-button";
-import { Icon } from "../../shared/ui/icons";
-import { ContentLayout } from "../../shared/ui/content-layout";
-import { SmartHeader } from "../../shared/ui/smart-header";
-import { NotFoundPage } from "../not-found";
-import { Input } from "../../shared/ui/input";
-import { UserCard } from "../../shared/ui/user-card";
-import styles from "./styles.module.css";
+import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import classnames from 'classnames';
+
+import { Filter } from 'features/filter/ui';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { setUserRole } from 'entities/user/model';
+import { PageLayout } from '../../shared/ui/page-layout';
+import { UserInfo } from '../../entities/user';
+import { ButtonContainer } from '../../shared/ui/button-container';
+import { CardButton } from '../../shared/ui/card-button';
+import { Icon } from '../../shared/ui/icons';
+import { ContentLayout } from '../../shared/ui/content-layout';
+import { SmartHeader } from '../../shared/ui/smart-header';
+import { Input } from '../../shared/ui/input';
+import { UserCard } from '../../shared/ui/user-card';
+import { NotFoundPage } from '../not-found';
+
+import styles from './styles.module.css';
 
 const numbersMock = {
   numberVolunteer: 2,
@@ -25,51 +27,51 @@ const numbersMock = {
 const userMock = [
   {
     avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: "Avatar",
+    avatarName: 'Avatar',
     userId: 1,
-    userName: "Иванов Иван Иванович",
-    userNumber: "+7 (111) 222-22-22",
+    userName: 'Иванов Иван Иванович',
+    userNumber: '+7 (111) 222-22-22',
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: "Avatar",
+    avatarName: 'Avatar',
     userId: 2,
-    userName: "Молчанов Егор Артёмович",
-    userNumber: "+7 (111) 222-22-22",
+    userName: 'Молчанов Егор Артёмович',
+    userNumber: '+7 (111) 222-22-22',
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: "Avatar",
+    avatarName: 'Avatar',
     userId: 3,
-    userName: "Суворов Лазарь Валентинович",
-    userNumber: "+7 (111) 222-22-22",
+    userName: 'Суворов Лазарь Валентинович',
+    userNumber: '+7 (111) 222-22-22',
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: "Avatar",
+    avatarName: 'Avatar',
     userId: 4,
-    userName: "Ефремов Мартын Ростиславович",
-    userNumber: "+7 (111) 222-22-22",
+    userName: 'Ефремов Мартын Ростиславович',
+    userNumber: '+7 (111) 222-22-22',
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: "Avatar",
+    avatarName: 'Avatar',
     userId: 5,
-    userName: "Ефремов Мартын Ростиславович",
-    userNumber: "+7 (111) 222-22-22",
+    userName: 'Ефремов Мартын Ростиславович',
+    userNumber: '+7 (111) 222-22-22',
   },
 ];
 export function AdminPage() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
-  const [buttonPosition, setButtonPosition] = useState({top: 0, right: 0});
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
   const getButtonPosition = () => {
     const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
     if (buttonRect) {
-      setButtonPosition({top: buttonRect.bottom, right: buttonRect.right});
+      setButtonPosition({ top: buttonRect.bottom, right: buttonRect.right });
     }
   };
   const openFilter = (e: MouseEvent) => {
@@ -87,7 +89,7 @@ export function AdminPage() {
   const filter = userMock.filter((user) =>
     user.userName.toLowerCase().includes(value.toLowerCase())
   );
-  const isAuth = !!(useAppSelector((store) => store.user.role));
+  const isAuth = !!useAppSelector((store) => store.user.role);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -156,11 +158,13 @@ export function AdminPage() {
                       }
                       settingText="Подтверждение / Блокировка"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="admin"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="admin"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >
@@ -169,17 +173,17 @@ export function AdminPage() {
                     {({ isActive }) => (
                       <div
                         className={classnames(
-                          isActive ? styles.tabContainer__itemActive : "",
+                          isActive ? styles.tabContainer__itemActive : '',
                           styles.tabContainer__item
                         )}
                       >
-                        {" "}
+                        {' '}
                         <p
                           className={classnames(
-                            isActive ? styles.tabContainer__textActive : "",
-                            "text",
-                            "p-0",
-                            "m-0",
+                            isActive ? styles.tabContainer__textActive : '',
+                            'text',
+                            'p-0',
+                            'm-0',
                             styles.tabContainer__text
                           )}
                         >
@@ -187,7 +191,7 @@ export function AdminPage() {
                         </p>
                         <span className={styles.tabContainer__number}>
                           {numbersMock.numberVolunteer}
-                        </span>{" "}
+                        </span>{' '}
                       </div>
                     )}
                   </NavLink>
@@ -195,17 +199,17 @@ export function AdminPage() {
                     {({ isActive }) => (
                       <div
                         className={classnames(
-                          isActive ? styles.tabContainer__itemActive : "",
+                          isActive ? styles.tabContainer__itemActive : '',
                           styles.tabContainer__item
                         )}
                       >
-                        {" "}
+                        {' '}
                         <p
                           className={classnames(
-                            isActive ? styles.tabContainer__textActive : "",
-                            "text",
-                            "p-0",
-                            "m-0",
+                            isActive ? styles.tabContainer__textActive : '',
+                            'text',
+                            'p-0',
+                            'm-0',
                             styles.tabContainer__text
                           )}
                         >
@@ -213,7 +217,7 @@ export function AdminPage() {
                         </p>
                         <span className={styles.tabContainer__number}>
                           {numbersMock.numberRecipient}
-                        </span>{" "}
+                        </span>{' '}
                       </div>
                     )}
                   </NavLink>
@@ -221,17 +225,17 @@ export function AdminPage() {
                     {({ isActive }) => (
                       <div
                         className={classnames(
-                          isActive ? styles.tabContainer__itemActive : "",
+                          isActive ? styles.tabContainer__itemActive : '',
                           styles.tabContainer__item
                         )}
                       >
-                        {" "}
+                        {' '}
                         <p
                           className={classnames(
-                            isActive ? styles.tabContainer__textActive : "",
-                            "text",
-                            "p-0",
-                            "m-0",
+                            isActive ? styles.tabContainer__textActive : '',
+                            'text',
+                            'p-0',
+                            'm-0',
                             styles.tabContainer__text
                           )}
                         >
@@ -239,7 +243,7 @@ export function AdminPage() {
                         </p>
                         <span className={styles.tabContainer__number}>
                           {numbersMock.numberNotProcessed}
-                        </span>{" "}
+                        </span>{' '}
                       </div>
                     )}
                   </NavLink>
@@ -286,11 +290,13 @@ export function AdminPage() {
                       }
                       settingText="Создание / Редактирование заявки"
                     />
-                    {isFilterVisibel && <Filter
-                      userRole="admin"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />}
+                    {isFilterVisibel && (
+                      <Filter
+                        userRole="admin"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )}
                   </>
                 }
               >
@@ -305,7 +311,7 @@ export function AdminPage() {
                   <ul>
                     {filter.map((item) => (
                       <li key={item.userId}>
-                        {" "}
+                        {' '}
                         <UserCard
                           avatarLink={item.avatarLink}
                           avatarName={item.avatarName}

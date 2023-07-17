@@ -1,9 +1,11 @@
+/* eslint-disable react/display-name */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/no-this-in-sfc */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React from "react";
-import { Placemark, useYMaps } from "@pbe/react-yandex-maps";
-import "./styles.css";
+import React from 'react';
+import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
+import './styles.css';
 
 type MarkProps = {
   id?: number;
@@ -29,7 +31,7 @@ export const Mark = React.memo(
     count,
     onClick,
   }: MarkProps) => {
-    const ymaps = useYMaps(["templateLayoutFactory"]);
+    const ymaps = useYMaps(['templateLayoutFactory']);
 
     if (!ymaps) return null;
 
@@ -55,8 +57,8 @@ export const Mark = React.memo(
           Iconlayout.superclass.build.call(this);
 
           // На метку добавляем кликабильную зону
-          this.getData().options.set("shape", {
-            type: "Circle",
+          this.getData().options.set('shape', {
+            type: 'Circle',
             coordinates: [28, 28],
             radius: 30,
           });
@@ -113,34 +115,34 @@ export const Mark = React.memo(
           Balloonlayout.superclass.build.call(this);
 
           const mainContainer = this.getParentElement();
-          const taskContainer = mainContainer.querySelector(".task_container");
+          const taskContainer = mainContainer.querySelector('.task_container');
 
           // Добавляем слушатель на кпонку "читать"
-          const buttonRead = taskContainer.querySelector(".task_button");
+          const buttonRead = taskContainer.querySelector('.task_button');
           const descriptionContainer = taskContainer.querySelector(
-            ".task_description_hidden"
+            '.task_description_hidden'
           );
           const onReadClick = () => {
-            descriptionContainer.classList.toggle("task_description_hidden");
+            descriptionContainer.classList.toggle('task_description_hidden');
             // eslint-disable-next-line no-unused-expressions
-            buttonRead.textContent === "Читать"
-              ? (buttonRead.textContent = "Свернуть")
-              : (buttonRead.textContent = "Читать");
+            buttonRead.textContent === 'Читать'
+              ? (buttonRead.textContent = 'Свернуть')
+              : (buttonRead.textContent = 'Читать');
           };
-          buttonRead.addEventListener("click", onReadClick);
+          buttonRead.addEventListener('click', onReadClick);
 
           // Добавляем слушатель на кпонку "Закрыть окно".
-          const buttonClose = taskContainer.querySelector(".close_icon");
+          const buttonClose = taskContainer.querySelector('.close_icon');
           const onCloseClick = () => {
             this.getData().map.balloon.close();
           };
-          buttonClose.addEventListener("click", onCloseClick);
+          buttonClose.addEventListener('click', onCloseClick);
 
           // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
           const button = taskContainer
-            .querySelector(".task_button_container")
-            .querySelector("button");
-          button.addEventListener("click", onClick);
+            .querySelector('.task_button_container')
+            .querySelector('button');
+          button.addEventListener('click', onClick);
         },
       }
     );

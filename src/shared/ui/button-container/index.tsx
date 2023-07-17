@@ -1,23 +1,25 @@
-import React from "react";
-import classnames from "classnames";
-import { Icon } from "../icons";
-import styles from "./styles.module.css";
+import { ReactNode } from 'react';
+import classnames from 'classnames';
+
+import { Icon } from '../icons';
+
+import styles from './styles.module.css';
 
 export interface ButtonContainerProps {
-  border?: "sea" | "main" | "mobile";
-  size?: "web" | "mob";
-  children?: React.ReactNode;
+  border?: 'sea' | 'main' | 'mobile';
+  size?: 'web' | 'mob';
+  children?: ReactNode;
   auth?: boolean;
   extClassName?: string;
 }
 
-export const ButtonContainer: React.FC<ButtonContainerProps> = ({
-  border = "sea",
-  size = "web",
+export const ButtonContainer = ({
+  border = 'sea',
+  size = 'web',
   children,
   auth,
-  extClassName
-}) => (
+  extClassName,
+}: ButtonContainerProps) => (
   <div
     className={classnames(
       styles.button__container,

@@ -1,38 +1,58 @@
-import { ReactNode, useEffect, useRef, CSSProperties, useCallback } from "react";
-import { createPortal } from "react-dom";
-import classnames from "classnames";
-import styles from "./styles.module.css";
+import {
+  ReactNode,
+  useEffect,
+  useRef,
+  CSSProperties,
+  useCallback,
+} from 'react';
+import { createPortal } from 'react-dom';
+import classnames from 'classnames';
+
+import styles from './styles.module.css';
 
 interface TooltipProps {
   extClassName?: string;
   visible?: boolean;
   children: ReactNode;
-  pointerPosition?: "right" | "center";
+  pointerPosition?: 'right' | 'center';
   changeVisible?: () => void;
-  elementStyles?: CSSProperties
+  elementStyles?: CSSProperties;
 }
 
 export const Tooltip = ({
   extClassName,
   visible,
   children,
-  pointerPosition = "right",
+  pointerPosition = 'right',
   changeVisible,
-  elementStyles
+  elementStyles,
 }: TooltipProps) => {
   const modalRoot = document.getElementById('modal') as HTMLElement;
+
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const closeWithEsc = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape' && changeVisible) {
-      changeVisible();
-    }
-  }, [changeVisible]);
-  const closeWithClickOutTooltip = useCallback((e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (changeVisible && !target.closest('.tooltip') && (target.getRootNode() === document)) {
-      changeVisible();
-    }
-  }, [changeVisible]);
+  const closeWithEsc = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && changeVisible) {
+        changeVisible();
+      }
+    },
+    [changeVisible]
+  );
+
+  const closeWithClickOutTooltip = useCallback(
+    (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        changeVisible &&
+        !target.closest('.tooltip') &&
+        target.getRootNode() === document
+      ) {
+        changeVisible();
+      }
+    },
+    [changeVisible]
+  );
+
   useEffect(() => {
     document.addEventListener('keydown', closeWithEsc);
     document.addEventListener('click', closeWithClickOutTooltip);
@@ -42,11 +62,16 @@ export const Tooltip = ({
     };
   }, [closeWithClickOutTooltip, closeWithEsc]);
 
-  const tooltip = 
+  const tooltip = (
     <div
-      className={classnames(styles.tooltip, extClassName, {
-        [styles["tooltip--visible"]]: visible,
-      }, 'tooltip')}
+      className={classnames(
+        styles.tooltip,
+        extClassName,
+        {
+          [styles['tooltip--visible']]: visible,
+        },
+        'tooltip'
+      )}
       ref={tooltipRef}
       style={elementStyles}
     >
@@ -57,7 +82,8 @@ export const Tooltip = ({
         )}
       />
       {children}
-    </div>;
+    </div>
+  );
 
   return createPortal(tooltip, modalRoot);
 };

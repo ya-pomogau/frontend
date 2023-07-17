@@ -1,4 +1,4 @@
-import { getColor, IIconProps } from "./utils";
+import { getColor, IIconProps } from './utils';
 
 export const PopularIcon = ({ color, ...props }: IIconProps) => (
   <svg

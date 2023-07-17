@@ -1,28 +1,28 @@
-import { useState, MouseEvent, useRef, useEffect } from "react";
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useMediaQuery } from "shared/hooks";
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useMediaQuery } from 'shared/hooks';
 
-import { UserInfo } from "entities/user";
-import { setUserRole } from "entities/user/model";
-import { ContentLayout } from "shared/ui/content-layout";
-import { PageLayout } from "shared/ui/page-layout";
-import { SmartHeader } from "shared/ui/smart-header";
-import { Icon } from "shared/ui/icons";
-import { TaskList } from "entities/task/ui/task-list";
-import { ButtonContainer } from "shared/ui/button-container";
-import { CardButton } from "shared/ui/card-button";
-import { Filter } from "features/filter/ui";
-import { NotFoundPage } from "pages/not-found";
-import { Request } from "features/create-request";
-import { openPopup } from "features/create-request/model";
+import { UserInfo } from 'entities/user';
+import { setUserRole } from 'entities/user/model';
+import { ContentLayout } from 'shared/ui/content-layout';
+import { PageLayout } from 'shared/ui/page-layout';
+import { SmartHeader } from 'shared/ui/smart-header';
+import { Icon } from 'shared/ui/icons';
+import { TaskList } from 'entities/task/ui/task-list';
+import { ButtonContainer } from 'shared/ui/button-container';
+import { CardButton } from 'shared/ui/card-button';
+import { Filter } from 'features/filter/ui';
+import { Request } from 'features/create-request';
+import { openPopup } from 'features/create-request/model';
+import { NotFoundPage } from 'pages/not-found';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 export function RecipientPage() {
-  const isMobile = useMediaQuery("(max-width:1150px)");
-  const isMobileForPopup = useMediaQuery("(max-width:735px)");
+  const isMobile = useMediaQuery('(max-width:1150px)');
+  const isMobileForPopup = useMediaQuery('(max-width:735px)');
 
   const dispatch = useAppDispatch();
 
@@ -47,10 +47,10 @@ export function RecipientPage() {
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
 
   useEffect(() => {
-    dispatch(setUserRole("recipient"));
-    window.addEventListener("resize", getButtonPosition);
+    dispatch(setUserRole('recipient'));
+    window.addEventListener('resize', getButtonPosition);
     return () => {
-      window.removeEventListener("resize", getButtonPosition);
+      window.removeEventListener('resize', getButtonPosition);
     };
   }, [dispatch]);
 
@@ -140,10 +140,7 @@ export function RecipientPage() {
                   isStatusActive
                   tasks={[]}
                 />
-                {isPopupOpen && (
-                  <Request isMobile={isMobileForPopup}
-                  />
-                )}
+                {isPopupOpen && <Request isMobile={isMobileForPopup} />}
               </ContentLayout>
             }
           />

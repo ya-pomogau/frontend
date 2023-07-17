@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Provider } from "react-redux";
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import type { Meta, StoryObj } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 
-import { UserInfo } from ".";
+import { UserInfo } from '.';
 
 const mockedMasterState = {
   role: 'master',
@@ -33,10 +33,11 @@ const mockedAdminState = {
     fullname: 'Админов Семен Семенович',
     role: 'admin',
     vk: 'https://vk.com/id123456789',
-    avatar: 'https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg',
+    avatar:
+      'https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg',
     phone: '+7 (902) 123-44-55',
     address: 'ул. Стойкости, 17',
-    coordinates: [59.828347, 30.211870],
+    coordinates: [59.828347, 30.21187],
     approved: null,
     checked: null,
     keys: null,
@@ -54,7 +55,8 @@ const mockedVolunteerState = {
     fullname: 'Волонтеров Петр Петрович',
     role: 'volunteer',
     vk: 'https://vk.com/id123456789',
-    avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
+    avatar:
+      'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
     phone: '+7 (901) 123-45-67',
     address: 'ул. Кораблестроителей, 19к1',
     coordinates: [59.942575, 30.216757],
@@ -108,9 +110,9 @@ const Mockstore = ({ initialState, children }: Record<any, any>) => (
 );
 
 const meta: Meta<typeof UserInfo> = {
-  title: "Entities/UserInfo",
+  title: 'Entities/UserInfo',
   component: UserInfo,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   decorators: [withRouter],
 };
 
@@ -119,13 +121,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Volunteer: Story = {
   decorators: [
-    (story) => <Mockstore initialState={mockedVolunteerState}>{story()}</Mockstore>,
+    (story) => (
+      <Mockstore initialState={mockedVolunteerState}>{story()}</Mockstore>
+    ),
   ],
 };
 
 export const Recipient: Story = {
   decorators: [
-    (story) => <Mockstore initialState={mockedRecipientState}>{story()}</Mockstore>,
+    (story) => (
+      <Mockstore initialState={mockedRecipientState}>{story()}</Mockstore>
+    ),
   ],
 };
 
@@ -137,12 +143,16 @@ export const Admin: Story = {
 
 export const Master: Story = {
   decorators: [
-    (story) => <Mockstore initialState={mockedMasterState}>{story()}</Mockstore>,
+    (story) => (
+      <Mockstore initialState={mockedMasterState}>{story()}</Mockstore>
+    ),
   ],
 };
 
 export const Unauthorized: Story = {
   decorators: [
-    (story) => <Mockstore initialState={unauthorizedState}>{story()}</Mockstore>,
+    (story) => (
+      <Mockstore initialState={unauthorizedState}>{story()}</Mockstore>
+    ),
   ],
 };

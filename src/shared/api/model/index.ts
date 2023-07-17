@@ -1,7 +1,7 @@
-import { API_URL } from "config/api-config";
+import { API_URL } from 'config/api-config';
 
-import type { UserInfo } from "entities/user/types";
-import type { Task } from "entities/task/types";
+import type { UserInfo } from 'entities/user/types';
+import type { Task } from 'entities/task/types';
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : Promise.reject(res);
@@ -56,7 +56,9 @@ export const getCompletedTasks = async (): Promise<Task[]> => {
   }
 };
 
-export const getAllCategories = async (): Promise<{id: number, name: string}[]> => {
+export const getAllCategories = async (): Promise<
+  { id: number; name: string }[]
+> => {
   try {
     const res = await fetch(`${API_URL}/category`);
     return await checkResponse(res);

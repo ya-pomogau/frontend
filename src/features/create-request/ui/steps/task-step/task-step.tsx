@@ -1,16 +1,18 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDescriptionForTask,
   changeStepDecrement,
   changeStepIncrement,
   setCategory,
-} from "features/create-request/model";
-import { Button } from "shared/ui/button";
-import { Select } from "shared/ui/select";
-import { TextArea } from "shared/ui/text-area";
-import styles from "./task-step.module.css";
+} from 'features/create-request/model';
+import { Button } from 'shared/ui/button';
+import { Select } from 'shared/ui/select';
+import { TextArea } from 'shared/ui/text-area';
+
+import styles from './task-step.module.css';
 
 interface ITaskStepProps {
   isMobile?: boolean;
@@ -22,11 +24,19 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   );
   const dispatch = useAppDispatch();
 
-  const optionsForSelect = categories.map((item) => ({ value: String(item.id), label: item.name }))
-  console.log(category)
+  const optionsForSelect = categories.map((item) => ({
+    value: String(item.id),
+    label: item.name,
+  }));
+  console.log(category);
 
   const handleTaskValueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setCategory({value: e.target.value, label: e.target[+e.target.value].firstChild?.nodeValue}));
+    dispatch(
+      setCategory({
+        value: e.target.value,
+        label: e.target[+e.target.value].firstChild?.nodeValue,
+      })
+    );
   };
 
   const handleTaskDescValueChange = (
@@ -50,9 +60,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
           <>
             <p
               className={classNames(
-                "text",
-                "text_type_regular ",
-                "m-0",
+                'text',
+                'text_type_regular ',
+                'm-0',
                 styles.task
               )}
             >

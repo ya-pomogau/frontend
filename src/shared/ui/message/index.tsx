@@ -1,10 +1,11 @@
-import classnames from "classnames";
-import { Avatar } from "../avatar";
-import styles from "./styles.module.css";
+import classnames from 'classnames';
+import { Avatar } from '../avatar';
+
+import styles from './styles.module.css';
 
 interface MessageProps {
   extClassName?: string;
-  type: "incoming" | "outgoing";
+  type: 'incoming' | 'outgoing';
   messageText: string;
   avatarLink: string;
 }
@@ -26,7 +27,7 @@ export const Message = ({
   const getMessageBlock = () => (
     <div className={styles.messageBlock}>
       <div className={classnames(styles.message, styles[`message--${type}`])}>
-        <span className={classnames(styles.text, "text", "text_size_small")}>
+        <span className={classnames(styles.text, 'text', 'text_size_small')}>
           {messageText}
         </span>
       </div>
@@ -40,8 +41,8 @@ export const Message = ({
         extClassName
       )}
     >
-      {type === "incoming" ? getAvatar() : getMessageBlock()}
-      {type === "incoming" ? getMessageBlock() : getAvatar()}
+      {type === 'incoming' ? getAvatar() : getMessageBlock()}
+      {type === 'incoming' ? getMessageBlock() : getAvatar()}
     </div>
   );
 };

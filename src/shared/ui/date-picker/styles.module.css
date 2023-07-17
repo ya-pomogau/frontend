@@ -7,7 +7,7 @@
   width: 308px;
   padding: 10px;
   border-radius: 0;
-  font-family: "Golos", sans-serif;
+  font-family: 'Golos', sans-serif;
   line-height: 14px;
   background-color: white;
   border: 0.5px solid rgba(0, 0, 0, 0.2);
@@ -26,7 +26,7 @@
 
 .datePicker__headerMonth {
   margin-right: 4px;
-  font-family: "Golos", sans-serif;
+  font-family: 'Golos', sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: var(--colors-interface-primary);
@@ -38,7 +38,7 @@
   border-radius: 2px;
 }
 
-.customInput{
+.customInput {
   display: block;
   width: 260px;
   text-align: left;

@@ -5,6 +5,7 @@ export interface IFilterValues {
   sortBy: string;
 }
 
-export type TRecipientFilter = Omit<IFilterValues, "date" | "searchRadius">;
+export type TRecipientFilter = Omit<IFilterValues, 'date' | 'searchRadius'>;
 export type TVolunteerFilter = IFilterValues;
-export type TRole = "admin" | "recipient" | "volunteer";
+
+export type TRole = 'admin' | 'recipient' | 'volunteer';

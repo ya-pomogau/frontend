@@ -1,19 +1,24 @@
-import classnames from "classnames";
-import { ChangeEvent } from "react";
-import Checkbox from "shared/ui/checkbox";
-import { FilterItemsIds } from "../consts";
-import styles from "../styles.module.css";
+import { ChangeEvent } from 'react';
+import classnames from 'classnames';
 
-interface Props {
+import Checkbox from 'shared/ui/checkbox';
+import { FilterItemsIds } from '../consts';
+
+import styles from '../styles.module.css';
+
+interface UserCategoriesBlockProps {
   filter: string[];
   onChange: (name: string, value: string[]) => void;
 }
 
-export const UserCategoriesBlock = ({ filter, onChange }: Props) => {
+export const UserCategoriesBlock = ({
+  filter,
+  onChange,
+}: UserCategoriesBlockProps) => {
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.checked) {
       const newValue = [target.id];
-      onChange("categories", newValue);
+      onChange('categories', newValue);
     }
   };
 
@@ -22,9 +27,9 @@ export const UserCategoriesBlock = ({ filter, onChange }: Props) => {
       <div
         className={classnames(
           styles.filterBlockTitle,
-          "text",
-          "text_size_small",
-          "text_type_bold"
+          'text',
+          'text_size_small',
+          'text_type_bold'
         )}
       >
         Категория

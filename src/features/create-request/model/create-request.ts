@@ -1,7 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
-import { api } from "../../../shared/api";
-
+import { api } from '../../../shared/api';
 
 export type TInitialStateForPopup = {
   time: string;
@@ -11,11 +10,11 @@ export type TInitialStateForPopup = {
   categories: {
     id: number;
     name: string;
-  }[],
+  }[];
   category: {
-    value: string,
-    label: string
-  },
+    value: string;
+    label: string;
+  };
   descriptionForTask: string;
   currentStep: number;
   termlessRequest: boolean;
@@ -30,40 +29,39 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
-
 export const InitialStateForPopup: TInitialStateForPopup = {
-  time: "",
-  date: format(new Date(), "dd.MM.yyyy"),
-  address: "",
+  time: '',
+  date: format(new Date(), 'dd.MM.yyyy'),
+  address: '',
   coordinates: undefined,
   categories: [],
   category: {
-    value: "",
-    label: ""
+    value: '',
+    label: '',
   },
-  descriptionForTask: "",
+  descriptionForTask: '',
   currentStep: 1,
   termlessRequest: false,
   isPopupOpen: false,
 };
 
 export const createRequestModel = createSlice({
-  name: "create-request",
+  name: 'create-request',
   initialState: InitialStateForPopup,
   reducers: {
     setDate(state, action) {
-    state.date = action.payload;
-  },
+      state.date = action.payload;
+    },
     setTime(state, action) {
       state.time = action.payload;
     },
     setAddress(state, action) {
       state.address = action.payload.additinalAddress;
-      state.coordinates = action.payload.coords
+      state.coordinates = action.payload.coords;
     },
     setCategory(state, action) {
       state.category.value = action.payload.value;
-      state.category.label = action.payload.label
+      state.category.label = action.payload.label;
     },
     setDescriptionForTask(state, action) {
       state.descriptionForTask = action.payload;
@@ -88,10 +86,9 @@ export const createRequestModel = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.categories = action.payload;
-      })
+    builder.addCase(fetchCategories.fulfilled, (state, action) => {
+      state.categories = action.payload;
+    });
   },
 });
 

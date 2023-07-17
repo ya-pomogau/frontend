@@ -1,19 +1,20 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
+import classnames from 'classnames';
 
-import classnames from "classnames";
-import { useAppSelector } from "app/hooks";
-import styles from "./styles.module.css";
-import { Loader } from "../loader";
+import { useAppSelector } from 'app/hooks';
+import { Loader } from '../loader';
+
+import styles from './styles.module.css';
 
 interface PageLayoutProps {
-  extClassName?: string; 
+  extClassName?: string;
   side: ReactNode;
   content: ReactNode;
 }
 
 export const PageLayout = ({
-  extClassName, 
-  side, 
+  extClassName,
+  side,
   content,
 }: PageLayoutProps) => {
   const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
@@ -29,4 +30,4 @@ export const PageLayout = ({
       </div>
     </>
   );
-}
+};

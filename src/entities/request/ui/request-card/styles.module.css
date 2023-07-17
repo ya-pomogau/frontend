@@ -23,7 +23,6 @@
   align-items: center;
   position: relative;
   z-index: 11;
-
   color: var(--colors-interface-primary);
 }
 

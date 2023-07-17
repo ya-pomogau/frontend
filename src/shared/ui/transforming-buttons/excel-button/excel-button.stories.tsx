@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ExcelButton } from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { ExcelButton } from '.';
 
 const meta = {
-  title: "uikit/Buttons/ExcelButton",
+  title: 'uikit/Buttons/ExcelButton',
   component: ExcelButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof ExcelButton>;
 export default meta;
 type Story = StoryObj<typeof meta>;

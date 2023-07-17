@@ -1,7 +1,8 @@
-import React from "react";
-import classnames from "classnames";
-import styles from "./styles.module.css";
-import HeartIcon from "./assets/heart-icon.png";
+import React from 'react';
+import classnames from 'classnames';
+
+import styles from './styles.module.css';
+import HeartIcon from './assets/heart-icon.png';
 
 interface InformerProps {
   extClassName?: string;
@@ -13,11 +14,11 @@ export const Informer = ({ text, extClassName, icon }: InformerProps) => (
   <div
     className={classnames(
       styles.informer,
-      { [styles["informer--withText"]]: text },
+      { [styles['informer--withText']]: text },
       extClassName
     )}
   >
-    <div className={styles["informer-imgBlock"]}>
+    <div className={styles['informer-imgBlock']}>
       {icon || (
         <img
           src={HeartIcon}
@@ -27,7 +28,7 @@ export const Informer = ({ text, extClassName, icon }: InformerProps) => (
       )}
     </div>
     <span
-      className={classnames("text", "text_size_large", styles.informerText)}
+      className={classnames('text', 'text_size_large', styles.informerText)}
     >
       {text}
     </span>

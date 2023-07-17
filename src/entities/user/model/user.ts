@@ -1,11 +1,7 @@
-import {
-  createSlice,
-  PayloadAction,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { api } from "../../../shared/api";
-import type { UserInfo, UserRole } from "../types";
+import { api } from '../../../shared/api';
+import type { UserInfo, UserRole } from '../types';
 
 type UserState = {
   role: UserRole | null;
@@ -13,7 +9,7 @@ type UserState = {
   isLoading: boolean;
   isFailed: boolean;
   error?: string;
-}
+};
 
 const initialState: UserState = {
   role: null,
@@ -31,7 +27,7 @@ export const fetchUserDataByRole = createAsyncThunk(
 );
 
 export const userModel = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     setUserRole: (state, { payload }: PayloadAction<UserRole>) => {
@@ -52,7 +48,7 @@ export const userModel = createSlice({
         state.isLoading = false;
         state.isFailed = true;
         state.error = action.error.message;
-      })
+      });
   },
 });
 
