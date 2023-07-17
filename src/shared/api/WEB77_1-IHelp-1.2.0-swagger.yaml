@@ -1,0 +1,1134 @@
+openapi: 3.0.3
+
+info:
+  description: 'Образец API, с которым работает фронтенд часть проекта ЯПомогаю.'
+  version: 1.2.0
+  title: 'ЯПомогаю, некоммерческая организация'
+  contact:
+    email: web77@yandex.ru
+
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/WEB77_1/IHelp/1.2.0
+
+tags:
+  - name: category
+    description: 'Интерфейс для работы с категориями'
+  - name: tasks
+    description: 'Интерфейс для работы с заявками'
+  - name: users
+    description: 'Интерфейс для работы с пользователями'
+
+paths:
+  /category:
+    get:
+      tags:
+        - category
+      summary: 'Получить все категории'
+      operationId: CategoryController_findMany
+      parameters: []
+      responses:
+        '200':
+          description: 'Успешная обработка запроса'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskCategory'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+          
+  /tasks:
+    post:
+      tags:
+        - tasks
+      summary: 'Добавление новой заявки'
+      operationId: TasksController_createOne
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskDto'
+      responses:
+        '201':
+          description: 'Заявка добавлена успешно'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              examples: 
+                NewTask:
+                  $ref: '#/components/examples/createTaskResponseExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  
+  /tasks/available:
+    get:
+      tags:
+        - tasks
+      summary: 'Показать все доступные для волонтеров заявки'
+      operationId: TasksController_findAvailableTasks
+      parameters: []
+      responses:
+        '200':
+          description: 'Запрос обработан успешно'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+              examples: 
+                schema:
+                  $ref: '#/components/examples/availableTasksResponseExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'  
+
+  /tasks/active:
+    get:
+      tags:
+        - tasks
+      summary: 'Показать все активные заявки у волонтера'
+      operationId: TasksController_findActiveTasks
+      parameters: []
+      responses:
+        '200':
+          description: 'Запрос обработан успешно, id волонтера приходит в JWT-токене'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+              examples: 
+                schema:
+                  $ref: '#/components/examples/activeTasksResponseExample'
+        '400':
+          $ref: '#/components/responses/BadRequest' 
+          
+  /tasks/completed:
+    get:
+      tags:
+        - tasks
+      summary: 'Показать все завершенные заявки'
+      operationId: TasksController_findCompletedTasks
+      parameters: []
+      responses:
+        '200':
+          description: 'Запрос обработан успешно, id волонтера приходит в JWT-токене'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+              examples: 
+                schema:
+                  $ref: '#/components/examples/completedTasksResponseExample'
+        '400':
+          $ref: '#/components/responses/BadRequest' 
+          
+  /tasks/{id}:
+    get:
+      tags:
+        - tasks
+      summary: 'Показать все данные по выбранной заявки'
+      operationId: TasksController_findOne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Запрос обработан успешно. Вопрос прав доступа пока открытый.'
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Task'
+              examples: 
+                FindTask:
+                  $ref: '#/components/examples/updateTaskResponseExample'
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+    patch:
+      tags:
+        - tasks
+      summary: 'Редактирование заявки'
+      operationId: TasksController_updateOne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Task'
+              examples: 
+                UpdatedTask:
+                  $ref: '#/components/examples/updateTaskResponseExample'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+    delete:
+      tags:
+        - tasks
+      summary: 'Удаление заявки'
+      operationId: TasksController_deleteOne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          $ref: '#/components/responses/DeleteSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /users:
+    post:
+      tags:
+        - users
+      summary: 'Добавить нового пользователя'
+      operationId: UsersController_createOne
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserDto'
+      responses:
+        '201':
+          description: 'Пользователь успешно добавлен'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples: 
+                NewUser:
+                  $ref: '#/components/examples/createUserResponseExample'
+        '400':
+          $ref: '#/components/responses/BadRequest' 
+          
+    get:
+      tags:
+        - users
+      summary: 'Показать всех пользователей на площадке'
+      operationId: UsersController_findMany
+      parameters: []
+      responses:
+        '200':
+          description: 'Запрос обработан успешно. Права доступа пока не прорабатывались.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              examples: 
+                schema:
+                  $ref: '#/components/examples/allUsersResponseExample'
+
+  /users/{id}:
+    get:
+      tags:
+        - users
+      summary: 'Показать данные выбранного пользователя'
+      operationId: UsersController_findOne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 'Запрос обработан успешно. Права доступа пока не прорабатывались.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples: 
+                FindUser:
+                  $ref: '#/components/examples/updateUserResponseExample'
+                  
+    patch:
+      tags:
+        - users
+      summary: 'Обновить данные выбранного пользователя'
+      operationId: UsersController_updateOne
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserDto'
+      responses:
+        '200':
+          description: 'Запрос обработан успешно. Права доступа пока не прорабатывались.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples: 
+                UpdatedUser:
+                  $ref: '#/components/examples/updateUserResponseExample'
+                
+
+components:
+  responses:
+    DeleteSuccess:
+      description: 'No content 204. Successful delete request'
+      content:
+        applecation/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'Объект удален успешно'
+                
+    NotFound:
+      description: 'Error 404. Requested object does not exist'
+      content:
+        applecation/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'Запрашиваемый объект не найден'
+    
+    BadRequest:
+      description: 'Error 400. Bad Request'
+      content:
+        applecation/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'Запрос не может быть выполнен'
+                
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          description: 'Заголовок для заявки'
+          example: 'Выгулять собаку'
+        category:
+          type: object
+          description: 'Тип заявки (категория)'
+          allOf:
+            - $ref: '#/components/schemas/TaskCategory'
+          example:
+            id: 1
+            name: 'Название категории 1'
+            scope: 1
+        date:
+          type: string
+          description: 'Дата и время выполнения заявки'
+          format: date-time
+        description:
+          type: string
+          description: 'Описание заявки от реципиента'
+          example: 'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!'
+          default: ''
+        completed:
+          type: boolean
+          description: 'Статус заявки - выполнена (true) / не выполнена (false)'
+          default: false
+          example: false
+        confirmed:
+          type: boolean
+          description: 'Статус подтверждения выполнения заявки - подтверждено (true) / не подтверждено (false)'
+          default: false
+          example: false
+        recipient:
+          $ref: '#/components/schemas/User'
+        volunteer:
+          $ref: '#/components/schemas/User'
+        address:
+          type: string
+          description: 'Адрес выполнения заявки'
+          example: 'ул. Нахимова, д. 9'
+        coordinates:
+          type: array
+          description: 'Координаты указанного в заявке адреса (по данным Яндекс.Карт)'
+          items:
+            type: number
+          example: [59.830065, 30.033465]
+        chat:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 2533
+              description: 'Идентификатор чата в базе данных'
+            unread:
+              type: integer
+              example: 3
+              description: 'Количество непрочитанных сообщений в данном чате'
+          description: 'Информация о чате в рамках данной заявки, если таковой был'
+          nullable: true
+          default: null
+
+    CreateTaskDto:
+      type: object
+      required:
+        - title
+        - categoryId
+        - date
+        - recipientId
+        - address
+        - coordinates
+      properties:
+        title:
+          type: string
+          example: 'Выгулять собаку (новая задача)'
+        categoryId:
+          type: integer
+          example: 2
+        date:
+          type: string
+          format: date-time
+          example: '2023-07-18T17:30Z'
+        description:
+          type: string
+        recipientId:
+          type: integer
+          example: 4
+        address:
+          type: string
+          example: 'ул. Нахимова, д. 9'
+        coordinates:
+          type: array
+          items:
+            type: number
+          example:
+            - 59.941871, 
+            - 30.223494
+        
+    UpdateTaskDto:
+      type: object
+      properties:
+        title:
+          type: string
+          example: 'Выгулять собаку (редактирование задачи)'
+        categoryId:
+          type: integer
+          example: 2
+        date:
+          type: string
+          format: date-time
+          example: '2023-05-31T17:30Z'
+        description:
+          type: string
+        completed:
+          type: boolean
+          example: false
+        confirmed:
+          type: boolean
+          example: false
+        recipientId:
+          type: integer
+          example: 4
+        volunteerId:
+          type: number
+          example: 7
+        address:
+          type: string
+          example: ул. Нахимова, д. 9
+        coordinates:
+          type: array
+          items:
+            type: number
+          example: [59.941871, 30.223494]
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7
+        fullname:
+          type: string
+          example: 'Петров Петр Петрович'
+        role:
+          type: string
+          description: 'Роль пользователя'
+          enum:
+            - master
+            - admin
+            - recipient
+            - volunteer
+          example: 'volunteer'
+        vk:
+          type: string
+          description: 'Ссылка на профиль пользователя в ВК'
+          format: url
+          example: 'https://vk.com/id123456789'
+        avatar:
+          type: string
+          description: 'Ссылка на фотографию пользователя'
+          format: url
+          example: 'http://webmg.ru/wp-content/uploads/2022/01/100-20220105_151754.jpg'
+        phone:
+          type: string
+          description: 'Телефон пользователя'
+          example: '+7 (926) 123-45-67'
+        address:
+          type: string
+          description: 'Адрес пользователя'
+          example: 'ул. Кораблестроителей, 19к1'
+        coordinates:
+          type: array
+          description: 'Координаты адреса пользователя (по данным Яндекс.Карт)'
+          items:
+            type: number
+          example: [59.942575, 30.216757]
+        approved:
+          type: boolean
+          description: 'Статус подтверждения пользователя'
+          default: false
+          example: true
+        checked:
+          type: boolean
+          description: 'Статус проверки пользователя (только для волонтера)'
+          default: false
+          example: true
+        keys:
+          type: boolean
+          description: 'Статус наличия ключей (только для волонтера)'
+          default: false
+          example: true
+        adminStatus:
+          type: integer
+          description: 'Уровень прав администратора. По умолчанию null для всех пользователей.'
+          default: null
+          minimum: 0
+          maximum: 5
+          example: null
+        scores:
+          type: integer
+          description: 'Всего баллов (только для role=volunteer)'
+          example: 2500
+          default: 0
+
+    CreateUserDto:
+      type: object
+      required:
+        - fullname
+        - role
+        - vk
+        - avatar
+        - phone
+        - address
+        - coordinates
+      properties:
+        fullname:
+          type: string
+          example: 'Петров Петр Петрович'
+        role:
+          type: string
+          enum:
+            - admin
+            - recipient
+            - volunteer
+          example: 'volunteer'
+        vk:
+          type: string
+          format: url
+          example: 'https://vk.com/id123456789'
+        avatar:
+          type: string
+          format: url
+          example: 'http://webmg.ru/wp-content/uploads/2022/01/100-20220105_151754.jpg'
+        phone:
+          type: string
+          example: '+7 (926) 123-45-67'
+        address:
+          type: string
+          example: 'ул. Кораблестроителей, 19к1'
+        coordinates:
+          type: array
+          items:
+            type: number
+          example: [59.942575, 30.216757]
+
+    UpdateUserDto:
+      type: object
+      properties:
+        fullname:
+          type: string
+          example: 'Петров Петр Петрович'
+        vk:
+          type: string
+          format: url
+          example: 'https://vk.com/id123456789'
+        avatar:
+          type: string
+          format: url
+          example: 'http://webmg.ru/wp-content/uploads/2022/01/100-20220105_151754.jpg'
+        phone:
+          type: string
+          example: '+7 (926) 123-45-67'
+        address:
+          type: string
+          example: 'ул. Кораблестроителей, 19к1'
+        coordinates:
+          type: array
+          items:
+            type: number
+          example: [59.942575, 30.216757]
+        approved:
+          type: boolean
+          example: true
+        checked:
+          type: boolean
+          example: true
+        keys:
+          type: boolean
+          example: true
+        scores:
+          type: integer
+          example: 2500
+          
+    TaskCategory:
+      type: object
+      properties:
+        id: 
+          type: number
+          example: 2
+        name: 
+          type: string
+          example: 'Покупка продуктов'
+        scope:
+          type: number
+          example: 1
+      example:
+        - id: 1
+          name: 'Сопровождение'
+          scope: 1
+        - id: 2
+          name: 'Покупка продуктов'
+          scope: 1
+        - id: 3
+          name: 'Покупка вещей/техники'
+          scope: 1
+        - id: 4
+          name: 'Помощь в уборке'
+          scope: 1
+        - id: 5
+          name: 'Ремонт техники/жилья'
+          scope: 1
+        - id: 6
+          name: 'Перевозка в личном транспорте'
+          scope: 1
+        - id: 7
+          name: 'Помощь в подъеме/спуске'
+          scope: 1
+        - id: 8
+          name: 'Помощь в готовке'
+          scope: 1
+        - id: 9
+          name: 'Организация досуга'
+          scope: 1
+  
+  examples:
+    createTaskResponseExample:
+      value:
+        id: 12
+        title: 'Выгулять собаку (новая задача)'
+        category:
+          id: 2
+          name: 'Сопровождение'
+          scope: 1
+        date: '2023-07-23T19:30Z'
+        description: 'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!'
+        completed: false
+        confirmed: false
+        recipient:
+          id: 4
+          fullname: 'Реципиентов Алексей Борисович'
+          role: 'recipient'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg'
+          phone: '+7 (916) 123-45-67'
+          address: 'ул. Нахимова, д. 9'
+          coordinates: [59.941871, 30.223494]
+          approved: true
+        volunteer: null
+        address: 'ул. Нахимова, д. 9'
+        coordinates: [59.941871, 30.223494]
+        chat: null
+
+    availableTasksResponseExample:
+      value: 
+        - id: 12
+          title: 'Выгулять собаку'
+          category:
+            id: 1
+            name: 'Сопровождение'
+            scope: 1
+          date: '2023-07-23T19:30Z'
+          description: 'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!'
+          completed: false
+          confirmed: false
+          recipient:
+            id: 5
+            fullname: 'Реципиентов Игорь Витальевич'
+            role: 'recipient'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg'
+            phone: '+7 (916) 123-45-67'
+            address: 'ул. Наличная, 28/16В'
+            coordinates: [59.941335, 30.227995]
+            approved: true
+          volunteer: null
+          address: 'ул. Наличная, 28/16В'
+          coordinates: [59.941335, 30.227995]
+          chat: null
+        - id: 24
+          title: 'Задача 24'
+          category:
+            id: 2
+            name: 'Покупка продуктов'
+            scope: 1
+          date: '2023-07-18T07:00Z'
+          description: 'Описание срочной задачи 24'
+          completed: false
+          confirmed: false
+          recipient:
+            id: 6
+            fullname: 'Реципиентов Иван Николаевич'
+            role: 'recipient'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg'
+            phone: '+7 (916) 123-45-67'
+            address: 'переулок Каховского, 3'
+            coordinates: [59.952520, 30.243239]
+            approved: true
+          volunteer: null
+          address: 'переулок Каховского, 3'
+          coordinates: [59.952520, 30.243239]
+          chat: null
+        - id: 33
+          title: 'Задача 33'
+          category:
+            id: 6
+            name: 'Перевозка в личном транспорте'
+            scope: 1
+          date: '2023-07-28T07:00Z'
+          description: 'Описание задачи 33'
+          completed: false
+          confirmed: false
+          recipient:
+            id: 6
+            fullname: 'Реципиентов Иван Николаевич'
+            role: 'recipient'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg'
+            phone: '+7 (916) 123-45-67'
+            address: 'переулок Каховского, 3'
+            coordinates: [59.952520, 30.243239]
+            approved: true
+          volunteer: null
+          address: 'Малая Морская, 9'
+          coordinates: [59.935940, 30.313128]
+          chat: null
+          
+    activeTasksResponseExample:
+      value: 
+        - id: 14
+          title: 'Название задачи 14'
+          category:
+            id: 1
+            name: 'Сопровождение'
+            scope: 1
+          date: '2023-07-20T17:30Z'
+          description: 'Короткое описание для задачи номер 14.'
+          completed: false
+          confirmed: false
+          recipient:
+            id: 4
+            fullname: 'Реципиентов Алексей Борисович'
+            role: 'recipient'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg'
+            phone: '+7 (916) 123-45-67'
+            address: 'ул. Нахимова, д. 9'
+            coordinates: [59.941871, 30.223494]
+            approved: true
+          volunteer:
+            id: 7
+            fullname: 'Волонтеров Петр Петрович'
+            role: 'volunteer'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+            phone: '+7 (926) 123-45-67'
+            address: 'ул. Кораблестроителей, 19к1'
+            coordinates: [59.942575, 30.216757]
+            approved: true
+            checked: true
+            keys: true
+            scores: 2500
+          address: 'ул. Нахимова, д. 9'
+          coordinates: [59.941871, 30.223494]
+          chat:
+            id: 4327
+            unread: 3
+        - id: 19
+          title: 'Достаточно длинное название для задачи 19'
+          category:
+            id: 5
+            name: 'Ремонт техники/жилья'
+            scope: 1
+          date: '2023-07-17T07:30Z'
+          description: 'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.'
+          completed: true
+          confirmed: false
+          recipient:
+            id: 5
+            fullname: 'Реципиентов Игорь Витальевич'
+            role: 'recipient'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg'
+            phone: '+7 (916) 123-45-67'
+            address: 'ул. Наличная, 28/16В'
+            coordinates: [59.941335, 30.227995]
+            approved: true
+          volunteer:
+            id: 7
+            fullname: 'Волонтеров Петр Петрович'
+            role: 'volunteer'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+            phone: '+7 (926) 123-45-67'
+            address: 'ул. Кораблестроителей, 19к1'
+            coordinates: [59.942575, 30.216757]
+            approved: true
+            checked: true
+            keys: true
+            scores: 2500
+          address: 'ул. Наличная, 28/16В'
+          coordinates: [59.941871, 30.223494]
+          chat: null
+      
+    completedTasksResponseExample:
+      value: 
+        - id: 15
+          title: 'Задача 15'
+          category:
+            id: 6
+            name: 'Перевозка в личном транспорте'
+            scope: 1
+          date: '2023-05-31T17:30Z'
+          description: 'Описание задачи 15 (срок задачи прошел, задача завершена и подтверждена)'
+          completed: true
+          confirmed: true
+          recipient:
+            id: 4
+            fullname: 'Реципиентов Алексей Борисович'
+            role: 'recipient'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg'
+            phone: '+7 (916) 123-45-67'
+            address: 'ул. Нахимова, д. 9'
+            coordinates: [59.941871, 30.223494]
+            approved: true
+          volunteer:
+            id: 7
+            fullname: 'Волонтеров Петр Петрович'
+            role: 'volunteer'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+            phone: '+7 (926) 123-45-67'
+            address: 'ул. Кораблестроителей, 19к1'
+            coordinates: [59.942575, 30.216757]
+            approved: true
+            checked: true
+            keys: true
+            scores: 2500
+          address: 'ул. Нахимова, д. 9'
+          coordinates: [59.941871, 30.223494]
+          chat: 
+            id: 5678
+            unread: 0
+        - id: 27
+          title: 'Задача 27'
+          category:
+            id: 1
+            name: 'Сопровождение'
+            scope: 1
+          date: '2023-07-01T08:00Z'
+          description: 'Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.'
+          completed: true
+          confirmed: true
+          recipient:
+            id: 6
+            fullname: 'Реципиентов Иван Николаевич'
+            role: 'recipient'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg'
+            phone: '+7 (999) 123-45-67'
+            address: 'переулок Каховского, 3'
+            coordinates: [59.952520, 30.243239]
+            approved: true
+          volunteer:
+            id: 7
+            fullname: 'Волонтеров Петр Петрович'
+            role: 'volunteer'
+            vk: 'https://vk.com/id123456789'
+            avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+            phone: '+7 (926) 123-45-67'
+            address: 'ул. Кораблестроителей, 19к1'
+            coordinates: [59.942575, 30.216757]
+            approved: true
+            checked: true
+            keys: true
+            scores: 2500
+          address: 'переулок Каховского, 3'
+          coordinates: [59.95252, 30.243239]
+          chat: null
+
+    updateTaskResponseExample:
+      value:
+        id: 12
+        title: 'Выгулять собаку (редактирование задачи)'
+        category:
+          id: 1
+          name: 'Сопровождение'
+          scope: 1
+        date: '2023-05-31T17:30Z'
+        description: 'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!'
+        completed: false
+        confirmed: false
+        recipient:
+          id: 4
+          fullname: 'Реципиентов Алексей Борисович'
+          role: 'recipient'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg'
+          phone: '+7 (916) 123-45-67'
+          address: 'ул. Нахимова, д. 9'
+          coordinates: [59.941871, 30.223494]
+          approved: true
+        volunteer:
+          id: 7
+          fullname: 'Волонтеров Петр Петрович'
+          role: 'volunteer'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+          phone: '+7 (926) 123-45-67'
+          address: 'ул. Кораблестроителей, 19к1'
+          coordinates: [59.942575, 30.216757]
+          approved: true
+          checked: true
+          keys: true
+          scores: 2500
+        address: 'ул. Нахимова, д. 9'
+        coordinates: [59.941871, 30.223494]
+        chat: null
+    
+    createUserResponseExample:
+      value: 
+        id: 7
+        fullname: 'Волонтеров Петр Петрович'
+        role: 'volunteer'
+        vk: 'https://vk.com/id123456789'
+        avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+        phone: '+7 (926) 123-45-67'
+        address: 'ул. Кораблестроителей, 19к1'
+        coordinates: [59.942575, 30.216757]
+        approved: false
+        checked: false
+        keys: false
+        adminStatus: null
+        scores: 0
+        
+    updateUserResponseExample:
+      value: 
+        id: 7
+        fullname: 'Волонтеров Петр Петрович'
+        role: 'volunteer'
+        vk: 'https://vk.com/id123456789'
+        avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+        phone: '+7 (926) 123-45-67'
+        address: 'ул. Кораблестроителей, 19к1'
+        coordinates: [59.942575, 30.216757]
+        approved: true
+        checked: true
+        keys: true
+        adminStatus: null
+        scores: 2500
+    
+    allUsersResponseExample:
+      value:
+        - id: 1
+          fullname: 'Админов Главный Админович'
+          role: 'master'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg'
+          phone: '+7 (901) 123-44-55'
+          address: 'ул. Поселковая, д. 5'
+          coordinates: [59.821539, 30.178031]
+          approved: null
+          checked: null
+          keys: null
+          adminStatus: 5
+          scores: null
+        - id: 2
+          fullname: 'Админов Семен Семенович'
+          role: 'admin'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg'
+          phone: '+7 (902) 123-44-55'
+          address: 'ул. Стойкости, 17'
+          coordinates: [59.828347, 30.211870]
+          approved: null
+          checked: null
+          keys: null
+          adminStatus: 2
+          scores: null
+        - id: 3
+          fullname: 'Админов Тахир Рахимович'
+          role: 'admin'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://cdn.ananasposter.ru/image/cache/catalog/poster/film/82/13481-1000x830.jpg'
+          phone: '+7 (902) 123-44-55'
+          address: 'ул. Новостроек, 10'
+          coordinates: [59.875420, 30.267817]
+          approved: null
+          checked: null
+          keys: null
+          adminStatus: 3
+          scores: null
+        - id: 4
+          fullname: 'Реципиентов Алексей Борисович'
+          role: 'recipient'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg'
+          phone: '+7 (916) 123-45-67'
+          address: 'ул. Нахимова, д. 9'
+          coordinates: [59.941871, 30.223494]
+          approved: true    
+        - id: 5
+          fullname: 'Реципиентов Игорь Витальевич'
+          role: 'recipient'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg'
+          phone: '+7 (995) 123-45-67'
+          address: 'ул. Наличная, 28/16В'
+          coordinates: [59.941335, 30.227995]
+          approved: true
+        - id: 6
+          fullname: 'Реципиентов Иван Николаевич'
+          role: 'recipient'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg'
+          phone: '+7 (999) 123-45-67'
+          address: 'переулок Каховского, 3'
+          coordinates: [59.952520, 30.243239]
+          approved: true
+        - id: 7
+          fullname: 'Волонтеров Петр Петрович'
+          role: 'volunteer'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg'
+          phone: '+7 (901) 123-45-67'
+          address: 'ул. Кораблестроителей, 19к1'
+          coordinates: [59.942575, 30.216757]
+          approved: true
+          checked: true
+          keys: true
+          scores: 2500
+        - id: 8
+          fullname: 'Волонтеров Сергей Петрович'
+          role: 'volunteer'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'http://samlib.ru/img/l/lisa_alisa/saljutpodnowyjgod/damon-1280.jpg'
+          phone: '+7 (910) 123-45-67'
+          address: 'ул. Наличная, 18'
+          coordinates: [59.936733, 30.232343]
+          approved: true
+          checked: false
+          keys: false
+          scores: 0
+        - id: 9
+          fullname: 'Волонтеров Владимир Михайлович'
+          role: 'volunteer'
+          vk: 'https://vk.com/id123456789'
+          avatar: ''
+          phone: '+7 (929) 123-45-67'
+          address: 'ул. Железноводская, 58'
+          coordinates: [59.949059, 30.239359]
+          approved: true
+          checked: true
+          keys: true
+          scores: 600
+        - id: 10
+          fullname: 'Волонтеров Михаил Владимирович'
+          role: 'volunteer'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://i.pinimg.com/originals/5d/6c/ce/5d6cce581aa563d2d6eaf31bb01b5429.jpg'
+          phone: '+7 (925) 123-45-67'
+          address: 'ул. Нахимова, 15Б'
+          coordinates: [59.941322, 30.219811]
+          approved: true
+          checked: true
+          keys: false
+          scores: 30
+        - id: 11
+          fullname: 'Волонтеров Николай Викторович'
+          role: 'volunteer'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://www.zastavki.com/pictures/originals/2014/Men___Male_Celebrity_Famous_Jean-Claude_Van_Damme_057175_.jpg'
+          phone: '+7 (926) 123-45-67'
+          address: 'переулок Пирогова, 10'
+          coordinates: [59.928929, 30.303175]
+          approved: false
+          checked: false
+          keys: false
+          scores: 0
+        - id: 12
+          fullname: 'Реципиентов Никонор Иванович'
+          role: 'recipient'
+          vk: 'https://vk.com/id123456789'
+          avatar: 'https://sun9-39.userapi.com/YKBp1zncmlbhHpt5OpyCdKS9zvh3cnz_4zh-pA/OFWinfVcpPU.jpg'
+          phone: '+7 (916) 123-45-67'
+          address: 'переулок Декабристов, 8'
+          coordinates: [59.950398, 30.248782]
+          approved: false
