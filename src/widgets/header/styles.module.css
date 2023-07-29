@@ -3,6 +3,18 @@
 .header {
   width: 100%;
   border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.header_mobile {
+  border-bottom: 0;
+  padding-bottom: 1px;
+}
+
+.header__gradient-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, #fff 0%, #2e3192 50%, #fff 100%);
 }
 
 .header_title {
@@ -62,8 +74,18 @@
   margin-bottom: 5px;
 }
 
+.header__logo_mobile {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .header__menu__container {
   position: relative;
+}
+
+.header__menu__container_hidden {
+  visibility: hidden;
 }
 
 .header__sidebar__container {
