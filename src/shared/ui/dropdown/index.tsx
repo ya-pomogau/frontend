@@ -1,40 +1,44 @@
-import React, { useState, useRef } from "react";
-import styles from './styles.module.css'
+import { useState } from 'react';
+import styles from './styles.module.css';
 
-interface dropdownProps {
+interface IDropdownProps {
   placeholder: string;
   items: Array<string>;
 }
 
-const Dropdown = ({placeholder, items, ...props} : dropdownProps) => {
-  const [ isActive, setIsActive ] = useState(false);
-  const [ selected, setSelected ] = useState('');
+const Dropdown = ({ placeholder, items }: IDropdownProps) => {
+  const [isActive, setIsActive] = useState(false);
+  const [selected, setSelected] = useState(placeholder);
 
   return (
     <div className={styles.dropdown}>
       <div
-        className={styles.dropdownButton}
-        onClick={() => {setIsActive(!isActive)}}
+        className={styles.button}
+        onClick={() => {
+          setIsActive(!isActive);
+        }}
       >
-        {placeholder === placeholder ? placeholder : selected}
+        {selected}
       </div>
 
       {isActive && (
-        <div
-          className={styles.dropdownContent}
-        >
-          {items.map(item => (
+        <div className={styles.content}>
+          {items.map((item, key) => (
             <div
+              className={styles.item}
+              key={key}
               onClick={() => {
-                setSelected(item)
-                setIsActive(false)
+                setSelected(item);
+                setIsActive(false);
               }}
             >
               {item}
             </div>
-          )}
-        </div>)}
+          ))}
+        </div>
+      )}
     </div>
-  )
-}
-export default Dropdown
+  );
+};
+
+export default Dropdown;

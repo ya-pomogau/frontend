@@ -5,31 +5,29 @@
   user-select: none;
 }
 
-.dropdown-button {
+.button {
   padding: 0 12px 0 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-  background: #818C99;
   cursor: pointer;
 }
 
-.dropdown-content {
+.content {
   position: absolute;
   top: 110%;
   padding: 10px;
-  background: #818C99;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   width: 95%;
 }
 
-.dropdown-item {
+.item {
   padding: 10px;
   cursor: pointer;
   transition: all .2s;
 }
 
-.dropdown-item:hover {
+.item:hover {
   background: #f4f4f4;
 }
