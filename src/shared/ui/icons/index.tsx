@@ -35,6 +35,9 @@ import { PopularIcon } from './popular-icon';
 import { CompletedApplicationIcon } from './completed-application-icon';
 import { ProgressIcon } from './progress-icon';
 import { CreateApplication } from './create-application-icon';
+import { LoginIcon } from './login-icon';
+import { PasswordOpenIcon } from './password-open-icon';
+import { PasswordCloseIcon } from './password-close-icon';
 
 const icons = {
   CalendarIcon,
@@ -71,6 +74,9 @@ const icons = {
   PopularIcon,
   ProgressIcon,
   CreateApplication,
+  LoginIcon,
+  PasswordOpenIcon,
+  PasswordCloseIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;

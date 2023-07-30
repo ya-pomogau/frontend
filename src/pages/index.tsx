@@ -16,6 +16,7 @@ import { ContactsPage } from './contacts';
 import { ProfilePage } from './profile';
 import { NotFoundPage } from './not-found';
 import { RegisterPage } from './register';
+import { LoginPage } from './login';
 
 export function AppRoutes() {
   const dispatch = useAppDispatch();
@@ -40,6 +41,7 @@ export function AppRoutes() {
         <Route path="policy" element={<PolicyPage />} />
         <Route path="contacts/*" element={<ContactsPage />} />
         <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LoginPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

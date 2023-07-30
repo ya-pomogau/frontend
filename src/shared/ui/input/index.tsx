@@ -15,6 +15,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
   errorText?: string;
   customIcon?: React.ReactNode;
+  onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -30,6 +31,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       error,
       errorText,
       customIcon,
+      onIconClick,
       ...props
     },
     ref
@@ -66,7 +68,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {errorToRender}
-          <div className={styles.icon}>{customIcon}</div>
+          <div className={styles.icon} onClick={onIconClick}>
+            {customIcon}
+          </div>
         </div>
       </div>
     );
