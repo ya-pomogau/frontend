@@ -22,12 +22,7 @@ type PermissionType = {
 //   { id: 7, name: 'increase score' },
 // ]
 
-type StatusType =
-  | 'uncomfirmed'
-  | 'confirmed'
-  | 'activated'
-  | 'verified'
-  | 'deactivated';
+type StatusType = 'uncomfirmed' | 'confirmed' | 'activated' | 'verified';
 
 export type UserInfo = {
   id: number;
@@ -42,6 +37,5 @@ export type UserInfo = {
   createdAt: string;
   keys?: number | null;
   scores?: number;
-  completed?: number | null;
   permissions?: Array<PermissionType> | null;
 };
