@@ -18,6 +18,7 @@ import { PinIcon } from './pin-icon';
 import { SendIcon } from './send-icon';
 import { EditIcon } from './edit-icon';
 import { CloseIcon } from './close-icon';
+import { CloseCrossIcon } from './close-cross-icon';
 import { VkIcon } from './vk-icon';
 import { DoneIcon } from './done-icon';
 import { ActiveApplicationIcon } from './active-application-icon';
@@ -53,6 +54,7 @@ const icons = {
   SendIcon,
   EditIcon,
   CloseIcon,
+  CloseCrossIcon,
   VkIcon,
   DoneIcon,
   ActiveApplicationIcon,

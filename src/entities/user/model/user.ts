@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { api } from '../../../shared/api';
-import type { UserInfo, UserRole } from '../types';
+import type { UpdateUserInfo, UserInfo, UserRole } from '../types';
 
 type UserState = {
   role: UserRole | null;
@@ -26,6 +26,14 @@ export const fetchUserDataByRole = createAsyncThunk(
   }
 );
 
+export const updateUserInfo = createAsyncThunk<UserInfo, UpdateUserInfo>(
+  'user/updateUser',
+  async function (body) {
+    const response = await api.updateUser(body);
+    return response;
+  }
+);
+
 export const userModel = createSlice({
   name: 'user',
   initialState,
@@ -45,6 +53,19 @@ export const userModel = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchUserDataByRole.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isFailed = true;
+        state.error = action.error.message;
+      })
+      .addCase(updateUserInfo.pending, (state) => {
+        state.isLoading = true;
+        state.isFailed = false;
+      })
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(updateUserInfo.rejected, (state, action) => {
         state.isLoading = false;
         state.isFailed = true;
         state.error = action.error.message;
