@@ -7,7 +7,7 @@ import styles from '../styles.module.css';
 
 interface VolunteerInfoProps {
   score: number;
-  hasKey?: boolean;
+  hasKey?: number | null;
 }
 
 export const VolunteerInfo = ({ score, hasKey }: VolunteerInfoProps) => (
@@ -18,11 +18,13 @@ export const VolunteerInfo = ({ score, hasKey }: VolunteerInfoProps) => (
         {score}
       </span>
     </div>
-    <div className={styles.dataWrapper}>
-      <KeyIcon size="24" color="blue" />
-      <span className={classnames('text', 'text_size_small', styles.count)}>
-        {hasKey ? '1' : '0'}
-      </span>
-    </div>
+    {hasKey && (
+      <div className={styles.dataWrapper}>
+        <KeyIcon size="24" color="blue" />
+        <span className={classnames('text', 'text_size_small', styles.count)}>
+          {hasKey}
+        </span>
+      </div>
+    )}
   </div>
 );
