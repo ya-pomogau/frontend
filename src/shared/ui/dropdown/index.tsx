@@ -11,13 +11,12 @@ interface IDropdownProps {
   onChange: (item: Option) => void;
 }
 
-const Dropdown = ({
-  placeholder,
-  items,
-  selected,
-  onChange,
-}: IDropdownProps) => {
+const Dropdown = ({ placeholder, items, selected }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
+  const [selectedValue, setSelectedValue] = useState({
+    id: 0,
+    title: placeholder,
+  });
 
   return (
     <div className={styles.dropdown}>
@@ -27,8 +26,8 @@ const Dropdown = ({
           setIsActive(!isActive);
         }}
       >
-        {selected?.title ?? placeholder}
-        {selected && <CheckIcon color={'blue'} />}
+        {selectedValue.title}
+        {selectedValue.title !== placeholder && <CheckIcon color={'blue'} />}
       </div>
 
       {isActive && (
@@ -38,12 +37,12 @@ const Dropdown = ({
               className={styles.item}
               key={item.id}
               onClick={() => {
-                onChange(item);
+                setSelectedValue(item);
                 setIsActive(false);
               }}
             >
               {item.title}
-              {selected?.id === item.id && <CheckIcon color={'blue'} />}
+              {selectedValue?.id === item.id && <CheckIcon color={'blue'} />}
             </li>
           ))}
         </ul>

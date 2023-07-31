@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   args: {
-    placeholder: 'выберите задачу',
+    placeholder: 'выберите город',
     items: [
       {
         id: 1,
