@@ -6,26 +6,39 @@
 }
 
 .button {
-  padding: 0 12px 0 12px;
+  padding: 0 11px 0 11px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   cursor: pointer;
+  box-sizing: border-box;
+  border: solid 1px #818C99;
+  font-size: 16px;
+  font-family: 'Golos', sans-serif;
 }
 
 .content {
-  position: absolute;
-  top: 110%;
-  padding: 10px;
-  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-  width: 95%;
+  font-family: 'Golos', sans-serif;
+  list-style: none;
+  max-height: 484px;
+  margin: 0;
+  padding: 0;
 }
 
 .item {
-  padding: 10px;
+  border: solid 1px #818C99;
+  border-top-width: 0;
+  height: 48px;
+  width: 375px;
+  line-height: 46px;
   cursor: pointer;
   transition: all .2s;
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .item:hover {

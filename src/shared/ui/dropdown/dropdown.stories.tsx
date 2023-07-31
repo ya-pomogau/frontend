@@ -7,7 +7,18 @@ const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
   tags: ['autodocs'],
   argTypes: {
-    items: ['1', '2', '3', '4'],
+    onChange: {
+      description: 'Обработчик события выбора нужного варианта меню',
+    },
+    placeholder: {
+      description: 'Плэйсхолдер',
+    },
+    items: {
+      description: 'Возножные варианты',
+    },
+    selected: {
+      description: 'Выбранный вариант',
+    },
   },
 };
 
@@ -17,6 +28,19 @@ type Story = StoryObj<typeof meta>;
 export const Example: Story = {
   args: {
     placeholder: 'выберите задачу',
-    items: ['1', '2', '3', '4'],
+    items: [
+      {
+        id: 1,
+        title: 'Москва',
+      },
+      {
+        id: 2,
+        title: 'Санкт-Петербург',
+      },
+      {
+        id: 3,
+        title: 'Екатеринбург',
+      },
+    ],
   },
 };

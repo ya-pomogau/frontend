@@ -1,14 +1,23 @@
 import { useState } from 'react';
 import styles from './styles.module.css';
+import { CheckIcon } from '../icons/check-icon';
+
+export type Option = { id: number; title: string };
 
 interface IDropdownProps {
   placeholder: string;
-  items: Array<string>;
+  items: Array<Option>;
+  selected: Option | undefined;
+  onChange: (item: Option) => void;
 }
 
-const Dropdown = ({ placeholder, items }: IDropdownProps) => {
+const Dropdown = ({
+  placeholder,
+  items,
+  selected,
+  onChange,
+}: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState(placeholder);
 
   return (
     <div className={styles.dropdown}>
@@ -18,24 +27,26 @@ const Dropdown = ({ placeholder, items }: IDropdownProps) => {
           setIsActive(!isActive);
         }}
       >
-        {selected}
+        {selected?.title ?? placeholder}
+        {selected && <CheckIcon color={'blue'} />}
       </div>
 
       {isActive && (
-        <div className={styles.content}>
-          {items.map((item, key) => (
-            <div
+        <ul className={styles.content}>
+          {items.map((item) => (
+            <li
               className={styles.item}
-              key={key}
+              key={item.id}
               onClick={() => {
-                setSelected(item);
+                onChange(item);
                 setIsActive(false);
               }}
             >
-              {item}
-            </div>
+              {item.title}
+              {selected?.id === item.id && <CheckIcon color={'blue'} />}
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );
