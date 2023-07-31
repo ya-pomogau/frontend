@@ -34,6 +34,14 @@ export const updateUserInfo = createAsyncThunk<UserInfo, UpdateUserInfo>(
   }
 );
 
+export const uploadUserAvatar = createAsyncThunk<UserInfo, FormData>(
+  'user/uploadUserAvatar',
+  async function (body: FormData) {
+    const response = await api.uploadAvatar(body);
+    return response;
+  }
+);
+
 export const userModel = createSlice({
   name: 'user',
   initialState,
@@ -66,6 +74,19 @@ export const userModel = createSlice({
         state.data = action.payload;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isFailed = true;
+        state.error = action.error.message;
+      })
+      .addCase(uploadUserAvatar.pending, (state) => {
+        state.isLoading = true;
+        state.isFailed = false;
+      })
+      .addCase(uploadUserAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(uploadUserAvatar.rejected, (state, action) => {
         state.isLoading = false;
         state.isFailed = true;
         state.error = action.error.message;

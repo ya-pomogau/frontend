@@ -85,15 +85,14 @@ export const updateUser = async (body: UpdateUserInfo): Promise<UserInfo> => {
   }
 };
 
-export const uploadAvatar = async (
-  id: number,
-  body: FormData
-): Promise<UpdateUserInfo> => {
+export const uploadAvatar = async (body: FormData): Promise<UserInfo> => {
   try {
-    // Создал дополнительную ручку для загрузки файла аватарки
-    const res = await fetch(`${API_URL}/users/avatar/${id}`, {
-      method: 'POST',
-      body: body,
+    const res = await fetch(`${API_URL}/users/avatar`, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      method: 'PATCH',
+      body,
     });
     return await checkResponse(res);
   } catch (err) {

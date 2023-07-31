@@ -5,11 +5,11 @@ import { InfoContainerContent } from 'shared/ui/info-container-content';
 import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 
-import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
-import { updateUserInfo } from 'entities/user/model';
-import { UpdateUserInfo } from 'entities/user/types';
+import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
+import type { UpdateUserInfo } from 'entities/user/types';
+import { LightPopup } from 'shared/ui/light-popup';
 
 export const UserInfo = () => {
   const user = useAppSelector((state) => state.user.data);
@@ -24,8 +24,12 @@ export const UserInfo = () => {
     setIsPopupOpen(false);
   };
 
-  const handleSaveViewerSettings = async (viewerData: UpdateUserInfo) => {
-    dispatch(updateUserInfo(viewerData));
+  const handleSaveViewerSettings = async (
+    userData: UpdateUserInfo,
+    avatarFile: FormData
+  ) => {
+    dispatch(uploadUserAvatar(avatarFile));
+    dispatch(updateUserInfo(userData));
     setIsPopupOpen(false);
   };
 
@@ -46,10 +50,9 @@ export const UserInfo = () => {
       avatar={user.avatar}
       onClickSettingsButton={handleOpenSettingClick}
     >
-      <EditViewerInfo
+      <LightPopup
         avatarLink={user.avatar}
         avatarName={user.avatar}
-        handlerAvatar={() => 1}
         onClickSave={handleSaveViewerSettings}
         onClickExit={handleCloseViewerSettings}
         valueName={user.fullname}

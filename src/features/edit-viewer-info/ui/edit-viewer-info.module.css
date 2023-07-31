@@ -79,11 +79,9 @@
 .input input {
   border: 0;
   border-bottom: 0.2px solid var(--colors-interface-primary);
-  /* max-width: 138px; */
   max-height: 25px;
   font-size: 12px;
   line-height: 14px;
-  /* padding: 0; */
   margin-left: 20px;
   margin-right: 20px;
 }
