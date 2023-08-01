@@ -6,6 +6,9 @@
   min-height: 128px;
   width: 276px;
   border: 1px solid var(--colors-interface-blue-strong);
+  display: flex; 
+  flex-direction: column; 
+  gap: 6px;
 }
 
 .avatar {
@@ -32,4 +35,31 @@
 
 .id_color {
   opacity: 0.5;
+}
+
+.icons_div{
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.buttons_div{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding-bottom: 25px;
+}
+
+.customVolunteerInfo{
+  margin: unset;
+}
+
+.volunteer_info{
+  display: flex;
+  margin-bottom: 10px;
 }
