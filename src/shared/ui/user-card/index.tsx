@@ -73,9 +73,21 @@ export const UserCard = ({
             hasKey={1}
           />
         </div>
-        <Button buttonType="partial" label="Подтвердить" />
-        <Button buttonType="secondary" label="Заблокировать" />
-        <Button buttonType="secondary" label="Дать ключи" />
+        <Button
+          buttonType="partial"
+          label="Подтвердить"
+          onClick={() => console.log('"подтвердить" button pressed')}
+        />
+        <Button
+          buttonType="secondary"
+          label="Заблокировать"
+          onClick={() => console.log('"Заблокировать" button pressed')}
+        />
+        <Button
+          buttonType="secondary"
+          label="Дать ключи"
+          onClick={() => console.log('"Дать ключи" button pressed')}
+        />
       </div>
     )}
     {role === 'recipient' && (
@@ -89,8 +101,16 @@ export const UserCard = ({
           placeholder="Впишите вашу фамилию"
           type="text"
         />
-        <Button buttonType="secondary" label="Проверить" />
-        <Button buttonType="secondary" label="Заблокировать" />
+        <Button
+          buttonType="secondary"
+          label="Проверить"
+          onClick={() => console.log('"Проверить" button pressed')}
+        />
+        <Button
+          buttonType="secondary"
+          label="Заблокировать"
+          onClick={() => console.log('"Заблокировать" button pressed')}
+        />
       </div>
     )}
     {children}
