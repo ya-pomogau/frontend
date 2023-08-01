@@ -1,0 +1,7 @@
+{
+    "/users/:id/": "/users/:id",
+    "/tasks/active": "/tasksActive",
+    "/tasks/completed": "/tasksCompleted",
+    "/tasks/available": "/tasksAvailable",
+    "/tasks/:id/": "/tasksAvailable/:id"
+  }
