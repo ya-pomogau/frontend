@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent, ReactNode, useState } from 'react';
 import classnames from 'classnames';
 
 import { Avatar } from '../avatar';
@@ -6,12 +6,12 @@ import { Avatar } from '../avatar';
 import styles from './styles.module.css';
 import { RoundButton } from '../round-button';
 import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
-import { PartialFill } from '../button/button.stories';
 import { Button } from '../button';
 import { Input } from '../input';
+import { ExclamationPointIcon } from '../icons/exclamation-point-icon';
 
 interface UserCardProps {
-  role?: 'volunteer' | 'recipient' | 'admin' | 'master' | 'unprocessed';
+  role?: 'volunteer' | 'recipient' | 'admin' | 'master';
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
@@ -20,6 +20,40 @@ interface UserCardProps {
   userNumber: string;
   children?: ReactNode;
 }
+
+const volunteerInfoMock = {
+  approved: true,
+  checked: false,
+  keys: true,
+  adminStatus: null,
+  scores: 30,
+};
+
+const { approved, checked, scores, keys } = volunteerInfoMock;
+
+const isKeysNullOrOne = keys ? 1 : null;
+
+const getButtonTypeFromScore = (
+  score: number
+): 'primary' | 'partial' | 'secondary' => {
+  if (score < 30) {
+    return 'primary';
+  } else if (score < 60) {
+    return 'partial';
+  } else {
+    return 'secondary';
+  }
+};
+
+const isVolonteerAcceptButtonDisabled =
+  (scores === 0 && approved) ||
+  (scores >= 30 && scores < 60 && checked) ||
+  scores >= 60;
+
+const isAcceptButtonExclamationPointIcon =
+  scores >= 30 && !checked && scores < 60;
+
+const isKeyButtonExclamationPointIcon = scores >= 60 && !checked && !keys;
 
 export const UserCard = ({
   role,
@@ -30,89 +64,131 @@ export const UserCard = ({
   userId,
   userNumber,
   children,
-}: UserCardProps) => (
-  <div className={classnames(styles.content, extClassName)}>
-    <Avatar
-      extClassName={styles.avatar}
-      avatarName={avatarName}
-      avatarLink={avatarLink}
-    />
-    <div className={classnames(styles.icons_div)}>
-      <RoundButton
-        buttonType="phone"
-        onClick={() => console.log('call button pressed')}
+}: UserCardProps) => {
+  const [recipientInputValue, setRecipientInputValue] = useState('');
+  return (
+    <div className={classnames(styles.content, extClassName)}>
+      <Avatar
+        extClassName={styles.avatar}
+        avatarName={avatarName}
+        avatarLink={avatarLink}
       />
-      <RoundButton
-        buttonType="message"
-        onClick={() => console.log('message button pressed')}
-      />
-    </div>
-    <div className={styles.user_info}>
-      <h2 className="m-0 text text_size_medium text_type_regular">
-        {userName}
-      </h2>
-      {role === 'recipient' && (
-        <div className={classnames(styles.grid_two, styles.id_color)}>
-          <p className="m-0 text text_size_small text_type_regular"> ID </p>
-          <p className="m-0 text text_size_small text_type_regular">{userId}</p>
+      <div className={classnames(styles.icons_div)}>
+        <RoundButton
+          buttonType="phone"
+          onClick={() => console.log('call button pressed')}
+        />
+        <RoundButton
+          buttonType="message"
+          onClick={() => console.log('message button pressed')}
+        />
+      </div>
+      <div className={styles.user_info}>
+        <h2 className="m-0 text text_size_medium text_type_regular">
+          {userName}
+        </h2>
+        {role === 'recipient' && (
+          <div className={classnames(styles.grid_two, styles.id_color)}>
+            <p className="m-0 text text_size_small text_type_regular"> ID </p>
+            <p className="m-0 text text_size_small text_type_regular">
+              {userId}
+            </p>
+          </div>
+        )}
+        <div className={styles.grid_two}>
+          <p className="m-0 text text_size_small text_type_bold "> тел: </p>
+          <p className="m-0 text text_size_small text_type_regular">
+            {userNumber}
+          </p>
+        </div>
+      </div>
+      {role === 'volunteer' && (
+        <div className={classnames(styles.buttons_div)}>
+          <div className={classnames(styles.volunteer_info)}>
+            <VolunteerInfo
+              extClassName={styles.customVolunteerInfo}
+              score={scores}
+              hasKey={isKeysNullOrOne}
+            />
+          </div>
+          <div className={classnames(styles.exclamation_point_div)}>
+            <Button
+              disabled={isVolonteerAcceptButtonDisabled}
+              buttonType={getButtonTypeFromScore(scores)}
+              label="Подтвердить"
+              onClick={() => console.log('"подтвердить" button pressed')}
+            />
+            {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />}
+          </div>
+          <Button
+            buttonType="secondary"
+            label="Заблокировать"
+            onClick={() => console.log('"Заблокировать" button pressed')}
+          />
+          <div className={classnames(styles.exclamation_point_div)}>
+            <Button
+              buttonType="secondary"
+              label="Дать ключи"
+              onClick={() => console.log('"Дать ключи" button pressed')}
+            />
+            {isKeyButtonExclamationPointIcon && <ExclamationPointIcon />}{' '}
+          </div>
         </div>
       )}
-      <div className={styles.grid_two}>
-        <p className="m-0 text text_size_small text_type_bold "> тел: </p>
-        <p className="m-0 text text_size_small text_type_regular">
-          {userNumber}
-        </p>
-      </div>
-    </div>
-    {role === 'volunteer' && (
-      <div className={classnames(styles.buttons_div)}>
-        <div className={classnames(styles.volunteer_info)}>
-          <VolunteerInfo
-            extClassName={styles.customVolunteerInfo}
-            score={0}
-            hasKey={1}
+      {role === 'recipient' && (
+        <div className={classnames(styles.buttons_div)}>
+          <Input
+            name="email"
+            onChange={(e) => {
+              setRecipientInputValue(e.target.value);
+            }}
+            value={recipientInputValue}
+            placeholder="Впишите вашу фамилию"
+            type="text"
+          />
+          <Button
+            disabled={approved}
+            buttonType={recipientInputValue ? 'primary' : 'secondary'}
+            label="Подтвердить"
+            onClick={() => console.log('"Подтвердить" button pressed')}
+          />
+          <Button
+            buttonType="secondary"
+            label="Заблокировать"
+            onClick={() => console.log('"Заблокировать" button pressed')}
           />
         </div>
-        <Button
-          buttonType="partial"
-          label="Подтвердить"
-          onClick={() => console.log('"подтвердить" button pressed')}
-        />
-        <Button
-          buttonType="secondary"
-          label="Заблокировать"
-          onClick={() => console.log('"Заблокировать" button pressed')}
-        />
-        <Button
-          buttonType="secondary"
-          label="Дать ключи"
-          onClick={() => console.log('"Дать ключи" button pressed')}
-        />
-      </div>
-    )}
-    {role === 'recipient' && (
-      <div className={classnames(styles.buttons_div)}>
-        <Input
-          name="email"
-          onChange={(e) => {
-            console.log(e);
-          }}
-          value={''}
-          placeholder="Впишите вашу фамилию"
-          type="text"
-        />
-        <Button
-          buttonType="secondary"
-          label="Проверить"
-          onClick={() => console.log('"Проверить" button pressed')}
-        />
-        <Button
-          buttonType="secondary"
-          label="Заблокировать"
-          onClick={() => console.log('"Заблокировать" button pressed')}
-        />
-      </div>
-    )}
-    {children}
-  </div>
-);
+      )}
+      {role === 'admin' && (
+        <div className={classnames(styles.buttons_div)}>
+          <Input
+            label="Логин"
+            name="login"
+            onChange={(e) => {
+              console.log(e);
+            }}
+            value={'Login'}
+            placeholder="Логин"
+            type="text"
+          />
+          <Input
+            label="Пароль"
+            name="password"
+            onChange={(e) => {
+              console.log(e);
+            }}
+            value={'Пароль'}
+            placeholder="Пароль"
+            type="text"
+          />
+          <Button
+            buttonType="primary"
+            label="Сохранить"
+            onClick={() => console.log('"Сохранить" button pressed')}
+          />
+        </div>
+      )}
+      {children}
+    </div>
+  );
+};

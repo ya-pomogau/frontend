@@ -6,8 +6,8 @@
   min-height: 128px;
   width: 276px;
   border: 1px solid var(--colors-interface-blue-strong);
-  display: flex; 
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
   gap: 6px;
 }
 
@@ -37,7 +37,7 @@
   opacity: 0.5;
 }
 
-.icons_div{
+.icons_div {
   width: 100%;
   margin: auto;
   display: flex;
@@ -47,7 +47,7 @@
   gap: 8px;
 }
 
-.buttons_div{
+.buttons_div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -55,11 +55,18 @@
   padding-bottom: 25px;
 }
 
-.customVolunteerInfo{
+/* .customVolunteerInfo {
   margin: unset;
-}
+} */
 
-.volunteer_info{
+.volunteer_info {
   display: flex;
   margin-bottom: 10px;
+  margin-left: -53px;
+}
+
+.exclamation_point_div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
