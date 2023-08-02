@@ -9,6 +9,7 @@ import styles from './edit-viewer-info.module.css';
 import { UpdateUserInfo } from 'entities/user/types';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import type { ViewerInputData } from '../types';
+import { LightPopup } from 'shared/ui/light-popup';
 
 interface EditViewerInfoProps {
   extClassName?: string;
@@ -20,6 +21,7 @@ interface EditViewerInfoProps {
   valuePhone: string;
   valueAddress: string;
   valueId: number;
+  isPopupOpen: boolean;
 }
 
 export const EditViewerInfo = ({
@@ -32,6 +34,7 @@ export const EditViewerInfo = ({
   valuePhone,
   valueAddress,
   valueId,
+  isPopupOpen,
   ...props
 }: EditViewerInfoProps) => {
   const avatarPicker = useRef<HTMLInputElement>(null);
@@ -66,138 +69,140 @@ export const EditViewerInfo = ({
   };
 
   return (
-    <div className={classnames(styles.container, extClassName)}>
-      <div className={styles.containerInfo}>
-        <div className={styles.headerElements}>
-          <div className={styles.avatarBlock}>
-            {avatarLink && !userData.avatar && (
-              <Avatar
-                extClassName={styles.avatar}
-                avatarLink={avatarLink}
-                avatarName={avatarName}
-              />
-            )}
-            {userData.avatar && (
-              <Avatar
-                extClassName={styles.avatar}
-                avatarLink={image}
-                avatarName={image}
-              />
-            )}
-            <button
-              onClick={handlePick}
-              className={classnames(
-                styles.avatarBlock__button,
-                'text',
-                'text_size_small'
+    <LightPopup isPopupOpen={isPopupOpen} onClickExit={onClickExit}>
+      <div className={classnames(styles.container, extClassName)}>
+        <div className={styles.containerInfo}>
+          <div className={styles.headerElements}>
+            <div className={styles.avatarBlock}>
+              {avatarLink && !userData.avatar && (
+                <Avatar
+                  extClassName={styles.avatar}
+                  avatarLink={avatarLink}
+                  avatarName={avatarName}
+                />
               )}
-              type="button"
-            >
-              Изменить фото
-            </button>
-            <input
-              onChange={handleChange}
-              className={classnames(
-                styles.avatarBlock__hidden,
-                'text',
-                'text_size_small'
+              {userData.avatar && (
+                <Avatar
+                  extClassName={styles.avatar}
+                  avatarLink={image}
+                  avatarName={image}
+                />
               )}
-              placeholder="Изменить фото"
-              type="file"
-              name="avatar"
-              accept="image/*,.png,.jpg,.gif,.web,"
-              ref={avatarPicker}
+              <button
+                onClick={handlePick}
+                className={classnames(
+                  styles.avatarBlock__button,
+                  'text',
+                  'text_size_small'
+                )}
+                type="button"
+              >
+                Изменить фото
+              </button>
+              <input
+                onChange={handleChange}
+                className={classnames(
+                  styles.avatarBlock__hidden,
+                  'text',
+                  'text_size_small'
+                )}
+                placeholder="Изменить фото"
+                type="file"
+                name="avatar"
+                accept="image/*,.png,.jpg,.gif,.web,"
+                ref={avatarPicker}
+              />
+            </div>
+            <CloseCrossIcon
+              className={styles.closeIcon}
+              size="14"
+              color="blue"
+              onClick={onClickExit}
             />
           </div>
-          <CloseCrossIcon
-            className={styles.closeIcon}
-            size="14"
-            color="blue"
-            onClick={onClickExit}
-          />
+          <ul className={classnames(styles.infoBlock, 'list')}>
+            <li className={styles.infoBlock__item}>
+              <p
+                className={classnames(
+                  styles.infoBlock__text,
+                  'text',
+                  'text_size_small',
+                  'm-0',
+                  'p-0',
+                  'text_type_bold'
+                )}
+              >
+                {' '}
+                Имя:{' '}
+              </p>
+              <Input
+                type="text"
+                extClassName={styles.input}
+                placeholder="Введите имя"
+                value={userData.fullname}
+                onChange={handleChange}
+                name="fullname"
+                {...props}
+              />
+            </li>
+            <li className={styles.infoBlock__item}>
+              <p
+                className={classnames(
+                  styles.infoBlock__text,
+                  'text',
+                  'text_size_small',
+                  'm-0',
+                  'p-0',
+                  'text_type_bold'
+                )}
+              >
+                {' '}
+                Тел.:{' '}
+              </p>
+              <Input
+                type="text"
+                extClassName={styles.input}
+                placeholder="Введите телефон"
+                value={userData.phone}
+                onChange={handleChange}
+                name="phone"
+                {...props}
+              />
+            </li>
+            <li className={styles.infoBlock__item}>
+              <p
+                className={classnames(
+                  styles.infoBlock__text,
+                  'text',
+                  'text_size_small',
+                  'm-0',
+                  'p-0',
+                  'text_type_bold'
+                )}
+              >
+                {' '}
+                Адрес:{' '}
+              </p>
+              <Input
+                type="text"
+                extClassName={styles.input}
+                placeholder="Введите адрес"
+                value={userData.address}
+                onChange={handleChange}
+                name="address"
+                {...props}
+              />
+            </li>
+          </ul>
         </div>
-        <ul className={classnames(styles.infoBlock, 'list')}>
-          <li className={styles.infoBlock__item}>
-            <p
-              className={classnames(
-                styles.infoBlock__text,
-                'text',
-                'text_size_small',
-                'm-0',
-                'p-0',
-                'text_type_bold'
-              )}
-            >
-              {' '}
-              Имя:{' '}
-            </p>
-            <Input
-              type="text"
-              extClassName={styles.input}
-              placeholder="Введите имя"
-              value={userData.fullname}
-              onChange={handleChange}
-              name="fullname"
-              {...props}
-            />
-          </li>
-          <li className={styles.infoBlock__item}>
-            <p
-              className={classnames(
-                styles.infoBlock__text,
-                'text',
-                'text_size_small',
-                'm-0',
-                'p-0',
-                'text_type_bold'
-              )}
-            >
-              {' '}
-              Тел.:{' '}
-            </p>
-            <Input
-              type="text"
-              extClassName={styles.input}
-              placeholder="Введите телефон"
-              value={userData.phone}
-              onChange={handleChange}
-              name="phone"
-              {...props}
-            />
-          </li>
-          <li className={styles.infoBlock__item}>
-            <p
-              className={classnames(
-                styles.infoBlock__text,
-                'text',
-                'text_size_small',
-                'm-0',
-                'p-0',
-                'text_type_bold'
-              )}
-            >
-              {' '}
-              Адрес:{' '}
-            </p>
-            <Input
-              type="text"
-              extClassName={styles.input}
-              placeholder="Введите адрес"
-              value={userData.address}
-              onChange={handleChange}
-              name="address"
-              {...props}
-            />
-          </li>
-        </ul>
+        <Button
+          onClick={() => onClickSave(userData, avatarFile)}
+          extClassName={styles.button}
+          buttonType="primary"
+          label="Сохранить"
+          size="medium"
+        />
       </div>
-      <Button
-        onClick={() => onClickSave(userData, avatarFile)}
-        extClassName={styles.button}
-        buttonType="primary"
-        label="Сохранить"
-        size="medium"
-      />
-    </div>
+    </LightPopup>
   );
 };

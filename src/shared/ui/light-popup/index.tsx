@@ -1,24 +1,21 @@
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
-import { UpdateUserInfo } from 'entities/user/types';
-import { EditViewerInfo } from 'features/edit-viewer-info/ui';
+import { ReactNode } from 'react';
 
 interface LightPopupProps {
-  extClassName?: string;
-  avatarLink: string;
-  avatarName: string;
-  onClickSave: (userData: UpdateUserInfo, avatarFile: FormData) => void;
   onClickExit: () => void;
-  valueName: string;
-  valuePhone: string;
-  valueAddress: string;
-  valueId: number;
+  children: ReactNode;
   isPopupOpen: boolean;
 }
 
-export const LightPopup = ({ isPopupOpen, ...props }: LightPopupProps) => {
+export const LightPopup = ({
+  children,
+  isPopupOpen,
+  onClickExit,
+}: // ...props
+LightPopupProps) => {
   return (
-    <OverlayingPopup isOpened={isPopupOpen}>
-      <EditViewerInfo {...props} />
+    <OverlayingPopup isOpened={isPopupOpen} onClose={onClickExit}>
+      {children}
     </OverlayingPopup>
   );
 };
