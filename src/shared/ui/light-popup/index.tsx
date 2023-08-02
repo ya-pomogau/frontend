@@ -11,8 +11,7 @@ export const LightPopup = ({
   children,
   isPopupOpen,
   onClickExit,
-}: // ...props
-LightPopupProps) => {
+}: LightPopupProps) => {
   return (
     <OverlayingPopup isOpened={isPopupOpen} onClose={onClickExit}>
       {children}
