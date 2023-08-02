@@ -24,7 +24,7 @@ interface UserCardProps {
 const volunteerInfoMock = {
   approved: true,
   checked: false,
-  keys: true,
+  keys: false,
   adminStatus: null,
   scores: 30,
 };
@@ -112,6 +112,8 @@ export const UserCard = ({
             />
           </div>
           <div className={classnames(styles.exclamation_point_div)}>
+            {/* При нажатии этой кнопки в Api - если buttonType == primary, то 'approved' меняется на 'true' и checked: true; если buttonType == partial, то checked меняем true */}
+            {/* В бэкенде надо прописать, что когда score меняется с 29 на 30 надо checked поменять на false */}
             <Button
               disabled={isVolonteerAcceptButtonDisabled}
               buttonType={getButtonTypeFromScore(scores)}
@@ -120,12 +122,14 @@ export const UserCard = ({
             />
             {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />}
           </div>
+          {/* При нажатии этой кнопки в Api -У пользователя пропадает доступ к ЛК, Карточка пользователя опускается вниз списка */}
           <Button
             buttonType="secondary"
             label="Заблокировать"
             onClick={() => console.log('"Заблокировать" button pressed')}
           />
           <div className={classnames(styles.exclamation_point_div)}>
+            {/* При нажатии этой кнопки в Api -'keys' меняется на 'true' */}
             <Button
               buttonType="secondary"
               label="Дать ключи"
@@ -152,6 +156,7 @@ export const UserCard = ({
             label="Подтвердить"
             onClick={() => console.log('"Подтвердить" button pressed')}
           />
+          {/* При нажатии этой кнопки в Api -У пользователя пропадает доступ к ЛК, Карточка пользователя опускается вниз списка */}
           <Button
             buttonType="secondary"
             label="Заблокировать"
