@@ -11,7 +11,7 @@ export const CheckIcon = ({
     height={size}
     viewBox="0 0 24 24"
     fill={getColor(color)}
-    stroke={getColor(color)}
+    stroke={'white'}
     {...props}
   >
     <path
