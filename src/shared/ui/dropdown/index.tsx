@@ -7,11 +7,10 @@ export type Option = { id: number; title: string };
 interface IDropdownProps {
   placeholder: string;
   items: Array<Option>;
-  selected: Option | undefined;
   onChange: (item: Option) => void;
 }
 
-const Dropdown = ({ placeholder, items, selected }: IDropdownProps) => {
+const Dropdown = ({ placeholder, items }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
   const [selectedValue, setSelectedValue] = useState({
     id: 0,

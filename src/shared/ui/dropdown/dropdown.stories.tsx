@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Dropdown from './index';
 
 const meta: Meta<typeof Dropdown> = {
-  title: 'uikit/DropDown/DropDown',
+  title: 'uikit/DropDown',
   component: Dropdown,
   tags: ['autodocs'],
   argTypes: {
@@ -15,9 +15,6 @@ const meta: Meta<typeof Dropdown> = {
     },
     items: {
       description: 'Возножные варианты',
-    },
-    selected: {
-      description: 'Выбранный вариант',
     },
   },
 };
