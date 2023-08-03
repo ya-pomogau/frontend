@@ -1,6 +1,7 @@
 .dropdown {
-  position: relative;
   user-select: none;
+  position: relative;
+  z-index: 1;
 }
 
 .label {
@@ -26,14 +27,20 @@
   color: var(--colors-interface-additional);
 }
 
-.content {
+.list {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
   list-style: none;
   max-height: 484px;
   margin: 0;
-  padding: 0;
   overflow-y: auto;
+  padding: 0;
   border: solid 1px var(--colors-interface-additional);
   border-top-width: 0;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .item {

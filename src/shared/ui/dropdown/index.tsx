@@ -45,7 +45,7 @@ const Dropdown = ({
         )}
       </div>
       {isActive && (
-        <ul className={classNames('text', 'text_size_middle', styles.content)}>
+        <ul className={classNames('text', 'text_size_middle', styles.list)}>
           {items.map((item) => (
             <li
               className={styles.item}
