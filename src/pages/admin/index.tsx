@@ -13,7 +13,7 @@ import { Icon } from '../../shared/ui/icons';
 import { ContentLayout } from '../../shared/ui/content-layout';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { Input } from '../../shared/ui/input';
-import { UserCard } from '../../shared/ui/user-card';
+import { UserCard } from '../../widgets/user-card';
 import { NotFoundPage } from '../not-found';
 
 import styles from './styles.module.css';

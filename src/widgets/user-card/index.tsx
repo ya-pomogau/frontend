@@ -1,14 +1,14 @@
 import { ChangeEvent, ReactNode, useState } from 'react';
 import classnames from 'classnames';
 
-import { Avatar } from '../avatar';
+import { Avatar } from '../../shared/ui/avatar';
 
 import styles from './styles.module.css';
-import { RoundButton } from '../round-button';
+import { RoundButton } from '../../shared/ui/round-button';
 import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
-import { Button } from '../button';
-import { Input } from '../input';
-import { ExclamationPointIcon } from '../icons/exclamation-point-icon';
+import { Button } from '../../shared/ui/button';
+import { Input } from '../../shared/ui/input';
+import { ExclamationPointIcon } from '../../shared/ui/icons/exclamation-point-icon';
 
 interface UserCardProps {
   role?: 'volunteer' | 'recipient' | 'admin' | 'master';
@@ -19,6 +19,7 @@ interface UserCardProps {
   userId: number;
   userNumber: string;
   children?: ReactNode;
+  volunteerInfo?: any;
 }
 
 // Данные берутся из БД по id
@@ -29,10 +30,6 @@ const volunteerInfoMock = {
   adminStatus: null,
   scores: 30,
 };
-
-const { approved, checked, scores, keys } = volunteerInfoMock;
-
-const isKeysNullOrOne = keys ? 1 : null;
 
 const getButtonTypeFromScore = (
   score: number
@@ -46,16 +43,6 @@ const getButtonTypeFromScore = (
   }
 };
 
-const isVolonteerAcceptButtonDisabled =
-  (scores === 0 && approved) ||
-  (scores >= 30 && scores < 60 && checked) ||
-  scores >= 60;
-
-const isAcceptButtonExclamationPointIcon =
-  scores >= 30 && !checked && scores < 60;
-
-const isKeyButtonExclamationPointIcon = scores >= 60 && !checked && !keys;
-
 export const UserCard = ({
   role,
   extClassName,
@@ -65,8 +52,30 @@ export const UserCard = ({
   userId,
   userNumber,
   children,
+  volunteerInfo = {
+    approved: true,
+    checked: false,
+    keys: false,
+    adminStatus: null,
+    scores: 30,
+  },
 }: UserCardProps) => {
   const [recipientInputValue, setRecipientInputValue] = useState('');
+
+  const { approved, checked, scores, keys } = volunteerInfo;
+
+  const isVolonteerAcceptButtonDisabled =
+    (scores === 0 && approved) ||
+    (scores >= 30 && scores < 60 && checked) ||
+    scores >= 60;
+
+  const isAcceptButtonExclamationPointIcon =
+    scores >= 30 && !checked && scores < 60;
+
+  const isKeyButtonExclamationPointIcon = scores >= 60 && !checked && !keys;
+
+  const isKeysNullOrOne = keys ? 1 : null;
+
   return (
     <div className={classnames(styles.content, extClassName)}>
       <Avatar
@@ -103,6 +112,7 @@ export const UserCard = ({
           </p>
         </div>
       </div>
+
       {role === 'volunteer' && (
         <div className={classnames(styles.buttons_div)}>
           <div className={classnames(styles.volunteer_info)}>
@@ -140,10 +150,11 @@ export const UserCard = ({
           </div>
         </div>
       )}
+
       {role === 'recipient' && (
         <div className={classnames(styles.buttons_div)}>
           <Input
-            name="email"
+            name="name"
             onChange={(e) => {
               setRecipientInputValue(e.target.value);
             }}
@@ -165,6 +176,7 @@ export const UserCard = ({
           />
         </div>
       )}
+
       {role === 'admin' && (
         <div className={classnames(styles.buttons_div)}>
           <Input
@@ -194,6 +206,7 @@ export const UserCard = ({
           />
         </div>
       )}
+
       {children}
     </div>
   );

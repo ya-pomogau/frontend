@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { UserCard } from 'shared/ui/user-card';
+import { UserCard } from 'widgets/user-card';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import { Icon } from 'shared/ui/icons';
 import { Button } from 'shared/ui/button';
