@@ -10,6 +10,7 @@ import { UpdateUserInfo } from 'entities/user/types';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import type { ViewerInputData } from '../types';
 import { LightPopup } from 'shared/ui/light-popup';
+import { useOutsideClick } from 'shared/hooks/use-outside-click';
 
 interface EditViewerInfoProps {
   extClassName?: string;
@@ -22,6 +23,9 @@ interface EditViewerInfoProps {
   valueAddress: string;
   valueId: number;
   isPopupOpen: boolean;
+  buttonRef: React.RefObject<HTMLElement>;
+  isFormEdited: boolean;
+  setIsFormEdited: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const EditViewerInfo = ({
@@ -35,9 +39,13 @@ export const EditViewerInfo = ({
   valueAddress,
   valueId,
   isPopupOpen,
+  buttonRef,
+  isFormEdited,
+  setIsFormEdited,
   ...props
 }: EditViewerInfoProps) => {
   const avatarPicker = useRef<HTMLInputElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const viewerData: UpdateUserInfo = {
     fullname: valueName,
@@ -53,6 +61,7 @@ export const EditViewerInfo = ({
 
   const handleChange = async (event: ViewerInputData) => {
     const { value, name, files } = event.target;
+    setIsFormEdited(false);
 
     if (files) {
       // Если загружен файл изображения, отрисовываем в компоненте аватара
@@ -68,9 +77,26 @@ export const EditViewerInfo = ({
     }
   };
 
+  const onClickExitModal = () => {
+    if (!isFormEdited) {
+      setUserData(viewerData);
+    }
+    onClickExit();
+  };
+
+  useOutsideClick({
+    elementRef: modalRef,
+    triggerRef: buttonRef,
+    onOutsideClick: onClickExitModal,
+    enabled: isPopupOpen,
+  });
+
   return (
-    <LightPopup isPopupOpen={isPopupOpen} onClickExit={onClickExit}>
-      <div className={classnames(styles.container, extClassName)}>
+    <LightPopup isPopupOpen={isPopupOpen} onClickExit={onClickExitModal}>
+      <div
+        ref={modalRef}
+        className={classnames(styles.container, extClassName)}
+      >
         <div className={styles.containerInfo}>
           <div className={styles.headerElements}>
             <div className={styles.avatarBlock}>
@@ -117,7 +143,7 @@ export const EditViewerInfo = ({
               className={styles.closeIcon}
               size="14"
               color="blue"
-              onClick={onClickExit}
+              onClick={onClickExitModal}
             />
           </div>
           <ul className={classnames(styles.infoBlock, 'list')}>

@@ -6,7 +6,7 @@ import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 
 import styles from './styles.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
 import type { UpdateUserInfo } from 'entities/user/types';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
@@ -14,7 +14,10 @@ import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 export const UserInfo = () => {
   const user = useAppSelector((state) => state.user.data);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isFormEdited, setIsFormEdited] = useState(false);
   const dispatch = useAppDispatch();
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleOpenSettingClick = () => {
     setIsPopupOpen(true);
@@ -28,8 +31,9 @@ export const UserInfo = () => {
     userData: UpdateUserInfo,
     avatarFile: FormData
   ) => {
-    dispatch(uploadUserAvatar(avatarFile));
-    dispatch(updateUserInfo(userData));
+    // dispatch(uploadUserAvatar(avatarFile));
+    // dispatch(updateUserInfo(userData));
+    setIsFormEdited(true);
     setIsPopupOpen(false);
   };
 
@@ -49,6 +53,7 @@ export const UserInfo = () => {
       name={user.fullname}
       avatar={user.avatar}
       onClickSettingsButton={handleOpenSettingClick}
+      buttonRef={buttonRef}
     >
       <EditViewerInfo
         avatarLink={user.avatar}
@@ -60,6 +65,9 @@ export const UserInfo = () => {
         valueAddress={user.address}
         isPopupOpen={isPopupOpen}
         valueId={user.id}
+        buttonRef={buttonRef}
+        isFormEdited={isFormEdited}
+        setIsFormEdited={setIsFormEdited}
       />
 
       <div className={styles.contentWrapper}>
