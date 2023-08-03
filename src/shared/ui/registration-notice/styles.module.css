@@ -1,0 +1,16 @@
+.container {
+  width: 100%;
+  min-width: 384px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  align-items: center;
+  box-shadow: 0px 4px 32px 0px #00000029;
+  gap: 10px;
+}
+
+.settingText {
+  color: var(--colors-interface-black);
+}
+
