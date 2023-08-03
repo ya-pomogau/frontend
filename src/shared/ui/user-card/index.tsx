@@ -16,11 +16,12 @@ interface UserCardProps {
   avatarLink: string;
   avatarName: string;
   userName: string;
-  userId?: number;
+  userId: number;
   userNumber: string;
   children?: ReactNode;
 }
 
+// Данные берутся из БД по id
 const volunteerInfoMock = {
   approved: true,
   checked: false,

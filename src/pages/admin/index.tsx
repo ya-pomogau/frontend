@@ -21,11 +21,12 @@ import styles from './styles.module.css';
 const numbersMock = {
   numberVolunteer: 2,
   numberRecipient: 3,
-  numberNotProcessed: 43,
+  numberNotProcessed: 5,
 };
 
 const userMock = [
   {
+    role: 'volunteer',
     avatarLink: 'https://i.pravatar.cc/300"',
     avatarName: 'Avatar',
     userId: 1,
@@ -33,6 +34,7 @@ const userMock = [
     userNumber: '+7 (111) 222-22-22',
   },
   {
+    role: 'volunteer',
     avatarLink: 'https://i.pravatar.cc/300"',
     avatarName: 'Avatar',
     userId: 2,
@@ -40,6 +42,7 @@ const userMock = [
     userNumber: '+7 (111) 222-22-22',
   },
   {
+    role: 'volunteer',
     avatarLink: 'https://i.pravatar.cc/300"',
     avatarName: 'Avatar',
     userId: 3,
@@ -47,6 +50,7 @@ const userMock = [
     userNumber: '+7 (111) 222-22-22',
   },
   {
+    role: 'volunteer',
     avatarLink: 'https://i.pravatar.cc/300"',
     avatarName: 'Avatar',
     userId: 4,
@@ -54,6 +58,7 @@ const userMock = [
     userNumber: '+7 (111) 222-22-22',
   },
   {
+    role: 'volunteer',
     avatarLink: 'https://i.pravatar.cc/300"',
     avatarName: 'Avatar',
     userId: 5,
@@ -247,6 +252,40 @@ export function AdminPage() {
                       </div>
                     )}
                   </NavLink>
+                </div>{' '}
+                <div className={styles.users_card_box}>
+                  <UserCard
+                    role="volunteer"
+                    avatarLink="https://i.pravatar.cc/300"
+                    avatarName="Avatar"
+                    userName="Иванов Иван Иванович"
+                    userId={12}
+                    userNumber="+7 (111) 222-22-22"
+                  />
+                  <UserCard
+                    role="recipient"
+                    avatarLink="https://i.pravatar.cc/300"
+                    avatarName="Avatar"
+                    userName="Иванов Иван Иванович"
+                    userId={12}
+                    userNumber="+7 (111) 222-22-22"
+                  />
+                  <UserCard
+                    role="volunteer"
+                    avatarLink="https://i.pravatar.cc/300"
+                    avatarName="Avatar"
+                    userName="Иванов Иван Иванович"
+                    userId={12}
+                    userNumber="+7 (111) 222-22-22"
+                  />
+                  <UserCard
+                    role="recipient"
+                    avatarLink="https://i.pravatar.cc/300"
+                    avatarName="Avatar"
+                    userName="Иванов Иван Иванович"
+                    userId={12}
+                    userNumber="+7 (111) 222-22-22"
+                  />
                 </div>
               </ContentLayout>
             }
