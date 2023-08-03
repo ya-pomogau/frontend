@@ -42,6 +42,7 @@ export const Default: Story = {
         confirmed: false,
         recipient: {
           id: 5,
+          createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Игорь Витальевич',
           role: 'recipient',
           vk: 'https://vk.com/id123456789',
@@ -50,7 +51,7 @@ export const Default: Story = {
           phone: '+7 (916) 123-45-67',
           address: 'ул. Наличная, 28/16В',
           coordinates: [59.941335, 30.227995],
-          approved: true,
+          status: 'confirmed',
         },
         volunteer: null,
         address: 'ул. Наличная, 28/16В',
@@ -71,6 +72,7 @@ export const Default: Story = {
         confirmed: false,
         recipient: {
           id: 6,
+          createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Иван Николаевич',
           role: 'recipient',
           vk: 'https://vk.com/id123456789',
@@ -78,7 +80,7 @@ export const Default: Story = {
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
           coordinates: [59.95252, 30.243239],
-          approved: true,
+          status: 'confirmed',
         },
         volunteer: null,
         address: 'переулок Каховского, 3',

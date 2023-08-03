@@ -70,35 +70,21 @@
   .links {
     align-items: flex-end;
     margin-left: 0;
-    margin-right: 10px;
   }
+
   .link {
     min-width: unset;
     padding: 0;
     align-items: center;
     max-height: 29px;
-    margin-top: 3px;
+    margin-top: 10px;
   }
-  .link:nth-child(1) {
-    margin-right: 6px;
-  }
-  .link:nth-child(2) {
-    margin-top: 5px;
-  }
-  .link:nth-child(3) {
-    margin-top: 0;
-    max-height: 49px;
-  }
-  .link:nth-child(4) {
-    margin-top: 0;
-  }
-  .link_active .link__icon {
-    margin-bottom: 4px;
-  }
+
   .link__title {
     padding: 0 2px 8px 0;
     border-bottom: 4px solid transparent;
   }
+
   .link__icon {
     display: flex;
     margin-top: 0;
@@ -107,9 +93,11 @@
     margin-bottom: 8px;
     border-bottom: 4px solid transparent;
   }
+
   .link:not(.link_active):hover .link__title {
     border-bottom: none;
   }
+
   .link:not(.link_active):hover .link__icon {
     border-bottom: none;
   }

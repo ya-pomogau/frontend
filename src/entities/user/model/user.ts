@@ -4,6 +4,7 @@ import { api } from '../../../shared/api';
 import type { UserInfo, UserRole } from '../types';
 
 type UserState = {
+  id?: number;
   role: UserRole | null;
   data: UserInfo | null;
   isLoading: boolean;
@@ -40,9 +41,9 @@ export const userModel = createSlice({
         state.isLoading = true;
         state.isFailed = false;
       })
-      .addCase(fetchUserDataByRole.fulfilled, (state, action) => {
+      .addCase(fetchUserDataByRole.fulfilled, (state, action: any) => {
         state.isLoading = false;
-        state.data = action.payload;
+        state.data = action.payload.data;
       })
       .addCase(fetchUserDataByRole.rejected, (state, action) => {
         state.isLoading = false;
