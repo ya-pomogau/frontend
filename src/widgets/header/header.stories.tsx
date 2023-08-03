@@ -17,7 +17,7 @@ const mockedRecipientState = {
     phone: '+7 (916) 123-45-67',
     address: 'ул. Нахимова, д. 9',
     coordinates: [59.941871, 30.223494],
-    approved: true,
+    status: 'confirmed',
   },
   isLoading: false,
   isFailed: false,
