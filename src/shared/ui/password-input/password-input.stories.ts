@@ -27,3 +27,14 @@ export const Default: Story = {
     placeholder: 'Введите пароль',
   },
 };
+
+export const Error: Story = {
+  args: {
+    type: 'text',
+    name: 'firstName',
+    label: 'Имя',
+    placeholder: 'Введите имя',
+    error: true,
+    errorText: 'Вы ввели неправильный пароль',
+  },
+};

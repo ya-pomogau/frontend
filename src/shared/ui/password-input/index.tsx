@@ -2,10 +2,12 @@
 /* eslint-disable import/no-named-as-default-member */
 import React, { useState } from 'react';
 
-import { Icon } from '../icons';
-import { Input } from '../input';
+//import styles from './styles.module.css';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+import { Icon } from '../icons';
+import { Input, InputProps } from '../input';
+
+interface PasswordInputProps extends InputProps {
   value: string;
   label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,7 +16,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
+export const PasswordInput = React.forwardRef<
+  HTMLInputElement,
+  PasswordInputProps
+>(
   (
     {
       value,
@@ -52,6 +57,8 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
             <Icon color="blue" icon="PasswordOpenIcon" size="32" />
           )
         }
+        error={true}
+        errorText={'Вы ввели неправильный пароль'}
       />
     );
   }

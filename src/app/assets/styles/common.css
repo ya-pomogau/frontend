@@ -1,5 +1,5 @@
 :root {
-  --colors-interface-white: #ffffff;
+  --colors-interface-white: rgba(251, 253, 255, 1);
   --colors-interface-black: #000000;
   --colors-interface-primary: #2e3192;
   --colors-interface-primary-additional: #9798c9;

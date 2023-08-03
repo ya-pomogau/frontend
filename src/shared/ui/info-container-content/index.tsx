@@ -38,15 +38,7 @@ export const InfoContainerContent = ({
     >
       ID {id}
     </p>
-    <p
-      className={classNames(
-        'm-0',
-        'text_size_small',
-        'text_type_regular',
-        'text',
-        styles['info-phone-wrapper']
-      )}
-    >
+    <div className={classNames('m-0', styles['info-address-container'])}>
       <span
         className={classNames(
           'm-0',
@@ -58,17 +50,19 @@ export const InfoContainerContent = ({
       >
         Тел.: &nbsp;
       </span>
-      {phone}
-    </p>
-    <p
-      className={classNames(
-        'm-0',
-        'text_size_small',
-        'text_type_regular',
-        'text',
-        styles['info-address-wrapper']
-      )}
-    >
+      <p
+        className={classNames(
+          'm-0',
+          'text_size_small',
+          'text_type_regular',
+          'text',
+          styles['info-phone-wrapper']
+        )}
+      >
+        {phone}
+      </p>
+    </div>
+    <div className={classNames('m-0', styles['info-address-container'])}>
       <span
         className={classNames(
           'm-0',
@@ -80,7 +74,17 @@ export const InfoContainerContent = ({
       >
         Адрес: &nbsp;
       </span>
-      {address}
-    </p>
+      <p
+        className={classNames(
+          'm-0',
+          'text_size_small',
+          'text_type_regular',
+          'text',
+          styles['info-address-wrapper']
+        )}
+      >
+        {address}
+      </p>
+    </div>
   </>
 );

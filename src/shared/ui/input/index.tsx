@@ -6,7 +6,8 @@ import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -48,6 +49,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const inputClass = error ? styles.input_error : styles.input;
 
+    const iconClass = error ? styles.icon_error : styles.icon;
+
     return (
       <div className={extClassName}>
         {label && (
@@ -61,14 +64,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type={type}
             name={name}
             value={value}
-            className={cn(inputClass, 'text', 'text_size_medium')}
+            className={cn('text', 'text_size_medium', inputClass)}
             onChange={onChange}
             placeholder={placeholder}
             id={id}
             {...props}
           />
           {errorToRender}
-          <div className={styles.icon} onClick={onIconClick}>
+          <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>
         </div>

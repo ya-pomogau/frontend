@@ -42,11 +42,13 @@ export const InfoContainer = ({
       <div className={classNames(styles['info-container-content'])}>
         {children}
       </div>
-      <SettingsButton
-        extClassName={styles['info-container-settings-button']}
-        onClick={onClickSettingsButton}
-        disabled={!isAuth}
-      />
+      {isAuth && (
+        <SettingsButton
+          extClassName={styles['info-container-settings-button']}
+          onClick={onClickSettingsButton}
+          disabled={!isAuth}
+        />
+      )}
     </div>
   );
 };

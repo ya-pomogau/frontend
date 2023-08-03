@@ -120,6 +120,8 @@ export function LoginPage() {
                 onChange={(event) => setLogin(event.currentTarget.value)}
                 placeholder="ФИО / Телефон / Логин"
                 type="text"
+                error={false}
+                errorText={'Вы ввели неправильный логин'}
               />
 
               <PasswordInput
@@ -140,6 +142,8 @@ export function LoginPage() {
                 actionType="submit"
                 label="Войти"
                 size="medium"
+                extClassName={styles.button}
+                disabled={!login || !password}
               />
             </form>
           )}

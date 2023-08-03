@@ -1,5 +1,5 @@
 .smartHeader__container {
-  width: 100%;
+  /* width: 100%; */
   min-width: 384px;
   border: 2px solid var(--colors-interface-primary);
   display: flex;
@@ -16,6 +16,8 @@
 
 .settingText {
   color: var(--colors-interface-primary);
+  font-size: 24px;
+  line-height: 29px;
 }
 
 .filterText {
@@ -57,18 +59,13 @@
     padding: 15px;
   }
 
-  .settingText {
-    font-size: 16px;
-    line-height: 19px;
-  }
-
   .settingIcon {
     margin-right: 10px;
   }
 
   .settingIcon {
-    max-width: 30px;
-    max-height: 30px;
+    max-width: 35px;
+    max-height: 35px;
   }
 
   .filterButton svg {
@@ -77,8 +74,14 @@
   }
 }
 
-@media all and (max-width: 414px) {
+@media screen and (max-width: 415px) {
   .settingText {
     max-width: 141px;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .smartHeader__container {
+    padding: 8px 15px;
   }
 }

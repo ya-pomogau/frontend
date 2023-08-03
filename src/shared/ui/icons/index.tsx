@@ -33,7 +33,6 @@ import { MapApplicationIcon } from './map-application-icon';
 import { MapIcon } from './map-icon';
 import { PopularIcon } from './popular-icon';
 import { CompletedApplicationIcon } from './completed-application-icon';
-import { ProgressIcon } from './progress-icon';
 import { CreateApplication } from './create-application-icon';
 import { LoginIcon } from './login-icon';
 import { PasswordOpenIcon } from './password-open-icon';
@@ -72,7 +71,6 @@ const icons = {
   MapApplicationIcon,
   MapIcon,
   PopularIcon,
-  ProgressIcon,
   CreateApplication,
   LoginIcon,
   PasswordOpenIcon,

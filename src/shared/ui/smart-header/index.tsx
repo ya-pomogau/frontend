@@ -22,15 +22,7 @@ export const SmartHeader = ({
   <div className={classnames(styles.smartHeader__container, extClassName)}>
     <div className={styles.smartHeader__block}>
       <div className={styles.settingIcon}>{settingIcon}</div>
-      <p
-        className={classnames(
-          styles.settingText,
-          'text',
-          'text_size_large',
-          'm-0',
-          'p-0'
-        )}
-      >
+      <p className={classnames('text', 'm-0', 'p-0', styles.settingText)}>
         {settingText}
       </p>
     </div>

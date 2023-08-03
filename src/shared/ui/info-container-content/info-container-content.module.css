@@ -21,3 +21,9 @@
 .info-address-wrapper {
   padding-bottom: 10px;
 }
+
+.info-address-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
