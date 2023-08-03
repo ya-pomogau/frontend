@@ -35,6 +35,7 @@ import { PopularIcon } from './popular-icon';
 import { CompletedApplicationIcon } from './completed-application-icon';
 import { CreateApplication } from './create-application-icon';
 import { CheckIcon } from './check-icon';
+import { ArrowDownIcon } from './arrow-down-icon';
 
 const icons = {
   CalendarIcon,
@@ -71,6 +72,7 @@ const icons = {
   PopularIcon,
   CreateApplication,
   CheckIcon,
+  ArrowDownIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;

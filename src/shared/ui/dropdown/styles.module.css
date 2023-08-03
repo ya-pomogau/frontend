@@ -1,8 +1,13 @@
 .dropdown {
-  width: 375px;
-  margin: 0 auto;
   position: relative;
   user-select: none;
+}
+
+.label {
+  color: var(--colors-interface-primary);
+  position: relative;
+  bottom: 8px;
+  left: 1px
 }
 
 .button {
@@ -13,24 +18,27 @@
   justify-content: space-between;
   cursor: pointer;
   box-sizing: border-box;
-  border: solid 1px #818C99;
-  font-size: 16px;
-  font-family: 'Golos', sans-serif;
+  border: solid 1px var(--colors-interface-additional);
+  color: var(--colors-interface-primary);
+}
+
+.placeholder {
+  color: var(--colors-interface-additional);
 }
 
 .content {
-  font-family: 'Golos', sans-serif;
   list-style: none;
   max-height: 484px;
   margin: 0;
   padding: 0;
+  overflow-y: auto;
+  border: solid 1px var(--colors-interface-additional);
+  border-top-width: 0;
 }
 
 .item {
-  border: solid 1px #818C99;
-  border-top-width: 0;
+  border-bottom: solid 1px var(--colors-interface-additional);
   height: 48px;
-  width: 375px;
   line-height: 46px;
   cursor: pointer;
   transition: all .2s;
@@ -43,4 +51,8 @@
 
 .item:hover {
   background: #f4f4f4;
+}
+
+.item:last-child {
+  border-bottom: none;
 }
