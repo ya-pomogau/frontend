@@ -2,11 +2,10 @@
   width: 100%;
   min-width: 384px;
   display: flex;
-  justify-content: space-between;
   padding: 20px 30px;
   box-sizing: border-box;
   align-items: center;
-  box-shadow: 0px 4px 32px 0px #00000029;
+  box-shadow: 0px 4px 32px 0px #00000029, 0px 0px 4px 0px #0000000a;
   gap: 10px;
 }
 
@@ -14,3 +13,23 @@
   color: var(--colors-interface-black);
 }
 
+@media all and (max-width: 1025px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  .settingText {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+  }
+}
+
+/* @media all and (max-width: 414px) {
+
+  .container {
+    padding: 20px 10px;
+  }
+
+} */
