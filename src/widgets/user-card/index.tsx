@@ -94,7 +94,12 @@ export const UserCard = ({
         />
       </div>
       <div className={styles.user_info}>
-        <h2 className="m-0 text text_size_medium text_type_regular">
+        <h2
+          className={classnames(
+            styles.name_text,
+            'm-0 text text_size_medium text_type_regular'
+          )}
+        >
           {userName}
         </h2>
         {role === 'recipient' && (
@@ -154,6 +159,7 @@ export const UserCard = ({
       {role === 'recipient' && (
         <div className={classnames(styles.buttons_div)}>
           <Input
+            className={classnames(styles.recipient_input)}
             name="name"
             onChange={(e) => {
               setRecipientInputValue(e.target.value);

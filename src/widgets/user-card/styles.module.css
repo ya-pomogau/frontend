@@ -55,10 +55,6 @@
   padding-bottom: 25px;
 }
 
-/* .customVolunteerInfo {
-  margin: unset;
-} */
-
 .volunteer_info {
   display: flex;
   margin-bottom: 10px;
@@ -69,4 +65,46 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+@media all and (max-width: 1025px) {
+  .content {
+    width: 175px;
+    padding: 41px 10px 0 10px;
+  }
+
+  .avatar {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 62px;
+    height: 62px;
+    transform: translate(-50%, -31px);
+  }
+
+  .buttons_div {
+    padding-bottom: 10px;
+  }
+
+  .volunteer_info {
+    margin-bottom: 2px;
+  }
+
+  .name_text {
+    font-size: 12px;
+  }
+
+  .recipient_input {
+    width: 150px;
+    height: 30px;
+    border: 0.5px solid #2e3192;
+    font-size: 8px;
+    /* padding: 10px; */
+    color: #2e3192;
+  }
+
+  .recipient_input::placeholder {
+    font-size: 8px;
+    padding: 10px;
+  }
 }
