@@ -35,6 +35,20 @@ export const PasswordInput = React.forwardRef<
     ref
   ) => {
     const [visible, setVisibility] = useState(false);
+    const [error, setError] = useState(false);
+
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    const validateField = (value: string) => {
+      setError(value.length < 6);
+    };
+
+    const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      if (e.target.value) {
+        validateField(e.target.value);
+      } else {
+        setError(false);
+      }
+    };
 
     const handleIconClick = (e: React.MouseEvent<HTMLDivElement>) => {
       setVisibility(!visible);
@@ -42,6 +56,7 @@ export const PasswordInput = React.forwardRef<
 
     return (
       <Input
+        onBlur={onBlur}
         type={visible ? 'text' : 'password'}
         value={value}
         label={label}
@@ -57,7 +72,8 @@ export const PasswordInput = React.forwardRef<
             <Icon color="blue" icon="PasswordOpenIcon" size="32" />
           )
         }
-        error={true}
+        // пропсы ошибки работают только на уровне Input, но я не вижу смысла их переносить "выше" в рамках логики приложения
+        error={error}
         errorText={'Вы ввели неправильный пароль'}
       />
     );

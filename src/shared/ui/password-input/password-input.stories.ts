@@ -25,15 +25,17 @@ export const Default: Story = {
     name: 'password',
     label: 'Пароль',
     placeholder: 'Введите пароль',
+    error: false,
   },
 };
 
 export const Error: Story = {
   args: {
-    type: 'text',
-    name: 'firstName',
-    label: 'Имя',
-    placeholder: 'Введите имя',
+    type: 'password',
+    name: 'password',
+    label: 'Пароль',
+    placeholder: 'Введите пароль',
+    // вот тут вот не работает свойство никоим образом, ошибка не появляется
     error: true,
     errorText: 'Вы ввели неправильный пароль',
   },
