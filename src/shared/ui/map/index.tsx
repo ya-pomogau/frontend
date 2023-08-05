@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, memo } from 'react';
 import { Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps';
 
@@ -6,7 +6,7 @@ import { isTaskUrgent } from 'shared/libs/utils';
 import { Mark } from './Mark';
 import type { Task } from 'entities/task/types';
 
-type YandexMapProps = {
+interface YandexMapProps {
   width?: string | number;
   height?: string | number;
   mapSettings?: {
@@ -17,16 +17,16 @@ type YandexMapProps = {
   tasks?: Task[];
   onClick?: () => void;
   coordinates?: [number, number];
-};
+}
 
-const YandexMap = ({
+export const YandexMap: FC<YandexMapProps> = ({
   width = 500,
   height = 500,
   mapSettings = { latitude: 59.93, longitude: 30.31, zoom: 15 },
   onClick,
   tasks,
   coordinates,
-}: YandexMapProps) => (
+}) => (
   <YMaps
     enterprise
     query={{
@@ -65,4 +65,4 @@ const YandexMap = ({
   </YMaps>
 );
 
-export default React.memo(YandexMap);
+export default memo(YandexMap);

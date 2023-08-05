@@ -1,57 +1,66 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { SideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
+import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
+import { Filter } from 'features/filter/ui';
 import { UserInfo } from 'entities/user';
+import { fetchAvailableTasks } from 'entities/task/model';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
+import YandexMap from 'shared/ui/map';
 import { Icon } from 'shared/ui/icons';
-import { Filter } from 'features/filter/ui';
-import { MapWithTasks } from 'widgets/map-with-tasks';
-import { useAppSelector } from 'app/hooks';
-import { VolunteerSideMenu } from 'widgets/side-menu';
+
+import {
+  VolunteerSideMenu,
+  RecipientSideMenu,
+  AdminSideMenu,
+  MasterSideMenu,
+} from 'widgets/side-menu';
 
 import styles from './styles.module.css';
-import { Navigate } from 'react-router-dom';
 
-export function UnauthPage() {
+export function ProfileMapPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
-  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   const buttonFilterRef = useRef<Element>();
 
+  // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
+  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
+
+  // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
   const getButtonPosition = () => {
     const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
-
     if (buttonRect) {
-      setButtonPosition({
-        top: buttonRect.bottom,
-        right: buttonRect.right,
-      });
+      setButtonPosition({ top: buttonRect.bottom, right: buttonRect.right });
     }
   };
 
   const openFilter = (e: MouseEvent) => {
     e.stopPropagation();
-
     if (isFilterVisibel === false) {
       buttonFilterRef.current = e.currentTarget;
       getButtonPosition();
     }
-
     setTimeout(() => setIsFilterVisibel(!isFilterVisibel));
   };
 
+  const dispatch = useAppDispatch();
+
+  const user = useAppSelector((store) => store.user.data);
+  const { role } = useAppSelector((store) => store.user);
+  const { tasks } = useAppSelector((store) => store.tasks);
+
   useEffect(() => {
     window.addEventListener('resize', getButtonPosition);
-
     return () => {
       window.removeEventListener('resize', getButtonPosition);
     };
   }, []);
 
-  const { role } = useAppSelector((state) => state.user);
-  if (role) {
-    return <Navigate to="/profile" replace />;
-  }
+  useEffect(() => {
+    dispatch(fetchAvailableTasks());
+  }, []);
 
   return (
     <PageLayout
@@ -61,7 +70,7 @@ export function UnauthPage() {
             <UserInfo />
           </div>
 
-          <VolunteerSideMenu />
+          <SideMenuForAuthorized />
         </>
       }
       content={
@@ -77,7 +86,6 @@ export function UnauthPage() {
                 }
                 settingText="Карта заявок"
               />
-
               {isFilterVisibel && (
                 <Filter
                   userRole="volunteer"
@@ -88,7 +96,17 @@ export function UnauthPage() {
             </>
           }
         >
-          <MapWithTasks />
+          <YandexMap
+            tasks={tasks}
+            mapSettings={{
+              latitude: user ? user.coordinates[0] : 59.938955,
+              longitude: user ? user.coordinates[1] : 30.315644,
+              zoom: 15,
+            }}
+            width="100%"
+            height="100%"
+            onClick={() => 3}
+          />
         </ContentLayout>
       }
     />

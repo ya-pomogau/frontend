@@ -1,3 +1,10 @@
+// !!!
+
+// НЕ ИСПОЛЬЗОВАТЬ СТРАНИЦУ В РОУТИНГЕ
+// СТРАНИЦА НУЖНА ЧТОБЫ ПЕРЕДЕЛАТЬ КОМПОНЕНТЫ (TaskList, Filter) НА СТРАНИЦЕ profile/active и profile/completed С УЧЕТОМ РОЛЕЙ
+
+// !!!
+
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 
@@ -11,7 +18,7 @@ import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { TaskList } from 'entities/task/ui/task-list';
-import { ButtonContainer } from 'shared/ui/button-container';
+import { SideMenuContainer } from 'entities/side-menu-container';
 import { CardButton } from 'shared/ui/card-button';
 import { Filter } from 'features/filter/ui';
 import { Request } from 'features/create-request';
@@ -61,7 +68,8 @@ export function RecipientPage() {
           <div className={styles.user}>
             <UserInfo />
           </div>
-          <ButtonContainer auth={isAuth}>
+
+          <SideMenuContainer overlayVisible={isAuth}>
             <NavLink to="active" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -92,7 +100,7 @@ export function RecipientPage() {
                 />
               )}
             </NavLink>
-          </ButtonContainer>
+          </SideMenuContainer>
         </>
       }
       content={

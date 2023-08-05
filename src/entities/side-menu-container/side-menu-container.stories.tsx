@@ -1,20 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ButtonContainer, ButtonContainerProps } from '.';
-import { Default as CardButtonStory } from '../card-button/card-button.stories';
-import { CardButton } from '../card-button/index';
+import {
+  SideMenuContainer,
+  SideMenuContainerProps,
+} from './side-menu-container';
+import { Default as CardButtonStory } from '../../shared/ui/card-button/card-button.stories';
+import { CardButton } from '../../shared/ui/card-button/index';
 
-type WrapperProps = ButtonContainerProps;
+type WrapperProps = SideMenuContainerProps;
 
-export function Wrapper({ border, size, auth }: WrapperProps) {
+export function Wrapper({ border, size, overlayVisible }: WrapperProps) {
   return (
-    <ButtonContainer border={border} size={size} auth={auth}>
+    <SideMenuContainer
+      border={border}
+      size={size}
+      overlayVisible={overlayVisible}
+    >
       <CardButton {...CardButtonStory.args} text="Короткий текст" />
       <CardButton
         {...CardButtonStory.args}
         text="На этой кнопке текста больше"
       />
       <CardButton {...CardButtonStory.args} text="Просто текст для кнопки" />
-    </ButtonContainer>
+    </SideMenuContainer>
   );
 }
 const meta: Meta<typeof Wrapper> = {
@@ -23,7 +30,7 @@ const meta: Meta<typeof Wrapper> = {
   tags: ['autodocs'],
   argTypes: {},
   args: {
-    auth: false,
+    overlayVisible: false,
   },
 };
 
@@ -32,12 +39,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Authorized: Story = {
   args: {
-    auth: true,
+    overlayVisible: true,
   },
 };
 
 export const Unauthorized: Story = {
   args: {
-    auth: false,
+    overlayVisible: false,
   },
 };

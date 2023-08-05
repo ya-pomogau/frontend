@@ -31,7 +31,7 @@ export const userModel = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserRole: (state, { payload }: PayloadAction<UserRole>) => {
+    setUserRole: (state, { payload }: PayloadAction<UserRole | null>) => {
       state.role = payload;
     },
   },

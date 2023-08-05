@@ -1,25 +1,25 @@
-import { ReactNode } from 'react';
+import { ReactNode, FC } from 'react';
 import classnames from 'classnames';
 
-import { Icon } from '../icons';
+import { Icon } from 'shared/ui/icons';
 
 import styles from './styles.module.css';
 
-export interface ButtonContainerProps {
+export interface SideMenuContainerProps {
   border?: 'sea' | 'main' | 'mobile';
   size?: 'web' | 'mob';
   children?: ReactNode;
-  auth?: boolean;
+  overlayVisible?: boolean;
   extClassName?: string;
 }
 
-export const ButtonContainer = ({
+export const SideMenuContainer: FC<SideMenuContainerProps> = ({
   border = 'sea',
   size = 'web',
   children,
-  auth,
+  overlayVisible,
   extClassName,
-}: ButtonContainerProps) => (
+}) => (
   <div
     className={classnames(
       styles.button__container,
@@ -30,7 +30,8 @@ export const ButtonContainer = ({
     style={{ border }}
   >
     {children}
-    {!auth && (
+
+    {overlayVisible && (
       <div className={styles.overlay}>
         <Icon color="white" icon="LockIcon" size="196" />
       </div>
