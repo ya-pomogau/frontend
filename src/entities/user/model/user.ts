@@ -27,7 +27,7 @@ export const fetchUserDataByRole = createAsyncThunk(
   }
 );
 
-export const updateUserInfo = createAsyncThunk<UserInfo, UpdateUserInfo>(
+export const updateUserInfo = createAsyncThunk<UserInfo | [], UpdateUserInfo>(
   'user/updateUser',
   async function (body) {
     const response = await api.updateUser(body);
@@ -35,7 +35,7 @@ export const updateUserInfo = createAsyncThunk<UserInfo, UpdateUserInfo>(
   }
 );
 
-export const uploadUserAvatar = createAsyncThunk<UserInfo, FormData>(
+export const uploadUserAvatar = createAsyncThunk<UserInfo | [], FormData>(
   'user/uploadUserAvatar',
   async function (body: FormData) {
     const response = await api.uploadAvatar(body);
@@ -72,7 +72,7 @@ export const userModel = createSlice({
       })
       .addCase(updateUserInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload;
+        // state.data = action.payload;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
         state.isLoading = false;
@@ -85,7 +85,7 @@ export const userModel = createSlice({
       })
       .addCase(uploadUserAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload;
+        // state.data = action.payload;
       })
       .addCase(uploadUserAvatar.rejected, (state, action) => {
         state.isLoading = false;

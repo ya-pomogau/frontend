@@ -85,13 +85,13 @@ export const updateUser = async (body: UpdateUserInfo): Promise<UserInfo> => {
   }
 };
 
-export const uploadAvatar = async (body: FormData): Promise<UserInfo> => {
+export const uploadAvatar = async (body: FormData): Promise<UserInfo | []> => {
   try {
     const res = await fetch(`${API_URL}/users/avatar`, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-      method: 'PATCH',
+      method: 'POST',
       body,
     });
     return await checkResponse(res);

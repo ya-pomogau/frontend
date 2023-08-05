@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import classnames from 'classnames';
 
 import { Avatar } from '../../../shared/ui/avatar';
@@ -17,7 +17,6 @@ interface EditViewerInfoProps {
   avatarLink: string;
   avatarName: string;
   onClickSave: (userData: UpdateUserInfo, formData: FormData) => void;
-  onClickExit: () => void;
   valueName: string;
   valuePhone: string;
   valueAddress: string;
@@ -25,7 +24,8 @@ interface EditViewerInfoProps {
   isPopupOpen: boolean;
   buttonRef: React.RefObject<HTMLElement>;
   isFormEdited: boolean;
-  setIsFormEdited: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFormSaved: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsPopupOpen: (isPopupOpen: boolean) => void;
 }
 
 export const EditViewerInfo = ({
@@ -33,7 +33,6 @@ export const EditViewerInfo = ({
   avatarLink,
   avatarName,
   onClickSave,
-  onClickExit,
   valueName,
   valuePhone,
   valueAddress,
@@ -41,7 +40,8 @@ export const EditViewerInfo = ({
   isPopupOpen,
   buttonRef,
   isFormEdited,
-  setIsFormEdited,
+  setIsFormSaved,
+  setIsPopupOpen,
   ...props
 }: EditViewerInfoProps) => {
   const avatarPicker = useRef<HTMLInputElement>(null);
@@ -60,13 +60,14 @@ export const EditViewerInfo = ({
   const avatarFile = new FormData();
 
   const handleChange = async (event: ViewerInputData) => {
+    setIsFormSaved(false);
+    avatarFile.delete('file');
     const { value, name, files } = event.target;
-    setIsFormEdited(false);
-
     if (files) {
       // Если загружен файл изображения, отрисовываем в компоненте аватара
       setImage(URL.createObjectURL(files[0]));
       avatarFile.append('file', files[0]);
+      setUserData({ ...userData, [name]: value });
     }
     setUserData({ ...userData, [name]: value });
   };
@@ -77,22 +78,33 @@ export const EditViewerInfo = ({
     }
   };
 
-  const onClickExitModal = () => {
+  const handleClosePopup = () => {
     if (!isFormEdited) {
       setUserData(viewerData);
     }
-    onClickExit();
+    setIsPopupOpen(false);
   };
 
   useOutsideClick({
     elementRef: modalRef,
     triggerRef: buttonRef,
-    onOutsideClick: onClickExitModal,
+    onOutsideClick: handleClosePopup,
     enabled: isPopupOpen,
   });
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleEscKeydown);
+    return () => {
+      document.removeEventListener('keydown', handleEscKeydown);
+    };
+  }, [isFormEdited]);
+
+  const handleEscKeydown = (e: { key: string }) => {
+    e.key === 'Escape' && handleClosePopup();
+  };
+
   return (
-    <LightPopup isPopupOpen={isPopupOpen} onClickExit={onClickExitModal}>
+    <LightPopup isPopupOpen={isPopupOpen} onClickExit={handleClosePopup}>
       <div
         ref={modalRef}
         className={classnames(styles.container, extClassName)}
@@ -143,7 +155,7 @@ export const EditViewerInfo = ({
               className={styles.closeIcon}
               size="14"
               color="blue"
-              onClick={onClickExitModal}
+              onClick={handleClosePopup}
             />
           </div>
           <ul className={classnames(styles.infoBlock, 'list')}>

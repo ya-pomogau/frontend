@@ -6,7 +6,7 @@ import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 
 import styles from './styles.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
 import type { UpdateUserInfo } from 'entities/user/types';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
@@ -14,7 +14,7 @@ import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 export const UserInfo = () => {
   const user = useAppSelector((state) => state.user.data);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isFormEdited, setIsFormEdited] = useState(false);
+  const [isFormEdited, setIsFormSaved] = useState(false);
   const dispatch = useAppDispatch();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -23,29 +23,14 @@ export const UserInfo = () => {
     setIsPopupOpen(true);
   };
 
-  const handleCloseViewerSettings = () => {
-    setIsPopupOpen(false);
-  };
-
   const handleSaveViewerSettings = async (
     userData: UpdateUserInfo,
     avatarFile: FormData
   ) => {
-    // dispatch(uploadUserAvatar(avatarFile));
-    // dispatch(updateUserInfo(userData));
-    setIsFormEdited(true);
+    dispatch(uploadUserAvatar(avatarFile));
+    dispatch(updateUserInfo(userData));
+    setIsFormSaved(true);
     setIsPopupOpen(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleEscKeydown);
-    return () => {
-      document.removeEventListener('keydown', handleEscKeydown);
-    };
-  }, []);
-
-  const handleEscKeydown = (e: { key: string }) => {
-    e.key === 'Escape' && handleCloseViewerSettings();
   };
 
   return user ? (
@@ -59,7 +44,6 @@ export const UserInfo = () => {
         avatarLink={user.avatar}
         avatarName={user.avatar}
         onClickSave={handleSaveViewerSettings}
-        onClickExit={handleCloseViewerSettings}
         valueName={user.fullname}
         valuePhone={user.phone}
         valueAddress={user.address}
@@ -67,7 +51,8 @@ export const UserInfo = () => {
         valueId={user.id}
         buttonRef={buttonRef}
         isFormEdited={isFormEdited}
-        setIsFormEdited={setIsFormEdited}
+        setIsFormSaved={setIsFormSaved}
+        setIsPopupOpen={setIsPopupOpen}
       />
 
       <div className={styles.contentWrapper}>
