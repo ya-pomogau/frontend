@@ -5,7 +5,7 @@
   padding: 20px 30px;
   box-sizing: border-box;
   align-items: center;
-  box-shadow: 0px 4px 32px 0px #00000029, 0px 0px 4px 0px #0000000a;
+  box-shadow: 0 4px 32px 0 #00000029, 0 0 4px 0 #0000000a;
   gap: 10px;
 }
 
@@ -25,11 +25,3 @@
     letter-spacing: 0em;
   }
 }
-
-/* @media all and (max-width: 414px) {
-
-  .container {
-    padding: 20px 10px;
-  }
-
-} */
