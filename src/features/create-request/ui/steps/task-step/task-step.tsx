@@ -64,6 +64,14 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               Дело
             </p>
             <div className={styles.headerWrapper} />
+            <Dropdown
+              selected={category}
+              label="Выберите тип задачи"
+              placeholder="Выберите тип задачи"
+              onChange={handleTaskValueChange}
+              items={optionsForSelect}
+              extClassName={styles.select}
+            />
             <TextArea
               value={descriptionForTask}
               label="Опишите задачу"
