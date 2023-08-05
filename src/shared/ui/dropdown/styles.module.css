@@ -63,3 +63,20 @@
 .item:last-child {
   border-bottom: none;
 }
+
+@media (max-width: 735px) {
+  .dropdown {
+    width: 271px;
+  }
+
+  .button {
+    margin-top: 5px;
+  }
+
+  .label {
+    color: var(--colors-interface-primary);
+    position: relative;
+    top: 2px;
+    left: 0;
+  }
+}
