@@ -286,6 +286,30 @@ export function AdminPage() {
                     userId={12}
                     userNumber="+7 (111) 222-22-22"
                   />
+                  <UserCard
+                    role="recipient"
+                    avatarLink="https://i.pravatar.cc/300"
+                    avatarName="Avatar"
+                    userName="Иванов Иван Иванович"
+                    userId={12}
+                    userNumber="+7 (111) 222-22-22"
+                  />
+                  <UserCard
+                    role="recipient"
+                    avatarLink="https://i.pravatar.cc/300"
+                    avatarName="Avatar"
+                    userName="Иванов Иван Иванович"
+                    userId={12}
+                    userNumber="+7 (111) 222-22-22"
+                  />
+                  <UserCard
+                    role="admin"
+                    avatarLink="https://i.pravatar.cc/300"
+                    avatarName="Avatar"
+                    userName="Иванов Иван Иванович"
+                    userId={12}
+                    userNumber="+7 (111) 222-22-22"
+                  />
                 </div>
               </ContentLayout>
             }

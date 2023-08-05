@@ -246,6 +246,7 @@ export const UserCard = ({
               </div>
             </>
           )}
+
           {!isAdminDropdownListClosed && (
             <div className={classnames(styles.admin_dropdown_list_opened_box)}>
               <div
