@@ -178,3 +178,6 @@
   background-color: var(--colors-interface-pink-soft);
   transition: var(--transition-hover);
 }
+.task_date_box {
+  display: flex;
+}

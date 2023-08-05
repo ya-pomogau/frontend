@@ -258,6 +258,7 @@ export function VolunteerPage() {
                 }
               >
                 <YandexMap
+                  isAuthorised={true}
                   tasks={tasks}
                   mapSettings={{
                     latitude: user ? user.coordinates[0] : 59.938955,

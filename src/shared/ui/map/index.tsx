@@ -17,6 +17,7 @@ type YandexMapProps = {
   tasks?: Task[];
   onClick?: () => void;
   coordinates?: [number, number];
+  isAuthorised?: boolean;
 };
 
 const YandexMap = ({
@@ -26,6 +27,7 @@ const YandexMap = ({
   onClick,
   tasks,
   coordinates,
+  isAuthorised,
 }: YandexMapProps) => (
   <YMaps
     enterprise
@@ -58,6 +60,9 @@ const YandexMap = ({
           count={task.category.scope}
           onClick={onClick}
           key={task.id}
+          isAuthorised={isAuthorised}
+          date={new Date(task.date).toLocaleDateString()}
+          time={new Date(task.date).toLocaleTimeString()}
         />
       ))}
       <Mark coordinates={coordinates} />
