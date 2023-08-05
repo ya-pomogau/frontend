@@ -2,18 +2,15 @@
 /* eslint-disable import/no-named-as-default-member */
 import React, { useState } from 'react';
 
-//import styles from './styles.module.css';
-
 import { Icon } from '../icons';
-import { Input, InputProps } from '../input';
+import { Input } from '../input';
 
-interface PasswordInputProps extends InputProps {
+interface PasswordInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   label: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   extClassName?: string;
-  customIcon: React.ReactNode;
-  onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const PasswordInput = React.forwardRef<
@@ -23,13 +20,11 @@ export const PasswordInput = React.forwardRef<
   (
     {
       value,
-      label,
+      label = 'Пароль',
       name,
       onChange,
       extClassName,
-      placeholder = 'Пароль',
-      customIcon,
-      onIconClick,
+      placeholder = 'Введите пароль',
       ...props
     },
     ref

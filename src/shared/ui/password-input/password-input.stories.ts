@@ -11,19 +11,6 @@ const meta = {
   title: 'uikit/FormElements/PasswordInput',
   component: PasswordInput,
   //tags: ['autodocs'],
-  argTypes: {
-    onIconClick: {
-      description: 'Функция, предназначенная для действий по клику на иконку.',
-    },
-    error: {
-      control: 'boolean',
-    },
-    customIcon: {
-      type: 'string',
-      description:
-        'Определяет иконку, которая будет высвечиваться справа в пределах инпута.',
-    },
-  },
 } as Meta<typeof PasswordInput>;
 
 export default meta;
@@ -36,7 +23,6 @@ export const Default: Story = {
     name: 'password',
     label: 'Пароль',
     placeholder: 'Введите пароль',
-    error: false,
   },
 };
 
@@ -46,8 +32,6 @@ export const Error: Story = {
     name: 'password',
     label: 'Пароль',
     placeholder: 'Введите пароль',
-    error: true,
-    errorText: 'Вы ввели неправильный пароль',
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);

@@ -27,7 +27,6 @@ export function LoginPage() {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Авторизация администратора:', login);
   };
 
   return (
@@ -93,7 +92,6 @@ export function LoginPage() {
           }
         >
           <p className={styles.title}>Войти</p>
-
           <div className={styles.info}>
             <Button
               buttonType="primary"
@@ -133,9 +131,6 @@ export function LoginPage() {
                 onChange={(event) => setPassword(event.currentTarget.value)}
                 placeholder="от 6 символов"
                 type="password"
-                customIcon={
-                  <Icon color="blue" icon="PasswordOpenIcon" size="32" />
-                }
               />
               <Button
                 buttonType="primary"
