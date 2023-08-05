@@ -11,6 +11,8 @@
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
+  font-size: 16px;
+  line-height: 19px;
 }
 
 .input_error {
