@@ -72,7 +72,6 @@ export const PasswordInput = React.forwardRef<
             <Icon color="blue" icon="PasswordOpenIcon" size="32" />
           )
         }
-        // пропсы ошибки работают только на уровне Input, но я не вижу смысла их переносить "выше" в рамках логики приложения
         error={error}
         errorText={'Вы ввели неправильный пароль'}
       />

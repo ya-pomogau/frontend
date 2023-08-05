@@ -52,7 +52,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const iconClass = error ? styles.icon_error : styles.icon;
 
     return (
-      <div className={extClassName}>
+      <div className={extClassName} data-testid={'div'}>
         {label && (
           <label className={cn(styles.label, 'text')} htmlFor={id}>
             {label}
@@ -60,6 +60,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         <div className={styles.container}>
           <input
+            data-testid={'input'}
             ref={ref}
             type={type}
             name={name}
