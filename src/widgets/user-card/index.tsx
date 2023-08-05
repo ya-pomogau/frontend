@@ -9,6 +9,9 @@ import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 import { Button } from '../../shared/ui/button';
 import { Input } from '../../shared/ui/input';
 import { ExclamationPointIcon } from '../../shared/ui/icons/exclamation-point-icon';
+import { EditIcon } from 'shared/ui/icons/edit-icon';
+import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
+import Checkbox from 'shared/ui/checkbox';
 
 interface UserCardProps {
   role?: 'volunteer' | 'recipient' | 'admin' | 'master';
@@ -61,6 +64,8 @@ export const UserCard = ({
   },
 }: UserCardProps) => {
   const [recipientInputValue, setRecipientInputValue] = useState('');
+  const [isAdminDropdownListClosed, setAdminDropdownListClosed] =
+    useState(true);
 
   const { approved, checked, scores, keys } = volunteerInfo;
 
@@ -77,7 +82,13 @@ export const UserCard = ({
   const isKeysNullOrOne = keys ? 1 : null;
 
   return (
-    <div className={classnames(styles.content, extClassName)}>
+    <div
+      className={classnames(
+        styles.content,
+        extClassName,
+        role === 'admin' && styles.admin_content
+      )}
+    >
       <Avatar
         extClassName={styles.avatar}
         avatarName={avatarName}
@@ -186,6 +197,7 @@ export const UserCard = ({
       {role === 'admin' && (
         <div className={classnames(styles.buttons_div)}>
           <Input
+            className={classnames(styles.admin_login_input)}
             label="Логин"
             name="login"
             onChange={(e) => {
@@ -195,21 +207,70 @@ export const UserCard = ({
             placeholder="Логин"
             type="text"
           />
-          <Input
-            label="Пароль"
-            name="password"
-            onChange={(e) => {
-              console.log(e);
-            }}
-            value={'Пароль'}
-            placeholder="Пароль"
-            type="text"
-          />
-          <Button
-            buttonType="primary"
-            label="Сохранить"
-            onClick={() => console.log('"Сохранить" button pressed')}
-          />
+          <div className={classnames(styles.admin_password_box)}>
+            <Input
+              className={classnames(styles.admin_password_input)}
+              label="Пароль"
+              name="password"
+              onChange={(e) => {
+                console.log(e);
+              }}
+              value={'Пароль'}
+              placeholder="Пароль"
+              type="password"
+            />
+            <EditIcon
+              className={classnames(styles.admin_edit_icon)}
+              color={'blue'}
+            ></EditIcon>{' '}
+          </div>
+
+          {isAdminDropdownListClosed && (
+            <>
+              <div className={classnames(styles.admin_save_btn)}>
+                <Button
+                  buttonType="primary"
+                  label="Сохранить"
+                  onClick={() => console.log('"Сохранить" button pressed')}
+                />
+              </div>
+              <div
+                className={classnames(styles.admin_dropdown_list_closed_box)}
+              >
+                <div
+                  className={classnames(styles.admin_arrow_down)}
+                  onClick={() => setAdminDropdownListClosed(false)}
+                >
+                  <ArrowDownIcon color={'blue'} />
+                </div>
+              </div>
+            </>
+          )}
+          {!isAdminDropdownListClosed && (
+            <div className={classnames(styles.admin_dropdown_list_opened_box)}>
+              <div
+                className={classnames(styles.admin_arrow_up)}
+                onClick={() => setAdminDropdownListClosed(true)}
+              >
+                <ArrowDownIcon color={'blue'} />
+              </div>{' '}
+              <div className={classnames(styles.admin_checkboxes)}>
+                <Checkbox label={'Подтверждать аккаунты'} />
+                <Checkbox label={'Создавать заявки'} />
+                <Checkbox label={'Раздавать ключи'} />
+                <Checkbox label={'Решать споры'} />
+                <Checkbox label={'Контент блог'} />
+                <Checkbox label={'Повышение балов'} />
+              </div>
+              <div className={classnames(styles.admin_block_btn)}>
+                <Button
+                  buttonType="secondary"
+                  label="Заблокировать"
+                  onClick={() => console.log('"Заблокировать" button pressed')}
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
 

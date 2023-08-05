@@ -141,6 +141,19 @@ export const RecipientUserCardSecond: Story = {
   },
 };
 
+export const AdminUserCardFirst: Story = {
+  args: {
+    role: 'admin',
+    avatarName: 'Recipient Avatar',
+    userName: 'Иванов Иван Иванович',
+    userId: 67890,
+    userNumber: '+1 (987) 654-3210',
+    volunteerInfo: {
+      approved: true,
+    },
+  },
+};
+
 export const ExampleButtons: Story = {
   args: {
     ...Example.args,
