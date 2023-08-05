@@ -46,7 +46,7 @@ const getButtonTypeFromScore = (
 export const UserCard = ({
   role,
   extClassName,
-  avatarLink = 'https://i.pravatar.cc/300',
+  avatarLink,
   avatarName,
   userName,
   userId,
