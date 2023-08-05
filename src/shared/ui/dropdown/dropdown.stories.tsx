@@ -8,20 +8,20 @@ const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
   tags: ['autodocs'],
   argTypes: {
-    onChange: {
-      description: 'Обработчик события выбора нужного варианта меню',
-    },
     placeholder: {
       description: 'Плэйсхолдер',
     },
     items: {
       description: 'Возножные варианты',
     },
-    label: {
-      description: 'Лэйбл над текстом',
-    },
     selected: {
       description: 'Объект выбранного значения',
+    },
+    onChange: {
+      description: 'Обработчик события выбора нужного варианта меню',
+    },
+    label: {
+      description: 'Лэйбл над текстом',
     },
   },
 };
@@ -38,16 +38,16 @@ const DropDownWithHooks = () => {
       placeholder={'Выберите город'}
       items={[
         {
-          id: 1,
-          title: 'Москва',
+          value: '1',
+          label: 'Москва',
         },
         {
-          id: 2,
-          title: 'Санкт-Петербург',
+          value: '2',
+          label: 'Санкт-Петербург',
         },
         {
-          id: 3,
-          title: 'Екатеринбург',
+          value: '3',
+          label: 'Екатеринбург',
         },
       ]}
       onChange={setSelected}

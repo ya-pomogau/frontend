@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 import { CheckIcon } from '../icons/check-icon';
 import { ArrowDownIcon } from '../icons/arrow-down-icon';
 
-export type Option = { id: number; title: string };
+export type Option = { value: string; label: string };
 
 interface IDropdownProps {
   placeholder: string;
@@ -13,6 +13,7 @@ interface IDropdownProps {
   label?: string;
   selected: Option | undefined;
   onChange: (item: Option) => void;
+  extClassName?: string;
 }
 
 const Dropdown = ({
@@ -21,12 +22,15 @@ const Dropdown = ({
   selected,
   onChange,
   label,
+  extClassName,
 }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className={styles.dropdown}>
-      <div className={classNames('text', styles.label)}>{label}</div>
+    <div className={classNames(styles.dropdown, extClassName)}>
+      <div className={classNames('text', 'text_size_middle', styles.label)}>
+        {label}
+      </div>
       <div
         className={classNames(
           `text`,
@@ -39,7 +43,7 @@ const Dropdown = ({
       >
         {!isActive && (
           <>
-            {selected?.title || placeholder}
+            {selected?.label || placeholder}
             {selected && <ArrowDownIcon color={'white'} />}
           </>
         )}
@@ -49,14 +53,14 @@ const Dropdown = ({
           {items.map((item) => (
             <li
               className={styles.item}
-              key={item.id}
+              key={item.value}
               onClick={() => {
                 onChange(item);
                 setIsActive(false);
               }}
             >
-              {item.title}
-              {selected?.id === item.id && <CheckIcon color={'blue'} />}
+              {item.label}
+              {selected?.value === item.value && <CheckIcon color={'blue'} />}
             </li>
           ))}
         </ul>
