@@ -36,7 +36,7 @@
 }
 
 .field {
-  width: 364px;
+  min-width: 364px;
 }
 
 @media all and (max-width: 415px) {
@@ -65,5 +65,9 @@
 
   .button {
     margin-top: 12px;
+  }
+
+  .field {
+    min-width: 98%;
   }
 }

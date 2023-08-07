@@ -1,6 +1,5 @@
 .smartHeader__container {
-  /* width: 100%; */
-  min-width: 384px;
+  min-width: 98%;
   border: 2px solid var(--colors-interface-primary);
   display: flex;
   justify-content: space-between;

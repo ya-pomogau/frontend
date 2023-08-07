@@ -7,7 +7,7 @@
 }
 
 .form {
-  width: 364px;
+  min-width: 364px;
   display: grid;
   gap: 24px;
   padding-left: 18px;

@@ -16,19 +16,32 @@ import styles from './styles.module.css';
 import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
 
-export function LoginPage() {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkState, setCheckState] = useState(false);
+interface ILoginForm {
+  login: string;
+  password: string;
+}
 
-  const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckState(!checkState);
+export function LoginPage() {
+  const [checkAdminState, setAdminCheckState] = useState(false);
+  const [inputError, setInputError] = useState(false);
+
+  const [inputFields, setInputFields] = useState<ILoginForm>({
+    login: '',
+    password: '',
+  });
+
+  const handleAdminCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminCheckState(!checkAdminState);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log('Отправка');
   };
-
   return (
     <PageLayout
       side={
@@ -103,32 +116,31 @@ export function LoginPage() {
             <Checkbox
               label="Войти как администратор"
               id={'adminLogin'}
-              onChange={handleCheck}
+              onChange={handleAdminCheck}
               extClassName={styles.label}
             />
           </div>
-          {checkState && (
+          {checkAdminState && (
             <form className={styles.form} onSubmit={onSubmit}>
               <Input
                 extClassName={styles.field}
                 required
                 label="Логин"
                 name="login"
-                value={login}
-                onChange={(event) => setLogin(event.currentTarget.value)}
+                value={inputFields.login}
+                onChange={handleChange}
                 placeholder="ФИО / Телефон / Логин"
                 type="text"
-                error={false}
+                error={inputError}
                 errorText={'Вы ввели неправильный логин'}
               />
-
               <PasswordInput
                 extClassName={styles.field}
                 required
                 label={'Пароль'}
                 name="password"
-                value={password}
-                onChange={(event) => setPassword(event.currentTarget.value)}
+                value={inputFields.password}
+                onChange={handleChange}
                 placeholder="от 6 символов"
                 type="password"
               />
@@ -138,7 +150,11 @@ export function LoginPage() {
                 label="Войти"
                 size="medium"
                 extClassName={styles.button}
-                disabled={!login || !password}
+                disabled={
+                  !inputFields.login ||
+                  !inputFields.password ||
+                  inputFields.password.length < 6
+                }
               />
             </form>
           )}

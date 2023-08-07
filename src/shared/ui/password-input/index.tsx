@@ -68,7 +68,11 @@ export const PasswordInput = React.forwardRef<
           )
         }
         error={error}
-        errorText={'Вы ввели неправильный пароль'}
+        errorText={
+          value.length < 6
+            ? 'Пароль должен состоять минимум из 6 символов'
+            : 'Вы ввели неправильный пароль'
+        }
       />
     );
   }
