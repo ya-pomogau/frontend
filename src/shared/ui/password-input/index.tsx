@@ -34,7 +34,7 @@ export const PasswordInput = React.forwardRef<
 
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const validateField = (value: string) => {
-      setError(value.length < 6);
+      setError(value.length < 2);
     };
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -51,6 +51,7 @@ export const PasswordInput = React.forwardRef<
 
     return (
       <Input
+        required
         onBlur={onBlur}
         type={visible ? 'text' : 'password'}
         value={value}
@@ -68,9 +69,7 @@ export const PasswordInput = React.forwardRef<
           )
         }
         error={error}
-        errorText={
-          'Поле не может быть пустым или пароль не может быть таким коротким'
-        }
+        errorText={'Пароль не может быть таким коротким'}
       />
     );
   }
