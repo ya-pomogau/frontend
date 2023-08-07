@@ -23,9 +23,13 @@ interface EditViewerInfoProps {
   valueId: number;
   isPopupOpen: boolean;
   buttonRef: React.RefObject<HTMLElement>;
-  isFormEdited: boolean;
+  isFormSaved: boolean;
   setIsFormSaved: React.Dispatch<React.SetStateAction<boolean>>;
   setIsPopupOpen: (isPopupOpen: boolean) => void;
+  isFormEdited: boolean;
+  setIsFormEdited: (isFormEdited: boolean) => void;
+  image: string;
+  setImage: (image: string) => void;
 }
 
 export const EditViewerInfo = ({
@@ -39,9 +43,13 @@ export const EditViewerInfo = ({
   valueId,
   isPopupOpen,
   buttonRef,
-  isFormEdited,
+  isFormSaved,
   setIsFormSaved,
   setIsPopupOpen,
+  isFormEdited,
+  setIsFormEdited,
+  image,
+  setImage,
   ...props
 }: EditViewerInfoProps) => {
   const avatarPicker = useRef<HTMLInputElement>(null);
@@ -56,10 +64,10 @@ export const EditViewerInfo = ({
   };
 
   const [userData, setUserData] = useState(viewerData);
-  const [image, setImage] = useState<string>('');
   const avatarFile = new FormData();
 
   const handleChange = async (event: ViewerInputData) => {
+    setIsFormEdited(true);
     setIsFormSaved(false);
     avatarFile.delete('file');
     const { value, name, files } = event.target;
@@ -79,9 +87,11 @@ export const EditViewerInfo = ({
   };
 
   const handleClosePopup = () => {
-    if (!isFormEdited) {
+    if (!isFormSaved) {
       setUserData(viewerData);
     }
+    setImage('');
+    setIsFormEdited(false);
     setIsPopupOpen(false);
   };
 
@@ -97,7 +107,7 @@ export const EditViewerInfo = ({
     return () => {
       document.removeEventListener('keydown', handleEscKeydown);
     };
-  }, [isFormEdited]);
+  }, [isFormSaved]);
 
   const handleEscKeydown = (e: { key: string }) => {
     e.key === 'Escape' && handleClosePopup();
@@ -112,14 +122,14 @@ export const EditViewerInfo = ({
         <div className={styles.containerInfo}>
           <div className={styles.headerElements}>
             <div className={styles.avatarBlock}>
-              {avatarLink && !userData.avatar && (
+              {avatarLink && !image && (
                 <Avatar
                   extClassName={styles.avatar}
                   avatarLink={avatarLink}
                   avatarName={avatarName}
                 />
               )}
-              {userData.avatar && (
+              {image && (
                 <Avatar
                   extClassName={styles.avatar}
                   avatarLink={image}

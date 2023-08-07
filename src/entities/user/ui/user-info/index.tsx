@@ -14,7 +14,10 @@ import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 export const UserInfo = () => {
   const user = useAppSelector((state) => state.user.data);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [isFormEdited, setIsFormSaved] = useState(false);
+  const [isFormSaved, setIsFormSaved] = useState(false);
+  const [isFormEdited, setIsFormEdited] = useState(false);
+  const [image, setImage] = useState<string>('');
+
   const dispatch = useAppDispatch();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -27,9 +30,20 @@ export const UserInfo = () => {
     userData: UpdateUserInfo,
     avatarFile: FormData
   ) => {
-    dispatch(uploadUserAvatar(avatarFile));
-    dispatch(updateUserInfo(userData));
+    if (isFormEdited) {
+      if (image) {
+        dispatch(uploadUserAvatar(avatarFile));
+      }
+      if (
+        user?.fullname !== userData.fullname ||
+        user?.phone !== userData.phone ||
+        user?.address !== userData.address
+      )
+        dispatch(updateUserInfo(userData));
+    }
     setIsFormSaved(true);
+    setIsFormEdited(false);
+    setImage('');
     setIsPopupOpen(false);
   };
 
@@ -50,9 +64,13 @@ export const UserInfo = () => {
         isPopupOpen={isPopupOpen}
         valueId={user.id}
         buttonRef={buttonRef}
-        isFormEdited={isFormEdited}
+        isFormSaved={isFormSaved}
         setIsFormSaved={setIsFormSaved}
         setIsPopupOpen={setIsPopupOpen}
+        isFormEdited={isFormEdited}
+        setIsFormEdited={setIsFormEdited}
+        image={image}
+        setImage={setImage}
       />
 
       <div className={styles.contentWrapper}>
