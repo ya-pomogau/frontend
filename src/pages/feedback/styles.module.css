@@ -1,0 +1,50 @@
+.button_container {
+  height: auto;
+  margin-top: 90px;
+}
+
+.header {
+  height: 90px;
+}
+
+.container {
+  margin: 10px 0 30px 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid;
+  border-image-source: var(--colors-interface-line);
+  border-image-slice: 1;
+}
+
+.title {
+  color: var(--colors-interface-primary-additional);
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--colors-interface-primary);
+}
+
+.form {
+  max-width: 600px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.input {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.text_area {
+  margin-bottom: 20px;
+  height: 122px;
+  width: 100%;
+}
+
+.button {
+  width: 94px;
+}
