@@ -6,7 +6,6 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { ButtonContainer } from 'shared/ui/button-container';
 import { CardButton } from 'shared/ui/card-button';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
@@ -15,6 +14,7 @@ import { VkIcon } from 'shared/ui/icons/vk-icon';
 import styles from './styles.module.css';
 import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
+import { SideMenuContainer } from 'entities/side-menu-container';
 
 interface ILoginForm {
   login: string;
@@ -49,7 +49,7 @@ export function LoginPage() {
           <div className={styles.viewer}>
             <UserInfo />
           </div>
-          <ButtonContainer>
+          <SideMenuContainer>
             <NavLink to="map" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -91,7 +91,7 @@ export function LoginPage() {
                 />
               )}
             </NavLink>
-          </ButtonContainer>
+          </SideMenuContainer>
         </>
       }
       content={

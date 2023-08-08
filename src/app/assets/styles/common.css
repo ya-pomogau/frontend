@@ -66,6 +66,11 @@ body {
   line-height: 14px;
 }
 
+.text_size_middle {
+  font-size: 14px;
+  line-height: 18px;
+}
+
 .text_size_medium {
   font-size: 16px;
   line-height: 19px;
