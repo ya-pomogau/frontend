@@ -107,25 +107,25 @@ export const router = createBrowserRouter(
             />
           }
         >
-          <Route path="/requests" element={<RequestsPage />} />
+          <Route path="/profile/requests" element={<RequestsPage />} />
           <Route
-            path="/requests/volunteers"
+            path="/profile/requests/volunteers"
             element={<RequestsVolunteersPage />}
           />
 
           <Route
-            path="/requests/recipients"
+            path="/profile/requests/recipients"
             element={<RequestsRecipientsPage />}
           />
 
           <Route
-            path="/requests/notprocessed"
+            path="/profile/requests/notprocessed"
             element={<RequestsNotprocessedPage />}
           />
 
-          <Route path="/statistics" element={<StatisticsPage />} />
+          <Route path="/profile/statistics" element={<StatisticsPage />} />
 
-          <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/profile/tasks" element={<TasksPage />} />
         </Route>
 
         <Route
@@ -137,7 +137,10 @@ export const router = createBrowserRouter(
             />
           }
         >
-          <Route path="/requests/admins" element={<RequestsAdminsPage />} />
+          <Route
+            path="/profile/requests/admins"
+            element={<RequestsAdminsPage />}
+          />
         </Route>
       </Route>
 

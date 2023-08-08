@@ -13,11 +13,11 @@ export function ProfilePage() {
   }
 
   if (role === 'admin') {
-    return <Navigate to="/requests" replace />;
+    return <Navigate to="/profile/requests" replace />;
   }
 
   if (role === 'master') {
-    return <Navigate to="/requests" replace />;
+    return <Navigate to="/profile/requests" replace />;
   }
 
   return <Navigate to="/" replace />;

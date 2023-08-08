@@ -6,7 +6,8 @@ import {
   SideMenuContainerProps,
 } from 'entities/side-menu-container';
 
-interface SideMenuProps extends SideMenuContainerProps {
+interface SideMenuProps
+  extends Omit<SideMenuContainerProps, 'overlayVisible' | 'children'> {
   authRequired?: boolean;
   links: ReactElement;
 }

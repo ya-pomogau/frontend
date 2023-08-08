@@ -8,10 +8,16 @@ export const PageSubMenuMaster: FC = () => {
     <PageSubMenu
       links={
         <>
-          <PageSubMenuLink to="/requests/volunteers" text="Волонтеры" />
-          <PageSubMenuLink to="/requests/recipients" text="Реципиенты" />
-          <PageSubMenuLink to="/requests/notprocessed" text="Не обработанные" />
-          <PageSubMenuLink to="/requests/admins" text="Админы" />
+          <PageSubMenuLink to="/profile/requests/volunteers" text="Волонтеры" />
+          <PageSubMenuLink
+            to="/profile/requests/recipients"
+            text="Реципиенты"
+          />
+          <PageSubMenuLink
+            to="/profile/requests/notprocessed"
+            text="Не обработанные"
+          />
+          <PageSubMenuLink to="/profile/requests/admins" text="Админы" />
         </>
       }
     />

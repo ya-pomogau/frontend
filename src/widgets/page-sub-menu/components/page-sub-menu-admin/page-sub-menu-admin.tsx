@@ -9,16 +9,19 @@ export const PageSubMenuAdmin: FC = () => {
       links={
         <>
           <PageSubMenuLink
-            to="/requests/volunteers"
+            to="/profile/requests/volunteers"
             text="Волонтеры"
             notifications={50}
           />
           <PageSubMenuLink
-            to="/requests/recipients"
+            to="/profile/requests/recipients"
             text="Реципиенты"
             notifications={1}
           />
-          <PageSubMenuLink to="/requests/notprocessed" text="Не обработанные" />
+          <PageSubMenuLink
+            to="/profile/requests/notprocessed"
+            text="Не обработанные"
+          />
         </>
       }
     />

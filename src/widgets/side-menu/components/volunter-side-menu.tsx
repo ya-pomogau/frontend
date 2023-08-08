@@ -10,7 +10,7 @@ export const VolunteerSideMenu: FC = () => {
 
   return (
     <SideMenu
-      overlayVisible={!role}
+      authRequired
       links={
         <>
           <SideMenuLink

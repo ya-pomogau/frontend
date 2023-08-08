@@ -1,16 +1,13 @@
 import { FC } from 'react';
 
-import { useAppSelector } from 'app/hooks';
 import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Icon } from 'shared/ui/icons';
 
 export const RecipientSideMenu: FC = () => {
-  const { role } = useAppSelector((state) => state.user);
-
   return (
     <SideMenu
-      overlayVisible={!role}
+      authRequired
       links={
         <>
           <SideMenuLink
