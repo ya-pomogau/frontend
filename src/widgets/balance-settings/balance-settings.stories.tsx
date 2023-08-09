@@ -2,15 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BalanceSettings } from '.';
 
 const meta: Meta<typeof BalanceSettings> = {
-  title: 'uikit/BalanceSettings',
+  title: 'widgets/BalanceSettings',
   component: BalanceSettings,
   tags: ['autodocs'],
-  argTypes: {
-    settingText: {
-      description:
-        'Спасибо за регистрацию. Как только администратор подтвердит Вашу учетную запись, Вы сможете откликаться на заявки.',
-    },
-  },
+  // argTypes: {
+  //   settingText: {
+  //     description:
+  //       'Спасибо за регистрацию. Как только администратор подтвердит Вашу учетную запись, Вы сможете откликаться на заявки.',
+  //   },
+  // },
 };
 
 export default meta;
