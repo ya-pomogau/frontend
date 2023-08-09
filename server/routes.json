@@ -1,5 +1,6 @@
 {
     "/users/:id/": "/users/:id",
+    "/users/avatar":"/usersAvatar",
     "/tasks/active": "/tasksActive",
     "/tasks/completed": "/tasksCompleted",
     "/tasks/available": "/tasksAvailable",

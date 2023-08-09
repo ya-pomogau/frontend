@@ -1,25 +1,19 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { fetchAvailableTasks } from 'entities/task/model';
 import { UserInfo } from 'entities/user';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
-import YandexMap from 'shared/ui/map';
 import { Icon } from 'shared/ui/icons';
-import { ButtonContainer } from 'shared/ui/button-container';
-import { CardButton } from 'shared/ui/card-button';
 import { Filter } from 'features/filter/ui';
+import { MapWithTasks } from 'widgets/map-with-tasks';
+import { useAppSelector } from 'app/hooks';
+import { VolunteerSideMenu } from 'widgets/side-menu';
 
 import styles from './styles.module.css';
+import { Navigate } from 'react-router-dom';
 
 export function UnauthPage() {
-  const { tasks } = useAppSelector((store) => store.tasks);
-
-  const dispatch = useAppDispatch();
-
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   const buttonFilterRef = useRef<Element>();
@@ -54,9 +48,10 @@ export function UnauthPage() {
     };
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchAvailableTasks());
-  }, []);
+  const { role } = useAppSelector((state) => state.user);
+  if (role) {
+    return <Navigate to="/profile" replace />;
+  }
 
   return (
     <PageLayout
@@ -65,49 +60,8 @@ export function UnauthPage() {
           <div className={styles.user}>
             <UserInfo />
           </div>
-          <ButtonContainer>
-            <NavLink to="map" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon color="white" icon="MapApplicationIcon" size="54" />
-                  }
-                  text="Карта заявок"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
-            <NavLink to="active" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon
-                      color="white"
-                      icon="ActiveApplicationIcon"
-                      size="54"
-                    />
-                  }
-                  text="Активные заяки"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
-            <NavLink to="completed" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon
-                      color="white"
-                      icon="CompletedApplicationIcon"
-                      size="54"
-                    />
-                  }
-                  text="Завершенные заявки"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
-          </ButtonContainer>
+
+          <VolunteerSideMenu />
         </>
       }
       content={
@@ -134,12 +88,7 @@ export function UnauthPage() {
             </>
           }
         >
-          <YandexMap
-            tasks={tasks}
-            width="100%"
-            height="100%"
-            onClick={() => 3}
-          />
+          <MapWithTasks />
         </ContentLayout>
       }
     />
