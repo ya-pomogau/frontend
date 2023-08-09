@@ -59,16 +59,15 @@
 }
 
 .save_btn span {
-  display: inline-block; 
-  width: 100%; 
-  text-align: center; 
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 
 @media all and (max-width: 1200px) {
   .container {
     width: 414px;
   }
-
 
   .balances_box {
     display: grid;

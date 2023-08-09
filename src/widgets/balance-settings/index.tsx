@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import styles from './styles.module.css';
-import { SettingsIcon } from 'shared/ui/icons/settings-icon';
 import { ChangeEvent } from 'react';
 import { Button } from 'shared/ui/button';
 import BalanceSettingsItem from './components/balance-settings-item';
