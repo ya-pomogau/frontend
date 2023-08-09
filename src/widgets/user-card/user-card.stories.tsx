@@ -3,7 +3,7 @@ import { UserCard } from '.';
 import { SettingsButton } from '../../shared/ui/transforming-buttons/settings-button';
 
 const meta: Meta<typeof UserCard> = {
-  title: 'uikit/UserCard',
+  title: 'widjets/UserCard',
   component: UserCard,
   tags: ['autodocs'],
 
