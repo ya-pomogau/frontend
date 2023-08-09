@@ -1,19 +1,14 @@
 import { FormEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-
 import { UserInfo } from 'entities/user';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { SideMenuContainer } from 'entities/side-menu-container';
-import { CardButton } from 'shared/ui/card-button';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { VkIcon } from 'shared/ui/icons/vk-icon';
 
-import { SideMenu } from 'widgets/side-menu';
-import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
+import { VolunteerSideMenu } from 'widgets/side-menu';
 
 import styles from './styles.module.css';
 
@@ -31,45 +26,11 @@ export function RegisterPage() {
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
+          <div className={styles.user}>
             <UserInfo />
           </div>
 
-          <SideMenu
-            links={
-              <>
-                <SideMenuLink
-                  to="/profile/map"
-                  text="Карта заявок"
-                  icon={
-                    <Icon color="white" icon="MapApplicationIcon" size="54" />
-                  }
-                />
-                <SideMenuLink
-                  to="/profile/active"
-                  text="Активные заяки"
-                  icon={
-                    <Icon
-                      color="white"
-                      icon="ActiveApplicationIcon"
-                      size="54"
-                    />
-                  }
-                />
-                <SideMenuLink
-                  to="/profile/completed"
-                  text="Завершенные заявки"
-                  icon={
-                    <Icon
-                      color="white"
-                      icon="CompletedApplicationIcon"
-                      size="54"
-                    />
-                  }
-                />
-              </>
-            }
-          />
+          <VolunteerSideMenu />
         </>
       }
       content={

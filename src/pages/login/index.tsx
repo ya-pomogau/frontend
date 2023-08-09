@@ -6,15 +6,13 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { CardButton } from 'shared/ui/card-button';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { VkIcon } from 'shared/ui/icons/vk-icon';
-
 import styles from './styles.module.css';
 import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
-import { SideMenuContainer } from 'entities/side-menu-container';
+import { VolunteerSideMenu } from 'widgets/side-menu';
 
 interface ILoginForm {
   login: string;
@@ -42,56 +40,16 @@ export function LoginPage() {
     event.preventDefault();
     console.log('Отправка');
   };
+
   return (
     <PageLayout
       side={
         <>
-          <div className={styles.viewer}>
+          <div className={styles.user}>
             <UserInfo />
           </div>
-          <SideMenuContainer>
-            <NavLink to="map" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon color="white" icon="MapApplicationIcon" size="54" />
-                  }
-                  text="Карта заявок"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
-            <NavLink to="active" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon
-                      color="white"
-                      icon="ActiveApplicationIcon"
-                      size="54"
-                    />
-                  }
-                  text="Активные заяки"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
-            <NavLink to="completed" className="link">
-              {({ isActive }) => (
-                <CardButton
-                  customIcon={
-                    <Icon
-                      color="white"
-                      icon="CompletedApplicationIcon"
-                      size="54"
-                    />
-                  }
-                  text="Завершенные заявки"
-                  isActive={isActive}
-                />
-              )}
-            </NavLink>
-          </SideMenuContainer>
+
+          <VolunteerSideMenu />
         </>
       }
       content={
