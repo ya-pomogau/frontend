@@ -7,18 +7,6 @@
   background-origin: border-box;
 }
 
-.header_box {
-  border: 2px solid #0071bc;
-  width: 940px;
-  height: 89px;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  align-items: center;
-  padding-left: 25px;
-  background-origin: border-box;
-}
-
 .balances_box {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -45,16 +33,6 @@
   font-weight: 400;
   line-height: 22px;
 }
-/* 
-.balance_input_box {
-  width: 41px;
-  height: 34px;
-  border: 0.5px solid #9798c9;
-  text-align: center;
-  margin-right: 10px;
-  margin-left: 10px;
-} */
-
 .balance_input {
   outline: none;
   border: none;
@@ -86,15 +64,11 @@
   text-align: center; 
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: 1200px) {
   .container {
     width: 414px;
   }
 
-  .header_box {
-    width: 414px;
-    font-size: 16px;
-  }
 
   .balances_box {
     display: grid;

@@ -18,8 +18,4 @@ type Story = StoryObj<typeof meta>;
 
 export const Filled: Story = {
   name: 'Balance Settings - Filled',
-  args: {
-    settingText:
-      'Спасибо за регистрацию. Как только администратор подтвердит Вашу учетную запись, Вы сможете откликаться на заявки.',
-  },
 };

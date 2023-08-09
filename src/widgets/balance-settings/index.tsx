@@ -7,27 +7,11 @@ import BalanceSettingsItem from './components/balance-settings-item';
 
 interface BalanceSettingsProps {
   extClassName?: string;
-  settingText: string;
 }
 
 export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   return (
     <div className={classnames(styles.container, extClassName)}>
-      <div className={classnames(styles.header_box)}>
-        <SettingsIcon color={'blue'} size="46" />
-        <p
-          className={classnames(
-            styles.headerText,
-            'text',
-            'text_size_large',
-            'm-0',
-            'p-0'
-          )}
-        >
-          Настройка балов
-        </p>
-      </div>
-
       <div className={classnames(styles.balances_box)}>
         <BalanceSettingsItem
           title="Перевозка в личном транспорте"
