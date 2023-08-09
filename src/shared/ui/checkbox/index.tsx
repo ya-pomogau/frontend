@@ -32,12 +32,7 @@ const Checkbox = ({
     />
     <label
       htmlFor={id}
-      className={classnames(
-        'text',
-        'text_type_regular',
-        'text_size_small',
-        extClassName
-      )}
+      className={classnames('text', 'text_type_regular', extClassName)}
     >
       <div className={styles.checkboxIconWrapper}>
         <span className={styles.checkboxIcon}>
