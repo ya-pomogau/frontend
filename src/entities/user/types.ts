@@ -39,3 +39,11 @@ export type UserInfo = {
   scores?: number;
   permissions?: Array<PermissionType> | null;
 };
+
+export type UpdateUserInfo = {
+  fullname: string;
+  phone: string;
+  address: string;
+  avatar: null | FormData;
+  id: number;
+};
