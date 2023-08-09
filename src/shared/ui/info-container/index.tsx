@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { LegacyRef, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { useAppSelector } from 'app/hooks';
@@ -14,6 +14,7 @@ interface InfoContainerProps {
   avatar?: string;
   name: string;
   onClickSettingsButton?: () => void;
+  buttonRef?: LegacyRef<HTMLButtonElement>;
 }
 
 export const InfoContainer = ({
@@ -22,6 +23,7 @@ export const InfoContainer = ({
   avatar,
   name,
   onClickSettingsButton,
+  buttonRef,
 }: InfoContainerProps) => {
   const isAuth = !!useAppSelector((store) => store.user.role);
 
@@ -47,6 +49,7 @@ export const InfoContainer = ({
           extClassName={styles['info-container-settings-button']}
           onClick={onClickSettingsButton}
           disabled={!isAuth}
+          buttonRef={buttonRef}
         />
       )}
     </div>

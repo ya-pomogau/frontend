@@ -15,7 +15,7 @@ export const VolunteerFilter = ({ filter, onChange }: VolunteerFilterProps) => {
   // определяем текущий вариант профиля волонтёра по пути в URL
   const pathnameAsArray = useLocation().pathname.slice(1).split('/');
   const currentModeOfProfile =
-    pathnameAsArray[pathnameAsArray.indexOf('volunteer') + 1];
+    pathnameAsArray[pathnameAsArray.indexOf('profile') + 1];
 
   let currentModeOfFilter: JSX.Element;
   switch (currentModeOfProfile) {

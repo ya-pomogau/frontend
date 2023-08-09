@@ -1,6 +1,6 @@
 import { API_URL } from 'config/api-config';
 
-import type { UserInfo } from 'entities/user/types';
+import type { UpdateUserInfo, UserInfo } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
 
 const checkResponse = <T>(res: Response): Promise<T> =>
@@ -64,6 +64,38 @@ export const getAllCategories = async (): Promise<
     return await checkResponse(res);
   } catch (err) {
     // TODO Exception handling
+    throw new Error('API exception');
+  }
+};
+
+export const updateUser = async (body: UpdateUserInfo): Promise<UserInfo> => {
+  try {
+    const res = await fetch(`${API_URL}/users/${body.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        fullname: body.fullname,
+        phone: body.phone,
+        address: body.address,
+      }),
+    });
+    return await checkResponse(res);
+  } catch (err) {
+    // TODO Exception handling
+    throw new Error('API exception');
+  }
+};
+
+export const uploadAvatar = async (body: FormData): Promise<UserInfo | []> => {
+  try {
+    const res = await fetch(`${API_URL}/users/avatar`, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      method: 'POST',
+      body,
+    });
+    return await checkResponse(res);
+  } catch (err) {
     throw new Error('API exception');
   }
 };

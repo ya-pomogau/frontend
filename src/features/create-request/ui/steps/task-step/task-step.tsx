@@ -9,10 +9,10 @@ import {
   setCategory,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
-import { Select } from 'shared/ui/select';
 import { TextArea } from 'shared/ui/text-area';
 
 import styles from './task-step.module.css';
+import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 interface ITaskStepProps {
   isMobile?: boolean;
@@ -30,13 +30,8 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   }));
   console.log(category);
 
-  const handleTaskValueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(
-      setCategory({
-        value: e.target.value,
-        label: e.target[+e.target.value].firstChild?.nodeValue,
-      })
-    );
+  const handleTaskValueChange = (item: Option) => {
+    dispatch(setCategory(item));
   };
 
   const handleTaskDescValueChange = (
@@ -69,13 +64,12 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               Дело
             </p>
             <div className={styles.headerWrapper} />
-            <Select
-              selectedValue={category.value}
+            <Dropdown
+              selected={category}
               label="Выберите тип задачи"
               placeholder="Выберите тип задачи"
-              name="tasks"
               onChange={handleTaskValueChange}
-              options={optionsForSelect}
+              items={optionsForSelect}
               extClassName={styles.select}
             />
             <TextArea
@@ -89,13 +83,12 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
           </>
         ) : (
           <>
-            <Select
-              selectedValue={category.value}
+            <Dropdown
+              selected={category}
               label="Выберите тип задачи"
               placeholder="Выберите тип задачи"
-              name="tasks"
               onChange={handleTaskValueChange}
-              options={optionsForSelect}
+              items={optionsForSelect}
               extClassName={styles.select}
             />
             <TextArea
