@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { setUserRole } from 'entities/user/model';
 import { PageLayout } from '../../shared/ui/page-layout';
 import { UserInfo } from '../../entities/user';
-import { ButtonContainer } from '../../shared/ui/button-container';
 import { CardButton } from '../../shared/ui/card-button';
 import { Icon } from '../../shared/ui/icons';
 import { ContentLayout } from '../../shared/ui/content-layout';
@@ -17,6 +16,7 @@ import { UserCard } from '../../widgets/user-card';
 import { NotFoundPage } from '../not-found';
 
 import styles from './styles.module.css';
+import { SideMenuContainer } from 'entities/side-menu-container';
 
 const numbersMock = {
   numberVolunteer: 2,
@@ -108,7 +108,7 @@ export function AdminPage() {
           <div className={styles.user}>
             <UserInfo />
           </div>
-          <ButtonContainer auth={isAuth}>
+          <SideMenuContainer >
             <NavLink to="requests" className="link">
               {({ isActive }) => (
                 <CardButton
@@ -140,7 +140,7 @@ export function AdminPage() {
                 />
               )}
             </NavLink>
-          </ButtonContainer>
+          </SideMenuContainer>
         </>
       }
       content={

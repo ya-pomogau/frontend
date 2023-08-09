@@ -3,7 +3,7 @@ import { UserCard } from '.';
 import { SettingsButton } from '../../shared/ui/transforming-buttons/settings-button';
 
 const meta: Meta<typeof UserCard> = {
-  title: 'widjets/UserCard',
+  title: 'widgets/UserCard',
   component: UserCard,
   tags: ['autodocs'],
 
@@ -152,19 +152,4 @@ export const AdminUserCardFirst: Story = {
       approved: true,
     },
   },
-};
-
-export const ExampleButtons: Story = {
-  args: {
-    ...Example.args,
-  },
-  render: (args) => (
-    <UserCard {...args}>
-      <SettingsButton
-        onClick={() => {
-          console.log('меня нажали');
-        }}
-      />
-    </UserCard>
-  ),
 };

@@ -9,7 +9,6 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
 
-
 import styles from './styles.module.css';
 import { UserCard } from 'widgets/user-card';
 
