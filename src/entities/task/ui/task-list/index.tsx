@@ -10,9 +10,11 @@ import type { UserRole } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
+import usePermission from 'shared/hooks/use-permission';
+import { CONFIRMED } from 'shared/libs/statuses';
 
 interface TaskListProps {
-  userRole: UserRole;
+  userRole?: UserRole | null;
   tasks: Array<Task>;
   extClassName?: string;
   isStatusActive: boolean;
@@ -39,6 +41,10 @@ export const TaskList = ({
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const isLoading = useAppSelector((store) => store.tasks.isLoading);
+  const buttonGuard = usePermission([CONFIRMED]);
+  const handleDeniedAccess = () => {
+    alert('Вам пока нельзя такое, дождитесь проверки администратором');
+  };
 
   return (
     <>
@@ -56,7 +62,9 @@ export const TaskList = ({
             <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
               <RoundButton
                 buttonType="add"
-                onClick={handleClickAddTaskButton}
+                onClick={
+                  buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
+                }
                 size={isMobile ? 'medium' : 'large'}
                 extClassName={styles.add_task_icon}
               />
@@ -123,7 +131,9 @@ export const TaskList = ({
               </p>
               <RoundButton
                 buttonType="add"
-                onClick={handleClickAddTaskButton}
+                onClick={
+                  buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
+                }
                 size="large"
               />
             </>

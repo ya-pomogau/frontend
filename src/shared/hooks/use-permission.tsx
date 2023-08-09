@@ -7,14 +7,14 @@ import { useAppSelector } from 'app/hooks';
 
 export default function usePermission(requirments: Array<any>) {
   const user = useAppSelector((state) => state.user.data);
-  let isGranted = false;
+  let isAllowed = false;
   if (user) {
     const userRights = { status: user.status, permissions: user.permissions };
     const hasPermission = requirments.filter((requirment: any) =>
       Object.values(userRights).some((element) => element === requirment)
     );
-    hasPermission.length > 0 ? (isGranted = true) : (isGranted = false);
+    hasPermission.length > 0 ? (isAllowed = true) : (isAllowed = false);
   }
 
-  return isGranted;
+  return isAllowed;
 }

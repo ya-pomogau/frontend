@@ -58,6 +58,7 @@ export type UserInfo = {
   keys?: number | null;
   scores?: number;
   permissions?: Array<PermissionType> | null;
+  isActive: boolean;
 };
 
 export type UpdateUserInfo = {

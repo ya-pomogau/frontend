@@ -7,12 +7,13 @@ import { RecipientFilter } from './recipient-filter';
 import { AdminFilter } from './admin-filter';
 import { VolunteerFilter } from './volunteer-filter';
 import { getQuery } from '../libs';
-import type { IFilterValues, TRole } from './types';
+import type { IFilterValues } from './types';
 
 import styles from './styles.module.css';
+import { UserRole } from 'entities/user/types';
 
 interface FilterProps {
-  userRole: TRole;
+  userRole?: UserRole | null;
   visible?: boolean;
   changeVisible: () => void;
   position: { top: number; right: number };
