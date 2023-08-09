@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
 import { Input } from 'shared/ui/input';
 import { BallsIcon } from 'shared/ui/icons/balls-icon';
 
