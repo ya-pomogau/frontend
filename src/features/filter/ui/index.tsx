@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Tooltip } from 'shared/ui/tooltip';
@@ -18,12 +18,12 @@ interface FilterProps {
   position: { top: number; right: number };
 }
 
-export const Filter = ({
+export const Filter: FC<FilterProps> = ({
   userRole,
   visible = true,
   changeVisible,
   position,
-}: FilterProps) => {
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     categories: [],

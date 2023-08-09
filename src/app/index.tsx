@@ -1,16 +1,15 @@
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { YMaps } from '@pbe/react-yandex-maps';
 
+import { AppRoutes } from 'app/routing';
 import { YMAPS_API_KEY } from 'config/ymaps';
 import { store } from './store';
-import { AppRoutes } from '../pages';
 
 import './assets/styles/index.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Provider store={store}>
         <YMaps
           enterprise
@@ -22,7 +21,7 @@ function App() {
           <AppRoutes />
         </YMaps>
       </Provider>
-    </BrowserRouter>
+    </>
   );
 }
 
