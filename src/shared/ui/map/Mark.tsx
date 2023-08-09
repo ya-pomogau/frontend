@@ -6,6 +6,8 @@
 import React from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import './styles.css';
+import usePermission from 'shared/hooks/use-permission';
+import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 
 type MarkProps = {
   id?: number;
@@ -32,6 +34,12 @@ export const Mark = React.memo(
     onClick,
   }: MarkProps) => {
     const ymaps = useYMaps(['templateLayoutFactory']);
+    const isGranted = usePermission([CONFIRMED, ACTIVATED, VERIFIED]);
+    const onUncomfirmedClick = () => {
+      alert(
+        'Тут будет попап о том, что вы еще не можете откликаться на заявки'
+      );
+    };
 
     if (!ymaps) return null;
 
@@ -142,7 +150,10 @@ export const Mark = React.memo(
           const button = taskContainer
             .querySelector('.task_button_container')
             .querySelector('button');
-          button.addEventListener('click', onClick);
+          button.addEventListener(
+            'click',
+            isGranted ? onClick : onUncomfirmedClick
+          );
         },
       }
     );

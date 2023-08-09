@@ -39,6 +39,9 @@ const Checkbox = ({
         extClassName
       )}
     >
+      <div className={styles.tooltip}>
+        Вы пока не можете выбрать эту категорию
+      </div>
       <div className={styles.checkboxIconWrapper}>
         <span className={styles.checkboxIcon}>
           <DefaultCheckboxIcon />

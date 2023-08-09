@@ -5,6 +5,8 @@ import Checkbox from 'shared/ui/checkbox';
 import { FilterItemsIds } from '../consts';
 
 import styles from '../styles.module.css';
+import usePermission from 'shared/hooks/use-permission';
+import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 
 interface CategoriesBlockProps {
   selectedCategories: string[];
@@ -16,6 +18,11 @@ export const CategoriesBlock = ({
   onChange,
 }: CategoriesBlockProps) => {
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
+
+  const filterGranted = usePermission([CONFIRMED, ACTIVATED, VERIFIED]);
+  const specialCategoryGranted = usePermission([ACTIVATED, VERIFIED]);
+  const higherCategoryGranted = usePermission([VERIFIED]);
+
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     let newValue;
     if (target.checked) {
@@ -46,6 +53,7 @@ export const CategoriesBlock = ({
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_1)}
             id={FilterItemsIds.CATEGORY_1}
             onChange={handleCheckboxChange}
+            disabled={filterGranted ? false : true}
           />
           <Checkbox
             name="taskCategory"
@@ -53,6 +61,7 @@ export const CategoriesBlock = ({
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_2)}
             id={FilterItemsIds.CATEGORY_2}
             onChange={handleCheckboxChange}
+            disabled={filterGranted ? false : true}
           />
         </div>
         <div className={styles.row}>
@@ -62,6 +71,7 @@ export const CategoriesBlock = ({
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_3)}
             id={FilterItemsIds.CATEGORY_3}
             onChange={handleCheckboxChange}
+            disabled={filterGranted ? false : true}
           />
           <Checkbox
             name="taskCategory"
@@ -69,6 +79,7 @@ export const CategoriesBlock = ({
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_4)}
             id={FilterItemsIds.CATEGORY_4}
             onChange={handleCheckboxChange}
+            disabled={specialCategoryGranted ? false : true}
           />
         </div>
         <div className={styles.row}>
@@ -78,6 +89,7 @@ export const CategoriesBlock = ({
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_5)}
             id={FilterItemsIds.CATEGORY_5}
             onChange={handleCheckboxChange}
+            disabled={specialCategoryGranted ? false : true}
           />
           <Checkbox
             name="taskCategory"
@@ -85,6 +97,7 @@ export const CategoriesBlock = ({
             checked={selectedCategories.includes(FilterItemsIds.CATEGORY_6)}
             id={FilterItemsIds.CATEGORY_6}
             onChange={handleCheckboxChange}
+            disabled={higherCategoryGranted ? false : true}
           />
         </div>
       </div>
