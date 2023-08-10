@@ -56,12 +56,17 @@
   text-align: center;
   line-height: 30px;
   margin-top: 30px;
+  border: none;
+  outline: none;
+  margin-left: -25px;
 }
 
 .save_btn span {
   display: inline-block;
   width: 100%;
   text-align: center;
+  border: none;
+  outline: none;
 }
 
 @media all and (max-width: 1200px) {
@@ -78,5 +83,9 @@
 
   .balance_box {
     padding-right: 0;
+  }
+
+  .save_btn {
+    margin-left: 0;
   }
 }
