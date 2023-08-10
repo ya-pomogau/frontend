@@ -196,9 +196,18 @@ export const Mark = React.memo(
 
           // Добавляем слушатель на кпонку "читать"
           const buttonRead = taskContainer.querySelector('.task_button');
+
           const descriptionContainer = taskContainer.querySelector(
             '.task_description_hidden'
           );
+          // Изменяем видимость кнопки "читать" в зависимости от длины контента
+          const hendleReadButton = () => {
+            if ([...description].length < 140) {
+              console.log([...description].length);
+              buttonRead.textContent = '';
+            }
+          };
+          hendleReadButton();
           const onReadClick = () => {
             descriptionContainer.classList.toggle('task_description_hidden');
             // eslint-disable-next-line no-unused-expressions

@@ -1,0 +1,39 @@
+.tabContainer__itemActive {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.tabContainer__item {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 6px;
+}
+
+.tabContainer__text {
+  margin-right: 6px;
+  color: var(--colors-interface-additional);
+}
+
+.tabContainer__textActive {
+  color: var(--colors-interface-black);
+}
+
+.tabContainer__number {
+  background: #d60080;
+  border-radius: 9px;
+  min-width: 18px;
+  height: 18px;
+  color: var(--colors-interface-white);
+  text-align: center;
+}
+
+.tabContainer__itemActive::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--colors-interface-primary);
+  border-radius: 2px;
+  content: '';
+}

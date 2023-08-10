@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { api } from '../../../shared/api';
-import type { UserInfo, UserRole } from '../types';
+import type { UpdateUserInfo, UserInfo, UserRole } from '../types';
 
 type UserState = {
+  id?: number;
   role: UserRole | null;
   data: UserInfo | null;
   isLoading: boolean;
@@ -26,11 +27,27 @@ export const fetchUserDataByRole = createAsyncThunk(
   }
 );
 
+export const updateUserInfo = createAsyncThunk<UserInfo | [], UpdateUserInfo>(
+  'user/updateUser',
+  async function (body) {
+    const response = await api.updateUser(body);
+    return response;
+  }
+);
+
+export const uploadUserAvatar = createAsyncThunk<UserInfo | [], FormData>(
+  'user/uploadUserAvatar',
+  async function (body: FormData) {
+    const response = await api.uploadAvatar(body);
+    return response;
+  }
+);
+
 export const userModel = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserRole: (state, { payload }: PayloadAction<UserRole>) => {
+    setUserRole: (state, { payload }: PayloadAction<UserRole | null>) => {
       state.role = payload;
     },
   },
@@ -40,11 +57,37 @@ export const userModel = createSlice({
         state.isLoading = true;
         state.isFailed = false;
       })
-      .addCase(fetchUserDataByRole.fulfilled, (state, action) => {
+      .addCase(fetchUserDataByRole.fulfilled, (state, action: any) => {
         state.isLoading = false;
-        state.data = action.payload;
+        state.data = action.payload.data;
       })
       .addCase(fetchUserDataByRole.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isFailed = true;
+        state.error = action.error.message;
+      })
+      .addCase(updateUserInfo.pending, (state) => {
+        state.isLoading = true;
+        state.isFailed = false;
+      })
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        // state.data = action.payload;
+      })
+      .addCase(updateUserInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isFailed = true;
+        state.error = action.error.message;
+      })
+      .addCase(uploadUserAvatar.pending, (state) => {
+        state.isLoading = true;
+        state.isFailed = false;
+      })
+      .addCase(uploadUserAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        // state.data = action.payload;
+      })
+      .addCase(uploadUserAvatar.rejected, (state, action) => {
         state.isLoading = false;
         state.isFailed = true;
         state.error = action.error.message;

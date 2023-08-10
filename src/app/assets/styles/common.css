@@ -34,6 +34,7 @@
 
 body {
   margin: 0;
+  background-color: var(--colors-interface-background);
 }
 
 #root {
@@ -63,6 +64,11 @@ body {
 .text_size_small {
   font-size: 12px;
   line-height: 14px;
+}
+
+.text_size_middle {
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .text_size_medium {

@@ -6,7 +6,8 @@ import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,6 +16,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
   errorText?: string;
   customIcon?: React.ReactNode;
+  onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -30,6 +32,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       error,
       errorText,
       customIcon,
+      onIconClick,
       ...props
     },
     ref
@@ -46,8 +49,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const inputClass = error ? styles.input_error : styles.input;
 
+    const iconClass = error ? styles.icon_error : styles.icon;
+
     return (
-      <div className={extClassName}>
+      <div className={extClassName} data-testid={'div'}>
         {label && (
           <label className={cn(styles.label, 'text')} htmlFor={id}>
             {label}
@@ -55,18 +60,21 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
         <div className={styles.container}>
           <input
+            data-testid={'input'}
             ref={ref}
             type={type}
             name={name}
             value={value}
-            className={cn(inputClass, 'text', 'text_size_medium')}
+            className={cn('text', inputClass)}
             onChange={onChange}
             placeholder={placeholder}
             id={id}
             {...props}
           />
           {errorToRender}
-          <div className={styles.icon}>{customIcon}</div>
+          <div className={iconClass} onClick={onIconClick}>
+            {customIcon}
+          </div>
         </div>
       </div>
     );
