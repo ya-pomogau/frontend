@@ -16,7 +16,7 @@ import { fetchAvailableTasks } from 'entities/task/model';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
-import YandexMap from 'shared/ui/map';
+import YandexMap from 'widgets/map';
 import { Icon } from 'shared/ui/icons';
 
 import styles from './styles.module.css';

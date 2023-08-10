@@ -145,7 +145,7 @@
 }
 
 .task_count_urgent {
-  color: #d60080;
+  color: var(--colors-interface-pink);
   font-size: 24px;
   line-height: 29px;
   margin: 0;
@@ -174,7 +174,7 @@
 }
 
 .submit_button_urgent {
-  background-color: #d60080;
+  background-color: var(--colors-interface-pink);
   border: none;
   color: white;
   font-family: 'Golos', sans-serif;

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
 
 const meta = {
-  title: 'uikit/YandexMap',
+  title: 'widgets/YandexMap',
   component: YandexMap,
   tags: ['autodocs'],
   argTypes: {
@@ -75,8 +75,7 @@ export const Default: Story = {
           fullname: 'Реципиентов Игорь Витальевич',
           role: 'recipient',
           vk: 'https://vk.com/id123456789',
-          avatar:
-            'https://w0.peakpx.com/wallpaper/216/581/,HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg',
+          avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'ул. Наличная, 28/16В',
           coordinates: [60.941344, 30.22767],

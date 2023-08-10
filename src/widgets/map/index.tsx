@@ -62,7 +62,10 @@ export const YandexMap: FC<YandexMapProps> = ({
           key={task.id}
           isAuthorised={isAuthorised}
           date={new Date(task.date).toLocaleDateString()}
-          time={new Date(task.date).toLocaleTimeString()}
+          time={new Date(task.date).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
         />
       ))}
       <Mark coordinates={coordinates} />

@@ -203,7 +203,6 @@ export const Mark = React.memo(
           // Изменяем видимость кнопки "читать" в зависимости от длины контента
           const hendleReadButton = () => {
             if ([...description].length < 140) {
-              console.log([...description].length);
               buttonRead.textContent = '';
             }
           };
