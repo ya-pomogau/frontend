@@ -12,7 +12,7 @@ export const RegistrationNotice = ({
   settingText,
 }: RegistrationNoticeProps) => {
   if (settingText.length === 0) {
-    return null; 
+    return null;
   }
 
   return (

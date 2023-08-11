@@ -90,6 +90,7 @@ export const ExampleActive: Story = {
         description: 'Короткое описание для задачи номер 14.',
         completed: false,
         confirmed: false,
+        conflict: false,
         recipient: {
           id: 4,
           createdAt: '2023-07-09T17:30Z',
@@ -120,6 +121,10 @@ export const ExampleActive: Story = {
         address: 'ул. Нахимова, д. 9',
         coordinates: [59.941871, 30.223494],
         chatId: null,
+        chat: {
+          id: 4327,
+          unread: 50,
+        },
       },
       {
         id: 19,
@@ -134,6 +139,7 @@ export const ExampleActive: Story = {
           'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
         completed: true,
         confirmed: false,
+        conflict: false,
         recipient: {
           id: 5,
           createdAt: '2023-07-09T17:30Z',
@@ -165,6 +171,10 @@ export const ExampleActive: Story = {
         address: 'ул. Наличная, 28/16В',
         coordinates: [59.941871, 30.223494],
         chatId: null,
+        chat: {
+          id: 4478,
+          unread: 238,
+        },
       },
     ],
     handleClickPnoneButton: () => console.log('кликнули на телефон'),
@@ -194,6 +204,7 @@ export const ExampleNotActive: Story = {
           'Описание задачи 15 (срок задачи прошел, задача завершена и подтверждена)',
         completed: true,
         confirmed: true,
+        conflict: false,
         recipient: {
           id: 4,
           createdAt: '2023-07-09T17:30Z',
@@ -224,6 +235,10 @@ export const ExampleNotActive: Story = {
         address: 'ул. Нахимова, д. 9',
         coordinates: [59.941871, 30.223494],
         chatId: 5678,
+        chat: {
+          id: 4545,
+          unread: 1,
+        },
       },
       {
         id: 27,
@@ -238,6 +253,7 @@ export const ExampleNotActive: Story = {
           'Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.',
         completed: true,
         confirmed: true,
+        conflict: false,
         recipient: {
           id: 6,
           createdAt: '2023-07-09T17:30Z',
@@ -268,6 +284,10 @@ export const ExampleNotActive: Story = {
         address: 'переулок Каховского, 3',
         coordinates: [59.95252, 30.243239],
         chatId: null,
+        chat: {
+          id: 1278,
+          unread: 0,
+        },
       },
     ],
     handleClickPnoneButton: () => console.log('кликнули на телефон'),

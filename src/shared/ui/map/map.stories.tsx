@@ -40,6 +40,7 @@ export const Default: Story = {
           'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!',
         completed: false,
         confirmed: false,
+        conflict: false,
         recipient: {
           id: 5,
           createdAt: '2023-07-10T19:30Z',
@@ -57,6 +58,7 @@ export const Default: Story = {
         address: 'ул. Наличная, 28/16В',
         coordinates: [59.941335, 30.227995],
         chatId: null,
+        chat: { id: 678, unread: 0 },
       },
       {
         id: 24,
@@ -70,6 +72,7 @@ export const Default: Story = {
         description: 'Описание задачи 24',
         completed: false,
         confirmed: false,
+        conflict: false,
         recipient: {
           id: 6,
           createdAt: '2023-07-10T19:30Z',
@@ -86,6 +89,7 @@ export const Default: Story = {
         address: 'переулок Каховского, 3',
         coordinates: [59.95252, 30.243239],
         chatId: null,
+        chat: { id: 547, unread: 50 },
       },
     ],
   },
