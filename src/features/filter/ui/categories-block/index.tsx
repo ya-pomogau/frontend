@@ -6,12 +6,7 @@ import { FilterItemsIds } from '../consts';
 
 import styles from '../styles.module.css';
 import usePermission from 'shared/hooks/use-permission';
-import {
-  ACTIVATED,
-  CONFIRMED,
-  UNCONFIRMED,
-  VERIFIED,
-} from 'shared/libs/statuses';
+import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 
 interface CategoriesBlockProps {
   selectedCategories: string[];
@@ -25,7 +20,7 @@ export const CategoriesBlock = ({
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
 
   const volunteerMainGuard = usePermission(
-    [UNCONFIRMED, ACTIVATED, VERIFIED],
+    [CONFIRMED, ACTIVATED, VERIFIED],
     'volunteer'
   );
   console.log(volunteerMainGuard);

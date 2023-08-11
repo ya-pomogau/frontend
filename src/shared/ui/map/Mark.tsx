@@ -34,7 +34,10 @@ export const Mark = React.memo(
     onClick,
   }: MarkProps) => {
     const ymaps = useYMaps(['templateLayoutFactory']);
-    const isGranted = usePermission([CONFIRMED, ACTIVATED, VERIFIED]);
+    const isGranted = usePermission(
+      [CONFIRMED, ACTIVATED, VERIFIED],
+      'volunteer'
+    );
     const onUncomfirmedClick = () => {
       alert(
         'Тут будет попап о том, что вы еще не можете откликаться на заявки'
