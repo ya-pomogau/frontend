@@ -8,12 +8,14 @@ interface PageSubMenuLinkProps {
   to: string;
   text: string;
   notifications?: number;
+  isImportant?: boolean;
 }
 
 export const PageSubMenuLink: FC<PageSubMenuLinkProps> = ({
   to,
   text,
   notifications = 0,
+  isImportant = false,
 }) => {
   const areNotificationsVisible = notifications > 0;
 
@@ -38,7 +40,14 @@ export const PageSubMenuLink: FC<PageSubMenuLinkProps> = ({
             {text}
           </p>
           {areNotificationsVisible && (
-            <span className={styles.tabContainer__number}>{notifications}</span>
+            <span
+              className={classnames(
+                styles.tabContainer__number,
+                isImportant ? styles.tabContainer__number__important : undefined
+              )}
+            >
+              {notifications}
+            </span>
           )}
         </div>
       )}

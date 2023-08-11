@@ -61,6 +61,11 @@ body {
   font-family: 'Golos', sans-serif;
 }
 
+.text_size_micro {
+  font-size: 8px;
+  line-height: 9.6px;
+}
+
 .text_size_small {
   font-size: 12px;
   line-height: 14px;

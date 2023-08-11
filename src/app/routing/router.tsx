@@ -29,6 +29,8 @@ import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
+import { ChatsPage } from '../../pages/chats/chats';
+import { ChatsInWorkPage } from '../../pages/chats-in-work';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -143,6 +145,8 @@ export const router = createBrowserRouter(
             element={<RequestsAdminsPage />}
           />
         </Route>
+        <Route path="/chats" element={<ChatsPage />} />
+        <Route path="/chats/in-work" element={<ChatsInWorkPage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />
