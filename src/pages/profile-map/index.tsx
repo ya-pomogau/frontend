@@ -1,7 +1,14 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { SideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
+import {
+  SideMenu,
+  SideMenuForAuthorized,
+  VolunteerSideMenu,
+  RecipientSideMenu,
+  AdminSideMenu,
+  MasterSideMenu,
+} from 'widgets/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Filter } from 'features/filter/ui';
 import { UserInfo } from 'entities/user';
@@ -9,15 +16,8 @@ import { fetchAvailableTasks } from 'entities/task/model';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
-import YandexMap from 'shared/ui/map';
+import YandexMap from 'widgets/map';
 import { Icon } from 'shared/ui/icons';
-
-import {
-  VolunteerSideMenu,
-  RecipientSideMenu,
-  AdminSideMenu,
-  MasterSideMenu,
-} from 'widgets/side-menu';
 
 import styles from './styles.module.css';
 
@@ -106,6 +106,7 @@ export function ProfileMapPage() {
             width="100%"
             height="100%"
             onClick={() => 3}
+            isAuthorised={true}
           />
         </ContentLayout>
       }

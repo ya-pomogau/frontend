@@ -2,15 +2,16 @@
   height: 90px;
 }
 
-.viewer {
+.user {
   margin-bottom: 30px;
 }
 
 .form {
-  width: 364px;
+  min-width: 364px;
   display: grid;
   gap: 24px;
   padding-left: 18px;
+  justify-items: flex-start;
 }
 
 .title {

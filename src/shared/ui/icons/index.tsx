@@ -35,6 +35,9 @@ import { MapIcon } from './map-icon';
 import { PopularIcon } from './popular-icon';
 import { CompletedApplicationIcon } from './completed-application-icon';
 import { CreateApplication } from './create-application-icon';
+import { LoginIcon } from './login-icon';
+import { PasswordOpenIcon } from './password-open-icon';
+import { PasswordCloseIcon } from './password-close-icon';
 import { CheckIcon } from './check-icon';
 import { ArrowDownIcon } from './arrow-down-icon';
 
@@ -73,6 +76,9 @@ const icons = {
   MapIcon,
   PopularIcon,
   CreateApplication,
+  LoginIcon,
+  PasswordOpenIcon,
+  PasswordCloseIcon,
   CheckIcon,
   ArrowDownIcon,
 };
