@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { fetchAvailableTasks } from 'entities/task/model';
-import YandexMap from 'shared/ui/map';
+import YandexMap from 'widgets/map';
 
 export const MapWithTasks: FC = () => {
   const dispatch = useAppDispatch();

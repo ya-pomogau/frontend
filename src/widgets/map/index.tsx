@@ -17,6 +17,7 @@ interface YandexMapProps {
   tasks?: Task[];
   onClick?: () => void;
   coordinates?: [number, number];
+  isAuthorised?: boolean;
 }
 
 export const YandexMap: FC<YandexMapProps> = ({
@@ -26,7 +27,8 @@ export const YandexMap: FC<YandexMapProps> = ({
   onClick,
   tasks,
   coordinates,
-}) => (
+  isAuthorised,
+}: YandexMapProps) => (
   <YMaps
     enterprise
     query={{
@@ -58,6 +60,12 @@ export const YandexMap: FC<YandexMapProps> = ({
           count={task.category.scope}
           onClick={onClick}
           key={task.id}
+          isAuthorised={isAuthorised}
+          date={new Date(task.date).toLocaleDateString()}
+          time={new Date(task.date).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
         />
       ))}
       <Mark coordinates={coordinates} />

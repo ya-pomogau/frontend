@@ -7,8 +7,7 @@
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import { setUserRole } from 'entities/user/model';
-import { fetchUserDataByRole } from 'entities/user/model';
+import { setUserRole, fetchUserDataByRole } from 'entities/user/model';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
