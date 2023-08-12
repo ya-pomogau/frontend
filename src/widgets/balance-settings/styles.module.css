@@ -59,6 +59,7 @@
   border: none;
   outline: none;
   margin-left: -25px;
+  cursor: pointer;
 }
 
 .save_btn span {

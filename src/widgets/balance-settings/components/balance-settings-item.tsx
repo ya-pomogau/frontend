@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import classnames from 'classnames';
 import styles from '../styles.module.css';
 import { Input } from 'shared/ui/input';
@@ -7,7 +7,7 @@ import { BallsIcon } from 'shared/ui/icons/balls-icon';
 interface BalanceSettingsItemProps {
   title: string;
   inputValue: string;
-  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onInputChange: (value: string) => void;
 }
 
 const BalanceSettingsItem: React.FC<BalanceSettingsItemProps> = ({
@@ -15,6 +15,10 @@ const BalanceSettingsItem: React.FC<BalanceSettingsItemProps> = ({
   inputValue,
   onInputChange,
 }) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onInputChange(e.target.value);
+  };
+
   return (
     <div className={classnames(styles.balance_box)}>
       <div>
@@ -35,7 +39,8 @@ const BalanceSettingsItem: React.FC<BalanceSettingsItemProps> = ({
           className={classnames(styles.balance_input)}
           value={inputValue}
           name={'text'}
-          onChange={onInputChange}
+          onChange={handleInputChange}
+          type="number"
         />
       </div>
       <BallsIcon color={'blue'} size={'46'} />
