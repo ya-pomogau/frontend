@@ -8,7 +8,6 @@ import styles from '../styles.module.css';
 interface VolunteerInfoProps {
   score: number;
   hasKey?: number | null;
-  children?: any;
   extClassName?: string;
 }
 
