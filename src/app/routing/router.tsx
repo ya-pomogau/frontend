@@ -28,6 +28,7 @@ import { StatisticsPage } from 'pages/statistics';
 import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
+import { LoginPage } from 'pages/login';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,7 +51,7 @@ export const router = createBrowserRouter(
         <Route element={<RoutesGroup onlyUnauthorized />}>
           <Route path="/register" element={<RegisterPage />} />
 
-          <Route path="/login" element={<></>} />
+          <Route path="/login" element={<LoginPage />} />
         </Route>
 
         <Route

@@ -41,6 +41,13 @@
   }
 }
 
+@media all and (max-width: 415px) {
+  .main {
+    margin-top: 20px;
+    padding: 0 14px;
+  }
+}
+
 .footer {
   max-width: 1440px;
   margin: 0 auto;

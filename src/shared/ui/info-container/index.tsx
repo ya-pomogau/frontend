@@ -1,12 +1,11 @@
 import { LegacyRef, ReactNode } from 'react';
 import classNames from 'classnames';
-
-import { useAppSelector } from 'app/hooks';
 import { SettingsButton } from '../transforming-buttons/settings-button';
 import { Avatar } from '../avatar';
 
 import styles from './info-container.module.css';
 import placeholder from './img/placeholder.svg';
+import useUser from 'shared/hooks/use-user';
 
 interface InfoContainerProps {
   extClassName?: string;
@@ -25,7 +24,7 @@ export const InfoContainer = ({
   onClickSettingsButton,
   buttonRef,
 }: InfoContainerProps) => {
-  const isAuth = !!useAppSelector((store) => store.user.role);
+  const isAuth = useUser();
 
   return (
     <div className={classNames(styles['info-container-frame'], extClassName)}>
