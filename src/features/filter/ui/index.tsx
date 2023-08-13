@@ -10,6 +10,7 @@ import { getQuery } from '../libs';
 import type { IFilterValues, TRole } from './types';
 
 import styles from './styles.module.css';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
 interface FilterProps {
   userRole: TRole;
@@ -109,7 +110,19 @@ export const Filter: FC<FilterProps> = ({
               onChange={handleFilterChange}
             />
           )}
-          <div className={styles.buttonWrapper}>
+          <div
+            className={`${styles.buttonWrapper} ${
+              window.innerWidth <= 768 ? styles.buttonWrapper__mobile : null
+            }`}
+          >
+            <Button
+              label="Сбросить фильтры"
+              buttonType="secondary"
+              size="medium"
+              actionType="button"
+              customIcon={<CloseCrossIcon color={'blue'} />}
+              onClick={handleAcceptClick}
+            />
             <Button
               label="Применить"
               buttonType="primary"

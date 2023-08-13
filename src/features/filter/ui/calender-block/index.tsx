@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { DatePicker } from 'shared/ui/date-picker';
 
 import styles from '../styles.module.css';
+import { TimePickerElement } from 'shared/ui/time-picker';
 
 interface CalenderBlockProps {
   onChange: (name: string, value: string[] | string) => void;
@@ -62,6 +63,47 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
         Дата и время
       </div>
       <div>
+        <p
+          className={classnames(
+            styles.filterBlockText,
+            'text',
+            'text_size_small'
+          )}
+        >
+          Время
+        </p>
+        <div className={classnames(styles.filterBlockTime)}>
+          <p
+            className={classnames(
+              styles.filterBlockText,
+              'text',
+              'text_size_small'
+            )}
+          >
+            От
+          </p>
+          <TimePickerElement isMobile={isCalenderMobil} />
+          <p
+            className={classnames(
+              styles.filterBlockText,
+              'text',
+              'text_size_small'
+            )}
+          >
+            До
+          </p>
+          <TimePickerElement isMobile={isCalenderMobil} />
+        </div>
+
+        <p
+          className={classnames(
+            styles.filterBlockText,
+            'text',
+            'text_size_small'
+          )}
+        >
+          Дата
+        </p>
         <DatePicker
           value={filterDate ? parseISO(filterDate) : getNewDate()}
           isMobile={isCalenderMobil}

@@ -35,6 +35,7 @@ export const router = createBrowserRouter(
     <>
       <Route path="/" element={<Layout />}>
         <Route element={<RoutesGroup publicRoutes />}>
+          {/* <Route path="/profile" element={<ProfilePage />} /> */}
           <Route index element={<UnauthPage />} />
 
           <Route path="/blog" element={<BlogPage />} />
@@ -71,7 +72,7 @@ export const router = createBrowserRouter(
           <Route path="/chat" element={<></>} />
         </Route>
 
-        <Route
+        {/* <Route
           element={
             <RoutesGroup
               allowed={{
@@ -79,9 +80,9 @@ export const router = createBrowserRouter(
               }}
             />
           }
-        >
-          <Route path="/profile/map" element={<ProfileMapPage />} />
-        </Route>
+        > */}
+        <Route path="/profile/map" element={<ProfileMapPage />} />
+        {/* </Route> */}
 
         <Route
           element={

@@ -10,6 +10,7 @@
   flex-direction: column;
   gap: 22px;
 }
+
 .filterBlock {
   display: flex;
   flex-direction: column;
@@ -22,11 +23,22 @@
   color: var(--colors-interface-black);
 }
 
+.filterBlockText {
+  margin: 5px 0;
+}
+
+.filterBlockTime {
+  display: flex;
+  width: 230px;
+  align-items: center;
+}
+
 .checkboxesWrapper {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
+
 .row {
   display: flex;
   gap: 20px;
@@ -35,6 +47,11 @@
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
+  gap: 38px;
+}
+
+.buttonWrapper__mobile {
+  gap: 11px;
 }
 
 .radiusButtonsWrapper {
@@ -53,6 +70,6 @@
 
 @media screen and (max-width: 768px) {
   .tooltip {
-    max-width: 320px;
+    max-width: 343px;
   }
 }
