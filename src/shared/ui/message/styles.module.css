@@ -10,6 +10,7 @@
 
 .wrapper--outgoing {
   justify-content: flex-end;
+  padding-right: 13px;
 }
 
 .avatar {
@@ -18,11 +19,12 @@
 }
 
 .messageBlock {
-  padding-top: 15px;
+  padding-top: 13px;
+  max-width: 223px;
 }
 
 .message {
-  max-width: 224px;
+  max-width: 223px;
   padding: 5px 20px;
   position: relative;
 }

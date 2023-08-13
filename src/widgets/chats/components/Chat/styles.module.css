@@ -1,0 +1,131 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 561px;
+  max-height: 485px;
+  margin-top: 16px;
+}
+
+.chatWrapper {
+  display: flex;
+  align-items: flex-start;
+  width: 100%
+}
+
+.avatar {
+  max-width: 52px;
+  max-height: 52px;
+  margin-right: 20px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.data {
+  display: flex;
+  flex-direction: row;
+}
+
+.id {
+  padding: 0 0 0 5px;
+  color: var(--colors-interface-primary);
+  opacity: 50%;
+  align-self: end;
+  margin: 0 0 3px 0;
+}
+
+.phoneInfo {
+  display: flex;
+  gap: 15px;
+}
+
+@media (max-width: 360px) {
+  .phoneInfo {
+    gap: 10px;
+  }
+}
+
+.chat {
+  max-height: 412px;
+  height: 100%;
+}
+
+.messagesBlock {
+  background-color: var(--colors-interface-white);
+  border: 1px solid var(--colors-interface-ford-white);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 0 22px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.input {
+  width: 100%;
+}
+
+.input > div > input {
+  height: 37px;
+  font-size: 12px;
+  line-height: 14px;
+}
+.input > div > input::placeholder {
+  color: var(--colors-interface-primary);
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.inputWrapper {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sendButton {
+  width: 37px;
+  height: 37px;
+  padding: 10px;
+}
+
+.buttonTakeInWork {
+  width: 177px;
+  height: 30px;
+  padding: 10px;
+  position: absolute;
+  left: 81%;
+  top: 76%;
+}
+
+.answers {
+  margin-top: 11px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.answer {
+  margin: 0;
+  max-width: 193px;
+  padding: 5px 10px;
+  background-color: var(--colors-interface-primary-additional);
+  color: var(--colors-interface-ford-white);
+}

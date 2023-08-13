@@ -9,13 +9,17 @@ export const PageSubMenuForChats: FC = () => {
       links={
         <>
           <PageSubMenuLink
-            to="/chats/in-work"
+            to="/chats/waiting"
             text="Ждут ответа"
             notifications={3}
           />
-          <PageSubMenuLink to="/chats" text="В работе" notifications={5} />
           <PageSubMenuLink
-            to="/chats"
+            to="/chats/in-work"
+            text="В работе"
+            notifications={5}
+          />
+          <PageSubMenuLink
+            to="/chats/conflicts"
             text="Конфликтное закрытие"
             notifications={1}
             isImportant={true}

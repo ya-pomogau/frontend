@@ -1,5 +1,6 @@
 .chats {
   list-style: none;
+  max-height: 626px;
   width: 359px;
   overflow-y: auto;
   display: flex;

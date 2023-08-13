@@ -3,6 +3,7 @@ import { PersonIcon } from 'shared/ui/icons/person-icon';
 import { LockIcon } from 'shared/ui/icons/lock-icon';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { ExitIcon } from 'shared/ui/icons/exit-icon';
+import { ReadMessageIcon } from 'shared/ui/icons/read-message-icon';
 import type {
   ISideBarPosition,
   ISideBarElementProps,
@@ -50,6 +51,11 @@ export const linksTop: ISideBarElementProps[] = [
     title: 'Контакты',
     to: '/contacts',
     icon: <LocationIcon color="blue" />,
+  },
+  {
+    title: 'Чаты',
+    to: '/chats',
+    icon: <ReadMessageIcon color="blue" />,
   },
 ];
 

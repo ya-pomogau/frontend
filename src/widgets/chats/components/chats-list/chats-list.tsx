@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import classNames from 'classnames';
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 import { mockChatsList } from './mock';
 
 export const ChatsList: FC = () => {
@@ -44,9 +44,6 @@ export const ChatsList: FC = () => {
           </li>
         ))}
       </ul>
-      <div className={classNames(styles.current)}>
-        <div></div>
-      </div>
     </>
   );
 };

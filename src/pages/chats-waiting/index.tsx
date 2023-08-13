@@ -17,7 +17,7 @@ import {
   sortMessages,
 } from '../../entities/chat/ui/chat/libs/utils';
 
-export function ChatsInWorkPage() {
+export function ChatsWaitingPage() {
   const [selectedChat, setSelectedChat] = useState(null);
   return (
     <PageLayout
