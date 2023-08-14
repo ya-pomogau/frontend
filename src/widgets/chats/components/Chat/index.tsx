@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 import { SendIcon } from '../../../../shared/ui/icons/send-icon';
 import { EmptyMessageIcon } from '../../../../shared/ui/icons/empty-message-icon';
 import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
+import { KeyIcon } from '../../../../shared/ui/icons/key-icon';
 
 interface ChatProps {
   extClassName?: string;
@@ -110,6 +111,20 @@ export const Chat = ({
               key={message.id}
             />
           ))}
+          <div className={styles.notification}>
+            <p
+              className={classnames(
+                'text',
+                'text_size_medium',
+                'text_type_bold',
+                styles.notificationText
+              )}
+            >
+              Волонтер достиг 3-го уровня доверия. Выдайте ему ключ
+            </p>
+            <div className={styles.line}></div>
+            <KeyIcon color={'white'} />
+          </div>
         </div>
         {window.location.pathname.includes('/in-work') ? (
           <>
