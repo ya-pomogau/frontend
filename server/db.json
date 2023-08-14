@@ -17,6 +17,7 @@
           30.178031
         ],
         "status": "activated",
+        "isActive": true,
         "keys": 1,
         "permissions": [
           {
@@ -70,6 +71,7 @@
           30.21187
         ],
         "status": "activated",
+        "isActive": true,
         "permissions": [
           {
             "id": 0,
@@ -108,7 +110,8 @@
         ],
         "status": "verified",
         "keys": 1,
-        "scores": 2500
+        "scores": 2500,
+        "isActive": true
       },
       "isLoading": false,
       "isFailed": false
@@ -129,7 +132,8 @@
           59.941871,
           30.223494
         ],
-        "status": "confirmed"
+        "status": "confirmed",
+        "isActive": true
       },
       "isLoading": false,
       "isFailed": false

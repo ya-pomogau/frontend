@@ -17,6 +17,7 @@ import styles from './styles.module.css';
 export function ProfileActivePage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
+  const user = useAppSelector((state) => state.user.data);
 
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
   const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
@@ -81,7 +82,7 @@ export function ProfileActivePage() {
               />
               {isFilterVisibel && (
                 <Filter
-                  userRole="volunteer"
+                  userRole={user?.role}
                   changeVisible={() => setIsFilterVisibel(false)}
                   position={buttonPosition}
                 />
@@ -90,7 +91,7 @@ export function ProfileActivePage() {
           }
         >
           <TaskList
-            userRole="volunteer"
+            userRole={user?.role}
             isMobile={isMobile}
             handleClickCloseButton={() => 2}
             handleClickConfirmButton={() => 3}
