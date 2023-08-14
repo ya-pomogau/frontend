@@ -76,19 +76,18 @@ export const UserCard = ({
         avatarName={avatarName}
         avatarLink={avatarLink}
       />
-      {role === 'volunteer' ||
-        (role === 'recipient' && (
-          <div className={classnames(styles.icons_div)}>
-            <RoundButton
-              buttonType="phone"
-              onClick={() => console.log('call button pressed')}
-            />
-            <RoundButton
-              buttonType="message"
-              onClick={() => console.log('message button pressed')}
-            />
-          </div>
-        ))}
+      {(role === 'volunteer' || role === 'recipient') && (
+        <div className={classnames(styles.icons_div)}>
+          <RoundButton
+            buttonType="phone"
+            onClick={() => console.log('call button pressed')}
+          />
+          <RoundButton
+            buttonType="message"
+            onClick={() => console.log('message button pressed')}
+          />
+        </div>
+      )}
 
       <UserInfo
         userName={userName}
