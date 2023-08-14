@@ -10,6 +10,19 @@
   padding: 0;
 }
 
+.chats::-webkit-scrollbar {
+  width: 2px;
+}
+
+.chats::-webkit-scrollbar-track {
+  background-color: var(--colors-interface-white);
+}
+
+.chats::-webkit-scrollbar-thumb {
+  height: 292px;
+  background-color: var(--colors-interface-primary-additional);
+}
+
 .chat {
   width: 100%;
   box-sizing: border-box;
@@ -64,4 +77,8 @@
   align-self: center;
   margin-left: 17px;
   margin-top: 2px;
+}
+
+.important {
+  background: #f37920;
 }

@@ -1,9 +1,13 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.css';
 import { mockChatsList } from './mock';
 
-export const ChatsList: FC = () => {
+interface IChatListProps {
+  isNotificationImportant?: boolean;
+}
+
+export const ChatsList = ({ isNotificationImportant }: IChatListProps) => {
   const [selectedChat, setSelectedChat] = useState(undefined);
   return (
     <>
@@ -35,7 +39,8 @@ export const ChatsList: FC = () => {
                 className={classNames(
                   'text',
                   'text_size_small',
-                  styles.notifications
+                  styles.notifications,
+                  isNotificationImportant ? styles.important : undefined
                 )}
               >
                 {chat.notifications}

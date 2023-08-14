@@ -16,7 +16,7 @@ import { EmptyMessageIcon } from '../../../../shared/ui/icons/empty-message-icon
 import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
 import { KeyIcon } from '../../../../shared/ui/icons/key-icon';
 
-interface ChatProps {
+interface IChatProps {
   extClassName?: string;
   messagesWrapperExtClassName?: string;
   messages: IMessage[];
@@ -32,7 +32,7 @@ export const Chat = ({
   chatmateInfo,
   onAttachFileClick,
   onMessageSend,
-}: ChatProps) => {
+}: IChatProps) => {
   const [inputValue, setInputValue] = useState<string>('');
   const sortedMessages = sortMessages(messages);
 
@@ -111,20 +111,22 @@ export const Chat = ({
               key={message.id}
             />
           ))}
-          <div className={styles.notification}>
-            <p
-              className={classnames(
-                'text',
-                'text_size_medium',
-                'text_type_bold',
-                styles.notificationText
-              )}
-            >
-              Волонтер достиг 3-го уровня доверия. Выдайте ему ключ
-            </p>
-            <div className={styles.line}></div>
-            <KeyIcon color={'white'} />
-          </div>
+          {window.location.pathname.includes('/in-work') ? (
+            <div className={styles.notification}>
+              <p
+                className={classnames(
+                  'text',
+                  'text_size_medium',
+                  'text_type_bold',
+                  styles.notificationText
+                )}
+              >
+                Волонтер достиг 3-го уровня доверия. Выдайте ему ключ
+              </p>
+              <div className={styles.line}></div>
+              <KeyIcon color={'white'} />
+            </div>
+          ) : undefined}
         </div>
         {window.location.pathname.includes('/in-work') ? (
           <>
