@@ -8,9 +8,9 @@ import { Icon } from 'shared/ui/icons';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
-import { UserCard } from 'shared/ui/user-card';
 
 import styles from './styles.module.css';
+import { UserCard } from 'widgets/user-card';
 
 const userMock = [
   {
