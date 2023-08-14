@@ -7,7 +7,7 @@ import {
   changeStepDecrement,
   changeStepIncrement,
 } from 'features/create-request/model';
-import YandexMap from 'shared/ui/map';
+import YandexMap from 'widgets/map';
 import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './address-step.module.css';

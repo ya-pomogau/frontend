@@ -34,6 +34,9 @@ const Checkbox = ({
       htmlFor={id}
       className={classnames('text', 'text_type_regular', extClassName)}
     >
+      <div className={styles.tooltip}>
+        Вы пока не можете выбрать эту категорию
+      </div>
       <div className={styles.checkboxIconWrapper}>
         <span className={styles.checkboxIcon}>
           <DefaultCheckboxIcon />
