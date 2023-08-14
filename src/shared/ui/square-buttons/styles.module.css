@@ -73,6 +73,19 @@
   cursor: default;
 }
 
+.square-button--exclamation.square-button::before {
+  background-color: var(--colors-interface-orange-soft);
+  transform: matrix(-1, 0, 0, -1, 0, 0)
+}
+
+.square-button--exclamation:hover.square-button::before {
+  background-color: var(--colors-interface-orange);
+}
+
+.square-button--exclamation:active.square-button::before {
+  background-color: var(--colors-interface-orange-soft);
+}
+
 .square-button:disabled.square-button::before {
   background-color: var(--colors-interface-additional);
 }

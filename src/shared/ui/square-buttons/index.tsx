@@ -4,12 +4,13 @@ import classnames from 'classnames';
 import { EditIcon } from '../icons/edit-icon';
 import { CloseIcon } from '../icons/close-icon';
 import { DoneIcon } from '../icons/done-icon';
+import { ExclamationIcon } from '../icons/exclamation-icon';
 
 import styles from './styles.module.css';
 
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
-  buttonType: 'close' | 'edit' | 'confirm';
+  buttonType: 'close' | 'edit' | 'confirm' | 'exclamation';
   onClick?: () => void;
   customIcon?: ReactNode;
 }
@@ -18,6 +19,7 @@ const defautlIcons = {
   close: <CloseIcon size="24" color="white" />,
   edit: <EditIcon size="24" color="white" />,
   confirm: <DoneIcon size="24" color="white" />,
+  exclamation: <ExclamationIcon color="white" />,
 };
 
 export const SquareButton = ({

@@ -1,19 +1,18 @@
 import { getColor, IIconProps } from './utils';
 
-export const ExclamationIcon = ({
-  color,
-  size = '24',
-  ...props
-}: IIconProps) => (
+export const ExclamationIcon = ({ color }: IIconProps) => (
   <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill={getColor(color)}
     xmlns="http://www.w3.org/2000/svg"
-    {...props}
+    width="6"
+    height="23"
+    fill={getColor(color)}
+    viewBox="0 0 6 24"
   >
-    <path d="M0.611954 17.9228L0 0.598249C0.000305653 0.274666 0.273308 0.00474018 0.600581 0.00443776L5.40054 2.54358e-07C5.72781 -0.000302172 6.00031 0.269119 6 0.592703L5.33552 17.9228H0.611954ZM5.61816 0.646972L5.02453 17.0842L1.21155 17.0813L0.545455 0.597744L5.50916 0.539205L5.61816 0.646972Z" />
-    <path d="M0.611936 23H5.6407V19.5212H0.611936V23ZM1.21153 20.1304V22.1585H5.02451L5.02449 20.1304H1.21153Z" />
+    <path
+      fill={getColor(color)}
+      fillRule="evenodd"
+      d="M.612 17.923 0 .598C0 .275.273.005.6.004L5.4 0a.6.6 0 0 1 .6.593l-.664 17.33H.612ZM5.618.647l-.593 16.437-3.813-.003L.545.598 5.51.539l.11.108ZM.612 23H5.64v-3.479H.61V23Zm.6-2.87v2.029h3.813V20.13H1.211Z"
+      clipRule="evenodd"
+    />
   </svg>
 );

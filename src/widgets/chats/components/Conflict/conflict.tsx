@@ -1,26 +1,12 @@
-import { ChangeEvent, useState } from 'react';
-import { sortMessages } from '../Chat/libs/utils';
 import styles from './styles.module.css';
 import classnames from 'classnames';
-import { Avatar } from '../../../../shared/ui/avatar';
 import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
-import { Message } from '../../../../shared/ui/message';
-import { KeyIcon } from '../../../../shared/ui/icons/key-icon';
-import { Input } from '../../../../shared/ui/input';
-import { PinIcon } from '../../../../shared/ui/icons/pin-icon';
-import { Button } from '../../../../shared/ui/button';
-import { SendIcon } from '../../../../shared/ui/icons/send-icon';
-import { EmptyMessageIcon } from '../../../../shared/ui/icons/empty-message-icon';
-import { IChatmateInfo } from '../Chat/types';
 import { ConflictUserCard } from '../../../../shared/ui/conflict-user-card';
-import { CheckIcon } from '../../../../shared/ui/icons/check-icon';
-import { DoneIcon } from '../../../../shared/ui/icons/done-icon';
+import { CategoriesBackground } from '../../../../shared/ui/categories-background';
+import { Button } from '../../../../shared/ui/button';
+import { EmptyMessageIcon } from '../../../../shared/ui/icons/empty-message-icon';
 
-interface IConflictProps {
-  extClassName?: string;
-}
-
-export const Conflict = ({ extClassName }: IConflictProps) => {
+export const Conflict = () => {
   return (
     <div className={styles.wrapper}>
       <div className={classnames('text', 'text_size_large', styles.heading)}>
@@ -33,7 +19,6 @@ export const Conflict = ({ extClassName }: IConflictProps) => {
             role={'Волонтер'}
             userName={'Петров Петр Петрович'}
             userId={11111114}
-            icon={<DoneIcon color={'white'} />}
             avatarLink={'https://i.pravatar.cc/300'}
             avatarName={'avatar'}
           />
@@ -41,11 +26,46 @@ export const Conflict = ({ extClassName }: IConflictProps) => {
             role={'Реципиент'}
             userName={'Петров Петр Петрович'}
             userId={11111114}
-            icon={<CheckIcon color={'white'} />}
             avatarLink={'https://i.pravatar.cc/300'}
             avatarName={'avatar'}
           />
         </div>
+        <div className={styles.information}>
+          <p className={classnames('text', 'text_size_large', styles.date)}>
+            24.09.2022
+            <p className={classnames(styles.time)}>16:00</p>
+          </p>
+          <p className={classnames('text', 'text_size_medium', styles.address)}>
+            ул. Нахимова, д.9, у подъезда №3
+          </p>
+          <CategoriesBackground theme={'primary'} content={'Сопровождение'} />
+          <p
+            className={classnames(
+              'text',
+              'text_size_medium',
+              styles.description
+            )}
+          >
+            Заболел и совсем нет сил даже ходить по квартире. Почти неделю
+            собаку выгуливали соседи, но в пятницу они не смогут. Помогите,
+            пожалуйста!
+          </p>
+        </div>
+      </div>
+      <div className={styles.buttons}>
+        <Button
+          buttonType={'secondary'}
+          label={'Конфликт решен'}
+          extClassName={classnames('text', 'text_size_small', styles.button)}
+        />
+        <Button
+          customIcon={<EmptyMessageIcon color={'white'} />}
+          buttonType="primary"
+          label="Ответить"
+          size="medium"
+          extClassName={classnames('text', 'text_size_medium', styles.button)}
+          disabled={false}
+        />
       </div>
     </div>
   );

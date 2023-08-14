@@ -1,14 +1,24 @@
 export interface IMessage {
-  id: number;
-  userId: string;
+  messageId: number;
+  userId: number;
   userAvatarLink: string;
-  message: string;
+  text: string;
   date: Date;
 }
 
-export interface IChatmateInfo {
-  userId: string;
-  userAvatarLink: string;
+export interface IChatMateInfo {
   name: string;
+  id: number;
+  avatar: string;
+  notifications?: number;
+  phone?: string;
+}
+
+export interface IChatList {
+  name: string;
+  id: number;
+  avatar: string;
+  message: string;
+  notifications: number;
   phone?: string;
 }

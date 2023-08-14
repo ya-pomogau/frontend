@@ -1,23 +1,24 @@
-import { ContentLayout } from 'shared/ui/content-layout';
-import { Icon } from 'shared/ui/icons';
-import { PageLayout } from 'shared/ui/page-layout';
-import { SmartHeader } from 'shared/ui/smart-header';
+import styles from '../chats-in-work/styles.module.css';
 
-import { SideMenu } from 'widgets/side-menu';
-import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
-
-import styles from './styles.module.css';
+import { PageLayout } from '../../shared/ui/page-layout';
 import { UserInfo } from '../../entities/user';
+import { SideMenu, SideMenuLink } from '../../widgets/side-menu';
+import { ContentLayout } from '../../shared/ui/content-layout';
+import { SmartHeader } from '../../shared/ui/smart-header';
 import { PageSubMenuForChats } from '../../widgets/page-sub-menu';
-import { ChatsList } from '../../widgets/chats/components';
-import { Chat } from '../../widgets/chats/components/Chat';
-import {
-  getMockMessages,
-  sortMessages,
-} from '../../entities/chat/ui/chat/libs/utils';
 import { Conflict } from '../../widgets/chats/components/Conflict';
 
-export function Conflicts() {
+import { Icon } from '../../shared/ui/icons';
+import { ChatsList } from '../../widgets/chats/components';
+import { useMemo, useState } from 'react';
+import { mockChatsList } from '../../widgets/chats/components/Chat/libs/utils';
+
+export function ConflictsPage() {
+  const [selectedChatId, setSelectedChatId] = useState<number>();
+  const selectedChat = useMemo(
+    () => mockChatsList.find((chat) => chat.id === selectedChatId),
+    [selectedChatId]
+  );
   return (
     <PageLayout
       side={
@@ -64,7 +65,10 @@ export function Conflicts() {
         >
           <PageSubMenuForChats />
           <div className={styles.container}>
-            <ChatsList isNotificationImportant={true} />
+            <ChatsList
+              selectedChatId={selectedChatId}
+              onSelectChat={setSelectedChatId}
+            />
             <Conflict />
           </div>
         </ContentLayout>

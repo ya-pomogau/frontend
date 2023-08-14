@@ -7,7 +7,7 @@ import { Message } from 'shared/ui/message';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 
-import { IMessage, IChatmateInfo } from './types';
+import { IMessage, IChatMateInfo } from './types';
 import { sortMessages } from './libs/utils';
 
 import styles from './styles.module.css';
@@ -20,7 +20,7 @@ interface IChatProps {
   extClassName?: string;
   messagesWrapperExtClassName?: string;
   messages: IMessage[];
-  chatmateInfo: IChatmateInfo;
+  chatMateInfo: IChatMateInfo;
   onAttachFileClick?: () => void;
   onMessageSend?: (message: string) => void;
 }
@@ -29,7 +29,7 @@ export const Chat = ({
   extClassName,
   messagesWrapperExtClassName,
   messages,
-  chatmateInfo,
+  chatMateInfo,
   onAttachFileClick,
   onMessageSend,
 }: IChatProps) => {
@@ -52,7 +52,7 @@ export const Chat = ({
       <div className={classnames(styles.chatWrapper, extClassName)}>
         <Avatar
           avatarName="Фотография собеседника"
-          avatarLink={chatmateInfo.userAvatarLink}
+          avatarLink={chatMateInfo.avatar}
           extClassName={styles.avatar}
         />
 
@@ -68,14 +68,14 @@ export const Chat = ({
               )}
             >
               <div className={styles.data}>
-                {chatmateInfo.name}
+                {chatMateInfo.name}
                 <p className={classnames('text', 'text_size_micro', styles.id)}>
-                  {`ID ${chatmateInfo.userId}`}
+                  {`ID ${chatMateInfo.id}`}
                 </p>
               </div>
               <CloseCrossIcon color={'blue'} />
             </div>
-            {chatmateInfo?.phone && (
+            {chatMateInfo?.phone && (
               <div className={styles.phoneInfo}>
                 <span
                   className={classnames(
@@ -87,7 +87,7 @@ export const Chat = ({
                   Тел.:
                 </span>
                 <span className={classnames('text', 'text_size_medium')}>
-                  {chatmateInfo.phone}
+                  {chatMateInfo.phone}
                 </span>
               </div>
             )}
@@ -104,11 +104,11 @@ export const Chat = ({
           {sortedMessages?.map((message) => (
             <Message
               type={
-                message.userId === chatmateInfo.userId ? 'incoming' : 'outgoing'
+                message.userId === chatMateInfo.id ? 'incoming' : 'outgoing'
               }
-              messageText={message.message}
+              messageText={message.text}
               avatarLink={message.userAvatarLink}
-              key={message.id}
+              key={message.messageId}
             />
           ))}
           {window.location.pathname.includes('/in-work') ? (

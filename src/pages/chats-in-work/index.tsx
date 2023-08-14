@@ -10,15 +10,20 @@ import styles from './styles.module.css';
 import { UserInfo } from '../../entities/user';
 import { PageSubMenuForChats } from '../../widgets/page-sub-menu';
 import { ChatsList } from '../../widgets/chats/components';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Chat } from '../../widgets/chats/components/Chat';
 import {
   getMockMessages,
   sortMessages,
-} from '../../entities/chat/ui/chat/libs/utils';
+  mockChatsList,
+} from '../../widgets/chats/components/Chat/libs/utils';
 
 export function ChatsInWorkPage() {
-  const [selectedChat, setSelectedChat] = useState(null);
+  const [selectedChatId, setSelectedChatId] = useState<number>();
+  const selectedChat = useMemo(
+    () => mockChatsList.find((chat) => chat.id === selectedChatId),
+    [selectedChatId]
+  );
   return (
     <PageLayout
       side={
@@ -65,16 +70,21 @@ export function ChatsInWorkPage() {
         >
           <PageSubMenuForChats />
           <div className={styles.container}>
-            <ChatsList />
-            <Chat
-              messages={sortMessages(getMockMessages())}
-              chatmateInfo={{
-                userId: '1',
-                name: 'Иванов Иван Иванович',
-                phone: '+7(000) 000-00-00',
-                userAvatarLink: 'https://i.pravatar.cc/300',
-              }}
+            <ChatsList
+              selectedChatId={selectedChatId}
+              onSelectChat={setSelectedChatId}
             />
+            {selectedChat && (
+              <Chat
+                messages={sortMessages(getMockMessages())}
+                chatMateInfo={{
+                  name: selectedChat.name,
+                  id: selectedChat.id,
+                  avatar: 'https://i.pravatar.cc/300',
+                  phone: '+7(000) 000-00-00',
+                }}
+              />
+            )}
           </div>
         </ContentLayout>
       }

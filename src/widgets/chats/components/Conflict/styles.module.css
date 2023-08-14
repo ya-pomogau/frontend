@@ -21,12 +21,54 @@
   height: 100%;
   background-color: var(--colors-interface-white);
   border: 1px solid var(--colors-interface-ford-white);
-  max-height: 409px;
-  padding: 17px 71px 7px;
+  max-height: 391px;
+  padding: 17px 0 0 57px;
 }
 
 .users {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  padding: 1px 0 0 5px;
+  gap: 43px;
+}
+
+.information {
+  margin-top: 47px;
+  max-width: 448px;
+}
+
+.date {
+  padding: 0;
+  display: flex;
+  gap: 34px;
+  flex-direction: row;
+  max-width: 206px;
+  margin: 0 0 17px 0;
+}
+
+.time {
+  margin: 0;
+  padding: 0;
+}
+
+.address {
+  margin: 0 0 20px 0;
+  padding: 0 0 0 22px;
+}
+
+.description {
+  margin: 13px 0 0 0;
+}
+
+.buttons {
+  margin: 13px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-self: end;
+}
+
+.button {
+  width: 132px;
+  height: 30px;
 }
