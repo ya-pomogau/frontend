@@ -1,0 +1,30 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 139px;
+  width: 118px;
+}
+
+.role {
+  margin: 0;
+  padding: 0;
+}
+
+.avatar {
+  width: 62px;
+  height: 62px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--colors-interface-primary);
+}

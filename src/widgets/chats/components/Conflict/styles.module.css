@@ -4,7 +4,7 @@
   width: 100%;
   max-width: 561px;
   margin-top: 12px;
-  gap: 10px
+  gap: 10px;
 }
 
 .heading {
@@ -15,9 +15,6 @@
   justify-content: space-between;
 }
 
-.closeIcon {
-}
-
 .conflict {
   display: flex;
   flex-direction: column;
@@ -25,4 +22,11 @@
   background-color: var(--colors-interface-white);
   border: 1px solid var(--colors-interface-ford-white);
   max-height: 409px;
+  padding: 17px 71px 7px;
+}
+
+.users {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
