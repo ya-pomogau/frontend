@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import classnames from 'classnames';
 
 import Checkbox from 'shared/ui/checkbox';
@@ -77,12 +77,30 @@ const AdminActions = ({
             <ArrowDownIcon color={'blue'} />
           </div>
           <div className={classnames(styles.admin_checkboxes)}>
-            <Checkbox label={'Подтверждать аккаунты'} />
-            <Checkbox label={'Создавать заявки'} />
-            <Checkbox label={'Раздавать ключи'} />
-            <Checkbox label={'Решать споры'} />
-            <Checkbox label={'Контент блог'} />
-            <Checkbox label={'Повышение балов'} />
+            <Checkbox
+              extClassName={styles.admin_checkbox}
+              label={'Подтверждать аккаунты'}
+            />
+            <Checkbox
+              extClassName={styles.admin_checkbox}
+              label={'Создавать заявки'}
+            />
+            <Checkbox
+              extClassName={styles.admin_checkbox}
+              label={'Раздавать ключи'}
+            />
+            <Checkbox
+              extClassName={styles.admin_checkbox}
+              label={'Решать споры'}
+            />
+            <Checkbox
+              extClassName={styles.admin_checkbox}
+              label={'Контент блог'}
+            />
+            <Checkbox
+              extClassName={styles.admin_checkbox}
+              label={'Повышение балов'}
+            />
           </div>
           <div className={classnames(styles.admin_block_btn)}>
             <Button
