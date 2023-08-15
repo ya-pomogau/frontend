@@ -12,8 +12,7 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import styles from './styles.module.css';
 import { useGetUsersQuery } from 'services/user-api';
 import { Loader } from 'shared/ui/loader';
-import { UserCard } from 'shared/ui/user-card';
-import { useAppSelector } from 'app/hooks';
+import { UserCard } from 'widgets/user-card';
 
 export function RequestsAdminsPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);

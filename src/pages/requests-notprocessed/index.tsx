@@ -12,7 +12,7 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import styles from './styles.module.css';
 import { useGetUncomfirmedQuery } from 'services/user-api';
 import { Loader } from 'shared/ui/loader';
-import { UserCard } from 'shared/ui/user-card';
+import { UserCard } from 'widgets/user-card';
 import { useAppSelector } from 'app/hooks';
 
 export function RequestsNotprocessedPage() {

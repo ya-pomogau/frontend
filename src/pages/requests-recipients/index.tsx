@@ -12,7 +12,7 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import styles from './styles.module.css';
 import { useGetUsersQuery } from 'services/user-api';
 import { Loader } from 'shared/ui/loader';
-import { UserCard } from 'shared/ui/user-card';
+import { UserCard } from 'widgets/user-card';
 
 export function RequestsRecipientsPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);

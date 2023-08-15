@@ -13,7 +13,7 @@ import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import styles from './styles.module.css';
 import { useGetUsersQuery } from 'services/user-api';
 import { Loader } from 'shared/ui/loader';
-import { UserCard } from 'shared/ui/user-card';
+import { UserCard } from 'widgets/user-card';
 
 export function RequestsVolunteersPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
