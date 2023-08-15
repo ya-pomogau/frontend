@@ -14,16 +14,12 @@
   width: 2px;
 }
 
-.chats::-webkit-scrollbar-track {
-  background-color: var(--colors-interface-white);
-}
-
-.chats::-webkit-scrollbar-thumb {
-  height: 292px;
-  background-color: var(--colors-interface-primary-additional);
+.chats::-webkit-scrollbar {
+  width: 0;
 }
 
 .chat {
+  margin: 0;
   cursor: pointer;
   width: 100%;
   box-sizing: border-box;
@@ -32,10 +28,11 @@
   display: flex;
   flex-direction: row;
 }
+
 .selectedChat {
   cursor: default;
-   background-color: var(--colors-interface-primary-additional);
- }
+  background-color: var(--colors-interface-primary-additional);
+}
 
 .avatar {
   border-radius: 50%;
@@ -86,4 +83,15 @@
 
 .important {
   background: #f37920;
+}
+
+@media (max-width: 735px) {
+  .chats {
+    margin-top: 10px;
+    width: 359px;
+  }
+
+  .chat {
+    width: 100%;
+  }
 }

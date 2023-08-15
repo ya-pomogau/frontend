@@ -53,9 +53,18 @@ export const SubmenuDefault: Story = {
         {...args}
         links={
           <>
-            <PageSubMenuLink to="/" text="Волонтеры" />
-            <PageSubMenuLink to="/recipients" text="Реципиенты" />
-            <PageSubMenuLink to="/admins" text="Админы" notifications={10} />
+            <PageSubMenuLink isMobile={false} to="/" text="Волонтеры" />
+            <PageSubMenuLink
+              isMobile={false}
+              to="/recipients"
+              text="Реципиенты"
+            />
+            <PageSubMenuLink
+              isMobile={false}
+              to="/admins"
+              text="Админы"
+              notifications={10}
+            />
           </>
         }
       />

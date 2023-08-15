@@ -12,6 +12,7 @@ import { Icon } from '../../shared/ui/icons';
 import { ChatsList } from '../../widgets/chats/components';
 import { useMemo, useState } from 'react';
 import { mockChatsList } from '../../widgets/chats/components/Chat/libs/utils';
+import { useMediaQuery } from '../../shared/hooks';
 
 export function ConflictsPage() {
   const [selectedChatId, setSelectedChatId] = useState<number>();
@@ -19,6 +20,9 @@ export function ConflictsPage() {
     () => mockChatsList.find((chat) => chat.id === selectedChatId),
     [selectedChatId]
   );
+
+  const isMobile = useMediaQuery('(max-width:1150px)');
+
   return (
     <PageLayout
       side={
@@ -58,19 +62,30 @@ export function ConflictsPage() {
           extClassName={styles.content}
           heading={
             <SmartHeader
-              settingIcon={<Icon color="blue" icon="ContactsIcon" size="54" />}
-              settingText="Чаты"
+              settingIcon={
+                <Icon color="blue" icon="ReadMessageIcon" size="54" />
+              }
+              settingText="Чат"
             />
           }
         >
           <PageSubMenuForChats />
-          <div className={styles.container}>
+          {isMobile ? (
             <ChatsList
               selectedChatId={selectedChatId}
               onSelectChat={setSelectedChatId}
+              isMobile={isMobile}
             />
-            <Conflict />
-          </div>
+          ) : (
+            <div className={styles.container}>
+              <ChatsList
+                selectedChatId={selectedChatId}
+                onSelectChat={setSelectedChatId}
+                isMobile={isMobile}
+              />
+              <Conflict />
+            </div>
+          )}
         </ContentLayout>
       }
     />

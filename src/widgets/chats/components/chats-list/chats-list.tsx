@@ -6,12 +6,14 @@ interface IChatListProps {
   isNotificationImportant?: boolean;
   selectedChatId: number | undefined;
   onSelectChat: (id: number) => void;
+  isMobile: boolean;
 }
 
 export const ChatsList = ({
   isNotificationImportant,
   selectedChatId,
   onSelectChat,
+  isMobile,
 }: IChatListProps) => {
   return (
     <>

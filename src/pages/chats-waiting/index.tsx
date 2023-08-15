@@ -17,6 +17,7 @@ import {
   sortMessages,
   mockChatsList,
 } from '../../widgets/chats/components/Chat/libs/utils';
+import { useMediaQuery } from '../../shared/hooks';
 
 export function ChatsWaitingPage() {
   const [selectedChatId, setSelectedChatId] = useState<number>();
@@ -24,6 +25,9 @@ export function ChatsWaitingPage() {
     () => mockChatsList.find((chat) => chat.id === selectedChatId),
     [selectedChatId]
   );
+
+  const isMobile = useMediaQuery('(max-width:1150px)');
+
   return (
     <PageLayout
       side={
@@ -63,29 +67,40 @@ export function ChatsWaitingPage() {
           extClassName={styles.content}
           heading={
             <SmartHeader
-              settingIcon={<Icon color="blue" icon="ContactsIcon" size="54" />}
-              settingText="Чаты"
+              settingIcon={
+                <Icon color="blue" icon="ReadMessageIcon" size="54" />
+              }
+              settingText="Чат"
             />
           }
         >
           <PageSubMenuForChats />
-          <div className={styles.container}>
+          {isMobile ? (
             <ChatsList
               selectedChatId={selectedChatId}
               onSelectChat={setSelectedChatId}
+              isMobile={isMobile}
             />
-            {selectedChat && (
-              <Chat
-                messages={sortMessages(getMockMessages())}
-                chatMateInfo={{
-                  name: selectedChat.name,
-                  id: selectedChat.id,
-                  avatar: 'https://i.pravatar.cc/300',
-                  phone: '+7(000) 000-00-00',
-                }}
+          ) : (
+            <div className={styles.container}>
+              <ChatsList
+                selectedChatId={selectedChatId}
+                onSelectChat={setSelectedChatId}
+                isMobile={isMobile}
               />
-            )}
-          </div>
+              {selectedChat && (
+                <Chat
+                  messages={sortMessages(getMockMessages())}
+                  chatMateInfo={{
+                    name: selectedChat.name,
+                    id: selectedChat.id,
+                    avatar: 'https://i.pravatar.cc/300',
+                    phone: '+7(000) 000-00-00',
+                  }}
+                />
+              )}
+            </div>
+          )}
         </ContentLayout>
       }
     />

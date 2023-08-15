@@ -9,6 +9,7 @@ interface PageSubMenuLinkProps {
   text: string;
   notifications?: number;
   isImportant?: boolean;
+  isMobile: boolean;
 }
 
 export const PageSubMenuLink: FC<PageSubMenuLinkProps> = ({
@@ -16,6 +17,7 @@ export const PageSubMenuLink: FC<PageSubMenuLinkProps> = ({
   text,
   notifications = 0,
   isImportant = false,
+  isMobile,
 }) => {
   const areNotificationsVisible = notifications > 0;
 
@@ -34,7 +36,8 @@ export const PageSubMenuLink: FC<PageSubMenuLinkProps> = ({
               'p-0',
               'm-0',
               styles.tabContainer__text,
-              isActive ? styles.tabContainer__textActive : ''
+              isActive ? styles.tabContainer__textActive : '',
+              isMobile ? 'text_size_small' : ''
             )}
           >
             {text}
