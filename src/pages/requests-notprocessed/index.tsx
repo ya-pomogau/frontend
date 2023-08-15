@@ -13,9 +13,11 @@ import styles from './styles.module.css';
 import { useGetUncomfirmedQuery } from 'services/user-api';
 import { Loader } from 'shared/ui/loader';
 import { UserCard } from 'shared/ui/user-card';
+import { useAppSelector } from 'app/hooks';
 
 export function RequestsNotprocessedPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const { role } = useAppSelector((store) => store.user);
 
   const buttonFilterRef = useRef<Element>();
 
@@ -36,9 +38,10 @@ export function RequestsNotprocessedPage() {
     getButtonPosition();
     setIsFilterVisibel(!isFilterVisibel);
   };
-
-  const { isLoading, data } = useGetUncomfirmedQuery({
-    pollingInterval: 300000,
+  //хук сейчас не нуждается в аргументах, но если не указать аргумент перед
+  //pollingInterval, то рефетча не будет
+  const { isLoading, data } = useGetUncomfirmedQuery(role, {
+    pollingInterval: 30000,
   });
 
   useEffect(() => {

@@ -38,7 +38,7 @@ export function RequestsRecipientsPage() {
   };
 
   const { isLoading, data = [] } = useGetUsersQuery('recipient', {
-    pollingInterval: 300000,
+    pollingInterval: 30000,
   });
 
   useEffect(() => {

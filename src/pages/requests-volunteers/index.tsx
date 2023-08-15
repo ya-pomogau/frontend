@@ -39,7 +39,7 @@ export function RequestsVolunteersPage() {
   };
 
   const { isLoading, data = [] } = useGetUsersQuery('volunteer', {
-    pollingInterval: 300000,
+    pollingInterval: 30000,
   });
 
   useEffect(() => {

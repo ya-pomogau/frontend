@@ -2,9 +2,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../config/api-config';
 
 //нам не нужны отдельные функции fetch для использования RTK Query.
-//Данный код генерирует нам 2 хука: хук useGetUsersQuery, который принимает userRole,
+//Данный код генерирует нам 2 хука для получения данных: хук useGetUsersQuery, который принимает userRole,
 //и возвращает массив юзеров с выбранной ролью, а также хук useUpdateUsersMutation,
-//который принимает body и обновляет массив юзеров
+//который принимает body и обновляет массив юзеров.
+//Также есть хук useUpdateUsersMutation, который принимает объект
+//с полями для обновления юзера
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
@@ -22,7 +24,12 @@ export const usersApi = createApi({
           : [{ type: 'Users', id: 'LIST' }],
     }),
     getUncomfirmed: build.query({
-      query: () => 'users?isFailed=false', //пока для теста сделала такое значение
+      query: (adminRole) =>
+        `users?${
+          adminRole === 'admin'
+            ? 'role_ne=admin&role_ne=master'
+            : 'role_ne=master'
+        }`, //пока для теста просто отдаю список, далее надо будет добавить условие статуса необработанных
       providesTags: (result) =>
         result
           ? [
@@ -33,9 +40,10 @@ export const usersApi = createApi({
     }),
     updateUsers: build.mutation({
       query: (body) => ({
-        url: 'users',
-        method: 'POST',
+        url: `users/${body.id}`,
+        method: 'PATCH',
         body,
+        // headers: 'Здесь будет JWT',
       }),
       invalidatesTags: [{ type: 'Users', id: 'LIST' }],
     }),
