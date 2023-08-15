@@ -33,6 +33,14 @@
   font-weight: 400;
   line-height: 22px;
 }
+
+.balance_input::-webkit-inner-spin-button,
+.balance_input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
 .balance_input {
   outline: none;
   border: none;
@@ -46,6 +54,18 @@
   background: #ffffff;
   background-origin: border-box;
   background-clip: content-box, border-box;
+  color: #2e3192;
+
+  font-family: Golos;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+}
+
+.balance_input::placeholder {
+  color: #9798c9;
+  -webkit-text-stroke: 0.5px #2e3192;
 }
 
 .save_btn {
@@ -71,6 +91,12 @@
 }
 
 @media all and (max-width: 1200px) {
+  body {
+    overflow-x: hidden;
+    background: linear-gradient(0deg, #ffffff, rgba(255, 255, 255, 0));
+    background-size: 100% 100vh;
+    background-attachment: fixed;
+  }
   .container {
     width: 414px;
   }

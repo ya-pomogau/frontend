@@ -19,32 +19,41 @@ const BalanceSettingsItem: React.FC<BalanceSettingsItemProps> = ({
     onInputChange(e.target.value);
   };
 
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    console.log('Form submitted');
+  };
+
   return (
-    <div className={classnames(styles.balance_box)}>
-      <div>
-        <p
-          className={classnames(
-            styles.balance_text,
-            'text',
-            'text_size_medium',
-            'm-0',
-            'p-0'
-          )}
-        >
-          {title}
-        </p>
+    <form onSubmit={handleSubmit}>
+      <div className={classnames(styles.balance_box)}>
+        <div>
+          <p
+            className={classnames(
+              styles.balance_text,
+              'text',
+              'text_size_medium',
+              'm-0',
+              'p-0'
+            )}
+          >
+            {title}
+          </p>
+        </div>
+        <div className={classnames(styles.balance_input_box)}>
+          <Input
+            className={classnames(styles.balance_input)}
+            value={inputValue}
+            name={'text'}
+            onChange={handleInputChange}
+            type="number"
+            min="1"
+            step="1"
+          />
+        </div>
+        <BallsIcon color={'blue'} size={'46'} />
       </div>
-      <div className={classnames(styles.balance_input_box)}>
-        <Input
-          className={classnames(styles.balance_input)}
-          value={inputValue}
-          name={'text'}
-          onChange={handleInputChange}
-          type="number"
-        />
-      </div>
-      <BallsIcon color={'blue'} size={'46'} />
-    </div>
+    </form>
   );
 };
 
