@@ -11,6 +11,9 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 
 import styles from './styles.module.css';
+import { useGetUsersQuery } from 'services/user-api';
+import { Loader } from 'shared/ui/loader';
+import { UserCard } from 'shared/ui/user-card';
 
 export function RequestsVolunteersPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
@@ -34,6 +37,10 @@ export function RequestsVolunteersPage() {
     getButtonPosition();
     setIsFilterVisibel(!isFilterVisibel);
   };
+
+  const { isLoading, data = [] } = useGetUsersQuery('volunteer', {
+    pollingInterval: 300000,
+  });
 
   useEffect(() => {
     window.addEventListener('resize', getButtonPosition);
@@ -76,6 +83,25 @@ export function RequestsVolunteersPage() {
           }
         >
           <PageSubMenuForAdmins />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <ul>
+              {data.map((item: any) => {
+                return (
+                  <li key={item.data.id}>
+                    <UserCard
+                      avatarLink={item.data.avatar}
+                      avatarName={item.data.fullname}
+                      userName={item.data.fullname}
+                      userId={item.data.id}
+                      userNumber={item.data.phone}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </ContentLayout>
       }
     />

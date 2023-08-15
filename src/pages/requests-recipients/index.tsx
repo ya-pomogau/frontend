@@ -10,6 +10,9 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 
 import styles from './styles.module.css';
+import { useGetUsersQuery } from 'services/user-api';
+import { Loader } from 'shared/ui/loader';
+import { UserCard } from 'shared/ui/user-card';
 
 export function RequestsRecipientsPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
@@ -33,6 +36,10 @@ export function RequestsRecipientsPage() {
     getButtonPosition();
     setIsFilterVisibel(!isFilterVisibel);
   };
+
+  const { isLoading, data = [] } = useGetUsersQuery('recipient', {
+    pollingInterval: 300000,
+  });
 
   useEffect(() => {
     window.addEventListener('resize', getButtonPosition);
@@ -75,6 +82,25 @@ export function RequestsRecipientsPage() {
           }
         >
           <PageSubMenuForAdmins />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <ul>
+              {data.map((item: any) => {
+                return (
+                  <li key={item.data.id}>
+                    <UserCard
+                      avatarLink={item.data.avatar}
+                      avatarName={item.data.fullname}
+                      userName={item.data.fullname}
+                      userId={item.data.id}
+                      userNumber={item.data.phone}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </ContentLayout>
       }
     />
