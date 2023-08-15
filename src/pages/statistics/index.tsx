@@ -23,11 +23,8 @@ export function StatisticsPage() {
         <ContentLayout
           heading={
             <SmartHeader
-              filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
-              filterText="Фильтр"
-              onClick={() => 1}
-              settingIcon={<Icon color="blue" icon="StatisticIcon" size="54" />}
-              settingText="Статистика"
+              icon={<Icon color="blue" icon="StatisticIcon" size="54" />}
+              text="Статистика"
             />
           }
         >

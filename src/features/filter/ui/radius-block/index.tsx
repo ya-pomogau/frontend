@@ -1,14 +1,14 @@
 import classnames from 'classnames';
 
 import { Button } from 'shared/ui/button';
-import { FilterItemsIds } from '../consts';
+import { FilterItemsIds } from '../../consts';
 
 import styles from '../styles.module.css';
 
 interface RadiusBlockProps {
   filter: string;
   onChange: (name: string, value: string[] | string) => void;
-  modeOfProfile: string;
+  modeOfProfile: 'map' | 'active' | 'completed';
 }
 
 export const RadiusBlock = ({
@@ -19,6 +19,7 @@ export const RadiusBlock = ({
   // определение внешнего вида копки радуса с учетом текущего выбора фильтра
   const getRadiusButtonType = (id: string) =>
     filter === id ? 'primary' : 'secondary';
+
   // изменение текущего состояния фильтра в части радиуса
   const handleRadiusButtonClick = (id: string) => {
     if (filter === id && modeOfProfile !== 'map') {
@@ -27,6 +28,7 @@ export const RadiusBlock = ({
       onChange('searchRadius', id);
     }
   };
+
   // установление изначального значения радиуса поиска активных заявок
   if (filter === '' && modeOfProfile === 'map') {
     filter = FilterItemsIds.RADIUS_5;
@@ -47,6 +49,7 @@ export const RadiusBlock = ({
       >
         Радиус поиска
       </div>
+
       <div className={styles.radiusButtonsWrapper}>
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_1)}
@@ -57,6 +60,7 @@ export const RadiusBlock = ({
           onClick={() => handleRadiusButtonClick(FilterItemsIds.RADIUS_1)}
           actionType="button"
         />
+
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_3)}
           size="medium"
@@ -66,6 +70,7 @@ export const RadiusBlock = ({
           onClick={() => handleRadiusButtonClick(FilterItemsIds.RADIUS_3)}
           actionType="button"
         />
+
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_5)}
           size="medium"

@@ -37,10 +37,8 @@ export function RegisterPage() {
         <ContentLayout
           heading={
             <SmartHeader
-              settingIcon={
-                <Icon color="blue" icon="RegistrationIcon" size="54" />
-              }
-              settingText="Регистрация"
+              icon={<Icon color="blue" icon="RegistrationIcon" size="54" />}
+              text="Регистрация"
               extClassName={styles.header}
             />
           }

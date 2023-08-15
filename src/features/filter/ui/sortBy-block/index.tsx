@@ -27,6 +27,7 @@ export const SortByBlock = ({
         label="По дате"
         onChange={handleCheckboxChange}
       />
+
       {userRole === 'volunteer' && (
         <>
           <Checkbox
@@ -35,6 +36,7 @@ export const SortByBlock = ({
             label="По убывающей цене"
             onChange={handleCheckboxChange}
           />
+
           <Checkbox
             checked={filter === 'increasingPrice'}
             id="increasingPrice"
