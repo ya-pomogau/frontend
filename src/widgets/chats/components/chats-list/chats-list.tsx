@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
-import { mockChatsList } from '../Chat/libs/utils';
+import { getChatList } from '../../libs/utils';
 
 interface IChatListProps {
   isNotificationImportant?: boolean;

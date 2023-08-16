@@ -1,4 +1,8 @@
-import { IChatList, IMessage } from '../types';
+import { IChatList, IMessage } from '../components/Chat/types';
+
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export const getMockMessages = (): IMessage[] => [
   {
@@ -24,7 +28,7 @@ export const getMockMessages = (): IMessage[] => [
   },
 ];
 
-export const mockChatsList: Array<IChatList> = [
+const mockChatsList: Array<IChatList> = [
   {
     name: 'Иванов Иван Иванович',
     id: 112230,
@@ -103,6 +107,11 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
 ];
+
+export async function getChatList() {
+  await delay(300);
+  return mockChatsList;
+}
 
 export const sortMessages = (messages: IMessage[]) =>
   messages.sort((a, b) => (a.date > b.date ? 1 : -1));

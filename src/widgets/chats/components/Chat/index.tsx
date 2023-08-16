@@ -8,7 +8,7 @@ import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 
 import { IMessage, IChatMateInfo } from './types';
-import { sortMessages } from './libs/utils';
+import { sortMessages } from '../../libs/utils';
 
 import styles from './styles.module.css';
 import { SendIcon } from '../../../../shared/ui/icons/send-icon';

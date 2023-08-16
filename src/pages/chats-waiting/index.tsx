@@ -16,7 +16,7 @@ import {
   getMockMessages,
   sortMessages,
   mockChatsList,
-} from '../../widgets/chats/components/Chat/libs/utils';
+} from '../../widgets/chats/libs/utils';
 
 export function ChatsWaitingPage() {
   const [selectedChatId, setSelectedChatId] = useState<number>();
