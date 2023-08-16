@@ -5,11 +5,5 @@
 .container {
   display: flex;
   flex-direction: row;
-  gap: 20px;
   margin-top: 28px;
-}
-
-.inputWrapper {
-  display: flex;
-  gap: 10px;
 }

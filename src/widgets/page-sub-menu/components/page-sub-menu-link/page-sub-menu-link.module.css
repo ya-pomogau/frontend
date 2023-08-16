@@ -12,6 +12,7 @@
 .tabContainer__text {
   margin-right: 6px;
   color: var(--colors-interface-additional);
+  width: max-content;
 }
 
 .tabContainer__textActive {

@@ -14,7 +14,6 @@ interface IConflictUserCardProps {
   avatarName: string;
   userName: string;
   userId: number;
-  buttonType?: 'confirm' | 'exclamation';
 }
 
 export const ConflictUserCard = ({
