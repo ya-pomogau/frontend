@@ -11,7 +11,7 @@ import { Conflict } from '../../widgets/chats/components/Conflict';
 import { Icon } from '../../shared/ui/icons';
 import { ChatsList } from '../../widgets/chats/components';
 import { useMemo, useState } from 'react';
-import { mockChatsList } from '../../widgets/chats/components/Chat/libs/utils';
+import { mockChatsList } from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
 
 export function ConflictsPage() {

@@ -15,6 +15,8 @@ import { SendIcon } from '../../../../shared/ui/icons/send-icon';
 import { EmptyMessageIcon } from '../../../../shared/ui/icons/empty-message-icon';
 import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
 import { KeyIcon } from '../../../../shared/ui/icons/key-icon';
+import { UserRole } from '../../../../entities/user/types';
+import { TemplateAnswers } from '../../../../shared/ui/template-answers';
 
 interface IChatProps {
   extClassName?: string;
@@ -23,6 +25,9 @@ interface IChatProps {
   chatMateInfo: IChatMateInfo;
   onAttachFileClick?: () => void;
   onMessageSend?: (message: string) => void;
+  parentPage: 'in-work' | 'waiting' | 'conflicts';
+  onClose: () => void;
+  role: UserRole;
 }
 
 export const Chat = ({
@@ -32,7 +37,16 @@ export const Chat = ({
   chatMateInfo,
   onAttachFileClick,
   onMessageSend,
+  parentPage,
+  role,
+  onClose,
 }: IChatProps) => {
+  const answersList = [
+    'Здравствуйте, спасибо, что обратились.',
+    'Я не могу ответить прямо сейчас, но обязательно вернусь с ответом в течении часа.',
+    'Будут вопросы — обращайтесь.',
+  ];
+
   const [inputValue, setInputValue] = useState<string>('');
   const sortedMessages = sortMessages(messages);
 
@@ -73,7 +87,7 @@ export const Chat = ({
                   {`ID ${chatMateInfo.id}`}
                 </p>
               </div>
-              <CloseCrossIcon color={'blue'} />
+              <CloseCrossIcon onClick={onClose} color={'blue'} />
             </div>
             {chatMateInfo?.phone && (
               <div className={styles.phoneInfo}>
@@ -111,7 +125,7 @@ export const Chat = ({
               key={message.messageId}
             />
           ))}
-          {window.location.pathname.includes('/in-work') ? (
+          {parentPage === 'in-work' ? (
             <div className={styles.notification}>
               <p
                 className={classnames(
@@ -128,7 +142,7 @@ export const Chat = ({
             </div>
           ) : undefined}
         </div>
-        {window.location.pathname.includes('/in-work') ? (
+        {parentPage === 'in-work' ? (
           <>
             <div className={classnames(styles.inputWrapper)}>
               <Input
@@ -150,24 +164,7 @@ export const Chat = ({
                 disabled={!inputValue}
               />
             </div>
-            <div className={classnames(styles.answers)}>
-              <p
-                className={classnames('text', 'text_size_small', styles.answer)}
-              >
-                Здравствуйте, спасибо, что обратились.
-              </p>
-              <p
-                className={classnames('text', 'text_size_small', styles.answer)}
-              >
-                Я не могу ответить прямо сейчас, но обязательно вернусь с
-                ответом в течении часа.
-              </p>
-              <p
-                className={classnames('text', 'text_size_small', styles.answer)}
-              >
-                Будут вопросы — обращайтесь.
-              </p>
-            </div>
+            {role === 'master' && <TemplateAnswers answers={answersList} />}
           </>
         ) : (
           <Button

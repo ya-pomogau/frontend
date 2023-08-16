@@ -1,0 +1,16 @@
+.answers {
+  margin-top: 11px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.answer {
+  margin: 0;
+  max-width: 193px;
+  padding: 5px 10px;
+  background-color: var(--colors-interface-primary-additional);
+  color: var(--colors-interface-ford-white);
+}

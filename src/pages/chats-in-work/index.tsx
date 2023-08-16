@@ -16,7 +16,7 @@ import {
   getMockMessages,
   sortMessages,
   mockChatsList,
-} from '../../widgets/chats/components/Chat/libs/utils';
+} from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
 
 export function ChatsInWorkPage() {
@@ -90,6 +90,7 @@ export function ChatsInWorkPage() {
               />
               {selectedChat && (
                 <Chat
+                  parentPage={'in-work'}
                   messages={sortMessages(getMockMessages())}
                   chatMateInfo={{
                     name: selectedChat.name,
@@ -97,6 +98,8 @@ export function ChatsInWorkPage() {
                     avatar: 'https://i.pravatar.cc/300',
                     phone: '+7(000) 000-00-00',
                   }}
+                  role={'master'}
+                  onClose={() => setSelectedChatId(undefined)}
                 />
               )}
             </div>

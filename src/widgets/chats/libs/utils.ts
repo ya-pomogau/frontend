@@ -13,22 +13,22 @@ export const getMockMessages = (): IMessage[] => [
     date: new Date(2023, 4, 15, 0, 0, 0),
   },
   {
-    messageId: 3,
-    userId: 2,
-    userAvatarLink: 'https://i.pravatar.cc/300',
-    text: 'Отлично, спасибо, встретимся у 3-го подъезда',
-    date: new Date(2023, 4, 15, 0, 5, 0),
-  },
-  {
     messageId: 2,
     userId: 1,
     userAvatarLink: 'https://i.pravatar.cc/300',
     text: 'Договорились так и сделаем',
     date: new Date(2023, 4, 15, 24, 0, 0),
   },
+  {
+    messageId: 3,
+    userId: 112230,
+    userAvatarLink: 'https://i.pravatar.cc/300',
+    text: 'Отлично, спасибо, встретимся у 3-го подъезда',
+    date: new Date(2023, 4, 15, 0, 5, 0),
+  },
 ];
 
-const mockChatsList: Array<IChatList> = [
+export const mockChatsList: Array<IChatList> = [
   {
     name: 'Иванов Иван Иванович',
     id: 112230,
