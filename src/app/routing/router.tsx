@@ -29,6 +29,7 @@ import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
+import { Logout } from 'pages/logout';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -68,6 +69,7 @@ export const router = createBrowserRouter(
         >
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/out" element={<Logout />} />
           <Route path="/chat" element={<></>} />
         </Route>
 
