@@ -58,26 +58,34 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
     setBalanceItems(updatedItems);
   };
 
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    console.log('Form submitted');
+  };
+
   return (
     <div className={classnames(styles.container, extClassName)}>
-      <div className={classnames(styles.balances_box)}>
-        {balanceItems.map((item, index) => (
-          <BalanceSettingsItem
-            key={index}
-            title={item.title}
-            inputValue={item.inputValue}
-            onInputChange={(value: string) => handleInputChange(index, value)}
-          />
-        ))}
-      </div>
-      <Button
-        className={classnames(styles.save_btn)}
-        buttonType={'primary'}
-        label={'Сохранить'}
-        size="large"
-        actionType="submit"
-        onClick={() => console.log('Save button pressed')}
-      />
+      <form onSubmit={handleSubmit}>
+        <div className={classnames(styles.balances_box)}>
+          {balanceItems.map((item, index) => (
+            <BalanceSettingsItem
+              key={index}
+              title={item.title}
+              inputValue={item.inputValue}
+              onInputChange={(value: string) => handleInputChange(index, value)}
+            />
+          ))}
+        </div>
+        <Button
+          className={classnames(styles.save_btn)}
+          buttonType={'primary'}
+          label={'Сохранить'}
+          size="large"
+          actionType="submit"
+          onClick={() => console.log('Save button pressed')}
+          onSubmit={() => console.log('Submit')}
+        />
+      </form>
     </div>
   );
 };
