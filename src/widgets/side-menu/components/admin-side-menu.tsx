@@ -1,10 +1,8 @@
-import { FC } from 'react';
-
 import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Icon } from 'shared/ui/icons';
 
-export const AdminSideMenu: FC = () => {
+export const AdminSideMenu = () => {
   return (
     <SideMenu
       authRequired

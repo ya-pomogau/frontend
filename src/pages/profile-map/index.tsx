@@ -1,15 +1,7 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import {
-  SideMenu,
-  SideMenuForAuthorized,
-  VolunteerSideMenu,
-  RecipientSideMenu,
-  AdminSideMenu,
-  MasterSideMenu,
-} from 'widgets/side-menu';
-import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
+import { SideMenuForAuthorized } from 'widgets/side-menu';
 import { Filter } from 'features/filter/ui';
 import { UserInfo } from 'entities/user';
 import { fetchAvailableTasks } from 'entities/task/model';

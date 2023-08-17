@@ -1,10 +1,9 @@
-import { FC } from 'react';
 import { useAppSelector } from 'app/hooks';
 
 import { PageSubMenuAdmin } from '../page-sub-menu-admin';
 import { PageSubMenuMaster } from '../page-sub-menu-master';
 
-export const PageSubMenuForAdmins: FC = () => {
+export const PageSubMenuForAdmins = () => {
   const { role } = useAppSelector((state) => state.user);
 
   if (role === 'admin') {

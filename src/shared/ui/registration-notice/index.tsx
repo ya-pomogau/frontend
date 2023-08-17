@@ -1,6 +1,7 @@
 import classnames from 'classnames';
-import styles from './styles.module.css';
+
 import { RoundButton } from '../round-button';
+import styles from './styles.module.css';
 
 interface RegistrationNoticeProps {
   extClassName?: string;
