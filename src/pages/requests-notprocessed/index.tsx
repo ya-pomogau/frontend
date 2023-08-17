@@ -10,6 +10,20 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 
 import styles from './styles.module.css';
+import { Input } from 'shared/ui/input';
+import { testUsers } from 'pages/requests/test-users';
+import { UserCard } from 'widgets/user-card';
+
+interface UserProps {
+  role: 'volunteer' | 'recipient' | 'admin' | 'master';
+  extClassName?: string;
+  avatarLink: string;
+  avatarName: string;
+  userName: string;
+  userId: number;
+  userNumber: string;
+  volunteerInfo?: any;
+}
 
 export function RequestsNotprocessedPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
@@ -75,6 +89,26 @@ export function RequestsNotprocessedPage() {
           }
         >
           <PageSubMenuForAdmins />
+
+          <Input
+            value=""
+            name="name"
+            onChange={() => console.log('Ipput changed')}
+            placeholder={'Введите имя'}
+            type="name"
+            label="Введите имя "
+          />
+          {testUsers.map((user: UserProps) => (
+            <UserCard
+              role={user.role}
+              key={user.userId} // Добавьте ключ, чтобы избежать предупреждений React
+              avatarLink={user.avatarLink}
+              avatarName={user.avatarName}
+              userName={user.userName}
+              userId={user.userId}
+              userNumber={user.userNumber}
+            />
+          ))}
         </ContentLayout>
       }
     />
