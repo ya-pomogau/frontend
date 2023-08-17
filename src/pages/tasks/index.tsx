@@ -10,6 +10,7 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
 
 import styles from './styles.module.css';
+import { Link } from 'react-router-dom';
 import { UserCard } from 'widgets/user-card';
 
 const userMock = [
@@ -121,6 +122,10 @@ export function TasksPage() {
             </>
           }
         >
+          <div>
+            <Link to={'/profile/bids'}>Настроить баллы</Link>
+          </div>
+
           <div>
             <Input
               value={value}

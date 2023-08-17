@@ -29,6 +29,7 @@ import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
+import { BidsPage } from 'pages/bids';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -127,6 +128,8 @@ export const router = createBrowserRouter(
           <Route path="/profile/statistics" element={<StatisticsPage />} />
 
           <Route path="/profile/tasks" element={<TasksPage />} />
+
+          <Route path="/profile/bids" element={<BidsPage />} />
         </Route>
 
         <Route
