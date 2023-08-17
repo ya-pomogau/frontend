@@ -10,9 +10,9 @@ import {
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { TextArea } from 'shared/ui/text-area';
+import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
-import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 interface ITaskStepProps {
   isMobile?: boolean;

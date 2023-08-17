@@ -1,9 +1,10 @@
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps';
 
 import { isTaskUrgent } from 'shared/libs/utils';
 import { Mark } from './Mark';
+
 import type { Task } from 'entities/task/types';
 
 interface YandexMapProps {
@@ -20,7 +21,7 @@ interface YandexMapProps {
   isAuthorised?: boolean;
 }
 
-export const YandexMap: FC<YandexMapProps> = ({
+export const YandexMap = ({
   width = 500,
   height = 500,
   mapSettings = { latitude: 59.93, longitude: 30.31, zoom: 15 },

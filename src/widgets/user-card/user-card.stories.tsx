@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UserCard } from '.';
-import { SettingsButton } from '../../shared/ui/transforming-buttons/settings-button';
 
 const meta: Meta<typeof UserCard> = {
   title: 'widgets/UserCard',

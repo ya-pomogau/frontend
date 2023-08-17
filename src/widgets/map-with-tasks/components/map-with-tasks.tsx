@@ -1,12 +1,14 @@
-import { FC, useEffect } from 'react';
+/* eslint-disable import/no-named-as-default */
+import { useEffect } from 'react';
 
-import { useAppSelector, useAppDispatch } from 'app/hooks';
+import { useGetTasksQuery } from 'services/tasks-api';
+import { useAppDispatch } from 'app/hooks';
+
 import { fetchAvailableTasks } from 'entities/task/model';
 import YandexMap from 'widgets/map';
-import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 
-export const MapWithTasks: FC = () => {
+export const MapWithTasks = () => {
   const dispatch = useAppDispatch();
   const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
 
@@ -17,6 +19,6 @@ export const MapWithTasks: FC = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    data && <YandexMap tasks={data} width="100%" height="100%" />
+    data && <YandexMap tasks={data} width="100%" height="90%" />
   );
 };

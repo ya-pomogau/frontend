@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import classnames from 'classnames';
-import styles from '../styles.module.css';
+
 import { Button } from 'shared/ui/button';
 import { Input } from 'shared/ui/input';
+
+import styles from '../styles.module.css';
 
 interface RecipientActionsProps {
   approved: boolean;

@@ -5,12 +5,14 @@ import { Avatar } from '../../../shared/ui/avatar';
 import { Button } from '../../../shared/ui/button';
 import { Input } from '../../../shared/ui/input';
 
-import styles from './edit-viewer-info.module.css';
-import { UpdateUserInfo } from 'entities/user/types';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
-import type { ViewerInputData } from '../types';
 import { LightPopup } from 'shared/ui/light-popup';
 import { useOutsideClick } from 'shared/hooks/use-outside-click';
+
+import type { UpdateUserInfo } from 'entities/user/types';
+import type { ViewerInputData } from '../types';
+
+import styles from './edit-viewer-info.module.css';
 
 interface EditViewerInfoProps {
   extClassName?: string;

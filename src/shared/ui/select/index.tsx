@@ -8,7 +8,7 @@ type TIconArrow = {
   extClassName?: string;
 };
 
-const IconArrow: React.FC<TIconArrow> = ({ extClassName }) => (
+const IconArrow = ({ extClassName }: TIconArrow) => (
   <svg
     className={extClassName}
     width="24"

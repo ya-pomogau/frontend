@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
@@ -36,11 +35,11 @@ type RoutesGroupProps =
   | RoledRouteProps
   | OnlyUnauthorizedRouteProps;
 
-export const RoutesGroup: FC<RoutesGroupProps> = ({
+export const RoutesGroup = ({
   publicRoutes,
   onlyUnauthorized,
   allowed,
-}) => {
+}: RoutesGroupProps) => {
   const { isLoading, role } = useAppSelector((state) => state.user);
 
   if (publicRoutes) {

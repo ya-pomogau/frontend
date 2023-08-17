@@ -1,9 +1,10 @@
-import React from 'react';
 import classnames from 'classnames';
+
 import { ExclamationPointIcon } from 'shared/ui/icons/exclamation-point-icon';
 import { Button } from 'shared/ui/button';
-import styles from '../styles.module.css';
 import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
+
+import styles from '../styles.module.css';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
@@ -19,7 +20,7 @@ interface VolunteerActionsProps {
   onGiveKeysButtonClick: () => void;
 }
 
-const VolunteerActions: React.FC<VolunteerActionsProps> = ({
+const VolunteerActions = ({
   isVolonteerAcceptButtonDisabled,
   getButtonTypeFromScore,
   scores,
