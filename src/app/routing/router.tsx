@@ -75,7 +75,7 @@ export const router = createBrowserRouter(
           <Route path="/chat" element={<></>} />
         </Route>
 
-        {/* <Route
+        <Route
           element={
             <RoutesGroup
               allowed={{
@@ -83,9 +83,9 @@ export const router = createBrowserRouter(
               }}
             />
           }
-        > */}
-        <Route path="/profile/map" element={<ProfileMapPage />} />
-        {/* </Route> */}
+        >
+          <Route path="/profile/map" element={<ProfileMapPage />} />
+        </Route>
 
         <Route
           element={
