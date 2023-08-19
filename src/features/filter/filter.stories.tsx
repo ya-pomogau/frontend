@@ -3,17 +3,12 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { withRouter } from 'storybook-addon-react-router-v6';
 
-import {
-  MapTasksFilter,
-  ActiveTasksFilter,
-  CompletedTasksFilter,
-  AdminsTasksFilter,
-  RequestsFilter,
-} from 'features/filter';
-
-/*
- * Информация о фильтре: https://github.com/vierim/YaPomogayu-frontend/issues/82#issuecomment-1678997474
- */
+import type {
+  FilterProps,
+  NotFoundFilterProps,
+  FilteringProps,
+} from 'features/filter/filter';
+import { Filter } from 'features/filter';
 
 const mockedVolunteerState = {
   role: 'volunteer',
@@ -70,17 +65,27 @@ const Mockstore = ({ initialState, children }: Record<any, any>) => (
   </Provider>
 );
 
-const meta: Meta<typeof MapTasksFilter> = {
+const meta: Meta<typeof Filter> = {
   title: 'features/Filter',
-  component: MapTasksFilter,
+  component: Filter,
+  tags: ['autodocs'],
   decorators: [withRouter],
 };
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const VolunteerMapTasksFilter: Story = {
-  render: () => (
+export const DefaultFilter: Story & any = {
+  args: {
+    items: {
+      categories: true,
+      radius: true,
+      sort: true,
+      date: true,
+    },
+  },
+  render: ({ ...args }: FilteringProps) => (
     <Mockstore initialState={mockedVolunteerState}>
       <div
         style={{
@@ -89,14 +94,17 @@ export const VolunteerMapTasksFilter: Story = {
           justifyContent: 'center',
         }}
       >
-        <MapTasksFilter />
+        <Filter {...args} />
       </div>
     </Mockstore>
   ),
 };
 
-export const VolunteerActiveTasksFilterFilter: Story = {
-  render: () => (
+export const BlockedFilter: Story & any = {
+  args: {
+    notFoundFilter: true,
+  },
+  render: ({ ...args }: NotFoundFilterProps) => (
     <Mockstore initialState={mockedVolunteerState}>
       <div
         style={{
@@ -105,87 +113,7 @@ export const VolunteerActiveTasksFilterFilter: Story = {
           justifyContent: 'center',
         }}
       >
-        <ActiveTasksFilter />
-      </div>
-    </Mockstore>
-  ),
-};
-
-export const RecipientActiveTasksFilterFilter: Story = {
-  render: () => (
-    <Mockstore initialState={mockedRecipientState}>
-      <div
-        style={{
-          width: '100vw',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <ActiveTasksFilter />
-      </div>
-    </Mockstore>
-  ),
-};
-
-export const VolunteerCompletedTasksFilter: Story = {
-  render: () => (
-    <Mockstore initialState={mockedVolunteerState}>
-      <div
-        style={{
-          width: '100vw',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <CompletedTasksFilter />
-      </div>
-    </Mockstore>
-  ),
-};
-
-export const RecipientCompletedTasksFilter: Story = {
-  render: () => (
-    <Mockstore initialState={mockedRecipientState}>
-      <div
-        style={{
-          width: '100vw',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <CompletedTasksFilter />
-      </div>
-    </Mockstore>
-  ),
-};
-
-export const AdminRequestsFilter: Story = {
-  render: () => (
-    <Mockstore initialState={mockedAdminState}>
-      <div
-        style={{
-          width: '100vw',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <RequestsFilter />
-      </div>
-    </Mockstore>
-  ),
-};
-
-export const AdminTasksFilter: Story = {
-  render: () => (
-    <Mockstore initialState={mockedAdminState}>
-      <div
-        style={{
-          width: '100vw',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <AdminsTasksFilter />
+        <Filter {...args} />
       </div>
     </Mockstore>
   ),

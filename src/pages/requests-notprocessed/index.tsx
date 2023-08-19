@@ -1,7 +1,7 @@
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import { SideMenuForAuthorized } from 'widgets/side-menu';
 
-import { RequestsFilter } from 'features/filter';
+import { Filter } from 'features/filter';
 import { UserInfo } from 'entities/user';
 
 import { PageLayout } from 'shared/ui/page-layout';
@@ -29,7 +29,7 @@ export function RequestsNotprocessedPage() {
             <SmartHeader
               icon={<Icon color="blue" icon="BlockIcon" size="54" />}
               text="Подтверждение / Блокировка"
-              filter={<RequestsFilter />}
+              filter={<Filter items={{ userCategories: true }} />}
             />
           }
         >

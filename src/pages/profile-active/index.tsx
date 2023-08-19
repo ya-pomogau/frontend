@@ -10,7 +10,7 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { ActiveTasksFilter } from 'features/filter';
+import { Filter } from 'features/filter';
 
 import styles from './styles.module.css';
 
@@ -45,7 +45,27 @@ export function ProfileActivePage() {
               icon={
                 <Icon color="blue" icon="ActiveApplicationIcon" size="54" />
               }
-              filter={<ActiveTasksFilter />}
+              filter={
+                role === 'volunteer' ? (
+                  <Filter
+                    items={{
+                      sort: true,
+                      categories: true,
+                      radius: true,
+                      date: false,
+                    }}
+                  />
+                ) : (
+                  <Filter
+                    items={{
+                      sort: true,
+                      categories: true,
+                      radius: false,
+                      date: false,
+                    }}
+                  />
+                )
+              }
             />
           }
         >

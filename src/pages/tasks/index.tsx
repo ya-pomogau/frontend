@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { SideMenuForAuthorized } from 'widgets/side-menu';
 
-import { AdminsTasksFilter } from 'features/filter';
+import { Filter } from 'features/filter';
 import { UserInfo } from 'entities/user';
 
 import { PageLayout } from 'shared/ui/page-layout';
@@ -76,7 +76,7 @@ export function TasksPage() {
             <SmartHeader
               icon={<Icon color="blue" icon="SettingsIcon" size="54" />}
               text="Создание / Редактирование заявки"
-              filter={<AdminsTasksFilter />}
+              filter={<Filter items={{ userCategories: true }} />}
             />
           }
         >

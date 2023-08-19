@@ -14,7 +14,7 @@ interface FilterCoverProps {
   position: { top: number; right: number };
   filterMenu: ReactElement;
   filterValues: IFilterValues;
-  setFilterValues: (value: IFilterValues) => void;
+  setFilterValues: Dispatch<SetStateAction<IFilterValues>>;
 }
 
 export const FilterCover = ({

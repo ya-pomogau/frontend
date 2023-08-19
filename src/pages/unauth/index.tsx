@@ -9,7 +9,7 @@ import { VolunteerSideMenu } from 'widgets/side-menu';
 
 import styles from './styles.module.css';
 import { Navigate } from 'react-router-dom';
-import { MapTasksFilter } from 'features/filter';
+import { Filter } from 'features/filter';
 
 export function UnauthPage() {
   const { role } = useAppSelector((state) => state.user);
@@ -34,7 +34,7 @@ export function UnauthPage() {
             <SmartHeader
               icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
               text="Карта заявок"
-              filter={<MapTasksFilter />}
+              filter={<Filter notFoundFilter />}
             />
           }
         >

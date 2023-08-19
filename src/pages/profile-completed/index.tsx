@@ -11,7 +11,7 @@ import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 
-import { CompletedTasksFilter } from 'features/filter';
+import { Filter } from 'features/filter';
 
 import styles from './styles.module.css';
 
@@ -21,6 +21,7 @@ export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
 
   const { tasks } = useAppSelector((store) => store.tasks);
+  const { role } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(fetchCompletedTasks());
@@ -45,7 +46,27 @@ export function ProfileCompletedPage() {
                 <Icon color="blue" icon="CompletedApplicationIcon" size="54" />
               }
               text="Завершенные заявки"
-              filter={<CompletedTasksFilter />}
+              filter={
+                role === 'volunteer' ? (
+                  <Filter
+                    items={{
+                      sort: true,
+                      categories: false,
+                      radius: false,
+                      date: false,
+                    }}
+                  />
+                ) : (
+                  <Filter
+                    items={{
+                      sort: true,
+                      categories: true,
+                      radius: false,
+                      date: false,
+                    }}
+                  />
+                )
+              }
             />
           }
         >

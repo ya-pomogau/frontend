@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import YandexMap from 'widgets/map';
 import { SideMenuForAuthorized } from 'widgets/side-menu';
 
-import { MapTasksFilter } from 'features/filter';
+import { Filter } from 'features/filter';
 import { UserInfo } from 'entities/user';
 
 import { fetchAvailableTasks } from 'entities/task/model';
@@ -43,7 +43,15 @@ export function ProfileMapPage() {
             <SmartHeader
               icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
               text="Карта заявок"
-              filter={<MapTasksFilter />}
+              filter={
+                <Filter
+                  items={{
+                    categories: true,
+                    radius: true,
+                    date: true,
+                  }}
+                />
+              }
             />
           }
         >

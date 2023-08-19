@@ -15,7 +15,7 @@ import { IFilterValues } from 'features/filter/types';
 interface FilterWrapperProps {
   filterMenu: ReactElement;
   filterValues: IFilterValues;
-  setFilterValues: (value: IFilterValues) => void;
+  setFilterValues: Dispatch<SetStateAction<IFilterValues>>;
 }
 
 export const FilterWrapper = ({
