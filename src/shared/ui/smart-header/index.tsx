@@ -1,4 +1,4 @@
-import { ReactNode, MouseEvent, FC } from 'react';
+import { ReactNode, MouseEvent } from 'react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
@@ -11,14 +11,14 @@ interface SmartHeaderProps {
   filterIcon?: ReactNode;
   onClick?: (e: MouseEvent) => void;
 }
-export const SmartHeader: FC<SmartHeaderProps> = ({
+export const SmartHeader = ({
   extClassName,
   settingText,
   settingIcon,
   filterText,
   filterIcon,
   ...props
-}) => (
+}: SmartHeaderProps) => (
   <div className={classnames(styles.smartHeader__container, extClassName)}>
     <div className={styles.smartHeader__block}>
       <div className={styles.settingIcon}>{settingIcon}</div>

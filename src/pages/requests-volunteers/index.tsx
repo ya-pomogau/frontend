@@ -1,5 +1,7 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 
+import { useGetUsersQuery } from 'services/user-api';
+
 import { SideMenuForAuthorized } from 'widgets/side-menu';
 import { Filter } from 'features/filter/ui';
 import { UserInfo } from 'entities/user';
@@ -7,8 +9,9 @@ import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
-
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
+import { Loader } from 'shared/ui/loader';
+import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
 
@@ -34,6 +37,10 @@ export function RequestsVolunteersPage() {
     getButtonPosition();
     setIsFilterVisibel(!isFilterVisibel);
   };
+
+  const { isLoading, data = [] } = useGetUsersQuery('volunteer', {
+    pollingInterval: 30000,
+  });
 
   useEffect(() => {
     window.addEventListener('resize', getButtonPosition);
@@ -76,6 +83,25 @@ export function RequestsVolunteersPage() {
           }
         >
           <PageSubMenuForAdmins />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <ul>
+              {data.map((item: any) => {
+                return (
+                  <li key={item.data.id}>
+                    <UserCard
+                      avatarLink={item.data.avatar}
+                      avatarName={item.data.fullname}
+                      userName={item.data.fullname}
+                      userId={item.data.id}
+                      userNumber={item.data.phone}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </ContentLayout>
       }
     />

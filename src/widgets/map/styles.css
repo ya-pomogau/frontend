@@ -119,11 +119,20 @@
 
 .task_icon_container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  gap: 4px;
+  margin: 10px 0 0 0;
+}
+
+.task_icon_box {
+  display: flex;
   justify-content: end;
   align-items: center;
   margin-top: 4px;
   gap: 4px;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
 }
 
 .task_count {
@@ -134,7 +143,7 @@
 }
 
 .task_count_urgent {
-  color: #d60080;
+  color: var(--colors-interface-pink);
   font-size: 24px;
   line-height: 29px;
   margin: 0;
@@ -163,7 +172,7 @@
 }
 
 .submit_button_urgent {
-  background-color: #d60080;
+  background-color: var(--colors-interface-pink);
   border: none;
   color: white;
   font-family: 'Golos', sans-serif;
@@ -177,4 +186,30 @@
   cursor: pointer;
   background-color: var(--colors-interface-pink-soft);
   transition: var(--transition-hover);
+}
+.task_box {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin: 3px;
+}
+
+.task_date_text {
+  margin: 0;
+  padding: 0;
+  color: #2e3192;
+  font-family: 'Golos', sans-serif;
+  font-size: 24px;
+  line-height: 28.8px;
+  font-weight: 400;
+}
+
+.task_date_text_urgent {
+  margin: 0;
+  padding: 0;
+  color: #d60080;
+  font-family: 'Golos', sans-serif;
+  font-size: 24px;
+  line-height: 28.8px;
+  font-weight: 400;
 }

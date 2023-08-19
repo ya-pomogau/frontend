@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { withRouter } from 'storybook-addon-react-router-v6';
@@ -52,19 +51,6 @@ const meta: Meta<typeof Header> = {
   tags: ['autodocs'],
   decorators: [withRouter],
 };
-
-// const meta: Meta<typeof Header> = {
-//   title: 'widgets/Header',
-//   component: Header,
-//   tags: ['autodocs'],
-//   decorators: [
-//     (Story) => (
-//       <BrowserRouter>
-//         <Story />
-//       </BrowserRouter>
-//     ),
-//   ],
-// };
 
 export default meta;
 

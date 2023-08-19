@@ -1,9 +1,10 @@
-import { FC, memo } from 'react';
+import { memo } from 'react';
 import { Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps';
 
 import { isTaskUrgent } from 'shared/libs/utils';
 import { Mark } from './Mark';
+
 import type { Task } from 'entities/task/types';
 
 interface YandexMapProps {
@@ -17,16 +18,18 @@ interface YandexMapProps {
   tasks?: Task[];
   onClick?: () => void;
   coordinates?: [number, number];
+  isAuthorised?: boolean;
 }
 
-export const YandexMap: FC<YandexMapProps> = ({
+export const YandexMap = ({
   width = 500,
   height = 500,
   mapSettings = { latitude: 59.93, longitude: 30.31, zoom: 15 },
   onClick,
   tasks,
   coordinates,
-}) => (
+  isAuthorised,
+}: YandexMapProps) => (
   <YMaps
     enterprise
     query={{
@@ -58,6 +61,12 @@ export const YandexMap: FC<YandexMapProps> = ({
           count={task.category.scope}
           onClick={onClick}
           key={task.id}
+          isAuthorised={isAuthorised}
+          date={new Date(task.date).toLocaleDateString()}
+          time={new Date(task.date).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
         />
       ))}
       <Mark coordinates={coordinates} />

@@ -26,6 +26,7 @@ import { openPopup } from 'features/create-request/model';
 import { NotFoundPage } from 'pages/not-found';
 
 import styles from './styles.module.css';
+import useUser from 'shared/hooks/use-user';
 
 export function RecipientPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -33,7 +34,7 @@ export function RecipientPage() {
 
   const dispatch = useAppDispatch();
 
-  const isAuth = !!useAppSelector((store) => store.user.role);
+  const isAuth = useUser();
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра

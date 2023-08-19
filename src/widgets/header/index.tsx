@@ -1,19 +1,20 @@
-import { useState, FC, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
+import { useMediaQuery } from 'shared/hooks/media-query';
+import { positionConfigTop, linksTop } from './utils';
+
 import { Logo } from 'shared/ui/logo';
 import { SideBar } from 'widgets/header/navigation';
 import { Menu } from 'widgets/header/menu';
 import { MenuIcon } from 'shared/ui/icons/menu-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { UnionIcon } from 'shared/ui/icons/union-icon';
-import { useMediaQuery } from 'shared/hooks/media-query';
-import { positionConfigTop, linksTop } from './utils';
 
 import styles from './styles.module.css';
 
-const Header: FC = () => {
+const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
 
   const isMobile = useMediaQuery('(max-width: 900px)');

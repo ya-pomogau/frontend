@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { UserInfo } from 'entities/user';
 import { ContentLayout } from 'shared/ui/content-layout';
@@ -9,10 +9,11 @@ import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { VkIcon } from 'shared/ui/icons/vk-icon';
-import styles from './styles.module.css';
 import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
 import { VolunteerSideMenu } from 'widgets/side-menu';
+
+import styles from './styles.module.css';
 
 interface ILoginForm {
   login: string;
@@ -116,6 +117,9 @@ export function LoginPage() {
               />
             </form>
           )}
+          <Link to="/pick" className={styles.templink}>
+            Авторизация под выбранной ролью
+          </Link>
         </ContentLayout>
       }
     />

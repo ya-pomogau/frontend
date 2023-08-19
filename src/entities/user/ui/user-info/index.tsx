@@ -1,18 +1,21 @@
+import { useRef, useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
 
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
 import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
+import { EditViewerInfo } from 'features/edit-viewer-info/ui';
+
+import type { UpdateUserInfo } from 'entities/user/types';
 
 import styles from './styles.module.css';
-import { useRef, useState } from 'react';
-import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
-import type { UpdateUserInfo } from 'entities/user/types';
-import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 
 export const UserInfo = () => {
   const user = useAppSelector((state) => state.user.data);
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
