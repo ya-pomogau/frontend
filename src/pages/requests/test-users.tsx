@@ -7,11 +7,11 @@ export const testUsers: any = [
     userNumber: '+1 (123) 456-7890',
     avatarLink: 'https://i.pravatar.cc/300',
     volunteerInfo: {
-      approved: false,
-      checked: false,
-      keys: false,
+      approved: true,
+      checked: true,
+      keys: true,
       adminStatus: null,
-      scores: 0,
+      scores: 60,
     },
   },
   {
@@ -22,11 +22,11 @@ export const testUsers: any = [
     userNumber: '+1 (123) 456-7890',
     avatarLink: 'https://i.pravatar.cc/300',
     volunteerInfo: {
-      approved: false,
+      approved: true,
       checked: false,
-      keys: false,
+      keys: true,
       adminStatus: null,
-      scores: 0,
+      scores: 60,
     },
   },
 

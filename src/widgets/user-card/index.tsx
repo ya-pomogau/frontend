@@ -43,13 +43,7 @@ export const UserCard = ({
   userId,
   userNumber,
   children,
-  volunteerInfo = {
-    approved: true,
-    checked: false,
-    keys: false,
-    adminStatus: null,
-    scores: 30,
-  },
+  volunteerInfo,
 }: UserCardProps) => {
   const { approved, checked, scores, keys } = volunteerInfo;
 

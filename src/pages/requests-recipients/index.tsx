@@ -10,9 +10,24 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 
 import styles from './styles.module.css';
+import { Input } from 'shared/ui/input';
+import { UserCard } from 'widgets/user-card';
+import { testUsers } from 'pages/requests/test-users';
+
+interface UserProps {
+  role: 'volunteer' | 'recipient' | 'admin' | 'master';
+  extClassName?: string;
+  avatarLink: string;
+  avatarName: string;
+  userName: string;
+  userId: number;
+  userNumber: string;
+  volunteerInfo?: any;
+}
 
 export function RequestsRecipientsPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const [searchName, setSearchName] = useState('');
 
   const buttonFilterRef = useRef<Element>();
 
@@ -75,6 +90,39 @@ export function RequestsRecipientsPage() {
           }
         >
           <PageSubMenuForAdmins />
+
+          <Input
+            extClassName={styles.input}
+            value={searchName}
+            name="name"
+            onChange={(e) => setSearchName(e.target.value)}
+            placeholder={'Введите имя'}
+            type="name"
+            label="Введите имя "
+          />
+
+          <div className={styles.userCards}>
+            {testUsers
+              .filter(
+                (user: UserProps) =>
+                  user.userName
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase()) &&
+                  user.role == 'recipient'
+              )
+              .map((user: UserProps) => (
+                <UserCard
+                  role={user.role}
+                  key={user.userId}
+                  avatarLink={user.avatarLink}
+                  avatarName={user.avatarName}
+                  userName={user.userName}
+                  userId={user.userId}
+                  userNumber={user.userNumber}
+                  volunteerInfo={user.volunteerInfo}
+                />
+              ))}
+          </div>
         </ContentLayout>
       }
     />

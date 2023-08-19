@@ -29,6 +29,7 @@ import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
+import { useAppSelector } from 'app/hooks';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -121,7 +122,8 @@ export const router = createBrowserRouter(
 
           <Route
             path="/profile/requests/notprocessed"
-            element={<RequestsNotprocessedPage />}
+            /* isMaster={сюда передать ину о том, какая роль мастера или нет} */
+            element={<RequestsNotprocessedPage isMaster={false} />}
           />
 
           <Route path="/profile/statistics" element={<StatisticsPage />} />

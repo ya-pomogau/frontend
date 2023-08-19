@@ -25,7 +25,11 @@ interface UserProps {
   volunteerInfo?: any;
 }
 
-export function RequestsNotprocessedPage() {
+interface RequestsNotprocessedPageProps {
+  isMaster: boolean;
+}
+
+export function RequestsNotprocessedPage(props: RequestsNotprocessedPageProps) {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const [searchName, setSearchName] = useState('');
 
@@ -100,27 +104,30 @@ export function RequestsNotprocessedPage() {
             type="name"
             label="Введите имя "
           />
-
-          <div className={styles.userAdminCards}>
-            {testUsers
-              .filter(
-                (user: UserProps) =>
-                  user.userName
-                    .toLowerCase()
-                    .includes(searchName.toLowerCase()) && user.role === 'admin'
-              )
-              .map((user: UserProps) => (
-                <UserCard
-                  role={user.role}
-                  key={user.userId}
-                  avatarLink={user.avatarLink}
-                  avatarName={user.avatarName}
-                  userName={user.userName}
-                  userId={user.userId}
-                  userNumber={user.userNumber}
-                />
-              ))}
-          </div>
+          {props.isMaster && (
+            <div className={styles.userAdminCards}>
+              {testUsers
+                .filter(
+                  (user: UserProps) =>
+                    user.userName
+                      .toLowerCase()
+                      .includes(searchName.toLowerCase()) &&
+                    user.role === 'admin'
+                )
+                .map((user: UserProps) => (
+                  <UserCard
+                    role={user.role}
+                    key={user.userId}
+                    avatarLink={user.avatarLink}
+                    avatarName={user.avatarName}
+                    userName={user.userName}
+                    userId={user.userId}
+                    userNumber={user.userNumber}
+                    volunteerInfo={user.volunteerInfo}
+                  />
+                ))}
+            </div>
+          )}
           <div className={styles.userCards}>
             {testUsers
               .filter(
@@ -138,6 +145,7 @@ export function RequestsNotprocessedPage() {
                   userName={user.userName}
                   userId={user.userId}
                   userNumber={user.userNumber}
+                  volunteerInfo={user.volunteerInfo}
                 />
               ))}
           </div>
