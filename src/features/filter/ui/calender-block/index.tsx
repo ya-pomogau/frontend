@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { format, parseISO } from 'date-fns';
 import classnames from 'classnames';
 
@@ -14,6 +14,11 @@ interface CalenderBlockProps {
 
 export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
   const [isCalenderMobil, setIsCalenderMobil] = useState(false);
+
+  const buttonRef = useRef<HTMLInputElement>(null);
+  const [startTime, setStartTime] = useState('00:00');
+  const [endTime, setEndTime] = useState('00:00');
+  console.log('start:', startTime, 'end:', endTime);
 
   const handleDateChange = (date: Date) => {
     const formatedDate = format(date, 'yyyy-MM-dd');
@@ -82,7 +87,12 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
           >
             От
           </p>
-          <TimePickerElement isMobile={isCalenderMobil} />
+          <TimePickerElement
+            isMobile={isCalenderMobil}
+            buttonRef={buttonRef}
+            startTime={startTime}
+            setStartTime={setStartTime}
+          />
           <p
             className={classnames(
               styles.filterBlockText,
@@ -92,7 +102,12 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
           >
             До
           </p>
-          <TimePickerElement isMobile={isCalenderMobil} />
+          <TimePickerElement
+            isMobile={isCalenderMobil}
+            buttonRef={buttonRef}
+            endTime={endTime}
+            setEndTime={setEndTime}
+          />
         </div>
 
         <p

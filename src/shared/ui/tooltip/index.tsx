@@ -32,7 +32,13 @@ export const Tooltip = ({
   const tooltipRef = useRef<HTMLDivElement>(null);
   const closeWithEsc = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && changeVisible) {
+      console.log(e.target);
+      if (
+        e.key === 'Escape' &&
+        !(e.target as HTMLElement).closest('.tooltip') &&
+        !(e.target as HTMLElement).closest('#clock-element') &&
+        changeVisible
+      ) {
         changeVisible();
       }
     },
@@ -45,6 +51,7 @@ export const Tooltip = ({
       if (
         changeVisible &&
         !target.closest('.tooltip') &&
+        !target.closest('#clock-element') &&
         target.getRootNode() === document
       ) {
         changeVisible();
