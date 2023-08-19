@@ -37,7 +37,7 @@ export const router = createBrowserRouter(
     <>
       <Route path="/" element={<Layout />}>
         <Route element={<RoutesGroup publicRoutes />}>
-          {/* <Route path="/profile" element={<ProfilePage />} /> */}
+          <Route path="/profile" element={<ProfilePage />} />
           <Route index element={<UnauthPage />} />
 
           <Route path="/blog" element={<BlogPage />} />
