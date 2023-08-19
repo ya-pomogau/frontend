@@ -32,7 +32,6 @@ export const Tooltip = ({
   const tooltipRef = useRef<HTMLDivElement>(null);
   const closeWithEsc = useCallback(
     (e: KeyboardEvent) => {
-      console.log(e.target);
       if (
         e.key === 'Escape' &&
         !(e.target as HTMLElement).closest('.tooltip') &&

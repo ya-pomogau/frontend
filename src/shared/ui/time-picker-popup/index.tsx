@@ -100,12 +100,7 @@ export function TimePickerPopup({
         hourObserver.observe(listItems[i]);
       }
     }
-    return () => {
-      hourObserver = null;
-    };
-  }, [onIntersectionChange]);
 
-  useEffect(() => {
     const minuteWheelElements = Array.from(
       document.getElementsByClassName('time__minutes')
     );
@@ -127,6 +122,7 @@ export function TimePickerPopup({
       }
     }
     return () => {
+      hourObserver = null;
       minuteObserver = null;
     };
   }, [onIntersectionChange]);
