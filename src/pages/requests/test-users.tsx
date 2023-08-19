@@ -17,7 +17,7 @@ export const testUsers: any = [
   {
     role: 'recipient',
     avatarName: 'Volunteer Avatar',
-    userName: 'Иванов Иван Иванович',
+    userName: 'Семенов Петр Игоревич',
     userId: 12345,
     userNumber: '+1 (123) 456-7890',
     avatarLink: 'https://i.pravatar.cc/300',
@@ -29,21 +29,7 @@ export const testUsers: any = [
       scores: 0,
     },
   },
-  {
-    role: 'admin',
-    avatarName: 'Volunteer Avatar',
-    userName: 'Иванов Иван Иванович',
-    userId: 12345,
-    userNumber: '+1 (123) 456-7890',
-    avatarLink: 'https://i.pravatar.cc/300',
-    volunteerInfo: {
-      approved: true,
-      checked: false,
-      keys: false,
-      adminStatus: null,
-      scores: 40,
-    },
-  },
+
   {
     role: 'volunteer',
     avatarName: 'Volunteer Avatar',
@@ -119,21 +105,7 @@ export const testUsers: any = [
       scores: 0,
     },
   },
-  {
-    role: 'admin',
-    avatarName: 'Volunteer Avatar',
-    userName: 'Иванов Иван Иванович',
-    userId: 12345,
-    userNumber: '+1 (123) 456-7890',
-    avatarLink: 'https://i.pravatar.cc/300',
-    volunteerInfo: {
-      approved: true,
-      checked: false,
-      keys: false,
-      adminStatus: null,
-      scores: 40,
-    },
-  },
+
   {
     role: 'volunteer',
     avatarName: 'Volunteer Avatar',
@@ -164,21 +136,7 @@ export const testUsers: any = [
       scores: 0,
     },
   },
-  {
-    role: 'admin',
-    avatarName: 'Volunteer Avatar',
-    userName: 'Иванов Иван Иванович',
-    userId: 12345,
-    userNumber: '+1 (123) 456-7890',
-    avatarLink: 'https://i.pravatar.cc/300',
-    volunteerInfo: {
-      approved: true,
-      checked: false,
-      keys: false,
-      adminStatus: null,
-      scores: 40,
-    },
-  },
+
   {
     role: 'volunteer',
     avatarName: 'Volunteer Avatar',

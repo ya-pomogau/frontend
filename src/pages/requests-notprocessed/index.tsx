@@ -27,6 +27,7 @@ interface UserProps {
 
 export function RequestsNotprocessedPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
+  const [searchName, setSearchName] = useState('');
 
   const buttonFilterRef = useRef<Element>();
 
@@ -91,24 +92,55 @@ export function RequestsNotprocessedPage() {
           <PageSubMenuForAdmins />
 
           <Input
-            value=""
+            extClassName={styles.input}
+            value={searchName}
             name="name"
-            onChange={() => console.log('Ipput changed')}
+            onChange={(e) => setSearchName(e.target.value)}
             placeholder={'Введите имя'}
             type="name"
             label="Введите имя "
           />
-          {testUsers.map((user: UserProps) => (
-            <UserCard
-              role={user.role}
-              key={user.userId} // Добавьте ключ, чтобы избежать предупреждений React
-              avatarLink={user.avatarLink}
-              avatarName={user.avatarName}
-              userName={user.userName}
-              userId={user.userId}
-              userNumber={user.userNumber}
-            />
-          ))}
+
+          <div className={styles.userAdminCards}>
+            {testUsers
+              .filter(
+                (user: UserProps) =>
+                  user.userName
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase()) && user.role === 'admin'
+              )
+              .map((user: UserProps) => (
+                <UserCard
+                  role={user.role}
+                  key={user.userId}
+                  avatarLink={user.avatarLink}
+                  avatarName={user.avatarName}
+                  userName={user.userName}
+                  userId={user.userId}
+                  userNumber={user.userNumber}
+                />
+              ))}
+          </div>
+          <div className={styles.userCards}>
+            {testUsers
+              .filter(
+                (user: UserProps) =>
+                  user.userName
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase()) && user.role !== 'admin'
+              )
+              .map((user: UserProps) => (
+                <UserCard
+                  role={user.role}
+                  key={user.userId}
+                  avatarLink={user.avatarLink}
+                  avatarName={user.avatarName}
+                  userName={user.userName}
+                  userId={user.userId}
+                  userNumber={user.userNumber}
+                />
+              ))}
+          </div>
         </ContentLayout>
       }
     />
