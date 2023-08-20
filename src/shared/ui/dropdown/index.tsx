@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import classNames from 'classnames';
 
-import { useState } from 'react';
-import styles from './styles.module.css';
 import { CheckIcon } from '../icons/check-icon';
 import { ArrowDownIcon } from '../icons/arrow-down-icon';
+
+import styles from './styles.module.css';
 
 export type Option = { value: string; label: string };
 

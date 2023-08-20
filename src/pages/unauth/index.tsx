@@ -1,4 +1,7 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { useAppSelector } from 'app/hooks';
 
 import { UserInfo } from 'entities/user';
 import { ContentLayout } from 'shared/ui/content-layout';
@@ -7,11 +10,9 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Filter } from 'features/filter/ui';
 import { MapWithTasks } from 'widgets/map-with-tasks';
-import { useAppSelector } from 'app/hooks';
 import { VolunteerSideMenu } from 'widgets/side-menu';
 
 import styles from './styles.module.css';
-import { Navigate } from 'react-router-dom';
 
 export function UnauthPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);

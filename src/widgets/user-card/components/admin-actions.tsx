@@ -2,11 +2,12 @@ import { useState } from 'react';
 import classnames from 'classnames';
 
 import Checkbox from 'shared/ui/checkbox';
-import styles from '../styles.module.css';
 import { Input } from 'shared/ui/input';
 import { EditIcon } from 'shared/ui/icons/edit-icon';
 import { Button } from 'shared/ui/button';
 import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
+
+import styles from '../styles.module.css';
 
 interface AdminActionsProps {
   onAdminSaveClick: () => void;
@@ -19,6 +20,7 @@ const AdminActions = ({
 }: AdminActionsProps) => {
   const [isAdminDropdownListClosed, setAdminDropdownListClosed] =
     useState(true);
+
   return (
     <div className={classnames(styles.buttons_div)}>
       <Input

@@ -1,6 +1,3 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import classNames from 'classnames';
-
 import useForm from 'shared/hooks/use-form';
 
 import { ContentLayout } from 'shared/ui/content-layout';
@@ -10,7 +7,6 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
 import { TextArea } from 'shared/ui/text-area';
 import { Button } from 'shared/ui/button';
-import { NotFoundPage } from 'pages/not-found';
 
 import { SideMenu } from 'widgets/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';

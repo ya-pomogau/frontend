@@ -1,8 +1,7 @@
-import { FC } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from './router';
 
-export const AppRoutes: FC = () => {
+export const AppRoutes = () => {
   return <RouterProvider router={router} />;
 };

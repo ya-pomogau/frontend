@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 import { useAppSelector } from 'app/hooks';
 import {
@@ -12,11 +12,11 @@ interface SideMenuProps
   links: ReactElement;
 }
 
-export const SideMenu: FC<SideMenuProps> = ({
+export const SideMenu = ({
   authRequired = true,
   links,
   ...containerProps
-}) => {
+}: SideMenuProps) => {
   const { role } = useAppSelector((state) => state.user);
 
   const isOverlayVisible = authRequired && !role;

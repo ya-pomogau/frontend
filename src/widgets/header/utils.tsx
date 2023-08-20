@@ -4,6 +4,7 @@ import { LockIcon } from 'shared/ui/icons/lock-icon';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { ExitIcon } from 'shared/ui/icons/exit-icon';
 import { ReadMessageIcon } from 'shared/ui/icons/read-message-icon';
+
 import type {
   ISideBarPosition,
   ISideBarElementProps,

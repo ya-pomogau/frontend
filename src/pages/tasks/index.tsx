@@ -1,4 +1,5 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { SideMenuForAuthorized } from 'widgets/side-menu';
 import { Filter } from 'features/filter/ui';
@@ -8,9 +9,9 @@ import { Icon } from 'shared/ui/icons';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
+import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
-import { UserCard } from 'widgets/user-card';
 
 const userMock = [
   {
@@ -121,6 +122,10 @@ export function TasksPage() {
             </>
           }
         >
+          <div>
+            <Link to={'/profile/bids'}>Настроить баллы</Link>
+          </div>
+
           <div>
             <Input
               value={value}
