@@ -7,7 +7,7 @@ import { Message } from 'shared/ui/message';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 
-import { IMessage, IChatMateInfo } from './types';
+import { IMessage, IChatMateInfo } from '../../libs/types';
 import { sortMessages } from '../../libs/utils';
 
 import styles from './styles.module.css';

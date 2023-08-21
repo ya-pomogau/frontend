@@ -1,4 +1,4 @@
-import { IChatList, IMessage } from '../components/Chat/types';
+import { IChatList, IMessage } from './types';
 
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

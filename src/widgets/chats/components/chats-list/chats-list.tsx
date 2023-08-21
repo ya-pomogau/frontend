@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import styles from './styles.module.css';
 import { getChatList } from '../../libs/utils';
 import { useEffect, useState } from 'react';
-import { IChatList } from '../Chat/types';
+import { IChatList } from '../../libs/types';
 import { Loader } from '../../../../shared/ui/loader';
 
 interface IChatListProps {

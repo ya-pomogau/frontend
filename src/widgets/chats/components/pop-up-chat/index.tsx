@@ -8,8 +8,8 @@ import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { SendIcon } from 'shared/ui/icons/send-icon';
 
-import { IMessage, IChatmateInfo } from './types';
-import { sortMessages } from './libs/utils';
+import { IMessage, IChatMateInfo } from '../../libs/types';
+import { sortMessages } from '../../libs/utils';
 
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ interface ChatProps {
   extClassName?: string;
   messagesWrapperExtClassName?: string;
   messages: IMessage[];
-  chatmateInfo: IChatmateInfo;
+  chatMateInfo: IChatMateInfo;
   onAttachFileClick?: () => void;
   onMessageSend: (message: string) => void;
 }
@@ -26,7 +26,7 @@ export const Chat = ({
   extClassName,
   messagesWrapperExtClassName,
   messages,
-  chatmateInfo,
+  chatMateInfo,
   onAttachFileClick,
   onMessageSend,
 }: ChatProps) => {
@@ -48,7 +48,7 @@ export const Chat = ({
     <div className={classnames(styles.chatWrapper, extClassName)}>
       <Avatar
         avatarName="Фотография собеседника"
-        avatarLink={chatmateInfo.userAvatarLink}
+        avatarLink={chatMateInfo.avatar}
         extClassName={styles.avatar}
       />
 
@@ -62,9 +62,9 @@ export const Chat = ({
               'text_type_regular'
             )}
           >
-            {chatmateInfo.name}
+            {chatMateInfo.name}
           </h1>
-          {chatmateInfo?.phone && (
+          {chatMateInfo?.phone && (
             <div className={styles.phoneInfo}>
               <span
                 className={classnames(
@@ -76,7 +76,7 @@ export const Chat = ({
                 Тел.:
               </span>
               <span className={classnames('text', 'text_size_medium')}>
-                {chatmateInfo.phone}
+                {chatMateInfo.phone}
               </span>
             </div>
           )}
@@ -91,13 +91,13 @@ export const Chat = ({
             {sortedMessages?.map((message) => (
               <Message
                 type={
-                  message.userId === chatmateInfo.userId
+                  message.userId === chatMateInfo.userId
                     ? 'incoming'
                     : 'outgoing'
                 }
-                messageText={message.message}
+                messageText={message.text}
                 avatarLink={message.userAvatarLink}
-                key={message.id}
+                key={message.messageId}
               />
             ))}
           </div>
