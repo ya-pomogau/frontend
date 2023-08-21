@@ -17,7 +17,7 @@ import { useMediaQuery } from '../../shared/hooks';
 export function ConflictsPage() {
   const [selectedChatId, setSelectedChatId] = useState<number>();
   const selectedChat = useMemo(
-    () => mockChatsList.find((chat) => chat.id === selectedChatId),
+    () => mockChatsList.find((chat) => chat.userId === selectedChatId),
     [selectedChatId]
   );
 

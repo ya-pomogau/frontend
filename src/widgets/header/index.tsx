@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'shared/hooks/media-query';
-import { positionConfigTop, linksTop } from './utils';
+import { positionConfigTop, linksTop, linksTopWithChat } from './utils';
 
 import { Logo } from 'shared/ui/logo';
 import { SideBar } from 'widgets/header/navigation';
@@ -19,6 +19,7 @@ const Header = () => {
 
   const isMobile = useMediaQuery('(max-width: 900px)');
   const user = useAppSelector((state) => state.user.data);
+  const role = useAppSelector((state) => state.user.role);
 
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
@@ -26,6 +27,7 @@ const Header = () => {
   };
 
   const isMenuHidden = !user && !isMobile;
+  // const isChatsHidden = ;
 
   return (
     <header className={`${styles.header} ${isMobile && styles.header_mobile}`}>
@@ -51,7 +53,16 @@ const Header = () => {
           <Logo />
         </NavLink>
 
-        {!isMobile && <SideBar position={positionConfigTop} links={linksTop} />}
+        {!isMobile && (
+          <SideBar
+            position={positionConfigTop}
+            links={
+              role === 'admin' || role === 'master'
+                ? linksTopWithChat
+                : linksTop
+            }
+          />
+        )}
 
         <div
           className={`${styles.header__menu__container} ${

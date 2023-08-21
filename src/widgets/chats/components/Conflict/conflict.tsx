@@ -31,10 +31,10 @@ export const Conflict = () => {
           />
         </div>
         <div className={styles.information}>
-          <p className={classnames('text', 'text_size_large', styles.date)}>
+          <div className={classnames('text', 'text_size_large', styles.date)}>
             24.09.2022
             <p className={classnames(styles.time)}>16:00</p>
-          </p>
+          </div>
           <p className={classnames('text', 'text_size_medium', styles.address)}>
             ул. Нахимова, д.9, у подъезда №3
           </p>

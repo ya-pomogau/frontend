@@ -8,17 +8,18 @@ export interface IMessage {
 
 export interface IChatMateInfo {
   name: string;
-  id: number;
+  userId: number;
   avatar: string;
   notifications?: number;
   phone?: string;
 }
 
 export interface IChatList {
+  chatId: number;
   name: string;
-  id: number;
-  avatar: string;
-  message: string;
+  userId: number;
+  userAvatarLink: string;
+  incomingMessage: string;
   notifications: number;
   phone?: string;
 }

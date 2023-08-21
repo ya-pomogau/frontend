@@ -53,6 +53,10 @@ export const linksTop: ISideBarElementProps[] = [
     to: '/contacts',
     icon: <LocationIcon color="blue" />,
   },
+];
+
+export const linksTopWithChat: ISideBarElementProps[] = [
+  ...linksTop,
   {
     title: 'Чат',
     to: '/chats',

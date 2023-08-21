@@ -22,7 +22,7 @@ import { useMediaQuery } from '../../shared/hooks';
 export function ChatsWaitingPage() {
   const [selectedChatId, setSelectedChatId] = useState<number>();
   const selectedChat = useMemo(
-    () => mockChatsList.find((chat) => chat.id === selectedChatId),
+    () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
     [selectedChatId]
   );
 
@@ -94,11 +94,10 @@ export function ChatsWaitingPage() {
                   messages={sortMessages(getMockMessages())}
                   chatMateInfo={{
                     name: selectedChat.name,
-                    id: selectedChat.id,
+                    userId: selectedChat.userId,
                     avatar: 'https://i.pravatar.cc/300',
                     phone: '+7(000) 000-00-00',
                   }}
-                  role="master"
                   onClose={() => setSelectedChatId(undefined)}
                 />
               )}

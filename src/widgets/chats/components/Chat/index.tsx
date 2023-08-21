@@ -15,7 +15,6 @@ import { SendIcon } from '../../../../shared/ui/icons/send-icon';
 import { EmptyMessageIcon } from '../../../../shared/ui/icons/empty-message-icon';
 import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
 import { KeyIcon } from '../../../../shared/ui/icons/key-icon';
-import { UserRole } from '../../../../entities/user/types';
 import { TemplateAnswers } from '../../../../shared/ui/template-answers';
 
 interface IChatProps {
@@ -27,7 +26,6 @@ interface IChatProps {
   onMessageSend?: (message: string) => void;
   parentPage: 'in-work' | 'waiting' | 'conflicts';
   onClose: () => void;
-  role: UserRole;
 }
 
 export const Chat = ({
@@ -38,7 +36,6 @@ export const Chat = ({
   onAttachFileClick,
   onMessageSend,
   parentPage,
-  role,
   onClose,
 }: IChatProps) => {
   const answersList = [
@@ -84,7 +81,7 @@ export const Chat = ({
               <div className={styles.data}>
                 {chatMateInfo.name}
                 <p className={classnames('text', 'text_size_micro', styles.id)}>
-                  {`ID ${chatMateInfo.id}`}
+                  {`ID ${chatMateInfo.userId}`}
                 </p>
               </div>
               <CloseCrossIcon onClick={onClose} color={'blue'} />
@@ -118,7 +115,7 @@ export const Chat = ({
           {sortedMessages?.map((message) => (
             <Message
               type={
-                message.userId === chatMateInfo.id ? 'incoming' : 'outgoing'
+                message.userId === chatMateInfo.userId ? 'incoming' : 'outgoing'
               }
               messageText={message.text}
               avatarLink={message.userAvatarLink}
@@ -164,7 +161,7 @@ export const Chat = ({
                 disabled={!inputValue}
               />
             </div>
-            {role === 'master' && <TemplateAnswers answers={answersList} />}
+            <TemplateAnswers answers={answersList} />
           </>
         ) : (
           <Button

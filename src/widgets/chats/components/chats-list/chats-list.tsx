@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 import { getChatList } from '../../libs/utils';
 import { useEffect, useState } from 'react';
 import { IChatList } from '../Chat/types';
+import { Loader } from '../../../../shared/ui/loader';
 
 interface IChatListProps {
   isNotificationImportant?: boolean;
@@ -39,17 +40,17 @@ export const ChatsList = ({
     <>
       {chatListLoadError &&
         'Произошла ошибка - попробуйте перезагрузить страницу'}
-      {isChatListLoading && 'Пожалуйста, подождите - идет загрузка'}
+      {isChatListLoading && <Loader />}
       {chatList && (
         <ul className={classNames(styles.chats)}>
           {chatList.map((chat) => (
             <li
               className={classNames(
                 styles.chat,
-                selectedChatId === chat.id ? styles.selectedChat : undefined
+                selectedChatId === chat.chatId ? styles.selectedChat : undefined
               )}
-              key={chat.id}
-              onClick={() => onSelectChat(chat.id)}
+              key={chat.chatId}
+              onClick={() => onSelectChat(chat.chatId)}
             >
               <div className={classNames(styles.avatar)}></div>
               <div className={classNames(styles.text)}>
@@ -63,7 +64,7 @@ export const ChatsList = ({
                   {chat.name}
                 </p>
                 <p className={classNames('text', 'text_size_micro', styles.id)}>
-                  {`ID ${chat.id}`}
+                  {`ID ${chat.userId}`}
                 </p>
                 <p
                   className={classNames(
@@ -72,7 +73,7 @@ export const ChatsList = ({
                     styles.message
                   )}
                 >
-                  {chat.message}
+                  {chat.incomingMessage}
                 </p>
               </div>
               {chat.notifications > 0 && (
