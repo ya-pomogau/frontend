@@ -79,15 +79,16 @@ export function ChatsWaitingPage() {
           <PageSubMenuForChats />
           {isMobile ? (
             <ChatsList
-              onClickOnChat={() => console.log(chatId)}
               selectedChatId={selectedChatId}
               onSelectChat={setSelectedChatId}
               isMobile={isMobile}
             />
           ) : (
-            <div className={styles.container}>
+            <div
+              onClick={() => console.log(chatId)}
+              className={styles.container}
+            >
               <ChatsList
-                onClickOnChat={() => console.log(chatId)}
                 selectedChatId={selectedChatId}
                 onSelectChat={setSelectedChatId}
                 isMobile={isMobile}
