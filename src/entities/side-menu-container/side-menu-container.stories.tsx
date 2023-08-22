@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import {
   SideMenuContainer,
   SideMenuContainerProps,
@@ -24,6 +25,7 @@ export function Wrapper({ border, size, overlayVisible }: WrapperProps) {
     </SideMenuContainer>
   );
 }
+
 const meta: Meta<typeof Wrapper> = {
   title: 'uikit/ButtonContainer',
   component: Wrapper,

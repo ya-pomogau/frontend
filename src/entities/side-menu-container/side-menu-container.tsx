@@ -1,4 +1,4 @@
-import { ReactNode, FC } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 
 import { Icon } from 'shared/ui/icons';
@@ -13,13 +13,13 @@ export interface SideMenuContainerProps {
   extClassName?: string;
 }
 
-export const SideMenuContainer: FC<SideMenuContainerProps> = ({
+export const SideMenuContainer = ({
   border = 'sea',
   size = 'web',
   children,
   overlayVisible,
   extClassName,
-}) => (
+}: SideMenuContainerProps) => (
   <div
     className={classnames(
       styles.button__container,

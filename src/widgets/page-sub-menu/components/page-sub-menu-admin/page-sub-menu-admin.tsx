@@ -1,9 +1,7 @@
-import { FC } from 'react';
-
 import { PageSubMenu } from '../page-sub-menu/page-sub-menu';
 import { PageSubMenuLink } from '../page-sub-menu-link/page-sub-menu-link';
 
-export const PageSubMenuAdmin: FC = () => {
+export const PageSubMenuAdmin = () => {
   return (
     <PageSubMenu
       links={

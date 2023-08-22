@@ -2,16 +2,17 @@ import classNames from 'classnames';
 import { nanoid } from 'nanoid';
 
 import { useAppSelector } from 'app/hooks';
+import usePermission from 'shared/hooks/use-permission';
+import { CONFIRMED } from 'shared/libs/statuses';
 
 import { Informer } from 'shared/ui/informer';
 import { RoundButton } from 'shared/ui/round-button';
 import { TaskItem } from '../task';
+
 import type { UserRole } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
-import usePermission from 'shared/hooks/use-permission';
-import { CONFIRMED } from 'shared/libs/statuses';
 
 interface TaskListProps {
   userRole?: UserRole | null;
@@ -42,6 +43,7 @@ export const TaskList = ({
 }: TaskListProps) => {
   const isLoading = useAppSelector((store) => store.tasks.isLoading);
   const buttonGuard = usePermission([CONFIRMED], 'recepient');
+
   const handleDeniedAccess = () => {
     alert('Вам пока нельзя такое, дождитесь проверки администратором');
   };

@@ -1,4 +1,7 @@
 import { ReactElement } from 'react';
+
+import { ReactNode, MouseEvent } from 'react';
+
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
