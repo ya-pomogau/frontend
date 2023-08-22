@@ -60,13 +60,16 @@ export const Tooltip = ({
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', closeWithEsc);
-    document.addEventListener('click', closeWithClickOutTooltip);
+    setTimeout(() => {
+      document.addEventListener('keydown', closeWithEsc);
+      document.addEventListener('click', closeWithClickOutTooltip);
+    });
+
     return () => {
       document.removeEventListener('keydown', closeWithEsc);
       document.removeEventListener('click', closeWithClickOutTooltip);
     };
-  }, [closeWithClickOutTooltip, closeWithEsc]);
+  }, []);
 
   const tooltip = (
     <div

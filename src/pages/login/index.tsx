@@ -57,8 +57,8 @@ export function LoginPage() {
         <ContentLayout
           heading={
             <SmartHeader
-              settingIcon={<Icon color="blue" icon="LoginIcon" size="54" />}
-              settingText="Вход"
+              text="Вход"
+              icon={<Icon color="blue" icon="LoginIcon" size="54" />}
               extClassName={styles.header}
             />
           }
