@@ -85,7 +85,10 @@ export function ChatsWaitingPage() {
               isMobile={isMobile}
             />
           ) : (
-            <div className={styles.container}>
+            <div
+              onClick={() => console.log(chatId)}
+              className={styles.container}
+            >
               <ChatsList
                 onClickOnChat={() => console.log(chatId)}
                 selectedChatId={selectedChatId}
