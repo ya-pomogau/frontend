@@ -24,9 +24,8 @@ export function BidsPage() {
         <ContentLayout
           heading={
             <SmartHeader
-              onClick={() => 1}
-              settingIcon={<Icon color="blue" icon="SettingsIcon" size="46" />}
-              settingText="Настройка балов"
+              icon={<Icon color="blue" icon="SettingsIcon" size="46" />}
+              text="Настройка балов"
             />
           }
         >

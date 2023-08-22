@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SmartHeader } from '.';
-import { FilterIcon } from '../icons/filter-icon';
+
 import { ActiveApplicationIcon } from '../icons/active-application-icon';
 
 const meta: Meta<typeof SmartHeader> = {
@@ -8,20 +8,14 @@ const meta: Meta<typeof SmartHeader> = {
   component: SmartHeader,
   tags: ['autodocs'],
   argTypes: {
-    settingIcon: {
+    icon: {
       description: 'Иконка статуса',
     },
-    settingText: {
+    text: {
       description: 'Текст статуса',
     },
-    filterText: {
-      description: 'Текст фильтра',
-    },
-    filterIcon: {
-      description: 'Иконка фильтра',
-    },
-    onClick: {
-      description: 'Обработчик кнопки фильтр',
+    filter: {
+      description: 'Слот для фильтра',
     },
   },
 };
@@ -31,10 +25,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Filled: Story = {
   args: {
-    settingIcon: <ActiveApplicationIcon color="blue" />,
-    settingText: 'Активные заявки',
-    filterText: 'Фильтр',
-    filterIcon: <FilterIcon color="blue" />,
+    icon: <ActiveApplicationIcon color="blue" />,
+    text: 'Активные заявки',
   },
 };
 
