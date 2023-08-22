@@ -18,9 +18,11 @@ import {
   mockChatsList,
 } from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
+import { Routes, Route, useParams } from 'react-router-dom';
 
 export function ChatsWaitingPage() {
-  const [selectedChatId, setSelectedChatId] = useState<number>();
+  const chatId = useParams<{ chatId: string }>();
+  const [selectedChatId, setSelectedChatId] = useState<string>();
   const selectedChat = useMemo(
     () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
     [selectedChatId]
@@ -77,6 +79,7 @@ export function ChatsWaitingPage() {
           <PageSubMenuForChats />
           {isMobile ? (
             <ChatsList
+              onClickOnChat={() => console.log(chatId)}
               selectedChatId={selectedChatId}
               onSelectChat={setSelectedChatId}
               isMobile={isMobile}
@@ -84,6 +87,7 @@ export function ChatsWaitingPage() {
           ) : (
             <div className={styles.container}>
               <ChatsList
+                onClickOnChat={() => console.log(chatId)}
                 selectedChatId={selectedChatId}
                 onSelectChat={setSelectedChatId}
                 isMobile={isMobile}

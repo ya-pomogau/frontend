@@ -1,4 +1,4 @@
-import styles from '../chats-in-work/styles.module.css';
+import styles from './styles.module.css';
 
 import { PageLayout } from '../../shared/ui/page-layout';
 import { UserInfo } from '../../entities/user';
@@ -15,9 +15,9 @@ import { mockChatsList } from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
 
 export function ConflictsPage() {
-  const [selectedChatId, setSelectedChatId] = useState<number>();
+  const [selectedChatId, setSelectedChatId] = useState<string>();
   const selectedChat = useMemo(
-    () => mockChatsList.find((chat) => chat.userId === selectedChatId),
+    () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
     [selectedChatId]
   );
 

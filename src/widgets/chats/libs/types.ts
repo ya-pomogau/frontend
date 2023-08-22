@@ -15,7 +15,7 @@ export interface IChatMateInfo {
 }
 
 export interface IChatList {
-  chatId: number;
+  chatId: string;
   name: string;
   userId: number;
   userAvatarLink: string;

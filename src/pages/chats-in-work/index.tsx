@@ -20,9 +20,9 @@ import {
 import { useMediaQuery } from '../../shared/hooks';
 
 export function ChatsInWorkPage() {
-  const [selectedChatId, setSelectedChatId] = useState<number>();
+  const [selectedChatId, setSelectedChatId] = useState<string>();
   const selectedChat = useMemo(
-    () => mockChatsList.find((chat) => chat.userId === selectedChatId),
+    () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
     [selectedChatId]
   );
 

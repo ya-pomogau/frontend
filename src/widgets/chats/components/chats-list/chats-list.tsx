@@ -7,15 +7,17 @@ import { Loader } from '../../../../shared/ui/loader';
 
 interface IChatListProps {
   isNotificationImportant?: boolean;
-  selectedChatId: number | undefined;
-  onSelectChat: (id: number) => void;
+  selectedChatId: string | undefined;
+  onSelectChat: (id: string) => void;
   isMobile: boolean;
+  onClickOnChat: () => void;
 }
 
 export const ChatsList = ({
   isNotificationImportant,
   selectedChatId,
   onSelectChat,
+  onClickOnChat,
   isMobile,
 }: IChatListProps) => {
   const [chatList, setChatList] = useState<Array<IChatList>>();
@@ -35,6 +37,10 @@ export const ChatsList = ({
     }
     fetchData();
   }, []);
+  function handleClick(chatId: string) {
+    onSelectChat(chatId);
+    onClickOnChat();
+  }
 
   return (
     <>
@@ -50,7 +56,9 @@ export const ChatsList = ({
                 selectedChatId === chat.chatId ? styles.selectedChat : undefined
               )}
               key={chat.chatId}
-              onClick={() => onSelectChat(chat.chatId)}
+              /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+              // @ts-ignore
+              onClick={handleClick}
             >
               <div className={classNames(styles.avatar)}></div>
               <div className={classNames(styles.text)}>

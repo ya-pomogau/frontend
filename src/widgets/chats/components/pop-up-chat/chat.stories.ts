@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Chat } from './index';
+import { PopUpChat } from './index';
 import { getMockMessages } from '../../libs/utils';
 
-const meta: Meta<typeof Chat> = {
+const meta: Meta<typeof PopUpChat> = {
   title: 'widgets/chats/components/pop-up-chat',
-  component: Chat,
+  component: PopUpChat,
   tags: ['autodocs'],
 };
 

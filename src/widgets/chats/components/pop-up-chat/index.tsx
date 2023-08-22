@@ -22,7 +22,7 @@ interface ChatProps {
   onMessageSend: (message: string) => void;
 }
 
-export const Chat = ({
+export const PopUpChat = ({
   extClassName,
   messagesWrapperExtClassName,
   messages,

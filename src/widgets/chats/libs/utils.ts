@@ -30,7 +30,7 @@ export const getMockMessages = (): IMessage[] => [
 
 export const mockChatsList: Array<IChatList> = [
   {
-    chatId: 0,
+    chatId: '0',
     name: 'Иванов Иван Иванович',
     userId: 112230,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -38,7 +38,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 5,
   },
   {
-    chatId: 1,
+    chatId: '1',
     name: 'Чебурашка Карина Игоревна',
     userId: 112231,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -46,7 +46,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 3,
   },
   {
-    chatId: 2,
+    chatId: '2',
     name: 'Игошина Яна Витальевна',
     userId: 12232,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -54,7 +54,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 3,
+    chatId: '3',
     name: 'Курицин Ян Олегович',
     userId: 112233,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -62,7 +62,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 4,
+    chatId: '4',
     name: 'Иванов Иван Иванович',
     userId: 112234,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -70,7 +70,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 5,
+    chatId: '5',
     name: 'Иванов Иван Иванович',
     userId: 112235,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -78,7 +78,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 6,
+    chatId: '6',
     name: 'Иванов Иван Иванович',
     userId: 112236,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -86,7 +86,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 7,
+    chatId: '7',
     name: 'Иванов Иван Иванович',
     userId: 112237,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -94,7 +94,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 8,
+    chatId: '8',
     name: 'Иванов Иван Иванович',
     userId: 112238,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -102,7 +102,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 9,
+    chatId: '9',
     name: 'Иванов Иван Иванович',
     userId: 112239,
     userAvatarLink: 'https://i.pravatar.cc/300',
@@ -110,7 +110,7 @@ export const mockChatsList: Array<IChatList> = [
     notifications: 0,
   },
   {
-    chatId: 10,
+    chatId: '10',
     name: 'Иванов Иван Иванович',
     userId: 112240,
     userAvatarLink: 'https://i.pravatar.cc/300',
