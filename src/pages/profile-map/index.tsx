@@ -10,7 +10,7 @@ import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import YandexMap from 'widgets/map';
 import { Icon } from 'shared/ui/icons';
-
+import ErrorBoundary from 'features/error-boundary';
 import styles from './styles.module.css';
 import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
@@ -72,48 +72,53 @@ export function ProfileMapPage() {
         </>
       }
       content={
-        <ContentLayout
-          heading={
-            <>
-              <SmartHeader
-                filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
-                filterText="Фильтр"
-                onClick={openFilter}
-                settingIcon={
-                  <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                }
-                settingText="Карта заявок"
-              />
-              {isFilterVisibel && (
-                <Filter
-                  userRole="volunteer"
-                  changeVisible={() => setIsFilterVisibel(false)}
-                  position={buttonPosition}
-                />
-              )}
-            </>
-          }
+        <ErrorBoundary
+          errorType="connect"
+          errorText="Отсутствует подключение к интернету"
         >
-          {isLoading ? (
-            <Loader />
-          ) : (
-            data && (
-              // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
-              <YandexMap
-                tasks={data}
-                mapSettings={{
-                  latitude: user ? user.coordinates[0] : 59.938955,
-                  longitude: user ? user.coordinates[1] : 30.315644,
-                  zoom: 15,
-                }}
-                width="100%"
-                height="100%"
-                onClick={() => 3}
-                isAuthorised={true}
-              />
-            )
-          )}
-        </ContentLayout>
+          <ContentLayout
+            heading={
+              <>
+                <SmartHeader
+                  filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+                  filterText="Фильтр"
+                  onClick={openFilter}
+                  settingIcon={
+                    <Icon color="blue" icon="MapApplicationIcon" size="54" />
+                  }
+                  settingText="Карта заявок"
+                />
+                {isFilterVisibel && (
+                  <Filter
+                    userRole="volunteer"
+                    changeVisible={() => setIsFilterVisibel(false)}
+                    position={buttonPosition}
+                  />
+                )}
+              </>
+            }
+          >
+            {isLoading ? (
+              <Loader />
+            ) : (
+              data && (
+                // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
+                <YandexMap
+                  tasks={data}
+                  mapSettings={{
+                    latitude: user ? user.coordinates[0] : 59.938955,
+                    longitude: user ? user.coordinates[1] : 30.315644,
+                    zoom: 15,
+                  }}
+                  width="100%"
+                  height="100%"
+                  onClick={() => 3}
+                  isAuthorised={true}
+                />
+              )
+            )}
+          </ContentLayout>
+        </ErrorBoundary>
       }
     />
   );
