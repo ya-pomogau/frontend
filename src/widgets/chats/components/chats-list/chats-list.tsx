@@ -7,8 +7,8 @@ import { Loader } from '../../../../shared/ui/loader';
 
 interface IChatListProps {
   isNotificationImportant?: boolean;
-  selectedChatId: number | undefined;
-  onSelectChat: (id: number) => void;
+  selectedChatId: string | undefined;
+  onSelectChat: (id: string) => void;
   isMobile: boolean;
 }
 
