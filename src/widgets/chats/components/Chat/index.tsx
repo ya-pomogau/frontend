@@ -18,8 +18,6 @@ import { KeyIcon } from '../../../../shared/ui/icons/key-icon';
 import { TemplateAnswers } from '../../../../shared/ui/template-answers';
 
 interface IChatProps {
-  extClassName?: string;
-  messagesWrapperExtClassName?: string;
   messages: IMessage[];
   chatMateInfo: IChatMateInfo;
   onAttachFileClick?: () => void;
@@ -29,8 +27,6 @@ interface IChatProps {
 }
 
 export const Chat = ({
-  extClassName,
-  messagesWrapperExtClassName,
   messages,
   chatMateInfo,
   onAttachFileClick,
@@ -60,7 +56,7 @@ export const Chat = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={classnames(styles.chatWrapper, extClassName)}>
+      <div className={classnames(styles.chatWrapper)}>
         <Avatar
           avatarName="Фотография собеседника"
           avatarLink={chatMateInfo.avatar}
@@ -106,12 +102,7 @@ export const Chat = ({
         </div>
       </div>
       <div className={styles.chat}>
-        <div
-          className={classnames(
-            styles.messagesBlock,
-            messagesWrapperExtClassName
-          )}
-        >
+        <div className={classnames(styles.messagesBlock)}>
           {sortedMessages?.map((message) => (
             <Message
               type={

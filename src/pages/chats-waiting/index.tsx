@@ -18,10 +18,9 @@ import {
   mockChatsList,
 } from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 export function ChatsWaitingPage() {
-  const chatId = useParams<{ chatId: string }>();
   const [selectedChatId, setSelectedChatId] = useState<string>();
   const selectedChat = useMemo(
     () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
@@ -84,27 +83,32 @@ export function ChatsWaitingPage() {
               isMobile={isMobile}
             />
           ) : (
-            <div
-              onClick={() => console.log(chatId)}
-              className={styles.container}
-            >
+            <div className={styles.container}>
               <ChatsList
                 selectedChatId={selectedChatId}
                 onSelectChat={setSelectedChatId}
                 isMobile={isMobile}
               />
               {selectedChat && (
-                <Chat
-                  parentPage={'waiting'}
-                  messages={sortMessages(getMockMessages())}
-                  chatMateInfo={{
-                    name: selectedChat.name,
-                    userId: selectedChat.userId,
-                    avatar: 'https://i.pravatar.cc/300',
-                    phone: '+7(000) 000-00-00',
-                  }}
-                  onClose={() => setSelectedChatId(undefined)}
-                />
+                <Routes>
+                  <Route
+                    path={'/waiting/:id'}
+                    element={
+                      <div>12345</div>
+                      // <Chat
+                      //   parentPage={'waiting'}
+                      //   messages={sortMessages(getMockMessages())}
+                      //   chatMateInfo={{
+                      //     name: selectedChat.name,
+                      //     userId: selectedChat.userId,
+                      //     avatar: 'https://i.pravatar.cc/300',
+                      //     phone: '+7(000) 000-00-00',
+                      //   }}
+                      //   onClose={() => setSelectedChatId(undefined)}
+                      // />
+                    }
+                  ></Route>
+                </Routes>
               )}
             </div>
           )}
