@@ -50,60 +50,42 @@ export function RequestsVolunteersPage() {
   }, []);
 
   return (
-    <PageLayout
-      side={
-        <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
+    <>
+      <SmartHeader
+        filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+        filterText="Фильтр"
+        onClick={openFilter}
+        settingIcon={<Icon color="blue" icon="BlockIcon" size="54" />}
+        settingText="Подтверждение / Блокировка"
+      />
 
-          <SideMenuForAuthorized />
-        </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <>
-              <SmartHeader
-                filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
-                filterText="Фильтр"
-                onClick={openFilter}
-                settingIcon={<Icon color="blue" icon="BlockIcon" size="54" />}
-                settingText="Подтверждение / Блокировка"
-              />
-
-              {isFilterVisibel && (
-                <Filter
-                  userRole="admin"
-                  changeVisible={() => setIsFilterVisibel(false)}
-                  position={buttonPosition}
+      {isFilterVisibel && (
+        <Filter
+          userRole="admin"
+          changeVisible={() => setIsFilterVisibel(false)}
+          position={buttonPosition}
+        />
+      )}
+      <PageSubMenuForAdmins />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <ul>
+          {data.map((item: any) => {
+            return (
+              <li key={item.data.id}>
+                <UserCard
+                  avatarLink={item.data.avatar}
+                  avatarName={item.data.fullname}
+                  userName={item.data.fullname}
+                  userId={item.data.id}
+                  userNumber={item.data.phone}
                 />
-              )}
-            </>
-          }
-        >
-          <PageSubMenuForAdmins />
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <ul>
-              {data.map((item: any) => {
-                return (
-                  <li key={item.data.id}>
-                    <UserCard
-                      avatarLink={item.data.avatar}
-                      avatarName={item.data.fullname}
-                      userName={item.data.fullname}
-                      userId={item.data.id}
-                      userNumber={item.data.phone}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </ContentLayout>
-      }
-    />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </>
   );
 }

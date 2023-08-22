@@ -1,17 +1,11 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { SideMenuForAuthorized } from 'widgets/side-menu';
 import { Filter } from 'features/filter/ui';
-import { UserInfo } from 'entities/user';
 import { fetchAvailableTasks } from 'entities/task/model';
-import { ContentLayout } from 'shared/ui/content-layout';
-import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import YandexMap from 'widgets/map';
 import { Icon } from 'shared/ui/icons';
-
-import styles from './styles.module.css';
 import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 
@@ -61,60 +55,40 @@ export function ProfileMapPage() {
   }, []);
 
   return (
-    <PageLayout
-      side={
-        <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
-
-          <SideMenuForAuthorized />
-        </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <>
-              <SmartHeader
-                filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
-                filterText="Фильтр"
-                onClick={openFilter}
-                settingIcon={
-                  <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                }
-                settingText="Карта заявок"
-              />
-              {isFilterVisibel && (
-                <Filter
-                  userRole="volunteer"
-                  changeVisible={() => setIsFilterVisibel(false)}
-                  position={buttonPosition}
-                />
-              )}
-            </>
-          }
-        >
-          {isLoading ? (
-            <Loader />
-          ) : (
-            data && (
-              // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
-              <YandexMap
-                tasks={data}
-                mapSettings={{
-                  latitude: user ? user.coordinates[0] : 59.938955,
-                  longitude: user ? user.coordinates[1] : 30.315644,
-                  zoom: 15,
-                }}
-                width="100%"
-                height="100%"
-                onClick={() => 3}
-                isAuthorised={true}
-              />
-            )
-          )}
-        </ContentLayout>
-      }
-    />
+    <>
+      <SmartHeader
+        filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+        filterText="Фильтр"
+        onClick={openFilter}
+        settingIcon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
+        settingText="Карта заявок"
+      />
+      {isFilterVisibel && (
+        <Filter
+          userRole="volunteer"
+          changeVisible={() => setIsFilterVisibel(false)}
+          position={buttonPosition}
+        />
+      )}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        data && (
+          // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
+          <YandexMap
+            tasks={data}
+            mapSettings={{
+              latitude: user ? user.coordinates[0] : 59.938955,
+              longitude: user ? user.coordinates[1] : 30.315644,
+              zoom: 15,
+            }}
+            width="100%"
+            height="100%"
+            onClick={() => 3}
+            isAuthorised={true}
+          />
+        )
+      )}
+    </>
   );
 }

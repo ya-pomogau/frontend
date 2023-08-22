@@ -1,12 +1,8 @@
 import { useState, MouseEvent, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { SideMenuForAuthorized } from 'widgets/side-menu';
 import { Filter } from 'features/filter/ui';
-import { UserInfo } from 'entities/user';
-import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
-import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
 import { UserCard } from 'widgets/user-card';
@@ -88,68 +84,48 @@ export function TasksPage() {
   );
 
   return (
-    <PageLayout
-      side={
-        <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
+    <>
+      <SmartHeader
+        filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+        filterText="Фильтр"
+        onClick={openFilter}
+        settingIcon={<Icon color="blue" icon="SettingsIcon" size="54" />}
+        settingText="Создание / Редактирование заявки"
+      />
 
-          <SideMenuForAuthorized />
-        </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <>
-              <SmartHeader
-                filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
-                filterText="Фильтр"
-                onClick={openFilter}
-                settingIcon={
-                  <Icon color="blue" icon="SettingsIcon" size="54" />
-                }
-                settingText="Создание / Редактирование заявки"
+      {isFilterVisibel && (
+        <Filter
+          userRole="admin"
+          changeVisible={() => setIsFilterVisibel(false)}
+          position={buttonPosition}
+        />
+      )}
+      <div>
+        <Link to={'/profile/bids'}>Настроить баллы</Link>
+      </div>
+
+      <div>
+        <Input
+          value={value}
+          label="Введите имя "
+          name="Name"
+          onChange={(e) => setValue(e.target.value)}
+          extClassName={styles.input}
+        />
+        <ul>
+          {filter.map((item) => (
+            <li key={item.userId}>
+              <UserCard
+                avatarLink={item.avatarLink}
+                avatarName={item.avatarName}
+                userName={item.userName}
+                userId={item.userId}
+                userNumber={item.userNumber}
               />
-
-              {isFilterVisibel && (
-                <Filter
-                  userRole="admin"
-                  changeVisible={() => setIsFilterVisibel(false)}
-                  position={buttonPosition}
-                />
-              )}
-            </>
-          }
-        >
-          <div>
-            <Link to={'/profile/bids'}>Настроить баллы</Link>
-          </div>
-
-          <div>
-            <Input
-              value={value}
-              label="Введите имя "
-              name="Name"
-              onChange={(e) => setValue(e.target.value)}
-              extClassName={styles.input}
-            />
-            <ul>
-              {filter.map((item) => (
-                <li key={item.userId}>
-                  <UserCard
-                    avatarLink={item.avatarLink}
-                    avatarName={item.avatarName}
-                    userName={item.userName}
-                    userId={item.userId}
-                    userNumber={item.userNumber}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </ContentLayout>
-      }
-    />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

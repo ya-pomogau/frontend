@@ -2,17 +2,10 @@ import { useState, MouseEvent, useRef, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
-
-import { UserInfo } from 'entities/user';
-import { ContentLayout } from 'shared/ui/content-layout';
-import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Filter } from 'features/filter/ui';
 import { MapWithTasks } from 'widgets/map-with-tasks';
-import { VolunteerSideMenu } from 'widgets/side-menu';
-
-import styles from './styles.module.css';
 
 export function UnauthPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
@@ -55,43 +48,23 @@ export function UnauthPage() {
   }
 
   return (
-    <PageLayout
-      side={
-        <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
+    <>
+      <SmartHeader
+        filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
+        filterText="Фильтр"
+        onClick={openFilter}
+        settingIcon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
+        settingText="Карта заявок"
+      />
 
-          <VolunteerSideMenu />
-        </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <>
-              <SmartHeader
-                filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
-                filterText="Фильтр"
-                onClick={openFilter}
-                settingIcon={
-                  <Icon color="blue" icon="MapApplicationIcon" size="54" />
-                }
-                settingText="Карта заявок"
-              />
-
-              {isFilterVisibel && (
-                <Filter
-                  userRole="volunteer"
-                  changeVisible={() => setIsFilterVisibel(false)}
-                  position={buttonPosition}
-                />
-              )}
-            </>
-          }
-        >
-          <MapWithTasks />
-        </ContentLayout>
-      }
-    />
+      {isFilterVisibel && (
+        <Filter
+          userRole="volunteer"
+          changeVisible={() => setIsFilterVisibel(false)}
+          position={buttonPosition}
+        />
+      )}
+      <MapWithTasks />
+    </>
   );
 }
