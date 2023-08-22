@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
-import classnames from 'classnames';
 
 import { DatePicker } from 'shared/ui/date-picker';
 
 import styles from '../styles.module.css';
-import { TimePickerElement } from 'shared/ui/time-picker';
 
 interface CalenderBlockProps {
   onChange: (name: string, value: string[] | string) => void;
@@ -14,11 +12,6 @@ interface CalenderBlockProps {
 
 export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
   const [isCalenderMobil, setIsCalenderMobil] = useState(false);
-
-  const buttonRef = useRef<HTMLInputElement>(null);
-  const [startTime, setStartTime] = useState('00:00');
-  const [endTime, setEndTime] = useState('00:00');
-  console.log('start:', startTime, 'end:', endTime);
 
   const handleDateChange = (date: Date) => {
     const formatedDate = format(date, 'yyyy-MM-dd');
@@ -57,68 +50,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   return (
     <div className={styles.filterBlock}>
-      <div
-        className={classnames(
-          styles.filterBlockTitle,
-          'text',
-          'text_size_small',
-          'text_type_bold'
-        )}
-      >
-        Дата и время
-      </div>
       <div>
-        <p
-          className={classnames(
-            styles.filterBlockText,
-            'text',
-            'text_size_small'
-          )}
-        >
-          Время
-        </p>
-        <div className={classnames(styles.filterBlockTime)}>
-          <p
-            className={classnames(
-              styles.filterBlockText,
-              'text',
-              'text_size_small'
-            )}
-          >
-            От
-          </p>
-          <TimePickerElement
-            isMobile={isCalenderMobil}
-            buttonRef={buttonRef}
-            startTime={startTime}
-            setStartTime={setStartTime}
-          />
-          <p
-            className={classnames(
-              styles.filterBlockText,
-              'text',
-              'text_size_small'
-            )}
-          >
-            До
-          </p>
-          <TimePickerElement
-            isMobile={isCalenderMobil}
-            buttonRef={buttonRef}
-            endTime={endTime}
-            setEndTime={setEndTime}
-          />
-        </div>
-
-        <p
-          className={classnames(
-            styles.filterBlockText,
-            'text',
-            'text_size_small'
-          )}
-        >
-          Дата
-        </p>
         <DatePicker
           value={filterDate ? parseISO(filterDate) : getNewDate()}
           isMobile={isCalenderMobil}

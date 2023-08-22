@@ -56,6 +56,7 @@ export function ProfileMapPage() {
                     categories: true,
                     radius: true,
                     date: true,
+                    time: true,
                   }}
                 />
               }
