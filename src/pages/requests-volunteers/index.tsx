@@ -1,16 +1,16 @@
-
-import { useState, MouseEvent, useRef, useEffect } from 'react';
 import { useGetUsersQuery } from 'services/user-api';
 
 import { SideMenuForAuthorized } from 'widgets/side-menu';
+import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
+import { UserCard } from 'widgets/user-card';
+
 import { UserInfo } from 'entities/user';
+
 import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
-import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import { Loader } from 'shared/ui/loader';
-import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
 

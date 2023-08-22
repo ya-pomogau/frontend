@@ -1,6 +1,3 @@
-
-import { useState, MouseEvent, useRef, useEffect } from 'react';
-
 import { useGetUsersQuery } from 'services/user-api';
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import { SideMenuForAuthorized } from 'widgets/side-menu';
@@ -20,7 +17,7 @@ export function RequestsAdminsPage() {
   const { isLoading, data = [] } = useGetUsersQuery('admin', {
     pollingInterval: 30000,
   });
-  
+
   return (
     <PageLayout
       side={
