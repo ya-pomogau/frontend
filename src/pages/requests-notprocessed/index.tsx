@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 import { Input } from 'shared/ui/input';
 import { testUsers } from 'pages/requests/test-users';
 import { UserCard } from 'widgets/user-card';
+import { useAppSelector } from 'app/hooks';
 
 interface UserProps {
   role: 'volunteer' | 'recipient' | 'admin' | 'master';
@@ -25,13 +26,11 @@ interface UserProps {
   volunteerInfo?: any;
 }
 
-interface RequestsNotprocessedPageProps {
-  isMaster: boolean;
-}
-
-export function RequestsNotprocessedPage(props: RequestsNotprocessedPageProps) {
+export function RequestsNotprocessedPage() {
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const [searchName, setSearchName] = useState('');
+
+  const { role } = useAppSelector((state) => state.user);
 
   const buttonFilterRef = useRef<Element>();
 
@@ -104,7 +103,7 @@ export function RequestsNotprocessedPage(props: RequestsNotprocessedPageProps) {
             type="name"
             label="Введите имя "
           />
-          {props.isMaster && (
+          {role === 'master' && (
             <div className={styles.userAdminCards}>
               {testUsers
                 .filter(

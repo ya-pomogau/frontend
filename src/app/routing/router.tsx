@@ -122,8 +122,7 @@ export const router = createBrowserRouter(
 
           <Route
             path="/profile/requests/notprocessed"
-            /* isMaster={сюда передать ину о том, какая роль мастера или нет} */
-            element={<RequestsNotprocessedPage isMaster={false} />}
+            element={<RequestsNotprocessedPage />}
           />
 
           <Route path="/profile/statistics" element={<StatisticsPage />} />
