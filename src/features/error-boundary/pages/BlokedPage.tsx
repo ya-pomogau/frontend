@@ -1,6 +1,6 @@
 import { SmartHeader } from 'shared/ui/smart-header';
 import { ErrorDialog } from 'shared/ui/error-dialog';
-import image from '../assets/no-conection.png';
+import image from '../assets/privacy.png';
 import styles from '../styles.module.css';
 import { Icon } from 'shared/ui/icons';
 
@@ -8,17 +8,13 @@ interface ErrorDialogProps {
   text?: string;
 }
 
-export const NoConectionPage = ({ text }: ErrorDialogProps) => {
+export const BlokedPage = () => {
   return (
     <>
-      <ErrorDialog text={text}></ErrorDialog>
-
       <SmartHeader
         extClassName={styles.smart_header}
-        filterIcon={<Icon color="blue" icon="FilterIcon" size="54" />}
-        filterText="Фильтр"
-        settingIcon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
-        settingText="Карта заявок"
+        settingIcon={<Icon color="blue" icon="LoginIcon" size="54" />}
+        settingText="Вход"
       />
       <div className={styles.content_box}>
         <img
@@ -26,6 +22,11 @@ export const NoConectionPage = ({ text }: ErrorDialogProps) => {
           src={image}
           alt="disconection_image"
         ></img>
+        <h3 className={styles.text_bloked}>Вы заблокированы администарором</h3>
+        <p className={styles.text_contact}>Для связи используйте</p>
+        <a className={styles.link} href="mailto:test@ya.ru">
+          test@ya.ru
+        </a>
       </div>
     </>
   );

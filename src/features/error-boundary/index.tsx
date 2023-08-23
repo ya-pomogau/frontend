@@ -1,6 +1,6 @@
 import React from 'react';
 import { NoConectionPage } from './pages/NoConectionPage';
-
+import { BlokedPage } from './pages/BlokedPage';
 const ErrorHandlerContext = React.createContext(() => {});
 
 type ErrorBoundaryProps = {
@@ -17,7 +17,12 @@ const ErrorBoundary = ({
   children,
 }: ErrorBoundaryProps) => {
   if (errorType) {
-    return <NoConectionPage errorText={errorText} />;
+    if (errorType === 'connect') {
+      return <NoConectionPage text={errorText} />;
+    }
+    if (errorType === 'bloked') {
+      return <BlokedPage />;
+    }
   }
   return (
     <ErrorHandlerContext.Provider value={setError}>

@@ -73,7 +73,7 @@ export function ProfileMapPage() {
       }
       content={
         <ErrorBoundary
-          errorType="connect"
+          errorType="bloked"
           errorText="Отсутствует подключение к интернету"
         >
           <ContentLayout
