@@ -12,15 +12,34 @@ import { VkIcon } from 'shared/ui/icons/vk-icon';
 import { VolunteerSideMenu } from 'widgets/side-menu';
 
 import styles from './styles.module.css';
+import { InputAddress } from 'shared/ui/input-address';
 
 export function RegisterPage() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
+
+  const [address, setAddress] = useState<{
+    address: string;
+    coords: [number, number] | [];
+  }>({
+    address: '',
+    coords: [],
+  });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     console.log('Региcтрация:', name, phone, address);
+  };
+
+  const handleAddressValueChange = (
+    newAddress: string,
+    coords?: [number, number] | []
+  ) => {
+    setAddress({
+      address: newAddress,
+      coords: coords || [],
+    });
   };
 
   return (
@@ -72,14 +91,13 @@ export function RegisterPage() {
             />
 
             <div>
-              {/* <InputAddress
-                inputAttributes={{
-                  required: true,
-                }}
-                initialValue=""
+              <InputAddress
+                required
                 name="address"
-                onChange={setAddress}
-              /> */}
+                address={address}
+                setAddress={handleAddressValueChange}
+              />
+
               <p className={styles.text}>
                 Укажите адрес и мы подберем ближайшее к вам задание
               </p>
