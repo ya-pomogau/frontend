@@ -249,6 +249,7 @@ export const Mark = React.memo(
 
     return (
       <Placemark
+        onClick={onClick}
         geometry={coordinates}
         options={{
           iconLayout: Iconlayout,

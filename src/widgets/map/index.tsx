@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef, useCallback } from 'react';
 import { Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps';
 
@@ -29,49 +29,71 @@ export const YandexMap = ({
   tasks,
   coordinates,
   isAuthorised,
-}: YandexMapProps) => (
-  <YMaps
-    enterprise
-    query={{
-      load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
-      apikey: YMAPS_API_KEY,
-    }}
-  >
-    <Map
-      state={{
-        center: [mapSettings.latitude, mapSettings.longitude],
-        zoom: mapSettings.zoom,
+}: YandexMapProps) => {
+  const mapRef = useRef<any>(null);
+
+  const handleMarkClick = useCallback((coords: [number, number]) => {
+    return async () => {
+      const transitionSettings = {
+        duration: 0,
+      };
+
+      await mapRef.current?.setZoom(15, transitionSettings);
+      await mapRef.current?.panTo(
+        [coords[0] - 0.005, coords[1]],
+        transitionSettings
+      );
+
+      onClick && onClick();
+    };
+  }, []);
+
+  return (
+    <YMaps
+      enterprise
+      query={{
+        load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
+        apikey: YMAPS_API_KEY,
       }}
-      options={{
-        suppressMapOpenBlock: true,
-        yandexMapDisablePoiInteractivity: true,
-      }}
-      width={width}
-      height={height}
     >
-      {tasks?.map((task) => (
-        <Mark
-          id={task.id}
-          coordinates={task.coordinates}
-          isUrgentTask={isTaskUrgent(task.date)}
-          fullName={task.recipient.fullname}
-          phone={task.recipient.phone}
-          avatar={task.recipient.avatar}
-          description={task.description}
-          count={task.category.scope}
-          onClick={onClick}
-          key={task.id}
-          isAuthorised={isAuthorised}
-          date={new Date(task.date).toLocaleDateString()}
-          time={new Date(task.date).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-        />
-      ))}
-      <Mark coordinates={coordinates} />
-    </Map>
-  </YMaps>
-);
+      <Map
+        defaultState={{
+          center: [mapSettings.latitude, mapSettings.longitude],
+          zoom: mapSettings.zoom,
+        }}
+        options={{
+          suppressMapOpenBlock: true,
+          yandexMapDisablePoiInteractivity: true,
+        }}
+        width={width}
+        height={height}
+        instanceRef={mapRef}
+      >
+        {tasks?.map((task) => (
+          <Mark
+            id={task.id}
+            coordinates={task.coordinates}
+            isUrgentTask={isTaskUrgent(task.date)}
+            fullName={task.recipient.fullname}
+            phone={task.recipient.phone}
+            avatar={task.recipient.avatar}
+            description={task.description}
+            count={task.category.scope}
+            onClick={handleMarkClick(task.coordinates)}
+            key={task.id}
+            isAuthorised={isAuthorised}
+            date={new Date(task.date).toLocaleDateString()}
+            time={new Date(task.date).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          />
+        ))}
+
+        <Mark coordinates={coordinates} />
+      </Map>
+    </YMaps>
+  );
+};
 
 export default memo(YandexMap);
