@@ -44,15 +44,7 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
   };
 
   if (notFoundFilter) {
-    return (
-      <FilterWrapper
-        filterMenu={
-          <span>Для такого вида профиля волонтёра нет подходящего фильтра</span>
-        }
-        filterValues={filterValues}
-        setFilterValues={setFilterValues}
-      />
-    );
+    return null;
   }
 
   return (
