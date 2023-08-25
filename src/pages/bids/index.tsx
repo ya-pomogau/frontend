@@ -6,9 +6,8 @@ export function BidsPage() {
   return (
     <>
       <SmartHeader
-        onClick={() => 1}
-        settingIcon={<Icon color="blue" icon="SettingsIcon" size="46" />}
-        settingText="Настройка балов"
+        icon={<Icon color="blue" icon="SettingsIcon" size="46" />}
+        text="Настройка балов"
       />
       <div>
         <BalanceSettings />

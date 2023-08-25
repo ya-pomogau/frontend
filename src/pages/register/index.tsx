@@ -7,22 +7,41 @@ import { Button } from 'shared/ui/button';
 import { VkIcon } from 'shared/ui/icons/vk-icon';
 
 import styles from './styles.module.css';
+import { InputAddress } from 'shared/ui/input-address';
 
 export function RegisterPage() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
+
+  const [address, setAddress] = useState<{
+    address: string;
+    coords: [number, number] | [];
+  }>({
+    address: '',
+    coords: [],
+  });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     console.log('Региcтрация:', name, phone, address);
+  };
+
+  const handleAddressValueChange = (
+    newAddress: string,
+    coords?: [number, number] | []
+  ) => {
+    setAddress({
+      address: newAddress,
+      coords: coords || [],
+    });
   };
 
   return (
     <>
       <SmartHeader
-        settingIcon={<Icon color="blue" icon="RegistrationIcon" size="54" />}
-        settingText="Регистрация"
+        icon={<Icon color="blue" icon="RegistrationIcon" size="54" />}
+        text="Регистрация"
         extClassName={styles.header}
       />
       <p className={styles.title}>Зарегистрироваться</p>
@@ -53,14 +72,13 @@ export function RegisterPage() {
         />
 
         <div>
-          {/* <InputAddress
-                inputAttributes={{
-                  required: true,
-                }}
-                initialValue=""
-                name="address"
-                onChange={setAddress}
-              /> */}
+          <InputAddress
+            required
+            name="address"
+            address={address}
+            setAddress={handleAddressValueChange}
+          />
+
           <p className={styles.text}>
             Укажите адрес и мы подберем ближайшее к вам задание
           </p>

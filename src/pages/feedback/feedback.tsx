@@ -18,8 +18,8 @@ export function FeedbackPage() {
   return (
     <>
       <SmartHeader
-        settingIcon={<Icon color="blue" icon="EmptyMessageIcon" size="54" />}
-        settingText="Напишите нам"
+        text="Напишите нам"
+        icon={<Icon color="blue" icon="EmptyMessageIcon" size="54" />}
       />
       <form className={styles.form}>
         <Input

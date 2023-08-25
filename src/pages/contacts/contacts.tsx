@@ -1,12 +1,6 @@
 import classNames from 'classnames';
-
-import { ContentLayout } from 'shared/ui/content-layout';
 import { Icon } from 'shared/ui/icons';
-import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
-
-import { SideMenu } from 'widgets/side-menu';
-import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 
 import styles from './styles.module.css';
 
@@ -14,8 +8,8 @@ export function ContactsPage() {
   return (
     <>
       <SmartHeader
-        settingIcon={<Icon color="blue" icon="ContactsIcon" size="54" />}
-        settingText="Контакты"
+        text="Контакты"
+        icon={<Icon color="blue" icon="ContactsIcon" size="54" />}
       />
       <div className={styles.container}>
         <h2

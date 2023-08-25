@@ -11,16 +11,14 @@ import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'shared/hooks';
 
-import { UserInfo } from 'entities/user';
 import { setUserRole } from 'entities/user/model';
 import { ContentLayout } from 'shared/ui/content-layout';
-import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { TaskList } from 'entities/task/ui/task-list';
 import { SideMenuContainer } from 'entities/side-menu-container';
 import { CardButton } from 'shared/ui/card-button';
-import { Filter } from 'features/filter/ui';
+
 import { Request } from 'features/create-request';
 import { openPopup } from 'features/create-request/model';
 import { NotFoundPage } from 'pages/not-found';
@@ -116,27 +114,27 @@ export function RecipientPage() {
               heading={
                 <>
                   <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={openFilter}
-                    settingIcon={
+                    // filterIcon={
+                    //   <Icon color="blue" icon="FilterIcon" size="54" />
+                    // }
+                    // filterText="Фильтр"
+                    // onClick={openFilter}
+                    icon={
                       <Icon
                         color="blue"
                         icon="ActiveApplicationIcon"
                         size="54"
                       />
                     }
-                    settingText="Активные заявки"
+                    text="Активные заявки"
                   />
-                  {isFilterVisibel && (
-                    <Filter
-                      userRole="recipient"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />
-                  )}
+                  {/* {isFilterVisibel && (
+                      <Filter
+                        userRole="recipient"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )} */}
                 </>
               }
             >
@@ -158,34 +156,29 @@ export function RecipientPage() {
         <Route
           path="completed"
           element={
-            <ContentLayout
-              heading={
-                <>
-                  <SmartHeader
-                    filterIcon={
-                      <Icon color="blue" icon="FilterIcon" size="54" />
-                    }
-                    filterText="Фильтр"
-                    onClick={openFilter}
-                    settingIcon={
-                      <Icon
-                        color="blue"
-                        icon="CompletedApplicationIcon"
-                        size="54"
-                      />
-                    }
-                    settingText="Завершенные заявки"
+            <>
+              <SmartHeader
+                // filterIcon={
+                //   <Icon color="blue" icon="FilterIcon" size="54" />
+                // }
+                // filterText="Фильтр"
+                // onClick={openFilter}
+                icon={
+                  <Icon
+                    color="blue"
+                    icon="CompletedApplicationIcon"
+                    size="54"
                   />
-                  {isFilterVisibel && (
-                    <Filter
-                      userRole="recipient"
-                      changeVisible={() => setIsFilterVisibel(false)}
-                      position={buttonPosition}
-                    />
-                  )}
-                </>
-              }
-            >
+                }
+                text="Завершенные заявки"
+              />
+              {/* {isFilterVisibel && (
+                      <Filter
+                        userRole="recipient"
+                        changeVisible={() => setIsFilterVisibel(false)}
+                        position={buttonPosition}
+                      />
+                    )} */}
               <TaskList
                 userRole="recipient"
                 isMobile={isMobile}
@@ -196,7 +189,7 @@ export function RecipientPage() {
                 isStatusActive={false}
                 tasks={[]}
               />
-            </ContentLayout>
+            </>
           }
         />
         <Route path="*" element={<NotFoundPage />} />
