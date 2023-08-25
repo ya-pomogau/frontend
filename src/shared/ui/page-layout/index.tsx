@@ -5,9 +5,8 @@ import { Loader } from '../loader';
 
 import styles from './styles.module.css';
 import { UserInfo } from 'entities/user';
-import { SideMenuForAuthorized } from 'widgets/side-menu';
+import { FeedbackSideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
 import { useLocation } from 'react-router-dom';
-import { FeedbackSideMenu } from 'widgets/side-menu/components/feedback-side-menu';
 
 interface PageLayoutProps {
   content?: ReactNode;

@@ -1,13 +1,11 @@
 import { Icon } from 'shared/ui/icons';
 import { SideMenu } from './side-menu';
 import { SideMenuLink } from './side-menu-link';
-import styles from '../../../pages/feedback/styles.module.css';
 
 export const FeedbackSideMenu = () => {
   return (
     <SideMenu
       authRequired={false}
-      extClassName={styles.button_container}
       links={
         <>
           <SideMenuLink
