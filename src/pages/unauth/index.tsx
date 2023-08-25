@@ -37,7 +37,6 @@ export function UnauthPage() {
             <SmartHeader
               icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
               text="Карта заявок"
-              filter={<Filter notFoundFilter />}
             />
           }
         >
