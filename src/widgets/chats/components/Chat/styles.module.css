@@ -143,7 +143,9 @@
     flex-direction: column;
     padding: 10px 30px;
     margin: 0;
+    height: calc(100% - 50px);
     align-self: start;
+    justify-content: space-between;
   }
 
   .chatWrapper {
@@ -175,5 +177,13 @@
     width: 100%;
     padding: 0;
   }
-}
 
+  .buttonTakeInWork {
+    margin: 0;
+  }
+
+  .answerZone {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -137,3 +137,16 @@ export async function getChatList() {
 
 export const sortMessages = (messages: IMessage[]) =>
   messages.sort((a, b) => (a.date > b.date ? 1 : -1));
+
+export const adminNotifications = [
+  'Волонтер прошел проверку и ждет подтверждения',
+  'Волонтер достиг 2-го уровня доверия.',
+  'Волонтер достиг 3-го уровня доверия. Выдайте ему ключ',
+];
+export const volunteerNotifications = [
+  'Вы достигли 2-го уровня . Теперь вам доступно больше заявок',
+  'Вы достигли 3-го уровня . Теперь вам доступно больше заявок',
+];
+export const recipientNotifications = [
+  'Администратор подтвердил Ваш аккаунт. Вы можете создать заявку',
+];

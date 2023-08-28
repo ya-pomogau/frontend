@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { fetchMessages, getSelectedChat } from '../../model/chat';
 import { LightPopup } from '../../../../shared/ui/light-popup';
 import { ArrowIcon } from '../../../../shared/ui/icons/arrow-icon';
+import { adminNotifications } from '../../libs/utils';
 
 interface IChatProps {
   onClose: () => void;
@@ -106,57 +107,59 @@ export const Chat = ({ onClose, isMobile }: IChatProps) => {
                           styles.notificationText
                         )}
                       >
-                        Волонтер достиг 3-го уровня доверия. Выдайте ему ключ
+                        {adminNotifications[2]}
                       </p>
                       <div className={styles.line}></div>
                       <KeyIcon color={'white'} />
                     </div>
                   ) : undefined}
                 </div>
-                {pathname.includes('in-work') ? (
-                  <>
-                    <div className={classnames(styles.inputWrapper)}>
-                      <Input
-                        placeholder="Напишите сообщение..."
-                        value={inputValue}
-                        name="message"
-                        extClassName={styles.input}
-                        onChange={handleInputChange}
-                        customIcon={
-                          <PinIcon
-                            size="24"
-                            color="blue"
-                            // onClick={onAttachFileClick}
-                          />
-                        }
-                      />
-                      <Button
-                        buttonType="primary"
-                        customIcon={<SendIcon color={'white'} />}
-                        size="small"
-                        onClick={handleSendClick}
-                        extClassName={styles.sendButton}
-                        disabled={!inputValue}
-                      />
-                    </div>
-                    <TemplateAnswers answers={answersList} />
-                  </>
-                ) : (
-                  <Button
-                    customIcon={<EmptyMessageIcon color={'white'} />}
-                    buttonType="primary"
-                    label="Взять в работу"
-                    size="medium"
-                    onClick={handleSendClick}
-                    extClassName={classnames(
-                      'text',
-                      'text_size_medium',
-                      styles.buttonTakeInWork
-                    )}
-                    disabled={false}
-                  />
-                )}
               </div>
+            )}
+            {pathname.includes('in-work') ? (
+              <>
+                <div className={classnames(styles.answerZone)}>
+                  <div className={classnames(styles.inputWrapper)}>
+                    <Input
+                      placeholder="Напишите сообщение..."
+                      value={inputValue}
+                      name="message"
+                      extClassName={styles.input}
+                      onChange={handleInputChange}
+                      customIcon={
+                        <PinIcon
+                          size="24"
+                          color="blue"
+                          // onClick={onAttachFileClick}
+                        />
+                      }
+                    />
+                    <Button
+                      buttonType="primary"
+                      customIcon={<SendIcon color={'white'} />}
+                      size="small"
+                      onClick={handleSendClick}
+                      extClassName={styles.sendButton}
+                      disabled={!inputValue}
+                    />
+                  </div>
+                  <TemplateAnswers answers={answersList} />
+                </div>
+              </>
+            ) : (
+              <Button
+                customIcon={<EmptyMessageIcon color={'white'} />}
+                buttonType="primary"
+                label="Взять в работу"
+                size="medium"
+                onClick={handleSendClick}
+                extClassName={classnames(
+                  'text',
+                  'text_size_medium',
+                  styles.buttonTakeInWork
+                )}
+                disabled={false}
+              />
             )}
           </div>
         </LightPopup>

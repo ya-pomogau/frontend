@@ -28,8 +28,8 @@
 .users {
   display: flex;
   flex-direction: row;
-  padding: 1px 0 0 5px;
-  gap: 43px;
+  padding: 0;
+  gap: 60px;
 }
 
 .information {
