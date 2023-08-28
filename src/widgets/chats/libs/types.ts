@@ -14,12 +14,12 @@ export interface IChatMateInfo {
   phone?: string;
 }
 
-export interface IChatList {
+export interface IChat {
   chatId: string;
   name: string;
   userId: number;
   userAvatarLink: string;
   incomingMessage: string;
   notifications: number;
-  phone?: string;
+  phone: string;
 }

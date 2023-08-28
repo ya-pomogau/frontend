@@ -1,46 +1,44 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
-import { getChatList } from '../../libs/utils';
-import { useEffect, useState } from 'react';
-import { IChatList } from '../../libs/types';
+
 import { Loader } from '../../../../shared/ui/loader';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
+import { useEffect } from 'react';
+import { fetchChatList } from '../../model/chat';
 
 interface IChatListProps {
   isNotificationImportant?: boolean;
   selectedChatId: string | undefined;
   onSelectChat: (id: string) => void;
   isMobile: boolean;
+  handleNavigate: (id: string) => void;
 }
 
 export const ChatsList = ({
   isNotificationImportant,
   selectedChatId,
   onSelectChat,
+  handleNavigate,
   isMobile,
 }: IChatListProps) => {
-  const [chatList, setChatList] = useState<Array<IChatList>>();
-  const [isChatListLoading, setChatListLoading] = useState(false);
-  const [chatListLoadError, setChatListLoadError] = useState<Error>();
+  const dispatch = useAppDispatch();
+  const { chatList, chatListLoading, chatListLoadError } = useAppSelector(
+    (state) => state.chats
+  );
+  const handleSelectChat = (id: string) => {
+    handleNavigate(id);
+    onSelectChat(id);
+  };
+
   useEffect(() => {
-    async function fetchData() {
-      setChatListLoading(true);
-      setChatListLoadError(undefined);
-      try {
-        setChatList(await getChatList());
-      } catch (err: any) {
-        setChatList(undefined);
-        setChatListLoadError(err);
-      }
-      setChatListLoading(false);
-    }
-    fetchData();
+    dispatch(fetchChatList());
   }, []);
 
   return (
     <>
       {chatListLoadError &&
         'Произошла ошибка - попробуйте перезагрузить страницу'}
-      {isChatListLoading && <Loader />}
+      {chatListLoading && <Loader />}
       {chatList && (
         <ul className={classNames(styles.chats)}>
           {chatList.map((chat) => (
@@ -50,7 +48,7 @@ export const ChatsList = ({
                 selectedChatId === chat.chatId ? styles.selectedChat : undefined
               )}
               key={chat.chatId}
-              onClick={() => onSelectChat(chat.chatId)}
+              onClick={() => handleSelectChat(chat.chatId)}
             >
               <div className={classNames(styles.avatar)}></div>
               <div className={classNames(styles.text)}>

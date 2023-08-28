@@ -1,4 +1,4 @@
-import { IChatList, IMessage } from './types';
+import { IChat, IMessage } from './types';
 
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -21,14 +21,14 @@ export const getMockMessages = (): IMessage[] => [
   },
   {
     messageId: 3,
-    userId: 11229,
+    userId: 112229,
     userAvatarLink: 'https://i.pravatar.cc/300',
     text: 'Отлично, спасибо, встретимся у 3-го подъезда',
     date: new Date(2023, 4, 15, 0, 5, 0),
   },
 ];
 
-export const mockChatsList: Array<IChatList> = [
+export const mockChatsList: Array<IChat> = [
   {
     chatId: '0',
     name: 'Иванов Иван Иванович',
@@ -36,6 +36,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Здравствуйте, не могу понять как отменить заявку',
     notifications: 5,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '1',
@@ -44,6 +45,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Волонтер не пришел в назначенное время',
     notifications: 3,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '2',
@@ -52,6 +54,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '3',
@@ -60,6 +63,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '4',
@@ -68,6 +72,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '5',
@@ -76,6 +81,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '6',
@@ -84,6 +90,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '7',
@@ -92,6 +99,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '8',
@@ -100,6 +108,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '9',
@@ -108,6 +117,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
   {
     chatId: '10',
@@ -116,6 +126,7 @@ export const mockChatsList: Array<IChatList> = [
     userAvatarLink: 'https://i.pravatar.cc/300',
     incomingMessage: 'Договорились, так и сделаем',
     notifications: 0,
+    phone: '+7(000) 000-00-00',
   },
 ];
 

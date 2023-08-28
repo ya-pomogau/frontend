@@ -5,11 +5,13 @@ import { taskModel } from 'entities/task/model';
 import { createRequestModel } from 'features/create-request/model/create-request';
 import { usersApi } from 'services/user-api';
 import { tasksApi } from 'services/tasks-api';
+import { chatModel } from '../../widgets/chats/model/chat';
 
 export const store = configureStore({
   reducer: {
     user: userModel.reducer,
     tasks: taskModel.reducer,
+    chats: chatModel.reducer,
     createRequest: createRequestModel.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [tasksApi.reducerPath]: tasksApi.reducer,

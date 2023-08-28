@@ -12,19 +12,26 @@ import { PageSubMenuForChats } from '../../widgets/page-sub-menu';
 import { ChatsList } from '../../widgets/chats/components';
 import { useMemo, useState } from 'react';
 import { Chat } from '../../widgets/chats/components/Chat';
-import {
-  getMockMessages,
-  sortMessages,
-  mockChatsList,
-} from '../../widgets/chats/libs/utils';
+import { mockChatsList } from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 export function ChatsInWorkPage() {
   const [selectedChatId, setSelectedChatId] = useState<string>();
+  const navigate = useNavigate();
   const selectedChat = useMemo(
     () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
     [selectedChatId]
   );
+
+  const handleNavigate = (id: string) => {
+    navigate(`${id}`);
+  };
+
+  const closeChat = () => {
+    navigate('..', { relative: 'path' });
+    setSelectedChatId(undefined);
+  };
 
   const isMobile = useMediaQuery('(max-width:1150px)');
 
@@ -76,31 +83,38 @@ export function ChatsInWorkPage() {
         >
           <PageSubMenuForChats />
           {isMobile ? (
-            <ChatsList
-              selectedChatId={selectedChatId}
-              onSelectChat={setSelectedChatId}
-              isMobile={isMobile}
-            />
+            <>
+              <ChatsList
+                selectedChatId={selectedChatId}
+                onSelectChat={setSelectedChatId}
+                isMobile={isMobile}
+                handleNavigate={handleNavigate}
+              />
+              <Routes>
+                <Route
+                  path={'/:chatId'}
+                  element={
+                    <Chat onClose={() => closeChat()} isMobile={isMobile} />
+                  }
+                />
+              </Routes>
+            </>
           ) : (
             <div className={styles.container}>
               <ChatsList
                 selectedChatId={selectedChatId}
                 onSelectChat={setSelectedChatId}
                 isMobile={isMobile}
+                handleNavigate={handleNavigate}
               />
-              {selectedChat && (
-                <Chat
-                  parentPage={'in-work'}
-                  messages={sortMessages(getMockMessages())}
-                  chatMateInfo={{
-                    name: selectedChat.name,
-                    userId: selectedChat.userId,
-                    avatar: 'https://i.pravatar.cc/300',
-                    phone: '+7(000) 000-00-00',
-                  }}
-                  onClose={() => setSelectedChatId(undefined)}
+              <Routes>
+                <Route
+                  path={'/:chatId'}
+                  element={
+                    <Chat onClose={() => closeChat()} isMobile={isMobile} />
+                  }
                 />
-              )}
+              </Routes>
             </div>
           )}
         </ContentLayout>

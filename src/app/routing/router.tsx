@@ -154,8 +154,8 @@ export const router = createBrowserRouter(
         </Route>
         <Route path="/chats" element={<ChatsPage />} />
         <Route path="/chats/waiting/*" element={<ChatsWaitingPage />} />
-        <Route path="/chats/in-work" element={<ChatsInWorkPage />} />
-        <Route path="/chats/conflicts" element={<ConflictsPage />} />
+        <Route path="/chats/in-work/*" element={<ChatsInWorkPage />} />
+        <Route path="/chats/conflicts/*" element={<ConflictsPage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

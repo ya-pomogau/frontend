@@ -13,13 +13,18 @@ import { ChatsList } from '../../widgets/chats/components';
 import { useMemo, useState } from 'react';
 import { mockChatsList } from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export function ConflictsPage() {
   const [selectedChatId, setSelectedChatId] = useState<string>();
+  const navigate = useNavigate();
   const selectedChat = useMemo(
     () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
     [selectedChatId]
   );
+  const handleNavigate = (id: string) => {
+    navigate(`${id}`);
+  };
 
   const isMobile = useMediaQuery('(max-width:1150px)');
 
@@ -75,6 +80,7 @@ export function ConflictsPage() {
               selectedChatId={selectedChatId}
               onSelectChat={setSelectedChatId}
               isMobile={isMobile}
+              handleNavigate={handleNavigate}
             />
           ) : (
             <div className={styles.container}>
@@ -82,6 +88,7 @@ export function ConflictsPage() {
                 selectedChatId={selectedChatId}
                 onSelectChat={setSelectedChatId}
                 isMobile={isMobile}
+                handleNavigate={handleNavigate}
               />
               <Conflict />
             </div>

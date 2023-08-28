@@ -55,12 +55,6 @@
   gap: 15px;
 }
 
-@media (max-width: 360px) {
-  .phoneInfo {
-    gap: 10px;
-  }
-}
-
 .chat {
   display: flex;
   flex-direction: column;
@@ -137,3 +131,49 @@
   height: 1px;
   margin-bottom: 10px;
 }
+
+@media (max-width: 735px) {
+  .popUp {
+    background-color: var(--colors-interface-background);
+    padding: 0;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px;
+    margin: 0;
+    align-self: start;
+  }
+
+  .chatWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .avatar {
+    max-width: 44px;
+    max-height: 44px;
+    margin: 0 5px 5px 30px;
+  }
+
+  .info {
+    align-items: center;
+  }
+
+  .name {
+    margin: 0;
+    padding: 0;
+  }
+
+  .phoneInfo {
+    gap: 10px;
+  }
+
+  .messagesBlock {
+    border: none;
+    width: 100%;
+    padding: 0;
+  }
+}
+

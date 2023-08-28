@@ -11,10 +11,6 @@
 }
 
 .chats::-webkit-scrollbar {
-  width: 2px;
-}
-
-.chats::-webkit-scrollbar {
   width: 0;
 }
 
