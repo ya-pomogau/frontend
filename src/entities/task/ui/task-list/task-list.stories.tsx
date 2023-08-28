@@ -66,9 +66,6 @@ const meta: Meta<typeof TaskList> = {
     handleClickEditButton: {
       description: 'функция при клике на кнопку редактирования заявки',
     },
-    handleClickAddTaskButton: {
-      description: 'функция при клике на кнопку создания заявки',
-    },
   },
 };
 
@@ -176,7 +173,6 @@ export const ExampleActive: Story = {
     handleClickConfirmButton: () => console.log('кликнули на галочку'),
     handleClickCloseButton: () => console.log('кликнули на крестик'),
     handleClickEditButton: () => console.log('кликнули на карандаш'),
-    handleClickAddTaskButton: () => console.log('кликнули на плюсик'),
     isMobile: false,
     isStatusActive: true,
   },
@@ -288,7 +284,6 @@ export const ExampleNotActive: Story = {
 export const ExampleEmptyActive: Story = {
   args: {
     tasks: [],
-    handleClickAddTaskButton: () => console.log('кликнули на плюсик'),
     isMobile: false,
     isStatusActive: true,
   },

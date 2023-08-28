@@ -70,6 +70,7 @@ export const TaskList = ({
                 size={isMobile ? 'medium' : 'large'}
                 extClassName={styles.add_task_icon}
               />
+
               <h2
                 className={`${styles.title_add_list} ${
                   isMobile ? 'text_size_medium' : 'text_size_large'
