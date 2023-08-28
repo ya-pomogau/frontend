@@ -21,16 +21,21 @@
 
 .text_bloked {
   font-size: 24px;
-  color: #9798C9;
+  color: #9798c9;
   line-height: 29.5px;
   max-width: 285px;
 }
 .text_contact {
   font-size: 24px;
   line-height: 29.05px;
-  color: #2E3192;
+  color: #2e3192;
 }
 .link {
   text-decoration: none;
   font-size: 24px;
+}
+
+.box {
+ display: flex;
+ flex-direction: column;
 }

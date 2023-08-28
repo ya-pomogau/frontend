@@ -1,6 +1,8 @@
 import React from 'react';
+import styles from './styles.module.css';
 import { NoConectionPage } from './pages/NoConectionPage';
 import { BlokedPage } from './pages/BlokedPage';
+import { ErrorDialog } from 'shared/ui/error-dialog';
 const ErrorHandlerContext = React.createContext(() => {});
 
 type ErrorBoundaryProps = {
@@ -22,6 +24,16 @@ const ErrorBoundary = ({
     }
     if (errorType === 'bloked') {
       return <BlokedPage />;
+    }
+    if (errorType === 'any') {
+      return (
+        <>
+          <ErrorHandlerContext.Provider value={setError}>
+            <ErrorDialog text={errorText}></ErrorDialog>
+            {children}
+          </ErrorHandlerContext.Provider>
+        </>
+      );
     }
   }
   return (
