@@ -6,7 +6,6 @@ import { ErrorDialog } from 'shared/ui/error-dialog';
 const ErrorHandlerContext = React.createContext(() => {});
 
 type ErrorBoundaryProps = {
-  errorType?: 'connect' | 'bloked' | 'any';
   errorText: string | null | undefined;
   children?: JSX.Element | JSX.Element[];
 };

@@ -4,10 +4,6 @@ import image from '../assets/privacy.png';
 import styles from '../styles.module.css';
 import { Icon } from 'shared/ui/icons';
 
-interface ErrorDialogProps {
-  text?: string;
-}
-
 export const BlokedPage = () => {
   return (
     <>
