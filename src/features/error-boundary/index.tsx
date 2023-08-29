@@ -7,29 +7,25 @@ const ErrorHandlerContext = React.createContext(() => {});
 
 type ErrorBoundaryProps = {
   errorType?: 'connect' | 'bloked' | 'any';
-  errorText: string;
+  errorText: string | null | undefined;
   children?: JSX.Element | JSX.Element[];
 };
 
 const setError = () => {};
 
-const ErrorBoundary = ({
-  errorType,
-  errorText,
-  children,
-}: ErrorBoundaryProps) => {
-  if (errorType) {
-    if (errorType === 'connect') {
+const ErrorBoundary = ({ errorText, children }: ErrorBoundaryProps) => {
+  if (errorText != null) {
+    if (errorText === 'Ошибка подключения') {
       return <NoConectionPage text={errorText} />;
     }
-    if (errorType === 'bloked') {
+    if (errorText === 'Пользователь заблокирован') {
       return <BlokedPage />;
     }
-    if (errorType === 'any') {
+    {
       return (
         <>
+          <ErrorDialog text={errorText}></ErrorDialog>
           <ErrorHandlerContext.Provider value={setError}>
-            <ErrorDialog text={errorText}></ErrorDialog>
             {children}
           </ErrorHandlerContext.Provider>
         </>

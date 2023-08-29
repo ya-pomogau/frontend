@@ -21,7 +21,7 @@ export function ProfileMapPage() {
 
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
   const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
-
+  const { error } = useAppSelector((state) => state.user);
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
   const getButtonPosition = () => {
     const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
@@ -72,10 +72,7 @@ export function ProfileMapPage() {
         </>
       }
       content={
-        <ErrorBoundary
-          errorType="any"
-          errorText="Отсутствует подключение к интернету"
-        >
+        <ErrorBoundary errorText={error}>
           <ContentLayout
             heading={
               <>

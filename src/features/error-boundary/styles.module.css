@@ -38,4 +38,5 @@
 .box {
  display: flex;
  flex-direction: column;
+ overflow-y: unset;
 }

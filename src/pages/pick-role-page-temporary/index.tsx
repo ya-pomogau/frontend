@@ -7,7 +7,11 @@
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import { setUserRole, fetchUserDataByRole } from 'entities/user/model';
+import {
+  setUserRole,
+  fetchUserDataByRole,
+  enableError,
+} from 'entities/user/model';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
@@ -35,6 +39,10 @@ export function PickRolePage() {
   const getMasterAdminRole = () => {
     dispatch(setUserRole('master'));
     dispatch(fetchUserDataByRole('master'));
+  };
+
+  const handleEnableError = () => {
+    dispatch(enableError());
   };
 
   const getPageYouWouldBeRedirected = () => {
@@ -96,6 +104,11 @@ export function PickRolePage() {
         <li>
           <button onClick={getMasterAdminRole} style={{ marginRight: 10 }}>
             Получить роль главного администратора.
+          </button>
+        </li>
+        <li>
+          <button onClick={handleEnableError} style={{ marginRight: 10 }}>
+            Добавить ошибку.
           </button>
         </li>
       </ul>

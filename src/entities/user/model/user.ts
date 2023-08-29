@@ -9,7 +9,7 @@ type UserState = {
   data: UserInfo | null;
   isLoading: boolean;
   isFailed: boolean;
-  error?: string;
+  error?: string | null;
 };
 
 const initialState: UserState = {
@@ -17,6 +17,7 @@ const initialState: UserState = {
   data: null,
   isLoading: false,
   isFailed: false,
+  error: null,
 };
 
 export const fetchUserDataByRole = createAsyncThunk(
@@ -53,6 +54,10 @@ export const userModel = createSlice({
     logoutUser: (state) => {
       state.data = null;
       state.role = null;
+    },
+    enableError: (state) => {
+      state.error =
+        'Пользователь заблокирован'; /* 'Ошибка подключения' 'Любой текст ошибки' */
     },
   },
   extraReducers: (builder) => {
@@ -99,4 +104,4 @@ export const userModel = createSlice({
   },
 });
 
-export const { setUserRole, logoutUser } = userModel.actions;
+export const { setUserRole, logoutUser, enableError } = userModel.actions;
