@@ -1,34 +1,35 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import format from 'date-fns/format';
-
+import { parseISO, format, isAfter } from 'date-fns';
 import { Avatar } from 'shared/ui/avatar';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import { Icon } from 'shared/ui/icons';
 import { RoundButton } from 'shared/ui/round-button';
 import { SquareButton } from 'shared/ui/square-buttons';
+import placeholder from './img/placeholder.svg';
 
 import styles from './styles.module.css';
 
 interface TaskItemProps {
   isMobile: boolean;
   category: string;
-  date: string;
+  date?: string;
   address: string;
   description: string;
   count: number;
-  avatar: string;
+  avatar?: string;
   completed: boolean;
   confirmed: boolean;
   conflict: boolean;
-  recipientName: string;
-  recipientPhoneNumber: string;
-  unreadMessages?: number | undefined;
+  recipientName?: string;
+  recipientPhoneNumber?: string;
+  unreadMessages?: number;
   handleClickPhoneButton?: () => void;
   handleClickMessageButton?: () => void;
   handleClickConfirmButton?: () => void;
   handleClickCloseButton?: () => void;
   handleClickEditButton?: () => void;
+  handleClickConflictButton?: () => void;
   extClassName?: string;
 }
 
@@ -37,10 +38,9 @@ export const TaskItem = ({
   category,
   date,
   address,
-  //title,
   description,
   count,
-  avatar,
+  avatar = placeholder,
   completed,
   confirmed,
   conflict,
@@ -52,6 +52,7 @@ export const TaskItem = ({
   handleClickConfirmButton,
   handleClickCloseButton,
   handleClickEditButton,
+  handleClickConflictButton,
   extClassName,
 }: TaskItemProps) => {
   const [isHidden, setIsHidden] = useState(true);
@@ -64,6 +65,9 @@ export const TaskItem = ({
       : conflict
       ? styles.container_main_conflict
       : styles.container_main_default;
+
+  const parsedDate = parseISO(date!);
+  const comparedDateResult = isAfter(new Date(), parsedDate);
 
   if (isMobile) {
     return (
@@ -79,44 +83,76 @@ export const TaskItem = ({
           <CategoriesBackground
             theme="primary"
             content={category}
-            size={category.length > 20 ? 'large' : 'medium'}
+            size={category.length > 22 ? 'large' : 'medium'}
             extClassName={styles.mobile_category}
           />
-          {handleClickConfirmButton && (
-            <SquareButton
-              buttonType="confirm"
-              onClick={handleClickConfirmButton}
-            />
-          )}
-          {handleClickCloseButton && (
-            <SquareButton
-              buttonType="close"
-              onClick={handleClickCloseButton}
-              extClassName={styles.button_edit}
-            />
-          )}
-          {handleClickEditButton && (
-            <SquareButton
-              buttonType="edit"
-              onClick={handleClickEditButton}
-              extClassName={styles.button_edit}
-            />
-          )}
+          <div className={styles.mobile_buttons}>
+            {handleClickConfirmButton && (
+              <SquareButton
+                buttonType="confirm"
+                onClick={handleClickConfirmButton}
+                extClassName={
+                  recipientName && !date
+                    ? ''
+                    : recipientName
+                    ? ''
+                    : styles.item_hidden
+                }
+              />
+            )}
+            {handleClickCloseButton && (
+              <SquareButton
+                buttonType="close"
+                onClick={handleClickCloseButton}
+                extClassName={
+                  !date && recipientName
+                    ? styles.item_hidden
+                    : styles.button_edit
+                }
+                disabled={comparedDateResult || completed}
+              />
+            )}
+            {handleClickConflictButton && (
+              <SquareButton
+                buttonType="conflict"
+                onClick={handleClickConflictButton}
+                extClassName={
+                  recipientName
+                    ? ''
+                    : !comparedDateResult
+                    ? ''
+                    : styles.item_hidden
+                }
+              />
+            )}
+            {handleClickEditButton && (
+              <SquareButton
+                buttonType="edit"
+                onClick={handleClickEditButton}
+                extClassName={
+                  recipientName ? styles.item_hidden : styles.button_edit
+                }
+              />
+            )}
+          </div>
         </div>
         <div className={styles.mobile_recipient_bio}>
           <Avatar
-            avatarName={recipientName}
+            avatarName={recipientName || 'Пользователь не назначен'}
             avatarLink={avatar}
             extClassName={styles.mobile_avatar}
           />
-          <div>
+          <div style={recipientName ? {} : { display: 'none' }}>
             <p className={`${styles.mobile_recipient_name} m-0`}>
               {recipientName}
             </p>
             <p className="m-0 text_size_medium">{recipientPhoneNumber}</p>
           </div>
         </div>
-        <div className={styles.mobile_buttons_call}>
+        <div
+          className={styles.mobile_buttons_call}
+          style={recipientName ? {} : { display: 'none' }}
+        >
           <RoundButton
             buttonType="phone"
             onClick={handleClickPhoneButton}
@@ -126,6 +162,7 @@ export const TaskItem = ({
             buttonType="message"
             onClick={handleClickMessageButton}
             disabled={completed && confirmed}
+            unreadMessages={unreadMessages}
           />
         </div>
         <div className={styles.mobile_section_description}>
@@ -166,7 +203,9 @@ export const TaskItem = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{format(new Date(date), 'dd.MM.yyyy')}</p>
+            <p className="m-0">
+              {date ? format(new Date(date), 'dd.MM.yyyy') : 'бессрочно'}
+            </p>
           </div>
           <div
             className={classNames(
@@ -181,7 +220,9 @@ export const TaskItem = ({
               size="24"
               className={styles.icon}
             />
-            <p className="m-0">{format(new Date(date), 'kk.mm')}</p>
+            <p className="m-0">
+              {date ? format(new Date(date), 'kk.mm') : '00:00-00:00'}
+            </p>
           </div>
         </div>
         <div
@@ -218,83 +259,32 @@ export const TaskItem = ({
           <CategoriesBackground
             theme="primary"
             content={category}
-            size={category.length > 20 ? 'large' : 'medium'}
+            size={category.length > 24 ? 'large' : 'medium'}
             extClassName={styles.category}
           />
-          {/* <div className={styles.main}> */}
           <div className={styles.info_date}>
-            {/* todo посмотреть заглушку для бессрочного */}
-            {date && date === '1000-10-10T00:00Z' ? (
-              // <div className={styles.date_additional}>
-              //   <div className={classNames(styles.date, 'text_size_large')}>
-              //     <Icon
-              //       color="blue"
-              //       icon="CalendarIcon"
-              //       size="24"
-              //       className={styles.icon}
-              //     />
-              //   </div>
-              //   <p
-              //     className={classNames(
-              //       styles.date_text_special,
-              //       'm-0',
-              //       'text_size_large'
-              //     )}
-              //   >
-              //     бессрочно
-              //   </p>
-              //   <div className={classNames(styles.date, 'text_size_large')}>
-              //     <Icon
-              //       color="blue"
-              //       icon="ClockIcon"
-              //       size="24"
-              //       className={styles.icon}
-              //     />
-              //   </div>
-              // </div>
-              // посмотреть другие варианты
-              <>
-                <div className={classNames(styles.date, 'text_size_large')}>
-                  <Icon
-                    color="blue"
-                    icon="CalendarIcon"
-                    size="24"
-                    className={styles.icon}
-                  />
-                  <p className="m-0">бессрочно</p>
-                </div>
-                <div className={classNames(styles.date, 'text_size_large')}>
-                  <Icon
-                    color="blue"
-                    icon="ClockIcon"
-                    size="24"
-                    className={styles.icon}
-                  />
-                  <p className="m-0">00:00-00:00</p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className={classNames(styles.date, 'text_size_large')}>
-                  <Icon
-                    color="blue"
-                    icon="CalendarIcon"
-                    size="24"
-                    className={styles.icon}
-                  />
-                  <p className="m-0">{format(new Date(date), 'dd.MM.yyyy')}</p>
-                </div>
-                <div className={classNames(styles.date, 'text_size_large')}>
-                  <Icon
-                    color="blue"
-                    icon="ClockIcon"
-                    size="24"
-                    className={styles.icon}
-                  />
-                  <p className="m-0">{format(new Date(date), 'kk.mm')}</p>
-                </div>
-              </>
-            )}
+            <div className={classNames(styles.date, 'text_size_large')}>
+              <Icon
+                color="blue"
+                icon="CalendarIcon"
+                size="24"
+                className={styles.icon}
+              />
+              <p className="m-0">
+                {date ? format(new Date(date), 'dd.MM.yyyy') : 'бессрочно'}
+              </p>
+            </div>
+            <div className={classNames(styles.date, 'text_size_large')}>
+              <Icon
+                color="blue"
+                icon="ClockIcon"
+                size="24"
+                className={styles.icon}
+              />
+              <p className="m-0">
+                {date ? format(new Date(date), 'kk.mm') : '00:00-00:00'}
+              </p>
+            </div>
             <div className={styles.address}>
               <Icon
                 color="blue"
@@ -336,28 +326,30 @@ export const TaskItem = ({
       <div className={styles.container}>
         <div className={styles.section_right}>
           <Avatar
-            avatarName={recipientName}
+            avatarName={recipientName || 'Пользователь не назначен'}
             avatarLink={avatar}
             extClassName={styles.avatar}
           />
-          <p className={`${styles.recipient_name} m-0 text_size_medium`}>
-            {recipientName}
-          </p>
-          <p className={`${styles.phone} text_size_medium`}>
-            {recipientPhoneNumber}
-          </p>
-          <div className={styles.buttons_call}>
-            <RoundButton
-              buttonType="phone"
-              onClick={handleClickPhoneButton}
-              disabled={completed && confirmed}
-            />
-            <RoundButton
-              buttonType="message"
-              onClick={handleClickMessageButton}
-              disabled={completed && confirmed}
-              unreadMessages={unreadMessages}
-            />
+          <div style={recipientName ? {} : { display: 'none' }}>
+            <p className={`${styles.recipient_name} m-0 text_size_medium`}>
+              {recipientName}
+            </p>
+            <p className={`${styles.phone} text_size_medium`}>
+              {recipientPhoneNumber}
+            </p>
+            <div className={styles.buttons_call}>
+              <RoundButton
+                buttonType="phone"
+                onClick={handleClickPhoneButton}
+                disabled={completed && confirmed}
+              />
+              <RoundButton
+                buttonType="message"
+                onClick={handleClickMessageButton}
+                disabled={completed && confirmed}
+                unreadMessages={unreadMessages}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.buttons_action}>
@@ -365,20 +357,47 @@ export const TaskItem = ({
             <SquareButton
               buttonType="confirm"
               onClick={handleClickConfirmButton}
+              extClassName={
+                recipientName && !date
+                  ? ''
+                  : recipientName
+                  ? ''
+                  : styles.item_hidden
+              }
             />
           )}
           {handleClickCloseButton && (
             <SquareButton
               buttonType="close"
               onClick={handleClickCloseButton}
-              extClassName={styles.button_edit}
+              extClassName={
+                !date && recipientName ? styles.item_hidden : styles.button_edit
+              }
+              disabled={comparedDateResult || completed}
+            />
+          )}
+          {handleClickConflictButton && (
+            <SquareButton
+              buttonType="conflict"
+              onClick={handleClickConflictButton}
+              extClassName={
+                recipientName && !date
+                  ? ''
+                  : recipientName
+                  ? ''
+                  : !comparedDateResult
+                  ? ''
+                  : styles.item_hidden
+              }
             />
           )}
           {handleClickEditButton && (
             <SquareButton
               buttonType="edit"
               onClick={handleClickEditButton}
-              extClassName={styles.button_edit}
+              extClassName={
+                recipientName ? styles.item_hidden : styles.button_edit
+              }
             />
           )}
         </div>

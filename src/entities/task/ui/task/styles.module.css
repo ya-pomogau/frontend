@@ -1,7 +1,7 @@
 /* DESKTOP */
 .container_main {
   display: flex;
-  /* grid-template-columns: auto 186px; */
+  padding-top: 4px;
   width: 100%;
   max-width: 889px;
   border-bottom: 1px solid;
@@ -145,7 +145,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 6px;
+  justify-content: flex-start;
+  /* padding-top: 6px; */
   min-width: 185px;
 }
 
@@ -167,7 +168,12 @@
 
 .buttons_call {
   display: flex;
+  justify-content: center;
   gap: 8px;
+}
+
+.item_hidden {
+  visibility: hidden;
 }
 
 .icon_button {
@@ -189,7 +195,7 @@
 .buttons_action {
   display: grid;
   grid-template-columns: repeat(2, 32px);
-  gap: 18px;
+  gap: 10px;
   max-width: 82px;
   justify-content: end;
   align-content: start;
@@ -202,7 +208,6 @@
 /* MOBILE */
 .mobile_container_main {
   border: 1px solid var(--colors-interface-blue-very-soft);
-  height: 100%;
 }
 
 .mobile_header {
@@ -212,8 +217,14 @@
 }
 
 .mobile_category {
-  min-width: 170px;
+  min-width: 33%;
   margin-right: auto;
+}
+
+.mobile_buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
 }
 
 .mobile_recipient_bio {
@@ -251,18 +262,18 @@
 }
 
 .mobile_description {
-  margin: 0;
+  margin: 20px 0 0 0;
   max-width: 600px;
   min-width: 200px;
-  line-height: 29px;
+  line-height: 22px;
 }
 
 .mobile_description_hidden {
-  margin: 0;
-  line-height: 29px;
+  margin: 20px 0 0 0;
+  line-height: 22px;
   max-width: 600px;
   min-width: 200px;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;

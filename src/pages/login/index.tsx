@@ -1,6 +1,4 @@
 import { FormEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-
 import { UserInfo } from 'entities/user';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
@@ -111,7 +109,7 @@ export function LoginPage() {
                 disabled={
                   !inputFields.login ||
                   !inputFields.password ||
-                  inputFields.password.length < 6
+                  inputFields.password.length < 2
                 }
               />
             </form>
