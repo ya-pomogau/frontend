@@ -10,20 +10,14 @@ import styles from './styles.module.css';
 import { UserInfo } from '../../entities/user';
 import { PageSubMenuForChats } from '../../widgets/page-sub-menu';
 import { ChatsList } from '../../widgets/chats/components';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Chat } from '../../widgets/chats/components/Chat';
-import { mockChatsList } from '../../widgets/chats/libs/utils';
 import { useMediaQuery } from '../../shared/hooks';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 export function ChatsInWorkPage() {
   const [selectedChatId, setSelectedChatId] = useState<string>();
   const navigate = useNavigate();
-  const selectedChat = useMemo(
-    () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
-    [selectedChatId]
-  );
-
   const handleNavigate = (id: string) => {
     navigate(`${id}`);
   };
@@ -87,7 +81,6 @@ export function ChatsInWorkPage() {
               <ChatsList
                 selectedChatId={selectedChatId}
                 onSelectChat={setSelectedChatId}
-                isMobile={isMobile}
                 handleNavigate={handleNavigate}
               />
               <Routes>
@@ -104,7 +97,6 @@ export function ChatsInWorkPage() {
               <ChatsList
                 selectedChatId={selectedChatId}
                 onSelectChat={setSelectedChatId}
-                isMobile={isMobile}
                 handleNavigate={handleNavigate}
               />
               <Routes>

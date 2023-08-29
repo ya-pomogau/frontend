@@ -10,7 +10,6 @@ interface IChatListProps {
   isNotificationImportant?: boolean;
   selectedChatId: string | undefined;
   onSelectChat: (id: string) => void;
-  isMobile: boolean;
   handleNavigate: (id: string) => void;
 }
 
@@ -19,7 +18,6 @@ export const ChatsList = ({
   selectedChatId,
   onSelectChat,
   handleNavigate,
-  isMobile,
 }: IChatListProps) => {
   const dispatch = useAppDispatch();
   const { chatList, chatListLoading, chatListLoadError } = useAppSelector(

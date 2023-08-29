@@ -23,3 +23,25 @@ export interface IChat {
   notifications: number;
   phone: string;
 }
+
+export interface IConflict {
+  conflictId: string;
+  volunteer: {
+    role: string;
+    userName: string;
+    userId: number;
+    avatarLink: string;
+    avatarName: string;
+  };
+  recipient: {
+    role: string;
+    userName: string;
+    userId: number;
+    avatarLink: string;
+    avatarName: string;
+  };
+  date: Date;
+  address: string;
+  theme: string;
+  description: string;
+}

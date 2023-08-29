@@ -10,20 +10,20 @@ import { Conflict } from '../../widgets/chats/components/Conflict';
 
 import { Icon } from '../../shared/ui/icons';
 import { ChatsList } from '../../widgets/chats/components';
-import { useMemo, useState } from 'react';
-import { mockChatsList } from '../../widgets/chats/libs/utils';
+import { useState } from 'react';
 import { useMediaQuery } from '../../shared/hooks';
-import { useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 export function ConflictsPage() {
-  const [selectedChatId, setSelectedChatId] = useState<string>();
+  const [selectedConflictId, setSelectedConflictId] = useState<string>();
   const navigate = useNavigate();
-  const selectedChat = useMemo(
-    () => mockChatsList.find((chat) => chat.chatId === selectedChatId),
-    [selectedChatId]
-  );
   const handleNavigate = (id: string) => {
     navigate(`${id}`);
+  };
+
+  const closeConflict = () => {
+    navigate('..', { relative: 'path' });
+    setSelectedConflictId(undefined);
   };
 
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -77,20 +77,28 @@ export function ConflictsPage() {
           <PageSubMenuForChats />
           {isMobile ? (
             <ChatsList
-              selectedChatId={selectedChatId}
-              onSelectChat={setSelectedChatId}
-              isMobile={isMobile}
+              selectedChatId={selectedConflictId}
+              onSelectChat={setSelectedConflictId}
               handleNavigate={handleNavigate}
             />
           ) : (
             <div className={styles.container}>
               <ChatsList
-                selectedChatId={selectedChatId}
-                onSelectChat={setSelectedChatId}
-                isMobile={isMobile}
+                selectedChatId={selectedConflictId}
+                onSelectChat={setSelectedConflictId}
                 handleNavigate={handleNavigate}
               />
-              <Conflict />
+              <Routes>
+                <Route
+                  path={'/:conflictId'}
+                  element={
+                    <Conflict
+                      isMobile={isMobile}
+                      onClose={() => closeConflict()}
+                    />
+                  }
+                />
+              </Routes>
             </div>
           )}
         </ContentLayout>

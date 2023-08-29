@@ -5,68 +5,110 @@ import { ConflictUserCard } from '../../../../shared/ui/conflict-user-card';
 import { CategoriesBackground } from '../../../../shared/ui/categories-background';
 import { Button } from '../../../../shared/ui/button';
 import { EmptyMessageIcon } from '../../../../shared/ui/icons/empty-message-icon';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
+import { fetchConflictList, getSelectedConflict } from '../../model/conflict';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-export const Conflict = () => {
+interface IConflictProps {
+  onClose: () => void;
+  isMobile: boolean;
+}
+
+export const Conflict = ({ onClose, isMobile }: IConflictProps) => {
+  const { conflictId } = useParams();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchConflictList());
+  }, []);
+
+  const conflictState = useAppSelector((state) => state.conflicts);
+  const selectedConflict = getSelectedConflict(conflictState, conflictId ?? '');
+
   return (
-    <div className={styles.wrapper}>
-      <div className={classnames('text', 'text_size_large', styles.heading)}>
-        Конфликт
-        <CloseCrossIcon color={'blue'} />
-      </div>
-      <div className={styles.conflict}>
-        <div className={styles.users}>
-          <ConflictUserCard
-            role={'Волонтер'}
-            userName={'Петров Петр Петрович'}
-            userId={11111114}
-            avatarLink={'https://i.pravatar.cc/300'}
-            avatarName={'avatar'}
-          />
-          <ConflictUserCard
-            role={'Реципиент'}
-            userName={'Петров Петр Петрович'}
-            userId={11111114}
-            avatarLink={'https://i.pravatar.cc/300'}
-            avatarName={'avatar'}
-          />
-        </div>
-        <div className={styles.information}>
-          <div className={classnames('text', 'text_size_large', styles.date)}>
-            24.09.2022
-            <p className={classnames(styles.time)}>16:00</p>
-          </div>
-          <p className={classnames('text', 'text_size_medium', styles.address)}>
-            ул. Нахимова, д.9, у подъезда №3
-          </p>
-          <CategoriesBackground theme={'primary'} content={'Сопровождение'} />
-          <p
-            className={classnames(
-              'text',
-              'text_size_medium',
-              styles.description
-            )}
+    <>
+      {selectedConflict && (
+        <div className={styles.wrapper}>
+          <div
+            className={classnames('text', 'text_size_large', styles.heading)}
           >
-            Заболел и совсем нет сил даже ходить по квартире. Почти неделю
-            собаку выгуливали соседи, но в пятницу они не смогут. Помогите,
-            пожалуйста!
-          </p>
+            Конфликт
+            <CloseCrossIcon color={'blue'} onClick={onClose} />
+          </div>
+          <div className={styles.conflict}>
+            <div className={styles.users}>
+              <ConflictUserCard
+                role={selectedConflict.volunteer.role}
+                userName={selectedConflict.volunteer.userName}
+                userId={selectedConflict.volunteer.userId}
+                avatarLink={selectedConflict.volunteer.avatarLink}
+                avatarName={selectedConflict.volunteer.avatarName}
+              />
+              <ConflictUserCard
+                role={selectedConflict.recipient.role}
+                userName={selectedConflict.recipient.userName}
+                userId={selectedConflict.recipient.userId}
+                avatarLink={selectedConflict.recipient.avatarLink}
+                avatarName={selectedConflict.recipient.avatarName}
+              />
+            </div>
+            <div className={styles.information}>
+              <div
+                className={classnames('text', 'text_size_large', styles.date)}
+              >
+                24.09.2022
+                <p className={classnames(styles.time)}>16:00</p>
+              </div>
+              <p
+                className={classnames(
+                  'text',
+                  'text_size_medium',
+                  styles.address
+                )}
+              >
+                {selectedConflict.address}
+              </p>
+              <CategoriesBackground
+                theme={'primary'}
+                content={selectedConflict.theme}
+              />
+              <p
+                className={classnames(
+                  'text',
+                  'text_size_medium',
+                  styles.description
+                )}
+              >
+                {selectedConflict.description}
+              </p>
+            </div>
+            <div className={styles.buttons}>
+              <Button
+                buttonType={'secondary'}
+                label={'Конфликт решен'}
+                extClassName={classnames(
+                  'text',
+                  'text_size_small',
+                  styles.button
+                )}
+              />
+              <Button
+                customIcon={<EmptyMessageIcon color={'white'} />}
+                buttonType="primary"
+                label="Ответить"
+                size="medium"
+                extClassName={classnames(
+                  'text',
+                  'text_size_medium',
+                  styles.button
+                )}
+                disabled={false}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      <div className={styles.buttons}>
-        <Button
-          buttonType={'secondary'}
-          label={'Конфликт решен'}
-          extClassName={classnames('text', 'text_size_small', styles.button)}
-        />
-        <Button
-          customIcon={<EmptyMessageIcon color={'white'} />}
-          buttonType="primary"
-          label="Ответить"
-          size="medium"
-          extClassName={classnames('text', 'text_size_medium', styles.button)}
-          disabled={false}
-        />
-      </div>
-    </div>
+      )}
+    </>
   );
 };

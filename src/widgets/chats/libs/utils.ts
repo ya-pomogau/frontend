@@ -1,4 +1,4 @@
-import { IChat, IMessage } from './types';
+import { IChat, IConflict, IMessage } from './types';
 
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -130,9 +130,61 @@ export const mockChatsList: Array<IChat> = [
   },
 ];
 
+export const mockConflictList: Array<IConflict> = [
+  {
+    conflictId: '0',
+    volunteer: {
+      role: 'Волонтер',
+      userName: 'Петров Петр Петрович',
+      userId: 112230,
+      avatarLink: 'https://i.pravatar.cc',
+      avatarName: 'avatar',
+    },
+    recipient: {
+      role: 'Реципиент',
+      userName: 'Петров Петр Петрович',
+      userId: 112231,
+      avatarLink: 'https://i.pravatar.cc',
+      avatarName: 'avatar',
+    },
+    date: new Date(2023, 9, 24, 16, 0, 0),
+    address: 'ул. Нахимова, д.9, у подъезда №3',
+    theme: 'Сопровождение',
+    description:
+      'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!',
+  },
+  {
+    conflictId: '1',
+    volunteer: {
+      role: 'Волонтер',
+      userName: 'Петров Петр Петрович',
+      userId: 112232,
+      avatarLink: 'https://i.pravatar.cc',
+      avatarName: 'avatar',
+    },
+    recipient: {
+      role: 'Реципиент',
+      userName: 'Петров Петр Петрович',
+      userId: 112233,
+      avatarLink: 'https://i.pravatar.cc',
+      avatarName: 'avatar',
+    },
+    date: new Date(2023, 9, 24, 16, 0, 0),
+    address: 'ул. Нахимова, д.9, у подъезда №3',
+    theme: 'Сопровождение',
+    description:
+      'Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!',
+  },
+];
+
 export async function getChatList() {
   await delay(300);
   return mockChatsList;
+}
+
+export async function getConflictList() {
+  await delay(300);
+  return mockConflictList;
 }
 
 export const sortMessages = (messages: IMessage[]) =>

@@ -85,6 +85,7 @@
   .chats {
     margin-top: 10px;
     width: 359px;
+    max-height: 350px;
   }
 
   .chat {

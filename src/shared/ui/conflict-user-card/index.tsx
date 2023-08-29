@@ -8,7 +8,7 @@ import { EmptyMessageIcon } from '../icons/empty-message-icon';
 import { SquareButton } from '../square-buttons';
 
 interface IConflictUserCardProps {
-  role: 'Волонтер' | 'Реципиент';
+  role: string;
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
