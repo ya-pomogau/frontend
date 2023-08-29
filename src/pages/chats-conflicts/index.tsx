@@ -26,7 +26,7 @@ export function ConflictsPage() {
     setSelectedConflictId(undefined);
   };
 
-  const isMobile = useMediaQuery('(max-width:1150px)');
+  const isMobile = useMediaQuery('(max-width:800px)');
 
   return (
     <PageLayout
@@ -76,11 +76,24 @@ export function ConflictsPage() {
         >
           <PageSubMenuForChats />
           {isMobile ? (
-            <ChatsList
-              selectedChatId={selectedConflictId}
-              onSelectChat={setSelectedConflictId}
-              handleNavigate={handleNavigate}
-            />
+            <>
+              <ChatsList
+                selectedChatId={selectedConflictId}
+                onSelectChat={setSelectedConflictId}
+                handleNavigate={handleNavigate}
+              />
+              <Routes>
+                <Route
+                  path={'/:conflictId'}
+                  element={
+                    <Conflict
+                      isMobile={isMobile}
+                      onClose={() => closeConflict()}
+                    />
+                  }
+                />
+              </Routes>
+            </>
           ) : (
             <div className={styles.container}>
               <ChatsList

@@ -12,12 +12,12 @@
 }
 
 .role {
-  margin: 0 0 0 0;
+  margin: 0;
   padding: 0;
 }
 
 .user {
-  margin: 0 0 0 0;
+  margin: 0;
 }
 
 .avatar {
@@ -65,4 +65,25 @@
   margin: 0;
   padding: 0;
   opacity: 50%;
+}
+
+@media (max-width: 735px) {
+
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: row;
+    gap: 72px
+  }
+
+  .content {
+    max-width: 175px;
+  }
+  .user {
+    align-self: center;
+  }
+
 }
