@@ -20,12 +20,13 @@ import { Icon } from 'shared/ui/icons';
 import { TaskList } from 'entities/task/ui/task-list';
 import { SideMenuContainer } from 'entities/side-menu-container';
 import { CardButton } from 'shared/ui/card-button';
-import { Filter } from 'features/filter/ui';
+
 import { Request } from 'features/create-request';
 import { openPopup } from 'features/create-request/model';
 import { NotFoundPage } from 'pages/not-found';
 
 import styles from './styles.module.css';
+import useUser from 'shared/hooks/use-user';
 
 export function RecipientPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -33,7 +34,7 @@ export function RecipientPage() {
 
   const dispatch = useAppDispatch();
 
-  const isAuth = !!useAppSelector((store) => store.user.role);
+  const isAuth = useUser();
   const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
@@ -113,27 +114,27 @@ export function RecipientPage() {
                 heading={
                   <>
                     <SmartHeader
-                      filterIcon={
-                        <Icon color="blue" icon="FilterIcon" size="54" />
-                      }
-                      filterText="Фильтр"
-                      onClick={openFilter}
-                      settingIcon={
+                      // filterIcon={
+                      //   <Icon color="blue" icon="FilterIcon" size="54" />
+                      // }
+                      // filterText="Фильтр"
+                      // onClick={openFilter}
+                      icon={
                         <Icon
                           color="blue"
                           icon="ActiveApplicationIcon"
                           size="54"
                         />
                       }
-                      settingText="Активные заявки"
+                      text="Активные заявки"
                     />
-                    {isFilterVisibel && (
+                    {/* {isFilterVisibel && (
                       <Filter
                         userRole="recipient"
                         changeVisible={() => setIsFilterVisibel(false)}
                         position={buttonPosition}
                       />
-                    )}
+                    )} */}
                   </>
                 }
               >
@@ -159,27 +160,27 @@ export function RecipientPage() {
                 heading={
                   <>
                     <SmartHeader
-                      filterIcon={
-                        <Icon color="blue" icon="FilterIcon" size="54" />
-                      }
-                      filterText="Фильтр"
-                      onClick={openFilter}
-                      settingIcon={
+                      // filterIcon={
+                      //   <Icon color="blue" icon="FilterIcon" size="54" />
+                      // }
+                      // filterText="Фильтр"
+                      // onClick={openFilter}
+                      icon={
                         <Icon
                           color="blue"
                           icon="CompletedApplicationIcon"
                           size="54"
                         />
                       }
-                      settingText="Завершенные заявки"
+                      text="Завершенные заявки"
                     />
-                    {isFilterVisibel && (
+                    {/* {isFilterVisibel && (
                       <Filter
                         userRole="recipient"
                         changeVisible={() => setIsFilterVisibel(false)}
                         position={buttonPosition}
                       />
-                    )}
+                    )} */}
                   </>
                 }
               >

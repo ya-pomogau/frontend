@@ -7,7 +7,7 @@ import {
   changeStepDecrement,
   changeStepIncrement,
 } from 'features/create-request/model';
-import YandexMap from 'shared/ui/map';
+import YandexMap from 'widgets/map';
 import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './address-step.module.css';
@@ -24,7 +24,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const handleAddressValueChange = (
     additinalAddress: string,
-    coords?: [number, number]
+    coords?: [number, number] | []
   ) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
@@ -53,12 +53,15 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               Место встречи
             </p>
             <div className={styles.headerWrapper} />
+
             <InputAddress
               initialValue={address}
-              inputChange={handleAddressValueChange}
+              address={{ address, coords: coordinates || [] }}
+              setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
             />
+
             <div className={styles.map}>
               <YandexMap
                 width="260px"
@@ -107,7 +110,8 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             <InputAddress
               label="Укажите место встречи"
               initialValue={address}
-              inputChange={handleAddressValueChange}
+              address={{ address, coords: coordinates || [] }}
+              setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
             />

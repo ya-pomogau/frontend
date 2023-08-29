@@ -7,8 +7,7 @@
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import { setUserRole } from 'entities/user/model';
-import { fetchUserDataByRole } from 'entities/user/model';
+import { setUserRole, fetchUserDataByRole } from 'entities/user/model';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
@@ -45,9 +44,9 @@ export function PickRolePage() {
       case 'recipient':
         return '/profile/active';
       case 'admin':
-        return '/requests';
+        return '/profile/requests';
       case 'master':
-        return '/requests';
+        return '/profile/requests';
       default:
         return '/';
     }

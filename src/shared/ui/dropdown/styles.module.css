@@ -8,7 +8,7 @@
   color: var(--colors-interface-primary);
   position: relative;
   bottom: 8px;
-  left: 1px
+  left: 1px;
 }
 
 .button {
@@ -48,7 +48,7 @@
   height: 48px;
   line-height: 46px;
   cursor: pointer;
-  transition: all .2s;
+  transition: all 0.2s;
   padding: 0 10px;
   box-sizing: border-box;
   display: flex;

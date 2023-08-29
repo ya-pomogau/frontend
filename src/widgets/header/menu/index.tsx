@@ -6,7 +6,9 @@ import { NavLink } from 'react-router-dom';
 
 import { SideBar } from 'widgets/header/navigation';
 import { EmptyMessageIcon } from 'shared/ui/icons/empty-message-icon';
+
 import { useMediaQuery } from 'shared/hooks';
+import { useAppSelector } from 'app/hooks';
 import {
   positionConfigMenu,
   linksMenuMobile,
@@ -15,7 +17,6 @@ import {
 } from '../utils';
 
 import styles from './styles.module.css';
-import { useAppSelector } from 'app/hooks';
 
 const modalRoot = document.getElementById('modal') as HTMLElement;
 

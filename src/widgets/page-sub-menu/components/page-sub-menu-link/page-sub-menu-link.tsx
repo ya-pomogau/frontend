@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import styles from './page-sub-menu-link.module.css';
@@ -10,11 +9,11 @@ interface PageSubMenuLinkProps {
   notifications?: number;
 }
 
-export const PageSubMenuLink: FC<PageSubMenuLinkProps> = ({
+export const PageSubMenuLink = ({
   to,
   text,
   notifications = 0,
-}) => {
+}: PageSubMenuLinkProps) => {
   const areNotificationsVisible = notifications > 0;
 
   return (

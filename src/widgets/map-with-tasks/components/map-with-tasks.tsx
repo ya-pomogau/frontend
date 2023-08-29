@@ -1,16 +1,24 @@
-import { FC, useEffect } from 'react';
+/* eslint-disable import/no-named-as-default */
+import { useEffect } from 'react';
 
-import { useAppSelector, useAppDispatch } from 'app/hooks';
+import { useGetTasksQuery } from 'services/tasks-api';
+import { useAppDispatch } from 'app/hooks';
+
 import { fetchAvailableTasks } from 'entities/task/model';
-import YandexMap from 'shared/ui/map';
+import YandexMap from 'widgets/map';
+import { Loader } from 'shared/ui/loader';
 
-export const MapWithTasks: FC = () => {
+export const MapWithTasks = () => {
   const dispatch = useAppDispatch();
-  const { tasks } = useAppSelector((store) => store.tasks);
+  const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
 
   useEffect(() => {
     dispatch(fetchAvailableTasks());
   }, []);
 
-  return <YandexMap tasks={tasks} width="100%" height="100%" />;
+  return isLoading ? (
+    <Loader />
+  ) : (
+    data && <YandexMap tasks={data} width="100%" height="90%" />
+  );
 };

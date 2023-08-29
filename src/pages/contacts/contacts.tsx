@@ -37,8 +37,8 @@ export function ContactsPage() {
         <ContentLayout
           heading={
             <SmartHeader
-              settingIcon={<Icon color="blue" icon="ContactsIcon" size="54" />}
-              settingText="Контакты"
+              text="Контакты"
+              icon={<Icon color="blue" icon="ContactsIcon" size="54" />}
             />
           }
         >

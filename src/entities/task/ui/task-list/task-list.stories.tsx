@@ -102,6 +102,7 @@ export const ExampleActive: Story = {
           address: 'ул. Нахимова, д. 9',
           coordinates: [59.941871, 30.223494],
           status: 'confirmed',
+          isActive: true,
         },
         volunteer: {
           id: 7,
@@ -115,6 +116,7 @@ export const ExampleActive: Story = {
           address: 'ул. Кораблестроителей, 19к1',
           coordinates: [59.942575, 30.216757],
           status: 'verified',
+          isActive: true,
           keys: 1,
           scores: 2500,
         },
@@ -152,6 +154,7 @@ export const ExampleActive: Story = {
           address: 'ул. Наличная, 28/16В',
           coordinates: [59.941335, 30.227995],
           status: 'confirmed',
+          isActive: true,
         },
         volunteer: {
           id: 7,
@@ -165,6 +168,7 @@ export const ExampleActive: Story = {
           address: 'ул. Кораблестроителей, 19к1',
           coordinates: [59.942575, 30.216757],
           status: 'verified',
+          isActive: true,
           keys: 1,
           scores: 2500,
         },
@@ -216,6 +220,7 @@ export const ExampleNotActive: Story = {
           address: 'ул. Нахимова, д. 9',
           coordinates: [59.941871, 30.223494],
           status: 'confirmed',
+          isActive: true,
         },
         volunteer: {
           id: 7,
@@ -229,6 +234,7 @@ export const ExampleNotActive: Story = {
           address: 'ул. Кораблестроителей, 19к1',
           coordinates: [59.942575, 30.216757],
           status: 'verified',
+          isActive: true,
           keys: 1,
           scores: 2500,
         },
@@ -265,6 +271,7 @@ export const ExampleNotActive: Story = {
           address: 'переулок Каховского, 3',
           coordinates: [59.95252, 30.243239],
           status: 'confirmed',
+          isActive: true,
         },
         volunteer: {
           id: 7,
@@ -278,6 +285,7 @@ export const ExampleNotActive: Story = {
           address: 'ул. Кораблестроителей, 19к1',
           coordinates: [59.942575, 30.216757],
           status: 'verified',
+          isActive: true,
           keys: 1,
           scores: 2500,
         },
