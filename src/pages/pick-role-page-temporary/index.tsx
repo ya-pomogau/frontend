@@ -10,7 +10,9 @@ import { Link } from 'react-router-dom';
 import {
   setUserRole,
   fetchUserDataByRole,
-  enableError,
+  enableAnyError,
+  enableBlokedError,
+  enableConnectionError,
 } from 'entities/user/model';
 
 export function PickRolePage() {
@@ -41,8 +43,14 @@ export function PickRolePage() {
     dispatch(fetchUserDataByRole('master'));
   };
 
-  const handleEnableError = () => {
-    dispatch(enableError());
+  const handleEnableConnectionError = () => {
+    dispatch(enableConnectionError());
+  };
+  const handleEnableBlokedError = () => {
+    dispatch(enableBlokedError());
+  };
+  const handleEnableAnyError = () => {
+    dispatch(enableAnyError());
   };
 
   const getPageYouWouldBeRedirected = () => {
@@ -107,8 +115,21 @@ export function PickRolePage() {
           </button>
         </li>
         <li>
-          <button onClick={handleEnableError} style={{ marginRight: 10 }}>
-            Добавить ошибку.
+          <button
+            onClick={handleEnableConnectionError}
+            style={{ marginRight: 10 }}
+          >
+            Добавить ошибку подключения.
+          </button>
+        </li>
+        <li>
+          <button onClick={handleEnableBlokedError} style={{ marginRight: 10 }}>
+            Добавить ошибку пользователь заблокирован.
+          </button>
+        </li>
+        <li>
+          <button onClick={handleEnableAnyError} style={{ marginRight: 10 }}>
+            Добавить любую ошибку.
           </button>
         </li>
       </ul>

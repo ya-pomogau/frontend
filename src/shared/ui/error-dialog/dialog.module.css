@@ -7,4 +7,6 @@
   box-sizing: border-box;
   position: relative;
   margin: 10px 10px 10px 10px;
+  display: flex;
+  gap: 10px;
 }

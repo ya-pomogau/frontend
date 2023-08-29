@@ -55,9 +55,14 @@ export const userModel = createSlice({
       state.data = null;
       state.role = null;
     },
-    enableError: (state) => {
-      state.error =
-        'Пользователь заблокирован'; /* 'Ошибка подключения' 'Любой текст ошибки' */
+    enableBlokedError: (state) => {
+      state.error = 'Пользователь заблокирован';
+    },
+    enableConnectionError: (state) => {
+      state.error = 'Ошибка подключения';
+    },
+    enableAnyError: (state) => {
+      state.error = 'Любой текст ошибки';
     },
   },
   extraReducers: (builder) => {
@@ -104,4 +109,10 @@ export const userModel = createSlice({
   },
 });
 
-export const { setUserRole, logoutUser, enableError } = userModel.actions;
+export const {
+  setUserRole,
+  logoutUser,
+  enableAnyError,
+  enableBlokedError,
+  enableConnectionError,
+} = userModel.actions;
