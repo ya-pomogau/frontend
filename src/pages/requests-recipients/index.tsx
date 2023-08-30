@@ -13,8 +13,8 @@ import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
 import { Input } from 'shared/ui/input';
-import { UserCard } from 'widgets/user-card';
 import { testUsers } from 'pages/requests/test-users';
+import { useState } from 'react';
 
 interface UserProps {
   role: 'volunteer' | 'recipient' | 'admin' | 'master';
@@ -54,59 +54,44 @@ export function RequestsRecipientsPage() {
           }
         >
           <PageSubMenuForAdmins />
-          
-                    {isLoading ? (
+
+          {isLoading ? (
             <Loader />
           ) : (
-            <ul>
-              {data.map((item: any) => {
-                return (
-                  <li key={item.data.id}>
+            <>
+              <Input
+                extClassName={styles.input}
+                value={searchName}
+                name="name"
+                onChange={(e) => setSearchName(e.target.value)}
+                placeholder={'Введите имя'}
+                type="name"
+                label="Введите имя "
+              />
+              <div className={styles.userCards}>
+                {testUsers
+                  .filter(
+                    (user: UserProps) =>
+                      user.userName
+                        .toLowerCase()
+                        .includes(searchName.toLowerCase()) &&
+                      user.role == 'recipient'
+                  )
+                  .map((user: UserProps) => (
                     <UserCard
-                      avatarLink={item.data.avatar}
-                      avatarName={item.data.fullname}
-                      userName={item.data.fullname}
-                      userId={item.data.id}
-                      userNumber={item.data.phone}
+                      role={user.role}
+                      key={user.userId}
+                      avatarLink={user.avatarLink}
+                      avatarName={user.avatarName}
+                      userName={user.userName}
+                      userId={user.userId}
+                      userNumber={user.userNumber}
+                      volunteerInfo={user.volunteerInfo}
                     />
-                  </li>
-                );
-              })}
-            </ul>
+                  ))}
+              </div>
+            </>
           )}
-
-          <Input
-            extClassName={styles.input}
-            value={searchName}
-            name="name"
-            onChange={(e) => setSearchName(e.target.value)}
-            placeholder={'Введите имя'}
-            type="name"
-            label="Введите имя "
-          />
-
-          <div className={styles.userCards}>
-            {testUsers
-              .filter(
-                (user: UserProps) =>
-                  user.userName
-                    .toLowerCase()
-                    .includes(searchName.toLowerCase()) &&
-                  user.role == 'recipient'
-              )
-              .map((user: UserProps) => (
-                <UserCard
-                  role={user.role}
-                  key={user.userId}
-                  avatarLink={user.avatarLink}
-                  avatarName={user.avatarName}
-                  userName={user.userName}
-                  userId={user.userId}
-                  userNumber={user.userNumber}
-                  volunteerInfo={user.volunteerInfo}
-                />
-              ))}
-          </div>
         </ContentLayout>
       }
     />

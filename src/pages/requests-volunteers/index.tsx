@@ -2,7 +2,6 @@ import { useGetUsersQuery } from 'services/user-api';
 
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import { SideMenuForAuthorized } from 'widgets/side-menu';
-import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import { UserCard } from 'widgets/user-card';
 
 import { UserInfo } from 'entities/user';
@@ -14,8 +13,9 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Loader } from 'shared/ui/loader';
 import styles from './styles.module.css';
 import { Input } from 'shared/ui/input';
-import { UserCard } from 'widgets/user-card';
+
 import { testUsers } from 'pages/requests/test-users';
+import { useState } from 'react';
 
 interface UserProps {
   role: 'volunteer' | 'recipient' | 'admin' | 'master';
@@ -55,59 +55,43 @@ export function RequestsVolunteersPage() {
           }
         >
           <PageSubMenuForAdmins />
-                    {isLoading ? (
+          {isLoading ? (
             <Loader />
           ) : (
-            <ul>
-              {data.map((item: any) => {
-                return (
-                  <li key={item.data.id}>
+            <>
+              <Input
+                extClassName={styles.input}
+                value={searchName}
+                name="name"
+                onChange={(e) => setSearchName(e.target.value)}
+                placeholder={'Введите имя'}
+                type="name"
+                label="Введите имя "
+              />
+              <div className={styles.userCards}>
+                {testUsers
+                  .filter(
+                    (user: UserProps) =>
+                      user.userName
+                        .toLowerCase()
+                        .includes(searchName.toLowerCase()) &&
+                      user.role == 'volunteer'
+                  )
+                  .map((user: UserProps) => (
                     <UserCard
-                      avatarLink={item.data.avatar}
-                      avatarName={item.data.fullname}
-                      userName={item.data.fullname}
-                      userId={item.data.id}
-                      userNumber={item.data.phone}
+                      role={user.role}
+                      key={user.userId}
+                      avatarLink={user.avatarLink}
+                      avatarName={user.avatarName}
+                      userName={user.userName}
+                      userId={user.userId}
+                      userNumber={user.userNumber}
+                      volunteerInfo={user.volunteerInfo}
                     />
-                  </li>
-                );
-              })}
-            </ul>
+                  ))}
+              </div>
+            </>
           )}
-          
-
-          <Input
-            extClassName={styles.input}
-            value={searchName}
-            name="name"
-            onChange={(e) => setSearchName(e.target.value)}
-            placeholder={'Введите имя'}
-            type="name"
-            label="Введите имя "
-          />
-
-          <div className={styles.userCards}>
-            {testUsers
-              .filter(
-                (user: UserProps) =>
-                  user.userName
-                    .toLowerCase()
-                    .includes(searchName.toLowerCase()) &&
-                  user.role == 'volunteer'
-              )
-              .map((user: UserProps) => (
-                <UserCard
-                  role={user.role}
-                  key={user.userId}
-                  avatarLink={user.avatarLink}
-                  avatarName={user.avatarName}
-                  userName={user.userName}
-                  userId={user.userId}
-                  userNumber={user.userNumber}
-                  volunteerInfo={user.volunteerInfo}
-                />
-              ))}
-          </div>
         </ContentLayout>
       }
     />
