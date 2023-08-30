@@ -123,7 +123,7 @@ export function ContactsPage() {
                     styles.title
                   )}
                 >
-                  Эл. почта
+                  Страница VK
                 </h2>
                 <input
                   type="text"
