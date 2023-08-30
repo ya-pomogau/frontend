@@ -1,34 +1,34 @@
 import classnames from 'classnames';
 
 import { Button } from 'shared/ui/button';
-import { FilterItemsIds } from '../consts';
+import { FilterItemsIds } from '../../consts';
 
 import styles from '../styles.module.css';
+import { useLocation } from 'react-router-dom';
 
 interface RadiusBlockProps {
   filter: string;
   onChange: (name: string, value: string[] | string) => void;
-  modeOfProfile: string;
 }
 
-export const RadiusBlock = ({
-  filter,
-  onChange,
-  modeOfProfile,
-}: RadiusBlockProps) => {
+export const RadiusBlock = ({ filter, onChange }: RadiusBlockProps) => {
+  const location = useLocation();
+
   // определение внешнего вида копки радуса с учетом текущего выбора фильтра
   const getRadiusButtonType = (id: string) =>
     filter === id ? 'primary' : 'secondary';
+
   // изменение текущего состояния фильтра в части радиуса
   const handleRadiusButtonClick = (id: string) => {
-    if (filter === id && modeOfProfile !== 'map') {
+    if (filter === id && location.pathname !== '/profile/map') {
       onChange('searchRadius', '');
     } else {
       onChange('searchRadius', id);
     }
   };
+
   // установление изначального значения радиуса поиска активных заявок
-  if (filter === '' && modeOfProfile === 'map') {
+  if (filter === '' && location.pathname === '/profile/map') {
     filter = FilterItemsIds.RADIUS_5;
     setTimeout(() => {
       handleRadiusButtonClick(FilterItemsIds.RADIUS_5);
@@ -47,6 +47,7 @@ export const RadiusBlock = ({
       >
         Радиус поиска
       </div>
+
       <div className={styles.radiusButtonsWrapper}>
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_1)}
@@ -57,6 +58,7 @@ export const RadiusBlock = ({
           onClick={() => handleRadiusButtonClick(FilterItemsIds.RADIUS_1)}
           actionType="button"
         />
+
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_3)}
           size="medium"
@@ -66,6 +68,7 @@ export const RadiusBlock = ({
           onClick={() => handleRadiusButtonClick(FilterItemsIds.RADIUS_3)}
           actionType="button"
         />
+
         <Button
           buttonType={getRadiusButtonType(FilterItemsIds.RADIUS_5)}
           size="medium"

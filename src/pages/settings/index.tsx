@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
-export const SettingsPage: FC = () => {
+export const SettingsPage = () => {
   return <div>Settings Page (В разработке)</div>;
 };

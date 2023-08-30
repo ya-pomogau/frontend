@@ -5,6 +5,7 @@ import { closePopup, fetchCategories } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
 import { CurrentPage } from '../../types';
+
 import { AddressStep } from './address-step/address-step';
 import { CommonStep } from './common-step/common-step';
 import { DateStep } from './date-step/date-step';

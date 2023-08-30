@@ -50,6 +50,10 @@ export const userModel = createSlice({
     setUserRole: (state, { payload }: PayloadAction<UserRole | null>) => {
       state.role = payload;
     },
+    logoutUser: (state) => {
+      state.data = null;
+      state.role = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -95,4 +99,4 @@ export const userModel = createSlice({
   },
 });
 
-export const { setUserRole } = userModel.actions;
+export const { setUserRole, logoutUser } = userModel.actions;

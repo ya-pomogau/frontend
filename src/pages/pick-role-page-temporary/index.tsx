@@ -44,9 +44,9 @@ export function PickRolePage() {
       case 'recipient':
         return '/profile/active';
       case 'admin':
-        return '/requests';
+        return '/profile/requests';
       case 'master':
-        return '/requests';
+        return '/profile/requests';
       default:
         return '/';
     }

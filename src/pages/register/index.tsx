@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+
 import { UserInfo } from 'entities/user';
 import { ContentLayout } from 'shared/ui/content-layout';
 import { PageLayout } from 'shared/ui/page-layout';
@@ -11,15 +12,34 @@ import { VkIcon } from 'shared/ui/icons/vk-icon';
 import { VolunteerSideMenu } from 'widgets/side-menu';
 
 import styles from './styles.module.css';
+import { InputAddress } from 'shared/ui/input-address';
 
 export function RegisterPage() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
+
+  const [address, setAddress] = useState<{
+    address: string;
+    coords: [number, number] | [];
+  }>({
+    address: '',
+    coords: [],
+  });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     console.log('Региcтрация:', name, phone, address);
+  };
+
+  const handleAddressValueChange = (
+    newAddress: string,
+    coords?: [number, number] | []
+  ) => {
+    setAddress({
+      address: newAddress,
+      coords: coords || [],
+    });
   };
 
   return (
@@ -37,10 +57,8 @@ export function RegisterPage() {
         <ContentLayout
           heading={
             <SmartHeader
-              settingIcon={
-                <Icon color="blue" icon="RegistrationIcon" size="54" />
-              }
-              settingText="Регистрация"
+              icon={<Icon color="blue" icon="RegistrationIcon" size="54" />}
+              text="Регистрация"
               extClassName={styles.header}
             />
           }
@@ -73,14 +91,13 @@ export function RegisterPage() {
             />
 
             <div>
-              {/* <InputAddress
-                inputAttributes={{
-                  required: true,
-                }}
-                initialValue=""
+              <InputAddress
+                required
                 name="address"
-                onChange={setAddress}
-              /> */}
+                address={address}
+                setAddress={handleAddressValueChange}
+              />
+
               <p className={styles.text}>
                 Укажите адрес и мы подберем ближайшее к вам задание
               </p>

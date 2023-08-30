@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { CardButton } from 'shared/ui/card-button';
@@ -9,7 +9,7 @@ interface SideMenuLinkProps {
   text: string;
 }
 
-export const SideMenuLink: FC<SideMenuLinkProps> = ({ to, icon, text }) => {
+export const SideMenuLink = ({ to, icon, text }: SideMenuLinkProps) => {
   return (
     <NavLink to={to} className="link">
       {({ isActive }) => (
