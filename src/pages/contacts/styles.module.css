@@ -16,6 +16,7 @@
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .title {
@@ -38,11 +39,6 @@
   align-items: end;
 }
 
-.input {
-  margin-bottom: 20px;
-  width: 100%;
-}
-
 .text_area {
   margin-bottom: 20px;
   height: 122px;
@@ -63,4 +59,22 @@
   font-size: 24px;
   border: none;
   background-color: transparent;
+  outline: none;
+}
+
+.input:hover {
+  cursor: pointer;
+}
+.edit_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit_box:hover {
+  cursor: pointer;
+}
+
+.edit_text {
+  color: var(--colors-interface-primary);
 }

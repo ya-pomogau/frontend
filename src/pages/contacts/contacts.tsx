@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, SyntheticEvent } from 'react';
 import { useAppSelector } from 'app/hooks';
 import classNames from 'classnames';
 import { ContentLayout } from 'shared/ui/content-layout';
@@ -10,17 +10,42 @@ import { SideMenu } from 'widgets/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 
 import styles from './styles.module.css';
+import { Button } from '../../shared/ui/button';
 
 export function ContactsPage() {
   const focus = false;
   const { role } = useAppSelector((state) => state.user);
+
+  const roleChecker = () => {
+    if (role === 'master') {
+      return true;
+    }
+    if (role === 'admin') {
+      return true;
+    }
+  };
+
   const [userData, setUserData] = React.useState({
     userEmail: 'www@yandex.ru',
     userVKLink: 'https://vk.com/me2help',
   });
+  const [enableEdit, setEnableEdit] = React.useState(false);
+
+  const onSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    setEnableEdit(false);
+    console.log(
+      `Данные ${userData.userEmail} ${userData.userVKLink} отправлены на сервер`
+    );
+  };
+  const handleEnableEdit = () => {
+    setEnableEdit(true);
+  };
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
   return (
     <PageLayout
       side={
@@ -52,64 +77,86 @@ export function ContactsPage() {
             />
           }
         >
-          <form className={styles.container}>
-            <div className={styles.element_box}>
-              <h2
-                className={classNames(
-                  'text',
-                  'text_size_large',
-                  'text_type_regular',
-                  styles.title
-                )}
-              >
-                Эл. почта
-              </h2>
-              <a
-                href="mailto:www@yandex.ru"
-                className={classNames(
-                  'text',
-                  'text_size_large',
-                  'text_type_regular',
-                  styles.link
-                )}
-              >
+          <form onSubmit={onSubmit}>
+            <div className={styles.container}>
+              <div className={styles.element_box}>
+                <h2
+                  className={classNames(
+                    'text',
+                    'text_size_large',
+                    'text_type_regular',
+                    styles.title
+                  )}
+                >
+                  Эл. почта
+                </h2>
+                <input
+                  type="text"
+                  className={styles.input}
+                  onChange={onChange}
+                  autoFocus={!enableEdit}
+                  name="userEmail"
+                  defaultValue={userData.userEmail}
+                  readOnly={!enableEdit}
+                  onClick={(e) => {
+                    if (!enableEdit) {
+                      e.preventDefault();
+                      window.location.href = `mailto:${userData.userEmail}`;
+                    }
+                  }}
+                />
+              </div>
+              {roleChecker() && (
+                <div onClick={handleEnableEdit} className={styles.edit_box}>
+                  <Icon color="blue" icon="EditIcon" />
+                  <p className={styles.edit_text}>Изменить данные</p>
+                </div>
+              )}
+            </div>
+            <div className={styles.container}>
+              <div className={styles.element_box}>
+                <h2
+                  className={classNames(
+                    'text',
+                    'text_size_large',
+                    'text_type_regular',
+                    styles.title
+                  )}
+                >
+                  Эл. почта
+                </h2>
                 <input
                   type="text"
                   className={styles.input}
                   onChange={onChange}
                   autoFocus={focus}
-                  name="userEmail"
-                  defaultValue={userData.userEmail}
-                  disabled={true}
+                  name="userVKLink"
+                  defaultValue={userData.userVKLink}
+                  readOnly={!enableEdit}
+                  onClick={(e) => {
+                    if (!enableEdit) {
+                      e.preventDefault();
+                      window.location.href = `${userData.userVKLink}`;
+                    }
+                  }}
                 />
-              </a>
+              </div>
+              {roleChecker() && (
+                <div onClick={handleEnableEdit} className={styles.edit_box}>
+                  <Icon color="blue" icon="EditIcon" />
+                  <p className={styles.edit_text}>Изменить данные</p>
+                </div>
+              )}
             </div>
+            {roleChecker() && (
+              <Button
+                buttonType="primary"
+                label="Сохранить"
+                disabled={!enableEdit}
+                type="submit"
+              />
+            )}
           </form>
-          <div className={styles.container}>
-            <h2
-              className={classNames(
-                'text',
-                'text_size_large',
-                'text_type_regular',
-                styles.title
-              )}
-            >
-              Соцсети
-            </h2>
-            <a
-              className={classNames(
-                'text',
-                'text_size_large',
-                'text_type_regular',
-                styles.link
-              )}
-              href="https://vk.com/me2help"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {userData.userVKLink}
-            </a>
-          </div>
         </ContentLayout>
       }
     />
