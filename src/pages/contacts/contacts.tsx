@@ -35,7 +35,7 @@ export function ContactsPage() {
     e.preventDefault();
     setEnableEdit(false);
     console.log(
-      `Данные ${userData.userEmail} ${userData.userVKLink} отправлены на сервер`
+      `Данные email:${userData.userEmail} и  VK:${userData.userVKLink} отправлены на сервер`
     );
   };
   const handleEnableEdit = () => {
