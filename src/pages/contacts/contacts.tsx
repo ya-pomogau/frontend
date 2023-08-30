@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 import { Button } from '../../shared/ui/button';
 
 export function ContactsPage() {
-  const focus = false;
   const { role } = useAppSelector((state) => state.user);
 
   const roleChecker = () => {
@@ -94,7 +93,6 @@ export function ContactsPage() {
                   type="text"
                   className={styles.input}
                   onChange={onChange}
-                  autoFocus={!enableEdit}
                   name="userEmail"
                   defaultValue={userData.userEmail}
                   readOnly={!enableEdit}
@@ -129,7 +127,6 @@ export function ContactsPage() {
                   type="text"
                   className={styles.input}
                   onChange={onChange}
-                  autoFocus={focus}
                   name="userVKLink"
                   defaultValue={userData.userVKLink}
                   readOnly={!enableEdit}
