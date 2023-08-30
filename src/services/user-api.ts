@@ -13,6 +13,16 @@ export const usersApi = createApi({
   tagTypes: ['Users'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
+    getUserById: build.query({
+      query: (userId) => `users/${userId}`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }: any) => ({ type: 'Users' as const, id })),
+              { type: 'Users', id: 'LIST' },
+            ]
+          : [{ type: 'Users', id: 'LIST' }],
+    }),
     getUsers: build.query({
       query: (userRole = '') => `users?role=${userRole}`,
       providesTags: (result) =>
@@ -47,11 +57,22 @@ export const usersApi = createApi({
       }),
       invalidatesTags: [{ type: 'Users', id: 'LIST' }],
     }),
+    updateAvatar: build.mutation({
+      query: (body) => ({
+        url: `users/avatar/${body.id}`,
+        method: 'PATCH',
+        body: body.file,
+        // headers: 'Здесь будет JWT',
+      }),
+      invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+    }),
   }),
 });
 
 export const {
+  useGetUserByIdQuery,
   useGetUsersQuery,
   useUpdateUsersMutation,
   useGetUncomfirmedQuery,
+  useUpdateAvatarMutation,
 } = usersApi;

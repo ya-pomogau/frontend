@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
+import { useAppSelector } from 'app/hooks';
 
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
@@ -12,6 +11,10 @@ import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
 
 import styles from './styles.module.css';
+import {
+  useUpdateAvatarMutation,
+  useUpdateUsersMutation,
+} from 'services/user-api';
 
 export const UserInfo = () => {
   const user = useAppSelector((state) => state.user.data);
@@ -20,8 +23,8 @@ export const UserInfo = () => {
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
-
-  const dispatch = useAppDispatch();
+  const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
+  const [updateAvatarData, { isError }] = useUpdateAvatarMutation();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -35,14 +38,14 @@ export const UserInfo = () => {
   ) => {
     if (isFormEdited) {
       if (image) {
-        dispatch(uploadUserAvatar(avatarFile));
+        await updateAvatarData({ id: userData?.id, file: avatarFile }).unwrap();
       }
       if (
         user?.fullname !== userData.fullname ||
         user?.phone !== userData.phone ||
         user?.address !== userData.address
       )
-        dispatch(updateUserInfo(userData));
+        await updateUserData(userData).unwrap();
     }
     setIsFormSaved(true);
     setIsFormEdited(false);

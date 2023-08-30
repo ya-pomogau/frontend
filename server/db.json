@@ -114,7 +114,11 @@
         "isActive": true
       },
       "isLoading": false,
-      "isFailed": false
+      "isFailed": false,
+      "fullname": "Волонтеров",
+      "phone": "+7 (901) 123-45-67",
+      "address": "ул. Кораблестроителей, 19к1",
+      "avatar": null
     },
     {
       "id": 4,
@@ -516,16 +520,16 @@
   ],
   "usersAvatar": [
     {
-      "id": "KTyHLdU"
+      "id": 7
     },
     {
-      "id": "JChGhgo"
+      "id": 4
     },
     {
-      "id": "UTVmzZb"
+      "id": 2
     },
     {
-      "id": "HKKHxny"
+      "id": 1
     },
     {
       "id": "yjf6YdA"
