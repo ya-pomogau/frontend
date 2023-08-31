@@ -7,6 +7,8 @@ import { TaskList } from 'entities/task/ui/task-list';
 import { useMediaQuery } from 'shared/hooks';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
+import { openPopup } from 'features/create-request/model';
+import { Request } from 'features/create-request';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -15,6 +17,9 @@ export function ProfileActivePage() {
   const { role } = useAppSelector((state) => state.user);
 
   const isMobile = useMediaQuery('(max-width:1150px)');
+
+  const { isPopupOpen } = useAppSelector((store) => store.createRequest);
+  const isMobileForPopup = useMediaQuery('(max-width:735px)');
 
   useEffect(() => {
     dispatch(fetchActiveTasks());
@@ -55,9 +60,12 @@ export function ProfileActivePage() {
         handleClickConfirmButton={() => 3}
         handleClickMessageButton={() => 5}
         handleClickPnoneButton={() => 6}
+        handleClickAddTaskButton={() => dispatch(openPopup())}
         isStatusActive
         tasks={tasks}
       />
+
+      {isPopupOpen && <Request isMobile={isMobileForPopup} />}
     </>
   );
 }
