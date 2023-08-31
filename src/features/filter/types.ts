@@ -3,4 +3,5 @@ export interface IFilterValues {
   searchRadius: string;
   sortBy: string;
   date: string;
+  time: string[];
 }
