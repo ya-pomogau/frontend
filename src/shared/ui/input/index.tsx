@@ -1,14 +1,12 @@
 /* eslint-disable react/display-name */
 /* eslint-disable import/no-named-as-default-member */
-import React, { useMemo } from 'react';
+import { useMemo, InputHTMLAttributes, forwardRef } from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
@@ -19,10 +17,9 @@ export interface InputProps
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      value,
       type,
       name,
       onChange,
@@ -64,7 +61,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={type}
             name={name}
-            value={value}
             className={cn('text', inputClass)}
             onChange={onChange}
             placeholder={placeholder}

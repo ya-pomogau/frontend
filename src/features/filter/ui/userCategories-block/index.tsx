@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import classnames from 'classnames';
 
 import Checkbox from 'shared/ui/checkbox';
-import { FilterItemsIds } from '../consts';
+import { FilterItemsIds } from '../../consts';
 
 import styles from '../styles.module.css';
 
@@ -34,6 +34,7 @@ export const UserCategoriesBlock = ({
       >
         Категория
       </div>
+
       <div className={styles.checkboxesWrapper}>
         <Checkbox
           label="Все"
@@ -41,18 +42,21 @@ export const UserCategoriesBlock = ({
           id={FilterItemsIds.ALL}
           onChange={handleCheckboxChange}
         />
+
         <Checkbox
           label="Волонтеры"
           checked={filter.includes(FilterItemsIds.VOLUNTEER)}
           id={FilterItemsIds.VOLUNTEER}
           onChange={handleCheckboxChange}
         />
+
         <Checkbox
           label="Реципиенты"
           checked={filter.includes(FilterItemsIds.RECIPIENT)}
           id={FilterItemsIds.RECIPIENT}
           onChange={handleCheckboxChange}
         />
+
         <Checkbox
           label="Не обработанные"
           checked={filter.includes(FilterItemsIds.UNHANDLED)}

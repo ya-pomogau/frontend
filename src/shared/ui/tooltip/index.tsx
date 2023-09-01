@@ -30,37 +30,35 @@ export const Tooltip = ({
   const modalRoot = document.getElementById('modal') as HTMLElement;
 
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const closeWithEsc = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && changeVisible) {
-        changeVisible();
-      }
-    },
-    [changeVisible]
-  );
 
-  const closeWithClickOutTooltip = useCallback(
-    (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        changeVisible &&
-        !target.closest('.tooltip') &&
-        target.getRootNode() === document
-      ) {
-        changeVisible();
-      }
-    },
-    [changeVisible]
-  );
+  const closeWithEsc = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape' && changeVisible) {
+      changeVisible();
+    }
+  }, []);
+
+  const closeWithClickOutTooltip = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (
+      changeVisible &&
+      !target.closest('.tooltip') &&
+      target.getRootNode() === document
+    ) {
+      changeVisible();
+    }
+  }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', closeWithEsc);
-    document.addEventListener('click', closeWithClickOutTooltip);
+    setTimeout(() => {
+      document.addEventListener('keydown', closeWithEsc);
+      document.addEventListener('click', closeWithClickOutTooltip);
+    });
+
     return () => {
       document.removeEventListener('keydown', closeWithEsc);
       document.removeEventListener('click', closeWithClickOutTooltip);
     };
-  }, [closeWithClickOutTooltip, closeWithEsc]);
+  }, []);
 
   const tooltip = (
     <div

@@ -46,10 +46,8 @@ export function FeedbackPage() {
         <ContentLayout
           heading={
             <SmartHeader
-              settingIcon={
-                <Icon color="blue" icon="EmptyMessageIcon" size="54" />
-              }
-              settingText="Напишите нам"
+              text="Напишите нам"
+              icon={<Icon color="blue" icon="EmptyMessageIcon" size="54" />}
             />
           }
         >
