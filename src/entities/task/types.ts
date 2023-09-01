@@ -12,13 +12,12 @@ export type Task = {
   description: string;
   completed: boolean;
   confirmed: boolean;
-  conflict: boolean;
+  conflict?: boolean;
   recipient: UserInfo;
   volunteer: UserInfo | null;
   address: string;
   coordinates: [number, number];
-  chatId: number | null;
-  chat: {
+  chat?: {
     id: number;
     unread?: number;
   };

@@ -20,7 +20,7 @@ interface TaskItemProps {
   avatar?: string;
   completed: boolean;
   confirmed: boolean;
-  conflict: boolean;
+  conflict?: boolean;
   recipientName?: string;
   recipientPhoneNumber?: string;
   unreadMessages?: number;
@@ -43,7 +43,7 @@ export const TaskItem = ({
   avatar = placeholder,
   completed,
   confirmed,
-  conflict,
+  conflict = false,
   recipientName,
   recipientPhoneNumber,
   unreadMessages,
