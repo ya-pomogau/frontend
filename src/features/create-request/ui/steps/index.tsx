@@ -35,6 +35,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   useEffect(() => {
     document.addEventListener('keydown', closeByEsc);
     dispatch(fetchCategories());
+
     return () => {
       document.removeEventListener('keydown', closeByEsc);
     };
