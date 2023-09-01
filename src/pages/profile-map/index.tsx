@@ -45,43 +45,43 @@ export function ProfileMapPage() {
       }
       content={
         <ErrorBoundary errorText={error}>
-        <ContentLayout
-          heading={
-            <SmartHeader
-              icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
-              text="Карта заявок"
-              filter={
-                <Filter
-                  items={{
-                    categories: true,
-                    radius: true,
-                    date: true,
-                  }}
-                />
-              }
-            />
-          }
-        >
-          {isLoading ? (
-            <Loader />
-          ) : (
-            data && (
-              // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
-              <YandexMap
-                tasks={data}
-                mapSettings={{
-                  latitude: user ? user.coordinates[0] : 59.938955,
-                  longitude: user ? user.coordinates[1] : 30.315644,
-                  zoom: 15,
-                }}
-                width="100%"
-                height="100%"
-                onClick={() => 3}
-                isAuthorised={true}
+          <ContentLayout
+            heading={
+              <SmartHeader
+                icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
+                text="Карта заявок"
+                filter={
+                  <Filter
+                    items={{
+                      categories: true,
+                      radius: true,
+                      date: true,
+                    }}
+                  />
+                }
               />
-            )
-          )}
-        </ContentLayout>
+            }
+          >
+            {isLoading ? (
+              <Loader />
+            ) : (
+              data && (
+                // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
+                <YandexMap
+                  tasks={data}
+                  mapSettings={{
+                    latitude: user ? user.coordinates[0] : 59.938955,
+                    longitude: user ? user.coordinates[1] : 30.315644,
+                    zoom: 15,
+                  }}
+                  width="100%"
+                  height="100%"
+                  onClick={() => 3}
+                  isAuthorised={true}
+                />
+              )
+            )}
+          </ContentLayout>
         </ErrorBoundary>
       }
     />

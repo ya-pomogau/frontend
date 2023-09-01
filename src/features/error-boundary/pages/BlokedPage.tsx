@@ -3,14 +3,23 @@ import { ErrorDialog } from 'shared/ui/error-dialog';
 import image from '../assets/privacy.png';
 import styles from '../styles.module.css';
 import { Icon } from 'shared/ui/icons';
+import { Filter } from 'features/filter';
 
 export const BlokedPage = () => {
   return (
     <>
       <SmartHeader
-        extClassName={styles.smart_header}
-        settingIcon={<Icon color="blue" icon="LoginIcon" size="54" />}
-        settingText="Вход"
+        icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
+        text="Карта заявок"
+        filter={
+          <Filter
+            items={{
+              categories: true,
+              radius: true,
+              date: true,
+            }}
+          />
+        }
       />
       <div className={styles.content_box}>
         <img
