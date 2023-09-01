@@ -12,11 +12,9 @@
 }
 
 .button--partial {
-  background: linear-gradient(
-    to right,
-    var(--colors-interface-white) 50%,
-    var(--colors-interface-primary) 50%
-  );
+  background: linear-gradient(to right,
+      var(--colors-interface-white) 50%,
+      var(--colors-interface-primary) 50%);
   border: 1px solid var(--colors-interface-primary);
 }
 
@@ -51,6 +49,7 @@
   color: var(--colors-interface-white);
   background-color: var(--colors-interface-blue-strong);
 }
+
 .button--secondary:disabled,
 .button--primary:disabled,
 .button--partial {
@@ -71,12 +70,12 @@
   background-color: var(--colors-interface-additional);
 }
 
-.button--partial:disabled > .buttonContent--partial {
+.button--partial:disabled>.buttonContent--partial {
   color: var(--colors-interface-white);
 }
 
 .button--small {
-  padding: 8px 17px;
+  padding: 8px 16px;
 }
 
 .button--medium {
@@ -94,7 +93,7 @@
 
 .buttonContent {
   display: flex;
-  gap: 5px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -109,14 +108,12 @@
 .buttonContent--partial {
   color: transparent;
   background-clip: text;
-  background-image: linear-gradient(
-    to right,
-    var(--colors-interface-primary) 50%,
-    var(--colors-interface-white) 50%
-  );
+  background-image: linear-gradient(to right,
+      var(--colors-interface-primary) 50%,
+      var(--colors-interface-white) 50%);
 }
 
-.button--partial:hover > .buttonContent--partial {
+.button--partial:hover>.buttonContent--partial {
   color: var(--colors-interface-white);
 }
 
@@ -125,7 +122,7 @@
 }
 
 .button--secondary--medium {
-  padding: 7px 17px;
+  padding: 7px 16px;
 }
 
 .button--secondary--large {

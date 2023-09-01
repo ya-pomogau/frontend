@@ -3,18 +3,16 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 import YandexMap from 'widgets/map';
-import { SideMenuForAuthorized } from 'widgets/side-menu';
 
 import { Filter } from 'features/filter';
-import { UserInfo } from 'entities/user';
 
 import { fetchAvailableTasks } from 'entities/task/model';
-import { ContentLayout } from 'shared/ui/content-layout';
-import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
+
 import ErrorBoundary from 'features/error-boundary';
 import styles from './styles.module.css';
+
 import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 
@@ -85,5 +83,3 @@ export function ProfileMapPage() {
         </ErrorBoundary>
       }
     />
-  );
-}

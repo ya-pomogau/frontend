@@ -23,7 +23,7 @@ export const CategoriesBlock = ({
     [CONFIRMED, ACTIVATED, VERIFIED],
     'volunteer'
   );
-  console.log(volunteerMainGuard);
+
   const volunteerSpecialGuard = usePermission(
     [ACTIVATED, VERIFIED],
     'volunteer'
