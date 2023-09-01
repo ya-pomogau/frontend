@@ -8,13 +8,13 @@ import { API_URL } from '../config/api-config';
 //Также есть хук useUpdateUsersMutation, который принимает объект
 //с полями для обновления юзера
 
-export const usersApi = createApi({
+export const usersApi: any = createApi({
   reducerPath: 'usersApi',
-  tagTypes: ['Users'],
+  tagTypes: ['Users', 'User'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
-    getUserById: build.query({
-      query: (userId) => `users/${userId}`,
+    getAllUsers: build.query({
+      query: () => 'users',
       providesTags: (result) =>
         result
           ? [
@@ -23,15 +23,12 @@ export const usersApi = createApi({
             ]
           : [{ type: 'Users', id: 'LIST' }],
     }),
+    getUserById: build.query({
+      query: (userId) => `users/${userId}`,
+      providesTags: ['User'],
+    }),
     getUsers: build.query({
       query: (userRole = '') => `users?role=${userRole}`,
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }: any) => ({ type: 'Users' as const, id })),
-              { type: 'Users', id: 'LIST' },
-            ]
-          : [{ type: 'Users', id: 'LIST' }],
     }),
     getUncomfirmed: build.query({
       query: (adminRole) =>
@@ -40,39 +37,33 @@ export const usersApi = createApi({
             ? 'role_ne=admin&role_ne=master'
             : 'role_ne=master'
         }`, //пока для теста просто отдаю список, далее надо будет добавить условие статуса необработанных
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }: any) => ({ type: 'Users' as const, id })),
-              { type: 'Users', id: 'LIST' },
-            ]
-          : [{ type: 'Users', id: 'LIST' }],
     }),
     updateUsers: build.mutation({
       query: (body) => ({
-        url: `users/${body.id}`,
+        url: body.file ? `users/avatar/${body.id}` : `users/${body.id}`,
         method: 'PATCH',
-        body,
+        body: body.file ? body.file : body,
         // headers: 'Здесь будет JWT',
       }),
-      invalidatesTags: [{ type: 'Users', id: 'LIST' }],
+      invalidatesTags: [{ type: 'User', id: 'LIST' }],
     }),
-    updateAvatar: build.mutation({
-      query: (body) => ({
-        url: `users/avatar/${body.id}`,
-        method: 'PATCH',
-        body: body.file,
-        // headers: 'Здесь будет JWT',
-      }),
-      invalidatesTags: [{ type: 'Users', id: 'LIST' }],
-    }),
+    // updateAvatar: build.mutation({
+    //   query: (body) => ({
+    //     url: `users/avatar/${body.id}`,
+    //     method: 'PATCH',
+    //     body: body.file,
+    //     // headers: 'Здесь будет JWT',
+    //   }),
+    //   invalidatesTags: [{ type: 'User', id: 'LIST' }],
+    // }),
   }),
 });
 
 export const {
   useGetUserByIdQuery,
+  useGetAllUsersQuery,
   useGetUsersQuery,
   useUpdateUsersMutation,
   useGetUncomfirmedQuery,
-  useUpdateAvatarMutation,
+  // useUpdateAvatarMutation,
 } = usersApi;

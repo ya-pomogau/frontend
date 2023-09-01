@@ -54,6 +54,9 @@ export const userModel = createSlice({
       state.data = null;
       state.role = null;
     },
+    setUser: (state, { payload }) => {
+      state.data = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -63,7 +66,7 @@ export const userModel = createSlice({
       })
       .addCase(fetchUserDataByRole.fulfilled, (state, action: any) => {
         state.isLoading = false;
-        state.data = action.payload.data;
+        state.data = action.payload;
       })
       .addCase(fetchUserDataByRole.rejected, (state, action) => {
         state.isLoading = false;
@@ -99,4 +102,4 @@ export const userModel = createSlice({
   },
 });
 
-export const { setUserRole, logoutUser } = userModel.actions;
+export const { setUserRole, logoutUser, setUser } = userModel.actions;

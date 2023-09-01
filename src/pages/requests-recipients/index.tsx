@@ -45,13 +45,13 @@ export function RequestsRecipientsPage() {
             <ul>
               {data.map((item: any) => {
                 return (
-                  <li key={item.data.id}>
+                  <li key={item.id}>
                     <UserCard
-                      avatarLink={item.data.avatar}
-                      avatarName={item.data.fullname}
-                      userName={item.data.fullname}
-                      userId={item.data.id}
-                      userNumber={item.data.phone}
+                      avatarLink={item.avatar}
+                      avatarName={item.fullname}
+                      userName={item.fullname}
+                      userId={item.id}
+                      userNumber={item.phone}
                     />
                   </li>
                 );

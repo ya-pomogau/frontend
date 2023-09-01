@@ -4,37 +4,76 @@
 // СТРАНИЦУ НЕОБХОДИМО УДАЛИТЬ ПОСЛЕ РЕАЛИЗАЦИИ СИСТЕМЫ АУТИФИКАЦИИ
 
 // !!!
-
+import { skipToken } from '@reduxjs/toolkit/query/react';
+import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import { setUserRole, fetchUserDataByRole } from 'entities/user/model';
+import { setUserRole, setUser } from 'entities/user/model';
+import { useGetUserByIdQuery } from 'services/user-api';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
+  const [userId, setUserId] = useState<number | null>(null);
+
+  const { data, refetch } = useGetUserByIdQuery(userId ?? skipToken);
 
   const removeRole = () => {
     dispatch(setUserRole(null));
   };
 
-  const getVolunteerRole = () => {
+  // const getDatabyRole = () => {
+  //   const result = data.filter((user: any) => user.role === role)[0];
+  //   console.log(result);
+  //   return result;
+  // };
+
+  const getVolunteerRole = async () => {
     dispatch(setUserRole('volunteer'));
-    dispatch(fetchUserDataByRole('volunteer'));
+    setUserId(7);
+    //dispatch(fetchUserDataByRole('volunteer'));
+    // const user = getDatabyRole();
+    // dispatch(setUser(user));
+    await data;
+    if (data) {
+      dispatch(setUser(data));
+    }
   };
 
-  const getRecipientRole = () => {
+  const getRecipientRole = async () => {
+    setUserId(4);
     dispatch(setUserRole('recipient'));
-    dispatch(fetchUserDataByRole('recipient'));
+    //dispatch(fetchUserDataByRole('recipient'));
+    // const user = getDatabyRole();
+    // dispatch(setUser(user));
+    await data;
+    if (data) {
+      dispatch(setUser(data));
+    }
   };
 
-  const getAdminRole = () => {
+  const getAdminRole = async () => {
     dispatch(setUserRole('admin'));
-    dispatch(fetchUserDataByRole('admin'));
+    setUserId(2);
+    //dispatch(fetchUserDataByRole('admin'));
+    // const user = getDatabyRole();
+    // dispatch(setUser(user));
+    await data;
+    if (data) {
+      dispatch(setUser(data));
+    }
   };
 
-  const getMasterAdminRole = () => {
+  const getMasterAdminRole = async () => {
     dispatch(setUserRole('master'));
-    dispatch(fetchUserDataByRole('master'));
+    setUserId(1);
+    //dispatch(fetchUserDataByRole('master'));
+    // const user = getDatabyRole();
+    // dispatch(setUser(user));
+    await data;
+    if (data) {
+      dispatch(setUser(data));
+    }
   };
 
   const getPageYouWouldBeRedirected = () => {
@@ -51,6 +90,10 @@ export function PickRolePage() {
         return '/';
     }
   };
+
+  useEffect(() => {
+    if (userId) refetch();
+  }, [userId, refetch]);
 
   return (
     <div>

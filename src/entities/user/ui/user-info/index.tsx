@@ -12,7 +12,7 @@ import type { UpdateUserInfo } from 'entities/user/types';
 
 import styles from './styles.module.css';
 import {
-  useUpdateAvatarMutation,
+  // useUpdateAvatarMutation,
   useUpdateUsersMutation,
 } from 'services/user-api';
 
@@ -24,7 +24,7 @@ export const UserInfo = () => {
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
   const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
-  const [updateAvatarData, { isError }] = useUpdateAvatarMutation();
+  //const [updateAvatarData, { isError }] = useUpdateAvatarMutation();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -38,7 +38,7 @@ export const UserInfo = () => {
   ) => {
     if (isFormEdited) {
       if (image) {
-        await updateAvatarData({ id: userData?.id, file: avatarFile }).unwrap();
+        await updateUserData({ id: userData?.id, file: avatarFile }).unwrap();
       }
       if (
         user?.fullname !== userData.fullname ||
