@@ -70,6 +70,7 @@ export const TaskList = ({
                 size={isMobile ? 'medium' : 'large'}
                 extClassName={styles.add_task_icon}
               />
+
               <h2
                 className={`${styles.title_add_list} ${
                   isMobile ? 'text_size_medium' : 'text_size_large'
@@ -87,15 +88,16 @@ export const TaskList = ({
                 isMobile={isMobile}
                 date={item.date}
                 address={item.address}
-                title={item.title}
                 description={item.description}
                 count={item.category.scope}
                 avatar={item.recipient.avatar}
                 completed={item.completed}
+                conflict={item.conflict}
                 confirmed={item.confirmed}
+                unreadMessages={item.chat?.unread}
                 recipientName={item.recipient.fullname}
                 recipientPhoneNumber={item.recipient.phone}
-                handleClickPnoneButton={handleClickPnoneButton}
+                handleClickPhoneButton={handleClickPnoneButton}
                 handleClickMessageButton={handleClickMessageButton}
                 handleClickConfirmButton={
                   item.completed && !item.confirmed

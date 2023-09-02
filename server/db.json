@@ -12,10 +12,7 @@
         "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
         "phone": "+7 (901) 123-44-55",
         "address": "ул. Поселковая, д. 5",
-        "coordinates": [
-          59.821539,
-          30.178031
-        ],
+        "coordinates": [59.821539, 30.178031],
         "status": "activated",
         "isActive": true,
         "keys": 1,
@@ -66,10 +63,7 @@
         "avatar": "https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg",
         "phone": "+7 (902) 123-44-55",
         "address": "ул. Стойкости, 17",
-        "coordinates": [
-          59.828347,
-          30.21187
-        ],
+        "coordinates": [59.828347, 30.21187],
         "status": "activated",
         "isActive": true,
         "permissions": [
@@ -104,10 +98,7 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (901) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "status": "verified",
         "keys": 1,
         "scores": 2500,
@@ -128,10 +119,7 @@
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Нахимова, д. 9",
-        "coordinates": [
-          59.941871,
-          30.223494
-        ],
+        "coordinates": [59.941871, 30.223494],
         "status": "confirmed",
         "isActive": true
       },
@@ -143,14 +131,11 @@
     {
       "title": "Выгулять собаку (новая задача)",
       "categoryId": 2,
-      "date": "2023-07-18T17:30Z",
+      "date": "2023-09-03T17:30Z",
       "description": "string",
       "recipientId": 4,
       "address": "ул. Нахимова, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ]
+      "coordinates": [59.941871, 30.223494]
     }
   ],
   "tasksAvailable": [
@@ -162,10 +147,11 @@
         "name": "Сопровождение",
         "scope": 1
       },
-      "date": "2023-08-19T19:30Z",
+      "date": "2023-09-03T19:30Z",
       "description": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста! Помогите, пожалуйста!",
       "completed": false,
       "confirmed": false,
+      "conflict": false,
       "recipient": {
         "id": 5,
         "fullname": "Реципиентов Игорь Витальевич",
@@ -174,18 +160,12 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Наличная, 28/16В",
-        "coordinates": [
-          59.941335,
-          30.227995
-        ],
+        "coordinates": [59.941335, 30.227995],
         "approved": true
       },
       "volunteer": null,
       "address": "ул. Наличная, 28/16В",
-      "coordinates": [
-        59.941335,
-        30.227995
-      ],
+      "coordinates": [59.941335, 30.227995],
       "chat": null
     },
     {
@@ -196,10 +176,11 @@
         "name": "Покупка продуктов",
         "scope": 1
       },
-      "date": "2023-08-18T07:00Z",
+      "date": "2023-09-02T23:00Z",
       "description": "Описание срочной задачи 24",
       "completed": false,
       "confirmed": false,
+      "conflict": false,
       "recipient": {
         "id": 6,
         "fullname": "Реципиентов Иван Николаевич",
@@ -208,18 +189,12 @@
         "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "переулок Каховского, 3",
-        "coordinates": [
-          59.95252,
-          30.243239
-        ],
+        "coordinates": [59.95252, 30.243239],
         "approved": true
       },
       "volunteer": null,
       "address": "переулок Каховского, 3",
-      "coordinates": [
-        59.95252,
-        30.243239
-      ],
+      "coordinates": [59.95252, 30.243239],
       "chat": null
     },
     {
@@ -230,10 +205,11 @@
         "name": "Перевозка в личном транспорте",
         "scope": 1
       },
-      "date": "2023-08-28T07:00Z",
+      "date": "2023-09-08T07:00Z",
       "description": "Описание задачи 33",
       "completed": false,
       "confirmed": false,
+      "conflict": false,
       "recipient": {
         "id": 6,
         "fullname": "Реципиентов Иван Николаевич",
@@ -242,18 +218,12 @@
         "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "переулок Каховского, 3",
-        "coordinates": [
-          59.95252,
-          30.243239
-        ],
+        "coordinates": [59.95252, 30.243239],
         "approved": true
       },
       "volunteer": null,
       "address": "Малая Морская, 9",
-      "coordinates": [
-        59.93594,
-        30.313128
-      ],
+      "coordinates": [59.93594, 30.313128],
       "chat": null
     }
   ],
@@ -266,10 +236,11 @@
         "name": "Сопровождение",
         "scope": 1
       },
-      "date": "2023-08-30T17:30Z",
+      "date": "2023-09-10T17:30Z",
       "description": "Короткое описание для задачи номер 14.",
       "completed": false,
       "confirmed": false,
+      "conflict": false,
       "recipient": {
         "id": 4,
         "fullname": "Реципиентов Алексей Борисович",
@@ -278,10 +249,7 @@
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Нахимова, д. 9",
-        "coordinates": [
-          59.941871,
-          30.223494
-        ],
+        "coordinates": [59.941871, 30.223494],
         "approved": true
       },
       "volunteer": {
@@ -292,23 +260,17 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "keys": true,
         "scores": 2500
       },
       "address": "ул. Нахимова, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "chat": {
         "id": 4327,
-        "unread": 3
+        "unread": 50
       }
     },
     {
@@ -319,10 +281,11 @@
         "name": "Ремонт техники/жилья",
         "scope": 1
       },
-      "date": "2023-08-17T07:30Z",
+      "date": "2023-09-02T07:30Z",
       "description": "Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная. Еще одно дополнительное описание задачи.",
       "completed": true,
       "confirmed": false,
+      "conflict": false,
       "recipient": {
         "id": 5,
         "fullname": "Реципиентов Игорь Витальевич",
@@ -331,10 +294,7 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Наличная, 28/16В",
-        "coordinates": [
-          59.941335,
-          30.227995
-        ],
+        "coordinates": [59.941335, 30.227995],
         "approved": true
       },
       "volunteer": {
@@ -345,20 +305,14 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "keys": true,
         "scores": 2500
       },
       "address": "ул. Наличная, 28/16В",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "chat": null
     }
   ],
@@ -375,6 +329,7 @@
       "description": "Описание задачи номер 15 (срок задачи прошел, задача завершена и подтверждена)",
       "completed": true,
       "confirmed": true,
+      "conflict": false,
       "recipient": {
         "id": 4,
         "fullname": "Реципиентов Алексей Борисович",
@@ -383,10 +338,7 @@
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Нахимова, д. 9",
-        "coordinates": [
-          59.941871,
-          30.223494
-        ],
+        "coordinates": [59.941871, 30.223494],
         "approved": true
       },
       "volunteer": {
@@ -397,20 +349,14 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "keys": true,
         "scores": 2500
       },
       "address": "ул. Нахимова, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "chat": {
         "id": 5678,
         "unread": 0
@@ -428,6 +374,7 @@
       "description": "Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.",
       "completed": true,
       "confirmed": true,
+      "conflict": false,
       "recipient": {
         "id": 6,
         "fullname": "Реципиентов Иван Николаевич",
@@ -436,10 +383,7 @@
         "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
         "phone": "+7 (999) 123-45-67",
         "address": "переулок Каховского, 3",
-        "coordinates": [
-          59.95252,
-          30.243239
-        ],
+        "coordinates": [59.95252, 30.243239],
         "approved": true
       },
       "volunteer": {
@@ -450,20 +394,14 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "keys": true,
         "scores": 2500
       },
       "address": "переулок Каховского, 3",
-      "coordinates": [
-        59.95252,
-        30.243239
-      ],
+      "coordinates": [59.95252, 30.243239],
       "chat": null
     }
   ],

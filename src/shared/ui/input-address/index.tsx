@@ -1,14 +1,21 @@
-/* eslint-disable import/no-named-as-default-member */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  InputHTMLAttributes,
+  ChangeEvent,
+} from 'react';
 import { useYMaps } from '@pbe/react-yandex-maps';
 
 import { Input } from '../input';
 
-interface InputAddressProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  initialValue: string;
+interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
+  initialValue?: string;
   name: string;
-  inputChange: (address: string, coord?: [number, number]) => void;
+  address: {
+    address: string;
+    coords: [number, number] | [];
+  };
+  setAddress: (address: string, coords?: [number, number] | []) => void;
   label?: string;
   extClassName?: string;
   error?: boolean;
@@ -19,50 +26,64 @@ interface InputAddressProps
 
 export const InputAddress = (props: InputAddressProps) => {
   const {
-    initialValue,
-    inputChange,
+    initialValue = '',
     inputAttributes = {},
+    address,
+    setAddress,
     ...otherProps
   } = props;
 
-  const [address, setAddress] = useState(initialValue);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const suggestInputRef = useRef<HTMLInputElement>(null);
+
+  // any потому что в библиотеке не написаны типы для SuggestView
   const ymaps: any = useYMaps(['SuggestView', 'geocode']);
-  const id = useMemo(() => `address-${Math.random()}`, []);
+
+  useEffect(() => {
+    setAddress(initialValue, []);
+  }, []);
 
   useEffect(() => {
     if (!ymaps) {
       return;
     }
-    // eslint-disable-next-line no-new
-    const suggestView = new ymaps.SuggestView(id);
-    // eslint-disable-next-line no-underscore-dangle
+
+    const suggestView = new ymaps.SuggestView(suggestInputRef?.current, {
+      results: 5,
+    });
+
     suggestView.events.add('select', (e: any) => {
-      setAddress(e.get('item').displayName);
-      const geo = ymaps.geocode(e.get('item').displayName);
+      const suggestValue = e.get('item').value;
+
+      const geo = ymaps.geocode(suggestValue);
+
+      // any потому что в библиотеке не написаны типы для SuggestView
       geo.then((res: any) => {
         // Выбираем первый результат геокодирования.
         const firstGeoObject = res.geoObjects.get(0);
-        // Координаты геообъекта.
-        const coords = firstGeoObject.geometry.getCoordinates();
 
-        inputChange(e.get('item').value, coords);
+        const coords: [number, number] =
+          firstGeoObject.geometry.getCoordinates();
+
+        setAddress(suggestValue, coords);
       });
     });
-  }, [ymaps, id, inputChange]);
+  }, [ymaps]);
 
   const inputProps = {
     ...inputAttributes,
     ...otherProps,
-    id,
-    value: address,
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-      setAddress(event.target.value);
-      inputChange(event.target.value);
+    onChange: (event: ChangeEvent<HTMLInputElement>) => {
+      setAddress(event.target.value, []);
     },
-    placeholder: 'ул. Нахимова, д.9, у подъезда №3',
-    type: 'text',
   };
 
-  return <Input {...inputProps} />;
+  return (
+    <Input
+      value={address.address}
+      ref={suggestInputRef}
+      type="text"
+      placeholder="ул. Нахимова, д.9, у подъезда №3"
+      {...inputProps}
+    />
+  );
 };
