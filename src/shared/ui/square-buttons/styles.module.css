@@ -69,6 +69,16 @@
 .square-button--confirm:active.square-button::before {
   background-color: var(--colors-interface-blue-strong);
 }
+
+.square-button--undone.square-button::before {
+  background-color: var(--colors-interface-orange);
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+.square-button--undone:hover.square-button::before {
+  background-color: var(--colors-interface-orange-bright);
+}
+
 .square-button:disabled {
   cursor: default;
 }

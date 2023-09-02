@@ -1,11 +1,45 @@
 .container {
   width: 370px;
   max-height: 236px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 32px rgba(0, 0, 0, 0.16);
   background-color: var(--colors-interface-white);
-  padding: 31px 30px 50px 30px;
+  padding: 20px 20px 0 20px;
   box-sizing: border-box;
   position: relative;
+}
+
+.containerSmall {
+  width: 296px;
+}
+
+.tooltip {
+  padding: 20px;
+}
+
+.tooltipSmall {
+  max-width: 296px;
+}
+
+.titleLine {
+  height: 1px;
+  width: 100%;
+  border: none;
+  background: #E0E0E0;
+  margin: 14px 0 20px;
+}
+
+.contentLine {
+  height: 1px;
+  width: 100%;
+  border: none;
+  margin: 20px 0 20px;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%);
+}
+
+.contentText {
+  margin: 0;
 }
 
 .exitButtonWrapper {
@@ -15,15 +49,12 @@
 }
 
 .headerWrapper {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    #2e3192 49.28%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%);
   width: 100%;
   height: 1px;
-  margin-top: 14px;
 }
 
 .headerText {
@@ -50,4 +81,47 @@
 .buttonWrapper {
   display: flex;
   justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.buttonBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+}
+
+.buttonContentWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 6px 0;
+}
+
+.closeIcon:hover {
+  cursor: pointer;
+}
+
+.checkboxesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formSavePass {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.labelForm {
+  line-height: 16px;
+  color: #2E3192
+}
+
+.inputForm {
+  padding: 8px 10px;
+  border: 1px solid #2E3192
 }

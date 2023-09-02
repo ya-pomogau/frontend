@@ -14,7 +14,7 @@ interface TooltipProps {
   extClassName?: string;
   visible?: boolean;
   children: ReactNode;
-  pointerPosition?: 'right' | 'center';
+  pointerPosition?: 'right' | 'center' | 'null';
   changeVisible?: () => void;
   elementStyles?: CSSProperties;
 }
