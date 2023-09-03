@@ -3,19 +3,22 @@ import classNames from 'classnames';
 import { Informer } from '../informer';
 import { Button } from '../button';
 
-import styles from './dialog.module.css';
+import styles from './styles.module.css';
 import { Tooltip } from '../tooltip';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
 import Checkbox from '../checkbox';
 import { CancelationReasonIds } from './consts';
 import { SquareButton } from '../square-buttons';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ConflictIcon } from '../icons/conflict-icon';
+import '../../../app/assets/styles/common.css';
 
 interface DialogProps {
   title?: string;
   text?: string;
   isContent?: boolean;
   isGroupButton?: boolean;
-  isSuccessfulyClosed?: boolean;
+  isTaskStarted?: boolean;
   isTaskClose?: boolean;
   isTaskResponse?: boolean;
   isTaskResponseIcon?: boolean;
@@ -28,8 +31,15 @@ interface DialogProps {
   isTaskOnMap?: boolean;
   isChangePassword?: boolean;
   isExitButton?: boolean;
+  isTaskUndone?: boolean;
+  isTaskTaken?: boolean;
   isAlertDialog?: boolean;
   isConfirmDialog?: boolean;
+  // handleCloseDialog?: any;
+  buttonRef?: React.RefObject<HTMLElement>;
+  tasksRef?: React.RefObject<HTMLElement>;
+  isMobile?: boolean;
+  changeVisible: () => void;
   extClassName?: string;
 }
 
@@ -38,7 +48,7 @@ export const Dialog = ({
   text,
   isContent,
   isGroupButton,
-  isSuccessfulyClosed,
+  isTaskStarted,
   isTaskClose,
   isTaskResponse,
   isTaskResponseIcon,
@@ -51,23 +61,56 @@ export const Dialog = ({
   isTaskOnMap,
   isChangePassword,
   isExitButton = false,
-  // isAlertDialog = false,
-  // isConfirmDialog = false,
+  isTaskUndone,
+  isTaskTaken,
+  // handleCloseDialog,
+  buttonRef,
+  tasksRef,
+  isMobile,
+  changeVisible,
   extClassName,
 }: DialogProps) => {
-  const position = {
-    top: 0,
-    right: 0,
-  };
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  // const filterPositionStyles = {
-  //   top: `${position.top}px`,
-  //   right: `${window.innerWidth - position.right - 10}px`,
-  // };
+  const [dialogPosition, setDialogPosition] = useState({
+    top: `${0}px`,
+    right: `${0}px`,
+  });
 
-  const filterPositionStyles = {
-    top: `${position.top}px`,
-    right: `${position.right}px`,
+  const calculateDialogPosition = useCallback(() => {
+    const buttonRect = buttonRef?.current?.getBoundingClientRect();
+
+    if (buttonRect) {
+      setDialogPosition({
+        top: `${buttonRect?.bottom}px`,
+        right: `${window.innerWidth - buttonRect?.right - 10}px`,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    calculateDialogPosition();
+    window.addEventListener('resize', calculateDialogPosition);
+    window.addEventListener('scroll', calculateDialogPosition);
+    if (tasksRef?.current) {
+      tasksRef.current.addEventListener('scroll', calculateDialogPosition);
+    }
+
+    return () => {
+      window.removeEventListener('resize', calculateDialogPosition);
+      window.removeEventListener('scroll', calculateDialogPosition);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleEscKeydown);
+    return () => {
+      document.removeEventListener('keydown', handleEscKeydown);
+    };
+  }, []);
+
+  const handleEscKeydown = (e: { key: string }) => {
+    e.key === 'Escape' && changeVisible();
   };
 
   return (
@@ -75,24 +118,27 @@ export const Dialog = ({
       pointerPosition={
         isTaskClosingBeforePublicationRecipient ||
         isTaskClosingBeforePublicationMaster ||
-        isTaskOnMap
+        isTaskOnMap ||
+        isTaskTaken
           ? 'center'
           : isChangePassword || isTaskClose
           ? 'null'
           : 'right'
       }
-      // changeVisible={closeFilterMenu}
-      elementStyles={filterPositionStyles}
+      elementStyles={dialogPosition}
       extClassName={classNames(
         styles.tooltip,
+        `${isMobile ? styles.tooltipMobile : styles.tooltip}`,
         `${(isChangePassword || isTaskClose) && styles.tooltipSmall} `
       )}
+      changeVisible={changeVisible}
       visible
     >
       <div
+        ref={modalRef}
         className={classNames(
           styles.container,
-          `${(isChangePassword || isTaskClose) && styles.containerSmall} `,
+          `${(isChangePassword || isTaskClose) && styles.containerSmall}`,
           extClassName
         )}
       >
@@ -102,12 +148,12 @@ export const Dialog = ({
               className={styles.closeIcon}
               size="14"
               color="blue"
-              // onClick={handleClosePopup}
+              onClick={changeVisible}
             />
           </div>
         )}
 
-        {title && (
+        {title && !isTaskTaken && (
           <>
             <p
               className={classNames(
@@ -119,6 +165,24 @@ export const Dialog = ({
             >
               {title}
             </p>
+            <hr className={styles.titleLine} />
+          </>
+        )}
+
+        {title && isTaskTaken && (
+          <>
+            <div className={styles.titleContainer}>
+              <ConflictIcon size="24" color="orange" />
+              <p
+                className={classNames(
+                  'text',
+                  'text_size_large',
+                  styles.headerTaskTaken
+                )}
+              >
+                {title}
+              </p>
+            </div>
             <hr className={styles.titleLine} />
           </>
         )}
@@ -183,7 +247,14 @@ export const Dialog = ({
                 <input className={styles.inputForm} type="text"></input>
               </form>
             )}
-            {isTaskResponseIcon && <Informer extClassName={styles.informer} />}
+            {isTaskResponseIcon && (
+              <Informer
+                extClassName={`${
+                  isMobile ? styles.informerMobile : styles.informer
+                }`}
+                isMobile={isMobile}
+              />
+            )}
             {isTaskCancelation && (
               <div className={styles.buttonWrapper}>
                 <Button label="Отменить" buttonType="secondary" />
@@ -195,33 +266,18 @@ export const Dialog = ({
                 <Checkbox
                   name="taskCancelationReason"
                   label="Не смогу прийти"
-                  // checked={selectedCategories.includes(
-                  //   FilterItemsIds.CATEGORY_1
-                  // )}
                   id={CancelationReasonIds.CANT_COME_IN}
-                  // onChange={handleCheckboxChange}
-                  // disabled={!volunteerMainGuard ?? false}
                 />
                 <Checkbox
                   name="taskCancelationReason"
                   label="Отмена по обоюдному согласию"
-                  // checked={selectedCategories.includes(
-                  //   FilterItemsIds.CATEGORY_2
-                  // )}
                   id={CancelationReasonIds.CANCEL_FROM_BOTH_AGREMENT}
-                  // onChange={handleCheckboxChange}
-                  // disabled={!volunteerMainGuard ?? false}
                 />
 
                 <Checkbox
                   name="taskCancelationReason"
                   label="Не могу указать причину"
-                  // checked={selectedCategories.includes(
-                  //   FilterItemsIds.CATEGORY_3
-                  // )}
                   id={CancelationReasonIds.UNKNOWN_REASON}
-                  // onChange={handleCheckboxChange}
-                  // disabled={!volunteerMainGuard ?? false}
                 />
               </div>
             )}
@@ -233,9 +289,11 @@ export const Dialog = ({
           !isTaskClosingBeforePublicationMaster &&
           !isTaskResponseIcon &&
           !isTaskOnMap &&
-          !isSuccessfulyClosed &&
+          !isTaskStarted &&
           !isChangePassword &&
-          !isTaskClose && <hr className={styles.contentLine} />}
+          !isTaskClose &&
+          !isTaskUndone &&
+          !isTaskTaken && <hr className={styles.contentLine} />}
 
         {isGroupButton && (
           <>

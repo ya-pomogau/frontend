@@ -1,6 +1,6 @@
 .container {
   width: 370px;
-  max-height: 236px;
+  max-height: auto;
   background-color: var(--colors-interface-white);
   padding: 20px 20px 0 20px;
   box-sizing: border-box;
@@ -13,6 +13,12 @@
 
 .tooltip {
   padding: 20px;
+  position: absolute;
+}
+
+.tooltipMobile {
+  padding: 20px;
+  width: 303px;
 }
 
 .tooltipSmall {
@@ -25,6 +31,11 @@
   border: none;
   background: #E0E0E0;
   margin: 14px 0 20px;
+}
+
+.titleContainer {
+  display: flex;
+  gap: 10px;
 }
 
 .contentLine {
@@ -62,15 +73,19 @@
   margin: 0;
 }
 
+.headerTaskTaken {
+  text-align: left;
+  margin: 0;
+}
+
 .informer {
   margin-top: 25px;
 }
 
 @media screen and (max-width: 735px) {
   .container {
-    width: 263px;
-    max-height: 154px;
-    padding: 29px 15px;
+    width: auto;
+    padding: 10px 15px 0 15px;
   }
 }
 

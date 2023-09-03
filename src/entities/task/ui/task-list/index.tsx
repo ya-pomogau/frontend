@@ -13,8 +13,10 @@ import type { UserRole } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
+import { LegacyRef } from 'react';
 
 interface TaskListProps {
+  buttonRef?: LegacyRef<HTMLButtonElement>;
   userRole?: UserRole | null;
   tasks: Array<Task>;
   extClassName?: string;
@@ -29,6 +31,7 @@ interface TaskListProps {
 }
 
 export const TaskList = ({
+  buttonRef,
   userRole,
   tasks,
   extClassName,
@@ -84,6 +87,7 @@ export const TaskList = ({
           {tasks.map((item) => (
             <li key={nanoid()}>
               <TaskItem
+                buttonRef={buttonRef}
                 category={item.category.name}
                 isMobile={isMobile}
                 date={item.date}

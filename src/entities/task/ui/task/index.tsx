@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { LegacyRef, useState } from 'react';
 import classNames from 'classnames';
 import { parseISO, format, isAfter } from 'date-fns';
 import { Avatar } from 'shared/ui/avatar';
@@ -11,6 +11,7 @@ import placeholder from './img/placeholder.svg';
 import styles from './styles.module.css';
 
 interface TaskItemProps {
+  buttonRef?: LegacyRef<HTMLButtonElement>;
   isMobile: boolean;
   category: string;
   date?: string;
@@ -34,6 +35,7 @@ interface TaskItemProps {
 }
 
 export const TaskItem = ({
+  buttonRef,
   isMobile,
   category,
   date,
@@ -89,6 +91,7 @@ export const TaskItem = ({
           <div className={styles.mobile_buttons}>
             {handleClickConfirmButton && (
               <SquareButton
+                buttonRef={buttonRef}
                 buttonType="confirm"
                 onClick={handleClickConfirmButton}
                 extClassName={
