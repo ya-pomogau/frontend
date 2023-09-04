@@ -10,6 +10,7 @@ import { VolunteerSideMenu } from 'widgets/side-menu/components/volunter-side-me
 import { RecipientSideMenu } from 'widgets/side-menu/components/recipient-side-menu';
 import { AdminSideMenu } from 'widgets/side-menu/components/admin-side-menu';
 import { MasterSideMenu } from 'widgets/side-menu/components/master-side-menu';
+import { FeedbackSideMenu } from './components/feedback-side-menu';
 
 const mockedVolunteerState = {
   role: 'volunteer',
@@ -141,7 +142,7 @@ export const VolunteerSideMenuExample: Story = {
     ...SidemenuDefault.argTypes,
   },
   args: {
-    authRequired: false,
+    authRequired: true,
   },
   render: ({ ...args }) => (
     <Mockstore initialState={mockedVolunteerState}>
@@ -155,7 +156,7 @@ export const RecipientSideMenuExample: Story = {
     ...SidemenuDefault.argTypes,
   },
   args: {
-    authRequired: false,
+    authRequired: true,
   },
   render: ({ ...args }) => (
     <Mockstore initialState={mockedRecipientState}>
@@ -169,7 +170,7 @@ export const AdminSideMenuExample: Story = {
     ...SidemenuDefault.argTypes,
   },
   args: {
-    authRequired: false,
+    authRequired: true,
   },
   render: ({ ...args }) => (
     <Mockstore initialState={mockedAdminState}>
@@ -183,11 +184,25 @@ export const MasterSideMenuExample: Story = {
     ...SidemenuDefault.argTypes,
   },
   args: {
-    authRequired: false,
+    authRequired: true,
   },
   render: ({ ...args }) => (
     <Mockstore initialState={mockedMasterState}>
       <MasterSideMenu />
+    </Mockstore>
+  ),
+};
+
+export const FeedbackSideMenuExample: Story = {
+  argTypes: {
+    ...SidemenuDefault.argTypes,
+  },
+  args: {
+    authRequired: false,
+  },
+  render: ({ ...args }) => (
+    <Mockstore initialState={mockedMasterState}>
+      <FeedbackSideMenu />
     </Mockstore>
   ),
 };
