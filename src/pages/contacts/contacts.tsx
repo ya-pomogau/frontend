@@ -5,24 +5,18 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { Icon } from 'shared/ui/icons';
 import { PageLayout } from 'shared/ui/page-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
-
+import { VERIFIED } from 'shared/libs/statuses';
 import { SideMenu } from 'widgets/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 
 import styles from './styles.module.css';
 import { Button } from '../../shared/ui/button';
+import usePermission from 'shared/hooks/use-permission';
 
 export function ContactsPage() {
-  const { role } = useAppSelector((state) => state.user);
+  const userRole = useAppSelector((state) => state.user.role);
 
-  const roleChecker = () => {
-    if (role === 'master') {
-      return true;
-    }
-    if (role === 'admin') {
-      return true;
-    }
-  };
+  const roleChecker = !usePermission([VERIFIED], userRole);
 
   const [userData, setUserData] = React.useState({
     userEmail: 'www@yandex.ru',
@@ -104,7 +98,7 @@ export function ContactsPage() {
                   }}
                 />
               </div>
-              {roleChecker() && (
+              {roleChecker && (
                 <div onClick={handleEnableEdit} className={styles.edit_box}>
                   <Icon color="blue" icon="EditIcon" />
                   <p className={styles.edit_text}>Изменить данные</p>
@@ -138,14 +132,14 @@ export function ContactsPage() {
                   }}
                 />
               </div>
-              {roleChecker() && (
+              {roleChecker && (
                 <div onClick={handleEnableEdit} className={styles.edit_box}>
                   <Icon color="blue" icon="EditIcon" />
                   <p className={styles.edit_text}>Изменить данные</p>
                 </div>
               )}
             </div>
-            {roleChecker() && (
+            {roleChecker && (
               <Button
                 buttonType="primary"
                 label="Сохранить"

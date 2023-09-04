@@ -42,7 +42,7 @@ export const TaskList = ({
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const isLoading = useAppSelector((store) => store.tasks.isLoading);
-  const buttonGuard = usePermission([CONFIRMED], 'recepient');
+  const buttonGuard = usePermission([CONFIRMED], 'recipient');
 
   const handleDeniedAccess = () => {
     alert('Вам пока нельзя такое, дождитесь проверки администратором');
