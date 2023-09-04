@@ -7,6 +7,7 @@ import { CategoriesBlock } from 'features/filter/ui/categories-block';
 import { RadiusBlock } from 'features/filter/ui/radius-block';
 import { CalenderBlock } from 'features/filter/ui/calender-block';
 import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
+import { TimeBlock } from './ui/time-block';
 
 export interface FilteringProps {
   items: {
@@ -14,6 +15,7 @@ export interface FilteringProps {
     radius?: boolean;
     sort?: boolean;
     date?: boolean;
+    time?: boolean;
     userCategories?: boolean;
   };
 
@@ -34,6 +36,7 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
     categories: [],
     searchRadius: '',
     date: '',
+    time: ['', ''],
   });
 
   const handleFilterChange = (
@@ -41,6 +44,7 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
     value: string | string[] | boolean
   ) => {
     setFilterValues({ ...filterValues, [name]: value });
+    console.log(filterValues);
   };
 
   if (notFoundFilter) {
@@ -75,6 +79,13 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
           {items?.radius && (
             <RadiusBlock
               filter={filterValues.searchRadius}
+              onChange={handleFilterChange}
+            />
+          )}
+
+          {items?.time && (
+            <TimeBlock
+              filterTime={filterValues.time}
               onChange={handleFilterChange}
             />
           )}

@@ -30,23 +30,34 @@ export const Tooltip = ({
   const modalRoot = document.getElementById('modal') as HTMLElement;
 
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const closeWithEsc = useCallback(
+    (e: KeyboardEvent) => {
+      if (
+        e.key === 'Escape' &&
+        !(e.target as HTMLElement).closest('.tooltip') &&
+        !(e.target as HTMLElement).closest('#clock-element') &&
+        changeVisible
+      ) {
+        changeVisible();
+      }
+    },
+    [changeVisible]
+  );
 
-  const closeWithEsc = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape' && changeVisible) {
-      changeVisible();
-    }
-  }, []);
-
-  const closeWithClickOutTooltip = useCallback((e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (
-      changeVisible &&
-      !target.closest('.tooltip') &&
-      target.getRootNode() === document
-    ) {
-      changeVisible();
-    }
-  }, []);
+  const closeWithClickOutTooltip = useCallback(
+    (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        changeVisible &&
+        !target.closest('.tooltip') &&
+        !target.closest('#clock-element') &&
+        target.getRootNode() === document
+      ) {
+        changeVisible();
+      }
+    },
+    [changeVisible]
+  );
 
   useEffect(() => {
     setTimeout(() => {

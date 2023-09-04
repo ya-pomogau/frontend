@@ -40,6 +40,7 @@ import { PasswordOpenIcon } from './password-open-icon';
 import { PasswordCloseIcon } from './password-close-icon';
 import { CheckIcon } from './check-icon';
 import { ArrowDownIcon } from './arrow-down-icon';
+import { ConflictIcon } from './conflict-icon';
 
 const icons = {
   CalendarIcon,
@@ -81,6 +82,7 @@ const icons = {
   PasswordCloseIcon,
   CheckIcon,
   ArrowDownIcon,
+  ConflictIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;

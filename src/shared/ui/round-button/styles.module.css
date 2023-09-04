@@ -11,6 +11,7 @@
   transition: var(--transition-hover);
   background-size: 18px;
   background-position: center;
+  position: relative;
 }
 
 .round-buttonImg {
@@ -70,4 +71,30 @@
 .round-button:disabled {
   background-color: var(--colors-interface-additional);
   cursor: default;
+}
+
+.messages {
+  border-radius: 50px;
+  background-color: #d60080;
+  color: var(--colors-interface-white);
+  position: absolute;
+  font-size: 12px;
+  line-height: 17px;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+}
+
+.messages_additional {
+  border-radius: 50px;
+  background-color: #d60080;
+  color: var(--colors-interface-white);
+  position: absolute;
+  font-size: 9px;
+  line-height: 16px;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
 }
