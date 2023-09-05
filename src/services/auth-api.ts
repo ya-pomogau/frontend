@@ -19,10 +19,10 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
-    protected: builder.mutation<{ message: string }, void>({
-      query: () => 'protected',
+    getMe: builder.query({
+      query: () => 'users/own',
     }),
   }),
 });
 
-export const { useLoginMutation, useProtectedMutation } = authApi;
+export const { useLoginMutation, useGetMeQuery } = authApi;

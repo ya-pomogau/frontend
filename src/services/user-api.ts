@@ -45,17 +45,22 @@ export const usersApi: any = createApi({
         body: body.file ? body.file : body,
         // headers: 'Здесь будет JWT',
       }),
-      invalidatesTags: [{ type: 'User', id: 'LIST' }],
+      async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          usersApi.util.updateQueryData('getUserById', id, (draft: any) => {
+            Object.assign(draft, patch);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+      invalidatesTags: (result, error, { id }) => [
+        { type: 'User', id: 'LIST' },
+      ],
     }),
-    // updateAvatar: build.mutation({
-    //   query: (body) => ({
-    //     url: `users/avatar/${body.id}`,
-    //     method: 'PATCH',
-    //     body: body.file,
-    //     // headers: 'Здесь будет JWT',
-    //   }),
-    //   invalidatesTags: [{ type: 'User', id: 'LIST' }],
-    // }),
   }),
 });
 
@@ -65,5 +70,4 @@ export const {
   useGetUsersQuery,
   useUpdateUsersMutation,
   useGetUncomfirmedQuery,
-  // useUpdateAvatarMutation,
 } = usersApi;

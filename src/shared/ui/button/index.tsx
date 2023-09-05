@@ -2,6 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
+import { Loader } from '../loader';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -11,6 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   size?: 'small' | 'medium' | 'large' | 'extraLarge';
   customIcon?: ReactNode;
+  isLoading?: boolean;
 }
 
 export const Button = ({
@@ -18,6 +20,7 @@ export const Button = ({
   buttonType,
   actionType,
   label,
+  isLoading,
   size = 'small',
   customIcon,
   ...props
@@ -48,7 +51,7 @@ export const Button = ({
         )}
       >
         {customIcon}
-        <span>{label}</span>
+        {isLoading ? <Loader /> : <span>{label}</span>}
       </div>
     </button>
   );

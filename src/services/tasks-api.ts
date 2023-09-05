@@ -3,7 +3,7 @@ import { API_URL } from 'config/api-config';
 
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
-  tagTypes: ['Tasks'],
+  tagTypes: ['Tasks', 'CompletedTasks'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
     getTasks: build.query({
@@ -25,7 +25,16 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: [{ type: 'Tasks', id: 'LIST' }],
     }),
+    getTasksByStatus: build.query({
+      query: (status) => ({
+        url: `tasks/${status}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetTasksQuery, useUpdateTaskMutation } = tasksApi;
+export const {
+  useGetTasksQuery,
+  useUpdateTaskMutation,
+  useGetTasksByStatusQuery,
+} = tasksApi;

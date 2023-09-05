@@ -19,87 +19,89 @@ const initialState: UserState = {
   isFailed: false,
 };
 
-export const fetchUserDataByRole = createAsyncThunk(
-  'user/fetchData',
-  async (role: UserRole) => {
-    const response = await api.getAllUsers();
-    return response.filter((user) => user.role === role)[0];
-  }
-);
+// export const fetchUserDataByRole = createAsyncThunk(
+//   'user/fetchData',
+//   async (role: UserRole) => {
+//     const response = await api.getAllUsers();
+//     return response.filter((user) => user.role === role)[0];
+//   }
+// );
 
-export const updateUserInfo = createAsyncThunk<UserInfo | [], UpdateUserInfo>(
-  'user/updateUser',
-  async function (body) {
-    const response = await api.updateUser(body);
-    return response;
-  }
-);
+// export const updateUserInfo = createAsyncThunk<UserInfo | [], UpdateUserInfo>(
+//   'user/updateUser',
+//   async function (body) {
+//     const response = await api.updateUser(body);
+//     return response;
+//   }
+// );
 
-export const uploadUserAvatar = createAsyncThunk<UserInfo | [], FormData>(
-  'user/uploadUserAvatar',
-  async function (body: FormData) {
-    const response = await api.uploadAvatar(body);
-    return response;
-  }
-);
+// export const uploadUserAvatar = createAsyncThunk<UserInfo | [], FormData>(
+//   'user/uploadUserAvatar',
+//   async function (body: FormData) {
+//     const response = await api.uploadAvatar(body);
+//     return response;
+//   }
+// );
 
-export const userModel = createSlice({
-  name: 'user',
-  initialState,
-  reducers: {
-    setUserRole: (state, { payload }: PayloadAction<UserRole | null>) => {
-      state.role = payload;
+export const userModel = createSlice(
+  {
+    name: 'user',
+    initialState,
+    reducers: {
+      setUserRole: (state, { payload }: PayloadAction<UserRole | null>) => {
+        state.role = payload;
+      },
+      logoutUser: (state) => {
+        state.data = null;
+        state.role = null;
+      },
+      setUser: (state, { payload }) => {
+        state.data = payload;
+      },
     },
-    logoutUser: (state) => {
-      state.data = null;
-      state.role = null;
-    },
-    setUser: (state, { payload }) => {
-      state.data = payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchUserDataByRole.pending, (state) => {
-        state.isLoading = true;
-        state.isFailed = false;
-      })
-      .addCase(fetchUserDataByRole.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.data = action.payload;
-      })
-      .addCase(fetchUserDataByRole.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isFailed = true;
-        state.error = action.error.message;
-      })
-      .addCase(updateUserInfo.pending, (state) => {
-        state.isLoading = true;
-        state.isFailed = false;
-      })
-      .addCase(updateUserInfo.fulfilled, (state, action) => {
-        state.isLoading = false;
-        // state.data = action.payload;
-      })
-      .addCase(updateUserInfo.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isFailed = true;
-        state.error = action.error.message;
-      })
-      .addCase(uploadUserAvatar.pending, (state) => {
-        state.isLoading = true;
-        state.isFailed = false;
-      })
-      .addCase(uploadUserAvatar.fulfilled, (state, action) => {
-        state.isLoading = false;
-        // state.data = action.payload;
-      })
-      .addCase(uploadUserAvatar.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isFailed = true;
-        state.error = action.error.message;
-      });
-  },
-});
+    // extraReducers: (builder) => {
+    //   builder
+    //     .addCase(fetchUserDataByRole.pending, (state) => {
+    //       state.isLoading = true;
+    //       state.isFailed = false;
+    //     })
+    //     .addCase(fetchUserDataByRole.fulfilled, (state, action: any) => {
+    //       state.isLoading = false;
+    //       state.data = action.payload;
+    //     })
+    //     .addCase(fetchUserDataByRole.rejected, (state, action) => {
+    //       state.isLoading = false;
+    //       state.isFailed = true;
+    //       state.error = action.error.message;
+    //     });
+    // .addCase(updateUserInfo.pending, (state) => {
+    //   state.isLoading = true;
+    //   state.isFailed = false;
+    // })
+    // .addCase(updateUserInfo.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   // state.data = action.payload;
+    // })
+    // .addCase(updateUserInfo.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isFailed = true;
+    //   state.error = action.error.message;
+    // })
+    // .addCase(uploadUserAvatar.pending, (state) => {
+    //   state.isLoading = true;
+    //   state.isFailed = false;
+    // })
+    // .addCase(uploadUserAvatar.fulfilled, (state, action) => {
+    //   state.isLoading = false;
+    //   // state.data = action.payload;
+    // })
+    // .addCase(uploadUserAvatar.rejected, (state, action) => {
+    //   state.isLoading = false;
+    //   state.isFailed = true;
+    //   state.error = action.error.message;
+    // });
+  }
+  // }
+);
 
 export const { setUserRole, logoutUser, setUser } = userModel.actions;
