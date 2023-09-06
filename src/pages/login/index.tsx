@@ -9,7 +9,7 @@ import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
 
 import styles from './styles.module.css';
-import { useLoginMutation } from 'services/auth-api';
+import { useLoginMutation } from 'services/auth-admin-api';
 import { setUser } from 'entities/user/model';
 import { useDispatch } from 'react-redux';
 

@@ -1,6 +1,6 @@
 import { useAppSelector } from 'app/hooks';
 import { Navigate } from 'react-router-dom';
-import { useGetMeQuery } from 'services/auth-api';
+import { useGetMeQuery } from 'services/auth-admin-api';
 
 export function ProfilePage() {
   const { role } = useAppSelector((state) => state.user);

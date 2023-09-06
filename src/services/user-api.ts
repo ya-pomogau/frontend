@@ -2,11 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../config/api-config';
 
 //нам не нужны отдельные функции fetch для использования RTK Query.
-//Данный код генерирует нам 2 хука для получения данных: хук useGetUsersQuery, который принимает userRole,
-//и возвращает массив юзеров с выбранной ролью, а также хук useUpdateUsersMutation,
-//который принимает body и обновляет массив юзеров.
-//Также есть хук useUpdateUsersMutation, который принимает объект
-//с полями для обновления юзера
+//Данный код генерирует нам хуки для получения данных. Напрмиер, хук useGetUsersQuery принимает userRole
+//и возвращает массив юзеров с выбранной ролью, а хук useUpdateUsersMutation,
+//который принимает body, обновляет массив юзеров.
 
 export const usersApi: any = createApi({
   reducerPath: 'usersApi',
@@ -36,7 +34,7 @@ export const usersApi: any = createApi({
           adminRole === 'admin'
             ? 'role_ne=admin&role_ne=master'
             : 'role_ne=master'
-        }`, //пока для теста просто отдаю список, далее надо будет добавить условие статуса необработанных
+        }`, //пока для теста просто отдаю список без проверки статуса, далее надо будет добавить условие статуса необработанных
     }),
     updateUsers: build.mutation({
       query: (body) => ({

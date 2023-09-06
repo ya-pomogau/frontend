@@ -24,11 +24,10 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   );
   const dispatch = useAppDispatch();
 
-  const optionsForSelect = categories.map((item) => ({
+  const optionsForSelect = categories?.map((item) => ({
     value: String(item.id),
     label: item.name,
   }));
-  console.log(category);
 
   const handleTaskValueChange = (item: Option) => {
     dispatch(setCategory(item));

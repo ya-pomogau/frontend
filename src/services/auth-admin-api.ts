@@ -1,6 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const authApi = createApi({
+// сейчас одновременно в проекте описаны запросы на моковый и живой сервер.
+// Когда бек будет полностью готов,
+// можно будет использовать в baseUrl единую переменную API_URL
+export const authAdminApi = createApi({
+  reducerPath: 'authAdminApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.kraev.nomoredomains.xyz',
     prepareHeaders: (headers) => {
@@ -25,4 +29,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useGetMeQuery } = authApi;
+export const { useLoginMutation, useGetMeQuery } = authAdminApi;
