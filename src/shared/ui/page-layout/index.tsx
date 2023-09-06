@@ -14,12 +14,12 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
-  const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
+  //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
 
   return (
     <>
-      {(isLoadingUserData || isLoadingTasksData) && <Loader />}
+      {isLoadingUserData && <Loader />}
       {location.pathname === '/policy' ||
       location.pathname === '/blog' ||
       location.pathname === '/pick' ? (

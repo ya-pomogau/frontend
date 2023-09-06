@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
+import { useAppSelector } from 'app/hooks';
 
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
@@ -12,21 +11,37 @@ import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
 
 import styles from './styles.module.css';
+import { useGetUserByIdQuery, useUpdateUsersMutation } from 'services/user-api';
+import { Loader } from 'shared/ui/loader';
+import { skipToken } from '@reduxjs/toolkit/query/react';
+import useUser from 'shared/hooks/use-user';
 
 export const UserInfo = () => {
-  const user = useAppSelector((state) => state.user.data);
+  // const user = useAppSelector((state) => state.user.data);
+  const role = useAppSelector((state) => state.user.role);
+  const userId = () => {
+    if (role === 'volunteer') return 7;
+    if (role === 'master') return 1;
+    if (role === 'recipient') return 4;
+    if (role === 'admin') return 2;
+    if (!role) return null;
+  };
+  const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
-
-  const dispatch = useAppDispatch();
+  const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
+  const isAuth = useUser();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleOpenSettingClick = () => {
     setIsPopupOpen(true);
+    alert(
+      'При изменении формы сбрасывается аватар. Поправить потом можно в файле db.json'
+    );
   };
 
   const handleSaveViewerSettings = async (
@@ -35,14 +50,14 @@ export const UserInfo = () => {
   ) => {
     if (isFormEdited) {
       if (image) {
-        dispatch(uploadUserAvatar(avatarFile));
+        await updateUserData({ id: userData?.id, file: avatarFile }).unwrap();
       }
       if (
         user?.fullname !== userData.fullname ||
         user?.phone !== userData.phone ||
         user?.address !== userData.address
       )
-        dispatch(updateUserInfo(userData));
+        await updateUserData(userData).unwrap();
     }
     setIsFormSaved(true);
     setIsFormEdited(false);
@@ -50,31 +65,35 @@ export const UserInfo = () => {
     setIsPopupOpen(false);
   };
 
-  return user ? (
+  return isAuth ? (
     <InfoContainer
       name={user.fullname}
       avatar={user.avatar}
       onClickSettingsButton={handleOpenSettingClick}
       buttonRef={buttonRef}
     >
-      <EditViewerInfo
-        avatarLink={user.avatar}
-        avatarName={user.avatar}
-        onClickSave={handleSaveViewerSettings}
-        valueName={user.fullname}
-        valuePhone={user.phone}
-        valueAddress={user.address}
-        isPopupOpen={isPopupOpen}
-        valueId={user.id}
-        buttonRef={buttonRef}
-        isFormSaved={isFormSaved}
-        setIsFormSaved={setIsFormSaved}
-        setIsPopupOpen={setIsPopupOpen}
-        isFormEdited={isFormEdited}
-        setIsFormEdited={setIsFormEdited}
-        image={image}
-        setImage={setImage}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <EditViewerInfo
+          avatarLink={user.avatar}
+          avatarName={user.avatar}
+          onClickSave={handleSaveViewerSettings}
+          valueName={user.fullname}
+          valuePhone={user.phone}
+          valueAddress={user.address}
+          isPopupOpen={isPopupOpen}
+          valueId={user.id}
+          buttonRef={buttonRef}
+          isFormSaved={isFormSaved}
+          setIsFormSaved={setIsFormSaved}
+          setIsPopupOpen={setIsPopupOpen}
+          isFormEdited={isFormEdited}
+          setIsFormEdited={setIsFormEdited}
+          image={image}
+          setImage={setImage}
+        />
+      )}
 
       <div className={styles.contentWrapper}>
         <InfoContainerContent

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { closePopup, fetchCategories } from 'features/create-request/model';
+import { closePopup, setCategoryList } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
 import { CurrentPage } from '../../types';
@@ -10,6 +10,7 @@ import { AddressStep } from './address-step/address-step';
 import { CommonStep } from './common-step/common-step';
 import { DateStep } from './date-step/date-step';
 import { TaskStep } from './task-step/task-step';
+import { useGetCategoriesQuery } from 'services/categories-api';
 
 export interface RequestProps {
   isMobile?: boolean;
@@ -21,6 +22,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
     (state) => state.createRequest
   );
   const data = useAppSelector((state) => state.user.data);
+  const { data: categories } = useGetCategoriesQuery('');
 
   const handleCloseClick = () => {
     dispatch(closePopup());
@@ -34,13 +36,13 @@ export const Request = ({ isMobile = true }: RequestProps) => {
 
   useEffect(() => {
     document.addEventListener('keydown', closeByEsc);
-    dispatch(fetchCategories());
+    dispatch(setCategoryList(categories));
 
     return () => {
       document.removeEventListener('keydown', closeByEsc);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [categories]);
 
   if (!data) return null;
 
