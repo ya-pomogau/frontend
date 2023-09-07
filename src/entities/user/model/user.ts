@@ -7,7 +7,7 @@ type UserState = {
   data: UserInfo | null;
   isLoading: boolean;
   isFailed: boolean;
-  error?: string;
+  error?: string | null | undefined;
 };
 
 const initialState: UserState = {
@@ -15,6 +15,7 @@ const initialState: UserState = {
   data: null,
   isLoading: false,
   isFailed: false,
+  error: null,
 };
 
 export const userModel = createSlice({
@@ -31,7 +32,23 @@ export const userModel = createSlice({
     setUser: (state, { payload }) => {
       state.data = payload;
     },
+    enableBlokedError: (state) => {
+      state.error = 'Пользователь заблокирован';
+    },
+    enableConnectionError: (state) => {
+      state.error = 'Ошибка подключения';
+    },
+    enableAnyError: (state) => {
+      state.error = 'Любой текст ошибки';
+    },
   },
 });
 
-export const { setUserRole, logoutUser, setUser } = userModel.actions;
+export const {
+  setUserRole,
+  logoutUser,
+  setUser,
+  enableBlokedError,
+  enableConnectionError,
+  enableAnyError,
+} = userModel.actions;

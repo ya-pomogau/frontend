@@ -8,7 +8,14 @@ import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import { setUserRole, setUser, logoutUser } from 'entities/user/model';
+import {
+  setUserRole,
+  setUser,
+  logoutUser,
+  enableAnyError,
+  enableBlokedError,
+  enableConnectionError,
+} from 'entities/user/model';
 import { useGetUserByIdQuery } from 'services/user-api';
 
 export function PickRolePage() {
@@ -42,6 +49,16 @@ export function PickRolePage() {
   const getMasterAdminRole = () => {
     dispatch(setUserRole('master'));
     setUserId(1);
+  };
+
+  const handleEnableConnectionError = () => {
+    dispatch(enableConnectionError());
+  };
+  const handleEnableBlokedError = () => {
+    dispatch(enableBlokedError());
+  };
+  const handleEnableAnyError = () => {
+    dispatch(enableAnyError());
   };
 
   const getPageYouWouldBeRedirected = () => {
@@ -112,6 +129,24 @@ export function PickRolePage() {
         <li>
           <button onClick={getMasterAdminRole} style={{ marginRight: 10 }}>
             Получить роль главного администратора.
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={handleEnableConnectionError}
+            style={{ marginRight: 10 }}
+          >
+            Добавить ошибку подключения.
+          </button>
+        </li>
+        <li>
+          <button onClick={handleEnableBlokedError} style={{ marginRight: 10 }}>
+            Добавить ошибку пользователь заблокирован.
+          </button>
+        </li>
+        <li>
+          <button onClick={handleEnableAnyError} style={{ marginRight: 10 }}>
+            Добавить любую ошибку.
           </button>
         </li>
       </ul>

@@ -6,20 +6,23 @@ import { YMAPS_API_KEY } from 'config/ymaps';
 import { store } from './store';
 
 import './assets/styles/index.css';
+import ErrorBoundary from 'features/error-boundary';
 
 function App() {
   return (
     <>
       <Provider store={store}>
-        <YMaps
-          enterprise
-          query={{
-            load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
-            apikey: YMAPS_API_KEY,
-          }}
-        >
-          <AppRoutes />
-        </YMaps>
+        <ErrorBoundary>
+          <YMaps
+            enterprise
+            query={{
+              load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
+              apikey: YMAPS_API_KEY,
+            }}
+          >
+            <AppRoutes />
+          </YMaps>
+        </ErrorBoundary>
       </Provider>
     </>
   );
