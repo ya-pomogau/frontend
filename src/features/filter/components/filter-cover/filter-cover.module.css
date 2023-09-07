@@ -16,10 +16,15 @@
   flex-flow: row nowrap;
   justify-content: flex-end;
   align-items: center;
+  gap: 38px;
+}
+
+.buttonWrapper__mobile {
+  gap: 11px;
 }
 
 @media screen and (max-width: 768px) {
   .tooltip {
-    max-width: 320px;
+    max-width: 343px;
   }
 }

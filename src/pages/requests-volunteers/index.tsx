@@ -4,11 +4,7 @@ import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import { SideMenuForAuthorized } from 'widgets/side-menu';
 import { UserCard } from 'widgets/user-card';
 
-import { UserInfo } from 'entities/user';
-
-import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
-import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Loader } from 'shared/ui/loader';
 import styles from './styles.module.css';
@@ -35,47 +31,33 @@ export function RequestsVolunteersPage() {
   const [searchName, setSearchName] = useState('');
 
   return (
-    <PageLayout
-      side={
+    <>
+      <SmartHeader
+        icon={<Icon color="blue" icon="BlockIcon" size="54" />}
+        text="Подтверждение / Блокировка"
+      />
+      <PageSubMenuForAdmins />
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
-
-          <SideMenuForAuthorized />
-        </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <SmartHeader
-              icon={<Icon color="blue" icon="BlockIcon" size="54" />}
-              text="Подтверждение / Блокировка"
-            />
-          }
-        >
-          <PageSubMenuForAdmins />
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <>
-              <Input
-                extClassName={styles.input}
-                value={searchName}
-                name="name"
-                onChange={(e) => setSearchName(e.target.value)}
-                placeholder={'Введите имя'}
-                type="name"
-                label="Введите имя "
-              />
-              <div className={styles.userCards}>
-                {testUsers
-                  .filter(
-                    (user: UserProps) =>
-                      user.userName
-                        .toLowerCase()
-                        .includes(searchName.toLowerCase()) &&
-                      user.role == 'volunteer'
+          <Input
+            extClassName={styles.input}
+            value={searchName}
+            name="name"
+            onChange={(e) => setSearchName(e.target.value)}
+            placeholder={'Введите имя'}
+            type="name"
+            label="Введите имя "
+          />
+          <div className={styles.userCards}>
+            {testUsers
+              .filter(
+                (user: UserProps) =>
+                  user.userName
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase()) &&
+                   user.role == 'volunteer'
                   )
                   .map((user: UserProps) => (
                     <UserCard
@@ -91,9 +73,7 @@ export function RequestsVolunteersPage() {
                   ))}
               </div>
             </>
-          )}
-        </ContentLayout>
-      }
-    />
+      )}
+    </>
   );
 }

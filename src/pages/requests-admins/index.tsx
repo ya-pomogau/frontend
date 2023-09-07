@@ -1,12 +1,6 @@
 import { useGetUsersQuery } from 'services/user-api';
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
-import { SideMenuForAuthorized } from 'widgets/side-menu';
-
-import { UserInfo } from 'entities/user';
-
-import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
-import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Loader } from 'shared/ui/loader';
 import { UserCard } from 'widgets/user-card';
@@ -34,31 +28,17 @@ export function RequestsAdminsPage() {
   const [searchName, setSearchName] = useState('');
 
   return (
-    <PageLayout
-      side={
+    <>
+      <SmartHeader
+        icon={<Icon color="blue" icon="BlockIcon" size="54" />}
+        text="Подтверждение / Блокировка"
+      />
+
+      <PageSubMenuForAdmins />
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
-
-          <SideMenuForAuthorized />
-        </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <SmartHeader
-              icon={<Icon color="blue" icon="BlockIcon" size="54" />}
-              text="Подтверждение / Блокировка"
-            />
-          }
-        >
-          <PageSubMenuForAdmins />
-
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <>
               <Input
                 extClassName={styles.input}
                 value={searchName}
@@ -91,9 +71,7 @@ export function RequestsAdminsPage() {
                   ))}
               </div>
             </>
-          )}
-        </ContentLayout>
-      }
-    />
+      )}
+    </>
   );
 }
