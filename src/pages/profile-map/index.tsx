@@ -1,31 +1,19 @@
-import { useEffect } from 'react';
-
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-
+import { useAppSelector } from 'app/hooks';
 import YandexMap from 'widgets/map';
-
 import { Filter } from 'features/filter';
-
-import { fetchAvailableTasks } from 'entities/task/model';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 
 export function ProfileMapPage() {
-  const dispatch = useAppDispatch();
-
   const user = useAppSelector((store) => store.user.data);
-  // const { role } = useAppSelector((store) => store.user);
-  // const { tasks } = useAppSelector((store) => store.tasks);
 
-  const { isLoading, data } = useGetTasksQuery('', {
+  const { isLoading, data: tasks } = useGetTasksQuery('', {
     pollingInterval: 30000,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
   });
-
-  useEffect(() => {
-    dispatch(fetchAvailableTasks());
-  }, []);
 
   return (
     <>
@@ -47,10 +35,10 @@ export function ProfileMapPage() {
       {isLoading ? (
         <Loader />
       ) : (
-        data && (
+        tasks && (
           // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
           <YandexMap
-            tasks={data}
+            tasks={tasks}
             mapSettings={{
               latitude: user ? user.coordinates[0] : 59.938955,
               longitude: user ? user.coordinates[1] : 30.315644,

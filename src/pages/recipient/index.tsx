@@ -148,6 +148,7 @@ export function RecipientPage() {
                 handleClickAddTaskButton={() => dispatch(openPopup())}
                 isStatusActive
                 tasks={[]}
+                isLoading={false}
               />
               {isPopupOpen && <Request isMobile={isMobileForPopup} />}
             </ContentLayout>
@@ -188,6 +189,7 @@ export function RecipientPage() {
                 handleClickPnoneButton={() => 6}
                 isStatusActive={false}
                 tasks={[]}
+                isLoading={false}
               />
             </>
           }
