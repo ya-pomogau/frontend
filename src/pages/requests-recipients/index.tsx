@@ -37,39 +37,39 @@ export function RequestsRecipientsPage() {
       {isLoading ? (
         <Loader />
       ) : (
-       <>
-              <Input
-                extClassName={styles.input}
-                value={searchName}
-                name="name"
-                onChange={(e) => setSearchName(e.target.value)}
-                placeholder={'Введите имя'}
-                type="name"
-                label="Введите имя "
-              />
-              <div className={styles.userCards}>
-                {testUsers
-                  .filter(
-                    (user: UserProps) =>
-                      user.userName
-                        .toLowerCase()
-                        .includes(searchName.toLowerCase()) &&
-                      user.role == 'recipient'
-                  )
-                  .map((user: UserProps) => (
-                    <UserCard
-                      role={user.role}
-                      key={user.userId}
-                      avatarLink={user.avatarLink}
-                      avatarName={user.avatarName}
-                      userName={user.userName}
-                      userId={user.userId}
-                      userNumber={user.userNumber}
-                      volunteerInfo={user.volunteerInfo}
-                    />
-                  ))}
-              </div>
-            </>
+        <>
+          <Input
+            extClassName={styles.input}
+            value={searchName}
+            name="name"
+            onChange={(e) => setSearchName(e.target.value)}
+            placeholder={'Введите имя'}
+            type="name"
+            label="Введите имя "
+          />
+          <div className={styles.userCards}>
+            {testUsers
+              .filter(
+                (user: UserProps) =>
+                  user.userName
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase()) &&
+                  user.role == 'recipient'
+              )
+              .map((user: UserProps) => (
+                <UserCard
+                  role={user.role}
+                  key={user.userId}
+                  avatarLink={user.avatarLink}
+                  avatarName={user.avatarName}
+                  userName={user.userName}
+                  userId={user.userId}
+                  userNumber={user.userNumber}
+                  volunteerInfo={user.volunteerInfo}
+                />
+              ))}
+          </div>
+        </>
       )}
     </>
   );

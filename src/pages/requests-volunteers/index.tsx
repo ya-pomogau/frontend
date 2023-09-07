@@ -57,22 +57,22 @@ export function RequestsVolunteersPage() {
                   user.userName
                     .toLowerCase()
                     .includes(searchName.toLowerCase()) &&
-                   user.role == 'volunteer'
-                  )
-                  .map((user: UserProps) => (
-                    <UserCard
-                      role={user.role}
-                      key={user.userId}
-                      avatarLink={user.avatarLink}
-                      avatarName={user.avatarName}
-                      userName={user.userName}
-                      userId={user.userId}
-                      userNumber={user.userNumber}
-                      volunteerInfo={user.volunteerInfo}
-                    />
-                  ))}
-              </div>
-            </>
+                  user.role == 'volunteer'
+              )
+              .map((user: UserProps) => (
+                <UserCard
+                  role={user.role}
+                  key={user.userId}
+                  avatarLink={user.avatarLink}
+                  avatarName={user.avatarName}
+                  userName={user.userName}
+                  userId={user.userId}
+                  userNumber={user.userNumber}
+                  volunteerInfo={user.volunteerInfo}
+                />
+              ))}
+          </div>
+        </>
       )}
     </>
   );
