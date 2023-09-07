@@ -1,7 +1,5 @@
 import classNames from 'classnames';
 import { nanoid } from 'nanoid';
-
-import { useAppSelector } from 'app/hooks';
 import usePermission from 'shared/hooks/use-permission';
 import { CONFIRMED } from 'shared/libs/statuses';
 
@@ -20,6 +18,7 @@ interface TaskListProps {
   extClassName?: string;
   isStatusActive: boolean;
   isMobile: boolean;
+  isLoading: boolean;
   handleClickPnoneButton: () => void;
   handleClickMessageButton: () => void;
   handleClickConfirmButton: () => void;
@@ -34,6 +33,7 @@ export const TaskList = ({
   extClassName,
   isStatusActive,
   isMobile,
+  isLoading,
   handleClickPnoneButton,
   handleClickMessageButton,
   handleClickConfirmButton,
@@ -41,7 +41,6 @@ export const TaskList = ({
   handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
-  const isLoading = useAppSelector((store) => store.tasks.isLoading);
   const buttonGuard = usePermission([CONFIRMED], 'recepient');
 
   const handleDeniedAccess = () => {

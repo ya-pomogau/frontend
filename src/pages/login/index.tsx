@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -9,6 +9,9 @@ import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
 
 import styles from './styles.module.css';
+import { useLoginMutation } from 'services/auth-admin-api';
+import { setUser } from 'entities/user/model';
+import { useDispatch } from 'react-redux';
 
 interface ILoginForm {
   login: string;
@@ -16,6 +19,8 @@ interface ILoginForm {
 }
 
 export function LoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [checkAdminState, setAdminCheckState] = useState(false);
   const [inputError, setInputError] = useState(false);
 
@@ -23,6 +28,22 @@ export function LoginPage() {
     login: '',
     password: '',
   });
+  const [login, { isLoading }] = useLoginMutation();
+
+  const handleAdminLogin = async () => {
+    try {
+      const user = await login(inputFields).unwrap();
+      sessionStorage.setItem('auth_token', user.access_token);
+      //dispatch(setUser(user));
+      navigate('/profile');
+    } catch (err) {
+      console.log({
+        status: err,
+        title: 'Error',
+        description: 'Ошибка при попытке авторизации админом',
+      });
+    }
+  };
 
   const handleAdminCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAdminCheckState(!checkAdminState);
@@ -34,7 +55,10 @@ export function LoginPage() {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Отправка');
+    if (checkAdminState) {
+      handleAdminLogin();
+    }
+    console.log('отправка');
   };
 
   return (

@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import type { IIconProps } from './utils';
-
 import { CalendarIcon } from './calendar-icon';
 import { ClockIcon } from './clock-icon';
 import { ReadMessageIcon } from './read-message-icon';
@@ -45,7 +44,6 @@ import { ExclamationPointIcon } from './exclamation-point-icon';
 import { ExclamationPMark } from './excalamation-mark';
 
 import { ConflictIcon } from './conflict-icon';
-
 
 const icons = {
   ExclamationPMark,
