@@ -41,7 +41,7 @@ export const TaskList = ({
   handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
-  const buttonGuard = usePermission([CONFIRMED], 'recepient');
+  const buttonGuard = usePermission([CONFIRMED], 'recipient');
 
   const handleDeniedAccess = () => {
     alert('Вам пока нельзя такое, дождитесь проверки администратором');
