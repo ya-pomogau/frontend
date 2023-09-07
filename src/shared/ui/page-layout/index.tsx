@@ -7,15 +7,18 @@ import styles from './styles.module.css';
 import { UserInfo } from 'entities/user';
 import { FeedbackSideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
 import { useLocation } from 'react-router-dom';
+import { ErrorDialog } from '../error-dialog';
 
 interface PageLayoutProps {
   content?: ReactNode;
 }
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
+  const { isError, errorText } = useAppSelector((state) => state.error);
   const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
   //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
+  console.log(isError);
 
   return (
     <>
@@ -37,7 +40,10 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-          <div className={styles.content}> {content} </div>
+          <div className={styles.content}>
+            {isError && <ErrorDialog text={errorText}></ErrorDialog>}
+            {content}{' '}
+          </div>
         </div>
       )}
     </>

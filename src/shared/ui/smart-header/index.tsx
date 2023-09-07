@@ -1,6 +1,4 @@
-import { ReactElement } from 'react';
-
-import { ReactNode, MouseEvent } from 'react';
+import { ReactElement, ReactNode, MouseEvent } from 'react';
 
 import classnames from 'classnames';
 

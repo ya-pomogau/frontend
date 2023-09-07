@@ -1,41 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles.module.css';
-import { NoConectionPage } from './pages/NoConectionPage';
-import { BlokedPage } from './pages/BlokedPage';
-import { ErrorDialog } from 'shared/ui/error-dialog';
-const ErrorHandlerContext = React.createContext(() => {});
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { enableError } from 'entities/error/model';
 
 type ErrorBoundaryProps = {
-  errorText: string | null | undefined;
-  children?: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[];
 };
 
-const setError = () => {};
+const ErrorBoundary = ({ children }: ErrorBoundaryProps) => {
+  const errorText = useAppSelector((state) => state.user.error!);
+  const dispatch = useAppDispatch();
+  console.log(errorText);
+  useEffect(() => {
+    if (errorText != null) {
+      dispatch(enableError(errorText));
+    }
+  }, [errorText]);
 
-const ErrorBoundary = ({ errorText, children }: ErrorBoundaryProps) => {
-  if (errorText != null) {
-    if (errorText === 'Ошибка подключения') {
-      return <NoConectionPage text={errorText} />;
-    }
-    if (errorText === 'Пользователь заблокирован') {
-      return <BlokedPage />;
-    }
-    {
-      return (
-        <>
-          <ErrorDialog text={errorText}></ErrorDialog>
-          <ErrorHandlerContext.Provider value={setError}>
-            {children}
-          </ErrorHandlerContext.Provider>
-        </>
-      );
-    }
-  }
-  return (
-    <ErrorHandlerContext.Provider value={setError}>
-      {children}
-    </ErrorHandlerContext.Provider>
-  );
+  return <>{children}</>;
 };
 
 export default ErrorBoundary;

@@ -6,9 +6,11 @@ import { usersApi } from 'services/user-api';
 import { tasksApi } from 'services/tasks-api';
 import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
+import { errorModel } from 'entities/error/model';
 
 export const store = configureStore({
   reducer: {
+    error: errorModel.reducer,
     user: userModel.reducer,
     createRequest: createRequestModel.reducer,
     [usersApi.reducerPath]: usersApi.reducer,

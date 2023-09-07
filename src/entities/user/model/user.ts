@@ -7,7 +7,7 @@ type UserState = {
   data: UserInfo | null;
   isLoading: boolean;
   isFailed: boolean;
-  error?: string | null;
+  error?: string | null | undefined;
 };
 
 const initialState: UserState = {

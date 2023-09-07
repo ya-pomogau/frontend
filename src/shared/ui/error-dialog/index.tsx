@@ -3,7 +3,7 @@ import styles from './dialog.module.css';
 import { Icon } from '../icons';
 
 interface ErrorDialogProps {
-  text?: string;
+  text?: string | null;
 }
 
 export const ErrorDialog = ({ text }: ErrorDialogProps) => (
