@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { nanoid } from 'nanoid';
 import usePermission from 'shared/hooks/use-permission';
 import { CONFIRMED } from 'shared/libs/statuses';
 
@@ -80,8 +79,8 @@ export const TaskList = ({
             </li>
           )}
 
-          {tasks.map((item) => (
-            <li key={nanoid()}>
+          {tasks.map((item, index) => (
+            <li key={index}>
               <TaskItem
                 category={item.category.name}
                 isMobile={isMobile}
