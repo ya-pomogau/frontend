@@ -1,7 +1,7 @@
 .timePicker {
   width: 86px;
   height: 34px;
-  border: 1px solid #818C99;
+  border: 1px solid #818c99;
   display: flex;
   align-items: center;
   padding-left: 10px;
@@ -14,7 +14,7 @@
 .timePickerContainer {
   display: flex;
   padding: 10px 36px 10px 10px;
-  border: 1px solid #818C99;
+  border: 1px solid #818c99;
   margin: 0 10px;
 }
 
@@ -28,6 +28,6 @@
   line-height: 14px;
 }
 
-input[type="time"]::-webkit-calendar-picker-indicator {
+input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
 }

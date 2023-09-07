@@ -8,8 +8,9 @@
 
 .form {
   min-width: 364px;
-  display: grid;
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding-left: 18px;
   justify-items: flex-start;
 }
@@ -25,6 +26,7 @@
 
 .field {
   width: 364px;
+  margin-bottom: 24px;
 }
 
 .text {
@@ -32,4 +34,10 @@
   font-size: 12px;
   line-height: 14px;
   padding-bottom: 6px;
+}
+
+.error {
+  color: red;
+  margin: 0 0 24px 0;
+  padding: 0;
 }

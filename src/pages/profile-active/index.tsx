@@ -38,7 +38,7 @@ export function ProfileActivePage() {
                 categories: true,
                 radius: true,
                 date: false,
-                 time: true,
+                time: true,
               }}
             />
           ) : (

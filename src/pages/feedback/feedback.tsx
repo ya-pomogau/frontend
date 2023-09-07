@@ -1,4 +1,9 @@
-import useForm from 'shared/hooks/use-form';
+import {
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+  Controller,
+} from 'react-hook-form';
 
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
@@ -8,12 +13,31 @@ import { Button } from 'shared/ui/button';
 
 import styles from './styles.module.css';
 
+interface IFeedBackForm {
+  firstName: string;
+  email: string;
+  message: string;
+}
+
 export function FeedbackPage() {
-  const { values, handleChange } = useForm({
-    firstName: '',
-    email: '',
-    message: '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    control,
+    reset,
+  } = useForm<IFeedBackForm>({
+    mode: 'onBlur',
   });
+
+  const onSubmit: SubmitHandler<IFeedBackForm> = (data) => {
+    console.log(data);
+    reset();
+  };
+
+  const error: SubmitErrorHandler<IFeedBackForm> = (data) => {
+    console.log(data);
+  };
 
   return (
     <>
@@ -21,21 +45,21 @@ export function FeedbackPage() {
         text="Напишите нам"
         icon={<Icon color="blue" icon="EmptyMessageIcon" size="54" />}
       />
-      <form className={styles.form}>
-        <Input
-          label="ФИО"
-          name="firstName"
-          onChange={handleChange}
-          value={values.firstName}
-          placeholder="Иванов Иван Иванович"
-          type="text"
-          extClassName={styles.input}
-        />
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit, error)}>
+          <Controller name={'firstName'} control={control} render={({field}) => (
+              <Input
+                  label="ФИО"
+                  name="firstName"
+                  onChange={handleChange}
+                  placeholder="Иванов Иван Иванович"
+                  type="text"
+                  extClassName={styles.input}
+              />
+          )}  />
         <Input
           label="Эл. почта"
           name="email"
           onChange={handleChange}
-          value={values.email}
           placeholder="www@yandex.ru"
           type="text"
           extClassName={styles.input}
@@ -44,7 +68,6 @@ export function FeedbackPage() {
           label="Комментарий"
           name="message"
           onChange={handleChange}
-          value={values.message}
           placeholder="Задайте Ваш вопрос"
           extClassName={styles.text_area}
         />
