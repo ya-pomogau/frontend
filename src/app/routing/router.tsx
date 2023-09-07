@@ -29,8 +29,8 @@ import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
-import { BidsPage } from 'pages/bids';
 import { Logout } from 'pages/logout';
+import { BidsPage } from 'pages/bids';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
