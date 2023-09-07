@@ -8,6 +8,7 @@ import { UserInfo } from 'entities/user';
 import { FeedbackSideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
 import { useLocation } from 'react-router-dom';
 import { ErrorDialog } from '../error-dialog';
+import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -42,7 +43,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
           </div>
           <div className={styles.content}>
             {isError && <ErrorDialog text={errorText}></ErrorDialog>}
-            {content}{' '}
+            {errorText != 'Ошибка подключения' ? content : <NoConectionPage />}
           </div>
         </div>
       )}

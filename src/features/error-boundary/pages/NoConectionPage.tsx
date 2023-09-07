@@ -12,7 +12,6 @@ interface ErrorDialogProps {
 export const NoConectionPage = ({ text }: ErrorDialogProps) => {
   return (
     <>
-      <ErrorDialog text={text}></ErrorDialog>
       <SmartHeader
         icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
         text="Карта заявок"
