@@ -10,7 +10,7 @@
 }
 
 .content {
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 @media all and (min-width: 920px) {

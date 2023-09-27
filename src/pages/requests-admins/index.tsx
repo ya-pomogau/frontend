@@ -5,10 +5,27 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Loader } from 'shared/ui/loader';
 import { UserCard } from 'widgets/user-card';
 
+import styles from './styles.module.css';
+import { testUsers } from 'pages/requests/test-users';
+import { Input } from 'shared/ui/input';
+import { useState } from 'react';
+
+interface UserProps {
+  role: 'volunteer' | 'recipient' | 'admin' | 'master';
+  extClassName?: string;
+  avatarLink: string;
+  avatarName: string;
+  userName: string;
+  userId: number;
+  userNumber: string;
+  volunteerInfo?: any;
+}
+
 export function RequestsAdminsPage() {
   const { isLoading, data = [] } = useGetUsersQuery('admin', {
     pollingInterval: 30000,
   });
+  const [searchName, setSearchName] = useState('');
 
   return (
     <>
@@ -21,21 +38,38 @@ export function RequestsAdminsPage() {
       {isLoading ? (
         <Loader />
       ) : (
-        <ul>
-          {data.map((item: any) => {
-            return (
-              <li key={item.data.id}>
+        <>
+          <Input
+            extClassName={styles.input}
+            value={searchName}
+            name="name"
+            onChange={(e) => setSearchName(e.target.value)}
+            placeholder={'Введите имя'}
+            type="name"
+            label="Введите имя "
+          />
+          <div className={styles.userAdminCards}>
+            {testUsers
+              .filter(
+                (user: UserProps) =>
+                  user.userName
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase()) && user.role === 'admin'
+              )
+              .map((user: UserProps) => (
                 <UserCard
-                  avatarLink={item.data.avatar}
-                  avatarName={item.data.fullname}
-                  userName={item.data.fullname}
-                  userId={item.data.id}
-                  userNumber={item.data.phone}
+                  role={user.role}
+                  key={user.userId}
+                  avatarLink={user.avatarLink}
+                  avatarName={user.avatarName}
+                  userName={user.userName}
+                  userId={user.userId}
+                  userNumber={user.userNumber}
+                  volunteerInfo={user.volunteerInfo}
                 />
-              </li>
-            );
-          })}
-        </ul>
+              ))}
+          </div>
+        </>
       )}
     </>
   );

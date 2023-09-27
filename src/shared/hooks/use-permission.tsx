@@ -33,11 +33,11 @@ type Requirments =
   | { id: number; name: typeof BLOG }
   | { id: number; name: typeof INCREASE_SCORE };
 
-type Role = 'volunteer' | 'recepient' | 'admin' | 'master' | 'any';
+type Role = 'volunteer' | 'recipient' | 'admin' | 'master' | 'any';
 
 export default function usePermission(
   requirments: Array<Requirments>,
-  role: Role
+  role: Role | null
 ) {
   const userStatus = useAppSelector((state) => state.user.data?.status);
   const userRole = useAppSelector((state) => state.user.data?.role);
