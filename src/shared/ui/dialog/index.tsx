@@ -72,9 +72,14 @@ export const Dialog = ({
 }: DialogProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
+  // const [dialogPosition, setDialogPosition] = useState({
+  //   top: `${0}px`,
+  //   right: `${0}px`,
+  // });
+
   const [dialogPosition, setDialogPosition] = useState({
-    top: `${0}px`,
-    right: `${0}px`,
+    top: 0,
+    right: 0,
   });
 
   const calculateDialogPosition = useCallback(() => {
@@ -82,23 +87,34 @@ export const Dialog = ({
 
     if (buttonRect) {
       setDialogPosition({
-        top: `${buttonRect?.bottom}px`,
-        right: `${window.innerWidth - buttonRect?.right - 10}px`,
+        // top: `${buttonRect?.bottom}px`,
+        // right: `${window.innerWidth - buttonRect?.right - 10}px`,
+        // top: buttonRect?.bottom,
+        // right: window.innerWidth - buttonRect?.right - 10,
+        top: buttonRect.bottom,
+        right: buttonRect.right,
       });
     }
+    console.log(
+      'dialogPosition',
+      buttonRect?.bottom,
+      buttonRect?.right,
+      buttonRef
+    );
   }, []);
 
   useEffect(() => {
     calculateDialogPosition();
     window.addEventListener('resize', calculateDialogPosition);
-    window.addEventListener('scroll', calculateDialogPosition);
-    if (tasksRef?.current) {
-      tasksRef.current.addEventListener('scroll', calculateDialogPosition);
-    }
+    // window.addEventListener('scroll', calculateDialogPosition);
+    // if (tasksRef?.current) {
+    //   tasksRef.current.addEventListener('scroll', calculateDialogPosition);
+    // }
+    // console.log(dialogPosition);
 
     return () => {
       window.removeEventListener('resize', calculateDialogPosition);
-      window.removeEventListener('scroll', calculateDialogPosition);
+      // window.removeEventListener('scroll', calculateDialogPosition);
     };
   }, []);
 

@@ -57,7 +57,7 @@ export const router = createBrowserRouter(
           <Route path="/login" element={<LoginPage />} />
         </Route>
 
-        <Route
+        {/* <Route
           element={
             <RoutesGroup
               allowed={{
@@ -68,12 +68,12 @@ export const router = createBrowserRouter(
               }}
             />
           }
-        >
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/out" element={<Logout />} />
-          <Route path="/chat" element={<></>} />
-        </Route>
+        > */}
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/out" element={<Logout />} />
+        <Route path="/chat" element={<></>} />
+        {/* </Route> */}
 
         <Route
           element={
@@ -87,7 +87,7 @@ export const router = createBrowserRouter(
           <Route path="/profile/map" element={<ProfileMapPage />} />
         </Route>
 
-        <Route
+        {/* <Route
           element={
             <RoutesGroup
               allowed={{
@@ -96,13 +96,13 @@ export const router = createBrowserRouter(
               }}
             />
           }
-        >
-          <Route path="/profile/active" element={<ProfileActivePage />} />
+        > */}
+        <Route path="/profile/active" element={<ProfileActivePage />} />
 
-          <Route path="/profile/completed" element={<ProfileCompletedPage />} />
-        </Route>
+        <Route path="/profile/completed" element={<ProfileCompletedPage />} />
+        {/* </Route> */}
 
-        <Route
+        {/* <Route
           element={
             <RoutesGroup
               allowed={{
@@ -111,29 +111,29 @@ export const router = createBrowserRouter(
               }}
             />
           }
-        >
-          <Route path="/profile/requests" element={<RequestsPage />} />
-          <Route
-            path="/profile/requests/volunteers"
-            element={<RequestsVolunteersPage />}
-          />
+        > */}
+        <Route path="/profile/requests" element={<RequestsPage />} />
+        <Route
+          path="/profile/requests/volunteers"
+          element={<RequestsVolunteersPage />}
+        />
 
-          <Route
-            path="/profile/requests/recipients"
-            element={<RequestsRecipientsPage />}
-          />
+        <Route
+          path="/profile/requests/recipients"
+          element={<RequestsRecipientsPage />}
+        />
 
-          <Route
-            path="/profile/requests/notprocessed"
-            element={<RequestsNotprocessedPage />}
-          />
+        <Route
+          path="/profile/requests/notprocessed"
+          element={<RequestsNotprocessedPage />}
+        />
 
-          <Route path="/profile/statistics" element={<StatisticsPage />} />
+        <Route path="/profile/statistics" element={<StatisticsPage />} />
 
-          <Route path="/profile/tasks" element={<TasksPage />} />
+        <Route path="/profile/tasks" element={<TasksPage />} />
 
-          <Route path="/profile/bids" element={<BidsPage />} />
-        </Route>
+        <Route path="/profile/bids" element={<BidsPage />} />
+        {/* </Route> */}
 
         <Route
           element={

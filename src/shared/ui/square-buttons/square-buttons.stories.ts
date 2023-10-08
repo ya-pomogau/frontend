@@ -33,6 +33,18 @@ export const ConfirmButton: Story = {
   },
 };
 
+export const ConflictButton: Story = {
+  args: {
+    buttonType: 'conflict',
+  },
+};
+
+export const UndoneButton: Story = {
+  args: {
+    buttonType: 'undone',
+  },
+};
+
 export const Disabled: Story = {
   args: {
     buttonType: 'edit',

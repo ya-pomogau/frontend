@@ -13,7 +13,9 @@ import styles from './styles.module.css';
 import { LegacyRef } from 'react';
 
 interface TaskListProps {
-  buttonRef?: LegacyRef<HTMLButtonElement>;
+  // buttonRef?: LegacyRef<HTMLButtonElement>;
+  buttonRef?: any;
+
   userRole?: UserRole | null;
   tasks: Array<Task>;
   extClassName?: string;
@@ -23,6 +25,7 @@ interface TaskListProps {
   handleClickPnoneButton: () => void;
   handleClickMessageButton: () => void;
   handleClickConfirmButton: () => void;
+  handleClickConflictButton?: () => void;
   handleClickCloseButton: () => void;
   handleClickEditButton?: () => void;
   handleClickAddTaskButton?: () => void;
@@ -39,6 +42,7 @@ export const TaskList = ({
   handleClickPnoneButton,
   handleClickMessageButton,
   handleClickConfirmButton,
+  handleClickConflictButton,
   handleClickCloseButton,
   handleClickEditButton,
   handleClickAddTaskButton,
@@ -101,17 +105,20 @@ export const TaskList = ({
                 recipientPhoneNumber={item.recipient.phone}
                 handleClickPhoneButton={handleClickPnoneButton}
                 handleClickMessageButton={handleClickMessageButton}
+                handleClickConflictButton={handleClickConflictButton}
                 handleClickConfirmButton={
                   item.completed && !item.confirmed
                     ? handleClickConfirmButton
                     : undefined
                 }
-                handleClickCloseButton={
-                  isStatusActive ? handleClickCloseButton : undefined
-                }
-                handleClickEditButton={
-                  isStatusActive ? handleClickEditButton : undefined
-                }
+                // handleClickCloseButton={
+                //   isStatusActive ? handleClickCloseButton : undefined
+                // }
+                handleClickCloseButton={handleClickCloseButton}
+                // handleClickEditButton={
+                //   isStatusActive ? handleClickEditButton : undefined
+                // }
+                handleClickEditButton={handleClickEditButton}
               />
             </li>
           ))}
