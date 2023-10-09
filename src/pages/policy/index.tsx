@@ -1,3 +1,7 @@
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { markdown } from './content';
+
 export function PolicyPage() {
-  return <div>privacy policy page</div>;
+  return <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>;
 }
