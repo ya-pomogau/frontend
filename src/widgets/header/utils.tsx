@@ -43,7 +43,7 @@ export const linksTop: ISideBarElementProps[] = [
     icon: <WriteMessageIcon color="blue" />,
   },
   {
-    title: 'Политика конфеденциальности',
+    title: 'Политика конфиденциальности',
     to: '/policy',
     icon: <LockIcon color="blue" />,
   },
