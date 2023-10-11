@@ -1,110 +1,90 @@
-import classNames from "classnames";
-import React from "react";
-import styles from "./info-container-content.module.css";
+import classNames from 'classnames';
 
-interface IInfoContainerContent {
+import styles from './info-container-content.module.css';
+
+interface InfoContainerContentProps {
   name?: string;
   id?: number;
-  phoneNumber?: string;
+  phone?: string;
   address?: string;
-  description?: string;
-  extClassName?: string;
 }
 
 export const InfoContainerContent = ({
   name,
   id,
-  phoneNumber,
+  phone,
   address,
-  description,
-  extClassName,
-}: IInfoContainerContent) => (
-  <div className={extClassName}>
+}: InfoContainerContentProps) => (
+  <>
     <p
       className={classNames(
-        "m-0",
-        "text_size_medium",
-        "text_type_regular",
-        "text",
-        styles["info-name-wrapper"]
+        'm-0',
+        'text_size_medium',
+        'text_type_regular',
+        'text',
+        styles['info-name-wrapper']
       )}
     >
       {name}
     </p>
     <p
       className={classNames(
-        "m-0",
-        "text_size_small",
-        "text_type_regular",
-        "text",
-        styles["info-id-wrapper"]
+        'm-0',
+        'text_size_small',
+        'text_type_regular',
+        'text',
+        styles['info-id-wrapper']
       )}
     >
       ID {id}
     </p>
-    <p
-      className={classNames(
-        "m-0",
-        "text_size_small",
-        "text_type_regular",
-        "text",
-        styles["info-phoneNumber-wrapper"]
-      )}
-    >
+    <div className={classNames('m-0', styles['info-address-container'])}>
       <span
         className={classNames(
-          "m-0",
-          "text_size_small",
-          "text_type_bold",
-          "text"
+          'm-0',
+          'text_size_small',
+          'text_type_bold',
+          'text',
+          styles['info-field-title']
         )}
       >
         Тел.: &nbsp;
       </span>
-      {phoneNumber}
-    </p>
-    <p
-      className={classNames(
-        "m-0",
-        "text_size_small",
-        "text_type_regular",
-        "text",
-        styles["info-address-wrapper"]
-      )}
-    >
+      <p
+        className={classNames(
+          'm-0',
+          'text_size_small',
+          'text_type_regular',
+          'text',
+          styles['info-phone-wrapper']
+        )}
+      >
+        {phone}
+      </p>
+    </div>
+    <div className={classNames('m-0', styles['info-address-container'])}>
       <span
         className={classNames(
-          "m-0",
-          "text_size_small",
-          "text_type_bold",
-          "text"
+          'm-0',
+          'text_size_small',
+          'text_type_bold',
+          'text',
+          styles['info-field-title']
         )}
       >
         Адрес: &nbsp;
       </span>
-      {address}
-    </p>
-    {description && (
       <p
         className={classNames(
-          "m-0",
-          "text_size_small",
-          "text_type_regular",
-          "text"
+          'm-0',
+          'text_size_small',
+          'text_type_regular',
+          'text',
+          styles['info-address-wrapper']
         )}
       >
-        <span
-          className={classNames(
-            "m-0",
-            "text_size_small",
-            "text_type_bold",
-            "text"
-          )}
-        >
-          О себе: &nbsp;
-        </span>
-        {description}
+        {address}
       </p>
-    )}
-  </div>
+    </div>
+  </>
 );

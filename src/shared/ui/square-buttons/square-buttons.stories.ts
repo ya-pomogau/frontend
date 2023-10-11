@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { SquareButton } from ".";
+import { SquareButton } from '.';
 
 const meta: Meta<typeof SquareButton> = {
-  title: "uikit/Buttons/SquareButton",
+  title: 'uikit/Buttons/SquareButton',
   component: SquareButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    customIcon: { type: "string" },
-    disabled: { type: "boolean" },
+    customIcon: { type: 'string' },
+    disabled: { type: 'boolean' },
   },
 };
 
@@ -17,25 +17,25 @@ type Story = StoryObj<typeof meta>;
 
 export const CloseButton: Story = {
   args: {
-    buttonType: "close",
+    buttonType: 'close',
   },
 };
 
 export const EditButton: Story = {
   args: {
-    buttonType: "edit",
+    buttonType: 'edit',
   },
 };
 
 export const ConfirmButton: Story = {
   args: {
-    buttonType: "confirm",
+    buttonType: 'confirm',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    buttonType: "edit",
+    buttonType: 'edit',
     disabled: true,
   },
 };

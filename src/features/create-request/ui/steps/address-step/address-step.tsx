@@ -1,27 +1,32 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { Button } from "shared/ui/button";
+import classNames from 'classnames';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { Button } from 'shared/ui/button';
 import {
-  addAddress,
+  setAddress,
   changeStepDecrement,
   changeStepIncrement,
-} from "features/create-request/model";
-import React from "react";
-import { RootState } from "app/store";
-import classNames from "classnames";
-import { Input } from "shared/ui/input";
-import { YandexMap } from "shared/ui/map";
-import styles from "./address-step.module.css";
+} from 'features/create-request/model';
+import YandexMap from 'widgets/map';
+import { InputAddress } from 'shared/ui/input-address';
+
+import styles from './address-step.module.css';
 
 interface IAddressProps {
   isMobile?: boolean;
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
-  const { address } = useAppSelector((state: RootState) => state.createRequest);
+  const { address, coordinates } = useAppSelector(
+    (state) => state.createRequest
+  );
   const dispatch = useAppDispatch();
 
-  const handleAddressValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(addAddress(e.target.value));
+  const handleAddressValueChange = (
+    additinalAddress: string,
+    coords?: [number, number] | []
+  ) => {
+    dispatch(setAddress({ additinalAddress, coords }));
   };
 
   const handleNextStepClick = () => {
@@ -39,35 +44,56 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           <>
             <p
               className={classNames(
-                "text",
-                "text_size_small",
-                "text_type_regular ",
-                "m-0",
+                'text',
+                'text_type_regular ',
+                'm-0',
                 styles.place
               )}
             >
               Место встречи
             </p>
             <div className={styles.headerWrapper} />
+
+            <InputAddress
+              initialValue={address}
+              address={{ address, coords: coordinates || [] }}
+              setAddress={handleAddressValueChange}
+              name="address"
+              extClassName={styles.input}
+            />
+
             <div className={styles.map}>
-              <YandexMap width="270px" height="395px" />
+              <YandexMap
+                width="260px"
+                height="350px"
+                coordinates={coordinates}
+                mapSettings={
+                  coordinates
+                    ? {
+                        latitude: coordinates[0],
+                        longitude: coordinates[1],
+                        zoom: 15,
+                      }
+                    : undefined
+                }
+              />
               <div className={styles.alertWrapper}>
                 <p
                   className={classNames(
-                    "text",
-                    "text_size_small",
-                    "text_type_regular ",
-                    "m-0",
+                    'text',
+                    'text_size_small',
+                    'text_type_regular ',
+                    'm-0',
                     styles.text
                   )}
                 >
                   * Будьте осторожны, если указываете домашний адрес,
                   <span
                     className={classNames(
-                      "text",
-                      "text_size_small",
-                      "text_type_regular ",
-                      "m-0",
+                      'text',
+                      'text_size_small',
+                      'text_type_regular ',
+                      'm-0',
                       styles.selectedText
                     )}
                   >
@@ -81,30 +107,31 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           </>
         ) : (
           <>
-            <Input
+            <InputAddress
               label="Укажите место встречи"
-              placeholder="Например: ул. Нахимова, д.9, у подъезда №3"
-              value={address}
-              onChange={handleAddressValueChange}
+              initialValue={address}
+              address={{ address, coords: coordinates || [] }}
+              setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
             />
             <p
               className={classNames(
-                "text",
-                "text_size_small",
-                "text_type_regular ",
-                "m-0",
+                'text',
+                'text_size_small',
+                'text_type_regular ',
                 styles.text
               )}
             >
-              * Будьте осторожны, если указываете домашний адрес,
+              * Будьте осторожны, если указываете домашний
+              <br />
+              адрес,
               <span
                 className={classNames(
-                  "text",
-                  "text_size_small",
-                  "text_type_regular ",
-                  "m-0",
+                  'text',
+                  'text_size_small',
+                  'text_type_regular ',
+                  'm-0',
                   styles.selectedText
                 )}
               >
@@ -113,7 +140,20 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               пишите его полностью.
             </p>
             <div className={styles.map}>
-              <YandexMap width="100%" height="159px" />
+              <YandexMap
+                width="100%"
+                height="159px"
+                coordinates={coordinates}
+                mapSettings={
+                  coordinates
+                    ? {
+                        latitude: coordinates[0],
+                        longitude: coordinates[1],
+                        zoom: 15,
+                      }
+                    : undefined
+                }
+              />
             </div>
           </>
         )}

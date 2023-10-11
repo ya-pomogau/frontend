@@ -1,8 +1,9 @@
-import type { ImgHTMLAttributes } from "react";
-import classnames from "classnames";
-import styles from "./styles.module.css";
+import type { ImgHTMLAttributes } from 'react';
+import classnames from 'classnames';
 
-interface imageProps extends ImgHTMLAttributes<HTMLImageElement> {
+import styles from './styles.module.css';
+
+interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
@@ -10,10 +11,10 @@ interface imageProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 export const Avatar = ({
   extClassName,
-  avatarLink = "https://i.pravatar.cc/300",
+  avatarLink = 'https://i.pravatar.cc/300',
   avatarName,
   ...props
-}: imageProps) => (
+}: AvatarProps) => (
   <img
     src={avatarLink}
     alt={avatarName}

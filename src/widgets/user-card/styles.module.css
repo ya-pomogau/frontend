@@ -1,0 +1,245 @@
+.content {
+  box-sizing: border-box;
+  position: relative;
+  margin-top: 31px;
+  padding: 41px 30px 0 30px;
+  min-height: 128px;
+  width: 276px;
+  border: 1px solid var(--colors-interface-blue-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 300px;
+}
+
+.avatar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 62px;
+  height: 62px;
+  transform: translate(107px, -31px);
+}
+
+.user_info {
+  display: grid;
+  row-gap: 5px;
+  grid-template-rows: repeat(3, auto);
+}
+
+.grid_two {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 5px;
+}
+
+.id_color {
+  opacity: 0.5;
+}
+
+.icons_div {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.buttons_div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding-bottom: 25px;
+}
+
+.volunteer_info {
+  display: flex;
+  margin-bottom: 10px;
+  margin-left: -53px;
+}
+
+.exclamation_point_div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin_login_input {
+  border: none;
+
+  outline: none;
+  background-color: transparent;
+  pointer-events: none;
+  cursor: not-allowed;
+  padding-left: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #2e3192;
+}
+
+.admin_password_box {
+  position: relative;
+}
+
+.admin_edit_icon {
+  position: absolute;
+  top: 70%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+}
+
+.admin_password_input {
+  width: 216px;
+  height: 30px;
+  top: 197px;
+  left: 20px;
+  border: 0.5px;
+  border: 0.5px solid #2e3192;
+  color: linear-gradient(0deg, #2e3192, #2e3192),
+    linear-gradient(0deg, #ffffff, #ffffff);
+  padding-left: 10px;
+  content: '*****';
+}
+
+.admin_save_btn {
+  padding-top: 20px;
+  margin: auto;
+}
+
+.admin_dropdown_list_closed_box {
+  position: relative;
+  width: 276px;
+  margin-left: -30px;
+  border-top: 1px solid;
+  border-image-source: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    #2e3192 49.28%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-image-slice: 1;
+}
+
+.admin_arrow_down {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.admin_dropdown_list_opened_box {
+  position: relative;
+  width: 276px;
+  margin-left: -30px;
+  margin-top: 10px;
+  border-top: 1px solid;
+  border-image-source: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    #2e3192 49.28%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  border-image-slice: 1;
+}
+
+.admin_arrow_up {
+  position: absolute;
+  top: -20px;
+  right: 8px;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.admin_checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 30px;
+  padding: 30px 33px 30px 33px;
+}
+
+.admin_checkbox {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+}
+
+.admin_block_btn {
+  margin: auto;
+  display: flex;
+  padding-left: 30px;
+  padding-bottom: 20px;
+}
+
+.recipient_input {
+  width: 196px;
+  height: 37px;
+  border: 0.5px solid #2e3192;
+  font-size: 12px;
+  color: #2e3192;
+  padding-left: 10px;
+}
+
+.admin_content {
+  height: 100%;
+}
+
+@media all and (max-width: 1025px) {
+  .content {
+    width: 175px;
+    padding: 41px 10px 0 10px;
+  }
+
+  .admin_content {
+    padding: 41px 30px 0 30px;
+    min-height: 128px;
+    width: 276px;
+    height: 100%;
+  }
+
+  .avatar {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 62px;
+    height: 62px;
+    transform: translate(-50%, -31px);
+  }
+
+  .buttons_div {
+    padding-bottom: 10px;
+  }
+
+  .volunteer_info {
+    margin-bottom: 2px;
+  }
+
+  .name_text {
+    font-size: 12px;
+  }
+
+  .recipient_input {
+    width: 140px;
+    height: 30px;
+    border: 0.5px solid #2e3192;
+    font-size: 8px;
+    /* padding: 10px; */
+    color: #2e3192;
+    line-height: 37px;
+  }
+
+  .recipient_input::placeholder {
+    font-size: 8px;
+    padding: 10px;
+  }
+}

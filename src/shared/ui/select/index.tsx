@@ -1,14 +1,14 @@
-/* eslint-disable react/no-array-index-key */
-import React from "react";
-import cn from "classnames";
-import { nanoid } from "nanoid";
-import styles from "./styles.module.css";
+import React from 'react';
+import cn from 'classnames';
+import { nanoid } from 'nanoid';
+
+import styles from './styles.module.css';
 
 type TIconArrow = {
   extClassName?: string;
 };
 
-const IconArrow: React.FC<TIconArrow> = ({ extClassName }) => (
+const IconArrow = ({ extClassName }: TIconArrow) => (
   <svg
     className={extClassName}
     width="24"
@@ -31,6 +31,7 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   selectedValue?: string;
 }
 
+// eslint-disable-next-line import/no-named-as-default-member, react/display-name
 export const Select = React.forwardRef<HTMLSelectElement, Props>(
   (
     {
@@ -50,7 +51,7 @@ export const Select = React.forwardRef<HTMLSelectElement, Props>(
     return (
       <div className={cn(styles.container, extClassName)}>
         {label && (
-          <label className={cn(styles.label, "text")} htmlFor={id}>
+          <label className={cn(styles.label, 'text')} htmlFor={id}>
             {label}
           </label>
         )}
@@ -58,7 +59,7 @@ export const Select = React.forwardRef<HTMLSelectElement, Props>(
           ref={ref}
           name={name}
           defaultValue={selectedValue}
-          className={cn(styles.select, "text", "text_size_medium")}
+          className={cn(styles.select, 'text', 'text_size_medium')}
           onChange={onChange}
           id={id}
           {...props}

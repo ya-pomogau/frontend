@@ -1,18 +1,22 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
-import classnames from "classnames";
-import { PhoneIcon } from "../icons/phone-icon";
-import { EmptyMessageIcon } from "../icons/empty-message-icon";
-import { LocationIcon } from "../icons/location-icon";
-import { AddIcon } from "../icons/add-icon";
-import styles from "./styles.module.css";
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import classnames from 'classnames';
+
+import { PhoneIcon } from '../icons/phone-icon';
+import { EmptyMessageIcon } from '../icons/empty-message-icon';
+import { LocationIcon } from '../icons/location-icon';
+import { AddIcon } from '../icons/add-icon';
+
+import styles from './styles.module.css';
 
 interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
-  buttonType: "phone" | "message" | "location" | "add" | "default";
+  buttonType: 'phone' | 'message' | 'location' | 'add' | 'default';
   onClick?: () => void;
   customIcon?: ReactNode;
-  size?: "small" | "medium" | "large";
+  size?: 'small' | 'medium' | 'large';
+  unreadMessages?: number;
 }
+
 const defautlIcons = {
   phone: <PhoneIcon size="24" color="white" />,
   message: <EmptyMessageIcon size="24" color="white" />,
@@ -26,20 +30,28 @@ export const RoundButton = ({
   buttonType,
   customIcon,
   size,
+  unreadMessages,
   ...props
 }: RoundButtonProps) => (
   <button
     type="button"
     className={classnames(
-      styles["round-button"],
+      styles['round-button'],
       styles[`round-button--${buttonType}`],
       styles[`round-button--${size}`],
       extClassName
     )}
     {...props}
   >
-    <div className={styles["round-buttonImg"]}>
+    <div className={styles['round-buttonImg']}>
       {customIcon || defautlIcons[buttonType]}
     </div>
+    {buttonType === 'message' && unreadMessages ? (
+      unreadMessages > 99 ? (
+        <div className={styles.messages_additional}>{'99+'}</div>
+      ) : (
+        <div className={styles.messages}>{unreadMessages}</div>
+      )
+    ) : null}
   </button>
 );

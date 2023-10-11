@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { CategoriesBackground } from ".";
+import { CategoriesBackground } from '.';
 
 const meta: Meta<typeof CategoriesBackground> = {
-  title: "uikit/CategoriesBackground",
+  title: 'uikit/CategoriesBackground',
   component: CategoriesBackground,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    content: { type: "string" },
+    content: { type: 'string' },
   },
 };
 
@@ -16,32 +16,32 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    theme: "primary",
+    theme: 'primary',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    theme: "secondary",
+    theme: 'secondary',
   },
 };
 
 export const Success: Story = {
   args: {
-    theme: "success",
+    theme: 'success',
   },
 };
 
 export const Warning: Story = {
   args: {
-    theme: "warning",
+    theme: 'warning',
   },
 };
 
 export const WithLabel: Story = {
   args: {
-    theme: "primary",
-    content: "категория",
-    size: "medium",
+    theme: 'primary',
+    content: 'категория',
+    size: 'medium',
   },
 };

@@ -12,6 +12,10 @@
   color: var(--colors-interface-black);
 }
 
+.checkbox:disabled + label {
+  color: #818c99;
+}
+
 .checkboxIconWrapper {
   box-sizing: border-box;
   display: inline-flex;
@@ -23,7 +27,7 @@
   height: 20px;
   flex-shrink: 0;
   flex-grow: 0;
-  content: "";
+  content: '';
   border: 2px solid var(--colors-interface-yorkshire-cloud);
   border-radius: 4px;
   transition: var(--transition-hover);
@@ -54,4 +58,25 @@
 
 .checkbox:checked + label > .checkboxIconWrapper > .checkboxIcon {
   visibility: visible;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  transition: transform 0.2s ease;
+  top: 15px;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, 0%);
+  background-color: #fbfdff;
+  color: var(--colors-interface-black);
+  display: inline-block;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.checkbox:disabled:hover + label {
+  & .tooltip {
+    visibility: visible;
+  }
 }

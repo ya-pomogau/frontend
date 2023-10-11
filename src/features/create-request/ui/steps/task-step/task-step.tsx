@@ -1,38 +1,42 @@
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { RootState } from "app/store";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
-  addDescriptionForTask,
-  addTypeOfTask,
+  setDescriptionForTask,
   changeStepDecrement,
   changeStepIncrement,
-} from "features/create-request/model";
-import React from "react";
-import { Button } from "shared/ui/button";
-import { Select } from "shared/ui/select";
-import { TextArea } from "shared/ui/text-area";
-import styles from "./task-step.module.css";
+  setCategory,
+} from 'features/create-request/model';
+import { Button } from 'shared/ui/button';
+import { TextArea } from 'shared/ui/text-area';
+import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
+
+import styles from './task-step.module.css';
 
 interface ITaskStepProps {
-  tasks: Array<{ value: string; label: string }>;
   isMobile?: boolean;
 }
 
-export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, typeOfTask } = useAppSelector(
-    (state: RootState) => state.createRequest
+export const TaskStep = ({ isMobile }: ITaskStepProps) => {
+  const { descriptionForTask, categories, category } = useAppSelector(
+    (state) => state.createRequest
   );
-
   const dispatch = useAppDispatch();
 
-  const handleTaskValueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(addTypeOfTask(e.target.value));
+  const optionsForSelect = categories?.map((item) => ({
+    value: String(item.id),
+    label: item.name,
+  }));
+
+  const handleTaskValueChange = (item: Option) => {
+    dispatch(setCategory(item));
   };
 
   const handleTaskDescValueChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    dispatch(addDescriptionForTask(e.target.value));
+    dispatch(setDescriptionForTask(e.target.value));
   };
 
   const handleNextStepClick = () => {
@@ -50,23 +54,21 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
           <>
             <p
               className={classNames(
-                "text",
-                "text_size_small",
-                "text_type_regular ",
-                "m-0",
+                'text',
+                'text_type_regular ',
+                'm-0',
                 styles.task
               )}
             >
               Дело
             </p>
             <div className={styles.headerWrapper} />
-            <Select
-              selectedValue={typeOfTask}
+            <Dropdown
+              selected={category}
               label="Выберите тип задачи"
               placeholder="Выберите тип задачи"
-              name="tasks"
               onChange={handleTaskValueChange}
-              options={tasks}
+              items={optionsForSelect}
               extClassName={styles.select}
             />
             <TextArea
@@ -80,13 +82,12 @@ export const TaskStep = ({ tasks, isMobile }: ITaskStepProps) => {
           </>
         ) : (
           <>
-            <Select
-              selectedValue={typeOfTask}
+            <Dropdown
+              selected={category}
               label="Выберите тип задачи"
               placeholder="Выберите тип задачи"
-              name="tasks"
               onChange={handleTaskValueChange}
-              options={tasks}
+              items={optionsForSelect}
               extClassName={styles.select}
             />
             <TextArea

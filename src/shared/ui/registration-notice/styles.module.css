@@ -1,0 +1,27 @@
+.container {
+  width: 100%;
+  min-width: 384px;
+  display: flex;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  align-items: center;
+  box-shadow: 0 4px 32px 0 #00000029, 0 0 4px 0 #0000000a;
+  gap: 10px;
+}
+
+.settingText {
+  color: var(--colors-interface-black);
+}
+
+@media all and (max-width: 1025px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  .settingText {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+  }
+}

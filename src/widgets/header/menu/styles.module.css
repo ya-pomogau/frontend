@@ -1,0 +1,103 @@
+.overlay {
+  position: absolute;
+  width: calc(100vw - 18px);
+  height: 100vh;
+  z-index: 10;
+  top: 0;
+  cursor: pointer;
+}
+
+.header__sidebar__container {
+  position: absolute;
+  right: 90px;
+  top: 88px;
+  background-color: var(--colors-interface-white);
+  padding-left: 30px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  width: 190px;
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+}
+
+@media screen and (min-width: 1440px) {
+  .header__sidebar__container {
+    right: calc((100vw - 1256px) / 2 - 10px);
+  }
+}
+
+.header__sidebar__container_mobile {
+  position: absolute;
+  right: 22px;
+  top: 82px;
+  padding-top: 10px;
+  background-color: var(--colors-interface-white);
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  width: 190px;
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+}
+
+.header__title__container {
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 200px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 20px;
+  text-decoration: none;
+  list-style: none;
+  justify-content: center;
+}
+
+.menu__title {
+  color: #2e3192;
+  font-family: 'Golos';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: 0;
+  width: 132px;
+  text-align: right;
+}
+
+.menu__title__icon {
+  width: 32px;
+  height: 32px;
+  background-color: #2e3192;
+  margin-left: 5px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .menu__title {
+    font-family: 'Golos';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    color: #fbfdff;
+    z-index: 2;
+  }
+
+  .header__title__background {
+    position: absolute;
+    right: -5px;
+    top: 19px;
+  }
+}

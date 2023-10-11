@@ -1,10 +1,12 @@
-import React, { useMemo } from "react";
-import cn from "classnames";
-import { nanoid } from "nanoid";
-import styles from "./styles.module.css";
+/* eslint-disable react/display-name */
+/* eslint-disable import/no-named-as-default-member */
+import { useMemo, InputHTMLAttributes, forwardRef } from 'react';
+import cn from 'classnames';
+import { nanoid } from 'nanoid';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+import styles from './styles.module.css';
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
@@ -12,12 +14,12 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
   errorText?: string;
   customIcon?: React.ReactNode;
+  onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      value,
       type,
       name,
       onChange,
@@ -27,6 +29,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       error,
       errorText,
       customIcon,
+      onIconClick,
       ...props
     },
     ref
@@ -36,34 +39,38 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const errorToRender = useMemo(
       () =>
         error && errorText ? (
-          <span className={cn(styles.error, "text")}>{errorText}</span>
+          <span className={cn(styles.error, 'text')}>{errorText}</span>
         ) : null,
       [error, errorText]
     );
 
     const inputClass = error ? styles.input_error : styles.input;
 
+    const iconClass = error ? styles.icon_error : styles.icon;
+
     return (
-      <div className={extClassName}>
+      <div className={extClassName} data-testid={'div'}>
         {label && (
-          <label className={cn(styles.label, "text")} htmlFor={id}>
+          <label className={cn(styles.label, 'text')} htmlFor={id}>
             {label}
           </label>
         )}
         <div className={styles.container}>
           <input
+            data-testid={'input'}
             ref={ref}
             type={type}
             name={name}
-            value={value}
-            className={cn(inputClass, "text", "text_size_medium")}
+            className={cn('text', inputClass)}
             onChange={onChange}
             placeholder={placeholder}
             id={id}
             {...props}
           />
           {errorToRender}
-          <div className={styles.icon}>{customIcon}</div>
+          <div className={iconClass} onClick={onIconClick}>
+            {customIcon}
+          </div>
         </div>
       </div>
     );

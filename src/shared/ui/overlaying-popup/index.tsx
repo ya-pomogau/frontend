@@ -1,13 +1,14 @@
-import classNames from "classnames";
-import { ReactNode } from "react";
-import { Portal } from "../portal";
-import styles from "./overlaying-popup.module.css";
+import { ReactNode } from 'react';
+import classNames from 'classnames';
 
-interface IOverlayingPopupProps {
+import { Portal } from '../portal';
+
+import styles from './overlaying-popup.module.css';
+
+interface OverlayingPopupProps {
   children?: ReactNode;
   isOpened?: boolean;
   onClose?: () => void;
-  handleKeyDown?: () => void;
   extClassName?: string;
 }
 
@@ -15,12 +16,12 @@ export const OverlayingPopup = ({
   children,
   onClose,
   isOpened,
-  handleKeyDown,
   extClassName,
-}: IOverlayingPopupProps) => {
+}: OverlayingPopupProps) => {
   if (!isOpened) {
     return null;
   }
+
   return (
     <Portal isOpened>
       <div
@@ -28,14 +29,14 @@ export const OverlayingPopup = ({
         role="dialog"
         id="label"
       >
-        <div
+        {/* Возможно не понадобится в будущем т.к. оверлей перекрывает содержимое модалки и делает невозможным нажатие кнопок. Без него задний фон затемняется а интерфейс не доступен*/}
+        {/* <div
           className={classNames(styles.overlay)}
           role="button"
           tabIndex={0}
           onClick={onClose}
-          onKeyDown={handleKeyDown}
           aria-labelledby="label"
-        />
+        ></div> */}
         {children}
       </div>
     </Portal>

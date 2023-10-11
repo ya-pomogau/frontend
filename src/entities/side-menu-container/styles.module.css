@@ -1,0 +1,52 @@
+.button__container {
+  gap: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  margin-top: 30px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  background-color: rgba(46, 49, 146, 0.4);
+  width: 100%;
+  height: 100%;
+}
+
+.button__container--mobile {
+  border: none;
+}
+
+.button__container--mob {
+  max-width: 354px;
+}
+
+@media (min-width: 414px) {
+  .button__container {
+    gap: 10px;
+    height: 426px;
+    padding: 30px 10px;
+  }
+
+  .button__container--web {
+    max-width: 295px;
+  }
+
+  .button__container--sea {
+    border: 2px solid var(--colors-interface-blue-strong);
+  }
+
+  .button__container--main {
+    border: 2px solid var(--colors-interface-primary);
+  }
+}

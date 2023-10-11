@@ -1,0 +1,42 @@
+.image {
+  max-width: 267px;
+  max-height: 267px;
+}
+
+.content_box {
+  margin-top: 100px;
+  min-width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.smart_header {
+  margin-top: 10px;
+  width: 100%;
+  min-width: 285px;
+}
+
+.text_bloked {
+  font-size: 24px;
+  color: #9798c9;
+  line-height: 29.5px;
+  max-width: 285px;
+}
+.text_contact {
+  font-size: 24px;
+  line-height: 29.05px;
+  color: #2e3192;
+}
+.link {
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.box {
+ display: flex;
+ flex-direction: column;
+ overflow-y: unset;
+}

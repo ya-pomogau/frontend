@@ -1,6 +1,6 @@
 .dateContainer {
   display: grid;
-  grid-template-columns: 140px 96px 50px 308px;
+  grid-template-columns: 76px 96px 46px 308px;
   margin-top: 20px;
 }
 
@@ -13,12 +13,18 @@
 }
 
 .wrapperForDate {
-  width: 308px;
   grid-column-start: 4;
 }
 
 .wrapperForTime {
   grid-column-start: 2;
+}
+
+.time {
+  font-size: 12px;
+  line-height: 14px;
+  margin: 0;
+  margin-bottom: 5px;
 }
 
 .button {
@@ -38,25 +44,35 @@
   display: none;
 }
 
-input[type="time"]::-webkit-calendar-picker-indicator {
+input[type='time']::-webkit-calendar-picker-indicator {
   background: none;
 }
 
-@media (min-width: 361px) and (max-width: 735px) {
+.date {
+  font-size: 12px;
+  line-height: 14px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 735px) {
   .dateContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
   }
+
   .time {
     font-size: 24px;
     line-height: 29px;
   }
+
   .date {
     font-size: 24px;
     line-height: 29px;
   }
+
   .headerWrapper {
     background: linear-gradient(
       90deg,
@@ -68,6 +84,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     height: 1px;
     margin-top: 4px;
   }
+
   .headerWrapperForDatePicker {
     background: linear-gradient(
       90deg,
@@ -80,11 +97,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     margin-top: 4px;
     margin-bottom: 20px;
   }
+
   .wrapperForTime {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   .wrapperForDate {
     display: flex;
     flex-direction: column;
@@ -92,15 +111,19 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     margin-top: 29px;
     margin-bottom: 4px;
   }
+
   .inputForTime {
     margin-top: 10px;
   }
+
   .datePicker {
     margin-top: 20px;
   }
+
   .checkbox {
     min-width: 197px;
   }
+
   .button {
     justify-content: center;
   }

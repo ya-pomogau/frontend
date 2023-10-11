@@ -1,68 +1,56 @@
-import classNames from "classnames";
-import { ReactNode } from "react";
-import styles from "./info-container.module.css";
-import { SettingsButton } from "../transforming-buttons/settings-button/index";
-import { Avatar } from "../avatar";
+import { LegacyRef, ReactNode } from 'react';
+import classNames from 'classnames';
+import { SettingsButton } from '../transforming-buttons/settings-button';
+import { Avatar } from '../avatar';
 
-interface IInfoContainerProps {
+import styles from './info-container.module.css';
+import placeholder from './img/placeholder.svg';
+import useUser from 'shared/hooks/use-user';
+
+interface InfoContainerProps {
   extClassName?: string;
   children?: ReactNode;
-  link?: string;
-  avatarName: string;
-  onClickSettingsButton: () => void;
+  avatar?: string;
+  name: string;
+  onClickSettingsButton?: () => void;
+  buttonRef?: LegacyRef<HTMLButtonElement>;
 }
 
 export const InfoContainer = ({
   extClassName,
   children,
-  link,
-  avatarName,
+  avatar,
+  name,
   onClickSettingsButton,
-  ...rest
-}: IInfoContainerProps) => (
-  <div className={classNames(styles["info-container-frame"], extClassName)}>
-    <img
-      className={classNames(styles["info-container-image"])}
-      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAScAAAESCAYAAAC/7RNfAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAi3SURBVHgB7d1baKR3GcfxJ5PNaVOzB+iBQsGKFaVQq1ivpCiIFip4qApS8MobvdM7vbC90vuCXhVEBUGpeLgRBaEUwarY9kLrjcouPbt1N0kz2TlkZsw7adKk21a33c372/XzgWFmXzawk33nm//zzvtOZh76452Tasmwt1zPP/qR+tK5717U1/3ibffUDx+9uZ57alyXw50fnas7v3B3rVx3Q10qpx//Q737sQfq/b0/1Zu13jlWD8x/uX7180G9Gffcu1D3zd1Wh+H28bm6+aXV+tm56+qr15+u7900qdUjM3W1+fDa9j7Y/Us9PPtkHYavDz5Z33jHT2ux8+b2gcP0rb9/sb72729PH/9+6UO19rvb69bfbPyvXz7p1BVocdyr+bm6omwNBrUw6VVb5uarejVbh+X4ZFDnto5MH6+O5ur4VnEJ9GYG1R/NV7reeP7A/r4yXqvNExe3/12RceLizc3NbO/Yhxen/xfHR9srwplucVAT0IVJv96KKzJOzZNuXmyXy3B7xTwa5C+bkzUrp9XRkeLSWq3NWt1arnTNv3FltFpvxcyrjzl99oOPXH0HBoBoT9b9TXf2H0S+Mo85AVc/cQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQqTPami+ANJ1hb7kA0nTOd08UQJpOf0OcgDzGOiDS9lh3sgDSdDbXj5Z37IA0nW53Uj3HnYAwnbWz23HqHi+AJJ3V1UkNe9cUQJLO2rlJdVevL4AkndVz4xr2nU4AZOkMB1Xra3PlfCcgyfRTCaYHxTec7wTkmMapOZ1g0D9aACl2Vk7bx52c6wQkeTlOZawDorw81m2vnHx0ChBkGqfmHbvmuJN37IAUe58h/uLz49pYczImkGEvTs3KyQfPASn24rS2aqwDcuzFafXspHzwHJBiL06b22Nd88FzAAkO/FLN5rgTQIIDcWqusQNIcCBOzQfPASQ4EKdNYx0Q4kCczrwwLoAEB+LUXMYCkKBTAIHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRPQuu6J2eltP3ECIokTEEmcgNZtnpyd3vYTJyCSOAGt626vmrpWTsCVQJyASEcKoGWvPsepYeUERLJyAlo3XLpwnSROQOuGizMXbDPWAZGsnIDWDYx1QKLhkrEOuEJYOQGt2zx5YYqsnIBI4gREMtYBrZtevjI5uM3KCYgkTkDrFia96W3/KQXiBLRuYdKf3gaLryRJnIBI4gS0bnesG+wb67xbB7RuYdyf3m8tLe9tEyegdc2qqTFYetveNnECWrc43omTd+uAeFZOQOua0wga+08lECegdbvHnNaMdUA6KyegdSvjten9c/t+f52VExBJnIBIxjqgdbtjXfeksQ4IZ+UEtG732rqh85yAJIsvn+c0POrznIBgzbEnKyegda9cvrJzhvgzty6KE9C+3ctXhks7w9zpO5aMdUCWZqR7duWIOAE5ViZrdeoDS3XmX2NxArKcuuNonf7nSJyALGvLs3XmhYk4ATlWRmv17NOj6WNxAqI88/R4ei9OQIx+Z6G2BpPpY3ECYvRnFqu7sfNYnIAY651jtdndWTk5QxxoXbNiapI0HLyyTZyA1vVnFnbiNJzsbRMnoHVrs8em990NcQKCNGNdw1gHRGnGusZwYOUEBGnepWt0u+IEBDHWAZH2DohvWjkBQXZXTluOOQFJmmvqGgNjHZBk94C4Y05AlN2xbrPb39smTkDr9q+YdokT0Lpud3zBNnECWmflBEQSJyDS/stWdokT0Lr9F/zuEiegdcY6INL+a+p2iRPQui1jHZBoYKwDEm12L9wmTkDrXuvdOr9UE4gkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYgkTkAkcQIiiRMQSZyASOIERBInIJI4AZHECYh05NUbbnvfA5M6ZDfe1KmPf/r5uunWRw5s765eX1t/vqU+v/6j6Z9/snJvvfPB5br2H4Nq018/dk2d/sQttTx/Q10Og9FGXbP+273n/UZ+vXx3ff/x99S113XqsXe9vZ7onKhL4VNbT9Wps0fqic2VutzuOvZi9W58qR4+lvWzcmb7dt9TW3X//EN1tbhr9N765onVuuP43w5s/86pz9TnzvygVsZrdVgePPGV+vEvl2qz+9rJidgbVs9O6nz3ZLFjtjNf67PHL+pr5uZnqncJ/zsXa1S98Wwdht7YAv6w9Gq4/f2ev2B7f3vb/KRfh2m9c+x1w9SI2Cuaf+Dm+tEabR38ps0vbhx4kfY7C3Xk/LjatnxuVKPx5V299WcWLurvz803O96li8lSE6eJaFxtXi9OzbbFSa8OS29msYb/5SUUs/d1twPV23jjkaS//YTmzx/61HnoZmfmp88VLrXezKD6o4NxasK0cIhhajQ/fIfDN34t/wfX5CBnoIJJNAAAAABJRU5ErkJggg=="
-      alt="рамка для профиля"
-    />
-    {link ? (
-      <div className={classNames(styles["info-container-avatarWrapper"])}>
+  buttonRef,
+}: InfoContainerProps) => {
+  const isAuth = useUser();
+
+  return (
+    <div className={classNames(styles['info-container-frame'], extClassName)}>
+      <img
+        className={classNames(styles['info-container-border'])}
+        src="data:image/png;base64,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"
+        alt="Граница профиля"
+      />
+      <div className={classNames(styles['info-container-avatarWrapper'])}>
         <Avatar
-          avatarLink={link}
-          avatarName={avatarName}
-          extClassName={styles["info-container-avatar"]}
+          avatarLink={avatar || placeholder}
+          avatarName={name}
+          extClassName={styles['info-container-avatar']}
         />
       </div>
-    ) : (
-      <div className={classNames(styles["info-container-avatarWrapper"])}>
-        <svg
-          className={classNames(styles["info-container-svg"])}
-          viewBox="0 0 75 125"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M36.807 61.1834C20.5872 61.1834 7.84302 47.1256 7.84302 30.6229C7.84302 13.5091 21.1665 0.0625 36.807 0.0625C53.0268 0.0625 65.771 14.1203 65.771 30.6229C65.771 47.1256 53.0268 61.1834 36.807 61.1834ZM36.807 3.11854C22.325 3.11854 10.7394 15.3429 10.7394 30.0119C10.7394 45.2921 22.325 57.5163 36.807 57.5163C51.289 57.5163 62.2955 45.2921 62.2955 30.0119C62.8747 15.3429 51.289 3.11854 36.807 3.11854Z"
-            fill="#FBFDFF"
-          />
-          <path
-            d="M73.3016 124.75H2.05027C0.891709 124.75 0.3125 124.138 0.3125 122.916V96.6345C0.3125 74.631 17.1118 57.517 37.3866 57.517C58.2406 57.517 74.4603 75.2422 74.4603 96.6345V122.916C75.0395 124.138 74.4602 124.75 73.3016 124.75ZM3.78804 121.083H71.5639V96.6345C71.5639 77.0759 56.5028 60.5731 37.3866 60.5731C18.2703 60.5731 3.2089 76.4647 3.2089 96.6345V121.083H3.78804Z"
-            fill="#FBFDFF"
-          />
-        </svg>
+      <div className={classNames(styles['info-container-content'])}>
+        {children}
       </div>
-    )}
-    <div className={classNames(styles["info-container-content"])}>
-      {children}
+      {isAuth && (
+        <SettingsButton
+          extClassName={styles['info-container-settings-button']}
+          onClick={onClickSettingsButton}
+          disabled={!isAuth}
+          buttonRef={buttonRef}
+        />
+      )}
     </div>
-    <SettingsButton
-      extClassName={styles["info-container-button-wrapper"]}
-      onClick={onClickSettingsButton}
-    />
-    <div
-      className={classNames(styles["info-container-personal-counter"])}
-      {...rest}
-    />
-  </div>
-);
+  );
+};

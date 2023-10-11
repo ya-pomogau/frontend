@@ -11,21 +11,25 @@
   border-bottom: 1px solid var(--colors-interface-yorkshire-cloud);
 }
 
+.fieldset:first-of-type .legend {
+  padding-top: 0;
+}
+
 .content {
   display: flex;
   gap: 12px;
   padding: 12px 0;
 }
 
-.content[data-view="COLUMN"] {
+.content[data-view='COLUMN'] {
   flex-direction: column;
 }
 
-.content[data-view="ROW"] {
+.content[data-view='ROW'] {
   flex-direction: row;
 }
 
-.content[data-view="TWO_COLUMNS"] {
+.content[data-view='TWO_COLUMNS'] {
   display: grid;
   grid-auto-flow: row;
   grid-template-columns: repeat(2, minmax(0, 192px));

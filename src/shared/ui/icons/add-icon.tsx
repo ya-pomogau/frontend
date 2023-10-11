@@ -1,6 +1,6 @@
-import { getColor, IIconProps } from "./utils";
+import { getColor, IIconProps } from './utils';
 
-export const AddIcon = ({ color, size = "24", ...props }: IIconProps<"66">) => (
+export const AddIcon = ({ color, size = '24', ...props }: IIconProps<'66'>) => (
   <svg
     width={size}
     height={size}

@@ -1,10 +1,12 @@
-import classNames from "classnames";
-import React from "react";
-import { Avatar } from "../avatar";
-import { SquareButton } from "../square-buttons";
-import styles from "./main-popup.module.css";
+import React from 'react';
+import classNames from 'classnames';
 
-interface IMainPopupProps {
+import { Avatar } from '../avatar';
+import { SquareButton } from '../square-buttons';
+
+import styles from './main-popup.module.css';
+
+interface MainPopupProps {
   extClassName?: string;
   name?: string;
   phoneNumber?: string;
@@ -24,7 +26,7 @@ export const MainPopup = ({
   children,
   isMobile,
   handleCloseClick,
-}: IMainPopupProps) => (
+}: MainPopupProps) => (
   <div className={classNames(styles.container, extClassName)}>
     {!isMobile && (
       <>
@@ -34,15 +36,19 @@ export const MainPopup = ({
           onClick={handleCloseClick}
         />
         <div className={classNames(styles.headerWrapper)}>
-          <Avatar avatarLink={avatarLink} avatarName={avatarName} />
+          <Avatar
+            avatarLink={avatarLink}
+            avatarName={avatarName}
+            extClassName={styles.avatar}
+          />
           <div className={classNames(styles.profileDesc)}>
             <p
               className={classNames(
-                "m-0",
-                "text_size_large",
-                "text_type_regular",
-                "text",
-                styles["info-name-wrapper"]
+                'm-0',
+                'text_size_large',
+                'text_type_regular',
+                'text',
+                styles['info-name-wrapper']
               )}
             >
               {name}
@@ -50,19 +56,19 @@ export const MainPopup = ({
             <div className={classNames(styles.phoneWrapper)}>
               <span
                 className={classNames(
-                  "text_size_medium",
-                  "text_type_bold",
-                  "text"
+                  'text_size_medium',
+                  'text_type_bold',
+                  'text'
                 )}
               >
                 Тел.: &nbsp;
               </span>
               <p
                 className={classNames(
-                  "m-0",
-                  "text_size_medium",
-                  "text_type_regular",
-                  "text",
+                  'm-0',
+                  'text_size_medium',
+                  'text_type_regular',
+                  'text',
                   styles.phoneNumber
                 )}
               >
@@ -72,6 +78,13 @@ export const MainPopup = ({
           </div>
         </div>
       </>
+    )}
+    {isMobile && (
+      <SquareButton
+        buttonType="close"
+        extClassName={styles.exitButton}
+        onClick={handleCloseClick}
+      />
     )}
     {children}
   </div>

@@ -1,0 +1,75 @@
+.tooltip {
+  padding: 22px 30px 34px 30px;
+  max-width: 370px;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.filterBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filterBlockTitle {
+  border-bottom: 1px solid var(--colors-interface-ford-white);
+  padding-bottom: 8px;
+  color: var(--colors-interface-black);
+}
+
+.filterBlockText {
+  margin: 5px 0;
+}
+
+.filterBlockTime {
+  display: flex;
+  width: 230px;
+  align-items: center;
+}
+
+.checkboxesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 38px;
+}
+
+.buttonWrapper__mobile {
+  gap: 11px;
+}
+
+.radiusButtonsWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.radiusButton {
+  width: 65px;
+  height: 24px;
+}
+
+.calendar {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .tooltip {
+    max-width: 343px;
+  }
+}

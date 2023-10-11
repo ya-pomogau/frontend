@@ -8,7 +8,7 @@
 }
 
 .categories-background::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -34,12 +34,12 @@
 }
 
 .categories-background--medium {
-  padding-left: 15px;
+  padding-left: 10px;
   max-width: 169px;
 }
 .categories-background--large {
-  padding-left: 30px;
-  max-width: 215px;
+  padding-left: 10px;
+  min-width: 215px;
 }
 
 .categories-background-content {

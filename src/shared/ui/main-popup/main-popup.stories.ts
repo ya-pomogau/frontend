@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { MainPopup } from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { MainPopup } from '.';
 
 const meta: Meta<typeof MainPopup> = {
-  title: "uikit/MainPopup",
+  title: 'uikit/MainPopup',
   component: MainPopup,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
     name: {
-      description: "Имя пользователя",
+      description: 'Имя пользователя',
     },
     phoneNumber: {
-      description: "Номер телефона",
+      description: 'Номер телефона',
     },
     extClassName: {
-      description: "Класс для дополнительной стилизации",
+      description: 'Класс для дополнительной стилизации',
     },
   },
 };
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    name: "Иванов Иван Иванович",
-    phoneNumber: "+7(000) 000-00-00",
+    name: 'Иванов Иван Иванович',
+    phoneNumber: '+7(000) 000-00-00',
   },
 };

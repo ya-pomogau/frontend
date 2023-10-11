@@ -1,31 +1,98 @@
-import { ReactNode } from "react";
-import classnames from "classnames";
-import styles from "./styles.module.css";
+import {
+  ReactNode,
+  useEffect,
+  useRef,
+  CSSProperties,
+  useCallback,
+} from 'react';
+import { createPortal } from 'react-dom';
+import classnames from 'classnames';
+
+import styles from './styles.module.css';
 
 interface TooltipProps {
   extClassName?: string;
   visible?: boolean;
   children: ReactNode;
-  pointerPosition?: "right" | "center";
+  pointerPosition?: 'right' | 'center';
+  changeVisible?: () => void;
+  elementStyles?: CSSProperties;
 }
 
 export const Tooltip = ({
   extClassName,
   visible,
   children,
-  pointerPosition = "right",
-}: TooltipProps) => (
-  <div
-    className={classnames(styles.tooltip, extClassName, {
-      [styles["tooltip--visible"]]: visible,
-    })}
-  >
+  pointerPosition = 'right',
+  changeVisible,
+  elementStyles,
+}: TooltipProps) => {
+  const modalRoot = document.getElementById('modal') as HTMLElement;
+
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const closeWithEsc = useCallback(
+    (e: KeyboardEvent) => {
+      if (
+        e.key === 'Escape' &&
+        !(e.target as HTMLElement).closest('.tooltip') &&
+        !(e.target as HTMLElement).closest('#clock-element') &&
+        changeVisible
+      ) {
+        changeVisible();
+      }
+    },
+    [changeVisible]
+  );
+
+  const closeWithClickOutTooltip = useCallback(
+    (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        changeVisible &&
+        !target.closest('.tooltip') &&
+        !target.closest('#clock-element') &&
+        target.getRootNode() === document
+      ) {
+        changeVisible();
+      }
+    },
+    [changeVisible]
+  );
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.addEventListener('keydown', closeWithEsc);
+      document.addEventListener('click', closeWithClickOutTooltip);
+    });
+
+    return () => {
+      document.removeEventListener('keydown', closeWithEsc);
+      document.removeEventListener('click', closeWithClickOutTooltip);
+    };
+  }, []);
+
+  const tooltip = (
     <div
       className={classnames(
-        styles.pointer,
-        styles[`pointer--${pointerPosition}`]
+        styles.tooltip,
+        extClassName,
+        {
+          [styles['tooltip--visible']]: visible,
+        },
+        'tooltip'
       )}
-    />
-    {children}
-  </div>
-);
+      ref={tooltipRef}
+      style={elementStyles}
+    >
+      <div
+        className={classnames(
+          styles.pointer,
+          styles[`pointer--${pointerPosition}`]
+        )}
+      />
+      {children}
+    </div>
+  );
+
+  return createPortal(tooltip, modalRoot);
+};

@@ -1,20 +1,20 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ContentLayout } from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import { ContentLayout } from '.';
 
 const meta: Meta<typeof ContentLayout> = {
-  title: "uikit/ContentLayout",
+  title: 'uikit/ContentLayout',
   component: ContentLayout,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 
   argTypes: {
     heading: {
-      description: "Наполнение страницы, должно быть 2 компонента ",
+      description: 'Наполнение страницы, должно быть 2 компонента ',
     },
     children: {
-      description: "Наполнение страницы, должно быть 2 компонента ",
+      description: 'Наполнение страницы, должно быть 2 компонента ',
     },
     extClassName: {
-      description: "Классы для дополнительной стилизации",
+      description: 'Классы для дополнительной стилизации',
     },
   },
 };

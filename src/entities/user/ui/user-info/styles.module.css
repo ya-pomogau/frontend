@@ -1,0 +1,44 @@
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 147px;
+  box-sizing: border-box;
+  padding: 0 20px 0 30px;
+  margin-top: 3px;
+  color: var(--colors-interface-primary);
+}
+
+.buttonsWrapper {
+  margin: 30px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.volunteerInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: auto 0 0 53px;
+}
+
+.recipientInfo {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.dataWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nested-buttons {
+  width: 196px;
+}
+
+.registration-button {
+  color: var(--colors-interface-background);
+}

@@ -1,0 +1,108 @@
+.timePickerPopup {
+  width: 300px;
+  height: 330px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 32px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: auto;
+}
+
+.timePickerPopup__container {
+  display: flex;
+  align-items: center;
+  height: 160px;
+  gap: 50px;
+  margin: 20px auto;
+}
+
+.timePickerPopup__wheel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  align-items: center;
+  height: 160px;
+  padding: 0;
+  overflow: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.timePickerPopup__item {
+  display: block;
+  font-family: 'Golos', sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  color: #818c99;
+  scroll-snap-align: center;
+}
+
+.timePickerPopup__item:hover {
+  cursor: pointer;
+}
+
+.timePickerSecond {
+  width: 96px;
+  height: 34px;
+  border: 1px solid #818c99;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  margin: 0 10px;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.timePickerSecond input {
+  width: 50px;
+  height: 18px;
+  border: none;
+  padding: 0;
+}
+
+.timePickerPopup__header {
+  font-family: 'Golos', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  margin: 30px auto 0 auto;
+}
+
+.timePickerPopup__line {
+  height: 1px;
+  width: 240px;
+  border: none;
+  background: linear-gradient(to right, #ffffff, #2e3192, #ffffff) 50% 0%;
+}
+
+.timePicker input {
+  font-family: 'Golos', sans-serif;
+  font-size: 14px;
+  line-height: 14px;
+  border: none;
+  padding: 0;
+}
+
+.timePicker span {
+  font-family: 'Golos', sans-serif;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}

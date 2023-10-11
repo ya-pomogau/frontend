@@ -1,5 +1,5 @@
 .main {
-  height: 884px;
+  height: calc(100% - 141px);
   padding: 0 92px;
   margin-top: 30px;
   position: relative;
@@ -38,6 +38,13 @@
 @media screen and (max-width: 900px) {
   .main {
     height: calc(100vh - 53px - 22px - 30px);
+  }
+}
+
+@media all and (max-width: 415px) {
+  .main {
+    margin-top: 20px;
+    padding: 0 14px;
   }
 }
 
