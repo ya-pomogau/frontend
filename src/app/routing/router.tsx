@@ -53,7 +53,6 @@ export const router = createBrowserRouter(
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
           <Route path="/register" element={<RegisterPage />} />
-
           <Route path="/login" element={<LoginPage />} />
         </Route>
 
