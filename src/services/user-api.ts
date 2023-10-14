@@ -1,15 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_URL } from '../config/api-config';
+import { API_URL, host } from '../config/api-config';
 
 //нам не нужны отдельные функции fetch для использования RTK Query.
 //Данный код генерирует нам хуки для получения данных. Напрмиер, хук useGetUsersQuery принимает userRole
 //и возвращает массив юзеров с выбранной ролью, а хук useUpdateUsersMutation,
 //который принимает body, обновляет массив юзеров.
 
-export const usersApi: any = createApi({
+export const usersApi = createApi({
   reducerPath: 'usersApi',
   tagTypes: ['Users', 'User'],
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({
+    // baseUrl: API_URL,
+    baseUrl: 'https://api.kraev.nomoredomains.xyz',
+    prepareHeaders: (headers) => {
+      const token = sessionStorage.getItem('token');
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (build) => ({
     getAllUsers: build.query({
       query: () => 'users',
@@ -59,6 +69,24 @@ export const usersApi: any = createApi({
         { type: 'User', id: 'LIST' },
       ],
     }),
+    // Данные опользователе полученные от БД
+    getProfile: build.query({
+      query: () => ({
+        url: `/me`,
+        method: 'GET',
+      }),
+    }),
+    // Авторизация существуюшего в базе реципиента/волонтера через ВК.
+    signinVk: build.mutation({
+      query: (code) => ({
+        url: `/signin-vk`,
+        method: 'POST',
+        body: JSON.stringify({ code }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
@@ -68,4 +96,6 @@ export const {
   useGetUsersQuery,
   useUpdateUsersMutation,
   useGetUncomfirmedQuery,
+  useGetProfileQuery,
+  useSigninVkMutation,
 } = usersApi;

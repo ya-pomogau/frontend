@@ -1,5 +1,5 @@
-import { FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { FormEvent, useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -12,6 +12,10 @@ import styles from './styles.module.css';
 import { useLoginMutation } from 'services/auth-admin-api';
 import { setUser } from 'entities/user/model';
 import { useDispatch } from 'react-redux';
+import { useSigninVkMutation } from 'services/user-api';
+import queryString from 'query-string';
+import { isEmptyObj } from 'shared/libs/utils';
+import { host } from 'config/api-config';
 
 interface ILoginForm {
   login: string;
@@ -23,12 +27,14 @@ export function LoginPage() {
   const navigate = useNavigate();
   const [checkAdminState, setAdminCheckState] = useState(false);
   const [inputError, setInputError] = useState(false);
+  const location = useLocation();
 
   const [inputFields, setInputFields] = useState<ILoginForm>({
     login: '',
     password: '',
   });
   const [login, { isLoading }] = useLoginMutation();
+  const [signinVk] = useSigninVkMutation();
 
   const handleAdminLogin = async () => {
     try {
@@ -61,6 +67,31 @@ export function LoginPage() {
     console.log('отправка');
   };
 
+  const [isError, setIsError] = useState(false);
+
+  const cbLink = `${host}/login`;
+
+  const handleRedirect = () => {
+    window.location.href = `https://oauth.vk.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&display=popup&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
+  };
+
+  useEffect(() => {
+    const handleLogin = (code: string | (string | null)[]) => {
+      signinVk(code)
+        .then((user) => {
+          dispatch(setUser(user));
+          navigate('/');
+        })
+        .catch(() => setIsError(true));
+    };
+
+    const queryObj = queryString.parse(location.search);
+
+    if (isError) window.location.href = cbLink;
+
+    if (!isEmptyObj(queryObj) && queryObj.code) handleLogin(queryObj.code);
+  }, [location.search, isError, cbLink, navigate]);
+
   return (
     <>
       <SmartHeader
@@ -76,6 +107,7 @@ export function LoginPage() {
           customIcon={<VkIcon color="white" size="24" />}
           label="Войти через ВКонтакте"
           size="extraLarge"
+          onClick={handleRedirect}
         />
         <Checkbox
           label="Войти как администратор"
