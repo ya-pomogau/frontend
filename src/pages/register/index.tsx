@@ -23,6 +23,7 @@ export function RegisterPage() {
   const redirectToRegisterForm = (role: UserRole) => {
     navigate(`/register-form/${role}`);
   };
+
   return (
     <>
       <SmartHeader
