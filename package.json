@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm start\" \"npm run storybook\"",
+    "dev": "concurrently \"npm run server\" \"npm start\" \"npm run storybook\" \"env-cmd -f .env react-scripts start\"",
     "start": "react-scripts start",
     "storybook": "storybook dev -p 6006",
     "prettier": "prettier --check src/**/*.{ts,tsx,css}",
