@@ -53,7 +53,6 @@ export function LoginPage() {
     }
     console.log('отправка');
   };
-
   return (
     <>
       <SmartHeader
