@@ -31,6 +31,7 @@ export function LoginPage() {
     password: '',
   });
   const [login, { isLoading }] = useLoginMutation();
+  const [signinVk] = useSigninVkMutation();
 
   const handleAdminLogin = async () => {
     try {
@@ -45,10 +46,6 @@ export function LoginPage() {
         description: 'Ошибка при попытке авторизации админом',
       });
     }
-  };
-
-  const handleAdminCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAdminCheckState(!checkAdminState);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

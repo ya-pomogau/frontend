@@ -1,4 +1,4 @@
-import { host } from 'config/api-config';
+
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 
 export const isTaskUrgent = (date: string): boolean =>
@@ -25,7 +25,7 @@ export const isEmptyObj = (obj: object): boolean => {
 };
 
 //callback link для возращения после авторизации
-export const cbLink = `${host}/vk-auth`;
+export const cbLink = `${process.env.REACT_APP_HOST_LOCAL}/vk-auth`;
 //функция редиректа на VK
 export const handleRedirectVK = () => {
   window.location.href = `https://oauth.vk.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&display=page&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
