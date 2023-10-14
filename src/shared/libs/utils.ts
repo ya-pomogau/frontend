@@ -1,3 +1,4 @@
+import { host } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 
 export const isTaskUrgent = (date: string): boolean =>
@@ -15,7 +16,6 @@ export const getFullQueriesForYApi = (
   }
   return mainJSApi + additionalQueries;
 };
-
 export const isEmptyObj = (obj: object): boolean => {
   for (const key in obj) {
     return false;
