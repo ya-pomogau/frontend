@@ -1,5 +1,5 @@
-import { FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { FormEvent, useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -19,6 +19,7 @@ export function LoginPage() {
   const navigate = useNavigate();
   const [checkAdminState, setAdminCheckState] = useState(false);
   const [inputError, setInputError] = useState(false);
+  const location = useLocation();
 
   const [inputFields, setInputFields] = useState<ILoginForm>({
     login: '',
