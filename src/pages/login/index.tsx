@@ -1,5 +1,5 @@
-import { FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { FormEvent, useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 import { useLoginMutation } from 'services/auth-admin-api';
 import { setUser } from 'entities/user/model';
 import { useDispatch } from 'react-redux';
+import { handleRedirectVK } from 'shared/libs/utils';
 
 interface ILoginForm {
   login: string;
@@ -23,6 +24,7 @@ export function LoginPage() {
   const navigate = useNavigate();
   const [checkAdminState, setAdminCheckState] = useState(false);
   const [inputError, setInputError] = useState(false);
+  const location = useLocation();
 
   const [inputFields, setInputFields] = useState<ILoginForm>({
     login: '',
@@ -76,6 +78,7 @@ export function LoginPage() {
           customIcon={<VkIcon color="white" size="24" />}
           label="Войти через ВКонтакте"
           size="extraLarge"
+          onClick={handleRedirectVK}
         />
         <Checkbox
           label="Войти как администратор"

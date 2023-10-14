@@ -34,6 +34,7 @@ import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
 import { RegisterFormPage } from 'pages/register-forn';
+import { VKAuthPage } from 'pages/vk-auth';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,6 +59,7 @@ export const router = createBrowserRouter(
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/register-form/:role" element={<RegisterFormPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/vk-auth" element={<VKAuthPage />} />
         </Route>
 
         <Route

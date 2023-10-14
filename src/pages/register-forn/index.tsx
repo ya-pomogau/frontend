@@ -9,6 +9,7 @@ import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './styles.module.css';
 import { useParams } from 'react-router-dom';
+import { handleRedirectVK } from 'shared/libs/utils';
 
 export function RegisterFormPage() {
   const [name, setName] = useState('');
@@ -92,6 +93,7 @@ export function RegisterFormPage() {
           customIcon={<VkIcon color="white" size="24" />}
           label="Зарегистрироваться через ВКонтакте"
           size="extraLarge"
+          onClick={() => handleRedirectVK()}
         />
       </form>
     </>
