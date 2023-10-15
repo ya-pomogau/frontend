@@ -1,0 +1,49 @@
+.adminButton {
+  display: flex;
+  color: var(--colors-interface-primary);
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  text-align: right;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.icon {
+  min-width: 32px;
+  height: 32px;
+  background-color: var(--colors-interface-primary);
+  margin-left: 5px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.title__background {
+  position: absolute;
+  right: -5px;
+  top: 19px;
+}
+
+
+@media (max-width: 900px) {
+  .title {
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+    color: #fbfdff;
+    z-index: 2;
+  }
+}
