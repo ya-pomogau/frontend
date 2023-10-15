@@ -21,7 +21,11 @@ export const AdminButton = forwardRef<HTMLButtonElement, AdminButtonProps>(
       >
         <p className={styles.title}>{children}</p>
         <div className={styles.icon}>
-          <Icon color="white" icon="EmptyMessageIcon" size="24" />
+          <Icon
+            color="white"
+            icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
+            size="24"
+          />
         </div>
         {isMobile && (
           <svg
