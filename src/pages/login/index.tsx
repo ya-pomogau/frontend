@@ -72,19 +72,21 @@ export function LoginPage() {
   const cbLink = `${host}/login`;
 
   const handleRedirect = () => {
-    window.location.href = `https://oauth.vk.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&display=popup&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
+    window.location.replace(
+      `https://oauth.vk.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&display=popup&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`
+    );
+  };
+
+  const handleLogin = (code: string | (string | null)[]) => {
+    signinVk(code)
+      .then((user) => {
+        dispatch(setUser(user));
+        navigate('/');
+      })
+      .catch(() => setIsError(true));
   };
 
   useEffect(() => {
-    const handleLogin = (code: string | (string | null)[]) => {
-      signinVk(code)
-        .then((user) => {
-          dispatch(setUser(user));
-          navigate('/');
-        })
-        .catch(() => setIsError(true));
-    };
-
     const queryObj = queryString.parse(location.search);
 
     if (isError) window.location.href = cbLink;
