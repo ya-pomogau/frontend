@@ -1,0 +1,21 @@
+.markdownStyles {
+    font-family: Golds;
+    font-weight:400;
+  }
+  
+  .markdownStyles h1 {
+    padding-top: 13px;
+    line-height: 28.8px;
+    font-size: 24px;
+    font-weight:400;
+  }
+
+  .markdownStyles h2 {
+    margin-top: 30px;
+    line-height: 19.2px;
+    font-size: 16px;
+  }
+  .markdownStyles p {
+    margin-top: 30px;
+    line-height:22.4px;
+  }

@@ -1,5 +1,7 @@
-/* eslint-disable */
 import {PolicyPage} from './index';
+import './markdown-style.module.css'
+import { markdown } from './content';
+import ReactMarkdown from 'react-markdown';
 
  export default {
     title: 'pages/PolicyPage',
@@ -7,4 +9,8 @@ import {PolicyPage} from './index';
 
  };
 
- export const Default = () => <PolicyPage/>;
+ const Template = () => <ReactMarkdown children={markdown}/>
+
+ export const Default = Template.bind({})
+
+
