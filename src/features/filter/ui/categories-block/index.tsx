@@ -2,7 +2,7 @@ import { useRef, ChangeEvent } from 'react';
 import classnames from 'classnames';
 
 import Checkbox from 'shared/ui/checkbox';
-import { FilterItemsIds } from '../consts';
+import { FilterItemsIds } from '../../consts';
 
 import styles from '../styles.module.css';
 import usePermission from 'shared/hooks/use-permission';
@@ -23,7 +23,7 @@ export const CategoriesBlock = ({
     [CONFIRMED, ACTIVATED, VERIFIED],
     'volunteer'
   );
-  console.log(volunteerMainGuard);
+
   const volunteerSpecialGuard = usePermission(
     [ACTIVATED, VERIFIED],
     'volunteer'

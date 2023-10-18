@@ -1,0 +1,30 @@
+.tooltip {
+  padding: 22px 30px 34px 30px;
+  max-width: 370px;
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 38px;
+}
+
+.buttonWrapper__mobile {
+  gap: 11px;
+}
+
+@media screen and (max-width: 768px) {
+  .tooltip {
+    max-width: 343px;
+  }
+}

@@ -32,7 +32,12 @@ export const Tooltip = ({
   const tooltipRef = useRef<HTMLDivElement>(null);
   const closeWithEsc = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && changeVisible) {
+      if (
+        e.key === 'Escape' &&
+        !(e.target as HTMLElement).closest('.tooltip') &&
+        !(e.target as HTMLElement).closest('#clock-element') &&
+        changeVisible
+      ) {
         changeVisible();
       }
     },
@@ -45,6 +50,7 @@ export const Tooltip = ({
       if (
         changeVisible &&
         !target.closest('.tooltip') &&
+        !target.closest('#clock-element') &&
         target.getRootNode() === document
       ) {
         changeVisible();
@@ -54,13 +60,16 @@ export const Tooltip = ({
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', closeWithEsc);
-    document.addEventListener('click', closeWithClickOutTooltip);
+    setTimeout(() => {
+      document.addEventListener('keydown', closeWithEsc);
+      document.addEventListener('click', closeWithClickOutTooltip);
+    });
+
     return () => {
       document.removeEventListener('keydown', closeWithEsc);
       document.removeEventListener('click', closeWithClickOutTooltip);
     };
-  }, [closeWithClickOutTooltip, closeWithEsc]);
+  }, []);
 
   const tooltip = (
     <div

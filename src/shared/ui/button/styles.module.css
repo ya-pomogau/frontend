@@ -51,6 +51,7 @@
   color: var(--colors-interface-white);
   background-color: var(--colors-interface-blue-strong);
 }
+
 .button--secondary:disabled,
 .button--primary:disabled,
 .button--partial {
@@ -76,7 +77,7 @@
 }
 
 .button--small {
-  padding: 8px 17px;
+  padding: 8px 16px;
 }
 
 .button--medium {
@@ -94,7 +95,7 @@
 
 .buttonContent {
   display: flex;
-  gap: 5px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -125,7 +126,7 @@
 }
 
 .button--secondary--medium {
-  padding: 7px 17px;
+  padding: 7px 16px;
 }
 
 .button--secondary--large {

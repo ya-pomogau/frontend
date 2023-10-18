@@ -1,24 +1,24 @@
-.button_container {
-  height: auto;
-  margin-top: 90px;
-}
-
 .header {
   height: 90px;
 }
 
 .container {
+  display: flex;
+  justify-content: space-between;
   margin: 10px 0 30px 30px;
   padding-bottom: 20px;
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .title {
   color: var(--colors-interface-primary-additional);
   margin: 0;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .link {
@@ -34,11 +34,6 @@
   align-items: end;
 }
 
-.input {
-  margin-bottom: 20px;
-  width: 100%;
-}
-
 .text_area {
   margin-bottom: 20px;
   height: 122px;
@@ -47,4 +42,34 @@
 
 .button {
   width: 94px;
+}
+
+.element_box {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  color: var(--colors-interface-primary);
+  font-size: 24px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.input:hover {
+  cursor: pointer;
+}
+.edit_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit_box:hover {
+  cursor: pointer;
+}
+
+.edit_text {
+  color: var(--colors-interface-primary);
 }

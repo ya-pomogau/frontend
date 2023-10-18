@@ -9,6 +9,10 @@
   display: none;
 }
 
+.content {
+  overflow-y: hidden;
+}
+
 @media all and (min-width: 920px) {
   .main {
     grid-template-columns: 295px 1fr;

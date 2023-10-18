@@ -29,18 +29,19 @@ import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
+import { Logout } from 'pages/logout';
 import { ChatsPage } from '../../pages/chats/chats';
 import { ChatsWaitingPage } from '../../pages/chats-waiting';
 import { ChatsInWorkPage } from '../../pages/chats-in-work';
 import { ConflictsPage } from '../../pages/chats-conflicts';
 import { BidsPage } from 'pages/bids';
-import { Logout } from 'pages/logout';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Layout />}>
         <Route element={<RoutesGroup publicRoutes />}>
+          <Route path="/profile" element={<ProfilePage />} />
           <Route index element={<UnauthPage />} />
 
           <Route path="/blog" element={<BlogPage />} />
