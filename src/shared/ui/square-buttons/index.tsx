@@ -11,7 +11,7 @@ import { ConflictIcon } from '../icons/conflict-icon';
 
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
-  buttonType: 'close' | 'edit' | 'confirm | exclamation | conflict';
+  buttonType: 'close' | 'edit' | 'confirm' | 'exclamation' | 'conflict';
   onClick?: () => void;
   customIcon?: ReactNode;
 }

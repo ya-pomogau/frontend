@@ -31,47 +31,45 @@ export function ChatsInWorkPage() {
 
   return (
     <PageLayout
-      side={
-        <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
-          <SideMenu
-            authRequired={false}
-            extClassName={styles.button_container}
-            links={
-              <>
-                <SideMenuLink
-                  to="/"
-                  icon={<Icon color="white" icon="BlockIcon" size="54" />}
-                  text="Подтверждение/Блокировка"
-                />
-                <SideMenuLink
-                  to="/"
-                  icon={<Icon color="white" icon="StatisticIcon" size="54" />}
-                  text="Статистика"
-                />
-                <SideMenuLink
-                  to="/"
-                  icon={
-                    <Icon color="white" icon="CreateApplication" size="54" />
-                  }
-                  text="Заявки/Работа с заявками"
-                />
-              </>
-            }
-          />
-        </>
-      }
+      // side={
+      //   <>
+      //     <div className={styles.user}>
+      //       <UserInfo />
+      //     </div>
+      //     <SideMenu
+      //       authRequired={false}
+      //       extClassName={styles.button_container}
+      //       links={
+      //         <>
+      //           <SideMenuLink
+      //             to="/"
+      //             icon={<Icon color="white" icon="BlockIcon" size="54" />}
+      //             text="Подтверждение/Блокировка"
+      //           />
+      //           <SideMenuLink
+      //             to="/"
+      //             icon={<Icon color="white" icon="StatisticIcon" size="54" />}
+      //             text="Статистика"
+      //           />
+      //           <SideMenuLink
+      //             to="/"
+      //             icon={
+      //               <Icon color="white" icon="CreateApplication" size="54" />
+      //             }
+      //             text="Заявки/Работа с заявками"
+      //           />
+      //         </>
+      //       }
+      //     />
+      //   </>
+      // }
       content={
         <ContentLayout
           extClassName={styles.content}
           heading={
             <SmartHeader
-              settingIcon={
-                <Icon color="blue" icon="ReadMessageIcon" size="54" />
-              }
-              settingText="Чат"
+              icon={<Icon color="blue" icon="ReadMessageIcon" size="54" />}
+              text="Чат"
             />
           }
         >
