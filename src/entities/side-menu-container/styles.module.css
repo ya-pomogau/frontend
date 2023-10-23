@@ -30,6 +30,7 @@
 .button__container--mob {
   max-width: 354px;
   flex-direction: row;
+  justify-content: center;
 }
 
 @media (min-width: 920px) {
