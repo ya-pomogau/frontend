@@ -40,6 +40,7 @@ const VolunteerActions = ({
           extClassName={styles.customVolunteerInfo}
           score={scores}
           hasKey={isKeysNullOrOne}
+          finishScore={1}
         />
       </div>
       <div className={classnames(styles.exclamation_point_div)}>

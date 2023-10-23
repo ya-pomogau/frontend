@@ -32,6 +32,7 @@
     padding: 0 30px;
   }
 }
+
 .card-button:disabled {
   cursor: default;
 }
@@ -52,8 +53,33 @@
 .card-buttonLabel {
   display: flex;
   align-items: center;
-  text-align: start;
 }
+
+@media (max-width: 919px) {
+  .card-buttonContent {
+    flex-direction: column;
+  }
+
+  .card-button {
+    max-width: 110px;
+  }
+
+  .card-buttonImg {
+    max-width: 43px;
+  }
+
+  .card-buttonLabel {
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: center;
+    height: 35px;
+  }
+}
+
+
 
 .card-button:active {
   background-color: var(--colors-interface-blue-strong);

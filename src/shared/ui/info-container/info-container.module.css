@@ -37,3 +37,15 @@
   bottom: 10px;
   right: 10px;
 }
+
+@media screen and (max-width: 920px) {
+  .info-container-frame {
+   max-width: 354px;
+   width: 100%;
+  }
+  .info-container-border{
+    width: 354px;
+    height: 274px;
+    
+  }
+}

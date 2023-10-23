@@ -1,13 +1,14 @@
 import { ReactNode } from 'react';
 import classnames from 'classnames';
 
-import { Icon } from 'shared/ui/icons';
+import { Icon, IconProps } from 'shared/ui/icons';
 
 import styles from './styles.module.css';
 
 export interface SideMenuContainerProps {
   border?: 'sea' | 'main' | 'mobile';
   size?: 'web' | 'mob';
+  sizeIcon?: '88' | '196';
   children?: ReactNode;
   overlayVisible?: boolean;
   extClassName?: string;
@@ -16,6 +17,7 @@ export interface SideMenuContainerProps {
 export const SideMenuContainer = ({
   border = 'sea',
   size = 'web',
+  sizeIcon = '196',
   children,
   overlayVisible,
   extClassName,
@@ -33,7 +35,7 @@ export const SideMenuContainer = ({
 
     {overlayVisible && (
       <div className={styles.overlay}>
-        <Icon color="white" icon="LockIcon" size="196" />
+        <Icon color="white" icon="LockIcon" size={sizeIcon} />
       </div>
     )}
   </div>

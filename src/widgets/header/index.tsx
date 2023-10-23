@@ -19,14 +19,12 @@ const Header = () => {
 
   const isMobile = useMediaQuery('(max-width: 900px)');
   const user = useAppSelector((state) => state.user.data);
-
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
     setMenuActive(!menuActive);
   };
 
   const isMenuHidden = !user && !isMobile;
-
   return (
     <header className={`${styles.header} ${isMobile && styles.header_mobile}`}>
       <div className={styles.header__container}>
