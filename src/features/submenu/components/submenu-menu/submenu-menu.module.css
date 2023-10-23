@@ -1,0 +1,6 @@
+.tooltip {
+  box-sizing: border-box;
+  position: absolute;
+  max-width: 400px;
+  width: auto;
+}
