@@ -18,12 +18,6 @@
   cursor: pointer;
   color: var(--colors-interface-primary);
 }
-.buttonContainer {
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-  padding-top: 15px;
-}
 .wrapper {
   min-width: 364px;
   display: grid;

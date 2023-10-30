@@ -55,7 +55,7 @@ export const router = createBrowserRouter(
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/register-form/:role" element={<RegisterFormPage />} />
+          <Route path="/register-form" element={<RegisterFormPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/vk-auth" element={<VKAuthPage />} />
         </Route>

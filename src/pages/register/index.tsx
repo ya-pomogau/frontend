@@ -7,11 +7,10 @@ import { Button } from 'shared/ui/button';
 import { VkIcon } from 'shared/ui/icons/vk-icon';
 
 import styles from './styles.module.css';
-import { UserRole } from 'entities/user/types';
+import { handleRedirectVK } from 'shared/libs/utils';
 
 export function RegisterPage() {
   const navigate = useNavigate();
-
   const [showLoginButton, setShowLoginButton] = useState(false);
 
   const redirectToLogin = () => {
@@ -19,9 +18,6 @@ export function RegisterPage() {
   };
   const visibleLoginButton = () => {
     setShowLoginButton(true);
-  };
-  const redirectToRegisterForm = (role: UserRole) => {
-    navigate(`/register-form/${role}`);
   };
 
   return (
@@ -34,26 +30,14 @@ export function RegisterPage() {
       <p className={styles.titleAdditional}>Зарегистрироваться</p>
 
       <div className={styles.wrapper}>
-        <div className={styles.buttonContainer}>
-          <Button
-            buttonType="primary"
-            actionType="button"
-            label="Хочу помочь"
-            size="extraLarge"
-            onClick={() => {
-              redirectToRegisterForm('volunteer');
-            }}
-          />
-          <Button
-            buttonType="secondary"
-            actionType="button"
-            label="Нужна помощь"
-            size="extraLarge"
-            onClick={() => {
-              redirectToRegisterForm('recipient');
-            }}
-          />
-        </div>
+        <Button
+          buttonType="primary"
+          actionType="submit"
+          customIcon={<VkIcon color="white" size="24" />}
+          label="Зарегистрироваться через ВКонтакте"
+          size="extraLarge"
+          onClick={() => handleRedirectVK()}
+        />
         <a className={styles.link} onClick={visibleLoginButton}>
           Уже есть аккаунт
         </a>
