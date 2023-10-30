@@ -7,8 +7,7 @@ export const VKAuthPage = () => {
   const location = useLocation();
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log('isLoading');
-  console.log(isLoading);
+
   useEffect(() => {
     //функция отправки кода на бэк и получения данных в ответ
     const loginVk = async (code: string | (string | null)[]) => {
@@ -39,7 +38,11 @@ export const VKAuthPage = () => {
                     "source": 8,
                     "source_description": "Auth by exchange token on change password"
                 }*/
-          //TODO: что делать дальше???
+          //TODO: ХЗ какие данные придут с сервера, поэтому не могу продумать полноценно логики. Накинула примерный план
+          // если есть user в базе c vk_id === user_id, то этот пользователь уже есть
+          // --- заправшиваем данные пользователя из базы, устанавливаем в хранилище, устанавливаем токен, перенаправляем на главную
+          // иначе
+          // --- берем данные, которые вернул ВК, перенаправляем на форму регистрации для подтверждения или корректировки данных пользователя,
         } else {
           // Если ответ от сервера не успешный
           setIsError(true); // Обрабатываем ошибку
