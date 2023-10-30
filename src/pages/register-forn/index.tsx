@@ -4,17 +4,16 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
-import { VkIcon } from 'shared/ui/icons/vk-icon';
 import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './styles.module.css';
-import { useParams } from 'react-router-dom';
-import { handleRedirectVK } from 'shared/libs/utils';
+import { FilterItemsIds } from 'features/filter/consts';
+import { useNavigate } from 'react-router-dom';
 
 export function RegisterFormPage() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-
+  const [role, setRole] = useState('volunteer');
   const [address, setAddress] = useState<{
     address: string;
     coords: [number, number] | [];
@@ -22,13 +21,20 @@ export function RegisterFormPage() {
     address: '',
     coords: [],
   });
-  const { role } = useParams();
-  console.log(role);
+  const navigate = useNavigate();
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    console.log('Региcтрация:', name, phone, address, role);
+    console.log('Региcтрация:', {
+      name: name,
+      phone: phone,
+      address: address,
+      role: role,
+    });
+    //TODO: установить в хранилище данные о пользователе, сохраняем в базе
+    //перенаправляем на главную
+    navigate('/');
   };
 
   const handleAddressValueChange = (
@@ -40,6 +46,12 @@ export function RegisterFormPage() {
       coords: coords || [],
     });
   };
+  const handleRoleButtonClick = (checkRole: string) => {
+    setRole(checkRole);
+  };
+  // определение внешнего вида кнопки выбора роли
+  const getRoleButtonType = (id: string) =>
+    role === id ? 'primary' : 'secondary';
 
   return (
     <>
@@ -49,7 +61,26 @@ export function RegisterFormPage() {
         extClassName={styles.header}
       />
       <p className={styles.titlePrimary}>Зарегистрироваться</p>
+
       <form className={styles.form} onSubmit={onSubmit}>
+        <div className={styles.buttonContainer}>
+          <Button
+            buttonType={getRoleButtonType(FilterItemsIds.VOLUNTEER)}
+            size="extraLarge"
+            label="Хочу помочь"
+            id={FilterItemsIds.VOLUNTEER}
+            onClick={() => handleRoleButtonClick(FilterItemsIds.VOLUNTEER)}
+            actionType="button"
+          />
+          <Button
+            buttonType={getRoleButtonType(FilterItemsIds.RECIPIENT)}
+            size="extraLarge"
+            label="Нужна помощь"
+            id={FilterItemsIds.RECIPIENT}
+            onClick={() => handleRoleButtonClick(FilterItemsIds.RECIPIENT)}
+            actionType="button"
+          />
+        </div>
         <Input
           extClassName={styles.field}
           required
@@ -90,10 +121,8 @@ export function RegisterFormPage() {
         <Button
           buttonType="primary"
           actionType="submit"
-          customIcon={<VkIcon color="white" size="24" />}
-          label="Зарегистрироваться через ВКонтакте"
+          label="Подтвердите корректность данных"
           size="extraLarge"
-          onClick={() => handleRedirectVK()}
         />
       </form>
     </>
