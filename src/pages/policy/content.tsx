@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const markdown =`
+export const markdown = `
 # Политика конфиденциальности
 
 ## 1. Общие положения
