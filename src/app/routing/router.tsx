@@ -31,6 +31,7 @@ import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
+import { RegisterFormPage } from 'pages/register-forn';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,7 +54,7 @@ export const router = createBrowserRouter(
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
           <Route path="/register" element={<RegisterPage />} />
-
+          <Route path="/register-form/:role" element={<RegisterFormPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Route>
 
