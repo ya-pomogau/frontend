@@ -145,7 +145,7 @@ export const Dialog = ({
       extClassName={classNames(
         styles.tooltip,
         `${isMobile ? styles.tooltipMobile : styles.tooltip}`,
-        `${(isChangePassword || isTaskClose) && styles.tooltipSmall} `
+        `${(isChangePassword || isTaskClose) && styles.tooltipSmall}`
       )}
       changeVisible={changeVisible}
       visible
@@ -299,8 +299,7 @@ export const Dialog = ({
             )}
           </>
         )}
-        {!isTaskResponse &&
-          !isDeletePublication &&
+        {!isDeletePublication &&
           !isTaskClosingBeforePublicationRecipient &&
           !isTaskClosingBeforePublicationMaster &&
           !isTaskResponseIcon &&
@@ -321,7 +320,7 @@ export const Dialog = ({
               )}
               {isTaskClosingBeforePublicationRecipient && (
                 <>
-                  <Button label="Закрыть" buttonType="primary" />
+                  <Button label="Хочу" buttonType="primary" />
                 </>
               )}
               {isTaskClosingBeforePublicationMaster && (
