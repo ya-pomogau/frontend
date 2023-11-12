@@ -1,24 +1,57 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
+import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
-import { VkIcon } from 'shared/ui/icons/vk-icon';
+import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './styles.module.css';
-import { handleRedirectVK } from 'shared/libs/utils';
+import { FilterItemsIds } from 'features/filter/consts';
+import { useNavigate } from 'react-router-dom';
 
 export function RegisterPage() {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [role, setRole] = useState('volunteer');
+  const [address, setAddress] = useState<{
+    address: string;
+    coords: [number, number] | [];
+  }>({
+    address: '',
+    coords: [],
+  });
   const navigate = useNavigate();
-  const [showLoginButton, setShowLoginButton] = useState(false);
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    console.log('Региcтрация:', {
+      name: name,
+      phone: phone,
+      address: address,
+      role: role,
+    });
+    //TODO: установить в хранилище данные о пользователе, сохраняем в базе
+    //перенаправляем на главную
+    navigate('/');
+  };
 
-  const redirectToLogin = () => {
-    navigate('/login');
+  const handleAddressValueChange = (
+    newAddress: string,
+    coords?: [number, number] | []
+  ) => {
+    setAddress({
+      address: newAddress,
+      coords: coords || [],
+    });
   };
-  const visibleLoginButton = () => {
-    setShowLoginButton(true);
+  const handleRoleButtonClick = (checkRole: string) => {
+    setRole(checkRole);
   };
+  // определение внешнего вида кнопки выбора роли
+  const getRoleButtonType = (id: string) =>
+    role === id ? 'primary' : 'secondary';
 
   return (
     <>
@@ -27,31 +60,71 @@ export function RegisterPage() {
         text="Регистрация"
         extClassName={styles.header}
       />
-      <p className={styles.titleAdditional}>Зарегистрироваться</p>
+      <p className={styles.titlePrimary}>Зарегистрироваться</p>
 
-      <div className={styles.wrapper}>
+      <form className={styles.form} onSubmit={onSubmit}>
+        <div className={styles.buttonContainer}>
+          <Button
+            buttonType={getRoleButtonType(FilterItemsIds.VOLUNTEER)}
+            size="extraLarge"
+            label="Хочу помочь"
+            id={FilterItemsIds.VOLUNTEER}
+            onClick={() => handleRoleButtonClick(FilterItemsIds.VOLUNTEER)}
+            actionType="button"
+          />
+          <Button
+            buttonType={getRoleButtonType(FilterItemsIds.RECIPIENT)}
+            size="extraLarge"
+            label="Нужна помощь"
+            id={FilterItemsIds.RECIPIENT}
+            onClick={() => handleRoleButtonClick(FilterItemsIds.RECIPIENT)}
+            actionType="button"
+          />
+        </div>
+        <Input
+          extClassName={styles.field}
+          required
+          label="ФИО"
+          name="name"
+          value={name}
+          onChange={(event) => setName(event.currentTarget.value)}
+          placeholder="ФИО"
+          type="text"
+        />
+
+        <Input
+          extClassName={styles.field}
+          required
+          label="Телефон"
+          name="phone"
+          value={phone}
+          onChange={(event) => setPhone(event.currentTarget.value)}
+          placeholder="+7 (000) 000 00 00"
+          type="tel"
+          pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"
+          title="+7 (123) 456 78 90"
+        />
+
+        <div>
+          <InputAddress
+            required
+            name="address"
+            address={address}
+            setAddress={handleAddressValueChange}
+          />
+
+          <p className={styles.text}>
+            Укажите адрес и мы подберем ближайшее к вам задание
+          </p>
+        </div>
+
         <Button
           buttonType="primary"
           actionType="submit"
-          customIcon={<VkIcon color="white" size="24" />}
-          label="Зарегистрироваться через ВКонтакте"
+          label="Подтвердите корректность данных"
           size="extraLarge"
-          onClick={() => handleRedirectVK()}
         />
-        <a className={styles.link} onClick={visibleLoginButton}>
-          Уже есть аккаунт
-        </a>
-        {showLoginButton && (
-          <Button
-            buttonType="primary"
-            actionType="submit"
-            customIcon={<VkIcon color="white" size="24" />}
-            label="Войти через ВКонтакте"
-            size="extraLarge"
-            onClick={() => redirectToLogin()}
-          />
-        )}
-      </div>
+      </form>
     </>
   );
 }
