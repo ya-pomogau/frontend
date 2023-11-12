@@ -18,6 +18,7 @@ export const UserInfo = () => {
   const role = useAppSelector((state) => state.user.role);
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
+  const isLoginPath = location.pathname.includes('/login');
   const isVKAuthPath = location.pathname.includes('/vk-auth');
   const userId = () => {
     if (role === 'volunteer') return 7;
@@ -111,7 +112,7 @@ export const UserInfo = () => {
     </InfoContainer>
   ) : (
     <InfoContainer name="Незарегистрированный пользователь">
-      {!isRegisterPath && !isVKAuthPath && <UnauthorizedUser />}
+      {!isRegisterPath && !isVKAuthPath && !isLoginPath && <UnauthorizedUser />}
     </InfoContainer>
   );
 };
