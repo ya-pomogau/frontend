@@ -1,4 +1,3 @@
-
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 
 export const isTaskUrgent = (date: string): boolean =>

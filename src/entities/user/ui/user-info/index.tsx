@@ -33,9 +33,12 @@ export const UserInfo = () => {
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
-  const [updateUserData, { isLoading }] = useUpdateUsersMutation();
+  // const [updateUserData, { isLoading }] = useUpdateUsersMutation();
   // const user = useUser();
-  const isAuth = user?.isActive;
+  // const isAuth = user?.isActive;
+  const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
+  //не показывается карточка пользователя, потому что запрос уходит на сервер предыдущей когорты (выдает ошибку что не может достучатся), где и были тестовые данные пользователей
+  const isAuth = useUser();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
