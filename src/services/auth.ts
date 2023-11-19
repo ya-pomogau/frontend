@@ -39,4 +39,8 @@ class Auth {
   }
 }
 
-export const authApi = new Auth(API_URL, AUTH_ROUTES, DEFAULT_HEADERS);
+export const authApi = new Auth(
+  'http://localhost:3001',
+  AUTH_ROUTES,
+  DEFAULT_HEADERS
+);
