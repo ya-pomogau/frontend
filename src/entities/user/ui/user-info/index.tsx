@@ -34,7 +34,6 @@ export const UserInfo = () => {
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
   const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
-
   const isAuth = useUser();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
