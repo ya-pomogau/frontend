@@ -1,3 +1,4 @@
+import { host } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 
 export const isTaskUrgent = (date: string): boolean =>
