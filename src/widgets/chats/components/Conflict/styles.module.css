@@ -1,0 +1,163 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 561px;
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.heading {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.conflict {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--colors-interface-white);
+  border: 1px solid var(--colors-interface-ford-white);
+  max-height: 391px;
+  padding: 17px 0 0 57px;
+}
+
+.users {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  gap: 60px;
+}
+
+.information {
+  margin-top: 47px;
+  max-width: 448px;
+}
+
+.date {
+  padding: 0;
+  display: flex;
+  gap: 34px;
+  flex-direction: row;
+  max-width: 206px;
+  margin: 0 0 17px 0;
+}
+
+.time {
+  margin: 0;
+  padding: 0;
+}
+
+.address {
+  margin: 0 0 20px 0;
+  padding: 0 0 0 22px;
+}
+
+.description {
+  margin: 13px 0 0 0;
+}
+
+.buttons {
+  margin: 13px 0 0 0;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-self: end;
+}
+
+.button {
+  width: 132px;
+  height: 30px;
+}
+
+@media (max-width: 735px) {
+  .popUp {
+    background-color: var(--colors-interface-background);
+    padding: 0;
+  }
+
+  .heading {
+    gap: 13px;
+    flex-direction: column;
+  }
+
+  .line {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 100%;
+    height: 1px;
+    margin-bottom: 10px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-left: 6px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 17px 30px;
+    margin: 0;
+    height: calc(100% - 50px);
+    align-self: start;
+  }
+
+  .conflict {
+    border: none;
+    padding-left: 7px;
+  }
+
+  .users {
+    align-self: center;
+    gap: 7px;
+  }
+
+  .information {
+    margin-top: 30px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .date {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    max-width: 100%;
+    color: var(--colors-interface-primary);
+    margin-bottom: 0;
+  }
+
+  .time {
+    display: flex;
+    margin-left: 40px;
+    gap: 5px
+  }
+
+  .address {
+    display: flex;
+    padding: 0;
+    gap: 5px;
+    color: var(--colors-interface-primary);
+    margin: 0;
+  }
+
+  .description {
+    margin: 0;
+  }
+
+  .buttons {
+    align-self: center;
+  }
+}

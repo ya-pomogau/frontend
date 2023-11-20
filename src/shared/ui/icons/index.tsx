@@ -39,6 +39,7 @@ import { PasswordOpenIcon } from './password-open-icon';
 import { PasswordCloseIcon } from './password-close-icon';
 import { CheckIcon } from './check-icon';
 import { ArrowDownIcon } from './arrow-down-icon';
+import { ExclamationIcon } from './exclamation-icon';
 
 import { ExclamationPointIcon } from './exclamation-point-icon';
 import { ExclamationPMark } from './excalamation-mark';
@@ -87,6 +88,7 @@ const icons = {
   PasswordCloseIcon,
   CheckIcon,
   ArrowDownIcon,
+  ExclamationIcon,
   ConflictIcon,
 };
 

@@ -1,0 +1,10 @@
+.user {
+  margin-bottom: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 28px;
+}
