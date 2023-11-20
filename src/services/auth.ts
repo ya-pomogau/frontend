@@ -40,7 +40,7 @@ class Auth {
 }
 
 export const authApi = new Auth(
-  'http://localhost:3001',
+  API_URL ?? 'http://localhost:3001',
   AUTH_ROUTES,
   DEFAULT_HEADERS
 );

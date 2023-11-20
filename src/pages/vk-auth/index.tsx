@@ -7,7 +7,7 @@ export const VKAuthPage = () => {
   const location = useLocation();
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log(location);
   useEffect(() => {
     //функция отправки кода на бэк и получения данных в ответ
     const loginVk = async (code: string | (string | null)[]) => {
