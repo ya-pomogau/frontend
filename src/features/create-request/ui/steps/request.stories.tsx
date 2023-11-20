@@ -6,7 +6,7 @@ import {
   createRequestModel,
 } from 'features/create-request/model';
 import { format } from 'date-fns';
-import { YMAPS_API_KEY } from 'config/ymaps';
+import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 
 import { YMaps } from '@pbe/react-yandex-maps';
 

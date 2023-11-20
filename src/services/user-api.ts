@@ -6,7 +6,7 @@ import { API_URL } from '../config/api-config';
 //и возвращает массив юзеров с выбранной ролью, а хук useUpdateUsersMutation,
 //который принимает body, обновляет массив юзеров.
 
-export const usersApi: any = createApi({
+export const usersApi = createApi({
   reducerPath: 'usersApi',
   tagTypes: ['Users', 'User'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),

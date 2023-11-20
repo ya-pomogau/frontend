@@ -7,12 +7,14 @@ import { tasksApi } from 'services/tasks-api';
 import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
+import systemSliceReducer from '../../services/system-slice';
 
 export const store = configureStore({
   reducer: {
     error: errorModel.reducer,
     user: userModel.reducer,
     createRequest: createRequestModel.reducer,
+    system: systemSliceReducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [tasksApi.reducerPath]: tasksApi.reducer,
     [authAdminApi.reducerPath]: authAdminApi.reducer,
