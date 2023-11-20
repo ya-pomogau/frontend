@@ -9,6 +9,7 @@ import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
 import { chatModel } from '../../widgets/chats/model/chat';
 import { conflictModel } from '../../widgets/chats/model/conflict';
+import systemSliceReducer from '../../services/system-slice';
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     chats: chatModel.reducer,
     conflicts: conflictModel.reducer,
     createRequest: createRequestModel.reducer,
+    system: systemSliceReducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [tasksApi.reducerPath]: tasksApi.reducer,
     [authAdminApi.reducerPath]: authAdminApi.reducer,
