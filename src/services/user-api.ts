@@ -9,8 +9,8 @@ export const usersApi = createApi({
   reducerPath: 'usersApi',
   tagTypes: ['Users', 'User'],
   baseQuery: fetchBaseQuery({
-    // baseUrl: API_URL,
-    baseUrl: 'https://api.kraev.nomoredomains.xyz',
+    baseUrl: 'http://localhost:3001',
+    // baseUrl: 'https://api.kraev.nomoredomains.xyz',
     prepareHeaders: (headers) => {
       const token = sessionStorage.getItem('token');
       if (token) {
