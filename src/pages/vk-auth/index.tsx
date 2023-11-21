@@ -8,6 +8,7 @@ export const VKAuthPage = () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    //TODO: сделать функцию отправки на сервер кода
     //функция отправки кода на бэк и получения данных в ответ
     const loginVk = async (code: string | (string | null)[]) => {
       setIsLoading(true);
