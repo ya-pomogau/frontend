@@ -20,12 +20,10 @@ export type ErrorDto = {
   [key: string]: unknown;
 };
 
-// TODO: Удалить лишнее по типу авторизации
 export type TVKLoginRequestDto = {
-  vk_id?: string;
-  code?: string;
-  silentToken: string;
-  redirect_uri: typeof cbLink;
+  code: string;
+  state?: string;
+  redirectUrl: string;
 };
 
 export type TVKLoginResponseDto = {
