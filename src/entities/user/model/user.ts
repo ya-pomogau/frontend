@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { UserInfo, UserRole } from '../types';
+import { userLoginThunk } from '../../../services/system-slice';
 
 type UserState = {
-  id?: number;
+  id?: string;
   role: UserRole | null;
   data: UserInfo | null;
   isLoading: boolean;
@@ -42,6 +43,65 @@ export const userModel = createSlice({
       state.error = 'Любой текст ошибки';
     },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(userLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const {
+          _id,
+          profile: { fullName, avatar, address, phone },
+          location: { coordinates },
+          permissions,
+          role,
+          keys,
+          status,
+          vkId,
+          scores,
+        } = user;
+        const data: UserInfo = {
+          fullname: fullName,
+          avatar,
+          address,
+          phone,
+          keys,
+          status,
+          role,
+          vk: vkId,
+          id: _id,
+          coordinates,
+          createdAt: 'a long long time ago in a far away galaxy...',
+          scores,
+          isActive: true,
+          permissions,
+        };
+        return {
+          ...state,
+          isLoading: false,
+          isFailed: false,
+          error: null,
+          role,
+          data,
+          id: _id,
+        };
+      })
+      .addCase(userLoginThunk.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        isFailed: true,
+        error: action.payload as string,
+      }))
+      .addCase(userLoginThunk.pending, (state) => ({
+        ...state,
+        isLoading: true,
+        isFailed: false,
+        error: null,
+      })),
 });
 
 export const {
