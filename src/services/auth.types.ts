@@ -1,3 +1,4 @@
+import { cbLink } from 'shared/libs/utils';
 import { TUser, TVKUser } from '../entities/user/types';
 
 export type TAuthRoutes = {
@@ -24,7 +25,7 @@ export type TVKLoginRequestDto = {
   vk_id?: string;
   code?: string;
   silentToken: string;
-  redirect_uri: string; // TODO: заменить на константу с роутом переадресации
+  redirect_uri: typeof cbLink;
 };
 
 export type TVKLoginResponseDto = {
