@@ -9,11 +9,23 @@ import { InputAddress } from 'shared/ui/input-address';
 import styles from './styles.module.css';
 import { FilterItemsIds } from 'features/filter/consts';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { newUserThunk, vkUserSelector } from 'services/system-slice';
+import { UserRole } from 'shared/types/common.types';
 
 export function RegisterPage() {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [role, setRole] = useState('volunteer');
+  const {
+    firstName = '',
+    lastName = '',
+    vkId = '',
+    email = '',
+  } = useAppSelector(vkUserSelector) ?? {};
+  //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
+  const [name, setName] = useState<string>(`${firstName} ${lastName}`);
+  //TODO: разобраться с получением телефона и записью его в стейт
+  const [phone, setPhone] = useState<string>('');
+  const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
+  // TODO: пока что оставила адрес в виде объекта, чтобы не ломались другие компоненты завязанные на inputAddress
   const [address, setAddress] = useState<{
     address: string;
     coords: [number, number] | [];
@@ -21,7 +33,9 @@ export function RegisterPage() {
     address: '',
     coords: [],
   });
+
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (
     event: FormEvent<HTMLFormElement>
   ) => {
@@ -29,12 +43,24 @@ export function RegisterPage() {
     console.log('Региcтрация:', {
       name: name,
       phone: phone,
-      address: address,
+      address: address.address,
+      coord: address.coords,
       role: role,
     });
-    //TODO: установить в хранилище данные о пользователе, сохраняем в базе
+    dispatch(
+      newUserThunk({
+        profile: {
+          //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
+          firstName: name,
+          phone,
+          address: address.address,
+        },
+        vkId,
+        role: role,
+      })
+    );
     //перенаправляем на главную
-    navigate('/');
+    navigate('/profile');
   };
 
   const handleAddressValueChange = (
@@ -46,7 +72,7 @@ export function RegisterPage() {
       coords: coords || [],
     });
   };
-  const handleRoleButtonClick = (checkRole: string) => {
+  const handleRoleButtonClick = (checkRole: UserRole) => {
     setRole(checkRole);
   };
   // определение внешнего вида кнопки выбора роли
