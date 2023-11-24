@@ -1,14 +1,14 @@
-import { getColor, IIconProps } from './utils';
+import { IIconProps } from './utils';
 
-export const ConflictIcon = ({ color, size = '24', ...props }: IIconProps) => (
+export const UndoneIcon = ({ color, size = '24', ...props }: IIconProps) => (
   <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill={getColor(color)}
+    width={42}
+    height={44}
+    viewBox="0 0 28 44"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M0 4.875L30.5 0L32 32.5H0V4.875Z" fill="#F9BC90" />
+    <path d="M0 4.875L30.5 0L32 32.5H0V4.875Z" />
     <path
       fillRule="evenodd"
       clipRule="evenodd"

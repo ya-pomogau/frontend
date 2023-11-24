@@ -31,6 +31,10 @@
   right: 50%;
 }
 
+.pointer--null {
+  display: none;
+}
+
 .tooltip--visible {
   visibility: visible;
 }

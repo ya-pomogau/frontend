@@ -59,6 +59,8 @@ export function RecipientPage() {
       window.removeEventListener('resize', getButtonPosition);
     };
   }, [dispatch]);
+
+  const tasksRef = useRef<HTMLDivElement>(null);
   //ниже закомментирован код, который более не используется.
   //Компонент PageLayout больше не использует пропсы side и extraClass
   return (
@@ -111,6 +113,7 @@ export function RecipientPage() {
           path="active"
           element={
             <ContentLayout
+              componentRef={tasksRef}
               heading={
                 <>
                   <SmartHeader

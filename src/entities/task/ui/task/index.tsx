@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { LegacyRef, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { parseISO, format, isAfter } from 'date-fns';
 import { Avatar } from 'shared/ui/avatar';
@@ -11,6 +11,9 @@ import placeholder from './img/placeholder.svg';
 import styles from './styles.module.css';
 
 interface TaskItemProps {
+  buttonRef?: LegacyRef<HTMLButtonElement>;
+  // buttonRef?: any;
+
   isMobile: boolean;
   category: string;
   date?: string;
@@ -34,6 +37,7 @@ interface TaskItemProps {
 }
 
 export const TaskItem = ({
+  buttonRef,
   isMobile,
   category,
   date,
@@ -68,6 +72,7 @@ export const TaskItem = ({
 
   const parsedDate = parseISO(date!);
   const comparedDateResult = isAfter(new Date(), parsedDate);
+  // const buttonRef = useRef<HTMLButtonElement>(null);
 
   if (isMobile) {
     return (
@@ -89,6 +94,8 @@ export const TaskItem = ({
           <div className={styles.mobile_buttons}>
             {handleClickConfirmButton && (
               <SquareButton
+                buttonRef={buttonRef}
+                // ref={buttonRef}
                 buttonType="confirm"
                 onClick={handleClickConfirmButton}
                 extClassName={
@@ -102,6 +109,8 @@ export const TaskItem = ({
             )}
             {handleClickCloseButton && (
               <SquareButton
+                buttonRef={buttonRef}
+                // ref={buttonRef}
                 buttonType="close"
                 onClick={handleClickCloseButton}
                 extClassName={
@@ -109,7 +118,8 @@ export const TaskItem = ({
                     ? styles.item_hidden
                     : styles.button_edit
                 }
-                disabled={comparedDateResult || completed}
+                // disabled={comparedDateResult || completed}
+                // disabled={completed}
               />
             )}
             {handleClickConflictButton && (
@@ -373,7 +383,7 @@ export const TaskItem = ({
               extClassName={
                 !date && recipientName ? styles.item_hidden : styles.button_edit
               }
-              disabled={comparedDateResult || completed}
+              // disabled={comparedDateResult || completed}
             />
           )}
           {handleClickConflictButton && (
@@ -387,7 +397,8 @@ export const TaskItem = ({
                   ? ''
                   : !comparedDateResult
                   ? ''
-                  : styles.item_hidden
+                  : // : styles.item_hidden
+                    styles.button_edit
               }
             />
           )}
@@ -396,7 +407,8 @@ export const TaskItem = ({
               buttonType="edit"
               onClick={handleClickEditButton}
               extClassName={
-                recipientName ? styles.item_hidden : styles.button_edit
+                // recipientName ? styles.item_hidden : styles.button_edit
+                recipientName ? styles.button_edit : styles.button_edit
               }
             />
           )}

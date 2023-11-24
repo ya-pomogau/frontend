@@ -8,9 +8,15 @@ interface InformerProps {
   extClassName?: string;
   text?: string;
   icon?: React.ReactNode;
+  isMobile?: boolean;
 }
 
-export const Informer = ({ text, extClassName, icon }: InformerProps) => (
+export const Informer = ({
+  text,
+  extClassName,
+  icon,
+  isMobile,
+}: InformerProps) => (
   <div
     className={classnames(
       styles.informer,
@@ -18,12 +24,18 @@ export const Informer = ({ text, extClassName, icon }: InformerProps) => (
       extClassName
     )}
   >
-    <div className={styles['informer-imgBlock']}>
+    <div
+      className={`${styles['informer-imgBlock']} ${
+        isMobile && styles['informer-imgBlock_mobile']
+      }`}
+    >
       {icon || (
         <img
           src={HeartIcon}
           alt="Сердeчное рукопожатие"
-          className={styles.informerImg}
+          className={`${styles.informerImg} ${
+            isMobile && styles.informerImgMobile
+          }`}
         />
       )}
     </div>
