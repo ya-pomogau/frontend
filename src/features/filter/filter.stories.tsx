@@ -83,6 +83,7 @@ export const DefaultFilter: Story & any = {
       radius: true,
       sort: true,
       date: true,
+      time: true,
     },
   },
   render: ({ ...args }: FilteringProps) => (

@@ -1,6 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
-import { api } from '../../../shared/api';
 
 export type TInitialStateForPopup = {
   time: string;
@@ -20,14 +19,6 @@ export type TInitialStateForPopup = {
   termlessRequest: boolean;
   isPopupOpen: boolean;
 };
-
-export const fetchCategories = createAsyncThunk(
-  'create-request/fetchCategory',
-  async () => {
-    const data = await api.getAllCategories();
-    return data;
-  }
-);
 
 export const InitialStateForPopup: TInitialStateForPopup = {
   time: '',
@@ -59,6 +50,9 @@ export const createRequestModel = createSlice({
       state.address = action.payload.additinalAddress;
       state.coordinates = action.payload.coords;
     },
+    setCategoryList(state, action) {
+      state.categories = action.payload;
+    },
     setCategory(state, action) {
       state.category.value = action.payload.value;
       state.category.label = action.payload.label;
@@ -85,11 +79,6 @@ export const createRequestModel = createSlice({
       state.isPopupOpen = false;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload;
-    });
-  },
 });
 
 export const {
@@ -97,6 +86,7 @@ export const {
   setDate,
   setDescriptionForTask,
   setTime,
+  setCategoryList,
   setCategory,
   changeStepIncrement,
   changeStepDecrement,

@@ -1,15 +1,14 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-
-import { api } from '../../../shared/api';
-import type { UpdateUserInfo, UserInfo, UserRole } from '../types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { UserInfo, UserRole } from '../types';
+import { userLoginThunk } from '../../../services/system-slice';
 
 type UserState = {
-  id?: number;
+  id?: string;
   role: UserRole | null;
   data: UserInfo | null;
   isLoading: boolean;
   isFailed: boolean;
-  error?: string;
+  error?: string | null | undefined;
 };
 
 const initialState: UserState = {
@@ -17,31 +16,8 @@ const initialState: UserState = {
   data: null,
   isLoading: false,
   isFailed: false,
+  error: null,
 };
-
-export const fetchUserDataByRole = createAsyncThunk(
-  'user/fetchData',
-  async (role: UserRole) => {
-    const response = await api.getAllUsers();
-    return response.filter((user) => user.role === role)[0];
-  }
-);
-
-export const updateUserInfo = createAsyncThunk<UserInfo | [], UpdateUserInfo>(
-  'user/updateUser',
-  async function (body) {
-    const response = await api.updateUser(body);
-    return response;
-  }
-);
-
-export const uploadUserAvatar = createAsyncThunk<UserInfo | [], FormData>(
-  'user/uploadUserAvatar',
-  async function (body: FormData) {
-    const response = await api.uploadAvatar(body);
-    return response;
-  }
-);
 
 export const userModel = createSlice({
   name: 'user',
@@ -54,49 +30,85 @@ export const userModel = createSlice({
       state.data = null;
       state.role = null;
     },
+    setUser: (state, { payload }) => {
+      state.data = payload;
+    },
+    enableBlokedError: (state) => {
+      state.error = 'Пользователь заблокирован';
+    },
+    enableConnectionError: (state) => {
+      state.error = 'Ошибка подключения';
+    },
+    enableAnyError: (state) => {
+      state.error = 'Любой текст ошибки';
+    },
   },
-  extraReducers: (builder) => {
+  extraReducers: (builder) =>
     builder
-      .addCase(fetchUserDataByRole.pending, (state) => {
-        state.isLoading = true;
-        state.isFailed = false;
+      .addCase(userLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const {
+          _id,
+          profile: { fullName, avatar, address, phone },
+          location: { coordinates },
+          permissions,
+          role,
+          keys,
+          status,
+          vkId,
+          scores,
+        } = user;
+        const data: UserInfo = {
+          fullname: fullName,
+          avatar,
+          address,
+          phone,
+          keys,
+          status,
+          role,
+          vk: vkId,
+          id: _id,
+          coordinates,
+          createdAt: 'a long long time ago in a far away galaxy...',
+          scores,
+          isActive: true,
+          permissions,
+        };
+        return {
+          ...state,
+          isLoading: false,
+          isFailed: false,
+          error: null,
+          role,
+          data,
+          id: _id,
+        };
       })
-      .addCase(fetchUserDataByRole.fulfilled, (state, action: any) => {
-        state.isLoading = false;
-        state.data = action.payload.data;
-      })
-      .addCase(fetchUserDataByRole.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isFailed = true;
-        state.error = action.error.message;
-      })
-      .addCase(updateUserInfo.pending, (state) => {
-        state.isLoading = true;
-        state.isFailed = false;
-      })
-      .addCase(updateUserInfo.fulfilled, (state, action) => {
-        state.isLoading = false;
-        // state.data = action.payload;
-      })
-      .addCase(updateUserInfo.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isFailed = true;
-        state.error = action.error.message;
-      })
-      .addCase(uploadUserAvatar.pending, (state) => {
-        state.isLoading = true;
-        state.isFailed = false;
-      })
-      .addCase(uploadUserAvatar.fulfilled, (state, action) => {
-        state.isLoading = false;
-        // state.data = action.payload;
-      })
-      .addCase(uploadUserAvatar.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isFailed = true;
-        state.error = action.error.message;
-      });
-  },
+      .addCase(userLoginThunk.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        isFailed: true,
+        error: action.payload as string,
+      }))
+      .addCase(userLoginThunk.pending, (state) => ({
+        ...state,
+        isLoading: true,
+        isFailed: false,
+        error: null,
+      })),
 });
 
-export const { setUserRole, logoutUser } = userModel.actions;
+export const {
+  setUserRole,
+  logoutUser,
+  setUser,
+  enableBlokedError,
+  enableConnectionError,
+  enableAnyError,
+} = userModel.actions;

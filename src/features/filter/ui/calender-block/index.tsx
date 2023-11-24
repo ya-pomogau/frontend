@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
-import classnames from 'classnames';
 
 import { DatePicker } from 'shared/ui/date-picker';
 
@@ -51,16 +50,6 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   return (
     <div className={styles.filterBlock}>
-      <div
-        className={classnames(
-          styles.filterBlockTitle,
-          'text',
-          'text_size_small',
-          'text_type_bold'
-        )}
-      >
-        Дата и время
-      </div>
       <div>
         <DatePicker
           value={filterDate ? parseISO(filterDate) : getNewDate()}

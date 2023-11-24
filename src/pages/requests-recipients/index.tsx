@@ -1,65 +1,76 @@
 import { useGetUsersQuery } from 'services/user-api';
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
-import { SideMenuForAuthorized } from 'widgets/side-menu';
-
-import { UserInfo } from 'entities/user';
-
-import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
-import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Loader } from 'shared/ui/loader';
 import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
+import { Input } from 'shared/ui/input';
+import { testUsers } from 'pages/requests/test-users';
+import { useState } from 'react';
+
+interface UserProps {
+  role: 'volunteer' | 'recipient' | 'admin' | 'master';
+  extClassName?: string;
+  avatarLink: string;
+  avatarName: string;
+  userName: string;
+  userId: number;
+  userNumber: string;
+  volunteerInfo?: any;
+}
 
 export function RequestsRecipientsPage() {
   const { isLoading, data = [] } = useGetUsersQuery('recipient', {
     pollingInterval: 30000,
   });
+  const [searchName, setSearchName] = useState('');
 
   return (
-    <PageLayout
-      side={
+    <>
+      <SmartHeader
+        icon={<Icon color="blue" icon="BlockIcon" size="54" />}
+        text="Подтверждение / Блокировка"
+      />
+      <PageSubMenuForAdmins />
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
-          <div className={styles.user}>
-            <UserInfo />
+          <Input
+            extClassName={styles.input}
+            value={searchName}
+            name="name"
+            onChange={(e) => setSearchName(e.target.value)}
+            placeholder={'Введите имя'}
+            type="name"
+            label="Введите имя "
+          />
+          <div className={styles.userCards}>
+            {testUsers
+              .filter(
+                (user: UserProps) =>
+                  user.userName
+                    .toLowerCase()
+                    .includes(searchName.toLowerCase()) &&
+                  user.role == 'recipient'
+              )
+              .map((user: UserProps) => (
+                <UserCard
+                  role={user.role}
+                  key={user.userId}
+                  avatarLink={user.avatarLink}
+                  avatarName={user.avatarName}
+                  userName={user.userName}
+                  userId={user.userId}
+                  userNumber={user.userNumber}
+                  volunteerInfo={user.volunteerInfo}
+                />
+              ))}
           </div>
-
-          <SideMenuForAuthorized />
         </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <SmartHeader
-              icon={<Icon color="blue" icon="BlockIcon" size="54" />}
-              text="Подтверждение / Блокировка"
-            />
-          }
-        >
-          <PageSubMenuForAdmins />
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <ul>
-              {data.map((item: any) => {
-                return (
-                  <li key={item.data.id}>
-                    <UserCard
-                      avatarLink={item.data.avatar}
-                      avatarName={item.data.fullname}
-                      userName={item.data.fullname}
-                      userId={item.data.id}
-                      userNumber={item.data.phone}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </ContentLayout>
-      }
-    />
+      )}
+    </>
   );
 }

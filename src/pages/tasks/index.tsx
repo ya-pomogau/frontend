@@ -1,14 +1,8 @@
-import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { SideMenuForAuthorized } from 'widgets/side-menu';
-
 import { Filter } from 'features/filter';
-import { UserInfo } from 'entities/user';
-
-import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
-import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
 import { UserCard } from 'widgets/user-card';
@@ -61,55 +55,39 @@ export function TasksPage() {
   );
 
   return (
-    <PageLayout
-      side={
-        <>
-          <div className={styles.user}>
-            <UserInfo />
-          </div>
+    <>
+      <SmartHeader
+        icon={<Icon color="blue" icon="SettingsIcon" size="54" />}
+        text="Создание / Редактирование заявки"
+        filter={<Filter items={{ userCategories: true }} />}
+      />
 
-          <SideMenuForAuthorized />
-        </>
-      }
-      content={
-        <ContentLayout
-          heading={
-            <SmartHeader
-              icon={<Icon color="blue" icon="SettingsIcon" size="54" />}
-              text="Создание / Редактирование заявки"
-              filter={<Filter items={{ userCategories: true }} />}
-            />
-          }
-        >
-          <div>
-            <Link to={'/profile/bids'}>Настроить баллы</Link>
-          </div>
+      <div>
+        <Link to={'/profile/bids'}>Настроить баллы</Link>
+      </div>
 
-          <div>
-            <Input
-              value={value}
-              label="Введите имя "
-              name="Name"
-              onChange={(e) => setValue(e.target.value)}
-              extClassName={styles.input}
-            />
-
-            <ul>
-              {filter.map((item) => (
-                <li key={item.userId}>
-                  <UserCard
-                    avatarLink={item.avatarLink}
-                    avatarName={item.avatarName}
-                    userName={item.userName}
-                    userId={item.userId}
-                    userNumber={item.userNumber}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </ContentLayout>
-      }
-    />
+      <div>
+        <Input
+          value={value}
+          label="Введите имя "
+          name="Name"
+          onChange={(e) => setValue(e.target.value)}
+          extClassName={styles.input}
+        />
+        <ul>
+          {filter.map((item) => (
+            <li key={item.userId}>
+              <UserCard
+                avatarLink={item.avatarLink}
+                avatarName={item.avatarName}
+                userName={item.userName}
+                userId={item.userId}
+                userNumber={item.userNumber}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

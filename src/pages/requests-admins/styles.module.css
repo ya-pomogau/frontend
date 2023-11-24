@@ -1,0 +1,29 @@
+.userCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 40px;
+}
+
+.userAdminCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.input {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 351px;
+}
+
+@media (max-width: 1200px) {
+  .userCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .userAdminCards {
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+  }
+}

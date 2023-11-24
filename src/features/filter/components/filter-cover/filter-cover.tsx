@@ -8,6 +8,7 @@ import { getQuery } from '../../libs';
 import type { IFilterValues } from 'features/filter/types';
 
 import styles from './filter-cover.module.css';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
 interface FilterCoverProps {
   closeFilterMenu: () => void;
@@ -54,9 +55,11 @@ export const FilterCover = ({
     });
 
     setSearchParams(params);
-
+    console.log(filterValues);
     closeFilterMenu();
   };
+
+  const resetFilter = () => {};
 
   const filterPositionStyles = {
     top: `${position.top}px`,
@@ -74,8 +77,19 @@ export const FilterCover = ({
       <form name="formFilter">
         <div className={styles.wrapper}>
           {filterMenu}
-
-          <div className={styles.buttonWrapper}>
+          <div
+            className={`${styles.buttonWrapper} ${
+              window.innerWidth <= 768 ? styles.buttonWrapper__mobile : null
+            }`}
+          >
+            <Button
+              label="Сбросить фильтры"
+              buttonType="secondary"
+              size="medium"
+              actionType="button"
+              customIcon={<CloseCrossIcon color={'blue'} />}
+              onClick={resetFilter}
+            />
             <Button
               onClick={applyFilter}
               label="Применить"
