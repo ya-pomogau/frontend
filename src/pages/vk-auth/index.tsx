@@ -45,7 +45,7 @@ export const VKAuthPage = () => {
     if (!user) {
       navigate('/register');
     }
-  }, [vkUser, navigate]);
+  }, [user, vkUser, navigate]);
 
   useEffect(() => {
     console.dir(user); //TODO: потом удалить

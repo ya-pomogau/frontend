@@ -18,7 +18,6 @@ export function RegisterPage() {
     firstName = '',
     lastName = '',
     vkId = '',
-    email = '',
   } = useAppSelector(vkUserSelector) ?? {};
   //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
   const [name, setName] = useState<string>(`${firstName} ${lastName}`);
