@@ -21,7 +21,7 @@
   font-family: 'Golos', sans-serif;
   font-size: 24px;
   line-height: 29px;
-  color: var(--colors-interface-primary);
+  color: var(--colors-interface-primary-additional);
 }
 
 .field {
@@ -30,10 +30,25 @@
 }
 
 .text {
+  padding: 19px 0 9px;
   font-family: 'Golos', sans-serif;
   font-size: 12px;
-  line-height: 14px;
-  padding-bottom: 6px;
+  line-height: 16.8px;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--colors-interface-primary);
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  padding-top: 15px;
+}
+.wrapper {
+  min-width: 364px;
+  display: grid;
+  padding-left: 18px;
+  justify-items: flex-start;
 }
 
 .error {

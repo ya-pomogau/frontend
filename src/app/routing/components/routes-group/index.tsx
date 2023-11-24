@@ -47,6 +47,9 @@ export const RoutesGroup = ({
   }
 
   if (onlyUnauthorized) {
+    console.log({ onlyUnauthorized });
+    console.log({ role });
+
     if (!role) {
       return <Outlet />;
     } else {
@@ -58,8 +61,10 @@ export const RoutesGroup = ({
     return null;
   }
 
-  // allowed по любому будет не undefined потому что если условие дошло до этого места, то allowed точно есть. Смотреть по интерфейсу RoledRouteProps
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  if (allowed === undefined) {
+    return <Navigate to="/" replace />;
+  }
+
   if (!role || !allowed![role]) {
     return <Navigate to="/register" replace />;
   }

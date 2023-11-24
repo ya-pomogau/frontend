@@ -1,32 +1,32 @@
 import { useRef, useState } from 'react';
-
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { updateUserInfo, uploadUserAvatar } from 'entities/user/model';
-
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
 import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
-
 import type { UpdateUserInfo } from 'entities/user/types';
-
 import styles from './styles.module.css';
+import { useUpdateUsersMutation } from 'services/user-api';
+import { Loader } from 'shared/ui/loader';
+import useUser from 'shared/hooks/use-user';
+import { useLocation } from 'react-router-dom';
 
 export const UserInfo = () => {
-  const user = useAppSelector((state) => state.user.data);
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
-
-  const dispatch = useAppDispatch();
+  const [updateUserData, { isLoading }] = useUpdateUsersMutation();
+  const user = useUser();
+  const isAuth = user?.isActive;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleOpenSettingClick = () => {
     setIsPopupOpen(true);
+    alert(
+      'При изменении формы сбрасывается аватар. Поправить потом можно в файле db.json'
+    );
   };
 
   const handleSaveViewerSettings = async (
@@ -35,14 +35,14 @@ export const UserInfo = () => {
   ) => {
     if (isFormEdited) {
       if (image) {
-        dispatch(uploadUserAvatar(avatarFile));
+        await updateUserData({ id: userData?.id, file: avatarFile }).unwrap();
       }
       if (
         user?.fullname !== userData.fullname ||
         user?.phone !== userData.phone ||
         user?.address !== userData.address
       )
-        dispatch(updateUserInfo(userData));
+        await updateUserData(userData).unwrap();
     }
     setIsFormSaved(true);
     setIsFormEdited(false);
@@ -50,31 +50,35 @@ export const UserInfo = () => {
     setIsPopupOpen(false);
   };
 
-  return user ? (
+  return isAuth ? (
     <InfoContainer
       name={user.fullname}
       avatar={user.avatar}
       onClickSettingsButton={handleOpenSettingClick}
       buttonRef={buttonRef}
     >
-      <EditViewerInfo
-        avatarLink={user.avatar}
-        avatarName={user.avatar}
-        onClickSave={handleSaveViewerSettings}
-        valueName={user.fullname}
-        valuePhone={user.phone}
-        valueAddress={user.address}
-        isPopupOpen={isPopupOpen}
-        valueId={user.id}
-        buttonRef={buttonRef}
-        isFormSaved={isFormSaved}
-        setIsFormSaved={setIsFormSaved}
-        setIsPopupOpen={setIsPopupOpen}
-        isFormEdited={isFormEdited}
-        setIsFormEdited={setIsFormEdited}
-        image={image}
-        setImage={setImage}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <EditViewerInfo
+          avatarLink={user.avatar}
+          avatarName={user.avatar}
+          onClickSave={handleSaveViewerSettings}
+          valueName={user.fullname}
+          valuePhone={user.phone}
+          valueAddress={user.address}
+          isPopupOpen={isPopupOpen}
+          valueId={user.id}
+          buttonRef={buttonRef}
+          isFormSaved={isFormSaved}
+          setIsFormSaved={setIsFormSaved}
+          setIsPopupOpen={setIsPopupOpen}
+          isFormEdited={isFormEdited}
+          setIsFormEdited={setIsFormEdited}
+          image={image}
+          setImage={setImage}
+        />
+      )}
 
       <div className={styles.contentWrapper}>
         <InfoContainerContent
@@ -91,7 +95,7 @@ export const UserInfo = () => {
     </InfoContainer>
   ) : (
     <InfoContainer name="Незарегистрированный пользователь">
-      <UnauthorizedUser />
+      {!isRegisterPath && <UnauthorizedUser />}
     </InfoContainer>
   );
 };

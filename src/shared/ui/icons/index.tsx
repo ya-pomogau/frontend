@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import type { IIconProps } from './utils';
-
 import { CalendarIcon } from './calendar-icon';
 import { ClockIcon } from './clock-icon';
 import { ReadMessageIcon } from './read-message-icon';
@@ -41,7 +40,14 @@ import { PasswordCloseIcon } from './password-close-icon';
 import { CheckIcon } from './check-icon';
 import { ArrowDownIcon } from './arrow-down-icon';
 
+import { ExclamationPointIcon } from './exclamation-point-icon';
+import { ExclamationPMark } from './excalamation-mark';
+
+import { ConflictIcon } from './conflict-icon';
+
 const icons = {
+  ExclamationPMark,
+  ExclamationPointIcon,
   CalendarIcon,
   ClockIcon,
   ReadMessageIcon,
@@ -81,6 +87,7 @@ const icons = {
   PasswordCloseIcon,
   CheckIcon,
   ArrowDownIcon,
+  ConflictIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;

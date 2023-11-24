@@ -134,7 +134,7 @@ export function TimePickerPopup({
     };
   }, []);
 
-  const handleEscKeydown = (e: { key: string }) => {
+  const handleEscKeydown = (e: KeyboardEvent) => {
     e.key === 'Escape' && handleClosePopup();
   };
 

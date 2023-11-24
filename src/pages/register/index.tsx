@@ -5,14 +5,15 @@ import {
   useForm,
   Controller,
 } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { VkIcon } from 'shared/ui/icons/vk-icon';
 
 import styles from './styles.module.css';
+import { UserRole } from 'entities/user/types';
 import { InputAddress } from 'shared/ui/input-address';
 import classnames from 'classnames';
 
@@ -26,6 +27,7 @@ interface IRegisterForm {
 }
 
 export function RegisterPage() {
+  const navigate = useNavigate();
   const [address, setAddress] = useState<{
     address: string;
     coords: [number, number] | [];
@@ -34,6 +36,13 @@ export function RegisterPage() {
     coords: [],
   });
 
+  const [showLoginButton, setShowLoginButton] = useState(false);
+
+  const redirectToLogin = () => {
+    navigate('/login');
+  };
+  const visibleLoginButton = () => {
+    setShowLoginButton(true);
   const handleAddressValueChange = (
     newAddress: string,
     coords?: [number, number] | []
@@ -42,6 +51,9 @@ export function RegisterPage() {
       address: newAddress,
       coords: coords || [],
     });
+  };
+  const redirectToRegisterForm = (role: UserRole) => {
+    navigate(`/register-form/${role}`);
   };
 
   const {
@@ -70,6 +82,7 @@ export function RegisterPage() {
         text="Регистрация"
         extClassName={styles.header}
       />
+      <p className={styles.titleAdditional}>Зарегистрироваться</p>
       <p className={styles.title}>Зарегистрироваться</p>
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit, error)}>
@@ -113,6 +126,25 @@ export function RegisterPage() {
           )}
         />
 
+      <div className={styles.wrapper}>
+        <div className={styles.buttonContainer}>
+          <Button
+            buttonType="primary"
+            actionType="button"
+            label="Хочу помочь"
+            size="extraLarge"
+            onClick={() => {
+              redirectToRegisterForm('volunteer');
+            }}
+          />
+          <Button
+            buttonType="secondary"
+            actionType="button"
+            label="Нужна помощь"
+            size="extraLarge"
+            onClick={() => {
+              redirectToRegisterForm('recipient');
+            }}
         <Controller
           name={'phone'}
           control={control}
@@ -195,6 +227,20 @@ export function RegisterPage() {
             Укажите адрес и мы подберем ближайшее к вам задание
           </p>
         </div>
+        <a className={styles.link} onClick={visibleLoginButton}>
+          Уже есть аккаунт
+        </a>
+        {showLoginButton && (
+          <Button
+            buttonType="primary"
+            actionType="submit"
+            customIcon={<VkIcon color="white" size="24" />}
+            label="Войти через ВКонтакте"
+            size="extraLarge"
+            onClick={() => redirectToLogin()}
+          />
+        )}
+      </div>
 
         <Button
           buttonType="primary"
