@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useAppSelector } from 'app/hooks';
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
 import { VolunteerInfo } from './volunteer-info';
@@ -6,19 +7,29 @@ import { UnauthorizedUser } from './unauthorized-user';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
 import styles from './styles.module.css';
-import { useUpdateUsersMutation } from 'services/user-api';
+import { useGetUserByIdQuery, useUpdateUsersMutation } from 'services/user-api';
+import { skipToken } from '@reduxjs/toolkit/query/react';
 import { Loader } from 'shared/ui/loader';
 import useUser from 'shared/hooks/use-user';
-import { useLocation } from 'react-router-dom';
-
+import { useMediaQuery } from 'shared/hooks';
+const location = useLocation();
 export const UserInfo = () => {
-  const location = useLocation();
+  // const user = useAppSelector((state) => state.user.data);
+  const role = useAppSelector((state) => state.user.role);
+  const userId = () => {
+    if (role === 'volunteer') return 7;
+    if (role === 'master') return 1;
+    if (role === 'recipient') return 4;
+    if (role === 'admin') return 2;
+    if (!role) return null;
+  };
+  const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
   const [updateUserData, { isLoading }] = useUpdateUsersMutation();
-  const user = useUser();
   const isAuth = user?.isActive;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -90,13 +101,17 @@ export const UserInfo = () => {
         />
 
         {user.role === 'volunteer' && (
-          <VolunteerInfo score={user.scores || 0} hasKey={user.keys} />
+          <VolunteerInfo
+            score={user.scores || 0}
+            hasKey={user.keys}
+            finishScore={1}
+          />
         )}
       </div>
     </InfoContainer>
   ) : (
     <InfoContainer name="Незарегистрированный пользователь">
-      {!isRegisterPath && <UnauthorizedUser />}
+      <UnauthorizedUser />
     </InfoContainer>
   );
 };
