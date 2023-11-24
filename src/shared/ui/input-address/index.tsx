@@ -40,7 +40,7 @@ export const InputAddress = (props: InputAddressProps) => {
 
   useEffect(() => {
     setAddress(initialValue, []);
-  }, [setAddress, initialValue]);
+  }, []);
 
   useEffect(() => {
     if (!ymaps) {
