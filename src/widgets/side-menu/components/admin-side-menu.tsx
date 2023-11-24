@@ -2,10 +2,11 @@ import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Icon } from 'shared/ui/icons';
 
-export const AdminSideMenu = () => {
+export const AdminSideMenu = (props: any) => {
   return (
     <SideMenu
       authRequired
+      {...props}
       links={
         <>
           <SideMenuLink

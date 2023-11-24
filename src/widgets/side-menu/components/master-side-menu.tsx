@@ -2,9 +2,10 @@ import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Icon } from 'shared/ui/icons';
 
-export const MasterSideMenu = () => {
+export const MasterSideMenu = (props: any) => {
   return (
     <SideMenu
+      {...props}
       links={
         <>
           <SideMenuLink

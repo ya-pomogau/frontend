@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
-  margin-top: 30px;
 }
 
 .overlay {
@@ -17,7 +16,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
   background-color: rgba(46, 49, 146, 0.4);
   width: 100%;
   height: 100%;
@@ -29,13 +29,16 @@
 
 .button__container--mob {
   max-width: 354px;
+  flex-direction: row;
+  justify-content: center;
 }
 
-@media (min-width: 414px) {
+@media (min-width: 920px) {
   .button__container {
     gap: 10px;
     height: 426px;
     padding: 30px 10px;
+    margin-top: 30px;
   }
 
   .button__container--web {
@@ -50,3 +53,4 @@
     border: 2px solid var(--colors-interface-primary);
   }
 }
+
