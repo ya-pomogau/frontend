@@ -12,6 +12,7 @@ import useUser from 'shared/hooks/use-user';
 import { useLocation } from 'react-router-dom';
 
 export const UserInfo = () => {
+  const location = useLocation();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
@@ -21,7 +22,7 @@ export const UserInfo = () => {
   const isAuth = user?.isActive;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
-
+  const isRegisterPath = location.pathname.includes('/register');
   const handleOpenSettingClick = () => {
     setIsPopupOpen(true);
     alert(
