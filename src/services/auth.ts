@@ -2,6 +2,8 @@ import {
   ErrorDto,
   ResponseDto,
   TAuthRoutes,
+  TCreateUserDto,
+  TNewUserResponseDto,
   TVKLoginRequestDto,
   TVKLoginResponseDto,
   TypedResponse,
@@ -36,6 +38,18 @@ class Auth {
     return fetch(`${this.baseUrl}${this.routes.userLogin}`, fetchOptions).then(
       Auth._checkResponse
     ) as Promise<TVKLoginResponseDto>;
+  }
+
+  public createNewUser(dto: TCreateUserDto) {
+    const fetchOptions = {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify(dto),
+    };
+    return fetch(
+      `${this.baseUrl}${this.routes.userRegister}`,
+      fetchOptions
+    ).then(Auth._checkResponse) as Promise<TNewUserResponseDto>;
   }
 }
 
