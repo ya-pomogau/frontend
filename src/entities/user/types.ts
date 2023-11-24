@@ -14,8 +14,9 @@ import {
   VERIFIED,
 } from 'shared/libs/statuses';
 import { AdminPermission } from '../../shared/types/common.types';
+import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
 
-export type UserRole = 'recipient' | 'volunteer' | 'master' | 'admin';
+export type UserRole = 'recipient' | 'volunteer' | 'admin' | 'master';
 type PermissionType = {
   id: number;
   name:
@@ -62,10 +63,7 @@ export type UserInfo = {
   isActive: boolean;
 };
 
-export type TPointGeoJSON = {
-  type: 'Point';
-  coordinates: [number, number];
-};
+export type TPointGeoJSON = PointGeoJSONInterface;
 
 export type TUserProfile = {
   fullName: string;
@@ -84,24 +82,20 @@ export type TUser = {
   status: StatusType;
   createdAt: Date | string;
   updatedAt: Date | string;
-  keys?: number | null;
+  keys?: boolean;
   scores?: number;
   permissions?: Array<AdminPermission> | null;
   isActive: boolean;
   vkId: string;
   isRoot: boolean;
+  login: string;
 };
 
-// TODO: Изменить в соответствии с реальным ответом
 export type TVKUser = {
-  fullName: string;
   firstName: string;
-  middleName: string;
   lastName: string;
-  phone: string;
-  avatar: string;
-  address: string;
   vkId: string;
+  email: string;
 };
 
 export type UpdateUserInfo = {
