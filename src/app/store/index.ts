@@ -7,6 +7,7 @@ import { tasksApi } from 'services/tasks-api';
 import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
+import systemSliceReducer from '../../services/system-slice';
 import { chatModel } from '../../widgets/chats/model/chat';
 import { conflictModel } from '../../widgets/chats/model/conflict';
 import systemSliceReducer from '../../services/system-slice';

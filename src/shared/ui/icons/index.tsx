@@ -40,13 +40,16 @@ import { PasswordCloseIcon } from './password-close-icon';
 import { CheckIcon } from './check-icon';
 import { ArrowDownIcon } from './arrow-down-icon';
 import { ExclamationIcon } from './exclamation-icon';
+import { ExcelIcon } from './excel-icon';
 
 import { ExclamationPointIcon } from './exclamation-point-icon';
 import { ExclamationPMark } from './excalamation-mark';
 
 import { ConflictIcon } from './conflict-icon';
+import { AccordionIconArrow } from './accordion-arrow';
 
 const icons = {
+  ExcelIcon,
   ExclamationPMark,
   ExclamationPointIcon,
   CalendarIcon,
@@ -90,6 +93,7 @@ const icons = {
   ArrowDownIcon,
   ExclamationIcon,
   ConflictIcon,
+  AccordionIconArrow,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
