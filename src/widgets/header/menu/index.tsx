@@ -2,10 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { NavLink } from 'react-router-dom';
-
 import { SideBar } from 'widgets/header/navigation';
-import { EmptyMessageIcon } from 'shared/ui/icons/empty-message-icon';
 
 import { useMediaQuery } from 'shared/hooks';
 import { useAppSelector } from 'app/hooks';
@@ -17,6 +14,7 @@ import {
 } from '../utils';
 
 import styles from './styles.module.css';
+import { AdminButton } from 'shared/ui/admin-button';
 
 const modalRoot = document.getElementById('modal') as HTMLElement;
 
@@ -55,7 +53,6 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
   }, []);
 
   return createPortal(
-    // <div className={styles.overlay} onClick={closeByOverlay}>
     <div
       className={
         isMobile
@@ -65,24 +62,13 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
       ref={ref}
     >
       {user && (
-        <NavLink to="/" className={`${styles.header__title__container} `}>
-          <h2 className={styles.menu__title}>Написать администратору</h2>
-          <div className={styles.menu__title__icon}>
-            <EmptyMessageIcon size="32" color="white" />
-          </div>
-          {isMobile && (
-            <svg
-              className={`${styles.header__title__background}`}
-              width="235"
-              height="46"
-              viewBox="0 0 235 46"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M0 17L235 0V46L0 39V17Z" fill="#9798C9" />
-            </svg>
-          )}
-        </NavLink>
+        <AdminButton
+          isMobile={isMobile}
+          extraClass={styles.header__sidebar__admin_button}
+          onClick={() => console.log('Нажали кнопку')}
+        >
+          Написать администратору
+        </AdminButton>
       )}
 
       {user ? (
