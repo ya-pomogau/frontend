@@ -32,6 +32,10 @@ import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
+import { ChatsPage } from '../../pages/chats/chats';
+import { ChatsWaitingPage } from '../../pages/chats-waiting';
+import { ChatsInWorkPage } from '../../pages/chats-in-work';
+import { ConflictsPage } from '../../pages/chats-conflicts';
 import { BidsPage } from 'pages/bids';
 import { RegisterFormPage } from 'pages/register-forn';
 
@@ -162,6 +166,10 @@ export const router = createBrowserRouter(
             element={<RequestsAdminsPage />}
           />
         </Route>
+        <Route path="/chats" element={<ChatsPage />} />
+        <Route path="/chats/waiting/*" element={<ChatsWaitingPage />} />
+        <Route path="/chats/in-work/*" element={<ChatsInWorkPage />} />
+        <Route path="/chats/conflicts/*" element={<ConflictsPage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

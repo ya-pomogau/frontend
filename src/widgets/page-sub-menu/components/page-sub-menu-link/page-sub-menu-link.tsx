@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import styles from './page-sub-menu-link.module.css';
@@ -7,13 +8,17 @@ interface PageSubMenuLinkProps {
   to: string;
   text: string;
   notifications?: number;
+  isImportant?: boolean;
+  isMobile: boolean;
 }
 
-export const PageSubMenuLink = ({
+export const PageSubMenuLink: FC<PageSubMenuLinkProps> = ({
   to,
   text,
   notifications = 0,
-}: PageSubMenuLinkProps) => {
+  isImportant = false,
+  isMobile,
+}) => {
   const areNotificationsVisible = notifications > 0;
 
   return (
@@ -31,13 +36,21 @@ export const PageSubMenuLink = ({
               'p-0',
               'm-0',
               styles.tabContainer__text,
-              isActive ? styles.tabContainer__textActive : ''
+              isActive ? styles.tabContainer__textActive : '',
+              isMobile ? 'text_size_small' : ''
             )}
           >
             {text}
           </p>
           {areNotificationsVisible && (
-            <span className={styles.tabContainer__number}>{notifications}</span>
+            <span
+              className={classnames(
+                styles.tabContainer__number,
+                isImportant ? styles.tabContainer__number__important : undefined
+              )}
+            >
+              {notifications}
+            </span>
           )}
         </div>
       )}

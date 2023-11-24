@@ -8,11 +8,16 @@ import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
 import systemSliceReducer from '../../services/system-slice';
+import { chatModel } from '../../widgets/chats/model/chat';
+import { conflictModel } from '../../widgets/chats/model/conflict';
+import systemSliceReducer from '../../services/system-slice';
 
 export const store = configureStore({
   reducer: {
     error: errorModel.reducer,
     user: userModel.reducer,
+    chats: chatModel.reducer,
+    conflicts: conflictModel.reducer,
     createRequest: createRequestModel.reducer,
     system: systemSliceReducer,
     [usersApi.reducerPath]: usersApi.reducer,

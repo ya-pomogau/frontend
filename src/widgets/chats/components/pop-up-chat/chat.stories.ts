@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Chat } from '.';
-import { getMockMessages } from './libs/utils';
+import { PopUpChat } from './index';
+import { getMockMessages } from '../../libs/utils';
 
-const meta: Meta<typeof Chat> = {
-  title: 'entities/Chat',
-  component: Chat,
+const meta: Meta<typeof PopUpChat> = {
+  title: 'widgets/chats/components/pop-up-chat',
+  component: PopUpChat,
   tags: ['autodocs'],
 };
 
@@ -14,11 +14,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    chatmateInfo: {
-      userId: '1',
+    chatMateInfo: {
       name: 'Иванов Иван Иванович',
+      userId: 1,
+      avatar: 'https://i.pravatar.cc/300',
       phone: '+7(000) 000-00-00',
-      userAvatarLink: 'https://i.pravatar.cc/300',
     },
     messages: getMockMessages(),
   },
