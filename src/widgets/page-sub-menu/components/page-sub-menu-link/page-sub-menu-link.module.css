@@ -42,3 +42,13 @@
   border-radius: 2px;
   content: '';
 }
+
+@media screen and (max-width: 600px) {
+  .tabContainer__text {
+    font-family: Golos, 'sans-serif';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+  }
+}

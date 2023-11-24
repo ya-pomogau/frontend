@@ -1,4 +1,4 @@
-import {
+/* import {
   BLOG,
   CREATE_TASKS,
   INCREASE_SCORE,
@@ -6,7 +6,7 @@ import {
   READ,
   RESOLVE_CONFLICTS,
   SET_KEYS,
-} from 'shared/libs/permissions-names';
+} from 'shared/libs/permissions-names'; */
 import {
   ACTIVATED,
   CONFIRMED,
@@ -16,7 +16,7 @@ import {
 import { AdminPermission } from '../../shared/types/common.types';
 
 export type UserRole = 'recipient' | 'volunteer' | 'master' | 'admin';
-type PermissionType = {
+/*type PermissionType = {
   id: number;
   name:
     | typeof READ
@@ -27,7 +27,7 @@ type PermissionType = {
     | typeof BLOG
     | typeof INCREASE_SCORE;
 };
-
+*/
 // пример для всех перечисленных в брифе прав
 // [
 //   { id: 0, name: 'read' },
@@ -46,7 +46,7 @@ type StatusType =
   | typeof VERIFIED;
 
 export type UserInfo = {
-  id: number;
+  id: string;
   fullname: string;
   role: UserRole | null;
   status: StatusType | null;
@@ -58,7 +58,7 @@ export type UserInfo = {
   createdAt: string;
   keys?: number | null;
   scores?: number;
-  permissions?: Array<PermissionType> | null;
+  permissions?: Array<AdminPermission> | null;
   isActive: boolean;
 };
 
@@ -78,6 +78,7 @@ export type TUserProfile = {
 };
 
 export type TUser = {
+  _id: string;
   profile: TUserProfile;
   location: TPointGeoJSON;
   role: UserRole;
