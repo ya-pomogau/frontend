@@ -53,6 +53,23 @@
       }
     ],
     "import/prefer-default-export": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": ["**/*.stories.ts*"] }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "default",
+        "format": ["camelCase", "strictCamelCase", "snake_case", "UPPER_CASE", "PascalCase"],
+        "leadingUnderscore": "allow"
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

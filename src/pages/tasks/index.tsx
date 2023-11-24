@@ -1,12 +1,7 @@
-import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { SideMenuForAuthorized } from 'widgets/side-menu';
-
 import { Filter } from 'features/filter';
-import { UserInfo } from 'entities/user';
-
-import { PageLayout } from 'shared/ui/page-layout';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';

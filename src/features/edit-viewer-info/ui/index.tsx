@@ -106,12 +106,13 @@ export const EditViewerInfo = ({
 
   useEffect(() => {
     document.addEventListener('keydown', handleEscKeydown);
+
     return () => {
       document.removeEventListener('keydown', handleEscKeydown);
     };
   }, [isFormSaved]);
 
-  const handleEscKeydown = (e: { key: string }) => {
+  const handleEscKeydown = (e: KeyboardEvent) => {
     e.key === 'Escape' && handleClosePopup();
   };
 

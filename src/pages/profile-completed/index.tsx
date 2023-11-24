@@ -1,25 +1,17 @@
-import { useEffect } from 'react';
-
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { fetchCompletedTasks } from 'entities/task/model';
+import { useAppSelector } from 'app/hooks';
 import { TaskList } from 'entities/task/ui/task-list';
 import { useMediaQuery } from 'shared/hooks';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 
 import { Filter } from 'features/filter';
+import { useGetTasksByStatusQuery } from 'services/tasks-api';
+import { Loader } from 'shared/ui/loader';
 
 export function ProfileCompletedPage() {
-  const dispatch = useAppDispatch();
-
   const isMobile = useMediaQuery('(max-width:1150px)');
-
-  const { tasks } = useAppSelector((store) => store.tasks);
+  const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
   const { role } = useAppSelector((state) => state.user);
-
-  useEffect(() => {
-    dispatch(fetchCompletedTasks());
-  }, []);
 
   return (
     <>
@@ -48,16 +40,21 @@ export function ProfileCompletedPage() {
           )
         }
       />
-      <TaskList
-        userRole="volunteer"
-        isMobile={isMobile}
-        handleClickCloseButton={() => 2}
-        handleClickConfirmButton={() => 3}
-        handleClickMessageButton={() => 5}
-        handleClickPnoneButton={() => 6}
-        isStatusActive={false}
-        tasks={tasks}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <TaskList
+          userRole="volunteer"
+          isMobile={isMobile}
+          handleClickCloseButton={() => 2}
+          handleClickConfirmButton={() => 3}
+          handleClickMessageButton={() => 5}
+          handleClickPnoneButton={() => 6}
+          isStatusActive={false}
+          tasks={tasks}
+          isLoading={isLoading}
+        />
+      )}
     </>
   );
 }

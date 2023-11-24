@@ -25,12 +25,15 @@ import { ProfileCompletedPage } from 'pages/profile-completed';
 import { RequestsRecipientsPage } from 'pages/requests-recipients';
 import { RequestsNotprocessedPage } from 'pages/requests-notprocessed';
 import { StatisticsPage } from 'pages/statistics';
+import { ApplicationsStatisticsPage } from 'pages/application-statistics';
+import { UsersStatisticsPage } from 'pages/users-statistics';
 import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
-import { BidsPage } from 'pages/bids';
 import { Logout } from 'pages/logout';
+import { BidsPage } from 'pages/bids';
+import { RegisterFormPage } from 'pages/register-forn';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,7 +56,7 @@ export const router = createBrowserRouter(
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
           <Route path="/register" element={<RegisterPage />} />
-
+          <Route path="/register-form/:role" element={<RegisterFormPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Route>
 
@@ -129,6 +132,16 @@ export const router = createBrowserRouter(
           />
 
           <Route path="/profile/statistics" element={<StatisticsPage />} />
+
+          <Route
+            path="/profile/statistics/applications"
+            element={<ApplicationsStatisticsPage />}
+          />
+
+          <Route
+            path="/profile/statistics/users"
+            element={<UsersStatisticsPage />}
+          />
 
           <Route path="/profile/tasks" element={<TasksPage />} />
 

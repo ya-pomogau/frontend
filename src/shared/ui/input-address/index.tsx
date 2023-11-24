@@ -5,7 +5,7 @@ import React, {
   ChangeEvent,
 } from 'react';
 import { useYMaps } from '@pbe/react-yandex-maps';
-
+import { YMAPS_SUGGEST_SWITCHER } from 'config/ymaps/switches-api';
 import { Input } from '../input';
 
 interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -47,26 +47,28 @@ export const InputAddress = (props: InputAddressProps) => {
       return;
     }
 
-    const suggestView = new ymaps.SuggestView(suggestInputRef?.current, {
-      results: 5,
-    });
-
-    suggestView.events.add('select', (e: any) => {
-      const suggestValue = e.get('item').value;
-
-      const geo = ymaps.geocode(suggestValue);
-
-      // any потому что в библиотеке не написаны типы для SuggestView
-      geo.then((res: any) => {
-        // Выбираем первый результат геокодирования.
-        const firstGeoObject = res.geoObjects.get(0);
-
-        const coords: [number, number] =
-          firstGeoObject.geometry.getCoordinates();
-
-        setAddress(suggestValue, coords);
+    if (YMAPS_SUGGEST_SWITCHER) {
+      const suggestView = new ymaps.SuggestView(suggestInputRef?.current, {
+        results: 5,
       });
-    });
+
+      suggestView.events.add('select', (e: any) => {
+        const suggestValue = e.get('item').value;
+
+        const geo = ymaps.geocode(suggestValue);
+
+        // any потому что в библиотеке не написаны типы для SuggestView
+        geo.then((res: any) => {
+          // Выбираем первый результат геокодирования.
+          const firstGeoObject = res.geoObjects.get(0);
+
+          const coords: [number, number] =
+            firstGeoObject.geometry.getCoordinates();
+
+          setAddress(suggestValue, coords);
+        });
+      });
+    }
   }, [ymaps]);
 
   const inputProps = {
@@ -82,7 +84,6 @@ export const InputAddress = (props: InputAddressProps) => {
       value={address.address}
       ref={suggestInputRef}
       type="text"
-      label="Адрес"
       placeholder="ул. Нахимова, д.9, у подъезда №3"
       {...inputProps}
     />
