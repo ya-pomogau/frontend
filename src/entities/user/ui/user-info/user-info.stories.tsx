@@ -1,8 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-
 import { UserInfo } from '.';
 
 const mockedMasterState = {
@@ -29,6 +28,7 @@ const mockedMasterState = {
       { id: 7, name: 'increase score' },
     ],
     scores: null,
+    isActive: true,
   },
   isLoading: false,
   isFailed: false,
@@ -55,6 +55,7 @@ const mockedAdminState = {
     ],
     keys: null,
     scores: null,
+    isActive: true,
   },
   isLoading: false,
   isFailed: false,
@@ -76,6 +77,7 @@ const mockedVolunteerState = {
     status: 'verified',
     keys: 1,
     scores: 2500,
+    isActive: true,
   },
   isLoading: false,
   isFailed: false,
@@ -94,6 +96,7 @@ const mockedRecipientState = {
     address: 'ул. Нахимова, д. 9',
     coordinates: [59.941871, 30.223494],
     status: 'confirmed',
+    isActive: true,
   },
   isLoading: false,
   isFailed: false,
@@ -111,7 +114,7 @@ const Mockstore = ({ initialState, children }: Record<any, any>) => (
     store={configureStore({
       reducer: {
         user: createSlice({
-          name: 'tasks',
+          name: 'user',
           initialState,
           reducers: {},
         }).reducer,
