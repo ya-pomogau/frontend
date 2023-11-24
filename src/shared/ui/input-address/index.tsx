@@ -84,7 +84,6 @@ export const InputAddress = (props: InputAddressProps) => {
       value={address.address}
       ref={suggestInputRef}
       type="text"
-      label="Адрес"
       placeholder="ул. Нахимова, д.9, у подъезда №3"
       {...inputProps}
     />
