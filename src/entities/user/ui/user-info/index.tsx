@@ -1,22 +1,18 @@
 import { useRef, useState } from 'react';
-
 import { useAppSelector } from 'app/hooks';
-
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
 import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
-
 import type { UpdateUserInfo } from 'entities/user/types';
-
 import styles from './styles.module.css';
 import { useGetUserByIdQuery, useUpdateUsersMutation } from 'services/user-api';
-import { Loader } from 'shared/ui/loader';
 import { skipToken } from '@reduxjs/toolkit/query/react';
+import { Loader } from 'shared/ui/loader';
 import useUser from 'shared/hooks/use-user';
 import { useMediaQuery } from 'shared/hooks';
-
+const location = useLocation();
 export const UserInfo = () => {
   // const user = useAppSelector((state) => state.user.data);
   const role = useAppSelector((state) => state.user.role);
@@ -33,11 +29,11 @@ export const UserInfo = () => {
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
-  const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
-  const isAuth = useUser();
+  const [updateUserData, { isLoading }] = useUpdateUsersMutation();
+  const isAuth = user?.isActive;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
-
+  const isRegisterPath = location.pathname.includes('/register');
   const handleOpenSettingClick = () => {
     setIsPopupOpen(true);
     alert(
@@ -65,6 +61,7 @@ export const UserInfo = () => {
     setImage('');
     setIsPopupOpen(false);
   };
+
   return isAuth ? (
     <InfoContainer
       name={user.fullname}

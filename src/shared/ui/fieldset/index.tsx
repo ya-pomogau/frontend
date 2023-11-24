@@ -9,6 +9,7 @@ interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
   title: string;
   view: FieldsetView;
   children: ReactNode;
+  extraClassContainer?: string;
 }
 
 const Fieldset = ({
