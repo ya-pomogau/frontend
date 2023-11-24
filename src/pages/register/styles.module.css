@@ -1,7 +1,21 @@
 .header {
   height: 90px;
 }
-.titleAdditional {
+
+.user {
+  margin-bottom: 30px;
+}
+
+.form {
+  min-width: 364px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 18px;
+  justify-items: flex-start;
+}
+
+.title {
   margin: 0;
   padding: 40px 18px 12px;
   font-family: 'Golos', sans-serif;
@@ -9,7 +23,13 @@
   line-height: 29px;
   color: var(--colors-interface-primary-additional);
 }
-.link {
+
+.field {
+  width: 364px;
+  margin-bottom: 24px;
+}
+
+.text {
   padding: 19px 0 9px;
   font-family: 'Golos', sans-serif;
   font-size: 12px;
@@ -29,4 +49,10 @@
   display: grid;
   padding-left: 18px;
   justify-items: flex-start;
+}
+
+.error {
+  color: red;
+  margin: 0 0 24px 0;
+  padding: 0;
 }
