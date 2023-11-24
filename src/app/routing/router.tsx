@@ -25,6 +25,8 @@ import { ProfileCompletedPage } from 'pages/profile-completed';
 import { RequestsRecipientsPage } from 'pages/requests-recipients';
 import { RequestsNotprocessedPage } from 'pages/requests-notprocessed';
 import { StatisticsPage } from 'pages/statistics';
+import { ApplicationsStatisticsPage } from 'pages/application-statistics';
+import { UsersStatisticsPage } from 'pages/users-statistics';
 import { TasksPage } from 'pages/tasks';
 import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
@@ -129,6 +131,16 @@ export const router = createBrowserRouter(
           />
 
           <Route path="/profile/statistics" element={<StatisticsPage />} />
+
+          <Route
+            path="/profile/statistics/applications"
+            element={<ApplicationsStatisticsPage />}
+          />
+
+          <Route
+            path="/profile/statistics/users"
+            element={<UsersStatisticsPage />}
+          />
 
           <Route path="/profile/tasks" element={<TasksPage />} />
 

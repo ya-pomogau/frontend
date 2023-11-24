@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ErrorState } from '../types';
+import { userLoginThunk } from '../../../services/system-slice';
 
 const initialState: ErrorState = {
   isError: false,
@@ -19,6 +20,12 @@ export const errorModel = createSlice({
       state.isError = false;
     },
   },
+  extraReducers: (builder) =>
+    builder.addCase(userLoginThunk.rejected, (state, action) => ({
+      ...state,
+      errorText: action.payload as string,
+      isError: true,
+    })),
 });
 
 export const { resetError, enableError } = errorModel.actions;
