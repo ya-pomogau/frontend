@@ -105,6 +105,48 @@ export type TVKUser = {
   vkId: string;
 };
 
+export type TPointGeoJSON = {
+  type: 'Point';
+  coordinates: [number, number];
+};
+
+export type TUserProfile = {
+  fullName: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  phone: string;
+  avatar: string;
+  address: string;
+};
+
+export type TUser = {
+  profile: TUserProfile;
+  location: TPointGeoJSON;
+  role: UserRole;
+  status: StatusType;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  keys?: number | null;
+  scores?: number;
+  permissions?: Array<AdminPermission> | null;
+  isActive: boolean;
+  vkId: string;
+  isRoot: boolean;
+};
+
+// TODO: Изменить в соответствии с реальным ответом
+export type TVKUser = {
+  fullName: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  phone: string;
+  avatar: string;
+  address: string;
+  vkId: string;
+};
+
 export type UpdateUserInfo = {
   fullname: string;
   phone: string;

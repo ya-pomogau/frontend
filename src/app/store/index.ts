@@ -10,6 +10,7 @@ import { errorModel } from 'entities/error/model';
 import systemSliceReducer from '../../services/system-slice';
 import { chatModel } from '../../widgets/chats/model/chat';
 import { conflictModel } from '../../widgets/chats/model/conflict';
+import systemSliceReducer from '../../services/system-slice';
 
 export const store = configureStore({
   reducer: {
