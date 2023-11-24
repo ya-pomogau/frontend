@@ -1,56 +1,63 @@
 import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { cbLink, isEmptyObj } from 'shared/libs/utils';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { TVKLoginRequestDto } from 'services/auth.types';
+import {
+  isNewSelector,
+  isPendingSelector,
+  userLoginThunk,
+  userSelector,
+  vkUserSelector,
+} from 'services/system-slice';
 
 export const VKAuthPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(userSelector);
+  const vkUser = useAppSelector(vkUserSelector);
+  const isLoading = useAppSelector(isPendingSelector);
+  const isNew = useAppSelector(isNewSelector);
+  const isError = useAppSelector((state) => state.error.isError);
+
+  const [dto, setDto] = useState<TVKLoginRequestDto | null>(null);
+
   useEffect(() => {
-    //TODO: сделать функцию отправки на сервер кода
-    //функция отправки кода на бэк и получения данных в ответ
-    const loginVk = async (code: string | (string | null)[]) => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_HOST}/auth/login/vk`,
-          {
-            //путь необходимо будет поменять в зависимости от реализации на сервере
-            method: 'POST',
-            body: JSON.stringify({ code }),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+    const queryObj = queryString.parse(location.search) as TVKLoginRequestDto;
 
-        if (response.ok) {
-          const userData = await response.json(); // Извлекаем данные из ответа
+    if (!isEmptyObj(queryObj) && queryObj.code && queryObj.state) {
+      queryObj.redirectUrl = cbLink;
+      setDto(queryObj);
+    }
+    console.dir(queryObj);
+  }, [location.search]);
 
-          //TODO: Логика перенаправления на страницу регистрации, или вход
-        } else {
-          // Если ответ от сервера не успешный
-          setIsError(true); // Обрабатываем ошибку
-        }
-      } catch (error) {
-        // Ошибка при выполнении запроса
-        setIsError(true); // Обрабатываем ошибку
-      }
-      setIsLoading(false);
-    };
+  useEffect(() => {
+    if (dto && dto.code && dto.redirectUrl) {
+      dispatch(userLoginThunk(dto));
+    }
+  }, [dto, dispatch]);
 
-    const queryObj = queryString.parse(location.search);
+  useEffect(() => {
+    console.dir(vkUser); //TODO: потом удалить
+    if (!user) {
+      navigate('/register');
+    }
+  }, [vkUser, navigate]);
 
-    // if (isError) window.location.href = cbLink;
-
-    if (!isEmptyObj(queryObj) && queryObj.code) loginVk(queryObj.code);
-  }, [location.search, isError, cbLink]);
+  useEffect(() => {
+    console.dir(user); //TODO: потом удалить
+    if (user) {
+      navigate('/profile');
+    }
+  }, [user, navigate]);
 
   return (
     <>
       {isError && <div>ошибка </div>}
-      {isLoading && <div>лоадер...</div>}
+      {(isLoading || isNew) && <div>лоадер...</div>}
     </>
   );
 };
