@@ -56,7 +56,6 @@ export const Default: Story = {
         volunteer: null,
         address: 'переулок Каховского, 3',
         coordinates: [59.95252, 30.243239],
-        chatId: null,
       },
       {
         id: 12,
@@ -87,7 +86,6 @@ export const Default: Story = {
         volunteer: null,
         address: 'ул. Наличная, 28/16В',
         coordinates: [59.941344, 30.227967],
-        chatId: null,
       },
     ],
   },

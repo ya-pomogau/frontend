@@ -51,7 +51,7 @@ const Dropdown = ({
       </div>
       {isActive && (
         <ul className={classNames('text', 'text_size_middle', styles.list)}>
-          {items.map((item) => (
+          {items?.map((item) => (
             <li
               className={styles.item}
               key={item.value}
@@ -60,7 +60,7 @@ const Dropdown = ({
                 setIsActive(false);
               }}
             >
-              {item.label}
+              {item?.label}
               {selected?.value === item.value && <CheckIcon color={'blue'} />}
             </li>
           ))}

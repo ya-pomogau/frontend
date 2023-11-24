@@ -76,3 +76,16 @@
 .square-button:disabled.square-button::before {
   background-color: var(--colors-interface-additional);
 }
+
+.square-button--conflict.square-button::before {
+  background-color: var(--colors-interface-orange-soft);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.square-button--conflict:hover.square-button::before {
+  background-color: var(--colors-interface-orange);
+}
+
+.square-button--conflict:active.square-button::before {
+  background-color: var(--colors-interface-red-soft);
+}

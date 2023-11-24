@@ -1,6 +1,6 @@
 import { memo, useRef, useCallback } from 'react';
 import { Map, YMaps } from '@pbe/react-yandex-maps';
-import { YMAPS_API_KEY } from 'config/ymaps';
+import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 
 import { isTaskUrgent } from 'shared/libs/utils';
 import { Mark } from './Mark';

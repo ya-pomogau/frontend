@@ -14,6 +14,7 @@ interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   customIcon?: ReactNode;
   size?: 'small' | 'medium' | 'large';
+  unreadMessages?: number;
 }
 
 const defautlIcons = {
@@ -29,6 +30,7 @@ export const RoundButton = ({
   buttonType,
   customIcon,
   size,
+  unreadMessages,
   ...props
 }: RoundButtonProps) => (
   <button
@@ -44,5 +46,12 @@ export const RoundButton = ({
     <div className={styles['round-buttonImg']}>
       {customIcon || defautlIcons[buttonType]}
     </div>
+    {buttonType === 'message' && unreadMessages ? (
+      unreadMessages > 99 ? (
+        <div className={styles.messages_additional}>{'99+'}</div>
+      ) : (
+        <div className={styles.messages}>{unreadMessages}</div>
+      )
+    ) : null}
   </button>
 );
