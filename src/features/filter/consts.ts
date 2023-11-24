@@ -1,7 +1,9 @@
+import { UserRole } from 'shared/types/common.types';
+
 export const FilterItemsIds = {
   ALL: 'all',
-  VOLUNTEER: 'volunteer',
-  RECIPIENT: 'recipient',
+  VOLUNTEER: UserRole.VOLUNTEER,
+  RECIPIENT: UserRole.RECIPIENT,
   UNHANDLED: 'unhandled',
   CATEGORY_1: '1',
   CATEGORY_2: '2',
