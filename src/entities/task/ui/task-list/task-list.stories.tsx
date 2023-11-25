@@ -89,7 +89,7 @@ export const ExampleActive: Story = {
         confirmed: false,
         conflict: false,
         recipient: {
-          id: 4,
+          id: '4',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Алексей Борисович',
           role: 'recipient',
@@ -102,7 +102,7 @@ export const ExampleActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',
@@ -119,7 +119,7 @@ export const ExampleActive: Story = {
         },
         address: 'ул. Нахимова, д. 9',
         coordinates: [59.941871, 30.223494],
-        chatId: null,
+        // chatId: null,
         chat: {
           id: 4327,
           unread: 50,
@@ -140,7 +140,7 @@ export const ExampleActive: Story = {
         confirmed: false,
         conflict: false,
         recipient: {
-          id: 5,
+          id: '5',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Игорь Витальевич',
           role: 'recipient',
@@ -154,7 +154,7 @@ export const ExampleActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',
@@ -171,7 +171,7 @@ export const ExampleActive: Story = {
         },
         address: 'ул. Наличная, 28/16В',
         coordinates: [59.941871, 30.223494],
-        chatId: null,
+        //  chatId: null,
         chat: {
           id: 4478,
           unread: 238,
@@ -206,7 +206,7 @@ export const ExampleNotActive: Story = {
         confirmed: true,
         conflict: false,
         recipient: {
-          id: 4,
+          id: '4',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Алексей Борисович',
           role: 'recipient',
@@ -219,7 +219,7 @@ export const ExampleNotActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',
@@ -236,7 +236,7 @@ export const ExampleNotActive: Story = {
         },
         address: 'ул. Нахимова, д. 9',
         coordinates: [59.941871, 30.223494],
-        chatId: 5678,
+        // chatId: 5678,
         chat: {
           id: 4545,
           unread: 1,
@@ -257,7 +257,7 @@ export const ExampleNotActive: Story = {
         confirmed: true,
         conflict: false,
         recipient: {
-          id: 6,
+          id: '6',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Иван Николаевич',
           role: 'recipient',
@@ -270,7 +270,7 @@ export const ExampleNotActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',
@@ -287,7 +287,7 @@ export const ExampleNotActive: Story = {
         },
         address: 'переулок Каховского, 3',
         coordinates: [59.95252, 30.243239],
-        chatId: null,
+        // chatId: null,
         chat: {
           id: 1278,
           unread: 0,

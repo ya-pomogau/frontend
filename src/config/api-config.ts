@@ -18,6 +18,8 @@ export const AUTH_ROUTES: TAuthRoutes = {
   adminLogin: '/auth/admin',
 };
 
+const contentType = 'Content-Type';
+
 export const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json',
+  [contentType]: 'application/json',
 };

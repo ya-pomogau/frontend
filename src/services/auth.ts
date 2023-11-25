@@ -10,7 +10,7 @@ import { API_URL, AUTH_ROUTES, DEFAULT_HEADERS } from '../config/api-config';
 
 class Auth {
   constructor(
-    private readonly baseUrl: string,
+    private readonly baseUrl: string | undefined,
     private readonly routes: TAuthRoutes,
     private readonly headers: Record<string, string>
   ) {}

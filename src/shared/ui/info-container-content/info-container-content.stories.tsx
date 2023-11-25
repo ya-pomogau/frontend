@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     name: 'Иванов Иван Иванович',
-    id: 112233,
+    id: '112233',
     phone: '+7(000) 000 000',
     address: 'ул. Цветной бульвар, 43',
   },
