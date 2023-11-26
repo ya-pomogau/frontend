@@ -46,7 +46,7 @@ type StatusType =
   | typeof VERIFIED;
 
 export type UserInfo = {
-  id: string;
+  id: number;
   fullname: string;
   role: UserRole | null;
   status: StatusType | null;
@@ -110,5 +110,5 @@ export type UpdateUserInfo = {
   phone: string;
   address: string;
   avatar: null | FormData;
-  id: string;
+  id: number;
 };
