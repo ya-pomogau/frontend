@@ -41,7 +41,7 @@ export const Default: Story = {
         completed: false,
         confirmed: false,
         recipient: {
-          id: 6,
+          id: '6',
           createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Иван Николаевич',
           role: 'recipient',
@@ -71,7 +71,7 @@ export const Default: Story = {
         completed: false,
         confirmed: false,
         recipient: {
-          id: 5,
+          id: '5',
           createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Игорь Витальевич',
           role: 'recipient',

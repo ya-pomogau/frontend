@@ -15,7 +15,7 @@
       ],
       "status": "activated",
       "isActive": true,
-      "keys": 1,
+      "isHasKeys": true,
       "permissions": [
         {
           "id": 0,
@@ -77,7 +77,7 @@
           "name": "create tasks"
         }
       ],
-      "keys": null,
+      "isHasKeys": false,
       "scores": null
     },
     {
@@ -94,7 +94,7 @@
         30.216757
       ],
       "status": "verified",
-      "keys": 1,
+      "isHasKeys": true,
       "scores": 2500,
       "isActive": true
     },
@@ -278,7 +278,7 @@
         ],
         "approved": true,
         "checked": true,
-        "keys": true,
+        "isHasKeys": true,
         "scores": 2500
       },
       "address": "ул. Нахимова, д. 9",
@@ -332,7 +332,7 @@
         ],
         "approved": true,
         "checked": true,
-        "keys": true,
+        "isHasKeys": true,
         "scores": 2500
       },
       "address": "ул. Наличная, 28/16В",
@@ -385,7 +385,7 @@
         ],
         "approved": true,
         "checked": true,
-        "keys": true,
+        "isHasKeys": true,
         "scores": 2500
       },
       "address": "ул. Нахимова, д. 9",
@@ -439,7 +439,7 @@
         ],
         "approved": true,
         "checked": true,
-        "keys": true,
+        "isHasKeys": true,
         "scores": 2500
       },
       "address": "переулок Каховского, 3",
