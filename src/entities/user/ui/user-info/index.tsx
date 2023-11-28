@@ -1,17 +1,19 @@
 import { useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
+
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
+import { Loader } from 'shared/ui/loader';
 import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
-import styles from './styles.module.css';
 import { useGetUserByIdQuery, useUpdateUsersMutation } from 'services/user-api';
-import { Loader } from 'shared/ui/loader';
-import useUser from 'shared/hooks/use-user';
-import { useLocation } from 'react-router-dom';
-import { skipToken } from '@reduxjs/toolkit/dist/query';
 import { useAppSelector } from 'app/hooks';
+import useUser from 'shared/hooks/use-user';
+
+import styles from './styles.module.css';
 
 export const UserInfo = () => {
   // const user = useAppSelector((state) => state.user.data);
