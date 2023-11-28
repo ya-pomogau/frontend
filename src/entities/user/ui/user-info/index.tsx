@@ -105,7 +105,7 @@ export const UserInfo = () => {
         />
 
         {user.role === 'volunteer' && (
-          <VolunteerInfo score={user.scores || 0} hasKey={user.keys} />
+          <VolunteerInfo score={user.scores || 0} hasKey={user.isHasKeys} />
         )}
       </div>
     </InfoContainer>

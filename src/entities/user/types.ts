@@ -14,7 +14,10 @@ import {
   VERIFIED,
 } from 'shared/libs/statuses';
 import { AdminPermission } from '../../shared/types/common.types';
-import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
+import {
+  GeoCoordinates,
+  PointGeoJSONInterface,
+} from 'shared/types/point-geojson.types';
 
 export type UserRole = 'recipient' | 'volunteer' | 'master' | 'admin';
 /*type PermissionType = {
@@ -56,9 +59,9 @@ export type UserInfo = {
   avatar: string;
   phone: string;
   address: string;
-  coordinates: number[];
+  coordinates: GeoCoordinates;
   createdAt: string;
-  keys?: number | null;
+  isHasKeys?: boolean;
   scores?: number;
   permissions?: Array<AdminPermission> | null;
   isActive: boolean;
@@ -84,7 +87,7 @@ export type TUser = {
   status: StatusType;
   createdAt: Date | string;
   updatedAt: Date | string;
-  keys?: boolean;
+  isHasKeys?: boolean;
   scores?: number;
   permissions?: Array<AdminPermission> | null;
   isActive: boolean;
