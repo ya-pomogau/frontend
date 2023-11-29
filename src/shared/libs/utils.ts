@@ -22,10 +22,9 @@ export const isEmptyObj = (obj: object): boolean => {
   }
   return true;
 };
-//TODO: надо будет заменить когда будет сервер
-const BASE_URL = 'http://localhost:3000';
+
 //callback link для возращения после авторизации
-export const cbLink = `${BASE_URL}/vk-auth`;
+export const cbLink = `${process.env.REACT_APP_FRONT}/vk-auth`;
 
 //функция редиректа на VK
 export const handleRedirectVK = () => {
