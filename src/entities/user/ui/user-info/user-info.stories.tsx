@@ -3,6 +3,7 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { UserInfo } from '.';
+import { usersApi } from 'services/user-api';
 
 const mockedMasterState = {
   role: 'master',
@@ -112,13 +113,14 @@ const unauthorizedState = {
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
   <Provider
     store={configureStore({
-      reducer: {
-        user: createSlice({
-          name: 'user',
-          initialState,
-          reducers: {},
-        }).reducer,
-      },
+      reducer: usersApi.reducer
+      // reducer: {
+      //   user: createSlice({
+      //     name: 'user',
+      //     initialState,
+      //     reducers: {},
+      //   }).reducer,
+      // },
     })}
   >
     {children}
