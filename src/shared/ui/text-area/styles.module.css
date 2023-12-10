@@ -13,6 +13,10 @@
   box-sizing: border-box;
 }
 
+.input_error {
+  border-color: var(--colors-interface-blue-navy);
+}
+
 .input_whithout_label {
   composes: input;
   height: 100%;
@@ -28,7 +32,6 @@
 
 .input:focus-visible {
   outline: none;
-  border-color: var(--colors-interface-blue-navy);
 }
 
 .label {

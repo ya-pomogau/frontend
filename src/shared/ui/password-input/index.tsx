@@ -7,10 +7,13 @@ import { Input } from '../input';
 
 interface PasswordInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
   label: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   extClassName?: string;
+  error?: boolean;
+  errorText?: string | any;
+  name?: string;
+  register: any;
 }
 
 export const PasswordInput = React.forwardRef<
@@ -19,10 +22,11 @@ export const PasswordInput = React.forwardRef<
 >(
   (
     {
-      value,
       label = 'Пароль',
+      register,
       name,
-      onChange,
+      error,
+      errorText,
       extClassName,
       placeholder = 'Введите пароль',
       ...props
@@ -30,20 +34,6 @@ export const PasswordInput = React.forwardRef<
     ref
   ) => {
     const [visible, setVisibility] = useState(false);
-    const [error, setError] = useState(false);
-
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    const validateField = (value: string) => {
-      setError(value.length < 2);
-    };
-
-    const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (e.target.value) {
-        validateField(e.target.value);
-      } else {
-        setError(false);
-      }
-    };
 
     const handleIconClick = (e: React.MouseEvent<HTMLDivElement>) => {
       setVisibility(!visible);
@@ -51,13 +41,8 @@ export const PasswordInput = React.forwardRef<
 
     return (
       <Input
-        required
-        onBlur={onBlur}
         type={visible ? 'text' : 'password'}
-        value={value}
         label={label}
-        name={name as string}
-        onChange={onChange}
         placeholder={placeholder}
         extClassName={extClassName}
         onIconClick={handleIconClick}
@@ -69,7 +54,9 @@ export const PasswordInput = React.forwardRef<
           )
         }
         error={error}
-        errorText={'Пароль не может быть таким коротким'}
+        errorText={errorText}
+        {...register(name)}
+        {...props}
       />
     );
   }

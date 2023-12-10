@@ -4,7 +4,7 @@ import styles from './info-container-content.module.css';
 
 interface InfoContainerContentProps {
   name?: string;
-  id?: number;
+  id?: number | string;
   phone?: string;
   address?: string;
 }

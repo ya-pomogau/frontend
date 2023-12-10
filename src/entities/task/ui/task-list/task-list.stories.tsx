@@ -4,6 +4,8 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 import { TaskList } from '.';
 
+// Юлия М.-П. изменила id с number на string, чтобы убрать ошибки при запуске
+
 const MockedState = {
   tasks: {
     available: [],
@@ -89,7 +91,7 @@ export const ExampleActive: Story = {
         confirmed: false,
         conflict: false,
         recipient: {
-          id: 4,
+          id: '4',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Алексей Борисович',
           role: 'recipient',
@@ -102,7 +104,7 @@ export const ExampleActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',
@@ -140,7 +142,7 @@ export const ExampleActive: Story = {
         confirmed: false,
         conflict: false,
         recipient: {
-          id: 5,
+          id: '5',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Игорь Витальевич',
           role: 'recipient',
@@ -154,7 +156,7 @@ export const ExampleActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',
@@ -206,7 +208,7 @@ export const ExampleNotActive: Story = {
         confirmed: true,
         conflict: false,
         recipient: {
-          id: 4,
+          id: '4',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Алексей Борисович',
           role: 'recipient',
@@ -219,7 +221,7 @@ export const ExampleNotActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',
@@ -257,7 +259,7 @@ export const ExampleNotActive: Story = {
         confirmed: true,
         conflict: false,
         recipient: {
-          id: 6,
+          id: '6',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Иван Николаевич',
           role: 'recipient',
@@ -270,7 +272,7 @@ export const ExampleNotActive: Story = {
           isActive: true,
         },
         volunteer: {
-          id: 7,
+          id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
           role: 'volunteer',

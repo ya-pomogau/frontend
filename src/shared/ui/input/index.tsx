@@ -12,7 +12,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   extClassName?: string;
   error?: boolean;
-  errorText?: string;
+  errorText?: string | any;
   customIcon?: React.ReactNode;
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   extClassNameInput?: string;

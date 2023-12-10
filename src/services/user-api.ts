@@ -9,7 +9,7 @@ import { API_URL } from '../config/api-config';
 export const usersApi = createApi({
   reducerPath: 'usersApi',
   tagTypes: ['Users', 'User'],
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env['REACT_APP_FRONT_LOCAL '] }),
   endpoints: (build) => ({
     getAllUsers: build.query({
       query: () => 'users',

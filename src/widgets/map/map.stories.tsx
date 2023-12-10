@@ -1,4 +1,6 @@
 /* eslint-disable import/no-named-as-default */
+// Юлия М.-П. изменила id с number на string, чтобы убрать ошибки при запуске
+
 import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
 
@@ -41,7 +43,7 @@ export const Default: Story = {
         completed: false,
         confirmed: false,
         recipient: {
-          id: 6,
+          id: '6',
           createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Иван Николаевич',
           role: 'recipient',
@@ -71,7 +73,7 @@ export const Default: Story = {
         completed: false,
         confirmed: false,
         recipient: {
-          id: 5,
+          id: '5',
           createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Игорь Витальевич',
           role: 'recipient',

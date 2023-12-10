@@ -19,7 +19,7 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   extClassName?: string;
   error?: boolean;
-  errorText?: string;
+  errorText?: string | any;
   customIcon?: React.ReactNode;
   inputAttributes?: React.InputHTMLAttributes<HTMLInputElement>;
 }

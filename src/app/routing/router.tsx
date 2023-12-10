@@ -33,7 +33,7 @@ import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
-import { RegisterFormPage } from 'pages/register-forn';
+import { RegisterFormPage } from 'pages/register-form';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

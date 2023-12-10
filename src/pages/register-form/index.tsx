@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
@@ -9,11 +9,28 @@ import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './styles.module.css';
 import { useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import Joi from 'joi';
+import { joiResolver } from '@hookform/resolvers/joi';
+
+const schema = Joi.object({
+  name: Joi.string().required().messages({
+    /* eslint-disable */
+    'string.empty': 'Заполните это поле',
+  }),
+  phone: Joi.string()
+    .required()
+    .regex(/^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$/)
+    .messages({
+      /* eslint-disable */
+      'string.pattern.base':
+        'Номер телефона должен иметь вид +7 (000) 000 00 00',
+      'string.empty': 'Заполните это поле',
+    }),
+  address: Joi.string().required().min(1),
+});
 
 export function RegisterFormPage() {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-
   const [address, setAddress] = useState<{
     address: string;
     coords: [number, number] | [];
@@ -21,13 +38,25 @@ export function RegisterFormPage() {
     address: '',
     coords: [],
   });
+
   const { role } = useParams();
   console.log(role);
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = (
-    event: FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-    console.log('Региcтрация:', name, phone, address, role);
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    getValues,
+    reset,
+  } = useForm({
+    mode: 'onChange',
+    resolver: joiResolver(schema),
+  });
+
+  const onSubmit = () => {
+    console.log(getValues());
+    console.log('test');
+    reset();
   };
 
   const handleAddressValueChange = (
@@ -48,44 +77,48 @@ export function RegisterFormPage() {
         extClassName={styles.header}
       />
       <p className={styles.titlePrimary}>Зарегистрироваться</p>
-      <form className={styles.form} onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
           extClassName={styles.field}
-          required
           label="ФИО"
-          name="name"
-          value={name}
-          onChange={(event) => setName(event.currentTarget.value)}
           placeholder="ФИО"
           type="text"
+          error={errors?.name && true}
+          errorText={
+            !(errors?.name?.message === undefined) && errors?.name?.message
+          }
+          {...register('name')}
         />
 
         <Input
           extClassName={styles.field}
-          required
           label="Телефон"
-          name="phone"
-          value={phone}
-          onChange={(event) => setPhone(event.currentTarget.value)}
           placeholder="+7 (000) 000 00 00"
           type="tel"
-          pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"
           title="+7 (123) 456 78 90"
+          error={errors?.phone && true}
+          errorText={
+            !(errors?.phone?.message === undefined) && errors?.phone?.message
+          }
+          {...register('phone')}
         />
 
         <div>
           <InputAddress
-            required
-            name="address"
             address={address}
             setAddress={handleAddressValueChange}
+            error={errors?.address && true}
+            errorText={
+              !errors?.address?.message === undefined &&
+              errors?.address?.message
+            }
+            {...register('address')}
           />
 
           <p className={styles.text}>
             Укажите адрес и мы подберем ближайшее к вам задание
           </p>
         </div>
-
         <Button
           buttonType="primary"
           actionType="submit"
