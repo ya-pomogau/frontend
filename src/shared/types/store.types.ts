@@ -5,6 +5,7 @@ export type TSystemSliceState = {
   user: TUser | null;
   vk_user: TVKUser | null;
   isPending: boolean;
+  isNew: boolean;
 };
 
 export type TCustomSelector<T> = (state: RootState) => T;

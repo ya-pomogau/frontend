@@ -40,8 +40,14 @@ export function ProfileMapPage() {
           <YandexMap
             tasks={tasks}
             mapSettings={{
-              latitude: user ? user.coordinates[0] : 59.938955,
-              longitude: user ? user.coordinates[1] : 30.315644,
+              latitude:
+                user && Array.isArray(user.coordinates)
+                  ? user.coordinates[0]
+                  : 59.938955,
+              longitude:
+                user && Array.isArray(user.coordinates)
+                  ? user.coordinates[1]
+                  : 30.315644,
               zoom: 15,
             }}
             width="100%"

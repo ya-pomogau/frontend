@@ -1,3 +1,4 @@
+import { FRONT_URL } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 
 export const isTaskUrgent = (date: string): boolean =>
@@ -14,4 +15,18 @@ export const getFullQueriesForYApi = (
     }
   }
   return mainJSApi + additionalQueries;
+};
+
+export const isEmptyObj = (obj: object): boolean => {
+  for (const key in obj) {
+    return false;
+  }
+  return true;
+};
+//callback link для возращения после авторизации
+export const cbLink = `${FRONT_URL}/vk-auth`;
+
+//функция редиректа на VK
+export const handleRedirectVK = () => {
+  window.location.href = `https://oauth.vk.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&display=page&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
 };

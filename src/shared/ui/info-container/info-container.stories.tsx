@@ -17,7 +17,7 @@ const mockedVolunteerState = {
     address: 'ул. Кораблестроителей, 19к1',
     coordinates: [59.942575, 30.216757],
     status: 'verified',
-    keys: 1,
+    isHasKeys: true,
     scores: 2500,
   },
   isLoading: false,
