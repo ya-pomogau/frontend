@@ -113,7 +113,7 @@ const unauthorizedState = {
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
   <Provider
     store={configureStore({
-      reducer: usersApi.reducer
+      reducer: usersApi.reducer,
       // reducer: {
       //   user: createSlice({
       //     name: 'user',
