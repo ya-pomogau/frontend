@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'shared/hooks/media-query';
-import { positionConfigTop, linksTop } from './utils';
+import { positionConfigTop, linksTop, linksTopAuthUser } from './utils';
 
 import { Logo } from 'shared/ui/logo';
 import { SideBar } from 'widgets/header/navigation';
@@ -24,6 +24,7 @@ const Header = () => {
     evt.stopPropagation();
     setMenuActive(!menuActive);
   };
+  console.log(menuActive);
 
   const isMenuHidden = !user && !isMobile;
 
@@ -51,7 +52,12 @@ const Header = () => {
           <Logo />
         </NavLink>
 
-        {!isMobile && <SideBar position={positionConfigTop} links={linksTop} />}
+        {!isMobile && (
+          <SideBar
+            position={positionConfigTop}
+            links={menuActive ? linksTopAuthUser : linksTop}
+          />
+        )}
 
         <div
           className={`${styles.header__menu__container} ${

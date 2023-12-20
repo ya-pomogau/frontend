@@ -34,6 +34,7 @@ import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
 import { VKAuthPage } from 'pages/vk-auth';
 import { RegisterPage } from 'pages/register';
+import { ProfileChatsPages } from 'pages/profile-chats';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,6 +53,7 @@ export const router = createBrowserRouter(
 
           {/* Удалить когда система аутификации будет готова */}
           <Route path="/pick" element={<PickRolePage />} />
+          <Route path="/test" element={<ProfileChatsPages />} />
         </Route>
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
