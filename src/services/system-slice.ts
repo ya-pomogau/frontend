@@ -19,7 +19,7 @@ export const userSelector: TCustomSelector<TUser | null> = (state) =>
   state.system.user;
 
 export const vkUserSelector: TCustomSelector<TVKUser | null> = (state) =>
-  state.system.vk_user;
+  state.system.vkUser;
 
 export const hasPrivilegesSelector: TCustomSelector<boolean> = (state) =>
   !!state.system.user &&
@@ -42,14 +42,28 @@ export const userLoginThunk = createAsyncThunk(
   'user/login',
   async (userLoginDto: TVKLoginRequestDto, { rejectWithValue }) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      const { token, user, vk_user } = await authApi.vkLogin(userLoginDto);
+      const tmpRes = await authApi.vkLogin(userLoginDto);
+      const {
+        token,
+        user,
+        vkUser: { response },
+      } = tmpRes;
+      console.dir(response);
+      const { first_name, last_name, id } = response[0];
+      const vkUser = { firstName: first_name, lastName: last_name, vkId: id };
       if (token && !!user) {
         localStorage.setItem('token', token);
       }
-      return { user, vk_user };
+      console.log('user:');
+      console.dir(user);
+      console.log('vkUser:');
+      console.dir(vkUser);
+      return { user, vkUser };
     } catch (error) {
+      console.log('error:');
+      console.dir(error);
       const { message } = error as ErrorDto;
+      console.log(`Error message: ${message}`);
       rejectWithValue(message as string);
     }
   }
@@ -58,8 +72,9 @@ export const userLoginThunk = createAsyncThunk(
 export const newUserThunk = createAsyncThunk(
   'user/new',
   async (newUserDto: TNewUserRequestDto, { rejectWithValue }) => {
+    console.log('newUserDto:');
+    console.dir(newUserDto);
     try {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { token, user } = await authApi.createNewUser(newUserDto);
       if (!token || !user) {
         throw new Error('Ошибка регистрации пользователя');
@@ -77,7 +92,7 @@ export const newUserThunk = createAsyncThunk(
 
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
-  vk_user: null,
+  vkUser: null,
   isPending: false,
   isNew: false,
 };
@@ -100,13 +115,13 @@ const systemSlice = createSlice({
           return state;
         }
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const { user = null, vk_user = null } = action.payload;
+        const { user = null, vkUser = null } = action.payload;
         return {
           ...state,
           user,
-          vk_user,
+          vkUser: vkUser,
           isPending: false,
-          isNew: !user && !!vk_user,
+          isNew: !user && !!vkUser,
         };
       })
       .addCase(userLoginThunk.rejected, (state) => ({

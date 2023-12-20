@@ -44,10 +44,18 @@ export type TAdminLoginDto = {
   password: string;
 };
 
+export type TVKUserResponseObj = {
+  first_name: string;
+  last_name: string;
+  id: string;
+  //  [key: string]: string;
+};
+
+export type TVKUserResponse = { response: Array<TVKUserResponseObj> };
 export type TVKLoginResponseDto = {
   token: string | null;
-  user: TUser | null;
-  vk_user: TVKUser | null;
+  user?: TUser;
+  vkUser: TVKUserResponse;
 };
 
 export type TNewUserResponseDto = {

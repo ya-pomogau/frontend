@@ -14,11 +14,10 @@ import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 
 export function RegisterPage() {
-  const {
-    firstName = '',
-    lastName = '',
-    vkId = '',
-  } = useAppSelector(vkUserSelector) ?? {};
+  const vkUser = useAppSelector(vkUserSelector);
+  console.log('vkUser in Register page:');
+  console.dir(vkUser);
+  const { firstName = '', lastName = '', vkId = '' } = vkUser ?? {};
   //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
   const [name, setName] = useState<string>(`${firstName} ${lastName}`);
   //TODO: разобраться с получением телефона и записью его в стейт

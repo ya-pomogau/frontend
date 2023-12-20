@@ -15,7 +15,8 @@ export const MapWithTasks = () => {
   }, [navigate]);
 
   return isLoading || !data ? (
-    <Loader />
+    // <Loader />
+    <p>loading</p>
   ) : (
     data && (
       <YandexMap tasks={data} width="100%" height="90%" onClick={handleClick} />

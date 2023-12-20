@@ -100,7 +100,6 @@ export type TVKUser = {
   firstName: string;
   lastName: string;
   vkId: string;
-  email: string;
 };
 
 export type UpdateUserInfo = {

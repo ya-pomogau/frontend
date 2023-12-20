@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import queryString from 'query-string';
 import { cbLink, isEmptyObj } from 'shared/libs/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -23,19 +23,38 @@ export const VKAuthPage = () => {
   const isError = useAppSelector((state) => state.error.isError);
 
   const [dto, setDto] = useState<TVKLoginRequestDto | null>(null);
-
+  const isUserRequested = useRef<boolean>(false);
   useEffect(() => {
     const queryObj = queryString.parse(location.search) as TVKLoginRequestDto;
-
-    if (!isEmptyObj(queryObj) && queryObj.code && queryObj.state) {
+    console.log('first effect:');
+    console.dir(dto);
+    console.log(
+      `Is first effect should enter 'if' : ${
+        !isEmptyObj(queryObj) && !!queryObj.code && !!queryObj.state
+      }`
+    );
+    if (
+      !isEmptyObj(queryObj) &&
+      queryObj.code &&
+      queryObj.state &&
+      !isUserRequested.current
+    ) {
+      console.log('location:');
+      console.dir(location);
+      console.log(`location.search: '${location.search}'.\nqueryObj`);
+      console.dir(queryObj);
       queryObj.redirectUrl = cbLink;
-      setDto(queryObj);
+      dispatch(userLoginThunk(queryObj));
+      isUserRequested.current = true;
     }
-    console.dir(queryObj);
   }, [location.search]);
 
   useEffect(() => {
+    console.log('second effect:');
+    console.dir(dto);
     if (dto && dto.code && dto.redirectUrl) {
+      console.log('second effect dispatch:');
+      console.dir(dto);
       dispatch(userLoginThunk(dto));
     }
   }, [dto, dispatch]);

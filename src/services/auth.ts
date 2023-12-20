@@ -20,6 +20,8 @@ class Auth {
   private static _checkResponse(
     res: TypedResponse<ResponseDto>
   ): Promise<ResponseDto> {
+    console.log('res in Auth._checkResponse():');
+    console.dir(res);
     if (res.ok) {
       return res.json();
     }
@@ -30,11 +32,14 @@ class Auth {
   }
 
   public vkLogin(dto: TVKLoginRequestDto) {
+    console.log('dto in vkLogin(dto):');
+    console.dir(dto);
     const fetchOptions = {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify(dto),
     };
+    console.dir();
     return fetch(`${this.baseUrl}${this.routes.userLogin}`, fetchOptions).then(
       Auth._checkResponse
     ) as Promise<TVKLoginResponseDto>;
