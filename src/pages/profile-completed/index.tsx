@@ -7,6 +7,7 @@ import { Icon } from 'shared/ui/icons';
 import { Filter } from 'features/filter';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
+import { UserRole } from 'shared/types/common.types';
 
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -19,7 +20,7 @@ export function ProfileCompletedPage() {
         icon={<Icon color="blue" icon="CompletedApplicationIcon" size="54" />}
         text="Завершенные заявки"
         filter={
-          role === 'volunteer' ? (
+          role === UserRole.VOLUNTEER ? (
             <Filter
               items={{
                 sort: true,
@@ -44,7 +45,7 @@ export function ProfileCompletedPage() {
         <Loader />
       ) : (
         <TaskList
-          userRole="volunteer"
+          userRole={UserRole.VOLUNTEER}
           isMobile={isMobile}
           handleClickCloseButton={() => 2}
           handleClickConfirmButton={() => 3}

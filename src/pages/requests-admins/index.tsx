@@ -9,9 +9,10 @@ import styles from './styles.module.css';
 import { testUsers } from 'pages/requests/test-users';
 import { Input } from 'shared/ui/input';
 import { useState } from 'react';
+import { UserRole } from 'shared/types/common.types';
 
 interface UserProps {
-  role: 'volunteer' | 'recipient' | 'admin' | 'master';
+  role: UserRole;
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
@@ -22,7 +23,7 @@ interface UserProps {
 }
 
 export function RequestsAdminsPage() {
-  const { isLoading, data = [] } = useGetUsersQuery('admin', {
+  const { isLoading, data = [] } = useGetUsersQuery('Admin', {
     pollingInterval: 30000,
   });
   const [searchName, setSearchName] = useState('');
@@ -54,7 +55,8 @@ export function RequestsAdminsPage() {
                 (user: UserProps) =>
                   user.userName
                     .toLowerCase()
-                    .includes(searchName.toLowerCase()) && user.role === 'admin'
+                    .includes(searchName.toLowerCase()) &&
+                  user.role === UserRole.ADMIN
               )
               .map((user: UserProps) => (
                 <UserCard

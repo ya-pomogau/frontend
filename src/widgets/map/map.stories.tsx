@@ -1,6 +1,7 @@
 /* eslint-disable import/no-named-as-default */
 import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
+import { UserRole } from 'shared/types/common.types';
 
 const meta = {
   title: 'widgets/YandexMap',
@@ -44,7 +45,7 @@ export const Default: Story = {
           id: '6',
           createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Иван Николаевич',
-          role: 'recipient',
+          role: UserRole.RECIPIENT,
           vk: 'https://vk.com/id123456789',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
@@ -74,7 +75,7 @@ export const Default: Story = {
           id: '5',
           createdAt: '2023-07-10T19:30Z',
           fullname: 'Реципиентов Игорь Витальевич',
-          role: 'recipient',
+          role: UserRole.RECIPIENT,
           vk: 'https://vk.com/id123456789',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',

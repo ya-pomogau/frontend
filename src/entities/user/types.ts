@@ -13,13 +13,13 @@ import {
   UNCONFIRMED,
   VERIFIED,
 } from 'shared/libs/statuses';
-import { AdminPermission } from '../../shared/types/common.types';
+import { AdminPermission, UserRole } from '../../shared/types/common.types';
 import {
   GeoCoordinates,
   PointGeoJSONInterface,
 } from 'shared/types/point-geojson.types';
 
-export type UserRole = 'recipient' | 'volunteer' | 'master' | 'admin';
+// export type UserRole = 'Recipient' | 'Volunteer' | 'Master' | 'Admin';
 /*type PermissionType = {
 
   id: number;

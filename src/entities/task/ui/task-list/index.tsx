@@ -6,10 +6,10 @@ import { Informer } from 'shared/ui/informer';
 import { RoundButton } from 'shared/ui/round-button';
 import { TaskItem } from '../task';
 
-import type { UserRole } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
+import { UserRole } from 'shared/types/common.types';
 
 interface TaskListProps {
   userRole?: UserRole | null;
@@ -40,7 +40,7 @@ export const TaskList = ({
   handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
-  const buttonGuard = usePermission([CONFIRMED], 'recipient');
+  const buttonGuard = usePermission([CONFIRMED], UserRole.RECIPIENT);
 
   const handleDeniedAccess = () => {
     alert('Вам пока нельзя такое, дождитесь проверки администратором');
@@ -58,7 +58,7 @@ export const TaskList = ({
             extClassName
           )}
         >
-          {userRole === 'recipient' && (
+          {userRole === UserRole.RECIPIENT && (
             <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
               <RoundButton
                 buttonType="add"
@@ -123,7 +123,7 @@ export const TaskList = ({
         >
           <Informer text="У Вас пока нет заявок" />
 
-          {userRole === 'recipient' && (
+          {userRole === UserRole.RECIPIENT && (
             <>
               <p
                 className={`${styles.title_add_empty} text_size_large text_type_regular`}

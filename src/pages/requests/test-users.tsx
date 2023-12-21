@@ -1,3 +1,5 @@
+import { UserRole } from 'shared/types/common.types';
+
 export const testUsers: any = [
   {
     role: 'volunteer',
@@ -15,7 +17,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'Семенов Петр Игоревич',
     userId: 12345,
@@ -46,7 +48,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -61,7 +63,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'admin',
+    role: UserRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -76,7 +78,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'admin',
+    role: UserRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -91,7 +93,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'admin',
+    role: UserRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -106,7 +108,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'admin',
+    role: UserRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -136,7 +138,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -167,7 +169,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -198,7 +200,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -213,7 +215,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'admin',
+    role: UserRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -243,7 +245,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -258,7 +260,7 @@ export const testUsers: any = [
     },
   },
   {
-    role: 'admin',
+    role: UserRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,

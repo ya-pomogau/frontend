@@ -12,9 +12,10 @@ import { Input } from 'shared/ui/input';
 
 import { testUsers } from 'pages/requests/test-users';
 import { useState } from 'react';
+import { UserRole } from 'shared/types/common.types';
 
 interface UserProps {
-  role: 'volunteer' | 'recipient' | 'admin' | 'master';
+  role: UserRole;
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
@@ -57,7 +58,7 @@ export function RequestsVolunteersPage() {
                   user.userName
                     .toLowerCase()
                     .includes(searchName.toLowerCase()) &&
-                  user.role == 'volunteer'
+                  user.role == UserRole.VOLUNTEER
               )
               .map((user: UserProps) => (
                 <UserCard

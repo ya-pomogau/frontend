@@ -4,14 +4,15 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { UserInfo } from '.';
 import { usersApi } from 'services/user-api';
+import { UserRole } from 'shared/types/common.types';
 
 const mockedMasterState = {
-  role: 'master',
+  role: UserRole.MASTER,
   data: {
     id: 1,
     createdAt: '2023-07-09T17:30Z',
     fullname: 'Админов Главный Админович',
-    role: 'master',
+    role: UserRole.MASTER,
     vk: 'https://vk.com/id123456789',
     avatar: 'https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg',
     phone: '+7 (901) 123-44-55',
@@ -36,12 +37,12 @@ const mockedMasterState = {
 };
 
 const mockedAdminState = {
-  role: 'admin',
+  role: UserRole.ADMIN,
   data: {
     id: 2,
     createdAt: '2023-07-09T17:30Z',
     fullname: 'Админов Семен Семенович',
-    role: 'admin',
+    role: UserRole.ADMIN,
     vk: 'https://vk.com/id123456789',
     avatar:
       'https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg',
@@ -63,12 +64,12 @@ const mockedAdminState = {
 };
 
 const mockedVolunteerState = {
-  role: 'volunteer',
+  role: UserRole.VOLUNTEER,
   data: {
     id: 7,
     createdAt: '2023-07-09T17:30Z',
     fullname: 'Волонтеров Петр Петрович',
-    role: 'volunteer',
+    role: UserRole.VOLUNTEER,
     vk: 'https://vk.com/id123456789',
     avatar:
       'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
@@ -85,12 +86,12 @@ const mockedVolunteerState = {
 };
 
 const mockedRecipientState = {
-  role: 'recipient',
+  role: UserRole.RECIPIENT,
   data: {
     id: 4,
     createdAt: '2023-07-09T17:30Z',
     fullname: 'Реципиентов Алексей Борисович',
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     vk: 'https://vk.com/id123456789',
     avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
     phone: '+7 (916) 123-45-67',

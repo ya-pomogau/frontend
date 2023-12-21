@@ -14,6 +14,7 @@ import { useAppSelector } from 'app/hooks';
 import useUser from 'shared/hooks/use-user';
 
 import styles from './styles.module.css';
+import { UserRole } from 'shared/types/common.types';
 
 export const UserInfo = () => {
   // const user = useAppSelector((state) => state.user.data);
@@ -23,10 +24,10 @@ export const UserInfo = () => {
   const isLoginPath = location.pathname.includes('/login');
   const isVKAuthPath = location.pathname.includes('/vk-auth');
   const userId = () => {
-    if (role === 'volunteer') return 7;
-    if (role === 'master') return 1;
-    if (role === 'recipient') return 4;
-    if (role === 'admin') return 2;
+    if (role === 'Volunteer') return 7;
+    if (role === 'Master') return 1;
+    if (role === 'Recipient') return 4;
+    if (role === 'Admin') return 2;
     if (!role) return null;
   };
   const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
@@ -105,7 +106,7 @@ export const UserInfo = () => {
           address={user.address}
         />
 
-        {user.role === 'volunteer' && (
+        {user.role === UserRole.VOLUNTEER && (
           <VolunteerInfo score={user.scores || 0} hasKey={user.isHasKeys} />
         )}
       </div>
