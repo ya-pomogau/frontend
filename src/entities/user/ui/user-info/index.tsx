@@ -17,20 +17,24 @@ import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
 
 export const UserInfo = () => {
-  // const user = useAppSelector((state) => state.user.data);
+  const user = useAppSelector((state) => state.user.data);
   const role = useAppSelector((state) => state.user.role);
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
   const isLoginPath = location.pathname.includes('/login');
   const isVKAuthPath = location.pathname.includes('/vk-auth');
-  const userId = () => {
-    if (role === 'Volunteer') return 7;
-    if (role === 'Master') return 1;
-    if (role === 'Recipient') return 4;
-    if (role === 'Admin') return 2;
-    if (!role) return null;
-  };
-  const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
+  // const userId = () => {
+  //   if (role === 'Volunteer') return 7;
+  //   if (role === 'Master') return 1;
+  //   if (role === 'Recipient') return 4;
+  //   if (role === 'Admin') return 2;
+  //   if (!role) return null;
+  // };
+  // const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
+  // console.log('user');
+  // console.dir(user);
+  // console.log('userStore');
+  // console.dir(userStore);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
@@ -106,8 +110,11 @@ export const UserInfo = () => {
           address={user.address}
         />
 
-        {user.role === UserRole.VOLUNTEER && (
-          <VolunteerInfo score={user.scores || 0} hasKey={user.isHasKeys} />
+        {role === UserRole.VOLUNTEER && (
+          <VolunteerInfo
+            score={user.scores || 0}
+            hasKey={user.isHasKeys || false}
+          />
         )}
       </div>
     </InfoContainer>
