@@ -61,17 +61,15 @@ export const VKAuthPage = () => {
 
   useEffect(() => {
     console.dir(vkUser); //TODO: потом удалить
-    if (!user) {
+    if (!user && !!vkUser) {
+      console.log('!user && !!vkUser');
       navigate('/register');
-    }
-  }, [user, vkUser, navigate]);
-
-  useEffect(() => {
-    console.dir(user); //TODO: потом удалить
-    if (user) {
+    } else if (user) {
+      console.log('!!user');
+      console.log('will navigate to profile');
       navigate('/profile');
     }
-  }, [user, navigate]);
+  }, [user, vkUser, navigate]);
 
   return (
     <>

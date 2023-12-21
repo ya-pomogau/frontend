@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi } from './auth';
-import { ErrorDto, TNewUserRequestDto, TVKLoginRequestDto } from './auth.types';
+import {
+  ErrorDto,
+  TNewUserRequestDto,
+  TVKLoginRequestDto,
+  TVKUserResponseObj,
+} from './auth.types';
 import {
   TCustomSelector,
   TSystemSliceState,
@@ -43,14 +48,30 @@ export const userLoginThunk = createAsyncThunk(
   async (userLoginDto: TVKLoginRequestDto, { rejectWithValue }) => {
     try {
       const tmpRes = await authApi.vkLogin(userLoginDto);
-      const {
-        token,
-        user,
-        vkUser: { response },
-      } = tmpRes;
-      console.dir(response);
-      const { first_name, last_name, id } = response[0];
-      const vkUser = { firstName: first_name, lastName: last_name, vkId: id };
+      console.log(`Respons from server`);
+      console.dir(tmpRes);
+      const { token, user, vkUser: vkUserResponse } = tmpRes;
+      console.dir(vkUserResponse);
+      const vkUser = vkUserResponse
+        ? Object.entries(vkUserResponse[0]).reduce((acc, [key, value]) => {
+            const tmp: Partial<TVKUser> = {};
+            switch (key) {
+              case 'first_name': {
+                return { ...acc, firstName: value };
+              }
+              case 'last_name': {
+                return { ...acc, lastName: value };
+              }
+              case 'id': {
+                return { ...acc, id: value };
+              }
+              default: {
+                return acc;
+              }
+            }
+          }, {} as TVKUser)
+        : null;
+
       if (token && !!user) {
         localStorage.setItem('token', token);
       }

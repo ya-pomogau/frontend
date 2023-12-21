@@ -18,8 +18,11 @@ export function RegisterPage() {
   console.log('vkUser in Register page:');
   console.dir(vkUser);
   const { firstName = '', lastName = '', vkId = '' } = vkUser ?? {};
+  console.log(`name: ${firstName}, familyName: ${lastName}, vkId: ${vkId}`);
+  const FIO = `${firstName} ${lastName}`;
+  console.log(`FIO: ${FIO}`);
   //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
-  const [name, setName] = useState<string>(`${firstName} ${lastName}`);
+  const [name, setName] = useState<string>(FIO);
   //TODO: разобраться с получением телефона и записью его в стейт
   const [phone, setPhone] = useState<string>('');
   const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
@@ -45,18 +48,31 @@ export function RegisterPage() {
       coord: address.coords,
       role: role,
     });
-    dispatch(
-      newUserThunk({
-        profile: {
-          //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
-          firstName: name,
-          phone,
-          address: address.address,
-        },
-        vkId,
-        role: role,
-      })
+    const [first, last] = name.split(' ').filter((i) => i.length > 0);
+    console.log(`vkId: '${vkId}'`);
+    const vk_id = `${vkId}`;
+    console.log(
+      `name: '${name}', first: '${first}', last: '${last}', vk_id: '${vk_id}'`
     );
+    const user = {
+      profile: {
+        firstName: first,
+        lastName: last,
+        phone,
+        address: address.address,
+        avatar: 'https://kspshnik.com/pub/img/verona_pre.jpg',
+        middleName: 'Валерьевна',
+      },
+      vkId: vk_id,
+      role: role,
+      location: {
+        type: 'Point',
+        coordinates: [23, 65],
+      },
+    };
+    console.log('user');
+    console.dir(user);
+    dispatch(newUserThunk(user));
     //перенаправляем на главную
     navigate('/profile');
   };
@@ -111,7 +127,7 @@ export function RegisterPage() {
           label="ФИО"
           name="name"
           value={name}
-          onChange={(event) => setName(event.currentTarget.value)}
+          onChange={(event) => setName(event.target.value)}
           placeholder="ФИО"
           type="text"
         />
@@ -122,7 +138,7 @@ export function RegisterPage() {
           label="Телефон"
           name="phone"
           value={phone}
-          onChange={(event) => setPhone(event.currentTarget.value)}
+          onChange={(event) => setPhone(event.target.value)}
           placeholder="+7 (000) 000 00 00"
           type="tel"
           pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"

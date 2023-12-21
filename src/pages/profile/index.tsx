@@ -1,11 +1,12 @@
 import { useAppSelector } from 'app/hooks';
 import { Navigate } from 'react-router-dom';
 import { useGetMeQuery } from 'services/auth-admin-api';
+import { userSelector } from 'services/system-slice';
 
 export function ProfilePage() {
   const { role } = useAppSelector((state) => state.user);
-  const { data: user } = useGetMeQuery('');
-  console.log(user);
+  // const { data: user } = useGetMeQuery('');
+  // console.log(user);
 
   if (role === 'volunteer') {
     return <Navigate to="/profile/map" replace />;
