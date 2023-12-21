@@ -50,25 +50,27 @@ export const userLoginThunk = createAsyncThunk(
       const tmpRes = await authApi.vkLogin(userLoginDto);
       const { token, user, vkUser: vkUserResponse } = tmpRes;
       const vkUser = vkUserResponse
-        ? Object.entries(vkUserResponse[0]).reduce((acc, [key, value]) => {
-            const tmp: Partial<TVKUser> = {};
-            switch (key) {
-              case 'first_name': {
-                return { ...acc, firstName: value };
+        ? Object.entries(vkUserResponse.response[0]).reduce(
+            (acc, [key, value]) => {
+              const tmp: Partial<TVKUser> = {};
+              switch (key) {
+                case 'first_name': {
+                  return { ...acc, firstName: value };
+                }
+                case 'last_name': {
+                  return { ...acc, lastName: value };
+                }
+                case 'id': {
+                  return { ...acc, vkId: value };
+                }
+                default: {
+                  return acc;
+                }
               }
-              case 'last_name': {
-                return { ...acc, lastName: value };
-              }
-              case 'id': {
-                return { ...acc, id: value };
-              }
-              default: {
-                return acc;
-              }
-            }
-          }, {} as TVKUser)
+            },
+            {} as TVKUser
+          )
         : null;
-
       if (token && !!user) {
         localStorage.setItem('token', token);
       }
