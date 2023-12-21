@@ -16,14 +16,14 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
-  const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
+  // const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
   //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
   console.log(`PageLayout - isError: ${isError}`);
 
   return (
     <>
-      {isLoadingUserData && <Loader />}
+      {/* {isLoadingUserData && <Loader />} */}
       {location.pathname === '/policy' ||
       location.pathname === '/blog' ||
       location.pathname === '/pick' ? (

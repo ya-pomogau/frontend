@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
@@ -10,7 +10,10 @@ import styles from './styles.module.css';
 import { FilterItemsIds } from 'features/filter/consts';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { newUserThunk, vkUserSelector } from 'services/system-slice';
+import {
+  newUserThunk,
+  vkUserSelector,
+} from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 
 export function RegisterPage() {
@@ -30,7 +33,6 @@ export function RegisterPage() {
     address: '',
     coords: [],
   });
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (
@@ -63,8 +65,6 @@ export function RegisterPage() {
       },
     };
     dispatch(newUserThunk(user));
-    //перенаправляем на главную
-    navigate('/profile');
   };
 
   const handleAddressValueChange = (
