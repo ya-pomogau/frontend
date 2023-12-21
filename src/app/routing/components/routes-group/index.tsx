@@ -47,9 +47,6 @@ export const RoutesGroup = ({
   }
 
   if (onlyUnauthorized) {
-    console.log({ onlyUnauthorized });
-    console.log({ role });
-
     if (!role) {
       return <Outlet />;
     } else {

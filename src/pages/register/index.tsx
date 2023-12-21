@@ -15,12 +15,8 @@ import { UserRole } from 'shared/types/common.types';
 
 export function RegisterPage() {
   const vkUser = useAppSelector(vkUserSelector);
-  console.log('vkUser in Register page:');
-  console.dir(vkUser);
   const { firstName = '', lastName = '', vkId = '' } = vkUser ?? {};
-  console.log(`name: ${firstName}, familyName: ${lastName}, vkId: ${vkId}`);
   const FIO = `${firstName} ${lastName}`;
-  console.log(`FIO: ${FIO}`);
   //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
   const [name, setName] = useState<string>(FIO);
   //TODO: разобраться с получением телефона и записью его в стейт
@@ -49,11 +45,7 @@ export function RegisterPage() {
       role: role,
     });
     const [first, last] = name.split(' ').filter((i) => i.length > 0);
-    console.log(`vkId: '${vkId}'`);
     const vk_id = `${vkId}`;
-    console.log(
-      `name: '${name}', first: '${first}', last: '${last}', vk_id: '${vk_id}'`
-    );
     const user = {
       profile: {
         firstName: first,
@@ -70,8 +62,6 @@ export function RegisterPage() {
         coordinates: [23, 65],
       },
     };
-    console.log('user');
-    console.dir(user);
     dispatch(newUserThunk(user));
     //перенаправляем на главную
     navigate('/profile');

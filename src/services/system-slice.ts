@@ -48,10 +48,7 @@ export const userLoginThunk = createAsyncThunk(
   async (userLoginDto: TVKLoginRequestDto, { rejectWithValue }) => {
     try {
       const tmpRes = await authApi.vkLogin(userLoginDto);
-      console.log(`Respons from server`);
-      console.dir(tmpRes);
       const { token, user, vkUser: vkUserResponse } = tmpRes;
-      console.dir(vkUserResponse);
       const vkUser = vkUserResponse
         ? Object.entries(vkUserResponse[0]).reduce((acc, [key, value]) => {
             const tmp: Partial<TVKUser> = {};
@@ -75,14 +72,8 @@ export const userLoginThunk = createAsyncThunk(
       if (token && !!user) {
         localStorage.setItem('token', token);
       }
-      console.log('user:');
-      console.dir(user);
-      console.log('vkUser:');
-      console.dir(vkUser);
       return { user, vkUser };
     } catch (error) {
-      console.log('error:');
-      console.dir(error);
       const { message } = error as ErrorDto;
       console.log(`Error message: ${message}`);
       rejectWithValue(message as string);
@@ -93,8 +84,6 @@ export const userLoginThunk = createAsyncThunk(
 export const newUserThunk = createAsyncThunk(
   'user/new',
   async (newUserDto: TNewUserRequestDto, { rejectWithValue }) => {
-    console.log('newUserDto:');
-    console.dir(newUserDto);
     try {
       const { token, user } = await authApi.createNewUser(newUserDto);
       if (!token || !user) {
