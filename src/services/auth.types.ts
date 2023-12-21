@@ -51,7 +51,7 @@ export type TVKUserResponseObj = {
   //  [key: string]: string;
 };
 
-export type TVKUserResponse = Array<TVKUserResponseObj>;
+export type TVKUserResponse = { response: Array<TVKUserResponseObj> };
 export type TVKLoginResponseDto = {
   token: string | null;
   user?: TUser;
