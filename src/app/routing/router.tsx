@@ -53,7 +53,11 @@ export const router = createBrowserRouter(
 
           {/* Удалить когда система аутификации будет готова */}
           <Route path="/pick" element={<PickRolePage />} />
+
+          {/* Временный код */}
           <Route path="/test" element={<ProfileChatsPages />} />
+          <Route path="/chat-one" element={<ProfileChatsPages />} />
+          <Route path="/chat-two" element={<ProfileChatsPages />} />
         </Route>
 
         <Route element={<RoutesGroup onlyUnauthorized />}>

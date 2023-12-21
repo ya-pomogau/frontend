@@ -5,7 +5,7 @@ import { Task } from 'entities/task/types';
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
   tagTypes: ['Tasks', 'CompletedTasks'],
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
+  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
     getTasks: build.query<Array<Task>, any>({
       query: (limit = '') => 'tasks/available',

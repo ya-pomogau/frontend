@@ -1,0 +1,28 @@
+.inputWrapper {
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.input {
+  width: 100%;
+}
+
+.input > div > input {
+  height: 37px;
+  font-size: 12px;
+  line-height: 14px;
+}
+.input > div > input::placeholder {
+  color: var(--colors-interface-primary);
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.button {
+  width: 37px;
+  height: 37px;
+  padding: 10px;
+}

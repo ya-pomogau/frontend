@@ -4,32 +4,35 @@ import classnames from 'classnames';
 import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { Message } from 'shared/ui/message';
-import { Input } from 'shared/ui/input';
-import { Button } from 'shared/ui/button';
 import { SendIcon } from 'shared/ui/icons/send-icon';
 
 import { IMessage, IChatmateInfo } from './types';
 import { sortMessages } from './libs/utils';
+import { SquareButton } from 'shared/ui/square-buttons';
 
 import styles from './styles.module.css';
+import { InputWrapper } from 'shared/ui/input-wrapper';
+import { useMediaQuery } from 'shared/hooks';
+import { Icon } from 'shared/ui/icons';
 
-interface ChatProps {
-  extClassName?: string;
-  messagesWrapperExtClassName?: string;
+interface PopupChatProps {
   messages: IMessage[];
   chatmateInfo: IChatmateInfo;
-  onAttachFileClick?: () => void;
+  onAttachFileClick: () => void;
   onMessageSend: (message: string) => void;
+  isOpen: boolean;
+  onClick: () => void;
 }
 
-export const Chat = ({
-  extClassName,
-  messagesWrapperExtClassName,
+export const PopupChat = ({
   messages,
   chatmateInfo,
   onAttachFileClick,
   onMessageSend,
-}: ChatProps) => {
+  isOpen,
+  onClick,
+}: PopupChatProps) => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
   const [inputValue, setInputValue] = useState<string>('');
   const sortedMessages = sortMessages(messages);
 
@@ -45,83 +48,65 @@ export const Chat = ({
   const getBtnIcon = () => <SendIcon size="24" color="white" />;
 
   return (
-    <div className={classnames(styles.chatWrapper, extClassName)}>
-      <Avatar
-        avatarName="Фотография собеседника"
-        avatarLink={chatmateInfo.userAvatarLink}
-        extClassName={styles.avatar}
-      />
+    <div
+      className={classnames(styles.chatWrapper, {
+        [styles.chatWrapper_action]: isOpen,
+      })}
+    >
+      {!isMobile && (
+        <SquareButton
+          buttonType="close"
+          onClick={onClick}
+          extClassName={styles['btn-close']}
+        />
+      )}
 
       <div className={styles.mainBlock}>
-        <div className={styles.userInfo}>
-          <h1
-            className={classnames(
-              'm-0',
-              'text',
-              'text_size_large',
-              'text_type_regular'
-            )}
-          >
-            {chatmateInfo.name}
-          </h1>
-          {chatmateInfo?.phone && (
-            <div className={styles.phoneInfo}>
-              <span
-                className={classnames(
-                  'text',
-                  'text_size_medium',
-                  'text_type_bold'
-                )}
-              >
-                Тел.:
-              </span>
-              <span className={classnames('text', 'text_size_medium')}>
-                {chatmateInfo.phone}
-              </span>
-            </div>
-          )}
-        </div>
-        <div className={styles.chat}>
-          <div
-            className={classnames(
-              styles.messagesBlock,
-              messagesWrapperExtClassName
-            )}
-          >
-            {sortedMessages?.map((message) => (
-              <Message
-                type={
-                  message.userId === chatmateInfo.userId
-                    ? 'incoming'
-                    : 'outgoing'
-                }
-                messageText={message.message}
-                avatarLink={message.userAvatarLink}
-                key={message.id}
-              />
-            ))}
-          </div>
-          <div className={styles.inputWrapper}>
-            <Input
-              placeholder="Напишите сообщение..."
-              value={inputValue}
-              name="message"
-              extClassName={styles.input}
-              onChange={handleInputChange}
-              customIcon={
-                <PinIcon size="24" color="blue" onClick={onAttachFileClick} />
+        {isMobile && (
+          <Icon
+            color="blue"
+            icon="ArrowIcon"
+            size="32"
+            className={styles.arrow}
+            onClick={onClick}
+          />
+        )}
+        <Avatar
+          avatarName="Фотография собеседника"
+          avatarLink={chatmateInfo.userAvatarLink}
+          extClassName={styles.avatar}
+        />
+
+        <h1 className={classnames('text', 'text_type_regular', styles.name)}>
+          {chatmateInfo.name}
+        </h1>
+      </div>
+
+      <div className={styles['container-chat']}>
+        <div className={styles.messagesBlock}>
+          {sortedMessages?.map((message) => (
+            <Message
+              type={
+                message.userId === chatmateInfo.userId ? 'incoming' : 'outgoing'
               }
+              messageText={message.message}
+              avatarLink={message.userAvatarLink}
+              key={message.id}
             />
-            <Button
-              buttonType="primary"
-              customIcon={getBtnIcon()}
-              size="small"
-              onClick={handleSendClick}
-              extClassName={styles.button}
-              disabled={!inputValue}
-            />
-          </div>
+          ))}
         </div>
+
+        <InputWrapper
+          placeholder="Напишите сообщение..."
+          inputValue={inputValue}
+          name="message"
+          onChange={handleInputChange}
+          customIcon={
+            <PinIcon size="24" color="blue" onClick={onAttachFileClick} />
+          }
+          customIconBtn={getBtnIcon()}
+          onClickBtn={handleSendClick}
+        />
       </div>
     </div>
   );
