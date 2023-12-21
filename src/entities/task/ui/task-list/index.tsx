@@ -48,7 +48,9 @@ export const TaskList = ({
 
   return (
     <>
-      {!isLoading && tasks.length > 0 && (
+      {/* TODO: Временно закоментировала код, после того как запрос с севера тасок будет происходить и заполнять стор можно будет разкомментить */}
+      <p>Таски</p>
+      {/* {!isLoading && tasks.length > 0 && (
         <ul
           className={classNames(
             styles.content,
@@ -112,9 +114,9 @@ export const TaskList = ({
             </li>
           ))}
         </ul>
-      )}
+      )} */}
 
-      {!isLoading && tasks.length === 0 && isStatusActive && (
+      {/* {!isLoading && tasks.length === 0 && isStatusActive && (
         <div
           className={classNames(
             isMobile ? styles.content_empty_mobile : styles.content_empty,
@@ -152,7 +154,7 @@ export const TaskList = ({
         >
           <Informer text="У Вас нет завершенных заявок" />
         </div>
-      )}
+      )} */}
     </>
   );
 };
