@@ -77,9 +77,9 @@ export const PopupChat = ({
           extClassName={styles.avatar}
         />
 
-        <h1 className={classnames('text', 'text_type_regular', styles.name)}>
+        <h4 className={classnames('text', 'text_type_regular', styles.name)}>
           {chatmateInfo.name}
-        </h1>
+        </h4>
       </div>
 
       <div className={styles['container-chat']}>

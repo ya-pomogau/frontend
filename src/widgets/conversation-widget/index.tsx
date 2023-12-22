@@ -2,6 +2,7 @@ import styles from './stylex.module.css';
 import { messages } from './constants';
 import { useState } from 'react';
 import { MessageCard } from 'shared/ui/message-card';
+import { ConflictCard } from 'shared/ui/conflict-card';
 
 export function ConversationWidget() {
   // const [isOpen, setIpOpen] = useState<boolean>(false);
@@ -29,6 +30,14 @@ export function ConversationWidget() {
           />
         );
       })}
+      <ConflictCard
+        optionCard="confirm"
+        name="Петров Петр Петрович"
+        specialization="valanter"
+        image="https://i.pravatar.cc/300"
+        id="324"
+      />
+      {/* <ConflictCard optionCard={true} /> */}
     </section>
   );
 }
