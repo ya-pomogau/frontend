@@ -1,3 +1,11 @@
 .container {
-  height: 60vh;
+  margin-top: 37px;
+  height: 64vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 700px) {
+  .container {
+    margin-top: 10px;
+  }
 }

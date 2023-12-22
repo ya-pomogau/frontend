@@ -1,0 +1,78 @@
+.card {
+  width: 359px;
+  height: 70px;
+  border: 1px solid var(--colors-interface-primary-additional);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card_action {
+  background: var(--colors-interface-primary-additional);
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--colors-interface-primary-additional);
+}
+
+.user-info {
+  width: 230px;
+}
+
+.name {
+  width: 100%;
+  font-size: 16px;
+  -webkit-line-clamp: 1;
+}
+
+.id {
+  font-size: 8px;
+  color: var(--colors-interface-primary);
+}
+
+.length-limitation {
+  overflow: hidden; /* Скрывает текст, который не помещается */
+  text-overflow: ellipsis; /* Добавляет троеточие в конце текста */
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.message {
+  width: 100%;
+  font-size: 12px;
+  -webkit-line-clamp: 1; /* Количество строк */
+}
+
+.counter {
+  width: 18px;
+  height: 18px;
+  font-size: 14px;
+  background: var(--colors-interface-fuchsia);
+  color: var(--colors-interface-white);
+  text-align: center;
+  border-radius: 50%;
+}
+
+@media (max-width: 400px) {
+  .card {
+    margin: 0 auto;
+    width: 95%;
+  }
+
+  .img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .name {
+    font-size: 12px;
+  }
+
+  .user-info {
+    width: 50vw;
+  }
+}
