@@ -32,12 +32,22 @@
 
 .text-block {
   width: 100%;
+  position: relative;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .title {
   color: var(--colors-interface-black);
   font-style: normal;
-  margin: 0;
+  max-width: calc(100% - 40px);
 }
 /* TODO сделать какое-нибудь плавное скрытие текста перед кнопкой Читать */
 .description {
@@ -45,6 +55,7 @@
   font-style: normal;
   max-height: 174px;
   overflow-y: hidden;
+  max-width: calc(100% - 40px);
 }
 
 .description_visible {
@@ -56,7 +67,7 @@
   margin-top: 0;
 }
 
-.button {
+.full-description-button {
   background-color: transparent;
   padding: 0px;
   border-width: 0px;

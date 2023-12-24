@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import classnames from 'classnames';
 import styles from './styles.module.css';
 import { Avatar } from '../avatar';
+import { SquareButton } from '../square-buttons';
 
 interface PostProps {
   title: string;
@@ -13,9 +14,18 @@ interface PostProps {
     id: string;
     avatar: string;
   };
+  handleDeleteButton?: () => void;
+  handleEditButton?: () => void;
 }
 
-export const Post: FC<PostProps> = ({ title, description, images, author }) => {
+export const Post: FC<PostProps> = ({
+  title,
+  description,
+  images,
+  author,
+  handleDeleteButton,
+  handleEditButton,
+}) => {
   const [fullDescription, setFullDescription] = useState(false);
 
   const titleStyle = classnames(
@@ -33,8 +43,8 @@ export const Post: FC<PostProps> = ({ title, description, images, author }) => {
     { [styles.description_visible]: fullDescription }
   );
 
-  const buttonStyle = classnames(
-    styles.button,
+  const fullDescriptionButtonStyle = classnames(
+    styles['full-description-button'],
     'text',
     'text_size_medium',
     'text_type_regular'
@@ -79,16 +89,29 @@ export const Post: FC<PostProps> = ({ title, description, images, author }) => {
           </p>
         </div>
       </div>
+
       <div className={styles['text-block']}>
         <h2 className={titleStyle}>{title}</h2>
         <ReactMarkdown className={descriptionStyle}>
           {description}
         </ReactMarkdown>
         {!fullDescription && (
-          <button className={buttonStyle} onClick={handleFullDescriptionButton}>
+          <button
+            className={fullDescriptionButtonStyle}
+            onClick={handleFullDescriptionButton}
+          >
             Читать
           </button>
         )}
+
+        <div className={styles.buttons}>
+          {handleDeleteButton && (
+            <SquareButton onClick={handleDeleteButton} buttonType={'close'} />
+          )}
+          {handleEditButton && (
+            <SquareButton onClick={handleEditButton} buttonType={'edit'} />
+          )}
+        </div>
       </div>
       <div className={galleryStyle}>
         {images.map((image, i) => (
