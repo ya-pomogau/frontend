@@ -1,6 +1,5 @@
-import type { FC } from 'react';
+import { useState, type FC, type MouseEventHandler } from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import classnames from 'classnames';
 import styles from './styles.module.css';
 
@@ -11,6 +10,8 @@ interface PostProps {
 }
 
 export const Post: FC<PostProps> = ({ title, description, images }) => {
+  const [fullDescription, setFullDescription] = useState(false);
+
   const titleStyle = classnames(
     styles.title,
     'text',
@@ -22,7 +23,8 @@ export const Post: FC<PostProps> = ({ title, description, images }) => {
     styles.description,
     'text',
     'text_size_medium',
-    'text_type_regular'
+    'text_type_regular',
+    { [styles.description_visible]: fullDescription }
   );
 
   const buttonStyle = classnames(
@@ -37,15 +39,23 @@ export const Post: FC<PostProps> = ({ title, description, images }) => {
     styles[`gallery-${images.length}`]
   );
 
+  const handleFullDescriptionButton: MouseEventHandler = () => {
+    setFullDescription(true);
+  };
+
   return (
     <article className={styles.article}>
       <div></div>
       <div className={styles['text-block']}>
         <ReactMarkdown className={titleStyle}>{title}</ReactMarkdown>
-        <ReactMarkdown className={descriptionStyle} remarkPlugins={[remarkGfm]}>
+        <ReactMarkdown className={descriptionStyle}>
           {description}
         </ReactMarkdown>
-        <button className={buttonStyle}>Читать</button>
+        {!fullDescription && (
+          <button className={buttonStyle} onClick={handleFullDescriptionButton}>
+            Читать
+          </button>
+        )}
       </div>
       <div className={galleryStyle}>
         {images.map((image, i) => (
