@@ -6,6 +6,30 @@
   gap: 20px;
 }
 
+.author {
+  display: flex;
+  align-items: center;
+}
+
+.author_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author_name {
+  margin: 0;
+}
+
+.author_id {
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+.author .author_avatar {
+  width: 62px;
+  height: 62px;
+}
+
 .text-block {
   width: 100%;
 }
@@ -13,12 +37,9 @@
 .title {
   color: var(--colors-interface-black);
   font-style: normal;
-}
-
-.title p {
   margin: 0;
 }
-
+/* TODO сделать какое-нибудь плавное скрытие текста перед кнопкой Читать */
 .description {
   color: var(--colors-interface-black);
   font-style: normal;

@@ -2,14 +2,20 @@ import { useState, type FC, type MouseEventHandler } from 'react';
 import ReactMarkdown from 'react-markdown';
 import classnames from 'classnames';
 import styles from './styles.module.css';
+import { Avatar } from '../avatar';
 
 interface PostProps {
   title: string;
   description: string;
   images: { src: string; alt: string }[];
+  author: {
+    name: string;
+    id: string;
+    avatar: string;
+  };
 }
 
-export const Post: FC<PostProps> = ({ title, description, images }) => {
+export const Post: FC<PostProps> = ({ title, description, images, author }) => {
   const [fullDescription, setFullDescription] = useState(false);
 
   const titleStyle = classnames(
@@ -34,6 +40,20 @@ export const Post: FC<PostProps> = ({ title, description, images }) => {
     'text_type_regular'
   );
 
+  const authorNameStyle = classnames(
+    styles.author_name,
+    'text',
+    'text_size_medium',
+    'text_type_regular'
+  );
+
+  const authorIdStyle = classnames(
+    styles.author_id,
+    'text',
+    'text_size_small',
+    'text_type_regular'
+  );
+
   const galleryStyle = classnames(
     styles.gallery,
     styles[`gallery-${images.length}`]
@@ -45,9 +65,22 @@ export const Post: FC<PostProps> = ({ title, description, images }) => {
 
   return (
     <article className={styles.article}>
-      <div></div>
+      <div className={styles.author}>
+        <Avatar
+          avatarLink={author.avatar}
+          avatarName={author.name}
+          extClassName={styles.author_avatar}
+        />
+        <div className={styles.author_info}>
+          <p className={authorNameStyle}>{author.name}</p>
+          <p className={authorIdStyle}>
+            <span>ID </span>
+            {author.id}
+          </p>
+        </div>
+      </div>
       <div className={styles['text-block']}>
-        <ReactMarkdown className={titleStyle}>{title}</ReactMarkdown>
+        <h2 className={titleStyle}>{title}</h2>
         <ReactMarkdown className={descriptionStyle}>
           {description}
         </ReactMarkdown>

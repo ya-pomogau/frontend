@@ -26,6 +26,12 @@ export const Default: Story = {
         alt: '',
       },
     ],
+    author: {
+      name: 'Петров Петр Петрович',
+      id: '111111114',
+      avatar:
+        'https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=826&t=st=1703443717~exp=1703444317~hmac=34278ddb6c1b753325d3dd5044c8cb3d7ec129d77e50e352112ef8cd9d2e58d6',
+    },
   },
 };
 
@@ -44,6 +50,12 @@ export const Gallery2: Story = {
         alt: '',
       },
     ],
+    author: {
+      name: 'Петров Петр Петрович',
+      id: '111111114',
+      avatar:
+        'https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=826&t=st=1703443717~exp=1703444317~hmac=34278ddb6c1b753325d3dd5044c8cb3d7ec129d77e50e352112ef8cd9d2e58d6',
+    },
   },
 };
 
@@ -66,6 +78,12 @@ export const Gallery3: Story = {
         alt: '',
       },
     ],
+    author: {
+      name: 'Петров Петр Петрович',
+      id: '111111114',
+      avatar:
+        'https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=826&t=st=1703443717~exp=1703444317~hmac=34278ddb6c1b753325d3dd5044c8cb3d7ec129d77e50e352112ef8cd9d2e58d6',
+    },
   },
 };
 
@@ -92,6 +110,12 @@ export const Gallery4: Story = {
         alt: '',
       },
     ],
+    author: {
+      name: 'Петров Петр Петрович',
+      id: '111111114',
+      avatar:
+        'https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=826&t=st=1703443717~exp=1703444317~hmac=34278ddb6c1b753325d3dd5044c8cb3d7ec129d77e50e352112ef8cd9d2e58d6',
+    },
   },
 };
 
@@ -115,5 +139,11 @@ export const Longread: Story = {
         alt: '',
       },
     ],
+    author: {
+      name: 'Петров Петр Петрович',
+      id: '111111114',
+      avatar:
+        'https://img.freepik.com/free-vector/cute-panda-drinking-boba-milk-tea-cartoon-vector-illustration-animal-food-concept-isolated-vector-flat-cartoon-style_138676-1949.jpg?w=826&t=st=1703443717~exp=1703444317~hmac=34278ddb6c1b753325d3dd5044c8cb3d7ec129d77e50e352112ef8cd9d2e58d6',
+    },
   },
 };
