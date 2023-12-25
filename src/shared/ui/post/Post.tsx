@@ -1,4 +1,10 @@
-import { useState, type FC, type MouseEventHandler } from 'react';
+import {
+  useState,
+  type FC,
+  type MouseEventHandler,
+  useRef,
+  useLayoutEffect,
+} from 'react';
 import ReactMarkdown from 'react-markdown';
 import classnames from 'classnames';
 import styles from './styles.module.css';
@@ -27,6 +33,15 @@ export const Post: FC<PostProps> = ({
   handleEditButton,
 }) => {
   const [fullDescription, setFullDescription] = useState(false);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+  const descriptionHeight = 172;
+
+  useLayoutEffect(() => {
+    const scrollHeight = descriptionRef.current?.scrollHeight;
+
+    if (scrollHeight && scrollHeight < descriptionHeight)
+      setFullDescription(true);
+  }, [description]);
 
   const titleStyle = classnames(
     styles.title,
@@ -92,9 +107,9 @@ export const Post: FC<PostProps> = ({
 
       <div className={styles['text-block']}>
         <h2 className={titleStyle}>{title}</h2>
-        <ReactMarkdown className={descriptionStyle}>
-          {description}
-        </ReactMarkdown>
+        <div ref={descriptionRef} className={descriptionStyle}>
+          <ReactMarkdown>{description}</ReactMarkdown>
+        </div>
         {!fullDescription && (
           <button
             className={fullDescriptionButtonStyle}

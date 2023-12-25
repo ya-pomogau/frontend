@@ -9,6 +9,7 @@
 .author {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .author_info {
@@ -48,6 +49,7 @@
   color: var(--colors-interface-black);
   font-style: normal;
   max-width: calc(100% - 40px);
+  margin-top: 0;
 }
 
 .description {
@@ -81,7 +83,6 @@
     rgba(255, 255, 255, 1) 100%
   );
   opacity: 1;
-  transition: opacity 0.3s linear;
 }
 
 .description_visible::after {
