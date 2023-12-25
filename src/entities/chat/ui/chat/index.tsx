@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { Message } from 'shared/ui/message';
-import { SendIcon } from 'shared/ui/icons/send-icon';
 
 import { IMessage, IChatmateInfo } from './types';
 import { sortMessages } from './libs/utils';
@@ -44,8 +43,6 @@ export const PopupChat = ({
   const handleSendClick = () => {
     onMessageSend(inputValue);
   };
-
-  const getBtnIcon = () => <SendIcon size="24" color="white" />;
 
   return (
     <div
@@ -104,7 +101,6 @@ export const PopupChat = ({
           customIcon={
             <PinIcon size="24" color="blue" onClick={onAttachFileClick} />
           }
-          customIconBtn={getBtnIcon()}
           onClickBtn={handleSendClick}
         />
       </div>

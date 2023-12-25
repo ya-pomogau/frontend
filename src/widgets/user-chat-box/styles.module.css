@@ -1,0 +1,162 @@
+.box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  visibility: hidden;
+  opacity: 0;
+  position: relative;
+}
+
+.box_action {
+  visibility: visible;
+  opacity: 1;
+}
+
+.user-info {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+.img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--colors-interface-primary-additional);
+}
+
+.container {
+  width: 25vw;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.name {
+  width: 325px;
+  overflow: hidden; /* Скрывает текст, который не помещается */
+  text-overflow: ellipsis; /* Добавляет троеточие в конце текста */
+  -webkit-line-clamp: 1; /* Количество строк */
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.id {
+  font-size: 8px;
+  opacity: 0.5;
+  text-align: end;
+}
+
+.span {
+  margin-right: 10px;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.btn-close :hover {
+  opacity: 0.8;
+}
+
+.content-container {
+  width: 100%;
+  box-sizing: border-box;
+  height: 412px;
+  border: 1px solid var(--colors-interface-additional);
+  padding: 20px 15px;
+}
+
+.container-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  width: 155px;
+}
+
+.box-btn {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.container-modile {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.arrow {
+  margin: 0 20px 0 20px;
+}
+
+.gradient-divider {
+  margin-top: 13px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+@media (max-width: 1150px) {
+  .box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+  }
+
+  .container {
+    width: 60%;
+  }
+}
+
+@media (max-width: 550px) {
+  .box {
+    position: fixed;
+    top: 0;
+    right: 0;
+    gap: 0;
+  }
+
+  .content-container {
+    border: none;
+  }
+
+  .box-btn {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .display-none {
+    display: none;
+  }
+
+  .user-info {
+    margin-top: 10px;
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .button {
+    margin: 20px auto;
+  }
+
+  .container-modile {
+    margin-top: 17px;
+  }
+}

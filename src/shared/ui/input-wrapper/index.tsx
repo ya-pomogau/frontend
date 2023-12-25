@@ -3,6 +3,7 @@ import { Button } from 'shared/ui/button';
 import { ReactElement } from 'react';
 import styles from './styles.module.css';
 import cn from 'classnames';
+import { Icon } from '../icons';
 
 interface PopupInputWrapper {
   placeholder: string;
@@ -11,7 +12,6 @@ interface PopupInputWrapper {
   extClassInput?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   customIcon?: ReactElement;
-  customIconBtn?: ReactElement;
   onClickBtn: () => void;
   extClassButton?: string;
 }
@@ -23,7 +23,6 @@ export function InputWrapper({
   extClassInput,
   onChange,
   customIcon,
-  customIconBtn,
   onClickBtn,
   extClassButton,
 }: PopupInputWrapper) {
@@ -39,7 +38,7 @@ export function InputWrapper({
       />
       <Button
         buttonType="primary"
-        customIcon={customIconBtn}
+        customIcon={<Icon color="white" icon="SendIcon" />}
         size="small"
         onClick={onClickBtn}
         extClassName={cn(styles.button, extClassButton)}

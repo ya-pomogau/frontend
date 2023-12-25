@@ -37,11 +37,7 @@ export function ConflictCard({
       >
         {specialization === 'valanter' ? 'Волонтер' : 'Реципиент'}
       </h4>
-      {image ? (
-        <img className={styles.img} src={image} alt="фото" />
-      ) : (
-        <div className={styles.img} />
-      )}
+      <img className={styles.img} src={image} alt="фото" />
       <div className={styles.conteiner}>
         <RoundButton buttonType="phone" />
         <RoundButton buttonType="message" />

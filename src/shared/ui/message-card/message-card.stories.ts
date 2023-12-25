@@ -10,7 +10,7 @@ const meta: Meta<typeof MessageCard> = {
       description: 'Объект с данными пользователя',
       defaultValue: {},
     },
-    massage: {
+    message: {
       description: 'Массив с сообщениями',
     },
     action: {
@@ -38,7 +38,7 @@ export const CardMessage: Story = {
       userAvatarLink: 'https://i.pravatar.cc/300',
       userId: '1',
     },
-    massage: [
+    message: [
       {
         date: new Date('2023-05-14T21:05:00.000Z'),
         id: 3,

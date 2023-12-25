@@ -1,5 +1,5 @@
 .inputWrapper {
-  margin-top: 5px;
+  margin: 5px auto 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -25,4 +25,11 @@
   width: 37px;
   height: 37px;
   padding: 10px;
+}
+
+@media (max-width: 550px) {
+  .inputWrapper {
+    margin: 20px auto 0;
+    width: 85%;
+  }
 }

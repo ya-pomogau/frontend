@@ -2,10 +2,19 @@
   margin-top: 37px;
   height: 64vh;
   overflow-y: auto;
+  display: flex;
+  gap: 20px;
+  position: relative;
 }
 
 @media (max-width: 700px) {
   .container {
     margin-top: 10px;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    justify-content: center;
   }
 }

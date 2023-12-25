@@ -1,0 +1,6 @@
+.border {
+  height: 1px;
+  box-sizing: border-box;
+  width: 100%;
+  background: linear-gradient(to right, #fff 0%, #2e3192 50%, #fff 100%);
+}

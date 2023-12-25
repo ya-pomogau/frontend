@@ -4,34 +4,39 @@ import styles from './styles.module.css';
 
 interface PropsMessageCard {
   chatmateInfo: IChatmateInfo;
-  massage: IMessage[];
+  message: IMessage[];
   action: boolean;
   onClick: (cardId: string) => void;
+  getChat: (chatmateInfo: IChatmateInfo, message: IMessage[]) => void;
 }
 
 export function MessageCard({
   chatmateInfo,
-  massage,
+  message,
   action,
   onClick,
+  getChat,
 }: PropsMessageCard) {
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
-  const lastMessage = massage.length - 1;
+  const lastMessage = message.length - 1;
+
+  const handelClick = () => {
+    onClick(chatmateInfo.userId);
+    getChat(chatmateInfo, message);
+  };
+
+  //  console.log(`MessageCard ${item}`);
 
   return (
     <article
-      onClick={() => onClick(chatmateInfo.userId)}
+      onClick={handelClick}
       className={cn(styles.card, { [styles.card_action]: action })}
     >
-      {chatmateInfo.userAvatarLink ? (
-        <img
-          src={chatmateInfo.userAvatarLink}
-          alt="фото"
-          className={styles.img}
-        />
-      ) : (
-        <div className={styles.img} />
-      )}
+      <img
+        src={chatmateInfo.userAvatarLink}
+        alt="фото"
+        className={styles.img}
+      />
       <div className={styles['user-info']}>
         <p
           className={cn(defultStyle, styles.name, styles['length-limitation'])}
@@ -48,11 +53,11 @@ export function MessageCard({
             styles['length-limitation']
           )}
         >
-          {massage[lastMessage].message}
+          {message[lastMessage].message}
         </p>
       </div>
       <span className={styles.counter}>
-        {massage.length > 10 ? '+9' : massage.length}
+        {message.length > 10 ? '+9' : message.length}
       </span>
     </article>
   );

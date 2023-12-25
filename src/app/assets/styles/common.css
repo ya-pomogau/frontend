@@ -63,6 +63,10 @@ body {
   font-family: 'Golos', sans-serif;
 }
 
+.text-inter {
+  font-family: 'Inter', sans-serif;
+}
+
 .text_size_small {
   font-size: 12px;
   line-height: 14px;
