@@ -49,22 +49,43 @@
   font-style: normal;
   max-width: calc(100% - 40px);
 }
-/* TODO сделать какое-нибудь плавное скрытие текста перед кнопкой Читать */
+
 .description {
   color: var(--colors-interface-black);
   font-style: normal;
-  max-height: 174px;
-  overflow-y: hidden;
+  max-height: 172px;
+  overflow: hidden;
   max-width: calc(100% - 40px);
+  position: relative;
 }
 
 .description_visible {
-  max-height: 100%;
-  overflow-y: visible;
+  max-height: none;
+  overflow: visible;
 }
 
 .description p:first-child {
   margin-top: 0;
+}
+
+.description::after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1) 100%
+  );
+  opacity: 1;
+  transition: opacity 0.3s linear;
+}
+
+.description_visible::after {
+  opacity: 0;
 }
 
 .full-description-button {
