@@ -6,15 +6,11 @@ import { SideBar } from 'widgets/header/navigation';
 
 import { useMediaQuery } from 'shared/hooks';
 import { useAppSelector } from 'app/hooks';
-import {
-  positionConfigMenu,
-  linksMenuMobile,
-  linksMenu,
-  linksMenuMobileUnauthorized,
-} from '../utils';
+import { positionConfigMenu, linksMenuMobileUnauthorized } from '../utils';
 
 import styles from './styles.module.css';
 import { AdminButton } from 'shared/ui/admin-button';
+import { LogoutButton } from './Logout/LogoutButton';
 
 const modalRoot = document.getElementById('modal') as HTMLElement;
 
@@ -74,14 +70,15 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
       {user ? (
         <SideBar
           position={positionConfigMenu}
-          links={isMobile ? linksMenuMobile : linksMenu}
+          links={isMobile ? linksMenuMobileUnauthorized : null}
         />
       ) : (
         <SideBar
           position={positionConfigMenu}
-          links={isMobile ? linksMenuMobileUnauthorized : linksMenu}
+          links={isMobile ? linksMenuMobileUnauthorized : null}
         />
       )}
+      <LogoutButton />
     </div>,
     modalRoot
   );
