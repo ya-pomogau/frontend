@@ -8,10 +8,11 @@ import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 type MarkProps = {
   id?: number;
-  coordinates?: [number, number];
+  coordinates?: GeoCoordinates;
   isUrgentTask?: boolean;
   fullName?: string;
   phone?: string;
@@ -23,6 +24,8 @@ type MarkProps = {
   title?: string;
   date?: string;
   time?: string;
+  hasBalloon?: boolean;
+  draggable?: boolean;
 };
 
 export const Mark = React.memo(
@@ -40,6 +43,8 @@ export const Mark = React.memo(
     isAuthorised,
     date,
     time,
+    hasBalloon,
+    draggable,
   }: MarkProps) => {
     const ymaps = useYMaps(['templateLayoutFactory']);
 
@@ -256,6 +261,8 @@ export const Mark = React.memo(
           hideIconOnBalloonOpen: false,
           balloonOffset: [-158, 66],
           balloonPanelMaxMapArea: 0,
+          hasBalloon: hasBalloon,
+          draggable: draggable,
         }}
         properties={{
           isUrgentTask,

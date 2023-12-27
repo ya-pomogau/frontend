@@ -6,6 +6,7 @@ import { isTaskUrgent } from 'shared/libs/utils';
 import { Mark } from './Mark';
 
 import type { Task } from 'entities/task/types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface YandexMapProps {
   width?: string | number;
@@ -17,7 +18,7 @@ interface YandexMapProps {
   };
   tasks?: Task[];
   onClick?: () => void;
-  coordinates?: [number, number];
+  coordinates?: GeoCoordinates | undefined;
   isAuthorised?: boolean;
 }
 
@@ -49,27 +50,35 @@ export const YandexMap = ({
       width={width}
       height={height}
     >
-      {tasks?.map((task) => (
-        <Mark
-          id={task.id}
-          coordinates={task.coordinates}
-          isUrgentTask={isTaskUrgent(task.date)}
-          fullName={task.recipient.fullname}
-          phone={task.recipient.phone}
-          avatar={task.recipient.avatar}
-          description={task.description}
-          count={task.category.scope}
-          onClick={onClick}
-          key={task.id}
-          isAuthorised={isAuthorised}
-          date={new Date(task.date).toLocaleDateString()}
-          time={new Date(task.date).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-        />
-      ))}
-      <Mark coordinates={coordinates} />
+      {tasks &&
+        tasks?.map((task) => (
+          <Mark
+            id={task.id}
+            coordinates={task.coordinates}
+            isUrgentTask={isTaskUrgent(task.date)}
+            fullName={task.recipient.fullname}
+            phone={task.recipient.phone}
+            avatar={task.recipient.avatar}
+            description={task.description}
+            count={task.category.scope}
+            onClick={onClick}
+            key={task.id}
+            isAuthorised={isAuthorised}
+            date={new Date(task.date).toLocaleDateString()}
+            time={new Date(task.date).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+            hasBalloon={true}
+            draggable={false}
+          />
+        ))}
+      <Mark
+        coordinates={coordinates}
+        onClick={() => console.log('Это яндекс карта')}
+        hasBalloon={false}
+        draggable={true}
+      />
     </Map>
   </YMaps>
 );

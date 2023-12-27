@@ -7,13 +7,14 @@ import React, {
 import { useYMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_SUGGEST_SWITCHER } from 'config/ymaps/switches-api';
 import { Input } from '../input';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   initialValue?: string;
   name: string;
   address: {
     address: string;
-    coords: [number, number] | [];
+    coords: GeoCoordinates | [];
   };
   setAddress: (address: string, coords?: [number, number] | []) => void;
   label?: string;
@@ -38,9 +39,9 @@ export const InputAddress = (props: InputAddressProps) => {
   // any потому что в библиотеке не написаны типы для SuggestView
   const ymaps: any = useYMaps(['SuggestView', 'geocode']);
 
-  useEffect(() => {
-    setAddress(initialValue, []);
-  }, []);
+  // useEffect(() => {
+  //   setAddress(initialValue, []);
+  // }, []);
 
   useEffect(() => {
     if (!ymaps) {
