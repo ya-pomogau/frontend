@@ -90,6 +90,24 @@
       "isActive": true
     },
     {
+      "id": "8",
+      "createdAt": "2023-07-09T17:30Z",
+      "fullname": "Волонтеров Иван Иванович",
+      "role": "volunteer",
+      "vk": "https://vk.com/id123456788",
+      "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
+      "phone": "+7 (901) 123-00-00",
+      "address": "ул. Строителей, 15",
+      "coordinates": [
+        55.686985,
+        37.529654
+      ],
+      "status": "unconfirmed",
+      "isHasKeys": true,
+      "scores": 0,
+      "isActive": true
+    },
+    {
       "id": "4",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Реципиентов Алексей Борисович",
