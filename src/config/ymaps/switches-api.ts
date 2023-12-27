@@ -1,2 +1,2 @@
 /* eslint-disable prettier/prettier */
-export const YMAPS_SUGGEST_SWITCHER = false;
+export const YMAPS_SUGGEST_SWITCHER = true;

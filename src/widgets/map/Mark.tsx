@@ -9,10 +9,11 @@ import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { UserRole } from 'shared/types/common.types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 type MarkProps = {
   id?: number;
-  coordinates?: [number, number];
+  coordinates?: GeoCoordinates;
   isUrgentTask?: boolean;
   fullName?: string;
   phone?: string;
@@ -26,6 +27,8 @@ type MarkProps = {
   title?: string;
   date?: string;
   time?: string;
+  hasBalloon?: boolean;
+  draggable?: boolean;
 };
 
 const Mark: React.FC<MarkProps> = ({
@@ -43,6 +46,8 @@ const Mark: React.FC<MarkProps> = ({
   isAuthorised,
   date,
   time,
+  hasBalloon,
+  draggable,
 }: MarkProps) => {
   const ymaps = useYMaps(['templateLayoutFactory']);
 
@@ -259,9 +264,12 @@ const Mark: React.FC<MarkProps> = ({
         hideIconOnBalloonOpen: false,
         balloonOffset: [-158, 66],
         balloonPanelMaxMapArea: 0,
+        hasBalloon: hasBalloon,
+        draggable: draggable,
       }}
       properties={{
         isUrgentTask,
+        isDisabled,
         fullName,
         phone,
         avatar,

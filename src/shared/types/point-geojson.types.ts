@@ -1,4 +1,3 @@
-// export type GeoCoordinates = [number, number];
 export type GeoCoordinates = Array<number>;
 
 // type GeoCoordinatesObject = {
