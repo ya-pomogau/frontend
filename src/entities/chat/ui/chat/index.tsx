@@ -1,11 +1,10 @@
 import { ChangeEvent, useState } from 'react';
 import classnames from 'classnames';
 
-import { PinIcon } from 'shared/ui/icons/pin-icon';
+// import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { Message } from 'shared/ui/message';
 
-import { IMessage, IChatmateInfo } from './types';
 import { sortMessages } from './libs/utils';
 import { SquareButton } from 'shared/ui/square-buttons';
 
@@ -13,6 +12,8 @@ import styles from './styles.module.css';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
+import { IMessage } from 'shared/types/message';
+import { IChatmateInfo } from 'shared/types/conflict';
 
 interface PopupChatProps {
   messages: IMessage[];
@@ -94,13 +95,11 @@ export const PopupChat = ({
         </div>
 
         <InputWrapper
+          getFile={() => {}}
           placeholder="Напишите сообщение..."
           inputValue={inputValue}
           name="message"
           onChange={handleInputChange}
-          customIcon={
-            <PinIcon size="24" color="blue" onClick={onAttachFileClick} />
-          }
           onClickBtn={handleSendClick}
         />
       </div>

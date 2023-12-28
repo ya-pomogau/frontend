@@ -1,39 +1,51 @@
 import cn from 'classnames';
-import { IChatmateInfo, IMessage } from 'entities/chat/ui/chat/types';
 import styles from './styles.module.css';
+import { IMessage } from 'shared/types/message';
+import {
+  IChatmateInfo,
+  IConflictUser,
+  IInfoConflict,
+} from 'shared/types/conflict';
+import React from 'react';
 
 interface PropsMessageCard {
   chatmateInfo: IChatmateInfo;
   message: IMessage[];
   action: boolean;
   onClick: (cardId: string) => void;
-  getChat: (chatmateInfo: IChatmateInfo, message: IMessage[]) => void;
+  id: number;
+  getConflict?: (
+    conflict?: IConflictUser,
+    infoConflict?: IInfoConflict
+  ) => void;
+  getChat: (
+    id: number,
+    chatmateInfo: IChatmateInfo,
+    message: IMessage[]
+  ) => void;
+  conflict?: IConflictUser;
+  infoConflict?: IInfoConflict;
 }
 
-export function MessageCard({
-  chatmateInfo,
-  message,
-  action,
-  onClick,
-  getChat,
-}: PropsMessageCard) {
+export const MessageCard: React.FC<PropsMessageCard> = (props) => {
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
-  const lastMessage = message.length - 1;
+  const lastMessage = props.message.length - 1;
 
   const handelClick = () => {
-    onClick(chatmateInfo.userId);
-    getChat(chatmateInfo, message);
+    props.onClick(props.chatmateInfo.userId);
+    props.getChat(props.id, props.chatmateInfo, props.message);
+    if (props.getConflict) {
+      props.getConflict(props.conflict, props.infoConflict);
+    }
   };
-
-  //  console.log(`MessageCard ${item}`);
 
   return (
     <article
       onClick={handelClick}
-      className={cn(styles.card, { [styles.card_action]: action })}
+      className={cn(styles.card, { [styles.card_action]: props.action })}
     >
       <img
-        src={chatmateInfo.userAvatarLink}
+        src={props.chatmateInfo.userAvatarLink}
         alt="фото"
         className={styles.img}
       />
@@ -41,10 +53,10 @@ export function MessageCard({
         <p
           className={cn(defultStyle, styles.name, styles['length-limitation'])}
         >
-          {chatmateInfo.name}
+          {props.chatmateInfo.name}
         </p>
         <span className={cn(defultStyle, styles.id)}>
-          {`ID ${chatmateInfo.userId}`}
+          {`ID ${props.chatmateInfo.userId}`}
         </span>
         <p
           className={cn(
@@ -53,12 +65,12 @@ export function MessageCard({
             styles['length-limitation']
           )}
         >
-          {message[lastMessage].message}
+          {props.message[lastMessage].message}
         </p>
       </div>
       <span className={styles.counter}>
-        {message.length > 10 ? '+9' : message.length}
+        {props.message.length > 10 ? '+9' : props.message.length}
       </span>
     </article>
   );
-}
+};

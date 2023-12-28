@@ -76,6 +76,29 @@ export const linksTopAuthUser: ISideBarElementProps[] = [
     to: '/contacts',
     icon: <LocationIcon color="blue" />,
   },
+];
+
+export const linksTopAuthAdmin: ISideBarElementProps[] = [
+  {
+    title: 'Личный кабинет',
+    to: '/profile',
+    icon: <PersonIcon color="blue" />,
+  },
+  {
+    title: 'Блог',
+    to: '/blog',
+    icon: <WriteMessageIcon color="blue" />,
+  },
+  {
+    title: 'Политика конфиденциальности',
+    to: '/policy',
+    icon: <LockIcon color="blue" />,
+  },
+  {
+    title: 'Контакты',
+    to: '/contacts',
+    icon: <LocationIcon color="blue" />,
+  },
   {
     title: 'Чат',
     to: '/chat',

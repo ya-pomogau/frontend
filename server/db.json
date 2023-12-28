@@ -9,10 +9,7 @@
       "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
       "phone": "+7 (901) 123-44-55",
       "address": "ул. Поселковая, д. 5",
-      "coordinates": [
-        59.821539,
-        30.178031
-      ],
+      "coordinates": [59.821539, 30.178031],
       "status": "activated",
       "isActive": true,
       "isHasKeys": true,
@@ -57,10 +54,7 @@
       "avatar": "https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg",
       "phone": "+7 (902) 123-44-55",
       "address": "ул. Стойкости, 17",
-      "coordinates": [
-        59.828347,
-        30.21187
-      ],
+      "coordinates": [59.828347, 30.21187],
       "status": "activated",
       "isActive": true,
       "permissions": [
@@ -89,10 +83,7 @@
       "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
       "phone": "+7 (901) 123-45-67",
       "address": "ул. Кораблестроителей, 19к1",
-      "coordinates": [
-        59.942575,
-        30.216757
-      ],
+      "coordinates": [59.942575, 30.216757],
       "status": "verified",
       "isHasKeys": true,
       "scores": 2500,
@@ -107,10 +98,7 @@
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
       "phone": "+7 (916) 123-45-67",
       "address": "ул. Нахимова, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "status": "confirmed",
       "isActive": true
     }
@@ -123,10 +111,7 @@
       "description": "string",
       "recipientId": 4,
       "address": "ул. Нахимова, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ]
+      "coordinates": [59.941871, 30.223494]
     }
   ],
   "tasksAvailable": [
@@ -151,18 +136,12 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Наличная, 28/16В",
-        "coordinates": [
-          59.941335,
-          30.227995
-        ],
+        "coordinates": [59.941335, 30.227995],
         "approved": true
       },
       "volunteer": null,
       "address": "ул. Наличная, 28/16В",
-      "coordinates": [
-        59.941335,
-        30.227995
-      ],
+      "coordinates": [59.941335, 30.227995],
       "chat": null
     },
     {
@@ -186,18 +165,12 @@
         "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "переулок Каховского, 3",
-        "coordinates": [
-          59.95252,
-          30.243239
-        ],
+        "coordinates": [59.95252, 30.243239],
         "approved": true
       },
       "volunteer": null,
       "address": "переулок Каховского, 3",
-      "coordinates": [
-        59.95252,
-        30.243239
-      ],
+      "coordinates": [59.95252, 30.243239],
       "chat": null
     },
     {
@@ -221,18 +194,12 @@
         "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "переулок Каховского, 3",
-        "coordinates": [
-          59.95252,
-          30.243239
-        ],
+        "coordinates": [59.95252, 30.243239],
         "approved": true
       },
       "volunteer": null,
       "address": "Малая Морская, 9",
-      "coordinates": [
-        59.93594,
-        30.313128
-      ],
+      "coordinates": [59.93594, 30.313128],
       "chat": null
     }
   ],
@@ -258,10 +225,7 @@
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Нахимова, д. 9",
-        "coordinates": [
-          59.941871,
-          30.223494
-        ],
+        "coordinates": [59.941871, 30.223494],
         "approved": true
       },
       "volunteer": {
@@ -272,20 +236,14 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "isHasKeys": true,
         "scores": 2500
       },
       "address": "ул. Нахимова, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "chat": {
         "id": 4327,
         "unread": 50
@@ -312,10 +270,7 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Наличная, 28/16В",
-        "coordinates": [
-          59.941335,
-          30.227995
-        ],
+        "coordinates": [59.941335, 30.227995],
         "approved": true
       },
       "volunteer": {
@@ -326,20 +281,14 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "isHasKeys": true,
         "scores": 2500
       },
       "address": "ул. Наличная, 28/16В",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "chat": null
     }
   ],
@@ -365,10 +314,7 @@
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "ул. Нахимова, д. 9",
-        "coordinates": [
-          59.941871,
-          30.223494
-        ],
+        "coordinates": [59.941871, 30.223494],
         "approved": true
       },
       "volunteer": {
@@ -379,20 +325,14 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "isHasKeys": true,
         "scores": 2500
       },
       "address": "ул. Нахимова, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "chat": {
         "id": 5678,
         "unread": 0
@@ -419,10 +359,7 @@
         "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
         "phone": "+7 (999) 123-45-67",
         "address": "переулок Каховского, 3",
-        "coordinates": [
-          59.95252,
-          30.243239
-        ],
+        "coordinates": [59.95252, 30.243239],
         "approved": true
       },
       "volunteer": {
@@ -433,20 +370,14 @@
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
         "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [
-          59.942575,
-          30.216757
-        ],
+        "coordinates": [59.942575, 30.216757],
         "approved": true,
         "checked": true,
         "isHasKeys": true,
         "scores": 2500
       },
       "address": "переулок Каховского, 3",
-      "coordinates": [
-        59.95252,
-        30.243239
-      ],
+      "coordinates": [59.95252, 30.243239],
       "chat": null
     }
   ],
@@ -515,6 +446,174 @@
     },
     {
       "id": "LBpM4Gu"
+    }
+  ],
+  "messages": [
+    {
+      "chatmateInfo": {
+        "name": "Вася Пупкин Аркадьевич",
+        "phone": "+7(777) 77-77-77",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "1234"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 12,
+          "message": "Здравствуйте",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "234"
+        },
+        {
+          "date": "new Date('2023-05-15T21:00:00.000Z')",
+          "id": 23,
+          "message": " Я не смогу прийти",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "214"
+        },
+        {
+          "date": "new Date('2023-05-14T21:05:00.000Z')",
+          "id": 34,
+          "message": "Мурку нужно подоить",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "3442"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "chatmateInfo": {
+        "name": "Иванов Иван Иванович",
+        "phone": "+7(000) 000-00-00",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "1"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 41,
+          "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "1"
+        },
+        {
+          "date": "new Date('2023-05-15T21:00:00.000Z')",
+          "id": 32,
+          "message": "Договорились так и сделаем",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "2"
+        },
+        {
+          "date": "new Date('2023-05-14T21:05:00.000Z')",
+          "id": 23,
+          "message": "Отлично, спасибо, встретимся у 3-го подъезда",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "2"
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "saveMessage": [
+    {
+      "chatmateInfo": {
+        "name": "Александр Владимирович Поветкин",
+        "phone": "+7(000) 000-00-00",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "754"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 1,
+          "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "743"
+        }
+      ],
+      "id": 3
+    }
+  ],
+  "conflicts": [
+    {
+      "id": 123,
+      "chatmateInfo": {
+        "name": "Смирнов Максим Валерьевич",
+        "phone": "+7(000) 000-00-00",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "33"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 435454,
+          "message": "У нас разногласие, помогите решить проблему",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "4423"
+        }
+      ],
+      "conflict": [
+        {
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Петров Петр Петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "33424"
+        },
+        {
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Зыбенко Михаил петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "2432"
+        }
+      ],
+      "infoConflict": {
+        "date": "10.10.2023",
+        "time": "16:00",
+        "address": "ул. Нахи, д.9, у подъезда №3",
+        "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
+      }
+    },
+    {
+      "id": 325,
+      "chatmateInfo": {
+        "name": "Кузнецов Владимир Валерьевич",
+        "phone": "+7(000) 000-00-00",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "44"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 432354,
+          "message": "Помогите решить конфликт",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "4"
+        }
+      ],
+      "conflict": [
+        {
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Петров Петр Петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "22"
+        },
+        {
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Зыбенко Михаил петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "44"
+        }
+      ],
+      "infoConflict": {
+        "date": "24.09.2022",
+        "time": "16:00",
+        "address": "ул. Нахимова, д.9, у подъезда №3",
+        "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
+      }
     }
   ]
 }

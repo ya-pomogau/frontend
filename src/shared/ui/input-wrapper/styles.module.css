@@ -27,9 +27,37 @@
   padding: 10px;
 }
 
+.file {
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.file-box {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-name {
+  max-width: 90%;
+  color: var(--colors-interface-primary);
+}
+
+.btn-close {
+  cursor: pointer;
+}
+
 @media (max-width: 550px) {
   .inputWrapper {
     margin: 20px auto 0;
     width: 85%;
+  }
+
+  .file-box {
+    width: 85%;
+    margin: 10px auto 0;
   }
 }

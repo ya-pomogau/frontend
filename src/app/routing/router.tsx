@@ -34,7 +34,10 @@ import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
 import { VKAuthPage } from 'pages/vk-auth';
 import { RegisterPage } from 'pages/register';
-import { ProfileChatsPages } from 'pages/profile-chats';
+import { ProfileChatsPages } from 'widgets/profile-chats';
+import { SectionChatPicker } from 'pages/section-chat-picker';
+import { SectionChatHub } from 'pages/section-chat-hub';
+import { SectionChatsConflict } from 'pages/section-chats-conflict';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,11 +56,6 @@ export const router = createBrowserRouter(
 
           {/* Удалить когда система аутификации будет готова */}
           <Route path="/pick" element={<PickRolePage />} />
-
-          {/* Временный код */}
-          <Route path="/test" element={<ProfileChatsPages />} />
-          <Route path="/chat-one" element={<ProfileChatsPages />} />
-          <Route path="/chat-two" element={<ProfileChatsPages />} />
         </Route>
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
@@ -81,7 +79,31 @@ export const router = createBrowserRouter(
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/out" element={<Logout />} />
-          <Route path="/chat" element={<></>} />
+
+          <Route
+            path="/chat"
+            element={
+              <ProfileChatsPages>
+                <SectionChatPicker />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chat-hub"
+            element={
+              <ProfileChatsPages>
+                <SectionChatHub />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chat-conflict"
+            element={
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            }
+          />
         </Route>
 
         <Route
@@ -169,6 +191,7 @@ export const router = createBrowserRouter(
           />
         </Route>
       </Route>
+      <Route path="/test" element={<SectionChatPicker />} />
 
       <Route path="*" element={<NotFoundPage />} />
     </>

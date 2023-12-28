@@ -35,6 +35,10 @@ const meta = {
       description: 'Класс для кнопки',
       defaultValue: '',
     },
+    getFile: {
+      description: 'Получить файл',
+      defaultValue: () => {},
+    },
   },
 };
 
@@ -49,5 +53,6 @@ export const Default: Story = {
     extClassInput: '',
     onChange: () => {},
     onClickBtn: () => {},
+    getFile: () => {},
   },
 };
