@@ -5,14 +5,14 @@ import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
+// import { FieldError } from 'react-hook-form';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   extClassName?: string;
   error?: boolean;
-  errorText?: string | any;
+  errorText?: string | null | false;
   customIcon?: React.ReactNode;
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   extClassNameInput?: string;
@@ -22,7 +22,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       type,
-      name,
       onChange,
       label,
       extClassName,
@@ -66,7 +65,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             data-testid={'input'}
             ref={ref}
             type={type}
-            name={name}
             className={cn('text', inputClass)}
             onChange={onChange}
             placeholder={placeholder}

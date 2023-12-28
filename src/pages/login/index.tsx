@@ -1,7 +1,6 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -10,50 +9,27 @@ import { VkIcon } from 'shared/ui/icons/vk-icon';
 import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
 
-import styles from './styles.module.css';
 import { useLoginMutation } from 'services/auth-admin-api';
-import { setUser } from 'entities/user/model';
-import { useDispatch } from 'react-redux';
-import Joi from 'joi';
 import { joiResolver } from '@hookform/resolvers/joi';
+import loginSchema from './login.joi-sheme';
 
-const schema = Joi.object({
-  login: Joi.string().required().messages({
-    /* eslint-disable */
-    'string.empty': 'Заполните это поле',
-  }),
-  password: Joi.string().required().min(6).messages({
-    /* eslint-disable */
-    'string.empty': 'Заполните это поле',
-    'string.min': 'Пароль должен содержать не менее 6 символов',
-  }),
-});
-
-interface ILoginForm {
-  login: string;
-  password: string;
-}
+import styles from './styles.module.css';
 
 export function LoginPage() {
   const navigate = useNavigate();
   const [checkAdminState, setAdminCheckState] = useState(false);
 
-  // const [inputFields, setInputFields] = useState<ILoginForm>({
-  //   login: '',
-  //   password: '',
-  // });
-  const [login, { isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   const {
     register,
-    control,
     formState: { errors, isValid },
     handleSubmit,
     getValues,
     reset,
   } = useForm({
     mode: 'onChange',
-    resolver: joiResolver(schema),
+    resolver: joiResolver(loginSchema),
   });
 
   const handleAdminLogin = async () => {
@@ -77,10 +53,6 @@ export function LoginPage() {
   const handleAdminCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAdminCheckState(!checkAdminState);
   };
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setInputFields({ ...inputFields, [e.target.name]: e.target.value });
-  // };
 
   const onSubmit = () => {
     console.log(getValues());
@@ -125,7 +97,7 @@ export function LoginPage() {
               error={errors?.login && true}
               errorText={
                 !(errors?.login?.message === undefined) &&
-                errors?.login?.message
+                errors?.login?.message.toString()
               }
               {...register('login')}
             />
@@ -138,7 +110,7 @@ export function LoginPage() {
               error={errors?.password && true}
               errorText={
                 !(errors?.password?.message === undefined) &&
-                errors?.password?.message
+                errors?.password?.message.toString()
               }
               register={register}
             />
@@ -156,7 +128,6 @@ export function LoginPage() {
               disabled={!isValid}
             />
           </form>
-          <DevTool control={control} />
         </>
       )}
       <Link to="/pick" className={styles.templink}>

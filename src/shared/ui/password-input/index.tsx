@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import { Icon } from '../icons';
 import { Input } from '../input';
+import { RegisterOptions, UseFormRegisterReturn } from 'react-hook-form';
 
 interface PasswordInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -11,9 +12,8 @@ interface PasswordInputProps
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   extClassName?: string;
   error?: boolean;
-  errorText?: string | any;
-  name?: string;
-  register: any;
+  errorText?: string | false | null;
+  register: (name: string, options?: RegisterOptions) => UseFormRegisterReturn;
 }
 
 export const PasswordInput = React.forwardRef<
@@ -54,8 +54,8 @@ export const PasswordInput = React.forwardRef<
           )
         }
         error={error}
-        errorText={errorText}
-        {...register(name)}
+        errorText={errorText?.toString()}
+        {...register(name!)}
         {...props}
       />
     );

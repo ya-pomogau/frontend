@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 
 import { Avatar } from '../../shared/ui/avatar';

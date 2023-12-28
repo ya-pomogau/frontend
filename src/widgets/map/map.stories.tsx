@@ -1,6 +1,3 @@
-/* eslint-disable import/no-named-as-default */
-// Юлия М.-П. изменила id с number на string, чтобы убрать ошибки при запуске
-
 import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
 

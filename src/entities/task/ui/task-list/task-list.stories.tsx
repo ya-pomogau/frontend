@@ -4,8 +4,6 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 import { TaskList } from '.';
 
-// Юлия М.-П. изменила id с number на string, чтобы убрать ошибки при запуске
-
 const MockedState = {
   tasks: {
     available: [],

@@ -21,7 +21,7 @@ interface YandexMapProps {
   isAuthorised?: boolean;
 }
 
-export const YandexMap = ({
+const YandexMap = ({
   width = 500,
   height = 500,
   mapSettings = { latitude: 59.93, longitude: 30.31, zoom: 15 },

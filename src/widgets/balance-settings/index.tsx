@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import styles from './styles.module.css';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'shared/ui/button';
 import BalanceSettingsItem from './components/balance-settings-item';
 

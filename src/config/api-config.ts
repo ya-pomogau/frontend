@@ -8,9 +8,9 @@ const {
 } = process.env;
 
 export const API_URL =
-  NODE_ENV === 'production'
+  (NODE_ENV === 'production'
     ? REACT_APP_HOST_PROD
-    : REACT_APP_HOST_DEV ?? REACT_APP_HOST_LOCAL;
+    : REACT_APP_HOST_DEV ?? REACT_APP_HOST_LOCAL) ?? 'http://localhost:3001';
 
 export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',
@@ -19,5 +19,7 @@ export const AUTH_ROUTES: TAuthRoutes = {
 };
 
 export const DEFAULT_HEADERS = {
-  contentType: 'application/json',
+  /* eslint-disable @typescript-eslint/naming-convention */
+  // Использование такого формата предписано RFC
+  'Content-Type': 'application/json',
 };

@@ -14,7 +14,6 @@ import type { ViewerInputData } from '../types';
 
 import styles from './edit-viewer-info.module.css';
 
-// Юлия М.-П. изменила тип valueId с string на string | number, чтобы убрать ошибки при запуске
 interface EditViewerInfoProps {
   extClassName?: string;
   avatarLink: string;
@@ -23,7 +22,7 @@ interface EditViewerInfoProps {
   valueName: string;
   valuePhone: string;
   valueAddress: string;
-  valueId: number | string;
+  valueId: string;
   isPopupOpen: boolean;
   buttonRef: React.RefObject<HTMLElement>;
   isFormSaved: boolean;

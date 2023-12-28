@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styles from './styles.module.css';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { enableError } from 'entities/error/model';
 

@@ -8,8 +8,6 @@ import {
 } from './auth.types';
 import { API_URL, AUTH_ROUTES, DEFAULT_HEADERS } from '../config/api-config';
 
-// Юлия М.-П. добавила дефолтное значение API_URL, чтобы убрать ошибки при запуске
-
 class Auth {
   constructor(
     private readonly baseUrl: string,
@@ -41,4 +39,4 @@ class Auth {
   }
 }
 
-export const authApi = new Auth(API_URL || '', AUTH_ROUTES, DEFAULT_HEADERS);
+export const authApi = new Auth(API_URL, AUTH_ROUTES, DEFAULT_HEADERS);

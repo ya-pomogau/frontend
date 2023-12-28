@@ -7,6 +7,7 @@ import React, {
 import { useYMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_SUGGEST_SWITCHER } from 'config/ymaps/switches-api';
 import { Input } from '../input';
+import { FieldError } from 'react-hook-form';
 
 interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   initialValue?: string;
@@ -19,7 +20,7 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   extClassName?: string;
   error?: boolean;
-  errorText?: string | any;
+  errorText?: string | boolean | null | FieldError;
   customIcon?: React.ReactNode;
   inputAttributes?: React.InputHTMLAttributes<HTMLInputElement>;
 }
@@ -30,6 +31,7 @@ export const InputAddress = (props: InputAddressProps) => {
     inputAttributes = {},
     address,
     setAddress,
+    errorText,
     ...otherProps
   } = props;
 
@@ -85,6 +87,7 @@ export const InputAddress = (props: InputAddressProps) => {
       ref={suggestInputRef}
       type="text"
       placeholder="ул. Нахимова, д.9, у подъезда №3"
+      errorText={errorText?.toString()}
       {...inputProps}
     />
   );

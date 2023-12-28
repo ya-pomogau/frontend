@@ -1,5 +1,3 @@
-// Юлия М.-П. изменила тип id в UpdateUserInfo с string на string | number, чтобы убрать ошибки при запуске
-
 /* import {
   BLOG,
   CREATE_TASKS,
@@ -112,5 +110,5 @@ export type UpdateUserInfo = {
   phone: string;
   address: string;
   avatar: null | FormData;
-  id: number | string;
+  id: string;
 };

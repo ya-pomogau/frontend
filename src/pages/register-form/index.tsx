@@ -7,28 +7,12 @@ import { Button } from 'shared/ui/button';
 import { VkIcon } from 'shared/ui/icons/vk-icon';
 import { InputAddress } from 'shared/ui/input-address';
 
-import styles from './styles.module.css';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import Joi from 'joi';
 import { joiResolver } from '@hookform/resolvers/joi';
+import registerSchema from './register-form.joi-sheme';
 
-const schema = Joi.object({
-  name: Joi.string().required().messages({
-    /* eslint-disable */
-    'string.empty': 'Заполните это поле',
-  }),
-  phone: Joi.string()
-    .required()
-    .regex(/^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$/)
-    .messages({
-      /* eslint-disable */
-      'string.pattern.base':
-        'Номер телефона должен иметь вид +7 (000) 000 00 00',
-      'string.empty': 'Заполните это поле',
-    }),
-  address: Joi.string().required().min(1),
-});
+import styles from './styles.module.css';
 
 export function RegisterFormPage() {
   const [address, setAddress] = useState<{
@@ -50,7 +34,7 @@ export function RegisterFormPage() {
     reset,
   } = useForm({
     mode: 'onChange',
-    resolver: joiResolver(schema),
+    resolver: joiResolver(registerSchema),
   });
 
   const onSubmit = () => {
@@ -85,7 +69,8 @@ export function RegisterFormPage() {
           type="text"
           error={errors?.name && true}
           errorText={
-            !(errors?.name?.message === undefined) && errors?.name?.message
+            !(errors?.name?.message === undefined) &&
+            errors?.name?.message.toString()
           }
           {...register('name')}
         />
@@ -98,7 +83,8 @@ export function RegisterFormPage() {
           title="+7 (123) 456 78 90"
           error={errors?.phone && true}
           errorText={
-            !(errors?.phone?.message === undefined) && errors?.phone?.message
+            !(errors?.phone?.message === undefined) &&
+            errors?.phone?.message.toString()
           }
           {...register('phone')}
         />
@@ -110,7 +96,7 @@ export function RegisterFormPage() {
             error={errors?.address && true}
             errorText={
               !errors?.address?.message === undefined &&
-              errors?.address?.message
+              errors?.address?.message?.toString()
             }
             {...register('address')}
           />
