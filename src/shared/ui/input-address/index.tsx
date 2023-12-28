@@ -71,7 +71,7 @@ export const InputAddress = (props: InputAddressProps) => {
         });
       });
     }
-  }, [ymaps]);
+  }, [ymaps, setAddress]);
 
   const inputProps = {
     ...inputAttributes,

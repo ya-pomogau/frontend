@@ -45,7 +45,7 @@ export const UserCard = ({
   children,
   volunteerInfo,
 }: UserCardProps) => {
-  const { approved, checked, scores, keys } = volunteerInfo;
+  const { approved, checked, scores, isHasKeys } = volunteerInfo;
 
   const isVolonteerAcceptButtonDisabled =
     (scores === 0 && approved) ||
@@ -55,7 +55,8 @@ export const UserCard = ({
   const isAcceptButtonExclamationPointIcon =
     scores >= 30 && !checked && scores < 60;
 
-  const isKeyButtonExclamationPointIcon = scores >= 60 && !checked && !keys;
+  const isKeyButtonExclamationPointIcon =
+    scores >= 60 && !checked && !isHasKeys;
 
   return (
     <div
@@ -108,7 +109,7 @@ export const UserCard = ({
           onGiveKeysButtonClick={() =>
             console.log('"Дать ключи" button pressed')
           }
-          keys={keys}
+          keys={isHasKeys}
         />
       )}
 

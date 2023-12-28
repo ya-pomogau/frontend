@@ -5,8 +5,6 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
-import { VkIcon } from 'shared/ui/icons/vk-icon';
-import Checkbox from 'shared/ui/checkbox';
 import { PasswordInput } from 'shared/ui/password-input';
 
 import { useLoginMutation } from 'services/auth-admin-api';
@@ -71,68 +69,45 @@ export function LoginPage() {
         extClassName={styles.header}
       />
       <p className={styles.title}>Войти</p>
-      <div className={styles.info}>
+
+      <form className={styles.form} onSubmit={onSubmit}>
+        <Input
+          extClassName={styles.field}
+          label="Логин"
+          placeholder="ФИО / Телефон / Логин"
+          type="text"
+          error={errors?.login && true}
+          errorText={
+            !(errors?.login?.message === undefined) &&
+            errors?.login?.message.toString()
+          }
+          {...register('login')}
+        />
+        <PasswordInput
+          extClassName={styles.field}
+          required
+          label={'Пароль'}
+          name="password"
+          placeholder="от 6 символов"
+          error={errors?.password && true}
+          errorText={
+            !(errors?.password?.message === undefined) &&
+            errors?.password?.message.toString()
+          }
+          register={register}
+        />
         <Button
           buttonType="primary"
-          actionType="button"
-          customIcon={<VkIcon color="white" size="24" />}
-          label="Войти через ВКонтакте"
-          size="extraLarge"
+          actionType="submit"
+          label="Войти"
+          size="medium"
+          extClassName={styles.button}
+          disabled={!isValid}
         />
-        <Checkbox
-          label="Войти как администратор"
-          id={'adminLogin'}
-          onChange={handleAdminCheck}
-          extClassName={styles.label}
-        />
-      </div>
-      {checkAdminState && (
-        <>
-          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              extClassName={styles.field}
-              label="Логин"
-              placeholder="ФИО / Телефон / Логин"
-              type="text"
-              error={errors?.login && true}
-              errorText={
-                !(errors?.login?.message === undefined) &&
-                errors?.login?.message.toString()
-              }
-              {...register('login')}
-            />
-
-            <PasswordInput
-              extClassName={styles.field}
-              label="Пароль"
-              name="password"
-              placeholder="от 6 символов"
-              error={errors?.password && true}
-              errorText={
-                !(errors?.password?.message === undefined) &&
-                errors?.password?.message.toString()
-              }
-              register={register}
-            />
-
-            <Button
-              buttonType="primary"
-              actionType="submit"
-              label="Войти"
-              size="medium"
-              onClick={() => {
-                console.log(errors);
-                console.log(getValues());
-              }}
-              extClassName={styles.button}
-              disabled={!isValid}
-            />
-          </form>
-        </>
-      )}
-      <Link to="/pick" className={styles.templink}>
-        Авторизация под выбранной ролью
-      </Link>
+        <Link to="/pick" className={styles.templink}>
+          Авторизация под выбранной ролью
+        </Link>
+      </form>
     </>
   );
 }

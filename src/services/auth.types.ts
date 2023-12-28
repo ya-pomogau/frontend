@@ -1,4 +1,11 @@
-import { TUser, TVKUser } from '../entities/user/types';
+import { cbLink } from 'shared/libs/utils';
+import {
+  TPointGeoJSON,
+  TUser,
+  TUserProfile,
+  TVKUser,
+} from '../entities/user/types';
+import { UserRole } from 'shared/types/common.types';
 
 export type TAuthRoutes = {
   userLogin: string;
@@ -19,16 +26,38 @@ export type ErrorDto = {
   [key: string]: unknown;
 };
 
-// TODO: Удалить лишнее по типу авторизации
 export type TVKLoginRequestDto = {
-  vk_id?: string;
-  code?: string;
-  silentToken: string;
-  redirect_uri: string; // TODO: заменить на константу с роутом переадресации
+  code: string;
+  state?: string;
+  redirectUrl: string;
+};
+
+export type TCreateUserDto = {
+  profile: Partial<TUserProfile>;
+  role: UserRole;
+  vkId: string;
+  location?: TPointGeoJSON;
+};
+
+export type TAdminLoginDto = {
+  login: string;
+  password: string;
 };
 
 export type TVKLoginResponseDto = {
   token: string | null;
   user: TUser | null;
   vk_user: TVKUser | null;
+};
+
+export type TNewUserResponseDto = {
+  token: string;
+  user: TUser;
+};
+
+export type TNewUserRequestDto = {
+  profile: Partial<TUserProfile>;
+  role: UserRole;
+  vkId: string;
+  location?: TPointGeoJSON;
 };

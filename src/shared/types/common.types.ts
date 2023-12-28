@@ -6,11 +6,9 @@ export enum UserStatus {
 }
 
 export enum UserRole {
-  MASTER = 'master',
-  ADMIN = 'admin',
-  RECIPIENT = 'recipient',
-  VOLUNTEER = 'volunteer',
-  VISITOR = 'visitor',
+  ADMIN = 'Admin',
+  RECIPIENT = 'Recipient',
+  VOLUNTEER = 'Volunteer',
 }
 
 export enum AdminPermission {
