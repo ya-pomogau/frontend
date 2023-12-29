@@ -30,6 +30,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   });
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmedUser;
+  //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
   console.log(isError);
 
