@@ -10,16 +10,19 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 import { Avatar } from '../avatar';
 import { SquareButton } from '../square-buttons';
+import { UserInfo } from 'entities/user/types';
+
+interface ImageProps {
+  id: string;
+  src: string;
+  alt: string;
+}
 
 interface PostProps {
   title: string;
   description: string;
-  images: { src: string; alt: string }[];
-  author: {
-    name: string;
-    id: string;
-    avatar: string;
-  };
+  images: ImageProps[];
+  author: Pick<UserInfo, 'id' | 'fullname' | 'avatar'>;
   handleDeleteButton?: () => void;
   handleEditButton?: () => void;
 }
@@ -93,11 +96,11 @@ export const Post: FC<PostProps> = ({
       <div className={styles.author}>
         <Avatar
           avatarLink={author.avatar}
-          avatarName={author.name}
+          avatarName={author.fullname}
           extClassName={styles.author_avatar}
         />
         <div className={styles.author_info}>
-          <p className={authorNameStyle}>{author.name}</p>
+          <p className={authorNameStyle}>{author.fullname}</p>
           <p className={authorIdStyle}>
             <span>ID </span>
             {author.id}
@@ -129,13 +132,9 @@ export const Post: FC<PostProps> = ({
         </div>
       </div>
       <div className={galleryStyle}>
-        {images.map((image, i) => (
-          <div key={i} className={styles['gallery-item']}>
-            <img
-              className={styles['gallery-item-image']}
-              src={image.src}
-              alt={image.alt}
-            />
+        {images.map(({ id, alt, src }) => (
+          <div key={id} className={styles['gallery-item']}>
+            <img className={styles['gallery-item-image']} src={src} alt={alt} />
           </div>
         ))}
       </div>
