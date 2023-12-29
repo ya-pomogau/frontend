@@ -20,12 +20,13 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
-  const { isLoading, data } = useAppSelector((state) => state.user);
-
-  const isUnConfirmedUser = (data && data.status === UNCONFIRMED) || null;
-  console.log(isUnConfirmedUser);
+  const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
+  const isUnConfirmedUser = useAppSelector((state) => {
+    return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
+  });
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmedUser;
+  //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
   const userRole = data?.role;
   console.log(UserRole.RECIPIENT);
