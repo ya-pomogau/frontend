@@ -55,7 +55,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-          {isUnConfirmedUser && userRole === 'Recipient' && (
+          {isUnConfirmedUser && userRole === UserRole.RECIPIENT && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedRecipientMessage} />
             </div>
