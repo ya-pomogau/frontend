@@ -24,6 +24,7 @@ interface PageLayoutProps {
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
   const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
+  const userRole = useAppSelector((state)=> state.user.role)
   const isUnConfirmedUser = useAppSelector((state) => {
     return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
   });
@@ -55,10 +56,14 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-
-          {isUnConfirmedUser && (
+          {isUnConfirmedUser && userRole === UserRole.RECIPIENT && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedRecipientMessage} />
+            </div>
+          )}
+          {isUnConfirmedUser && userRole === UserRole.VOLUNTEER && (
+            <div className={styles.message}>
+              <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>
           )}
           <div className={styles.content}>
