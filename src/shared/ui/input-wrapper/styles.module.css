@@ -50,6 +50,16 @@
   cursor: pointer;
 }
 
+.box-message {
+  margin-top: 10px;
+  width: 200px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 550px) {
   .inputWrapper {
     margin: 20px auto 0;
@@ -59,5 +69,10 @@
   .file-box {
     width: 85%;
     margin: 10px auto 0;
+  }
+
+  .box-message {
+    margin: 10px auto 0;
+    width: 85%;
   }
 }

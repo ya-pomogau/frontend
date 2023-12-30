@@ -11,6 +11,7 @@ import {
   linksMenuMobile,
   linksMenu,
   linksMenuMobileUnauthorized,
+  linksTopAuthAdmin,
 } from '../utils';
 
 import styles from './styles.module.css';
@@ -28,6 +29,7 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
   const ref = useRef(null);
 
   const user = useAppSelector((state) => state.user.data);
+  console.log(user?.role);
 
   const closeByOverlay = (evt: MouseEvent) => {
     if (evt.target !== ref.current) {
@@ -72,14 +74,21 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
       )}
 
       {user ? (
-        <SideBar
-          position={positionConfigMenu}
-          links={isMobile ? linksMenuMobile : linksMenu}
-        />
+        user?.role === 'master' || user?.role === 'admin' ? (
+          <SideBar
+            position={positionConfigMenu}
+            links={isMobile ? linksTopAuthAdmin : linksMenu}
+          />
+        ) : (
+          <SideBar
+            position={positionConfigMenu}
+            links={isMobile ? linksMenuMobileUnauthorized : linksMenu}
+          />
+        )
       ) : (
         <SideBar
           position={positionConfigMenu}
-          links={isMobile ? linksMenuMobileUnauthorized : linksMenu}
+          links={isMobile ? linksMenuMobile : linksMenu}
         />
       )}
     </div>,

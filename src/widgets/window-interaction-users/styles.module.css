@@ -27,7 +27,6 @@
 }
 
 .container {
-  width: 25vw;
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;

@@ -79,31 +79,6 @@ export const router = createBrowserRouter(
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/out" element={<Logout />} />
-
-          <Route
-            path="/chat"
-            element={
-              <ProfileChatsPages>
-                <SectionChatPicker />
-              </ProfileChatsPages>
-            }
-          />
-          <Route
-            path="/chat-hub"
-            element={
-              <ProfileChatsPages>
-                <SectionChatHub />
-              </ProfileChatsPages>
-            }
-          />
-          <Route
-            path="/chat-conflict"
-            element={
-              <ProfileChatsPages>
-                <SectionChatsConflict />
-              </ProfileChatsPages>
-            }
-          />
         </Route>
 
         <Route
@@ -174,6 +149,31 @@ export const router = createBrowserRouter(
           <Route path="/profile/tasks" element={<TasksPage />} />
 
           <Route path="/profile/bids" element={<BidsPage />} />
+
+          <Route
+            path="/chat"
+            element={
+              <ProfileChatsPages>
+                <SectionChatPicker />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chat-hub"
+            element={
+              <ProfileChatsPages>
+                <SectionChatHub />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chat-conflict"
+            element={
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            }
+          />
         </Route>
 
         <Route

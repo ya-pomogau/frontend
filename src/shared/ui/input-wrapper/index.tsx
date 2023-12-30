@@ -4,6 +4,8 @@ import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
+import { Message } from '../message';
+import { useLocation } from 'react-router-dom';
 
 interface PropsInputWrapper {
   placeholder: string;
@@ -19,6 +21,7 @@ interface PropsInputWrapper {
 export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
   const [fileInput, setFileInput] = useState('');
   const [fileName, setFileName] = useState('');
+  const location = useLocation();
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -63,6 +66,19 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
+
+  const dataMessage = [
+    {
+      messageText: 'Здравствуйте, спасибо, что обратились.',
+    },
+    {
+      messageText: 'Будут вопросы — обращайтесь.',
+    },
+    {
+      messageText:
+        'Я не могу ответить прямо сейчас, но обязательно вернусь с ответом в течении часа.',
+    },
+  ];
 
   return (
     <div className={styles.box}>
@@ -116,6 +132,18 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
             className={styles['btn-close']}
             onClick={hendleDeleteFile}
           />
+        </div>
+      )}
+      {location.pathname === '/chat-hub' && (
+        <div className={styles['box-message']}>
+          {dataMessage.map((m, i) => (
+            <Message
+              key={i}
+              type="send"
+              messageText={m.messageText}
+              avatarLink=""
+            />
+          ))}
         </div>
       )}
     </div>
