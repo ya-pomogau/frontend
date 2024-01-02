@@ -1,21 +1,49 @@
 import { useAppSelector } from 'app/hooks';
-
-import { PageSubMenuAdmin } from '../page-sub-menu-admin';
-import { PageSubMenuMaster } from '../page-sub-menu-master';
-import { UserRole } from 'shared/types/common.types';
 import { isRootSelector } from 'entities/user/model';
+import { PageSubMenu } from '../page-sub-menu/page-sub-menu';
+import { PageSubMenuLink } from '../page-sub-menu-link/page-sub-menu-link';
 
-export const PageSubMenuForAdmins = () => {
+interface PageSubMenuForAdminsProps {
+  counters: {
+    [key in 'volunteers' | 'recipients' | 'notprocessed' | 'admins']: number;
+  };
+}
+
+export const PageSubMenuForAdmins = ({
+  counters,
+}: PageSubMenuForAdminsProps) => {
   const { role } = useAppSelector((state) => state.user);
   const isRoot = useAppSelector(isRootSelector);
-
-  if (role === UserRole.ADMIN && !isRoot) {
-    return <PageSubMenuAdmin />;
-  }
-
-  if (isRoot) {
-    return <PageSubMenuMaster />;
-  }
-
-  return <PageSubMenuAdmin />;
+  return (
+    <PageSubMenu
+      links={
+        <>
+          <PageSubMenuLink
+            to="/profile/requests/volunteers"
+            text="Волонтеры"
+            notifications={counters.volunteers}
+          />
+          <PageSubMenuLink
+            to="/profile/requests/recipients"
+            text="Реципиенты"
+            notifications={counters.recipients}
+          />
+          <PageSubMenuLink
+            to="/profile/requests/notprocessed"
+            text="Не обработанные"
+            notifications={counters.notprocessed}
+          />
+          {role === 'Admin' && isRoot ? (
+            <PageSubMenuLink
+              to="/profile/requests/admins"
+              text="Админы"
+              notifications={counters.admins}
+            />
+          ) : (
+            ''
+          )}
+        </>
+      }
+    />
+  );
 };
