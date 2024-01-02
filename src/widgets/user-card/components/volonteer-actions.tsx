@@ -13,6 +13,8 @@ interface VolunteerActionsProps {
   ) => 'primary' | 'partial' | 'secondary';
   scores: number;
   keys: boolean;
+  isAdminHavePermissionSetKeys: boolean;
+  isAdminHavePermissionApprove: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
   isKeyButtonExclamationPointIcon: boolean;
   onAcceptButtonClick: () => void;
@@ -30,6 +32,8 @@ const VolunteerActions = ({
   onBlockButtonClick,
   onGiveKeysButtonClick,
   keys,
+  isAdminHavePermissionSetKeys,
+  isAdminHavePermissionApprove,
 }: VolunteerActionsProps) => {
   const isKeysNullOrOne = keys ? true : false;
 
@@ -44,21 +48,27 @@ const VolunteerActions = ({
       </div>
       <div className={classnames(styles.exclamation_point_div)}>
         <Button
-          disabled={isVolonteerAcceptButtonDisabled}
+          disabled={
+            isVolonteerAcceptButtonDisabled || !isAdminHavePermissionApprove
+          }
           buttonType={getButtonTypeFromScore(scores)}
           label="Подтвердить"
           onClick={onAcceptButtonClick}
         />
         {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />}
-        <Button
-          buttonType="secondary"
-          label="Заблокировать"
-          onClick={onBlockButtonClick}
-        />
+      </div>
+      <Button
+        disabled={!isAdminHavePermissionApprove}
+        buttonType="secondary"
+        label="Заблокировать"
+        onClick={onBlockButtonClick}
+      />
+      <div className={classnames(styles.exclamation_point_div)}>
         <Button
           buttonType="secondary"
           label="Дать ключи"
           onClick={onGiveKeysButtonClick}
+          disabled={!isAdminHavePermissionSetKeys}
         />
         {isKeyButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>

@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import classnames from 'classnames';
 
 import { Avatar } from '../../shared/ui/avatar';
@@ -10,6 +10,7 @@ import VolunteerActions from './components/volonteer-actions';
 import RecipientActions from './components/recipient-actions';
 import AdminActions from './components/admin-actions';
 import { UserRole } from 'shared/types/common.types';
+import { useAppSelector } from '../../app/hooks';
 
 interface UserCardProps {
   role?: UserRole;
@@ -34,7 +35,10 @@ const getButtonTypeFromScore = (
     return 'secondary';
   }
 };
-
+interface IPermission {
+  id: number;
+  name: string;
+}
 export const UserCard = ({
   role,
   extClassName,
@@ -47,7 +51,21 @@ export const UserCard = ({
   volunteerInfo,
 }: UserCardProps) => {
   const { approved, checked, scores, isHasKeys } = volunteerInfo;
-
+  const adminData: any = useAppSelector((state) => state.user.data);
+  const adminPermissions: IPermission[] = adminData.permissions;
+  const [approvePermission, setApprovePermission] = useState(false);
+  const [keysPermission, setKeysPermission] = useState(false);
+  useEffect(() => {
+    adminPermissions.map((per) => {
+      if (per.id === 1) {
+        setApprovePermission(true);
+      }
+      if (per.id === 3) {
+        setKeysPermission(true);
+      }
+      return true;
+    });
+  }, [adminPermissions]);
   const isVolonteerAcceptButtonDisabled =
     (scores === 0 && approved) ||
     (scores >= 30 && scores < 60 && checked) ||
@@ -111,12 +129,15 @@ export const UserCard = ({
             console.log('"Дать ключи" button pressed')
           }
           keys={isHasKeys}
+          isAdminHavePermissionSetKeys={keysPermission}
+          isAdminHavePermissionApprove={approvePermission}
         />
       )}
 
       {role === UserRole.RECIPIENT && (
         <RecipientActions
           approved={approved}
+          isAdminHavePermissionApprove={approvePermission}
           onConfirmClick={() => {
             console.log('Recipient confirm button pressed');
           }}
