@@ -14,6 +14,11 @@ import { LogoutButton } from './Logout/LogoutButton';
 
 const modalRoot = document.getElementById('modal') as HTMLElement;
 
+const line = {
+  background: '#E0E0E0',
+  height: '1px',
+  width: '100%',
+};
 interface MenuProps {
   setMenuActive: (arg: boolean) => void;
   menuActive: boolean;
@@ -66,8 +71,16 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
           Написать администратору
         </AdminButton>
       )}
+      {isMobile ? (
+        <SideBar
+          position={positionConfigMenu}
+          links={linksMenuMobileUnauthorized}
+        />
+      ) : (
+        <div style={line}></div>
+      )}
 
-      {user ? (
+      {/*{user ? (
         <SideBar
           position={positionConfigMenu}
           links={isMobile ? linksMenuMobileUnauthorized : null}
@@ -77,7 +90,7 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
           position={positionConfigMenu}
           links={isMobile ? linksMenuMobileUnauthorized : null}
         />
-      )}
+      )}*/}
       <LogoutButton />
     </div>,
     modalRoot
