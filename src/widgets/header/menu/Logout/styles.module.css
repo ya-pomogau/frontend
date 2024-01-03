@@ -4,6 +4,7 @@
   display: flex;
   border: none;
   padding: 0;
+  color:black;
   background-color: transparent;
   cursor: pointer;
   justify-content: right;

@@ -9,29 +9,42 @@ type AdminButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   extraClass?: string;
   isMobile?: boolean;
   isDisabled?: boolean;
+  buttonType?: string;
 };
 
 export const AdminButton = forwardRef<HTMLButtonElement, AdminButtonProps>(
   (
-    { children, isMobile = false, isDisabled, extraClass, ...buttonProps },
+    {
+      children,
+      isMobile = false,
+      isDisabled,
+      extraClass,
+      buttonType,
+      ...buttonProps
+    },
     ref
   ) => {
     return (
       <button
-        className={classnames(styles.adminButton, extraClass)}
+        className={classnames(extraClass)}
         type="button"
         ref={ref}
         disabled={isDisabled}
         {...buttonProps}
       >
         <p className={styles.title}>{children}</p>
-        <div className={isDisabled ? styles.icon_disable : styles.icon}>
-          <Icon
-            color="white"
-            icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
-            size="24"
-          />
-        </div>
+        {buttonType ? (
+          <div className={isDisabled ? styles.icon_disable : styles.icon}>
+            <Icon
+              color="white"
+              icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
+              size="24"
+            />
+          </div>
+        ) : (
+          <Icon color="blue" icon="ExitIcon" size="24" />
+        )}
+
         {isMobile && (
           <svg
             className={`${styles.title__background}`}

@@ -5,12 +5,14 @@ import { createPortal } from 'react-dom';
 import { SideBar } from 'widgets/header/navigation';
 
 import { useMediaQuery } from 'shared/hooks';
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { positionConfigMenu, linksMenuMobileUnauthorized } from '../utils';
 
 import styles from './styles.module.css';
 import { AdminButton } from 'shared/ui/admin-button';
 import { LogoutButton } from './Logout/LogoutButton';
+import { useNavigate } from 'react-router-dom';
+import { logoutUser } from 'entities/user/model';
 
 const modalRoot = document.getElementById('modal') as HTMLElement;
 
@@ -53,6 +55,14 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const handlerOnClick = () => {
+    console.log('exit');
+    dispatch(logoutUser());
+    return navigate('/');
+  };
+
   return createPortal(
     <div
       className={
@@ -62,36 +72,33 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
       }
       ref={ref}
     >
-      {user && (
-        <AdminButton
-          isMobile={isMobile}
-          extraClass={styles.header__sidebar__admin_button}
-          onClick={() => console.log('Нажали кнопку')}
-        >
-          Написать администратору
-        </AdminButton>
-      )}
-      {isMobile ? (
-        <SideBar
-          position={positionConfigMenu}
-          links={linksMenuMobileUnauthorized}
-        />
-      ) : (
-        <div style={line}></div>
-      )}
-
-      {/*{user ? (
-        <SideBar
-          position={positionConfigMenu}
-          links={isMobile ? linksMenuMobileUnauthorized : null}
-        />
-      ) : (
-        <SideBar
-          position={positionConfigMenu}
-          links={isMobile ? linksMenuMobileUnauthorized : null}
-        />
-      )}*/}
-      <LogoutButton />
+      {user ? (
+        <>
+          <AdminButton
+            isMobile={isMobile}
+            extraClass={styles.header__sidebar__admin_button}
+            onClick={() => console.log('Нажали кнопку')}
+            buttonType="adminMessage"
+          >
+            Написать администратору
+          </AdminButton>
+          {isMobile ? (
+            <SideBar
+              position={positionConfigMenu}
+              links={linksMenuMobileUnauthorized}
+            />
+          ) : (
+            <div style={line}></div>
+          )}
+          <AdminButton
+            isMobile={isMobile}
+            extraClass={styles.button}
+            onClick={handlerOnClick}
+          >
+            Выход
+          </AdminButton>
+        </>
+      ) : null}
     </div>,
     modalRoot
   );

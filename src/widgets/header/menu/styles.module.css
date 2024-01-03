@@ -37,4 +37,23 @@
   margin-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--colors-interface-ford-white);
+  display: flex;
+  color: var(--colors-interface-primary);
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  justify-content: right;
+  margin-top: 35px;
 }

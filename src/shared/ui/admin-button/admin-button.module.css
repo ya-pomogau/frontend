@@ -1,4 +1,4 @@
-.adminButton {
+/*.adminButton {
   display: flex;
   color: var(--colors-interface-primary);
   border: none;
@@ -7,7 +7,7 @@
   cursor: pointer;
   justify-content: center;
   align-items: center;
-}
+}*/
 
 .title {
   margin: 0;
