@@ -32,17 +32,22 @@ export const AdminButton = forwardRef<HTMLButtonElement, AdminButtonProps>(
         disabled={isDisabled}
         {...buttonProps}
       >
-        <p className={styles.title}>{children}</p>
         {buttonType ? (
-          <div className={isDisabled ? styles.icon_disable : styles.icon}>
-            <Icon
-              color="white"
-              icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
-              size="24"
-            />
-          </div>
+          <>
+            <p className={styles.title}>{children}</p>
+            <div className={isDisabled ? styles.icon_disable : styles.icon}>
+              <Icon
+                color="white"
+                icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
+                size="24"
+              />
+            </div>
+          </>
         ) : (
-          <Icon color="blue" icon="ExitIcon" size="24" />
+          <>
+            <p className={styles.title_logout}>{children}</p>
+            <Icon color="blue" icon="ExitIcon" size="24" />
+          </>
         )}
 
         {isMobile && (

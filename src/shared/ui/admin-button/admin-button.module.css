@@ -43,6 +43,15 @@
   top: 19px;
 }
 
+.title_logout {
+  margin: 0;
+  margin-right: 5px;
+  text-align: right;
+  font-family: 'Golos';
+  font-size: 16px;
+  line-height: 19px;
+}
+
 @media (max-width: 900px) {
   .title {
     font-size: 12px;
@@ -55,4 +64,5 @@
     color: #fbfdff;
     z-index: 2;
   }
+
 }
