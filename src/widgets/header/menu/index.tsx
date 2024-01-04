@@ -10,7 +10,6 @@ import { positionConfigMenu, linksMenuMobileUnauthorized } from '../utils';
 
 import styles from './styles.module.css';
 import { AdminButton } from 'shared/ui/admin-button';
-import { LogoutButton } from './Logout/LogoutButton';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from 'entities/user/model';
 
