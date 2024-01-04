@@ -25,7 +25,8 @@ const Header = () => {
     setMenuActive(!menuActive);
   };
 
-  const isMenuHidden = !user && !isMobile;
+  const isMenuHidden = !user;
+  //&& !isMobile;
 
   return (
     <header className={`${styles.header} ${isMobile && styles.header_mobile}`}>
