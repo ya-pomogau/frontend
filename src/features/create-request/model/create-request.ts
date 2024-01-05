@@ -114,4 +114,5 @@ export const {
   clearTime,
   clearState,
   changeCurrentStep,
+  clearTime,
 } = createRequestModel.actions;
