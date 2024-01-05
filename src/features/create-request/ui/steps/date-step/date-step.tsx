@@ -8,6 +8,7 @@ import {
   setTime,
   changeCheckbox,
   changeStepIncrement,
+  clearTime,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import Checkbox from 'shared/ui/checkbox';
