@@ -1,11 +1,7 @@
-.card {
+.cards-container {
   width: 359px;
-  height: 70px;
-  border: 1px solid var(--colors-interface-primary-additional);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  cursor: pointer;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .card_action {
@@ -17,6 +13,10 @@
   height: 50px;
   border-radius: 50%;
   background: var(--colors-interface-primary-additional);
+}
+
+.img_action {
+  background: var(--colors-interface-white);
 }
 
 .user-info {
@@ -57,10 +57,26 @@
   border-radius: 50%;
 }
 
+.card {
+  box-sizing: content-box;
+  display: flex;
+  width: 359px;
+  height: 70px;
+  border: 1px solid var(--colors-interface-primary-additional);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card-swipe {
+  margin-left: 70px;
+}
+
 @media (max-width: 400px) {
   .card {
-    margin: 0 auto;
-    width: 95%;
+    margin: 0;
+    width: 100%;
   }
 
   .img {

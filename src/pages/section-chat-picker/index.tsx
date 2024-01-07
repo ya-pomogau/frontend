@@ -65,7 +65,6 @@ export const SectionChatPicker = () => {
           />
         ))}
       </div>
-
       {isOpen && (
         <WindowInteractionUsers
           option="chat"

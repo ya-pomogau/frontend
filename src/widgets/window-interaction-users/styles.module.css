@@ -6,6 +6,7 @@
   visibility: hidden;
   opacity: 0;
   position: relative;
+  height: 65vh;
 }
 
 .box_action {
@@ -120,6 +121,7 @@
     top: 0;
     right: 0;
     gap: 0;
+    height: 90%;
   }
 
   .content-container {

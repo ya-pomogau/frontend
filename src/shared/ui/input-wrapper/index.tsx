@@ -134,7 +134,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
           />
         </div>
       )}
-      {location.pathname === '/chat-hub' && (
+      {location.pathname !== '/chat' && (
         <div className={styles['box-message']}>
           {dataMessage.map((m, i) => (
             <Message

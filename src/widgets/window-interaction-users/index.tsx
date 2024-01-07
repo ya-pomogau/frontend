@@ -9,7 +9,7 @@ import { IChatmateInfo } from 'shared/types/conflict';
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
   isOpen: boolean;
-  onClick: (text: string) => void;
+  onClick: (text: string, func?: boolean) => void;
   children: ReactNode;
   chatmateInfo?: IChatmateInfo;
   boxButton: ReactElement;

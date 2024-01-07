@@ -9,8 +9,11 @@
 }
 
 .box-message {
-  width: 361px;
-  height: 100%;
+  min-width: 361px;
+  height: 98%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border: 1px solid var(--colors-interface-primary-additional);
 }
 
 .box-btn {
@@ -22,10 +25,11 @@
 @media (max-width: 550px) {
   .hub {
     margin: 0 auto;
-    justify-content: center;
+    gap: 0;
   }
 
   .box-message {
+    min-width: 100px;
     margin: 10px auto 0;
   }
 

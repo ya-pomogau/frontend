@@ -5,6 +5,7 @@ import {
   IChatmateInfo,
   IConflictUser,
   IInfoConflict,
+  IUsers,
 } from 'shared/types/conflict';
 import React from 'react';
 
@@ -18,13 +19,16 @@ interface PropsMessageCard {
     conflict?: IConflictUser,
     infoConflict?: IInfoConflict
   ) => void;
-  getChat: (
+  getChat?: (
     id: number,
     chatmateInfo: IChatmateInfo,
     message: IMessage[]
   ) => void;
   conflict?: IConflictUser;
   infoConflict?: IInfoConflict;
+  position?: boolean;
+  getInfoChatsConflict?: (users: IUsers[], id: number) => void;
+  users?: IUsers[];
 }
 
 export const MessageCard: React.FC<PropsMessageCard> = (props) => {
@@ -33,44 +37,67 @@ export const MessageCard: React.FC<PropsMessageCard> = (props) => {
 
   const handelClick = () => {
     props.onClick(props.chatmateInfo.userId);
-    props.getChat(props.id, props.chatmateInfo, props.message);
+
+    if (props.getChat) {
+      props.getChat(props.id, props.chatmateInfo, props.message);
+    }
     if (props.getConflict) {
       props.getConflict(props.conflict, props.infoConflict);
+    }
+    if (props.getInfoChatsConflict && props.users) {
+      props.getInfoChatsConflict(props.users, props.id);
     }
   };
 
   return (
-    <article
-      onClick={handelClick}
-      className={cn(styles.card, { [styles.card_action]: props.action })}
-    >
-      <img
-        src={props.chatmateInfo.userAvatarLink}
-        alt="фото"
-        className={styles.img}
-      />
-      <div className={styles['user-info']}>
-        <p
-          className={cn(defultStyle, styles.name, styles['length-limitation'])}
-        >
-          {props.chatmateInfo.name}
-        </p>
-        <span className={cn(defultStyle, styles.id)}>
-          {`ID ${props.chatmateInfo.userId}`}
+    <article onClick={handelClick} className={styles['cards-container']}>
+      <div
+        className={cn(
+          styles.card,
+          { [styles.card_action]: props.action },
+          {
+            [styles['card-swipe']]: props.position,
+          }
+        )}
+      >
+        {props.chatmateInfo.userAvatarLink ? (
+          <img
+            src={props.chatmateInfo.userAvatarLink}
+            alt="фото"
+            className={styles.img}
+          />
+        ) : (
+          <div
+            className={cn(styles.img, { [styles.img_action]: props.action })}
+          />
+        )}
+        <div className={styles['user-info']}>
+          <p
+            className={cn(
+              defultStyle,
+              styles.name,
+              styles['length-limitation']
+            )}
+          >
+            {props.chatmateInfo.name}
+          </p>
+          <span className={cn(defultStyle, styles.id)}>
+            {`ID ${props.chatmateInfo.userId}`}
+          </span>
+          <p
+            className={cn(
+              defultStyle,
+              styles.message,
+              styles['length-limitation']
+            )}
+          >
+            {props.message[lastMessage].message}
+          </p>
+        </div>
+        <span className={styles.counter}>
+          {props.message.length > 10 ? '+9' : props.message.length}
         </span>
-        <p
-          className={cn(
-            defultStyle,
-            styles.message,
-            styles['length-limitation']
-          )}
-        >
-          {props.message[lastMessage].message}
-        </p>
       </div>
-      <span className={styles.counter}>
-        {props.message.length > 10 ? '+9' : props.message.length}
-      </span>
     </article>
   );
 };

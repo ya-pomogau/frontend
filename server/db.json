@@ -536,76 +536,43 @@
   ],
   "conflicts": [
     {
-      "id": 123,
-      "chatmateInfo": {
-        "name": "Смирнов Максим Валерьевич",
-        "phone": "+7(000) 000-00-00",
-        "userAvatarLink": "https://i.pravatar.cc/300",
-        "userId": "33"
-      },
-      "messages": [
+      "id": 99,
+      "users": [
         {
-          "date": "new Date('2023-05-14T21:00:00.000Z')",
-          "id": 435454,
-          "message": "У нас разногласие, помогите решить проблему",
-          "userAvatarLink": "https://i.pravatar.cc/300",
-          "userId": "4423"
-        }
-      ],
-      "conflict": [
-        {
-          "specialization": "recipient",
-          "option": "confirm",
-          "name": "Петров Петр Петрович",
-          "image": "https://i.pravatar.cc/300",
-          "id": "33424"
+          "id": 22342,
+          "chatmateInfo": {
+            "name": "Александр Владимирович Поветкин",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "234333"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 4324324,
+              "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "52345"
+            }
+          ]
         },
         {
-          "specialization": "valanter",
-          "option": "conflict",
-          "name": "Зыбенко Михаил петрович",
-          "image": "https://i.pravatar.cc/300",
-          "id": "2432"
-        }
-      ],
-      "infoConflict": {
-        "date": "10.10.2023",
-        "time": "16:00",
-        "address": "ул. Нахи, д.9, у подъезда №3",
-        "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
-      }
-    },
-    {
-      "id": 325,
-      "chatmateInfo": {
-        "name": "Кузнецов Владимир Валерьевич",
-        "phone": "+7(000) 000-00-00",
-        "userAvatarLink": "https://i.pravatar.cc/300",
-        "userId": "44"
-      },
-      "messages": [
-        {
-          "date": "new Date('2023-05-14T21:00:00.000Z')",
-          "id": 432354,
-          "message": "Помогите решить конфликт",
-          "userAvatarLink": "https://i.pravatar.cc/300",
-          "userId": "4"
-        }
-      ],
-      "conflict": [
-        {
-          "specialization": "recipient",
-          "option": "confirm",
-          "name": "Петров Петр Петрович",
-          "image": "https://i.pravatar.cc/300",
-          "id": "22"
-        },
-        {
-          "specialization": "valanter",
-          "option": "conflict",
-          "name": "Зыбенко Михаил петрович",
-          "image": "https://i.pravatar.cc/300",
-          "id": "44"
+          "id": 663244,
+          "chatmateInfo": {
+            "name": "Смирнов Максим Валерьевич",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "7234347"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 882343,
+              "message": "У нас разногласие, помогите решить проблему",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "9923434"
+            }
+          ]
         }
       ],
       "infoConflict": {
@@ -613,7 +580,86 @@
         "time": "16:00",
         "address": "ул. Нахимова, д.9, у подъезда №3",
         "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
-      }
+      },
+      "conflict": [
+        {
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Петров Петр Петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "111"
+        },
+        {
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Зыбенко Михаил петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "222"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "users": [
+        {
+          "id": 22,
+          "chatmateInfo": {
+            "name": "Александр Владимирович Поветкин",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "33"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 44,
+              "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "55"
+            }
+          ]
+        },
+        {
+          "id": 66,
+          "chatmateInfo": {
+            "name": "Смирнов Максим Валерьевич",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "77"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 88,
+              "message": "У нас разногласие, помогите решить проблему",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "99"
+            }
+          ]
+        }
+      ],
+      "infoConflict": {
+        "date": "24.09.2022",
+        "time": "16:00",
+        "address": "ул. Нахимова, д.9, у подъезда №3",
+        "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
+      },
+      "conflict": [
+        {
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Петров Петр Петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "111"
+        },
+        {
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Зыбенко Михаил петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "222"
+        }
+      ]
     }
   ]
 }
