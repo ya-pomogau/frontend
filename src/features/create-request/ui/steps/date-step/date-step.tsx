@@ -8,7 +8,6 @@ import {
   setTime,
   changeCheckbox,
   changeStepIncrement,
-  clearTime,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import Checkbox from 'shared/ui/checkbox';
@@ -41,22 +40,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentTime = new Date(); // текущая дата
-    const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-    const selectedTime = new Date(`1970-01-01T${e.target.value}:00`); //фиктивная дата '1970-01-01', чтобы установить только время, а не дату
-    const selectedFormattedTime = format(selectedTime, 'HH:mm'); // привожу в нужный формат
-    //
-    if (time < currentFormattedTime) {
-      // console.log('время меньше');
-      console.log(selectedFormattedTime);
-      console.log(currentFormattedTime);
-
-      dispatch(setTime(currentFormattedTime));
-      return;
-    } //сравниваю даты
-    // console.log('время норм');
     dispatch(setTime(e.target.value));
-    // setInputValue(e.target.value);
   };
 
   useEffect(() => {
