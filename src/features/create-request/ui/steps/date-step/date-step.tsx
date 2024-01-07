@@ -8,7 +8,7 @@ import {
   setTime,
   changeCheckbox,
   changeStepIncrement,
-  clearTime,
+  setDateValidation,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import Checkbox from 'shared/ui/checkbox';
@@ -22,12 +22,10 @@ interface IDateStepProps {
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date, isTypeEdit } = useAppSelector(
+  const { time, termlessRequest, date, isTypeEdit, dateValidation } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
-  // const [inputValue, setInputValue] = useState('');
-  // const [isTimePassed, setIsTimePassed] = useState(false);
 
   const handleDateValueChange = (value: Date) => {
     const formatedDate = format(value, 'dd.MM.yyyy');
@@ -35,22 +33,24 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTime(e.target.value));
+  };
+
+  useEffect(() => {
     const currentTime = new Date(); // текущая дата
     const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-    const selectedTime = new Date(`1970-01-01T${e.target.value}:00`); //фиктивная дата '1970-01-01', чтобы установить только время, а не дату
-    const selectedFormattedTime = format(selectedTime, 'HH:mm'); // привожу в нужный формат
-    //
-    if (time < currentFormattedTime) {
-      // console.log('время меньше');
-      console.log(selectedFormattedTime);
-      console.log(currentFormattedTime);
-
-      dispatch(setTime(currentFormattedTime));
-      return;
+    // const selectedTime = new Date(`1970-01-01T${time}:00`); //фиктивная дата '1970-01-01', чтобы установить только время, а не дату
+    // const selectedFormattedTime = format(selectedTime, 'HH:mm'); // привожу в нужный формат
+    if (time && time < currentFormattedTime) {
+      console.log('отработал');
+      dispatch(setDateValidation(true));
+    } else {
+      dispatch(setDateValidation(false));
     } //сравниваю даты
-    // console.log('время норм');
-    dispatch(setTime(e.target.value));
-    // setInputValue(e.target.value);
+  }, [time]);
+
+  const handleNextStepClick = () => {
+    dispatch(changeStepIncrement());
   };
 
   const handleCheckboxChange = () => {
@@ -74,7 +74,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
             id="time"
             name="time"
             onChange={handleTimeValueChange}
-            // value={time}
             value={time}
             required
             className={classNames(
@@ -108,11 +107,16 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         </div>
       </div>
       <div className={styles.button}>
+        {dateValidation ? (
+          <p className={styles.validationMessage}>{'Введите валидное время'}</p>
+        ) : (
+          <></>
+        )}
         <Button
           buttonType="primary"
           label={propsButton.label}
           onClick={propsButton.onClick}
-          disabled={!time}
+          disabled={!time || dateValidation === true}
         />
       </div>
     </>
