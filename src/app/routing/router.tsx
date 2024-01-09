@@ -191,7 +191,16 @@ export const router = createBrowserRouter(
           />
         </Route>
       </Route>
-      <Route path="/test" element={<SectionChatPicker />} />
+
+      {/* нужно потом удалить */}
+      <Route
+        path="/test"
+        element={
+          <ProfileChatsPages>
+            <SectionChatsConflict />
+          </ProfileChatsPages>
+        }
+      />
 
       <Route path="*" element={<NotFoundPage />} />
     </>

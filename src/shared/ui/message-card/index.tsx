@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { IMessage } from 'shared/types/message';
@@ -7,7 +9,6 @@ import {
   IInfoConflict,
   IUsers,
 } from 'shared/types/conflict';
-import React from 'react';
 
 interface PropsMessageCard {
   chatmateInfo: IChatmateInfo;
@@ -29,11 +30,24 @@ interface PropsMessageCard {
   position?: boolean;
   getInfoChatsConflict?: (users: IUsers[], id: number) => void;
   users?: IUsers[];
+  openChat?: boolean;
 }
 
 export const MessageCard: React.FC<PropsMessageCard> = (props) => {
+  const [hasNewMessage, setHasNewMessage] = useState(false);
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
   const lastMessage = props.message.length - 1;
+  const location = useLocation();
+
+  useEffect(() => {
+    setHasNewMessage(true);
+  }, [props.message]);
+
+  useEffect(() => {
+    if (props.openChat) {
+      setHasNewMessage(true);
+    }
+  }, [props.openChat]);
 
   const handelClick = () => {
     props.onClick(props.chatmateInfo.userId);
@@ -94,9 +108,23 @@ export const MessageCard: React.FC<PropsMessageCard> = (props) => {
             {props.message[lastMessage].message}
           </p>
         </div>
-        <span className={styles.counter}>
-          {props.message.length > 10 ? '+9' : props.message.length}
-        </span>
+        {location.pathname === '/chat-conflict'
+          ? hasNewMessage && (
+              <div
+                className={cn(styles.notification, styles.radius, {
+                  [styles.vizabiliti]: !hasNewMessage,
+                })}
+              />
+            )
+          : hasNewMessage && (
+              <span
+                className={cn(styles.counter, styles.radius, {
+                  [styles.vizabiliti]: !hasNewMessage,
+                })}
+              >
+                {props.message.length > 10 ? '+9' : props.message.length}
+              </span>
+            )}
       </div>
     </article>
   );

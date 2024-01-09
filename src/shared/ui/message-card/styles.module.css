@@ -48,13 +48,18 @@
 }
 
 .counter {
-  width: 18px;
-  height: 18px;
-  font-size: 14px;
   background: var(--colors-interface-fuchsia);
   color: var(--colors-interface-white);
   text-align: center;
+}
+
+.radius {
+  font-size: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .card {
@@ -71,6 +76,15 @@
 
 .card-swipe {
   margin-left: 70px;
+}
+
+.notification {
+  background: var(--colors-interface-orange-dark);
+}
+
+.vizabiliti {
+  visibility: visible;
+  opacity: 1;
 }
 
 @media (max-width: 400px) {

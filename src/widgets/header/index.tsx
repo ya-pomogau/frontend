@@ -13,9 +13,12 @@ import { Avatar } from 'shared/ui/avatar';
 import { UnionIcon } from 'shared/ui/icons/union-icon';
 
 import styles from './styles.module.css';
+import { PopupChat } from 'entities/chat/ui/chat';
+import { infoAdmin } from 'entities/chat/ui/chat/libs/utils';
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
+  const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 
   const isMobile = useMediaQuery('(max-width: 900px)');
   const user = useAppSelector((state) => state.user.data);
@@ -23,6 +26,10 @@ const Header = () => {
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
     setMenuActive(!menuActive);
+  };
+
+  const hendleChat = () => {
+    setIsOpenChat((state) => !state);
   };
 
   const isMenuHidden = !user && !isMobile;
@@ -79,10 +86,24 @@ const Header = () => {
             )}
           </button>
           {menuActive && (
-            <Menu setMenuActive={setMenuActive} menuActive={menuActive} />
+            <Menu
+              setMenuActive={setMenuActive}
+              menuActive={menuActive}
+              onClick={hendleChat}
+            />
           )}
         </div>
       </div>
+
+      {isOpenChat && (
+        <PopupChat
+          isOpen={isOpenChat}
+          onClick={hendleChat}
+          messages={[]}
+          chatmateInfo={infoAdmin}
+          onAttachFileClick={() => {}}
+        />
+      )}
 
       {isMobile && <div className={styles['header__gradient-divider']}></div>}
     </header>

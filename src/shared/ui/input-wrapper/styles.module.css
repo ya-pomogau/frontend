@@ -61,9 +61,13 @@
 }
 
 @media (max-width: 550px) {
+  .box {
+    width: 100%;
+    margin: 0 auto;
+  }
+
   .inputWrapper {
     margin: 20px auto 0;
-    width: 85%;
   }
 
   .file-box {
@@ -72,7 +76,6 @@
   }
 
   .box-message {
-    margin: 10px auto 0;
     width: 85%;
   }
 }

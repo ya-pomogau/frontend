@@ -57,6 +57,7 @@ export const SectionChatHub = () => {
             chatmateInfo={i.chatmateInfo}
             message={i.messages}
             action={isOpen && selectedCard === i.chatmateInfo.userId}
+            openChat={isOpen}
           />
         ))}
       </div>
@@ -74,6 +75,7 @@ export const SectionChatHub = () => {
               onClickBtn={() => {}}
               onChange={handleInputChange}
               getFile={setFileInput}
+              containerMessages={true}
             />
           }
         >

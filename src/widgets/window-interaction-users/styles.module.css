@@ -126,6 +126,7 @@
 
   .content-container {
     border: none;
+    width: 95%;
   }
 
   .box-btn {
@@ -159,5 +160,10 @@
 
   .container-modile {
     margin-top: 17px;
+  }
+
+  .isMobile {
+    width: 95%;
+    margin: 0 auto;
   }
 }

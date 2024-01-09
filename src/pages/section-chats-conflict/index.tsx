@@ -214,6 +214,7 @@ export const SectionChatsConflict = () => {
                 onClickBtn={() => {}}
                 onChange={handleInputChange}
                 getFile={setFileInput}
+                containerMessages={true}
               />
             }
           >

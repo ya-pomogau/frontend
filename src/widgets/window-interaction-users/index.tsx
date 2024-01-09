@@ -124,7 +124,7 @@ export const WindowInteractionUsers: React.FC<IWindowInteractionUsers> = (
         />
       )}
       {isMobile && <GradientDivider />}
-      {props.boxButton}
+      <div className={styles.isMobile}>{props.boxButton}</div>
     </article>
   );
 };

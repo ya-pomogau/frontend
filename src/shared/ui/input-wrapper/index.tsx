@@ -5,7 +5,6 @@ import { Button } from 'shared/ui/button';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
 import { Message } from '../message';
-import { useLocation } from 'react-router-dom';
 
 interface PropsInputWrapper {
   placeholder: string;
@@ -16,12 +15,12 @@ interface PropsInputWrapper {
   onClickBtn: () => void;
   extClassButton?: string;
   getFile: (value: string) => void;
+  containerMessages: boolean;
 }
 
 export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
   const [fileInput, setFileInput] = useState('');
   const [fileName, setFileName] = useState('');
-  const location = useLocation();
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -134,7 +133,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
           />
         </div>
       )}
-      {location.pathname !== '/chat' && (
+      {props.containerMessages && (
         <div className={styles['box-message']}>
           {dataMessage.map((m, i) => (
             <Message

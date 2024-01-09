@@ -1,18 +1,19 @@
 .chatWrapper {
   width: 586px;
-  height: 380px;
-  position: absolute;
-  bottom: 70px;
+  height: 374px;
+  position: fixed;
+  bottom: 0;
   right: 0;
   display: flex;
-  z-index: i;
-  flex-direction: column;
-  gap: 20px;
+  z-index: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.4s ease;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 20px 30px;
   background-color: var(--colors-interface-white);
   box-shadow: var(--common-element-shadow);
 }
@@ -30,8 +31,8 @@
 }
 
 .avatar {
-  max-width: clamp(44px, 2vw, 52px);
-  max-height: clamp(44px, 2vw, 52px);
+  width: 52px;
+  height: 52px;
 }
 
 .name {
@@ -41,8 +42,12 @@
 }
 
 .container-chat {
-  width: 90%;
-  margin-left: 3vw;
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .chat-container {
@@ -60,7 +65,7 @@
 }
 
 .arrow {
-  margin: auto 0;
+  margin: 0;
   cursor: pointer;
 }
 
@@ -71,6 +76,7 @@
 }
 
 .messagesBlock {
+  height: 180px;
   background-color: var(--colors-interface-white);
   border: 1px solid var(--colors-interface-ford-white);
   display: flex;
@@ -104,11 +110,32 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 95vh;
+    height: 95%;
     box-shadow: none;
+    padding: 10px 15px;
+    gap: 0;
+    align-content: flex-start;
+  }
+
+  .avatar {
+    width: 43px;
+    height: 43px;
+  }
+
+  .mainBlock {
+    height: 43px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 5px;
   }
 
   .messagesBlock {
     height: 60vh;
+  }
+
+  .container-chat {
+    width: 100%;
+    gap: 0;
   }
 }

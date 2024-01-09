@@ -14,12 +14,13 @@ import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
+import { GradientDivider } from 'shared/ui/gradient-divider';
 
 interface PopupChatProps {
   messages: IMessage[];
   chatmateInfo: IChatmateInfo;
   onAttachFileClick: () => void;
-  onMessageSend: (message: string) => void;
+  onMessageSend?: (message: string) => void;
   isOpen: boolean;
   onClick: () => void;
 }
@@ -42,7 +43,9 @@ export const PopupChat = ({
   };
 
   const handleSendClick = () => {
-    onMessageSend(inputValue);
+    if (onMessageSend) {
+      onMessageSend(inputValue);
+    }
   };
 
   return (
@@ -79,7 +82,7 @@ export const PopupChat = ({
           {chatmateInfo.name}
         </h4>
       </div>
-
+      {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>
         <div className={styles.messagesBlock}>
           {sortedMessages?.map((message) => (
@@ -101,6 +104,7 @@ export const PopupChat = ({
           name="message"
           onChange={handleInputChange}
           onClickBtn={handleSendClick}
+          containerMessages={false}
         />
       </div>
     </div>

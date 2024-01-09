@@ -54,5 +54,6 @@ export const Default: Story = {
     onChange: () => {},
     onClickBtn: () => {},
     getFile: () => {},
+    containerMessages: false,
   },
 };
