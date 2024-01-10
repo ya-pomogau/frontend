@@ -8,6 +8,7 @@ import { useYMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_SUGGEST_SWITCHER } from 'config/ymaps/switches-api';
 import { Input } from '../input';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { useAppSelector } from 'app/hooks';
 
 interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   initialValue?: string;
@@ -35,13 +36,9 @@ export const InputAddress = (props: InputAddressProps) => {
   } = props;
 
   const suggestInputRef = useRef<HTMLInputElement>(null);
-
+  const initPlaceholder = useAppSelector((store) => store.user.data?.address);
   // any потому что в библиотеке не написаны типы для SuggestView
   const ymaps: any = useYMaps(['SuggestView', 'geocode']);
-
-  // useEffect(() => {
-  //   setAddress(initialValue, []);
-  // }, []);
 
   useEffect(() => {
     if (!ymaps) {
@@ -70,7 +67,7 @@ export const InputAddress = (props: InputAddressProps) => {
         });
       });
     }
-  }, [ymaps, setAddress]);
+  }, [ymaps]);
 
   const inputProps = {
     ...inputAttributes,
@@ -85,7 +82,7 @@ export const InputAddress = (props: InputAddressProps) => {
       value={address.address}
       ref={suggestInputRef}
       type="text"
-      placeholder="ул. Нахимова, д.9, у подъезда №3"
+      placeholder={initPlaceholder}
       {...inputProps}
     />
   );

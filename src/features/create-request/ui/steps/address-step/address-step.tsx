@@ -11,16 +11,28 @@ import YandexMap from 'widgets/map';
 import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './address-step.module.css';
+import { useEffect } from 'react';
 
 interface IAddressProps {
   isMobile?: boolean;
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
+  // Для получения стартового значения адреса, эта точка будет центром карты по умолчанию
+  const cord = useAppSelector((store) => store.user.data?.coordinates);
+
+  const dispatch = useAppDispatch();
+
   const { address, coordinates } = useAppSelector(
     (state) => state.createRequest
   );
-  const dispatch = useAppDispatch();
+  // Заполняем стор createRecust для отрисовки стартовой позиции баллуна при монтировании страницы
+  useEffect(() => {
+    // Условие нужно, чтобы сохранить промежуточный результат ввода данных при переходе на след или предудыший этап
+    if (!address) {
+      dispatch(setAddress({ additinalAddress: '', coords: cord }));
+    }
+  }, []);
 
   const handleAddressValueChange = (
     additinalAddress: string,
@@ -72,7 +84,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                     ? {
                         latitude: coordinates[0],
                         longitude: coordinates[1],
-                        zoom: 15,
+                        zoom: 17,
                       }
                     : undefined
                 }
@@ -149,7 +161,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                     ? {
                         latitude: coordinates[0],
                         longitude: coordinates[1],
-                        zoom: 15,
+                        zoom: 17,
                       }
                     : undefined
                 }
