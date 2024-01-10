@@ -30,57 +30,58 @@ export const YandexMap = ({
   tasks,
   coordinates,
   isAuthorised,
-}: YandexMapProps) => (
-  <YMaps
-    enterprise
-    query={{
-      load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
-      apikey: YMAPS_API_KEY,
-    }}
-  >
-    <Map
-      state={{
-        center: [mapSettings.latitude, mapSettings.longitude],
-        zoom: mapSettings.zoom,
+}: YandexMapProps) => {
+  return (
+    <YMaps
+      enterprise
+      query={{
+        load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
+        apikey: YMAPS_API_KEY,
       }}
-      options={{
-        suppressMapOpenBlock: true,
-        yandexMapDisablePoiInteractivity: true,
-      }}
-      width={width}
-      height={height}
     >
-      {tasks &&
-        tasks?.map((task) => (
-          <Mark
-            id={task.id}
-            coordinates={task.coordinates}
-            isUrgentTask={isTaskUrgent(task.date)}
-            fullName={task.recipient.fullname}
-            phone={task.recipient.phone}
-            avatar={task.recipient.avatar}
-            description={task.description}
-            count={task.category.scope}
-            onClick={onClick}
-            key={task.id}
-            isAuthorised={isAuthorised}
-            date={new Date(task.date).toLocaleDateString()}
-            time={new Date(task.date).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
-            hasBalloon={true}
-            draggable={false}
-          />
-        ))}
-      <Mark
-        coordinates={coordinates}
-        onClick={() => console.log('Это яндекс карта')}
-        hasBalloon={false}
-        draggable={true}
-      />
-    </Map>
-  </YMaps>
-);
-
+      <Map
+        state={{
+          center: [mapSettings.latitude, mapSettings.longitude],
+          zoom: mapSettings.zoom,
+        }}
+        options={{
+          suppressMapOpenBlock: true,
+          yandexMapDisablePoiInteractivity: true,
+        }}
+        width={width}
+        height={height}
+      >
+        {tasks &&
+          tasks?.map((task) => (
+            <Mark
+              id={task.id}
+              coordinates={task.coordinates}
+              isUrgentTask={isTaskUrgent(task.date)}
+              fullName={task.recipient.fullname}
+              phone={task.recipient.phone}
+              avatar={task.recipient.avatar}
+              description={task.description}
+              count={task.category.scope}
+              onClick={onClick}
+              key={task.id}
+              isAuthorised={isAuthorised}
+              date={new Date(task.date).toLocaleDateString()}
+              time={new Date(task.date).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+              hasBalloon={true}
+              draggable={false}
+            />
+          ))}
+        <Mark
+          coordinates={coordinates}
+          onClick={() => console.log('Это яндекс карта')}
+          hasBalloon={false}
+          draggable={true}
+        />
+      </Map>
+    </YMaps>
+  );
+};
 export default memo(YandexMap);

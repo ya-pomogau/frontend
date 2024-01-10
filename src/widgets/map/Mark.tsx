@@ -3,12 +3,14 @@
 /* eslint-disable react/no-this-in-sfc */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React from 'react';
+import React, { useState } from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { useDispatch } from 'react-redux';
+import { setAddress } from 'features/create-request/model';
 
 type MarkProps = {
   id?: number;
@@ -46,7 +48,9 @@ export const Mark = React.memo(
     hasBalloon,
     draggable,
   }: MarkProps) => {
-    const ymaps = useYMaps(['templateLayoutFactory']);
+    const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+
+    const dispatch = useDispatch();
 
     const isGranted = usePermission(
       [CONFIRMED, ACTIVATED, VERIFIED],
@@ -275,6 +279,24 @@ export const Mark = React.memo(
           isAuthorised,
           date,
           time,
+        }}
+        // Данный пропс отвечает за возможность получить координату в конце перетаскивания баллуна
+        onDragEnd={(event) => {
+          const newCoordinates = event.get('target').geometry.getCoordinates();
+          // С помощью геокодера конвертируем полученную координату в адрес и отправляем в стор createRequst
+          if (ymaps) {
+            const geo = ymaps.geocode(newCoordinates);
+            geo.then((res) => {
+              const firstGeoObject = res.geoObjects.get(0);
+
+              dispatch(
+                setAddress({
+                  additinalAddress: firstGeoObject.getAddressLine(),
+                  coords: newCoordinates,
+                })
+              );
+            });
+          }
         }}
       />
     );
