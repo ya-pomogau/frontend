@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
 
@@ -39,15 +39,18 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   useEffect(() => {
     const currentTime = new Date(); // текущая дата
     const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-    // const selectedTime = new Date(`1970-01-01T${time}:00`); //фиктивная дата '1970-01-01', чтобы установить только время, а не дату
-    // const selectedFormattedTime = format(selectedTime, 'HH:mm'); // привожу в нужный формат
     if (time && time < currentFormattedTime) {
-      console.log('отработал');
       dispatch(setDateValidation(true));
     } else {
       dispatch(setDateValidation(false));
     } //сравниваю даты
   }, [time]);
+
+  useEffect(() => {
+    if (termlessRequest) {
+      dispatch(setTime(''));
+    }
+  }, [termlessRequest]);
 
   const handleNextStepClick = () => {
     dispatch(changeStepIncrement());
@@ -70,6 +73,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
           </p>
           <div className={styles.headerWrapper} />
           <input
+            disabled={termlessRequest}
             type="time"
             id="time"
             name="time"
