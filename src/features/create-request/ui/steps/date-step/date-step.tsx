@@ -61,6 +61,12 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     }
   }, [termlessRequest]);
 
+  useEffect(() => {
+    if (termlessRequest) {
+      dispatch(setTime(''));
+    }
+  }, [termlessRequest]);
+
   const handleNextStepClick = () => {
     dispatch(changeStepIncrement());
   };
