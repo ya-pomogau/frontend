@@ -16,6 +16,7 @@ export const MapWithTasks = () => {
 
   return isLoading || !data ? (
     // <Loader />
+    // TODO: временная заглушка, чтобы не падала приложение, так как данные тасок еще не приходят с сервера
     <p>loading</p>
   ) : (
     data && (
