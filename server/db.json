@@ -734,6 +734,51 @@
       "address": "ул. Наличная, 28/16В",
       "coordinates": [59.941871, 30.223494],
       "chat": null
+    },
+    {
+      "id": 69,
+      "title": "Тестирую кнопки",
+      "category": {
+        "id": 1,
+        "name": "Сопровождение",
+        "scope": 1
+      },
+      "date": "2023-09-10T17:30Z",
+      "description": "Тестирую кнопки",
+      "completed": false,
+      "confirmed": false,
+      "conflict": true,
+      "recipient": {
+        "id": 4,
+        "fullname": "Реципиентов Алексей Борисович",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Нахимова, д. 9",
+        "coordinates": [59.941871, 30.223494],
+        "approved": true
+      },
+      "volunteer": {
+        "id": 7,
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [59.942575, 30.216757],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
+      },
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [59.941871, 30.223494],
+      "chat": {
+        "id": 4327,
+        "unread": 50
+      }
     }
   ],
   "tasksCompleted": [
@@ -794,7 +839,7 @@
       "description": "Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.",
       "completed": true,
       "confirmed": true,
-      "conflict": false,
+      "conflict": true,
       "recipient": {
         "id": "6",
         "fullname": "Реципиентов Иван Николаевич",
