@@ -48,12 +48,5 @@
 }
 
 .button {
-  width: 100%;
-  display: flex;
-  border: none;
-  padding: 0;
-  background-color: transparent;
-  cursor: pointer;
-  justify-content: right;
   margin-top: 35px;
 }
