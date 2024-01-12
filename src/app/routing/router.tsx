@@ -192,16 +192,6 @@ export const router = createBrowserRouter(
         </Route>
       </Route>
 
-      {/* нужно потом удалить */}
-      <Route
-        path="/test"
-        element={
-          <ProfileChatsPages>
-            <SectionChatsConflict />
-          </ProfileChatsPages>
-        }
-      />
-
       <Route path="*" element={<NotFoundPage />} />
     </>
   )

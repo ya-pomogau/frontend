@@ -64,68 +64,65 @@ export const MessageCard: React.FC<PropsMessageCard> = (props) => {
   };
 
   return (
-    <article onClick={handelClick} className={styles['cards-container']}>
-      <div
-        className={cn(
-          styles.card,
-          { [styles.card_action]: props.action },
-          {
-            [styles['card-swipe']]: props.position,
-          }
-        )}
-      >
-        {props.chatmateInfo.userAvatarLink ? (
-          <img
-            src={props.chatmateInfo.userAvatarLink}
-            alt="фото"
-            className={styles.img}
-          />
-        ) : (
-          <div
-            className={cn(styles.img, { [styles.img_action]: props.action })}
-          />
-        )}
-        <div className={styles['user-info']}>
-          <p
-            className={cn(
-              defultStyle,
-              styles.name,
-              styles['length-limitation']
-            )}
-          >
-            {props.chatmateInfo.name}
-          </p>
-          <span className={cn(defultStyle, styles.id)}>
-            {`ID ${props.chatmateInfo.userId}`}
-          </span>
-          <p
-            className={cn(
-              defultStyle,
-              styles.message,
-              styles['length-limitation']
-            )}
-          >
-            {props.message[lastMessage].message}
-          </p>
-        </div>
-        {location.pathname === '/chat-conflict'
-          ? hasNewMessage && (
-              <div
-                className={cn(styles.notification, styles.radius, {
-                  [styles.vizabiliti]: !hasNewMessage,
-                })}
-              />
-            )
-          : hasNewMessage && (
-              <span
-                className={cn(styles.counter, styles.radius, {
-                  [styles.vizabiliti]: !hasNewMessage,
-                })}
-              >
-                {props.message.length > 10 ? '+9' : props.message.length}
-              </span>
-            )}
+    // <article onClick={handelClick} className={styles['cards-container']}>
+    <article
+      onClick={handelClick}
+      className={cn(
+        styles.card,
+        { [styles.card_action]: props.action },
+        {
+          [styles['card-swipe']]: props.position,
+        }
+      )}
+    >
+      {props.chatmateInfo.userAvatarLink ? (
+        <img
+          src={props.chatmateInfo.userAvatarLink}
+          alt="фото"
+          className={styles.img}
+        />
+      ) : (
+        <div
+          className={cn(styles.img, { [styles.img_action]: props.action })}
+        />
+      )}
+      <div className={styles['user-info']}>
+        <p
+          className={cn(defultStyle, styles.name, styles['length-limitation'])}
+        >
+          {props.chatmateInfo.name}
+        </p>
+        <span className={cn(defultStyle, styles.id)}>
+          {`ID ${props.chatmateInfo.userId}`}
+        </span>
+        <p
+          className={cn(
+            defultStyle,
+            styles.message,
+            styles['length-limitation']
+          )}
+        >
+          {props.message[lastMessage].message}
+        </p>
       </div>
+      {location.pathname === '/chat-conflict'
+        ? hasNewMessage && (
+            <div
+              className={cn(styles.notification, styles.radius, {
+                [styles.vizabiliti]: !hasNewMessage,
+              })}
+            />
+          )
+        : hasNewMessage && (
+            <span
+              className={cn(styles.counter, styles.radius, {
+                [styles.vizabiliti]: !hasNewMessage,
+              })}
+            >
+              {props.message.length > 10 ? '+9' : props.message.length}
+            </span>
+          )}
     </article>
+    // </article>
   );
 };

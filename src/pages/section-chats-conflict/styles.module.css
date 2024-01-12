@@ -28,6 +28,12 @@
   gap: 20px;
 }
 
+.test {
+  width: 359px;
+  height: 140px;
+  box-sizing: border-box;
+}
+
 @media (max-width: 550px) {
   .conflict {
     width: 100%;

@@ -150,7 +150,7 @@ export const SectionChatsConflict = () => {
               action={selectedCard === item.id + ''}
             />
             {isOpenChats && selectedCard === item.id + '' && (
-              <>
+              <div className={styles.test}>
                 {infoUsers?.users.map((date) => (
                   <MessageCard
                     id={date.id}
@@ -163,7 +163,7 @@ export const SectionChatsConflict = () => {
                     position={true}
                   />
                 ))}
-              </>
+              </div>
             )}
           </div>
         ))}
