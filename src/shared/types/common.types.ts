@@ -19,3 +19,10 @@ export enum AdminPermission {
   BLOG = 'write the blog',
   CATEGORIES = 'change categories',
 }
+
+export enum Tabs {
+  VOLUNTEERS = 'volunteers',
+  RECIPIENTS = 'recipients',
+  NOTPROCESSED = 'notprocessed',
+  ADMINS = 'admins',
+}
