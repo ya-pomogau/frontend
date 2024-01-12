@@ -95,6 +95,7 @@ export const TaskList = ({
                 unreadMessages={item.chat?.unread}
                 recipientName={item.recipient.fullname}
                 recipientPhoneNumber={item.recipient.phone}
+                isStatusActive={isStatusActive}
                 handleClickPhoneButton={handleClickPnoneButton}
                 handleClickMessageButton={handleClickMessageButton}
                 handleClickConfirmButton={
