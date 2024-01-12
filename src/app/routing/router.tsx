@@ -31,6 +31,7 @@ import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
 import { VKAuthPage } from 'pages/vk-auth';
 import { RegisterPage } from 'pages/register';
+import { Tabs } from '../../shared/types/common.types';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -116,17 +117,17 @@ export const router = createBrowserRouter(
           />
           <Route
             path="/profile/requests/volunteers"
-            element={<RequestsPage incomeTab={'volunteers'} />}
+            element={<RequestsPage incomeTab={Tabs.VOLUNTEERS} />}
           />
 
           <Route
             path="/profile/requests/recipients"
-            element={<RequestsPage incomeTab={'recipients'} />}
+            element={<RequestsPage incomeTab={Tabs.RECIPIENTS} />}
           />
 
           <Route
             path="/profile/requests/notprocessed"
-            element={<RequestsPage incomeTab={'notprocessed'} />}
+            element={<RequestsPage incomeTab={Tabs.NOTPROCESSED} />}
           />
 
           <Route path="/profile/statistics" element={<StatisticsPage />} />
@@ -157,7 +158,7 @@ export const router = createBrowserRouter(
         >
           <Route
             path="/profile/requests/admins"
-            element={<RequestsPage incomeTab={'admins'} />}
+            element={<RequestsPage incomeTab={Tabs.ADMINS} />}
           />
         </Route>
       </Route>

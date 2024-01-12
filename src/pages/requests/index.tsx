@@ -1,9 +1,4 @@
-import { Navigate } from 'react-router-dom';
-import { useGetUsersQuery } from 'services/user-api';
-
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
-import { SideMenuForAuthorized } from 'widgets/side-menu';
-import { UserCard } from 'widgets/user-card';
 
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
@@ -16,20 +11,12 @@ import { useMemo, useState } from 'react';
 import { Filter } from '../../features/filter';
 import { RequestsTab } from '../requests-tab';
 import { useAppSelector } from '../../app/hooks';
-
-interface UserProps {
-  role: 'volunteer' | 'recipient' | 'admin' | 'master';
-  extClassName?: string;
-  avatarLink: string;
-  avatarName: string;
-  userName: string;
-  userId: number;
-  userNumber: string;
-  volunteerInfo?: any;
-}
+import { userSelector } from '../../services/system-slice';
+import { UserCardType } from '../../shared/types/user-cards.types';
+import { Tabs } from '../../shared/types/common.types';
 
 interface PageProps {
-  incomeTab: 'volunteers' | 'recipients' | 'notprocessed' | 'admins';
+  incomeTab: string;
 }
 
 export function RequestsPage({ incomeTab }: PageProps) {
@@ -48,95 +35,75 @@ export function RequestsPage({ incomeTab }: PageProps) {
   //  pollingInterval: 30000,
   //});
   const { role } = useAppSelector((state) => state.user);
+  const usertest = useAppSelector(userSelector);
   const [activeTab, setActiveTab] = useState(incomeTab);
   const [searchName, setSearchName] = useState('');
 
   // заглушка на получение тестовых данных из файла и распределение по константам
   console.log(incomeTab);
+  console.log(usertest);
   const recipientsData = testUsers.filter(
-    (user: UserProps) => user.role == 'recipient'
+    (user: UserCardType) => user.role === 'recipient'
   );
   const volunteersData = testUsers.filter(
-    (user: UserProps) => user.role == 'volunteer'
+    (user: UserCardType) => user.role === 'volunteer'
   );
   const adminsData = testUsers.filter(
-    (user: UserProps) => user.role == 'admin'
+    (user: UserCardType) => user.role === 'admin'
   );
 
   const tabRecipientsData = useMemo(() => {
     return recipientsData
-      .sort((a: UserProps, b: UserProps) => {
-        if (a.volunteerInfo.approved === false) {
-          return -1;
-        } else {
-          return 1;
-        }
+      .sort((a: UserCardType, b: UserCardType) => {
+        if (!a.volunteerInfo.approved) return -1;
+        return 1;
       })
-      .filter((user: UserProps) =>
+      .filter((user: UserCardType) =>
         user.userName.toLowerCase().includes(searchName.toLowerCase())
       );
   }, [recipientsData, searchName]);
+
   const countersOnTabsRecipients = useMemo(() => {
     return Object.keys(
       recipientsData.filter(
-        (user: UserProps) => user.volunteerInfo.approved === false
+        (user: UserCardType) => !user.volunteerInfo.approved
       )
     ).length;
   }, [recipientsData]);
 
   const tabVolunteersData = useMemo(() => {
     return volunteersData
-      .sort((a: UserProps, b: UserProps) => {
-        if (a.volunteerInfo.checked === true && a.volunteerInfo.scores >= 60) {
+      .sort((a: UserCardType, b: UserCardType) => {
+        if (a.volunteerInfo.checked && a.volunteerInfo.scores >= 60) return -1;
+        else if (!a.volunteerInfo.checked && a.volunteerInfo.scores >= 30)
           return -1;
-        } else {
-          return 1;
-        }
+        else if (!a.volunteerInfo.approved) return -1;
+        return 1;
       })
-      .sort((a: UserProps, b: UserProps) => {
-        if (a.volunteerInfo.checked === false && a.volunteerInfo.scores >= 30) {
-          return -1;
-        } else {
-          return 1;
-        }
-      })
-      .sort((a: UserProps, b: UserProps) => {
-        if (a.volunteerInfo.approved === false) {
-          return -1;
-        } else {
-          return 1;
-        }
-      })
-      .filter((user: UserProps) =>
+      .filter((user: UserCardType) =>
         user.userName.toLowerCase().includes(searchName.toLowerCase())
       );
   }, [volunteersData, searchName]);
+
   const countersOnTabsVolunteers = useMemo(() => {
     return Object.keys(
       volunteersData.filter(
-        (user: UserProps) =>
-          (user.volunteerInfo.checked === true &&
-            user.volunteerInfo.scores >= 60) ||
-          (user.volunteerInfo.checked === false &&
-            user.volunteerInfo.scores >= 30) ||
-          user.volunteerInfo.approved === false
+        (user: UserCardType) =>
+          (user.volunteerInfo.checked && user.volunteerInfo.scores >= 60) ||
+          (!user.volunteerInfo.checked && user.volunteerInfo.scores >= 30) ||
+          !user.volunteerInfo.approved
       )
     ).length;
   }, [volunteersData]);
 
   const tabAdminsData = useMemo(() => {
-    if (role !== 'master') {
-      return [];
-    }
+    if (role !== 'master') return [];
     return adminsData
-      .sort((a: UserProps, b: UserProps) => {
-        if (a.volunteerInfo.approved === false) {
-          return 1;
-        } else {
-          return -1;
-        }
+      .sort((a: UserCardType, b: UserCardType) => {
+        if (!a.volunteerInfo.approved) return 1;
+        return -1;
       })
-      .filter((user: UserProps) =>
+      .filter((user: UserCardType) =>
         user.userName.toLowerCase().includes(searchName.toLowerCase())
       );
   }, [adminsData, searchName]);
@@ -155,13 +122,13 @@ export function RequestsPage({ incomeTab }: PageProps) {
 
   const tabContent = useMemo(() => {
     switch (incomeTab) {
-      case 'volunteers':
+      case Tabs.VOLUNTEERS:
         return <RequestsTab data={tabVolunteersData} />;
-      case 'recipients':
+      case Tabs.RECIPIENTS:
         return <RequestsTab data={tabRecipientsData} />;
-      case 'notprocessed':
+      case Tabs.NOTPROCESSED:
         return <RequestsTab data={tabNotProcessedData} />;
-      case 'admins':
+      case Tabs.ADMINS:
         return <RequestsTab data={tabAdminsData} />;
       default:
         return <Loader />;
@@ -170,7 +137,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
 
   return (
     <>
-      {incomeTab === 'notprocessed' ? (
+      {incomeTab === Tabs.NOTPROCESSED ? (
         <SmartHeader
           icon={<Icon color="blue" icon="BlockIcon" size="54" />}
           text="Подтверждение / Блокировка"
