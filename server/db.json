@@ -815,7 +815,7 @@
       "description": "Описание задачи номер 15 (срок задачи прошел, задача завершена и подтверждена)",
       "completed": true,
       "confirmed": true,
-      "conflict": false,
+      "conflict": true,
       "recipient": {
         "id": "4",
         "fullname": "Реципиентов Алексей Борисович",
