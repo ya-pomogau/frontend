@@ -37,7 +37,7 @@ export const DropDownMenuButton = forwardRef<
     const logoutIcon = <Icon color="blue" icon="ExitIcon" size="24" />;
     return (
       <button
-        className={classnames(extraClass)}
+        className={classnames(styles.adminButton, extraClass)}
         type="button"
         ref={ref}
         disabled={isDisabled}
