@@ -3,16 +3,19 @@ import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 import { Icon } from 'shared/ui/icons';
 
-import styles from './admin-button.module.css';
+import styles from './DropDownMenuButton.module.css';
 
-type AdminButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type DropDownMenuButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   extraClass?: string;
   isMobile?: boolean;
   isDisabled?: boolean;
   buttonType?: string;
 };
 
-export const AdminButton = forwardRef<HTMLButtonElement, AdminButtonProps>(
+export const DropDownMenuButton = forwardRef<
+  HTMLButtonElement,
+  DropDownMenuButtonProps
+>(
   (
     {
       children,
@@ -24,6 +27,14 @@ export const AdminButton = forwardRef<HTMLButtonElement, AdminButtonProps>(
     },
     ref
   ) => {
+    const sendMessageIcon = (
+      <Icon
+        color="white"
+        icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
+        size="24"
+      />
+    );
+    const logoutIcon = <Icon color="blue" icon="ExitIcon" size="24" />;
     return (
       <button
         className={classnames(extraClass)}
@@ -36,17 +47,13 @@ export const AdminButton = forwardRef<HTMLButtonElement, AdminButtonProps>(
           <>
             <p className={styles.title}>{children}</p>
             <div className={isDisabled ? styles.icon_disable : styles.icon}>
-              <Icon
-                color="white"
-                icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
-                size="24"
-              />
+              {sendMessageIcon}
             </div>
           </>
         ) : (
           <>
             <p className={styles.title_logout}>{children}</p>
-            <Icon color="blue" icon="ExitIcon" size="24" />
+            {logoutIcon}
           </>
         )}
 
@@ -70,4 +77,4 @@ export const AdminButton = forwardRef<HTMLButtonElement, AdminButtonProps>(
   }
 );
 
-AdminButton.displayName = 'AdminButton';
+DropDownMenuButton.displayName = 'DropDownMenuButton';

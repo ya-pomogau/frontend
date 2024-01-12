@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { positionConfigMenu, linksMenuMobileUnauthorized } from '../utils';
 
 import styles from './styles.module.css';
-import { AdminButton } from 'shared/ui/admin-button';
+import { DropDownMenuButton } from 'shared/ui/DropDownMenuButton';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from 'entities/user/model';
 
@@ -73,14 +73,14 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
     >
       {user ? (
         <>
-          <AdminButton
+          <DropDownMenuButton
             isMobile={isMobile}
             extraClass={styles.header__sidebar__admin_button}
             onClick={() => console.log('Нажали кнопку')}
             buttonType="adminMessage"
           >
             Написать администратору
-          </AdminButton>
+          </DropDownMenuButton>
           {isMobile ? (
             <SideBar
               position={positionConfigMenu}
@@ -89,13 +89,13 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
           ) : (
             <div style={line}></div>
           )}
-          <AdminButton
+          <DropDownMenuButton
             isMobile={isMobile}
             extraClass={styles.button}
             onClick={handlerOnClick}
           >
             Выход
-          </AdminButton>
+          </DropDownMenuButton>
         </>
       ) : null}
     </div>,
