@@ -34,7 +34,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   const handleAcceptTime = (selectedTime: any) => {
     console.log(selectedTime);
   };
-  const [calendarValidation, setCalendarValidation] = useState(false);
+
   const handleDateValueChange = (value: Date) => {
     const formattedDate = format(value, 'dd.MM.yyyy');
     dispatch(setDate(formattedDate));
@@ -50,9 +50,9 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     const currentDate = new Date().toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
 
     if (time && time < currentFormattedTime && date && currentDate === date) {
-      setCalendarValidation(true);
+      setTimeValidation(true);
     } else {
-      setCalendarValidation(false);
+      setTimeValidation(false);
     } //сравниваю даты
   }, [time, date]);
 
