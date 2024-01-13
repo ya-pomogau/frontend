@@ -40,10 +40,8 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     const currentDate = new Date().toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
 
     if (time && time < currentFormattedTime && date && currentDate === date) {
-      // dispatch(setDateValidation(true));
       setCalendarValidation(true);
     } else {
-      // dispatch(setDateValidation(false));
       setCalendarValidation(false);
     } //сравниваю даты
   }, [time, date]);
