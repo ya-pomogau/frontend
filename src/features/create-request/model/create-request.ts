@@ -6,7 +6,6 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 export type TInitialStateForPopup = {
   time: string;
   date: string;
-  dateValidation: boolean;
   address: string;
   coordinates?: GeoCoordinates;
   categories: {
@@ -27,7 +26,6 @@ export type TInitialStateForPopup = {
 export const InitialStateForPopup: TInitialStateForPopup = {
   time: format(new Date(), 'hh:mm'),
   date: format(new Date(), 'dd.MM.yyyy'),
-  dateValidation: false,
   address: '',
   coordinates: [],
   categories: [],
@@ -51,9 +49,6 @@ export const createRequestModel = createSlice({
     },
     setTime(state, action) {
       state.time = action.payload;
-    },
-    setDateValidation(state, action) {
-      state.dateValidation = action.payload;
     },
     setAddress(state, action) {
       state.address = action.payload.additinalAddress;
