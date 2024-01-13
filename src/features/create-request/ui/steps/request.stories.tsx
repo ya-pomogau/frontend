@@ -15,7 +15,6 @@ import { Request } from '.';
 export const InitialStateForPopup: TInitialStateForPopup = {
   time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
-  dateValidation: false,
   address: '',
   coordinates: undefined,
   categories: [],
