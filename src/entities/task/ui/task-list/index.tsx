@@ -109,6 +109,7 @@ export const TaskList = ({
                 handleClickEditButton={
                   isStatusActive ? handleClickEditButton : undefined
                 }
+                handleClickConflictButton={() => 2}
               />
             </li>
           ))}
