@@ -50,13 +50,11 @@ const VolunteerActions = ({
           onClick={onAcceptButtonClick}
         />
         {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />}
-      </div>
-      <Button
-        buttonType="secondary"
-        label="Заблокировать"
-        onClick={onBlockButtonClick}
-      />
-      <div className={classnames(styles.exclamation_point_div)}>
+        <Button
+          buttonType="secondary"
+          label="Заблокировать"
+          onClick={onBlockButtonClick}
+        />
         <Button
           buttonType="secondary"
           label="Дать ключи"

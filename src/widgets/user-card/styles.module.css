@@ -24,7 +24,6 @@
 .user_info {
   display: grid;
   row-gap: 12px;
-  /*grid-template-rows: repeat(3, auto);*/
   margin-left: 8px;
 }
 
@@ -63,9 +62,11 @@
 }
 
 .exclamation_point_div {
+  margin-top: 10px;
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 5px;
+  flex-direction: column;
 }
 
 .admin_login_input {
