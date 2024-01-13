@@ -8,7 +8,6 @@ import {
   setTime,
   changeCheckbox,
   changeStepIncrement,
-  setDateValidation,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import Checkbox from 'shared/ui/checkbox';
@@ -23,7 +22,7 @@ interface IDateStepProps {
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date, isTypeEdit, dateValidation } = useAppSelector(
+  const { time, termlessRequest, date, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
@@ -35,6 +34,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   const handleAcceptTime = (selectedTime: any) => {
     console.log(selectedTime);
   };
+  const [calendarValidation, setCalendarValidation] = useState(false);
   const handleDateValueChange = (value: Date) => {
     const formattedDate = format(value, 'dd.MM.yyyy');
     dispatch(setDate(formattedDate));
@@ -50,9 +50,11 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     const currentDate = new Date().toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
 
     if (time && time < currentFormattedTime && date && currentDate === date) {
-      dispatch(setDateValidation(true));
+      // dispatch(setDateValidation(true));
+      setCalendarValidation(true);
     } else {
-      dispatch(setDateValidation(false));
+      // dispatch(setDateValidation(false));
+      setCalendarValidation(false);
     } //сравниваю даты
   }, [time, date]);
 
