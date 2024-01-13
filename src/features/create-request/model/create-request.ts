@@ -46,6 +46,9 @@ export const createRequestModel = createSlice({
     setTime(state, action) {
       state.time = action.payload;
     },
+    clearTime(state, action) {
+      state.time = '';
+    },
     setAddress(state, action) {
       state.address = action.payload.additinalAddress;
       state.coordinates = action.payload.coords;
@@ -93,4 +96,5 @@ export const {
   changeCheckbox,
   openPopup,
   closePopup,
+  clearTime,
 } = createRequestModel.actions;
