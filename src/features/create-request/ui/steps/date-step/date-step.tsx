@@ -24,7 +24,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
-  const [calendarValidation, setCalendarValidation] = useState(false);
+  const [timeValidation, setTimeValidation] = useState(false);
   const handleDateValueChange = (value: Date) => {
     const formatedDate = format(value, 'dd.MM.yyyy');
     dispatch(setDate(formatedDate));
@@ -40,9 +40,9 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     const currentDate = new Date().toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
 
     if (time && time < currentFormattedTime && date && currentDate === date) {
-      setCalendarValidation(true);
+      setTimeValidation(true);
     } else {
-      setCalendarValidation(false);
+      setTimeValidation(false);
     } //сравниваю даты
   }, [time, date]);
 
@@ -111,7 +111,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         </div>
       </div>
       <div className={styles.button}>
-        {calendarValidation ? (
+        {timeValidation ? (
           <p className={styles.validationMessage}>{'Введите валидное время'}</p>
         ) : (
           <></>
@@ -120,7 +120,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
           buttonType="primary"
           label="Продолжить"
           onClick={handleNextStepClick}
-          disabled={!time || calendarValidation}
+          disabled={!time || timeValidation}
         />
       </div>
     </>
