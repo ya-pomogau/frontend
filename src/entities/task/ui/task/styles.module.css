@@ -308,7 +308,7 @@
   margin-bottom: 14px;
 }
 
-.tooltip {
+.modalTooltip {
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -325,16 +325,17 @@
 .modalContent {
   padding: 20px 0;
   display: flex;
-  justify-content: center;
 }
 
 .flexColumn {
   flex-direction: column;
+  justify-content: center;
   gap: 15px;
 }
 
 .flexRow {
   flex-direction: row;
+  justify-content: center;
   gap: 20px;
 }
 

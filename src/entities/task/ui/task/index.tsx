@@ -13,13 +13,15 @@ import { ButtonWithModal } from 'widgets/button-with-modal';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
 
-enum ButtonsTypes {
-  CLOSE = 'close',
-  COMPLETED = 'completed',
-  CONFLICT = 'conflict',
-  CONFIRMED = 'confirmed',
-  PHONE = 'phone',
-}
+type ButtonsTypes = 'close' | 'conflict' | 'confirm' | 'phone';
+type ModalTitles = { [key in ButtonsTypes]: string };
+type ModalContent = { [key in ButtonsTypes]: ReactNode };
+type ModalButtons = {
+  [Key in ButtonsTypes]: Array<{
+    type: 'primary' | 'secondary';
+    text: string;
+  }> | null;
+};
 
 interface TaskItemProps {
   isMobile: boolean;
@@ -45,14 +47,14 @@ interface TaskItemProps {
   extClassName?: string;
 }
 
-const titles: { [key: string]: string } = {
-  CLOSE: 'Укажите причину отмены',
-  CONFIRM: 'Благодарим за отзывчивость',
-  CONFLICT: `Подтвердите, что заявка\nне выполнена`,
-  PHONE: 'Номер телефона:',
+const titles: ModalTitles = {
+  close: 'Укажите причину отмены',
+  confirm: 'Благодарим за отзывчивость',
+  conflict: `Подтвердите, что заявка\nне выполнена`,
+  phone: 'Номер телефона:',
 };
 
-const content: { [key: string]: ReactNode } = {
+const content: ModalContent = {
   close: (
     <div className={classNames(styles.modalContent, styles.flexColumn)}>
       <Checkbox label="Не смогу прийти" />
@@ -60,7 +62,6 @@ const content: { [key: string]: ReactNode } = {
       <Checkbox label="Не могу указать причину" />
     </div>
   ),
-  edit: null,
   confirm: (
     <p
       className={classNames(
@@ -94,27 +95,16 @@ const content: { [key: string]: ReactNode } = {
       +7 (800) 555-35-35
     </a>
   ),
-  message: '',
-  location: '',
-  add: '',
-  default: null,
 };
 
-const buttonsSection: {
-  [key: string]: Array<{ type: 'primary' | 'secondary'; text: string }> | null;
-} = {
+const buttonsSection: ModalButtons = {
   close: [
     { type: 'secondary', text: 'Помощь администратора' },
     { type: 'primary', text: 'Отменить заявку' },
   ],
-  edit: null,
   confirm: null,
   conflict: [{ type: 'secondary', text: 'Помощь администратора' }],
   phone: null,
-  message: null,
-  location: null,
-  add: null,
-  default: null,
 };
 
 export const TaskItem = ({
@@ -154,9 +144,9 @@ export const TaskItem = ({
   const parsedDate = parseISO(date!);
   const comparedDateResult = isAfter(new Date(), parsedDate);
 
-  const getModalContent = (buttonType: string) => {
+  const getModalContent = (buttonType: ButtonsTypes) => {
     return (
-      <div className={styles.tooltip}>
+      <div className={styles.modalTooltip}>
         <h3
           className={classNames(
             styles.modalTitle,
@@ -166,22 +156,49 @@ export const TaskItem = ({
             'm-0'
           )}
         >
-          {!isStatusActive && buttonType === 'conflict'
+          {isStatusActive
+            ? titles[buttonType]
+            : buttonType === 'conflict'
             ? conflict
-              ? 'Не выполнена'
+              ? 'Не Выполнена'
               : 'Выполнена'
-            : titles[buttonType]}
+            : buttonType === 'confirm'
+            ? 'Время выполнения'
+            : ''}
         </h3>
-        {!isStatusActive && buttonType === 'conflict'
-          ? null
-          : content[buttonType]}
-        {buttonsSection[buttonType] && (
-          <div className={styles.modalButtons}>
-            {buttonsSection[buttonType]?.map((button, i) => (
-              <Button key={i} buttonType={button.type} label={button.text} />
-            ))}
-          </div>
+        {isStatusActive ? (
+          content[buttonType]
+        ) : buttonType === 'confirm' ? (
+          <p
+            className={classNames(
+              'text',
+              'text_size_medium',
+              'text_type_regular',
+              'm-0',
+              styles.modalContent
+            )}
+          >
+            {
+              //в моковых заявках нет время завершения, как появится - обновить
+              date ? format(new Date(date), 'dd.MM.yyyy hh:mm') : ''
+            }
+          </p>
+        ) : (
+          ''
         )}
+        {isStatusActive
+          ? buttonsSection[buttonType] && (
+              <div className={styles.modalButtons}>
+                {buttonsSection[buttonType]?.map((button, i) => (
+                  <Button
+                    key={i}
+                    buttonType={button.type}
+                    label={button.text}
+                  />
+                ))}
+              </div>
+            )
+          : null}
       </div>
     );
   };
@@ -462,19 +479,17 @@ export const TaskItem = ({
                   disabled={completed && confirmed}
                 />
               </ButtonWithModal>
-              <ButtonWithModal modalContent={getModalContent('message')}>
-                <RoundButton
-                  buttonType="message"
-                  onClick={handleClickMessageButton}
-                  disabled={completed && confirmed}
-                  unreadMessages={unreadMessages}
-                />
-              </ButtonWithModal>
+              <RoundButton
+                buttonType="message"
+                onClick={handleClickMessageButton}
+                disabled={completed && confirmed}
+                unreadMessages={unreadMessages}
+              />
             </div>
           </div>
         </div>
         <div className={styles.buttons_action}>
-          {handleClickConfirmButton && (
+          {!handleClickConfirmButton && (
             <ButtonWithModal modalContent={getModalContent('confirm')}>
               <SquareButton
                 buttonType="confirm"
@@ -521,15 +536,13 @@ export const TaskItem = ({
             </ButtonWithModal>
           )}
           {handleClickEditButton && (
-            <ButtonWithModal modalContent={getModalContent('edit')}>
-              <SquareButton
-                buttonType="edit"
-                onClick={handleClickEditButton}
-                extClassName={
-                  recipientName ? styles.item_hidden : styles.button_edit
-                }
-              />
-            </ButtonWithModal>
+            <SquareButton
+              buttonType="edit"
+              onClick={handleClickEditButton}
+              extClassName={
+                recipientName ? styles.item_hidden : styles.button_edit
+              }
+            />
           )}
         </div>
       </div>
