@@ -4,7 +4,6 @@ import { format } from 'date-fns';
 export type TInitialStateForPopup = {
   time: string;
   date: string;
-  dateValidation: boolean;
   address: string;
   coordinates: [number, number] | undefined;
   categories: {
@@ -24,7 +23,6 @@ export type TInitialStateForPopup = {
 export const InitialStateForPopup: TInitialStateForPopup = {
   time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
-  dateValidation: false,
   address: '',
   coordinates: undefined,
   categories: [],
@@ -47,9 +45,6 @@ export const createRequestModel = createSlice({
     },
     setTime(state, action) {
       state.time = action.payload;
-    },
-    setDateValidation(state, action) {
-      state.dateValidation = action.payload;
     },
     setAddress(state, action) {
       state.address = action.payload.additinalAddress;
@@ -98,5 +93,4 @@ export const {
   changeCheckbox,
   openPopup,
   closePopup,
-  setDateValidation,
 } = createRequestModel.actions;
