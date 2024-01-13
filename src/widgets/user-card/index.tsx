@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import classnames from 'classnames';
 
 import { Avatar } from '../../shared/ui/avatar';
@@ -11,6 +11,7 @@ import RecipientActions from './components/recipient-actions';
 import AdminActions from './components/admin-actions';
 import { UserRole } from 'shared/types/common.types';
 import { useAppSelector } from '../../app/hooks';
+import { UserRole } from '../../entities/user/types';
 
 interface UserCardProps {
   role?: UserRole;
@@ -35,7 +36,7 @@ const getButtonTypeFromScore = (
     return 'secondary';
   }
 };
-interface IPermission {
+interface Permission {
   id: number;
   name: string;
 }
@@ -52,11 +53,12 @@ export const UserCard = ({
 }: UserCardProps) => {
   const { approved, checked, scores, isHasKeys } = volunteerInfo;
   const adminData: any = useAppSelector((state) => state.user.data);
-  const adminPermissions: IPermission[] = adminData.permissions;
+  const adminPermissions: Permission[] = adminData.permissions;
   const [approvePermission, setApprovePermission] = useState(false);
   const [keysPermission, setKeysPermission] = useState(false);
-  useEffect(() => {
-    adminPermissions.map((per) => {
+
+  useMemo(() => {
+    adminPermissions.forEach((per) => {
       if (per.id === 1) {
         setApprovePermission(true);
       }
