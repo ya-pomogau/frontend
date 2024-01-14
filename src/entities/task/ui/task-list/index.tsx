@@ -17,7 +17,6 @@ import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { useAppSelector } from 'app/hooks';
 import { Tooltip } from 'shared/ui/tooltip';
 
-
 interface TaskListProps {
   userRole?: UserRole | null;
   tasks: Array<Task>;
