@@ -25,7 +25,7 @@ export function PickRolePage() {
   const [userId, setUserId] = useState<number | null>(null);
 
   const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
-
+ 
   const removeRole = () => {
     dispatch(setUserRole(null));
     setUserId(null);
