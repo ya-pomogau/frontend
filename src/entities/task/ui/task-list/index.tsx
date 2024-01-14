@@ -35,16 +35,14 @@ export const TaskList = ({
   isLoading,
   handleClickAddTaskButton,
 }: TaskListProps) => {
+  
   const buttonGuard = usePermission([CONFIRMED], 'recipient');
   const [isOpen, setIsOpen] = useState(false);
   const handleDeniedAccess = () => {
     setIsOpen((prev) => !prev);
   };
 
-  // const filterPositionStyles = {
-  //   top: `${position.top}px`,
-  //   right: `${window.innerWidth - position.right - 10}px`,
-  // };
+  
 
   return (
     <>
