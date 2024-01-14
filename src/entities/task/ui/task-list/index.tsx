@@ -52,8 +52,6 @@ export const TaskList = ({
     setIsOpen((prev) => !prev);
   };
 
-  
-
   return (
     <>
       {/* TODO: удалить 52 строку, когда будут приходить данные тасок с сервера */}
