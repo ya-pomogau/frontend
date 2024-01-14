@@ -14,6 +14,7 @@ import { useAppSelector } from 'app/hooks';
 import { useState } from 'react';
 import { Dialog } from 'shared/ui/dialog';
 import { Tooltip } from 'shared/ui/tooltip';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
 interface TaskListProps {
   userRole?: UserRole | null;
@@ -158,7 +159,18 @@ export const TaskList = ({
                 extClassName={styles.modal}
                 pointerPosition="center"
               >
-                <div>Здесь будет модалка</div>
+                <div className={styles.closeWrapper}>
+                  <CloseCrossIcon
+                    className={styles.closeIcon}
+                    size="14"
+                    color="blue"
+                    onClick={() => setIsOpen(false)}
+                  />
+                </div>
+                <div className={styles.text}>
+                  Вы пока не можете создавать заявку. Дождитесь подтверждения
+                  администратора
+                </div>
               </Tooltip>
             </>
           )}
