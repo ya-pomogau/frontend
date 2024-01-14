@@ -14,10 +14,13 @@ import { useAppSelector } from 'app/hooks';
 import useUser from 'shared/hooks/use-user';
 
 import styles from './styles.module.css';
+import { CONFIRMED, UNCONFIRMED } from 'shared/libs/statuses';
 
 export const UserInfo = () => {
   // const user = useAppSelector((state) => state.user.data);
   const role = useAppSelector((state) => state.user.role);
+  const roleStatus = useAppSelector((state) => state.user.data?.status);
+
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
   const isLoginPath = location.pathname.includes('/login');
@@ -25,7 +28,8 @@ export const UserInfo = () => {
   const userId = () => {
     if (role === 'volunteer') return 7;
     if (role === 'master') return 1;
-    if (role === 'recipient') return 4;
+    if (role === 'recipient' && roleStatus === CONFIRMED) return 4;
+    if (role === 'recipient' && roleStatus === UNCONFIRMED) return 8;
     if (role === 'admin') return 2;
     if (!role) return null;
   };
