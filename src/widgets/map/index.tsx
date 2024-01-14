@@ -24,7 +24,7 @@ interface YandexMapProps {
   radius?: number;
   tasks?: Task[];
   onClick?: () => void;
-  coordinates?: GeoCoordinates | undefined;
+  coordinates?: GeoCoordinates;
   isAuthorised?: boolean;
 }
 

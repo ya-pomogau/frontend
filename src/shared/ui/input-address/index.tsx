@@ -15,9 +15,9 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   address: {
     address: string;
-    coords: GeoCoordinates | [];
+    coords?: GeoCoordinates | [];
   };
-  setAddress: (address: string, coords?: [number, number] | []) => void;
+  setAddress: (address: string, coords?: GeoCoordinates | []) => void;
   label?: string;
   extClassName?: string;
   error?: boolean;
@@ -60,7 +60,7 @@ export const InputAddress = (props: InputAddressProps) => {
           // Выбираем первый результат геокодирования.
           const firstGeoObject = res.geoObjects.get(0);
 
-          const coords: [number, number] =
+          const coords: GeoCoordinates =
             firstGeoObject.geometry.getCoordinates();
 
           setAddress(suggestValue, coords);
