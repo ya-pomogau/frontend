@@ -73,23 +73,7 @@
 }
 .modal {
   position: absolute;
-  /* top: calc(50% + 340px);
-  left: calc(46vw + 30px); */
-}
-.text {
-  font-family: 'Golos', sans-serif;
-  max-width: 294px;
-  margin: auto;
-}
-
-.closeWrapper {
-  display: flex;
-  justify-content: flex-end;
-}
-.closeIcon:hover {
-  opacity: 0.5;
-  cursor: pointer;
-}
-.wrapperBtn {
-  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

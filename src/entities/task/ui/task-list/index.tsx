@@ -10,6 +10,8 @@ import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
+import { useAppSelector } from 'app/hooks';
+
 import { useEffect, useRef, useState } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
@@ -66,6 +68,9 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
+  const isConfirmed = useAppSelector((store) => {
+    return store.user.data?.status === CONFIRMED;
+  });
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
