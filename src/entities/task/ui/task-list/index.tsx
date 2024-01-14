@@ -50,7 +50,6 @@ export const TaskList = ({
         top: `${window.innerHeight - 140}px`,
         left: `${window.innerWidth - rect.left + 69}px`,
       });
-      console.log(tooltipStyle);
     }
   }, [isOpen]);
 
