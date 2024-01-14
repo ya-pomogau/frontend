@@ -25,7 +25,7 @@ interface MenuProps {
   menuActive: boolean;
 }
 
-export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
+export const DropDownMenu = ({ setMenuActive, menuActive }: MenuProps) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
   const ref = useRef(null);
 
