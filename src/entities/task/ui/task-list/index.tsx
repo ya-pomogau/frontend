@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
 import { useAppSelector } from 'app/hooks';
 import { useState } from 'react';
-import { Dialog } from 'shared/ui/dialog';
+
 import { Tooltip } from 'shared/ui/tooltip';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
@@ -51,9 +51,11 @@ export const TaskList = ({
   const handleDeniedAccess = () => {
     setIsOpen((prev) => !prev);
   };
-  const isConfirmed = useAppSelector((store) => {
-    return store.user.data?.status === CONFIRMED;
-  });
+
+  // const filterPositionStyles = {
+  //   top: `${position.top}px`,
+  //   right: `${window.innerWidth - position.right - 10}px`,
+  // };
 
   return (
     <>
