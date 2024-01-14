@@ -81,7 +81,6 @@
   max-width: 294px;
   margin: auto;
 }
-
 .closeWrapper {
   display: flex;
   justify-content: flex-end;
@@ -92,18 +91,4 @@
 }
 .wrapperBtn {
   position: relative;
-}
-.text {
-  font-family: 'Golos', sans-serif;
-  max-width: 294px;
-  margin: auto;
-}
-
-.closeWrapper {
-  display: flex;
-  justify-content: flex-end;
-}
-.closeIcon:hover {
-  opacity: 0.5;
-  cursor: pointer;
 }
