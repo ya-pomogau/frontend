@@ -3,14 +3,14 @@
 /* eslint-disable react/no-this-in-sfc */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, { useState } from 'react';
+import React from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { useDispatch } from 'react-redux';
 import { setAddress } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
 
 type MarkProps = {
   id?: number;
@@ -50,7 +50,7 @@ export const Mark = React.memo(
   }: MarkProps) => {
     const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const isGranted = usePermission(
       [CONFIRMED, ACTIVATED, VERIFIED],

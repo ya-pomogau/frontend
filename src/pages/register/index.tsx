@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export function RegisterPage() {
   const {
@@ -27,7 +28,7 @@ export function RegisterPage() {
   // TODO: пока что оставила адрес в виде объекта, чтобы не ломались другие компоненты завязанные на inputAddress
   const [address, setAddress] = useState<{
     address: string;
-    coords: [number, number] | [];
+    coords?: GeoCoordinates | [];
   }>({
     address: '',
     coords: [],
@@ -64,7 +65,7 @@ export function RegisterPage() {
 
   const handleAddressValueChange = (
     newAddress: string,
-    coords?: [number, number] | []
+    coords?: GeoCoordinates | []
   ) => {
     setAddress({
       address: newAddress,

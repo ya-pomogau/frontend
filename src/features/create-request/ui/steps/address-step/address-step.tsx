@@ -12,31 +12,29 @@ import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './address-step.module.css';
 import { useEffect } from 'react';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface IAddressProps {
   isMobile?: boolean;
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
-  // Для получения стартового значения адреса, эта точка будет центром карты по умолчанию
-  const cord = useAppSelector((store) => store.user.data?.coordinates);
+  const coord = useAppSelector((store) => store.user.data?.coordinates);
 
   const dispatch = useAppDispatch();
 
   const { address, coordinates } = useAppSelector(
     (state) => state.createRequest
   );
-  // Заполняем стор createRecust для отрисовки стартовой позиции баллуна при монтировании страницы
   useEffect(() => {
-    // Условие нужно, чтобы сохранить промежуточный результат ввода данных при переходе на след или предудыший этап
     if (!address) {
-      dispatch(setAddress({ additinalAddress: '', coords: cord }));
+      dispatch(setAddress({ additinalAddress: '', coords: coord }));
     }
   }, []);
 
   const handleAddressValueChange = (
     additinalAddress: string,
-    coords?: [number, number] | []
+    coords?: GeoCoordinates | []
   ) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
