@@ -14,12 +14,15 @@ import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
+import { CONFIRMED } from 'shared/libs/statuses';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('active');
   const { role } = useAppSelector((state) => state.user);
-
+  const isConfirmed = useAppSelector((state) => {
+    return state.user.data?.status === CONFIRMED;
+  });
   const isMobile = useMediaQuery('(max-width:1150px)');
 
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
@@ -70,7 +73,7 @@ export function ProfileActivePage() {
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive
-          tasks={filterTasks}
+          tasks={isConfirmed ? tasks : []}
           isLoading={isLoading}
         />
       )}
