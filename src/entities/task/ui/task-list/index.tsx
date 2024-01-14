@@ -67,6 +67,19 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
+  const myRef = useRef<HTMLDivElement>(null);
+  const [tooltipStyle, setTooltipStyle] = useState({});
+
+  useEffect(() => {
+    if (myRef.current) {
+      const rect = myRef.current.getBoundingClientRect();
+      setTooltipStyle({
+        top: `${window.innerHeight - 140}px`,
+        left: `${window.innerWidth - rect.left + 69}px`,
+      });
+      console.log(tooltipStyle);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
