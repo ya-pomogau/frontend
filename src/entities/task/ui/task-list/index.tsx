@@ -39,10 +39,7 @@ export const TaskList = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const handleDeniedAccess = () => {
-    setIsOpen(!isOpen);
-    isOpen &&
-      console.log('Вам пока нельзя такое, дождитесь проверки администратором');
-    !isOpen && console.log('Закрыли');
+    setIsOpen((prev) => !prev);
   };
   const isConfirmed = useAppSelector((store) => {
     return store.user.data?.status === CONFIRMED;
@@ -130,24 +127,27 @@ export const TaskList = ({
                 extClassName={styles.add_task_icon_unconf}
                 size="large"
               />
-              <Tooltip
-                visible={isOpen}
-                extClassName={styles.modal}
-                pointerPosition="center"
-              >
-                <div className={styles.closeWrapper}>
-                  <CloseCrossIcon
-                    className={styles.closeIcon}
-                    size="14"
-                    color="blue"
-                    onClick={() => setIsOpen(false)}
-                  />
-                </div>
-                <div className={styles.text}>
-                  Вы пока не можете создавать заявку. Дождитесь подтверждения
-                  администратора
-                </div>
-              </Tooltip>
+              {isOpen && (
+                <Tooltip
+                  visible
+                  extClassName={styles.modal}
+                  pointerPosition="center"
+                  changeVisible={handleDeniedAccess}
+                >
+                  <div className={styles.closeWrapper}>
+                    <CloseCrossIcon
+                      className={styles.closeIcon}
+                      size="14"
+                      color="blue"
+                      onClick={() => setIsOpen(false)}
+                    />
+                  </div>
+                  <div className={styles.text}>
+                    Вы пока не можете создавать заявку. Дождитесь подтверждения
+                    администратора
+                  </div>
+                </Tooltip>
+              )}
             </>
           )}
         </div>
