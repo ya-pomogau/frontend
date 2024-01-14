@@ -13,8 +13,10 @@ import { UserRole } from 'shared/types/common.types';
 
 import { useEffect, useRef, useState } from 'react';
 
-import { Tooltip } from 'shared/ui/tooltip';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { useAppSelector } from 'app/hooks';
+import { Tooltip } from 'shared/ui/tooltip';
+
 
 interface TaskListProps {
   userRole?: UserRole | null;
@@ -67,6 +69,10 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
+  // FIX: для чего?
+  const isConfirmed = useAppSelector((store) => {
+    return store.user.data?.status === CONFIRMED;
+  });
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
