@@ -10,8 +10,7 @@ import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
-import { useAppSelector } from 'app/hooks';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
@@ -51,6 +50,19 @@ export const TaskList = ({
   const handleDeniedAccess = () => {
     setIsOpen((prev) => !prev);
   };
+  const myRef = useRef<HTMLDivElement>(null);
+  const [tooltipStyle, setTooltipStyle] = useState({});
+
+  useEffect(() => {
+    if (myRef.current) {
+      const rect = myRef.current.getBoundingClientRect();
+      setTooltipStyle({
+        top: `${window.innerHeight - 140}px`,
+        left: `${window.innerWidth - rect.left + 69}px`,
+      });
+      console.log(tooltipStyle);
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -140,20 +152,23 @@ export const TaskList = ({
                 {' '}
                 Хотите создать заявку?
               </p>
-              <RoundButton
-                buttonType="add"
-                onClick={
-                  buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
-                }
-                extClassName={styles.add_task_icon_unconf}
-                size="large"
-              />
+              <div ref={myRef}>
+                <RoundButton
+                  buttonType="add"
+                  onClick={
+                    buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
+                  }
+                  extClassName={styles.add_task_icon_unconf}
+                  size="large"
+                />
+              </div>
               {isOpen && (
                 <Tooltip
                   visible
                   extClassName={styles.modal}
                   pointerPosition="center"
                   changeVisible={handleDeniedAccess}
+                  elementStyles={tooltipStyle}
                 >
                   <div className={styles.closeWrapper}>
                     <CloseCrossIcon
