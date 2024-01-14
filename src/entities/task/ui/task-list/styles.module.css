@@ -73,8 +73,8 @@
 }
 .modal {
   position: absolute;
-  top: 85vh;
-  left: 46.5vw;
+  /* top: calc(50% + 340px);
+  left: calc(46vw + 30px); */
 }
 .text {
   font-family: 'Golos', sans-serif;
