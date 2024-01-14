@@ -48,7 +48,7 @@ export function PickRolePage() {
 
   const getUnconfirmedRecipient = () => {
     dispatch(setUserRole('recipient'));
-    setUserId(9);
+    setUserId(8);
   };
 
   const getAdminRole = () => {
