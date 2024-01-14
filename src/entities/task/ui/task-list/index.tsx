@@ -14,6 +14,8 @@ import { UserRole } from 'shared/types/common.types';
 import { useEffect, useRef, useState } from 'react';
 
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { useAppSelector } from 'app/hooks';
+
 import { Tooltip } from 'shared/ui/tooltip';
 
 interface TaskListProps {
