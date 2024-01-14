@@ -45,6 +45,7 @@ export const TaskList = ({
   isLoading,
   handleClickAddTaskButton,
 }: TaskListProps) => {
+  
   const buttonGuard = usePermission([CONFIRMED], 'recipient');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -72,10 +73,7 @@ export const TaskList = ({
     setIsOpen((prev) => !prev);
   };
 
-  // const filterPositionStyles = {
-  //   top: `${position.top}px`,
-  //   right: `${window.innerWidth - position.right - 10}px`,
-  // };
+  
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
