@@ -15,7 +15,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
 interface TaskListProps {
   userRole?: UserRole | null;
