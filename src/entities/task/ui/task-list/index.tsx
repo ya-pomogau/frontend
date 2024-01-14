@@ -10,6 +10,10 @@ import type { UserRole } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
+import { useAppSelector } from 'app/hooks';
+import { useState } from 'react';
+import { Dialog } from 'shared/ui/dialog';
+import { Tooltip } from 'shared/ui/tooltip';
 
 interface TaskListProps {
   userRole?: UserRole | null;
@@ -31,10 +35,16 @@ export const TaskList = ({
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const buttonGuard = usePermission([CONFIRMED], 'recipient');
-
+  const [isOpen, setIsOpen] = useState(false);
   const handleDeniedAccess = () => {
-    alert('Вам пока нельзя такое, дождитесь проверки администратором');
+    setIsOpen(!isOpen);
+    isOpen &&
+      console.log('Вам пока нельзя такое, дождитесь проверки администратором');
+    !isOpen && console.log('Закрыли');
   };
+  const isConfirmed = useAppSelector((store) => {
+    return store.user.data?.status === CONFIRMED;
+  });
 
   return (
     <>
@@ -114,8 +124,16 @@ export const TaskList = ({
                 onClick={
                   buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
                 }
+                extClassName={styles.add_task_icon_unconf}
                 size="large"
               />
+              <Tooltip
+                visible={isOpen}
+                extClassName={styles.modal}
+                pointerPosition="center"
+              >
+                <div>Здесь будет модалка</div>
+              </Tooltip>
             </>
           )}
         </div>

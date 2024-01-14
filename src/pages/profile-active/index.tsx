@@ -8,12 +8,15 @@ import { openPopup } from 'features/create-request/model';
 import { Request } from 'features/create-request';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
+import { CONFIRMED } from 'shared/libs/statuses';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('active');
   const { role } = useAppSelector((state) => state.user);
-
+  const isConfirmed = useAppSelector((state) => {
+    return state.user.data?.status === CONFIRMED;
+  });
   const isMobile = useMediaQuery('(max-width:1150px)');
 
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
@@ -55,7 +58,7 @@ export function ProfileActivePage() {
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive
-          tasks={tasks}
+          tasks={isConfirmed ? tasks : []}
           isLoading={isLoading}
         />
       )}
