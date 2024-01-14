@@ -161,6 +161,22 @@
       ],
       "status": "confirmed",
       "isActive": true
+    },
+    {
+      "id": 8,
+      "createdAt": "2023-07-09T17:30Z",
+      "fullname": "Реципиентов Валерий Афонасьевич",
+      "role": "recipient",
+      "vk": "https://vk.com/id123456789",
+      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
+      "phone": "+7 (916) 123-45-67",
+      "address": "ул. Самарская, д. 9",
+      "coordinates": [
+        59.941871,
+        30.223494
+      ],
+      "status": "unconfirmed",
+      "isActive": true
     }
   ],
   "tasks": [
