@@ -54,6 +54,14 @@ const titles: ModalTitles = {
   phone: 'Номер телефона:',
 };
 
+const textStyle = classNames(
+  'text',
+  'text_size_medium',
+  'text_type_regular',
+  'm-0',
+  styles.modalContent
+);
+
 const content: ModalContent = {
   close: (
     <div className={classNames(styles.modalContent, styles.flexColumn)}>
@@ -62,19 +70,7 @@ const content: ModalContent = {
       <Checkbox label="Не могу указать причину" />
     </div>
   ),
-  confirm: (
-    <p
-      className={classNames(
-        'text',
-        'text_size_medium',
-        'text_type_regular',
-        'm-0',
-        styles.modalContent
-      )}
-    >
-      Мы ждем ответ рецепиента
-    </p>
-  ),
+  confirm: <p className={textStyle}>Мы ждем ответ рецепиента</p>,
   conflict: (
     <div className={classNames(styles.modalContent, styles.flexRow)}>
       <Button buttonType="secondary" label="Отменить" />
@@ -82,16 +78,7 @@ const content: ModalContent = {
     </div>
   ),
   phone: (
-    <a
-      className={classNames(
-        'text',
-        'text_size_medium',
-        'text_type_regular',
-        'm-0',
-        styles.modalContent
-      )}
-      href="tel: +7 (800) 555-35-35"
-    >
+    <a className={textStyle} href="tel: +7 (800) 555-35-35">
       +7 (800) 555-35-35
     </a>
   ),
@@ -169,15 +156,7 @@ export const TaskItem = ({
         {isStatusActive ? (
           content[buttonType]
         ) : buttonType === 'confirm' ? (
-          <p
-            className={classNames(
-              'text',
-              'text_size_medium',
-              'text_type_regular',
-              'm-0',
-              styles.modalContent
-            )}
-          >
+          <p className={textStyle}>
             {
               //в моковых заявках нет время завершения, как появится - обновить
               date ? format(new Date(date), 'dd.MM.yyyy hh:mm') : ''

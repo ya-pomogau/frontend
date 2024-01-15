@@ -40,11 +40,5 @@
   position: absolute;
   top: 15px;
   right: 20px;
-  border: none;
-  background-color: transparent;
-}
-
-.closeButton:hover {
   cursor: pointer;
-  transform: scale(1.1);
 }
