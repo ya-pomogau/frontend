@@ -13,13 +13,27 @@ import { ButtonWithModal } from 'widgets/button-with-modal';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
 
-type ButtonsTypes = 'close' | 'conflict' | 'confirm' | 'phone';
+enum ButtonType {
+  close = 'close',
+  conflict = 'conflict',
+  confirm = 'confirm',
+  phone = 'phone',
+}
+
+enum ReasonType {
+  first = 'first',
+  second = 'second',
+  third = 'third',
+}
+
+type ButtonsTypes = keyof typeof ButtonType;
 type ModalTitles = { [key in ButtonsTypes]: string };
 type ModalContent = { [key in ButtonsTypes]: ReactNode };
 type ModalButtons = {
-  [Key in ButtonsTypes]: Array<{
+  [key in ButtonsTypes]: Array<{
     type: 'primary' | 'secondary';
     text: string;
+    handleclick?: () => void;
   }> | null;
 };
 
@@ -38,12 +52,6 @@ interface TaskItemProps {
   recipientPhoneNumber?: string;
   unreadMessages?: number;
   isStatusActive?: boolean;
-  handleClickPhoneButton?: () => void;
-  handleClickMessageButton?: () => void;
-  handleClickConfirmButton?: () => void;
-  handleClickCloseButton?: () => void;
-  handleClickEditButton?: () => void;
-  handleClickConflictButton?: () => void;
   extClassName?: string;
 }
 
@@ -62,38 +70,6 @@ const textStyle = classNames(
   styles.modalContent
 );
 
-const content: ModalContent = {
-  close: (
-    <div className={classNames(styles.modalContent, styles.flexColumn)}>
-      <Checkbox label="Не смогу прийти" />
-      <Checkbox label="Отмена по обоюдному согласию" />
-      <Checkbox label="Не могу указать причину" />
-    </div>
-  ),
-  confirm: <p className={textStyle}>Мы ждем ответ рецепиента</p>,
-  conflict: (
-    <div className={classNames(styles.modalContent, styles.flexRow)}>
-      <Button buttonType="secondary" label="Отменить" />
-      <Button buttonType="primary" label="Подтвердить" />
-    </div>
-  ),
-  phone: (
-    <a className={textStyle} href="tel: +7 (800) 555-35-35">
-      +7 (800) 555-35-35
-    </a>
-  ),
-};
-
-const buttonsSection: ModalButtons = {
-  close: [
-    { type: 'secondary', text: 'Помощь администратора' },
-    { type: 'primary', text: 'Отменить заявку' },
-  ],
-  confirm: null,
-  conflict: [{ type: 'secondary', text: 'Помощь администратора' }],
-  phone: null,
-};
-
 export const TaskItem = ({
   isMobile,
   category,
@@ -109,15 +85,61 @@ export const TaskItem = ({
   recipientPhoneNumber,
   unreadMessages,
   isStatusActive,
-  handleClickPhoneButton,
-  handleClickMessageButton,
-  handleClickConfirmButton,
-  handleClickCloseButton,
-  handleClickEditButton,
-  handleClickConflictButton,
   extClassName,
 }: TaskItemProps) => {
   const [isHidden, setIsHidden] = useState(true);
+  const [reason, setReason] = useState<ReasonType | null>(null);
+
+  const content: ModalContent = {
+    close: (
+      <div className={classNames(styles.modalContent, styles.flexColumn)}>
+        <Checkbox
+          label="Не смогу прийти"
+          id={ReasonType.first}
+          onChange={() => setReason(ReasonType.first)}
+          checked={reason === ReasonType.first}
+        />
+        <Checkbox
+          label="Отмена по обоюдному согласию"
+          id={ReasonType.second}
+          onChange={() => setReason(ReasonType.second)}
+          checked={reason === ReasonType.second}
+        />
+        <Checkbox
+          label="Не могу указать причину"
+          id={ReasonType.third}
+          onChange={() => setReason(ReasonType.third)}
+          checked={reason === ReasonType.third}
+        />
+      </div>
+    ),
+    confirm: <p className={textStyle}>Мы ждем ответ рецепиента</p>,
+    conflict: (
+      <div className={classNames(styles.modalContent, styles.flexRow)}>
+        <Button buttonType="secondary" label="Отменить" />
+        <Button buttonType="primary" label="Подтвердить" />
+      </div>
+    ),
+    phone: (
+      <a className={textStyle} href="tel: +7 (800) 555-35-35">
+        +7 (800) 555-35-35
+      </a>
+    ),
+  };
+
+  const buttonsSection: ModalButtons = {
+    close: [
+      { type: 'secondary', text: 'Помощь администратора' },
+      {
+        type: 'primary',
+        text: 'Отменить заявку',
+        handleclick: () => console.log(reason),
+      },
+    ],
+    confirm: null,
+    conflict: [{ type: 'secondary', text: 'Помощь администратора' }],
+    phone: null,
+  };
 
   const taskLayout =
     confirmed && completed
@@ -145,17 +167,17 @@ export const TaskItem = ({
         >
           {isStatusActive
             ? titles[buttonType]
-            : buttonType === 'conflict'
+            : buttonType === ButtonType.conflict
             ? conflict
               ? 'Не Выполнена'
               : 'Выполнена'
-            : buttonType === 'confirm'
+            : buttonType === ButtonType.confirm
             ? 'Время выполнения'
             : ''}
         </h3>
         {isStatusActive ? (
           content[buttonType]
-        ) : buttonType === 'confirm' ? (
+        ) : buttonType === ButtonType.confirm ? (
           <p className={textStyle}>
             {
               //в моковых заявках нет время завершения, как появится - обновить
@@ -173,6 +195,7 @@ export const TaskItem = ({
                     key={i}
                     buttonType={button.type}
                     label={button.text}
+                    onClick={button.handleclick}
                   />
                 ))}
               </div>
@@ -200,10 +223,10 @@ export const TaskItem = ({
             extClassName={styles.mobile_category}
           />
           <div className={styles.mobile_buttons}>
-            {handleClickConfirmButton && (
+            {completed && (
+              //переписать completed на подходящий параметр
               <SquareButton
-                buttonType="confirm"
-                onClick={handleClickConfirmButton}
+                buttonType={ButtonType.confirm}
                 extClassName={
                   recipientName && !date
                     ? ''
@@ -213,10 +236,10 @@ export const TaskItem = ({
                 }
               />
             )}
-            {handleClickCloseButton && (
+            {!completed && (
+              //переписать completed на подходящий параметр
               <SquareButton
-                buttonType="close"
-                onClick={handleClickCloseButton}
+                buttonType={ButtonType.close}
                 extClassName={
                   !date && recipientName
                     ? styles.item_hidden
@@ -225,10 +248,10 @@ export const TaskItem = ({
                 disabled={comparedDateResult || completed}
               />
             )}
-            {handleClickConflictButton && (
+            {!conflict && (
+              //переписать true на подходящий параметр
               <SquareButton
-                buttonType="conflict"
-                onClick={handleClickConflictButton}
+                buttonType={ButtonType.conflict}
                 extClassName={
                   recipientName
                     ? ''
@@ -238,10 +261,10 @@ export const TaskItem = ({
                 }
               />
             )}
-            {handleClickEditButton && (
+            {true && (
+              //переписать true на подходящий параметр
               <SquareButton
                 buttonType="edit"
-                onClick={handleClickEditButton}
                 extClassName={
                   recipientName ? styles.item_hidden : styles.button_edit
                 }
@@ -267,13 +290,11 @@ export const TaskItem = ({
           style={recipientName ? {} : { display: 'none' }}
         >
           <RoundButton
-            buttonType="phone"
-            onClick={handleClickPhoneButton}
+            buttonType={ButtonType.phone}
             disabled={completed && confirmed}
           />
           <RoundButton
             buttonType="message"
-            onClick={handleClickMessageButton}
             disabled={completed && confirmed}
             unreadMessages={unreadMessages}
           />
@@ -451,16 +472,14 @@ export const TaskItem = ({
               {recipientPhoneNumber}
             </p>
             <div className={styles.buttons_call}>
-              <ButtonWithModal modalContent={getModalContent('phone')}>
+              <ButtonWithModal modalContent={getModalContent(ButtonType.phone)}>
                 <RoundButton
-                  buttonType="phone"
-                  onClick={handleClickPhoneButton}
+                  buttonType={ButtonType.phone}
                   disabled={completed && confirmed}
                 />
               </ButtonWithModal>
               <RoundButton
                 buttonType="message"
-                onClick={handleClickMessageButton}
                 disabled={completed && confirmed}
                 unreadMessages={unreadMessages}
               />
@@ -468,11 +487,11 @@ export const TaskItem = ({
           </div>
         </div>
         <div className={styles.buttons_action}>
-          {!handleClickConfirmButton && (
-            <ButtonWithModal modalContent={getModalContent('confirm')}>
+          {completed && (
+            //переписать completed если бэк поменяется
+            <ButtonWithModal modalContent={getModalContent(ButtonType.confirm)}>
               <SquareButton
-                buttonType="confirm"
-                onClick={handleClickConfirmButton}
+                buttonType={ButtonType.confirm}
                 extClassName={
                   recipientName && !date
                     ? ''
@@ -483,25 +502,27 @@ export const TaskItem = ({
               />
             </ButtonWithModal>
           )}
-          {handleClickCloseButton && (
-            <ButtonWithModal modalContent={getModalContent('close')}>
+          {!completed && (
+            //переписать completed если бэк поменяется
+            <ButtonWithModal modalContent={getModalContent(ButtonType.close)}>
               <SquareButton
-                buttonType="close"
-                onClick={handleClickCloseButton}
+                buttonType={ButtonType.close}
                 extClassName={
                   !date && recipientName
                     ? styles.item_hidden
                     : styles.button_edit
                 }
-                //disabled={comparedDateResult || !completed}
+                disabled={comparedDateResult || !completed}
               />
             </ButtonWithModal>
           )}
-          {handleClickConflictButton && (
-            <ButtonWithModal modalContent={getModalContent('conflict')}>
+          {!conflict && (
+            //переписать conflict на подходящий параметр
+            <ButtonWithModal
+              modalContent={getModalContent(ButtonType.conflict)}
+            >
               <SquareButton
-                buttonType="conflict"
-                onClick={handleClickConflictButton}
+                buttonType={ButtonType.conflict}
                 extClassName={
                   recipientName && !date
                     ? ''
@@ -514,15 +535,13 @@ export const TaskItem = ({
               />
             </ButtonWithModal>
           )}
-          {handleClickEditButton && (
-            <SquareButton
-              buttonType="edit"
-              onClick={handleClickEditButton}
-              extClassName={
-                recipientName ? styles.item_hidden : styles.button_edit
-              }
-            />
-          )}
+
+          <SquareButton
+            buttonType="edit"
+            extClassName={
+              recipientName ? styles.item_hidden : styles.button_edit
+            }
+          />
         </div>
       </div>
     </div>

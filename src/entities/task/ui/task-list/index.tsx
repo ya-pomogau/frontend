@@ -22,11 +22,6 @@ interface TaskListProps {
   isStatusActive: boolean;
   isMobile: boolean;
   isLoading: boolean;
-  handleClickPnoneButton: () => void;
-  handleClickMessageButton: () => void;
-  handleClickConfirmButton: () => void;
-  handleClickCloseButton: () => void;
-  handleClickEditButton?: () => void;
   handleClickAddTaskButton?: () => void;
 }
 
@@ -42,11 +37,6 @@ export const TaskList = ({
   isStatusActive,
   isMobile,
   isLoading,
-  handleClickPnoneButton,
-  handleClickMessageButton,
-  handleClickConfirmButton,
-  handleClickCloseButton,
-  handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const buttonGuard = usePermission([CONFIRMED], UserRole.RECIPIENT);
@@ -120,39 +110,26 @@ export const TaskList = ({
             </li>
           )}
 
-          {tasks &&
-            tasks.map((item, index) => (
-              <li key={index}>
-                <TaskItem
-                  category={item.category.name}
-                  isMobile={isMobile}
-                  date={item.date}
-                  address={item.address}
-                  description={item.description}
-                  count={item.category.scope}
-                  avatar={item.recipient.avatar}
-                  completed={item.completed}
-                  conflict={item.conflict}
-                  confirmed={item.confirmed}
-                  unreadMessages={item.chat?.unread}
-                  recipientName={item.recipient.fullname}
-                  recipientPhoneNumber={item.recipient.phone}
-                  handleClickPhoneButton={handleClickPnoneButton}
-                  handleClickMessageButton={handleClickMessageButton}
-                  handleClickConfirmButton={
-                    item.completed && !item.confirmed
-                      ? handleClickConfirmButton
-                      : undefined
-                  }
-                  handleClickCloseButton={
-                    isStatusActive ? handleClickCloseButton : undefined
-                  }
-                  handleClickEditButton={
-                    isStatusActive ? handleClickEditButton : undefined
-                  }
-                />
-              </li>
-            ))}
+          {tasks && tasks.map((item, index) => (
+            <li key={index}>
+              <TaskItem
+                category={item.category.name}
+                isMobile={isMobile}
+                date={item.date}
+                address={item.address}
+                description={item.description}
+                count={item.category.scope}
+                avatar={item.recipient.avatar}
+                completed={item.completed}
+                conflict={item.conflict}
+                confirmed={item.confirmed}
+                unreadMessages={item.chat?.unread}
+                recipientName={item.recipient.fullname}
+                recipientPhoneNumber={item.recipient.phone}
+                isStatusActive={isStatusActive}
+              />
+            </li>
+          ))}
         </ul>
       )}
 
