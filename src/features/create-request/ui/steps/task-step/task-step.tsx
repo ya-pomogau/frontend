@@ -12,14 +12,33 @@ import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
+import { useGetTasksByStatusQuery } from 'services/tasks-api';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, categories, category, isTypeEdit } =
-    useAppSelector((state) => state.createRequest);
+  const { descriptionForTask, categories, category, isTypeEdit } = useAppSelector(
+    (state) => state.createRequest
+  );
+  const userId = useAppSelector((state) => state.user.data?.id);
+  const { data: tasks } = useGetTasksByStatusQuery('active');
+  // console.log(tasks);
+  // Фильтруем заявки по id
+  const taskId = tasks.filter((item: any) => {
+    if (item.recipient.id === userId) {
+      return item;
+    }
+  });
+  // Получаем id категории
+  const categoryId = taskId.map((item: any) => item.category.id);
+  //Получем объект уже выбранной категории
+  const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
+
+  // console.log(taskId);
+  console.log(categoryId);
+  console.log(commonIds);
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -116,6 +135,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             <p className={styles.messageAlert}>Добавьте описание задачи</p>
           )}
         </div>
+        {category.value === '' && category.label === '' && (
+            <p className={styles.messageAlert}>Выберите тип задачи</p>
+        )}
         {!isTypeEdit && (
           <Button
             buttonType="secondary"
