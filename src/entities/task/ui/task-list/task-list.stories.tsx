@@ -51,21 +51,6 @@ const meta: Meta<typeof TaskList> = {
     isMobile: {
       description: 'признак мобильной версии',
     },
-    handleClickPnoneButton: {
-      description: 'функция при клике на кнопку телефона',
-    },
-    handleClickMessageButton: {
-      description: 'функция при клике на кнопку сообщения',
-    },
-    handleClickConfirmButton: {
-      description: 'функция при клике на кнопку принятой заявки',
-    },
-    handleClickCloseButton: {
-      description: 'функция при клике на кнопку закрытия заявки',
-    },
-    handleClickEditButton: {
-      description: 'функция при клике на кнопку редактирования заявки',
-    },
   },
 };
 
@@ -176,11 +161,6 @@ export const ExampleActive: Story = {
         },
       },
     ],
-    handleClickPnoneButton: () => console.log('кликнули на телефон'),
-    handleClickMessageButton: () => console.log('кликнули на сообщение'),
-    handleClickConfirmButton: () => console.log('кликнули на галочку'),
-    handleClickCloseButton: () => console.log('кликнули на крестик'),
-    handleClickEditButton: () => console.log('кликнули на карандаш'),
     isMobile: false,
     isStatusActive: true,
   },
@@ -290,8 +270,6 @@ export const ExampleNotActive: Story = {
         },
       },
     ],
-    handleClickPnoneButton: () => console.log('кликнули на телефон'),
-    handleClickMessageButton: () => console.log('кликнули на сообщение'),
     isMobile: false,
     isStatusActive: false,
   },
