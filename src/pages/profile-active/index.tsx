@@ -56,10 +56,6 @@ export function ProfileActivePage() {
         <TaskList
           userRole={role}
           isMobile={isMobile}
-          handleClickCloseButton={() => 2}
-          handleClickConfirmButton={() => 3}
-          handleClickMessageButton={() => 5}
-          handleClickPnoneButton={() => 6}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive
           tasks={isConfirmed ? tasks : []}
