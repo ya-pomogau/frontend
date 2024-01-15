@@ -20,7 +20,7 @@ export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const getCoords = () => {
-    setVisible(!visible);
+    setVisible(true);
     const box = buttonRef.current?.getBoundingClientRect();
 
     if (box) {
@@ -28,8 +28,6 @@ export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
         right: window.innerWidth - box.right - box.width / 3,
         top: box.top + window.scrollY + box.height * 1.2,
       });
-    } else {
-      setCoords(null);
     }
   };
   return (
