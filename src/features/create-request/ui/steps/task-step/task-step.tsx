@@ -14,14 +14,33 @@ import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
+import { useGetTasksByStatusQuery } from 'services/tasks-api';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, categories, category, isTypeEdit } =
-    useAppSelector((state) => state.createRequest);
+  const { descriptionForTask, categories, category, isTypeEdit } = useAppSelector(
+    (state) => state.createRequest
+  );
+  const userId = useAppSelector((state) => state.user.data?.id);
+  const { data: tasks } = useGetTasksByStatusQuery('active');
+  // console.log(tasks);
+  // Фильтруем заявки по id
+  const taskId = tasks.filter((item: any) => {
+    if (item.recipient.id === userId) {
+      return item;
+    }
+  });
+  // Получаем id категории
+  const categoryId = taskId.map((item: any) => item.category.id);
+  //Получем объект уже выбранной категории
+  const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
+
+  // console.log(taskId);
+  console.log(categoryId);
+  console.log(commonIds);
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -42,6 +61,16 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   };
 
   const propsButton = usePropsButtonCustom();
+
+  const disabledBtn = () => {
+    if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
+      return true;
+    }
+    if (category.value === '' && category.label === '') {
+      return true;
+    }
+  };
+
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.taskContainer}>
@@ -99,15 +128,24 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
         )}
       </div>
       <div className={styles.buttonsWrapper}>
+        <div className={styles.alertWrapper}>
+          {descriptionForTask.length <= 5 && (
+            <p className={styles.messageAlert}>Добавьте описание задачи</p>
+          )}
+          {category.value === '' && category.label === '' && (
+            <p className={styles.messageAlert}>Выберите тип задачи</p>
+          )}
+        </div>
         {!isTypeEdit && (
           <Button
             buttonType="secondary"
-            label={propsButton.backlabel}
-            onClick={propsButton.backonClick}
+            label={propsButton.label}
+            onClick={propsButton.onClick}
             extClassName={styles.prevButton}
           />
         )}
         <Button
+          disabled={disabledBtn()}
           buttonType="primary"
           label={propsButton.label}
           onClick={propsButton.onClick}

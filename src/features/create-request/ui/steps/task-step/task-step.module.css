@@ -29,6 +29,19 @@
   margin-right: 20px;
 }
 
+.messageAlert {
+  color: red;
+  margin: 5px 30px 0 0;
+  font-family: 'Golos', sans-serif;
+  font-size: 14px;
+}
+
+.alertWrapper {
+  display: flex;
+  flex-direction: column;
+  max-height: 20px;
+}
+
 @media (max-width: 735px) {
   .taskContainer {
     display: flex;
