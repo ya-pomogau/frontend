@@ -13,6 +13,7 @@ import { TextArea } from 'shared/ui/text-area';
 import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
+import { useGetTasksByStatusQuery } from 'services/tasks-api';
 
 interface ITaskStepProps {
   isMobile?: boolean;
@@ -22,6 +23,23 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const { descriptionForTask, categories, category } = useAppSelector(
     (state) => state.createRequest
   );
+  const userId = useAppSelector((state) => state.user.data?.id);
+  const { data: tasks } = useGetTasksByStatusQuery('active');
+  // console.log(tasks);
+  // Фильтруем заявки по id
+  const taskId = tasks.filter((item: any) => {
+    if (item.recipient.id === userId) {
+      return item;
+    }
+  });
+  // Получаем id категории
+  const categoryId = taskId.map((item: any) => item.category.id);
+  //Получем объект уже выбранной категории
+  const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
+
+  // console.log(taskId);
+  console.log(categoryId);
+  console.log(commonIds);
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -45,6 +63,15 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
+  };
+
+  const disabledBtn = () => {
+    if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
+      return true;
+    }
+    if (category.value === '' && category.label === '') {
+      return true;
+    }
   };
 
   return (
@@ -104,6 +131,14 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
         )}
       </div>
       <div className={styles.buttonsWrapper}>
+        <div className={styles.alertWrapper}>
+          {descriptionForTask.length <= 5 && (
+            <p className={styles.messageAlert}>Добавьте описание задачи</p>
+          )}
+          {category.value === '' && category.label === '' && (
+            <p className={styles.messageAlert}>Выберите тип задачи</p>
+          )}
+        </div>
         <Button
           buttonType="secondary"
           label="Вернуться"
@@ -111,6 +146,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
           extClassName={styles.prevButton}
         />
         <Button
+          disabled={disabledBtn()}
           buttonType="primary"
           label="Продолжить"
           onClick={handleNextStepClick}
