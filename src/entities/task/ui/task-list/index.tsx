@@ -18,11 +18,6 @@ interface TaskListProps {
   isStatusActive: boolean;
   isMobile: boolean;
   isLoading: boolean;
-  handleClickPnoneButton: () => void;
-  handleClickMessageButton: () => void;
-  handleClickConfirmButton: () => void;
-  handleClickCloseButton: () => void;
-  handleClickEditButton?: () => void;
   handleClickAddTaskButton?: () => void;
 }
 
@@ -33,11 +28,6 @@ export const TaskList = ({
   isStatusActive,
   isMobile,
   isLoading,
-  handleClickPnoneButton,
-  handleClickMessageButton,
-  handleClickConfirmButton,
-  handleClickCloseButton,
-  handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const buttonGuard = usePermission([CONFIRMED], UserRole.RECIPIENT);

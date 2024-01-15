@@ -62,10 +62,6 @@ export function ProfileCompletedPage() {
         <TaskList
           userRole={UserRole.VOLUNTEER}
           isMobile={isMobile}
-          handleClickCloseButton={() => 2}
-          handleClickConfirmButton={() => 3}
-          handleClickMessageButton={() => 5}
-          handleClickPnoneButton={() => 6}
           isStatusActive={false}
           tasks={filterTasks}
           isLoading={isLoading}
