@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { FilterWrapper } from 'features/filter/components/filter-wrapper';
 import { IFilterValues } from 'features/filter/types';
@@ -40,7 +40,7 @@ export const Filter = ({
     categories: [],
     searchRadius: '',
     date: '',
-    time: ['', ''],
+    time: ['00:00', '00:00'],
   });
 
   const handleFilterChange = (
@@ -56,7 +56,7 @@ export const Filter = ({
       categories: [],
       searchRadius: '',
       date: '',
-      time: ['', ''],
+      time: ['00:00', '00:00'],
     });
   };
 
@@ -100,6 +100,7 @@ export const Filter = ({
             <TimeBlock
               filterTime={filterValues.time}
               onChange={handleFilterChange}
+              time={filterValues.time}
             />
           )}
 
