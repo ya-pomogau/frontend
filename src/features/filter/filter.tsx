@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FilterWrapper } from 'features/filter/components/filter-wrapper';
 import { IFilterValues } from 'features/filter/types';
@@ -18,19 +18,23 @@ export interface FilteringProps {
     time?: boolean;
     userCategories?: boolean;
   };
-
+  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
 }
 
 export interface NotFoundFilterProps {
   items?: never;
-
+  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter: boolean;
 }
 
 export type FilterProps = FilteringProps | NotFoundFilterProps;
 
-export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
+export const Filter = ({
+  items,
+  notFoundFilter = false,
+  setFilteres,
+}: FilterProps) => {
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     sortBy: '',
     categories: [],
@@ -44,7 +48,16 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
     value: string | string[] | boolean
   ) => {
     setFilterValues({ ...filterValues, [name]: value });
-    console.log(filterValues);
+  };
+
+  const handleReset = () => {
+    setFilterValues({
+      sortBy: '',
+      categories: [],
+      searchRadius: '',
+      date: '',
+      time: ['', ''],
+    });
   };
 
   if (notFoundFilter) {
@@ -100,6 +113,8 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
       }
       filterValues={filterValues}
       setFilterValues={setFilterValues}
+      onReset={handleReset}
+      setFilteres={setFilteres}
     />
   );
 };

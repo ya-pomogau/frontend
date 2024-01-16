@@ -29,16 +29,16 @@ export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
       {role === 'volunteer' && (
         <>
           <Checkbox
-            checked={filter === 'decreasingPrice'}
-            id="decreasingPrice"
-            label="По убывающей цене"
+            checked={filter === 'decreasingPoints'}
+            id="decreasingPoints"
+            label="По убывающим баллам"
             onChange={handleCheckboxChange}
           />
 
           <Checkbox
-            checked={filter === 'increasingPrice'}
-            id="increasingPrice"
-            label="По возрастающей цене"
+            checked={filter === 'increasingPoints'}
+            id="increasingPoints"
+            label="По возростающим баллам"
             onChange={handleCheckboxChange}
           />
         </>

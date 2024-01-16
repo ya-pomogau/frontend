@@ -15,6 +15,8 @@ import { IFilterValues } from 'features/filter/types';
 interface FilterWrapperProps {
   filterMenu: ReactElement;
   filterValues: IFilterValues;
+  setFilteres?: (data: IFilterValues) => void;
+  onReset: () => void;
   setFilterValues: Dispatch<SetStateAction<IFilterValues>>;
 }
 
@@ -22,6 +24,8 @@ export const FilterWrapper = ({
   filterMenu,
   filterValues,
   setFilterValues,
+  setFilteres,
+  onReset,
 }: FilterWrapperProps) => {
   const [isFilterMenuVisible, setFilterMenuVisible] = useState(false);
 
@@ -63,6 +67,8 @@ export const FilterWrapper = ({
           filterMenu={filterMenu}
           filterValues={filterValues}
           setFilterValues={setFilterValues}
+          setFilteres={setFilteres}
+          onReset={onReset}
         />
       )}
     </>
