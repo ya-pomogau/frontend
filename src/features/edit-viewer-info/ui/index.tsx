@@ -22,7 +22,7 @@ interface EditViewerInfoProps {
   valueName: string;
   valuePhone: string;
   valueAddress: string;
-  valueId: number;
+  valueId: string;
   isPopupOpen: boolean;
   buttonRef: React.RefObject<HTMLElement>;
   isFormSaved: boolean;

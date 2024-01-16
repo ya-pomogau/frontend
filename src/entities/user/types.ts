@@ -108,5 +108,5 @@ export type UpdateUserInfo = {
   phone: string;
   address: string;
   avatar: null | FormData;
-  id: number;
+  id: string;
 };

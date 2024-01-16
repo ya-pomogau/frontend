@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import classnames from 'classnames';
 import styles from '../styles.module.css';
 import { Input } from 'shared/ui/input';

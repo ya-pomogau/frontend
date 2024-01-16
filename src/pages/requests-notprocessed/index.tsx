@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useGetUncomfirmedQuery } from 'services/user-api';
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
@@ -31,7 +31,7 @@ export function RequestsNotprocessedPage() {
 
   //хук сейчас не нуждается в аргументах, но если не указать аргумент перед
   //pollingInterval, то рефетча не будет
-  const { isLoading, data } = useGetUncomfirmedQuery(role, {
+  const { isLoading } = useGetUncomfirmedQuery(role, {
     pollingInterval: 30000,
   });
 

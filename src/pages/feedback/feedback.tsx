@@ -1,19 +1,32 @@
-import useForm from 'shared/hooks/use-form';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
 import { TextArea } from 'shared/ui/text-area';
 import { Button } from 'shared/ui/button';
+import feedbackSchema from './feedback.joi-sheme';
 
 import styles from './styles.module.css';
 
 export function FeedbackPage() {
-  const { values, handleChange } = useForm({
-    firstName: '',
-    email: '',
-    message: '',
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    getValues,
+    reset,
+  } = useForm({
+    mode: 'onChange',
+    resolver: joiResolver(feedbackSchema),
   });
+
+  function onSubmit() {
+    console.log(getValues());
+    console.log('test');
+    reset();
+  }
 
   return (
     <>
@@ -21,40 +34,40 @@ export function FeedbackPage() {
         text="Напишите нам"
         icon={<Icon color="blue" icon="EmptyMessageIcon" size="54" />}
       />
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="ФИО"
-          name="firstName"
-          onChange={handleChange}
-          value={values.firstName}
           placeholder="Иванов Иван Иванович"
           type="text"
           extClassName={styles.input}
+          error={errors?.firstName && true}
+          errorText={
+            !(errors?.firstName?.message === undefined) &&
+            errors?.firstName?.message.toString()
+          }
+          {...register('firstName', { required: true })}
         />
         <Input
           label="Эл. почта"
-          name="email"
-          onChange={handleChange}
-          value={values.email}
           placeholder="www@yandex.ru"
-          type="text"
+          type="email"
           extClassName={styles.input}
+          error={errors?.email && true}
+          errorText={errors?.email?.message?.toString()}
+          {...register('email', { required: false })}
         />
         <TextArea
           label="Комментарий"
-          name="message"
-          onChange={handleChange}
-          value={values.message}
           placeholder="Задайте Ваш вопрос"
           extClassName={styles.text_area}
-          maxLength={300}
+          {...register('message', { required: false })}
         />
         <Button
           buttonType="primary"
           label="Отправить"
           actionType="submit"
-          onClick={() => 1}
           extClassName={styles.button}
+          disabled={!isValid}
         />
       </form>
     </>

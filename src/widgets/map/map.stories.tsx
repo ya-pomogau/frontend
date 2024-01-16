@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
 

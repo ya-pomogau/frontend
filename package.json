@@ -15,6 +15,7 @@
     "server": "json-server -w server/db.json --routes server/routes.json -p 3001"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@pbe/react-yandex-maps": "^1.2.4",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/dom": "^9.3.1",
@@ -28,11 +29,13 @@
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
+    "joi": "^17.11.0",
     "nanoid": "^4.0.2",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-datepicker": "^4.11.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.3",
     "react-markdown": "^9.0.0",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.1",

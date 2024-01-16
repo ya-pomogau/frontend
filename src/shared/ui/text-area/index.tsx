@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  value: string;
+  value?: string;
   name: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   label?: string;

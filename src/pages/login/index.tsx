@@ -1,34 +1,41 @@
-import { FormEvent, ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { PasswordInput } from 'shared/ui/password-input';
 
-import styles from './styles.module.css';
 import { useLoginMutation } from 'services/auth-admin-api';
-import { setUser } from 'entities/user/model';
+import { joiResolver } from '@hookform/resolvers/joi';
+import loginSchema from './login.joi-sheme';
 
-interface ILoginForm {
-  login: string;
-  password: string;
-}
+import styles from './styles.module.css';
 
 export function LoginPage() {
   const navigate = useNavigate();
   const [checkAdminState, setAdminCheckState] = useState(false);
-  const [inputError, setInputError] = useState(false);
 
-  const [inputFields, setInputFields] = useState<ILoginForm>({
-    login: '',
-    password: '',
+  const [login] = useLoginMutation();
+
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    getValues,
+    reset,
+  } = useForm({
+    mode: 'onChange',
+    resolver: joiResolver(loginSchema),
   });
-  const [login, { isLoading }] = useLoginMutation();
 
   const handleAdminLogin = async () => {
     try {
-      const user = await login(inputFields).unwrap();
+      const user = await login({
+        login: getValues('login'),
+        password: getValues('password'),
+      }).unwrap();
       sessionStorage.setItem('auth_token', user.access_token);
       //dispatch(setUser(user));
       navigate('/profile');
@@ -41,17 +48,19 @@ export function LoginPage() {
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
+  const handleAdminCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAdminCheckState(!checkAdminState);
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = () => {
+    console.log(getValues());
+    reset();
     if (checkAdminState) {
       handleAdminLogin();
     }
     console.log('отправка');
   };
+
   return (
     <>
       <SmartHeader
@@ -64,25 +73,28 @@ export function LoginPage() {
       <form className={styles.form} onSubmit={onSubmit}>
         <Input
           extClassName={styles.field}
-          required
           label="Логин"
-          name="login"
-          value={inputFields.login}
-          onChange={handleChange}
           placeholder="ФИО / Телефон / Логин"
           type="text"
-          error={inputError}
-          errorText={'Вы ввели неправильный логин'}
+          error={errors?.login && true}
+          errorText={
+            !(errors?.login?.message === undefined) &&
+            errors?.login?.message.toString()
+          }
+          {...register('login')}
         />
         <PasswordInput
           extClassName={styles.field}
           required
           label={'Пароль'}
           name="password"
-          value={inputFields.password}
-          onChange={handleChange}
           placeholder="от 6 символов"
-          type="password"
+          error={errors?.password && true}
+          errorText={
+            !(errors?.password?.message === undefined) &&
+            errors?.password?.message.toString()
+          }
+          register={register}
         />
         <Button
           buttonType="primary"
@@ -90,17 +102,12 @@ export function LoginPage() {
           label="Войти"
           size="medium"
           extClassName={styles.button}
-          disabled={
-            !inputFields.login ||
-            !inputFields.password ||
-            inputFields.password.length < 6
-          }
+          disabled={!isValid}
         />
+        <Link to="/pick" className={styles.templink}>
+          Авторизация под выбранной ролью
+        </Link>
       </form>
-
-      <Link to="/pick" className={styles.templink}>
-        Авторизация под выбранной ролью
-      </Link>
     </>
   );
 }

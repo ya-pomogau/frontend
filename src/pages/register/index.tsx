@@ -12,6 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
+import registerSchema from './register.joi-sheme';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
 
 export function RegisterPage() {
   const {
@@ -62,6 +65,17 @@ export function RegisterPage() {
     navigate('/profile');
   };
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    getValues,
+    reset,
+  } = useForm({
+    mode: 'onChange',
+    resolver: joiResolver(registerSchema),
+  });
+
   const handleAddressValueChange = (
     newAddress: string,
     coords?: [number, number] | []
@@ -110,32 +124,42 @@ export function RegisterPage() {
           extClassName={styles.field}
           required
           label="ФИО"
-          name="name"
-          value={name}
-          onChange={(event) => setName(event.currentTarget.value)}
           placeholder="ФИО"
           type="text"
+          error={errors?.name && true}
+          errorText={
+            !(errors?.name?.message === undefined) &&
+            errors?.name?.message.toString()
+          }
+          {...register('name')}
         />
 
         <Input
           extClassName={styles.field}
-          required
           label="Телефон"
-          name="phone"
-          value={phone}
-          onChange={(event) => setPhone(event.currentTarget.value)}
           placeholder="+7 (000) 000 00 00"
           type="tel"
           pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"
           title="+7 (123) 456 78 90"
+          error={errors?.phone && true}
+          errorText={
+            !(errors?.phone?.message === undefined) &&
+            errors?.phone?.message.toString()
+          }
+          {...register('phone')}
         />
 
         <div>
           <InputAddress
             required
-            name="address"
             address={address}
             setAddress={handleAddressValueChange}
+            error={errors?.address && true}
+            errorText={
+              !errors?.address?.message === undefined &&
+              errors?.address?.message?.toString()
+            }
+            {...register('address')}
           />
 
           <p className={styles.text}>
