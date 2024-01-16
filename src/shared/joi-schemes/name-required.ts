@@ -3,8 +3,12 @@
 
 import Joi from 'joi';
 
-const nameRequiredJoi = Joi.string().required().messages({
+const pattern = /^[а-яА-Яa-zA-ZЁё\-\s]*$/;
+
+const nameRequiredJoi = Joi.string().required().pattern(pattern).messages({
   'string.empty': 'Заполните это поле',
+  'string.pattern.base':
+    'Имя должно содержать только кириллицу, латиницу, пробел и дефис',
 });
 
 export default nameRequiredJoi;

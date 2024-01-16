@@ -47,6 +47,7 @@ const ApplyDatePickerInEnvironment = ({
   function getNewDate() {
     return parseISO(format(new Date(), 'yyyy-MM-dd'));
   }
+
   const [dateValue, setDateValue] = useState(getNewDate());
   const handleDateChange = (date: Date) => {
     const formatedDate = format(date, 'yyyy-MM-dd');
@@ -71,78 +72,74 @@ const ApplyDatePickerInEnvironment = ({
 
 export const Primary: Story = {
   /**
-   * Пример использования: 
-     
-     
-     import { useState } from "react";
-     import { format, parseISO } from "date-fns";
-     import { DatePicker } from "./date-picker";
-     
-     () => {
-       function getNewDate() {
-         return parseISO(format(new Date(), "yyyy-MM-dd"));
-       }
-       const [ dateValue, setDateValue] = useState(getNewDate());
-       const handleDateChange = (date: Date) => {
-         const formatedDate = format(date, "yyyy-MM-dd");
-         setDateValue(parseISO(formatedDate));
-       };
-       return (
-         <DatePicker value={dateValue} onChangeValue={handleDateChange}/>
-       )
-     };
+   * Пример использования:
+
+   import { useState } from "react";
+   import { format, parseISO } from "date-fns";
+   import { DatePicker } from "./date-picker";
+
+   () => {
+   function getNewDate() {
+   return parseISO(format(new Date(), "yyyy-MM-dd"));
+   }
+   const [ dateValue, setDateValue] = useState(getNewDate());
+   const handleDateChange = (date: Date) => {
+   const formatedDate = format(date, "yyyy-MM-dd");
+   setDateValue(parseISO(formatedDate));
+   };
+   return (
+   <DatePicker value={dateValue} onChangeValue={handleDateChange}/>
+   )
+   };
    */
   render: () => <ApplyDatePickerInEnvironment inline isMobile={false} />,
 };
 
 export const Mobile: Story = {
   /**
-   * Пример использования: 
-     
-     
-     import { useState } from "react";
-     import { format, parseISO } from "date-fns";
-     import { DatePicker } from "./date-picker";
-     
-     () => {
-       function getNewDate() {
-         return parseISO(format(new Date(), "yyyy-MM-dd"));
-       }
-       const [ dateValue, setDateValue] = useState(getNewDate());
-       const handleDateChange = (date: Date) => {
-         const formatedDate = format(date, "yyyy-MM-dd");
-         setDateValue(parseISO(formatedDate));
-       };
-       return (
-         <DatePicker value={dateValue} onChangeValue={handleDateChange} isMobile/>
-       )
-     };
+   * Пример использования:
+
+   import { useState } from "react";
+   import { format, parseISO } from "date-fns";
+   import { DatePicker } from "./date-picker";
+
+   () => {
+   function getNewDate() {
+   return parseISO(format(new Date(), "yyyy-MM-dd"));
+   }
+   const [ dateValue, setDateValue] = useState(getNewDate());
+   const handleDateChange = (date: Date) => {
+   const formatedDate = format(date, "yyyy-MM-dd");
+   setDateValue(parseISO(formatedDate));
+   };
+   return (
+   <DatePicker value={dateValue} onChangeValue={handleDateChange} isMobile/>
+   )
+   };
    */
   render: () => <ApplyDatePickerInEnvironment inline isMobile />,
 };
 
 export const MobileTypeButton: Story = {
   /**
-   * Пример использования: 
-     
-     
-     import { useState } from "react";
-     import { format, parseISO } from "date-fns";
-     import { DatePicker } from "./date-picker";
-     
-     () => {
-       function getNewDate() {
-         return parseISO(format(new Date(), "yyyy-MM-dd"));
-       }
-       const [ dateValue, setDateValue] = useState(getNewDate());
-       const handleDateChange = (date: Date) => {
-         const formatedDate = format(date, "yyyy-MM-dd");
-         setDateValue(parseISO(formatedDate));
-       };
-       return (
-         <DatePicker value={dateValue} onChangeValue={handleDateChange} inline={false} isMobile/>
-       )
-     };
+   * Пример использования:
+   import { useState } from "react";
+   import { format, parseISO } from "date-fns";
+   import { DatePicker } from "./date-picker";
+
+   () => {
+   function getNewDate() {
+   return parseISO(format(new Date(), "yyyy-MM-dd"));
+   }
+   const [ dateValue, setDateValue] = useState(getNewDate());
+   const handleDateChange = (date: Date) => {
+   const formatedDate = format(date, "yyyy-MM-dd");
+   setDateValue(parseISO(formatedDate));
+   };
+   return (
+   <DatePicker value={dateValue} onChangeValue={handleDateChange} inline={false} isMobile/>
+   )
+   };
    */
   render: () => <ApplyDatePickerInEnvironment inline={false} isMobile />,
 };

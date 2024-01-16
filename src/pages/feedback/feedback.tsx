@@ -40,7 +40,12 @@ export function FeedbackPage() {
           placeholder="Иванов Иван Иванович"
           type="text"
           extClassName={styles.input}
-          {...register('firstName', { required: false })}
+          error={errors?.firstName && true}
+          errorText={
+            !(errors?.firstName?.message === undefined) &&
+            errors?.firstName?.message.toString()
+          }
+          {...register('firstName', { required: true })}
         />
         <Input
           label="Эл. почта"
