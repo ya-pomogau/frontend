@@ -26,8 +26,8 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   const dispatch = useAppDispatch();
   const [timeValidation, setTimeValidation] = useState(false);
   const handleDateValueChange = (value: Date) => {
-    const formatedDate = format(value, 'dd.MM.yyyy');
-    dispatch(setDate(formatedDate));
+    const formattedDate = format(value, 'dd.MM.yyyy');
+    dispatch(setDate(formattedDate));
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,11 +35,10 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   };
 
   useEffect(() => {
-    const currentTime = new Date(); // текущая дата
-    const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
+    const currentTime = format(new Date(), 'HH:mm'); // привожу в нужный формат
     const currentDate = new Date().toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
 
-    if (time && time < currentFormattedTime && date && currentDate === date) {
+    if (time && time < currentTime && date && currentDate === date) {
       setTimeValidation(true);
     } else {
       setTimeValidation(false);
@@ -111,10 +110,8 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         </div>
       </div>
       <div className={styles.button}>
-        {timeValidation ? (
+        {timeValidation && (
           <p className={styles.validationMessage}>{'Введите валидное время'}</p>
-        ) : (
-          <></>
         )}
         <Button
           buttonType="primary"
