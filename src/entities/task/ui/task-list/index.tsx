@@ -10,7 +10,7 @@ import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
@@ -50,18 +50,42 @@ export const TaskList = ({
   const handleDeniedAccess = () => {
     setIsOpen((prev) => !prev);
   };
+  // const myRef = useRef<HTMLDivElement>(null);
+  // const [tooltipStyle, setTooltipStyle] = useState({});
+
+  // useEffect(() => {
+  //   if (myRef.current) {
+  //     const rect = myRef.current.getBoundingClientRect();
+  //     setTooltipStyle({
+  //       top: `${window.innerHeight - 140}px`,
+  //       left: `${window.innerWidth - rect.left + 69}px`,
+  //     });
+  //   }
+  // }, [isOpen]);
+
+  const [popupPosion, setPopupPosion] = useState({ top: 0, right: 0 });
   const myRef = useRef<HTMLDivElement>(null);
-  const [tooltipStyle, setTooltipStyle] = useState({});
+
+  const calculateFilterPosition = useCallback(() => {
+    const buttonRect = myRef.current?.getBoundingClientRect();
+
+    if (buttonRect) {
+      setPopupPosion({ top: buttonRect.bottom, right: buttonRect.right });
+    }
+  }, []);
 
   useEffect(() => {
-    if (myRef.current) {
-      const rect = myRef.current.getBoundingClientRect();
-      setTooltipStyle({
-        top: `${window.innerHeight - 140}px`,
-        left: `${window.innerWidth - rect.left + 69}px`,
-      });
-    }
-  }, [isOpen]);
+    window.addEventListener('resize', calculateFilterPosition);
+
+    return () => {
+      window.removeEventListener('resize', calculateFilterPosition);
+    };
+  }, []);
+
+  const popupPositionStyles = {
+    top: `${popupPosion.top + 18}px`,
+    right: `${window.innerWidth - popupPosion.right - 183}px`,
+  };
 
   return (
     <>
@@ -167,7 +191,7 @@ export const TaskList = ({
                   extClassName={styles.modal}
                   pointerPosition="center"
                   changeVisible={handleDeniedAccess}
-                  elementStyles={tooltipStyle}
+                  elementStyles={popupPositionStyles}
                 >
                   <div className={styles.closeWrapper}>
                     <CloseCrossIcon
