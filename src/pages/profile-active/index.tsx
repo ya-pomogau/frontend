@@ -9,6 +9,9 @@ import { Request } from 'features/create-request';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 import { UserRole } from 'shared/types/common.types';
+import { useEffect, useState } from 'react';
+import { IFilterValues } from 'features/filter/types';
+import { Task } from 'entities/task/types';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -19,6 +22,64 @@ export function ProfileActivePage() {
 
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
+  const [infoFilterTasks, setInfoFilterTasks] = useState<IFilterValues>();
+  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
+
+  const sortTasks = (
+    arr: Task[],
+    item: 'date' | 'decreasing' | 'increasing'
+  ) => {
+    const sortedTasks = [...arr].sort((a, b) => {
+      const aValue = item === 'date' ? a.date : a.category.scope;
+      const bValue = item === 'date' ? b.date : b.category.scope;
+      const order = item === 'increasing' ? -1 : 1;
+
+      if (aValue > bValue) {
+        return order;
+      }
+      if (aValue < bValue) {
+        return -order;
+      }
+      return 0;
+    });
+    return sortedTasks;
+  };
+
+  const sortDisplay = (arr: Task[], text: string) => {
+    switch (text) {
+      case 'date':
+        setFilterTasks(sortTasks(arr, 'date'));
+        break;
+      case 'decreasingPoints':
+        setFilterTasks(sortTasks(arr, 'decreasing'));
+        break;
+      case 'increasingPoints':
+        setFilterTasks(sortTasks(arr, 'increasing'));
+        break;
+    }
+  };
+
+  useEffect(() => {
+    // получение данных
+    if (tasks) {
+      setFilterTasks(tasks);
+    }
+    // сортировка по дисплею
+    if (infoFilterTasks?.sortBy) {
+      sortDisplay(tasks, infoFilterTasks.sortBy);
+    }
+    // сортировка по категориям
+    if (infoFilterTasks?.categories.length) {
+      const filteredTasks = tasks.filter((task: Task) =>
+        infoFilterTasks.categories.includes(task.category.id + '')
+      );
+      console.log(filteredTasks);
+      console.log(infoFilterTasks?.sortBy);
+      if (infoFilterTasks?.sortBy) {
+        sortDisplay(filteredTasks, infoFilterTasks.sortBy);
+      }
+    }
+  }, [infoFilterTasks?.sortBy, tasks, infoFilterTasks?.categories]);
 
   return (
     <>
@@ -35,6 +96,7 @@ export function ProfileActivePage() {
                 date: false,
                 time: true,
               }}
+              setFilteres={setInfoFilterTasks}
             />
           ) : (
             <Filter
@@ -44,6 +106,7 @@ export function ProfileActivePage() {
                 radius: false,
                 date: false,
               }}
+              setFilteres={setInfoFilterTasks}
             />
           )
         }
@@ -60,7 +123,7 @@ export function ProfileActivePage() {
           handleClickPnoneButton={() => 6}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive
-          tasks={tasks}
+          tasks={filterTasks}
           isLoading={isLoading}
         />
       )}
