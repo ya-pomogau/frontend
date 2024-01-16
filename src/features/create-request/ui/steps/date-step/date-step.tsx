@@ -45,8 +45,9 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   };
 
   useEffect(() => {
-    const currentTime = format(new Date(), 'HH:mm'); // привожу в нужный формат
-    const currentDate = new Date().toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
+    const dateNow = new Date();
+    const currentTime = format(dateNow, 'HH:mm'); // привожу в нужный формат
+    const currentDate = dateNow.toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
 
     if (time && time < currentTime && date && currentDate === date) {
       setTimeValidation(true);
