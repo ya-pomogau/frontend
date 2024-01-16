@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import classnames from 'classnames';
 
 import styles from '../styles.module.css';
@@ -7,13 +7,18 @@ import { TimePickerElement } from 'shared/ui/time-picker';
 interface TimeBlockProps {
   onChange: (name: string, value: string[] | string) => void;
   filterTime: Array<string>;
+  time: string[];
 }
 
-export const TimeBlock = ({ onChange, filterTime }: TimeBlockProps) => {
+export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLInputElement>(null);
+
   const [startTime, setStartTime] = useState('00:00');
   const [endTime, setEndTime] = useState('00:00');
+  console.log(time);
+  console.log(startTime);
+  console.log(endTime);
 
   const setTypeResolution = () => {
     if (window.innerWidth <= 768) {
@@ -22,6 +27,11 @@ export const TimeBlock = ({ onChange, filterTime }: TimeBlockProps) => {
       setIsMobile(false);
     }
   };
+
+  useCallback(() => {
+    setStartTime(time[0]);
+    setEndTime(time[1]);
+  }, [time]);
 
   useEffect(() => {
     onChange('time', [startTime, endTime]);
@@ -89,16 +99,6 @@ export const TimeBlock = ({ onChange, filterTime }: TimeBlockProps) => {
             setEndTime={setEndTime}
           />
         </div>
-
-        <p
-          className={classnames(
-            styles.filterBlockText,
-            'text',
-            'text_size_small'
-          )}
-        >
-          Дата
-        </p>
       </div>
     </div>
   );
