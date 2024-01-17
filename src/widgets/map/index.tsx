@@ -103,7 +103,11 @@ export const YandexMap = ({
         </Map>
       </YMaps>
       {!isGranted && (
-        <LightPopup isPopupOpen={isVisible} onClickExit={onClickExit}>
+        <LightPopup
+          isPopupOpen={isVisible}
+          onClickExit={onClickExit}
+          hasClosedButton={true}
+        >
           {unauthorizedVolunteerPopupMessage}
         </LightPopup>
       )}
