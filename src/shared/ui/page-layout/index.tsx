@@ -12,6 +12,7 @@ import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 import { RegistrationNotice } from '../registration-notice';
 import { UNCONFIRMED } from 'shared/libs/statuses';
 import { unauthorizedVolunteerMessage } from 'shared/libs/constants';
+import { UserRole } from 'shared/types/common.types';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -19,19 +20,19 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
-  const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
-  const isUnConfirmedUser = useAppSelector((state) => {
-    return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
-  });
-  const isRole = useAppSelector((state) => state.user.data?.role);
+  const { isLoading, data } = useAppSelector((state) => state.user);
+
+  const isUnConfirmedUser = (data && data.status === UNCONFIRMED) || null;
+  console.log(isUnConfirmedUser);
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmedUser;
   const location = useLocation();
-  console.log(isError);
+  const userRole = data?.role;
+  console.log(UserRole.RECIPIENT);
 
   return (
     <>
-      {isLoadingUserData && <Loader />}
+      {isLoading && <Loader />}
       {location.pathname === '/policy' ||
       location.pathname === '/blog' ||
       location.pathname === '/pick' ? (
@@ -51,8 +52,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-
-          {isUnConfirmedUser && isRole === 'recipient' && (
+          {isUnConfirmedUser && userRole === 'recipient' && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>
