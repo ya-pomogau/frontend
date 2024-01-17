@@ -25,6 +25,11 @@ interface TaskListProps {
   handleClickAddTaskButton?: () => void;
 }
 
+interface Cords {
+  right: number;
+  top: number;
+}
+
 export const TaskList = ({
   userRole,
   tasks,
@@ -37,45 +42,35 @@ export const TaskList = ({
   const buttonGuard = usePermission([CONFIRMED], UserRole.RECIPIENT);
 
   const [isOpen, setIsOpen] = useState(false);
-  const handleDeniedAccess = () => {
-    setIsOpen((prev) => !prev);
-  };
-  // const myRef = useRef<HTMLDivElement>(null);
-  // const [tooltipStyle, setTooltipStyle] = useState({});
 
-  // useEffect(() => {
-  //   if (myRef.current) {
-  //     const rect = myRef.current.getBoundingClientRect();
-  //     setTooltipStyle({
-  //       top: `${window.innerHeight - 140}px`,
-  //       left: `${window.innerWidth - rect.left + 69}px`,
-  //     });
-  //   }
-  // }, [isOpen]);
-
-  const [popupPosion, setPopupPosion] = useState({ top: 0, right: 0 });
+  const [popupPosion, setPopupPosion] = useState<Cords | null>(null);
   const myRef = useRef<HTMLDivElement>(null);
 
-  const calculateFilterPosition = useCallback(() => {
-    const buttonRect = myRef.current?.getBoundingClientRect();
+  const getCoords = () => {
+    const box = myRef.current?.getBoundingClientRect();
 
-    if (buttonRect) {
-      setPopupPosion({ top: buttonRect.bottom, right: buttonRect.right });
+    if (box) {
+      setPopupPosion({
+        right: window.innerWidth - box.right - box.width * 2.25,
+        top: box.top + window.scrollY + box.height * 1.2,
+      });
     }
-  }, []);
+  };
+
+  const handleDeniedAccess = () => {
+    if (!isOpen) {
+      getCoords();
+    }
+    setIsOpen((prev) => !prev);
+  };
 
   useEffect(() => {
-    window.addEventListener('resize', calculateFilterPosition);
+    window.addEventListener('resize', getCoords);
 
     return () => {
-      window.removeEventListener('resize', calculateFilterPosition);
+      window.removeEventListener('resize', getCoords);
     };
   }, []);
-
-  const popupPositionStyles = {
-    top: `${popupPosion.top + 18}px`,
-    right: `${window.innerWidth - popupPosion.right - 183}px`,
-  };
 
   return (
     <>
@@ -151,7 +146,11 @@ export const TaskList = ({
                 {' '}
                 Хотите создать заявку?
               </p>
-              <div ref={myRef}>
+              <div
+                className={styles.wrapperBtn}
+                ref={myRef}
+                // onClick={getCoords}
+              >
                 <RoundButton
                   buttonType="add"
                   onClick={
@@ -166,8 +165,12 @@ export const TaskList = ({
                   visible
                   extClassName={styles.modal}
                   pointerPosition="center"
-                  changeVisible={handleDeniedAccess}
-                  elementStyles={popupPositionStyles}
+                  changeVisible={() => setIsOpen(false)}
+                  elementStyles={{
+                    position: 'absolute',
+                    top: `${popupPosion?.top}px`,
+                    right: `${popupPosion?.right}px`,
+                  }}
                 >
                   <div className={styles.closeWrapper}>
                     <CloseCrossIcon
