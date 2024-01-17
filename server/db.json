@@ -239,6 +239,22 @@
       ],
       "status": "unconfirmed",
       "isActive": true
+    },
+    {
+      "id": 3,
+      "createdAt": "2023-07-09T17:30Z",
+      "fullname": "Реципиентов Иван Иванович",
+      "role": "recipient",
+      "vk": "https://vk.com/id123456789",
+      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+      "phone": "+7 (916) 123-00-00",
+      "address": "1-й Смоленский пер., 13",
+      "coordinates": [
+        55.747854,
+        37.579887
+      ],
+      "status": "confirmed",
+      "isActive": true
     }
   ],
   "tasks": [
@@ -478,13 +494,6 @@
       "volunteer": null,
       "address": "1-й Смоленский пер., 13",
       "coordinates": [55.747854, 37.579887],
-      "chat": null
-    },
-    {
-      "id": 14,
-      "title": "Выгулять собаку",
-      "category": {
-        "id": "1",
         "name": "Сопровождение",
         "scope": 1
       },
@@ -507,13 +516,6 @@
       "volunteer": null,
       "address": "улица Россолимо, 17с3",
       "coordinates": [55.732741, 37.578115],
-      "chat": null
-    },
-    {
-      "id": 15,
-      "title": "Сводить погулять в парк",
-      "category": {
-        "id": "1",
         "name": "Сопровождение",
         "scope": 1
       },
