@@ -33,66 +33,54 @@ export function ProfileActivePage() {
   });
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
+  const handleTasksFilter = (arr: Task[]) =>
+    arr.filter((task: Task) =>
+      infoFilterTasks.categories.includes(task.category.name)
+    );
+
   useEffect(() => {
     if (tasks) {
       setFilterTasks(tasks);
     }
-
-    const sortDisplay = (arr: Task[], text: string) => {
+    const sortDisplay = (arr: Task[], text: string): Task[] => {
+      let sortedTasks: Task[] = [];
       switch (text) {
         case 'date':
-          setFilterTasks(sortTasks(arr, 'date'));
+          sortedTasks = sortTasks(arr, 'date');
           break;
         case 'decreasingPoints':
-          setFilterTasks(sortTasks(arr, 'decreasing'));
+          sortedTasks = sortTasks(arr, 'decreasing');
           break;
         case 'increasingPoints':
-          setFilterTasks(sortTasks(arr, 'increasing'));
+          sortedTasks = sortTasks(arr, 'increasing');
+          break;
+        default:
+          // Handle default case or invalid text value
           break;
       }
+      return sortedTasks;
     };
-    if (infoFilterTasks?.sortBy) {
-      sortDisplay(tasks, infoFilterTasks.sortBy);
-    }
     if (infoFilterTasks?.categories.length) {
-      const filteredTasks = tasks.filter((task: Task) =>
-        infoFilterTasks.categories.includes(task.category.id + '')
-      );
-      if (infoFilterTasks?.sortBy) {
-        sortDisplay(filteredTasks, infoFilterTasks.sortBy);
-      }
-    }
-    if (infoFilterTasks?.searchRadius) {
-      switch (infoFilterTasks?.searchRadius) {
-        case '1':
-          sortDisplay(tasks, 'date');
-          break;
-        case '4':
-          sortDisplay(tasks, 'decreasing');
-          break;
-        case '5':
-          sortDisplay(tasks, 'date');
-          break;
-      }
-    }
-    if (
-      infoFilterTasks?.time[0] > '00:00' &&
-      infoFilterTasks?.time[1] > '00:00'
-    ) {
-      const filterTaskTime = tasks.filter((item: Task) => {
-        const date = format(new Date(item.date), 'kk:mm');
-        return infoFilterTasks.time[0] < date && date < infoFilterTasks.time[1];
+      const filteredTasks = tasks.filter((task: Task) => {
+        return infoFilterTasks.categories.includes(task.category.name);
       });
-      setFilterTasks(filterTaskTime);
+      if (infoFilterTasks?.sortBy) {
+        sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy);
+      } else {
+        setFilterTasks(filteredTasks);
+      }
     }
-  }, [
-    infoFilterTasks,
-    infoFilterTasks?.sortBy,
-    tasks,
-    infoFilterTasks?.categories,
-    infoFilterTasks?.searchRadius,
-    infoFilterTasks?.time,
-  ]);
+    if (infoFilterTasks?.sortBy) {
+      if (infoFilterTasks?.categories.length > 0) {
+        setFilterTasks(
+          sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy)
+        );
+      } else {
+        setFilterTasks(sortDisplay(tasks, infoFilterTasks.sortBy));
+      }
+    }
+    // eslint-disable-next-line
+  }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
   return (
     <>
@@ -104,10 +92,10 @@ export function ProfileActivePage() {
             <Filter
               items={{
                 sort: true,
-                categories: true,
-                radius: true,
+                categories: false,
+                radius: false,
                 date: false,
-                time: true,
+                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />
@@ -115,9 +103,10 @@ export function ProfileActivePage() {
             <Filter
               items={{
                 sort: true,
-                categories: true,
+                categories: false,
                 radius: false,
                 date: false,
+                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />

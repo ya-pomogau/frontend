@@ -9,8 +9,6 @@ import { CalenderBlock } from 'features/filter/ui/calender-block';
 import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
 import { CategoriesServies } from './ui/categories-types';
-import { useDispatch } from 'react-redux';
-import { resetTimeFiler } from 'services/filter-time-tasks';
 
 export interface FilteringProps {
   items: {
@@ -39,7 +37,6 @@ export const Filter = ({
   notFoundFilter = false,
   setFilteres,
 }: FilterProps) => {
-  const dispath = useDispatch();
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     sortBy: '',
     categories: [],
@@ -66,7 +63,6 @@ export const Filter = ({
       date: '',
       time: ['00:00', '00:00'],
     });
-    dispath(resetTimeFiler());
   };
 
   if (notFoundFilter) {
