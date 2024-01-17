@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
+import { CONFIRMED } from 'shared/libs/statuses';
 
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -27,6 +28,9 @@ export function ProfileCompletedPage() {
     // eslint-disable-next-line
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
+  const isConfirmed = useAppSelector((state) => {
+    return state.user.data?.status === CONFIRMED;
+  });
   return (
     <>
       <SmartHeader
@@ -43,7 +47,7 @@ export function ProfileCompletedPage() {
               }}
               setFilteres={setInfoFilterTasks}
             />
-          ) : (
+          ) : isConfirmed ? (
             <Filter
               items={{
                 sort: true,
@@ -53,6 +57,8 @@ export function ProfileCompletedPage() {
               }}
               setFilteres={setInfoFilterTasks}
             />
+          ) : (
+            <></>
           )
         }
       />
@@ -63,7 +69,7 @@ export function ProfileCompletedPage() {
           userRole={UserRole.VOLUNTEER}
           isMobile={isMobile}
           isStatusActive={false}
-          tasks={filterTasks}
+          tasks={isConfirmed ? tasks : []}
           isLoading={isLoading}
         />
       )}
