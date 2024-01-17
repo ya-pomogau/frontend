@@ -79,7 +79,6 @@ export function ProfileActivePage() {
       infoFilterTasks?.time[1] > '00:00'
     ) {
       const filterTaskTime = tasks.filter((item: Task) => {
-        console.log('render');
         const date = format(new Date(item.date), 'kk:mm');
         return infoFilterTasks.time[0] < date && date < infoFilterTasks.time[1];
       });

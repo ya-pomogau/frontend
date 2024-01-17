@@ -3,19 +3,22 @@ import classnames from 'classnames';
 
 import styles from '../styles.module.css';
 import { TimePickerElement } from 'shared/ui/time-picker';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'app/store';
+import { updateInfoTimeFilter } from 'services/filter-time-tasks';
 
 interface TimeBlockProps {
   onChange: (name: string, value: string[] | string) => void;
   filterTime: Array<string>;
-  time: string[];
 }
 
-export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
+export const TimeBlock = ({ onChange, filterTime }: TimeBlockProps) => {
+  const dispatch = useDispatch();
+  const infoTime = useSelector((state: RootState) => state.test.time);
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLInputElement>(null);
-
-  const [times, setTimes] = useState<string[]>(time);
-  console.log(`time ${times}`);
+  const [startTime, setStartTime] = useState<string>(infoTime[0]);
+  const [endTime, setEndTime] = useState<string>(infoTime[1]);
 
   const setTypeResolution = () => {
     if (window.innerWidth <= 768) {
@@ -26,8 +29,14 @@ export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
   };
 
   useEffect(() => {
-    onChange('time', [times[0], times[1]]);
-  }, [times]);
+    onChange('time', [startTime, endTime]);
+    dispatch(updateInfoTimeFilter([startTime, endTime]));
+  }, [startTime, endTime]);
+
+  useEffect(() => {
+    setStartTime(infoTime[0]);
+    setEndTime(infoTime[1]);
+  }, [infoTime]);
 
   useEffect(() => {
     setTypeResolution();
@@ -72,9 +81,8 @@ export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
           <TimePickerElement
             isMobile={isMobile}
             buttonRef={buttonRef}
-            times={times}
-            setTimes={setTimes}
-            variant="start"
+            startTime={startTime}
+            setStartTime={setStartTime}
           />
           <p
             className={classnames(
@@ -86,13 +94,22 @@ export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
             До
           </p>
           <TimePickerElement
-            variant="end"
             isMobile={isMobile}
             buttonRef={buttonRef}
-            times={times}
-            setTimes={setTimes}
+            endTime={endTime}
+            setEndTime={setEndTime}
           />
         </div>
+
+        <p
+          className={classnames(
+            styles.filterBlockText,
+            'text',
+            'text_size_small'
+          )}
+        >
+          Дата
+        </p>
       </div>
     </div>
   );

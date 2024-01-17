@@ -57,7 +57,6 @@ export const FilterCover = ({
         params += `${key}=${value}&`;
       }
     });
-    console.dir(filterValues);
     setFilteres?.(filterValues);
     setSearchParams(params);
     closeFilterMenu();
