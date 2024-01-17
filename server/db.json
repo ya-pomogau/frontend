@@ -379,6 +379,96 @@
       "address": "переулок Каховского, 3",
       "coordinates": [59.95252, 30.243239],
       "chat": null
+    },
+    {
+      "id": 15,
+      "title": "Задача 15",
+      "category": {
+        "id": 6,
+        "name": "Покупка продуктов",
+        "scope": 10
+      },
+      "date": "2023-01-02T17:30Z",
+      "description": "Описание задачи номер 15 (срок задачи прошел, задача завершена и подтверждена)",
+      "completed": true,
+      "confirmed": true,
+      "conflict": false,
+      "recipient": {
+        "id": 4,
+        "fullname": "Реципиентов Алексей Борисович",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Нахимова, д. 9",
+        "coordinates": [59.941871, 30.223494],
+        "approved": true
+      },
+      "volunteer": {
+        "id": 7,
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [59.942575, 30.216757],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
+      },
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [59.941871, 30.223494],
+      "chat": {
+        "id": 5678,
+        "unread": 0
+      }
+    },
+    {
+      "id": 15,
+      "title": "Задача 15",
+      "category": {
+        "id": 7,
+        "name": "Помощь в готовке",
+        "scope": 10
+      },
+      "date": "2022-09-12T17:30Z",
+      "description": "Описание задачи номер 15 (срок задачи прошел, задача завершена и подтверждена)",
+      "completed": true,
+      "confirmed": true,
+      "conflict": false,
+      "recipient": {
+        "id": 4,
+        "fullname": "Реципиентов Алексей Борисович",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Нахимова, д. 9",
+        "coordinates": [59.941871, 30.223494],
+        "approved": true
+      },
+      "volunteer": {
+        "id": 7,
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [59.942575, 30.216757],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
+      },
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [59.941871, 30.223494],
+      "chat": {
+        "id": 5678,
+        "unread": 0
+      }
     }
   ],
   "category": [
