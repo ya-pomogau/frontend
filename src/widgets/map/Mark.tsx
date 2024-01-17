@@ -47,6 +47,7 @@ export const Mark = React.memo(
     onClick,
     showPopup,
     isAuthorised,
+    showPopup,
     date,
     time,
     hasBalloon,
