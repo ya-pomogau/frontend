@@ -52,7 +52,7 @@ export function ProfileActivePage() {
               }}
               setFilteres={setInfoFilterTasks}
             />
-          ) : (
+          ) : isConfirmed ? (
             <Filter
               items={{
                 sort: true,
@@ -62,6 +62,8 @@ export function ProfileActivePage() {
               }}
               setFilteres={setInfoFilterTasks}
             />
+          ) : (
+            <></>
           )
         }
       />
