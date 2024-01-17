@@ -6,6 +6,7 @@ import { TextArea } from '../text-area';
 import { FileAttachmentIcon } from '../icons/file-attachment-icon';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
 import styles from './styles.module.css';
+import { FileTypes } from 'shared/types/common.types';
 
 interface PostFormProps {
   title?: string;
@@ -65,7 +66,7 @@ export const PostForm: FC<PostFormProps> = ({
             className={styles['input-file']}
             type="file"
             name="fileAttachment"
-            accept=".png, .jpg, .jpeg"
+            accept={[FileTypes.JPEG, FileTypes.JPG, FileTypes.PNG].join(',')}
             multiple
             onChange={(e) => {
               addAttachment(e.target.files);
