@@ -18,6 +18,7 @@ enum ButtonType {
   conflict = 'conflict',
   confirm = 'confirm',
   phone = 'phone',
+  cancel = 'cancel',
 }
 
 enum ReasonType {
@@ -33,6 +34,7 @@ type ModalButtons = {
   [key in ButtonsTypes]: Array<{
     type: 'primary' | 'secondary';
     text: string;
+    modal?: boolean;
     handleclick?: () => void;
   }> | null;
 };
@@ -60,6 +62,7 @@ const titles: ModalTitles = {
   confirm: 'Благодарим за отзывчивость',
   conflict: `Подтвердите, что заявка\nне выполнена`,
   phone: 'Номер телефона:',
+  cancel: 'До начала заявки менее 24 часа',
 };
 
 const textStyle = classNames(
@@ -125,6 +128,9 @@ export const TaskItem = ({
         +7 (800) 555-35-35
       </a>
     ),
+    cancel: (
+      <p className={textStyle}>Вы не можете отменить заявку самостоятельно.</p>
+    ),
   };
 
   const buttonsSection: ModalButtons = {
@@ -133,12 +139,14 @@ export const TaskItem = ({
       {
         type: 'primary',
         text: 'Отменить заявку',
+        modal: true,
         handleclick: () => console.log(reason),
       },
     ],
     confirm: null,
     conflict: [{ type: 'secondary', text: 'Помощь администратора' }],
     phone: null,
+    cancel: [{ type: 'primary', text: 'Написать администратору' }],
   };
 
   const taskLayout =
@@ -190,14 +198,27 @@ export const TaskItem = ({
         {isStatusActive
           ? buttonsSection[buttonType] && (
               <div className={styles.modalButtons}>
-                {buttonsSection[buttonType]?.map((button, i) => (
-                  <Button
-                    key={i}
-                    buttonType={button.type}
-                    label={button.text}
-                    onClick={button.handleclick}
-                  />
-                ))}
+                {buttonsSection[buttonType]?.map((button, i) =>
+                  button.modal ? (
+                    <ButtonWithModal
+                      key={i}
+                      modalContent={getModalContent(ButtonType.cancel)}
+                    >
+                      <Button
+                        buttonType={button.type}
+                        label={button.text}
+                        onClick={button.handleclick}
+                      />
+                    </ButtonWithModal>
+                  ) : (
+                    <Button
+                      key={i}
+                      buttonType={button.type}
+                      label={button.text}
+                      onClick={button.handleclick}
+                    />
+                  )
+                )}
               </div>
             )
           : null}
@@ -487,55 +508,44 @@ export const TaskItem = ({
           </div>
         </div>
         <div className={styles.buttons_action}>
-          {completed && (
-            //переписать completed если бэк поменяется
-            <ButtonWithModal modalContent={getModalContent(ButtonType.confirm)}>
-              <SquareButton
-                buttonType={ButtonType.confirm}
-                extClassName={
-                  recipientName && !date
-                    ? ''
-                    : recipientName
-                    ? ''
-                    : styles.item_hidden
-                }
-              />
-            </ButtonWithModal>
-          )}
-          {!completed && (
-            //переписать completed если бэк поменяется
-            <ButtonWithModal modalContent={getModalContent(ButtonType.close)}>
-              <SquareButton
-                buttonType={ButtonType.close}
-                extClassName={
-                  !date && recipientName
-                    ? styles.item_hidden
-                    : styles.button_edit
-                }
-                disabled={comparedDateResult || !completed}
-              />
-            </ButtonWithModal>
-          )}
-          {!conflict && (
-            //переписать conflict на подходящий параметр
-            <ButtonWithModal
-              modalContent={getModalContent(ButtonType.conflict)}
-            >
-              <SquareButton
-                buttonType={ButtonType.conflict}
-                extClassName={
-                  recipientName && !date
-                    ? ''
-                    : recipientName
-                    ? ''
-                    : !comparedDateResult
-                    ? ''
-                    : styles.item_hidden
-                }
-              />
-            </ButtonWithModal>
-          )}
-
+          <ButtonWithModal modalContent={getModalContent(ButtonType.confirm)}>
+            <SquareButton
+              buttonType={ButtonType.confirm}
+              //переписать completed если бэк поменяется
+              extClassName={
+                recipientName && !date && completed
+                  ? ''
+                  : recipientName
+                  ? ''
+                  : styles.item_hidden
+              }
+            />
+          </ButtonWithModal>
+          <ButtonWithModal modalContent={getModalContent(ButtonType.close)}>
+            <SquareButton
+              buttonType={ButtonType.close}
+              extClassName={
+                !date && recipientName ? styles.item_hidden : styles.button_edit
+              }
+              //переписать completed если бэк поменяется
+              disabled={comparedDateResult || !completed}
+            />
+          </ButtonWithModal>
+          <ButtonWithModal modalContent={getModalContent(ButtonType.conflict)}>
+            <SquareButton
+              buttonType={ButtonType.conflict}
+              //переписать conflict на подходящий параметр
+              extClassName={
+                recipientName && !date && !conflict
+                  ? ''
+                  : recipientName
+                  ? ''
+                  : !comparedDateResult
+                  ? ''
+                  : styles.item_hidden
+              }
+            />
+          </ButtonWithModal>
           <SquareButton
             buttonType="edit"
             extClassName={
