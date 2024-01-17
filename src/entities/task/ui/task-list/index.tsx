@@ -74,38 +74,25 @@ export const TaskList = ({
   // const myRef = useRef<HTMLDivElement>(null);
   // const [tooltipStyle, setTooltipStyle] = useState({});
 
-  // useEffect(() => {
-  //   if (myRef.current) {
-  //     const rect = myRef.current.getBoundingClientRect();
-  //     setTooltipStyle({
-  //       top: `${window.innerHeight - 140}px`,
-  //       left: `${window.innerWidth - rect.left + 69}px`,
-  //     });
-  //   }
-  // }, [isOpen]);
-
-  const [popupPosion, setPopupPosion] = useState({ top: 0, right: 0 });
+  const [popupPosion, setPopupPosion] = useState<Cords | null>(null);
   const myRef = useRef<HTMLDivElement>(null);
 
-  const calculateFilterPosition = useCallback(() => {
-    const buttonRect = myRef.current?.getBoundingClientRect();
+  const getCoords = () => {
+    const box = myRef.current?.getBoundingClientRect();
 
-    if (buttonRect) {
-      setPopupPosion({ top: buttonRect.bottom, right: buttonRect.right });
+    if (box) {
+      setPopupPosion({
+        right: window.innerWidth - box.right - box.width * 2.25,
+        top: box.top + window.scrollY + box.height * 1.2,
+      });
     }
-  }, []);
+  };
 
-  useEffect(() => {
-    window.addEventListener('resize', calculateFilterPosition);
-
-    return () => {
-      window.removeEventListener('resize', calculateFilterPosition);
-    };
-  }, []);
-
-  const popupPositionStyles = {
-    top: `${popupPosion.top + 18}px`,
-    right: `${window.innerWidth - popupPosion.right - 183}px`,
+  const handleDeniedAccess = () => {
+    if (!isOpen) {
+      getCoords();
+    }
+    setIsOpen((prev) => !prev);
   };
 
   useEffect(() => {
