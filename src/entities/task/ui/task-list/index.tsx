@@ -68,10 +68,6 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
-  // FIX: для чего?
-  const isConfirmed = useAppSelector((store) => {
-    return store.user.data?.status === CONFIRMED;
-  });
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
