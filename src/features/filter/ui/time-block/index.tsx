@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classnames from 'classnames';
 
 import styles from '../styles.module.css';
@@ -14,11 +14,8 @@ export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLInputElement>(null);
 
-  const [startTime, setStartTime] = useState('00:00');
-  const [endTime, setEndTime] = useState('00:00');
-  console.log(time);
-  console.log(startTime);
-  console.log(endTime);
+  const [times, setTimes] = useState<string[]>(time);
+  console.log(`time ${times}`);
 
   const setTypeResolution = () => {
     if (window.innerWidth <= 768) {
@@ -28,14 +25,9 @@ export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
     }
   };
 
-  useCallback(() => {
-    setStartTime(time[0]);
-    setEndTime(time[1]);
-  }, [time]);
-
   useEffect(() => {
-    onChange('time', [startTime, endTime]);
-  }, [startTime, endTime]);
+    onChange('time', [times[0], times[1]]);
+  }, [times]);
 
   useEffect(() => {
     setTypeResolution();
@@ -80,8 +72,9 @@ export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
           <TimePickerElement
             isMobile={isMobile}
             buttonRef={buttonRef}
-            startTime={startTime}
-            setStartTime={setStartTime}
+            times={times}
+            setTimes={setTimes}
+            variant="start"
           />
           <p
             className={classnames(
@@ -93,10 +86,11 @@ export const TimeBlock = ({ onChange, filterTime, time }: TimeBlockProps) => {
             До
           </p>
           <TimePickerElement
+            variant="end"
             isMobile={isMobile}
             buttonRef={buttonRef}
-            endTime={endTime}
-            setEndTime={setEndTime}
+            times={times}
+            setTimes={setTimes}
           />
         </div>
       </div>

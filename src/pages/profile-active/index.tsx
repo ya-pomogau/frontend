@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { format } from 'date-fns';
+import { sortTasks } from 'shared/libs/utils';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -28,32 +29,11 @@ export function ProfileActivePage() {
     categories: [],
     searchRadius: '',
     date: '',
-    time: ['', ''],
+    time: ['00:00', '00:00'],
   });
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
-  const sortTasks = (
-    arr: Task[],
-    item: 'date' | 'decreasing' | 'increasing'
-  ) => {
-    const sortedTasks = [...arr].sort((a, b) => {
-      const aValue = item === 'date' ? a.date : a.category.scope;
-      const bValue = item === 'date' ? b.date : b.category.scope;
-      const order = item === 'decreasing' ? -1 : 1;
-
-      if (aValue > bValue) {
-        return order;
-      }
-      if (aValue < bValue) {
-        return -order;
-      }
-      return 0;
-    });
-    return sortedTasks;
-  };
-
   useEffect(() => {
-    // получение данных
     if (tasks) {
       setFilterTasks(tasks);
     }
@@ -71,11 +51,9 @@ export function ProfileActivePage() {
           break;
       }
     };
-    // сортировка по дисплею
     if (infoFilterTasks?.sortBy) {
       sortDisplay(tasks, infoFilterTasks.sortBy);
     }
-    // сортировка по категориям
     if (infoFilterTasks?.categories.length) {
       const filteredTasks = tasks.filter((task: Task) =>
         infoFilterTasks.categories.includes(task.category.id + '')
@@ -97,7 +75,6 @@ export function ProfileActivePage() {
           break;
       }
     }
-
     if (
       infoFilterTasks?.time[0] > '00:00' &&
       infoFilterTasks?.time[1] > '00:00'
@@ -107,9 +84,6 @@ export function ProfileActivePage() {
         const date = format(new Date(item.date), 'kk:mm');
         return infoFilterTasks.time[0] < date && date < infoFilterTasks.time[1];
       });
-      // if (infoFilterTasks.sortBy) {
-      //   setFilterTasks(sortDisplay(filterTaskTime, infoFilterTasks.sortBy));
-      // }
       setFilterTasks(filterTaskTime);
     }
   }, [
@@ -120,16 +94,6 @@ export function ProfileActivePage() {
     infoFilterTasks?.searchRadius,
     infoFilterTasks?.time,
   ]);
-
-  // useEffect(() => {
-  //   if (infoFilterTasks?.time) {
-  //     const filterTaskTime = tasks.filter((item: Task) => {
-  //       const date = format(new Date(item.date), 'kk:mm');
-  //       return infoFilterTasks.time[0] < date && date < infoFilterTasks.time[1];
-  //     });
-  //     setFilterTasks(filterTaskTime);
-  //   }
-  // }, [infoFilterTasks?.time, tasks]);
 
   return (
     <>
