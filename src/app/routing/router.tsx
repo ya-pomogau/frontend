@@ -2,6 +2,7 @@ import {
   Route,
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
 } from 'react-router-dom';
 
 import { RoutesGroup } from 'app/routing/components/routes-group';
@@ -10,7 +11,6 @@ import { Layout } from 'pages/layout';
 
 import { UnauthPage } from 'pages/unauth';
 import { RequestsPage } from 'pages/requests';
-import { RequestsVolunteersPage } from 'pages/requests-volunteers';
 import { BlogPage } from 'pages/blog';
 import { PolicyPage } from 'pages/policy';
 import { ContactsPage } from 'pages/contacts';
@@ -21,19 +21,17 @@ import { NotFoundPage } from 'pages/not-found';
 import { ProfileMapPage } from 'pages/profile-map';
 import { ProfileActivePage } from 'pages/profile-active';
 import { ProfileCompletedPage } from 'pages/profile-completed';
-import { RequestsRecipientsPage } from 'pages/requests-recipients';
-import { RequestsNotprocessedPage } from 'pages/requests-notprocessed';
 import { StatisticsPage } from 'pages/statistics';
 import { ApplicationsStatisticsPage } from 'pages/application-statistics';
 import { UsersStatisticsPage } from 'pages/users-statistics';
 import { TasksPage } from 'pages/tasks';
-import { RequestsAdminsPage } from 'pages/requests-admins';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
 import { VKAuthPage } from 'pages/vk-auth';
 import { RegisterPage } from 'pages/register';
+import { Tabs } from '../../shared/types/common.types';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -115,20 +113,23 @@ export const router = createBrowserRouter(
             />
           }
         >
-          <Route path="/profile/requests" element={<RequestsPage />} />
+          <Route
+            path="/profile/requests"
+            element={<Navigate to={'/profile/requests/volunteers'} />}
+          />
           <Route
             path="/profile/requests/volunteers"
-            element={<RequestsVolunteersPage />}
+            element={<RequestsPage incomeTab={Tabs.VOLUNTEERS} />}
           />
 
           <Route
             path="/profile/requests/recipients"
-            element={<RequestsRecipientsPage />}
+            element={<RequestsPage incomeTab={Tabs.RECIPIENTS} />}
           />
 
           <Route
             path="/profile/requests/notprocessed"
-            element={<RequestsNotprocessedPage />}
+            element={<RequestsPage incomeTab={Tabs.NOTPROCESSED} />}
           />
 
           <Route path="/profile/statistics" element={<StatisticsPage />} />
@@ -159,7 +160,7 @@ export const router = createBrowserRouter(
         >
           <Route
             path="/profile/requests/admins"
-            element={<RequestsAdminsPage />}
+            element={<RequestsPage incomeTab={Tabs.ADMINS} />}
           />
         </Route>
       </Route>
