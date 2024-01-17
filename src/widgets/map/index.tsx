@@ -11,6 +11,7 @@ import { unauthorizedVolunteerPopupMessage } from 'shared/libs/constants';
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { UserRole } from 'shared/types/common.types';
 
 interface YandexMapProps {
   width?: string | number;
@@ -37,7 +38,7 @@ export const YandexMap = ({
 }: YandexMapProps) => {
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
-    'volunteer'
+    UserRole.VOLUNTEER
   );
 
   const [isVisible, setVisibility] = useState(false);
