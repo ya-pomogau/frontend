@@ -68,6 +68,15 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
           inline={window.innerWidth > 768 || false}
         />
       </div>
+      <p
+        className={classNames(
+          styles.filterBlockText,
+          'text',
+          'text_size_small'
+        )}
+      >
+        Дата
+      </p>
     </div>
   );
 };

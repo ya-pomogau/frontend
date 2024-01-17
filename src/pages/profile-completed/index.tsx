@@ -25,7 +25,7 @@ export function ProfileCompletedPage() {
   });
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
-  const handle = (arr: Task[]) =>
+  const handleTasksFilter = (arr: Task[]) =>
     arr.filter((task: Task) =>
       infoFilterTasks.categories.includes(task.category.name)
     );
@@ -57,14 +57,16 @@ export function ProfileCompletedPage() {
         return infoFilterTasks.categories.includes(task.category.name);
       });
       if (infoFilterTasks?.sortBy) {
-        sortDisplay(handle(tasks), infoFilterTasks.sortBy);
+        sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy);
       } else {
         setFilterTasks(filteredTasks);
       }
     }
     if (infoFilterTasks?.sortBy) {
       if (infoFilterTasks?.categories.length > 0) {
-        setFilterTasks(sortDisplay(handle(tasks), infoFilterTasks.sortBy));
+        setFilterTasks(
+          sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy)
+        );
       } else {
         setFilterTasks(sortDisplay(tasks, infoFilterTasks.sortBy));
       }
