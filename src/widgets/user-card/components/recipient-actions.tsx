@@ -23,8 +23,8 @@ const RecipientActions = ({
   const adminPermissions = useAppSelector(
     (state) => state.user.data?.permissions
   );
-  const approvePermission = adminPermissions?.some(
-    (per) => per === AdminPermission.CONFIRMATION
+  const approvePermission = adminPermissions?.includes(
+    AdminPermission.CONFIRMATION
   );
 
   return (
