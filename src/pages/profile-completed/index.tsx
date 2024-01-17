@@ -25,27 +25,52 @@ export function ProfileCompletedPage() {
   });
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
+  const handle = (arr: Task[]) =>
+    arr.filter((task: Task) =>
+      infoFilterTasks.categories.includes(task.category.name)
+    );
+
   useEffect(() => {
     if (tasks) {
       setFilterTasks(tasks);
     }
-    const sortDisplay = (arr: Task[], text: string) => {
+    const sortDisplay = (arr: Task[], text: string): Task[] => {
+      let sortedTasks: Task[] = [];
       switch (text) {
         case 'date':
-          setFilterTasks(sortTasks(arr, 'date'));
+          sortedTasks = sortTasks(arr, 'date');
           break;
         case 'decreasingPoints':
-          setFilterTasks(sortTasks(arr, 'decreasing'));
+          sortedTasks = sortTasks(arr, 'decreasing');
           break;
         case 'increasingPoints':
-          setFilterTasks(sortTasks(arr, 'increasing'));
+          sortedTasks = sortTasks(arr, 'increasing');
+          break;
+        default:
+          // Handle default case or invalid text value
           break;
       }
+      return sortedTasks;
     };
-    if (infoFilterTasks?.sortBy) {
-      sortDisplay(tasks, infoFilterTasks.sortBy);
+    if (infoFilterTasks?.categories.length) {
+      const filteredTasks = tasks.filter((task: Task) => {
+        return infoFilterTasks.categories.includes(task.category.name);
+      });
+      if (infoFilterTasks?.sortBy) {
+        sortDisplay(handle(tasks), infoFilterTasks.sortBy);
+      } else {
+        setFilterTasks(filteredTasks);
+      }
     }
-  }, [tasks, infoFilterTasks.sortBy]);
+    if (infoFilterTasks?.sortBy) {
+      if (infoFilterTasks?.categories.length > 0) {
+        setFilterTasks(sortDisplay(handle(tasks), infoFilterTasks.sortBy));
+      } else {
+        setFilterTasks(sortDisplay(tasks, infoFilterTasks.sortBy));
+      }
+    }
+    // eslint-disable-next-line
+  }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
   return (
     <>
@@ -60,6 +85,7 @@ export function ProfileCompletedPage() {
                 categories: false,
                 radius: false,
                 date: false,
+                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />
