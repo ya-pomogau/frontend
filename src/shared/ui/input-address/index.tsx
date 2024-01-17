@@ -66,8 +66,39 @@ export const InputAddress = (props: InputAddressProps) => {
           setAddress(suggestValue, coords);
         });
       });
+    } else {
+      const geo = ymaps.geocode(address.address);
+
+      // any потому что в библиотеке не написаны типы для SuggestView
+      geo.then((res: any) => {
+        // Выбираем первый результат геокодирования.
+        const firstGeoObject = res.geoObjects.get(0);
+
+        const coords: GeoCoordinates = firstGeoObject.geometry.getCoordinates();
+        console.log(coords);
+        setAddress(address.address, coords);
+      });
     }
   }, [ymaps]);
+
+  useEffect(() => {
+    if (!ymaps) {
+      return;
+    }
+    if (!YMAPS_SUGGEST_SWITCHER) {
+      const geo = ymaps.geocode(address.address);
+
+      // any потому что в библиотеке не написаны типы для SuggestView
+      geo.then((res: any) => {
+        // Выбираем первый результат геокодирования.
+        const firstGeoObject = res.geoObjects.get(0);
+
+        const coords: GeoCoordinates = firstGeoObject.geometry.getCoordinates();
+        console.log(coords);
+        setAddress(address.address, coords);
+      });
+    }
+  }, [address.address]);
 
   const inputProps = {
     ...inputAttributes,
