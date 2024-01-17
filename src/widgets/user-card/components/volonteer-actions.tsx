@@ -37,12 +37,10 @@ const VolunteerActions = ({
   const adminPermissions = useAppSelector(
     (state) => state.user.data?.permissions
   );
-  const approvePermission = adminPermissions?.some(
-    (per) => per === AdminPermission.CONFIRMATION
+  const approvePermission = adminPermissions?.includes(
+    AdminPermission.CONFIRMATION
   );
-  const keysPermission = adminPermissions?.some(
-    (per) => per === AdminPermission.KEYS
-  );
+  const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
 
   return (
     <div className={classnames(styles.buttons_div)}>
