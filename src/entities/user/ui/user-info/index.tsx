@@ -18,9 +18,8 @@ import { UserRole } from 'shared/types/common.types';
 import { CONFIRMED, UNCONFIRMED } from 'shared/libs/statuses';
 
 export const UserInfo = () => {
-  // const user = useAppSelector((state) => state.user.data);
   const role = useAppSelector((state) => state.user.role);
-  const roleStatus = useAppSelector((state) => state.user.data?.status);
+  const userStatus = useAppSelector((state) => state.user.data?.status);
 
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
@@ -29,8 +28,8 @@ export const UserInfo = () => {
   const userId = () => {
     if (role === 'Volunteer') return 7;
     if (role === 'Master') return 1;
-    if (role === 'Recipient' && roleStatus === CONFIRMED) return 4;
-    if (role === 'Recipient' && roleStatus === UNCONFIRMED) return 8;
+    if (role === 'Recipient' && userStatus === CONFIRMED) return 4;
+    if (role === 'Recipient' && userStatus === UNCONFIRMED) return 8;
     if (role === 'Admin') return 2;
     if (!role) return null;
   };
