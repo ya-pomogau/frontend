@@ -98,7 +98,7 @@ export const YandexMap = ({
         <LightPopup
           isPopupOpen={isVisible}
           onClickExit={onClickExit}
-          hasClosedButton={true}
+          hasCloseButton={true}
         >
           {unauthorizedVolunteerPopupMessage}
         </LightPopup>
