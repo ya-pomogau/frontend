@@ -8,12 +8,15 @@ import { Filter } from 'features/filter';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 import { UserRole } from 'shared/types/common.types';
+import { CONFIRMED } from 'shared/libs/statuses';
 
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
   const { role } = useAppSelector((state) => state.user);
-
+  const isConfirmed = useAppSelector((state) => {
+    return state.user.data?.status === CONFIRMED;
+  });
   return (
     <>
       <SmartHeader
@@ -29,7 +32,7 @@ export function ProfileCompletedPage() {
                 date: false,
               }}
             />
-          ) : (
+          ) : isConfirmed ? (
             <Filter
               items={{
                 sort: true,
@@ -38,6 +41,8 @@ export function ProfileCompletedPage() {
                 date: false,
               }}
             />
+          ) : (
+            <></>
           )
         }
       />
@@ -52,7 +57,7 @@ export function ProfileCompletedPage() {
           handleClickMessageButton={() => 5}
           handleClickPnoneButton={() => 6}
           isStatusActive={false}
-          tasks={tasks}
+          tasks={isConfirmed ? tasks : []}
           isLoading={isLoading}
         />
       )}
