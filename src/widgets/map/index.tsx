@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react';
-import { Circle, GeoObject, Map, YMaps } from '@pbe/react-yandex-maps';
+import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
@@ -21,7 +21,7 @@ interface YandexMapProps {
     longitude: number;
     zoom: number;
   };
-  radius?: number | null;
+  radius?: number;
   tasks?: Task[];
   onClick?: () => void;
   coordinates?: GeoCoordinates;
@@ -89,6 +89,9 @@ export const YandexMap = ({
       >
         <Map
           state={{
+            bounds: radius
+              ? getBounds([mapSettings.latitude, mapSettings.longitude], radius)
+              : undefined,
             center: [mapSettings.latitude, mapSettings.longitude],
             zoom: mapSettings.zoom,
           }}
@@ -121,13 +124,15 @@ export const YandexMap = ({
             />
           ))}
           
-          <Mark
-            coordinates={
-              Array.isArray(coordinates)
-                ? coordinates
-                : [coordinates.latitude, coordinates.longitude]
-            }
-          />
+          {coordinates && (
+            <Mark
+              coordinates={
+                Array.isArray(coordinates)
+                  ? coordinates
+                  : [coordinates.latitude, coordinates.longitude]
+              }
+            />
+          )}
          {radius && (
           <Circle
             instanceRef={circleRef}
