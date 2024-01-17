@@ -22,6 +22,8 @@ type MarkProps = {
   description?: string;
   count?: number;
   onClick?: () => void;
+  showPopup?: () => void;
+  onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
   title?: string;
   date?: string;
@@ -43,6 +45,7 @@ export const Mark = React.memo(
     count,
     onClick,
     isAuthorised,
+    showPopup,
     date,
     time,
     hasBalloon,
@@ -56,10 +59,9 @@ export const Mark = React.memo(
       [CONFIRMED, ACTIVATED, VERIFIED],
       'volunteer'
     );
+
     const onUncomfirmedClick = () => {
-      alert(
-        'Тут будет попап о том, что вы еще не можете откликаться на заявки'
-      );
+      showPopup();
     };
     const isDisabled = !isGranted;
 
@@ -159,7 +161,6 @@ export const Mark = React.memo(
           <button
             type="button"
             class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
-            {% if properties.isDisabled %} disabled {% endif %}
           >
             Откликнуться
           </button>
@@ -203,7 +204,6 @@ export const Mark = React.memo(
           <button
             type="button"
             class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
-            {% if properties.isDisabled %} disabled {% endif %}
           >
             Откликнуться
           </button>
@@ -248,9 +248,9 @@ export const Mark = React.memo(
           buttonClose.addEventListener('click', onCloseClick);
 
           // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
-          const button = taskContainer
-            .querySelector('.task_button_container')
-            .querySelector('button');
+          const button = taskContainer.querySelector(
+            '.task_button_container > button'
+          );
           button.addEventListener(
             'click',
             isGranted ? onClick : onUncomfirmedClick
@@ -306,3 +306,5 @@ export const Mark = React.memo(
     );
   }
 );
+
+export default React.memo(Mark);

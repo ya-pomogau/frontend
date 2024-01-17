@@ -11,6 +11,7 @@ import { ErrorDialog } from '../error-dialog';
 import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 import { RegistrationNotice } from '../registration-notice';
 import { UNCONFIRMED } from 'shared/libs/statuses';
+import { unauthorizedVolunteerMessage } from 'shared/libs/constants';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -52,7 +53,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
           </div>
           {isUnConfirmedUser && userRole === 'recipient' && (
             <div className={styles.message}>
-              <RegistrationNotice settingText="Спасибо за регистрацию. Как только администратор подтвердит Вашу учетную запись, Вы сможете создавать заявки." />
+              <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>
           )}
           <div className={styles.content}>

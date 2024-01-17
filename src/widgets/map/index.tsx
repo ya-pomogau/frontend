@@ -1,9 +1,13 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
+import usePermission from 'shared/hooks/use-permission';
+import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 
 import { isTaskUrgent } from 'shared/libs/utils';
-import { Mark } from './Mark';
+import Mark from './Mark';
+import { LightPopup } from 'shared/ui/light-popup';
+import { unauthorizedVolunteerPopupMessage } from 'shared/libs/constants';
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
@@ -31,28 +35,43 @@ export const YandexMap = ({
   coordinates,
   isAuthorised,
 }: YandexMapProps) => {
+  const isGranted = usePermission(
+    [CONFIRMED, ACTIVATED, VERIFIED],
+    'volunteer'
+  );
+
+  const [isVisible, setVisibility] = useState(false);
+
+  const showPopup = () => {
+    setVisibility(true);
+  };
+
+  const onClickExit = () => {
+    setVisibility(false);
+  };
+
   return (
-    <YMaps
-      enterprise
-      query={{
-        load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
-        apikey: YMAPS_API_KEY,
-      }}
-    >
-      <Map
-        state={{
-          center: [mapSettings.latitude, mapSettings.longitude],
-          zoom: mapSettings.zoom,
+    <>
+      <YMaps
+        enterprise
+        query={{
+          load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
+          apikey: YMAPS_API_KEY,
         }}
-        options={{
-          suppressMapOpenBlock: true,
-          yandexMapDisablePoiInteractivity: true,
-        }}
-        width={width}
-        height={height}
       >
-        {tasks &&
-          tasks?.map((task) => (
+        <Map
+          state={{
+            center: [mapSettings.latitude, mapSettings.longitude],
+            zoom: mapSettings.zoom,
+          }}
+          options={{
+            suppressMapOpenBlock: true,
+            yandexMapDisablePoiInteractivity: true,
+          }}
+          width={width}
+          height={height}
+        >
+          {tasks?.map((task) => (
             <Mark
               id={task.id}
               coordinates={task.coordinates}
@@ -63,6 +82,7 @@ export const YandexMap = ({
               description={task.description}
               count={task.category.scope}
               onClick={onClick}
+              showPopup={showPopup}
               key={task.id}
               isAuthorised={isAuthorised}
               date={new Date(task.date).toLocaleDateString()}
@@ -74,14 +94,21 @@ export const YandexMap = ({
               draggable={false}
             />
           ))}
-        <Mark
-          coordinates={coordinates}
-          onClick={() => console.log('Это яндекс карта')}
-          hasBalloon={false}
-          draggable={true}
-        />
-      </Map>
-    </YMaps>
+          <Mark
+            coordinates={coordinates}
+            onClick={() => console.log('Это яндекс карта')}
+            hasBalloon={false}
+            draggable={true}
+          />
+        </Map>
+      </YMaps>
+      {!isGranted && (
+        <LightPopup isPopupOpen={isVisible} onClickExit={onClickExit}>
+          {unauthorizedVolunteerPopupMessage}
+        </LightPopup>
+      )}
+    </>
   );
 };
+
 export default memo(YandexMap);
