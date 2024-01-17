@@ -29,7 +29,7 @@ export const UserInfo = () => {
     if (role === 'Volunteer') return 7;
     if (role === 'Master') return 1;
     if (role === 'Recipient' && userStatus === CONFIRMED) return 4;
-    if (role === 'Recipient' && userStatus === UNCONFIRMED) return 8;
+    if (role === 'Recipient' && userStatus === UNCONFIRMED) return 9;
     if (role === 'Admin') return 2;
     if (!role) return null;
   };
