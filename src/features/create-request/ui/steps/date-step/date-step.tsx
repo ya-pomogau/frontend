@@ -1,5 +1,4 @@
-
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
 
@@ -9,8 +8,6 @@ import {
   setTime,
   changeCheckbox,
   changeStepIncrement,
-  features/recipient-datePopUp
-  setDateValidation,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import Checkbox from 'shared/ui/checkbox';
@@ -23,44 +20,31 @@ interface IDateStepProps {
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date, dateValidation } = useAppSelector(
+  const { time, termlessRequest, date } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
-
+  const [timeValidation, setTimeValidation] = useState(false);
   const handleDateValueChange = (value: Date) => {
-    const formatedDate = format(value, 'dd.MM.yyyy');
-    dispatch(setDate(formatedDate));
+    const formattedDate = format(value, 'dd.MM.yyyy');
+    dispatch(setDate(formattedDate));
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentTime = new Date(); // текущая дата
-    const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-    const selectedTime = new Date(`1970-01-01T${e.target.value}:00`); //фиктивная дата '1970-01-01', чтобы установить только время, а не дату
-    const selectedFormattedTime = format(selectedTime, 'HH:mm'); // привожу в нужный формат
-    //
-    if (time < currentFormattedTime) {
-      // console.log('время меньше');
-      console.log(selectedFormattedTime);
-      console.log(currentFormattedTime);
-
-      dispatch(setTime(currentFormattedTime));
-      return;
-    } //сравниваю даты
-    // console.log('время норм');
     dispatch(setTime(e.target.value));
-    // setInputValue(e.target.value);
   };
 
   useEffect(() => {
-    const currentTime = new Date(); // текущая дата
-    const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-    if (time && time < currentFormattedTime) {
-      dispatch(setDateValidation(true));
+    const dateNow = new Date();
+    const currentTime = format(dateNow, 'HH:mm'); // привожу в нужный формат
+    const currentDate = dateNow.toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
+
+    if (time && time < currentTime && date && currentDate === date) {
+      setTimeValidation(true);
     } else {
-      dispatch(setDateValidation(false));
+      setTimeValidation(false);
     } //сравниваю даты
-  }, [time]);
+  }, [time, date]);
 
   useEffect(() => {
     if (termlessRequest) {
@@ -94,7 +78,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
             id="time"
             name="time"
             onChange={handleTimeValueChange}
-            // value={time}
             value={time}
             required
             className={classNames(
@@ -128,16 +111,14 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         </div>
       </div>
       <div className={styles.button}>
-        {dateValidation ? (
+        {timeValidation && (
           <p className={styles.validationMessage}>{'Введите валидное время'}</p>
-        ) : (
-          <></>
         )}
         <Button
           buttonType="primary"
           label="Продолжить"
           onClick={handleNextStepClick}
-          disabled={!time || dateValidation === true}
+          disabled={!time || timeValidation}
         />
       </div>
     </>
