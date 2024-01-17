@@ -5,26 +5,25 @@ import { TimePickerPopup } from '../time-picker-popup';
 export interface ITimePickerElement {
   isMobile?: boolean;
   buttonRef: RefObject<HTMLElement> | undefined;
-  // startTime?: string;
-  // setStartTime?: React.Dispatch<React.SetStateAction<string>>;
-  // endTime?: string;
-  // setEndTime?: React.Dispatch<React.SetStateAction<string>>;
-  variant: 'start' | 'end';
-  times: string[];
-  setTimes: React.Dispatch<React.SetStateAction<string[]>>;
+  startTime?: string;
+  setStartTime?: React.Dispatch<React.SetStateAction<string>>;
+  endTime?: string;
+  setEndTime?: React.Dispatch<React.SetStateAction<string>>;
+  // variant: 'start' | 'end';
+  // times: string[];
+  // setTimes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export function TimePickerElement({
   isMobile,
-  variant,
-  times,
-  setTimes,
-}: // startTime,
-// setStartTime,
-// endTime,
-// setEndTime,
-
-ITimePickerElement) {
+  // variant,
+  // times,
+  // setTimes,
+  startTime,
+  setStartTime,
+  endTime,
+  setEndTime,
+}: ITimePickerElement) {
   const buttonRef = useRef<HTMLInputElement>(null);
   const [isOpenClockElement, setIsOpenClockElement] = useState(false);
 
@@ -33,23 +32,23 @@ ITimePickerElement) {
     setIsOpenClockElement(true);
   };
 
-  if (times) {
-    console.log(`startTime ${times[0]}`);
-    console.log(`endTime ${times[1]}`);
-  }
+  // if (times) {
+  //   console.log(`startTime ${times[0]}`);
+  //   console.log(`endTime ${times[1]}`);
+  // }
 
   const handleSetTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (variant === 'start') {
-      setTimes([e.target.value, ...times.slice(0, 1)]);
-    } else if (variant === 'end') {
-      setTimes([...times.slice(0, 1), e.target.value]);
-    }
-
-    // if (startTime && setStartTime) {
-    //   setStartTime(e.target.value);
-    // } else if (endTime && setEndTime) {
-    //   setEndTime(e.target.value);
+    // if (variant === 'start') {
+    //   setTimes([e.target.value, ...times.slice(0, 1)]);
+    // } else if (variant === 'end') {
+    //   setTimes([...times.slice(0, 1), e.target.value]);
     // }
+
+    if (startTime && setStartTime) {
+      setStartTime(e.target.value);
+    } else if (endTime && setEndTime) {
+      setEndTime(e.target.value);
+    }
   };
 
   const handleAcceptTime = () => {
@@ -59,7 +58,7 @@ ITimePickerElement) {
   return (
     <div className={styles.timePickerContainer}>
       <input
-        value={variant === 'start' ? times[0] : times[1]}
+        value={startTime ? startTime : endTime}
         onChange={handleSetTime}
         type="text"
         id="timepicker"
@@ -76,16 +75,16 @@ ITimePickerElement) {
       />
       {isMobile && isOpenClockElement && (
         <div>
-          {/* <TimePickerPopup
+          <TimePickerPopup
             isPopupOpen={isOpenClockElement}
             buttonRef={buttonRef}
             setIsOpenClockElement={setIsOpenClockElement}
             handleAcceptTime={handleAcceptTime}
-            startTime={times[0]}
+            startTime={startTime}
             setStartTime={setStartTime}
-            endTime={times[1]}
+            endTime={endTime}
             setEndTime={setEndTime}
-          /> */}
+          />
         </div>
       )}
     </div>
