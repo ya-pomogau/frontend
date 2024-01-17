@@ -29,7 +29,6 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   const hasMessage = isUnConfirmedUser;
   //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
-  console.log(isError);
 
   return (
     <>
