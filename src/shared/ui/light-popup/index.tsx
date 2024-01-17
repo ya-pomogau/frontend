@@ -10,6 +10,7 @@ interface LightPopupProps {
   children: ReactNode;
   isPopupOpen: boolean;
   extClassName?: string;
+  hasClosedButton?: boolean;
 }
 
 export const LightPopup = ({
@@ -17,6 +18,7 @@ export const LightPopup = ({
   isPopupOpen,
   onClickExit,
   extClassName,
+  hasClosedButton,
 }: LightPopupProps) => {
   return (
     <OverlayingPopup
@@ -25,9 +27,11 @@ export const LightPopup = ({
       extClassName="overlay"
     >
       <div className={classNames(styles.container, extClassName, 'text')}>
-        <button className={styles.closeButton} onClick={onClickExit}>
-          <CloseCrossIcon color={'blue'} />
-        </button>
+        {hasClosedButton && (
+          <button className={styles.closeButton} onClick={onClickExit}>
+            <CloseCrossIcon color={'blue'} />
+          </button>
+        )}
         {children}
       </div>
     </OverlayingPopup>
