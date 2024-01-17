@@ -19,45 +19,46 @@ type MarkProps = {
   description?: string;
   count?: number;
   onClick?: () => void;
+  showPopup?: () => void;
+  onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
   title?: string;
   date?: string;
   time?: string;
 };
 
-export const Mark = React.memo(
-  ({
-    id,
-    coordinates,
-    isUrgentTask,
-    fullName,
-    phone,
-    avatar,
-    description,
-    title,
-    count,
-    onClick,
-    isAuthorised,
-    date,
-    time,
-  }: MarkProps) => {
-    const ymaps = useYMaps(['templateLayoutFactory']);
+const Mark: React.FC<MarkProps> = ({
+  id,
+  coordinates,
+  isUrgentTask,
+  fullName,
+  phone,
+  avatar,
+  description,
+  title,
+  count,
+  onClick,
+  showPopup,
+  isAuthorised,
+  date,
+  time,
+}: MarkProps) => {
+  const ymaps = useYMaps(['templateLayoutFactory']);
 
-    const isGranted = usePermission(
-      [CONFIRMED, ACTIVATED, VERIFIED],
-      'volunteer'
-    );
-    const onUncomfirmedClick = () => {
-      alert(
-        'Тут будет попап о том, что вы еще не можете откликаться на заявки'
-      );
-    };
-    const isDisabled = !isGranted;
+  const isGranted = usePermission(
+    [CONFIRMED, ACTIVATED, VERIFIED],
+    'volunteer'
+  );
 
-    if (!ymaps) return null;
+  const onUncomfirmedClick = () => {
+    showPopup();
+  };
+  const isDisabled = !isGranted;
 
-    const Iconlayout = ymaps.templateLayoutFactory.createClass(
-      `{% if properties.isUrgentTask %}
+  if (!ymaps) return null;
+
+  const Iconlayout = ymaps.templateLayoutFactory.createClass(
+    `{% if properties.isUrgentTask %}
       <div class="mark_container">
         <svg width="53" height="53" viewBox="0 0 53 53" fill="#D60080" xmlns="http://www.w3.org/2000/svg">
           <circle cx="26.5" cy="26.5" r="26.5" />
@@ -73,22 +74,22 @@ export const Mark = React.memo(
         </svg>
       </div> {% endif %}
       `,
-      {
-        build() {
-          Iconlayout.superclass.build.call(this);
+    {
+      build() {
+        Iconlayout.superclass.build.call(this);
 
-          // На метку добавляем кликабильную зону
-          this.getData().options.set('shape', {
-            type: 'Circle',
-            coordinates: [28, 28],
-            radius: 30,
-          });
-        },
-      }
-    );
+        // На метку добавляем кликабильную зону
+        this.getData().options.set('shape', {
+          type: 'Circle',
+          coordinates: [28, 28],
+          radius: 30,
+        });
+      },
+    }
+  );
 
-    const Balloonlayout = ymaps.templateLayoutFactory.createClass(
-      `{% if properties.isAuthorised %}
+  const Balloonlayout = ymaps.templateLayoutFactory.createClass(
+    `{% if properties.isAuthorised %}
       <div class="task_container">
         <div class="close_icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="#2E3192" xmlns="http://www.w3.org/2000/svg">
@@ -150,7 +151,6 @@ export const Mark = React.memo(
           <button
             type="button"
             class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
-            {% if properties.isDisabled %} disabled {% endif %}
           >
             Откликнуться
           </button>
@@ -194,7 +194,6 @@ export const Mark = React.memo(
           <button
             type="button"
             class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
-            {% if properties.isDisabled %} disabled {% endif %}
           >
             Откликнуться
           </button>
@@ -202,78 +201,79 @@ export const Mark = React.memo(
       </div> {% endif %}
       `,
 
-      {
-        build() {
-          Balloonlayout.superclass.build.call(this);
+    {
+      build() {
+        Balloonlayout.superclass.build.call(this);
 
-          const mainContainer = this.getParentElement();
-          const taskContainer = mainContainer.querySelector('.task_container');
+        const mainContainer = this.getParentElement();
+        const taskContainer = mainContainer.querySelector('.task_container');
 
-          // Добавляем слушатель на кпонку "читать"
-          const buttonRead = taskContainer.querySelector('.task_button');
+        // Добавляем слушатель на кпонку "читать"
+        const buttonRead = taskContainer.querySelector('.task_button');
 
-          const descriptionContainer = taskContainer.querySelector(
-            '.task_description_hidden'
-          );
-          // Изменяем видимость кнопки "читать" в зависимости от длины контента
-          const hendleReadButton = () => {
-            if ([...description].length < 140) {
-              buttonRead.textContent = '';
-            }
-          };
-          hendleReadButton();
-          const onReadClick = () => {
-            descriptionContainer.classList.toggle('task_description_hidden');
-            // eslint-disable-next-line no-unused-expressions
-            buttonRead.textContent === 'Читать'
-              ? (buttonRead.textContent = 'Свернуть')
-              : (buttonRead.textContent = 'Читать');
-          };
-          buttonRead.addEventListener('click', onReadClick);
+        const descriptionContainer = taskContainer.querySelector(
+          '.task_description_hidden'
+        );
+        // Изменяем видимость кнопки "читать" в зависимости от длины контента
+        const hendleReadButton = () => {
+          if ([...description].length < 140) {
+            buttonRead.textContent = '';
+          }
+        };
+        hendleReadButton();
+        const onReadClick = () => {
+          descriptionContainer.classList.toggle('task_description_hidden');
+          // eslint-disable-next-line no-unused-expressions
+          buttonRead.textContent === 'Читать'
+            ? (buttonRead.textContent = 'Свернуть')
+            : (buttonRead.textContent = 'Читать');
+        };
+        buttonRead.addEventListener('click', onReadClick);
 
-          // Добавляем слушатель на кпонку "Закрыть окно".
-          const buttonClose = taskContainer.querySelector('.close_icon');
-          const onCloseClick = () => {
-            this.getData().map.balloon.close();
-          };
-          buttonClose.addEventListener('click', onCloseClick);
+        // Добавляем слушатель на кпонку "Закрыть окно".
+        const buttonClose = taskContainer.querySelector('.close_icon');
+        const onCloseClick = () => {
+          this.getData().map.balloon.close();
+        };
+        buttonClose.addEventListener('click', onCloseClick);
 
-          // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
-          const button = taskContainer
-            .querySelector('.task_button_container')
-            .querySelector('button');
-          button.addEventListener(
-            'click',
-            isGranted ? onClick : onUncomfirmedClick
-          );
-        },
-      }
-    );
+        // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
+        const button = taskContainer.querySelector(
+          '.task_button_container > button'
+        );
+        button.addEventListener(
+          'click',
+          isGranted ? onClick : onUncomfirmedClick
+        );
+      },
+    }
+  );
 
-    return (
-      <Placemark
-        geometry={coordinates}
-        options={{
-          iconLayout: Iconlayout,
-          balloonLayout: Balloonlayout,
-          hideIconOnBalloonOpen: false,
-          balloonOffset: [-158, 66],
-          balloonPanelMaxMapArea: 0,
-        }}
-        properties={{
-          isUrgentTask,
-          isDisabled,
-          fullName,
-          phone,
-          avatar,
-          description,
-          count,
-          title,
-          isAuthorised,
-          date,
-          time,
-        }}
-      />
-    );
-  }
-);
+  return (
+    <Placemark
+      geometry={coordinates}
+      options={{
+        iconLayout: Iconlayout,
+        balloonLayout: Balloonlayout,
+        hideIconOnBalloonOpen: false,
+        balloonOffset: [-158, 66],
+        balloonPanelMaxMapArea: 0,
+      }}
+      properties={{
+        isUrgentTask,
+        isDisabled,
+        fullName,
+        phone,
+        avatar,
+        description,
+        count,
+        title,
+        isAuthorised,
+        date,
+        time,
+      }}
+    />
+  );
+};
+
+export default React.memo(Mark);
