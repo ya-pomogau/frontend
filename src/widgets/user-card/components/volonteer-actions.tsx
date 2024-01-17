@@ -5,6 +5,8 @@ import { Button } from 'shared/ui/button';
 import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
+import { useAppSelector } from '../../../app/hooks';
+import { AdminPermission } from '../../../shared/types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
@@ -13,8 +15,6 @@ interface VolunteerActionsProps {
   ) => 'primary' | 'partial' | 'secondary';
   scores: number;
   keys: boolean;
-  isAdminHavePermissionSetKeys: boolean;
-  isAdminHavePermissionApprove: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
   isKeyButtonExclamationPointIcon: boolean;
   onAcceptButtonClick: () => void;
@@ -32,10 +32,17 @@ const VolunteerActions = ({
   onBlockButtonClick,
   onGiveKeysButtonClick,
   keys,
-  isAdminHavePermissionSetKeys,
-  isAdminHavePermissionApprove,
 }: VolunteerActionsProps) => {
   const isKeysNullOrOne = keys ? 1 : null;
+  const adminPermissions = useAppSelector(
+    (state) => state.user.data?.permissions
+  );
+  const approvePermission = adminPermissions?.some(
+    (per) => per === AdminPermission.CONFIRMATION
+  );
+  const keysPermission = adminPermissions?.some(
+    (per) => per === AdminPermission.KEYS
+  );
 
   return (
     <div className={classnames(styles.buttons_div)}>
@@ -48,9 +55,7 @@ const VolunteerActions = ({
       </div>
       <div className={classnames(styles.exclamation_point_div)}>
         <Button
-          disabled={
-            isVolonteerAcceptButtonDisabled || !isAdminHavePermissionApprove
-          }
+          disabled={isVolonteerAcceptButtonDisabled || !approvePermission}
           buttonType={getButtonTypeFromScore(scores)}
           label="Подтвердить"
           onClick={onAcceptButtonClick}
@@ -58,7 +63,7 @@ const VolunteerActions = ({
         {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>
       <Button
-        disabled={!isAdminHavePermissionApprove}
+        disabled={!approvePermission}
         buttonType="secondary"
         label="Заблокировать"
         onClick={onBlockButtonClick}
@@ -68,7 +73,7 @@ const VolunteerActions = ({
           buttonType="secondary"
           label="Дать ключи"
           onClick={onGiveKeysButtonClick}
-          disabled={!isAdminHavePermissionSetKeys}
+          disabled={!keysPermission}
         />
         {isKeyButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>

@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 
 import { Avatar } from '../../shared/ui/avatar';
@@ -9,9 +9,7 @@ import UserInfo from './components/user-info';
 import VolunteerActions from './components/volonteer-actions';
 import RecipientActions from './components/recipient-actions';
 import AdminActions from './components/admin-actions';
-import { useAppSelector } from '../../app/hooks';
 import { UserRole } from '../../entities/user/types';
-import { AdminPermission } from '../../shared/types/common.types';
 
 interface UserCardProps {
   role?: UserRole;
@@ -48,24 +46,6 @@ export const UserCard = ({
   volunteerInfo,
 }: UserCardProps) => {
   const { approved, checked, scores, isHasKeys } = volunteerInfo;
-  const adminData = useAppSelector((state) => state.user.data);
-  const adminPermissions = adminData?.permissions;
-  const [approvePermission, setApprovePermission] = useState(false);
-  const [keysPermission, setKeysPermission] = useState(false);
-
-  useMemo(() => {
-    if (adminPermissions) {
-      adminPermissions.forEach((per) => {
-        if (per === AdminPermission.CONFIRMATION) {
-          setApprovePermission(true);
-        }
-        if (per === AdminPermission.KEYS) {
-          setKeysPermission(true);
-        }
-        return true;
-      });
-    }
-  }, [adminPermissions]);
   const isVolonteerAcceptButtonDisabled =
     (scores === 0 && approved) ||
     (scores >= 30 && scores < 60 && checked) ||
@@ -129,15 +109,12 @@ export const UserCard = ({
             console.log('"Дать ключи" button pressed')
           }
           keys={isHasKeys}
-          isAdminHavePermissionSetKeys={keysPermission}
-          isAdminHavePermissionApprove={approvePermission}
         />
       )}
 
       {role === 'recipient' && (
         <RecipientActions
           approved={approved}
-          isAdminHavePermissionApprove={approvePermission}
           onConfirmClick={() => {
             console.log('Recipient confirm button pressed');
           }}
