@@ -39,7 +39,7 @@ export function ProfileActivePage() {
                 time: true,
               }}
             />
-          ) : (
+          ) : isConfirmed ? (
             <Filter
               items={{
                 sort: true,
@@ -48,6 +48,8 @@ export function ProfileActivePage() {
                 date: false,
               }}
             />
+          ) : (
+            <></>
           )
         }
       />
