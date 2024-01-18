@@ -4,6 +4,7 @@ import {
   useRef,
   CSSProperties,
   useCallback,
+  useMemo,
 } from 'react';
 import { createPortal } from 'react-dom';
 import classnames from 'classnames';
@@ -71,28 +72,30 @@ export const Tooltip = ({
     };
   }, []);
 
-  const tooltip = (
-    <div
-      className={classnames(
-        styles.tooltip,
-        extClassName,
-        {
-          [styles['tooltip--visible']]: visible,
-        },
-        'tooltip'
-      )}
-      ref={tooltipRef}
-      style={elementStyles}
-    >
+  const tooltip = useMemo(() => {
+    return (
       <div
         className={classnames(
-          styles.pointer,
-          styles[`pointer--${pointerPosition}`]
+          styles.tooltip,
+          extClassName,
+          {
+            [styles['tooltip--visible']]: visible,
+          },
+          'tooltip'
         )}
-      />
-      {children}
-    </div>
-  );
+        ref={tooltipRef}
+        style={elementStyles}
+      >
+        <div
+          className={classnames(
+            styles.pointer,
+            styles[`pointer--${pointerPosition}`]
+          )}
+        />
+        {children}
+      </div>
+    );
+  }, [visible, pointerPosition, extClassName, children, elementStyles]);
 
   return createPortal(tooltip, modalRoot);
 };
