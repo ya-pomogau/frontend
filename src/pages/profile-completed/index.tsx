@@ -31,6 +31,7 @@ export function ProfileCompletedPage() {
   const isConfirmed = useAppSelector((state) => {
     return state.user.data?.status === CONFIRMED;
   });
+
   return (
     <>
       <SmartHeader
