@@ -25,6 +25,11 @@ export interface RequestProps {
   isMobile?: boolean;
 }
 
+interface Coords {
+  right: number;
+  top: number;
+}
+
 export const Request = ({ isMobile = true }: RequestProps) => {
   const dispatch = useAppDispatch();
   const { currentStep, isPopupOpen } = useAppSelector(
@@ -33,29 +38,30 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
-  const [popupPosion, setPopupPosion] = useState({ top: 0, right: 0 });
-  const myRef = useRef<HTMLDivElement>(null);
-  //
-  const calculateFilterPosition = useCallback(() => {
-    const buttonRect = myRef.current?.getBoundingClientRect();
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const popupClose = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
 
-    if (buttonRect) {
-      setPopupPosion({ top: buttonRect.bottom, right: buttonRect.right });
+  const getCoords = () => {
+    const box = buttonRef.current?.getBoundingClientRect();
+
+    if (box) {
+      setPopupPosion({
+        right: window.innerWidth - box.right - box.width * 0.7,
+        top: box.top + window.scrollY + box.height * 0.6,
+      });
     }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', getCoords);
+
+    return () => {
+      window.removeEventListener('resize', getCoords);
+    };
   }, []);
-  //
-  // useEffect(() => {
-  //   window.addEventListener('resize', calculateFilterPosition);
-  //
-  //   return () => {
-  //     window.removeEventListener('resize', calculateFilterPosition);
-  //   };
-  // }, []);
-  //
-  // const popupPositionStyles = {
-  //   top: `${popupPosion.top + 520}px`,
-  //   right: `${window.innerWidth - popupPosion.right - 900}px`,
-  // };
   const handleCloseClick = () => {
     dispatch(closePopup());
     dispatch(clearState());
@@ -82,53 +88,63 @@ export const Request = ({ isMobile = true }: RequestProps) => {
 
   return (
     <OverlayingPopup isOpened={isPopupOpen} onClose={handleCloseClick}>
-      <MainPopup
-        name={data.fullname}
-        avatarLink={data.avatar}
-        avatarName={data.fullname}
-        phoneNumber={data.phone}
-        handleCloseClick={() => setIsOpen(true)}
-        isMobile={isMobile}
-      >
-        {isOpen && (
-          <Tooltip
-            visible
-            extClassName={styles.modal}
-            pointerPosition="right"
-            // changeVisible={handleDeniedAccess}
-            // elementStyles={popupPositionStyles}
-          >
-            <div className={styles.closeWrapper}></div>
-            <div className={styles.text}>
-              Закрыть окно сейчас и удалить ранее внесенную информацию?
-            </div>
-            <div className={styles.buttonWrapper}>
-              <Button
-                buttonType="primary"
-                label="Вернуться"
-                onClick={() => setIsOpen(false)}
-              />
-              <Button
-                buttonType="primary"
-                label="Закрыть"
-                onClick={handleCloseClick}
-              />
-            </div>
-          </Tooltip>
-        )}
-        {currentStep === CurrentPage.DATE_STEP && (
-          <DateStep isMobile={isMobile} />
-        )}
-        {currentStep === CurrentPage.ADDRESS_STEP && (
-          <AddressStep isMobile={isMobile} />
-        )}
-        {currentStep === CurrentPage.TASK_STEP && (
-          <TaskStep isMobile={isMobile} />
-        )}
-        {currentStep === CurrentPage.COMMON_STEP && (
-          <CommonStep isMobile={isMobile} />
-        )}
-      </MainPopup>
+      <div ref={buttonRef}>
+        <MainPopup
+          name={data.fullname}
+          avatarLink={data.avatar}
+          avatarName={data.fullname}
+          phoneNumber={data.phone}
+          handleCloseClick={() => setIsOpen(true)}
+          isMobile={isMobile}
+        >
+          {/*<OverlayingPopup isOpened={isOpen} onClose={handleCloseClick}>*/}
+          {isOpen && (
+            <Tooltip
+              visible
+              extClassName={styles.modal}
+              pointerPosition="right"
+              // elementStyles={{
+              //   position: 'absolute',
+              //   top: `${popupPosion?.top}px`,
+              //   right: `${popupPosion?.right}px`,
+              // }}
+              // changeVisible={handleDeniedAccess}
+              // elementStyles={popupPositionStyles}
+            >
+              <div className={styles.closeWrapper}></div>
+              <div className={styles.text}>
+                Закрыть окно сейчас и удалить ранее внесенную информацию?
+              </div>
+              <div className={styles.buttonWrapper}>
+                <Button
+                  buttonType="primary"
+                  label="Вернуться"
+                  onClick={() => setIsOpen(false)}
+                />
+                <Button
+                  buttonType="primary"
+                  label="Закрыть"
+                  onClick={handleCloseClick}
+                />
+              </div>
+            </Tooltip>
+          )}
+          {/*</OverlayingPopup>*/}
+
+          {currentStep === CurrentPage.DATE_STEP && (
+            <DateStep isMobile={isMobile} />
+          )}
+          {currentStep === CurrentPage.ADDRESS_STEP && (
+            <AddressStep isMobile={isMobile} />
+          )}
+          {currentStep === CurrentPage.TASK_STEP && (
+            <TaskStep isMobile={isMobile} />
+          )}
+          {currentStep === CurrentPage.COMMON_STEP && (
+            <CommonStep isMobile={isMobile} />
+          )}
+        </MainPopup>
+      </div>
     </OverlayingPopup>
   );
 };
