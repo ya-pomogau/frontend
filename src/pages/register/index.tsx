@@ -25,7 +25,7 @@ export function RegisterPage() {
   // TODO: пока что оставила адрес в виде объекта, чтобы не ломались другие компоненты завязанные на inputAddress
   const [address, setAddress] = useState<{
     address: string;
-    coords?: GeoCoordinates | [];
+    coords?: GeoCoordinates;
   }>({
     address: '',
     coords: [],
@@ -65,7 +65,7 @@ export function RegisterPage() {
 
   const handleAddressValueChange = (
     newAddress: string,
-    coords?: GeoCoordinates | []
+    coords?: GeoCoordinates
   ) => {
     setAddress({
       address: newAddress,
