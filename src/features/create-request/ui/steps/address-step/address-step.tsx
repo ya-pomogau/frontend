@@ -27,7 +27,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
   const dispatch = useAppDispatch();
 
   const { address, coordinates, isTypeEdit } = useAppSelector(
-    (state) => state.createRequest
+      (state) => state.createRequest
   );
   useEffect(() => {
     if (!address) {
