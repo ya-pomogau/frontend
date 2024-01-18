@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
@@ -19,6 +19,8 @@ import { TaskStep } from './task-step/task-step';
 import { useGetCategoriesQuery } from 'services/categories-api';
 import { Tooltip } from '../../../../shared/ui/tooltip';
 import styles from './styles.module.css';
+import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
+import { SquareButton } from '../../../../shared/ui/square-buttons';
 import { Button } from '../../../../shared/ui/button';
 
 export interface RequestProps {
@@ -32,7 +34,29 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
+  const [popupPosion, setPopupPosion] = useState({ top: 0, right: 0 });
+  const myRef = useRef<HTMLDivElement>(null);
+  //
+  const calculateFilterPosition = useCallback(() => {
+    const buttonRect = myRef.current?.getBoundingClientRect();
 
+    if (buttonRect) {
+      setPopupPosion({ top: buttonRect.bottom, right: buttonRect.right });
+    }
+  }, []);
+  //
+  // useEffect(() => {
+  //   window.addEventListener('resize', calculateFilterPosition);
+  //
+  //   return () => {
+  //     window.removeEventListener('resize', calculateFilterPosition);
+  //   };
+  // }, []);
+  //
+  // const popupPositionStyles = {
+  //   top: `${popupPosion.top + 520}px`,
+  //   right: `${window.innerWidth - popupPosion.right - 900}px`,
+  // };
   const handleCloseClick = () => {
     if (isTypeEdit && currentStep !== 4) {
       dispatch(closePopup());
