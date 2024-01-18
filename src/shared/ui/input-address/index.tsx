@@ -15,9 +15,9 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   address: {
     address: string;
-    coords?: GeoCoordinates;
+    coords?: GeoCoordinates | [];
   };
-  setAddress: (address: string, coords?: GeoCoordinates) => void;
+  setAddress: (address: string, coords?: GeoCoordinates | []) => void;
   label?: string;
   extClassName?: string;
   error?: boolean;
