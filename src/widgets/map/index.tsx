@@ -10,6 +10,7 @@ import { LightPopup } from 'shared/ui/light-popup';
 import { unauthorizedVolunteerPopupMessage } from 'shared/libs/constants';
 
 import type { Task } from 'entities/task/types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface YandexMapProps {
   width?: string | number;
@@ -21,7 +22,7 @@ interface YandexMapProps {
   };
   tasks?: Task[];
   onClick?: () => void;
-  coordinates?: [number, number];
+  coordinates?: GeoCoordinates;
   isAuthorised?: boolean;
 }
 
@@ -89,9 +90,16 @@ export const YandexMap = ({
                 hour: '2-digit',
                 minute: '2-digit',
               })}
+              hasBalloon={true}
+              draggable={false}
             />
           ))}
-          <Mark coordinates={coordinates} />
+           <Mark
+          coordinates={coordinates}
+          onClick={() => console.log('Это яндекс карта')}
+          hasBalloon={false}
+          draggable={true}
+        />
         </Map>
       </YMaps>
       {!isGranted && (

@@ -13,20 +13,30 @@ import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './address-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
+import { useEffect } from 'react';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface IAddressProps {
   isMobile?: boolean;
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
-  const { address, coordinates, isTypeEdit } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const coord = useAppSelector((store) => store.user.data?.coordinates);
+
   const dispatch = useAppDispatch();
+
+  const { address, coordinates, isTypeEdit } = useAppSelector(
+      (state) => state.createRequest
+  );
+  useEffect(() => {
+    if (!address) {
+      dispatch(setAddress({ additinalAddress: '', coords: coord }));
+    }
+  }, []);
 
   const handleAddressValueChange = (
     additinalAddress: string,
-    coords?: [number, number] | []
+    coords?: GeoCoordinates | []
   ) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
@@ -68,7 +78,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                     ? {
                         latitude: coordinates[0],
                         longitude: coordinates[1],
-                        zoom: 15,
+                        zoom: 17,
                       }
                     : undefined
                 }
@@ -145,7 +155,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                     ? {
                         latitude: coordinates[0],
                         longitude: coordinates[1],
-                        zoom: 15,
+                        zoom: 17,
                       }
                     : undefined
                 }

@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useAppSelector } from 'app/hooks';
 import { format } from 'date-fns';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export type TInitialStateForPopup = {
   time: string;
   date: string;
   address: string;
-  coordinates: [number, number] | undefined;
+  coordinates?: GeoCoordinates;
   categories: {
     id: number;
     name: string;
@@ -25,7 +27,7 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
-  coordinates: undefined,
+  coordinates: [],
   categories: [],
   category: {
     value: '',

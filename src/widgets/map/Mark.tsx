@@ -8,10 +8,13 @@ import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { setAddress } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
 
 type MarkProps = {
   id?: number;
-  coordinates?: [number, number];
+  coordinates?: GeoCoordinates;
   isUrgentTask?: boolean;
   fullName?: string;
   phone?: string;
@@ -25,25 +28,32 @@ type MarkProps = {
   title?: string;
   date?: string;
   time?: string;
+  hasBalloon?: boolean;
+  draggable?: boolean;
 };
 
-const Mark: React.FC<MarkProps> = ({
-  id,
-  coordinates,
-  isUrgentTask,
-  fullName,
-  phone,
-  avatar,
-  description,
-  title,
-  count,
-  onClick,
-  showPopup,
-  isAuthorised,
-  date,
-  time,
-}: MarkProps) => {
-  const ymaps = useYMaps(['templateLayoutFactory']);
+export const Mark = React.memo(
+  ({
+    id,
+    coordinates,
+    isUrgentTask,
+    fullName,
+    phone,
+    avatar,
+    description,
+    title,
+    count,
+    onClick,
+    showPopup,
+    isAuthorised,
+    date,
+    time,
+    hasBalloon,
+    draggable,
+  }: MarkProps) => {
+    const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+
+    const dispatch = useAppDispatch();
 
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
@@ -249,31 +259,52 @@ const Mark: React.FC<MarkProps> = ({
     }
   );
 
-  return (
-    <Placemark
-      geometry={coordinates}
-      options={{
-        iconLayout: Iconlayout,
-        balloonLayout: Balloonlayout,
-        hideIconOnBalloonOpen: false,
-        balloonOffset: [-158, 66],
-        balloonPanelMaxMapArea: 0,
-      }}
-      properties={{
-        isUrgentTask,
-        isDisabled,
-        fullName,
-        phone,
-        avatar,
-        description,
-        count,
-        title,
-        isAuthorised,
-        date,
-        time,
-      }}
-    />
-  );
-};
+    return (
+      <Placemark
+        geometry={coordinates}
+        options={{
+          iconLayout: Iconlayout,
+          balloonLayout: Balloonlayout,
+          hideIconOnBalloonOpen: false,
+          balloonOffset: [-158, 66],
+          balloonPanelMaxMapArea: 0,
+          hasBalloon: hasBalloon,
+          draggable: draggable,
+        }}
+        properties={{
+          isUrgentTask,
+          isDisabled,
+          fullName,
+          phone,
+          avatar,
+          description,
+          count,
+          title,
+          isAuthorised,
+          date,
+          time,
+        }}
+        // Данный пропс отвечает за возможность получить координату в конце перетаскивания баллуна
+        onDragEnd={(event) => {
+          const newCoordinates = event.get('target').geometry.getCoordinates();
+          // С помощью геокодера конвертируем полученную координату в адрес и отправляем в стор createRequst
+          if (ymaps) {
+            const geo = ymaps.geocode(newCoordinates);
+            geo.then((res) => {
+              const firstGeoObject = res.geoObjects.get(0);
+
+              dispatch(
+                setAddress({
+                  additinalAddress: firstGeoObject.getAddressLine(),
+                  coords: newCoordinates,
+                })
+              );
+            });
+          }
+        }}
+      />
+    );
+  }
+);
 
 export default React.memo(Mark);
