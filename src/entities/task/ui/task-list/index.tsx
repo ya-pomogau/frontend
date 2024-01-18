@@ -26,7 +26,7 @@ interface TaskListProps {
   handleClickAddTaskButton?: () => void;
 }
 
-interface Cords {
+interface Coords {
   right: number;
   top: number;
 }
@@ -43,11 +43,14 @@ export const TaskList = ({
   const buttonGuard = usePermission([CONFIRMED], 'recipient');
   const [isOpen, setIsOpen] = useState(false);
 
-  const [popupPosion, setPopupPosion] = useState<Cords | null>(null);
-  const myRef = useRef<HTMLDivElement>(null);
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const popupClose = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
 
   const getCoords = () => {
-    const box = myRef.current?.getBoundingClientRect();
+    const box = buttonRef.current?.getBoundingClientRect();
 
     if (box) {
       setPopupPosion({
@@ -145,11 +148,7 @@ export const TaskList = ({
                 {' '}
                 Хотите создать заявку?
               </p>
-              <div
-                className={styles.wrapperBtn}
-                ref={myRef}
-                // onClick={getCoords}
-              >
+              <div className={styles.wrapperBtn} ref={buttonRef}>
                 <RoundButton
                   buttonType="add"
                   onClick={
@@ -164,7 +163,7 @@ export const TaskList = ({
                   visible
                   extClassName={styles.modal}
                   pointerPosition="center"
-                  changeVisible={() => setIsOpen(false)}
+                  changeVisible={() => popupClose()}
                   elementStyles={{
                     position: 'absolute',
                     top: `${popupPosion?.top}px`,
@@ -176,7 +175,7 @@ export const TaskList = ({
                       className={styles.closeIcon}
                       size="14"
                       color="blue"
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => popupClose()}
                     />
                   </div>
                   <div className={styles.text}>
