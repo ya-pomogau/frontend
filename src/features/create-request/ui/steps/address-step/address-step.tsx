@@ -36,7 +36,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const handleAddressValueChange = (
     additinalAddress: string,
-    coords?: GeoCoordinates | []
+    coords?: GeoCoordinates
   ) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
