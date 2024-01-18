@@ -90,6 +90,24 @@
       "isActive": true
     },
     {
+      "id": 8,
+      "createdAt": "2023-07-09T17:30Z",
+      "fullname": "Волонтеров Иван Иванович",
+      "role": "volunteer",
+      "vk": "https://vk.com/id123456788",
+      "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
+      "phone": "+7 (901) 123-00-00",
+      "address": "ул. Строителей, 15",
+      "coordinates": [
+        55.686985,
+        37.529654
+      ],
+      "status": "unconfirmed",
+      "isHasKeys": true,
+      "scores": 0,
+      "isActive": true
+    },
+    {
       "id": 4,
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Реципиентов Алексей Борисович",
@@ -99,6 +117,22 @@
       "phone": "+7 (916) 123-45-67",
       "address": "ул. Нахимова, д. 9",
       "coordinates": [59.941871, 30.223494],
+      "status": "confirmed",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "createdAt": "2023-07-09T17:30Z",
+      "fullname": "Реципиентов Иван Иванович",
+      "role": "recipient",
+      "vk": "https://vk.com/id123456789",
+      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+      "phone": "+7 (916) 123-00-00",
+      "address": "1-й Смоленский пер., 13",
+      "coordinates": [
+        55.747854,
+        37.579887
+      ],
       "status": "confirmed",
       "isActive": true
     }
@@ -200,6 +234,111 @@
       "volunteer": null,
       "address": "Малая Морская, 9",
       "coordinates": [59.93594, 30.313128],
+      "chat": null
+    },
+    {
+      "id": 13,
+      "title": "Купить лекарства",
+      "category": {
+        "id": 1,
+        "name": "Сопровождение",
+        "scope": 1
+      },
+      "date": "2023-09-03T19:30Z",
+      "description": "Заболел и совсем нет сил даже ходить по квартире. Помогите, пожалуйста!",
+      "completed": false,
+      "confirmed": false,
+      "conflict": false,
+      "recipient": {
+        "id": 3,
+        "fullname": "Реципиентов Иван Иванович",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
+        "phone": "+7 (916) 123-00-00",
+        "address": "1-й Смоленский пер., 13",
+        "coordinates": [
+          55.747854,
+          37.579887
+        ],
+        "approved": true
+      },
+      "volunteer": null,
+      "address": "1-й Смоленский пер., 13",
+      "coordinates": [
+        55.747854,
+        37.579887
+      ],
+      "chat": null
+    },
+    {
+      "id": 14,
+      "title": "Выгулять собаку",
+      "category": {
+        "id": 1,
+        "name": "Сопровождение",
+        "scope": 1
+      },
+      "date": "2023-09-03T19:30Z",
+      "description": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста! Помогите, пожалуйста!",
+      "completed": false,
+      "confirmed": false,
+      "conflict": false,
+      "recipient": {
+        "id": 4,
+        "fullname": "Реципиентов Иван Иванович",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "улица Россолимо, 17с3",
+        "coordinates": [
+          55.732741,
+          37.578115
+        ],
+        "approved": true
+      },
+      "volunteer": null,
+      "address": "улица Россолимо, 17с3",
+      "coordinates": [
+        55.732741,
+        37.578115
+      ],
+      "chat": null
+    },
+    {
+      "id": 15,
+      "title": "Сводить погулять в парк",
+      "category": {
+        "id": 1,
+        "name": "Сопровождение",
+        "scope": 1
+      },
+      "date": "2023-09-03T19:30Z",
+      "description": "Очень хочется прогуляться, месяц уже дома из-зи перелома. Сам спуститься не могу, нужна помощь. Сводите подышать воздухом, пожалуста! Парк через дорогу.",
+      "completed": false,
+      "confirmed": false,
+      "conflict": false,
+      "recipient": {
+        "id": 4,
+        "fullname": "Реципиентов Иван Иванович",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "улица Фотиевой, 14к3",
+        "coordinates": [
+          55.699788,
+          37.557059
+        ],
+        "approved": true
+      },
+      "volunteer": null,
+      "address": "улица Фотиевой, 14к3",
+      "coordinates": [
+        55.699788,
+        37.557059
+      ],
       "chat": null
     }
   ],

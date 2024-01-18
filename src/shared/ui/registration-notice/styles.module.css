@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  min-width: 384px;
+  /* min-width: 384px; */
   display: flex;
   padding: 20px 30px;
   box-sizing: border-box;
