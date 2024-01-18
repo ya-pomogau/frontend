@@ -80,6 +80,9 @@ export const createRequestModel = createSlice({
       state.currentStep = InitialStateForPopup.currentStep;
       state.isPopupOpen = false;
     },
+    clearState(state) {
+      Object.assign(state, InitialStateForPopup);
+    },
   },
 });
 
@@ -95,4 +98,5 @@ export const {
   changeCheckbox,
   openPopup,
   closePopup,
+  clearState,
 } = createRequestModel.actions;
