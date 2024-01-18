@@ -13,10 +13,8 @@ import { CONFIRMED } from 'shared/libs/statuses';
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
-  const { role } = useAppSelector((state) => state.user);
-  const isConfirmed = useAppSelector((state) => {
-    return state.user.data?.status === CONFIRMED;
-  });
+  const { role, data } = useAppSelector((state) => state.user);
+  const isConfirmed = data?.status === CONFIRMED;
   return (
     <>
       <SmartHeader
