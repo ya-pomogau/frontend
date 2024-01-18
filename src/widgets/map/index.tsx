@@ -1,10 +1,12 @@
-import { memo } from 'react';
-import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
+import { memo, useState } from 'react';
+import { Map, YMaps, Circle } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
-
+import usePermission from 'shared/hooks/use-permission';
+import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { isTaskUrgent, getBounds } from 'shared/libs/utils';
-import { Mark } from './Mark';
-
+import Mark from './Mark';
+import { LightPopup } from 'shared/ui/light-popup';
+import { unauthorizedVolunteerPopupMessage } from 'shared/libs/constants';
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
@@ -32,75 +34,104 @@ export const YandexMap = ({
   tasks,
   coordinates,
   isAuthorised,
-}: YandexMapProps) => (
-  <YMaps
-    enterprise
-    query={{
-      load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
-      apikey: YMAPS_API_KEY,
-    }}
-  >
-    <Map
-      state={{
-        bounds: radius
-          ? getBounds([mapSettings.latitude, mapSettings.longitude], radius)
-          : undefined,
-        center: [mapSettings.latitude, mapSettings.longitude],
-        zoom: mapSettings.zoom,
-      }}
-      options={{
-        suppressMapOpenBlock: true,
-        yandexMapDisablePoiInteractivity: true,
-      }}
-      width={width}
-      height={height}
-    >
-      {tasks?.map((task) => (
-        <Mark
-          id={task.id}
-          coordinates={task.coordinates}
-          isUrgentTask={isTaskUrgent(task.date)}
-          fullName={task.recipient.fullname}
-          phone={task.recipient.phone}
-          avatar={task.recipient.avatar}
-          description={task.description}
-          count={task.category.scope}
-          onClick={onClick}
-          key={task.id}
-          isAuthorised={isAuthorised}
-          date={new Date(task.date).toLocaleDateString()}
-          time={new Date(task.date).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-        />
-      ))}
-      {coordinates && (
-        <Mark
-          coordinates={
-            Array.isArray(coordinates)
-              ? coordinates
-              : [coordinates.latitude, coordinates.longitude]
-          }
-        />
-      )}
-      {radius && (
-        <Circle
-          geometry={[
-            [mapSettings.latitude, mapSettings.longitude],
-            radius * 1000,
-          ]}
-          options={{
-            draggable: false,
-            fillColor: '#DB709377',
-            strokeColor: '#990066',
-            strokeOpacity: 0.8,
-            strokeWidth: 5,
+}: YandexMapProps) => {
+  const isGranted = usePermission(
+    [CONFIRMED, ACTIVATED, VERIFIED],
+    'volunteer'
+  );
+
+  const [isVisible, setVisibility] = useState(false);
+
+  const showPopup = () => {
+    setVisibility(true);
+  };
+
+  const onClickExit = () => {
+    setVisibility(false);
+  };
+
+  return (
+    <>
+      <YMaps
+        enterprise
+        query={{
+          load: 'Map,Placemark,map.addon.balloon,geoObject.addon.balloon',
+          apikey: YMAPS_API_KEY,
+        }}
+      >
+        <Map
+          state={{
+            bounds: radius
+              ? getBounds([mapSettings.latitude, mapSettings.longitude], radius)
+              : undefined,
+            center: [mapSettings.latitude, mapSettings.longitude],
+            zoom: mapSettings.zoom,
           }}
-        />
+          options={{
+            suppressMapOpenBlock: true,
+            yandexMapDisablePoiInteractivity: true,
+          }}
+          width={width}
+          height={height}
+        >
+          {tasks?.map((task) => (
+            <Mark
+              id={task.id}
+              coordinates={task.coordinates}
+              isUrgentTask={isTaskUrgent(task.date)}
+              fullName={task.recipient.fullname}
+              phone={task.recipient.phone}
+              avatar={task.recipient.avatar}
+              description={task.description}
+              count={task.category.scope}
+              onClick={onClick}
+              showPopup={showPopup}
+              key={task.id}
+              isAuthorised={isAuthorised}
+              date={new Date(task.date).toLocaleDateString()}
+              time={new Date(task.date).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            />
+          ))}
+          {coordinates && (
+            <Mark
+              coordinates={
+                Array.isArray(coordinates)
+                  ? coordinates
+                  : [coordinates.latitude, coordinates.longitude]
+              }
+            />
+          )}
+          {radius && (
+            <Circle
+              geometry={[
+                [mapSettings.latitude, mapSettings.longitude],
+                radius * 1000,
+              ]}
+              options={{
+                draggable: false,
+                fillColor: '#DB709377',
+                strokeColor: '#990066',
+                strokeOpacity: 0.8,
+                strokeWidth: 5,
+              }}
+            />
+          )}
+        </Map>
+      </YMaps>
+      {!isGranted && (
+        <LightPopup
+          isPopupOpen={isVisible}
+          onClickExit={onClickExit}
+          hasCloseButton={true}
+        >
+          {unauthorizedVolunteerPopupMessage}
+        </LightPopup>
       )}
-    </Map>
-  </YMaps>
-);
+    </>
+  );
+};
 
 export default memo(YandexMap);

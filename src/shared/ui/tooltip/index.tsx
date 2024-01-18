@@ -9,6 +9,7 @@ import { createPortal } from 'react-dom';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
+import { CloseCrossIcon } from '../icons/close-cross-icon';
 
 interface TooltipProps {
   extClassName?: string;
@@ -49,7 +50,7 @@ export const Tooltip = ({
       const target = e.target as HTMLElement;
       if (
         changeVisible &&
-        !target.closest('.tooltip') &&
+        (!target.closest('.tooltip') || target.closest('.close')) &&
         !target.closest('#clock-element') &&
         target.getRootNode() === document
       ) {
@@ -89,6 +90,10 @@ export const Tooltip = ({
           styles.pointer,
           styles[`pointer--${pointerPosition}`]
         )}
+      />
+      <CloseCrossIcon
+        className={classnames(styles.closeButton, 'close')}
+        color={'blue'}
       />
       {children}
     </div>
