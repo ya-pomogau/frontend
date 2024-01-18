@@ -7,9 +7,19 @@ import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { isTaskUrgent } from 'shared/libs/utils';
 import Mark from './Mark';
 import { LightPopup } from 'shared/ui/light-popup';
-import { unauthorizedVolunteerPopupMessage } from 'shared/libs/constants';
+import {
+  unauthorizedVolunteerPopupMessage,
+  thankForAssignTaskMessage,
+  cantAssignTaskMessage,
+} from 'shared/libs/constants';
+import { ConflictIcon } from 'shared/ui/icons/conflict-icon';
+import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-icon';
 
 import type { Task } from 'entities/task/types';
+
+import classNames from 'classnames';
+import './styles.css';
+import styles from './styles.module.css';
 
 interface YandexMapProps {
   width?: string | number;
@@ -40,13 +50,23 @@ export const YandexMap = ({
   );
 
   const [isVisible, setVisibility] = useState(false);
+  const [isSorryPopupVisible, setSorryPopupVisible] = useState(false);
+  const [isThankPopupVisible, setThankPopupVisible] = useState(false);
 
-  const showPopup = () => {
+  const showUnauthorithedPopup = () => {
     setVisibility(true);
+  };
+  const showSorryPopup = () => {
+    setSorryPopupVisible(true);
+  };
+  const showThankPopup = () => {
+    setThankPopupVisible(true);
   };
 
   const onClickExit = () => {
     setVisibility(false);
+    setSorryPopupVisible(false);
+    setThankPopupVisible(false);
   };
 
   return (
@@ -70,27 +90,33 @@ export const YandexMap = ({
           width={width}
           height={height}
         >
-          {tasks?.map((task) => (
-            <Mark
-              id={task.id}
-              coordinates={task.coordinates}
-              isUrgentTask={isTaskUrgent(task.date)}
-              fullName={task.recipient.fullname}
-              phone={task.recipient.phone}
-              avatar={task.recipient.avatar}
-              description={task.description}
-              count={task.category.scope}
-              onClick={onClick}
-              showPopup={showPopup}
-              key={task.id}
-              isAuthorised={isAuthorised}
-              date={new Date(task.date).toLocaleDateString()}
-              time={new Date(task.date).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            />
-          ))}
+          {tasks?.map((task) => {
+            console.log('task', task.id);
+            let showPopup = showThankPopup;
+            if (task.volunteer !== null) showPopup = showSorryPopup;
+            if (!isGranted) showPopup = showUnauthorithedPopup;
+
+            return (
+              <Mark
+                id={task.id}
+                coordinates={task.coordinates}
+                isUrgentTask={isTaskUrgent(task.date)}
+                fullName={task.recipient.fullname}
+                phone={task.recipient.phone}
+                avatar={task.recipient.avatar}
+                description={task.description}
+                count={task.category.scope}
+                showPopup={showPopup}
+                key={task.id}
+                isAuthorised={isAuthorised}
+                date={new Date(task.date).toLocaleDateString()}
+                time={new Date(task.date).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              />
+            );
+          })}
           <Mark coordinates={coordinates} />
         </Map>
       </YMaps>
@@ -102,6 +128,41 @@ export const YandexMap = ({
         >
           {unauthorizedVolunteerPopupMessage}
         </LightPopup>
+      )}
+      {isGranted && (
+        <>
+          <LightPopup
+            isPopupOpen={isThankPopupVisible}
+            onClickExit={onClickExit}
+            hasCloseButton={true}
+          >
+            <p
+              className={classNames(
+                styles.popupTitle,
+                'text_size_medium',
+                'text_type_bold'
+              )}
+            >
+              {thankForAssignTaskMessage}
+            </p>
+            <p className={classNames(styles.popupIcon, 'text_size_large')}>
+              <FinishedApplicationIcon color="#9798C9" size="101" />
+            </p>
+          </LightPopup>
+          <LightPopup
+            isPopupOpen={isSorryPopupVisible}
+            onClickExit={onClickExit}
+            hasCloseButton={true}
+          >
+            <p className={classNames(styles.popupTitle, 'text_size_large')}>
+              <ConflictIcon color="orange" />
+              Извините
+            </p>
+            <p className={classNames(styles.popupText, 'text_size_medium')}>
+              {cantAssignTaskMessage}
+            </p>
+          </LightPopup>
+        </>
       )}
     </>
   );

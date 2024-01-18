@@ -1,6 +1,6 @@
 import React from 'react';
 
-type TIconColor = 'blue' | 'white' | '#9798C9';
+type TIconColor = 'blue' | 'white' | 'orange' | '#9798C9';
 
 export const getColor = (color: TIconColor) => {
   switch (color) {
@@ -8,6 +8,8 @@ export const getColor = (color: TIconColor) => {
       return '#2E3192';
     case 'white':
       return '#ffffff';
+    case 'orange':
+      return '#F37920';
     case '#9798C9':
       return '#9798C9';
     default:
@@ -19,7 +21,7 @@ export const getColor = (color: TIconColor) => {
 
 export interface IIconProps<T = '24'> {
   color: TIconColor;
-  size?: T | '14' | '24' | '32' | '46' | '54' | '196';
+  size?: T | '14' | '24' | '32' | '46' | '54' | '101' | '196';
   className?: string;
   onClick?:
     | (() => void)
