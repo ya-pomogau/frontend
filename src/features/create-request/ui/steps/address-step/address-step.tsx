@@ -16,7 +16,6 @@ import usePropsButtonCustom from '../useButtonPropsCustom';
 import { useEffect } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { UserRole } from 'shared/types/common.types';
-import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface IAddressProps {
   isMobile?: boolean;

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useAppSelector } from 'app/hooks';
 import { format } from 'date-fns';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
