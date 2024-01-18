@@ -71,29 +71,6 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
-  // const myRef = useRef<HTMLDivElement>(null);
-  // const [tooltipStyle, setTooltipStyle] = useState({});
-
-  const [popupPosion, setPopupPosion] = useState<Cords | null>(null);
-  const myRef = useRef<HTMLDivElement>(null);
-
-  const getCoords = () => {
-    const box = myRef.current?.getBoundingClientRect();
-
-    if (box) {
-      setPopupPosion({
-        right: window.innerWidth - box.right - box.width * 2.25,
-        top: box.top + window.scrollY + box.height * 1.2,
-      });
-    }
-  };
-
-  const handleDeniedAccess = () => {
-    if (!isOpen) {
-      getCoords();
-    }
-    setIsOpen((prev) => !prev);
-  };
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
