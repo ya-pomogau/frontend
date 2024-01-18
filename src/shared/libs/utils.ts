@@ -1,8 +1,13 @@
 import { FRONT_URL } from 'config/api-config';
-// eslint-disable-next-line import/no-duplicates
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
-// eslint-disable-next-line import/no-duplicates
-import { isAfter, parseISO } from 'date-fns';
+import {
+  DAYS_IN_MONTH,
+  DAYS_IN_YEAR,
+  DEGREES_IN_RADIAN,
+  EARTH_RADIUS,
+  MINUTES_IN_HOUR,
+  RADIANS_IN_DEGREE,
+} from './constants';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -34,29 +39,25 @@ export const handleRedirectVK = () => {
   window.location.href = `https://oauth.vk.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&display=page&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
 };
 
-const degrToRadians = (deg: number): number => {
-  return (Math.PI * deg) / 180;
+const degrToRadians = (degrees: number): number => {
+  return degrees * RADIANS_IN_DEGREE;
 };
 
-const radToDegr = (rad: number): number => {
-  return (rad * 180) / Math.PI;
+const radToDegr = (radians: number): number => {
+  return radians * DEGREES_IN_RADIAN;
 };
 
 //масштабирование карты под заданный радиус
 export const getBounds = (coords: number[], radius: number): number[][] => {
-  const earthRadius = 6371;
-
-  const radCoords: number[] = [
-    degrToRadians(coords[0]),
-    degrToRadians(coords[1]),
-  ];
-  const deltaLat = (radius * 360) / (2 * Math.PI * earthRadius);
+  const latitude = coords[0];
+  const radiansLatitude: number = degrToRadians(latitude);
+  const deltaLat = (radius * 360) / (2 * Math.PI * EARTH_RADIUS);
   const deltaLong = Math.abs(
     radToDegr(
       Math.acos(
         (Math.cos(degrToRadians(deltaLat)) -
-          Math.pow(Math.sin(radCoords[0]), 2)) /
-          Math.pow(Math.cos(radCoords[0]), 2)
+          Math.pow(Math.sin(radiansLatitude), 2)) /
+          Math.pow(Math.cos(radiansLatitude), 2)
       )
     )
   );
@@ -72,52 +73,55 @@ export const filterByDistance = (
   locationY: number[],
   distance: number
 ): boolean => {
-  const earthRadius = 6371;
   const locationXLatRadians = degrToRadians(locationX[0]);
   const locationYLatRadians = degrToRadians(locationY[0]);
-  const getAngle = () =>
-    radToDegr(
-      Math.acos(
-        Math.sin(locationXLatRadians) * Math.sin(locationYLatRadians) +
-          Math.cos(locationXLatRadians) *
-            Math.cos(locationYLatRadians) *
-            Math.cos(degrToRadians(Math.abs(locationX[1] - locationY[1])))
-      )
-    );
+  const angle = radToDegr(
+    Math.acos(
+      Math.sin(locationXLatRadians) * Math.sin(locationYLatRadians) +
+        Math.cos(locationXLatRadians) *
+          Math.cos(locationYLatRadians) *
+          Math.cos(degrToRadians(Math.abs(locationX[1] - locationY[1])))
+    )
+  );
 
-  return Math.abs(2 * Math.PI * earthRadius * (getAngle() / 360)) <= distance;
+  return Math.abs(2 * Math.PI * EARTH_RADIUS * (angle / 360)) <= distance;
 };
 
-export const filterByDate = (filterDate: string, taskDate: string): boolean => {
+export const filterByDate = (
+  filterDate: string,
+  taskDateString: string
+): boolean => {
+  const taskDate = new Date(taskDateString);
+  const [year, day, month] = filterDate.split('-');
   const filter: number =
-    parseInt(filterDate.split('-')[0]) * 365.25 +
-    parseInt(filterDate.split('-')[2]) * 30 +
-    parseInt(filterDate.split('-')[1]);
+    parseInt(year) * DAYS_IN_YEAR +
+    parseInt(month) * DAYS_IN_MONTH +
+    parseInt(day);
   const task: number =
-    new Date(taskDate).getFullYear() * 365.25 +
-    new Date(taskDate).getDay() * 30 +
-    new Date(taskDate).getDay();
+    taskDate.getFullYear() * DAYS_IN_YEAR +
+    taskDate.getDay() * DAYS_IN_MONTH +
+    taskDate.getDay();
   return filter > task;
 };
 
 export const filterByTime = (
   filterTime: (string | null)[] | string,
-  taskTime: string
+  taskTimeString: string
 ): boolean => {
   filterTime =
     typeof filterTime === 'string' ? filterTime.split(',') : filterTime;
-
-  const minLimit: number = filterTime[0]
-    ? parseInt(filterTime[0].split(':')[0]) * 60 +
-      parseInt(filterTime[0].split(':')[1])
-    : -1;
-
-  const maxLimit: number = filterTime[1]
-    ? parseInt(filterTime[1].split(':')[0]) * 60 +
-      parseInt(filterTime[1].split(':')[1])
-    : 1500;
-  const time =
-    new Date(taskTime).getHours() * 60 + new Date(taskTime).getMinutes();
+  const taskTime = new Date(taskTimeString);
+  const [hourMin, minuteMin] = filterTime[0]
+    ? filterTime[0].split(':')
+    : ['0', '0'];
+  const [hourMax, minuteMax] = filterTime[1]
+    ? filterTime[1].split(':')
+    : ['24', '0'];
+  const minLimit: number =
+    parseInt(hourMin) * MINUTES_IN_HOUR + parseInt(minuteMin);
+  const maxLimit: number =
+    parseInt(hourMax) * MINUTES_IN_HOUR + parseInt(minuteMax);
+  const time = taskTime.getHours() * MINUTES_IN_HOUR + taskTime.getMinutes();
 
   return minLimit < time && time < maxLimit;
 };

@@ -30,39 +30,34 @@ export function ProfileMapPage() {
     //починить типизацию значений фильтра и убрать лишние условия
     let result: Task[] = tasks ? tasks : [];
     if (result.length && user) {
-      if (typeof query.date === 'string') {
-        result = result.filter((task: Task) => {
-          if (typeof query.date === 'string') {
-            return filterByDate(query.date, task.date);
-          } else return false;
-        });
-      }
-      if (query.time) {
-        result = result.filter((task: Task) => {
-          if (Array.isArray(query.time) || typeof query.time === 'string') {
-            return filterByTime(query.time, task.date);
-          } else return false;
-        });
+      const { date, time, searchRadius } = query;
+      if (date && typeof date === 'string') {
+        result = result.filter((task: Task) => filterByDate(date, task.date));
       }
 
-      if (query.searchRadius) {
+      if (time && (typeof time === 'string' || Array.isArray(time))) {
+        result = result.filter((task: Task) => filterByTime(time, task.date));
+      }
+
+      if (
+        searchRadius &&
+        user.coordinates &&
+        typeof searchRadius === 'string'
+      ) {
         const userCoords = Array.isArray(user.coordinates)
           ? user.coordinates
           : [user.coordinates.latitude, user.coordinates.longitude];
-
-        result = result.filter((task: Task) => {
-          if (typeof query.searchRadius === 'string' && user.coordinates) {
-            return filterByDistance(
-              userCoords,
-              task.coordinates,
-              parseInt(query.searchRadius)
-            );
-          } else return false;
-        });
+        result = result.filter((task: Task) =>
+          filterByDistance(
+            userCoords,
+            task.coordinates,
+            parseInt(searchRadius, 10)
+          )
+        );
       }
     }
     return result;
-  }, [query.date, query.searchRadius, query.time, tasks, user]);
+  }, [query, tasks, user]);
 
   return (
     <>
