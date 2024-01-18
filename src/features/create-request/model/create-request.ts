@@ -81,6 +81,9 @@ export const createRequestModel = createSlice({
       state.currentStep = InitialStateForPopup.currentStep;
       state.isPopupOpen = false;
     },
+    clearState(state) {
+      Object.assign(state, InitialStateForPopup);
+    },
   },
 });
 
@@ -97,4 +100,5 @@ export const {
   openPopup,
   closePopup,
   clearTime,
+  clearState,
 } = createRequestModel.actions;
