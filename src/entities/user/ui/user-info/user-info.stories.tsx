@@ -3,6 +3,7 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { UserInfo } from '.';
+import { usersApi } from 'services/user-api';
 
 const mockedMasterState = {
   role: 'master',
@@ -17,7 +18,7 @@ const mockedMasterState = {
     address: 'ул. Поселковая, д. 5',
     coordinates: [59.821539, 30.178031],
     status: 'activated',
-    keys: 1,
+    isHasKeys: true,
     permissions: [
       { id: 0, name: 'read' },
       { id: 1, name: 'profiles approval' },
@@ -53,7 +54,7 @@ const mockedAdminState = {
       { id: 1, name: 'profiles approval' },
       { id: 2, name: 'create tasks' },
     ],
-    keys: null,
+    isHasKeys: false,
     scores: null,
     isActive: true,
   },
@@ -75,7 +76,7 @@ const mockedVolunteerState = {
     address: 'ул. Кораблестроителей, 19к1',
     coordinates: [59.942575, 30.216757],
     status: 'verified',
-    keys: 1,
+    isHasKeys: true,
     scores: 2500,
     isActive: true,
   },
@@ -112,13 +113,14 @@ const unauthorizedState = {
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
   <Provider
     store={configureStore({
-      reducer: {
-        user: createSlice({
-          name: 'user',
-          initialState,
-          reducers: {},
-        }).reducer,
-      },
+      reducer: usersApi.reducer,
+      // reducer: {
+      //   user: createSlice({
+      //     name: 'user',
+      //     initialState,
+      //     reducers: {},
+      //   }).reducer,
+      // },
     })}
   >
     {children}

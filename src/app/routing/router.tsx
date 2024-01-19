@@ -17,7 +17,6 @@ import { ContactsPage } from 'pages/contacts';
 import { FeedbackPage } from 'pages/feedback';
 import { ProfilePage } from 'pages/profile';
 import { PickRolePage } from 'pages/pick-role-page-temporary';
-import { RegisterPage } from 'pages/register';
 import { NotFoundPage } from 'pages/not-found';
 import { ProfileMapPage } from 'pages/profile-map';
 import { ProfileActivePage } from 'pages/profile-active';
@@ -33,7 +32,8 @@ import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
 import { BidsPage } from 'pages/bids';
-import { RegisterFormPage } from 'pages/register-forn';
+import { VKAuthPage } from 'pages/vk-auth';
+import { RegisterPage } from 'pages/register';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,8 +56,8 @@ export const router = createBrowserRouter(
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/register-form/:role" element={<RegisterFormPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/vk-auth" element={<VKAuthPage />} />
         </Route>
 
         <Route

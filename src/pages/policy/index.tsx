@@ -5,8 +5,13 @@ import style from './markdown-style.module.css';
 
 export function PolicyPage() {
   return (
-    <ReactMarkdown className={style.markdownStyles} remarkPlugins={[remarkGfm]}>
-      {markdown}
-    </ReactMarkdown>
+    <div className={style.wrapper}>
+      <ReactMarkdown
+        className={style.markdownStyles}
+        remarkPlugins={[remarkGfm]}
+      >
+        {markdown}
+      </ReactMarkdown>
+    </div>
   );
 }
