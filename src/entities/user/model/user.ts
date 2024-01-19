@@ -73,7 +73,7 @@ export const userModel = createSlice({
           status,
           role,
           vk: vkId,
-          id: _id,
+          id: +_id,
           coordinates,
           createdAt: 'a long long time ago in a far away galaxy...',
           scores,

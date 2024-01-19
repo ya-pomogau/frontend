@@ -51,7 +51,7 @@ type StatusType =
   | typeof VERIFIED;
 
 export type UserInfo = {
-  id: string;
+  id: number;
   fullname: string;
   role: UserRole | null;
   status: StatusType | null;
