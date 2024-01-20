@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
 
@@ -14,6 +14,7 @@ import Checkbox from 'shared/ui/checkbox';
 import { DatePicker } from 'shared/ui/date-picker';
 
 import styles from './date-step.module.css';
+import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
 
 interface IDateStepProps {
   isMobile?: boolean;
@@ -25,6 +26,13 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   );
   const dispatch = useAppDispatch();
   const [timeValidation, setTimeValidation] = useState(false);
+  const [isOpenClockElement, setIsOpenClockElement] = useState(false);
+
+  const buttonRef = useRef<HTMLDivElement>(null);
+
+  const handleAcceptTime = (selectedTime: any) => {
+    console.log(selectedTime);
+  };
   const handleDateValueChange = (value: Date) => {
     const formattedDate = format(value, 'dd.MM.yyyy');
     dispatch(setDate(formattedDate));
@@ -68,16 +76,26 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     <>
       <div className={styles.dateContainer}>
         <div className={styles.wrapperForTime}>
+          {isMobile && (
+            <TimePickerPopup
+              isPopupOpen={isOpenClockElement}
+              buttonRef={buttonRef}
+              setIsOpenClockElement={setIsOpenClockElement}
+              handleAcceptTime={() => handleAcceptTime}
+            />
+          )}
           <p className={classNames(styles.time, 'text', 'text_type_regular ')}>
             Время
           </p>
           <div className={styles.headerWrapper} />
+
           <input
             disabled={termlessRequest}
             type="time"
             id="time"
             name="time"
             onChange={handleTimeValueChange}
+            onClick={() => setIsOpenClockElement(!isOpenClockElement)}
             value={time}
             required
             className={classNames(
