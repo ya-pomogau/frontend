@@ -98,7 +98,11 @@ export const Request = ({ isMobile = true }: RequestProps) => {
           isMobile={isMobile}
         >
           {isOpen && (
-            <OverlayingPopup isOpened={isOpen} onClose={handleCloseClick}>
+            <OverlayingPopup
+              extClassName={styles.tooltipWrapper}
+              isOpened={isOpen}
+              onClose={handleCloseClick}
+            >
               <div>
                 <Tooltip
                   visible
