@@ -141,10 +141,6 @@ export function RecipientPage() {
               <TaskList
                 userRole="recipient"
                 isMobile={isMobile}
-                handleClickCloseButton={() => 2}
-                handleClickConfirmButton={() => 3}
-                handleClickMessageButton={() => 5}
-                handleClickPnoneButton={() => 6}
                 handleClickAddTaskButton={() => dispatch(openPopup())}
                 isStatusActive
                 tasks={[]}
@@ -183,10 +179,6 @@ export function RecipientPage() {
               <TaskList
                 userRole="recipient"
                 isMobile={isMobile}
-                handleClickCloseButton={() => 2}
-                handleClickConfirmButton={() => 3}
-                handleClickMessageButton={() => 5}
-                handleClickPnoneButton={() => 6}
                 isStatusActive={false}
                 tasks={[]}
                 isLoading={false}
