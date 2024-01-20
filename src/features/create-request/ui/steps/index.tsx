@@ -97,39 +97,40 @@ export const Request = ({ isMobile = true }: RequestProps) => {
           handleCloseClick={() => setIsOpen(true)}
           isMobile={isMobile}
         >
-          {/*<OverlayingPopup isOpened={isOpen} onClose={handleCloseClick}>*/}
           {isOpen && (
-            <Tooltip
-              visible
-              extClassName={styles.modal}
-              pointerPosition="right"
-              // elementStyles={{
-              //   position: 'absolute',
-              //   top: `${popupPosion?.top}px`,
-              //   right: `${popupPosion?.right}px`,
-              // }}
-              // changeVisible={handleDeniedAccess}
-              // elementStyles={popupPositionStyles}
-            >
-              <div className={styles.closeWrapper}></div>
-              <div className={styles.text}>
-                Закрыть окно сейчас и удалить ранее внесенную информацию?
+            <OverlayingPopup isOpened={isOpen} onClose={handleCloseClick}>
+              <div>
+                <Tooltip
+                  visible
+                  extClassName={styles.modal}
+                  pointerPosition="right"
+                  // elementStyles={{
+                  //   position: 'absolute',
+                  //   top: `${popupPosion?.top}px`,
+                  //   right: `${popupPosion?.right}px`,
+                  // }}
+                  // changeVisible={handleDeniedAccess}
+                  // elementStyles={popupPositionStyles}
+                >
+                  <div className={styles.text}>
+                    Закрыть окно сейчас и удалить ранее внесенную информацию?
+                  </div>
+                  <div className={styles.buttonWrapper}>
+                    <Button
+                      buttonType="primary"
+                      label="Вернуться"
+                      onClick={() => setIsOpen(false)}
+                    />
+                    <Button
+                      buttonType="primary"
+                      label="Закрыть"
+                      onClick={handleCloseClick}
+                    />
+                  </div>
+                </Tooltip>
               </div>
-              <div className={styles.buttonWrapper}>
-                <Button
-                  buttonType="primary"
-                  label="Вернуться"
-                  onClick={() => setIsOpen(false)}
-                />
-                <Button
-                  buttonType="primary"
-                  label="Закрыть"
-                  onClick={handleCloseClick}
-                />
-              </div>
-            </Tooltip>
+            </OverlayingPopup>
           )}
-          {/*</OverlayingPopup>*/}
 
           {currentStep === CurrentPage.DATE_STEP && (
             <DateStep isMobile={isMobile} />
