@@ -24,30 +24,34 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const { descriptionForTask, categories, category, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
-  const userId = useAppSelector((state) => state.user.data?.id);
-  const { data: tasks } = useGetTasksByStatusQuery('active');
+  // const userId = useAppSelector((state) => state.user.data?.id);
+  // const { data: tasks } = useGetTasksByStatusQuery('active');
   // console.log(tasks);
-  // Фильтруем заявки по id
-  const taskId = tasks.filter((item: any) => {
-    if (item.recipient.id === userId) {
-      return item;
-    }
-  });
+  // // Фильтруем заявки по id
+  // const taskId = tasks.filter((item: any) => {
+  //   if (item.recipient.id === userId) {
+  //     return item;
+  //   }
+  // });
   // Получаем id категории
-  const categoryId = taskId.map((item: any) => item.category.id);
-  //Получем объект уже выбранной категории
-  const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
-
-  // console.log(taskId);
-  console.log(categoryId);
-  console.log(commonIds);
+  // const categoryId = taskId.map((item: any) => item.category.id);
+  // //Получем объект уже выбранной категории
+  // const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
+  // const commonSelected = commonIds?.map((item) => ({
+  //   value: String(item.id),
+  //   label: item.name,
+  // }));
+  // // console.log(taskId);
+  // // console.log(categoryId);
+  // // console.log(commonIds);
+  // console.log(commonSelected);
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
     value: String(item.id),
     label: item.name,
   }));
-
+  // console.log(optionsForSelect);
   const handleTaskValueChange = (item: Option) => {
     dispatch(setCategory(item));
   };
