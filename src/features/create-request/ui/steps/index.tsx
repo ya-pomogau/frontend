@@ -38,30 +38,30 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
-  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const popupClose = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
-
-  const getCoords = () => {
-    const box = buttonRef.current?.getBoundingClientRect();
-
-    if (box) {
-      setPopupPosion({
-        right: window.innerWidth - box.right - box.width * 0.7,
-        top: box.top + window.scrollY + box.height * 0.6,
-      });
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', getCoords);
-
-    return () => {
-      window.removeEventListener('resize', getCoords);
-    };
-  }, []);
+  // const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+  // const buttonRef = useRef<HTMLDivElement>(null);
+  // const popupClose = useCallback(() => {
+  //   setIsOpen(false);
+  // }, [setIsOpen]);
+  //
+  // const getCoords = () => {
+  //   const box = buttonRef.current?.getBoundingClientRect();
+  //
+  //   if (box) {
+  //     setPopupPosion({
+  //       right: window.innerWidth - box.right - box.width * 0.7,
+  //       top: box.top + window.scrollY + box.height * 0.6,
+  //     });
+  //   }
+  // };
+  //
+  // useEffect(() => {
+  //   window.addEventListener('resize', getCoords);
+  //
+  //   return () => {
+  //     window.removeEventListener('resize', getCoords);
+  //   };
+  // }, []);
   const handleCloseClick = () => {
     dispatch(closePopup());
     dispatch(clearState());
@@ -88,7 +88,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
 
   return (
     <OverlayingPopup isOpened={isPopupOpen} onClose={handleCloseClick}>
-      <div ref={buttonRef}>
+      <div>
         <MainPopup
           name={data.fullname}
           avatarLink={data.avatar}
@@ -98,21 +98,15 @@ export const Request = ({ isMobile = true }: RequestProps) => {
           isMobile={isMobile}
         >
           {isOpen && (
-            <OverlayingPopup
-              extClassName={styles.tooltipWrapper}
-              isOpened={isOpen}
-              onClose={handleCloseClick}
-            >
+            <OverlayingPopup isOpened={isOpen} onClose={handleCloseClick}>
               <div>
                 <Tooltip
                   visible
                   extClassName={styles.modal}
                   pointerPosition="right"
-                  // elementStyles={{
-                  //   position: 'absolute',
-                  //   top: `${popupPosion?.top}px`,
-                  //   right: `${popupPosion?.right}px`,
-                  // }}
+                  elementStyles={{
+                    zIndex: 11,
+                  }}
                   // changeVisible={handleDeniedAccess}
                   // elementStyles={popupPositionStyles}
                 >
