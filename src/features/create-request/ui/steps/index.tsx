@@ -40,30 +40,30 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
-  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const popupClose = useCallback(() => {
-    setIsOpen(false);
-  }, [setIsOpen]);
-
-  const getCoords = () => {
-    const box = buttonRef.current?.getBoundingClientRect();
-
-    if (box) {
-      setPopupPosion({
-        right: window.innerWidth - box.right - box.width * 0.7,
-        top: box.top + window.scrollY + box.height * 0.6,
-      });
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', getCoords);
-
-    return () => {
-      window.removeEventListener('resize', getCoords);
-    };
-  }, []);
+  // const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+  // const buttonRef = useRef<HTMLDivElement>(null);
+  // const popupClose = useCallback(() => {
+  //   setIsOpen(false);
+  // }, [setIsOpen]);
+  //
+  // const getCoords = () => {
+  //   const box = buttonRef.current?.getBoundingClientRect();
+  //
+  //   if (box) {
+  //     setPopupPosion({
+  //       right: window.innerWidth - box.right - box.width * 0.7,
+  //       top: box.top + window.scrollY + box.height * 0.6,
+  //     });
+  //   }
+  // };
+  //
+  // useEffect(() => {
+  //   window.addEventListener('resize', getCoords);
+  //
+  //   return () => {
+  //     window.removeEventListener('resize', getCoords);
+  //   };
+  // }, []);
   const handleCloseClick = () => {
     if (isTypeEdit && currentStep !== 4) {
       dispatch(closePopup());
