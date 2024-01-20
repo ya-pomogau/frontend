@@ -114,7 +114,13 @@ const Dropdown = ({
     value: String(item.id),
     label: item.name,
   }));
-
+  const handleOnChange = useCallback(
+    (item: Option) => {
+      onChange(item);
+      setIsActive(false);
+    },
+    [onChange, setIsActive]
+  );
   return (
     <div className={classNames(styles.dropdown, extClassName)}>
       <div className={classNames('text', 'text_size_middle', styles.label)}>
