@@ -57,7 +57,6 @@ const Dropdown = ({
     value: String(item.id),
     label: item.name,
   }));
-
   const handleOnChange = useCallback(
     (item: Option) => {
       onChange(item);
