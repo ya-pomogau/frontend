@@ -34,7 +34,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   const handleAcceptTime = (selectedTime: any) => {
     console.log(selectedTime);
   };
-
   const handleDateValueChange = (value: Date) => {
     const formattedDate = format(value, 'dd.MM.yyyy');
     dispatch(setDate(formattedDate));
