@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 
 import { CheckIcon } from '../icons/check-icon';
@@ -50,7 +50,13 @@ const Dropdown = ({
     value: String(item.id),
     label: item.name,
   }));
-
+  const handleOnChange = useCallback(
+    (item: Option) => {
+      onChange(item);
+      setIsActive(false);
+    },
+    [onChange, setIsActive]
+  );
   return (
     <div className={classNames(styles.dropdown, extClassName)}>
       <div className={classNames('text', 'text_size_middle', styles.label)}>
@@ -75,25 +81,23 @@ const Dropdown = ({
       </div>
       {isActive && (
         <ul className={classNames('text', 'text_size_middle', styles.list)}>
-          {items?.map((item) => (
-            <li
-              className={
-                commonSelected?.find((obj) => {
-                  return obj.value === item.value;
-                })
-                  ? styles.itemSelected
-                  : styles.item
-              }
-              key={item.value}
-              onClick={() => {
-                onChange(item);
-                setIsActive(false);
-              }}
-            >
-              {item?.label}
-              {selected?.value === item.value && <CheckIcon color={'blue'} />}
-            </li>
-          ))}
+          {items?.map((item) => {
+            const itemSelect = commonSelected?.find((obj) => {
+              return obj.value === item.value;
+            });
+            return (
+              <li
+                className={itemSelect ? styles.itemSelected : styles.item}
+                key={item.value}
+                onClick={() => {
+                  itemSelect ? console.log('нельзя') : handleOnChange(item);
+                }}
+              >
+                {item?.label}
+                {selected?.value === item.value && <CheckIcon color={'blue'} />}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
