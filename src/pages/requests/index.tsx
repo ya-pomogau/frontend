@@ -113,27 +113,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
       ...tabVolunteersData.slice(0, countersOnTabsVolunteers),
       ...tabRecipientsData.slice(0, countersOnTabsRecipients),
     ];
-  }, [
-    tabVolunteersData,
-    countersOnTabsVolunteers,
-    tabRecipientsData,
-    countersOnTabsRecipients,
-  ]);
-
-  const tabContent = useMemo(() => {
-    switch (incomeTab) {
-      case Tabs.VOLUNTEERS:
-        return <RequestsTab data={tabVolunteersData} />;
-      case Tabs.RECIPIENTS:
-        return <RequestsTab data={tabRecipientsData} />;
-      case Tabs.NOTPROCESSED:
-        return <RequestsTab data={tabNotProcessedData} />;
-      case Tabs.ADMINS:
-        return <RequestsTab data={tabAdminsData} />;
-      default:
-        return <Loader />;
-    }
-  }, [incomeTab, searchName]);
+  }, [countersOnTabsVolunteers, countersOnTabsRecipients]);
 
   return (
     <>
@@ -168,7 +148,19 @@ export function RequestsPage({ incomeTab }: PageProps) {
       />
       {/* ToDo:Настроить лоадер в зависимости от получения данных : или получить все вкладки и показывать, или только открытую, остальные в фоне. */}
       {/*{isLoading ? <Loader /> : tabContent}*/}
-      {tabContent}
+      {
+        <RequestsTab
+          data={
+            incomeTab === Tabs.VOLUNTEERS
+              ? tabVolunteersData
+              : incomeTab === Tabs.RECIPIENTS
+              ? tabRecipientsData
+              : incomeTab === Tabs.NOTPROCESSED
+              ? tabNotProcessedData
+              : tabAdminsData
+          }
+        />
+      }
     </>
   );
 }
