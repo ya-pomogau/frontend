@@ -4,10 +4,19 @@
     justify-content: center;
     gap: 20px;
 }
-
+.mainPopUpWrapperMobile {
+    height: 554px;
+    width: 300px;
+}
 
 .modal {
     position: absolute;
     top: calc(50% - 160px);
     left: calc(50% - 125px);
+}
+
+.modalMobile {
+    position: absolute;
+    top: calc(50% - 230px);
+    left: calc(50% - 265px);
 }
