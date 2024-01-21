@@ -19,3 +19,9 @@ export enum AdminPermission {
   BLOG = 'write the blog',
   CATEGORIES = 'change categories',
 }
+
+export enum FileTypes {
+  JPG = '.jpg',
+  JPEG = '.jpeg',
+  PNG = '.png',
+}
