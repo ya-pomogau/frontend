@@ -72,30 +72,28 @@ export const Tooltip = ({
     };
   }, []);
 
-  const tooltip = useMemo(() => {
-    return (
+  const tooltip = (
+    <div
+      className={classnames(
+        styles.tooltip,
+        extClassName,
+        {
+          [styles['tooltip--visible']]: visible,
+        },
+        'tooltip'
+      )}
+      ref={tooltipRef}
+      style={elementStyles}
+    >
       <div
         className={classnames(
-          styles.tooltip,
-          extClassName,
-          {
-            [styles['tooltip--visible']]: visible,
-          },
-          'tooltip'
+          styles.pointer,
+          styles[`pointer--${pointerPosition}`]
         )}
-        ref={tooltipRef}
-        style={elementStyles}
-      >
-        <div
-          className={classnames(
-            styles.pointer,
-            styles[`pointer--${pointerPosition}`]
-          )}
-        />
-        {children}
-      </div>
-    );
-  }, [visible, pointerPosition, extClassName, children, elementStyles]);
+      />
+      {children}
+    </div>
+  );
 
   return createPortal(tooltip, modalRoot);
 };
