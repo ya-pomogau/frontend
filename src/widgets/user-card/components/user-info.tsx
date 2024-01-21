@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import styles from '../styles.module.css';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole } from '../../../shared/types/common.types';
 
 interface UserInfoProps {
-  role?: UserRole;
+  role: UserRole;
   userName: string;
   userId: number;
   userNumber: string;

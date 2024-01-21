@@ -151,6 +151,7 @@ export function TasksPage() {
                 userId={item.userId}
                 userNumber={item.userNumber}
                 volunteerInfo={item.volunteerInfo}
+                role={item.role}
               />
             </li>
           ))}

@@ -13,7 +13,7 @@ import { RequestsTab } from '../requests-tab';
 import { useAppSelector } from '../../app/hooks';
 import { userSelector } from '../../services/system-slice';
 import { UserCardType } from '../../shared/types/user-cards.types';
-import { Tabs } from '../../shared/types/common.types';
+import { Tabs, UserRole } from '../../shared/types/common.types';
 
 interface PageProps {
   incomeTab: string;
@@ -43,13 +43,13 @@ export function RequestsPage({ incomeTab }: PageProps) {
   console.log(incomeTab);
   console.log(usertest);
   const recipientsData = testUsers.filter(
-    (user: UserCardType) => user.role === 'recipient'
+    (user: UserCardType) => user.role === UserRole.RECIPIENT
   );
   const volunteersData = testUsers.filter(
-    (user: UserCardType) => user.role === 'volunteer'
+    (user: UserCardType) => user.role === UserRole.VOLUNTEER
   );
   const adminsData = testUsers.filter(
-    (user: UserCardType) => user.role === 'admin'
+    (user: UserCardType) => user.role === UserRole.ADMIN
   );
 
   const tabRecipientsData = useMemo(() => {
