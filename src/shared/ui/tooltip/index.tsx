@@ -4,7 +4,6 @@ import {
   useRef,
   CSSProperties,
   useCallback,
-  useMemo,
 } from 'react';
 import { createPortal } from 'react-dom';
 import classnames from 'classnames';
