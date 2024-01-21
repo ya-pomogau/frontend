@@ -55,9 +55,9 @@ export const TaskList = ({
 
   const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
-  const popupClose = useCallback(() => {
+  const popupClose = () => {
     setIsOpen(false);
-  }, [setIsOpen]);
+  };
 
   const getCoords = () => {
     const box = buttonRef.current?.getBoundingClientRect();
