@@ -107,8 +107,6 @@ export const Request = ({ isMobile = true }: RequestProps) => {
                   elementStyles={{
                     zIndex: 11,
                   }}
-                  // changeVisible={handleDeniedAccess}
-                  // elementStyles={popupPositionStyles}
                 >
                   <div className={styles.text}>
                     Закрыть окно сейчас и удалить ранее внесенную информацию?
