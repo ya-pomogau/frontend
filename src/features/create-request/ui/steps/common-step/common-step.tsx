@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { changeStepDecrement, closePopup } from 'features/create-request/model';
+import {
+  changeStepDecrement,
+  clearState,
+  closePopup,
+} from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
@@ -26,6 +30,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     console.log(
       `время: ${time} адрес: ${address} категория: ${category.label} описание:${descriptionForTask} дата: ${date}`
     );
+    dispatch(clearState());
     dispatch(closePopup());
   };
 
