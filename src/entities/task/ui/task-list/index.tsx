@@ -10,7 +10,7 @@ import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
