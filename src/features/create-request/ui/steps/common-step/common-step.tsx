@@ -23,6 +23,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   };
 
   const handleSubmitClick = () => {
+    console.log(
+      `время: ${time} адрес: ${address} категория: ${category.label} описание:${descriptionForTask} дата: ${date}`
+    );
     dispatch(closePopup());
   };
 

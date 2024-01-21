@@ -51,30 +51,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     dispatch(setTime(e.target.value));
     // setInputValue(e.target.value);
   };
-
-  // useEffect(() => {
-  //   const currentTime = new Date(); // текущая дата
-  //   const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-  //   // const selectedTime = new Date(`1970-01-01T${time}:00`); //фиктивная дата '1970-01-01', чтобы установить только время, а не дату
-  //   // const selectedFormattedTime = format(selectedTime, 'HH:mm'); // привожу в нужный формат
-  //   if (time && time < currentFormattedTime) {
-  //     console.log('время меньше');
-  //     console.log(currentFormattedTime);
-  //
-  //     dispatch(setTime(currentFormattedTime));
-  //   } //сравниваю даты
-  // }, [time]);
-  // useEffect(() => {
-  //   const inputTime = new Date(inputValue);
-  //   const currentTime = new Date();
-  //
-  //   if (inputTime < currentTime) {
-  //     setIsTimePassed(true);
-  //   } else {
-  //     setIsTimePassed(false);
-  //   }
-  // }, [inputValue]);
-
   const handleNextStepClick = () => {
     dispatch(changeStepIncrement());
   };
