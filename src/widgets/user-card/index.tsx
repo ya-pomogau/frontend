@@ -6,10 +6,10 @@ import { Avatar } from '../../shared/ui/avatar';
 import styles from './styles.module.css';
 import { RoundButton } from '../../shared/ui/round-button';
 import UserInfo from './components/user-info';
-import { UserRole } from '../../shared/types/common.types';
 import VolunteerActions from './components/volonteer-actions';
 import RecipientActions from './components/recipient-actions';
 import AdminActions from './components/admin-actions';
+import { UserRole } from '../../shared/types/common.types';
 
 interface UserCardProps {
   role: UserRole;
@@ -34,7 +34,6 @@ const getButtonTypeFromScore = (
     return 'secondary';
   }
 };
-
 export const UserCard = ({
   role,
   extClassName,
@@ -47,7 +46,6 @@ export const UserCard = ({
   volunteerInfo,
 }: UserCardProps) => {
   const { approved, checked, scores, isHasKeys } = volunteerInfo;
-
   const isVolonteerAcceptButtonDisabled =
     (scores === 0 && approved) ||
     (scores >= 30 && scores < 60 && checked) ||
