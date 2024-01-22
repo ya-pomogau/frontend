@@ -97,34 +97,6 @@ const Dropdown = ({
     };
   }, []);
 
-  const { data: tasks } = useGetTasksByStatusQuery('active');
-  // console.log(tasks);
-  const userId = useAppSelector((state) => state.user.data?.id);
-  const { categories } = useAppSelector((state) => state.createRequest);
-  // Фильтруем заявки по id
-  const taskId = tasks.filter((item: any) => {
-    if (item.recipient.id === userId) {
-      return item;
-    }
-  });
-  // Получаем id категории
-  const categoryId = taskId.map((item: any) => item.category.id);
-  //Получем объект уже выбранной категории
-  const commonIds = categories.filter((obj: any) =>
-    categoryId.includes(obj.id)
-  );
-
-  const commonSelected = commonIds?.map((item: any) => ({
-    value: String(item.id),
-    label: item.name,
-  }));
-  const handleOnChange = useCallback(
-    (item: Option) => {
-      onChange(item);
-      setIsActive(false);
-    },
-    [onChange, setIsActive]
-  );
   return (
     <div className={classNames(styles.dropdown, extClassName)}>
       <div className={classNames('text', 'text_size_middle', styles.label)}>
