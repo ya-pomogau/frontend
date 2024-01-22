@@ -42,6 +42,15 @@
   max-height: 20px;
 }
 
+.closeWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeIcon:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
 @media (max-width: 735px) {
   .taskContainer {
     display: flex;
