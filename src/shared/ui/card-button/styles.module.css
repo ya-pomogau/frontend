@@ -7,6 +7,7 @@
   cursor: pointer;
   height: 114px;
   padding: 0 12px;
+
 }
 
 @media (max-width: 360px) {
@@ -40,6 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: -6px 0 0 -4px;
 }
 
 .card-buttonContent {
@@ -53,6 +55,7 @@
   display: flex;
   align-items: center;
   text-align: start;
+  margin-left: 4px;
 }
 
 .card-button:active {
