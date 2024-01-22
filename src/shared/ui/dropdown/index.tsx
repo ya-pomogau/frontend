@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { CheckIcon } from '../icons/check-icon';
@@ -7,6 +7,8 @@ import { ArrowDownIcon } from '../icons/arrow-down-icon';
 import styles from './styles.module.css';
 import { useAppSelector } from 'app/hooks';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
+import { CloseCrossIcon } from '../icons/close-cross-icon';
+import { Tooltip } from '../tooltip';
 
 export type Option = { value: string; label: string };
 
@@ -20,7 +22,10 @@ interface IDropdownProps {
   popupOpen?: any;
   refLi?: any;
 }
-
+interface Coords {
+  right: number;
+  top: number;
+}
 const Dropdown = ({
   placeholder,
   items,
@@ -32,6 +37,7 @@ const Dropdown = ({
   refLi,
 }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data: tasks } = useGetTasksByStatusQuery('active');
   // console.log(tasks);
@@ -61,6 +67,54 @@ const Dropdown = ({
     },
     [onChange, setIsActive]
   );
+
+  const refMap = useRef<{
+    [key: string]: React.MutableRefObject<HTMLLIElement | null>;
+  }>({});
+  // console.log(refMap);
+  useEffect(() => {
+    refMap.current = {}; // Сброс объекта при каждом монтировании
+  }, []);
+
+  const popupOpened = (item: Option) => {
+    const refKey = item.value.toString();
+    const boundingClientRect =
+      refMap.current[refKey]?.current?.getBoundingClientRect();
+    if (boundingClientRect) {
+      setPopupPosion({
+        right: window.innerWidth - boundingClientRect.right,
+        top: boundingClientRect.top + boundingClientRect.height,
+      });
+    }
+    // if (!isOpen) {
+    //   popupOpened(item);
+    // }
+    setIsOpen((prev) => !prev);
+  };
+  // useEffect(() => {
+  //   commonSelected.map((item:Option)=>{
+  //     window.addEventListener('resize', popupOpened(item));
+  //   })
+      
+
+  //   return () => {
+  //     window.removeEventListener('resize', popupOpened);
+  //   };
+  // }, []);
+  // const getCoords = () => {
+  //   console.log(refMap);
+  //   console.log(window.innerHeight);
+  //   const box = refMap.current?.getBoundingClientRect();
+  //   console.log(box);
+  //   if (box) {
+  //     setPopupPosion({
+  //       right: window.innerWidth - box.right,
+  //       top: box.top + box.height,
+  //     });
+  //   }
+  // };
+
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   return (
     <div className={classNames(styles.dropdown, extClassName)}>
       <div className={classNames('text', 'text_size_middle', styles.label)}>
@@ -89,13 +143,19 @@ const Dropdown = ({
             const itemSelect = commonSelected?.find((obj) => {
               return obj.value === item.value;
             });
+            const refKey = item.value.toString();
+            if (!refMap.current[refKey]) {
+              refMap.current[refKey] = React.createRef<HTMLLIElement>();
+            }
+            console.log(itemSelect);
+            console.log(refMap.current[refKey]);
             return (
               <li
-                ref={itemSelect && refLi}
+                ref={itemSelect && refMap.current[refKey]}
                 className={itemSelect ? styles.itemSelected : styles.item}
                 key={item.value}
                 onClick={() => {
-                  itemSelect ? popupOpen() : handleOnChange(item);
+                  itemSelect ? popupOpened(item) : handleOnChange(item);
                 }}
               >
                 {item?.label}
@@ -104,6 +164,27 @@ const Dropdown = ({
             );
           })}
         </ul>
+      )}
+      {isOpen && (
+        <Tooltip
+          visible
+          changeVisible={() => setIsOpen(false)}
+          elementStyles={{
+            position: 'absolute',
+            top: `${popupPosion?.top}px`,
+            right: `${popupPosion?.right}px`,
+          }}
+        >
+          <div className={styles.closeWrapper}>
+            <CloseCrossIcon
+              className={styles.closeIcon}
+              size="14"
+              color="blue"
+              onClick={() => setIsOpen(false)}
+            />
+          </div>
+          Здесь будет текст
+        </Tooltip>
       )}
     </div>
   );
