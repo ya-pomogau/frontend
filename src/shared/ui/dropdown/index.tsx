@@ -91,16 +91,18 @@ const Dropdown = ({
     // }
     setIsOpen((prev) => !prev);
   };
-  // useEffect(() => {
-  //   commonSelected.map((item:Option)=>{
-  //     window.addEventListener('resize', popupOpened(item));
-  //   })
+  useEffect(() => {
+    commonSelected.map((item:Option)=>{
+      window.addEventListener('resize', () =>  popupOpened(item));
+    })
       
 
-  //   return () => {
-  //     window.removeEventListener('resize', popupOpened);
-  //   };
-  // }, []);
+    return () => {
+      commonSelected.map((item:Option)=>{
+        window.removeEventListener('resize', () =>  popupOpened(item));
+      })
+    };
+  }, []);
   // const getCoords = () => {
   //   console.log(refMap);
   //   console.log(window.innerHeight);
