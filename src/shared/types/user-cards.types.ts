@@ -1,4 +1,5 @@
-import { TVolunteerInfo, UserRole } from '../../entities/user/types';
+import { TVolunteerInfo } from '../../entities/user/types';
+import { UserRole } from './common.types';
 
 export type UserCardType = {
   role: UserRole;

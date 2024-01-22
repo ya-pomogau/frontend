@@ -8,6 +8,7 @@ import { Input } from 'shared/ui/input';
 import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
+import { UserRole } from '../../shared/types/common.types';
 
 const userMock = [
   {
@@ -16,6 +17,7 @@ const userMock = [
     userId: 1,
     userName: 'Иванов Иван Иванович',
     userNumber: '+7 (111) 222-22-22',
+    role: UserRole.VOLUNTEER,
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
@@ -23,6 +25,7 @@ const userMock = [
     userId: 2,
     userName: 'Молчанов Егор Артёмович',
     userNumber: '+7 (111) 222-22-22',
+    role: UserRole.VOLUNTEER,
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
@@ -30,6 +33,7 @@ const userMock = [
     userId: 3,
     userName: 'Суворов Лазарь Валентинович',
     userNumber: '+7 (111) 222-22-22',
+    role: UserRole.VOLUNTEER,
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
@@ -37,6 +41,7 @@ const userMock = [
     userId: 4,
     userName: 'Ефремов Мартын Ростиславович',
     userNumber: '+7 (111) 222-22-22',
+    role: UserRole.VOLUNTEER,
   },
   {
     avatarLink: 'https://i.pravatar.cc/300"',
@@ -44,6 +49,7 @@ const userMock = [
     userId: 5,
     userName: 'Ефремов Мартын Ростиславович',
     userNumber: '+7 (111) 222-22-22',
+    role: UserRole.VOLUNTEER,
   },
 ];
 
@@ -83,6 +89,7 @@ export function TasksPage() {
                 userName={item.userName}
                 userId={item.userId}
                 userNumber={item.userNumber}
+                role={item.role}
               />
             </li>
           ))}
