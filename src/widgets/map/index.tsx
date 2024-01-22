@@ -1,15 +1,14 @@
 import { memo, useState } from 'react';
-import { Map, YMaps } from '@pbe/react-yandex-maps';
+import { Map, YMaps, Circle } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
-
-import { isTaskUrgent } from 'shared/libs/utils';
+import { isTaskUrgent, getBounds } from 'shared/libs/utils';
 import Mark from './Mark';
 import { LightPopup } from 'shared/ui/light-popup';
 import { unauthorizedVolunteerPopupMessage } from 'shared/libs/constants';
-
 import type { Task } from 'entities/task/types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface YandexMapProps {
   width?: string | number;
@@ -19,9 +18,10 @@ interface YandexMapProps {
     longitude: number;
     zoom: number;
   };
+  radius?: number;
   tasks?: Task[];
   onClick?: () => void;
-  coordinates?: [number, number];
+  coordinates?: GeoCoordinates;
   isAuthorised?: boolean;
 }
 
@@ -29,6 +29,7 @@ export const YandexMap = ({
   width = 500,
   height = 500,
   mapSettings = { latitude: 59.93, longitude: 30.31, zoom: 15 },
+  radius,
   onClick,
   tasks,
   coordinates,
@@ -60,6 +61,9 @@ export const YandexMap = ({
       >
         <Map
           state={{
+            bounds: radius
+              ? getBounds([mapSettings.latitude, mapSettings.longitude], radius)
+              : undefined,
             center: [mapSettings.latitude, mapSettings.longitude],
             zoom: mapSettings.zoom,
           }}
@@ -91,7 +95,30 @@ export const YandexMap = ({
               })}
             />
           ))}
-          <Mark coordinates={coordinates} />
+          {coordinates && (
+            <Mark
+              coordinates={
+                Array.isArray(coordinates)
+                  ? coordinates
+                  : [coordinates.latitude, coordinates.longitude]
+              }
+            />
+          )}
+          {radius && (
+            <Circle
+              geometry={[
+                [mapSettings.latitude, mapSettings.longitude],
+                radius * 1000,
+              ]}
+              options={{
+                draggable: false,
+                fillColor: '#DB709377',
+                strokeColor: '#990066',
+                strokeOpacity: 0.8,
+                strokeWidth: 5,
+              }}
+            />
+          )}
         </Map>
       </YMaps>
       {!isGranted && (
