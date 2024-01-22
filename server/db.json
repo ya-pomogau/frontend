@@ -586,6 +586,114 @@
       }
     },
     {
+      "id": "18",
+      "title": "Название задачи 14",
+      "category": {
+        "id": "2",
+        "name": "Покупка продуктов",
+        "scope": 1
+      },
+      "date": "2023-09-10T17:30Z",
+      "description": "Короткое описание для задачи номер 14.",
+      "completed": false,
+      "confirmed": false,
+      "conflict": false,
+      "recipient": {
+        "id": "4",
+        "fullname": "Реципиентов Алексей Борисович",
+        "role": "Recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Нахимова, д. 9",
+        "coordinates": [
+          59.941871,
+          30.223494
+        ],
+        "approved": true
+      },
+      "volunteer": {
+        "id": "7",
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "Volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [
+          59.942575,
+          30.216757
+        ],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
+      },
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [
+        59.941871,
+        30.223494
+      ],
+      "chat": {
+        "id": 4327,
+        "unread": 50
+      }
+    },
+    {
+      "id": "14",
+      "title": "Название задачи 14",
+      "category": {
+        "id": "3",
+        "name": "Покупка вещей/техники",
+        "scope": 1
+      },
+      "date": "2023-09-10T17:30Z",
+      "description": "Короткое описание для задачи номер 14.",
+      "completed": false,
+      "confirmed": false,
+      "conflict": false,
+      "recipient": {
+        "id": "4",
+        "fullname": "Реципиентов Алексей Борисович",
+        "role": "Recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Нахимова, д. 9",
+        "coordinates": [
+          59.941871,
+          30.223494
+        ],
+        "approved": true
+      },
+      "volunteer": {
+        "id": "7",
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [
+          59.942575,
+          30.216757
+        ],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
+      },
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [
+        59.941871,
+        30.223494
+      ],
+      "chat": {
+        "id": 4327,
+        "unread": 50
+      }
+    },
+    {
       "id": "19",
       "title": "Достаточно длинное название для задачи 19",
       "category": {
