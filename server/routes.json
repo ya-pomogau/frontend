@@ -4,5 +4,6 @@
     "/tasks/active": "/tasksActive",
     "/tasks/completed": "/tasksCompleted",
     "/tasks/available": "/tasksAvailable",
-    "/tasks/:id/": "/tasksAvailable/:id"
+    "/tasks/:id/": "/tasksAvailable/:id",
+    "/posts": "/posts"
   }
