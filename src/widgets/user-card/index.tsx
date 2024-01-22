@@ -9,10 +9,10 @@ import UserInfo from './components/user-info';
 import VolunteerActions from './components/volonteer-actions';
 import RecipientActions from './components/recipient-actions';
 import AdminActions from './components/admin-actions';
-import { UserRole } from '../../entities/user/types';
+import { UserRole } from '../../shared/types/common.types';
 
 interface UserCardProps {
-  role?: UserRole;
+  role: UserRole;
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
@@ -62,7 +62,7 @@ export const UserCard = ({
       className={classnames(
         styles.content,
         extClassName,
-        role === 'admin' && styles.admin_content
+        role === UserRole.ADMIN && styles.admin_content
       )}
     >
       <Avatar
@@ -70,7 +70,7 @@ export const UserCard = ({
         avatarName={avatarName}
         avatarLink={avatarLink}
       />
-      {(role === 'volunteer' || role === 'recipient') && (
+      {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
         <div className={classnames(styles.icons_div)}>
           <RoundButton
             buttonType="phone"
@@ -90,7 +90,7 @@ export const UserCard = ({
         role={role}
       />
 
-      {role === 'volunteer' && (
+      {role === UserRole.VOLUNTEER && (
         <VolunteerActions
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
@@ -112,7 +112,7 @@ export const UserCard = ({
         />
       )}
 
-      {role === 'recipient' && (
+      {role === UserRole.RECIPIENT && (
         <RecipientActions
           approved={approved}
           onConfirmClick={() => {
@@ -124,7 +124,7 @@ export const UserCard = ({
         />
       )}
 
-      {role === 'admin' && (
+      {role === UserRole.ADMIN && (
         <AdminActions
           onAdminSaveClick={() => {
             console.log('Admin save button pressed');
