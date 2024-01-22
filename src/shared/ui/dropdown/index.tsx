@@ -17,6 +17,8 @@ interface IDropdownProps {
   selected: Option | undefined;
   onChange: (item: Option) => void;
   extClassName?: string;
+  popupOpen?: any;
+  refLi?: any;
 }
 
 const Dropdown = ({
@@ -26,6 +28,8 @@ const Dropdown = ({
   onChange,
   label,
   extClassName,
+  popupOpen,
+  refLi,
 }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
 
@@ -45,7 +49,7 @@ const Dropdown = ({
   const commonIds = categories.filter((obj: any) =>
     categoryId.includes(obj.id)
   );
-  console.log(commonIds);
+
   const commonSelected = commonIds?.map((item: any) => ({
     value: String(item.id),
     label: item.name,
@@ -87,10 +91,11 @@ const Dropdown = ({
             });
             return (
               <li
+                ref={itemSelect && refLi}
                 className={itemSelect ? styles.itemSelected : styles.item}
                 key={item.value}
                 onClick={() => {
-                  itemSelect ? console.log('нельзя') : handleOnChange(item);
+                  itemSelect ? popupOpen() : handleOnChange(item);
                 }}
               >
                 {item?.label}
