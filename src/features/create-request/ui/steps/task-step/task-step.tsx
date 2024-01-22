@@ -31,22 +31,6 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
 
   const dispatch = useAppDispatch();
 
-  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
-  const optionRef = useRef<HTMLLIElement>(null);
-
-  const getCoords = () => {
-    console.log(optionRef);
-    console.log(window.innerHeight);
-    const box = optionRef.current?.getBoundingClientRect();
-    console.log(box);
-    if (box) {
-      setPopupPosion({
-        right: window.innerWidth - box.right,
-        top: box.top + box.height,
-      });
-    }
-  };
-
   const optionsForSelect = categories?.map((item) => ({
     value: String(item.id),
     label: item.name,
@@ -75,12 +59,12 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
 
   const propsButton = usePropsButtonCustom();
 
-  const handlePopupOpen = () => {
-    if (!isOpen) {
-      getCoords();
-    }
-    setIsOpen((prev) => !prev);
-  };
+  // const handlePopupOpen = () => {
+  //   if (!isOpen) {
+  //     getCoords();
+  //   }
+  //   setIsOpen((prev) => !prev);
+  // };
 
   const disabledBtn = () => {
     if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
@@ -91,13 +75,13 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('resize', getCoords);
+  // useEffect(() => {
+  //   window.addEventListener('resize', getCoords);
 
-    return () => {
-      window.removeEventListener('resize', getCoords);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('resize', getCoords);
+  //   };
+  // }, []);
 
   return (
     <div className={styles.mainWrapper}>
@@ -122,8 +106,6 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               onChange={handleTaskValueChange}
               items={optionsForSelect}
               extClassName={styles.select}
-              popupOpen={handlePopupOpen}
-              refLi={optionRef}
             />
 
             <TextArea
@@ -145,8 +127,6 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               onChange={handleTaskValueChange}
               items={optionsForSelect}
               extClassName={styles.select}
-              popupOpen={handlePopupOpen}
-              refLi={optionRef}
             />
             {category.value === '' && category.label === '' && (
               <p className={styles.messageAlert}>Выберите тип задачи</p>
@@ -160,7 +140,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               extClassName={styles.textarea}
               maxLength={300}
             />
-            {isOpen && (
+            {/* {isOpen && (
               <Tooltip
                 visible
                 changeVisible={() => setIsOpen(false)}
@@ -180,7 +160,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
                 </div>
                 Здесь будет текст
               </Tooltip>
-            )}
+            )} */}
           </>
         )}
       </div>
