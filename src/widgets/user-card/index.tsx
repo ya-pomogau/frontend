@@ -75,7 +75,9 @@ export const UserCard = ({
         <div className={classnames(styles.icons_div)}>
           <RoundButton
             buttonType="phone"
-            onClick={() => console.log('call button pressed')}
+            onClick={() => {
+              window.location.href = 'tel:' + userNumber;
+            }}
           />
           <RoundButton
             buttonType="message"
