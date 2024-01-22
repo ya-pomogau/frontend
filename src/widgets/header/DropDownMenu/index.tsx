@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useEffect, useRef } from 'react';
+import { ReactComponentElement, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { SideBar } from 'widgets/header/navigation';
 
@@ -13,7 +13,7 @@ import { DropDownMenuButton } from 'shared/ui/DropDownMenuButton';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from 'entities/user/model';
 
-const modalRoot = document.getElementById('modal') as HTMLElement;
+export const modalRoot = document.getElementById('modal') as HTMLElement;
 
 const line = {
   background: '#E0E0E0',
@@ -72,10 +72,9 @@ export const DropDownMenu = ({ setMenuActive, menuActive }: MenuProps) => {
       ref={ref}
     >
       {user ? (
-        <>
+        <div className={styles.wrapper}>
           <DropDownMenuButton
             isMobile={isMobile}
-            extraClass={styles.header__sidebar__admin_button}
             onClick={() => console.log('Нажали кнопку')}
             buttonType="adminMessage"
           >
@@ -89,14 +88,10 @@ export const DropDownMenu = ({ setMenuActive, menuActive }: MenuProps) => {
           ) : (
             <div style={line}></div>
           )}
-          <DropDownMenuButton
-            isMobile={isMobile}
-            extraClass={styles.button}
-            onClick={handlerOnClick}
-          >
+          <DropDownMenuButton isMobile={isMobile} onClick={handlerOnClick}>
             Выход
           </DropDownMenuButton>
-        </>
+        </div>
       ) : null}
     </div>,
     modalRoot

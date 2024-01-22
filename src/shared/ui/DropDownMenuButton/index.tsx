@@ -6,7 +6,6 @@ import { Icon } from 'shared/ui/icons';
 import styles from './DropDownMenuButton.module.css';
 
 type DropDownMenuButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  extraClass?: string;
   isMobile?: boolean;
   isDisabled?: boolean;
   buttonType?: string;
@@ -17,14 +16,7 @@ export const DropDownMenuButton = forwardRef<
   DropDownMenuButtonProps
 >(
   (
-    {
-      children,
-      isMobile = false,
-      isDisabled,
-      extraClass,
-      buttonType,
-      ...buttonProps
-    },
+    { children, isMobile = false, isDisabled, buttonType, ...buttonProps },
     ref
   ) => {
     const sendMessageIcon = (
@@ -37,24 +29,24 @@ export const DropDownMenuButton = forwardRef<
     const logoutIcon = <Icon color="blue" icon="ExitIcon" size="24" />;
     return (
       <button
-        className={classnames(styles.adminButton, extraClass)}
+        className={styles.adminButton}
         type="button"
         ref={ref}
         disabled={isDisabled}
         {...buttonProps}
       >
         {buttonType ? (
-          <>
+          <div className={styles.wrapper}>
             <p className={styles.title}>{children}</p>
             <div className={isDisabled ? styles.icon_disable : styles.icon}>
               {sendMessageIcon}
             </div>
-          </>
+          </div>
         ) : (
-          <>
+          <div className={styles.wrapper}>
             <p className={styles.title_logout}>{children}</p>
             {logoutIcon}
-          </>
+          </div>
         )}
 
         {isMobile && (

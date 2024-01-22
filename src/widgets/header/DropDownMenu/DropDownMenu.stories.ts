@@ -12,10 +12,17 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   name: 'adminMessage',
-  args: {
-    menuActive: true,
-    //children: '',
-    //isDisabled: false,
-    //isMobile: false,
-  },
+  decorators: [
+    (Story) => (
+      <div style = {{ margin: 0 }} >
+  <Story/>
+  < /div>)
+  ],
+
+//args: {
+//  menuActive: true,
+//    //children: '',
+//    //isDisabled: false,
+//    //isMobile: false,
+//  },
 };

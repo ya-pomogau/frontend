@@ -2,14 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { DropDownMenuButton } from '.';
 import './DropDownMenuButton.module.css';
 
-const meta: Meta<typeof DropDownMenuButton> = {
+const MenuButton: Meta<typeof DropDownMenuButton> = {
   title: 'uikit/Buttons/DropDownMenuButton',
   component: DropDownMenuButton,
   tags: ['autodocs'],
 };
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+
+export default MenuButton;
+type Story = StoryObj<typeof DropDownMenuButton>;
 
 export const Primary: Story = {
   name: 'adminMessage',
