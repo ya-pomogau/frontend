@@ -92,17 +92,36 @@ const Dropdown = ({
     setIsOpen((prev) => !prev);
   };
   useEffect(() => {
-    commonSelected.map((item:Option)=>{
-      window.addEventListener('resize', () =>  popupOpened(item));
-    })
-      
+    window.addEventListener('resize', () => setIsOpen(false));
 
     return () => {
-      commonSelected.map((item:Option)=>{
-        window.removeEventListener('resize', () =>  popupOpened(item));
-      })
+      window.removeEventListener('resize', () => setIsOpen(false));
     };
   }, []);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     commonSelected.forEach((item) => {
+  //       popupOpened(item);
+  //     });
+  //   };
+
+  //   window.addEventListener('resize', handleResize);
+
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, [isOpen]);
+  // useEffect(() => {
+  //   commonSelected.map((item: Option) => {
+  //     window.addEventListener('resize', () => popupOpened(item));
+  //   });
+
+  //   return () => {
+  //     commonSelected.map((item: Option) => {
+  //       window.removeEventListener('resize', () => popupOpened(item));
+  //     });
+  //   };
+  // }, []);
   // const getCoords = () => {
   //   console.log(refMap);
   //   console.log(window.innerHeight);
@@ -170,6 +189,7 @@ const Dropdown = ({
       {isOpen && (
         <Tooltip
           visible
+          pointerPosition={'center'}
           changeVisible={() => setIsOpen(false)}
           elementStyles={{
             position: 'absolute',
