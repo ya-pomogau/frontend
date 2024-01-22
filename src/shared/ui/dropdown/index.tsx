@@ -20,6 +20,8 @@ interface IDropdownProps {
   selected: Option | undefined;
   onChange: (item: Option) => void;
   extClassName?: string;
+  popupOpen?: any;
+  refLi?: any;
 }
 interface Coords {
   right: number;
@@ -32,6 +34,8 @@ const Dropdown = ({
   onChange,
   label,
   extClassName,
+  popupOpen,
+  refLi,
 }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -109,7 +113,7 @@ const Dropdown = ({
   const commonIds = categories.filter((obj: any) =>
     categoryId.includes(obj.id)
   );
-  console.log(commonIds);
+
   const commonSelected = commonIds?.map((item: any) => ({
     value: String(item.id),
     label: item.name,
