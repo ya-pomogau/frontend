@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -15,15 +15,21 @@ import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 import styles from './task-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
+import { Tooltip } from 'shared/ui/tooltip';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
-
+interface Coords {
+  right: number;
+  top: number;
+}
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const { descriptionForTask, categories, category, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
+  const [isOpen, setIsOpen] = useState(false);
   // const userId = useAppSelector((state) => state.user.data?.id);
   // const { data: tasks } = useGetTasksByStatusQuery('active');
   // console.log(tasks);
@@ -47,6 +53,22 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   // console.log(commonSelected);
   const dispatch = useAppDispatch();
 
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+  const optionRef = useRef<HTMLLIElement>(null);
+
+  const getCoords = () => {
+    console.log(optionRef);
+    console.log(window.innerHeight);
+    const box = optionRef.current?.getBoundingClientRect();
+    console.log(box);
+    if (box) {
+      setPopupPosion({
+        right: window.innerWidth - box.right,
+        top: box.top + box.height,
+      });
+    }
+  };
+
   const optionsForSelect = categories?.map((item) => ({
     value: String(item.id),
     label: item.name,
@@ -66,6 +88,13 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
 
   const propsButton = usePropsButtonCustom();
 
+  const handlePopupOpen = () => {
+    if (!isOpen) {
+      getCoords();
+    }
+    setIsOpen((prev) => !prev);
+  };
+
   const disabledBtn = () => {
     if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
       return true;
@@ -74,6 +103,14 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
       return true;
     }
   };
+
+  useEffect(() => {
+    window.addEventListener('resize', getCoords);
+
+    return () => {
+      window.removeEventListener('resize', getCoords);
+    };
+  }, []);
 
   return (
     <div className={styles.mainWrapper}>
@@ -98,6 +135,8 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               onChange={handleTaskValueChange}
               items={optionsForSelect}
               extClassName={styles.select}
+              popupOpen={handlePopupOpen}
+              refLi={optionRef}
             />
             <TextArea
               value={descriptionForTask}
@@ -118,6 +157,8 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               onChange={handleTaskValueChange}
               items={optionsForSelect}
               extClassName={styles.select}
+              popupOpen={handlePopupOpen}
+              refLi={optionRef}
             />
             <TextArea
               value={descriptionForTask}
@@ -128,6 +169,27 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               extClassName={styles.textarea}
               maxLength={300}
             />
+            {isOpen && (
+              <Tooltip
+                visible
+                changeVisible={() => setIsOpen(false)}
+                elementStyles={{
+                  position: 'absolute',
+                  top: `${popupPosion?.top}px`,
+                  right: `${popupPosion?.right}px`,
+                }}
+              >
+                <div className={styles.closeWrapper}>
+                  <CloseCrossIcon
+                    className={styles.closeIcon}
+                    size="14"
+                    color="blue"
+                    onClick={() => setIsOpen(false)}
+                  />
+                </div>
+                Здесь будет текст
+              </Tooltip>
+            )}
           </>
         )}
       </div>
