@@ -8,7 +8,6 @@ const MenuButton: Meta<typeof DropDownMenuButton> = {
   tags: ['autodocs'],
 };
 
-
 export default MenuButton;
 type Story = StoryObj<typeof DropDownMenuButton>;
 
