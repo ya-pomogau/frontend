@@ -72,7 +72,6 @@ const Dropdown = ({
   const refMap = useRef<{
     [key: string]: React.MutableRefObject<HTMLLIElement | null>;
   }>({});
-
   useEffect(() => {
     refMap.current = {}; // Сброс объекта при каждом монтировании
   }, []);
