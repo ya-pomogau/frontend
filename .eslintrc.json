@@ -6,7 +6,6 @@
   "extends": [
     "airbnb-typescript",
     "react-app",
-    "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
@@ -15,18 +14,30 @@
     "plugin:import/typescript",
     "plugin:prettier/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "prettier"
   ],
   "settings": {
     "import/resolver": {
       "typescript": true,
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "moduleDirectory": ["node_modules", "src/"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ],
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
       }
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
     }
   },
   "overrides": [],
@@ -34,16 +45,29 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "prettier",
+    "@typescript-eslint"
+  ],
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "no-param-reassign": 0,
     "react/function-component-definition": "off",
     "react/require-default-props": "off",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".tsx"]
+        "extensions": [
+          ".tsx"
+        ]
       }
     ],
     "import/extensions": [
@@ -55,13 +79,23 @@
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/*.stories.ts*"] }
+      {
+        "devDependencies": [
+          "**/*.stories.ts*"
+        ]
+      }
     ],
     "@typescript-eslint/naming-convention": [
       "error",
       {
         "selector": "default",
-        "format": ["camelCase", "strictCamelCase", "snake_case", "UPPER_CASE", "PascalCase"],
+        "format": [
+          "camelCase",
+          "strictCamelCase",
+          "snake_case",
+          "UPPER_CASE",
+          "PascalCase"
+        ],
         "leadingUnderscore": "allow"
       }
     ],
