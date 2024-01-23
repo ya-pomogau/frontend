@@ -58,7 +58,10 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   if (!data) return null;
 
   return (
-    <OverlayingPopup isOpened={isPopupOpen} onClose={handleCloseClick}>
+    <OverlayingPopup
+      isOpened={isPopupOpen}
+      onClose={isOpen ? undefined : handleCloseClick}
+    >
       <div>
         <MainPopup
           name={data.fullname}
@@ -70,7 +73,10 @@ export const Request = ({ isMobile = true }: RequestProps) => {
           extClassName={isMobile ? styles.mainPopUpWrapperMobile : undefined}
         >
           {isOpen && (
-            <OverlayingPopup isOpened={isOpen} onClose={handleCloseClick}>
+            <OverlayingPopup
+              isOpened={isOpen}
+              onClose={isOpen ? () => setIsOpen(false) : undefined}
+            >
               <div>
                 <Tooltip
                   visible
