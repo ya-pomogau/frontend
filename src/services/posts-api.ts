@@ -17,11 +17,12 @@ export const postsApi = createApi({
             ]
           : [{ type: 'Posts', id: 'LIST' }],
     }),
-    addPost: build.mutation<void, PostProps>({
+    addPost: build.mutation<void, FormData>({
       query: (body) => ({
         url: 'posts',
         method: 'POST',
         body,
+        formData: true,
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),

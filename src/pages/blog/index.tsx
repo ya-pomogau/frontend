@@ -14,6 +14,7 @@ import { useAppSelector } from 'app/hooks';
 import { Loader } from 'shared/ui/loader';
 import { PostProps } from 'shared/ui/post/Post';
 import { useRef, useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 
 const postsPerPage = 10;
 
@@ -22,6 +23,9 @@ export function BlogPage() {
 
   const { data: posts, isLoading } = useGetPostsQuery(postsPerPage);
   const [addPost, { isLoading: isLoadingNewPost }] = useAddPostMutation();
+  const [attachments, setAttachments] = useState<
+    { file: File; id: string; name: string }[]
+  >([]);
   const [editPost, { isLoading: isLoadingEditedPost }] = useEditPostMutation();
   const [idEditedPost, setIdEditedPost] = useState<string | undefined>(
     undefined
@@ -38,20 +42,47 @@ export function BlogPage() {
 
   const isAdmin = user?.role === 'admin' || user?.role === 'master';
 
+  const handleAddAttachment = (fileList: FileList | null) => {
+    if (!fileList) return;
+
+    const additionalImages = Array.from(fileList).map((file) => ({
+      file: file,
+      id: `${nanoid()}`,
+      name: file.name,
+    }));
+
+    setAttachments((prev) => [...prev, ...additionalImages]);
+  };
+
+  const handleRemoveAttachment = (id: string) => {
+    setAttachments(attachments.filter((attachment) => attachment.id !== id));
+  };
+
   const handlePublishPost = async () => {
     if (!(values.title.trim() && values.description.trim() && user)) return;
 
+    const formData = new FormData();
+
     if (!idEditedPost) {
-      await addPost({
-        title: values.title,
-        description: values.description,
-        images: [],
-        author: {
-          id: user.id,
-          fullname: user.fullname,
-          avatar: user.avatar,
-        },
-      });
+      formData.append(
+        'content',
+        JSON.stringify({
+          title: values.title,
+          description: values.description,
+          author: {
+            id: user.id,
+            fullname: user.fullname,
+            avatar: user.avatar,
+          },
+        })
+      );
+
+      for (const attachment of attachments) {
+        formData.append('attachments', attachment.file);
+      }
+
+      await addPost(formData);
+
       setValues({ title: '', description: '' });
     } else {
       await editPost({ ...values, id: idEditedPost });
@@ -59,6 +90,8 @@ export function BlogPage() {
 
       const index = posts?.findIndex((post) => post.id === idEditedPost);
       if (index !== undefined && index > -1) {
+        /* атрибут disabled у кнопки отправляющей форму блокирует scrollIntoView,
+        подробное описание https://github.com/facebook/react/issues/20770 */
         setTimeout(() => {
           refPostList.current?.children[index]?.scrollIntoView({
             behavior: 'smooth',
@@ -71,7 +104,7 @@ export function BlogPage() {
   };
 
   const handleDeletePost = async (id: string) => {
-    await deletePost(id).unwrap();
+    await deletePost(id);
   };
 
   const handleEditPost = (post: Partial<PostProps>) => {
@@ -101,10 +134,11 @@ export function BlogPage() {
           refPostForm={refPostForm}
           title={values.title}
           description={values.description}
-          addAttachment={() => {}}
-          removeAttachment={() => {}}
+          addAttachment={handleAddAttachment}
+          removeAttachment={handleRemoveAttachment}
           handleChange={handleChange}
           handleSubmit={handlePublishPost}
+          images={attachments}
         />
       )}
 
