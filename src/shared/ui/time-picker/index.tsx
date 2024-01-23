@@ -9,16 +9,10 @@ export interface ITimePickerElement {
   setStartTime?: React.Dispatch<React.SetStateAction<string>>;
   endTime?: string;
   setEndTime?: React.Dispatch<React.SetStateAction<string>>;
-  // variant: 'start' | 'end';
-  // times: string[];
-  // setTimes: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export function TimePickerElement({
   isMobile,
-  // variant,
-  // times,
-  // setTimes,
   startTime,
   setStartTime,
   endTime,
@@ -32,18 +26,7 @@ export function TimePickerElement({
     setIsOpenClockElement(true);
   };
 
-  // if (times) {
-  //   console.log(`startTime ${times[0]}`);
-  //   console.log(`endTime ${times[1]}`);
-  // }
-
   const handleSetTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // if (variant === 'start') {
-    //   setTimes([e.target.value, ...times.slice(0, 1)]);
-    // } else if (variant === 'end') {
-    //   setTimes([...times.slice(0, 1), e.target.value]);
-    // }
-
     if (startTime && setStartTime) {
       setStartTime(e.target.value);
     } else if (endTime && setEndTime) {
