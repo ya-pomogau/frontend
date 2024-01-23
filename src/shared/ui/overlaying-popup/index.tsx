@@ -24,14 +24,20 @@ export const OverlayingPopup = ({
 
   return (
     <Portal isOpened>
-      <div className={classNames(styles.popup)} role="dialog" id="label">
-        <div
-          className={classNames(styles.overlay, extClassName)}
-          role="button"
-          tabIndex={0}
-          onClick={onClose}
-          aria-labelledby="label"
-        ></div>
+      <div
+        className={classNames(styles.popup, extClassName)}
+        role="dialog"
+        id="label"
+      >
+        {
+          <div
+            className={classNames(styles.overlay)}
+            role="button"
+            tabIndex={0}
+            onClick={onClose}
+            aria-labelledby="label"
+          ></div>
+        }
         {children}
       </div>
     </Portal>
