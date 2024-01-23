@@ -4,6 +4,7 @@ import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
 import Checkbox from 'shared/ui/checkbox';
 import { useAppSelector } from 'app/hooks';
+import { VariantCheckbox } from 'shared/types/common.types';
 
 interface SortByBlockProps {
   filter: string;
@@ -20,8 +21,8 @@ export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
   return (
     <Fieldset title="Отображать" view={FieldsetView.COLUMN}>
       <Checkbox
-        checked={filter === 'date'}
-        id="date"
+        checked={filter === VariantCheckbox.DATE}
+        id={VariantCheckbox.DATE}
         label="По дате"
         onChange={handleCheckboxChange}
       />
@@ -29,15 +30,15 @@ export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
       {role === 'volunteer' && (
         <>
           <Checkbox
-            checked={filter === 'decreasingPoints'}
-            id="decreasingPoints"
+            checked={filter === VariantCheckbox.DECREASINGPOINTS}
+            id={VariantCheckbox.DECREASINGPOINTS}
             label="По убывающим баллам"
             onChange={handleCheckboxChange}
           />
 
           <Checkbox
-            checked={filter === 'increasingPoints'}
-            id="increasingPoints"
+            checked={filter === VariantCheckbox.INCREASINGPOINTS}
+            id={VariantCheckbox.INCREASINGPOINTS}
             label="По возростающим баллам"
             onChange={handleCheckboxChange}
           />

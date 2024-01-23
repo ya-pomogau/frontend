@@ -11,8 +11,7 @@ import { Loader } from 'shared/ui/loader';
 import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
-import { format } from 'date-fns';
-import { sortTasks } from 'shared/libs/utils';
+import { handleFilterTasks } from 'shared/libs/utils';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -32,52 +31,8 @@ export function ProfileActivePage() {
   });
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
-  const handleTasksFilter = (arr: Task[]) =>
-    arr.filter((task: Task) =>
-      infoFilterTasks.categories.includes(task.category.name)
-    );
-
   useEffect(() => {
-    if (tasks) {
-      setFilterTasks(tasks);
-    }
-    const sortDisplay = (arr: Task[], text: string): Task[] => {
-      let sortedTasks: Task[] = [];
-      switch (text) {
-        case 'date':
-          sortedTasks = sortTasks(arr, 'date');
-          break;
-        case 'decreasingPoints':
-          sortedTasks = sortTasks(arr, 'decreasing');
-          break;
-        case 'increasingPoints':
-          sortedTasks = sortTasks(arr, 'increasing');
-          break;
-        default:
-          // Handle default case or invalid text value
-          break;
-      }
-      return sortedTasks;
-    };
-    if (infoFilterTasks?.categories.length) {
-      const filteredTasks = tasks.filter((task: Task) => {
-        return infoFilterTasks.categories.includes(task.category.name);
-      });
-      if (infoFilterTasks?.sortBy) {
-        sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy);
-      } else {
-        setFilterTasks(filteredTasks);
-      }
-    }
-    if (infoFilterTasks?.sortBy) {
-      if (infoFilterTasks?.categories.length > 0) {
-        setFilterTasks(
-          sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy)
-        );
-      } else {
-        setFilterTasks(sortDisplay(tasks, infoFilterTasks.sortBy));
-      }
-    }
+    handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
     // eslint-disable-next-line
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
