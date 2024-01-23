@@ -1,4 +1,4 @@
-import { ChangeEvent, Ref, type FC, useState } from 'react';
+import { ChangeEvent, Ref, type FC } from 'react';
 import classNames from 'classnames';
 import { Button } from '../button';
 import { Input } from '../input';
@@ -90,6 +90,7 @@ export const PostForm: FC<PostFormProps> = ({
                 customIcon={<CloseCrossIcon size="14" color="blue" />}
                 extClassName={styles['close-cross-button']}
                 onClick={() => removeAttachment(id)}
+                type="button"
               />
             </div>
           ))}

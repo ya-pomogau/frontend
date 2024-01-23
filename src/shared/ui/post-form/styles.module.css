@@ -3,6 +3,12 @@
   padding-left: 30px;
 }
 
+@media (max-width: 920px) {
+  .form {
+    width: 94%;
+  }
+}
+
 .input {
   padding-bottom: 10px;
 }
