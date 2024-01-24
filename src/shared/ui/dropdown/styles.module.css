@@ -68,6 +68,21 @@
   align-items: center;
   border-bottom: solid 1px var(--colors-interface-additional);
 }
+.text {
+  font-family: 'Golos', sans-serif;
+  max-width: 294px;
+  margin: auto;
+}
+.closeWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeIcon:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
 .itemSelected:hover {
   background: #f4f4f4;
 }

@@ -9,6 +9,7 @@ import { useAppSelector } from 'app/hooks';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
 import { Tooltip } from '../tooltip';
+import { Task } from 'entities/task/types';
 
 export type Option = { value: string; label: string };
 
@@ -19,8 +20,6 @@ interface IDropdownProps {
   selected: Option | undefined;
   onChange: (item: Option) => void;
   extClassName?: string;
-  popupOpen?: any;
-  refLi?: any;
 }
 interface Coords {
   right: number;
@@ -33,33 +32,32 @@ const Dropdown = ({
   onChange,
   label,
   extClassName,
-  popupOpen,
-  refLi,
 }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: tasks } = useGetTasksByStatusQuery('active');
-  // console.log(tasks);
+
   const userId = useAppSelector((state) => state.user.data?.id);
   const { categories } = useAppSelector((state) => state.createRequest);
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   // Фильтруем заявки по id
-  const taskId = tasks.filter((item: any) => {
+
+  const taskId = tasks.filter((item: Task) => {
     if (item.recipient.id === userId) {
       return item;
     }
   });
   // Получаем id категории
-  const categoryId = taskId.map((item: any) => item.category.id);
+  const categoryId = taskId.map((item: Task) => item.category.id);
   //Получем объект уже выбранной категории
-  const commonIds = categories.filter((obj: any) =>
-    categoryId.includes(obj.id)
-  );
+  const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
 
-  const commonSelected = commonIds?.map((item: any) => ({
+  const commonSelected = commonIds?.map((item) => ({
     value: String(item.id),
     label: item.name,
   }));
+
   const handleOnChange = useCallback(
     (item: Option) => {
       onChange(item);
@@ -71,7 +69,7 @@ const Dropdown = ({
   const refMap = useRef<{
     [key: string]: React.MutableRefObject<HTMLLIElement | null>;
   }>({});
-  // console.log(refMap);
+
   useEffect(() => {
     refMap.current = {}; // Сброс объекта при каждом монтировании
   }, []);
@@ -86,9 +84,6 @@ const Dropdown = ({
         top: boundingClientRect.top + boundingClientRect.height,
       });
     }
-    // if (!isOpen) {
-    //   popupOpened(item);
-    // }
     setIsOpen((prev) => !prev);
   };
   useEffect(() => {
@@ -98,44 +93,7 @@ const Dropdown = ({
       window.removeEventListener('resize', () => setIsOpen(false));
     };
   }, []);
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     commonSelected.forEach((item) => {
-  //       popupOpened(item);
-  //     });
-  //   };
 
-  //   window.addEventListener('resize', handleResize);
-
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, [isOpen]);
-  // useEffect(() => {
-  //   commonSelected.map((item: Option) => {
-  //     window.addEventListener('resize', () => popupOpened(item));
-  //   });
-
-  //   return () => {
-  //     commonSelected.map((item: Option) => {
-  //       window.removeEventListener('resize', () => popupOpened(item));
-  //     });
-  //   };
-  // }, []);
-  // const getCoords = () => {
-  //   console.log(refMap);
-  //   console.log(window.innerHeight);
-  //   const box = refMap.current?.getBoundingClientRect();
-  //   console.log(box);
-  //   if (box) {
-  //     setPopupPosion({
-  //       right: window.innerWidth - box.right,
-  //       top: box.top + box.height,
-  //     });
-  //   }
-  // };
-
-  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   return (
     <div className={classNames(styles.dropdown, extClassName)}>
       <div className={classNames('text', 'text_size_middle', styles.label)}>
@@ -168,8 +126,7 @@ const Dropdown = ({
             if (!refMap.current[refKey]) {
               refMap.current[refKey] = React.createRef<HTMLLIElement>();
             }
-            console.log(itemSelect);
-            console.log(refMap.current[refKey]);
+
             return (
               <li
                 ref={itemSelect && refMap.current[refKey]}
@@ -205,7 +162,9 @@ const Dropdown = ({
               onClick={() => setIsOpen(false)}
             />
           </div>
-          Здесь будет текст
+          <div className={styles.text}>
+            Такая заявка уже существует. Дождитесь ее выполнения.
+          </div>
         </Tooltip>
       )}
     </div>
