@@ -13,7 +13,7 @@
   box-sizing: border-box;
 }
 
-.input_whithout_label {
+.input_without_label {
   composes: input;
   height: 100%;
 }
