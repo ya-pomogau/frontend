@@ -19,14 +19,17 @@ export const FilterWrapper = ({
 }: FilterWrapperProps) => {
   const [isFilterMenuVisible, setFilterMenuVisible] = useState(false);
 
-  const [filterPosition, setFilterPosition] = useState({ top: 0, right: 0 });
+  const [filterPosition, setFilterPosition] = useState({ top: 10, right: 0 });
   const filterButtonRef = useRef<HTMLButtonElement>(null);
 
   const calculateFilterPosition = useCallback(() => {
     const buttonRect = filterButtonRef.current?.getBoundingClientRect();
 
     if (buttonRect) {
-      setFilterPosition({ top: buttonRect.bottom, right: buttonRect.right });
+      setFilterPosition({
+        top: buttonRect.bottom + 20,
+        right: buttonRect.right,
+      });
     }
   }, []);
 
