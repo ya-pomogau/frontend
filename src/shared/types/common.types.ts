@@ -26,3 +26,10 @@ export enum VariantCheckbox {
   DECREASINGPOINTS = 'decreasingPoints',
   INCREASINGPOINTS = 'increasingPoints',
 }
+export enum TaskButtonType {
+  close = 'close',
+  conflict = 'conflict',
+  confirm = 'confirm',
+  phone = 'phone',
+  cancel = 'cancel',
+}

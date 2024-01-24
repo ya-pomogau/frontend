@@ -10,8 +10,8 @@ import placeholder from './img/placeholder.svg';
 
 import styles from './styles.module.css';
 import { ButtonWithModal } from 'widgets/button-with-modal';
-import { ButtonType } from 'entities/task/types';
 import { ModalContent } from 'widgets/task-buttons-content';
+import { TaskButtonType } from 'shared/types/common.types';
 
 interface TaskItemProps {
   isMobile: boolean;
@@ -82,41 +82,59 @@ export const TaskItem = ({
           <div className={styles.mobile_buttons}>
             {completed && (
               //переписать completed на подходящий параметр
-              <SquareButton
-                buttonType={ButtonType.confirm}
-                extClassName={
-                  recipientName && !date
-                    ? ''
-                    : recipientName
-                    ? ''
-                    : styles.item_hidden
+              <ButtonWithModal
+                modalContent={
+                  <ModalContent
+                    type={TaskButtonType.confirm}
+                    active={isStatusActive}
+                    date={date}
+                  />
                 }
-              />
+              >
+                <SquareButton
+                  buttonType={TaskButtonType.confirm}
+                  extClassName={
+                    recipientName && !date
+                      ? ''
+                      : recipientName
+                      ? ''
+                      : styles.item_hidden
+                  }
+                />
+              </ButtonWithModal>
             )}
             {!completed && (
               //переписать completed на подходящий параметр
-              <SquareButton
-                buttonType={ButtonType.close}
-                extClassName={
-                  !date && recipientName
-                    ? styles.item_hidden
-                    : styles.button_edit
-                }
-                disabled={comparedDateResult || completed}
-              />
+              <ButtonWithModal
+                modalContent={<ModalContent type={TaskButtonType.close} />}
+              >
+                <SquareButton
+                  buttonType={TaskButtonType.close}
+                  extClassName={
+                    !date && recipientName
+                      ? styles.item_hidden
+                      : styles.button_edit
+                  }
+                  disabled={comparedDateResult || completed}
+                />
+              </ButtonWithModal>
             )}
             {!conflict && (
               //переписать true на подходящий параметр
-              <SquareButton
-                buttonType={ButtonType.conflict}
-                extClassName={
-                  recipientName
-                    ? ''
-                    : !comparedDateResult
-                    ? ''
-                    : styles.item_hidden
-                }
-              />
+              <ButtonWithModal
+                modalContent={<ModalContent type={TaskButtonType.conflict} />}
+              >
+                <SquareButton
+                  buttonType={TaskButtonType.conflict}
+                  extClassName={
+                    recipientName
+                      ? ''
+                      : !comparedDateResult
+                      ? ''
+                      : styles.item_hidden
+                  }
+                />
+              </ButtonWithModal>
             )}
             {true && (
               //переписать true на подходящий параметр
@@ -146,10 +164,15 @@ export const TaskItem = ({
           className={styles.mobile_buttons_call}
           style={recipientName ? {} : { display: 'none' }}
         >
-          <RoundButton
-            buttonType={ButtonType.phone}
-            disabled={completed && confirmed}
-          />
+          <ButtonWithModal
+            modalContent={<ModalContent type={TaskButtonType.phone} />}
+          >
+            <RoundButton
+              buttonType={TaskButtonType.phone}
+              disabled={completed && confirmed}
+            />
+          </ButtonWithModal>
+
           <RoundButton
             buttonType="message"
             disabled={completed && confirmed}
@@ -332,13 +355,13 @@ export const TaskItem = ({
               <ButtonWithModal
                 modalContent={
                   <ModalContent
-                    type={ButtonType.phone}
+                    type={TaskButtonType.phone}
                     active={isStatusActive}
                   />
                 }
               >
                 <RoundButton
-                  buttonType={ButtonType.phone}
+                  buttonType={TaskButtonType.phone}
                   disabled={completed && confirmed}
                 />
               </ButtonWithModal>
@@ -354,14 +377,14 @@ export const TaskItem = ({
           <ButtonWithModal
             modalContent={
               <ModalContent
-                type={ButtonType.confirm}
+                type={TaskButtonType.confirm}
                 active={isStatusActive}
                 date={date}
               />
             }
           >
             <SquareButton
-              buttonType={ButtonType.confirm}
+              buttonType={TaskButtonType.confirm}
               //переписать completed если бэк поменяется
               extClassName={
                 recipientName && !date && completed
@@ -373,10 +396,10 @@ export const TaskItem = ({
             />
           </ButtonWithModal>
           <ButtonWithModal
-            modalContent={<ModalContent type={ButtonType.close} />}
+            modalContent={<ModalContent type={TaskButtonType.close} />}
           >
             <SquareButton
-              buttonType={ButtonType.close}
+              buttonType={TaskButtonType.close}
               extClassName={
                 (!date && recipientName) || !isStatusActive
                   ? styles.item_hidden
@@ -389,14 +412,14 @@ export const TaskItem = ({
           <ButtonWithModal
             modalContent={
               <ModalContent
-                type={ButtonType.conflict}
+                type={TaskButtonType.conflict}
                 active={isStatusActive}
                 conflict={conflict}
               />
             }
           >
             <SquareButton
-              buttonType={ButtonType.conflict}
+              buttonType={TaskButtonType.conflict}
               //переписать conflict на подходящий параметр
               extClassName={
                 recipientName && !date && !conflict
