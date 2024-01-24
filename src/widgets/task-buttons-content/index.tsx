@@ -4,12 +4,13 @@ import Checkbox from 'shared/ui/checkbox';
 import styles from './styles.module.css';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { Button } from 'shared/ui/button';
-import { ButtonType, ReasonType } from './types';
+import { ReasonType } from './types';
 import { format } from 'date-fns';
 import { textStyle, titleStyle } from './utils';
+import { TaskButtonType } from 'shared/types/common.types';
 
 interface ModalContentProps {
-  type: ButtonType;
+  type: TaskButtonType;
   active?: boolean;
   conflict?: boolean;
   date?: string;
@@ -23,7 +24,7 @@ export const ModalContent = ({
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   switch (type) {
-    case ButtonType.close:
+    case TaskButtonType.close:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Укажите причину отмены</h3>
@@ -54,14 +55,14 @@ export const ModalContent = ({
               onClick={() => 1}
             />
             <ButtonWithModal
-              modalContent={<ModalContent type={ButtonType.cancel} />}
+              modalContent={<ModalContent type={TaskButtonType.cancel} />}
             >
               <Button buttonType="primary" label="Отменить заявку" />
             </ButtonWithModal>
           </div>
         </div>
       );
-    case ButtonType.conflict:
+    case TaskButtonType.conflict:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>
@@ -88,7 +89,7 @@ export const ModalContent = ({
           )}
         </div>
       );
-    case ButtonType.confirm:
+    case TaskButtonType.confirm:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Благодарим за отзывчивость</h3>
@@ -101,7 +102,7 @@ export const ModalContent = ({
           </p>
         </div>
       );
-    case ButtonType.phone:
+    case TaskButtonType.phone:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Номер телефона:</h3>
@@ -110,7 +111,7 @@ export const ModalContent = ({
           </a>
         </div>
       );
-    case ButtonType.cancel:
+    case TaskButtonType.cancel:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>До начала заявки менее 24 часа</h3>

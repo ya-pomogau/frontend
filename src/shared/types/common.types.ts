@@ -19,3 +19,11 @@ export enum AdminPermission {
   BLOG = 'write the blog',
   CATEGORIES = 'change categories',
 }
+
+export enum TaskButtonType {
+  close = 'close',
+  conflict = 'conflict',
+  confirm = 'confirm',
+  phone = 'phone',
+  cancel = 'cancel',
+}
