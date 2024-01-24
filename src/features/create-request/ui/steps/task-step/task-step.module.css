@@ -31,9 +31,10 @@
 
 .messageAlert {
   color: red;
-  margin: 5px 30px 0 0;
+  margin: 0 46px 0 0;
   font-family: 'Golos', sans-serif;
   font-size: 14px;
+  grid-column-start: 2;
 }
 
 .alertWrapper {
