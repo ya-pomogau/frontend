@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
@@ -17,8 +17,6 @@ import { TaskStep } from './task-step/task-step';
 import { useGetCategoriesQuery } from 'services/categories-api';
 import { Tooltip } from '../../../../shared/ui/tooltip';
 import styles from './styles.module.css';
-import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
-import { SquareButton } from '../../../../shared/ui/square-buttons';
 import { Button } from '../../../../shared/ui/button';
 
 export interface RequestProps {
@@ -36,7 +34,6 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   const handleCloseClick = () => {
     dispatch(closePopup());
     dispatch(clearState());
-    console.log('close');
   };
 
   const closeByEsc = (e: KeyboardEvent) => {
@@ -91,12 +88,12 @@ export const Request = ({ isMobile = true }: RequestProps) => {
                   </div>
                   <div className={styles.buttonWrapper}>
                     <Button
-                      buttonType="primary"
+                      buttonType="secondary"
                       label="Вернуться"
                       onClick={() => setIsOpen(false)}
                     />
                     <Button
-                      buttonType="primary"
+                      buttonType="secondary"
                       label="Закрыть"
                       onClick={handleCloseClick}
                     />
