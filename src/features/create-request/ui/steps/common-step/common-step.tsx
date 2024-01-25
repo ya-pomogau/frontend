@@ -27,9 +27,14 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   };
 
   const handleSubmitClick = () => {
-    console.log(
-      `время: ${time} адрес: ${address} категория: ${category.label} описание:${descriptionForTask} дата: ${date}`
-    );
+    const requestData = {
+      time,
+      date,
+      address,
+      category,
+      descriptionForTask,
+    };
+    console.log(requestData);
     dispatch(clearState());
     dispatch(closePopup());
   };
@@ -118,15 +123,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               content={category.label}
               extClassName={styles.categories}
             />
-            <p
-              className={classNames(
-                'text_size_medium',
-                'text_type_bold ',
-                styles.typeOfTask
-              )}
-            >
-              123
-            </p>
             <p
               className={classNames(
                 'text_size_medium',
