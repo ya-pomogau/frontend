@@ -61,10 +61,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     }
   }, [termlessRequest]);
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
-
   useEffect(() => {
     const dateNow = new Date();
     const currentTime = format(dateNow, 'HH:mm'); // привожу в нужный формат

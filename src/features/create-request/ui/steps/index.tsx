@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
@@ -19,8 +19,6 @@ import { TaskStep } from './task-step/task-step';
 import { useGetCategoriesQuery } from 'services/categories-api';
 import { Tooltip } from '../../../../shared/ui/tooltip';
 import styles from './styles.module.css';
-import { CloseCrossIcon } from '../../../../shared/ui/icons/close-cross-icon';
-import { SquareButton } from '../../../../shared/ui/square-buttons';
 import { Button } from '../../../../shared/ui/button';
 
 export interface RequestProps {
