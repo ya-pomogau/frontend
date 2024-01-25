@@ -30,6 +30,14 @@
 .add_task_icon {
   justify-self: center;
 }
+.add_task_icon_unconf {
+  justify-self: center;
+  background-color: var(--colors-interface-additional);
+}
+
+.add_task_icon_unconf:hover {
+  background-color: var(--colors-interface-yorkshire-cloud);
+}
 
 .add_task {
   display: grid;
@@ -61,4 +69,27 @@
 
 .title_add_empty {
   color: var(--colors-interface-primary);
+  margin-top: 85px;
+}
+.modal {
+  position: absolute;
+  /* top: calc(50% + 340px);
+  left: calc(46vw + 30px); */
+}
+.text {
+  font-family: 'Golos', sans-serif;
+  max-width: 294px;
+  margin: auto;
+}
+
+.closeWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+.closeIcon:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.wrapperBtn {
+  position: relative;
 }

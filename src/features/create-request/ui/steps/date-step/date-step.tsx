@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState, useRef } from 'react';
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
 
@@ -14,6 +14,7 @@ import Checkbox from 'shared/ui/checkbox';
 import { DatePicker } from 'shared/ui/date-picker';
 
 import styles from './date-step.module.css';
+import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
 
 interface IDateStepProps {
   isMobile?: boolean;
@@ -24,21 +25,41 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
+  const [timeValidation, setTimeValidation] = useState(false);
+  const [isOpenClockElement, setIsOpenClockElement] = useState(false);
 
+  const buttonRef = useRef<HTMLDivElement>(null);
+
+  const handleAcceptTime = (selectedTime: any) => {
+    console.log(selectedTime);
+  };
   const handleDateValueChange = (value: Date) => {
-    const formatedDate = format(value, 'dd.MM.yyyy');
-    dispatch(setDate(formatedDate));
+    const formattedDate = format(value, 'dd.MM.yyyy');
+    dispatch(setDate(formattedDate));
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentTime = new Date(); // текущая дата
-    const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-    if (time < currentFormattedTime) {
-      dispatch(setTime(currentFormattedTime));
-      return;
-    } //сравниваю даты
     dispatch(setTime(e.target.value));
   };
+
+  useEffect(() => {
+    const dateNow = new Date();
+    const currentTime = format(dateNow, 'HH:mm'); // привожу в нужный формат
+    const currentDate = dateNow.toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
+
+    if (time && time < currentTime && date && currentDate === date) {
+      setTimeValidation(true);
+    } else {
+      setTimeValidation(false);
+    } //сравниваю даты
+  }, [time, date]);
+
+  useEffect(() => {
+    if (termlessRequest) {
+      dispatch(setTime(''));
+    }
+  }, [termlessRequest]);
+
   const handleNextStepClick = () => {
     dispatch(changeStepIncrement());
   };
@@ -55,16 +76,26 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     <>
       <div className={styles.dateContainer}>
         <div className={styles.wrapperForTime}>
+          {isMobile && (
+            <TimePickerPopup
+              isPopupOpen={isOpenClockElement}
+              buttonRef={buttonRef}
+              setIsOpenClockElement={setIsOpenClockElement}
+              handleAcceptTime={() => handleAcceptTime}
+            />
+          )}
           <p className={classNames(styles.time, 'text', 'text_type_regular ')}>
             Время
           </p>
           <div className={styles.headerWrapper} />
+
           <input
+            disabled={termlessRequest}
             type="time"
             id="time"
             name="time"
             onChange={handleTimeValueChange}
-            // value={time}
+            onClick={() => setIsOpenClockElement(!isOpenClockElement)}
             value={time}
             required
             className={classNames(
@@ -98,11 +129,14 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         </div>
       </div>
       <div className={styles.button}>
+        {timeValidation && (
+          <p className={styles.validationMessage}>{'Введите валидное время'}</p>
+        )}
         <Button
           buttonType="primary"
           label="Продолжить"
           onClick={handleNextStepClick}
-          disabled={!time}
+          disabled={!time || timeValidation}
         />
       </div>
     </>
