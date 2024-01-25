@@ -11,12 +11,17 @@ import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 
 import styles from './common-step.module.css';
+import { EditButton } from 'shared/ui/edit-button';
 
 interface ICommonStepProps {
   isMobile?: boolean;
+  typeWin?: string;
 }
 
-export const CommonStep = ({ isMobile }: ICommonStepProps) => {
+export const CommonStep = ({
+  isMobile,
+  typeWin = 'string',
+}: ICommonStepProps) => {
   const dispatch = useAppDispatch();
   const { time, address, category, descriptionForTask, date, termlessRequest } =
     useAppSelector((state) => state.createRequest);
@@ -114,6 +119,12 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               <p className={classNames('text_size_large', 'm-0')}>{date}</p>
+              {typeWin && (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить дату и время"
+                />
+              )}
               <p className={classNames('text_size_large', styles.time)}>
                 {time}
               </p>
@@ -121,6 +132,12 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <div className={styles.addressWrapper}>
               <LocationIcon color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
+              {typeWin && (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить адрес"
+                />
+              )}
             </div>
             <CategoriesBackground
               theme="primary"
@@ -135,17 +152,25 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               {descriptionForTask}
+              {typeWin && (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить задание"
+                />
+              )}
             </p>
           </>
         )}
       </div>
       <div className={styles.buttonsWrapper}>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
+        {!typeWin && (
+          <Button
+            buttonType="secondary"
+            label="Вернуться"
+            onClick={handlePreviousStepClick}
+            extClassName={styles.prevButton}
+          />
+        )}
         <Button
           buttonType="primary"
           label="Опубликовать"
