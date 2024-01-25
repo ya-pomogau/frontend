@@ -16,6 +16,8 @@ interface FilterCoverProps {
   filterMenu: ReactElement;
   filterValues: IFilterValues;
   setFilterValues: Dispatch<SetStateAction<IFilterValues>>;
+  setFilteres?: (item: IFilterValues) => void;
+  onReset: () => void;
 }
 
 export const FilterCover = ({
@@ -24,6 +26,8 @@ export const FilterCover = ({
   filterMenu,
   filterValues,
   setFilterValues,
+  onReset,
+  setFilteres,
 }: FilterCoverProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -53,13 +57,15 @@ export const FilterCover = ({
         params += `${key}=${value}&`;
       }
     });
-
+    setFilteres?.(filterValues);
     setSearchParams(params);
-    console.log(filterValues);
     closeFilterMenu();
   };
 
-  const resetFilter = () => {};
+  const resetFilter = () => {
+    onReset();
+    setFilteres?.(filterValues);
+  };
 
   const filterPositionStyles = {
     top: `${position.top}px`,

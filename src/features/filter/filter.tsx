@@ -8,6 +8,7 @@ import { RadiusBlock } from 'features/filter/ui/radius-block';
 import { CalenderBlock } from 'features/filter/ui/calender-block';
 import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
+import { CategoriesServies } from './ui/categories-types';
 
 export interface FilteringProps {
   items: {
@@ -16,35 +17,52 @@ export interface FilteringProps {
     sort?: boolean;
     date?: boolean;
     time?: boolean;
+    servies?: boolean;
     userCategories?: boolean;
   };
-
+  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
 }
 
 export interface NotFoundFilterProps {
   items?: never;
-
+  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter: boolean;
 }
 
 export type FilterProps = FilteringProps | NotFoundFilterProps;
 
-export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
+export const Filter = ({
+  items,
+  notFoundFilter = false,
+  setFilteres,
+}: FilterProps) => {
   const [filterValues, setFilterValues] = useState<IFilterValues>({
     sortBy: '',
     categories: [],
     searchRadius: '',
     date: '',
-    time: ['', ''],
+    time: ['00:00', '00:00'],
   });
 
   const handleFilterChange = (
     name: string,
     value: string | string[] | boolean
   ) => {
-    setFilterValues({ ...filterValues, [name]: value });
-    console.log(filterValues);
+    setFilterValues((prevFilterValues) => ({
+      ...prevFilterValues,
+      [name]: value,
+    }));
+  };
+
+  const handleReset = () => {
+    setFilterValues({
+      sortBy: '',
+      categories: [],
+      searchRadius: '',
+      date: '',
+      time: ['00:00', '00:00'],
+    });
   };
 
   if (notFoundFilter) {
@@ -58,6 +76,12 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
           {items?.sort && (
             <SortByBlock
               filter={filterValues.sortBy}
+              onChange={handleFilterChange}
+            />
+          )}
+          {items?.servies && (
+            <CategoriesServies
+              selectedServies={filterValues.categories}
               onChange={handleFilterChange}
             />
           )}
@@ -100,6 +124,8 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
       }
       filterValues={filterValues}
       setFilterValues={setFilterValues}
+      onReset={handleReset}
+      setFilteres={setFilteres}
     />
   );
 };

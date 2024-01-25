@@ -19,3 +19,9 @@ export enum AdminPermission {
   BLOG = 'write the blog',
   CATEGORIES = 'change categories',
 }
+
+export enum VariantCheckbox {
+  DATE = 'date',
+  DECREASINGPOINTS = 'decreasingPoints',
+  INCREASINGPOINTS = 'increasingPoints',
+}
