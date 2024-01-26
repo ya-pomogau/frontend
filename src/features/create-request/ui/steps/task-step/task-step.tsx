@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -12,9 +12,6 @@ import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
-import { useGetTasksByStatusQuery } from 'services/tasks-api';
-import { Tooltip } from 'shared/ui/tooltip';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
 interface ITaskStepProps {
   isMobile?: boolean;
