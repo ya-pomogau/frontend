@@ -137,7 +137,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
           buttonType="primary"
           label={propsButton.label}
           onClick={propsButton.onClick}
-          disabled={timeValidation || !termlessRequest}
+          disabled={(timeValidation || !time) && !termlessRequest}
         />
       </div>
     </>
