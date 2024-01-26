@@ -11,6 +11,7 @@ import {
   linksMenuMobile,
   linksMenu,
   linksMenuMobileUnauthorized,
+  linksTopAuthAdmin,
 } from '../utils';
 
 import styles from './styles.module.css';
@@ -21,9 +22,10 @@ const modalRoot = document.getElementById('modal') as HTMLElement;
 interface MenuProps {
   setMenuActive: (arg: boolean) => void;
   menuActive: boolean;
+  onClick: () => void;
 }
 
-export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
+export const Menu = ({ setMenuActive, menuActive, onClick }: MenuProps) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
   const ref = useRef(null);
 
@@ -65,21 +67,31 @@ export const Menu = ({ setMenuActive, menuActive }: MenuProps) => {
         <AdminButton
           isMobile={isMobile}
           extraClass={styles.header__sidebar__admin_button}
-          onClick={() => console.log('Нажали кнопку')}
+          onClick={() => {
+            onClick();
+            console.log('Нажали кнопку');
+          }}
         >
           Написать администратору
         </AdminButton>
       )}
 
       {user ? (
-        <SideBar
-          position={positionConfigMenu}
-          links={isMobile ? linksMenuMobile : linksMenu}
-        />
+        user?.role === 'master' || user?.role === 'admin' ? (
+          <SideBar
+            position={positionConfigMenu}
+            links={isMobile ? linksTopAuthAdmin : linksMenu}
+          />
+        ) : (
+          <SideBar
+            position={positionConfigMenu}
+            links={isMobile ? linksMenuMobileUnauthorized : linksMenu}
+          />
+        )
       ) : (
         <SideBar
           position={positionConfigMenu}
-          links={isMobile ? linksMenuMobileUnauthorized : linksMenu}
+          links={isMobile ? linksMenuMobile : linksMenu}
         />
       )}
     </div>,

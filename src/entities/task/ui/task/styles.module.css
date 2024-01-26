@@ -197,7 +197,7 @@
   grid-template-columns: repeat(2, 32px);
   gap: 10px;
   max-width: 82px;
-  justify-content: end;
+  justify-content: flex-end;
   align-content: start;
 }
 
@@ -281,7 +281,7 @@
 
 .icon_finish_container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   margin-right: 10px;
   margin-top: 4px;

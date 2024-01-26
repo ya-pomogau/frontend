@@ -15,3 +15,21 @@
   font-style: normal;
   font-display: block;
 }
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./Inter-700.woff2') format('woff2'),
+    url('./Inter-700.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./Inter-400.woff2') format('woff2'),
+    url('./Inter-400.woff2') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}

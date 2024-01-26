@@ -11,7 +11,7 @@ interface MainPopupProps {
   name?: string;
   phoneNumber?: string;
   avatarName: string;
-  avatarLink: string;
+  avatarLink?: string;
   children?: React.ReactNode;
   handleCloseClick: () => void;
   isMobile?: boolean;
@@ -37,7 +37,7 @@ export const MainPopup = ({
         />
         <div className={classNames(styles.headerWrapper)}>
           <Avatar
-            avatarLink={avatarLink}
+            avatarLink={avatarLink ? avatarLink : ''}
             avatarName={avatarName}
             extClassName={styles.avatar}
           />
