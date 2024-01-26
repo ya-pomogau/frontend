@@ -135,9 +135,9 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
       )}
       {props.containerMessages && (
         <div className={styles['box-message']}>
-          {dataMessage.map((m, i) => (
+          {dataMessage.map((m) => (
             <Message
-              key={i}
+              key={m.messageText}
               type="send"
               messageText={m.messageText}
               avatarLink=""

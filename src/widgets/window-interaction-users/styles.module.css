@@ -35,9 +35,9 @@
 
 .name {
   width: 325px;
-  overflow: hidden; /* Скрывает текст, который не помещается */
-  text-overflow: ellipsis; /* Добавляет троеточие в конце текста */
-  -webkit-line-clamp: 1; /* Количество строк */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   display: -webkit-box;
 }
@@ -85,7 +85,7 @@
   justify-content: flex-end;
 }
 
-.container-modile {
+.container-mobile {
   display: flex;
   flex-wrap: wrap;
 }
@@ -158,7 +158,7 @@
     margin: 20px auto;
   }
 
-  .container-modile {
+  .container-mobile {
     margin-top: 17px;
   }
 

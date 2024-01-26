@@ -1,9 +1,10 @@
 import { ConflictCard } from 'shared/ui/conflict-card';
 import styles from './styles.module.css';
-import React from 'react';
+import { FC } from 'react';
 import { Icon } from 'shared/ui/icons';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import cn from 'classnames';
+import { IInfoConflict } from 'shared/types/conflict';
 
 export interface IConflict {
   specialization: 'valanter' | 'recipient';
@@ -13,19 +14,12 @@ export interface IConflict {
   id: string;
 }
 
-interface IInfoConflict {
-  date: string;
-  time: string;
-  address: string;
-  message: string;
-}
-
 export interface PropsInfoConflict {
   conflict?: IConflict[];
   infoConflict?: IInfoConflict;
 }
 
-export const InfoConflict: React.FC<PropsInfoConflict> = (props) => {
+export const InfoConflict: FC<PropsInfoConflict> = (props) => {
   return (
     <article className={styles.wrapper}>
       <div className={styles['box-cards']}>

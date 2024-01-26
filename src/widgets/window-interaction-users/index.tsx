@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode, FC } from 'react';
 import styles from './styles.module.css';
 import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
@@ -9,15 +9,13 @@ import { IChatmateInfo } from 'shared/types/conflict';
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
   isOpen: boolean;
-  onClick: (text: string, func?: boolean) => void;
+  onClick: (text: string) => void;
   children: ReactNode;
   chatmateInfo?: IChatmateInfo;
   boxButton: ReactElement;
 }
 
-export const WindowInteractionUsers: React.FC<IWindowInteractionUsers> = (
-  props
-) => {
+export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
   const isMobile = useMediaQuery('(max-width: 550px)');
 
   return (
@@ -88,7 +86,7 @@ export const WindowInteractionUsers: React.FC<IWindowInteractionUsers> = (
           )}
         </div>
       ) : (
-        <div className={styles['container-modile']}>
+        <div className={styles['container-mobile']}>
           {isMobile && (
             <Icon
               onClick={() => props.onClick('close')}

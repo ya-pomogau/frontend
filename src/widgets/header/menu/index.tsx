@@ -30,7 +30,6 @@ export const Menu = ({ setMenuActive, menuActive, onClick }: MenuProps) => {
   const ref = useRef(null);
 
   const user = useAppSelector((state) => state.user.data);
-  console.log(user?.role);
 
   const closeByOverlay = (evt: MouseEvent) => {
     if (evt.target !== ref.current) {
