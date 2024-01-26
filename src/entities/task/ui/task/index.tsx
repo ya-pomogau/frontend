@@ -22,7 +22,6 @@ interface TaskItemProps {
   unreadMessages?: number;
   isStatusActive?: boolean;
   extClassName?: string;
-  handleEditButton?: () => void;
 }
 
 export const TaskItem = ({
@@ -40,7 +39,6 @@ export const TaskItem = ({
   unreadMessages,
   isStatusActive,
   extClassName,
-  handleEditButton,
 }: TaskItemProps) => {
   const taskLayout =
     confirmed && completed
