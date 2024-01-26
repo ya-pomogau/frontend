@@ -74,7 +74,7 @@ const Dropdown = ({
     refMap.current = {}; // Сброс объекта при каждом монтировании
   }, []);
 
-  const popupOpened = (item: Option) => {
+  const openPopup = (item: Option) => {
     const refKey = item.value.toString();
     const boundingClientRect =
       refMap.current[refKey]?.current?.getBoundingClientRect();
@@ -133,7 +133,7 @@ const Dropdown = ({
                 className={itemSelect ? styles.itemSelected : styles.item}
                 key={item.value}
                 onClick={() => {
-                  itemSelect ? popupOpened(item) : handleOnChange(item);
+                  itemSelect ? openPopup(item) : handleOnChange(item);
                 }}
               >
                 {item?.label}
