@@ -18,9 +18,8 @@ interface ICommonStepProps {
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const { time, address, category, descriptionForTask, date } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const { time, address, category, descriptionForTask, date, termlessRequest } =
+    useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
@@ -29,7 +28,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const handleSubmitClick = () => {
     const requestData = {
       time,
-      date,
+      date: termlessRequest ? null : date,
       address,
       category,
       descriptionForTask,
