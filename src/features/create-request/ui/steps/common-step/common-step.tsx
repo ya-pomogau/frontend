@@ -31,6 +31,25 @@ export const CommonStep = ({
     dispatch(closePopup());
   };
 
+  const handleEditButton = (typeButton: string) => {
+    switch (typeButton) {
+      case 'date':
+        console.log('date');
+
+        break;
+
+      case 'coordinates':
+        console.log('coordinates');
+        break;
+
+      case 'description':
+        console.log('description');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className={styles.mainWrapper}>
       <div
@@ -105,6 +124,7 @@ export const CommonStep = ({
                 <EditButton
                   extClassName={styles.edit_button}
                   label="Изменить дату и время"
+                  onClick={() => handleEditButton('date')}
                 />
               )}
               <p className={classNames('text_size_large', styles.time)}>
@@ -118,6 +138,7 @@ export const CommonStep = ({
                 <EditButton
                   extClassName={styles.edit_button}
                   label="Изменить адрес"
+                  onClick={() => handleEditButton('coordinates')}
                 />
               )}
             </div>
@@ -147,6 +168,7 @@ export const CommonStep = ({
                 <EditButton
                   extClassName={styles.edit_button}
                   label="Изменить задание"
+                  onClick={() => handleEditButton('description')}
                 />
               )}
             </p>

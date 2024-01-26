@@ -86,7 +86,6 @@ export const TaskList = ({
                 recipientName={item.recipient.fullname}
                 recipientPhoneNumber={item.recipient.phone}
                 isStatusActive={isStatusActive}
-                handleEditButton={handleClickAddTaskButton}
               />
             </li>
           ))}
