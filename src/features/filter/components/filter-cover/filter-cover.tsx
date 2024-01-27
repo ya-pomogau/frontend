@@ -30,7 +30,7 @@ export const FilterCover = ({
   setFilteres,
 }: FilterCoverProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
-
+  // TODO: убрать дубляж searchParams, filterValues
   useEffect(() => {
     const queryParams = getQuery(searchParams);
 
@@ -51,8 +51,9 @@ export const FilterCover = ({
 
   const applyFilter = () => {
     let params = `?`;
-
+    //TODO: preventDefault
     Object.entries(filterValues).forEach(([key, value]) => {
+      //TODO: & убрать на последнем параметре
       if (value.length) {
         params += `${key}=${value}&`;
       }
@@ -80,6 +81,7 @@ export const FilterCover = ({
       extClassName={styles.tooltip}
       visible
     >
+      {/* TODO повесить обработчики */}
       <form name="formFilter">
         <div className={styles.wrapper}>
           {filterMenu}
@@ -88,6 +90,7 @@ export const FilterCover = ({
               window.innerWidth <= 768 ? styles.buttonWrapper__mobile : null
             }`}
           >
+            {/* TODO:  reset, submit*/}
             <Button
               label="Сбросить фильтры"
               buttonType="secondary"
