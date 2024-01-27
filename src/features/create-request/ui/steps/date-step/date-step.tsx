@@ -39,12 +39,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   };
 
   const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentTime = new Date(); // текущая дата
-    const currentFormattedTime = format(currentTime, 'HH:mm'); // привожу в нужный формат
-    if (time < currentFormattedTime) {
-      dispatch(setTime(currentFormattedTime));
-      return;
-    } //сравниваю даты
     dispatch(setTime(e.target.value));
   };
 
