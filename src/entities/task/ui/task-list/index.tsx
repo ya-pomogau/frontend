@@ -11,6 +11,11 @@ import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
 
+import { useEffect, useRef, useState } from 'react';
+
+import { Tooltip } from 'shared/ui/tooltip';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+
 interface TaskListProps {
   userRole?: UserRole | null;
   tasks: Array<Task>;
@@ -24,6 +29,11 @@ interface TaskListProps {
   handleClickCloseButton: () => void;
   handleClickEditButton?: () => void;
   handleClickAddTaskButton?: () => void;
+}
+
+interface Coords {
+  right: number;
+  top: number;
 }
 
 export const TaskList = ({
@@ -41,10 +51,39 @@ export const TaskList = ({
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const buttonGuard = usePermission([CONFIRMED], 'recipient');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const popupClose = () => {
+    setIsOpen(false);
+  };
+
+  const getCoords = () => {
+    const box = buttonRef.current?.getBoundingClientRect();
+
+    if (box) {
+      setPopupPosion({
+        right: window.innerWidth - box.right - box.width * 2.25,
+        top: box.top + window.scrollY + box.height * 1.2,
+      });
+    }
+  };
 
   const handleDeniedAccess = () => {
-    alert('Вам пока нельзя такое, дождитесь проверки администратором');
+    if (!isOpen) {
+      getCoords();
+    }
+    setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    window.addEventListener('resize', getCoords);
+
+    return () => {
+      window.removeEventListener('resize', getCoords);
+    };
+  }, []);
 
   return (
     <>
@@ -131,13 +170,42 @@ export const TaskList = ({
                 {' '}
                 Хотите создать заявку?
               </p>
-              <RoundButton
-                buttonType="add"
-                onClick={
-                  buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
-                }
-                size="large"
-              />
+              <div className={styles.wrapperBtn} ref={buttonRef}>
+                <RoundButton
+                  buttonType="add"
+                  onClick={
+                    buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
+                  }
+                  extClassName={styles.add_task_icon_unconf}
+                  size="large"
+                />
+              </div>
+              {isOpen && (
+                <Tooltip
+                  visible
+                  extClassName={styles.modal}
+                  pointerPosition="center"
+                  changeVisible={() => popupClose()}
+                  elementStyles={{
+                    position: 'absolute',
+                    top: `${popupPosion?.top}px`,
+                    right: `${popupPosion?.right}px`,
+                  }}
+                >
+                  <div className={styles.closeWrapper}>
+                    <CloseCrossIcon
+                      className={styles.closeIcon}
+                      size="14"
+                      color="blue"
+                      onClick={() => popupClose()}
+                    />
+                  </div>
+                  <div className={styles.text}>
+                    Вы пока не можете создавать заявку. Дождитесь подтверждения
+                    администратора
+                  </div>
+                </Tooltip>
+              )}
             </>
           )}
         </div>
