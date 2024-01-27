@@ -26,9 +26,15 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   };
 
   const handleSubmitClick = () => {
+    const [day, month, year] = date.split('.');
+    const [hours, minutes] = time.split(':');
+
+    const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
+
+    console.log(dateObject);
     const requestData = {
       time,
-      date: termlessRequest ? null : date,
+      date: termlessRequest ? null : dateObject,
       address,
       category,
       descriptionForTask,
