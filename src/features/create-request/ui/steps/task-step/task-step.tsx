@@ -66,7 +66,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
                 'm-0',
                 styles.task
               )}
-            ></p>
+            >
+              Дело
+            </p>
             <div className={styles.headerWrapper} />
             <Dropdown
               selected={category}
