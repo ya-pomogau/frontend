@@ -22,6 +22,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const { descriptionForTask, categories, category } = useAppSelector(
     (state) => state.createRequest
   );
+
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -45,6 +46,15 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
+  };
+
+  const disabledBtn = () => {
+    if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
+      return true;
+    }
+    if (category.value === '' && category.label === '') {
+      return true;
+    }
   };
 
   return (
@@ -71,6 +81,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
+
             <TextArea
               value={descriptionForTask}
               label="Опишите задачу"
@@ -90,6 +101,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
+            {category.value === '' && category.label === '' && (
+              <p className={styles.messageAlert}>Выберите тип задачи</p>
+            )}
             <TextArea
               value={descriptionForTask}
               label="Опишите задачу"
@@ -102,6 +116,11 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
         )}
       </div>
       <div className={styles.buttonsWrapper}>
+        <div className={styles.alertWrapper}>
+          {descriptionForTask.length <= 5 && (
+            <p className={styles.messageAlert}>Добавьте описание задачи</p>
+          )}
+        </div>
         <Button
           buttonType="secondary"
           label="Вернуться"
@@ -109,6 +128,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
           extClassName={styles.prevButton}
         />
         <Button
+          disabled={disabledBtn()}
           buttonType="primary"
           label="Продолжить"
           onClick={handleNextStepClick}
