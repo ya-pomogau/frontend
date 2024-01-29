@@ -91,11 +91,13 @@ export const Request = ({ isMobile = true }: RequestProps) => {
                       buttonType="secondary"
                       label="Вернуться"
                       onClick={() => setIsOpen(false)}
+                      extClassName={styles.button}
                     />
                     <Button
-                      buttonType="secondary"
+                      buttonType="primary"
                       label="Закрыть"
                       onClick={handleCloseClick}
+                      extClassName={styles.button}
                     />
                   </div>
                 </Tooltip>
