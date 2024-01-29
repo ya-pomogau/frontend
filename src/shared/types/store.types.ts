@@ -3,7 +3,7 @@ import { RootState } from '../../app/store';
 
 export type TSystemSliceState = {
   user: TUser | null;
-  vk_user: TVKUser | null;
+  vkUser: TVKUser | null;
   isPending: boolean;
   isNew: boolean;
 };

@@ -10,7 +10,7 @@ type ErrorBoundaryProps = {
 const ErrorBoundary = ({ children }: ErrorBoundaryProps) => {
   const errorText = useAppSelector((state) => state.user.error!);
   const dispatch = useAppDispatch();
-  console.log(errorText);
+  console.log(`ErrorBoundary errorText: ${errorText}`);
   useEffect(() => {
     if (errorText != null) {
       dispatch(enableError(errorText));

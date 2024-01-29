@@ -31,7 +31,7 @@ const VolunteerActions = ({
   onGiveKeysButtonClick,
   keys,
 }: VolunteerActionsProps) => {
-  const isKeysNullOrOne = keys ? 1 : null;
+  const isKeysNullOrOne = keys ? true : false;
 
   return (
     <div className={classnames(styles.buttons_div)}>

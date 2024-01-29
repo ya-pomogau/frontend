@@ -15,7 +15,9 @@ export const MapWithTasks = () => {
   }, [navigate]);
 
   return isLoading || !data ? (
-    <Loader />
+    // <Loader />
+    // TODO: временная заглушка, чтобы не падала приложение, так как данные тасок еще не приходят с сервера
+    <p>loading</p>
   ) : (
     data && (
       <YandexMap tasks={data} width="100%" height="90%" onClick={handleClick} />

@@ -6,10 +6,10 @@ import { Informer } from 'shared/ui/informer';
 import { RoundButton } from 'shared/ui/round-button';
 import { TaskItem } from '../task';
 
-import type { UserRole } from 'entities/user/types';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
+import { UserRole } from 'shared/types/common.types';
 
 interface TaskListProps {
   userRole?: UserRole | null;
@@ -40,7 +40,7 @@ export const TaskList = ({
   handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
-  const buttonGuard = usePermission([CONFIRMED], 'recipient');
+  const buttonGuard = usePermission([CONFIRMED], UserRole.RECIPIENT);
 
   const handleDeniedAccess = () => {
     alert('Вам пока нельзя такое, дождитесь проверки администратором');
@@ -48,7 +48,9 @@ export const TaskList = ({
 
   return (
     <>
-      {!isLoading && tasks.length > 0 && (
+      {/* TODO: удалить 52 строку, когда будут приходить данные тасок с сервера */}
+      {!tasks && <p>список тасок, которые будут получены с сервера</p>}
+      {!isLoading && tasks && (
         <ul
           className={classNames(
             styles.content,
@@ -58,7 +60,7 @@ export const TaskList = ({
             extClassName
           )}
         >
-          {userRole === 'recipient' && (
+          {userRole === UserRole.RECIPIENT && (
             <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
               <RoundButton
                 buttonType="add"
@@ -79,42 +81,43 @@ export const TaskList = ({
             </li>
           )}
 
-          {tasks.map((item, index) => (
-            <li key={index}>
-              <TaskItem
-                category={item.category.name}
-                isMobile={isMobile}
-                date={item.date}
-                address={item.address}
-                description={item.description}
-                count={item.category.scope}
-                avatar={item.recipient.avatar}
-                completed={item.completed}
-                conflict={item.conflict}
-                confirmed={item.confirmed}
-                unreadMessages={item.chat?.unread}
-                recipientName={item.recipient.fullname}
-                recipientPhoneNumber={item.recipient.phone}
-                handleClickPhoneButton={handleClickPnoneButton}
-                handleClickMessageButton={handleClickMessageButton}
-                handleClickConfirmButton={
-                  item.completed && !item.confirmed
-                    ? handleClickConfirmButton
-                    : undefined
-                }
-                handleClickCloseButton={
-                  isStatusActive ? handleClickCloseButton : undefined
-                }
-                handleClickEditButton={
-                  isStatusActive ? handleClickEditButton : undefined
-                }
-              />
-            </li>
-          ))}
+          {tasks &&
+            tasks.map((item, index) => (
+              <li key={index}>
+                <TaskItem
+                  category={item.category.name}
+                  isMobile={isMobile}
+                  date={item.date}
+                  address={item.address}
+                  description={item.description}
+                  count={item.category.scope}
+                  avatar={item.recipient.avatar}
+                  completed={item.completed}
+                  conflict={item.conflict}
+                  confirmed={item.confirmed}
+                  unreadMessages={item.chat?.unread}
+                  recipientName={item.recipient.fullname}
+                  recipientPhoneNumber={item.recipient.phone}
+                  handleClickPhoneButton={handleClickPnoneButton}
+                  handleClickMessageButton={handleClickMessageButton}
+                  handleClickConfirmButton={
+                    item.completed && !item.confirmed
+                      ? handleClickConfirmButton
+                      : undefined
+                  }
+                  handleClickCloseButton={
+                    isStatusActive ? handleClickCloseButton : undefined
+                  }
+                  handleClickEditButton={
+                    isStatusActive ? handleClickEditButton : undefined
+                  }
+                />
+              </li>
+            ))}
         </ul>
       )}
 
-      {!isLoading && tasks.length === 0 && isStatusActive && (
+      {!isLoading && tasks && tasks.length === 0 && isStatusActive && (
         <div
           className={classNames(
             isMobile ? styles.content_empty_mobile : styles.content_empty,
@@ -123,7 +126,7 @@ export const TaskList = ({
         >
           <Informer text="У Вас пока нет заявок" />
 
-          {userRole === 'recipient' && (
+          {userRole === UserRole.RECIPIENT && (
             <>
               <p
                 className={`${styles.title_add_empty} text_size_large text_type_regular`}
@@ -143,7 +146,7 @@ export const TaskList = ({
         </div>
       )}
 
-      {!isLoading && tasks.length === 0 && !isStatusActive && (
+      {!isLoading && tasks && tasks.length === 0 && !isStatusActive && (
         <div
           className={classNames(
             isMobile ? styles.content_empty_mobile : styles.content_empty,

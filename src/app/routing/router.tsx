@@ -64,10 +64,10 @@ export const router = createBrowserRouter(
           element={
             <RoutesGroup
               allowed={{
-                volunteer: true,
-                recipient: true,
-                admin: true,
-                master: true,
+                Volunteer: true,
+                Recipient: true,
+                Admin: true,
+                Master: true,
               }}
             />
           }
@@ -82,7 +82,7 @@ export const router = createBrowserRouter(
           element={
             <RoutesGroup
               allowed={{
-                volunteer: true,
+                Volunteer: true,
               }}
             />
           }
@@ -94,8 +94,8 @@ export const router = createBrowserRouter(
           element={
             <RoutesGroup
               allowed={{
-                volunteer: true,
-                recipient: true,
+                Volunteer: true,
+                Recipient: true,
               }}
             />
           }
@@ -109,8 +109,8 @@ export const router = createBrowserRouter(
           element={
             <RoutesGroup
               allowed={{
-                admin: true,
-                master: true,
+                Admin: true,
+                Master: true,
               }}
             />
           }
@@ -152,7 +152,7 @@ export const router = createBrowserRouter(
           element={
             <RoutesGroup
               allowed={{
-                master: true,
+                Master: true,
               }}
             />
           }

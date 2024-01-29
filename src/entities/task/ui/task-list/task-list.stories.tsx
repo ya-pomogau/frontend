@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 import { TaskList } from '.';
+import { UserRole } from 'shared/types/common.types';
 
 const MockedState = {
   tasks: {
@@ -92,7 +93,7 @@ export const ExampleActive: Story = {
           id: '4',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Алексей Борисович',
-          role: 'recipient',
+          role: UserRole.RECIPIENT,
           vk: 'https://vk.com/id123456789',
           avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
           phone: '+7 (916) 123-45-67',
@@ -105,7 +106,7 @@ export const ExampleActive: Story = {
           id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
-          role: 'volunteer',
+          role: UserRole.VOLUNTEER,
           vk: 'https://vk.com/id123456789',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
@@ -142,7 +143,7 @@ export const ExampleActive: Story = {
           id: '5',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Игорь Витальевич',
-          role: 'recipient',
+          role: UserRole.RECIPIENT,
           vk: 'https://vk.com/id123456789',
           avatar:
             'https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg',
@@ -156,7 +157,7 @@ export const ExampleActive: Story = {
           id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
-          role: 'volunteer',
+          role: UserRole.VOLUNTEER,
           vk: 'https://vk.com/id123456789',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
@@ -207,7 +208,7 @@ export const ExampleNotActive: Story = {
           id: '4',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Алексей Борисович',
-          role: 'recipient',
+          role: UserRole.RECIPIENT,
           vk: 'https://vk.com/id123456789',
           avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
           phone: '+7 (916) 123-45-67',
@@ -220,7 +221,7 @@ export const ExampleNotActive: Story = {
           id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
-          role: 'volunteer',
+          role: UserRole.VOLUNTEER,
           vk: 'https://vk.com/id123456789',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
@@ -257,7 +258,7 @@ export const ExampleNotActive: Story = {
           id: '6',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Реципиентов Иван Николаевич',
-          role: 'recipient',
+          role: UserRole.RECIPIENT,
           vk: 'https://vk.com/id123456789',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (999) 123-45-67',
@@ -270,7 +271,7 @@ export const ExampleNotActive: Story = {
           id: '7',
           createdAt: '2023-07-09T17:30Z',
           fullname: 'Волонтеров Петр Петрович',
-          role: 'volunteer',
+          role: UserRole.VOLUNTEER,
           vk: 'https://vk.com/id123456789',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',

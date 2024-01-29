@@ -7,7 +7,7 @@ import styles from '../styles.module.css';
 
 interface VolunteerInfoProps {
   score: number;
-  hasKey?: number | null;
+  hasKey?: boolean;
   extClassName?: string;
 }
 

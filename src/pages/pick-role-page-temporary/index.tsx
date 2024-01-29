@@ -17,6 +17,7 @@ import {
   enableConnectionError,
 } from 'entities/user/model';
 import { useGetUserByIdQuery } from 'services/user-api';
+import { UserRole } from 'shared/types/common.types';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
@@ -32,22 +33,22 @@ export function PickRolePage() {
   };
 
   const getVolunteerRole = () => {
-    dispatch(setUserRole('volunteer'));
+    dispatch(setUserRole(UserRole.VOLUNTEER));
     setUserId(7);
   };
 
   const getRecipientRole = () => {
     setUserId(4);
-    dispatch(setUserRole('recipient'));
+    dispatch(setUserRole(UserRole.RECIPIENT));
   };
 
   const getAdminRole = () => {
-    dispatch(setUserRole('admin'));
+    dispatch(setUserRole(UserRole.ADMIN));
     setUserId(2);
   };
 
   const getMasterAdminRole = () => {
-    dispatch(setUserRole('master'));
+    dispatch(setUserRole(UserRole.MASTER));
     setUserId(1);
   };
 
@@ -63,13 +64,13 @@ export function PickRolePage() {
 
   const getPageYouWouldBeRedirected = () => {
     switch (role) {
-      case 'volunteer':
+      case UserRole.VOLUNTEER:
         return '/profile/map';
-      case 'recipient':
+      case UserRole.RECIPIENT:
         return '/profile/active';
-      case 'admin':
+      case UserRole.ADMIN:
         return '/profile/requests';
-      case 'master':
+      case UserRole.MASTER:
         return '/profile/requests';
       default:
         return '/';

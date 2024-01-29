@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
-import { UserRole } from 'entities/user/types';
+import { UserRole } from 'shared/types/common.types';
 
 interface CommonRouteProps {
   someflag?: never;
@@ -47,9 +47,6 @@ export const RoutesGroup = ({
   }
 
   if (onlyUnauthorized) {
-    console.log({ onlyUnauthorized });
-    console.log({ role });
-
     if (!role) {
       return <Outlet />;
     } else {
