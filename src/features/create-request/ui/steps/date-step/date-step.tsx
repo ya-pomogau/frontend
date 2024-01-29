@@ -15,13 +15,14 @@ import { DatePicker } from 'shared/ui/date-picker';
 
 import styles from './date-step.module.css';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface IDateStepProps {
   isMobile?: boolean;
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date } = useAppSelector(
+  const { time, termlessRequest, date, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
@@ -71,7 +72,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     (): Date => parse(date, 'dd.MM.yyyy', new Date()),
     [date]
   );
-
+  const propsButton = usePropsButtonCustom();
   return (
     <>
       <div className={styles.dateContainer}>
@@ -134,8 +135,8 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         )}
         <Button
           buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
+          label={propsButton.label}
+          onClick={propsButton.onClick}
           disabled={(timeValidation || !time) && !termlessRequest}
         />
       </div>
