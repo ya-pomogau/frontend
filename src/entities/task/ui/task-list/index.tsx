@@ -73,7 +73,6 @@ export const TaskList = ({
             <li key={index}>
               <TaskItem
                 category={item.category.name}
-                isMobile={isMobile}
                 date={item.date}
                 address={item.address}
                 description={item.description}
