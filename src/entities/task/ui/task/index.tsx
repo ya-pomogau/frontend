@@ -12,7 +12,6 @@ import styles from './styles.module.css';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
-import { useAppDispatch } from 'app/hooks';
 import {
   changeCurrentStep,
   openPopup,
@@ -22,6 +21,7 @@ import {
   setDescriptionForTask,
   setTime,
 } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
 
 enum ButtonType {
   close = 'close',
