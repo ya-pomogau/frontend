@@ -1,7 +1,12 @@
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { changeStepDecrement, closePopup } from 'features/create-request/model';
+import {
+  changeCurrentStep,
+  changeStepDecrement,
+  closePopup,
+  openPopup,
+} from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
@@ -17,7 +22,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
   const { time, address, category, descriptionForTask, date, isTypeEdit } =
     useAppSelector((state) => state.createRequest);
-  console.log(isTypeEdit);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
@@ -30,16 +34,18 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const handleEditButton = (typeButton: string) => {
     switch (typeButton) {
       case 'date':
-        console.log('date');
-
+        dispatch(changeCurrentStep(1));
+        dispatch(openPopup());
         break;
 
       case 'coordinates':
-        console.log('coordinates');
+        dispatch(changeCurrentStep(2));
+        dispatch(openPopup());
         break;
 
       case 'description':
-        console.log('description');
+        dispatch(changeCurrentStep(3));
+        dispatch(openPopup());
         break;
       default:
         break;
