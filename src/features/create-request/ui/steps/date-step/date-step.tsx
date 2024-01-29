@@ -17,6 +17,7 @@ import styles from './date-step.module.css';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface IDateStepProps {
   isMobile?: boolean;
@@ -135,9 +136,9 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         )}
         <Button
           buttonType="primary"
+          disabled={(timeValidation || !time) && !termlessRequest}
           label={propsButton.label}
           onClick={propsButton.onClick}
-          disabled={(timeValidation || !time) && !termlessRequest}
         />
       </div>
     </>
