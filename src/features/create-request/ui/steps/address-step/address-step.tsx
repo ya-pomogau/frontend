@@ -15,8 +15,6 @@ import styles from './address-step.module.css';
 import { useEffect } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import usePropsButtonCustom from '../useButtonPropsCustom';
-import { useEffect } from 'react';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface IAddressProps {
   isMobile?: boolean;
