@@ -559,7 +559,7 @@ export const TaskItem = ({
             onClick={handleEditButton}
             buttonType="edit"
             extClassName={
-              // не забыть удалить !
+              // не забыть удалить ! после подключения бека
               !recipientName ? styles.item_hidden : styles.button_edit
             }
           />
