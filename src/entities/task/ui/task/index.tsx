@@ -12,6 +12,9 @@ import styles from './styles.module.css';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { Request } from '../../../../features/create-request/ui/steps/index';
+import { changeCurrentStep, openPopup } from 'features/create-request/model';
 
 enum ButtonType {
   close = 'close',
@@ -148,10 +151,13 @@ export const TaskItem = ({
     phone: null,
     cancel: [{ type: 'primary', text: 'Написать администратору' }],
   };
+  const dispatch = useAppDispatch();
 
   const handleEditButton = () => {
-    console.log('pusk');
+    dispatch(changeCurrentStep(4));
+    dispatch(openPopup());
   };
+
   const taskLayout =
     confirmed && completed
       ? styles.container_main_default

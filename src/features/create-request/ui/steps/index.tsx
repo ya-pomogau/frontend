@@ -14,10 +14,10 @@ import { useGetCategoriesQuery } from 'services/categories-api';
 
 export interface RequestProps {
   isMobile?: boolean;
-  exit?: boolean;
+  edit?: boolean;
 }
 
-export const Request = ({ isMobile = true, exit }: RequestProps) => {
+export const Request = ({ isMobile = true, edit }: RequestProps) => {
   const dispatch = useAppDispatch();
   const { currentStep, isPopupOpen } = useAppSelector(
     (state) => state.createRequest
@@ -57,7 +57,6 @@ export const Request = ({ isMobile = true, exit }: RequestProps) => {
         handleCloseClick={handleCloseClick}
         isMobile={isMobile}
       >
-        {exit && <CommonStep isMobile={isMobile} typeWin={'typeWin'} />}
         {currentStep === CurrentPage.DATE_STEP && (
           <DateStep isMobile={isMobile} />
         )}

@@ -18,6 +18,7 @@ export type TInitialStateForPopup = {
   currentStep: number;
   termlessRequest: boolean;
   isPopupOpen: boolean;
+  isTypeEdit: boolean;
 };
 
 export const InitialStateForPopup: TInitialStateForPopup = {
@@ -34,6 +35,7 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   currentStep: 1,
   termlessRequest: false,
   isPopupOpen: false,
+  isTypeEdit: false,
 };
 
 export const createRequestModel = createSlice({
@@ -63,6 +65,10 @@ export const createRequestModel = createSlice({
     changeCheckbox(state) {
       state.termlessRequest = !state.termlessRequest;
     },
+    changeCurrentStep(state, action) {
+      state.currentStep = action.payload;
+      state.isTypeEdit = true;
+    },
     changeStepIncrement(state) {
       const increment = (prev: number) => prev + 1;
       state.currentStep = increment(state.currentStep);
@@ -76,6 +82,7 @@ export const createRequestModel = createSlice({
     },
     closePopup(state) {
       state.currentStep = InitialStateForPopup.currentStep;
+      state.isTypeEdit = false;
       state.isPopupOpen = false;
     },
   },
@@ -93,4 +100,5 @@ export const {
   changeCheckbox,
   openPopup,
   closePopup,
+  changeCurrentStep,
 } = createRequestModel.actions;

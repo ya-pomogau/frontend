@@ -11,17 +11,13 @@ import { EditButton } from 'shared/ui/edit-button';
 
 interface ICommonStepProps {
   isMobile?: boolean;
-  typeWin?: string;
 }
 
-export const CommonStep = ({
-  isMobile,
-  typeWin = 'string',
-}: ICommonStepProps) => {
+export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const { time, address, category, descriptionForTask, date } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const { time, address, category, descriptionForTask, date, isTypeEdit } =
+    useAppSelector((state) => state.createRequest);
+  console.log(isTypeEdit);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
@@ -120,13 +116,13 @@ export const CommonStep = ({
               )}
             >
               <p className={classNames('text_size_large', 'm-0')}>{date}</p>
-              {typeWin && (
+              {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}
                   label="Изменить дату и время"
                   onClick={() => handleEditButton('date')}
                 />
-              )}
+              ) : null}
               <p className={classNames('text_size_large', styles.time)}>
                 {time}
               </p>
@@ -134,7 +130,7 @@ export const CommonStep = ({
             <div className={styles.addressWrapper}>
               <LocationIcon color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
-              {typeWin && (
+              {isTypeEdit && (
                 <EditButton
                   extClassName={styles.edit_button}
                   label="Изменить адрес"
@@ -164,19 +160,19 @@ export const CommonStep = ({
               )}
             >
               {descriptionForTask}
-              {typeWin && (
+              {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}
                   label="Изменить задание"
                   onClick={() => handleEditButton('description')}
                 />
-              )}
+              ) : null}
             </p>
           </>
         )}
       </div>
       <div className={styles.buttonsWrapper}>
-        {!typeWin && (
+        {!isTypeEdit && (
           <Button
             buttonType="secondary"
             label="Вернуться"
