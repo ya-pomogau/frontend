@@ -26,6 +26,7 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   currentStep: 1,
   termlessRequest: false,
   isPopupOpen: false,
+  isTypeEdit: false,
 };
 
 // eslint-disable-next-line react/prop-types

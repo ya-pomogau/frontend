@@ -21,7 +21,7 @@ import { Button } from '../../../../shared/ui/button';
 
 export interface RequestProps {
   isMobile?: boolean;
-  exit?: boolean;
+  edit?: boolean;
 }
 export const Request = ({ isMobile = true }: RequestProps) => {
   const dispatch = useAppDispatch();

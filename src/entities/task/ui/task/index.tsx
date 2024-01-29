@@ -8,7 +8,11 @@ import { TaskRecipient } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
 
 interface TaskItemProps {
-  category: string;
+  category: {
+    id: string;
+    name: string;
+    scope: number;
+  };
   date?: string;
   address: string;
   description: string;
@@ -60,8 +64,8 @@ export const TaskItem = ({
     >
       <CategoriesBackground
         theme="primary"
-        content={category}
-        size={category.length > 24 ? 'large' : 'medium'}
+        content={category.name}
+        size={category.name.length > 24 ? 'large' : 'medium'}
         extClassName={styles.category}
       />
       <TaskInfo date={date} address={address} extClassName={styles.taskInfo} />
@@ -80,6 +84,9 @@ export const TaskItem = ({
       />
       <TaskButtons
         recipientName={recipientName}
+        address = {address}
+        description = {description}
+        category={category}
         date={date}
         isStatusActive
         completed

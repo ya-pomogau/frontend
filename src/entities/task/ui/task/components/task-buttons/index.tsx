@@ -5,9 +5,18 @@ import { ModalContent } from 'widgets/task-buttons-content';
 import styles from './styles.module.css';
 import { isAfter, parseISO } from 'date-fns';
 import classNames from 'classnames';
+import { useAppDispatch } from 'app/hooks';
+import { changeCurrentStep, openPopup, setAddress, setCategory, setDate, setDescriptionForTask } from 'features/create-request/model';
 
 interface TaskButtonsProps {
   recipientName?: string;
+  address: string;
+  description: string,
+  category: {
+    id: string,
+    name: string,
+    scope: number,
+  }
   date?: string;
   isStatusActive: boolean;
   completed: boolean;
@@ -17,6 +26,9 @@ interface TaskButtonsProps {
 
 export const TaskButtons = ({
   recipientName,
+  address,
+  description,
+  category,
   date,
   isStatusActive = true,
   completed,
@@ -25,6 +37,18 @@ export const TaskButtons = ({
 }: TaskButtonsProps) => {
   const parsedDate = parseISO(date!);
   const comparedDateResult = isAfter(new Date(), parsedDate);
+  const dispatch = useAppDispatch();
+
+  const additinalAddress = address;
+
+  const handleEditButton = () => {
+    dispatch(setDate(date));
+    dispatch(setAddress({ additinalAddress }));
+    dispatch(setDescriptionForTask(description));
+    dispatch(setCategory({ value: category.id, label: category.name }));
+    dispatch(changeCurrentStep(4));
+    dispatch(openPopup());
+  };
   return (
     <div className={classNames(extClassName, styles.buttons_action)}>
       <ButtonWithModal
@@ -86,8 +110,12 @@ export const TaskButtons = ({
         />
       </ButtonWithModal>
       <SquareButton
+        onClick={handleEditButton}
         buttonType="edit"
-        extClassName={recipientName && styles.item_hidden}
+        extClassName={
+          // не забыть удалить !
+          !recipientName ? styles.item_hidden : styles.button_edit
+        }
       />
     </div>
   );
