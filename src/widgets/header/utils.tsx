@@ -2,7 +2,6 @@ import { WriteMessageIcon } from 'shared/ui/icons/write-message-icon';
 import { PersonIcon } from 'shared/ui/icons/person-icon';
 import { LockIcon } from 'shared/ui/icons/lock-icon';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
-import { ExitIcon } from 'shared/ui/icons/exit-icon';
 
 import type {
   ISideBarPosition,
@@ -74,22 +73,5 @@ export const linksMenuMobileUnauthorized: ISideBarElementProps[] = [
     title: 'Контакты',
     to: '/contacts',
     icon: <LocationIcon color="blue" />,
-  },
-];
-
-export const linksMenuMobile: ISideBarElementProps[] = [
-  ...linksMenuMobileUnauthorized,
-  {
-    title: 'Выход',
-    to: '/out',
-    icon: <ExitIcon color="blue" />,
-  },
-];
-
-export const linksMenu = [
-  {
-    title: 'Выход',
-    to: '/out',
-    icon: <ExitIcon color="blue" />,
   },
 ];

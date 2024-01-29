@@ -7,7 +7,7 @@ import { positionConfigTop, linksTop } from './utils';
 
 import { Logo } from 'shared/ui/logo';
 import { SideBar } from 'widgets/header/navigation';
-import { Menu } from 'widgets/header/menu';
+import { DropDownMenu } from 'widgets/header/DropDownMenu';
 import { MenuIcon } from 'shared/ui/icons/menu-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { UnionIcon } from 'shared/ui/icons/union-icon';
@@ -25,7 +25,8 @@ const Header = () => {
     setMenuActive(!menuActive);
   };
 
-  const isMenuHidden = !user && !isMobile;
+  const isMenuHidden = !user;
+  //&& !isMobile;
 
   return (
     <header className={`${styles.header} ${isMobile && styles.header_mobile}`}>
@@ -73,7 +74,10 @@ const Header = () => {
             )}
           </button>
           {menuActive && (
-            <Menu setMenuActive={setMenuActive} menuActive={menuActive} />
+            <DropDownMenu
+              setMenuActive={setMenuActive}
+              menuActive={menuActive}
+            />
           )}
         </div>
       </div>
