@@ -2,9 +2,11 @@ import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
+  changeCurrentStep,
   changeStepDecrement,
-  clearState,
   closePopup,
+  openPopup,
+  clearState,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
@@ -56,16 +58,18 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const handleEditButton = (typeButton: string) => {
     switch (typeButton) {
       case 'date':
-        console.log('date');
-
+        dispatch(changeCurrentStep(1));
+        dispatch(openPopup());
         break;
 
       case 'coordinates':
-        console.log('coordinates');
+        dispatch(changeCurrentStep(2));
+        dispatch(openPopup());
         break;
 
       case 'description':
-        console.log('description');
+        dispatch(changeCurrentStep(3));
+        dispatch(openPopup());
         break;
       default:
         break;
