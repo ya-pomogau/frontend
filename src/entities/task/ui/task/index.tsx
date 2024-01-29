@@ -65,7 +65,6 @@ interface TaskItemProps {
   unreadMessages?: number;
   isStatusActive?: boolean;
   extClassName?: string;
-  handleEditButton?: () => void;
 }
 
 const titles: ModalTitles = {
@@ -101,7 +100,6 @@ export const TaskItem = ({
   unreadMessages,
   isStatusActive,
   extClassName,
-  handleEditButton,
 }: TaskItemProps) => {
   const [isHidden, setIsHidden] = useState(true);
   const [reason, setReason] = useState<ReasonType | null>(null);
@@ -161,6 +159,7 @@ export const TaskItem = ({
     phone: null,
     cancel: [{ type: 'primary', text: 'Написать администратору' }],
   };
+  const dispatch = useAppDispatch();
 
   const dispatch = useAppDispatch();
 
