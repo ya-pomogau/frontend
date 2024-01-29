@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDescriptionForTask,
-  changeStepDecrement,
-  changeStepIncrement,
   setCategory,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
@@ -14,9 +12,6 @@ import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
-import { useGetTasksByStatusQuery } from 'services/tasks-api';
-import { Tooltip } from 'shared/ui/tooltip';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
 interface ITaskStepProps {
   isMobile?: boolean;
@@ -25,7 +20,6 @@ interface ITaskStepProps {
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const { descriptionForTask, categories, category, isTypeEdit } =
     useAppSelector((state) => state.createRequest);
-
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -65,6 +59,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     }
   };
 
+  const propsButton = usePropsButtonCustom();
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.taskContainer}>
@@ -134,8 +129,8 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
         {!isTypeEdit && (
           <Button
             buttonType="secondary"
-            label={propsButton.label}
-            onClick={propsButton.onClick}
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
             extClassName={styles.prevButton}
           />
         )}
