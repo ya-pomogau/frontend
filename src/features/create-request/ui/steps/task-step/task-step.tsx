@@ -13,16 +13,15 @@ import { TextArea } from 'shared/ui/text-area';
 import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, categories, category } = useAppSelector(
-    (state) => state.createRequest
-  );
-
+  const { descriptionForTask, categories, category, isTypeEdit } =
+    useAppSelector((state) => state.createRequest);
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -40,14 +39,6 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     dispatch(setDescriptionForTask(e.target.value));
   };
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
-
-  const handlePreviousStepClick = () => {
-    dispatch(changeStepDecrement());
-  };
-
   const disabledBtn = () => {
     if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
       return true;
@@ -57,6 +48,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     }
   };
 
+  const propsButton = usePropsButtonCustom();
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.taskContainer}>
@@ -123,17 +115,19 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             <p className={styles.messageAlert}>Добавьте описание задачи</p>
           )}
         </div>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
+            extClassName={styles.prevButton}
+          />
+        )}
         <Button
           disabled={disabledBtn()}
           buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
+          label={propsButton.label}
+          onClick={propsButton.onClick}
         />
       </div>
     </div>
