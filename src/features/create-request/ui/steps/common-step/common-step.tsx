@@ -19,13 +19,9 @@ import { EditButton } from 'shared/ui/edit-button';
 
 interface ICommonStepProps {
   isMobile?: boolean;
-  typeWin?: string;
 }
 
-export const CommonStep = ({
-  isMobile,
-  typeWin = 'string',
-}: ICommonStepProps) => {
+export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
   const {
     time,
