@@ -6,6 +6,7 @@ import {
   setAddress,
   changeStepDecrement,
   changeStepIncrement,
+  closePopup,
 } from 'features/create-request/model';
 import YandexMap from 'widgets/map';
 import { InputAddress } from 'shared/ui/input-address';
@@ -24,7 +25,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const dispatch = useAppDispatch();
 
-  const { address, coordinates } = useAppSelector(
+  const { address, coordinates, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
   useEffect(() => {
@@ -47,6 +48,20 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
   };
+
+  const handleSubmitClick = () => {
+    dispatch(closePopup());
+  };
+  const propsButtonDefault = {
+    label: 'Продолжить',
+    onClick: handleNextStepClick,
+  };
+  const propsEditButton = {
+    label: 'сохранить',
+    onClick: handleSubmitClick,
+  };
+
+  const propsButton = isTypeEdit ? propsEditButton : propsButtonDefault;
 
   return (
     <>
@@ -172,17 +187,21 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         )}
       </div>
       <div className={styles.buttonWrapper}>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
-        <Button
-          buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
-        />
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label="Вернуться"
+            onClick={handlePreviousStepClick}
+            extClassName={styles.prevButton}
+          />
+        )}
+        {
+          <Button
+            buttonType="primary"
+            label={propsButton.label}
+            onClick={propsButton.onClick}
+          />
+        }
       </div>
     </>
   );
