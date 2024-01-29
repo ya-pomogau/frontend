@@ -15,6 +15,7 @@ import styles from './address-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { useEffect } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface IAddressProps {
   isMobile?: boolean;
@@ -42,20 +43,6 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
   };
 
   const propsButton = usePropsButtonCustom();
-
-  const handleSubmitClick = () => {
-    dispatch(closePopup());
-  };
-  const propsButtonDefault = {
-    label: 'Продолжить',
-    onClick: handleNextStepClick,
-  };
-  const propsEditButton = {
-    label: 'сохранить',
-    onClick: handleSubmitClick,
-  };
-
-  const propsButton = isTypeEdit ? propsEditButton : propsButtonDefault;
 
   return (
     <>
