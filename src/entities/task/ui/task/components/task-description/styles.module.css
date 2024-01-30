@@ -1,12 +1,10 @@
 .descriptionMain {
   display: grid;
-  width: 100%;
   box-sizing: border-box;
-  grid-template-columns: minmax(300px, 333px);
   grid-template-rows: repeat(2, max-content);
   line-height: 24px;
   grid-template-areas: 'description'
-                      'icon';
+                      'iconGrid';
 }
 
 .textWithButton {
@@ -55,7 +53,7 @@
 }
 
 .icon {
-  grid-area: icon;
+  grid-area: iconGrid;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -68,13 +66,12 @@
 
 @media screen and (max-width: 1150px) {
   .descriptionMain {
-    grid-template-columns: 1fr;
     grid-template-rows: repeat(2, max-content);
     border-bottom: 1px solid;
     border-image-source: var(--colors-interface-line);
     border-image-slice: 1;
     gap: 37px;
-    grid-template-areas: 'description' 'icon';
+    grid-template-areas: 'description' 'iconGrid';
   }
 
   .textWithButton {
@@ -83,6 +80,7 @@
 
   .description {
     max-width: 600px;
+    min-width: 100%;
   }
 
   .button {
