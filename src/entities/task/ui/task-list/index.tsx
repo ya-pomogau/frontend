@@ -76,7 +76,6 @@ export const TaskList = ({
               <li key={index}>
                 <TaskItem
                   category={item.category.name}
-                  isMobile={isMobile}
                   date={item.date}
                   address={item.address}
                   description={item.description}
@@ -88,19 +87,6 @@ export const TaskList = ({
                   unreadMessages={item.chat?.unread}
                   recipientName={item.recipient.fullname}
                   recipientPhoneNumber={item.recipient.phone}
-                  handleClickPhoneButton={handleClickPnoneButton}
-                  handleClickMessageButton={handleClickMessageButton}
-                  handleClickConfirmButton={
-                    item.completed && !item.confirmed
-                      ? handleClickConfirmButton
-                      : undefined
-                  }
-                  handleClickCloseButton={
-                    isStatusActive ? handleClickCloseButton : undefined
-                  }
-                  handleClickEditButton={
-                    isStatusActive ? handleClickEditButton : undefined
-                  }
                 />
               </li>
             ))}

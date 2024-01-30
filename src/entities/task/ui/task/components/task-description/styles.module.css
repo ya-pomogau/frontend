@@ -9,15 +9,11 @@
 
 .textWithButton {
   grid-area: description;
+  max-width: 333px;
   position: relative;
   display: flex;
 }
 
-.description {
-  max-width: 333px;
-  min-width: 300px;
-  box-sizing: border-box;
-}
 
 .description_hidden {
   max-height: 120px;
@@ -75,6 +71,7 @@
   }
 
   .textWithButton {
+    max-width: 600px;
     margin-right: 58px;
   }
 

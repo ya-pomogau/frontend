@@ -1,4 +1,5 @@
 .infoDate {
+  margin-top: 40px;
   max-width: 153px;
   display: grid;
   grid-template-rows: 36px 29px max-content;
