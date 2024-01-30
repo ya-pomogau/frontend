@@ -32,4 +32,5 @@ export const defaultObjFilteres = {
   searchRadius: '',
   date: '',
   time: ['00:00', '00:00'],
+  userCategories: '',
 };

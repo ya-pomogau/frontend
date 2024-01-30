@@ -8,6 +8,7 @@ import type { IFilterValues } from 'features/filter/types';
 import styles from './filter-cover.module.css';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { defaultObjFilteres } from 'features/filter/consts';
+import { useSearchParams } from 'react-router-dom';
 
 interface FilterCoverProps {
   closeFilterMenu: () => void;
@@ -26,6 +27,9 @@ export const FilterCover = ({
   onReset,
   setFilteres,
 }: FilterCoverProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const newSearchParams = new URLSearchParams();
+
   useEffect(() => {
     if (window.innerWidth > 768) {
       setFilteres?.({
@@ -42,6 +46,18 @@ export const FilterCover = ({
   }, []);
 
   const applyFilter = () => {
+    Object.entries(filterValues).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        if (value[0] !== '00:00' && value[1] !== '00:00' && value.length > 0) {
+          newSearchParams.set(key, value.toString());
+        }
+      }
+
+      if (typeof value === 'string' && value.length > 0) {
+        newSearchParams.set(key, value);
+      }
+    });
+    setSearchParams(newSearchParams);
     setFilteres?.(filterValues);
     closeFilterMenu();
   };
