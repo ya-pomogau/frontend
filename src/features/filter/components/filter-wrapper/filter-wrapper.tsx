@@ -1,12 +1,4 @@
-import {
-  useState,
-  useEffect,
-  useRef,
-  ReactElement,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import { useState, useEffect, useRef, ReactElement, useCallback } from 'react';
 
 import { FilterButton } from 'features/filter/components/filter-button';
 import { FilterCover } from 'features/filter/components/filter-cover';
@@ -17,13 +9,11 @@ interface FilterWrapperProps {
   filterValues: IFilterValues;
   setFilteres?: (data: IFilterValues) => void;
   onReset: () => void;
-  setFilterValues: Dispatch<SetStateAction<IFilterValues>>;
 }
 
 export const FilterWrapper = ({
   filterMenu,
   filterValues,
-  setFilterValues,
   setFilteres,
   onReset,
 }: FilterWrapperProps) => {
@@ -66,7 +56,6 @@ export const FilterWrapper = ({
           position={filterPosition}
           filterMenu={filterMenu}
           filterValues={filterValues}
-          setFilterValues={setFilterValues}
           setFilteres={setFilteres}
           onReset={onReset}
         />

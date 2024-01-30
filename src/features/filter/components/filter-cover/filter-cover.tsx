@@ -1,9 +1,7 @@
-import { useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, ReactElement, useState, FormEvent } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
-import { getQuery } from '../../libs';
 
 import type { IFilterValues } from 'features/filter/types';
 
@@ -15,7 +13,6 @@ interface FilterCoverProps {
   position: { top: number; right: number };
   filterMenu: ReactElement;
   filterValues: IFilterValues;
-  setFilterValues: Dispatch<SetStateAction<IFilterValues>>;
   setFilteres?: (item: IFilterValues) => void;
   onReset: () => void;
 }
@@ -25,41 +22,27 @@ export const FilterCover = ({
   position,
   filterMenu,
   filterValues,
-  setFilterValues,
   onReset,
   setFilteres,
 }: FilterCoverProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  // TODO: убрать дубляж searchParams, filterValues
+  const [buttonClicked, setButtonClicked] = useState('');
   useEffect(() => {
-    const queryParams = getQuery(searchParams);
-
     if (window.innerWidth > 768) {
-      setFilterValues({
+      setFilteres?.({
         ...filterValues,
-        ...queryParams,
       });
     } else {
       setTimeout(() => {
-        setFilterValues({
+        setFilteres?.({
           ...filterValues,
-          ...queryParams,
         });
       }, 0);
     }
+    // eslint-disable-next-line
   }, []);
 
   const applyFilter = () => {
-    let params = `?`;
-    //TODO: preventDefault
-    Object.entries(filterValues).forEach(([key, value]) => {
-      //TODO: & убрать на последнем параметре
-      if (value.length) {
-        params += `${key}=${value}&`;
-      }
-    });
     setFilteres?.(filterValues);
-    setSearchParams(params);
     closeFilterMenu();
   };
 
@@ -73,6 +56,11 @@ export const FilterCover = ({
     right: `${window.innerWidth - position.right - 10}px`,
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    buttonClicked === 'apply' ? applyFilter() : resetFilter();
+  };
+
   return (
     <Tooltip
       pointerPosition="right"
@@ -81,8 +69,7 @@ export const FilterCover = ({
       extClassName={styles.tooltip}
       visible
     >
-      {/* TODO повесить обработчики */}
-      <form name="formFilter">
+      <form name="formFilter" onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.wrapper}>
           {filterMenu}
           <div
@@ -90,21 +77,20 @@ export const FilterCover = ({
               window.innerWidth <= 768 ? styles.buttonWrapper__mobile : null
             }`}
           >
-            {/* TODO:  reset, submit*/}
             <Button
               label="Сбросить фильтры"
               buttonType="secondary"
               size="medium"
-              actionType="button"
+              actionType="submit"
               customIcon={<CloseCrossIcon color={'blue'} />}
-              onClick={resetFilter}
+              onClick={() => setButtonClicked('reset')}
             />
             <Button
-              onClick={applyFilter}
+              onClick={() => setButtonClicked('apply')}
               label="Применить"
               buttonType="primary"
               size="medium"
-              actionType="button"
+              actionType="submit"
             />
           </div>
         </div>
