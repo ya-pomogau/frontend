@@ -43,6 +43,7 @@ type ModalButtons = {
 };
 
 interface TaskItemProps {
+  taskId?: number;
   isMobile: boolean;
   category: string;
   date?: string;
@@ -77,6 +78,7 @@ const textStyle = classNames(
 );
 
 export const TaskItem = ({
+  taskId,
   isMobile,
   category,
   date,
@@ -151,9 +153,11 @@ export const TaskItem = ({
     phone: null,
     cancel: [{ type: 'primary', text: 'Написать администратору' }],
   };
+
   const dispatch = useAppDispatch();
 
   const handleEditButton = () => {
+    console.log(taskId);
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
@@ -556,6 +560,7 @@ export const TaskItem = ({
             />
           </ButtonWithModal>
           <SquareButton
+            taskId={taskId}
             onClick={handleEditButton}
             buttonType="edit"
             extClassName={

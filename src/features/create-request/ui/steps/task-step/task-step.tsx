@@ -36,6 +36,8 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const handleTaskDescValueChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
+    console.log(222);
+
     dispatch(setDescriptionForTask(e.target.value));
   };
 

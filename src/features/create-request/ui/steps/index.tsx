@@ -14,10 +14,9 @@ import { useGetCategoriesQuery } from 'services/categories-api';
 
 export interface RequestProps {
   isMobile?: boolean;
-  edit?: boolean;
 }
 
-export const Request = ({ isMobile = true, edit }: RequestProps) => {
+export const Request = ({ isMobile = true }: RequestProps) => {
   const dispatch = useAppDispatch();
   const { currentStep, isPopupOpen } = useAppSelector(
     (state) => state.createRequest
