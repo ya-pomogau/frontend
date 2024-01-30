@@ -164,6 +164,7 @@ export const TaskItem = ({
     phone: null,
     cancel: [{ type: 'primary', text: 'Написать администратору' }],
   };
+
   const dispatch = useAppDispatch();
 
   const dispatch = useAppDispatch();
@@ -577,6 +578,7 @@ export const TaskItem = ({
             />
           </ButtonWithModal>
           <SquareButton
+            taskId={taskId}
             onClick={handleEditButton}
             buttonType="edit"
             extClassName={

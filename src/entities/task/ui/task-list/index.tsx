@@ -68,6 +68,7 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
+  console.log(tasks);
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
@@ -129,7 +130,6 @@ export const TaskList = ({
                 recipientName={item.recipient.fullname}
                 recipientPhoneNumber={item.recipient.phone}
                 isStatusActive={isStatusActive}
-                handleEditButton={handleClickAddTaskButton}
               />
             </li>
           ))}
