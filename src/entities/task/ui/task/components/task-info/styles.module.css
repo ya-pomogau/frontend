@@ -1,5 +1,4 @@
 .infoDate {
-  margin-top: 40px;
   max-width: 153px;
   display: grid;
   grid-template-rows: 36px 29px max-content;
@@ -33,6 +32,7 @@
 
 @media screen and (max-width: 1150px) {
   .infoDate {
+    max-width: 100%;
     margin-top: 0;
     grid-template-columns: repeat(2, max-content);
     grid-template-rows: repeat(2, max-content);

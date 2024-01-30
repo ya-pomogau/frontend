@@ -65,17 +65,23 @@
     grid-template-areas: 'buttons' 'recipient' 'description' 'taskInfo';
     padding-top: 0;
     padding-left: 10px;
+    padding-bottom: 10px;
     border: 1px solid var(--colors-interface-blue-very-soft);
   }
 
   .recipient {
     justify-self: start;
     margin-right: 0;
+    max-width: 100%;
   }
 
   .description {
     margin-top: 20px;
     padding-bottom: 5px;
     margin-bottom: 16px;
+  }
+
+  .taskInfo {
+    margin-top: 40px;
   }
 }
