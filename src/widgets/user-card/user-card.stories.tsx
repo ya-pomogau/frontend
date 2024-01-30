@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UserCard } from '.';
+import { UserRole } from 'shared/types/common.types';
 
 const meta: Meta<typeof UserCard> = {
   title: 'widgets/UserCard',
@@ -48,7 +49,7 @@ export const Example: Story = {
 
 export const VolunteerUserCardFirst: Story = {
   args: {
-    role: 'volunteer',
+    role: UserRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -65,7 +66,7 @@ export const VolunteerUserCardFirst: Story = {
 
 export const VolunteerUserCardSecond: Story = {
   args: {
-    role: 'volunteer',
+    role: UserRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -82,7 +83,7 @@ export const VolunteerUserCardSecond: Story = {
 
 export const VolunteerUserCardThird: Story = {
   args: {
-    role: 'volunteer',
+    role: UserRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -99,7 +100,7 @@ export const VolunteerUserCardThird: Story = {
 
 export const VolunteerUserCardForth: Story = {
   args: {
-    role: 'volunteer',
+    role: UserRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 12345,
@@ -116,7 +117,7 @@ export const VolunteerUserCardForth: Story = {
 
 export const RecipientUserCardFirst: Story = {
   args: {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Recipient Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 67890,
@@ -129,7 +130,7 @@ export const RecipientUserCardFirst: Story = {
 
 export const RecipientUserCardSecond: Story = {
   args: {
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     avatarName: 'Recipient Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 67890,
@@ -142,7 +143,7 @@ export const RecipientUserCardSecond: Story = {
 
 export const AdminUserCardFirst: Story = {
   args: {
-    role: 'admin',
+    role: UserRole.ADMIN,
     avatarName: 'Recipient Avatar',
     userName: 'Иванов Иван Иванович',
     userId: 67890,

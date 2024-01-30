@@ -5,6 +5,8 @@ import { FieldsetView } from 'shared/ui/fieldset/utils';
 import Checkbox from 'shared/ui/checkbox';
 import { useAppSelector } from 'app/hooks';
 import { VariantCheckbox } from 'shared/types/common.types';
+import { UserRole } from 'shared/types/common.types';
+
 
 interface SortByBlockProps {
   filter: string;
@@ -27,7 +29,8 @@ export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
         onChange={handleCheckboxChange}
       />
 
-      {role === 'admin' && (
+
+      {role === UserRole.VOLUNTEER && (
         <>
           <Checkbox
             checked={filter === VariantCheckbox.DECREASINGPOINTS}

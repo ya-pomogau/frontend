@@ -1,4 +1,19 @@
+.wrapper{
+  display: flex;
+  width: 100%;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  justify-content: right;
+  align-items: center;
+}
+
 .adminButton {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--colors-interface-ford-white);
   display: flex;
   color: var(--colors-interface-primary);
   border: none;
@@ -7,12 +22,13 @@
   cursor: pointer;
   justify-content: center;
   align-items: center;
-}
 
+}
 .title {
   margin: 0;
   text-align: right;
   font-family: 'Golos';
+
   font-size: 16px;
   line-height: 19px;
 }
@@ -43,6 +59,16 @@
   top: 19px;
 }
 
+.title_logout {
+  margin-right: 5px;
+  font-family: 'Golos';
+  font-size: 16px;
+  line-height: 19px;
+  color: black;
+  justify-content:end;
+
+}
+
 @media (max-width: 900px) {
   .title {
     font-size: 12px;
@@ -55,4 +81,5 @@
     color: #fbfdff;
     z-index: 2;
   }
+
 }

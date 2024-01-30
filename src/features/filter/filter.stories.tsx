@@ -9,13 +9,14 @@ import type {
   FilteringProps,
 } from 'features/filter/filter';
 import { Filter } from 'features/filter';
+import { UserRole } from 'shared/types/common.types';
 
 const mockedVolunteerState = {
-  role: 'volunteer',
+  role: UserRole.VOLUNTEER,
   data: {
     id: 4,
     fullname: 'Реципиентов Алексей Борисович',
-    role: 'recipient',
+    role: UserRole.RECIPIENT,
     vk: 'https://vk.com/id123456789',
     avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
     phone: '+7 (916) 123-45-67',
@@ -29,17 +30,17 @@ const mockedVolunteerState = {
 
 const mockedRecipientState = {
   ...mockedVolunteerState,
-  role: 'recipient',
+  role: UserRole.RECIPIENT,
 };
 
 const mockedAdminState = {
   ...mockedVolunteerState,
-  role: 'admin',
+  role: UserRole.ADMIN,
 };
 
 const mockedMasterState = {
   ...mockedVolunteerState,
-  role: 'master',
+  role: UserRole.MASTER,
 };
 
 const mockedUnauthorizedState = {

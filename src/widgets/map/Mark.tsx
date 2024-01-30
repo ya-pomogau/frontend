@@ -8,6 +8,7 @@ import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
+import { UserRole } from 'shared/types/common.types';
 
 type MarkProps = {
   id?: number;
@@ -45,7 +46,7 @@ export const Mark = React.memo(
 
     const isGranted = usePermission(
       [CONFIRMED, ACTIVATED, VERIFIED],
-      'volunteer'
+      UserRole.VOLUNTEER
     );
     const onUncomfirmedClick = () => {
       alert(

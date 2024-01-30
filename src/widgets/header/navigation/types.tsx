@@ -16,6 +16,6 @@ export interface ISideBarPosition {
   element: ISideBarElementPosition;
 }
 export interface ISideBarProps {
-  links: ISideBarElementProps[];
+  links: ISideBarElementProps[] | null;
   position: ISideBarPosition;
 }

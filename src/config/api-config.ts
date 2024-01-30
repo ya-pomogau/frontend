@@ -27,6 +27,6 @@ export const AUTH_ROUTES: TAuthRoutes = {
 };
 
 export const DEFAULT_HEADERS = {
-  // 'Content-Type': 'application/json',
-  contentType: 'application/json',
+  //eslint-disable-next-line @typescript-eslint/naming-convention
+  'Content-Type': 'application/json',
 };

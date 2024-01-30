@@ -38,7 +38,7 @@ export const SideBar = ({ links, position }: ISideBarProps) => (
       className={`${styles.links} `}
       style={{ flexDirection: position.ulflexDirection, gap: position.ulgap }}
     >
-      {links.map((item) => (
+      {links?.map((item) => (
         <SideBarItem
           key={item.to}
           title={item.title}

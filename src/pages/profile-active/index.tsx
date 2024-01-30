@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
+import { UserRole } from 'shared/types/common.types';
+
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -42,7 +44,7 @@ export function ProfileActivePage() {
         text="Активные заявки"
         icon={<Icon color="blue" icon="ActiveApplicationIcon" size="54" />}
         filter={
-          role === 'volunteer' ? (
+          role === UserRole.VOLUNTEER ? (
             <Filter
               items={{
                 sort: true,
