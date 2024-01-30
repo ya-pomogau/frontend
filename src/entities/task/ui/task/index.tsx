@@ -576,6 +576,7 @@ export const TaskItem = ({
             />
           </ButtonWithModal>
           <SquareButton
+            taskId={taskId}
             onClick={handleEditButton}
             buttonType="edit"
             extClassName={
