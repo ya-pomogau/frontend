@@ -13,6 +13,7 @@ import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
+import { defaultObjFilteres } from 'features/filter/consts';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -23,13 +24,8 @@ export function ProfileActivePage() {
 
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
-  const [infoFilterTasks, setInfoFilterTasks] = useState<IFilterValues>({
-    sortBy: '',
-    categories: [],
-    searchRadius: '',
-    date: '',
-    time: ['00:00', '00:00'],
-  });
+  const [infoFilterTasks, setInfoFilterTasks] =
+    useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
   useEffect(() => {

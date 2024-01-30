@@ -25,3 +25,11 @@ export const FilterItemsIds = {
   SERVIS_8: 'Организация досуга',
   SERVIS_9: 'Ремонт техники/жилья',
 };
+
+export const defaultObjFilteres = {
+  sortBy: '',
+  categories: [],
+  searchRadius: '',
+  date: '',
+  time: ['00:00', '00:00'],
+};

@@ -3,11 +3,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { withRouter } from 'storybook-addon-react-router-v6';
 
-import type {
-  FilterProps,
-  NotFoundFilterProps,
-  FilteringProps,
-} from 'features/filter/filter';
+import type { FilteringProps, NotFoundFilterProps } from './types';
 import { Filter } from 'features/filter';
 import { UserRole } from 'shared/types/common.types';
 
