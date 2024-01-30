@@ -66,6 +66,7 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
+  console.log(tasks);
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);
@@ -111,6 +112,7 @@ export const TaskList = ({
           {tasks.map((item, index) => (
             <li key={index}>
               <TaskItem
+                taskId={item.id}
                 category={item.category.name}
                 isMobile={isMobile}
                 date={item.date}
