@@ -4,6 +4,7 @@ export interface IFilterValues {
   sortBy: string;
   date: string;
   time: string[];
+  userCategories: string;
 }
 
 export interface FilteringProps {

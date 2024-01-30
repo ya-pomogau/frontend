@@ -12,18 +12,14 @@ import { Task } from 'entities/task/types';
 import { useEffect, useState } from 'react';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
+import { defaultObjFilteres } from 'features/filter/consts';
 
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
   const { role } = useAppSelector((state) => state.user);
-  const [infoFilterTasks, setInfoFilterTasks] = useState<IFilterValues>({
-    sortBy: '',
-    categories: [],
-    searchRadius: '',
-    date: '',
-    time: ['00:00', '00:00'],
-  });
+  const [infoFilterTasks, setInfoFilterTasks] =
+    useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
   useEffect(() => {
