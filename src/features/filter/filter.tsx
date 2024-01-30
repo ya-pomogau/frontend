@@ -123,7 +123,6 @@ export const Filter = ({
         </>
       }
       filterValues={filterValues}
-      setFilterValues={setFilterValues}
       onReset={handleReset}
       setFilteres={setFilteres}
     />
