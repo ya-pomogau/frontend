@@ -1,47 +1,22 @@
 import { useState } from 'react';
 
 import { FilterWrapper } from 'features/filter/components/filter-wrapper';
-import { IFilterValues } from 'features/filter/types';
+import { FilterProps, IFilterValues } from 'features/filter/types';
 import { SortByBlock } from 'features/filter/ui/sortBy-block';
 import { RadiusBlock } from 'features/filter/ui/radius-block';
 import { CalenderBlock } from 'features/filter/ui/calender-block';
 import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
 import { CategoriesBlock } from './ui/categories-block';
-
-export interface FilteringProps {
-  items: {
-    categories?: boolean;
-    radius?: boolean;
-    sort?: boolean;
-    date?: boolean;
-    time?: boolean;
-    userCategories?: boolean;
-  };
-  setFilteres?: (date: IFilterValues) => void;
-  notFoundFilter?: never;
-}
-
-export interface NotFoundFilterProps {
-  items?: never;
-  setFilteres?: (date: IFilterValues) => void;
-  notFoundFilter: boolean;
-}
-
-export type FilterProps = FilteringProps | NotFoundFilterProps;
+import { defaultObjFilteres } from './consts';
 
 export const Filter = ({
   items,
   notFoundFilter = false,
   setFilteres,
 }: FilterProps) => {
-  const [filterValues, setFilterValues] = useState<IFilterValues>({
-    sortBy: '',
-    categories: [],
-    searchRadius: '',
-    date: '',
-    time: ['00:00', '00:00'],
-  });
+  const [filterValues, setFilterValues] =
+    useState<IFilterValues>(defaultObjFilteres);
 
   const handleFilterChange = (
     name: string,
@@ -54,13 +29,7 @@ export const Filter = ({
   };
 
   const handleReset = () => {
-    setFilterValues({
-      sortBy: '',
-      categories: [],
-      searchRadius: '',
-      date: '',
-      time: ['00:00', '00:00'],
-    });
+    setFilterValues(defaultObjFilteres);
   };
 
   if (notFoundFilter) {

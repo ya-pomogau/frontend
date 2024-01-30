@@ -1,4 +1,4 @@
-import { useEffect, ReactElement, useState, FormEvent } from 'react';
+import { useEffect, ReactElement, FormEvent } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
@@ -7,6 +7,7 @@ import type { IFilterValues } from 'features/filter/types';
 
 import styles from './filter-cover.module.css';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { defaultObjFilteres } from 'features/filter/consts';
 
 interface FilterCoverProps {
   closeFilterMenu: () => void;
@@ -25,7 +26,6 @@ export const FilterCover = ({
   onReset,
   setFilteres,
 }: FilterCoverProps) => {
-  const [buttonClicked, setButtonClicked] = useState('');
   useEffect(() => {
     if (window.innerWidth > 768) {
       setFilteres?.({
@@ -48,7 +48,8 @@ export const FilterCover = ({
 
   const resetFilter = () => {
     onReset();
-    setFilteres?.(filterValues);
+    setFilteres?.(defaultObjFilteres);
+    closeFilterMenu();
   };
 
   const filterPositionStyles = {
@@ -58,7 +59,7 @@ export const FilterCover = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    buttonClicked === 'apply' ? applyFilter() : resetFilter();
+    applyFilter();
   };
 
   return (
@@ -69,7 +70,11 @@ export const FilterCover = ({
       extClassName={styles.tooltip}
       visible
     >
-      <form name="formFilter" onSubmit={(e) => handleSubmit(e)}>
+      <form
+        name="formFilter"
+        onSubmit={(e) => handleSubmit(e)}
+        onReset={() => resetFilter()}
+      >
         <div className={styles.wrapper}>
           {filterMenu}
           <div
@@ -81,12 +86,10 @@ export const FilterCover = ({
               label="Сбросить фильтры"
               buttonType="secondary"
               size="medium"
-              actionType="submit"
+              actionType="reset"
               customIcon={<CloseCrossIcon color={'blue'} />}
-              onClick={() => setButtonClicked('reset')}
             />
             <Button
-              onClick={() => setButtonClicked('apply')}
               label="Применить"
               buttonType="primary"
               size="medium"
