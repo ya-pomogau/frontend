@@ -41,10 +41,9 @@ export function ProfileCompletedPage() {
             <Filter
               items={{
                 sort: true,
-                categories: false,
+                categories: true,
                 radius: false,
                 date: false,
-                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />

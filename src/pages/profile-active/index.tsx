@@ -47,10 +47,9 @@ export function ProfileActivePage() {
             <Filter
               items={{
                 sort: true,
-                categories: false,
+                categories: true,
                 radius: false,
                 date: false,
-                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />
@@ -58,10 +57,9 @@ export function ProfileActivePage() {
             <Filter
               items={{
                 sort: true,
-                categories: false,
+                categories: true,
                 radius: false,
                 date: false,
-                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />

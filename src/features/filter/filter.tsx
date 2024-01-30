@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { FilterWrapper } from 'features/filter/components/filter-wrapper';
 import { IFilterValues } from 'features/filter/types';
 import { SortByBlock } from 'features/filter/ui/sortBy-block';
-import { CategoriesBlock } from 'features/filter/ui/categories-block';
 import { RadiusBlock } from 'features/filter/ui/radius-block';
 import { CalenderBlock } from 'features/filter/ui/calender-block';
 import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
-import { CategoriesServies } from './ui/categories-types';
+import { CategoriesBlock } from './ui/categories-block';
 
 export interface FilteringProps {
   items: {
@@ -17,7 +16,6 @@ export interface FilteringProps {
     sort?: boolean;
     date?: boolean;
     time?: boolean;
-    servies?: boolean;
     userCategories?: boolean;
   };
   setFilteres?: (date: IFilterValues) => void;
@@ -79,10 +77,9 @@ export const Filter = ({
               onChange={handleFilterChange}
             />
           )}
-
           {items?.categories && (
             <CategoriesBlock
-              selectedCategories={filterValues.categories}
+              selectedServies={filterValues.categories}
               onChange={handleFilterChange}
             />
           )}
@@ -111,13 +108,6 @@ export const Filter = ({
           {items?.date && (
             <CalenderBlock
               filterDate={filterValues.date}
-              onChange={handleFilterChange}
-            />
-          )}
-
-          {items?.servies && (
-            <CategoriesServies
-              selectedServies={filterValues.categories}
               onChange={handleFilterChange}
             />
           )}
