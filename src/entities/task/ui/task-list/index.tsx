@@ -69,28 +69,25 @@ export const TaskList = ({
             </li>
           )}
 
-          {tasks.map(
-            (item, index) =>
-              index > 0 && (
-                <li key={index}>
-                  <TaskItem
-                    category={item.category.name}
-                    date={item.date}
-                    address={item.address}
-                    description={item.description}
-                    count={item.category.scope}
-                    avatar={item.recipient.avatar}
-                    completed={item.completed}
-                    conflict={item.conflict}
-                    confirmed={item.confirmed}
-                    unreadMessages={item.chat?.unread}
-                    recipientName={item.recipient.fullname}
-                    recipientPhoneNumber={item.recipient.phone}
-                    isStatusActive={isStatusActive}
-                  />
-                </li>
-              )
-          )}
+          {tasks.map((item, index) => (
+            <li key={index}>
+              <TaskItem
+                category={item.category.name}
+                date={item.date}
+                address={item.address}
+                description={item.description}
+                count={item.category.scope}
+                avatar={item.recipient.avatar}
+                completed={item.completed}
+                conflict={item.conflict}
+                confirmed={item.confirmed}
+                unreadMessages={item.chat?.unread}
+                recipientName={item.recipient.fullname}
+                recipientPhoneNumber={item.recipient.phone}
+                isStatusActive={isStatusActive}
+              />
+            </li>
+          ))}
         </ul>
       )}
 

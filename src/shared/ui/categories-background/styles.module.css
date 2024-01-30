@@ -39,7 +39,7 @@
 }
 .categories-background--large {
   padding-left: 10px;
-  min-width: 215px;
+  max-width: 215px;
 }
 
 .categories-background-content {
