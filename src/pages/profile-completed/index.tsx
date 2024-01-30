@@ -13,7 +13,6 @@ import { useEffect, useState } from 'react';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 
-
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
@@ -42,10 +41,9 @@ export function ProfileCompletedPage() {
             <Filter
               items={{
                 sort: true,
-                categories: false,
+                categories: true,
                 radius: false,
                 date: false,
-                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />
@@ -53,10 +51,9 @@ export function ProfileCompletedPage() {
             <Filter
               items={{
                 sort: true,
-                categories: false,
+                categories: true,
                 radius: false,
                 date: false,
-                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />

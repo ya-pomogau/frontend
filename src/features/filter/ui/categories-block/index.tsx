@@ -10,12 +10,12 @@ import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { UserRole } from 'shared/types/common.types';
 
 interface CategoriesBlockProps {
-  selectedCategories: string[];
+  selectedServies: string[];
   onChange: (name: string, value: string[]) => void;
 }
 
 export const CategoriesBlock = ({
-  selectedCategories,
+  selectedServies,
   onChange,
 }: CategoriesBlockProps) => {
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
@@ -32,11 +32,12 @@ export const CategoriesBlock = ({
   const volunteerhigherGuard = usePermission([VERIFIED], UserRole.VOLUNTEER);
 
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    let newValue;
+    let newValue: string[];
+
     if (target.checked) {
-      newValue = [...selectedCategories, target.id];
+      newValue = [...selectedServies, target.id];
     } else {
-      newValue = selectedCategories.filter((item) => item !== target.id);
+      newValue = selectedServies.filter((item) => item !== target.id);
     }
     onChange('categories', newValue);
   };
@@ -57,55 +58,96 @@ export const CategoriesBlock = ({
         <div className={styles.row}>
           <Checkbox
             name="taskCategory"
-            label="Категория 1"
-            checked={selectedCategories.includes(FilterItemsIds.CATEGORY_1)}
-            id={FilterItemsIds.CATEGORY_1}
+            label="Сопровождение"
+            checked={selectedServies.includes(FilterItemsIds.SERVIS_1)}
+            id={FilterItemsIds.SERVIS_1}
             onChange={handleCheckboxChange}
             disabled={!volunteerMainGuard ?? false}
+            extClassName={classnames('text_size_small')}
           />
           <Checkbox
             name="taskCategory"
-            label="Категория 2"
-            checked={selectedCategories.includes(FilterItemsIds.CATEGORY_2)}
-            id={FilterItemsIds.CATEGORY_2}
+            label="Перевозка в личном транспорте"
+            checked={selectedServies.includes(FilterItemsIds.SERVIS_2)}
+            id={FilterItemsIds.SERVIS_2}
             onChange={handleCheckboxChange}
             disabled={!volunteerMainGuard ?? false}
+            extClassName={classnames('text_size_small')}
           />
         </div>
         <div className={styles.row}>
           <Checkbox
             name="taskCategory"
-            label="Категория 3"
-            checked={selectedCategories.includes(FilterItemsIds.CATEGORY_3)}
-            id={FilterItemsIds.CATEGORY_3}
+            label="Покупка продуктов"
+            checked={selectedServies.includes(FilterItemsIds.SERVIS_3)}
+            id={FilterItemsIds.SERVIS_3}
             onChange={handleCheckboxChange}
             disabled={!volunteerMainGuard ?? false}
+            extClassName={classnames('text_size_small')}
           />
           <Checkbox
             name="taskCategory"
-            label="Категория 4"
-            checked={selectedCategories.includes(FilterItemsIds.CATEGORY_4)}
-            id={FilterItemsIds.CATEGORY_4}
+            label="Помощ в подъёме/спуске"
+            checked={selectedServies.includes(FilterItemsIds.SERVIS_4)}
+            id={FilterItemsIds.SERVIS_4}
             onChange={handleCheckboxChange}
             disabled={!volunteerSpecialGuard ?? false}
+            extClassName={classnames('text_size_small')}
           />
         </div>
         <div className={styles.row}>
+          <div className={styles.box}>
+            <Checkbox
+              name="taskCategory"
+              label="Покупка вещей/техники"
+              checked={selectedServies.includes(FilterItemsIds.SERVIS_5)}
+              id={FilterItemsIds.SERVIS_5}
+              onChange={handleCheckboxChange}
+              disabled={!volunteerSpecialGuard ?? false}
+              extClassName={classnames('text_size_small')}
+            />
+          </div>
           <Checkbox
             name="taskCategory"
-            label="Категория 5"
-            checked={selectedCategories.includes(FilterItemsIds.CATEGORY_5)}
-            id={FilterItemsIds.CATEGORY_5}
-            onChange={handleCheckboxChange}
-            disabled={!volunteerSpecialGuard ?? false}
-          />
-          <Checkbox
-            name="taskCategory"
-            label="Категория 6"
-            checked={selectedCategories.includes(FilterItemsIds.CATEGORY_6)}
-            id={FilterItemsIds.CATEGORY_6}
+            label="Помощь в готовке"
+            checked={selectedServies.includes(FilterItemsIds.SERVIS_6)}
+            id={FilterItemsIds.SERVIS_6}
             onChange={handleCheckboxChange}
             disabled={!volunteerhigherGuard ?? false}
+            extClassName={classnames('text_size_small')}
+          />
+        </div>
+        <div className={styles.row}>
+          <div className={styles.box}>
+            <Checkbox
+              name="taskCategory"
+              label="Помощь в уборке"
+              checked={selectedServies.includes(FilterItemsIds.SERVIS_7)}
+              id={FilterItemsIds.SERVIS_7}
+              onChange={handleCheckboxChange}
+              disabled={!volunteerSpecialGuard ?? false}
+              extClassName={classnames('text_size_small')}
+            />
+          </div>
+          <Checkbox
+            name="taskCategory"
+            label="Организация досуга"
+            checked={selectedServies.includes(FilterItemsIds.SERVIS_8)}
+            id={FilterItemsIds.SERVIS_8}
+            onChange={handleCheckboxChange}
+            disabled={!volunteerhigherGuard ?? false}
+            extClassName={classnames('text_size_small')}
+          />
+        </div>
+        <div className={styles.box}>
+          <Checkbox
+            name="taskCategory"
+            label="Ремонт техники/жилья"
+            checked={selectedServies.includes(FilterItemsIds.SERVIS_9)}
+            id={FilterItemsIds.SERVIS_9}
+            onChange={handleCheckboxChange}
+            disabled={!volunteerSpecialGuard ?? false}
+            extClassName={classnames('text_size_small')}
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Админов Главный Админович",
       "role": "Master",
@@ -15,38 +15,38 @@
       "isHasKeys": true,
       "permissions": [
         {
-          "id": 0,
+          "id": "0",
           "name": "read"
         },
         {
-          "id": 1,
+          "id": "1",
           "name": "profiles approval"
         },
         {
-          "id": 2,
+          "id": "2",
           "name": "create tasks"
         },
         {
-          "id": 3,
+          "id": "3",
           "name": "set keys"
         },
         {
-          "id": 4,
+          "id": "4",
           "name": "resolve conflicts"
         },
         {
-          "id": 5,
+          "id": "5",
           "name": "blog"
         },
         {
-          "id": 6,
+          "id": "6",
           "name": "increase score"
         }
       ],
       "scores": null
     },
     {
-      "id": 2,
+      "id": "2",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Админов Семен Семенович",
       "role": "Admin",
@@ -59,15 +59,15 @@
       "isActive": true,
       "permissions": [
         {
-          "id": 0,
+          "id": "0",
           "name": "read"
         },
         {
-          "id": 1,
+          "id": "1",
           "name": "profiles approval"
         },
         {
-          "id": 2,
+          "id": "2",
           "name": "create tasks"
         }
       ],
@@ -75,7 +75,7 @@
       "scores": null
     },
     {
-      "id": 7,
+      "id": "7",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Волонтеров Петр Петрович",
       "role": "Volunteer",
@@ -90,7 +90,7 @@
       "isActive": true
     },
     {
-      "id": 4,
+      "id": "4",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Реципиентов Алексей Борисович",
       "role": "Recipient",
@@ -116,10 +116,10 @@
   ],
   "tasksAvailable": [
     {
-      "id": 12,
+      "id": "12",
       "title": "Выгулять собаку",
       "category": {
-        "id": 1,
+        "id": "1",
         "name": "Сопровождение",
         "scope": 1
       },
@@ -129,7 +129,7 @@
       "confirmed": false,
       "conflict": false,
       "recipient": {
-        "id": 5,
+        "id": "5",
         "fullname": "Реципиентов Игорь Витальевич",
         "role": "Recipient",
         "vk": "https://vk.com/id123456789",
@@ -145,10 +145,10 @@
       "chat": null
     },
     {
-      "id": 24,
+      "id": "24",
       "title": "Задача 24",
       "category": {
-        "id": 2,
+        "id": "2",
         "name": "Покупка продуктов",
         "scope": 1
       },
@@ -158,7 +158,7 @@
       "confirmed": false,
       "conflict": false,
       "recipient": {
-        "id": 6,
+        "id": "6",
         "fullname": "Реципиентов Иван Николаевич",
         "role": "Recipient",
         "vk": "https://vk.com/id123456789",
@@ -174,10 +174,10 @@
       "chat": null
     },
     {
-      "id": 33,
+      "id": "33",
       "title": "Задача 33",
       "category": {
-        "id": 6,
+        "id": "6",
         "name": "Перевозка в личном транспорте",
         "scope": 1
       },
@@ -187,7 +187,7 @@
       "confirmed": false,
       "conflict": false,
       "recipient": {
-        "id": 6,
+        "id": "6",
         "fullname": "Реципиентов Иван Николаевич",
         "role": "Recipient",
         "vk": "https://vk.com/id123456789",
@@ -205,10 +205,10 @@
   ],
   "tasksActive": [
     {
-      "id": 14,
+      "id": "14",
       "title": "Название задачи 14",
       "category": {
-        "id": 1,
+        "id": "1",
         "name": "Сопровождение",
         "scope": 6
       },
@@ -218,7 +218,7 @@
       "confirmed": false,
       "conflict": false,
       "recipient": {
-        "id": 4,
+        "id": "4",
         "fullname": "Реципиентов Алексей Борисович",
         "role": "Recipient",
         "vk": "https://vk.com/id123456789",
@@ -229,7 +229,7 @@
         "approved": true
       },
       "volunteer": {
-        "id": 7,
+        "id": "7",
         "fullname": "Волонтеров Петр Петрович",
         "role": "Volunteer",
         "vk": "https://vk.com/id123456789",
@@ -250,10 +250,10 @@
       }
     },
     {
-      "id": 19,
+      "id": "19",
       "title": "Достаточно длинное название для задачи 19",
       "category": {
-        "id": 5,
+        "id": "5",
         "name": "Ремонт техники/жилья",
         "scope": 2
       },
@@ -263,7 +263,7 @@
       "confirmed": false,
       "conflict": false,
       "recipient": {
-        "id": 5,
+        "id": "5",
         "fullname": "Реципиентов Игорь Витальевич",
         "role": "Recipient",
         "vk": "https://vk.com/id123456789",
@@ -274,7 +274,7 @@
         "approved": true
       },
       "volunteer": {
-        "id": 7,
+        "id": "7",
         "fullname": "Волонтеров Петр Петрович",
         "role": "Volunteer",
         "vk": "https://vk.com/id123456789",
@@ -294,10 +294,10 @@
   ],
   "tasksCompleted": [
     {
-      "id": 15,
+      "id": "15",
       "title": "Задача 15",
       "category": {
-        "id": 6,
+        "id": "6",
         "name": "Перевозка в личном транспорте",
         "scope": 4
       },
@@ -307,7 +307,7 @@
       "confirmed": true,
       "conflict": false,
       "recipient": {
-        "id": 4,
+        "id": "4",
         "fullname": "Реципиентов Алексей Борисович",
         "role": "Recipient",
         "vk": "https://vk.com/id123456789",
@@ -318,7 +318,7 @@
         "approved": true
       },
       "volunteer": {
-        "id": 7,
+        "id": "7",
         "fullname": "Волонтеров Петр Петрович",
         "role": "Volunteer",
         "vk": "https://vk.com/id123456789",
@@ -339,10 +339,10 @@
       }
     },
     {
-      "id": 27,
+      "id": "27",
       "title": "Задача 27",
       "category": {
-        "id": 1,
+        "id": "1",
         "name": "Сопровождение",
         "scope": 1
       },
@@ -352,7 +352,7 @@
       "confirmed": true,
       "conflict": false,
       "recipient": {
-        "id": 6,
+        "id": "6",
         "fullname": "Реципиентов Иван Николаевич",
         "role": "Recipient",
         "vk": "https://vk.com/id123456789",
@@ -363,7 +363,7 @@
         "approved": true
       },
       "volunteer": {
-        "id": 7,
+        "id": "7",
         "fullname": "Волонтеров Петр Петрович",
         "role": "Volunteer",
         "vk": "https://vk.com/id123456789",
@@ -381,10 +381,10 @@
       "chat": null
     },
     {
-      "id": 15,
+      "id": "15",
       "title": "Задача 15",
       "category": {
-        "id": 6,
+        "id": "6",
         "name": "Покупка продуктов",
         "scope": 10
       },
@@ -394,7 +394,7 @@
       "confirmed": true,
       "conflict": false,
       "recipient": {
-        "id": 4,
+        "id": "4",
         "fullname": "Реципиентов Алексей Борисович",
         "role": "recipient",
         "vk": "https://vk.com/id123456789",
@@ -405,7 +405,7 @@
         "approved": true
       },
       "volunteer": {
-        "id": 7,
+        "id": "7",
         "fullname": "Волонтеров Петр Петрович",
         "role": "volunteer",
         "vk": "https://vk.com/id123456789",
@@ -426,10 +426,10 @@
       }
     },
     {
-      "id": 15,
+      "id": "15",
       "title": "Задача 15",
       "category": {
-        "id": 7,
+        "id": "7",
         "name": "Помощь в готовке",
         "scope": 10
       },
@@ -439,7 +439,7 @@
       "confirmed": true,
       "conflict": false,
       "recipient": {
-        "id": 4,
+        "id": "4",
         "fullname": "Реципиентов Алексей Борисович",
         "role": "recipient",
         "vk": "https://vk.com/id123456789",
@@ -450,7 +450,7 @@
         "approved": true
       },
       "volunteer": {
-        "id": 7,
+        "id": "7",
         "fullname": "Волонтеров Петр Петрович",
         "role": "volunteer",
         "vk": "https://vk.com/id123456789",
@@ -473,63 +473,63 @@
   ],
   "category": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Сопровождение",
       "scope": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Покупка продуктов",
       "scope": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Покупка вещей/техники",
       "scope": 1
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Помощь в уборке",
       "scope": 1
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Ремонт техники/жилья",
       "scope": 1
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Перевозка в личном транспорте",
       "scope": 1
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Помощь в подъеме/спуске",
       "scope": 1
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Помощь в готовке",
       "scope": 1
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Организация досуга",
       "scope": 1
     }
   ],
   "usersAvatar": [
     {
-      "id": 7
+      "id": "7"
     },
     {
-      "id": 4
+      "id": "4"
     },
     {
-      "id": 2
+      "id": "2"
     },
     {
-      "id": 1
+      "id": "1"
     },
     {
       "id": "yjf6YdA"

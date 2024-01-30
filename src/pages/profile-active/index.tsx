@@ -14,7 +14,6 @@ import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 
-
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('active');
@@ -48,10 +47,9 @@ export function ProfileActivePage() {
             <Filter
               items={{
                 sort: true,
-                categories: false,
+                categories: true,
                 radius: false,
                 date: false,
-                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />
@@ -59,10 +57,9 @@ export function ProfileActivePage() {
             <Filter
               items={{
                 sort: true,
-                categories: false,
+                categories: true,
                 radius: false,
                 date: false,
-                servies: true,
               }}
               setFilteres={setInfoFilterTasks}
             />

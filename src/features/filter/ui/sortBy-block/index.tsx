@@ -7,7 +7,6 @@ import { useAppSelector } from 'app/hooks';
 import { VariantCheckbox } from 'shared/types/common.types';
 import { UserRole } from 'shared/types/common.types';
 
-
 interface SortByBlockProps {
   filter: string;
   onChange: (name: string, value: string[] | string) => void;
@@ -28,7 +27,6 @@ export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
         label="По дате"
         onChange={handleCheckboxChange}
       />
-
 
       {role === UserRole.VOLUNTEER && (
         <>
