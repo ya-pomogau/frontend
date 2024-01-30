@@ -86,6 +86,8 @@ export const createRequestModel = createSlice({
       state.currentStep = InitialStateForPopup.currentStep;
       state.isTypeEdit = false;
       state.isPopupOpen = false;
+      //очистить поле ввода текста
+      state.descriptionForTask = '';
     },
     clearState(state) {
       Object.assign(state, InitialStateForPopup);

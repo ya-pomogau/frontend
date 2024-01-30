@@ -4,7 +4,7 @@ export type Task = {
   id: number;
   title: string;
   category: {
-    id: number;
+    id: string;
     name: string;
     scope: number;
   };
