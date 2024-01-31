@@ -121,15 +121,6 @@ export const YandexMap = ({
               />
             );
           })}
-          {coordinates && (
-            <Mark
-              coordinates={
-                Array.isArray(coordinates)
-                  ? coordinates
-                  : [coordinates.latitude, coordinates.longitude]
-              }
-            />
-          )}
           {radius && (
             <Circle
               geometry={[
