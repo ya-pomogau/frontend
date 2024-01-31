@@ -122,27 +122,33 @@ export const YandexMap = ({
           width={width}
           height={height}
         >
-          {tasks?.map((task) => (
-            <Mark
-              id={task.id}
-              coordinates={task.coordinates}
-              isUrgentTask={isTaskUrgent(task.date)}
-              fullName={task.recipient.fullname}
-              phone={task.recipient.phone}
-              avatar={task.recipient.avatar}
-              description={task.description}
-              count={task.category.scope}
-              onClick={onClick}
-              showPopup={showPopup}
-              key={task.id}
-              isAuthorised={isAuthorised}
-              date={new Date(task.date).toLocaleDateString()}
-              time={new Date(task.date).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            />
-          ))}
+          {tasks?.map((task) => {
+            let showPopup = showThankPopup;
+            if (task.volunteer !== null) showPopup = showSorryPopup;
+            if (!isGranted) showPopup = showUnauthorithedPopup;
+            return (
+              <Mark
+                id={task.id}
+                coordinates={task.coordinates}
+                isUrgentTask={isTaskUrgent(task.date)}
+                fullName={task.recipient.fullname}
+                phone={task.recipient.phone}
+                avatar={task.recipient.avatar}
+                description={task.description}
+                count={task.category.scope}
+                onClick={onClick}
+                showPopup={showPopup}
+                key={task.id}
+                isAuthorised={isAuthorised}
+                date={new Date(task.date).toLocaleDateString()}
+                time={new Date(task.date).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              />
+            );
+          })}
+          
           
           {coordinates && (
             <Mark
