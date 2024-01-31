@@ -12,9 +12,15 @@ import styles from './styles.module.css';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Request } from '../../../../features/create-request/ui/steps/index';
-import { changeCurrentStep, openPopup } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
+import {
+  changeCurrentStep,
+  openPopup,
+  setAddress,
+  setDate,
+  setDescriptionForTask,
+  setTime,
+} from 'features/create-request/model';
 
 enum ButtonType {
   close = 'close',
@@ -43,7 +49,7 @@ type ModalButtons = {
 };
 
 interface TaskItemProps {
-  taskId?: number;
+  time?: number;
   isMobile: boolean;
   category: string;
   date?: string;
@@ -78,10 +84,10 @@ const textStyle = classNames(
 );
 
 export const TaskItem = ({
-  taskId,
   isMobile,
   category,
   date,
+  time,
   address,
   description,
   count,
@@ -156,8 +162,12 @@ export const TaskItem = ({
 
   const dispatch = useAppDispatch();
 
+  const additinalAddress = address;
+
   const handleEditButton = () => {
-    console.log(taskId);
+    dispatch(setDate(date));
+    dispatch(setAddress({ additinalAddress }));
+    dispatch(setDescriptionForTask(description));
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
@@ -560,7 +570,6 @@ export const TaskItem = ({
             />
           </ButtonWithModal>
           <SquareButton
-            taskId={taskId}
             onClick={handleEditButton}
             buttonType="edit"
             extClassName={

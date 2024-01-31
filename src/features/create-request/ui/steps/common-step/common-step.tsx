@@ -1,7 +1,9 @@
 import classNames from 'classnames';
-
+import { format } from 'date-fns';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
+  setDate,
+  setTime,
   changeCurrentStep,
   changeStepDecrement,
   closePopup,
@@ -58,6 +60,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const handleEditButton = (typeButton: string) => {
     switch (typeButton) {
       case 'date':
+        dispatch(setDate(format(new Date(), 'dd.MM.yyyy')));
         dispatch(changeCurrentStep(1));
         dispatch(openPopup());
         break;
