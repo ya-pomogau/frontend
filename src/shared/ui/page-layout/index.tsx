@@ -16,7 +16,6 @@ import {
   unauthorizedRecipientMessage,
 } from 'shared/libs/constants';
 import { UserRole } from 'shared/types/common.types';
-import { unauthorizedVolunteerMessage } from 'shared/libs/constants';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -29,7 +28,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   const isUnConfirmedUser = useAppSelector((state) => {
     return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
   });
-  const userRole = useAppSelector((state)=> state.user.role);
+  const userRole = useAppSelector((state) => state.user.role);
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmedUser;
   //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
