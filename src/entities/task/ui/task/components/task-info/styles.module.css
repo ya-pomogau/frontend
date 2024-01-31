@@ -1,0 +1,44 @@
+.infoDate {
+  margin-top: 40px;
+  max-width: 153px;
+  display: grid;
+  grid-template-rows: 36px 29px max-content;
+  gap: 5px;
+  grid-template-areas: 'date' 'time' 'address';
+}
+
+.date {
+  grid-area: date;
+  display: flex;
+  align-items: center;
+  color: var(--colors-interface-primary);
+  gap: 3px;
+}
+
+.time {
+  grid-area: time;
+  display: flex;
+  align-items: center;
+  color: var(--colors-interface-primary);
+  gap: 3px;
+}
+
+.address {
+  grid-area: address;
+  display: flex;
+  align-items: center;
+  color: var(--colors-interface-primary);
+  gap: 3px;
+}
+
+@media screen and (max-width: 1150px) {
+  .infoDate {
+    max-width: 100%;
+    margin-top: 0;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(2, max-content);
+    gap: 5px 40px;
+    grid-template-areas: 'date time' 
+                          'address address';
+  }
+}
