@@ -1,5 +1,5 @@
 import { useAppSelector } from 'app/hooks';
-import YandexMap from 'widgets/map';
+import { YandexMap } from 'widgets/map';
 import { Filter } from 'features/filter';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
