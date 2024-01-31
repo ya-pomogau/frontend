@@ -31,7 +31,7 @@ export function LoginPage() {
       const user = await login(inputFields).unwrap();
       sessionStorage.setItem('auth_token', user.access_token);
       //dispatch(setUser(user));
-      navigate('/profile');
+      // navigate('/profile');
     } catch (err) {
       console.log({
         status: err,

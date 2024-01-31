@@ -19,19 +19,14 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
-  const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
-  const isUnConfirmedUser = useAppSelector((state) => {
-    return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
-  });
-  // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
-  const hasMessage = isUnConfirmedUser;
+  // const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
   //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
-  console.log(isError);
+  console.log(`PageLayout - isError: ${isError}`);
 
   return (
     <>
-      {isLoadingUserData && <Loader />}
+      {/* {isLoadingUserData && <Loader />} */}
       {location.pathname === '/policy' ||
       location.pathname === '/blog' ||
       location.pathname === '/pick' ? (
@@ -59,7 +54,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
           )}
           <div className={styles.content}>
             {isError && <ErrorDialog text={errorText}></ErrorDialog>}
-            {errorText != 'Ошибка подключения' ? content : <NoConectionPage />}
+            {errorText !== 'Ошибка подключения' ? content : <NoConectionPage />}
           </div>
         </div>
       )}

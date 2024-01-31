@@ -8,6 +8,7 @@ import { openPopup } from 'features/create-request/model';
 import { Request } from 'features/create-request';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
+import { UserRole } from 'shared/types/common.types';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ export function ProfileActivePage() {
         text="Активные заявки"
         icon={<Icon color="blue" icon="ActiveApplicationIcon" size="54" />}
         filter={
-          role === 'volunteer' ? (
+          role === UserRole.VOLUNTEER ? (
             <Filter
               items={{
                 sort: true,

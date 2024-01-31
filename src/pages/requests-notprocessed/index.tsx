@@ -13,9 +13,10 @@ import { Input } from 'shared/ui/input';
 import { testUsers } from 'pages/requests/test-users';
 import { UserCard } from 'widgets/user-card';
 import { useAppSelector } from 'app/hooks';
+import { UserRole } from 'shared/types/common.types';
 
 interface UserProps {
-  role: 'volunteer' | 'recipient' | 'admin' | 'master';
+  role: UserRole;
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
@@ -56,7 +57,7 @@ export function RequestsNotprocessedPage() {
             type="name"
             label="Введите имя "
           />
-          {role === 'master' && (
+          {role === UserRole.MASTER && (
             <div className={styles.userAdminCards}>
               {testUsers
                 .filter(
@@ -64,7 +65,7 @@ export function RequestsNotprocessedPage() {
                     user.userName
                       .toLowerCase()
                       .includes(searchName.toLowerCase()) &&
-                    user.role === 'admin'
+                    user.role === UserRole.ADMIN
                 )
                 .map((user: UserProps) => (
                   <UserCard
@@ -86,7 +87,8 @@ export function RequestsNotprocessedPage() {
                 (user: UserProps) =>
                   user.userName
                     .toLowerCase()
-                    .includes(searchName.toLowerCase()) && user.role !== 'admin'
+                    .includes(searchName.toLowerCase()) &&
+                  user.role !== UserRole.ADMIN
               )
               .map((user: UserProps) => (
                 <UserCard

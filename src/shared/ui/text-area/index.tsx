@@ -1,5 +1,5 @@
 /* eslint-disable import/no-named-as-default-member */
-import React, { useMemo } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
@@ -12,23 +12,29 @@ interface TextAreaProps
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   label?: string;
   extClassName?: string;
+  maxLength?: number;
 }
 
 // eslint-disable-next-line react/display-name
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
-    { value, name, onChange, label, extClassName, placeholder, ...props },
+    {
+      value,
+      name,
+      onChange,
+      label,
+      extClassName,
+      placeholder,
+      maxLength,
+      ...props
+    },
     ref
   ) => {
     const id = nanoid();
 
-    const inputClass = label ? styles.input : styles.input_whithout_label;
-    const sign = useMemo(
-      () =>
-        // eslint-disable-next-line no-nested-ternary
-        value ? (value.length <= 300 ? 300 - value.length : '0') : '300',
-      [value]
-    );
+    const inputClass = label ? styles.input : styles.input_without_label;
+
+    const sign = Math.max((maxLength ?? 0) - (value?.length ?? 0), 0);
 
     return (
       <div className={cn(styles.container, extClassName)}>
@@ -45,10 +51,12 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className={cn(inputClass, 'text', 'text_size_medium')}
           placeholder={placeholder}
           id={id}
-          maxLength={300}
+          maxLength={maxLength}
           {...props}
         />
-        <p className={cn(styles.sign, 'text', 'm-0')}>{`${sign} знаков`}</p>
+        {maxLength && (
+          <p className={cn(styles.sign, 'text', 'm-0')}>{`${sign} знаков`}</p>
+        )}
       </div>
     );
   }
