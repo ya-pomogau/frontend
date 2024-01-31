@@ -68,7 +68,6 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
-  console.log(tasks);
 
   useEffect(() => {
     window.addEventListener('resize', getCoords);

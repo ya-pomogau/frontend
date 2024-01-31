@@ -167,8 +167,6 @@ export const TaskItem = ({
 
   const dispatch = useAppDispatch();
 
-  const dispatch = useAppDispatch();
-
   const additinalAddress = address;
 
   const handleEditButton = () => {
@@ -578,7 +576,6 @@ export const TaskItem = ({
             />
           </ButtonWithModal>
           <SquareButton
-            taskId={taskId}
             onClick={handleEditButton}
             buttonType="edit"
             extClassName={
