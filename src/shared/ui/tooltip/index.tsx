@@ -90,7 +90,8 @@ export const Tooltip = ({
           styles[`pointer--${pointerPosition}`]
         )}
       />
-      <button className={styles.closeButton} onClick={changeVisible}>
+      {/* TODO:закоментила потому что этой кнопки быть не должно!*/}
+      {/*<button className={styles.closeButton} onClick={changeVisible}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"
@@ -103,7 +104,7 @@ export const Tooltip = ({
             fill="#2E3192"
           />
         </svg>
-      </button>
+      </button>*/}
       {children}
     </div>
   );

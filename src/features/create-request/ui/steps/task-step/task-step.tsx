@@ -50,7 +50,6 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     }
   };
 
-  const propsButton = usePropsButtonCustom();
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.taskContainer}>
