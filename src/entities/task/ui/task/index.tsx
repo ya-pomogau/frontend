@@ -31,7 +31,6 @@ interface TaskItemProps {
 export const TaskItem = ({
   category,
   date,
-  time,
   address,
   description,
   count,
