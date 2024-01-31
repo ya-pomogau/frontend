@@ -59,7 +59,6 @@ export function ProfileActivePage() {
           isLoading={isLoading}
         />
       )}
-
       {isPopupOpen && <Request isMobile={isMobileForPopup} />}
     </>
   );

@@ -35,7 +35,6 @@ export const TaskList = ({
   const handleDeniedAccess = () => {
     alert('Вам пока нельзя такое, дождитесь проверки администратором');
   };
-  console.log(tasks);
 
   return (
     <>
@@ -73,7 +72,6 @@ export const TaskList = ({
           {tasks.map((item, index) => (
             <li key={index}>
               <TaskItem
-                taskId={item.id}
                 category={item.category.name}
                 isMobile={isMobile}
                 date={item.date}

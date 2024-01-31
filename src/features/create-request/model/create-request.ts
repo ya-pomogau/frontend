@@ -84,8 +84,9 @@ export const createRequestModel = createSlice({
       state.currentStep = InitialStateForPopup.currentStep;
       state.isTypeEdit = false;
       state.isPopupOpen = false;
-      //очистить поле ввода текста
+      //очистить поле state
       state.descriptionForTask = '';
+      state.date = format(new Date(), 'dd.MM.yyyy');
     },
   },
 });
