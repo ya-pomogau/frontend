@@ -9,6 +9,7 @@ import { LightPopup } from 'shared/ui/light-popup';
 import { unauthorizedVolunteerPopupMessage } from 'shared/libs/constants';
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { UserRole } from 'shared/types/common.types';
 
 interface YandexMapProps {
   width?: string | number;
@@ -37,7 +38,7 @@ export const YandexMap = ({
 }: YandexMapProps) => {
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
-    'volunteer'
+    UserRole.VOLUNTEER
   );
 
   const [isVisible, setVisibility] = useState(false);
@@ -95,15 +96,12 @@ export const YandexMap = ({
               })}
             />
           ))}
-          {coordinates && (
-            <Mark
-              coordinates={
-                Array.isArray(coordinates)
-                  ? coordinates
-                  : [coordinates.latitude, coordinates.longitude]
-              }
-            />
-          )}
+          {
+            //поменялся тип координат на Array<number> -- почему, если у координат всегда длина массива из двух элементов
+            coordinates && (
+              <Mark coordinates={[coordinates[0], coordinates[1]]} />
+            )
+          }
           {radius && (
             <Circle
               geometry={[
