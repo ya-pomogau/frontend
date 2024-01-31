@@ -17,7 +17,6 @@ import styles from './date-step.module.css';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
-import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface IDateStepProps {
   isMobile?: boolean;
