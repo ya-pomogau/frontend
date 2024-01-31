@@ -44,12 +44,9 @@ export function ProfileMapPage() {
         user.coordinates &&
         typeof searchRadius === 'string'
       ) {
-        const userCoords = Array.isArray(user.coordinates)
-          ? user.coordinates
-          : [user.coordinates.latitude, user.coordinates.longitude];
         result = result.filter((task: Task) =>
           filterByDistance(
-            userCoords,
+            user.coordinates,
             task.coordinates,
             parseInt(searchRadius, 10)
           )

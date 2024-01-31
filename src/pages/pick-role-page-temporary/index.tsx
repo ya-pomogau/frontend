@@ -38,7 +38,7 @@ export function PickRolePage() {
   };
 
   const getUnconfirmedVolunteerRole = () => {
-    dispatch(setUserRole('volunteer'));
+    dispatch(setUserRole(UserRole.VOLUNTEER));
     setUserId(8);
   };
 
