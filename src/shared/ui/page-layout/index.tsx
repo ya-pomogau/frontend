@@ -9,9 +9,6 @@ import { FeedbackSideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
 import { useLocation } from 'react-router-dom';
 import { ErrorDialog } from '../error-dialog';
 import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
-import { RegistrationNotice } from '../registration-notice';
-import { UNCONFIRMED } from 'shared/libs/statuses';
-import { unauthorizedVolunteerMessage } from 'shared/libs/constants';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -37,9 +34,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
       location.pathname === '/pick' ? (
         <div className={styles.content}> {content} </div>
       ) : (
-        <div
-          className={styles.main + ' ' + (hasMessage && styles.mainWithMessage)}
-        >
+        <div className={styles.main}>
           <div className={styles.side}>
             <div className={styles.user}>
               <UserInfo />
@@ -51,12 +46,6 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-
-          {isUnConfirmedUser && (
-            <div className={styles.message}>
-              <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
-            </div>
-          )}
           <div className={styles.content}>
             {isError && <ErrorDialog text={errorText}></ErrorDialog>}
             {errorText !== 'Ошибка подключения' ? content : <NoConectionPage />}

@@ -262,7 +262,6 @@ const Mark: React.FC<MarkProps> = ({
       }}
       properties={{
         isUrgentTask,
-        isDisabled,
         fullName,
         phone,
         avatar,
