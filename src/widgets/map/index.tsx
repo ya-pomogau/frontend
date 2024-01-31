@@ -94,12 +94,12 @@ export const YandexMap = ({
               draggable={false}
             />
           ))}
-           <Mark
-          coordinates={coordinates}
-          onClick={() => console.log('Это яндекс карта')}
-          hasBalloon={false}
-          draggable={true}
-        />
+          <Mark
+            coordinates={coordinates}
+            onClick={() => console.log('Это яндекс карта')}
+            hasBalloon={false}
+            draggable={true}
+          />
         </Map>
       </YMaps>
       {!isGranted && (

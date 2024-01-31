@@ -15,7 +15,6 @@ import styles from './address-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { useEffect } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface IAddressProps {
   isMobile?: boolean;
@@ -27,7 +26,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
   const dispatch = useAppDispatch();
 
   const { address, coordinates, isTypeEdit } = useAppSelector(
-      (state) => state.createRequest
+    (state) => state.createRequest
   );
   useEffect(() => {
     if (!address) {
