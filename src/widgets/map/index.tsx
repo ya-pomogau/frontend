@@ -75,33 +75,36 @@ export const YandexMap = ({
           width={width}
           height={height}
         >
-          {tasks?.map((task) => (
-            <Mark
-              id={task.id}
-              coordinates={task.coordinates}
-              isUrgentTask={isTaskUrgent(task.date)}
-              fullName={task.recipient.fullname}
-              phone={task.recipient.phone}
-              avatar={task.recipient.avatar}
-              description={task.description}
-              count={task.category.scope}
-              onClick={onClick}
-              showPopup={showPopup}
-              key={task.id}
-              isAuthorised={isAuthorised}
-              date={new Date(task.date).toLocaleDateString()}
-              time={new Date(task.date).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            />
-          ))}
-          {
-            //поменялся тип координат на Array<number> -- почему, если у координат всегда длина массива из двух элементов
-            coordinates && (
-              <Mark coordinates={[coordinates[0], coordinates[1]]} />
-            )
-          }
+          {tasks &&
+            tasks?.map((task) => (
+              <Mark
+                id={task.id}
+                coordinates={task.coordinates}
+                isUrgentTask={isTaskUrgent(task.date)}
+                fullName={task.recipient.fullname}
+                phone={task.recipient.phone}
+                avatar={task.recipient.avatar}
+                description={task.description}
+                count={task.category.scope}
+                onClick={onClick}
+                showPopup={showPopup}
+                key={task.id}
+                isAuthorised={isAuthorised}
+                date={new Date(task.date).toLocaleDateString()}
+                time={new Date(task.date).toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+                hasBalloon={true}
+                draggable={false}
+              />
+            ))}
+          <Mark
+            coordinates={coordinates}
+            onClick={() => console.log('Это яндекс карта')}
+            hasBalloon={false}
+            draggable={true}
+          />
           {radius && (
             <Circle
               geometry={[
