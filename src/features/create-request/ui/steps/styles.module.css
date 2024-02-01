@@ -1,6 +1,6 @@
 .buttonWrapper {
     display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
     justify-content: center;
     gap: 20px;
 }
@@ -12,15 +12,32 @@
 .modal {
     position: absolute;
     top: calc(50% - 160px);
-    left: calc(50% - 125px);
+    left: calc(50% - 45px);
 }
 
 .modalMobile {
     position: absolute;
     top: calc(50% - 230px);
-    left: calc(50% - 265px);
+    left: calc(50% - 185px);
 }
 
 .button {
     width: 82px;
+}
+
+.tooltipContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 30px;
+}
+
+.text {
+    font-family: 'Golos', sans-serif;
+    font-size: 16px;
+    color: rgba(44, 45, 46, 1);
+    width: 265px;
+    height: 44px;
+    line-height: 22px;
+    margin: 0;
 }

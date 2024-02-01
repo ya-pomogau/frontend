@@ -81,24 +81,28 @@ export const Request = ({ isMobile = true }: RequestProps) => {
                   pointerPosition="right"
                   elementStyles={{
                     zIndex: 11,
+                    width: 343,
+                    padding: 0,
                   }}
                 >
-                  <div className={styles.text}>
-                    Закрыть окно сейчас и удалить ранее внесенную информацию?
-                  </div>
-                  <div className={styles.buttonWrapper}>
-                    <Button
-                      buttonType="secondary"
-                      label="Вернуться"
-                      onClick={() => setIsOpen(false)}
-                      extClassName={styles.button}
-                    />
-                    <Button
-                      buttonType="primary"
-                      label="Закрыть"
-                      onClick={handleCloseClick}
-                      extClassName={styles.button}
-                    />
+                  <div className={styles.tooltipContent}>
+                    <p className={styles.text}>
+                      Закрыть окно сейчас и удалить ранее внесенную информацию?
+                    </p>
+                    <div className={styles.buttonWrapper}>
+                      <Button
+                        buttonType="secondary"
+                        label="Вернуться"
+                        onClick={() => setIsOpen(false)}
+                        extClassName={styles.button}
+                      />
+                      <Button
+                        buttonType="primary"
+                        label="Закрыть"
+                        onClick={handleCloseClick}
+                        extClassName={styles.button}
+                      />
+                    </div>
                   </div>
                 </Tooltip>
               </div>
