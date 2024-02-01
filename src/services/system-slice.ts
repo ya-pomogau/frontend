@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi } from './auth';
-import { ErrorDto, TNewUserRequestDto, TVKLoginRequestDto } from './auth.types';
+import {
+  ErrorDto,
+  TNewUserRequestDto,
+  TVKLoginRequestDto,
+  TVKUserResponseObj,
+} from './auth.types';
 import {
   TCustomSelector,
   TSystemSliceState,
@@ -19,7 +24,7 @@ export const userSelector: TCustomSelector<TUser | null> = (state) =>
   state.system.user;
 
 export const vkUserSelector: TCustomSelector<TVKUser | null> = (state) =>
-  state.system.vk_user;
+  state.system.vkUser;
 
 export const hasPrivilegesSelector: TCustomSelector<boolean> = (state) =>
   !!state.system.user &&
@@ -42,14 +47,37 @@ export const userLoginThunk = createAsyncThunk(
   'user/login',
   async (userLoginDto: TVKLoginRequestDto, { rejectWithValue }) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      const { token, user, vk_user } = await authApi.vkLogin(userLoginDto);
+      const tmpRes = await authApi.vkLogin(userLoginDto);
+      const { token, user, vkUser: vkUserResponse } = tmpRes;
+      const vkUser = vkUserResponse
+        ? Object.entries(vkUserResponse.response[0]).reduce(
+            (acc, [key, value]) => {
+              const tmp: Partial<TVKUser> = {};
+              switch (key) {
+                case 'first_name': {
+                  return { ...acc, firstName: value };
+                }
+                case 'last_name': {
+                  return { ...acc, lastName: value };
+                }
+                case 'id': {
+                  return { ...acc, vkId: value };
+                }
+                default: {
+                  return acc;
+                }
+              }
+            },
+            {} as TVKUser
+          )
+        : null;
       if (token && !!user) {
         localStorage.setItem('token', token);
       }
-      return { user, vk_user };
+      return { user, vkUser };
     } catch (error) {
       const { message } = error as ErrorDto;
+      console.log(`Error message: ${message}`);
       rejectWithValue(message as string);
     }
   }
@@ -59,7 +87,6 @@ export const newUserThunk = createAsyncThunk(
   'user/new',
   async (newUserDto: TNewUserRequestDto, { rejectWithValue }) => {
     try {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { token, user } = await authApi.createNewUser(newUserDto);
       if (!token || !user) {
         throw new Error('Ошибка регистрации пользователя');
@@ -77,7 +104,7 @@ export const newUserThunk = createAsyncThunk(
 
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
-  vk_user: null,
+  vkUser: null,
   isPending: false,
   isNew: false,
 };
@@ -100,13 +127,13 @@ const systemSlice = createSlice({
           return state;
         }
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const { user = null, vk_user = null } = action.payload;
+        const { user = null, vkUser = null } = action.payload;
         return {
           ...state,
           user,
-          vk_user,
+          vkUser: vkUser,
           isPending: false,
-          isNew: !user && !!vk_user,
+          isNew: !user && !!vkUser,
         };
       })
       .addCase(userLoginThunk.rejected, (state) => ({

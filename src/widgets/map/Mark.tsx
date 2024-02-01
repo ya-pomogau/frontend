@@ -7,6 +7,7 @@ import React from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
+import { UserRole } from 'shared/types/common.types';
 
 type MarkProps = {
   id?: number;
@@ -45,13 +46,10 @@ const Mark: React.FC<MarkProps> = ({
 
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
-    'volunteer'
+    UserRole.VOLUNTEER
   );
   const isDisabled = !isGranted;
-
-  const onUncomfirmedClick = () => {
-    showPopup();
-  };
+        
   const onClick = () => {
     // Добавить обращение в бэкенд и после получения ответа показываем попап:
     // Пока договорились использовать замоканные данные заявок
@@ -264,7 +262,6 @@ const Mark: React.FC<MarkProps> = ({
       }}
       properties={{
         isUrgentTask,
-        isDisabled,
         fullName,
         phone,
         avatar,

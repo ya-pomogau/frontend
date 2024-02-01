@@ -78,6 +78,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               placeholder="Например: Помогите выгулять собаку."
               onChange={handleTaskDescValueChange}
               extClassName={styles.textarea}
+              maxLength={300}
             />
           </>
         ) : (
@@ -97,6 +98,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               placeholder="Например: Помогите выгулять собаку."
               onChange={handleTaskDescValueChange}
               extClassName={styles.textarea}
+              maxLength={300}
             />
           </>
         )}

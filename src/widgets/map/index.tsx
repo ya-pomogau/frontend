@@ -16,6 +16,7 @@ import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-ic
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { UserRole } from 'shared/types/common.types';
 
 import classNames from 'classnames';
 import './styles.css';
@@ -48,7 +49,7 @@ export const YandexMap = ({
 }: YandexMapProps) => {
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
-    'volunteer'
+    UserRole.VOLUNTEER
   );
 
   const [isVisible, setVisibility] = useState(false);
@@ -95,6 +96,7 @@ export const YandexMap = ({
           width={width}
           height={height}
         >
+
           {tasks?.map((task) => {
             let showPopup = showThankPopup;
             if (task.volunteer !== null) showPopup = showSorryPopup;
@@ -121,6 +123,12 @@ export const YandexMap = ({
               />
             );
           })}
+          {
+            //поменялся тип координат на Array<number> -- почему, если у координат всегда длина массива из двух элементов
+            coordinates && (
+              <Mark coordinates={[coordinates[0], coordinates[1]]} />
+            )
+          }
           {radius && (
             <Circle
               geometry={[

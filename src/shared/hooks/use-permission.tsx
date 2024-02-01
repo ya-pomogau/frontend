@@ -14,6 +14,7 @@ import {
   UNCONFIRMED,
   VERIFIED,
 } from 'shared/libs/statuses';
+import { UserRole } from 'shared/types/common.types';
 
 // хук использует массив необходимых компоненту разрешений, роль, к которой они
 // применяюся и сравнивает их с состоянием юзера, возвращая true или false, в зависимости
@@ -32,8 +33,13 @@ type Requirments =
   | { id: number; name: typeof RESOLVE_CONFLICTS }
   | { id: number; name: typeof BLOG }
   | { id: number; name: typeof INCREASE_SCORE };
-
-type Role = 'volunteer' | 'recipient' | 'admin' | 'master' | 'any';
+// TODO: проверить для чего usePermission использовали и проверить Role не повлияет ли это на что-то
+type Role =
+  | UserRole.VOLUNTEER
+  | UserRole.RECIPIENT
+  | UserRole.ADMIN
+  | UserRole.MASTER
+  | 'any';
 
 export default function usePermission(
   requirments: Array<Requirments>,

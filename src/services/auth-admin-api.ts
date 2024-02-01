@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { API_URL } from 'config/api-config';
 
 // сейчас одновременно в проекте описаны запросы на моковый и живой сервер.
 // Когда бек будет полностью готов,
@@ -6,7 +7,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const authAdminApi = createApi({
   reducerPath: 'authAdminApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://api.kraev.nomoredomains.xyz',
+    // baseUrl: 'https://api.kraev.nomoredomains.xyz',
+    baseUrl: API_URL,
     prepareHeaders: (headers) => {
       const token = sessionStorage.getItem('auth_token');
       if (token) {

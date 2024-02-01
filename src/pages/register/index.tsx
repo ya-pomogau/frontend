@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
@@ -8,19 +8,16 @@ import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './styles.module.css';
 import { FilterItemsIds } from 'features/filter/consts';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 
 export function RegisterPage() {
-  const {
-    firstName = '',
-    lastName = '',
-    vkId = '',
-  } = useAppSelector(vkUserSelector) ?? {};
+  const vkUser = useAppSelector(vkUserSelector);
+  const { firstName = '', lastName = '', vkId = '' } = vkUser ?? {};
+  const FIO = `${firstName} ${lastName}`;
   //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
-  const [name, setName] = useState<string>(`${firstName} ${lastName}`);
+  const [name, setName] = useState<string>(FIO);
   //TODO: разобраться с получением телефона и записью его в стейт
   const [phone, setPhone] = useState<string>('');
   const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
@@ -32,8 +29,6 @@ export function RegisterPage() {
     address: '',
     coords: [],
   });
-
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (
     event: FormEvent<HTMLFormElement>
@@ -46,20 +41,25 @@ export function RegisterPage() {
       coord: address.coords,
       role: role,
     });
-    dispatch(
-      newUserThunk({
-        profile: {
-          //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
-          firstName: name,
-          phone,
-          address: address.address,
-        },
-        vkId,
-        role: role,
-      })
-    );
-    //перенаправляем на главную
-    navigate('/profile');
+    const [first, last] = name.split(' ').filter((i) => i.length > 0);
+    const vk_id = `${vkId}`;
+    const user = {
+      profile: {
+        firstName: first,
+        lastName: last,
+        phone,
+        address: address.address,
+        avatar: 'https://kspshnik.com/pub/img/verona_pre.jpg',
+        middleName: 'Валерьевна',
+      },
+      vkId: vk_id,
+      role: role,
+      location: {
+        type: 'Point',
+        coordinates: [23, 65],
+      },
+    };
+    dispatch(newUserThunk(user));
   };
 
   const handleAddressValueChange = (
@@ -112,7 +112,7 @@ export function RegisterPage() {
           label="ФИО"
           name="name"
           value={name}
-          onChange={(event) => setName(event.currentTarget.value)}
+          onChange={(event) => setName(event.target.value)}
           placeholder="ФИО"
           type="text"
         />
@@ -123,7 +123,7 @@ export function RegisterPage() {
           label="Телефон"
           name="phone"
           value={phone}
-          onChange={(event) => setPhone(event.currentTarget.value)}
+          onChange={(event) => setPhone(event.target.value)}
           placeholder="+7 (000) 000 00 00"
           type="tel"
           pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"

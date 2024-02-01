@@ -47,6 +47,7 @@ export function FeedbackPage() {
           value={values.message}
           placeholder="Задайте Ваш вопрос"
           extClassName={styles.text_area}
+          maxLength={300}
         />
         <Button
           buttonType="primary"

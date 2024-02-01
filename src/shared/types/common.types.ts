@@ -7,6 +7,7 @@ export enum UserStatus {
 
 export enum UserRole {
   ADMIN = 'Admin',
+  MASTER = 'Master',
   RECIPIENT = 'Recipient',
   VOLUNTEER = 'Volunteer',
 }
@@ -18,4 +19,12 @@ export enum AdminPermission {
   CONFLICTS = 'resolve conflicts',
   BLOG = 'write the blog',
   CATEGORIES = 'change categories',
+}
+
+export enum TaskButtonType {
+  close = 'close',
+  conflict = 'conflict',
+  confirm = 'confirm',
+  phone = 'phone',
+  cancel = 'cancel',
 }
