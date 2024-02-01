@@ -5,7 +5,6 @@
 // @ts-nocheck
 import React from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
-import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { UserRole } from 'shared/types/common.types';
@@ -38,7 +37,6 @@ const Mark: React.FC<MarkProps> = ({
   description,
   title,
   count,
-  onClick,
   showPopup,
   isAuthorised,
   date,
@@ -50,8 +48,12 @@ const Mark: React.FC<MarkProps> = ({
     [CONFIRMED, ACTIVATED, VERIFIED],
     UserRole.VOLUNTEER
   );
-  const onUncomfirmedClick = () => {
-    alert('Тут будет попап о том, что вы еще не можете откликаться на заявки');
+  const isDisabled = !isGranted;
+        
+  const onClick = () => {
+    // Добавить обращение в бэкенд и после получения ответа показываем попап:
+    // Пока договорились использовать замоканные данные заявок
+    showPopup();
   };
 
   if (!ymaps) return null;
