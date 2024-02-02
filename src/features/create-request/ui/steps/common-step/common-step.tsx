@@ -3,7 +3,6 @@ import { format } from 'date-fns';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDate,
-  setTime,
   changeCurrentStep,
   changeStepDecrement,
   closePopup,
@@ -16,7 +15,6 @@ import { CategoriesBackground } from 'shared/ui/categories-background';
 
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
-
 interface ICommonStepProps {
   isMobile?: boolean;
 }
@@ -32,19 +30,19 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     isTypeEdit,
     termlessRequest,
   } = useAppSelector((state) => state.createRequest);
-  console.log(isTypeEdit);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
   };
 
+  const parsedDate = format(new Date(date), 'dd.MM.yyyy');
+
   const handleSubmitClick = () => {
-    const [day, month, year] = date.split('.');
+    const [day, month, year] = parsedDate.split('.');
     const [hours, minutes] = time.split(':');
 
     const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
 
-    console.log(dateObject);
     const requestData = {
       time,
       date: termlessRequest ? null : dateObject,
@@ -104,7 +102,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_medium', 'm-0')}>{date}</p>
+              <p className={classNames('text_size_medium', 'm-0')}>
+                {parsedDate}
+              </p>
               <p className={classNames('text_size_medium', styles.time)}>
                 {time}
               </p>
@@ -148,7 +148,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_large', 'm-0')}>{date}</p>
+              <p className={classNames('text_size_large', 'm-0')}>
+                {parsedDate}
+              </p>
               {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}
