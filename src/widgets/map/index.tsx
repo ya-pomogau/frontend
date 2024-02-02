@@ -96,7 +96,6 @@ export const YandexMap = ({
           width={width}
           height={height}
         >
-
           {tasks?.map((task) => {
             let showPopup = showThankPopup;
             if (task.volunteer !== null) showPopup = showSorryPopup;
