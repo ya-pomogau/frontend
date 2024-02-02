@@ -107,7 +107,6 @@ export const {
   changeCheckbox,
   openPopup,
   closePopup,
-  clearTime,
-  clearState,
   changeCurrentStep,
+  clearState,
 } = createRequestModel.actions;
