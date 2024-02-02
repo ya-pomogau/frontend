@@ -93,15 +93,12 @@
       "id": "8",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Волонтеров Иван Иванович",
-      "role": "volunteer",
+      "role": "Volunteer",
       "vk": "https://vk.com/id123456788",
       "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
       "phone": "+7 (901) 123-00-00",
       "address": "ул. Строителей, 15",
-      "coordinates": [
-        55.686985,
-        37.529654
-      ],
+      "coordinates": [55.686985, 37.529654],
       "status": "unconfirmed",
       "isHasKeys": true,
       "scores": 0,
@@ -129,10 +126,7 @@
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
       "phone": "+7 (916) 123-00-00",
       "address": "1-й Смоленский пер., 13",
-      "coordinates": [
-        55.747854,
-        37.579887
-      ],
+      "coordinates": [55.747854, 37.579887],
       "status": "confirmed",
       "isActive": true
     }
@@ -181,10 +175,7 @@
         "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
         "phone": "+7 (901) 123-00-00",
         "address": "ул. Строителей, 15",
-        "coordinates": [
-          55.686985,
-          37.529654
-        ],
+        "coordinates": [55.686985, 37.529654],
         "isHasKeys": true,
         "scores": 0,
         "isActive": true
@@ -272,18 +263,12 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-00-00",
         "address": "1-й Смоленский пер., 13",
-        "coordinates": [
-          55.747854,
-          37.579887
-        ],
+        "coordinates": [55.747854, 37.579887],
         "approved": true
       },
       "volunteer": null,
       "address": "1-й Смоленский пер., 13",
-      "coordinates": [
-        55.747854,
-        37.579887
-      ],
+      "coordinates": [55.747854, 37.579887],
       "chat": null
     },
     {
@@ -307,18 +292,12 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "улица Россолимо, 17с3",
-        "coordinates": [
-          55.732741,
-          37.578115
-        ],
+        "coordinates": [55.732741, 37.578115],
         "approved": true
       },
       "volunteer": null,
       "address": "улица Россолимо, 17с3",
-      "coordinates": [
-        55.732741,
-        37.578115
-      ],
+      "coordinates": [55.732741, 37.578115],
       "chat": null
     },
     {
@@ -342,10 +321,7 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "улица Фотиевой, 14к3",
-        "coordinates": [
-          55.699788,
-          37.557059
-        ],
+        "coordinates": [55.699788, 37.557059],
         "approved": true
       },
       "volunteer": {
@@ -356,19 +332,13 @@
         "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
         "phone": "+7 (901) 123-00-00",
         "address": "ул. Строителей, 15",
-        "coordinates": [
-          55.686985,
-          37.529654
-        ],
+        "coordinates": [55.686985, 37.529654],
         "isHasKeys": true,
         "scores": 0,
         "isActive": true
       },
       "address": "улица Фотиевой, 14к3",
-      "coordinates": [
-        55.699788,
-        37.557059
-      ],
+      "coordinates": [55.699788, 37.557059],
       "chat": null
     }
   ],
