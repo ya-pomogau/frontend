@@ -61,10 +61,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     }
   }, [termlessRequest]);
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
-
   const handleCheckboxChange = () => {
     dispatch(changeCheckbox());
   };
