@@ -12,6 +12,7 @@ import YandexMap from 'widgets/map';
 import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './address-step.module.css';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 import { useEffect } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { UserRole } from 'shared/types/common.types';
