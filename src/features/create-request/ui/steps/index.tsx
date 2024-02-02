@@ -32,8 +32,8 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseClick = () => {
-    dispatch(closePopup());
     dispatch(clearState());
+    dispatch(closePopup());
   };
 
   const closeByEsc = (e: KeyboardEvent) => {
