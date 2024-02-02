@@ -217,10 +217,7 @@
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
       "phone": "+7 (916) 123-00-00",
       "address": "1-й Смоленский пер., 13",
-      "coordinates": [
-        55.747854,
-        37.579887
-      ],
+      "coordinates": [55.747854, 37.579887],
       "status": "confirmed",
       "isActive": true
     },
