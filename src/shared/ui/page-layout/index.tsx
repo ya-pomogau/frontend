@@ -23,7 +23,7 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
-  const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
+  const isLoading = useAppSelector((state) => state.user.isLoading);
   const isUnConfirmedUser = useAppSelector((state) => {
     return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
   });

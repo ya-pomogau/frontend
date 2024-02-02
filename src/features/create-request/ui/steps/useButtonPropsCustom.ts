@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
+  changeCurrentStep,
   changeStepDecrement,
   changeStepIncrement,
   closePopup,
@@ -26,7 +27,7 @@ const usePropsButtonCustom = (): usePropsButtonCustomType => {
   };
 
   const handleSubmitClick = () => {
-    dispatch(closePopup());
+    dispatch(changeCurrentStep(4));
   };
   const propsButtonDefault = {
     label: 'Продолжить',

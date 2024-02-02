@@ -31,7 +31,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
   const handleSubmitClick = () => {
     console.log(date);
-
     dispatch(closePopup());
   };
 
@@ -161,9 +160,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 'text_type_bold ',
                 styles.typeOfTask
               )}
-            >
-              123
-            </p>
+            ></p>
             <p
               className={classNames(
                 'text_size_medium',
