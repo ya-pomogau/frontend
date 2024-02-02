@@ -11,11 +11,7 @@ import { ErrorDialog } from '../error-dialog';
 import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 import { RegistrationNotice } from '../registration-notice';
 import { UNCONFIRMED } from 'shared/libs/statuses';
-import {
-  unauthorizedVolunteerMessage,
-  unauthorizedRecipientMessage,
-} from 'shared/libs/constants';
-import { UserRole } from 'shared/types/common.types';
+import { unauthorizedRecipientMessage } from 'shared/libs/constants';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -62,7 +58,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
           )}
           <div className={styles.content}>
             {isError && <ErrorDialog text={errorText}></ErrorDialog>}
-            {errorText != 'Ошибка подключения' ? content : <NoConectionPage />}
+            {errorText !== 'Ошибка подключения' ? content : <NoConectionPage />}
           </div>
         </div>
       )}

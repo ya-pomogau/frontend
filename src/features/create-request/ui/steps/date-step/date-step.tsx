@@ -16,16 +16,14 @@ import { DatePicker } from 'shared/ui/date-picker';
 import styles from './date-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
-import usePropsButtonCustom from '../useButtonPropsCustom';
-import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
-
 interface IDateStepProps {
   isMobile?: boolean;
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date, isTypeEdit, dateValidation } =
-    useAppSelector((state) => state.createRequest);
+  const { time, termlessRequest, date, isTypeEdit } = useAppSelector(
+    (state) => state.createRequest
+  );
   const dispatch = useAppDispatch();
   const [timeValidation, setTimeValidation] = useState(false);
   const [isOpenClockElement, setIsOpenClockElement] = useState(false);

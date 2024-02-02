@@ -16,11 +16,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Tooltip } from 'shared/ui/tooltip';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 
-import { useEffect, useRef, useState } from 'react';
-
-import { Tooltip } from 'shared/ui/tooltip';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
-
 interface TaskListProps {
   userRole?: UserRole | null;
   tasks: Array<Task>;
