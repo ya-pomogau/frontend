@@ -50,15 +50,6 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     }
   };
 
-  const disabledBtn = () => {
-    if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
-      return true;
-    }
-    if (category.value === '' && category.label === '') {
-      return true;
-    }
-  };
-
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.taskContainer}>
