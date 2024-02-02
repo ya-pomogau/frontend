@@ -33,7 +33,7 @@ export const Default: Story = {
         id: 24,
         title: 'Задача 24',
         category: {
-          id: 5,
+          id: '5',
           name: 'Название категории 5',
           scope: 50,
         },
@@ -62,7 +62,7 @@ export const Default: Story = {
         id: 12,
         title: 'Сходить за продуктами',
         category: {
-          id: 2,
+          id: '2',
           name: 'Название категории 2',
           scope: 20,
         },
