@@ -98,10 +98,7 @@
       "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
       "phone": "+7 (901) 123-00-00",
       "address": "ул. Строителей, 15",
-      "coordinates": [
-        55.686985,
-        37.529654
-      ],
+      "coordinates": [55.686985, 37.529654],
       "status": "unconfirmed",
       "isHasKeys": true,
       "scores": 0,
@@ -194,10 +191,7 @@
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
       "phone": "+7 (916) 123-00-00",
       "address": "1-й Смоленский пер., 13",
-      "coordinates": [
-        55.747854,
-        37.579887
-      ],
+      "coordinates": [55.747854, 37.579887],
       "status": "confirmed",
       "isActive": true
     },
@@ -210,10 +204,7 @@
       "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
       "phone": "+7 (916) 123-45-67",
       "address": "ул. Самарская, д. 9",
-      "coordinates": [
-        59.941871,
-        30.223494
-      ],
+      "coordinates": [59.941871, 30.223494],
       "status": "unconfirmed",
       "isActive": true
     },
@@ -465,25 +456,19 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-00-00",
         "address": "1-й Смоленский пер., 13",
-        "coordinates": [
-          55.747854,
-          37.579887
-        ],
+        "coordinates": [55.747854, 37.579887],
         "approved": true
       },
       "volunteer": null,
       "address": "1-й Смоленский пер., 13",
-      "coordinates": [
-        55.747854,
-        37.579887
-      ],
+      "coordinates": [55.747854, 37.579887],
       "chat": null
     },
     {
       "id": 14,
       "title": "Выгулять собаку",
       "category": {
-        "id": 1,
+        "id": "1",
         "name": "Сопровождение",
         "scope": 1
       },
@@ -500,25 +485,19 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "улица Россолимо, 17с3",
-        "coordinates": [
-          55.732741,
-          37.578115
-        ],
+        "coordinates": [55.732741, 37.578115],
         "approved": true
       },
       "volunteer": null,
       "address": "улица Россолимо, 17с3",
-      "coordinates": [
-        55.732741,
-        37.578115
-      ],
+      "coordinates": [55.732741, 37.578115],
       "chat": null
     },
     {
       "id": 15,
       "title": "Сводить погулять в парк",
       "category": {
-        "id": 1,
+        "id": "1",
         "name": "Сопровождение",
         "scope": 1
       },
@@ -535,18 +514,12 @@
         "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
         "phone": "+7 (916) 123-45-67",
         "address": "улица Фотиевой, 14к3",
-        "coordinates": [
-          55.699788,
-          37.557059
-        ],
+        "coordinates": [55.699788, 37.557059],
         "approved": true
       },
       "volunteer": null,
       "address": "улица Фотиевой, 14к3",
-      "coordinates": [
-        55.699788,
-        37.557059
-      ],
+      "coordinates": [55.699788, 37.557059],
       "chat": null
     }
   ],
