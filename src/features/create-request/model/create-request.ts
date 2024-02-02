@@ -85,9 +85,6 @@ export const createRequestModel = createSlice({
       state.currentStep = InitialStateForPopup.currentStep;
       state.isTypeEdit = false;
       state.isPopupOpen = false;
-      //очистить поле state
-      state.descriptionForTask = '';
-      state.date = format(new Date(), 'dd.MM.yyyy');
     },
     clearState(state) {
       Object.assign(state, InitialStateForPopup);
