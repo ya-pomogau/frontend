@@ -28,7 +28,6 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   const isUnConfirmedUser = useAppSelector((state) => {
     return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
   });
-  const userRole = useAppSelector((state) => state.user.role);
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmedUser;
   //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
