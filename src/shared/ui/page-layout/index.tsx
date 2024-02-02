@@ -64,7 +64,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
           )}
           <div className={styles.content}>
             {isError && <ErrorDialog text={errorText}></ErrorDialog>}
-            {errorText != 'Ошибка подключения' ? content : <NoConectionPage />}
+            {errorText !== 'Ошибка подключения' ? content : <NoConectionPage />}
           </div>
         </div>
       )}
