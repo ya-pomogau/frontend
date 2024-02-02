@@ -17,6 +17,7 @@ import {
   changeCurrentStep,
   openPopup,
   setAddress,
+  setCategory,
   setDate,
   setDescriptionForTask,
   setTime,
@@ -51,7 +52,11 @@ type ModalButtons = {
 interface TaskItemProps {
   time?: number;
   isMobile: boolean;
-  category: string;
+  category: {
+    id: string;
+    name: string;
+    scope: number;
+  };
   date?: string;
   address: string;
   description: string;
@@ -168,6 +173,7 @@ export const TaskItem = ({
     dispatch(setDate(date));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
+    dispatch(setCategory({ value: category.id, label: category.name }));
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
@@ -262,8 +268,8 @@ export const TaskItem = ({
         <div className={styles.mobile_header}>
           <CategoriesBackground
             theme="primary"
-            content={category}
-            size={category.length > 22 ? 'large' : 'medium'}
+            content={category.name}
+            size={category.name.length > 22 ? 'large' : 'medium'}
             extClassName={styles.mobile_category}
           />
           <div className={styles.mobile_buttons}>
@@ -436,8 +442,8 @@ export const TaskItem = ({
         <div className={styles.section_left}>
           <CategoriesBackground
             theme="primary"
-            content={category}
-            size={category.length > 24 ? 'large' : 'medium'}
+            content={category.name}
+            size={category.name.length > 24 ? 'large' : 'medium'}
             extClassName={styles.category}
           />
           <div className={styles.info_date}>
