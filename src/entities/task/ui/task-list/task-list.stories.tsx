@@ -65,7 +65,7 @@ export const ExampleActive: Story = {
         id: 14,
         title: 'Название задачи 14',
         category: {
-          id: 1,
+          id: '1',
           name: 'Название категории 1',
           scope: 10,
         },
@@ -114,7 +114,7 @@ export const ExampleActive: Story = {
         id: 19,
         title: 'Достаточно длинное название для задачи 19',
         category: {
-          id: 6,
+          id: '6',
           name: 'Название категории 6',
           scope: 60,
         },
@@ -174,7 +174,7 @@ export const ExampleNotActive: Story = {
         id: 15,
         title: 'Задача 15',
         category: {
-          id: 2,
+          id: '2',
           name: 'Название категории 2',
           scope: 20,
         },
@@ -224,7 +224,7 @@ export const ExampleNotActive: Story = {
         id: 27,
         title: 'Задача 27',
         category: {
-          id: 2,
+          id: '2',
           name: 'Название категории 2',
           scope: 20,
         },
