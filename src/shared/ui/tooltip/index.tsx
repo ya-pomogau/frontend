@@ -9,7 +9,6 @@ import { createPortal } from 'react-dom';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
-import { CloseCrossIcon } from '../icons/close-cross-icon';
 
 interface TooltipProps {
   extClassName?: string;
