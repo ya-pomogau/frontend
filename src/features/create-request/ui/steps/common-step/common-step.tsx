@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { changeStepDecrement, closePopup } from 'features/create-request/model';
+import {
+  changeStepDecrement,
+  clearState,
+  closePopup,
+} from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
@@ -14,15 +18,29 @@ interface ICommonStepProps {
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const { time, address, category, descriptionForTask, date } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const { time, address, category, descriptionForTask, date, termlessRequest } =
+    useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
   };
 
   const handleSubmitClick = () => {
+    const [day, month, year] = date.split('.');
+    const [hours, minutes] = time.split(':');
+
+    const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
+
+    console.log(dateObject);
+    const requestData = {
+      time,
+      date: termlessRequest ? null : dateObject,
+      address,
+      category,
+      descriptionForTask,
+    };
+    console.log(requestData);
+    dispatch(clearState());
     dispatch(closePopup());
   };
 
@@ -110,15 +128,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               content={category.label}
               extClassName={styles.categories}
             />
-            <p
-              className={classNames(
-                'text_size_medium',
-                'text_type_bold ',
-                styles.typeOfTask
-              )}
-            >
-              123
-            </p>
             <p
               className={classNames(
                 'text_size_medium',

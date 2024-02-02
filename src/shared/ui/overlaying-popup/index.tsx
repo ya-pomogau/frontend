@@ -29,14 +29,15 @@ export const OverlayingPopup = ({
         role="dialog"
         id="label"
       >
-        {/* Возможно не понадобится в будущем т.к. оверлей перекрывает содержимое модалки и делает невозможным нажатие кнопок. Без него задний фон затемняется а интерфейс не доступен*/}
-        {/* <div
-          className={classNames(styles.overlay)}
-          role="button"
-          tabIndex={0}
-          onClick={onClose}
-          aria-labelledby="label"
-        ></div> */}
+        {
+          <div
+            className={classNames(styles.overlay)}
+            role="button"
+            tabIndex={0}
+            onClick={onClose}
+            aria-labelledby="label"
+          ></div>
+        }
         {children}
       </div>
     </Portal>
