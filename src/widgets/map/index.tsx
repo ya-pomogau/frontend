@@ -34,6 +34,7 @@ interface YandexMapProps {
   tasks?: Task[];
   onClick?: () => void;
   coordinates?: GeoCoordinates;
+  role?: UserRole | null;
   isAuthorised?: boolean;
 }
 
@@ -45,6 +46,7 @@ export const YandexMap = ({
   onClick,
   tasks,
   coordinates,
+  role,
   isAuthorised,
 }: YandexMapProps) => {
   const isGranted = usePermission(
@@ -122,12 +124,11 @@ export const YandexMap = ({
               />
             );
           })}
-          {
-            //поменялся тип координат на Array<number> -- почему, если у координат всегда длина массива из двух элементов
-            coordinates && (
-              <Mark coordinates={[coordinates[0], coordinates[1]]} />
-            )
-          }
+          <Mark
+            coordinates={coordinates}
+            hasBalloon={false}
+            draggable={role === UserRole.RECIPIENT}
+          />
           {radius && (
             <Circle
               geometry={[

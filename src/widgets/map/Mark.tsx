@@ -58,7 +58,7 @@ const Mark: React.FC<MarkProps> = ({
     UserRole.VOLUNTEER
   );
   const isDisabled = !isGranted;
-        
+
   const onClick = () => {
     // Добавить обращение в бэкенд и после получения ответа показываем попап:
     // Пока договорились использовать замоканные данные заявок
