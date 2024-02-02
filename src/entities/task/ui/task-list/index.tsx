@@ -116,7 +116,7 @@ export const TaskList = ({
           {tasks.map((item, index) => (
             <li key={index}>
               <TaskItem
-                category={item.category.name}
+                category={item.category}
                 isMobile={isMobile}
                 date={item.date}
                 address={item.address}
