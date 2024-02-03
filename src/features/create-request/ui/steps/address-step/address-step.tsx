@@ -13,6 +13,7 @@ import { InputAddress } from 'shared/ui/input-address';
 import styles from './address-step.module.css';
 import { useEffect } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { UserRole } from 'shared/types/common.types';
 
 interface IAddressProps {
   isMobile?: boolean;
@@ -77,6 +78,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                 width="260px"
                 height="350px"
                 coordinates={coordinates}
+                role={UserRole.RECIPIENT}
                 mapSettings={
                   coordinates
                     ? {
@@ -154,6 +156,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                 width="100%"
                 height="159px"
                 coordinates={coordinates}
+                role={UserRole.RECIPIENT}
                 mapSettings={
                   coordinates
                     ? {

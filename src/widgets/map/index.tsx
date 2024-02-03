@@ -36,6 +36,7 @@ interface YandexMapProps {
   onClick?: () => void;
   coordinates?: GeoCoordinates;
   isAuthorised?: boolean;
+  role: UserRole;
 }
 
 export const YandexMap = ({
@@ -47,6 +48,7 @@ export const YandexMap = ({
   tasks,
   coordinates,
   isAuthorised,
+  role,
 }: YandexMapProps) => {
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
@@ -148,15 +150,25 @@ export const YandexMap = ({
               />
             );
           })}
-          
-          
-          {coordinates && (
-            <Mark
-              coordinates={
-                Array.isArray(coordinates)
-                  ? coordinates
-                  : [coordinates.latitude, coordinates.longitude]
-              }
+          <Mark
+            coordinates={coordinates}
+            hasBalloon={false}
+            onClick={() => console.log(role)}
+            draggable={role === UserRole.RECIPIENT}
+          />
+          {radius && (
+            <Circle
+              geometry={[
+                [mapSettings.latitude, mapSettings.longitude],
+                radius * 1000,
+              ]}
+              options={{
+                draggable: false,
+                fillColor: '#DB709377',
+                strokeColor: '#990066',
+                strokeOpacity: 0.8,
+                strokeWidth: 5,
+              }}
             />
           )}
          {radius && (
