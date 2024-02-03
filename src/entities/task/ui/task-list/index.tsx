@@ -23,11 +23,6 @@ interface TaskListProps {
   isStatusActive: boolean;
   isMobile: boolean;
   isLoading: boolean;
-  handleClickPnoneButton: () => void;
-  handleClickMessageButton: () => void;
-  handleClickConfirmButton: () => void;
-  handleClickCloseButton: () => void;
-  handleClickEditButton?: () => void;
   handleClickAddTaskButton?: () => void;
 }
 
@@ -43,11 +38,6 @@ export const TaskList = ({
   isStatusActive,
   isMobile,
   isLoading,
-  handleClickPnoneButton,
-  handleClickMessageButton,
-  handleClickConfirmButton,
-  handleClickCloseButton,
-  handleClickEditButton,
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const buttonGuard = usePermission([CONFIRMED], 'recipient');
@@ -121,7 +111,7 @@ export const TaskList = ({
           {tasks.map((item, index) => (
             <li key={index}>
               <TaskItem
-                category={item.category.name}
+                category={item.category}
                 isMobile={isMobile}
                 date={item.date}
                 address={item.address}
@@ -134,19 +124,7 @@ export const TaskList = ({
                 unreadMessages={item.chat?.unread}
                 recipientName={item.recipient.fullname}
                 recipientPhoneNumber={item.recipient.phone}
-                handleClickPhoneButton={handleClickPnoneButton}
-                handleClickMessageButton={handleClickMessageButton}
-                handleClickConfirmButton={
-                  item.completed && !item.confirmed
-                    ? handleClickConfirmButton
-                    : undefined
-                }
-                handleClickCloseButton={
-                  isStatusActive ? handleClickCloseButton : undefined
-                }
-                handleClickEditButton={
-                  isStatusActive ? handleClickEditButton : undefined
-                }
+                isStatusActive={isStatusActive}
               />
             </li>
           ))}

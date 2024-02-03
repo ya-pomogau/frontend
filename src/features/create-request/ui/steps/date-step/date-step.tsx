@@ -14,14 +14,14 @@ import Checkbox from 'shared/ui/checkbox';
 import { DatePicker } from 'shared/ui/date-picker';
 
 import styles from './date-step.module.css';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
-
 interface IDateStepProps {
   isMobile?: boolean;
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date } = useAppSelector(
+  const { time, termlessRequest, date, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
@@ -60,10 +60,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     }
   }, [termlessRequest]);
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
-
   const handleCheckboxChange = () => {
     dispatch(changeCheckbox());
   };
@@ -71,7 +67,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     (): Date => parse(date, 'dd.MM.yyyy', new Date()),
     [date]
   );
-
+  const propsButton = usePropsButtonCustom();
   return (
     <>
       <div className={styles.dateContainer}>
@@ -134,9 +130,9 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         )}
         <Button
           buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
           disabled={(timeValidation || !time) && !termlessRequest}
+          label={propsButton.label}
+          onClick={propsButton.onClick}
         />
       </div>
     </>

@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDescriptionForTask,
-  changeStepDecrement,
-  changeStepIncrement,
   setCategory,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
@@ -13,16 +11,15 @@ import { TextArea } from 'shared/ui/text-area';
 import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, categories, category } = useAppSelector(
-    (state) => state.createRequest
-  );
-
+  const { descriptionForTask, categories, category, isTypeEdit } =
+    useAppSelector((state) => state.createRequest);
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -37,15 +34,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const handleTaskDescValueChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
+    console.log(222);
+
     dispatch(setDescriptionForTask(e.target.value));
-  };
-
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
-
-  const handlePreviousStepClick = () => {
-    dispatch(changeStepDecrement());
   };
 
   const disabledBtn = () => {
@@ -56,6 +47,8 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
       return true;
     }
   };
+
+  const propsButton = usePropsButtonCustom();
 
   return (
     <div className={styles.mainWrapper}>
@@ -89,6 +82,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               placeholder="Например: Помогите выгулять собаку."
               onChange={handleTaskDescValueChange}
               extClassName={styles.textarea}
+              maxLength={300}
             />
           </>
         ) : (
@@ -111,6 +105,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               placeholder="Например: Помогите выгулять собаку."
               onChange={handleTaskDescValueChange}
               extClassName={styles.textarea}
+              maxLength={300}
             />
           </>
         )}
@@ -121,17 +116,19 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             <p className={styles.messageAlert}>Добавьте описание задачи</p>
           )}
         </div>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
+            extClassName={styles.prevButton}
+          />
+        )}
         <Button
           disabled={disabledBtn()}
           buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
+          label={propsButton.label}
+          onClick={propsButton.onClick}
         />
       </div>
     </div>

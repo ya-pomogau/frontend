@@ -126,7 +126,6 @@ const Dropdown = ({
             if (!refMap.current[refKey]) {
               refMap.current[refKey] = React.createRef<HTMLLIElement>();
             }
-
             return (
               <li
                 ref={itemSelect && refMap.current[refKey]}

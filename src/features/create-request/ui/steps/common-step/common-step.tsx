@@ -1,37 +1,48 @@
 import classNames from 'classnames';
-
+import { format } from 'date-fns';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
+  setDate,
+  changeCurrentStep,
   changeStepDecrement,
-  clearState,
   closePopup,
+  openPopup,
+  clearState,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 
 import styles from './common-step.module.css';
-
+import { EditButton } from 'shared/ui/edit-button';
 interface ICommonStepProps {
   isMobile?: boolean;
 }
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const { time, address, category, descriptionForTask, date, termlessRequest } =
-    useAppSelector((state) => state.createRequest);
+  const {
+    time,
+    address,
+    category,
+    descriptionForTask,
+    date,
+    isTypeEdit,
+    termlessRequest,
+  } = useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
   };
 
+  const parsedDate = format(new Date(date), 'dd.MM.yyyy');
+
   const handleSubmitClick = () => {
-    const [day, month, year] = date.split('.');
+    const [day, month, year] = parsedDate.split('.');
     const [hours, minutes] = time.split(':');
 
     const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
 
-    console.log(dateObject);
     const requestData = {
       time,
       date: termlessRequest ? null : dateObject,
@@ -42,6 +53,28 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     console.log(requestData);
     dispatch(clearState());
     dispatch(closePopup());
+  };
+
+  const handleEditButton = (typeButton: string) => {
+    switch (typeButton) {
+      case 'date':
+        dispatch(setDate(format(new Date(), 'dd.MM.yyyy')));
+        dispatch(changeCurrentStep(1));
+        dispatch(openPopup());
+        break;
+
+      case 'coordinates':
+        dispatch(changeCurrentStep(2));
+        dispatch(openPopup());
+        break;
+
+      case 'description':
+        dispatch(changeCurrentStep(3));
+        dispatch(openPopup());
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -69,7 +102,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_medium', 'm-0')}>{date}</p>
+              <p className={classNames('text_size_medium', 'm-0')}>
+                {parsedDate}
+              </p>
               <p className={classNames('text_size_medium', styles.time)}>
                 {time}
               </p>
@@ -113,14 +148,30 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_large', 'm-0')}>{date}</p>
+              <p className={classNames('text_size_large', 'm-0')}>
+                {parsedDate}
+              </p>
               <p className={classNames('text_size_large', styles.time)}>
                 {time}
               </p>
+              {isTypeEdit ? (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить дату и время"
+                  onClick={() => handleEditButton('date')}
+                />
+              ) : null}
             </div>
             <div className={styles.addressWrapper}>
               <LocationIcon color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
+              {isTypeEdit && (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить адрес"
+                  onClick={() => handleEditButton('coordinates')}
+                />
+              )}
             </div>
             <CategoriesBackground
               theme="primary"
@@ -135,17 +186,26 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               {descriptionForTask}
+              {isTypeEdit ? (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить задание"
+                  onClick={() => handleEditButton('description')}
+                />
+              ) : null}
             </p>
           </>
         )}
       </div>
       <div className={styles.buttonsWrapper}>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label="Вернуться"
+            onClick={handlePreviousStepClick}
+            extClassName={styles.prevButton}
+          />
+        )}
         <Button
           buttonType="primary"
           label="Опубликовать"
