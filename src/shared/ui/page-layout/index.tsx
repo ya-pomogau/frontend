@@ -12,6 +12,7 @@ import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 import { RegistrationNotice } from '../registration-notice';
 import { UNCONFIRMED } from 'shared/libs/statuses';
 import { unauthorizedRecipientMessage } from 'shared/libs/constants';
+import { UserRole } from 'shared/types/common.types';
 
 interface PageLayoutProps {
   content?: ReactNode;

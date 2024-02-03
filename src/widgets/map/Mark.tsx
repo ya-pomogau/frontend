@@ -248,17 +248,18 @@ export const Mark = React.memo(
           };
           buttonClose.addEventListener('click', onCloseClick);
 
-        // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
-        const button = taskContainer.querySelector(
-          '.task_button_container > button'
-        );
-        button.addEventListener(
-          'click',
-          isGranted ? onClick : onUncomfirmedClick
-        );
-      },
-    }
-  );
+          // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
+          const button = taskContainer.querySelector(
+            '.task_button_container > button'
+          );
+          button.addEventListener(
+            'click',
+            isGranted ? onClick : onUncomfirmedClick
+          );
+        },
+      }
+    );
+
     return (
       <Placemark
         geometry={coordinates}

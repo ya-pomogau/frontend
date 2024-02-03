@@ -16,7 +16,6 @@ import { DatePicker } from 'shared/ui/date-picker';
 import styles from './date-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
-
 interface IDateStepProps {
   isMobile?: boolean;
 }
@@ -60,10 +59,6 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
       dispatch(setTime(''));
     }
   }, [termlessRequest]);
-
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
 
   useEffect(() => {
     const dateNow = new Date();
