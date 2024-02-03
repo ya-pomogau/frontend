@@ -151,6 +151,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               <p className={classNames('text_size_large', 'm-0')}>
                 {parsedDate}
               </p>
+              <p className={classNames('text_size_large', styles.time)}>
+                {time}
+              </p>
               {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}
@@ -158,9 +161,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                   onClick={() => handleEditButton('date')}
                 />
               ) : null}
-              <p className={classNames('text_size_large', styles.time)}>
-                {time}
-              </p>
             </div>
             <div className={styles.addressWrapper}>
               <LocationIcon color="blue" />
