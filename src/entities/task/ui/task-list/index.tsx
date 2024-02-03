@@ -89,7 +89,7 @@ export const TaskList = ({
             extClassName
           )}
         >
-          {userRole === UserRole.RECIPIENT && (
+          {!isStatusActive && userRole === UserRole.RECIPIENT && (
             <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
               <RoundButton
                 buttonType="add"
