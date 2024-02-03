@@ -38,7 +38,7 @@ export function PickRolePage() {
   };
 
   const getUnconfirmedVolunteerRole = () => {
-    dispatch(setUserRole('volunteer'));
+    dispatch(setUserRole(UserRole.VOLUNTEER));
     setUserId(8);
   };
 
@@ -48,17 +48,7 @@ export function PickRolePage() {
   };
 
   const getUnconfirmedRecipient = () => {
-    dispatch(setUserRole('recipient'));
-    setUserId(9);
-  };
-
-  const getUnconfirmedRecipient = () => {
-    dispatch(setUserRole('recipient'));
-    setUserId(9);
-  };
-
-  const getUnconfirmedRecipient = () => {
-    dispatch(setUserRole('recipient'));
+    dispatch(setUserRole(UserRole.RECIPIENT));
     setUserId(9);
   };
 

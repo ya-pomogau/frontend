@@ -44,7 +44,6 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
     value: string | string[] | boolean
   ) => {
     setFilterValues({ ...filterValues, [name]: value });
-    console.log(filterValues);
   };
 
   if (notFoundFilter) {

@@ -55,7 +55,6 @@ export const FilterCover = ({
     });
 
     setSearchParams(params);
-    console.log(filterValues);
     closeFilterMenu();
   };
 

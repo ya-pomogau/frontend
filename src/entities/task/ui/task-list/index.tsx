@@ -16,7 +16,6 @@ import { useEffect, useRef, useState } from 'react';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
 
-
 interface TaskListProps {
   userRole?: UserRole | null;
   tasks: Array<Task>;
@@ -91,7 +90,7 @@ export const TaskList = ({
             extClassName
           )}
         >
-          {userRole === UserRole.RECIPIENT && (
+          {!isStatusActive && userRole === UserRole.RECIPIENT && (
             <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
               <RoundButton
                 buttonType="add"
@@ -112,26 +111,27 @@ export const TaskList = ({
             </li>
           )}
 
-          {tasks && tasks.map((item, index) => (
-            <li key={index}>
-              <TaskItem
-                category={item.category}
-                isMobile={isMobile}
-                date={item.date}
-                address={item.address}
-                description={item.description}
-                count={item.category.scope}
-                avatar={item.recipient.avatar}
-                completed={item.completed}
-                conflict={item.conflict}
-                confirmed={item.confirmed}
-                unreadMessages={item.chat?.unread}
-                recipientName={item.recipient.fullname}
-                recipientPhoneNumber={item.recipient.phone}
-                isStatusActive={isStatusActive}
-              />
-            </li>
-          ))}
+          {tasks &&
+            tasks.map((item, index) => (
+              <li key={index}>
+                <TaskItem
+                  category={item.category}
+                  isMobile={isMobile}
+                  date={item.date}
+                  address={item.address}
+                  description={item.description}
+                  count={item.category.scope}
+                  avatar={item.recipient.avatar}
+                  completed={item.completed}
+                  conflict={item.conflict}
+                  confirmed={item.confirmed}
+                  unreadMessages={item.chat?.unread}
+                  recipientName={item.recipient.fullname}
+                  recipientPhoneNumber={item.recipient.phone}
+                  isStatusActive={isStatusActive}
+                />
+              </li>
+            ))}
         </ul>
       )}
 
