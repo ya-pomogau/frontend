@@ -251,10 +251,7 @@ const Mark: React.FC<MarkProps> = ({
         const button = taskContainer.querySelector(
           '.task_button_container > button'
         );
-        button.addEventListener(
-          'click',
-          isGranted ? onClick : onUncomfirmedClick
-        );
+        button.addEventListener('click', onClick);
       },
     }
   );
@@ -273,6 +270,7 @@ const Mark: React.FC<MarkProps> = ({
       }}
       properties={{
         isUrgentTask,
+        isDisabled,
         fullName,
         phone,
         avatar,

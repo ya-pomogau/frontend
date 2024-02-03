@@ -127,6 +127,7 @@ export const YandexMap = ({
           <Mark
             coordinates={coordinates}
             hasBalloon={false}
+            onClick={() => console.log(role)}
             draggable={role === UserRole.RECIPIENT}
           />
           {radius && (

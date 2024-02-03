@@ -100,7 +100,7 @@ export function ProfileMapPage() {
             height="100%"
             onClick={() => 3}
             coordinates={user?.coordinates}
-            role={user?.role}
+            role={user && user.role}
             isAuthorised={true}
           />
         )
