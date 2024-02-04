@@ -9,10 +9,7 @@ import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { setAddress } from 'features/create-request/model';
-import { useAppDispatch } from 'app/hooks';
 import { UserRole } from 'shared/types/common.types';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
 
 type MarkProps = {
@@ -45,6 +42,7 @@ const Mark: React.FC<MarkProps> = ({
   description,
   title,
   count,
+  onClick,
   showPopup,
   isAuthorised,
   date,
@@ -62,10 +60,11 @@ const Mark: React.FC<MarkProps> = ({
   );
   const isDisabled = !isGranted;
 
-  const onClick = () => {
+  const onClickButton = () => {
     // Добавить обращение в бэкенд и после получения ответа показываем попап:
     // Пока договорились использовать замоканные данные заявок
-    showPopup();
+
+    !isAuthorised ? onClick() : showPopup();
   };
 
   if (!ymaps) return null;
@@ -254,7 +253,7 @@ const Mark: React.FC<MarkProps> = ({
         const button = taskContainer.querySelector(
           '.task_button_container > button'
         );
-        button.addEventListener('click', onClick);
+        button.addEventListener('click', onClickButton);
       },
     }
   );

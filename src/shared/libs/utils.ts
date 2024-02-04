@@ -198,5 +198,5 @@ export const filterByTime = (
     parseInt(hourMax) * MINUTES_IN_HOUR + parseInt(minuteMax);
   const time = taskTime.getHours() * MINUTES_IN_HOUR + taskTime.getMinutes();
 
-  return minLimit < time && time < maxLimit; 
+  return minLimit < time && time < maxLimit;
 };

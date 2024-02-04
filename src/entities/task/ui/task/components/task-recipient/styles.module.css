@@ -37,7 +37,7 @@
     gap: 5px;
     grid-template-areas: 'avatar info' 'empty buttons';
   }
-  
+
   .avatar {
     max-width: 60px;
     max-height: 60px;

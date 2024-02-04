@@ -3,8 +3,9 @@
   box-sizing: border-box;
   grid-template-rows: repeat(2, max-content);
   line-height: 24px;
-  grid-template-areas: 'description'
-                      'iconGrid';
+  grid-template-areas:
+    'description'
+    'iconGrid';
 }
 
 .textWithButton {
@@ -13,7 +14,6 @@
   position: relative;
   display: flex;
 }
-
 
 .description_hidden {
   max-height: 120px;

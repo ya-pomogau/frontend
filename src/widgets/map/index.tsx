@@ -1,4 +1,4 @@
-import {memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
