@@ -1,0 +1,12 @@
+.buttons_action {
+  display: grid;
+  grid-template-columns: repeat(2, 32px);
+  gap: 10px;
+  max-width: 82px;
+  justify-content: end;
+  align-content: start;
+}
+
+.item_hidden {
+  visibility: hidden;
+}

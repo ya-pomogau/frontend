@@ -37,6 +37,11 @@ export function PickRolePage() {
     setUserId(7);
   };
 
+  const getUnconfirmedVolunteerRole = () => {
+    dispatch(setUserRole(UserRole.VOLUNTEER));
+    setUserId(8);
+  };
+
   const getRecipientRole = () => {
     setUserId(4);
     dispatch(setUserRole(UserRole.RECIPIENT));
@@ -112,6 +117,15 @@ export function PickRolePage() {
         <li>
           <button onClick={getVolunteerRole} style={{ marginRight: 10 }}>
             Получить роль волонтера.
+          </button>
+        </li>
+
+        <li>
+          <button
+            onClick={getUnconfirmedVolunteerRole}
+            style={{ marginRight: 10 }}
+          >
+            Получить роль волонтера, еще не одобренного админом.
           </button>
         </li>
 
