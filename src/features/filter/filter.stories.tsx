@@ -76,11 +76,64 @@ type Story = StoryObj<typeof meta>;
 export const DefaultFilter: Story & any = {
   args: {
     items: {
-      categories: true,
+      sort: false,
+      categories: false,
       radius: true,
-      sort: true,
-      date: true,
       time: true,
+      date: true,
+      servies: true,
+    },
+  },
+  render: ({ ...args }: FilteringProps) => (
+    <Mockstore initialState={mockedVolunteerState}>
+      <div
+        style={{
+          width: '100vw',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Filter {...args} />
+      </div>
+    </Mockstore>
+  ),
+};
+
+export const FilterTasksVolunteers: Story & any = {
+  args: {
+    items: {
+      sort: true,
+      categories: false,
+      radius: false,
+      time: false,
+      date: false,
+      servies: true,
+    },
+  },
+  render: ({ ...args }: FilteringProps) => (
+    <Mockstore initialState={mockedVolunteerState}>
+      <div
+        style={{
+          width: '100vw',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Filter {...args} />
+      </div>
+    </Mockstore>
+  ),
+};
+
+export const FilterTasksRecipien: Story & any = {
+  args: {
+    items: {
+      sort: true,
+      categories: false,
+      radius: false,
+      time: false,
+      date: false,
+      servies: true,
     },
   },
   render: ({ ...args }: FilteringProps) => (

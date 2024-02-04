@@ -8,11 +8,11 @@ import { openPopup } from 'features/create-request/model';
 import { Request } from 'features/create-request';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
-import { UserRole } from 'shared/types/common.types';
 import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
+import { UserRole } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
 
 export function ProfileActivePage() {

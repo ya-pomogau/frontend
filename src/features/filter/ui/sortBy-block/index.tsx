@@ -4,6 +4,7 @@ import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
 import Checkbox from 'shared/ui/checkbox';
 import { useAppSelector } from 'app/hooks';
+import { VariantCheckbox } from 'shared/types/common.types';
 import { UserRole } from 'shared/types/common.types';
 import { VariantCheckbox } from 'shared/types/common.types';
 
