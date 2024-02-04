@@ -3,7 +3,7 @@ import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import { Task } from 'entities/task/types';
 import { IFilterValues } from 'features/filter/types';
 // eslint-disable-next-line import/no-duplicates
-import { isAfter, parseISO } from 'date-fns';
+
 import {
   DAYS_IN_MONTH,
   DAYS_IN_YEAR,
@@ -114,8 +114,8 @@ export const handleFilterTasks = (
     }
   }
 };
-const degrToRadians = (deg: number): number => {
-  return (Math.PI * deg) / 180;
+const degrToRadians = (degrees: number): number => {
+  return degrees * RADIANS_IN_DEGREE;
 };
 
 const radToDegr = (radians: number): number => {

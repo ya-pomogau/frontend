@@ -7,6 +7,9 @@ import React from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { setAddress } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
 import { UserRole } from 'shared/types/common.types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { setAddress } from 'features/create-request/model';
@@ -51,7 +54,7 @@ const Mark: React.FC<MarkProps> = ({
 }: MarkProps) => {
   const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
@@ -59,9 +62,6 @@ const Mark: React.FC<MarkProps> = ({
   );
   const isDisabled = !isGranted;
 
-  const onUncomfirmedClick = () => {
-    showPopup();
-  };
   const onClick = () => {
     // Добавить обращение в бэкенд и после получения ответа показываем попап:
     // Пока договорились использовать замоканные данные заявок

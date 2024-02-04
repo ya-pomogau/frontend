@@ -1,10 +1,9 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import {memo, useEffect, useRef, useState } from 'react';
 import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
 import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
-
-import { isTaskUrgent } from 'shared/libs/utils';
+import { isTaskUrgent, getBounds } from 'shared/libs/utils';
 import Mark from './Mark';
 import { LightPopup } from 'shared/ui/light-popup';
 import {
@@ -35,8 +34,8 @@ interface YandexMapProps {
   tasks?: Task[];
   onClick?: () => void;
   coordinates?: GeoCoordinates;
+  role?: UserRole | null;
   isAuthorised?: boolean;
-  role: UserRole;
 }
 
 export const YandexMap = ({
@@ -47,8 +46,8 @@ export const YandexMap = ({
   onClick,
   tasks,
   coordinates,
-  isAuthorised,
   role,
+  isAuthorised,
 }: YandexMapProps) => {
   const isGranted = usePermission(
     [CONFIRMED, ACTIVATED, VERIFIED],
@@ -74,31 +73,6 @@ export const YandexMap = ({
     setSorryPopupVisible(false);
     setThankPopupVisible(false);
   };
-  const circleRef = useRef<ymaps.Map | undefined>(undefined);
-
-  const [state, setState] = useState<{
-    bounds?: number[][];
-    center?: number[];
-    zoom?: number;
-  }>({
-    center: [mapSettings.latitude, mapSettings.longitude],
-    zoom: mapSettings.zoom,
-  });
-  const getBounds = () => {
-    radius
-      ? setState({
-          bounds: circleRef.current?.getBounds(),
-        })
-      : setState({
-          center: [mapSettings.latitude, mapSettings.longitude],
-          zoom: mapSettings.zoom,
-        });
-  };
-
-  useEffect(() => {
-    getBounds();
-  }, [radius]);
-
 
   return (
     <>
@@ -171,19 +145,6 @@ export const YandexMap = ({
               }}
             />
           )}
-         {radius && (
-          <Circle
-            instanceRef={circleRef}
-            geometry={[[mapSettings.latitude, mapSettings.longitude], radius]}
-            options={{
-              draggable: false,
-              fillColor: '#DB709377',
-              strokeColor: '#990066',
-              strokeOpacity: 0.8,
-              strokeWidth: 5,
-            }}
-          />
-        )}
         </Map>
       </YMaps>
       {!isGranted && (
