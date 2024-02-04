@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
   display: flex;
   width: 100%;
   border: none;
@@ -22,7 +22,6 @@
   cursor: pointer;
   justify-content: center;
   align-items: center;
-
 }
 .title {
   margin: 0;
@@ -65,8 +64,7 @@
   font-size: 16px;
   line-height: 19px;
   color: black;
-  justify-content:end;
-
+  justify-content: end;
 }
 
 @media (max-width: 900px) {
@@ -81,5 +79,4 @@
     color: #fbfdff;
     z-index: 2;
   }
-
 }

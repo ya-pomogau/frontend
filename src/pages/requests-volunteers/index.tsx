@@ -58,7 +58,7 @@ export function RequestsVolunteersPage() {
                   user.userName
                     .toLowerCase()
                     .includes(searchName.toLowerCase()) &&
-                  user.role == UserRole.VOLUNTEER
+                  user.role === UserRole.VOLUNTEER
               )
               .map((user: UserProps) => (
                 <UserCard

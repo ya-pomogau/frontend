@@ -3,6 +3,8 @@ import classnames from 'classnames';
 
 import styles from '../styles.module.css';
 import { TimePickerElement } from 'shared/ui/time-picker';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'app/store';
 
 interface TimeBlockProps {
   onChange: (name: string, value: string[] | string) => void;
@@ -10,10 +12,11 @@ interface TimeBlockProps {
 }
 
 export const TimeBlock = ({ onChange, filterTime }: TimeBlockProps) => {
+  const dispatch = useDispatch();
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLInputElement>(null);
-  const [startTime, setStartTime] = useState('00:00');
-  const [endTime, setEndTime] = useState('00:00');
+  const [startTime, setStartTime] = useState<string>('00:00');
+  const [endTime, setEndTime] = useState<string>('00:00');
 
   const setTypeResolution = () => {
     if (window.innerWidth <= 768) {
@@ -89,16 +92,6 @@ export const TimeBlock = ({ onChange, filterTime }: TimeBlockProps) => {
             setEndTime={setEndTime}
           />
         </div>
-
-        <p
-          className={classnames(
-            styles.filterBlockText,
-            'text',
-            'text_size_small'
-          )}
-        >
-          Дата
-        </p>
       </div>
     </div>
   );

@@ -8,7 +8,12 @@ import { openPopup } from 'features/create-request/model';
 import { Request } from 'features/create-request';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
+import { useEffect, useState } from 'react';
+import { IFilterValues } from 'features/filter/types';
+import { Task } from 'entities/task/types';
+import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
+import { defaultObjFilteres } from 'features/filter/consts';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -19,6 +24,14 @@ export function ProfileActivePage() {
 
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
+  const [infoFilterTasks, setInfoFilterTasks] =
+    useState<IFilterValues>(defaultObjFilteres);
+  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
+    // eslint-disable-next-line
+  }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
   return (
     <>
@@ -31,10 +44,10 @@ export function ProfileActivePage() {
               items={{
                 sort: true,
                 categories: true,
-                radius: true,
+                radius: false,
                 date: false,
-                time: true,
               }}
+              setFilteres={setInfoFilterTasks}
             />
           ) : (
             <Filter
@@ -44,6 +57,7 @@ export function ProfileActivePage() {
                 radius: false,
                 date: false,
               }}
+              setFilteres={setInfoFilterTasks}
             />
           )
         }
@@ -60,7 +74,7 @@ export function ProfileActivePage() {
           handleClickPnoneButton={() => 6}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive
-          tasks={tasks}
+          tasks={filterTasks}
           isLoading={isLoading}
         />
       )}

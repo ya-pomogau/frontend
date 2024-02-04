@@ -68,6 +68,10 @@
   width: 100%;
 }
 
+.box {
+  width: 129px;
+}
+
 @media screen and (max-width: 768px) {
   .tooltip {
     max-width: 343px;

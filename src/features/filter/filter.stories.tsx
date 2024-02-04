@@ -3,11 +3,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { withRouter } from 'storybook-addon-react-router-v6';
 
-import type {
-  FilterProps,
-  NotFoundFilterProps,
-  FilteringProps,
-} from 'features/filter/filter';
+import type { FilteringProps, NotFoundFilterProps } from './types';
 import { Filter } from 'features/filter';
 import { UserRole } from 'shared/types/common.types';
 
@@ -80,11 +76,64 @@ type Story = StoryObj<typeof meta>;
 export const DefaultFilter: Story & any = {
   args: {
     items: {
-      categories: true,
+      sort: false,
+      categories: false,
       radius: true,
-      sort: true,
-      date: true,
       time: true,
+      date: true,
+      servies: true,
+    },
+  },
+  render: ({ ...args }: FilteringProps) => (
+    <Mockstore initialState={mockedVolunteerState}>
+      <div
+        style={{
+          width: '100vw',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Filter {...args} />
+      </div>
+    </Mockstore>
+  ),
+};
+
+export const FilterTasksVolunteers: Story & any = {
+  args: {
+    items: {
+      sort: true,
+      categories: false,
+      radius: false,
+      time: false,
+      date: false,
+      servies: true,
+    },
+  },
+  render: ({ ...args }: FilteringProps) => (
+    <Mockstore initialState={mockedVolunteerState}>
+      <div
+        style={{
+          width: '100vw',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Filter {...args} />
+      </div>
+    </Mockstore>
+  ),
+};
+
+export const FilterTasksRecipien: Story & any = {
+  args: {
+    items: {
+      sort: true,
+      categories: false,
+      radius: false,
+      time: false,
+      date: false,
+      servies: true,
     },
   },
   render: ({ ...args }: FilteringProps) => (
