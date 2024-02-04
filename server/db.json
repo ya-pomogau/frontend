@@ -238,7 +238,7 @@
       "id": 3,
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Реципиентов Иван Иванович",
-      "role": "recipient",
+      "role": "Recipient",
       "vk": "https://vk.com/id123456789",
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
       "phone": "+7 (916) 123-00-00",
@@ -271,6 +271,19 @@
       "address": "1-й Смоленский пер., 13",
       "coordinates": [55.747854, 37.579887],
       "status": "confirmed",
+      "isActive": true
+    },
+    {
+      "id": 9,
+      "createdAt": "2023-07-09T17:30Z",
+      "fullname": "Реципиентов Валерий Афонасьевич",
+      "role": "Recipient",
+      "vk": "https://vk.com/id123456789",
+      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
+      "phone": "+7 (916) 123-45-67",
+      "address": "ул. Самарская, д. 9",
+      "coordinates": [59.941871, 30.223494],
+      "status": "unconfirmed",
       "isActive": true
     }
   ],
