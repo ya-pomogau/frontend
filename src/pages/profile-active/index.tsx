@@ -39,17 +39,7 @@ export function ProfileActivePage() {
         text="Активные заявки"
         icon={<Icon color="blue" icon="ActiveApplicationIcon" size="54" />}
         filter={
-          role === UserRole.VOLUNTEER ? (
-            <Filter
-              items={{
-                sort: true,
-                categories: true,
-                radius: false,
-                date: false,
-              }}
-              setFilteres={setInfoFilterTasks}
-            />
-          ) : !isUnConfirmed ? (
+          !isUnConfirmed ? (
             <Filter
               items={{
                 sort: true,
@@ -72,7 +62,7 @@ export function ProfileActivePage() {
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive={!isUnConfirmed ? false : true}
-          tasks={!isUnConfirmed ? tasks : []}
+          tasks={!isUnConfirmed ? filterTasks : []}
           isLoading={isLoading}
         />
       )}

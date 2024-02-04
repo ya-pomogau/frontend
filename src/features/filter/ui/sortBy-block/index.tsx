@@ -26,8 +26,8 @@ export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
         label="По дате"
         onChange={handleCheckboxChange}
       />
-
-      {role === UserRole.VOLUNTEER && (
+      {/* Закоментили, так как так и не определились нужны ли у волонтера в фильтрах другие параметры кроме даты */}
+      {/* {role === UserRole.VOLUNTEER && (
         <>
           <Checkbox
             checked={filter === VariantCheckbox.DECREASINGPOINTS}
@@ -43,7 +43,7 @@ export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
             onChange={handleCheckboxChange}
           />
         </>
-      )}
+      )} */}
     </Fieldset>
   );
 };

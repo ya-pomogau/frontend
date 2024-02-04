@@ -67,10 +67,10 @@ const Mark: React.FC<MarkProps> = ({
     !isAuthorised ? onClick() : showPopup();
   };
 
-    if (!ymaps) return null;
+  if (!ymaps) return null;
 
-    const Iconlayout = ymaps.templateLayoutFactory.createClass(
-      `{% if properties.isUrgentTask %}
+  const Iconlayout = ymaps.templateLayoutFactory.createClass(
+    `{% if properties.isUrgentTask %}
       <div class="mark_container">
         <svg width="53" height="53" viewBox="0 0 53 53" fill="#D60080" xmlns="http://www.w3.org/2000/svg">
           <circle cx="26.5" cy="26.5" r="26.5" />
@@ -86,22 +86,22 @@ const Mark: React.FC<MarkProps> = ({
         </svg>
       </div> {% endif %}
       `,
-      {
-        build() {
-          Iconlayout.superclass.build.call(this);
+    {
+      build() {
+        Iconlayout.superclass.build.call(this);
 
-          // На метку добавляем кликабильную зону
-          this.getData().options.set('shape', {
-            type: 'Circle',
-            coordinates: [28, 28],
-            radius: 30,
-          });
-        },
-      }
-    );
+        // На метку добавляем кликабильную зону
+        this.getData().options.set('shape', {
+          type: 'Circle',
+          coordinates: [28, 28],
+          radius: 30,
+        });
+      },
+    }
+  );
 
-    const Balloonlayout = ymaps.templateLayoutFactory.createClass(
-      `{% if properties.isAuthorised %}
+  const Balloonlayout = ymaps.templateLayoutFactory.createClass(
+    `{% if properties.isAuthorised %}
       <div class="task_container">
         <div class="close_icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="#2E3192" xmlns="http://www.w3.org/2000/svg">
@@ -213,41 +213,41 @@ const Mark: React.FC<MarkProps> = ({
       </div> {% endif %}
       `,
 
-      {
-        build() {
-          Balloonlayout.superclass.build.call(this);
+    {
+      build() {
+        Balloonlayout.superclass.build.call(this);
 
-          const mainContainer = this.getParentElement();
-          const taskContainer = mainContainer.querySelector('.task_container');
+        const mainContainer = this.getParentElement();
+        const taskContainer = mainContainer.querySelector('.task_container');
 
-          // Добавляем слушатель на кпонку "читать"
-          const buttonRead = taskContainer.querySelector('.task_button');
+        // Добавляем слушатель на кпонку "читать"
+        const buttonRead = taskContainer.querySelector('.task_button');
 
-          const descriptionContainer = taskContainer.querySelector(
-            '.task_description_hidden'
-          );
-          // Изменяем видимость кнопки "читать" в зависимости от длины контента
-          const hendleReadButton = () => {
-            if ([...description].length < 140) {
-              buttonRead.textContent = '';
-            }
-          };
-          hendleReadButton();
-          const onReadClick = () => {
-            descriptionContainer.classList.toggle('task_description_hidden');
-            // eslint-disable-next-line no-unused-expressions
-            buttonRead.textContent === 'Читать'
-              ? (buttonRead.textContent = 'Свернуть')
-              : (buttonRead.textContent = 'Читать');
-          };
-          buttonRead.addEventListener('click', onReadClick);
+        const descriptionContainer = taskContainer.querySelector(
+          '.task_description_hidden'
+        );
+        // Изменяем видимость кнопки "читать" в зависимости от длины контента
+        const hendleReadButton = () => {
+          if ([...description].length < 140) {
+            buttonRead.textContent = '';
+          }
+        };
+        hendleReadButton();
+        const onReadClick = () => {
+          descriptionContainer.classList.toggle('task_description_hidden');
+          // eslint-disable-next-line no-unused-expressions
+          buttonRead.textContent === 'Читать'
+            ? (buttonRead.textContent = 'Свернуть')
+            : (buttonRead.textContent = 'Читать');
+        };
+        buttonRead.addEventListener('click', onReadClick);
 
-          // Добавляем слушатель на кпонку "Закрыть окно".
-          const buttonClose = taskContainer.querySelector('.close_icon');
-          const onCloseClick = () => {
-            this.getData().map.balloon.close();
-          };
-          buttonClose.addEventListener('click', onCloseClick);
+        // Добавляем слушатель на кпонку "Закрыть окно".
+        const buttonClose = taskContainer.querySelector('.close_icon');
+        const onCloseClick = () => {
+          this.getData().map.balloon.close();
+        };
+        buttonClose.addEventListener('click', onCloseClick);
 
         // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
         const button = taskContainer.querySelector(

@@ -20,8 +20,9 @@ interface IDateStepProps {
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date, isTypeEdit } =
-    useAppSelector((state) => state.createRequest);
+  const { time, termlessRequest, date, isTypeEdit } = useAppSelector(
+    (state) => state.createRequest
+  );
   const dispatch = useAppDispatch();
   const [timeValidation, setTimeValidation] = useState(false);
   const [isOpenClockElement, setIsOpenClockElement] = useState(false);

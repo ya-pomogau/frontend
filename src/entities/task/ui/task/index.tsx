@@ -6,6 +6,9 @@ import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
 import { TaskRecipient } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
+import { useAppSelector } from 'app/hooks';
+import { Request } from 'features/create-request';
+import { useMediaQuery } from 'shared/hooks';
 
 interface TaskItemProps {
   category: {
@@ -54,45 +57,51 @@ export const TaskItem = ({
       : styles.container_main_default;
 
   return (
-    <div
-      className={classNames(
-        styles.container_main,
-        'text',
-        taskLayout,
-        extClassName
-      )}
-    >
-      <CategoriesBackground
-        theme="primary"
-        content={category.name}
-        size={category.name.length > 24 ? 'large' : 'medium'}
-        extClassName={styles.category}
-      />
-      <TaskInfo date={date} address={address} extClassName={styles.taskInfo} />
-      <TaskDescription
-        description={description}
-        count={count}
-        extClassName={styles.description}
-      />
-      <TaskRecipient
-        avatar={avatar}
-        recipientName={recipientName}
-        recipientPhoneNumber={recipientPhoneNumber}
-        connection={completed}
-        unreadMessages={unreadMessages}
-        extClassName={styles.recipient}
-      />
-      <TaskButtons
-        recipientName={recipientName}
-        address = {address}
-        description = {description}
-        category={category}
-        date={date}
-        isStatusActive
-        completed
-        conflict
-        extClassName={styles.buttons}
-      />
-    </div>
+    <>
+      <div
+        className={classNames(
+          styles.container_main,
+          'text',
+          taskLayout,
+          extClassName
+        )}
+      >
+        <CategoriesBackground
+          theme="primary"
+          content={category.name}
+          size={category.name.length > 24 ? 'large' : 'medium'}
+          extClassName={styles.category}
+        />
+        <TaskInfo
+          date={date}
+          address={address}
+          extClassName={styles.taskInfo}
+        />
+        <TaskDescription
+          description={description}
+          count={count}
+          extClassName={styles.description}
+        />
+        <TaskRecipient
+          avatar={avatar}
+          recipientName={recipientName}
+          recipientPhoneNumber={recipientPhoneNumber}
+          connection={completed}
+          unreadMessages={unreadMessages}
+          extClassName={styles.recipient}
+        />
+        <TaskButtons
+          recipientName={recipientName}
+          address={address}
+          description={description}
+          category={category}
+          date={date}
+          isStatusActive
+          completed
+          conflict
+          extClassName={styles.buttons}
+        />
+      </div>
+    </>
   );
 };

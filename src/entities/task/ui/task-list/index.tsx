@@ -153,7 +153,7 @@ export const TaskList = ({
           {userRole === UserRole.RECIPIENT && (
             <>
               <p
-                className={`${styles.title_add_empty} text_size_large text_type_regular`}
+                className={`${styles.title_add_empty} text_size_large text_type_regular text `}
               >
                 {' '}
                 Хотите создать заявку?

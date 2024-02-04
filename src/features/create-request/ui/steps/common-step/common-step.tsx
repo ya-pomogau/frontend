@@ -102,9 +102,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_medium', 'm-0')}>
-                {parsedDate}
-              </p>
+              <p className={classNames('text_size_medium', 'm-0')}>{date}</p>
               <p className={classNames('text_size_medium', styles.time)}>
                 {time}
               </p>
@@ -119,15 +117,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               content={category.label}
               extClassName={styles.categories}
             />
-            <p
-              className={classNames(
-                'text_size_medium',
-                'text_type_bold ',
-                styles.typeOfTask
-              )}
-            >
-              13
-            </p>
             <p
               className={classNames(
                 'text_size_medium',
@@ -148,9 +137,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_large', 'm-0')}>
-                {parsedDate}
-              </p>
+              <p className={classNames('text_size_large', 'm-0')}>{date}</p>
               <p className={classNames('text_size_large', styles.time)}>
                 {time}
               </p>

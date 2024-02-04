@@ -131,7 +131,7 @@
       "isActive": true
     },
     {
-      "id": 9,
+      "id": "9",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Реципиентов Валерий Афонасьевич",
       "role": "Recipient",
@@ -144,7 +144,7 @@
       "isActive": true
     },
     {
-      "id": 3,
+      "id": "3",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Реципиентов Иван Иванович",
       "role": "Recipient",
@@ -154,136 +154,6 @@
       "address": "1-й Смоленский пер., 13",
       "coordinates": [55.747854, 37.579887],
       "status": "confirmed",
-      "isActive": true
-    },
-    {
-      "id": 9,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Валерий Афонасьевич",
-      "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
-      "phone": "+7 (916) 123-45-67",
-      "address": "ул. Самарская, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "status": "unconfirmed",
-      "isActive": true
-    },
-    {
-      "id": 3,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Иван Иванович",
-      "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-      "phone": "+7 (916) 123-00-00",
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "status": "confirmed",
-      "isActive": true
-    },
-    {
-      "id": 3,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Иван Иванович",
-      "role": "recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-      "phone": "+7 (916) 123-00-00",
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "status": "confirmed",
-      "isActive": true
-    },
-    {
-      "id": 9,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Валерий Афонасьевич",
-      "role": "recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
-      "phone": "+7 (916) 123-45-67",
-      "address": "ул. Самарская, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "status": "unconfirmed",
-      "isActive": true
-    },
-    {
-      "id": 3,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Иван Иванович",
-      "role": "recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-      "phone": "+7 (916) 123-00-00",
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "status": "confirmed",
-      "isActive": true
-    },
-    {
-      "id": 9,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Валерий Афонасьевич",
-      "role": "recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
-      "phone": "+7 (916) 123-45-67",
-      "address": "ул. Самарская, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "status": "unconfirmed",
-      "isActive": true
-    },
-    {
-      "id": 3,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Иван Иванович",
-      "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-      "phone": "+7 (916) 123-00-00",
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "status": "confirmed",
-      "isActive": true
-    },
-    {
-      "id": 9,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Валерий Афонасьевич",
-      "role": "recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
-      "phone": "+7 (916) 123-45-67",
-      "address": "ул. Самарская, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "status": "unconfirmed",
-      "isActive": true
-    },
-    {
-      "id": 3,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Иван Иванович",
-      "role": "recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-      "phone": "+7 (916) 123-00-00",
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "status": "confirmed",
-      "isActive": true
-    },
-    {
-      "id": 9,
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Валерий Афонасьевич",
-      "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
-      "phone": "+7 (916) 123-45-67",
-      "address": "ул. Самарская, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "status": "unconfirmed",
       "isActive": true
     }
   ],
@@ -399,7 +269,7 @@
       "chat": null
     },
     {
-      "id": 13,
+      "id": "13",
       "title": "Купить лекарства",
       "category": {
         "id": "1",
@@ -428,7 +298,7 @@
       "chat": null
     },
     {
-      "id": 14,
+      "id": "14",
       "title": "Выгулять собаку",
       "category": {
         "id": "1",
@@ -457,7 +327,7 @@
       "chat": null
     },
     {
-      "id": 15,
+      "id": "15",
       "title": "Сводить погулять в парк",
       "category": {
         "id": "1",
@@ -496,35 +366,6 @@
       "address": "улица Фотиевой, 14к3",
       "coordinates": [55.699788, 37.557059],
       "chat": null
-    },
-    {
-      "id": 13,
-      "title": "Купить лекарства",
-      "category": {
-        "id": 1,
-        "name": "Сопровождение",
-        "scope": 1
-      },
-      "date": "2023-09-03T19:30Z",
-      "description": "Заболел и совсем нет сил даже ходить по квартире. Помогите, пожалуйста!",
-      "completed": false,
-      "confirmed": false,
-      "conflict": false,
-      "recipient": {
-        "id": 3,
-        "fullname": "Реципиентов Иван Иванович",
-        "role": "recipient",
-        "vk": "https://vk.com/id123456789",
-        "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
-        "phone": "+7 (916) 123-00-00",
-        "address": "1-й Смоленский пер., 13",
-        "coordinates": [55.747854, 37.579887],
-        "approved": true
-      },
-      "volunteer": null,
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "chat": null
     }
   ],
   "tasksActive": [
@@ -536,7 +377,7 @@
         "name": "Сопровождение",
         "scope": 6
       },
-      "date": "2023-09-10T17:42Z",
+      "date": "2024-07-02T09:00:00.000Z",
       "description": "Короткое описание для задачи номер 14.",
       "completed": false,
       "confirmed": false,
@@ -619,141 +460,6 @@
       }
     },
     {
-      "id": "14",
-      "title": "Название задачи 14",
-      "category": {
-        "id": "3",
-        "name": "Покупка вещей/техники",
-        "scope": 1
-      },
-      "date": "2023-09-10T17:30Z",
-      "description": "Короткое описание для задачи номер 14.",
-      "completed": false,
-      "confirmed": false,
-      "conflict": false,
-      "recipient": {
-        "id": "4",
-        "fullname": "Реципиентов Алексей Борисович",
-        "role": "Recipient",
-        "vk": "https://vk.com/id123456789",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "phone": "+7 (916) 123-45-67",
-        "address": "ул. Нахимова, д. 9",
-        "coordinates": [59.941871, 30.223494],
-        "approved": true
-      },
-      "volunteer": {
-        "id": "7",
-        "fullname": "Волонтеров Петр Петрович",
-        "role": "volunteer",
-        "vk": "https://vk.com/id123456789",
-        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
-        "phone": "+7 (926) 123-45-67",
-        "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [59.942575, 30.216757],
-        "approved": true,
-        "checked": true,
-        "isHasKeys": true,
-        "scores": 2500
-      },
-      "address": "ул. Нахимова, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "chat": {
-        "id": "4327",
-        "unread": 50
-      }
-    },
-    {
-      "id": 18,
-      "title": "Название задачи 14",
-      "category": {
-        "id": "2",
-        "name": "Покупка продуктов",
-        "scope": 1
-      },
-      "date": "2023-09-10T17:30Z",
-      "description": "Короткое описание для задачи номер 14.",
-      "completed": false,
-      "confirmed": false,
-      "conflict": false,
-      "recipient": {
-        "id": 4,
-        "fullname": "Реципиентов Алексей Борисович",
-        "role": "recipient",
-        "vk": "https://vk.com/id123456789",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "phone": "+7 (916) 123-45-67",
-        "address": "ул. Нахимова, д. 9",
-        "coordinates": [59.941871, 30.223494],
-        "approved": true
-      },
-      "volunteer": {
-        "id": 7,
-        "fullname": "Волонтеров Петр Петрович",
-        "role": "volunteer",
-        "vk": "https://vk.com/id123456789",
-        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
-        "phone": "+7 (926) 123-45-67",
-        "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [59.942575, 30.216757],
-        "approved": true,
-        "checked": true,
-        "isHasKeys": true,
-        "scores": 2500
-      },
-      "address": "ул. Нахимова, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "chat": {
-        "id": 4327,
-        "unread": 50
-      }
-    },
-    {
-      "id": 14,
-      "title": "Название задачи 14",
-      "category": {
-        "id": "3",
-        "name": "Покупка вещей/техники",
-        "scope": 1
-      },
-      "date": "2023-09-10T17:30Z",
-      "description": "Короткое описание для задачи номер 14.",
-      "completed": false,
-      "confirmed": false,
-      "conflict": false,
-      "recipient": {
-        "id": 4,
-        "fullname": "Реципиентов Алексей Борисович",
-        "role": "recipient",
-        "vk": "https://vk.com/id123456789",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "phone": "+7 (916) 123-45-67",
-        "address": "ул. Нахимова, д. 9",
-        "coordinates": [59.941871, 30.223494],
-        "approved": true
-      },
-      "volunteer": {
-        "id": 7,
-        "fullname": "Волонтеров Петр Петрович",
-        "role": "volunteer",
-        "vk": "https://vk.com/id123456789",
-        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
-        "phone": "+7 (926) 123-45-67",
-        "address": "ул. Кораблестроителей, 19к1",
-        "coordinates": [59.942575, 30.216757],
-        "approved": true,
-        "checked": true,
-        "isHasKeys": true,
-        "scores": 2500
-      },
-      "address": "ул. Нахимова, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "chat": {
-        "id": 4327,
-        "unread": 50
-      }
-    },
-    {
       "id": "19",
       "title": "Достаточно длинное название для задачи 19",
       "category": {
@@ -796,7 +502,7 @@
       "chat": null
     },
     {
-      "id": 69,
+      "id": "69",
       "title": "Тестирую кнопки",
       "category": {
         "id": "1",
@@ -858,7 +564,7 @@
       "recipient": {
         "id": "4",
         "fullname": "Реципиентов Алексей Борисович",
-        "role": "recipient",
+        "role": "Recipient",
         "vk": "https://vk.com/id123456789",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "phone": "+7 (916) 123-45-67",
@@ -869,7 +575,7 @@
       "volunteer": {
         "id": "7",
         "fullname": "Волонтеров Петр Петрович",
-        "role": "volunteer",
+        "role": "Volunteer",
         "vk": "https://vk.com/id123456789",
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",
@@ -888,8 +594,8 @@
       }
     },
     {
-      "id": "15",
-      "title": "Задача 15",
+      "id": "16",
+      "title": "Задача 16",
       "category": {
         "id": "7",
         "name": "Помощь в готовке",
@@ -903,7 +609,7 @@
       "recipient": {
         "id": "4",
         "fullname": "Реципиентов Алексей Борисович",
-        "role": "recipient",
+        "role": "Recipient",
         "vk": "https://vk.com/id123456789",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "phone": "+7 (916) 123-45-67",
@@ -914,7 +620,7 @@
       "volunteer": {
         "id": "7",
         "fullname": "Волонтеров Петр Петрович",
-        "role": "volunteer",
+        "role": "Volunteer",
         "vk": "https://vk.com/id123456789",
         "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
         "phone": "+7 (926) 123-45-67",

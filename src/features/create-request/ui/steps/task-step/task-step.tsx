@@ -114,9 +114,6 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             <p className={styles.messageAlert}>Добавьте описание задачи</p>
           )}
         </div>
-        {category.value === '' && category.label === '' && (
-            <p className={styles.messageAlert}>Выберите тип задачи</p>
-        )}
         {!isTypeEdit && (
           <Button
             buttonType="secondary"

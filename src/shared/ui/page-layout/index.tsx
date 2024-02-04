@@ -11,7 +11,10 @@ import { ErrorDialog } from '../error-dialog';
 import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 import { RegistrationNotice } from '../registration-notice';
 import { UNCONFIRMED } from 'shared/libs/statuses';
-import { unauthorizedRecipientMessage, unauthorizedVolunteerMessage } from 'shared/libs/constants';
+import {
+  unauthorizedRecipientMessage,
+  unauthorizedVolunteerMessage,
+} from 'shared/libs/constants';
 import { UserRole } from 'shared/types/common.types';
 
 interface PageLayoutProps {
@@ -21,7 +24,7 @@ interface PageLayoutProps {
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
   const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
-  const userRole = useAppSelector((state)=> state.user.role)
+  const userRole = useAppSelector((state) => state.user.role);
   const isUnConfirmedUser = useAppSelector((state) => {
     return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
   });
