@@ -15,26 +15,25 @@ import useUser from 'shared/hooks/use-user';
 
 import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
+import { CONFIRMED, UNCONFIRMED } from 'shared/libs/statuses';
 
 export const UserInfo = () => {
-  const user = useAppSelector((state) => state.user.data);
   const role = useAppSelector((state) => state.user.role);
+  const userStatus = useAppSelector((state) => state.user.data?.status);
+
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
   const isLoginPath = location.pathname.includes('/login');
   const isVKAuthPath = location.pathname.includes('/vk-auth');
-  // const userId = () => {
-  //   if (role === 'Volunteer') return 7;
-  //   if (role === 'Master') return 1;
-  //   if (role === 'Recipient') return 4;
-  //   if (role === 'Admin') return 2;
-  //   if (!role) return null;
-  // };
-  // const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
-  // console.log('user');
-  // console.dir(user);
-  // console.log('userStore');
-  // console.dir(userStore);
+  const userId = () => {
+    if (role === 'Volunteer') return 7;
+    if (role === 'Master') return 1;
+    if (role === 'Recipient' && userStatus === CONFIRMED) return 4;
+    if (role === 'Recipient' && userStatus === UNCONFIRMED) return 9;
+    if (role === 'Admin') return 2;
+    if (!role) return null;
+  };
+  const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);

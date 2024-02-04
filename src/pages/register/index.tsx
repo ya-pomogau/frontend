@@ -17,7 +17,7 @@ export function RegisterPage() {
   const vkUser = useAppSelector(vkUserSelector);
   const { firstName = '', lastName = '', vkId = '' } = vkUser ?? {};
   const FIO = `${firstName} ${lastName}`;
-  //TODO: перед отправкой на сервер необходимо будет name разделить на ФИО
+  //TODO: теперь с сервера будет приходить фио вместе
   const [name, setName] = useState<string>(FIO);
   //TODO: разобраться с получением телефона и записью его в стейт
   const [phone, setPhone] = useState<string>('');
@@ -25,7 +25,7 @@ export function RegisterPage() {
   // TODO: пока что оставила адрес в виде объекта, чтобы не ломались другие компоненты завязанные на inputAddress
   const [address, setAddress] = useState<{
     address: string;
-    coords?: GeoCoordinates | [];
+    coords?: GeoCoordinates;
   }>({
     address: '',
     coords: [],
@@ -65,7 +65,7 @@ export function RegisterPage() {
 
   const handleAddressValueChange = (
     newAddress: string,
-    coords?: GeoCoordinates | []
+    coords?: GeoCoordinates
   ) => {
     setAddress({
       address: newAddress,

@@ -47,6 +47,11 @@ export function PickRolePage() {
     dispatch(setUserRole(UserRole.RECIPIENT));
   };
 
+  const getUnconfirmedRecipient = () => {
+    dispatch(setUserRole(UserRole.RECIPIENT));
+    setUserId(9);
+  };
+
   const getAdminRole = () => {
     dispatch(setUserRole(UserRole.ADMIN));
     setUserId(2);
@@ -132,6 +137,12 @@ export function PickRolePage() {
         <li>
           <button onClick={getRecipientRole} style={{ marginRight: 10 }}>
             Получить роль рецепиента.
+          </button>
+        </li>
+
+        <li>
+          <button onClick={getUnconfirmedRecipient} style={{ marginRight: 10 }}>
+            Получить роль неактивированного рецепиента.
           </button>
         </li>
 

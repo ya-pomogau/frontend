@@ -55,7 +55,37 @@
   justify-content: space-between;
   align-items: center;
 }
+.itemSelected {
+  color: var(--colors-interface-additional);
+  height: 48px;
+  line-height: 46px;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px var(--colors-interface-additional);
+}
+.text {
+  font-family: 'Golos', sans-serif;
+  max-width: 294px;
+  margin: auto;
+}
+.closeWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
 
+.closeIcon:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.itemSelected:hover {
+  background: #f4f4f4;
+}
 .item:hover {
   background: #f4f4f4;
 }

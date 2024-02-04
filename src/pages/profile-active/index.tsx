@@ -14,14 +14,14 @@ import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
+import { UNCONFIRMED } from 'shared/libs/statuses';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('active');
-  const { role } = useAppSelector((state) => state.user);
-
+  const { role, data } = useAppSelector((state) => state.user);
+  const isUnConfirmed = data?.status === UNCONFIRMED;
   const isMobile = useMediaQuery('(max-width:1150px)');
-
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
   const [infoFilterTasks, setInfoFilterTasks] =
@@ -39,7 +39,7 @@ export function ProfileActivePage() {
         text="Активные заявки"
         icon={<Icon color="blue" icon="ActiveApplicationIcon" size="54" />}
         filter={
-          role === UserRole.VOLUNTEER ? (
+          !isUnConfirmed ? (
             <Filter
               items={{
                 sort: true,
@@ -50,15 +50,7 @@ export function ProfileActivePage() {
               setFilteres={setInfoFilterTasks}
             />
           ) : (
-            <Filter
-              items={{
-                sort: true,
-                categories: true,
-                radius: false,
-                date: false,
-              }}
-              setFilteres={setInfoFilterTasks}
-            />
+            <></>
           )
         }
       />
@@ -69,12 +61,11 @@ export function ProfileActivePage() {
           userRole={role}
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}
-          isStatusActive
-          tasks={filterTasks}
+          isStatusActive={!isUnConfirmed ? false : true}
+          tasks={!isUnConfirmed ? filterTasks : []}
           isLoading={isLoading}
         />
       )}
-
       {isPopupOpen && <Request isMobile={isMobileForPopup} />}
     </>
   );

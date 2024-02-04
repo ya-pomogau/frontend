@@ -11,7 +11,11 @@ import { ErrorDialog } from '../error-dialog';
 import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 import { RegistrationNotice } from '../registration-notice';
 import { UNCONFIRMED } from 'shared/libs/statuses';
-import { unauthorizedVolunteerMessage } from 'shared/libs/constants';
+import {
+  unauthorizedRecipientMessage,
+  unauthorizedVolunteerMessage,
+} from 'shared/libs/constants';
+import { UserRole } from 'shared/types/common.types';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -20,6 +24,7 @@ interface PageLayoutProps {
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
   const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
+  const userRole = useAppSelector((state) => state.user.role);
   const isUnConfirmedUser = useAppSelector((state) => {
     return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
   });
@@ -27,7 +32,6 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   const hasMessage = isUnConfirmedUser;
   //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
-  console.log(isError);
 
   return (
     <>
@@ -51,15 +55,19 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-
-          {isUnConfirmedUser && (
+          {isUnConfirmedUser && userRole === UserRole.RECIPIENT && (
+            <div className={styles.message}>
+              <RegistrationNotice settingText={unauthorizedRecipientMessage} />
+            </div>
+          )}
+          {isUnConfirmedUser && userRole === UserRole.VOLUNTEER && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>
           )}
           <div className={styles.content}>
             {isError && <ErrorDialog text={errorText}></ErrorDialog>}
-            {errorText != 'Ошибка подключения' ? content : <NoConectionPage />}
+            {errorText !== 'Ошибка подключения' ? content : <NoConectionPage />}
           </div>
         </div>
       )}

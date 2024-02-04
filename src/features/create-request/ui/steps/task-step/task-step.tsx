@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDescriptionForTask,
-  changeStepDecrement,
-  changeStepIncrement,
   setCategory,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
@@ -13,15 +11,15 @@ import { TextArea } from 'shared/ui/text-area';
 import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, categories, category } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const { descriptionForTask, categories, category, isTypeEdit } =
+    useAppSelector((state) => state.createRequest);
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
@@ -39,12 +37,15 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     dispatch(setDescriptionForTask(e.target.value));
   };
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
+  const propsButton = usePropsButtonCustom();
 
-  const handlePreviousStepClick = () => {
-    dispatch(changeStepDecrement());
+  const disabledBtn = () => {
+    if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
+      return true;
+    }
+    if (category.value === '' && category.label === '') {
+      return true;
+    }
   };
 
   return (
@@ -71,6 +72,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
+
             <TextArea
               value={descriptionForTask}
               label="Опишите задачу"
@@ -91,6 +93,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
+            {category.value === '' && category.label === '' && (
+              <p className={styles.messageAlert}>Выберите тип задачи</p>
+            )}
             <TextArea
               value={descriptionForTask}
               label="Опишите задачу"
@@ -104,16 +109,24 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
         )}
       </div>
       <div className={styles.buttonsWrapper}>
+        <div className={styles.alertWrapper}>
+          {descriptionForTask.length <= 5 && (
+            <p className={styles.messageAlert}>Добавьте описание задачи</p>
+          )}
+        </div>
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
+            extClassName={styles.prevButton}
+          />
+        )}
         <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
-        <Button
+          disabled={disabledBtn()}
           buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
+          label={propsButton.label}
+          onClick={propsButton.onClick}
         />
       </div>
     </div>

@@ -6,11 +6,13 @@ import {
   setAddress,
   changeStepDecrement,
   changeStepIncrement,
+  closePopup,
 } from 'features/create-request/model';
 import YandexMap from 'widgets/map';
 import { InputAddress } from 'shared/ui/input-address';
 
 import styles from './address-step.module.css';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 import { useEffect } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { UserRole } from 'shared/types/common.types';
@@ -24,7 +26,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const dispatch = useAppDispatch();
 
-  const { address, coordinates } = useAppSelector(
+  const { address, coordinates, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
   useEffect(() => {
@@ -35,18 +37,12 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const handleAddressValueChange = (
     additinalAddress: string,
-    coords?: GeoCoordinates | []
+    coords?: GeoCoordinates
   ) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
-
-  const handlePreviousStepClick = () => {
-    dispatch(changeStepDecrement());
-  };
+  const propsButton = usePropsButtonCustom();
 
   return (
     <>
@@ -172,17 +168,21 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         )}
       </div>
       <div className={styles.buttonWrapper}>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
-        <Button
-          buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
-        />
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
+            extClassName={styles.prevButton}
+          />
+        )}
+        {
+          <Button
+            buttonType="primary"
+            label={propsButton.label}
+            onClick={propsButton.onClick}
+          />
+        }
       </div>
     </>
   );

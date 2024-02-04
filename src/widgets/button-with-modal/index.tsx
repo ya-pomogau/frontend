@@ -26,7 +26,7 @@ export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
     if (box) {
       setCoords({
         right: window.innerWidth - box.right - box.width / 3,
-        top: box.top + window.scrollY + 40,
+        top: box.top + window.scrollY + box.height * 1.2,
       });
     }
   };

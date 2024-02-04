@@ -128,3 +128,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
     justify-content: center;
   }
 }
+
+.validationMessage {
+  font-family: 'Golos', sans-serif;
+  margin: 0;
+  margin-right: 40px;
+  color: red;
+}
