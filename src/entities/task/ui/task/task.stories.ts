@@ -15,8 +15,9 @@ export const Desktop: Story = {
   args: {
     category: {
       id: 'id',
-      name: 'сопровождение',
-      scope: 2,
+      title: 'сопровождение',
+      points: 2,
+      accessLevel: 1,
     },
     date: '2023-05-27T14:10Z',
     address: 'ул. Потолочного д. 9',
@@ -34,8 +35,9 @@ export const Mobile: Story = {
   args: {
     category: {
       id: 'id',
-      name: 'сопровождение',
-      scope: 2,
+      title: 'сопровождение',
+      points: 2,
+      accessLevel: 1,
     },
     date: '2023-05-27T14:10Z',
     address: 'ул. Потолочного д. 9',
@@ -52,8 +54,9 @@ export const ExampleWithNoRecipient: Story = {
   args: {
     category: {
       id: 'id',
-      name: 'сопровождение',
-      scope: 2,
+      title: 'сопровождение',
+      points: 2,
+      accessLevel: 1,
     },
     date: '2023-05-27T14:10Z',
     address: 'ул. Потолочного д. 9',
@@ -65,11 +68,11 @@ export const ExampleWithNoRecipient: Story = {
 
 export const ExampleConfirmed: Story = {
   args: {
-    confirmed: true,
     category: {
       id: 'id',
-      name: 'сопровождение',
-      scope: 2,
+      title: 'сопровождение',
+      points: 2,
+      accessLevel: 1,
     },
     date: '2015-05-27T14:10Z',
     avatar: 'https://i.pravatar.cc/300',
@@ -84,11 +87,11 @@ export const ExampleConfirmed: Story = {
 
 export const ExampleConflict: Story = {
   args: {
-    conflict: true,
     category: {
       id: 'id',
-      name: 'сопровождение',
-      scope: 2,
+      title: 'сопровождение',
+      points: 2,
+      accessLevel: 1,
     },
     date: '2015-05-27T14:10Z',
     avatar: 'https://i.pravatar.cc/300',
@@ -105,8 +108,9 @@ export const ExampleWithIndefiniteDate: Story = {
   args: {
     category: {
       id: 'id',
-      name: 'сопровождение',
-      scope: 2,
+      title: 'сопровождение',
+      points: 2,
+      accessLevel: 1,
     },
     avatar: 'https://i.pravatar.cc/300',
     recipientName: 'Иванов Иван Иванович',

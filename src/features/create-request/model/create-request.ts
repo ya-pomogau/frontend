@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
+import { Category } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export type TInitialStateForPopup = {
@@ -7,10 +8,7 @@ export type TInitialStateForPopup = {
   date: string;
   address: string;
   coordinates?: GeoCoordinates;
-  categories: {
-    id: number;
-    name: string;
-  }[];
+  categories: Category[];
   category: {
     value: string;
     label: string;

@@ -9,7 +9,7 @@ import { useAppSelector } from 'app/hooks';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
 import { Tooltip } from '../tooltip';
-import { Task } from 'entities/task/types';
+import { Taskschema } from 'entities/task/types';
 
 export type Option = { value: string; label: string };
 
@@ -43,19 +43,19 @@ const Dropdown = ({
   const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   // Фильтруем заявки по id
 
-  const taskId = tasks.filter((item: Task) => {
+  const taskId = tasks.filter((item: Taskschema) => {
     if (item.recipient.id === userId) {
       return item;
     }
   });
   // Получаем id категории
-  const categoryId = taskId.map((item: Task) => item.category.id);
+  const categoryId = taskId.map((item: Taskschema) => item.category.id);
   //Получем объект уже выбранной категории
   const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
 
   const commonSelected = commonIds?.map((item) => ({
     value: String(item.id),
-    label: item.name,
+    label: item.title,
   }));
 
   const handleOnChange = useCallback(

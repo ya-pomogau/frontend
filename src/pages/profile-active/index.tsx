@@ -10,7 +10,7 @@ import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';
-import { Task } from 'entities/task/types';
+import { Taskschema } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
@@ -26,8 +26,8 @@ export function ProfileActivePage() {
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
-  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
-
+  const [filterTasks, setFilterTasks] = useState<Taskschema[]>([]);
+  console.log(tasks);
   useEffect(() => {
     handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
     // eslint-disable-next-line

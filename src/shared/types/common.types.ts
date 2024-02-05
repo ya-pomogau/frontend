@@ -1,4 +1,5 @@
 export enum UserStatus {
+  BLOCKED = -1,
   UNCONFIRMED = 0,
   CONFIRMED = 1,
   VERIFIED = 2,
@@ -7,6 +8,7 @@ export enum UserStatus {
 
 export enum UserRole {
   ADMIN = 'Admin',
+  // USER = 'GeneralUser',
   MASTER = 'Master',
   RECIPIENT = 'Recipient',
   VOLUNTEER = 'Volunteer',

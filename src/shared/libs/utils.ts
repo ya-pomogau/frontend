@@ -1,6 +1,6 @@
 import { FRONT_URL } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
-import { Task } from 'entities/task/types';
+import { Taskschema } from 'entities/task/types';
 import { IFilterValues } from 'features/filter/types';
 // eslint-disable-next-line import/no-duplicates
 
@@ -44,12 +44,12 @@ export const handleRedirectVK = () => {
 };
 
 export const sortTasks = (
-  arr: Task[],
+  arr: Taskschema[],
   item: 'date' | 'decreasing' | 'increasing'
 ) => {
   const sortedTasks = [...arr].sort((a, b) => {
-    const aValue = item === 'date' ? a.date : a.category.scope;
-    const bValue = item === 'date' ? b.date : b.category.scope;
+    const aValue = item === 'date' ? a.date! : a.category.points;
+    const bValue = item === 'date' ? b.date! : b.category.points;
     const order = item === 'decreasing' ? -1 : 1;
 
     if (aValue > bValue) {
@@ -64,20 +64,20 @@ export const sortTasks = (
 };
 
 export const handleFilterTasks = (
-  tasks: Task[],
-  setFilterTasks: (date: Task[]) => void,
+  tasks: Taskschema[],
+  setFilterTasks: (date: Taskschema[]) => void,
   infoFilterTasks: IFilterValues
 ) => {
-  const handleTasksFilter = (arr: Task[]) =>
-    arr.filter((task: Task) =>
-      infoFilterTasks.categories.includes(task.category.name)
+  const handleTasksFilter = (arr: Taskschema[]) =>
+    arr.filter((task: Taskschema) =>
+      infoFilterTasks.categories.includes(task.category.title)
     );
 
   if (tasks) {
     setFilterTasks(tasks);
   }
-  const sortDisplay = (arr: Task[], text: string): Task[] => {
-    let sortedTasks: Task[] = [];
+  const sortDisplay = (arr: Taskschema[], text: string): Taskschema[] => {
+    let sortedTasks: Taskschema[] = [];
     switch (text) {
       case 'date':
         sortedTasks = sortTasks(arr, 'date');
@@ -95,8 +95,8 @@ export const handleFilterTasks = (
     return sortedTasks;
   };
   if (infoFilterTasks?.categories.length) {
-    const filteredTasks = tasks.filter((task: Task) => {
-      return infoFilterTasks.categories.includes(task.category.name);
+    const filteredTasks = tasks.filter((task: Taskschema) => {
+      return infoFilterTasks.categories.includes(task.category.title);
     });
     if (infoFilterTasks?.sortBy) {
       sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy);

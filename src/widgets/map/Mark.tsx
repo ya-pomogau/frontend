@@ -13,7 +13,7 @@ import { UserRole } from 'shared/types/common.types';
 import { useAppDispatch } from 'app/hooks';
 
 type MarkProps = {
-  id?: number;
+  id?: string;
   coordinates?: GeoCoordinates;
   isUrgentTask?: boolean;
   fullName?: string;

@@ -14,16 +14,13 @@ import {
   setDate,
   setDescriptionForTask,
 } from 'features/create-request/model';
+import { Category } from 'entities/task/types';
 
 interface TaskButtonsProps {
   recipientName?: string;
   address: string;
   description: string;
-  category: {
-    id: string;
-    name: string;
-    scope: number;
-  };
+  category: Category;
   date?: string;
   isStatusActive: boolean;
   completed: boolean;
@@ -52,10 +49,12 @@ export const TaskButtons = ({
     dispatch(setDate(date));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
-    dispatch(setCategory({ value: category.id, label: category.name }));
+    dispatch(setCategory({ value: category.id, label: category.title }));
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
+  //TODO: логика отображения, работы кнопок должна соответствовать миро доске
+  //TODO: в зависимости от роли, на некоторых попапах будет разных текст
   return (
     <div className={classNames(extClassName, styles.buttons_action)}>
       <ButtonWithModal

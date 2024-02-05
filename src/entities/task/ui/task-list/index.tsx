@@ -6,7 +6,7 @@ import { Informer } from 'shared/ui/informer';
 import { RoundButton } from 'shared/ui/round-button';
 import { TaskItem } from '../task';
 
-import type { Task } from 'entities/task/types';
+import type { Taskschema } from 'entities/task/types';
 
 import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
@@ -18,7 +18,7 @@ import { Tooltip } from 'shared/ui/tooltip';
 
 interface TaskListProps {
   userRole?: UserRole | null;
-  tasks: Array<Task>;
+  tasks: Array<Taskschema>;
   extClassName?: string;
   isStatusActive: boolean;
   isMobile: boolean;
@@ -117,23 +117,21 @@ export const TaskList = ({
               </h2>
             </li>
           )}
-
+          {/* TODO: сделать передачу item в TaskItem вместо тысячи пропсов */}
           {tasks &&
             tasks.map((item, index) => (
               <li key={index}>
                 <TaskItem
                   category={item.category}
-                  date={item.date}
+                  date={item.date!}
                   address={item.address}
                   description={item.description}
-                  count={item.category.scope}
+                  count={item.category.points}
                   avatar={item.recipient.avatar}
-                  completed={item.completed}
-                  conflict={item.conflict}
-                  confirmed={item.confirmed}
                   unreadMessages={item.chat?.unread}
-                  recipientName={item.recipient.fullname}
+                  recipientName={item.recipient.name}
                   recipientPhoneNumber={item.recipient.phone}
+                  volunteer={item.volunteer}
                   isStatusActive={isStatusActive}
                 />
               </li>

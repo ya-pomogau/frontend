@@ -14,7 +14,7 @@ import {
 import { ConflictIcon } from 'shared/ui/icons/conflict-icon';
 import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-icon';
 
-import type { Task } from 'entities/task/types';
+import type { Taskschema } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { UserRole } from 'shared/types/common.types';
 
@@ -31,7 +31,7 @@ interface YandexMapProps {
     zoom: number;
   };
   radius?: number;
-  tasks?: Task[];
+  tasks?: Taskschema[];
   onClick?: () => void;
   coordinates?: GeoCoordinates;
   role?: UserRole | null;
@@ -105,19 +105,19 @@ export const YandexMap = ({
             return (
               <Mark
                 id={task.id}
-                coordinates={task.coordinates}
-                isUrgentTask={isTaskUrgent(task.date)}
-                fullName={task.recipient.fullname}
+                coordinates={task.location}
+                isUrgentTask={isTaskUrgent(task.date!)}
+                fullName={task.recipient.name}
                 phone={task.recipient.phone}
                 avatar={task.recipient.avatar}
                 description={task.description}
-                count={task.category.scope}
+                count={task.category.points}
                 onClick={onClick}
                 showPopup={showPopup}
                 key={task.id}
                 isAuthorised={isAuthorised}
-                date={new Date(task.date).toLocaleDateString()}
-                time={new Date(task.date).toLocaleTimeString([], {
+                date={new Date(task.date!).toLocaleDateString()}
+                time={new Date(task.date!).toLocaleTimeString([], {
                   hour: '2-digit',
                   minute: '2-digit',
                 })}

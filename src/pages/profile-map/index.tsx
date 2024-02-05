@@ -8,7 +8,7 @@ import { Loader } from 'shared/ui/loader';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { useMemo } from 'react';
-import { Task } from 'entities/task/types';
+import { Taskschema } from 'entities/task/types';
 import {
   filterByDate,
   filterByDistance,
@@ -26,17 +26,21 @@ export function ProfileMapPage() {
     refetchOnReconnect: true,
   });
 
-  const filteredTasks = useMemo((): Task[] => {
+  const filteredTasks = useMemo((): Taskschema[] => {
     //починить типизацию значений фильтра и убрать лишние условия
-    let result: Task[] = tasks ? tasks : [];
+    let result: Taskschema[] = tasks ? tasks : [];
     if (result.length && user) {
       const { date, time, searchRadius } = query;
       if (date && typeof date === 'string') {
-        result = result.filter((task: Task) => filterByDate(date, task.date));
+        result = result.filter((task: Taskschema) =>
+          filterByDate(date, task.date!)
+        );
       }
 
       if (time && (typeof time === 'string' || Array.isArray(time))) {
-        result = result.filter((task: Task) => filterByTime(time, task.date));
+        result = result.filter(
+          (task: Taskschema) => task.date && filterByTime(time, task.date!)
+        );
       }
 
       if (
@@ -44,10 +48,10 @@ export function ProfileMapPage() {
         user.coordinates &&
         typeof searchRadius === 'string'
       ) {
-        result = result.filter((task: Task) =>
+        result = result.filter((task: Taskschema) =>
           filterByDistance(
             user.coordinates,
-            task.coordinates,
+            task.location,
             parseInt(searchRadius, 10)
           )
         );

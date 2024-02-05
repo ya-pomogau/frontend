@@ -24,7 +24,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
 
   const optionsForSelect = categories?.map((item) => ({
     value: String(item.id),
-    label: item.name,
+    label: item.title,
   }));
 
   const handleTaskValueChange = (item: Option) => {

@@ -6,31 +6,24 @@ import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
 import { TaskRecipient } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
-import { useAppSelector } from 'app/hooks';
-import { Request } from 'features/create-request';
-import { useMediaQuery } from 'shared/hooks';
+import { Category } from 'entities/task/types';
+import { UserProfile } from 'entities/user/types';
 
 interface TaskItemProps {
-  category: {
-    id: string;
-    name: string;
-    scope: number;
-  };
+  category: Category;
   date?: string;
   address: string;
   description: string;
   count: number;
   avatar?: string;
-  completed: boolean;
-  confirmed: boolean;
-  conflict?: boolean;
   recipientName?: string;
   recipientPhoneNumber?: string;
+  volunteer: UserProfile | null;
   unreadMessages?: number;
   isStatusActive?: boolean;
   extClassName?: string;
 }
-
+// TODO: сделать передачу item в TaskItem вместо тысячи пропсов
 export const TaskItem = ({
   category,
   date,
@@ -38,38 +31,37 @@ export const TaskItem = ({
   description,
   count,
   avatar = placeholder,
-  completed,
-  confirmed,
-  conflict = false,
   recipientName,
+  volunteer,
   recipientPhoneNumber,
   unreadMessages,
   isStatusActive,
   extClassName,
 }: TaskItemProps) => {
-  const taskLayout =
-    confirmed && completed
-      ? styles.container_main_default
-      : confirmed
-      ? styles.container_main_confirmed
-      : conflict
-      ? styles.container_main_conflict
-      : styles.container_main_default;
-
+  //TODO: confirmed && completed заменить на новые поля объекта
+  // const taskLayout =
+  //   confirmed && completed
+  //     ? styles.container_main_default
+  //     : confirmed
+  //     ? styles.container_main_confirmed
+  //     : conflict
+  //     ? styles.container_main_conflict
+  //     : styles.container_main_default;
+  //TODO: использовать деструктуризацию для записи полей таски
   return (
     <>
       <div
         className={classNames(
           styles.container_main,
           'text',
-          taskLayout,
+          // taskLayout,
           extClassName
         )}
       >
         <CategoriesBackground
           theme="primary"
-          content={category.name}
-          size={category.name.length > 24 ? 'large' : 'medium'}
+          content={category.title}
+          size={category.title.length > 24 ? 'large' : 'medium'}
           extClassName={styles.category}
         />
         <TaskInfo
@@ -86,11 +78,13 @@ export const TaskItem = ({
           avatar={avatar}
           recipientName={recipientName}
           recipientPhoneNumber={recipientPhoneNumber}
-          connection={completed}
+          //TODO: заменить volunteer === null ? false : true на правильное условие
+          connection={volunteer === null ? false : true}
           unreadMessages={unreadMessages}
           extClassName={styles.recipient}
         />
         <TaskButtons
+          //TODO: заменить completed conflict на правильные поля
           recipientName={recipientName}
           address={address}
           description={description}
