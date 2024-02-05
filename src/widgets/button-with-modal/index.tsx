@@ -44,6 +44,7 @@ export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
             right: `${coords?.right}px`,
           }}
         >
+          {/* TODO: необходимо добавить крестик, не затрагивая  Tooltip*/}
           {modalContent}
         </Tooltip>
       )}
