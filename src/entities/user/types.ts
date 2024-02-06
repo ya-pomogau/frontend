@@ -17,11 +17,12 @@ type StatusType =
   | typeof VERIFIED;
 
 export type UserProfile = {
-  id: string;
   name: string;
   phone: string;
   avatar: string;
   address: string;
+  vkId: string;
+  role: string;
 };
 
 export type UserInfo = {

@@ -1,6 +1,6 @@
 import { FRONT_URL } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
-import { Taskschema } from 'entities/task/types';
+import { Task } from 'entities/task/types';
 import { IFilterValues } from 'features/filter/types';
 // eslint-disable-next-line import/no-duplicates
 
@@ -44,7 +44,7 @@ export const handleRedirectVK = () => {
 };
 
 export const sortTasks = (
-  arr: Taskschema[],
+  arr: Task[],
   item: 'date' | 'decreasing' | 'increasing'
 ) => {
   const sortedTasks = [...arr].sort((a, b) => {
@@ -64,20 +64,20 @@ export const sortTasks = (
 };
 
 export const handleFilterTasks = (
-  tasks: Taskschema[],
-  setFilterTasks: (date: Taskschema[]) => void,
+  tasks: Task[],
+  setFilterTasks: (date: Task[]) => void,
   infoFilterTasks: IFilterValues
 ) => {
-  const handleTasksFilter = (arr: Taskschema[]) =>
-    arr.filter((task: Taskschema) =>
+  const handleTasksFilter = (arr: Task[]) =>
+    arr.filter((task: Task) =>
       infoFilterTasks.categories.includes(task.category.title)
     );
 
   if (tasks) {
     setFilterTasks(tasks);
   }
-  const sortDisplay = (arr: Taskschema[], text: string): Taskschema[] => {
-    let sortedTasks: Taskschema[] = [];
+  const sortDisplay = (arr: Task[], text: string): Task[] => {
+    let sortedTasks: Task[] = [];
     switch (text) {
       case 'date':
         sortedTasks = sortTasks(arr, 'date');
@@ -95,7 +95,7 @@ export const handleFilterTasks = (
     return sortedTasks;
   };
   if (infoFilterTasks?.categories.length) {
-    const filteredTasks = tasks.filter((task: Taskschema) => {
+    const filteredTasks = tasks.filter((task: Task) => {
       return infoFilterTasks.categories.includes(task.category.title);
     });
     if (infoFilterTasks?.sortBy) {

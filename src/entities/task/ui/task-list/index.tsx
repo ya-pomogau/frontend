@@ -6,7 +6,7 @@ import { Informer } from 'shared/ui/informer';
 import { RoundButton } from 'shared/ui/round-button';
 import { TaskItem } from '../task';
 
-import type { Taskschema } from 'entities/task/types';
+import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
 import { UserRole } from 'shared/types/common.types';
@@ -18,7 +18,7 @@ import { Tooltip } from 'shared/ui/tooltip';
 
 interface TaskListProps {
   userRole?: UserRole | null;
-  tasks: Array<Taskschema>;
+  tasks: Array<Task>;
   extClassName?: string;
   isStatusActive: boolean;
   isMobile: boolean;
@@ -128,7 +128,6 @@ export const TaskList = ({
                   description={item.description}
                   count={item.category.points}
                   avatar={item.recipient.avatar}
-                  unreadMessages={item.chat?.unread}
                   recipientName={item.recipient.name}
                   recipientPhoneNumber={item.recipient.phone}
                   volunteer={item.volunteer}

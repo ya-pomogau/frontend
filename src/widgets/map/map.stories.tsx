@@ -31,7 +31,7 @@ export const Default: Story = {
     },
     tasks: [
       {
-        id: '24',
+        _id: '24',
         description: 'Помочь перенести мебель, таска взята волонтером',
         address: 'Улица Мебельная, 77',
         location: [60.699788, 40.557059],
@@ -44,11 +44,12 @@ export const Default: Story = {
         },
         date: '2023-07-07T07:00Z',
         recipient: {
-          id: '6',
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: '3456789',
+          role: UserRole.RECIPIENT,
         },
         recipientReport: null,
         volunteer: null,
@@ -57,7 +58,7 @@ export const Default: Story = {
         isPendingChanges: false,
       },
       {
-        id: '28',
+        _id: '28',
         description: 'Помочь перенести мебель, таска взята волонтером',
         address: 'Улица Мебельная, 77',
         location: [60.699788, 40.557059],
@@ -70,11 +71,12 @@ export const Default: Story = {
         },
         date: '2023-07-07T07:00Z',
         recipient: {
-          id: '6',
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: '698456789',
+          role: UserRole.RECIPIENT,
         },
         recipientReport: null,
         volunteer: null,

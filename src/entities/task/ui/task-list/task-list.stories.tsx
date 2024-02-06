@@ -63,7 +63,7 @@ export const ExampleActive: Story = {
   args: {
     tasks: [
       {
-        id: '14',
+        _id: '14',
         category: {
           id: '2',
           title: 'Название категории 2',
@@ -73,19 +73,21 @@ export const ExampleActive: Story = {
         date: '2023-07-09T17:30Z',
         description: 'Короткое описание для задачи номер 14.',
         recipient: {
-          id: '6',
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: '4567890',
+          role: UserRole.RECIPIENT,
         },
         volunteer: {
-          id: '7',
           name: 'Волонтеров Петр Петрович',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
+          vkId: '4567890',
+          role: UserRole.VOLUNTEER,
         },
         address: 'переулок Каховского, 3',
         location: [59.95252, 30.243239],
@@ -94,13 +96,9 @@ export const ExampleActive: Story = {
         volunteerReport: null,
         adminResolve: null,
         isPendingChanges: false,
-        chat: {
-          id: '4327',
-          unread: 50,
-        },
       },
       {
-        id: '19',
+        _id: '19',
         category: {
           id: '2',
           title: 'Название категории 2',
@@ -111,19 +109,21 @@ export const ExampleActive: Story = {
         description:
           'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
         recipient: {
-          id: '6',
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: '4567890',
+          role: UserRole.RECIPIENT,
         },
         volunteer: {
-          id: '7',
           name: 'Волонтеров Петр Петрович',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
+          vkId: '4567890',
+          role: UserRole.VOLUNTEER,
         },
         address: 'переулок Каховского, 3',
         location: [59.95252, 30.243239],
@@ -132,10 +132,6 @@ export const ExampleActive: Story = {
         volunteerReport: null,
         adminResolve: null,
         isPendingChanges: false,
-        chat: {
-          id: '4478',
-          unread: 238,
-        },
       },
     ],
     isMobile: false,
@@ -147,7 +143,7 @@ export const ExampleNotActive: Story = {
   args: {
     tasks: [
       {
-        id: '15',
+        _id: '15',
         category: {
           id: '2',
           title: 'Название категории 2',
@@ -158,19 +154,21 @@ export const ExampleNotActive: Story = {
         description:
           'Описание задачи 15 (срок задачи прошел, задача завершена и подтверждена)',
         recipient: {
-          id: '6',
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: '4567890',
+          role: UserRole.RECIPIENT,
         },
         volunteer: {
-          id: '7',
           name: 'Волонтеров Петр Петрович',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
+          vkId: '4567890',
+          role: UserRole.VOLUNTEER,
         },
         address: 'переулок Каховского, 3',
         location: [59.95252, 30.243239],
@@ -179,13 +177,9 @@ export const ExampleNotActive: Story = {
         volunteerReport: null,
         adminResolve: null,
         isPendingChanges: false,
-        chat: {
-          id: '4545',
-          unread: 1,
-        },
       },
       {
-        id: '27',
+        _id: '27',
         category: {
           id: '2',
           title: 'Название категории 2',
@@ -199,28 +193,26 @@ export const ExampleNotActive: Story = {
         description:
           'Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.',
         recipient: {
-          id: '6',
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: '4567890',
+          role: UserRole.RECIPIENT,
         },
         volunteer: {
-          id: '7',
           name: 'Волонтеров Петр Петрович',
           avatar:
             'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
+          vkId: '123456',
+          role: UserRole.VOLUNTEER,
         },
         recipientReport: null,
         volunteerReport: null,
         adminResolve: null,
         isPendingChanges: false,
-        chat: {
-          id: '1278',
-          unread: 0,
-        },
       },
     ],
     isMobile: false,

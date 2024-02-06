@@ -8,7 +8,7 @@ import { Filter } from 'features/filter';
 import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 import { IFilterValues } from 'features/filter/types';
-import { Taskschema } from 'entities/task/types';
+import { Task } from 'entities/task/types';
 import { useEffect, useState } from 'react';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
@@ -20,7 +20,7 @@ export function ProfileCompletedPage() {
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
-  const [filterTasks, setFilterTasks] = useState<Taskschema[]>([]);
+  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);

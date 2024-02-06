@@ -8,7 +8,7 @@ import { Loader } from 'shared/ui/loader';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { useMemo } from 'react';
-import { Taskschema } from 'entities/task/types';
+import { Task } from 'entities/task/types';
 import {
   filterByDate,
   filterByDistance,
@@ -26,20 +26,18 @@ export function ProfileMapPage() {
     refetchOnReconnect: true,
   });
 
-  const filteredTasks = useMemo((): Taskschema[] => {
+  const filteredTasks = useMemo((): Task[] => {
     //починить типизацию значений фильтра и убрать лишние условия
-    let result: Taskschema[] = tasks ? tasks : [];
+    let result: Task[] = tasks ? tasks : [];
     if (result.length && user) {
       const { date, time, searchRadius } = query;
       if (date && typeof date === 'string') {
-        result = result.filter((task: Taskschema) =>
-          filterByDate(date, task.date!)
-        );
+        result = result.filter((task: Task) => filterByDate(date, task.date!));
       }
 
       if (time && (typeof time === 'string' || Array.isArray(time))) {
         result = result.filter(
-          (task: Taskschema) => task.date && filterByTime(time, task.date!)
+          (task: Task) => task.date && filterByTime(time, task.date!)
         );
       }
 
@@ -48,7 +46,7 @@ export function ProfileMapPage() {
         user.coordinates &&
         typeof searchRadius === 'string'
       ) {
-        result = result.filter((task: Taskschema) =>
+        result = result.filter((task: Task) =>
           filterByDistance(
             user.coordinates,
             task.location,

@@ -26,8 +26,8 @@ export type Category = {
   accessLevel: UserStatus; // категория будет доступна, если статус пользователя больше или равен accessLevel категории
 };
 
-export type Taskschema = {
-  id: string;
+export type Task = {
+  _id: string;
   description: string;
   address: string;
   location: GeoCoordinates;
@@ -40,9 +40,4 @@ export type Taskschema = {
   volunteerReport: TaskReport | null;
   adminResolve: ResolveStatus | null; // null - вмешательства не требуется админа.
   isPendingChanges: boolean; //показывает что один участник ответил по выполнению заявки
-  chat?: {
-    //chat пока не продуман, оставила как было
-    id: string;
-    unread?: number;
-  };
 };

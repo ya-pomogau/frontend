@@ -13,7 +13,6 @@ interface TaskRecipientProps {
   recipientName?: string;
   recipientPhoneNumber?: string;
   connection: boolean;
-  unreadMessages?: number;
   extClassName?: string;
 }
 // TODO: переименовать в TaskUser
@@ -22,7 +21,6 @@ export const TaskRecipient = ({
   recipientName,
   recipientPhoneNumber,
   connection,
-  unreadMessages,
   extClassName,
 }: TaskRecipientProps) => {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -58,11 +56,7 @@ export const TaskRecipient = ({
             disabled={connection}
           />
         </ButtonWithModal>
-        <RoundButton
-          buttonType="message"
-          disabled={connection}
-          unreadMessages={unreadMessages}
-        />
+        <RoundButton buttonType="message" disabled={connection} />
       </div>
     </div>
   );

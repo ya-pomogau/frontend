@@ -34,7 +34,6 @@ export const TaskItem = ({
   recipientName,
   volunteer,
   recipientPhoneNumber,
-  unreadMessages,
   isStatusActive,
   extClassName,
 }: TaskItemProps) => {
@@ -80,7 +79,6 @@ export const TaskItem = ({
           recipientPhoneNumber={recipientPhoneNumber}
           //TODO: заменить volunteer === null ? false : true на правильное условие
           connection={volunteer === null ? false : true}
-          unreadMessages={unreadMessages}
           extClassName={styles.recipient}
         />
         <TaskButtons

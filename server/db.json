@@ -159,7 +159,7 @@
   ],
   "tasksAvailable": [
     {
-      "id": "1",
+      "_id": "1",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
       "location": [59.91776040271765,30.323923391601433],
@@ -170,26 +170,23 @@
         "points": 1,
         "accessLevel": 1
       },
-      "date": "2023-01-15T14:30:00Z",
+      "date": null,
       "recipient": {
-        "_id": "1",
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45"
+        "address": "Улица Цветочная, 45",
+        "vkId": "4567890",
+        "role": "Recipient"
       },
       "recipientReport": null,
       "volunteer": null,
       "volunteerReport": null,
       "adminResolve": null,
-      "isPendingChanges": false,
-      "chat": {
-        "id": "chat1",
-        "unread": 0
-      }
+      "isPendingChanges": false
     },
     {
-      "id": "2",
+      "_id": "2",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
       "location": [59.941335, 30.227995],
@@ -202,24 +199,21 @@
       },
       "date": "2023-01-15T14:30:00Z",
       "recipient": {
-        "_id": "2",
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45"
+        "address": "Улица Цветочная, 45",
+        "vkId": "4567890",
+        "role": "Recipient"
       },
       "recipientReport": null,
       "volunteer": null,
       "volunteerReport": null,
       "adminResolve": null,
-      "isPendingChanges": false,
-      "chat": {
-        "id": "chat1",
-        "unread": 0
-      }
+      "isPendingChanges": false
     },
     {
-      "id": "3",
+      "_id": "3",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
       "location": [59.90017303411407,30.40357427050727],
@@ -232,26 +226,23 @@
       },
       "date": "2023-01-15T14:30:00Z",
       "recipient": {
-        "_id": "3",
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45"
+        "address": "Улица Цветочная, 45",
+        "vkId": "4567890",
+        "role": "Recipient"
       },
       "recipientReport": null,
       "volunteer": null,
       "volunteerReport": null,
       "adminResolve": null,
-      "isPendingChanges": false,
-      "chat": {
-        "id": "chat1",
-        "unread": 0
-      }
+      "isPendingChanges": false
     }
   ],
   "tasksActive": [
     {
-      "id": "1",
+      "_id": "1",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
       "location": [55.699788, 37.557059],
@@ -264,24 +255,21 @@
       },
       "date": "2023-01-15T14:30:00Z",
       "recipient": {
-        "_id": "1",
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45"
+        "address": "Улица Цветочная, 45",
+        "vkId": "4567890",
+        "role": "Recipient"
       },
       "recipientReport": null,
       "volunteer": null,
       "volunteerReport": null,
       "adminResolve": null,
-      "isPendingChanges": false,
-      "chat": {
-        "id": "chat1",
-        "unread": 0
-      }
+      "isPendingChanges": false
     },
     {
-      "id": "2",
+      "_id": "2",
       "description": "Помочь перенести мебель, таска взята волонтером",
       "address": "Улица Мебельная, 77",
       "location": [60.699788, 40.557059],
@@ -294,11 +282,12 @@
       },
       "date": "2023-02-20T10:00:00Z",
       "recipient": {
-        "_id": "2",
         "name": "Александр Петров",
         "phone": "+7 987 654 3210",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Мебельная, 77"
+        "address": "Улица Мебельная, 77",
+        "vkId": "4567890",
+        "role": "Recipient"
       },
       "recipientReport": null,
       "volunteer": {
@@ -306,18 +295,16 @@
         "name": "Волонтер Вася",
         "phone": "+7 111 222 3333",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Волонтёрская, 55"
+        "address": "Улица Волонтёрская, 55",
+        "vkId": "4567890",
+        "role": "Volunteer"
       },
       "volunteerReport": null,
       "adminResolve": null,
-      "isPendingChanges": false,
-      "chat": {
-        "id": "chat2",
-        "unread": 1
-      }
+      "isPendingChanges": false
     },
     {
-      "id": "3",
+      "_id": "3",
       "description": "Посадить дерево в сквере, таска  взята волонтером",
       "address": "Улица Деревенская, 30",
       "location": [59.699788, 41.557059],
@@ -330,32 +317,30 @@
       },
       "date": "2023-03-10T16:45:00Z",
       "recipient": {
-        "_id": "3",
         "name": "Елена Сидорова",
         "phone": "+7 555 666 7777",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Садовая, 10"
+        "address": "Улица Садовая, 10",
+        "vkId": "4567890",
+        "role": "Recipient"
       },
       "recipientReport": "fulfilled",
       "volunteer": {
-        "_id": "vol456",
         "name": "Валентин Захаров",
         "phone": "+7 777 888 9999",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20"
+        "address": "Улица Захарова, 20",
+        "vkId": "4567890",
+        "role": "Volunteer"
       },
       "volunteerReport": "fulfilled",
       "adminResolve": "fulfilled",
-      "isPendingChanges": false,
-      "chat": {
-        "id": "chat3",
-        "unread": 0
-      }
+      "isPendingChanges": false
     }
   ],
   "tasksCompleted": [
     {
-      "id": "3",
+      "_id": "3",
       "description": "Посадить дерево в сквере, таска  завершена",
       "address": "Улица Деревенская, 30",
       "location": [59.699788, 41.557059],
@@ -368,27 +353,25 @@
       },
       "date": "2023-03-10T16:45:00Z",
       "recipient": {
-        "_id": "3",
         "name": "Елена Сидорова",
         "phone": "+7 555 666 7777",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Садовая, 10"
+        "address": "Улица Садовая, 10",
+        "vkId": "4567890",
+        "role": "Recipient"
       },
       "recipientReport": "fulfilled",
       "volunteer": {
-        "_id": "vol456",
         "name": "Валентин Захаров",
         "phone": "+7 777 888 9999",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20"
+        "address": "Улица Захарова, 20",
+        "vkId": "4567890",
+        "role": "Volunteer"
       },
       "volunteerReport": "fulfilled",
       "adminResolve": "fulfilled",
-      "isPendingChanges": false,
-      "chat": {
-        "id": "chat3",
-        "unread": 0
-      }
+      "isPendingChanges": false
     }
   ],
   "category": [

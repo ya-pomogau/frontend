@@ -1,24 +1,24 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
-import { Taskschema } from 'entities/task/types';
+import { Task } from 'entities/task/types';
 
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
-  tagTypes: ['Taskschema', 'CompletedTasks'],
+  tagTypes: ['Task', 'CompletedTasks'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
-    getTasks: build.query<Array<Taskschema>, any>({
+    getTasks: build.query<Array<Task>, any>({
       query: (limit = '') => 'tasks/available',
       providesTags: (result) =>
         result
           ? [
               ...result.map(({ id }: any) => ({
-                type: 'Taskschema' as const,
+                type: 'Task' as const,
                 id,
               })),
-              { type: 'Taskschema', id: 'LIST' },
+              { type: 'Task', id: 'LIST' },
             ]
-          : [{ type: 'Taskschema', id: 'LIST' }],
+          : [{ type: 'Task', id: 'LIST' }],
     }),
     updateTask: build.mutation({
       query: (body) => ({
@@ -27,7 +27,7 @@ export const tasksApi = createApi({
         body,
         // headers: 'Здесь будет JWT',
       }),
-      invalidatesTags: [{ type: 'Taskschema', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Task', id: 'LIST' }],
     }),
     getTasksByStatus: build.query({
       query: (status) => ({
