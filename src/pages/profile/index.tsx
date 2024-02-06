@@ -21,7 +21,7 @@ export function ProfilePage() {
     return <Navigate to="/profile/requests" replace />;
   }
 
-  if (role === UserRole.MASTER) {
+  if (role === UserRole.USER) {
     return <Navigate to="/profile/requests" replace />;
   }
 

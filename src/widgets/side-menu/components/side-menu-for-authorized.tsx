@@ -14,7 +14,7 @@ export const SideMenuForAuthorized = () => {
 
   if (role === UserRole.ADMIN) return <AdminSideMenu />;
 
-  if (role === UserRole.MASTER) return <MasterSideMenu />;
+  if (role === UserRole.USER) return <MasterSideMenu />;
 
   return <VolunteerSideMenu />;
 };

@@ -71,9 +71,9 @@ export const Request = ({ isMobile = true }: RequestProps) => {
     >
       <div>
         <MainPopup
-          name={data.fullname}
+          name={data.name}
           avatarLink={data.avatar}
-          avatarName={data.fullname}
+          avatarName={data.name}
           phoneNumber={data.phone}
           handleCloseClick={() => setIsOpen(true)}
           isMobile={isMobile}

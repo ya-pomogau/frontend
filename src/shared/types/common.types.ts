@@ -8,19 +8,18 @@ export enum UserStatus {
 
 export enum UserRole {
   ADMIN = 'Admin',
-  // USER = 'GeneralUser',
-  MASTER = 'Master',
+  USER = 'GeneralUser',
   RECIPIENT = 'Recipient',
   VOLUNTEER = 'Volunteer',
 }
 
 export enum AdminPermission {
-  CONFIRMATION = 'confirm users',
-  TASKS = 'create tasks',
-  KEYS = 'give keys',
-  CONFLICTS = 'resolve conflicts',
-  BLOG = 'write the blog',
-  CATEGORIES = 'change categories',
+  CONFIRMATION = 'CONFIRM_USER',
+  TASKS = 'CREATE_TASK',
+  KEYS = 'GIVE_KEY',
+  CONFLICTS = 'RESOLVE_CONFLICT',
+  BLOG = 'EDIT_BLOG',
+  CATEGORIES = 'SET_CATEGORY_POINTS',
 }
 
 export enum VariantCheckbox {

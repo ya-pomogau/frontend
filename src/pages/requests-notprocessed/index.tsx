@@ -57,7 +57,7 @@ export function RequestsNotprocessedPage() {
             type="name"
             label="Введите имя "
           />
-          {role === UserRole.MASTER && (
+          {role === UserRole.USER && (
             <div className={styles.userAdminCards}>
               {testUsers
                 .filter(

@@ -6,10 +6,9 @@
 import React from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import usePermission from 'shared/hooks/use-permission';
-import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { setAddress } from 'features/create-request/model';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 import { useAppDispatch } from 'app/hooks';
 
 type MarkProps = {
@@ -55,7 +54,7 @@ const Mark: React.FC<MarkProps> = ({
   const dispatch = useAppDispatch();
 
   const isGranted = usePermission(
-    [CONFIRMED, ACTIVATED, VERIFIED],
+    [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
   );
   const isDisabled = !isGranted;

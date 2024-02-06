@@ -5,14 +5,14 @@ import { Provider } from 'react-redux';
 import { UserInfo } from '.';
 import { usersApi } from 'services/user-api';
 import { UserRole } from 'shared/types/common.types';
-
+// TODO: исправить
 const mockedMasterState = {
-  role: UserRole.MASTER,
+  role: UserRole.USER,
   data: {
     id: 1,
     createdAt: '2023-07-09T17:30Z',
     fullname: 'Админов Главный Админович',
-    role: UserRole.MASTER,
+    role: UserRole.USER,
     vk: 'https://vk.com/id123456789',
     avatar: 'https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg',
     phone: '+7 (901) 123-44-55',

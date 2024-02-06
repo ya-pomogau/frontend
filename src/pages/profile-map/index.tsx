@@ -41,14 +41,10 @@ export function ProfileMapPage() {
         );
       }
 
-      if (
-        searchRadius &&
-        user.coordinates &&
-        typeof searchRadius === 'string'
-      ) {
+      if (searchRadius && user.location && typeof searchRadius === 'string') {
         result = result.filter((task: Task) =>
           filterByDistance(
-            user.coordinates,
+            user.location!,
             task.location,
             parseInt(searchRadius, 10)
           )
@@ -84,12 +80,12 @@ export function ProfileMapPage() {
             tasks={filteredTasks}
             mapSettings={{
               latitude:
-                user && Array.isArray(user.coordinates)
-                  ? user.coordinates[0]
+                user && Array.isArray(user.location)
+                  ? user.location[0]
                   : 59.938955,
               longitude:
-                user && Array.isArray(user.coordinates)
-                  ? user.coordinates[1]
+                user && Array.isArray(user.location)
+                  ? user.location[1]
                   : 30.315644,
               zoom: 15,
             }}
@@ -101,7 +97,7 @@ export function ProfileMapPage() {
             width="100%"
             height="100%"
             onClick={() => 3}
-            coordinates={user?.coordinates}
+            coordinates={user?.location}
             role={user && user.role}
             isAuthorised={true}
           />
