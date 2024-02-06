@@ -58,6 +58,7 @@ export const TaskButtons = ({
   return (
     <div className={classNames(extClassName, styles.buttons_action)}>
       <ButtonWithModal
+        closeButton
         modalContent={
           <ModalContent
             type={TaskButtonType.confirm}
@@ -79,6 +80,7 @@ export const TaskButtons = ({
         />
       </ButtonWithModal>
       <ButtonWithModal
+        closeButton
         modalContent={<ModalContent type={TaskButtonType.close} />}
       >
         <SquareButton
@@ -93,6 +95,7 @@ export const TaskButtons = ({
         />
       </ButtonWithModal>
       <ButtonWithModal
+        closeButton
         modalContent={
           <ModalContent
             type={TaskButtonType.conflict}

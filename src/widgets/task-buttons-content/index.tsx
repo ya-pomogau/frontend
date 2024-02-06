@@ -55,6 +55,7 @@ export const ModalContent = ({
               onClick={() => 1}
             />
             <ButtonWithModal
+              closeButton
               modalContent={<ModalContent type={TaskButtonType.cancel} />}
             >
               <Button buttonType="primary" label="Отменить заявку" />
