@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
-import { UserRole } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { UNCONFIRMED } from 'shared/libs/statuses';
 
@@ -27,7 +26,6 @@ export function ProfileActivePage() {
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
-  console.log(tasks);
   useEffect(() => {
     handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
     // eslint-disable-next-line

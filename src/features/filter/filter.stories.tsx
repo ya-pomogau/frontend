@@ -77,11 +77,10 @@ export const DefaultFilter: Story & any = {
   args: {
     items: {
       sort: false,
-      categories: false,
+      categories: true,
       radius: true,
       time: true,
       date: true,
-      servies: true,
     },
   },
   render: ({ ...args }: FilteringProps) => (
@@ -103,11 +102,10 @@ export const FilterTasksVolunteers: Story & any = {
   args: {
     items: {
       sort: true,
-      categories: false,
+      categories: true,
       radius: false,
       time: false,
       date: false,
-      servies: true,
     },
   },
   render: ({ ...args }: FilteringProps) => (
@@ -129,11 +127,10 @@ export const FilterTasksRecipien: Story & any = {
   args: {
     items: {
       sort: true,
-      categories: false,
+      categories: true,
       radius: false,
       time: false,
       date: false,
-      servies: true,
     },
   },
   render: ({ ...args }: FilteringProps) => (

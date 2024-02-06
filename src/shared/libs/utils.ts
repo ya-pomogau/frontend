@@ -48,9 +48,16 @@ export const sortTasks = (
   item: 'date' | 'decreasing' | 'increasing'
 ) => {
   const sortedTasks = [...arr].sort((a, b) => {
-    const aValue = item === 'date' ? a.date! : a.category.points;
-    const bValue = item === 'date' ? b.date! : b.category.points;
+    const aValue = item === 'date' ? a.date : a.category.points;
+    const bValue = item === 'date' ? b.date : b.category.points;
     const order = item === 'decreasing' ? -1 : 1;
+
+    if (aValue === null) {
+      return 1;
+    }
+    if (bValue === null) {
+      return -1;
+    }
 
     if (aValue > bValue) {
       return order;
