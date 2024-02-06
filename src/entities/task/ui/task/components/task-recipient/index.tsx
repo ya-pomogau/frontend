@@ -49,6 +49,7 @@ export const TaskRecipient = ({
       {/* TODO: disabled кнопок привести к логике описанной в миро */}
       <div className={styles.buttons}>
         <ButtonWithModal
+          closeButton
           modalContent={<ModalContent type={TaskButtonType.phone} />}
         >
           <RoundButton

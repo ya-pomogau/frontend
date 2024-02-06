@@ -1,10 +1,13 @@
 import type { ReactNode } from 'react';
 import { useRef, useState } from 'react';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
+import styles from './styles.module.css';
 
 interface ModalProps {
   children: ReactNode;
   modalContent: ReactNode;
+  closeButton?: boolean;
 }
 
 interface Coords {
@@ -12,7 +15,11 @@ interface Coords {
   top: number;
 }
 
-export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
+export const ButtonWithModal = ({
+  children,
+  modalContent,
+  closeButton = false,
+}: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const [coords, setCoords] = useState<Coords | null>(null);
@@ -30,6 +37,7 @@ export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
       });
     }
   };
+
   return (
     <div ref={buttonRef} onClick={getCoords}>
       {children}
@@ -44,7 +52,12 @@ export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
             right: `${coords?.right}px`,
           }}
         >
-          {/* TODO: необходимо добавить крестик, не затрагивая  Tooltip*/}
+          {closeButton && (
+            <CloseCrossIcon
+              color="blue"
+              className={`${styles.closeButton} close`}
+            />
+          )}
           {modalContent}
         </Tooltip>
       )}
