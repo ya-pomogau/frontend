@@ -9,7 +9,7 @@ import { useMediaQuery } from 'shared/hooks';
 
 interface TaskRecipientProps {
   avatar: string;
-  // TODO: переименовать в name & phone. В зависимости от роли отображается информация либо волонтера либо реципиента
+  // TODO: переименовать в name & phone. В зависимости от роли текущего пользователя отображается информация либо волонтера либо реципиента
   recipientName?: string;
   recipientPhoneNumber?: string;
   connection: boolean;
