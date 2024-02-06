@@ -11,9 +11,8 @@ import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { useEffect, useState } from 'react';
 import { handleFilterTasks } from 'shared/libs/utils';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
-import { UNCONFIRMED } from 'shared/libs/statuses';
 
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -28,7 +27,7 @@ export function ProfileCompletedPage() {
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
   const isConfirmed = useAppSelector((state) => {
-    return state.user.data?.status === UNCONFIRMED;
+    return state.user.data?.status === UserStatus.UNCONFIRMED;
   });
 
   return (

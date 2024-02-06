@@ -12,15 +12,14 @@ import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
-import { UserRole } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
-import { UNCONFIRMED } from 'shared/libs/statuses';
+import { UserStatus } from 'shared/types/common.types';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('active');
   const { role, data } = useAppSelector((state) => state.user);
-  const isUnConfirmed = data?.status === UNCONFIRMED;
+  const isUnConfirmed = data?.status === UserStatus.UNCONFIRMED;
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
   const isMobileForPopup = useMediaQuery('(max-width:735px)');

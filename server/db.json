@@ -2,159 +2,103 @@
   "users": [
     {
       "id": "1",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Админов Главный Админович",
-      "role": "GeneralUser",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
+      "name": "Админов Главный Админович",
       "phone": "+7 (901) 123-44-55",
+      "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
       "address": "ул. Поселковая, д. 5",
-      "coordinates": [59.821539, 30.178031],
-      "status": "activated",
+      "vkId": "https://vk.com/id123456789",
+      "role": "GeneralUser",
+      "login": "root@mail.com",
+      "password": "459670778",
       "isActive": true,
-      "isHasKeys": true,
+      "isRoot": true,
       "permissions": [
-        {
-          "id": "0",
-          "name": "read"
-        },
-        {
-          "id": "1",
-          "name": "profiles approval"
-        },
-        {
-          "id": "2",
-          "name": "create tasks"
-        },
-        {
-          "id": "3",
-          "name": "set keys"
-        },
-        {
-          "id": "4",
-          "name": "resolve conflicts"
-        },
-        {
-          "id": "5",
-          "name": "blog"
-        },
-        {
-          "id": "6",
-          "name": "increase score"
-        }
-      ],
-      "scores": null
+        "CONFIRM_USER",
+        "CREATE_TASK",
+        "GIVE_KEY",
+        "RESOLVE_CONFLICT",
+        "EDIT_BLOG",
+        "SET_CATEGORY_POINTS"
+      ]
     },
     {
       "id": "2",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Админов Семен Семенович",
-      "role": "Admin",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg",
+      "name": "Админов Семен Семенович",
       "phone": "+7 (902) 123-44-55",
+      "avatar": "https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg",
       "address": "ул. Стойкости, 17",
-      "coordinates": [59.828347, 30.21187],
-      "status": "activated",
+      "vkId": "https://vk.com/id123456789",
+      "role": "Admin",
+      "login": "admin2@mail.com",
+      "password": "uoeft839",
       "isActive": true,
+      "isRoot": false,
       "permissions": [
-        {
-          "id": "0",
-          "name": "read"
-        },
-        {
-          "id": "1",
-          "name": "profiles approval"
-        },
-        {
-          "id": "2",
-          "name": "create tasks"
-        }
-      ],
-      "isHasKeys": false,
-      "scores": null
+        "GIVE_KEY",
+        "RESOLVE_CONFLICT",
+        "EDIT_BLOG",
+        "SET_CATEGORY_POINTS"
+      ]
     },
     {
       "id": "7",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Волонтеров Петр Петрович",
-      "role": "Volunteer",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+      "name": "Волонтеров Петр Петрович",
       "phone": "+7 (901) 123-45-67",
+      "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
       "address": "ул. Кораблестроителей, 19к1",
-      "coordinates": [59.942575, 30.216757],
-      "status": "verified",
-      "isHasKeys": true,
-      "scores": 2500,
-      "isActive": true
+      "vkId": "https://vk.com/id123456789",
+      "role": "Volunteer",
+      "score": 2500,
+      "status": 2,
+      "location": [
+        59.942575,
+        30.216757
+      ],
+      "keys": true
     },
     {
       "id": "8",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Волонтеров Иван Иванович",
-      "role": "Volunteer",
-      "vk": "https://vk.com/id123456788",
-      "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
+      "name": "Волонтеров Иван Иванович",
       "phone": "+7 (901) 123-00-00",
+      "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
       "address": "ул. Строителей, 15",
-      "coordinates": [55.686985, 37.529654],
-      "status": "unconfirmed",
-      "isHasKeys": true,
-      "scores": 0,
-      "isActive": true
+      "vkId": "https://vk.com/id123456788",
+      "role": "Volunteer",
+      "score": 0,
+      "status": 0,
+      "location": [
+        55.686985,
+        37.529654
+      ],
+      "keys": false
     },
     {
       "id": "4",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Алексей Борисович",
-      "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+      "name": "Реципиентов Алексей Борисович",
       "phone": "+7 (916) 123-45-67",
-      "address": "ул. Нахимова, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "status": "confirmed",
-      "isActive": true
-    },
-    {
-      "id": "3",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Иван Иванович",
-      "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-      "phone": "+7 (916) 123-00-00",
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "status": "confirmed",
-      "isActive": true
+      "address": "ул. Нахимова, д. 9",
+      "vkId": "https://vk.com/id123456789",
+      "role": "Recipient",
+      "status": 1,
+      "location": [
+        59.941871,
+        30.223494
+      ]
     },
     {
       "id": "9",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Валерий Афонасьевич",
-      "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
+      "name": "Реципиентов Валерий Афонасьевич",
       "phone": "+7 (916) 123-45-67",
+      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
       "address": "ул. Самарская, д. 9",
-      "coordinates": [59.941871, 30.223494],
-      "status": "unconfirmed",
-      "isActive": true
-    },
-    {
-      "id": "3",
-      "createdAt": "2023-07-09T17:30Z",
-      "fullname": "Реципиентов Иван Иванович",
+      "vkId": "https://vk.com/id123456789",
       "role": "Recipient",
-      "vk": "https://vk.com/id123456789",
-      "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-      "phone": "+7 (916) 123-00-00",
-      "address": "1-й Смоленский пер., 13",
-      "coordinates": [55.747854, 37.579887],
-      "status": "confirmed",
-      "isActive": true
+      "status": 0,
+      "location": [
+        59.941871,
+        30.223494
+      ]
     }
   ],
   "tasksAvailable": [
@@ -162,7 +106,10 @@
       "_id": "1",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [59.91776040271765,30.323923391601433],
+      "location": [
+        59.91776040271765,
+        30.323923391601433
+      ],
       "status": "created",
       "category": {
         "_id": "1",
@@ -189,7 +136,10 @@
       "_id": "2",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [59.941335, 30.227995],
+      "location": [
+        59.941335,
+        30.227995
+      ],
       "status": "created",
       "category": {
         "_id": "1",
@@ -216,7 +166,10 @@
       "_id": "3",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [59.90017303411407,30.40357427050727],
+      "location": [
+        59.90017303411407,
+        30.40357427050727
+      ],
       "status": "created",
       "category": {
         "_id": "1",
@@ -245,7 +198,10 @@
       "_id": "1",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [55.699788, 37.557059],
+      "location": [
+        55.699788,
+        37.557059
+      ],
       "status": "accepted",
       "category": {
         "_id": "1",
@@ -272,7 +228,10 @@
       "_id": "2",
       "description": "Помочь перенести мебель, таска взята волонтером",
       "address": "Улица Мебельная, 77",
-      "location": [60.699788, 40.557059],
+      "location": [
+        60.699788,
+        40.557059
+      ],
       "status": "accepted",
       "category": {
         "_id": "2",
@@ -282,7 +241,7 @@
       },
       "date": "2023-02-20T10:00:00Z",
       "recipient": {
-        "name": "Александр Петров",
+        "name": "Александр Петров Сергеевич",
         "phone": "+7 987 654 3210",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Мебельная, 77",
@@ -307,7 +266,10 @@
       "_id": "3",
       "description": "Посадить дерево в сквере, таска  взята волонтером",
       "address": "Улица Деревенская, 30",
-      "location": [59.699788, 41.557059],
+      "location": [
+        59.699788,
+        41.557059
+      ],
       "status": "accepted",
       "category": {
         "_id": "3",
@@ -343,7 +305,10 @@
       "_id": "3",
       "description": "Посадить дерево в сквере, таска  завершена",
       "address": "Улица Деревенская, 30",
-      "location": [59.699788, 41.557059],
+      "location": [
+        59.699788,
+        41.557059
+      ],
       "status": "completed",
       "category": {
         "_id": "3",

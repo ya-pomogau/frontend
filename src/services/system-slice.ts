@@ -31,7 +31,7 @@ export const hasPrivilegesSelector: TCustomSelector<boolean> = (state) =>
   !!state.system.user.permissions &&
   state.system.user.permissions.length > 0;
 
-export const isRootSelector: TCustomSelector<boolean> = (state) =>
+export const isRootSelector: TCustomSelector<boolean | undefined> = (state) =>
   !!state.system.user && state.system.user.isRoot;
 
 export const permissionsSelector: TCustomSelector<

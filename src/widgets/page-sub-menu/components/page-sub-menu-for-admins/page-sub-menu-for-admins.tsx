@@ -11,7 +11,7 @@ export const PageSubMenuForAdmins = () => {
     return <PageSubMenuAdmin />;
   }
 
-  if (role === UserRole.MASTER) {
+  if (role === UserRole.USER) {
     return <PageSubMenuMaster />;
   }
 

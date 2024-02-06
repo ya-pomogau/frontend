@@ -22,7 +22,7 @@ import { UserRole } from 'shared/types/common.types';
 export function PickRolePage() {
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
-  const [userId, setUserId] = useState<number | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
   const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
 
@@ -34,32 +34,32 @@ export function PickRolePage() {
 
   const getVolunteerRole = () => {
     dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId(7);
+    setUserId('7');
   };
 
   const getUnconfirmedVolunteerRole = () => {
     dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId(8);
+    setUserId('8');
   };
 
   const getRecipientRole = () => {
-    setUserId(4);
+    setUserId('4');
     dispatch(setUserRole(UserRole.RECIPIENT));
   };
 
   const getUnconfirmedRecipient = () => {
     dispatch(setUserRole(UserRole.RECIPIENT));
-    setUserId(9);
+    setUserId('9');
   };
 
   const getAdminRole = () => {
     dispatch(setUserRole(UserRole.ADMIN));
-    setUserId(2);
+    setUserId('2');
   };
 
   const getMasterAdminRole = () => {
-    dispatch(setUserRole(UserRole.MASTER));
-    setUserId(1);
+    dispatch(setUserRole(UserRole.USER));
+    setUserId('1');
   };
 
   const handleEnableConnectionError = () => {
@@ -80,7 +80,7 @@ export function PickRolePage() {
         return '/profile/active';
       case UserRole.ADMIN:
         return '/profile/requests';
-      case UserRole.MASTER:
+      case UserRole.USER:
         return '/profile/requests';
       default:
         return '/';
@@ -88,7 +88,7 @@ export function PickRolePage() {
   };
 
   useEffect(() => {
-    if (userId) {
+    if (userId && data) {
       refetch().then(() => dispatch(setUser(data)));
     }
     if (error) {

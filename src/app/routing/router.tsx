@@ -67,7 +67,7 @@ export const router = createBrowserRouter(
                 Volunteer: true,
                 Recipient: true,
                 Admin: true,
-                Master: true,
+                GeneralUser: true,
               }}
             />
           }
@@ -110,7 +110,7 @@ export const router = createBrowserRouter(
             <RoutesGroup
               allowed={{
                 Admin: true,
-                Master: true,
+                GeneralUser: true,
               }}
             />
           }
@@ -152,7 +152,7 @@ export const router = createBrowserRouter(
           element={
             <RoutesGroup
               allowed={{
-                Master: true,
+                GeneralUser: true,
               }}
             />
           }

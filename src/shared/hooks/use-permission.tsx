@@ -1,20 +1,9 @@
 import { useAppSelector } from 'app/hooks';
 import {
-  BLOG,
-  CREATE_TASKS,
-  INCREASE_SCORE,
-  PROFILES_APPROVAL,
-  READ,
-  RESOLVE_CONFLICTS,
-  SET_KEYS,
-} from 'shared/libs/permissions-names';
-import {
-  ACTIVATED,
-  CONFIRMED,
-  UNCONFIRMED,
-  VERIFIED,
-} from 'shared/libs/statuses';
-import { UserRole } from 'shared/types/common.types';
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from 'shared/types/common.types';
 
 // хук использует массив необходимых компоненту разрешений, роль, к которой они
 // применяюся и сравнивает их с состоянием юзера, возвращая true или false, в зависимости
@@ -22,28 +11,27 @@ import { UserRole } from 'shared/types/common.types';
 // требований или нет
 
 type Requirments =
-  | typeof UNCONFIRMED
-  | typeof CONFIRMED
-  | typeof ACTIVATED
-  | typeof VERIFIED
-  | { id: number; name: typeof READ }
-  | { id: number; name: typeof PROFILES_APPROVAL }
-  | { id: number; name: typeof CREATE_TASKS }
-  | { id: number; name: typeof SET_KEYS }
-  | { id: number; name: typeof RESOLVE_CONFLICTS }
-  | { id: number; name: typeof BLOG }
-  | { id: number; name: typeof INCREASE_SCORE };
-// TODO: проверить для чего usePermission использовали и проверить Role не повлияет ли это на что-то
+  | UserStatus.CONFIRMED
+  | UserStatus.UNCONFIRMED
+  | UserStatus.ACTIVATED
+  | UserStatus.VERIFIED
+  | UserStatus.BLOCKED
+  | AdminPermission.CONFIRMATION
+  | AdminPermission.TASKS
+  | AdminPermission.KEYS
+  | AdminPermission.CONFLICTS
+  | AdminPermission.BLOG
+  | AdminPermission.CATEGORIES;
+// TODO: проверить что работает норм
 type Role =
   | UserRole.VOLUNTEER
   | UserRole.RECIPIENT
   | UserRole.ADMIN
-  | UserRole.MASTER
-  | 'any';
+  | UserRole.USER;
 
 export default function usePermission(
   requirments: Array<Requirments>,
-  role: Role | null
+  role: Role
 ) {
   const userStatus = useAppSelector((state) => state.user.data?.status);
   const userRole = useAppSelector((state) => state.user.data?.role);
@@ -53,7 +41,7 @@ export default function usePermission(
 
   let isAllowed = false;
 
-  if (userRole === role || role === 'any') {
+  if (userRole === role) {
     if (userRole) {
       const userRights = { status: userStatus, ...userPermissions };
       const hasPermission = requirments.filter((requirment) =>

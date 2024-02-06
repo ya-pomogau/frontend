@@ -58,11 +58,11 @@ export const EditViewerInfo = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   const viewerData: UpdateUserInfo = {
-    fullname: valueName,
+    name: valueName,
     phone: valuePhone,
     address: valueAddress,
     avatar: null,
-    id: valueId,
+    _id: valueId,
   };
 
   const [userData, setUserData] = useState(viewerData);
@@ -190,7 +190,7 @@ export const EditViewerInfo = ({
                 type="text"
                 extClassName={styles.input}
                 placeholder="Введите имя"
-                value={userData.fullname}
+                value={userData.name}
                 onChange={handleChange}
                 name="fullname"
                 {...props}
