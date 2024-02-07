@@ -52,7 +52,7 @@ export function RequestsNotprocessedPage() {
   }, [searchRole]);
 
   useEffect(() => {
-    setDateUsers(filterUsersNamePageAdmin(testUsers, searchName));
+    setDateUsers(filterUsersNamePageAdmin(dateUsers, searchName));
     // eslint-disable-next-line
   }, [searchName]);
 
