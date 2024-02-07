@@ -6,6 +6,7 @@ import { ModalContent } from 'widgets/task-buttons-content';
 import { RoundButton } from 'shared/ui/round-button';
 import classNames from 'classnames';
 import { useMediaQuery } from 'shared/hooks';
+import DefaultImageAvatar from '../../img/placeholder.svg';
 
 interface TaskRecipientProps {
   avatar: string;
@@ -15,8 +16,7 @@ interface TaskRecipientProps {
   connection: boolean;
   extClassName?: string;
 }
-// TODO: переименовать в TaskUser
-export const TaskRecipient = ({
+export const TaskUser = ({
   avatar,
   recipientName,
   recipientPhoneNumber,
@@ -24,40 +24,54 @@ export const TaskRecipient = ({
   extClassName,
 }: TaskRecipientProps) => {
   const isMobile = useMediaQuery('(max-width:1150px)');
+
   return (
     // TODO: Если отображаются таски реципиента, то в зависимости от поля volunteer должна отображаться либо пустая рамка аватара, либо аватар и информация.
     <div className={classNames(extClassName, styles.main)}>
-      <Avatar
-        avatarName={recipientName || 'Пользователь не назначен'}
-        avatarLink={avatar}
-        extClassName={styles.avatar}
-      />
-      <div className={styles.info}>
-        <p
-          className={`${
-            isMobile
-              ? `m-0 text_type_regular ${styles.name}`
-              : 'm-0 text_size_medium'
-          }`}
-        >
-          {recipientName}
-        </p>
-        <p className={`${!isMobile && styles.phone} m-0 text_size_medium`}>
-          {recipientPhoneNumber}
-        </p>
-      </div>
-      {/* TODO: disabled кнопок привести к логике описанной в миро */}
-      <div className={styles.buttons}>
-        <ButtonWithModal
-          modalContent={<ModalContent type={TaskButtonType.phone} />}
-        >
-          <RoundButton
-            buttonType={TaskButtonType.phone}
-            disabled={connection}
+      {connection ? (
+        <>
+          <Avatar
+            avatarName={recipientName || 'Пользователь не назначен'}
+            avatarLink={avatar}
+            extClassName={styles.avatar}
           />
-        </ButtonWithModal>
-        <RoundButton buttonType="message" disabled={connection} />
-      </div>
+          <div className={styles.info}>
+            <p
+              className={`${
+                isMobile
+                  ? `m-0 text_type_regular ${styles.name}`
+                  : 'm-0 text_size_medium'
+              }`}
+            >
+              {recipientName}
+            </p>
+            <p className={`${!isMobile && styles.phone} m-0 text_size_medium`}>
+              {recipientPhoneNumber}
+            </p>
+          </div>
+        </>
+      ) : (
+        <Avatar
+          avatarLink={DefaultImageAvatar}
+          avatarName="фото"
+          extClassName={styles.defaultAvatarImg}
+        />
+      )}
+
+      {/* TODO: disabled кнопок привести к логике описанной в миро */}
+      {connection && (
+        <div className={styles.buttons}>
+          <ButtonWithModal
+            modalContent={<ModalContent type={TaskButtonType.phone} />}
+          >
+            <RoundButton
+              buttonType={TaskButtonType.phone}
+              disabled={connection}
+            />
+          </ButtonWithModal>
+          <RoundButton buttonType="message" disabled={connection} />
+        </div>
+      )}
     </div>
   );
 };

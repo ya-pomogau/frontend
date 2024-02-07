@@ -4,7 +4,7 @@ import placeholder from './img/placeholder.svg';
 import styles from './styles.module.css';
 import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
-import { TaskRecipient } from './components/task-recipient';
+import { TaskUser } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
 import { Category } from 'entities/task/types';
 import { UserProfile } from 'entities/user/types';
@@ -73,7 +73,7 @@ export const TaskItem = ({
           count={count}
           extClassName={styles.description}
         />
-        <TaskRecipient
+        <TaskUser
           avatar={avatar}
           recipientName={recipientName}
           recipientPhoneNumber={recipientPhoneNumber}
