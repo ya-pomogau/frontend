@@ -5,23 +5,20 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 
 import type { FilteringProps, NotFoundFilterProps } from './types';
 import { Filter } from 'features/filter';
-import { UserRole } from 'shared/types/common.types';
 
 const mockedVolunteerState = {
-  role: UserRole.VOLUNTEER,
-  data: {
-    id: 4,
-    fullname: 'Реципиентов Алексей Борисович',
-    role: UserRole.RECIPIENT,
-    vk: 'https://vk.com/id123456789',
-    avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
-    phone: '+7 (916) 123-45-67',
-    address: 'ул. Нахимова, д. 9',
-    coordinates: [59.941871, 30.223494],
-    status: 'confirmed',
-  },
-  isLoading: false,
-  isFailed: false,
+  id: '8',
+  name: 'Волонтеров Иван Иванович',
+  phone: '+7 (901) 123-00-00',
+  avatar:
+    'https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg',
+  address: 'ул. Строителей, 15',
+  vkId: 'https://vk.com/id123456788',
+  role: 'Volunteer',
+  score: 0,
+  status: 1,
+  location: [55.686985, 37.529654],
+  keys: false,
 };
 
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
