@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDate,
@@ -35,12 +35,12 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     dispatch(changeStepDecrement());
   };
 
-  const parsedDate = format(new Date(date), 'dd.MM.yyyy');
+  const parseDate = parse(date, 'dd.MM.yyyy', new Date());
+  const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
   const handleSubmitClick = () => {
-    const [day, month, year] = parsedDate.split('.');
+    const [year, month, day] = formattedDate.split('.');
     const [hours, minutes] = time.split(':');
-
     const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
 
     const requestData = {
@@ -50,7 +50,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       category,
       descriptionForTask,
     };
-    console.log(requestData);
+    console.log(dateObject.toISOString());
+
     dispatch(clearState());
     dispatch(closePopup());
   };
