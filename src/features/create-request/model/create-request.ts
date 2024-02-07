@@ -21,7 +21,7 @@ export type TInitialStateForPopup = {
 };
 
 export const InitialStateForPopup: TInitialStateForPopup = {
-  time: format(new Date(), 'hh:mm'),
+  time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
   coordinates: [],
