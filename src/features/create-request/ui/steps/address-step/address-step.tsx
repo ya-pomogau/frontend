@@ -178,6 +178,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         )}
         {
           <Button
+            disabled={address === ''}
             buttonType="primary"
             label={propsButton.label}
             onClick={propsButton.onClick}
