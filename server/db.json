@@ -4,7 +4,7 @@
       "id": "1",
       "createdAt": "2023-07-09T17:30Z",
       "fullname": "Админов Главный Админович",
-      "role": "GeneralUser",
+      "role": "Recipient",
       "vk": "https://vk.com/id123456789",
       "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
       "phone": "+7 (901) 123-44-55",
@@ -162,7 +162,7 @@
       "_id": "1",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [59.91776040271765,30.323923391601433],
+      "location": [59.91776040271765, 30.323923391601433],
       "status": "created",
       "category": {
         "id": "1",

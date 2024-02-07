@@ -24,28 +24,6 @@ const mockedVolunteerState = {
   isFailed: false,
 };
 
-const mockedRecipientState = {
-  ...mockedVolunteerState,
-  role: UserRole.RECIPIENT,
-};
-
-const mockedAdminState = {
-  ...mockedVolunteerState,
-  role: UserRole.ADMIN,
-};
-
-const mockedMasterState = {
-  ...mockedVolunteerState,
-  role: UserRole.MASTER,
-};
-
-const mockedUnauthorizedState = {
-  role: null,
-  data: null,
-  isLoading: false,
-  isFailed: false,
-};
-
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
   <Provider
     store={configureStore({

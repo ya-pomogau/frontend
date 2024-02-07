@@ -12,6 +12,9 @@ import {
   MINUTES_IN_HOUR,
   RADIANS_IN_DEGREE,
 } from './constants';
+import { IDateUser } from 'pages/requests/test-users';
+import { UserRole } from 'shared/types/common.types';
+import { UserProps } from 'pages/requests-notprocessed';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -206,4 +209,36 @@ export const filterByTime = (
   const time = taskTime.getHours() * MINUTES_IN_HOUR + taskTime.getMinutes();
 
   return minLimit < time && time < maxLimit;
+};
+
+const filterCardsPageAdmin = (array: IDateUser[], roleUser: UserRole) => {
+  return array.filter((item) => item.role === roleUser);
+};
+
+export const filterCardsUsersPageAdmin = (
+  array: IDateUser[],
+  search: IFilterValues,
+  setDate: (date: IDateUser[]) => void
+) => {
+  switch (search.categories[0]) {
+    case 'all':
+      return setDate(array);
+    case UserRole.VOLUNTEER:
+      return setDate(filterCardsPageAdmin(array, UserRole.VOLUNTEER));
+    case UserRole.RECIPIENT:
+      return setDate(filterCardsPageAdmin(array, UserRole.RECIPIENT));
+    default:
+      return setDate(array);
+  }
+};
+
+export const filterUsersNamePageAdmin = (
+  array: IDateUser[],
+  searchName: string
+) => {
+  return array.filter(
+    (user: UserProps) =>
+      user.userName.toLowerCase().includes(searchName.toLowerCase()) &&
+      user.role !== UserRole.ADMIN
+  );
 };
