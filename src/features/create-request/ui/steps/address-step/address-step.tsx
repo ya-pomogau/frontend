@@ -168,6 +168,9 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         )}
       </div>
       <div className={styles.buttonWrapper}>
+        {address === '' && (
+          <p className={styles.messageAlert}>Выберите тип задачи</p>
+        )}
         {!isTypeEdit && (
           <Button
             buttonType="secondary"
