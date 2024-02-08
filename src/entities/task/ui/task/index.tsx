@@ -3,7 +3,7 @@ import { CategoriesBackground } from 'shared/ui/categories-background';
 import styles from './styles.module.css';
 import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
-import { TaskRecipient } from './components/task-recipient';
+import { TaskUser } from './components/task-user';
 import { TaskButtons } from './components/task-buttons';
 import {
   TaskStatus,
@@ -108,11 +108,12 @@ export const TaskItem = ({
           count={category.points}
           extClassName={styles.description}
         />
-        <TaskRecipient
+        <TaskUser
           avatar={avatar}
-          recipientName={name}
-          recipientPhoneNumber={phone}
-          connection={canConnectWithUser}
+          name={name}
+          phone={phone}
+          //TODO: заменить volunteer === null ? false : true на правильное условие
+          connection={volunteer === null ? false : true}
           extClassName={styles.recipient}
           date={date}
         />

@@ -6,6 +6,7 @@ import { Avatar } from '../avatar';
 import styles from './info-container.module.css';
 import placeholder from './img/placeholder.svg';
 import useUser from 'shared/hooks/use-user';
+import { DefaultAvatar } from 'entities/task/ui/task/img/default-avatar';
 
 interface InfoContainerProps {
   extClassName?: string;
@@ -34,11 +35,15 @@ export const InfoContainer = ({
         alt="Граница профиля"
       />
       <div className={classNames(styles['info-container-avatarWrapper'])}>
-        <Avatar
-          avatarLink={avatar || placeholder}
-          avatarName={name}
-          extClassName={styles['info-container-avatar']}
-        />
+        {avatar ? (
+          <Avatar
+            avatarLink={avatar || placeholder}
+            avatarName={name}
+            extClassName={styles['info-container-avatar']}
+          />
+        ) : (
+          <DefaultAvatar isTaskAvatar={false} />
+        )}
       </div>
       <div className={classNames(styles['info-container-content'])}>
         {children}
