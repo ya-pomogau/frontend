@@ -7,13 +7,13 @@ export type TInitialStateForPopup = {
   time: string;
   date: string;
   address: string;
-  coordinates?: GeoCoordinates;
+  location?: GeoCoordinates;
   categories: Category[];
   category: {
-    value: string;
-    label: string;
+    id: string;
+    title: string;
   };
-  descriptionForTask: string;
+  description: string;
   currentStep: number;
   termlessRequest: boolean;
   isPopupOpen: boolean;
@@ -24,13 +24,13 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
-  coordinates: [],
+  location: [],
   categories: [],
   category: {
-    value: '',
-    label: '',
+    id: '',
+    title: '',
   },
-  descriptionForTask: '',
+  description: '',
   currentStep: 1,
   termlessRequest: false,
   isPopupOpen: false,
@@ -49,17 +49,17 @@ export const createRequestModel = createSlice({
     },
     setAddress(state, action) {
       state.address = action.payload.additinalAddress;
-      state.coordinates = action.payload.coords;
+      state.location = action.payload.coords;
     },
     setCategoryList(state, action) {
       state.categories = action.payload;
     },
     setCategory(state, action) {
-      state.category.value = action.payload.value;
-      state.category.label = action.payload.label;
+      state.category.id = action.payload.id;
+      state.category.title = action.payload.title;
     },
     setDescriptionForTask(state, action) {
-      state.descriptionForTask = action.payload;
+      state.description = action.payload;
     },
     changeCheckbox(state) {
       state.termlessRequest = !state.termlessRequest;
