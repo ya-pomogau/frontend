@@ -175,7 +175,7 @@ export const TaskList = ({
                     />
                   </div>
                   <div className={styles.text}>
-                    unauthorizedRecipientPopupMessage
+                    {unauthorizedRecipientPopupMessage}
                   </div>
                 </Tooltip>
               )}

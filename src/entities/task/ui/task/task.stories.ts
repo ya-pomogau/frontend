@@ -17,7 +17,7 @@ export const Desktop: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12,1234],
+      location: [12, 1234],
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -29,7 +29,7 @@ export const Desktop: Story = {
         address: '',
         phone: '',
         vkId: '145',
-        role: 'volunteer'
+        role: 'volunteer',
       },
       category: {
         _id: 'id',
@@ -44,12 +44,12 @@ export const Desktop: Story = {
       // count: 30,
       recipient: {
         address: '',
-        vkId: '123',  
-        role: 'recipient',      
+        vkId: '123',
+        role: 'recipient',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
-      }      
+      },
     },
     // unreadMessages: 60,
   },
@@ -59,7 +59,7 @@ export const Mobile: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12,1234],
+      location: [12, 1234],
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -71,7 +71,7 @@ export const Mobile: Story = {
         address: '',
         phone: '',
         vkId: '145',
-        role: 'volunteer'
+        role: 'volunteer',
       },
       category: {
         _id: 'id',
@@ -86,12 +86,12 @@ export const Mobile: Story = {
       // count: 30,
       recipient: {
         address: '',
-        vkId: '123',  
-        role: 'recipient',      
+        vkId: '123',
+        role: 'recipient',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
-      }      
+      },
     },
   },
 };
@@ -100,7 +100,7 @@ export const ExampleWithNoRecipient: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12,1234],
+      location: [12, 1234],
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -112,7 +112,7 @@ export const ExampleWithNoRecipient: Story = {
         address: '',
         phone: '',
         vkId: '145',
-        role: 'volunteer'
+        role: 'volunteer',
       },
       category: {
         _id: 'id',
@@ -127,21 +127,21 @@ export const ExampleWithNoRecipient: Story = {
       // count: 30,
       recipient: {
         address: '',
-        vkId: '123',  
-        role: 'recipient',      
+        vkId: '123',
+        role: 'recipient',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
-      }      
+      },
     },
-  }
+  },
 };
 
 export const ExampleConfirmed: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12,1234],
+      location: [12, 1234],
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -153,7 +153,7 @@ export const ExampleConfirmed: Story = {
         address: '',
         phone: '',
         vkId: '145',
-        role: 'volunteer'
+        role: 'volunteer',
       },
       category: {
         _id: 'id',
@@ -168,21 +168,21 @@ export const ExampleConfirmed: Story = {
       // count: 30,
       recipient: {
         address: '',
-        vkId: '123',  
-        role: 'recipient',      
+        vkId: '123',
+        role: 'recipient',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
-      }      
+      },
     },
-  }
+  },
 };
 
 export const ExampleConflict: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12,1234],
+      location: [12, 1234],
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -194,7 +194,7 @@ export const ExampleConflict: Story = {
         address: '',
         phone: '',
         vkId: '145',
-        role: 'volunteer'
+        role: 'volunteer',
       },
       category: {
         _id: 'id',
@@ -209,21 +209,21 @@ export const ExampleConflict: Story = {
       // count: 30,
       recipient: {
         address: '',
-        vkId: '123',  
-        role: 'recipient',      
+        vkId: '123',
+        role: 'recipient',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
-      }      
+      },
     },
-  }
+  },
 };
 
 export const ExampleWithIndefiniteDate: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12,1234],
+      location: [12, 1234],
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -235,7 +235,7 @@ export const ExampleWithIndefiniteDate: Story = {
         address: '',
         phone: '',
         vkId: '145',
-        role: 'volunteer'
+        role: 'volunteer',
       },
       category: {
         _id: 'id',
@@ -250,12 +250,12 @@ export const ExampleWithIndefiniteDate: Story = {
       // count: 30,
       recipient: {
         address: '',
-        vkId: '123',  
-        role: 'recipient',      
+        vkId: '123',
+        role: 'recipient',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
-      }      
+      },
     },
-  }
+  },
 };
