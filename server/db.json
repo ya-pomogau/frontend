@@ -165,7 +165,7 @@
       "location": [59.91776040271765,30.323923391601433],
       "status": "created",
       "category": {
-        "id": "1",
+        "_id": "1",
         "title": "Сопровождение",
         "points": 1,
         "accessLevel": 1
@@ -192,7 +192,7 @@
       "location": [59.941335, 30.227995],
       "status": "created",
       "category": {
-        "id": "1",
+        "_id": "1",
         "title": "Сопровождение",
         "points": 1,
         "accessLevel": 1
@@ -219,7 +219,7 @@
       "location": [59.90017303411407,30.40357427050727],
       "status": "created",
       "category": {
-        "id": "1",
+        "_id": "1",
         "title": "Сопровождение",
         "points": 1,
         "accessLevel": 1
@@ -248,7 +248,7 @@
       "location": [55.699788, 37.557059],
       "status": "accepted",
       "category": {
-        "id": "1",
+        "_id": "1",
         "title": "Сопровождение",
         "points": 1,
         "accessLevel": 1
@@ -275,7 +275,7 @@
       "location": [60.699788, 40.557059],
       "status": "accepted",
       "category": {
-        "id": "2",
+        "_id": "2",
         "title": "Покупка продуктов",
         "points": 1,
         "accessLevel": 1
@@ -310,7 +310,7 @@
       "location": [59.699788, 41.557059],
       "status": "accepted",
       "category": {
-        "id": "3",
+        "_id": "3",
         "title": "Покупка вещей/техники",
         "points": 1,
         "accessLevel": 1
@@ -346,7 +346,7 @@
       "location": [59.699788, 41.557059],
       "status": "completed",
       "category": {
-        "id": "3",
+        "_id": "3",
         "title": "Покупка вещей/техники",
         "points": 1,
         "accessLevel": 1
@@ -376,55 +376,55 @@
   ],
   "category": [
     {
-      "id": "1",
+      "_id": "1",
       "title": "Сопровождение",
       "points": 1,
       "accessLevel": 1
     },
     {
-      "id": "2",
+      "_id": "2",
       "title": "Покупка продуктов",
       "points": 1,
       "accessLevel": 1
     },
     {
-      "id": "3",
+      "_id": "3",
       "title": "Покупка вещей/техники",
       "points": 1,
       "accessLevel": 1
     },
     {
-      "id": "4",
+      "_id": "4",
       "title": "Помощь в уборке",
       "points": 1,
       "accessLevel": 2
     },
     {
-      "id": "5",
+      "_id": "5",
       "title": "Ремонт техники/жилья",
       "points": 1,
       "accessLevel": 2
     },
     {
-      "id": "6",
+      "_id": "6",
       "title": "Перевозка в личном транспорте",
       "points": 1,
       "accessLevel": 2
     },
     {
-      "id": "7",
+      "_id": "7",
       "title": "Помощь в подъеме/спуске",
       "points": 1,
       "accessLevel": 3
     },
     {
-      "id": "8",
+      "_id": "8",
       "title": "Помощь в готовке",
       "points": 1,
       "accessLevel": 3
     },
     {
-      "id": "9",
+      "_id": "9",
       "title": "Организация досуга",
       "points": 1,
       "accessLevel": 3

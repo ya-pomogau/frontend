@@ -50,12 +50,12 @@ const Dropdown = ({
   //   }
   // });
   // Получаем id категории
-  const categoryId = tasks.map((item: Task) => item.category.id);
+  const categoryId = tasks.map((item: Task) => item.category._id);
   //Получем объект уже выбранной категории
-  const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
+  const commonIds = categories.filter((obj) => categoryId.includes(obj._id));
 
   const commonSelected = commonIds?.map((item) => ({
-    value: String(item.id),
+    value: String(item._id),
     label: item.title,
   }));
 

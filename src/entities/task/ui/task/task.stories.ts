@@ -31,7 +31,7 @@ export const Desktop: Story = {
         role: 'volunteer'
       },
       category: {
-        id: 'id',
+        _id: 'id',
         title: 'сопровождение',
         points: 2,
         accessLevel: 1,
@@ -73,7 +73,7 @@ export const Mobile: Story = {
         role: 'volunteer'
       },
       category: {
-        id: 'id',
+        _id: 'id',
         title: 'сопровождение',
         points: 2,
         accessLevel: 1,
@@ -114,7 +114,7 @@ export const ExampleWithNoRecipient: Story = {
         role: 'volunteer'
       },
       category: {
-        id: 'id',
+        _id: 'id',
         title: 'сопровождение',
         points: 2,
         accessLevel: 1,
@@ -155,7 +155,7 @@ export const ExampleConfirmed: Story = {
         role: 'volunteer'
       },
       category: {
-        id: 'id',
+        _id: 'id',
         title: 'сопровождение',
         points: 2,
         accessLevel: 1,
@@ -196,7 +196,7 @@ export const ExampleConflict: Story = {
         role: 'volunteer'
       },
       category: {
-        id: 'id',
+        _id: 'id',
         title: 'сопровождение',
         points: 2,
         accessLevel: 1,
@@ -237,7 +237,7 @@ export const ExampleWithIndefiniteDate: Story = {
         role: 'volunteer'
       },
       category: {
-        id: 'id',
+        _id: 'id',
         title: 'сопровождение',
         points: 2,
         accessLevel: 1,

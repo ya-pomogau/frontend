@@ -23,7 +23,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
-    value: String(item.id),
+    value: String(item._id),
     label: item.title,
   }));
 
