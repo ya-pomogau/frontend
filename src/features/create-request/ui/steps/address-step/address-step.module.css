@@ -36,6 +36,14 @@
   margin-right: 20px;
 }
 
+.messageAlert {
+  color: red;
+  margin: 13px auto 0px 70px;
+  font-family: 'Golos', sans-serif;
+  font-size: 14px;
+  grid-column-start: 2;
+}
+
 @media (max-width: 735px) {
   .addressContainer {
     display: flex;
