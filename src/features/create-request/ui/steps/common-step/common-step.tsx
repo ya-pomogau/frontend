@@ -25,11 +25,11 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     time,
     address,
     category,
-    coordinates,
-    descriptionForTask,
+    description,
     date,
     isTypeEdit,
     termlessRequest,
+    location,
   } = useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
@@ -52,11 +52,11 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       ).toISOString();
 
       const requestData = {
-        categoryId: category.value,
-        location: coordinates,
+        categoryId: category.id,
+        location,
         date: dateObject,
-        address: address,
-        description: descriptionForTask,
+        address,
+        description,
       };
 
       console.log(requestData);
@@ -64,19 +64,17 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       dispatch(closePopup());
     } else {
       const requestData = {
-        categoryId: category.value,
-        location: coordinates,
+        categoryId: category.id,
+        location,
         date: null,
-        address: address,
-        description: descriptionForTask,
+        address,
+        description,
       };
       console.log(requestData);
       dispatch(clearState());
       dispatch(closePopup());
     }
   };
-
-  const handleSubmitNullData = () => {};
 
   const handleEditButton = (typeButton: string) => {
     switch (typeButton) {
@@ -137,7 +135,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content={category.label}
+              content={category.title}
               extClassName={styles.categories}
             />
             <p
@@ -147,7 +145,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.descriptionForTask
               )}
             >
-              {descriptionForTask}
+              {description}
             </p>
           </>
         ) : (
@@ -186,7 +184,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content={category.label}
+              content={category.title}
               extClassName={styles.categories}
             />
             <p
@@ -195,7 +193,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.descriptionForTask
               )}
             >
-              {descriptionForTask}
+              {description}
               {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}
