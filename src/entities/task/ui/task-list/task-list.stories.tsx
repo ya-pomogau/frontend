@@ -65,7 +65,7 @@ export const ExampleActive: Story = {
       {
         _id: '14',
         category: {
-          id: '2',
+          _id: '2',
           title: 'Название категории 2',
           points: 20,
           accessLevel: 2,
@@ -100,7 +100,7 @@ export const ExampleActive: Story = {
       {
         _id: '19',
         category: {
-          id: '2',
+          _id: '2',
           title: 'Название категории 2',
           points: 20,
           accessLevel: 2,
@@ -145,7 +145,7 @@ export const ExampleNotActive: Story = {
       {
         _id: '15',
         category: {
-          id: '2',
+          _id: '2',
           title: 'Название категории 2',
           points: 20,
           accessLevel: 2,
@@ -181,7 +181,7 @@ export const ExampleNotActive: Story = {
       {
         _id: '27',
         category: {
-          id: '2',
+          _id: '2',
           title: 'Название категории 2',
           points: 20,
           accessLevel: 2,

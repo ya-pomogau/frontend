@@ -49,7 +49,7 @@ export const TaskButtons = ({
     dispatch(setDate(date));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
-    dispatch(setCategory({ value: category.id, label: category.title }));
+    dispatch(setCategory({ value: category._id, label: category.title }));
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
