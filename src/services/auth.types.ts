@@ -33,10 +33,13 @@ export type TVKLoginRequestDto = {
 };
 
 export type TCreateUserDto = {
-  profile: Partial<TUserProfile>;
+  name: string;
+  address: string;
+  phone: string;
+  avatar?: string;
   role: UserRole;
   vkId: string;
-  location?: TPointGeoJSON;
+  location: TPointGeoJSON;
 };
 
 export type TAdminLoginDto = {
@@ -64,8 +67,11 @@ export type TNewUserResponseDto = {
 };
 
 export type TNewUserRequestDto = {
-  profile: Partial<TUserProfile>;
+  name: string;
+  address: string;
+  phone: string;
+  avatar?: string;
   role: UserRole;
   vkId: string;
-  location?: TPointGeoJSON;
+  location: TPointGeoJSON;
 };
