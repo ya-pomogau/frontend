@@ -25,6 +25,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     time,
     address,
     category,
+    coordinates,
     descriptionForTask,
     date,
     isTypeEdit,
@@ -39,22 +40,37 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
   const handleSubmitClick = () => {
-    const [year, month, day] = formattedDate.split('.');
-    const [hours, minutes] = time.split(':');
-    const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
+    if (!termlessRequest) {
+      const [year, month, day] = formattedDate.split('.');
+      const [hours, minutes] = time.split(':');
+      const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes).toISOString();
 
-    const requestData = {
-      time,
-      date: termlessRequest ? null : dateObject,
-      address,
-      category,
-      descriptionForTask,
-    };
-    console.log(dateObject.toISOString());
-
-    dispatch(clearState());
-    dispatch(closePopup());
+      const requestData = {
+        categoryId: category.value,
+        location: coordinates,
+        date: dateObject,
+        address: address,
+        description: descriptionForTask,
+      };
+      
+      console.log(requestData);
+      dispatch(clearState());
+      dispatch(closePopup());
+    } else {
+      const requestData = {
+        categoryId: category.value,
+        location: coordinates,
+        date: null,
+        address: address,
+        description: descriptionForTask,
+      };
+      console.log(requestData);
+      dispatch(clearState());
+      dispatch(closePopup());
+    }
   };
+
+  const handleSubmitNullData = () => {};
 
   const handleEditButton = (typeButton: string) => {
     switch (typeButton) {
