@@ -43,7 +43,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     if (!termlessRequest) {
       const [year, month, day] = formattedDate.split('.');
       const [hours, minutes] = time.split(':');
-      const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes).toISOString();
+      const dateObject = new Date(
+        +year,
+        +month - 1,
+        +day,
+        +hours,
+        +minutes
+      ).toISOString();
 
       const requestData = {
         categoryId: category.value,
@@ -52,7 +58,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address: address,
         description: descriptionForTask,
       };
-      
+
       console.log(requestData);
       dispatch(clearState());
       dispatch(closePopup());
