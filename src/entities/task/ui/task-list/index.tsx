@@ -120,7 +120,7 @@ export const TaskList = ({
           {tasks &&
             tasks.map((item, index) => (
               <li key={index}>
-                <TaskItem item={item} isStatusActive={isStatusActive} />
+                <TaskItem item={item} />
               </li>
             ))}
         </ul>

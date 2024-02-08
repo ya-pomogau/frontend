@@ -12,6 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+//TODO Привести сторибук в актуальное состояние после измнения Task
 export const Desktop: Story = {
   args: {
     item: {

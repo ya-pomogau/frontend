@@ -9,7 +9,6 @@ import type { Task } from 'entities/task/types';
 
 export interface TaskItemProps {
   item: Task;
-  isStatusActive?: boolean;
   extClassName?: string;
 }
 export const TaskItem = ({
@@ -21,7 +20,6 @@ export const TaskItem = ({
     recipient: { name, phone, avatar },
     volunteer,
   },
-  isStatusActive = true,
   extClassName,
 }: TaskItemProps) => {
   //TODO: confirmed && completed заменить на новые поля объекта
@@ -75,7 +73,6 @@ export const TaskItem = ({
           description={description}
           category={category}
           date={date}
-          isStatusActive={isStatusActive}
           completed
           conflict
           extClassName={styles.buttons}
