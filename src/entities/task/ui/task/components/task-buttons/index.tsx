@@ -21,7 +21,7 @@ interface TaskButtonsProps {
   address: string;
   description: string;
   category: Category;
-  date?: string;
+  date: string | null;
   completed: boolean;
   conflict: boolean;
   extClassName?: string;
@@ -81,8 +81,7 @@ export const TaskButtons = ({
         />
       </ButtonWithModal>
       <ButtonWithModal
-        closeButton
-        modalContent={<ModalContent type={TaskButtonType.close} />}
+        modalContent={<ModalContent type={TaskButtonType.close} date={date}/>}
       >
         <SquareButton
           buttonType={TaskButtonType.close}
@@ -102,6 +101,7 @@ export const TaskButtons = ({
             type={TaskButtonType.conflict}
             active={isStatusActive}
             conflict={conflict}
+            date={date}
           />
         }
       >

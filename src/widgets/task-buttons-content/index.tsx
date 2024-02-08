@@ -13,7 +13,7 @@ interface ModalContentProps {
   type: TaskButtonType;
   active?: boolean;
   conflict?: boolean;
-  date?: string;
+  date: string | null;
 }
 
 export const ModalContent = ({
@@ -55,8 +55,7 @@ export const ModalContent = ({
               onClick={() => 1}
             />
             <ButtonWithModal
-              closeButton
-              modalContent={<ModalContent type={TaskButtonType.cancel} />}
+              modalContent={<ModalContent type={TaskButtonType.cancel} date={date}/>}
             >
               <Button buttonType="primary" label="Отменить заявку" />
             </ButtonWithModal>
