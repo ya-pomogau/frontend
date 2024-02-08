@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Desktop: Story = {
   args: {
     category: {
-      id: 'id',
+      _id: 'id',
       title: 'сопровождение',
       points: 2,
       accessLevel: 1,
@@ -34,7 +34,7 @@ export const Desktop: Story = {
 export const Mobile: Story = {
   args: {
     category: {
-      id: 'id',
+      _id: 'id',
       title: 'сопровождение',
       points: 2,
       accessLevel: 1,
@@ -53,7 +53,7 @@ export const Mobile: Story = {
 export const ExampleWithNoRecipient: Story = {
   args: {
     category: {
-      id: 'id',
+      _id: 'id',
       title: 'сопровождение',
       points: 2,
       accessLevel: 1,
@@ -69,7 +69,7 @@ export const ExampleWithNoRecipient: Story = {
 export const ExampleConfirmed: Story = {
   args: {
     category: {
-      id: 'id',
+      _id: 'id',
       title: 'сопровождение',
       points: 2,
       accessLevel: 1,
@@ -88,7 +88,7 @@ export const ExampleConfirmed: Story = {
 export const ExampleConflict: Story = {
   args: {
     category: {
-      id: 'id',
+      _id: 'id',
       title: 'сопровождение',
       points: 2,
       accessLevel: 1,
@@ -107,7 +107,7 @@ export const ExampleConflict: Story = {
 export const ExampleWithIndefiniteDate: Story = {
   args: {
     category: {
-      id: 'id',
+      _id: 'id',
       title: 'сопровождение',
       points: 2,
       accessLevel: 1,

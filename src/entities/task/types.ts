@@ -20,7 +20,7 @@ export enum TaskReport {
 }
 
 export type Category = {
-  id: string;
+  _id: string;
   title: string;
   points: number;
   accessLevel: UserStatus; // категория будет доступна, если статус пользователя больше или равен accessLevel категории
