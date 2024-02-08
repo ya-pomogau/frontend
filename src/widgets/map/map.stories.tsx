@@ -37,7 +37,7 @@ export const Default: Story = {
         location: [60.699788, 40.557059],
         status: TaskStatus.CREATED,
         category: {
-          id: '5',
+          _id: '5',
           title: 'Название категории 5',
           points: 50,
           accessLevel: 1,
@@ -64,7 +64,7 @@ export const Default: Story = {
         location: [60.699788, 40.557059],
         status: TaskStatus.CREATED,
         category: {
-          id: '5',
+          _id: '5',
           title: 'Название категории 5',
           points: 50,
           accessLevel: 1,
