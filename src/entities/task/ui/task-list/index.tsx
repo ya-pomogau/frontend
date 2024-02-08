@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
+import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
 
 interface TaskListProps {
   userRole?: UserRole | null;
@@ -116,22 +117,10 @@ export const TaskList = ({
               </h2>
             </li>
           )}
-          {/* TODO: сделать передачу item в TaskItem вместо тысячи пропсов */}
           {tasks &&
             tasks.map((item, index) => (
               <li key={index}>
-                <TaskItem
-                  category={item.category}
-                  date={item.date!}
-                  address={item.address}
-                  description={item.description}
-                  count={item.category.points}
-                  avatar={item.recipient.avatar}
-                  recipientName={item.recipient.name}
-                  recipientPhoneNumber={item.recipient.phone}
-                  volunteer={item.volunteer}
-                  isStatusActive={isStatusActive}
-                />
+                <TaskItem item={item} isStatusActive={isStatusActive} />
               </li>
             ))}
         </ul>
@@ -185,8 +174,7 @@ export const TaskList = ({
                     />
                   </div>
                   <div className={styles.text}>
-                    Вы пока не можете создавать заявку. Дождитесь подтверждения
-                    администратора
+                    unauthorizedRecipientPopupMessage
                   </div>
                 </Tooltip>
               )}
