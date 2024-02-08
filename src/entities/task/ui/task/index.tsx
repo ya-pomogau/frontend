@@ -65,6 +65,7 @@ export const TaskItem = ({
           //TODO: заменить volunteer === null ? false : true на правильное условие
           connection={volunteer === null ? false : true}
           extClassName={styles.recipient}
+          date={date}
         />
         <TaskButtons
           //TODO: заменить completed conflict на правильные поля

@@ -81,7 +81,7 @@ export const TaskButtons = ({
         />
       </ButtonWithModal>
       <ButtonWithModal
-        modalContent={<ModalContent type={TaskButtonType.close} date={date}/>}
+        modalContent={<ModalContent type={TaskButtonType.close} date={date} />}
       >
         <SquareButton
           buttonType={TaskButtonType.close}
