@@ -14,3 +14,6 @@ export const DEGREES_IN_RADIAN = 180 / Math.PI;
 
 export const unauthorizedRecipientMessage =
   'Спасибо за регистрацию. Как только администратор подтвердит Вашу учетную запись, Вы сможете создавать заявки.';
+
+export const unauthorizedRecipientPopupMessage =
+  'Вы пока не можете создавать заявку. Дождитесь подтверждения администратора';

@@ -6,6 +6,7 @@ import { ModalContent } from 'widgets/task-buttons-content';
 import { RoundButton } from 'shared/ui/round-button';
 import classNames from 'classnames';
 import { useMediaQuery } from 'shared/hooks';
+import placeholder from '../../img/placeholder.svg';
 
 interface TaskRecipientProps {
   avatar: string;
@@ -17,7 +18,7 @@ interface TaskRecipientProps {
 }
 // TODO: переименовать в TaskUser
 export const TaskRecipient = ({
-  avatar,
+  avatar = placeholder,
   recipientName,
   recipientPhoneNumber,
   connection,

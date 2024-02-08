@@ -1,40 +1,27 @@
 import classNames from 'classnames';
 import { CategoriesBackground } from 'shared/ui/categories-background';
-import placeholder from './img/placeholder.svg';
 import styles from './styles.module.css';
 import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
 import { TaskRecipient } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
-import { Category } from 'entities/task/types';
-import { UserProfile } from 'entities/user/types';
+import type { Task } from 'entities/task/types';
 
-interface TaskItemProps {
-  category: Category;
-  date?: string;
-  address: string;
-  description: string;
-  count: number;
-  avatar?: string;
-  recipientName?: string;
-  recipientPhoneNumber?: string;
-  volunteer: UserProfile | null;
-  unreadMessages?: number;
+export interface TaskItemProps {
+  item: Task;
   isStatusActive?: boolean;
   extClassName?: string;
 }
-// TODO: сделать передачу item в TaskItem вместо тысячи пропсов
 export const TaskItem = ({
-  category,
-  date,
-  address,
-  description,
-  count,
-  avatar = placeholder,
-  recipientName,
-  volunteer,
-  recipientPhoneNumber,
-  isStatusActive,
+  item: {
+    category,
+    date,
+    address,
+    description,
+    recipient: { name, phone, avatar },
+    volunteer,
+  },
+  isStatusActive = true,
   extClassName,
 }: TaskItemProps) => {
   //TODO: confirmed && completed заменить на новые поля объекта
@@ -70,25 +57,25 @@ export const TaskItem = ({
         />
         <TaskDescription
           description={description}
-          count={count}
+          count={category.points}
           extClassName={styles.description}
         />
         <TaskRecipient
           avatar={avatar}
-          recipientName={recipientName}
-          recipientPhoneNumber={recipientPhoneNumber}
+          recipientName={name}
+          recipientPhoneNumber={phone}
           //TODO: заменить volunteer === null ? false : true на правильное условие
           connection={volunteer === null ? false : true}
           extClassName={styles.recipient}
         />
         <TaskButtons
           //TODO: заменить completed conflict на правильные поля
-          recipientName={recipientName}
+          recipientName={name}
           address={address}
           description={description}
           category={category}
           date={date}
-          isStatusActive
+          isStatusActive={isStatusActive}
           completed
           conflict
           extClassName={styles.buttons}
