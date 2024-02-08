@@ -55,7 +55,9 @@ export const ModalContent = ({
               onClick={() => 1}
             />
             <ButtonWithModal
-              modalContent={<ModalContent type={TaskButtonType.cancel} date={date}/>}
+              modalContent={
+                <ModalContent type={TaskButtonType.cancel} date={date} />
+              }
             >
               <Button buttonType="primary" label="Отменить заявку" />
             </ButtonWithModal>

@@ -15,6 +15,7 @@ interface TaskRecipientProps {
   recipientPhoneNumber?: string;
   connection: boolean;
   extClassName?: string;
+  date: string | null;
 }
 // TODO: переименовать в TaskUser
 export const TaskRecipient = ({
@@ -23,6 +24,7 @@ export const TaskRecipient = ({
   recipientPhoneNumber,
   connection,
   extClassName,
+  date,
 }: TaskRecipientProps) => {
   const isMobile = useMediaQuery('(max-width:1150px)');
   return (
@@ -50,7 +52,9 @@ export const TaskRecipient = ({
       {/* TODO: disabled кнопок привести к логике описанной в миро */}
       <div className={styles.buttons}>
         <ButtonWithModal
-          modalContent={<ModalContent type={TaskButtonType.phone} />}
+          modalContent={
+            <ModalContent type={TaskButtonType.phone} date={date} />
+          }
         >
           <RoundButton
             buttonType={TaskButtonType.phone}
