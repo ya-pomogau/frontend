@@ -21,8 +21,7 @@ interface TaskButtonsProps {
   address: string;
   description: string;
   category: Category;
-  date?: string;
-  isStatusActive: boolean;
+  date: string | null;
   completed: boolean;
   conflict: boolean;
   extClassName?: string;
@@ -34,7 +33,6 @@ export const TaskButtons = ({
   description,
   category,
   date,
-  isStatusActive = true,
   completed,
   conflict,
   extClassName,
@@ -44,6 +42,9 @@ export const TaskButtons = ({
   const dispatch = useAppDispatch();
   const userRole = useAppSelector((state) => state.user.role);
   const additinalAddress = address;
+  //Это значение раньше было в пропсах и никакого отношения к отображению кнопок не имеет
+  //TODO заменить на актуальное условие показа кнопок
+  const isStatusActive = true;
 
   const handleEditButton = () => {
     dispatch(setDate(date));
@@ -79,7 +80,7 @@ export const TaskButtons = ({
         />
       </ButtonWithModal>
       <ButtonWithModal
-        modalContent={<ModalContent type={TaskButtonType.close} />}
+        modalContent={<ModalContent type={TaskButtonType.close} date={date} />}
       >
         <SquareButton
           buttonType={TaskButtonType.close}
@@ -98,6 +99,7 @@ export const TaskButtons = ({
             type={TaskButtonType.conflict}
             active={isStatusActive}
             conflict={conflict}
+            date={date}
           />
         }
       >
