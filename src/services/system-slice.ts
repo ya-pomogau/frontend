@@ -31,8 +31,8 @@ export const hasPrivilegesSelector: TCustomSelector<boolean> = (state) =>
   !!state.system.user.permissions &&
   state.system.user.permissions.length > 0;
 
-export const isRootSelector: TCustomSelector<boolean | undefined> = (state) =>
-  !!state.system.user && state.system.user.isRoot;
+export const isRootSelector: TCustomSelector<boolean> = (state) =>
+  !!state.system.user && (state.system.user.isRoot ?? false);
 
 export const permissionsSelector: TCustomSelector<
   Array<AdminPermission> | null
