@@ -127,7 +127,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
         </div>
       </div>
       <div className={styles.button}>
-        {timeValidation && (
+        {(timeValidation || !time) && !termlessRequest && (
           <p className={styles.validationMessage}>{'Введите валидное время'}</p>
         )}
         <Button
