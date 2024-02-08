@@ -22,7 +22,6 @@ interface TaskButtonsProps {
   description: string;
   category: Category;
   date?: string;
-  isStatusActive: boolean;
   completed: boolean;
   conflict: boolean;
   extClassName?: string;
@@ -34,7 +33,6 @@ export const TaskButtons = ({
   description,
   category,
   date,
-  isStatusActive = true,
   completed,
   conflict,
   extClassName,
@@ -44,6 +42,9 @@ export const TaskButtons = ({
   const dispatch = useAppDispatch();
   const userRole = useAppSelector((state) => state.user.role);
   const additinalAddress = address;
+  //Это значение раньше было в пропсах и никакого отношения к отображению кнопок не имеет
+  //TODO заменить на актуальное условие показа кнопок
+  const isStatusActive = true;
 
   const handleEditButton = () => {
     dispatch(setDate(date));
