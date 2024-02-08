@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { useMediaQuery } from 'shared/hooks';
 
 interface TaskInfoProps {
-  date?: string;
+  date: string | null;
   address: string;
   extClassName?: string;
 }

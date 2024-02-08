@@ -33,7 +33,7 @@ export type Task = {
   location: GeoCoordinates;
   status: TaskStatus;
   category: Category;
-  date: string;
+  date: string | null;
   recipient: UserProfile;
   recipientReport: TaskReport | null;
   volunteer: UserProfile | null;
