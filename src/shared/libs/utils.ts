@@ -12,6 +12,8 @@ import {
   MINUTES_IN_HOUR,
   RADIANS_IN_DEGREE,
 } from './constants';
+import { TaskButtonType } from 'shared/types/common.types';
+import { UserProfile } from 'entities/user/types';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -199,4 +201,22 @@ export const filterByTime = (
   const time = taskTime.getHours() * MINUTES_IN_HOUR + taskTime.getMinutes();
 
   return minLimit < time && time < maxLimit;
+};
+
+export const variantBtnRec = (volunteer: UserProfile | null) => {
+  return volunteer ? TaskButtonType.responded : TaskButtonType.close;
+};
+
+export function checkTimeDifference(time: Date): boolean {
+  const currentTime: Date = new Date();
+  const timeDifference: number = time.getTime() - currentTime.getTime();
+  const hoursDifference: number = timeDifference / (1000 * 3600);
+
+  return hoursDifference < 24;
+}
+
+export const variantBtn = (parsedDate: Date) => {
+  return !checkTimeDifference(parsedDate)
+    ? TaskButtonType.close
+    : TaskButtonType.cancel;
 };

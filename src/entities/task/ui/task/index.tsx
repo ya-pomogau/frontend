@@ -26,26 +26,9 @@ export const TaskItem = ({
   },
   extClassName,
 }: TaskItemProps) => {
-  //TODO: confirmed && completed заменить на новые поля объекта
-  // const taskLayout =
-  //   confirmed && completed
-  //     ? styles.container_main_default
-  //     : confirmed
-  //     ? styles.container_main_confirmed
-  //     : conflict
-  //     ? styles.container_main_conflict
-  //     : styles.container_main_default;
-  //TODO: использовать деструктуризацию для записи полей таски
   return (
     <>
-      <div
-        className={classNames(
-          styles.container_main,
-          'text',
-          // taskLayout,
-          extClassName
-        )}
-      >
+      <div className={classNames(styles.container_main, 'text', extClassName)}>
         <CategoriesBackground
           theme="primary"
           content={category.title}
@@ -67,13 +50,11 @@ export const TaskItem = ({
           name={name}
           phone={phone}
           status={status}
-          //TODO: заменить volunteer === null ? false : true на правильное условие
           connection={volunteer === null ? false : true}
           extClassName={styles.recipient}
           date={date}
         />
         <TaskButtons
-          //TODO: заменить completed conflict на правильные поля
           recipientName={name}
           address={address}
           description={description}
