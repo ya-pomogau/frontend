@@ -25,7 +25,7 @@ export function RegisterPage() {
   // TODO: пока что оставила адрес в виде объекта, чтобы не ломались другие компоненты завязанные на inputAddress
   const [address, setAddress] = useState<{
     address: string;
-    coords?: GeoCoordinates;
+    coords: GeoCoordinates;
   }>({
     address: '',
     coords: [],
@@ -39,25 +39,20 @@ export function RegisterPage() {
       name: name,
       phone: phone,
       address: address.address,
-      coord: address.coords,
+      location: address.coords,
       role: role,
     });
-    const [first, last] = name.split(' ').filter((i) => i.length > 0);
+    // const [first, last] = name.split(' ').filter((i) => i.length > 0);
     const vk_id = `${vkId}`;
     const user = {
-      profile: {
-        firstName: first,
-        lastName: last,
-        phone,
-        address: address.address,
-        avatar: 'https://kspshnik.com/pub/img/verona_pre.jpg',
-        middleName: 'Валерьевна',
-      },
+      name,
+      phone,
+      address: address.address,
       vkId: vk_id,
       role: role,
       location: {
         type: 'Point',
-        coordinates: [23, 65],
+        coordinates: address.coords,
       },
     };
     dispatch(newUserThunk(user));
