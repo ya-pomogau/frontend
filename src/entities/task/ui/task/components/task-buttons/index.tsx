@@ -66,8 +66,9 @@ export const TaskButtons = ({
   const [clicked, setClicked] = useState<boolean>(false);
 
   const initialData = {
+    taskId,
     address,
-    category: { value: category._id, label: category.title },
+    category,
     description,
     date,
   };

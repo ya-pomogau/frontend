@@ -30,6 +30,7 @@ export const TaskItem = ({
     volunteer,
     volunteerReport,
     adminResolve,
+    _id,
   },
   userRole,
   extClassName,
@@ -79,29 +80,6 @@ export const TaskItem = ({
     : '';
 
   return (
-    //код для кнопки закрытия алерта
-
-    //const dispatch = useAppDispatch();
-
-    //const initialData = {
-    //  time,
-    //  address,
-    //  coordinates,
-    //  category: { value: category.id, label: category.name },
-    //  description,
-    //  date,
-    //};
-    //console.log(initialData.address);
-
-    //const handleEditButton = () => {
-    //  dispatch(setTemporary({ initialData }));
-    //  dispatch(setDate(date));
-    //  dispatch(setAddress({ additinalAddress: address, coords: coordinates }));
-    //  dispatch(setDescriptionForTask(description));
-    //  dispatch(setCategory({ value: category.id, label: category.name }));
-    //  dispatch(changeCurrentStep(4));
-    //  dispatch(openPopup());
-    //};
     <>
       <div
         className={classNames(
@@ -133,6 +111,8 @@ export const TaskItem = ({
           date={date}
         />
         <TaskButtons
+          //TODO: заменить completed conflict на правильные поля
+          taskId={_id}
           address={address}
           description={description}
           category={category}
