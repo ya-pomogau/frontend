@@ -15,8 +15,6 @@ import {
 import { IDateUser } from 'pages/requests/test-users';
 import { UserRole } from 'shared/types/common.types';
 import { UserProps } from 'pages/requests-notprocessed';
-import { TaskButtonType } from 'shared/types/common.types';
-import { UserProfile } from 'entities/user/types';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
