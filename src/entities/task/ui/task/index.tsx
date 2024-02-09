@@ -125,8 +125,8 @@ export const TaskItem = ({
           description={description}
           category={category}
           date={date}
-          completed
           conflict
+          volunteer={volunteer}
           extClassName={styles.buttons}
           volunteerReport={volunteerReport}
           recipientReport={recipientReport}

@@ -16,6 +16,7 @@ import {
 } from 'features/create-request/model';
 import { Category, ResolveStatus, TaskReport } from 'entities/task/types';
 import { useLocation } from 'react-router-dom';
+import { UserProfile } from 'entities/user/types';
 
 interface TaskButtonsProps {
   recipientName?: string;
@@ -23,12 +24,13 @@ interface TaskButtonsProps {
   description: string;
   category: Category;
   date: string | null;
-  completed: boolean;
+  // completed: boolean;
   conflict: boolean;
   extClassName?: string;
   volunteerReport: TaskReport | null;
   recipientReport: TaskReport | null;
   adminResolve: ResolveStatus | null;
+  volunteer: UserProfile | null;
 }
 
 export const TaskButtons = ({
@@ -37,12 +39,13 @@ export const TaskButtons = ({
   description,
   category,
   date,
-  completed,
+  // completed,
   conflict,
   extClassName,
   volunteerReport,
   recipientReport,
   adminResolve,
+  volunteer,
 }: TaskButtonsProps) => {
   const parsedDate = parseISO(date!);
   const comparedDateResult = isAfter(new Date(), parsedDate);
@@ -57,14 +60,15 @@ export const TaskButtons = ({
 
     return hoursDifference < 24;
   }
-  console.log(comparedDateResult);
-  console.log(checkTimeDifference(parsedDate));
+
+  const overdueTask = () => new Date() > parsedDate && volunteer === null;
 
   const location = useLocation();
   const visibilityBtn = location.pathname === '/profile/completed';
   //Это значение раньше было в пропсах и никакого отношения к отображению кнопок не имеет
   //TODO заменить на актуальное условие показа кнопок
   const isStatusActive = !date;
+  console.log(recipientName);
 
   const handleEditButton = () => {
     dispatch(setDate(date));
@@ -88,7 +92,7 @@ export const TaskButtons = ({
           modalContent={
             <ModalContent
               type={TaskButtonType.confirm}
-              active={!isStatusActive}
+              active={true}
               date={date}
             />
           }
@@ -96,7 +100,7 @@ export const TaskButtons = ({
           <SquareButton
             buttonType={TaskButtonType.confirm}
             extClassName={
-              recipientName && !date && completed
+              recipientName && !date
                 ? ''
                 : recipientName
                 ? ''
@@ -121,9 +125,7 @@ export const TaskButtons = ({
                 : styles.button_edit
             }
             //переписать completed если бэк поменяется
-            disabled={
-              checkTimeDifference(parsedDate) || !completed || isStatusActive
-            }
+            disabled={checkTimeDifference(parsedDate) || isStatusActive}
           />
         </ButtonWithModal>
       )}
@@ -136,17 +138,15 @@ export const TaskButtons = ({
           <SquareButton
             buttonType={TaskButtonType.close}
             extClassName={
-              (!date && recipientName) || !isStatusActive
-                ? styles.item_hidden
-                : styles.button_edit
+              !date && recipientName ? styles.item_hidden : styles.button_edit
             }
             //переписать completed если бэк поменяется
-            disabled={comparedDateResult || !completed}
+            disabled={volunteer ? true : false}
           />
         </ButtonWithModal>
       )}
       {/* конфликт таску  */}
-      {(comparedDateResult || !date) && (
+      {(comparedDateResult || !date) && !overdueTask() && (
         <ButtonWithModal
           modalContent={
             <ModalContent
@@ -176,8 +176,8 @@ export const TaskButtons = ({
           />
         </ButtonWithModal>
       )}
-
-      {userRole === UserRole.RECIPIENT && (
+      {/* редактирование заявки */}
+      {userRole === UserRole.RECIPIENT && !volunteer && !visibilityBtn && (
         <SquareButton
           onClick={handleEditButton}
           buttonType="edit"
