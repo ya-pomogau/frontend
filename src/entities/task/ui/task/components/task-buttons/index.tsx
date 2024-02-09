@@ -26,6 +26,7 @@ import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
 import { useState } from 'react';
 
 interface TaskButtonsProps {
+  taskId?: string;
   address: string;
   description: string;
   category: Category;
@@ -39,6 +40,7 @@ interface TaskButtonsProps {
 }
 
 export const TaskButtons = ({
+  taskId,
   address,
   description,
   category,
