@@ -17,7 +17,7 @@ import { isRootSelector } from 'entities/user/model';
 
 export const UserInfo = () => {
   const role = useAppSelector((state) => state.user.role);
-  // берем данные пользователя из стора
+  // берем данные пользователя из стора (следующую строчку надо закоментить, чтобы тестировать фронт без бэка)
   const user = useAppSelector((state) => state.user.data);
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
