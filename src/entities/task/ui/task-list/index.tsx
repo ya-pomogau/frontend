@@ -122,6 +122,7 @@ export const TaskList = ({
             tasks.map((item, index) => (
               <li key={index}>
                 <TaskItem
+                  taskId={item._id}
                   category={item.category}
                   date={item.date!}
                   address={item.address}

@@ -13,6 +13,7 @@ import { YMaps } from '@pbe/react-yandex-maps';
 import { Request } from '.';
 
 export const InitialStateForPopup: TInitialStateForPopup = {
+  taskId: '',
   time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',

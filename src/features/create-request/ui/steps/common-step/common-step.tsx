@@ -22,6 +22,7 @@ interface ICommonStepProps {
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
   const {
+    taskId,
     time,
     address,
     category,
@@ -75,7 +76,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       dispatch(closePopup());
     }
     if (isTypeEdit) {
-      console.log('это редактирование', requestData);
+      const updateTask = { ...requestData, taskId: taskId };
+      console.log('это редактирование', updateTask);
     } else {
       console.log('это новая таска', requestData);
     }
@@ -102,8 +104,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         break;
     }
   };
-  console.log('category', category);
-  console.log('temporaryCategory', temporaryCategory);
+
   return (
     <div className={styles.mainWrapper}>
       <div

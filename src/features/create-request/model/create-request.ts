@@ -4,6 +4,7 @@ import { Category } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export type TInitialStateForPopup = {
+  taskId: string;
   time: string;
   date: string;
   address: string;
@@ -28,6 +29,7 @@ export type TInitialStateForPopup = {
 };
 
 export const InitialStateForPopup: TInitialStateForPopup = {
+  taskId: '',
   time: format(new Date(), 'hh:mm'),
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
@@ -102,6 +104,7 @@ export const createRequestModel = createSlice({
       Object.assign(state, InitialStateForPopup);
     },
     setTemporary(state, action) {
+      state.taskId = action.payload.initialData.taskId;
       state.temporaryAddress = action.payload.initialData.address;
       //state.temporaryCoordinates = action.payload.initialData.coords;
       state.temporaryCategory.id = action.payload.initialData.category.id;

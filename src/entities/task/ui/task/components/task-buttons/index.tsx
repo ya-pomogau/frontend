@@ -49,8 +49,8 @@ export const TaskButtons = ({
   const additinalAddress = address;
 
   const initialData = {
-    address,
     taskId,
+    address,
     category,
     description,
     date,

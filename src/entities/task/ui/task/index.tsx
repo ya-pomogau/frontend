@@ -11,6 +11,7 @@ import { UserProfile } from 'entities/user/types';
 import { isAfter, parseISO } from 'date-fns';
 
 interface TaskItemProps {
+  taskId: string;
   category: Category;
   date?: string;
   address: string;
@@ -26,6 +27,7 @@ interface TaskItemProps {
 }
 // TODO: сделать передачу item в TaskItem вместо тысячи пропсов
 export const TaskItem = ({
+  taskId,
   category,
   date,
   address,
@@ -49,29 +51,6 @@ export const TaskItem = ({
   //     : styles.container_main_default;
   //TODO: использовать деструктуризацию для записи полей таски
   return (
-    //код для кнопки закрытия алерта
-
-    //const dispatch = useAppDispatch();
-
-    //const initialData = {
-    //  time,
-    //  address,
-    //  coordinates,
-    //  category: { value: category.id, label: category.name },
-    //  description,
-    //  date,
-    //};
-    //console.log(initialData.address);
-
-    //const handleEditButton = () => {
-    //  dispatch(setTemporary({ initialData }));
-    //  dispatch(setDate(date));
-    //  dispatch(setAddress({ additinalAddress: address, coords: coordinates }));
-    //  dispatch(setDescriptionForTask(description));
-    //  dispatch(setCategory({ value: category.id, label: category.name }));
-    //  dispatch(changeCurrentStep(4));
-    //  dispatch(openPopup());
-    //};
     <>
       <div
         className={classNames(
@@ -107,6 +86,7 @@ export const TaskItem = ({
         />
         <TaskButtons
           //TODO: заменить completed conflict на правильные поля
+          taskId={taskId}
           recipientName={recipientName}
           address={address}
           description={description}
