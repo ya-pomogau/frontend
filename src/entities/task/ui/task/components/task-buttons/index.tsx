@@ -17,6 +17,7 @@ import {
   setCategory,
   setDate,
   setDescriptionForTask,
+  setTemporary,
 } from 'features/create-request/model';
 import { Category, ResolveStatus, TaskReport } from 'entities/task/types';
 import { useLocation } from 'react-router-dom';
@@ -62,8 +63,15 @@ export const TaskButtons = ({
   //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
   const [clicked, setClicked] = useState<boolean>(false);
 
+  const initialData = {
+    address,
+    category: { value: category.id, label: category.title },
+    description,
+    date,
+  };
+
   const handleEditButton = () => {
-    dispatch(setDate(date));
+    dispatch(setTemporary({ initialData }));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
     dispatch(setCategory({ value: category._id, label: category.title }));

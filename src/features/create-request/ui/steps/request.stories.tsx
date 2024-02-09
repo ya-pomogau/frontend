@@ -27,6 +27,13 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   termlessRequest: false,
   isPopupOpen: false,
   isTypeEdit: false,
+  temporaryAddress: '',
+  temporaryCoordinates: [],
+  temporaryCategory: {
+    value: '',
+    label: '',
+  },
+  temporaryDescriptionForTask: '',
 };
 
 // eslint-disable-next-line react/prop-types

@@ -18,10 +18,17 @@ export type TInitialStateForPopup = {
   termlessRequest: boolean;
   isPopupOpen: boolean;
   isTypeEdit: boolean;
+  temporaryAddress: string;
+  temporaryCoordinates?: GeoCoordinates;
+  temporaryCategory: {
+    value: string;
+    label: string;
+  };
+  temporaryDescriptionForTask: string;
 };
 
 export const InitialStateForPopup: TInitialStateForPopup = {
-  time: '',
+  time: format(new Date(), 'hh:mm'),
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
   location: [],
@@ -35,6 +42,13 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   termlessRequest: false,
   isPopupOpen: false,
   isTypeEdit: false,
+  temporaryAddress: '',
+  temporaryCoordinates: [],
+  temporaryCategory: {
+    value: '',
+    label: '',
+  },
+  temporaryDescriptionForTask: '',
 };
 
 export const createRequestModel = createSlice({
@@ -56,7 +70,7 @@ export const createRequestModel = createSlice({
     },
     setCategory(state, action) {
       state.category.id = action.payload.id;
-      state.category.title = action.payload.title;
+      state.category.title = action.payload.label;
     },
     setDescriptionForTask(state, action) {
       state.description = action.payload;
@@ -87,6 +101,14 @@ export const createRequestModel = createSlice({
     clearState(state) {
       Object.assign(state, InitialStateForPopup);
     },
+    setTemporary(state, action) {
+      state.temporaryAddress = action.payload.initialData.address;
+      //state.temporaryCoordinates = action.payload.initialData.coords;
+      state.temporaryCategory.value = action.payload.initialData.category.value;
+      state.temporaryCategory.label = action.payload.initialData.category.label;
+      state.temporaryDescriptionForTask =
+        action.payload.initialData.description;
+    },
   },
 });
 
@@ -104,4 +126,5 @@ export const {
   closePopup,
   clearState,
   changeCurrentStep,
+  setTemporary,
 } = createRequestModel.actions;
