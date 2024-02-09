@@ -13,10 +13,12 @@ import { useGetUserByIdQuery, useUpdateUsersMutation } from 'services/user-api';
 import { useAppSelector } from 'app/hooks';
 import styles from './styles.module.css';
 import { UserRole, UserStatus } from 'shared/types/common.types';
+import { isRootSelector } from 'entities/user/model';
 
 export const UserInfo = () => {
   const role = useAppSelector((state) => state.user.role);
   const userStatus = useAppSelector((state) => state.user.data?.status);
+  const isRoot = useAppSelector(isRootSelector);
 
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
@@ -24,11 +26,12 @@ export const UserInfo = () => {
   const isVKAuthPath = location.pathname.includes('/vk-auth');
   const userId = () => {
     if (role === UserRole.VOLUNTEER) return '7';
-    if (role === UserRole.USER) return '1';
-    if (role === UserRole.RECIPIENT && userStatus === UserStatus.CONFIRMED) return '4';
+    if (role === UserRole.ADMIN && isRoot) return '1';
+    if (role === UserRole.RECIPIENT && userStatus === UserStatus.CONFIRMED)
+      return '4';
     if (role === UserRole.RECIPIENT && userStatus === UserStatus.UNCONFIRMED)
       return '9';
-    if (role === UserRole.ADMIN) return '2';
+    if (role === UserRole.ADMIN && !isRoot) return '2';
     if (!role) return null;
   };
   const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);

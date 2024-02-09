@@ -8,7 +8,6 @@ export enum UserStatus {
 
 export enum UserRole {
   ADMIN = 'Admin',
-  USER = 'GeneralUser',
   RECIPIENT = 'Recipient',
   VOLUNTEER = 'Volunteer',
 }

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { newUserThunk, userLoginThunk } from '../../../services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { User } from '../types';
+import { TCustomSelector } from 'shared/types/store.types';
 
 type UserState = {
   _id: string;
@@ -21,7 +22,8 @@ const initialState: UserState = {
   isFailed: false,
   error: null,
 };
-
+export const isRootSelector: TCustomSelector<boolean> = (state) =>
+  !!state.user && (state.user.data?.isRoot ?? false);
 export const userModel = createSlice({
   name: 'user',
   initialState,

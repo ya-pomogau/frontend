@@ -7,7 +7,7 @@
       "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
       "address": "ул. Поселковая, д. 5",
       "vkId": "https://vk.com/id123456789",
-      "role": "GeneralUser",
+      "role": "Admin",
       "login": "root@mail.com",
       "password": "459670778",
       "isActive": true,

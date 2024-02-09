@@ -67,7 +67,6 @@ export const router = createBrowserRouter(
                 Volunteer: true,
                 Recipient: true,
                 Admin: true,
-                GeneralUser: true,
               }}
             />
           }
@@ -110,7 +109,6 @@ export const router = createBrowserRouter(
             <RoutesGroup
               allowed={{
                 Admin: true,
-                GeneralUser: true,
               }}
             />
           }
@@ -147,13 +145,14 @@ export const router = createBrowserRouter(
 
           <Route path="/profile/bids" element={<BidsPage />} />
         </Route>
-
+        {/* TODO: нужно добавить определеение что это мастер исходя из значение isRoot */}
         <Route
           element={
             <RoutesGroup
               allowed={{
-                GeneralUser: true,
+                Admin: true,
               }}
+              isRoot={true}
             />
           }
         >
