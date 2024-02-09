@@ -18,6 +18,7 @@ import {
 import { Category } from 'entities/task/types';
 
 interface TaskButtonsProps {
+  taskId?: string;
   recipientName?: string;
   address: string;
   description: string;
@@ -30,6 +31,7 @@ interface TaskButtonsProps {
 }
 
 export const TaskButtons = ({
+  taskId,
   recipientName,
   address,
   description,
@@ -48,7 +50,8 @@ export const TaskButtons = ({
 
   const initialData = {
     address,
-    category: { value: category.id, label: category.title },
+    taskId,
+    category,
     description,
     date,
   };
