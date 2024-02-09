@@ -32,4 +32,5 @@ export enum TaskButtonType {
   confirm = 'confirm',
   phone = 'phone',
   cancel = 'cancel',
+  responded = 'responded',
 }

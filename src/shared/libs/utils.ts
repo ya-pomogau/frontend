@@ -15,6 +15,8 @@ import {
 import { IDateUser } from 'pages/requests/test-users';
 import { UserRole } from 'shared/types/common.types';
 import { UserProps } from 'pages/requests-notprocessed';
+import { TaskButtonType } from 'shared/types/common.types';
+import { UserProfile } from 'entities/user/types';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -241,4 +243,21 @@ export const filterUsersNamePageAdmin = (
       user.userName.toLowerCase().includes(searchName.toLowerCase()) &&
       user.role !== UserRole.ADMIN
   );
+};
+export const variantBtnRec = (volunteer: UserProfile | null) => {
+  return volunteer ? TaskButtonType.responded : TaskButtonType.close;
+};
+
+export function checkTimeDifference(time: Date): boolean {
+  const currentTime: Date = new Date();
+  const timeDifference: number = time.getTime() - currentTime.getTime();
+  const hoursDifference: number = timeDifference / (1000 * 3600);
+
+  return hoursDifference < 24;
+}
+
+export const variantBtn = (parsedDate: Date) => {
+  return !checkTimeDifference(parsedDate)
+    ? TaskButtonType.close
+    : TaskButtonType.cancel;
 };
