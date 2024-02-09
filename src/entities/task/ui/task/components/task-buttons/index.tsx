@@ -3,7 +3,7 @@ import { SquareButton } from 'shared/ui/square-buttons';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
 import styles from './styles.module.css';
-import { isAfter, parseISO } from 'date-fns';
+import { format, isAfter, parseISO } from 'date-fns';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
@@ -14,6 +14,7 @@ import {
   setDate,
   setDescriptionForTask,
   setTemporary,
+  setTime,
 } from 'features/create-request/model';
 import { Category } from 'entities/task/types';
 
@@ -57,6 +58,9 @@ export const TaskButtons = ({
   };
 
   const handleEditButton = () => {
+    console.log('date', date);
+    dispatch(setDate(format(new Date(date!), 'dd.MM.yyyy')));
+    dispatch(setTime(format(new Date(date!), 'HH:mm')));
     dispatch(setTemporary({ initialData }));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
