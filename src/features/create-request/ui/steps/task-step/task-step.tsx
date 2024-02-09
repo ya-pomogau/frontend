@@ -29,6 +29,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   }));
 
   const handleTaskValueChange = (item: Option) => {
+    console.log('item', item);
     dispatch(setCategory(item));
   };
 

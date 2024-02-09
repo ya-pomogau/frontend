@@ -21,8 +21,8 @@ export type TInitialStateForPopup = {
   temporaryAddress: string;
   temporaryCoordinates?: GeoCoordinates;
   temporaryCategory: {
-    value: string;
-    label: string;
+    id: string;
+    title: string;
   };
   temporaryDescriptionForTask: string;
 };
@@ -45,8 +45,8 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   temporaryAddress: '',
   temporaryCoordinates: [],
   temporaryCategory: {
-    value: '',
-    label: '',
+    id: '',
+    title: '',
   },
   temporaryDescriptionForTask: '',
 };
@@ -70,7 +70,7 @@ export const createRequestModel = createSlice({
     },
     setCategory(state, action) {
       state.category.id = action.payload.id;
-      state.category.title = action.payload.label;
+      state.category.title = action.payload.title;
     },
     setDescriptionForTask(state, action) {
       state.description = action.payload;
@@ -104,8 +104,8 @@ export const createRequestModel = createSlice({
     setTemporary(state, action) {
       state.temporaryAddress = action.payload.initialData.address;
       //state.temporaryCoordinates = action.payload.initialData.coords;
-      state.temporaryCategory.value = action.payload.initialData.category.value;
-      state.temporaryCategory.label = action.payload.initialData.category.label;
+      state.temporaryCategory.id = action.payload.initialData.category.id;
+      state.temporaryCategory.title = action.payload.initialData.category.title;
       state.temporaryDescriptionForTask =
         action.payload.initialData.description;
     },

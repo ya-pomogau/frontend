@@ -57,7 +57,7 @@ export const TaskButtons = ({
     dispatch(setTemporary({ initialData }));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
-    dispatch(setCategory({ value: category.id, label: category.title }));
+    dispatch(setCategory(category));
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
