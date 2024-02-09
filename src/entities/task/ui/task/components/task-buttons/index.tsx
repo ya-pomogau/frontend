@@ -65,7 +65,7 @@ export const TaskButtons = ({
 
   const initialData = {
     address,
-    category: { value: category.id, label: category.title },
+    category: { value: category._id, label: category.title },
     description,
     date,
   };
@@ -74,7 +74,7 @@ export const TaskButtons = ({
     dispatch(setTemporary({ initialData }));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
-    dispatch(setCategory({ value: category._id, label: category.title }));
+    dispatch(setCategory(category));
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };

@@ -30,8 +30,8 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   temporaryAddress: '',
   temporaryCoordinates: [],
   temporaryCategory: {
-    value: '',
-    label: '',
+    id: '',
+    title: '',
   },
   temporaryDescriptionForTask: '',
 };

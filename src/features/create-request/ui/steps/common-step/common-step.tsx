@@ -30,6 +30,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     isTypeEdit,
     termlessRequest,
     location,
+    temporaryCategory,
   } = useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
@@ -101,7 +102,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         break;
     }
   };
-
+  console.log('category', category);
+  console.log('temporaryCategory', temporaryCategory);
   return (
     <div className={styles.mainWrapper}>
       <div
