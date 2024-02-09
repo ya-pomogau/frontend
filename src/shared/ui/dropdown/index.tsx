@@ -42,20 +42,21 @@ const Dropdown = ({
   const { categories } = useAppSelector((state) => state.createRequest);
   const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   // Фильтруем заявки по id
-
-  const taskId = tasks.filter((item: Task) => {
-    if (item.recipient.id === userId) {
-      return item;
-    }
-  });
+  //BUG: эта функция не нужна так как по запросу активных тасок, будут приходить таски текущего пользователя
+  //BUG+ в GenericUserModelInterface (который на фронте записан в тип UserProfile) на бэке нет поля id
+  // const taskId = tasks.filter((item: Task) => {
+  //   if (item.recipient.id === userId) {
+  //     return item;
+  //   }
+  // });
   // Получаем id категории
-  const categoryId = taskId.map((item: Task) => item.category.id);
+  const categoryId = tasks.map((item: Task) => item.category._id);
   //Получем объект уже выбранной категории
-  const commonIds = categories.filter((obj) => categoryId.includes(obj.id));
+  const commonIds = categories.filter((obj) => categoryId.includes(obj._id));
 
   const commonSelected = commonIds?.map((item) => ({
-    value: String(item.id),
-    label: item.name,
+    value: String(item._id),
+    label: item.title,
   }));
 
   const handleOnChange = useCallback(

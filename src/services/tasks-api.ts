@@ -4,7 +4,7 @@ import { Task } from 'entities/task/types';
 
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
-  tagTypes: ['Tasks', 'CompletedTasks'],
+  tagTypes: ['Task', 'CompletedTasks'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
     getTasks: build.query<Array<Task>, any>({
@@ -12,10 +12,13 @@ export const tasksApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }: any) => ({ type: 'Tasks' as const, id })),
-              { type: 'Tasks', id: 'LIST' },
+              ...result.map(({ id }: any) => ({
+                type: 'Task' as const,
+                id,
+              })),
+              { type: 'Task', id: 'LIST' },
             ]
-          : [{ type: 'Tasks', id: 'LIST' }],
+          : [{ type: 'Task', id: 'LIST' }],
     }),
     updateTask: build.mutation({
       query: (body) => ({
@@ -24,7 +27,7 @@ export const tasksApi = createApi({
         body,
         // headers: 'Здесь будет JWT',
       }),
-      invalidatesTags: [{ type: 'Tasks', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Task', id: 'LIST' }],
     }),
     getTasksByStatus: build.query({
       query: (status) => ({

@@ -9,23 +9,23 @@ import { useMediaQuery } from 'shared/hooks';
 
 interface TaskRecipientProps {
   avatar: string;
+  // TODO: переименовать в name & phone. В зависимости от роли текущего пользователя отображается информация либо волонтера либо реципиента
   recipientName?: string;
   recipientPhoneNumber?: string;
   connection: boolean;
-  unreadMessages?: number;
   extClassName?: string;
 }
-
+// TODO: переименовать в TaskUser
 export const TaskRecipient = ({
   avatar,
   recipientName,
   recipientPhoneNumber,
-  connection = true,
-  unreadMessages,
+  connection,
   extClassName,
 }: TaskRecipientProps) => {
   const isMobile = useMediaQuery('(max-width:1150px)');
   return (
+    // TODO: Если отображаются таски реципиента, то в зависимости от поля volunteer должна отображаться либо пустая рамка аватара, либо аватар и информация.
     <div className={classNames(extClassName, styles.main)}>
       <Avatar
         avatarName={recipientName || 'Пользователь не назначен'}
@@ -46,7 +46,7 @@ export const TaskRecipient = ({
           {recipientPhoneNumber}
         </p>
       </div>
-
+      {/* TODO: disabled кнопок привести к логике описанной в миро */}
       <div className={styles.buttons}>
         <ButtonWithModal
           modalContent={<ModalContent type={TaskButtonType.phone} />}
@@ -56,11 +56,7 @@ export const TaskRecipient = ({
             disabled={connection}
           />
         </ButtonWithModal>
-        <RoundButton
-          buttonType="message"
-          disabled={connection}
-          unreadMessages={unreadMessages}
-        />
+        <RoundButton buttonType="message" disabled={connection} />
       </div>
     </div>
   );

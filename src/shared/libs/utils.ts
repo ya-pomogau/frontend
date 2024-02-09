@@ -48,8 +48,8 @@ export const sortTasks = (
   item: 'date' | 'decreasing' | 'increasing'
 ) => {
   const sortedTasks = [...arr].sort((a, b) => {
-    const aValue = item === 'date' ? a.date : a.category.scope;
-    const bValue = item === 'date' ? b.date : b.category.scope;
+    const aValue = item === 'date' ? a.date! : a.category.points;
+    const bValue = item === 'date' ? b.date! : b.category.points;
     const order = item === 'decreasing' ? -1 : 1;
 
     if (aValue > bValue) {
@@ -70,7 +70,7 @@ export const handleFilterTasks = (
 ) => {
   const handleTasksFilter = (arr: Task[]) =>
     arr.filter((task: Task) =>
-      infoFilterTasks.categories.includes(task.category.name)
+      infoFilterTasks.categories.includes(task.category.title)
     );
 
   if (tasks) {
@@ -96,7 +96,7 @@ export const handleFilterTasks = (
   };
   if (infoFilterTasks?.categories.length) {
     const filteredTasks = tasks.filter((task: Task) => {
-      return infoFilterTasks.categories.includes(task.category.name);
+      return infoFilterTasks.categories.includes(task.category.title);
     });
     if (infoFilterTasks?.sortBy) {
       sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy);

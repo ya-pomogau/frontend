@@ -104,20 +104,20 @@ export const YandexMap = ({
             if (!isGranted) showPopup = showUnauthorithedPopup;
             return (
               <Mark
-                id={task.id}
-                coordinates={task.coordinates}
-                isUrgentTask={isTaskUrgent(task.date)}
-                fullName={task.recipient.fullname}
+                id={task._id}
+                coordinates={task.location}
+                isUrgentTask={isTaskUrgent(task.date!)}
+                fullName={task.recipient.name}
                 phone={task.recipient.phone}
                 avatar={task.recipient.avatar}
                 description={task.description}
-                count={task.category.scope}
+                count={task.category.points}
                 onClick={onClick}
                 showPopup={showPopup}
-                key={task.id}
+                key={task._id}
                 isAuthorised={isAuthorised}
-                date={new Date(task.date).toLocaleDateString()}
-                time={new Date(task.date).toLocaleTimeString([], {
+                date={new Date(task.date!).toLocaleDateString()}
+                time={new Date(task.date!).toLocaleTimeString([], {
                   hour: '2-digit',
                   minute: '2-digit',
                 })}

@@ -32,11 +32,13 @@ export function ProfileMapPage() {
     if (result.length && user) {
       const { date, time, searchRadius } = query;
       if (date && typeof date === 'string') {
-        result = result.filter((task: Task) => filterByDate(date, task.date));
+        result = result.filter((task: Task) => filterByDate(date, task.date!));
       }
 
       if (time && (typeof time === 'string' || Array.isArray(time))) {
-        result = result.filter((task: Task) => filterByTime(time, task.date));
+        result = result.filter(
+          (task: Task) => task.date && filterByTime(time, task.date!)
+        );
       }
 
       if (
@@ -47,7 +49,7 @@ export function ProfileMapPage() {
         result = result.filter((task: Task) =>
           filterByDistance(
             user.coordinates,
-            task.coordinates,
+            task.location,
             parseInt(searchRadius, 10)
           )
         );
