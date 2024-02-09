@@ -162,7 +162,7 @@
       "_id": "1",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [59.91776040271765,30.323923391601433],
+      "location": [59.91776040271765, 30.323923391601433],
       "status": "created",
       "category": {
         "_id": "1",
@@ -216,7 +216,7 @@
       "_id": "3",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [59.90017303411407,30.40357427050727],
+      "location": [59.90017303411407, 30.40357427050727],
       "status": "created",
       "category": {
         "_id": "1",
@@ -258,7 +258,7 @@
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45",
+        "address": "Улица Мебельная, 77",
         "vkId": "4567890",
         "role": "Recipient"
       },
@@ -439,6 +439,33 @@
       },
       "volunteerReport": "rejected",
       "adminResolve": "rejected",
+      "isPendingChanges": false
+    },
+    {
+      "_id": "1",
+      "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
+      "address": "Улица Парковая, 123",
+      "location": [59.91776040271765, 30.323923391601433],
+      "status": "created",
+      "category": {
+        "_id": "1",
+        "title": "Сопровождение",
+        "points": 1,
+        "accessLevel": 1
+      },
+      "date": "2023-03-10T16:45:00Z",
+      "recipient": {
+        "name": "Мария Иванова",
+        "phone": "+7 123 456 7890",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "address": "Улица Цветочная, 45",
+        "vkId": "4567890",
+        "role": "Recipient"
+      },
+      "recipientReport": null,
+      "volunteer": null,
+      "volunteerReport": null,
+      "adminResolve": null,
       "isPendingChanges": false
     }
   ],

@@ -31,6 +31,7 @@ export const TaskUser = ({
   status,
 }: TaskUserProps) => {
   const isMobile = useMediaQuery('(max-width:1150px)');
+
   return (
     // TODO: Если отображаются таски реципиента, то в зависимости от поля volunteer должна отображаться либо пустая рамка аватара, либо аватар и информация.
     <div className={classNames(extClassName, styles.main)}>
