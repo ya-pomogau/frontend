@@ -35,6 +35,8 @@ export const InitialStateForPopup: TInitialStateForPopup = {
     title: '',
   },
   temporaryDescriptionForTask: '',
+  temporaryTime: format(new Date(), 'hh:mm'),
+  temporaryDate: format(new Date(), 'dd.MM.yyyy'),
 };
 
 // eslint-disable-next-line react/prop-types

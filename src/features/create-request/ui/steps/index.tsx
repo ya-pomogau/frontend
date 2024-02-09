@@ -10,6 +10,8 @@ import {
   setAddress,
   setCategory,
   setDescriptionForTask,
+  setTime,
+  setDate,
 } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
@@ -23,6 +25,7 @@ import { useGetCategoriesQuery } from 'services/categories-api';
 import { Tooltip } from '../../../../shared/ui/tooltip';
 import styles from './styles.module.css';
 import { Button } from '../../../../shared/ui/button';
+import { format } from 'date-fns';
 
 export interface RequestProps {
   isMobile?: boolean;
@@ -36,12 +39,16 @@ export const Request = ({ isMobile = true }: RequestProps) => {
     temporaryAddress,
     temporaryCoordinates,
     temporaryDescriptionForTask,
+    temporaryDate,
+    temporaryTime,
   } = useAppSelector((state) => state.createRequest);
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseClick = () => {
+    dispatch(setDate(format(new Date(temporaryDate!), 'dd.MM.yyyy')));
+    dispatch(setTime(temporaryTime!));
     dispatch(
       setAddress({
         additinalAddress: temporaryAddress,

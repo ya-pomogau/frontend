@@ -1,3 +1,4 @@
+import { Data } from './../../../widgets/map/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
 import { Category } from 'entities/task/types';
@@ -26,6 +27,8 @@ export type TInitialStateForPopup = {
     title: string;
   };
   temporaryDescriptionForTask: string;
+  temporaryTime: string;
+  temporaryDate: string;
 };
 
 export const InitialStateForPopup: TInitialStateForPopup = {
@@ -51,6 +54,8 @@ export const InitialStateForPopup: TInitialStateForPopup = {
     title: '',
   },
   temporaryDescriptionForTask: '',
+  temporaryTime: format(new Date(), 'hh:mm'),
+  temporaryDate: format(new Date(), 'dd.MM.yyyy'),
 };
 
 export const createRequestModel = createSlice({
@@ -104,6 +109,7 @@ export const createRequestModel = createSlice({
       Object.assign(state, InitialStateForPopup);
     },
     setTemporary(state, action) {
+      state.temporaryDate = action.payload.initialData.date;
       state.taskId = action.payload.initialData.taskId;
       state.temporaryAddress = action.payload.initialData.address;
       //state.temporaryCoordinates = action.payload.initialData.coords;
