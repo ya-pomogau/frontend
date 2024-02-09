@@ -22,13 +22,8 @@ type Requirments =
   | AdminPermission.CONFLICTS
   | AdminPermission.BLOG
   | AdminPermission.CATEGORIES;
-// TODO: проверить что работает норм
-type Role =
-  | UserRole.VOLUNTEER
-  | UserRole.RECIPIENT
-  | UserRole.ADMIN
-  | UserRole.USER;
-
+type Role = UserRole.VOLUNTEER | UserRole.RECIPIENT | UserRole.ADMIN;
+// TODO: возможно нужно будет дописать условие на isRoot тк админ и мастер имею одну и туже роль
 export default function usePermission(
   requirments: Array<Requirments>,
   role: Role

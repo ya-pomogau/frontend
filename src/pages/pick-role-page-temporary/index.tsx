@@ -18,12 +18,13 @@ import {
 } from 'entities/user/model';
 import { useGetUserByIdQuery } from 'services/user-api';
 import { UserRole } from 'shared/types/common.types';
+import { isRootSelector } from 'entities/user/model';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
   const [userId, setUserId] = useState<string | null>(null);
-
+  const isRoot = useAppSelector(isRootSelector);
   const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
 
   const removeRole = () => {
@@ -58,7 +59,7 @@ export function PickRolePage() {
   };
 
   const getMasterAdminRole = () => {
-    dispatch(setUserRole(UserRole.USER));
+    dispatch(setUserRole(UserRole.ADMIN));
     setUserId('1');
   };
 
@@ -73,14 +74,15 @@ export function PickRolePage() {
   };
 
   const getPageYouWouldBeRedirected = () => {
+    if (isRoot) {
+      return '/profile/requests';
+    }
     switch (role) {
       case UserRole.VOLUNTEER:
         return '/profile/map';
       case UserRole.RECIPIENT:
         return '/profile/active';
       case UserRole.ADMIN:
-        return '/profile/requests';
-      case UserRole.USER:
         return '/profile/requests';
       default:
         return '/';

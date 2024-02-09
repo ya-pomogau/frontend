@@ -9,25 +9,25 @@ interface CommonRouteProps {
 
 interface PublicRouteProps extends CommonRouteProps {
   publicRoutes: true;
-
   allowed?: never;
   onlyUnauthorized?: never;
+  isRoot?: never;
 }
 
 interface OnlyUnauthorizedRouteProps extends CommonRouteProps {
   onlyUnauthorized: boolean;
-
   allowed?: never;
   publicRoutes?: never;
+  isRoot?: never;
 }
 
 interface RoledRouteProps extends CommonRouteProps {
   allowed: {
     [key in UserRole]?: boolean;
   };
-
   publicRoutes?: never;
   onlyUnauthorized?: never;
+  isRoot?: boolean;
 }
 
 type RoutesGroupProps =
@@ -39,6 +39,7 @@ export const RoutesGroup = ({
   publicRoutes,
   onlyUnauthorized,
   allowed,
+  isRoot,
 }: RoutesGroupProps) => {
   const { isLoading, role } = useAppSelector((state) => state.user);
 
@@ -57,7 +58,9 @@ export const RoutesGroup = ({
   if (isLoading) {
     return null;
   }
-
+  if (isRoot) {
+    return <Outlet />;
+  }
   if (allowed === undefined) {
     return <Navigate to="/" replace />;
   }
