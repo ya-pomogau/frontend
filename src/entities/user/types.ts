@@ -54,17 +54,7 @@ export type User = {
 };
 
 export type TPointGeoJSON = PointGeoJSONInterface;
-// TODO: надо изменить
-export type TUserProfile = {
-  fullName: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  phone: string;
-  avatar: string;
-  address: string;
-};
-// TODO: надо изменить
+
 export type TUser = {
   _id: string;
   name: string;

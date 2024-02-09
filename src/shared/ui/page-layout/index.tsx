@@ -34,7 +34,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
 
   return (
     <>
-      {isLoadingUserData && <Loader />}
+      {/* {isLoadingUserData && <Loader />} */}
       {location.pathname === '/policy' ||
       location.pathname === '/blog' ||
       location.pathname === '/pick' ? (
