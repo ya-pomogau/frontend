@@ -11,6 +11,7 @@ import { format, isAfter, parseISO } from 'date-fns';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
+  changeCheckbox,
   changeCurrentStep,
   openPopup,
   setAddress,
@@ -75,7 +76,9 @@ export const TaskButtons = ({
   };
 
   const handleEditButton = () => {
-    console.log('date', date);
+    if (date === null) {
+      dispatch(changeCheckbox());
+    }
     dispatch(setDate(format(new Date(date!), 'dd.MM.yyyy')));
     dispatch(setTime(format(new Date(date!), 'HH:mm')));
     dispatch(setTemporary({ initialData }));
