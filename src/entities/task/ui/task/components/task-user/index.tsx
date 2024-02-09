@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import { useMediaQuery } from 'shared/hooks';
 import placeholder from '../../img/placeholder.svg';
 import { DefaultAvatar } from '../../img/default-avatar';
+import { TaskStatus } from 'entities/task/types';
 
 interface TaskUserProps {
   avatar: string;
@@ -17,6 +18,7 @@ interface TaskUserProps {
   connection: boolean;
   extClassName?: string;
   date: string | null;
+  status: TaskStatus;
 }
 // TODO: переименовать в TaskUser
 export const TaskUser = ({
@@ -26,6 +28,7 @@ export const TaskUser = ({
   connection,
   extClassName,
   date,
+  status,
 }: TaskUserProps) => {
   const isMobile = useMediaQuery('(max-width:1150px)');
   return (
@@ -52,26 +55,25 @@ export const TaskUser = ({
               {phone}
             </p>
           </div>
+          <div className={styles.buttons}>
+            <ButtonWithModal
+              modalContent={
+                <ModalContent type={TaskButtonType.phone} date={date} />
+              }
+            >
+              <RoundButton
+                buttonType={TaskButtonType.phone}
+                disabled={status === TaskStatus.COMPLETED ? true : false}
+              />
+            </ButtonWithModal>
+            <RoundButton
+              buttonType="message"
+              disabled={status === TaskStatus.COMPLETED ? true : false}
+            />
+          </div>
         </>
       ) : (
         <DefaultAvatar isTaskAvatar />
-      )}
-
-      {/* TODO: disabled кнопок привести к логике описанной в миро */}
-      {connection && (
-        <div className={styles.buttons}>
-          <ButtonWithModal
-            modalContent={
-              <ModalContent type={TaskButtonType.phone} date={date} />
-            }
-          >
-            <RoundButton
-              buttonType={TaskButtonType.phone}
-              disabled={connection}
-            />
-          </ButtonWithModal>
-          <RoundButton buttonType="message" disabled={connection} />
-        </div>
       )}
     </div>
   );

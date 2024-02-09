@@ -14,7 +14,8 @@ import {
   setDate,
   setDescriptionForTask,
 } from 'features/create-request/model';
-import { Category } from 'entities/task/types';
+import { Category, ResolveStatus, TaskReport } from 'entities/task/types';
+import { useLocation } from 'react-router-dom';
 
 interface TaskButtonsProps {
   recipientName?: string;
@@ -25,6 +26,9 @@ interface TaskButtonsProps {
   completed: boolean;
   conflict: boolean;
   extClassName?: string;
+  volunteerReport: TaskReport | null;
+  recipientReport: TaskReport | null;
+  adminResolve: ResolveStatus | null;
 }
 
 export const TaskButtons = ({
@@ -36,15 +40,31 @@ export const TaskButtons = ({
   completed,
   conflict,
   extClassName,
+  volunteerReport,
+  recipientReport,
+  adminResolve,
 }: TaskButtonsProps) => {
   const parsedDate = parseISO(date!);
   const comparedDateResult = isAfter(new Date(), parsedDate);
   const dispatch = useAppDispatch();
   const userRole = useAppSelector((state) => state.user.role);
   const additinalAddress = address;
+
+  function checkTimeDifference(time: Date): boolean {
+    const currentTime: Date = new Date();
+    const timeDifference: number = time.getTime() - currentTime.getTime();
+    const hoursDifference: number = timeDifference / (1000 * 3600);
+
+    return hoursDifference < 24;
+  }
+  console.log(comparedDateResult);
+  console.log(checkTimeDifference(parsedDate));
+
+  const location = useLocation();
+  const visibilityBtn = location.pathname === '/profile/completed';
   //Это значение раньше было в пропсах и никакого отношения к отображению кнопок не имеет
   //TODO заменить на актуальное условие показа кнопок
-  const isStatusActive = true;
+  const isStatusActive = !date;
 
   const handleEditButton = () => {
     dispatch(setDate(date));
@@ -57,68 +77,106 @@ export const TaskButtons = ({
   //TODO: логика отображения, работы кнопок должна соответствовать миро доске
   //TODO: в зависимости от роли, на некоторых попапах будет разных текст
   return (
-    <div className={classNames(extClassName, styles.buttons_action)}>
-      <ButtonWithModal
-        closeButton
-        modalContent={
-          <ModalContent
-            type={TaskButtonType.confirm}
-            active={isStatusActive}
-            date={date}
+    <div
+      className={classNames(extClassName, styles.buttons_action, {
+        [styles.item_hidden]: !recipientName,
+      })}
+    >
+      {/* зеленая кнопка  */}
+      {(comparedDateResult || !date) && !visibilityBtn && (
+        <ButtonWithModal
+          modalContent={
+            <ModalContent
+              type={TaskButtonType.confirm}
+              active={!isStatusActive}
+              date={date}
+            />
+          }
+        >
+          <SquareButton
+            buttonType={TaskButtonType.confirm}
+            extClassName={
+              recipientName && !date && completed
+                ? ''
+                : recipientName
+                ? ''
+                : styles.item_hidden
+            }
           />
-        }
-      >
-        <SquareButton
-          buttonType={TaskButtonType.confirm}
-          //переписать completed если бэк поменяется
-          extClassName={
-            recipientName && !date && completed
-              ? ''
-              : recipientName
-              ? ''
-              : styles.item_hidden
+        </ButtonWithModal>
+      )}
+
+      {/* удалить таску  */}
+      {userRole === UserRole.VOLUNTEER && !visibilityBtn && (
+        <ButtonWithModal
+          modalContent={
+            <ModalContent type={TaskButtonType.close} date={date} />
           }
-        />
-      </ButtonWithModal>
-      <ButtonWithModal
-        modalContent={<ModalContent type={TaskButtonType.close} date={date} />}
-      >
-        <SquareButton
-          buttonType={TaskButtonType.close}
-          extClassName={
-            (!date && recipientName) || !isStatusActive
-              ? styles.item_hidden
-              : styles.button_edit
-          }
-          //переписать completed если бэк поменяется
-          disabled={comparedDateResult || !completed}
-        />
-      </ButtonWithModal>
-      <ButtonWithModal
-        closeButton
-        modalContent={
-          <ModalContent
-            type={TaskButtonType.conflict}
-            active={isStatusActive}
-            conflict={conflict}
-            date={date}
+        >
+          <SquareButton
+            buttonType={TaskButtonType.close}
+            extClassName={
+              !date && recipientName && !isStatusActive
+                ? styles.item_hidden
+                : styles.button_edit
+            }
+            //переписать completed если бэк поменяется
+            disabled={
+              checkTimeDifference(parsedDate) || !completed || isStatusActive
+            }
           />
-        }
-      >
-        <SquareButton
-          buttonType={TaskButtonType.conflict}
-          //переписать conflict на подходящий параметр
-          extClassName={
-            recipientName && !date && !conflict
-              ? ''
-              : recipientName
-              ? ''
-              : !comparedDateResult
-              ? ''
-              : styles.item_hidden
+        </ButtonWithModal>
+      )}
+      {userRole === UserRole.RECIPIENT && !visibilityBtn && (
+        <ButtonWithModal
+          modalContent={
+            <ModalContent type={TaskButtonType.close} date={date} />
           }
-        />
-      </ButtonWithModal>
+        >
+          <SquareButton
+            buttonType={TaskButtonType.close}
+            extClassName={
+              (!date && recipientName) || !isStatusActive
+                ? styles.item_hidden
+                : styles.button_edit
+            }
+            //переписать completed если бэк поменяется
+            disabled={comparedDateResult || !completed}
+          />
+        </ButtonWithModal>
+      )}
+      {/* конфликт таску  */}
+      {(comparedDateResult || !date) && (
+        <ButtonWithModal
+          modalContent={
+            <ModalContent
+              type={TaskButtonType.conflict}
+              active={true}
+              conflict={conflict}
+              date={date}
+            />
+          }
+        >
+          <SquareButton
+            buttonType={TaskButtonType.conflict}
+            extClassName={
+              recipientName && !date && !conflict
+                ? ''
+                : recipientName
+                ? ''
+                : !comparedDateResult
+                ? ''
+                : styles.item_hidden
+            }
+            disabled={
+              volunteerReport === TaskReport.REJECTED &&
+              recipientReport === TaskReport.REJECTED &&
+              adminResolve === ResolveStatus.REJECTED
+            }
+          />
+        </ButtonWithModal>
+      )}
+
       {userRole === UserRole.RECIPIENT && (
         <SquareButton
           onClick={handleEditButton}

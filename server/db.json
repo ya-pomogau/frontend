@@ -209,7 +209,7 @@
         "points": 1,
         "accessLevel": 1
       },
-      "date": null,
+      "date": "2024-02-15T14:30:00Z",
       "recipient": {
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
@@ -235,11 +235,11 @@
       "status": "accepted",
       "category": {
         "_id": "2",
-        "title": "Покупка продуктов",
+        "title": "Перевозка в личном транспорте",
         "points": 1,
         "accessLevel": 1
       },
-      "date": "2023-03-10T16:45:00Z",
+      "date": "2024-02-09T18:00:00Z",
       "recipient": {
         "name": "Александр Петров Сергеевич",
         "phone": "+7 987 654 3210",
@@ -273,11 +273,45 @@
       "status": "accepted",
       "category": {
         "_id": "3",
-        "title": "Покупка вещей/техники",
+        "title": "Покупка продуктов",
         "points": 1,
         "accessLevel": 1
       },
-      "date": "2023-01-15T14:30:00Z",
+      "date": "2024-02-08T16:45:00Z",
+      "recipient": {
+        "name": "Елена Сидорова",
+        "phone": "+7 555 666 7777",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "address": "Улица Садовая, 10",
+        "vkId": "4567890",
+        "role": "Recipient"
+      },
+      "recipientReport": "fulfilled",
+      "volunteer": {
+        "name": "Валентин Захаров",
+        "phone": "+7 777 888 9999",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "address": "Улица Захарова, 20",
+        "vkId": "4567890",
+        "role": "Volunteer"
+      },
+      "volunteerReport": "fulfilled",
+      "adminResolve": "fulfilled",
+      "isPendingChanges": false
+    },
+    {
+      "_id": "4",
+      "description": "Посадить дерево в сквере, таска  взята волонтером",
+      "address": "Улица Деревенская, 30",
+      "location": [59.699788, 41.557059],
+      "status": "accepted",
+      "category": {
+        "_id": "4",
+        "title": "Покупка продуктов",
+        "points": 1,
+        "accessLevel": 1
+      },
+      "date": null,
       "recipient": {
         "name": "Елена Сидорова",
         "phone": "+7 555 666 7777",
@@ -336,6 +370,40 @@
       },
       "volunteerReport": "fulfilled",
       "adminResolve": "fulfilled",
+      "isPendingChanges": false
+    },
+    {
+      "_id": "3",
+      "description": "Посадить дерево в сквере, таска  завершена",
+      "address": "Улица Деревенская, 30",
+      "location": [59.699788, 41.557059],
+      "status": "completed",
+      "category": {
+        "_id": "3",
+        "title": "Покупка вещей/техники",
+        "points": 1,
+        "accessLevel": 1
+      },
+      "date": "2023-03-10T16:45:00Z",
+      "recipient": {
+        "name": "Елена Сидорова",
+        "phone": "+7 555 666 7777",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "address": "Улица Садовая, 10",
+        "vkId": "4567890",
+        "role": "Recipient"
+      },
+      "recipientReport": "rejected",
+      "volunteer": {
+        "name": "Валентин Захаров",
+        "phone": "+7 777 888 9999",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "address": "Улица Захарова, 20",
+        "vkId": "4567890",
+        "role": "Volunteer"
+      },
+      "volunteerReport": "rejected",
+      "adminResolve": "rejected",
       "isPendingChanges": false
     }
   ],
