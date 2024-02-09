@@ -38,6 +38,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     dispatch(changeStepDecrement());
   };
 
+  //if(data === null){
+  //  termlessRequest = true;
+  //}
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
@@ -165,10 +168,19 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_large', 'm-0')}>{date}</p>
-              <p className={classNames('text_size_large', styles.time)}>
-                {time}
-              </p>
+              {!termlessRequest ? (
+                <>
+                  <p className={classNames('text_size_large', 'm-0')}>{date}</p>
+                  <p className={classNames('text_size_large', styles.time)}>
+                    {time}
+                    {termlessRequest}
+                  </p>
+                </>
+              ) : (
+                <p className={classNames('text_size_large', 'm-0')}>
+                  Заявка без срока
+                </p>
+              )}
               {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}

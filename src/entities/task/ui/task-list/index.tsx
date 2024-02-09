@@ -82,7 +82,6 @@ export const TaskList = ({
       window.removeEventListener('resize', getCoords);
     };
   }, []);
-
   return (
     <>
       {/* TODO: удалить 52 строку, когда будут приходить данные тасок с сервера */}
