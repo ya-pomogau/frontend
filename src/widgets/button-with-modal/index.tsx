@@ -1,13 +1,12 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
-import styles from './styles.module.css';
 
 interface ModalProps {
   children: ReactNode;
   modalContent: ReactNode;
-  closeButton?: boolean;
+  setClicked?: Dispatch<SetStateAction<boolean>>;
+  extClassName?: string;
 }
 
 interface Coords {
@@ -18,7 +17,8 @@ interface Coords {
 export const ButtonWithModal = ({
   children,
   modalContent,
-  closeButton = false,
+  setClicked,
+  extClassName,
 }: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -38,13 +38,18 @@ export const ButtonWithModal = ({
     }
   };
 
+  const hideModal = () => {
+    setVisible(false);
+    setClicked && setClicked(true);
+  };
+
   return (
-    <div ref={buttonRef} onClick={getCoords}>
+    <div ref={buttonRef} onClick={getCoords} className={extClassName}>
       {children}
       {visible && (
         <Tooltip
           visible={visible}
-          changeVisible={() => setVisible(false)}
+          changeVisible={hideModal}
           pointerPosition="right"
           elementStyles={{
             position: 'absolute',
@@ -52,12 +57,7 @@ export const ButtonWithModal = ({
             right: `${coords?.right}px`,
           }}
         >
-          {closeButton && (
-            <CloseCrossIcon
-              color="blue"
-              className={`${styles.closeButton} close`}
-            />
-          )}
+          {/* TODO: необходимо добавить крестик, не затрагивая  Tooltip*/}
           {modalContent}
         </Tooltip>
       )}
