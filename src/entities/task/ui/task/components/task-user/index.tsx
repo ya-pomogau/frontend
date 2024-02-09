@@ -12,7 +12,6 @@ import { TaskStatus } from 'entities/task/types';
 
 interface TaskUserProps {
   avatar: string;
-  // TODO: переименовать в name & phone. В зависимости от роли текущего пользователя отображается информация либо волонтера либо реципиента
   name?: string;
   phone?: string;
   connection: boolean;
@@ -20,7 +19,6 @@ interface TaskUserProps {
   date: string | null;
   status: TaskStatus;
 }
-// TODO: переименовать в TaskUser
 export const TaskUser = ({
   avatar = placeholder,
   name,
@@ -33,7 +31,6 @@ export const TaskUser = ({
   const isMobile = useMediaQuery('(max-width:1150px)');
 
   return (
-    // TODO: Если отображаются таски реципиента, то в зависимости от поля volunteer должна отображаться либо пустая рамка аватара, либо аватар и информация.
     <div className={classNames(extClassName, styles.main)}>
       {connection ? (
         <>

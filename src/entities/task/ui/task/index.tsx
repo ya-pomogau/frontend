@@ -34,9 +34,6 @@ export const TaskItem = ({
   userRole,
   extClassName,
 }: TaskItemProps) => {
-  //TODO: возможно, будет достаточно смотреть на статус задачи
-  const canConnectWithUser =
-    volunteer !== null || status === TaskStatus.ACCEPTED ? true : false;
 
   const taskConfirmed = () => {
     if (
@@ -113,13 +110,11 @@ export const TaskItem = ({
           name={name}
           phone={phone}
           status={status}
-          //TODO: заменить volunteer === null ? false : true на правильное условие
           connection={volunteer === null ? false : true}
           extClassName={styles.recipient}
           date={date}
         />
         <TaskButtons
-          //TODO: заменить completed conflict на правильные поля
           recipientName={name}
           address={address}
           description={description}
