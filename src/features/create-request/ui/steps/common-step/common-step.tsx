@@ -40,6 +40,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
   const handleSubmitClick = () => {
+    let requestData = {};
     if (!termlessRequest) {
       const [year, month, day] = formattedDate.split('.');
       const [hours, minutes] = time.split(':');
@@ -51,28 +52,31 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         +minutes
       ).toISOString();
 
-      const requestData = {
+      requestData = {
         categoryId: category.id,
         location,
         date: dateObject,
         address,
         description,
       };
-
-      console.log(requestData);
       dispatch(clearState());
       dispatch(closePopup());
     } else {
-      const requestData = {
+      requestData = {
         categoryId: category.id,
         location,
         date: null,
         address,
         description,
       };
-      console.log(requestData);
+
       dispatch(clearState());
       dispatch(closePopup());
+    }
+    if (isTypeEdit) {
+      console.log('это редактирование', requestData);
+    } else {
+      console.log('это новая таска', requestData);
     }
   };
 
