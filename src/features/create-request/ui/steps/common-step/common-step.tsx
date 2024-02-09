@@ -38,7 +38,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
-  console.log(category);
 
   const handleSubmitClick = () => {
     if (!termlessRequest) {
