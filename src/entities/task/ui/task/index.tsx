@@ -19,6 +19,10 @@ export const TaskItem = ({
     description,
     recipient: { name, phone, avatar },
     volunteer,
+    status,
+    volunteerReport,
+    recipientReport,
+    adminResolve,
   },
   extClassName,
 }: TaskItemProps) => {
@@ -62,6 +66,7 @@ export const TaskItem = ({
           avatar={avatar}
           name={name}
           phone={phone}
+          status={status}
           //TODO: заменить volunteer === null ? false : true на правильное условие
           connection={volunteer === null ? false : true}
           extClassName={styles.recipient}
@@ -77,6 +82,9 @@ export const TaskItem = ({
           completed
           conflict
           extClassName={styles.buttons}
+          volunteerReport={volunteerReport}
+          recipientReport={recipientReport}
+          adminResolve={adminResolve}
         />
       </div>
     </>
