@@ -7,6 +7,9 @@ import {
   clearState,
   changeCurrentStep,
   openPopup,
+  setAddress,
+  setCategory,
+  setDescriptionForTask,
 } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
@@ -26,17 +29,29 @@ export interface RequestProps {
 }
 export const Request = ({ isMobile = true }: RequestProps) => {
   const dispatch = useAppDispatch();
-  const { currentStep, isPopupOpen, isTypeEdit } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const {
+    currentStep,
+    isPopupOpen,
+    isTypeEdit,
+    temporaryAddress,
+    temporaryCoordinates,
+    temporaryDescriptionForTask,
+  } = useAppSelector((state) => state.createRequest);
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseClick = () => {
+    dispatch(
+      setAddress({
+        additinalAddress: temporaryAddress,
+        coords: temporaryCoordinates,
+      })
+    );
+    dispatch(setDescriptionForTask(temporaryDescriptionForTask));
+    dispatch(setCategory({ temporaryCoordinates }));
     if (isTypeEdit && currentStep !== 4) {
       dispatch(closePopup());
-      dispatch(clearState());
       dispatch(changeCurrentStep(4));
       dispatch(openPopup());
       setIsOpen(false);

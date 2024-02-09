@@ -13,6 +13,7 @@ import {
   setCategory,
   setDate,
   setDescriptionForTask,
+  setTemporary,
 } from 'features/create-request/model';
 import { Category } from 'entities/task/types';
 
@@ -45,8 +46,15 @@ export const TaskButtons = ({
   const userRole = useAppSelector((state) => state.user.role);
   const additinalAddress = address;
 
+  const initialData = {
+    address,
+    category: { value: category.id, label: category.title },
+    description,
+    date,
+  };
+
   const handleEditButton = () => {
-    dispatch(setDate(date));
+    dispatch(setTemporary({ initialData }));
     dispatch(setAddress({ additinalAddress }));
     dispatch(setDescriptionForTask(description));
     dispatch(setCategory({ value: category.id, label: category.title }));

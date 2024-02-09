@@ -8,6 +8,7 @@ import { TaskRecipient } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
 import { Category } from 'entities/task/types';
 import { UserProfile } from 'entities/user/types';
+import { isAfter, parseISO } from 'date-fns';
 
 interface TaskItemProps {
   category: Category;
@@ -48,6 +49,29 @@ export const TaskItem = ({
   //     : styles.container_main_default;
   //TODO: использовать деструктуризацию для записи полей таски
   return (
+    //код для кнопки закрытия алерта
+
+    //const dispatch = useAppDispatch();
+
+    //const initialData = {
+    //  time,
+    //  address,
+    //  coordinates,
+    //  category: { value: category.id, label: category.name },
+    //  description,
+    //  date,
+    //};
+    //console.log(initialData.address);
+
+    //const handleEditButton = () => {
+    //  dispatch(setTemporary({ initialData }));
+    //  dispatch(setDate(date));
+    //  dispatch(setAddress({ additinalAddress: address, coords: coordinates }));
+    //  dispatch(setDescriptionForTask(description));
+    //  dispatch(setCategory({ value: category.id, label: category.name }));
+    //  dispatch(changeCurrentStep(4));
+    //  dispatch(openPopup());
+    //};
     <>
       <div
         className={classNames(
