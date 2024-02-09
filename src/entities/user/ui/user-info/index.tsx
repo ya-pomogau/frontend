@@ -17,31 +17,33 @@ import { isRootSelector } from 'entities/user/model';
 
 export const UserInfo = () => {
   const role = useAppSelector((state) => state.user.role);
-  const userStatus = useAppSelector((state) => state.user.data?.status);
-  const isRoot = useAppSelector(isRootSelector);
-
+  // берем данные пользователя из стора
+  const user = useAppSelector((state) => state.user.data);
   const location = useLocation();
   const isRegisterPath = location.pathname.includes('/register');
   const isLoginPath = location.pathname.includes('/login');
   const isVKAuthPath = location.pathname.includes('/vk-auth');
-  const userId = () => {
-    if (role === UserRole.VOLUNTEER) return '7';
-    if (role === UserRole.ADMIN && isRoot) return '1';
-    if (role === UserRole.RECIPIENT && userStatus === UserStatus.CONFIRMED)
-      return '4';
-    if (role === UserRole.RECIPIENT && userStatus === UserStatus.UNCONFIRMED)
-      return '9';
-    if (role === UserRole.ADMIN && !isRoot) return '2';
-    if (!role) return null;
-  };
-  const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
+  // Этот код нужно раскоментить, если нужно тестить фронт без бэка
+  // const userStatus = useAppSelector((state) => state.user.data?.status);
+  // const isRoot = useAppSelector(isRootSelector);
+  // const userId = () => {
+  //   if (role === UserRole.VOLUNTEER) return '7';
+  //   if (role === UserRole.ADMIN && isRoot) return '1';
+  //   if (role === UserRole.RECIPIENT && userStatus === UserStatus.CONFIRMED)
+  //     return '4';
+  //   if (role === UserRole.RECIPIENT && userStatus === UserStatus.UNCONFIRMED)
+  //     return '9';
+  //   if (role === UserRole.ADMIN && !isRoot) return '2';
+  //   if (!role) return null;
+  // };
+  // const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
   const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
-  // const isAuth = useUser();
+
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleOpenSettingClick = () => {
@@ -104,7 +106,7 @@ export const UserInfo = () => {
 
       <div className={styles.contentWrapper}>
         <InfoContainerContent
-          id={user._id}
+          id={user.vkId}
           name={user.name}
           phone={user.phone}
           address={user.address}
