@@ -17,14 +17,10 @@ import {
 import { Category, ResolveStatus, TaskReport } from 'entities/task/types';
 import { useLocation } from 'react-router-dom';
 import { UserProfile } from 'entities/user/types';
-import {
-  checkTimeDifference,
-  variantBtn,
-  variantBtnRec,
-} from 'shared/libs/utils';
+import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
+import { useState } from 'react';
 
 interface TaskButtonsProps {
-  recipientName?: string;
   address: string;
   description: string;
   category: Category;
@@ -38,7 +34,6 @@ interface TaskButtonsProps {
 }
 
 export const TaskButtons = ({
-  recipientName,
   address,
   description,
   category,
@@ -51,13 +46,16 @@ export const TaskButtons = ({
   volunteer,
 }: TaskButtonsProps) => {
   const location = useLocation();
-  const parsedDate = parseISO(date!);
-  const comparedDateResult = isAfter(new Date(), parsedDate);
   const dispatch = useAppDispatch();
   const userRole = useAppSelector((state) => state.user.role);
+  const parsedDate = parseISO(date!);
   const additinalAddress = address;
-  const overdueTask = () => new Date() > parsedDate;
-  const visibilityBtn = location.pathname === '/profile/completed';
+  const isTaskExpired = isAfter(new Date(), parsedDate);
+  const isTaskUrgent = checkTaskUrgency(date!);
+  const isPageActive = location.pathname === '/profile/active';
+
+  const [clickedConflict, setClickedConflict] = useState<boolean>(false);
+  const [clickedConfirm, setClickedConfirm] = useState<boolean>(false);
 
   const handleEditButton = () => {
     dispatch(setDate(date));
@@ -68,42 +66,36 @@ export const TaskButtons = ({
     dispatch(openPopup());
   };
   return (
-    <div
-      className={classNames(extClassName, styles.buttons_action, {
-        [styles.item_hidden]: !recipientName,
-      })}
-    >
-      {(comparedDateResult || !date) && !visibilityBtn && (
+    <div className={classNames(extClassName, styles.buttons)}>
+      {(isTaskExpired || !date) && isPageActive && (
         <ButtonWithModal
+          setClicked={setClickedConfirm}
           modalContent={
             <ModalContent
               type={TaskButtonType.confirm}
-              active={true}
               date={date}
               role={userRole}
             />
           }
+          extClassName={styles.confirm}
         >
           <SquareButton
             buttonType={TaskButtonType.confirm}
-            extClassName={
-              recipientName && !date
-                ? ''
-                : recipientName
-                ? ''
-                : styles.item_hidden
-            }
+            disabledColor={clickedConfirm}
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.VOLUNTEER && !visibilityBtn && date && (
+      {userRole === UserRole.VOLUNTEER && isPageActive && (
         <ButtonWithModal
+          extClassName={styles.close}
           modalContent={
             <ModalContent
               type={
-                !overdueTask()
-                  ? variantBtn(parsedDate)
-                  : TaskButtonType.responded
+                isTaskExpired || !date
+                  ? TaskButtonType.responded
+                  : isTaskUrgent
+                  ? TaskButtonType.cancel
+                  : TaskButtonType.close
               }
               date={date}
             />
@@ -111,30 +103,22 @@ export const TaskButtons = ({
         >
           <SquareButton
             buttonType={
-              checkTimeDifference(parsedDate)
-                ? TaskButtonType.responded
-                : TaskButtonType.close
+              isTaskUrgent ? TaskButtonType.responded : TaskButtonType.close
             }
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.VOLUNTEER && !date && (
+      {userRole === UserRole.RECIPIENT && isPageActive && (
         <ButtonWithModal
-          modalContent={
-            <ModalContent type={TaskButtonType.responded} date={date} />
-          }
-        >
-          <SquareButton buttonType={TaskButtonType.responded} />
-        </ButtonWithModal>
-      )}
-      {userRole === UserRole.RECIPIENT && !visibilityBtn && (
-        <ButtonWithModal
+          extClassName={styles.close}
           modalContent={
             <ModalContent
               type={
-                !overdueTask()
-                  ? variantBtnRec(volunteer)
-                  : TaskButtonType.responded
+                isTaskExpired
+                  ? TaskButtonType.responded
+                  : volunteer
+                  ? TaskButtonType.responded
+                  : TaskButtonType.close
               }
               date={date}
             />
@@ -142,55 +126,36 @@ export const TaskButtons = ({
         >
           <SquareButton
             buttonType={
-              checkTimeDifference(parsedDate)
-                ? TaskButtonType.responded
-                : TaskButtonType.close
+              isTaskUrgent ? TaskButtonType.responded : TaskButtonType.close
             }
           />
         </ButtonWithModal>
       )}
-      {(comparedDateResult || !date) &&
-        (!visibilityBtn ? (
-          <ButtonWithModal
-            modalContent={
-              <ModalContent
-                type={TaskButtonType.conflict}
-                active={true}
-                conflict={conflict}
-                date={date}
-              />
-            }
-          >
-            <SquareButton
-              buttonType={TaskButtonType.conflict}
-              disabled={
-                volunteerReport === TaskReport.REJECTED &&
-                recipientReport === TaskReport.REJECTED &&
-                adminResolve === ResolveStatus.REJECTED
-              }
+      {(isTaskExpired || !date) && (
+        <ButtonWithModal
+          setClicked={setClickedConflict}
+          extClassName={styles.conflict}
+          modalContent={
+            <ModalContent
+              type={TaskButtonType.conflict}
+              active={isPageActive}
+              conflict={conflict}
+              date={date}
             />
-          </ButtonWithModal>
-        ) : (
+          }
+        >
           <SquareButton
             buttonType={TaskButtonType.conflict}
-            extClassName={
-              recipientName && !date && !conflict
-                ? ''
-                : recipientName
-                ? ''
-                : !comparedDateResult
-                ? ''
-                : styles.item_hidden
-            }
-            disabled={
-              volunteerReport === TaskReport.REJECTED &&
-              recipientReport === TaskReport.REJECTED &&
-              adminResolve === ResolveStatus.REJECTED
-            }
+            disabledColor={conflict || clickedConflict}
           />
-        ))}
-      {userRole === UserRole.RECIPIENT && !volunteer && !visibilityBtn && (
-        <SquareButton onClick={handleEditButton} buttonType="edit" />
+        </ButtonWithModal>
+      )}
+      {userRole === UserRole.RECIPIENT && !volunteer && isPageActive && (
+        <SquareButton
+          onClick={handleEditButton}
+          buttonType="edit"
+          extClassName={styles.edit}
+        />
       )}
     </div>
   );

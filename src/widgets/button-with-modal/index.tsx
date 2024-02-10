@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';

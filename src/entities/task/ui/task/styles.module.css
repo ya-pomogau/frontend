@@ -44,7 +44,7 @@
   width: 100%;
 }
 
-.recipient {
+.user {
   grid-area: recipient;
   max-width: 181px;
   box-sizing: border-box;
