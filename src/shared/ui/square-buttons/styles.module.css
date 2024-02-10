@@ -93,3 +93,20 @@
 .square-button--conflict:active.square-button::before {
   background-color: var(--colors-interface-red-soft);
 }
+
+.square-button--conflict:focus.square-button::before {
+  background-color: var(--colors-interface-additional);
+}
+
+.disabledColor.square-button::before {
+  background-color: var(--colors-interface-additional);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.disabledColor:hover.square-button::before {
+  background-color: var(--colors-interface-additional);
+}
+
+.disabledColor:active.square-button::before {
+  background-color: var(--colors-interface-additional);
+}

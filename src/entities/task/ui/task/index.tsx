@@ -5,7 +5,7 @@ import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
 import { TaskUser } from './components/task-user';
 import { TaskButtons } from './components/task-buttons';
-import type { Task } from 'entities/task/types';
+import { TaskStatus, type Task } from 'entities/task/types';
 
 export interface TaskItemProps {
   item: Task;
@@ -17,7 +17,7 @@ export const TaskItem = ({
     date,
     address,
     description,
-    recipient: { name, phone, avatar },
+    recipient,
     volunteer,
     status,
     volunteerReport,
@@ -46,21 +46,18 @@ export const TaskItem = ({
           extClassName={styles.description}
         />
         <TaskUser
-          avatar={avatar}
-          name={name}
-          phone={phone}
+          user={recipient}
           status={status}
           connection={volunteer === null ? false : true}
-          extClassName={styles.recipient}
+          extClassName={styles.user}
           date={date}
         />
         <TaskButtons
-          recipientName={name}
           address={address}
           description={description}
           category={category}
           date={date}
-          conflict
+          conflict={status === TaskStatus.CONFLICTED}
           volunteer={volunteer}
           extClassName={styles.buttons}
           volunteerReport={volunteerReport}

@@ -14,6 +14,7 @@ interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType: 'close' | 'edit' | 'confirm' | 'conflict' | 'responded';
   onClick?: () => void;
   customIcon?: ReactNode;
+  disabledColor?: boolean;
 }
 
 const defautlIcons = {
@@ -29,12 +30,14 @@ export const SquareButton = ({
   extClassName,
   buttonType,
   customIcon,
+  disabledColor = false,
   ...props
 }: SquareButtonProps) => (
   <button
     type="button"
     className={classnames(
       styles['square-button'],
+      disabledColor && styles.disabledColor,
       styles[`square-button--${buttonType}`],
       extClassName
     )}

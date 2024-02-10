@@ -80,21 +80,31 @@ export const ModalContent = ({
               ? 'Не выполнена'
               : 'Выполнена'}
           </h3>
-          {active && (
+          {
             <>
-              <div className={classNames(styles.modalContent, styles.flexRow)}>
-                <Button buttonType="secondary" label="Отменить" />
-                <Button buttonType="primary" label="Подтвердить" />
-              </div>
-              <div className={styles.modalButtons}>
-                <Button
-                  buttonType="secondary"
-                  label="Помощь администратора"
-                  onClick={() => 1}
-                />
-              </div>
+              {active && (
+                <div
+                  className={classNames(styles.modalContent, styles.flexRow)}
+                >
+                  <Button buttonType="secondary" label="Отменить" />
+                  <Button buttonType="primary" label="Подтвердить" />
+                </div>
+              )}
+              {(active || !conflict) && (
+                <div className={styles.modalButtons}>
+                  <Button
+                    buttonType="secondary"
+                    label={
+                      active
+                        ? 'Помощь администратора'
+                        : 'Написать администратору'
+                    }
+                    onClick={() => 1}
+                  />
+                </div>
+              )}
             </>
-          )}
+          }
         </div>
       );
     case TaskButtonType.confirm:
@@ -104,7 +114,7 @@ export const ModalContent = ({
           <p className={textStyle}>
             {active
               ? `Мы ждем ответ ${
-                  role === UserRole.RECIPIENT ? 'волонтера' : 'рецепиента'
+                  role === UserRole.RECIPIENT ? 'от волонтера' : 'от реципиента'
                 }`
               : date
               ? format(new Date(date), 'dd.MM.yyyy hh:mm')
