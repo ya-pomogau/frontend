@@ -1,10 +1,28 @@
-.buttons_action {
+.buttons {
   display: grid;
   grid-template-columns: repeat(2, 32px);
+  grid-template-rows: repeat(2, 32px);
   gap: 10px;
   max-width: 82px;
   justify-content: end;
   align-content: start;
+  grid-template-areas: 'confirm close' 'conflict edit';
+}
+
+.confirm {
+  grid-area: confirm;
+}
+
+.close {
+  grid-area: close;
+}
+
+.conflict {
+  grid-area: conflict;
+}
+
+.edit {
+  grid-area: edit;
 }
 
 .item_hidden {

@@ -25,7 +25,7 @@ export const TaskItem = ({
     address,
     status,
     description,
-    recipient: { name, phone, avatar },
+    recipient,
     recipientReport,
     volunteer,
     volunteerReport,
@@ -106,21 +106,18 @@ export const TaskItem = ({
           extClassName={styles.description}
         />
         <TaskUser
-          avatar={avatar}
-          name={name}
-          phone={phone}
+          user={UserRole.RECIPIENT === userRole ? volunteer : recipient}
           status={status}
           connection={volunteer === null ? false : true}
-          extClassName={styles.recipient}
+          extClassName={styles.user}
           date={date}
         />
         <TaskButtons
-          recipientName={name}
           address={address}
           description={description}
           category={category}
           date={date}
-          conflict
+          conflict={status === TaskStatus.CONFLICTED}
           volunteer={volunteer}
           extClassName={styles.buttons}
           volunteerReport={volunteerReport}

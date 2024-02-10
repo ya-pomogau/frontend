@@ -9,20 +9,17 @@ import { useMediaQuery } from 'shared/hooks';
 import placeholder from '../../img/placeholder.svg';
 import { DefaultAvatar } from '../../img/default-avatar';
 import { TaskStatus } from 'entities/task/types';
+import { UserProfile } from 'entities/user/types';
 
 interface TaskUserProps {
-  avatar: string;
-  name?: string;
-  phone?: string;
+  user: UserProfile | null;
   connection: boolean;
   extClassName?: string;
   date: string | null;
   status: TaskStatus;
 }
 export const TaskUser = ({
-  avatar = placeholder,
-  name,
-  phone,
+  user,
   connection,
   extClassName,
   date,
