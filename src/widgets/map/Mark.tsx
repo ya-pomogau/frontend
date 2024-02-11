@@ -3,61 +3,35 @@
 /* eslint-disable react/no-this-in-sfc */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React from 'react';
+import { FC, memo } from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import usePermission from 'shared/hooks/use-permission';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { setAddress } from 'features/create-request/model';
 import { UserRole, UserStatus } from 'shared/types/common.types';
-import { useAppDispatch } from 'app/hooks';
+import { Task } from 'entities/task/types';
+import { isTaskUrgent } from 'shared/libs/utils';
 
 type MarkProps = {
-  id?: string;
-  coordinates?: GeoCoordinates;
-  isUrgentTask?: boolean;
-  fullName?: string;
-  phone?: string;
-  avatar?: string;
-  description?: string;
-  count?: number;
+  task?: Task;
   onClick?: () => void;
   showPopup?: () => void;
   onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
-  title?: string;
-  date?: string;
-  time?: string;
-  hasBalloon?: boolean;
-  draggable?: boolean;
 };
 
-const Mark: React.FC<MarkProps> = ({
-  id,
-  coordinates,
-  isUrgentTask,
-  fullName,
-  phone,
-  avatar,
-  description,
-  title,
-  count,
+const Mark: FC<MarkProps> = ({
+  task,
   onClick,
   showPopup,
   isAuthorised,
-  date,
-  time,
-  hasBalloon,
-  draggable,
 }: MarkProps) => {
-  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+  const { description, location, date } = task;
 
-  const dispatch = useAppDispatch();
+  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
 
   const isGranted = usePermission(
     [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
   );
-  const isDisabled = !isGranted;
 
   const onClickButton = () => {
     // Добавить обращение в бэкенд и после получения ответа показываем попап:
@@ -88,7 +62,6 @@ const Mark: React.FC<MarkProps> = ({
     {
       build() {
         Iconlayout.superclass.build.call(this);
-
         // На метку добавляем кликабильную зону
         this.getData().options.set('shape', {
           type: 'Circle',
@@ -108,12 +81,12 @@ const Mark: React.FC<MarkProps> = ({
           </svg>
         </div>
         <div class="task_bio">
-          <img src="{{properties.avatar}}" alt={{properties.fullName}} class="task_avatar"/>
+          <img src="{{properties.recipient.avatar}}" alt={{properties.recipient.name}} class="task_avatar"/>
           <div>
             <p class="task_recipient_name">
-              {{properties.fullName}}
+              {{properties.recipient.name}}
             </p>
-            <p class="task_recipient_phone">{{properties.phone}}</p>
+            <p class="task_recipient_phone">{{properties.recipient.phone}}</p>
           </div>
         </div>
         <div class="task_description_container">
@@ -135,7 +108,7 @@ const Mark: React.FC<MarkProps> = ({
           <p class={% if properties.isUrgentTask %} "task_date_text_urgent" {% else %} "task_date_text" {% endif %}>{{properties.date}}</p>
         </div>
           <div class="task_box">
-            <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.count}}</p>
+            <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.category.points}}</p>
               <svg width="47" height="36" viewBox="0 0 47 36" fill={% if properties.isUrgentTask %} "#D60080" {% else %} "#2E3192" {% endif %} xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.5 33C29.8497 33 36.0168 29.1956 37.704 21.9962C37.7102 21.9962 37.7165 21.9962 37.7228 21.9962L37.7358 21.9962C41.1954 21.9962 44 18.5281 44 14.8806C44 11.233 41.1954 7.76493 37.7358 7.76493C37.025 7.76493 36.0506 7.68529 35.4137 7.91528C32.6319 3.3266 28.0485 1 22.5 1C16.9515 1 12.3681 3.3266 9.58627 7.91528C8.94939 7.68529 7.97502 7.76493 7.2642 7.76493C3.80458 7.76493 1 11.233 1 14.8806C1 18.5281 3.80458 21.4851 7.2642 21.4851C7.27482 21.4851 7.28543 21.485 7.29604 21.485C8.98319 28.6844 15.1503 33 22.5 33Z"/>
                 <path d="M33.5569 17.7272C33.5569 24.5554 28.2856 30.0908 21.7831 30.0908C15.2806 30.0908 10.0093 24.5554 10.0093 17.7272C10.0093 10.8989 15.2806 5.36353 21.7831 5.36353C28.2856 5.36353 33.5569 10.8989 33.5569 17.7272Z" stroke="white" stroke-width="0.5"/>
@@ -175,7 +148,7 @@ const Mark: React.FC<MarkProps> = ({
           </svg>
         </div>
         <div class="task_bio">
-          <img src="{{properties.avatar}}" alt={{properties.fullName}} class="task_avatar"/>
+          <img src="{{properties.recipient.avatar}}" alt={{properties.recipient.name}} class="task_avatar"/>
           <div>
             <p class="task_recipient_name">
                Нужна помощь
@@ -185,12 +158,12 @@ const Mark: React.FC<MarkProps> = ({
         </div>
         <div class="task_description_container">
           <p class="task_description task_description_hidden" >
-            {{properties.title}}
+            {{properties.category.title}}
           </p>
           <button type="button" class="task_button"></button>
         </div>
         <div class="task_icon_box">
-          <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.count}}</p>
+          <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.category.count}}</p>
           <svg width="47" height="36" viewBox="0 0 47 36" fill={% if properties.isUrgentTask %} "#D60080" {% else %} "#2E3192" {% endif %} xmlns="http://www.w3.org/2000/svg">
             <path d="M22.5 33C29.8497 33 36.0168 29.1956 37.704 21.9962C37.7102 21.9962 37.7165 21.9962 37.7228 21.9962L37.7358 21.9962C41.1954 21.9962 44 18.5281 44 14.8806C44 11.233 41.1954 7.76493 37.7358 7.76493C37.025 7.76493 36.0506 7.68529 35.4137 7.91528C32.6319 3.3266 28.0485 1 22.5 1C16.9515 1 12.3681 3.3266 9.58627 7.91528C8.94939 7.68529 7.97502 7.76493 7.2642 7.76493C3.80458 7.76493 1 11.233 1 14.8806C1 18.5281 3.80458 21.4851 7.2642 21.4851C7.27482 21.4851 7.28543 21.485 7.29604 21.485C8.98319 28.6844 15.1503 33 22.5 33Z"/>
             <path d="M33.5569 17.7272C33.5569 24.5554 28.2856 30.0908 21.7831 30.0908C15.2806 30.0908 10.0093 24.5554 10.0093 17.7272C10.0093 10.8989 15.2806 5.36353 21.7831 5.36353C28.2856 5.36353 33.5569 10.8989 33.5569 17.7272Z" stroke="white" stroke-width="0.5"/>
@@ -257,51 +230,33 @@ const Mark: React.FC<MarkProps> = ({
     }
   );
 
+  const properties = Object.assign(
+    { ...task },
+    {
+      isAuthorised: isAuthorised,
+      isUrgentTask: isTaskUrgent(date!),
+      date: new Date(date!).toLocaleDateString(),
+      time: new Date(date!).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      isDisabled: !isGranted,
+    }
+  );
+
   return (
     <Placemark
-      geometry={coordinates}
+      geometry={location}
       options={{
         iconLayout: Iconlayout,
         balloonLayout: Balloonlayout,
         hideIconOnBalloonOpen: false,
         balloonOffset: [-158, 66],
         balloonPanelMaxMapArea: 0,
-        hasBalloon: hasBalloon,
-        draggable: draggable,
       }}
-      properties={{
-        isUrgentTask,
-        isDisabled,
-        fullName,
-        phone,
-        avatar,
-        description,
-        count,
-        title,
-        isAuthorised,
-        date,
-        time,
-      }}
-      // Данный пропс отвечает за возможность получить координату в конце перетаскивания баллуна
-      onDragEnd={(event) => {
-        const newCoordinates = event.get('target').geometry.getCoordinates();
-        // С помощью геокодера конвертируем полученную координату в адрес и отправляем в стор createRequst
-        if (ymaps) {
-          const geo = ymaps.geocode(newCoordinates);
-          geo.then((res) => {
-            const firstGeoObject = res.geoObjects.get(0);
-
-            dispatch(
-              setAddress({
-                additinalAddress: firstGeoObject.getAddressLine(),
-                coords: newCoordinates,
-              })
-            );
-          });
-        }
-      }}
+      properties={properties}
     />
   );
 };
 
-export default React.memo(Mark);
+export default memo(Mark);

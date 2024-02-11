@@ -1,8 +1,8 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useState } from 'react';
 import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
-import { isTaskUrgent, getBounds } from 'shared/libs/utils';
+import { getBounds } from 'shared/libs/utils';
 import Mark from './Mark';
 import { LightPopup } from 'shared/ui/light-popup';
 import {
@@ -20,6 +20,7 @@ import { UserRole, UserStatus } from 'shared/types/common.types';
 import classNames from 'classnames';
 import './styles.css';
 import styles from './styles.module.css';
+import UserMark from './UserMark';
 
 interface YandexMapProps {
   width?: string | number;
@@ -103,32 +104,20 @@ export const YandexMap = ({
             if (!isGranted) showPopup = showUnauthorithedPopup;
             return (
               <Mark
-                id={task._id}
-                coordinates={task.location}
-                isUrgentTask={isTaskUrgent(task.date!)}
-                fullName={task.recipient.name}
-                phone={task.recipient.phone}
-                avatar={task.recipient.avatar}
-                description={task.description}
-                count={task.category.points}
+                task={task}
                 onClick={onClick}
                 showPopup={showPopup}
                 key={task._id}
                 isAuthorised={isAuthorised}
-                date={new Date(task.date!).toLocaleDateString()}
-                time={new Date(task.date!).toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
               />
             );
           })}
-          <Mark
-            coordinates={coordinates}
-            hasBalloon={false}
-            onClick={() => console.log(role)}
-            draggable={role === UserRole.RECIPIENT}
-          />
+          {
+            <UserMark
+              location={coordinates}
+              draggable={role === UserRole.RECIPIENT}
+            />
+          }
           {radius && (
             <Circle
               geometry={[
