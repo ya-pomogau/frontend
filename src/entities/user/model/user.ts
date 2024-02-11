@@ -1,25 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { UserInfo } from '../types';
+
 import { newUserThunk, userLoginThunk } from '../../../services/system-slice';
 import { UserRole } from 'shared/types/common.types';
+import { User } from '../types';
+import { TCustomSelector } from 'shared/types/store.types';
 
 type UserState = {
-  id?: string;
+  _id: string;
   role: UserRole | null;
-  data: UserInfo | null;
+  data: User | null;
   isLoading: boolean;
   isFailed: boolean;
   error?: string | null | undefined;
 };
 
 const initialState: UserState = {
+  _id: '',
   role: null,
   data: null,
   isLoading: false,
   isFailed: false,
   error: null,
 };
-
+export const isRootSelector: TCustomSelector<boolean> = (state) =>
+  !!state.user && (state.user.data?.isRoot ?? false);
 export const userModel = createSlice({
   name: 'user',
   initialState,
@@ -31,7 +35,7 @@ export const userModel = createSlice({
       state.data = null;
       state.role = null;
     },
-    setUser: (state, { payload }) => {
+    setUser: (state, { payload }: PayloadAction<User>) => {
       state.data = payload;
     },
     enableBlokedError: (state) => {
@@ -56,30 +60,29 @@ export const userModel = createSlice({
         }
         const {
           _id,
-          profile: { fullName, avatar, address, phone },
-          location: { coordinates },
-          permissions,
-          role,
-          isHasKeys,
-          status,
-          vkId,
-          scores,
-        } = user;
-        const data: UserInfo = {
-          fullname: fullName,
+          name,
+          phone,
           avatar,
           address,
-          phone,
-          isHasKeys,
-          status,
+          location,
           role,
-          vk: vkId,
-          id: _id,
-          coordinates,
-          createdAt: 'a long long time ago in a far away galaxy...',
-          scores,
-          isActive: true,
-          permissions,
+          keys,
+          status,
+          vkId,
+          score,
+        } = user;
+        const data: User = {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          location: location?.coordinates,
+          role,
+          keys,
+          status,
+          vkId,
+          score,
         };
         return {
           ...state,
@@ -88,7 +91,7 @@ export const userModel = createSlice({
           error: null,
           role,
           data,
-          id: _id,
+          _id,
         };
       })
       .addCase(userLoginThunk.rejected, (state, action) => ({
@@ -113,30 +116,29 @@ export const userModel = createSlice({
         }
         const {
           _id,
-          profile: { fullName, avatar, address, phone },
-          location: { coordinates },
-          permissions,
-          role,
-          isHasKeys,
-          status,
-          vkId,
-          scores,
-        } = user;
-        const data: UserInfo = {
-          fullname: fullName,
+          name,
+          phone,
           avatar,
           address,
-          phone,
-          isHasKeys,
-          status,
+          location,
           role,
-          vk: vkId,
-          id: _id,
-          coordinates,
-          createdAt: 'a long long time ago in a far away galaxy...',
-          scores,
-          isActive: true,
-          permissions,
+          keys,
+          status,
+          vkId,
+          score,
+        } = user;
+        const data: User = {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          location: location?.coordinates,
+          role,
+          keys,
+          status,
+          vkId,
+          score,
         };
         return {
           ...state,
@@ -145,7 +147,7 @@ export const userModel = createSlice({
           error: null,
           role,
           data,
-          id: _id,
+          _id,
         };
       })
       .addCase(newUserThunk.rejected, (state, action) => ({

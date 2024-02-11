@@ -10,12 +10,11 @@ import { useLocation } from 'react-router-dom';
 import { ErrorDialog } from '../error-dialog';
 import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
 import { RegistrationNotice } from '../registration-notice';
-import { UNCONFIRMED } from 'shared/libs/statuses';
 import {
   unauthorizedRecipientMessage,
   unauthorizedVolunteerMessage,
 } from 'shared/libs/constants';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -26,7 +25,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
   const userRole = useAppSelector((state) => state.user.role);
   const isUnConfirmedUser = useAppSelector((state) => {
-    return (state.user.data && state.user.data.status === UNCONFIRMED) || null;
+    return state.user.data?.status === UserStatus.UNCONFIRMED;
   });
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmedUser;
@@ -35,7 +34,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
 
   return (
     <>
-      {isLoadingUserData && <Loader />}
+      {/* {isLoadingUserData && <Loader />} */}
       {location.pathname === '/policy' ||
       location.pathname === '/blog' ||
       location.pathname === '/pick' ? (

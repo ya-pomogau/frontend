@@ -6,8 +6,7 @@ import { FilterItemsIds } from '../../consts';
 
 import styles from '../styles.module.css';
 import usePermission from 'shared/hooks/use-permission';
-import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 
 interface CategoriesBlockProps {
   selectedServies: string[];
@@ -21,15 +20,18 @@ export const CategoriesBlock = ({
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
 
   const volunteerMainGuard = usePermission(
-    [CONFIRMED, ACTIVATED, VERIFIED],
+    [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
   );
 
   const volunteerSpecialGuard = usePermission(
-    [ACTIVATED, VERIFIED],
+    [UserStatus.ACTIVATED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
   );
-  const volunteerhigherGuard = usePermission([VERIFIED], UserRole.VOLUNTEER);
+  const volunteerhigherGuard = usePermission(
+    [UserStatus.VERIFIED],
+    UserRole.VOLUNTEER
+  );
 
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     let newValue: string[];

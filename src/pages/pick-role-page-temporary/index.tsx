@@ -18,12 +18,13 @@ import {
 } from 'entities/user/model';
 import { useGetUserByIdQuery } from 'services/user-api';
 import { UserRole } from 'shared/types/common.types';
+import { isRootSelector } from 'entities/user/model';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
-  const [userId, setUserId] = useState<number | null>(null);
-
+  const [userId, setUserId] = useState<string | null>(null);
+  const isRoot = useAppSelector(isRootSelector);
   const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
 
   const removeRole = () => {
@@ -34,32 +35,32 @@ export function PickRolePage() {
 
   const getVolunteerRole = () => {
     dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId(7);
+    setUserId('7');
   };
 
   const getUnconfirmedVolunteerRole = () => {
     dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId(8);
+    setUserId('8');
   };
 
   const getRecipientRole = () => {
-    setUserId(4);
+    setUserId('4');
     dispatch(setUserRole(UserRole.RECIPIENT));
   };
 
   const getUnconfirmedRecipient = () => {
     dispatch(setUserRole(UserRole.RECIPIENT));
-    setUserId(9);
+    setUserId('9');
   };
 
   const getAdminRole = () => {
     dispatch(setUserRole(UserRole.ADMIN));
-    setUserId(2);
+    setUserId('2');
   };
 
   const getMasterAdminRole = () => {
-    dispatch(setUserRole(UserRole.MASTER));
-    setUserId(1);
+    dispatch(setUserRole(UserRole.ADMIN));
+    setUserId('1');
   };
 
   const handleEnableConnectionError = () => {
@@ -73,6 +74,9 @@ export function PickRolePage() {
   };
 
   const getPageYouWouldBeRedirected = () => {
+    if (isRoot) {
+      return '/profile/requests';
+    }
     switch (role) {
       case UserRole.VOLUNTEER:
         return '/profile/map';
@@ -80,15 +84,13 @@ export function PickRolePage() {
         return '/profile/active';
       case UserRole.ADMIN:
         return '/profile/requests';
-      case UserRole.MASTER:
-        return '/profile/requests';
       default:
         return '/';
     }
   };
 
   useEffect(() => {
-    if (userId) {
+    if (userId && data) {
       refetch().then(() => dispatch(setUser(data)));
     }
     if (error) {

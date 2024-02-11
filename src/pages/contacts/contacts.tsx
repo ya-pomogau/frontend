@@ -2,15 +2,14 @@ import React, { ChangeEvent, SyntheticEvent } from 'react';
 import classNames from 'classnames';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
-import { VERIFIED } from 'shared/libs/statuses';
 
 import styles from './styles.module.css';
 import { Button } from '../../shared/ui/button';
 import usePermission from 'shared/hooks/use-permission';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 
 export function ContactsPage() {
-  const roleChecker = !usePermission([VERIFIED], UserRole.ADMIN);
+  const roleChecker = !usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
 
   const [userData, setUserData] = React.useState({
     userEmail: 'www@yandex.ru',

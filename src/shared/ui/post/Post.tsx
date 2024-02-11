@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 import { Avatar } from '../avatar';
 import { SquareButton } from '../square-buttons';
-import { UserInfo } from 'entities/user/types';
+import { User } from 'entities/user/types';
 
 interface ImageProps {
   id: string;
@@ -22,7 +22,7 @@ interface PostProps {
   title: string;
   description: string;
   images: ImageProps[];
-  author: Pick<UserInfo, 'id' | 'fullname' | 'avatar'>;
+  author: Pick<User, '_id' | 'name' | 'avatar'>;
   handleDeleteButton?: () => void;
   handleEditButton?: () => void;
 }
@@ -96,14 +96,14 @@ export const Post: FC<PostProps> = ({
       <div className={styles.author}>
         <Avatar
           avatarLink={author.avatar}
-          avatarName={author.fullname}
+          avatarName={author.name}
           extClassName={styles.author_avatar}
         />
         <div className={styles.author_info}>
-          <p className={authorNameStyle}>{author.fullname}</p>
+          <p className={authorNameStyle}>{author.name}</p>
           <p className={authorIdStyle}>
             <span>ID </span>
-            {author.id}
+            {author._id}
           </p>
         </div>
       </div>

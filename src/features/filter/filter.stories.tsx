@@ -36,7 +36,7 @@ const mockedAdminState = {
 
 const mockedMasterState = {
   ...mockedVolunteerState,
-  role: UserRole.MASTER,
+  role: UserRole.ADMIN,
 };
 
 const mockedUnauthorizedState = {

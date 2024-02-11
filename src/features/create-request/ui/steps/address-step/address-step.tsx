@@ -22,7 +22,7 @@ interface IAddressProps {
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
-  const coord = useAppSelector((store) => store.user.data?.coordinates);
+  const coord = useAppSelector((store) => store.user.data?.location);
 
   const dispatch = useAppDispatch();
 
