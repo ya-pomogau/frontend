@@ -116,9 +116,7 @@ export const TaskButtons = ({
           modalContent={
             <ModalContent
               type={
-                isTaskExpired
-                  ? ModalContentType.responded
-                  : volunteer
+                isTaskExpired || volunteer
                   ? ModalContentType.responded
                   : ModalContentType.close
               }
