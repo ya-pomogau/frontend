@@ -13,7 +13,8 @@ const mockedVolunteerState = {
     id: '8',
     name: 'Волонтеров Иван Иванович',
     phone: '+7 (901) 123-00-00',
-    avatar:'https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg',
+    avatar:
+      'https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg',
     address: 'ул. Строителей, 15',
     vkId: 'https://vk.com/id123456788',
     role: UserRole.VOLUNTEER,
