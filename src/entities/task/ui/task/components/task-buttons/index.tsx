@@ -59,6 +59,7 @@ export const TaskButtons = ({
   const isPageActive = location.pathname === '/profile/active';
   const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
 
+  //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
   const [clicked, setClicked] = useState<boolean>(false);
 
   const handleEditButton = () => {
@@ -84,7 +85,11 @@ export const TaskButtons = ({
         >
           <SquareButton
             buttonType={TaskButtonType.confirm}
-            disabledColor={clicked}
+            disabledColor={
+              (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
+              (userRole === UserRole.RECIPIENT && !!recipientReport) ||
+              clicked
+            }
           />
         </ButtonWithModal>
       )}
@@ -153,7 +158,16 @@ export const TaskButtons = ({
         >
           <SquareButton
             buttonType={TaskButtonType.conflict}
-            disabledColor={conflict || (clicked && isPageActive)}
+            disabledColor={
+              (userRole === UserRole.VOLUNTEER &&
+                !!volunteerReport &&
+                isPageActive) ||
+              (userRole === UserRole.RECIPIENT &&
+                !!recipientReport &&
+                isPageActive) ||
+              conflict ||
+              (clicked && isPageActive)
+            }
           />
         </ButtonWithModal>
       )}
