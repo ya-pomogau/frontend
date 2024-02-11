@@ -5,21 +5,27 @@ import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
 import { TaskRecipient } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
-import type { Task } from 'entities/task/types';
+import { TaskStatus, type Task, TaskReport } from 'entities/task/types';
+import { UserRole } from '../../../../shared/types/common.types';
 
 export interface TaskItemProps {
   item: Task;
   extClassName?: string;
+  userRole: UserRole | null;
 }
 export const TaskItem = ({
   item: {
     category,
     date,
     address,
+    status,
     description,
     recipient: { name, phone, avatar },
+    recipientReport,
     volunteer,
+    volunteerReport,
   },
+  userRole,
   extClassName,
 }: TaskItemProps) => {
   //TODO: confirmed && completed заменить на новые поля объекта
@@ -32,13 +38,36 @@ export const TaskItem = ({
   //     ? styles.container_main_conflict
   //     : styles.container_main_default;
   //TODO: использовать деструктуризацию для записи полей таски
+
+  //TODO: возможно, будет достаточно смотреть на статус задачи
+  const canConnectWithUser =
+    volunteer !== null || status === TaskStatus.ACCEPTED ? true : false;
+
+  const taskConfirmed =
+    (userRole === UserRole.VOLUNTEER &&
+      volunteerReport === TaskReport.FULFILLED) ||
+    (userRole === UserRole.RECIPIENT &&
+      recipientReport === TaskReport.FULFILLED);
+
+  const taskConflict =
+    (userRole === UserRole.VOLUNTEER &&
+      volunteerReport === TaskReport.FULFILLED) ||
+    (userRole === UserRole.RECIPIENT &&
+      recipientReport === TaskReport.FULFILLED);
+
+  const taskLayout = taskConfirmed
+    ? styles.container_main_confirmed
+    : taskConflict
+    ? styles.container_main_conflict
+    : '';
+
   return (
     <>
       <div
         className={classNames(
           styles.container_main,
           'text',
-          // taskLayout,
+          taskLayout,
           extClassName
         )}
       >
@@ -62,8 +91,7 @@ export const TaskItem = ({
           avatar={avatar}
           recipientName={name}
           recipientPhoneNumber={phone}
-          //TODO: заменить volunteer === null ? false : true на правильное условие
-          connection={volunteer === null ? false : true}
+          connection={canConnectWithUser}
           extClassName={styles.recipient}
           date={date}
         />
