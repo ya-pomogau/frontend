@@ -17,7 +17,7 @@ import { Tooltip } from 'shared/ui/tooltip';
 import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
 
 interface TaskListProps {
-  userRole?: UserRole | null;
+  userRole: UserRole | null;
   tasks: Array<Task>;
   extClassName?: string;
   isStatusActive: boolean;
@@ -120,7 +120,7 @@ export const TaskList = ({
           {tasks &&
             tasks.map((item, index) => (
               <li key={index}>
-                <TaskItem item={item} />
+                <TaskItem item={item} userRole={userRole} />
               </li>
             ))}
         </ul>
