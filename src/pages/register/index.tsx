@@ -17,12 +17,10 @@ export function RegisterPage() {
   const vkUser = useAppSelector(vkUserSelector);
   const { firstName = '', lastName = '', vkId = '' } = vkUser ?? {};
   const FIO = `${firstName} ${lastName}`;
-  //TODO: теперь с сервера будет приходить фио вместе
   const [name, setName] = useState<string>(FIO);
   //TODO: разобраться с получением телефона и записью его в стейт
   const [phone, setPhone] = useState<string>('');
   const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
-  // TODO: пока что оставила адрес в виде объекта, чтобы не ломались другие компоненты завязанные на inputAddress
   const [address, setAddress] = useState<{
     address: string;
     coords: GeoCoordinates;
@@ -42,7 +40,6 @@ export function RegisterPage() {
       location: address.coords,
       role: role,
     });
-    // const [first, last] = name.split(' ').filter((i) => i.length > 0);
     const vk_id = `${vkId}`;
     const user = {
       name,

@@ -26,7 +26,6 @@ export function ProfileActivePage() {
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
-  console.log(tasks);
   useEffect(() => {
     handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
     // eslint-disable-next-line
