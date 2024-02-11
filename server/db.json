@@ -203,7 +203,7 @@
         "points": 1,
         "accessLevel": 1
       },
-      "date": "2024-02-15T14:30:00Z",
+      "date": "2024-02-11T14:30:00Z",
       "recipient": {
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
@@ -233,11 +233,11 @@
         "points": 1,
         "accessLevel": 1
       },
-      "date": "2024-02-09T18:00:00Z",
+      "date": "2024-02-11T18:00:00Z",
       "recipient": {
         "name": "Александр Петров Сергеевич",
         "phone": "+7 987 654 3210",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "avatar": "",
         "address": "Улица Мебельная, 77",
         "vkId": "4567890",
         "role": "Recipient"
@@ -247,7 +247,7 @@
         "_id": "vol123",
         "name": "Волонтер Вася",
         "phone": "+7 111 222 3333",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "avatar": "",
         "address": "Улица Волонтёрская, 55",
         "vkId": "4567890",
         "role": "Volunteer"
@@ -271,7 +271,7 @@
         "points": 1,
         "accessLevel": 1
       },
-      "date": "2024-02-08T16:45:00Z",
+      "date": "2024-02-13T16:45:00Z",
       "recipient": {
         "name": "Елена Сидорова",
         "phone": "+7 555 666 7777",
