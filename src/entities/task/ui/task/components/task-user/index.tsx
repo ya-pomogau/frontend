@@ -10,30 +10,24 @@ import placeholder from '../../img/placeholder.svg';
 import { DefaultAvatar } from '../../img/default-avatar';
 import { TaskStatus } from 'entities/task/types';
 import { UserProfile } from 'entities/user/types';
+import { useLocation } from 'react-router-dom';
 
 interface TaskUserProps {
-  user: UserProfile;
-  connection: boolean;
+  user: UserProfile | null;
   extClassName?: string;
   date: string | null;
-  status: TaskStatus;
 }
-export const TaskUser = ({
-  user: { avatar = placeholder, name, phone },
-  connection,
-  extClassName,
-  date,
-  status,
-}: TaskUserProps) => {
+export const TaskUser = ({ user, extClassName, date }: TaskUserProps) => {
+  const location = useLocation();
   const isMobile = useMediaQuery('(max-width:1150px)');
-
+  const isPageActive = location.pathname === '/profile/completed';
   return (
     <div className={classNames(extClassName, styles.main)}>
-      {connection ? (
+      {user !== null ? (
         <>
           <Avatar
-            avatarName={name || 'Пользователь не назначен'}
-            avatarLink={avatar}
+            avatarName={user.name || 'Пользователь не назначен'}
+            avatarLink={user.avatar ? user.avatar : placeholder}
             extClassName={styles.avatar}
           />
           <div className={styles.info}>
@@ -44,10 +38,10 @@ export const TaskUser = ({
                   : 'm-0 text_size_medium'
               }`}
             >
-              {name}
+              {user.name}
             </p>
             <p className={`${!isMobile && styles.phone} m-0 text_size_medium`}>
-              {phone}
+              {user.phone}
             </p>
           </div>
           <div className={styles.buttons}>
@@ -58,17 +52,32 @@ export const TaskUser = ({
             >
               <RoundButton
                 buttonType={TaskButtonType.phone}
-                disabled={status === TaskStatus.COMPLETED ? true : false}
+                disabled={isPageActive ? true : false}
               />
             </ButtonWithModal>
             <RoundButton
               buttonType="message"
-              disabled={status === TaskStatus.COMPLETED ? true : false}
+              disabled={isPageActive ? true : false}
             />
           </div>
         </>
       ) : (
-        <DefaultAvatar isTaskAvatar />
+        <>
+          <DefaultAvatar isTaskAvatar />
+          <div className={styles.buttons}>
+            <ButtonWithModal
+              modalContent={
+                <ModalContent type={TaskButtonType.phone} date={date} />
+              }
+            >
+              <RoundButton
+                buttonType={TaskButtonType.phone}
+                disabled={!user ? true : false}
+              />
+            </ButtonWithModal>
+            <RoundButton buttonType="message" disabled={!user ? true : false} />
+          </div>
+        </>
       )}
     </div>
   );

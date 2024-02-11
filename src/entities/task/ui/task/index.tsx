@@ -6,6 +6,8 @@ import { TaskDescription } from './components/task-description';
 import { TaskUser } from './components/task-user';
 import { TaskButtons } from './components/task-buttons';
 import { TaskStatus, type Task } from 'entities/task/types';
+import { useAppSelector } from 'app/hooks';
+import { UserRole } from 'shared/types/common.types';
 
 export interface TaskItemProps {
   item: Task;
@@ -26,6 +28,7 @@ export const TaskItem = ({
   },
   extClassName,
 }: TaskItemProps) => {
+  const role = useAppSelector((state) => state.user.role);
   return (
     <>
       <div className={classNames(styles.container_main, 'text', extClassName)}>
@@ -46,9 +49,7 @@ export const TaskItem = ({
           extClassName={styles.description}
         />
         <TaskUser
-          user={recipient}
-          status={status}
-          connection={volunteer === null ? false : true}
+          user={UserRole.RECIPIENT === role ? volunteer : recipient}
           extClassName={styles.user}
           date={date}
         />

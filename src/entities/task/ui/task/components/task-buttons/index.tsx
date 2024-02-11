@@ -56,7 +56,19 @@ export const TaskButtons = ({
 
   const [clickedConflict, setClickedConflict] = useState<boolean>(false);
   const [clickedConfirm, setClickedConfirm] = useState<boolean>(false);
-
+  // TODO: при нажатии галочки:
+  // -- отправка на сервер volunteerReport | recipientReport со значением TaskReport.FULFILLED
+  // -- кнопка становится серой
+  // -- при клике на кнопку открывается попап связи с адмиином
+  // -- при этом кнопка воскл. знак становится серой (при нажатии появляется попап связи с админом)
+  // TODO: при нажатии воскл.знак:
+  // -- отправка на сервер volunteerReport | recipientReport со значением TaskReport.REJECTED
+  // -- кнопка становится серой
+  // -- при клике на кнопку открывается попап связи с адмиином
+  // -- при этом кнопка галочка становится серой (при нажатии появляется попап связи с админом)
+  //TODO: при статусе Taskstatus === complited при нажатии на воскл попап "Выполнена"
+  // --- при статусе Taskstatus === conflicted при нажатии на воскл попап "Не Выполнена"
+  // --- при условии что у таски date: больше текущего времени и volunteer: null && Taskstatus === complited  при нажатии на воскл попап "Никто не отозвался"
   const handleEditButton = () => {
     dispatch(setDate(date));
     dispatch(setAddress({ additinalAddress }));
