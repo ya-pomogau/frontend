@@ -7,7 +7,6 @@ import { FC, memo } from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import usePermission from 'shared/hooks/use-permission';
 import { UserRole, UserStatus } from 'shared/types/common.types';
-import { UserRole } from 'shared/types/common.types';
 import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
 
