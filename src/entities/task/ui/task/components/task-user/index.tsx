@@ -29,22 +29,7 @@ export const TaskUser = ({ user, extClassName, date }: TaskUserProps) => {
           extClassName={styles.avatar}
         />
       ) : (
-        <>
-          <DefaultAvatar isTaskAvatar />
-          <div className={styles.buttons}>
-            <ButtonWithModal
-              modalContent={
-                <ModalContent type={TaskButtonType.phone} date={date} />
-              }
-            >
-              <RoundButton
-                buttonType={TaskButtonType.phone}
-                disabled={!user ? true : false}
-              />
-            </ButtonWithModal>
-            <RoundButton buttonType="message" disabled={!user ? true : false} />
-          </div>
-        </>
+        <DefaultAvatar isTaskAvatar />
       )}
       <div className={styles.info}>
         <p

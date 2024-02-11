@@ -11,7 +11,7 @@ import { ConflictIcon } from '../icons/conflict-icon';
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   taskId?: number;
   extClassName?: string;
-  buttonType: 'close' | 'edit' | 'confirm' | 'conflict' | 'responded';
+  buttonType: 'close' | 'edit' | 'confirm' | 'conflict';
   onClick?: () => void;
   customIcon?: ReactNode;
   disabledColor?: boolean;
@@ -22,7 +22,6 @@ const defautlIcons = {
   edit: <EditIcon size="24" color="white" />,
   confirm: <DoneIcon size="24" color="white" />,
   conflict: <ConflictIcon size="24" color="white" />,
-  responded: <CloseIcon size="24" color="white" />,
 };
 
 export const SquareButton = ({
