@@ -244,20 +244,3 @@ export const filterUsersNamePageAdmin = (
       user.role !== UserRole.ADMIN
   );
 };
-export const variantBtnRec = (volunteer: UserProfile | null) => {
-  return volunteer ? TaskButtonType.responded : TaskButtonType.close;
-};
-
-export function checkTimeDifference(time: Date): boolean {
-  const currentTime: Date = new Date();
-  const timeDifference: number = time.getTime() - currentTime.getTime();
-  const hoursDifference: number = timeDifference / (1000 * 3600);
-
-  return hoursDifference < 24;
-}
-
-export const variantBtn = (parsedDate: Date) => {
-  return !checkTimeDifference(parsedDate)
-    ? TaskButtonType.close
-    : TaskButtonType.cancel;
-};
