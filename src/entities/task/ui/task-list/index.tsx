@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import usePermission from 'shared/hooks/use-permission';
-import { CONFIRMED } from 'shared/libs/statuses';
 
 import { Informer } from 'shared/ui/informer';
 import { RoundButton } from 'shared/ui/round-button';
@@ -9,7 +8,7 @@ import { TaskItem } from '../task';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -40,7 +39,7 @@ export const TaskList = ({
   isLoading,
   handleClickAddTaskButton,
 }: TaskListProps) => {
-  const buttonGuard = usePermission([CONFIRMED], UserRole.RECIPIENT);
+  const buttonGuard = usePermission([UserStatus.CONFIRMED], UserRole.RECIPIENT);
 
   const [isOpen, setIsOpen] = useState(false);
 

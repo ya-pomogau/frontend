@@ -2,7 +2,6 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
-import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
 import { isTaskUrgent, getBounds } from 'shared/libs/utils';
 import Mark from './Mark';
 import { LightPopup } from 'shared/ui/light-popup';
@@ -16,7 +15,7 @@ import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-ic
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 
 import classNames from 'classnames';
 import './styles.css';
@@ -50,7 +49,7 @@ export const YandexMap = ({
   isAuthorised,
 }: YandexMapProps) => {
   const isGranted = usePermission(
-    [CONFIRMED, ACTIVATED, VERIFIED],
+    [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
   );
 

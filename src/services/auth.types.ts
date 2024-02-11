@@ -1,10 +1,5 @@
 import { cbLink } from 'shared/libs/utils';
-import {
-  TPointGeoJSON,
-  TUser,
-  TUserProfile,
-  TVKUser,
-} from '../entities/user/types';
+import { TPointGeoJSON, TUser } from '../entities/user/types';
 import { UserRole } from 'shared/types/common.types';
 
 export type TAuthRoutes = {
@@ -33,10 +28,13 @@ export type TVKLoginRequestDto = {
 };
 
 export type TCreateUserDto = {
-  profile: Partial<TUserProfile>;
+  name: string;
+  phone: string;
+  address: string;
+  avatar?: string;
   role: UserRole;
   vkId: string;
-  location?: TPointGeoJSON;
+  location: TPointGeoJSON;
 };
 
 export type TAdminLoginDto = {
@@ -64,8 +62,11 @@ export type TNewUserResponseDto = {
 };
 
 export type TNewUserRequestDto = {
-  profile: Partial<TUserProfile>;
+  name: string;
+  phone: string;
+  address: string;
+  avatar?: string;
   role: UserRole;
   vkId: string;
-  location?: TPointGeoJSON;
+  location: TPointGeoJSON;
 };

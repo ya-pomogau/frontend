@@ -20,6 +20,8 @@ import {
   filterCardsUsersPageAdmin,
   filterUsersNamePageAdmin,
 } from 'shared/libs/utils';
+import { isRootSelector } from 'entities/user/model';
+
 
 export interface UserProps {
   role: UserRole;
@@ -38,6 +40,7 @@ export function RequestsNotprocessedPage() {
   const [searchRole, setSearchRole] =
     useState<IFilterValues>(defaultObjFilteres);
   const [dateUsers, setDateUsers] = useState<IDateUser[]>(testUsers);
+  const isRoot = useAppSelector(isRootSelector);
   //хук сейчас не нуждается в аргументах, но если не указать аргумент перед
   //pollingInterval, то рефетча не будет
   const { isLoading, data } = useGetUncomfirmedQuery(role, {
@@ -82,7 +85,7 @@ export function RequestsNotprocessedPage() {
             type="name"
             label="Введите имя "
           />
-          {role === UserRole.MASTER && (
+          {isRoot && (
             <div className={styles.userAdminCards}>
               {dateUsers.map((user: UserProps) => (
                 <UserCard

@@ -28,8 +28,8 @@ export const Default: Story = {
       },
     ],
     author: {
-      fullname: 'Петров Петр Петрович',
-      id: '111111114',
+      name: 'Петров Петр Петрович',
+      _id: '111111114',
       avatar:
         'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1703537667~exp=1703538267~hmac=edc39853d02715235411f8c64f4bc06d48a2cbdc670b4ed6aedebc82633a7618',
     },
@@ -54,8 +54,8 @@ export const Gallery2Master: Story = {
       },
     ],
     author: {
-      fullname: 'Петров Петр Петрович',
-      id: '111111114',
+      name: 'Петров Петр Петрович',
+      _id: '111111114',
       avatar:
         'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1703537667~exp=1703538267~hmac=edc39853d02715235411f8c64f4bc06d48a2cbdc670b4ed6aedebc82633a7618',
     },
@@ -91,8 +91,8 @@ export const Gallery3Admin: Story = {
       },
     ],
     author: {
-      fullname: 'Петров Петр Петрович',
-      id: '111111114',
+      name: 'Петров Петр Петрович',
+      _id: '111111114',
       avatar:
         'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1703537667~exp=1703538267~hmac=edc39853d02715235411f8c64f4bc06d48a2cbdc670b4ed6aedebc82633a7618',
     },
@@ -133,8 +133,8 @@ export const Gallery4: Story = {
       },
     ],
     author: {
-      fullname: 'Петров Петр Петрович',
-      id: '111111114',
+      name: 'Петров Петр Петрович',
+      _id: '111111114',
       avatar:
         'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1703537667~exp=1703538267~hmac=edc39853d02715235411f8c64f4bc06d48a2cbdc670b4ed6aedebc82633a7618',
     },
@@ -163,8 +163,8 @@ export const Longread: Story = {
       },
     ],
     author: {
-      fullname: 'Петров Петр Петрович',
-      id: '111111114',
+      name: 'Петров Петр Петрович',
+      _id: '111111114',
       avatar:
         'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=826&t=st=1703537667~exp=1703538267~hmac=edc39853d02715235411f8c64f4bc06d48a2cbdc670b4ed6aedebc82633a7618',
     },

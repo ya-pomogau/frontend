@@ -1,20 +1,12 @@
 import {
-  ACTIVATED,
-  CONFIRMED,
-  UNCONFIRMED,
-  VERIFIED,
-} from 'shared/libs/statuses';
-import { AdminPermission, UserRole } from '../../shared/types/common.types';
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from '../../shared/types/common.types';
 import {
   GeoCoordinates,
   PointGeoJSONInterface,
 } from 'shared/types/point-geojson.types';
-
-type StatusType =
-  | typeof UNCONFIRMED
-  | typeof CONFIRMED
-  | typeof ACTIVATED
-  | typeof VERIFIED;
 
 export type UserProfile = {
   name: string;
@@ -25,50 +17,63 @@ export type UserProfile = {
   role: string;
 };
 
-export type UserInfo = {
-  id: string;
-  fullname: string;
-  role: UserRole | null;
-  status: StatusType | null;
-  vk: string;
-  avatar: string;
+// export type UserInfo = {
+//   id: string;
+//   fullname: string;
+//   role: UserRole | null;
+//   status?: UserStatus;
+//   vk: string;
+//   avatar: string;
+//   phone: string;
+//   address: string;
+//   coordinates: GeoCoordinates;
+//   createdAt: string;
+//   isHasKeys?: boolean;
+//   scores?: number;
+//   permissions?: Array<AdminPermission> | null;
+//   isActive: boolean;
+// };
+
+export type User = {
+  _id: string;
+  name: string;
   phone: string;
+  avatar: string;
   address: string;
-  coordinates: GeoCoordinates;
-  createdAt: string;
-  isHasKeys?: boolean;
-  scores?: number;
-  permissions?: Array<AdminPermission> | null;
-  isActive: boolean;
+  vkId: string;
+  role: UserRole;
+  score?: number;
+  status?: UserStatus;
+  location?: GeoCoordinates;
+  keys?: boolean;
+  permissions?: AdminPermission[];
+  login?: string;
+  password?: string;
+  isRoot?: boolean;
+  isActive?: boolean;
 };
 
 export type TPointGeoJSON = PointGeoJSONInterface;
 
-export type TUserProfile = {
-  fullName: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
+export type TUser = {
+  _id: string;
+  name: string;
   phone: string;
   avatar: string;
   address: string;
-};
-
-export type TUser = {
-  _id: string;
-  profile: TUserProfile;
-  location: TPointGeoJSON;
+  vkId: string;
   role: UserRole;
-  status: StatusType;
+  score?: number;
+  status?: UserStatus;
+  location?: TPointGeoJSON;
+  keys?: boolean;
+  permissions?: AdminPermission[];
+  login?: string;
+  password?: string;
+  isRoot?: boolean;
+  isActive?: boolean;
   createdAt: Date | string;
   updatedAt: Date | string;
-  isHasKeys?: boolean;
-  scores?: number;
-  permissions?: Array<AdminPermission> | null;
-  isActive: boolean;
-  vkId: string;
-  isRoot: boolean;
-  login: string;
 };
 
 export type TVKUser = {
@@ -76,11 +81,11 @@ export type TVKUser = {
   lastName: string;
   vkId: string;
 };
-
+// TODO: надо изменить
 export type UpdateUserInfo = {
-  fullname: string;
+  name: string;
   phone: string;
   address: string;
   avatar: null | FormData;
-  id: string;
+  _id: string;
 };

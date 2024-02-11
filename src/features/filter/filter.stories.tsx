@@ -7,18 +7,23 @@ import type { FilteringProps, NotFoundFilterProps } from './types';
 import { Filter } from 'features/filter';
 
 const mockedVolunteerState = {
-  id: '8',
-  name: 'Волонтеров Иван Иванович',
-  phone: '+7 (901) 123-00-00',
-  avatar:
-    'https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg',
-  address: 'ул. Строителей, 15',
-  vkId: 'https://vk.com/id123456788',
-  role: 'Volunteer',
-  score: 0,
-  status: 1,
-  location: [55.686985, 37.529654],
-  keys: false,
+  role: UserRole.VOLUNTEER,
+  data: {
+     id: '8',
+      name: 'Волонтеров Иван Иванович',
+      phone: '+7 (901) 123-00-00',
+      avatar:
+        'https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg',
+      address: 'ул. Строителей, 15',
+      vkId: 'https://vk.com/id123456788',
+      role:  UserRole.VOLUNTEER,
+      score: 0,
+      status: 1,
+      location: [55.686985, 37.529654],
+      keys: false,
+  },
+  isLoading: false,
+  isFailed: false,
 };
 
 const Mockstore = ({ initialState, children }: Record<any, any>) => (

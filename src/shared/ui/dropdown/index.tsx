@@ -38,7 +38,7 @@ const Dropdown = ({
 
   const { data: tasks } = useGetTasksByStatusQuery('active');
 
-  const userId = useAppSelector((state) => state.user.data?.id);
+  // const userId = useAppSelector((state) => state.user.data?._id);
   const { categories } = useAppSelector((state) => state.createRequest);
   const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   // Фильтруем заявки по id

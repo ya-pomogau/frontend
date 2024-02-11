@@ -36,7 +36,7 @@ const Header = () => {
             {user && isMobile && (
               <Avatar
                 extClassName={styles.header__avatar}
-                avatarName={user.fullname}
+                avatarName={user.name}
                 avatarLink={user.avatar}
               />
             )}{' '}
