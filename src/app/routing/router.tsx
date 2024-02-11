@@ -145,7 +145,6 @@ export const router = createBrowserRouter(
 
           <Route path="/profile/bids" element={<BidsPage />} />
         </Route>
-        {/* TODO: нужно добавить определеение что это мастер исходя из значение isRoot */}
         <Route
           element={
             <RoutesGroup

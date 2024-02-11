@@ -5,22 +5,22 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 
 import type { FilteringProps, NotFoundFilterProps } from './types';
 import { Filter } from 'features/filter';
+import { UserRole } from 'shared/types/common.types';
 
 const mockedVolunteerState = {
   role: UserRole.VOLUNTEER,
   data: {
-     id: '8',
-      name: 'Волонтеров Иван Иванович',
-      phone: '+7 (901) 123-00-00',
-      avatar:
-        'https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg',
-      address: 'ул. Строителей, 15',
-      vkId: 'https://vk.com/id123456788',
-      role:  UserRole.VOLUNTEER,
-      score: 0,
-      status: 1,
-      location: [55.686985, 37.529654],
-      keys: false,
+    id: '8',
+    name: 'Волонтеров Иван Иванович',
+    phone: '+7 (901) 123-00-00',
+    avatar:'https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg',
+    address: 'ул. Строителей, 15',
+    vkId: 'https://vk.com/id123456788',
+    role: UserRole.VOLUNTEER,
+    score: 0,
+    status: 1,
+    location: [55.686985, 37.529654],
+    keys: false,
   },
   isLoading: false,
   isFailed: false,

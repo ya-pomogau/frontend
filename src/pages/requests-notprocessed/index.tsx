@@ -22,7 +22,6 @@ import {
 } from 'shared/libs/utils';
 import { isRootSelector } from 'entities/user/model';
 
-
 export interface UserProps {
   role: UserRole;
   extClassName?: string;
