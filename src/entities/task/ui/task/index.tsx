@@ -11,7 +11,7 @@ import {
   TaskReport,
   ResolveStatus,
 } from 'entities/task/types';
-import { UserRole } from '../../../../shared/types/common.types';
+import { UserRole } from 'shared/types/common.types';
 
 export interface TaskItemProps {
   item: Task;
@@ -107,8 +107,6 @@ export const TaskItem = ({
         />
         <TaskUser
           user={UserRole.RECIPIENT === userRole ? volunteer : recipient}
-          status={status}
-          connection={volunteer === null ? false : true}
           extClassName={styles.user}
           date={date}
         />
