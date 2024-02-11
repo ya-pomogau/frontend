@@ -1,4 +1,8 @@
-import { TaskButtonType, UserRole } from 'shared/types/common.types';
+import {
+  ModalContentType,
+  TaskButtonType,
+  UserRole,
+} from 'shared/types/common.types';
 import { SquareButton } from 'shared/ui/square-buttons';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
@@ -53,22 +57,10 @@ export const TaskButtons = ({
   const isTaskExpired = isAfter(new Date(), parsedDate);
   const isTaskUrgent = checkTaskUrgency(date!);
   const isPageActive = location.pathname === '/profile/active';
+  const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
 
-  const [clickedConflict, setClickedConflict] = useState<boolean>(false);
-  const [clickedConfirm, setClickedConfirm] = useState<boolean>(false);
-  // TODO: при нажатии галочки:
-  // -- отправка на сервер volunteerReport | recipientReport со значением TaskReport.FULFILLED
-  // -- кнопка становится серой
-  // -- при клике на кнопку открывается попап связи с адмиином
-  // -- при этом кнопка воскл. знак становится серой (при нажатии появляется попап связи с админом)
-  // TODO: при нажатии воскл.знак:
-  // -- отправка на сервер volunteerReport | recipientReport со значением TaskReport.REJECTED
-  // -- кнопка становится серой
-  // -- при клике на кнопку открывается попап связи с адмиином
-  // -- при этом кнопка галочка становится серой (при нажатии появляется попап связи с админом)
-  //TODO: при статусе Taskstatus === complited при нажатии на воскл попап "Выполнена"
-  // --- при статусе Taskstatus === conflicted при нажатии на воскл попап "Не Выполнена"
-  // --- при условии что у таски date: больше текущего времени и volunteer: null && Taskstatus === complited  при нажатии на воскл попап "Никто не отозвался"
+  const [clicked, setClicked] = useState<boolean>(false);
+
   const handleEditButton = () => {
     dispatch(setDate(date));
     dispatch(setAddress({ additinalAddress }));
@@ -81,11 +73,10 @@ export const TaskButtons = ({
     <div className={classNames(extClassName, styles.buttons)}>
       {(isTaskExpired || !date) && isPageActive && (
         <ButtonWithModal
-          setClicked={setClickedConfirm}
+          setClicked={setClicked}
           modalContent={
             <ModalContent
-              type={TaskButtonType.confirm}
-              date={date}
+              type={clicked ? ModalContentType.admin : ModalContentType.confirm}
               role={userRole}
             />
           }
@@ -93,7 +84,7 @@ export const TaskButtons = ({
         >
           <SquareButton
             buttonType={TaskButtonType.confirm}
-            disabledColor={clickedConfirm}
+            disabledColor={clicked}
           />
         </ButtonWithModal>
       )}
@@ -104,19 +95,18 @@ export const TaskButtons = ({
             <ModalContent
               type={
                 isTaskExpired || !date
-                  ? TaskButtonType.responded
+                  ? ModalContentType.responded
                   : isTaskUrgent
-                  ? TaskButtonType.cancel
-                  : TaskButtonType.close
+                  ? ModalContentType.cancel
+                  : ModalContentType.close
               }
               date={date}
             />
           }
         >
           <SquareButton
-            buttonType={
-              isTaskUrgent ? TaskButtonType.responded : TaskButtonType.close
-            }
+            buttonType={TaskButtonType.close}
+            disabledColor={isTaskUrgent}
           />
         </ButtonWithModal>
       )}
@@ -127,29 +117,36 @@ export const TaskButtons = ({
             <ModalContent
               type={
                 isTaskExpired
-                  ? TaskButtonType.responded
+                  ? ModalContentType.responded
                   : volunteer
-                  ? TaskButtonType.responded
-                  : TaskButtonType.close
+                  ? ModalContentType.responded
+                  : ModalContentType.close
               }
               date={date}
             />
           }
         >
           <SquareButton
-            buttonType={
-              isTaskUrgent ? TaskButtonType.responded : TaskButtonType.close
-            }
+            buttonType={TaskButtonType.close}
+            disabledColor={isTaskUrgent}
           />
         </ButtonWithModal>
       )}
       {(isTaskExpired || !date) && (
         <ButtonWithModal
-          setClicked={setClickedConflict}
+          setClicked={isPageActive ? setClicked : undefined}
           extClassName={styles.conflict}
           modalContent={
             <ModalContent
-              type={TaskButtonType.conflict}
+              type={
+                isPageActive
+                  ? clicked
+                    ? ModalContentType.admin
+                    : ModalContentType.conflict
+                  : unfulfilledTask
+                  ? ModalContentType.unfulfilled
+                  : ModalContentType.conflict
+              }
               active={isPageActive}
               conflict={conflict}
               date={date}
@@ -158,7 +155,7 @@ export const TaskButtons = ({
         >
           <SquareButton
             buttonType={TaskButtonType.conflict}
-            disabledColor={conflict || clickedConflict}
+            disabledColor={conflict || (clicked && isPageActive)}
           />
         </ButtonWithModal>
       )}

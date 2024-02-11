@@ -27,7 +27,6 @@ export const ButtonWithModal = ({
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const getCoords = () => {
-    setClicked && setClicked(!visible);
     setVisible(true);
     const box = buttonRef.current?.getBoundingClientRect();
 
@@ -41,7 +40,7 @@ export const ButtonWithModal = ({
 
   const hideModal = () => {
     setVisible(false);
-    setClicked && setClicked(false);
+    setClicked && setClicked(true);
   };
 
   return (
