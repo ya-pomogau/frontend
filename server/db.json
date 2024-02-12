@@ -326,40 +326,6 @@
       "volunteerReport": null,
       "adminResolve": null,
       "isPendingChanges": false
-    },
-    {
-      "_id": "4",
-      "description": "Посадить дерево в сквере, таска  взята волонтером",
-      "address": "Улица Деревенская, 30",
-      "location": [59.699788, 41.557059],
-      "status": "accepted",
-      "category": {
-        "_id": "4",
-        "title": "Покупка продуктов",
-        "points": 1,
-        "accessLevel": 1
-      },
-      "date": null,
-      "recipient": {
-        "name": "Елена Сидорова",
-        "phone": "+7 555 666 7777",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Садовая, 10",
-        "vkId": "4567890",
-        "role": "Recipient"
-      },
-      "recipientReport": "fulfilled",
-      "volunteer": {
-        "name": "Валентин Захаров",
-        "phone": "+7 777 888 9999",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20",
-        "vkId": "4567890",
-        "role": "Volunteer"
-      },
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
     }
   ],
   "tasksCompleted": [
