@@ -34,7 +34,6 @@ export const TaskItem = ({
   userRole,
   extClassName,
 }: TaskItemProps) => {
-
   const taskConfirmed = () => {
     if (
       adminResolve === null ||
