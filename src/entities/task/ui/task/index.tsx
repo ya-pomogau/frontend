@@ -3,7 +3,7 @@ import { CategoriesBackground } from 'shared/ui/categories-background';
 import styles from './styles.module.css';
 import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
-import { TaskRecipient } from './components/task-recipient';
+import { TaskUser } from './components/task-user';
 import { TaskButtons } from './components/task-buttons';
 import {
   TaskStatus,
@@ -11,7 +11,7 @@ import {
   TaskReport,
   ResolveStatus,
 } from 'entities/task/types';
-import { UserRole } from '../../../../shared/types/common.types';
+import { UserRole } from 'shared/types/common.types';
 
 export interface TaskItemProps {
   item: Task;
@@ -25,7 +25,7 @@ export const TaskItem = ({
     address,
     status,
     description,
-    recipient: { name, phone, avatar },
+    recipient,
     recipientReport,
     volunteer,
     volunteerReport,
@@ -34,10 +34,6 @@ export const TaskItem = ({
   userRole,
   extClassName,
 }: TaskItemProps) => {
-  //TODO: возможно, будет достаточно смотреть на статус задачи
-  const canConnectWithUser =
-    volunteer !== null || status === TaskStatus.ACCEPTED ? true : false;
-
   const taskConfirmed = () => {
     if (
       adminResolve === null ||
@@ -108,24 +104,22 @@ export const TaskItem = ({
           count={category.points}
           extClassName={styles.description}
         />
-        <TaskRecipient
-          avatar={avatar}
-          recipientName={name}
-          recipientPhoneNumber={phone}
-          connection={canConnectWithUser}
-          extClassName={styles.recipient}
+        <TaskUser
+          user={UserRole.RECIPIENT === userRole ? volunteer : recipient}
+          extClassName={styles.user}
           date={date}
         />
         <TaskButtons
-          //TODO: заменить completed conflict на правильные поля
-          recipientName={name}
           address={address}
           description={description}
           category={category}
           date={date}
-          completed
-          conflict
+          conflict={status === TaskStatus.CONFLICTED}
+          volunteer={volunteer}
           extClassName={styles.buttons}
+          volunteerReport={volunteerReport}
+          recipientReport={recipientReport}
+          adminResolve={adminResolve}
         />
       </div>
     </>

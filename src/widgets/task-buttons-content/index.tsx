@@ -5,15 +5,15 @@ import styles from './styles.module.css';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
-import { format } from 'date-fns';
 import { textStyle, titleStyle } from './utils';
-import { TaskButtonType } from 'shared/types/common.types';
+import { UserRole, ModalContentType } from 'shared/types/common.types';
 
 interface ModalContentProps {
-  type: TaskButtonType;
+  type: ModalContentType;
   active?: boolean;
   conflict?: boolean;
-  date: string | null;
+  date?: string | null;
+  role?: UserRole | null;
 }
 
 export const ModalContent = ({
@@ -21,10 +21,11 @@ export const ModalContent = ({
   active = true,
   conflict = true,
   date,
+  role,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   switch (type) {
-    case TaskButtonType.close:
+    case ModalContentType.close:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Укажите причину отмены</h3>
@@ -54,17 +55,21 @@ export const ModalContent = ({
               label="Помощь администратора"
               onClick={() => 1}
             />
-            <ButtonWithModal
+            {/* <ButtonWithModal
               modalContent={
-                <ModalContent type={TaskButtonType.cancel} date={date} />
+                <ModalContent type={TaskButtonType.close} date={date} />
               }
-            >
-              <Button buttonType="primary" label="Отменить заявку" />
-            </ButtonWithModal>
+            > */}
+            <Button
+              buttonType="primary"
+              label="Отменить заявку"
+              onClick={() => 2}
+            />
+            {/* </ButtonWithModal> */}
           </div>
         </div>
       );
-    case TaskButtonType.conflict:
+    case ModalContentType.conflict:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>
@@ -74,37 +79,58 @@ export const ModalContent = ({
               ? 'Не выполнена'
               : 'Выполнена'}
           </h3>
-          {active && (
+          {
             <>
-              <div className={classNames(styles.modalContent, styles.flexRow)}>
-                <Button buttonType="secondary" label="Отменить" />
-                <Button buttonType="primary" label="Подтвердить" />
-              </div>
-              <div className={styles.modalButtons}>
-                <Button
-                  buttonType="secondary"
-                  label="Помощь администратора"
-                  onClick={() => 1}
-                />
-              </div>
+              {active && (
+                <div
+                  className={classNames(styles.modalContent, styles.flexRow)}
+                >
+                  <Button buttonType="secondary" label="Отменить" />
+                  <Button buttonType="primary" label="Подтвердить" />
+                </div>
+              )}
+              {(active || !conflict) && (
+                <div className={styles.modalButtons}>
+                  <Button
+                    buttonType="secondary"
+                    label={
+                      active
+                        ? 'Помощь администратора'
+                        : 'Написать администратору'
+                    }
+                    onClick={() => 1}
+                  />
+                </div>
+              )}
             </>
-          )}
+          }
         </div>
       );
-    case TaskButtonType.confirm:
+    case ModalContentType.confirm:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Благодарим за отзывчивость</h3>
           <p className={textStyle}>
-            {active
-              ? 'Мы ждем ответ рецепиента'
-              : date
-              ? format(new Date(date), 'dd.MM.yyyy hh:mm')
-              : ''}
+            {`Мы ждем ответ ${
+              role === UserRole.RECIPIENT ? 'от волонтера' : 'от реципиента'
+            }`}
           </p>
         </div>
       );
-    case TaskButtonType.phone:
+    case ModalContentType.admin:
+      return (
+        <div className={styles.modalTooltip}>
+          <h3 className={titleStyle}>Связь с администратором</h3>
+          <div className={styles.modalButtons}>
+            <Button
+              buttonType="secondary"
+              label={'Написать администратору'}
+              onClick={() => 1}
+            />
+          </div>
+        </div>
+      );
+    case ModalContentType.phone:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Номер телефона:</h3>
@@ -113,7 +139,7 @@ export const ModalContent = ({
           </a>
         </div>
       );
-    case TaskButtonType.cancel:
+    case ModalContentType.cancel:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>До начала заявки менее 24 часа</h3>
@@ -123,6 +149,24 @@ export const ModalContent = ({
           <div className={styles.modalButtons}>
             <Button buttonType="primary" label="Написать администратору" />
           </div>
+        </div>
+      );
+    case ModalContentType.responded:
+      return (
+        <div className={styles.modalTooltip}>
+          <h3 className={titleStyle}>На заявку откликнулись</h3>
+          <p className={textStyle}>
+            Вы не можете отменить или отредактировать заявку самостоятельно.
+          </p>
+          <div className={styles.modalButtons}>
+            <Button buttonType="primary" label="Написать администратору" />
+          </div>
+        </div>
+      );
+    case ModalContentType.unfulfilled:
+      return (
+        <div className={styles.modalTooltip}>
+          <h3 className={titleStyle}>На заявку не откликнулись</h3>
         </div>
       );
   }

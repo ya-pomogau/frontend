@@ -12,6 +12,8 @@ import {
   MINUTES_IN_HOUR,
   RADIANS_IN_DEGREE,
 } from './constants';
+import { TaskButtonType } from 'shared/types/common.types';
+import { UserProfile } from 'entities/user/types';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;

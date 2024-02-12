@@ -1,10 +1,12 @@
-import type { ReactNode } from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
 import { Tooltip } from 'shared/ui/tooltip';
 
 interface ModalProps {
   children: ReactNode;
   modalContent: ReactNode;
+  setClicked?: Dispatch<SetStateAction<boolean>>;
+  extClassName?: string;
 }
 
 interface Coords {
@@ -12,7 +14,12 @@ interface Coords {
   top: number;
 }
 
-export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
+export const ButtonWithModal = ({
+  children,
+  modalContent,
+  setClicked,
+  extClassName,
+}: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const [coords, setCoords] = useState<Coords | null>(null);
@@ -30,13 +37,19 @@ export const ButtonWithModal = ({ children, modalContent }: ModalProps) => {
       });
     }
   };
+
+  const hideModal = () => {
+    setVisible(false);
+    setClicked && setClicked(true);
+  };
+
   return (
-    <div ref={buttonRef} onClick={getCoords}>
+    <div ref={buttonRef} onClick={getCoords} className={extClassName}>
       {children}
       {visible && (
         <Tooltip
           visible={visible}
-          changeVisible={() => setVisible(false)}
+          changeVisible={hideModal}
           pointerPosition="right"
           elementStyles={{
             position: 'absolute',
