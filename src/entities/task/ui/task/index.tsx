@@ -5,7 +5,12 @@ import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
 import { TaskRecipient } from './components/task-recipient';
 import { TaskButtons } from './components/task-buttons';
-import { TaskStatus, type Task, TaskReport } from 'entities/task/types';
+import {
+  TaskStatus,
+  type Task,
+  TaskReport,
+  ResolveStatus,
+} from 'entities/task/types';
 import { UserRole } from '../../../../shared/types/common.types';
 
 export interface TaskItemProps {
@@ -24,40 +29,56 @@ export const TaskItem = ({
     recipientReport,
     volunteer,
     volunteerReport,
+    adminResolve,
   },
   userRole,
   extClassName,
 }: TaskItemProps) => {
-  //TODO: confirmed && completed заменить на новые поля объекта
-  // const taskLayout =
-  //   confirmed && completed
-  //     ? styles.container_main_default
-  //     : confirmed
-  //     ? styles.container_main_confirmed
-  //     : conflict
-  //     ? styles.container_main_conflict
-  //     : styles.container_main_default;
-  //TODO: использовать деструктуризацию для записи полей таски
-
   //TODO: возможно, будет достаточно смотреть на статус задачи
   const canConnectWithUser =
     volunteer !== null || status === TaskStatus.ACCEPTED ? true : false;
 
-  const taskConfirmed =
-    (userRole === UserRole.VOLUNTEER &&
-      volunteerReport === TaskReport.FULFILLED) ||
-    (userRole === UserRole.RECIPIENT &&
-      recipientReport === TaskReport.FULFILLED);
+  const taskConfirmed = () => {
+    if (
+      adminResolve === null ||
+      adminResolve === ResolveStatus.PENDING ||
+      adminResolve === ResolveStatus.VIRGIN
+    ) {
+      return (
+        (userRole === UserRole.VOLUNTEER &&
+          volunteerReport === TaskReport.FULFILLED) ||
+        (userRole === UserRole.RECIPIENT &&
+          recipientReport === TaskReport.FULFILLED)
+      );
+    } else if (adminResolve === ResolveStatus.FULFILLED) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-  const taskConflict =
-    (userRole === UserRole.VOLUNTEER &&
-      volunteerReport === TaskReport.FULFILLED) ||
-    (userRole === UserRole.RECIPIENT &&
-      recipientReport === TaskReport.FULFILLED);
+  const taskConflict = () => {
+    if (
+      adminResolve === null ||
+      adminResolve === ResolveStatus.PENDING ||
+      adminResolve === ResolveStatus.VIRGIN
+    ) {
+      return (
+        (userRole === UserRole.VOLUNTEER &&
+          volunteerReport === TaskReport.REJECTED) ||
+        (userRole === UserRole.RECIPIENT &&
+          recipientReport === TaskReport.REJECTED)
+      );
+    } else if (adminResolve === ResolveStatus.REJECTED) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
-  const taskLayout = taskConfirmed
+  const taskLayout = taskConfirmed()
     ? styles.container_main_confirmed
-    : taskConflict
+    : taskConflict()
     ? styles.container_main_conflict
     : '';
 

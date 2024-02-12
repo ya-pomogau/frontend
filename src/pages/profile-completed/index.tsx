@@ -17,6 +17,7 @@ import { defaultObjFilteres } from 'features/filter/consts';
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
+  const { role } = useAppSelector((state) => state.user);
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
@@ -55,7 +56,7 @@ export function ProfileCompletedPage() {
         <Loader />
       ) : (
         <TaskList
-          userRole={UserRole.VOLUNTEER}
+          userRole={role}
           isMobile={isMobile}
           isStatusActive={false}
           tasks={!isConfirmed ? filterTasks : []}
