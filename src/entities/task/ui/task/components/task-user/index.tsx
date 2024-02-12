@@ -53,12 +53,12 @@ export const TaskUser = ({ user, extClassName, date }: TaskUserProps) => {
         >
           <RoundButton
             buttonType={TaskButtonType.phone}
-            disabled={isPageCompleted ? true : false}
+            disabled={isPageCompleted || !user ? true : false}
           />
         </ButtonWithModal>
         <RoundButton
           buttonType="message"
-          disabled={isPageCompleted ? true : false}
+          disabled={isPageCompleted || !user ? true : false}
         />
       </div>
     </div>

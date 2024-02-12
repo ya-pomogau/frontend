@@ -367,8 +367,8 @@
         "vkId": "4567890",
         "role": "Volunteer"
       },
-      "volunteerReport": "fulfilled",
-      "adminResolve": "fulfilled",
+      "volunteerReport": null,
+      "adminResolve": null,
       "isPendingChanges": false
     }
   ],
