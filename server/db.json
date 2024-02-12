@@ -403,8 +403,8 @@
         "vkId": "4567890",
         "role": "Volunteer"
       },
-      "volunteerReport": "fulfilled",
-      "adminResolve": "fulfilled",
+      "volunteerReport": "rejected",
+      "adminResolve": "pending",
       "isPendingChanges": false
     },
     {
@@ -428,7 +428,7 @@
         "vkId": "4567890",
         "role": "Recipient"
       },
-      "recipientReport": "rejected",
+      "recipientReport": "fulfilled",
       "volunteer": {
         "name": "Валентин Захаров",
         "phone": "+7 777 888 9999",
@@ -437,8 +437,8 @@
         "vkId": "4567890",
         "role": "Volunteer"
       },
-      "volunteerReport": "rejected",
-      "adminResolve": "rejected",
+      "volunteerReport": "fulfilled",
+      "adminResolve": null,
       "isPendingChanges": false
     },
     {
