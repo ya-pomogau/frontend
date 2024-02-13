@@ -24,7 +24,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
-    id: item._id,
+    _id: item._id,
     title: item.title,
   }));
 
@@ -45,7 +45,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     if (description.length <= 5 || description.length > 300) {
       return true;
     }
-    if (category.id === '' && category.title === '') {
+    if (category._id === '' && category.title === '') {
       return true;
     }
   };
@@ -95,7 +95,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
-            {category.id === '' && category.title === '' && (
+            {category._id === '' && category.title === '' && (
               <p className={styles.messageAlert}>Выберите тип задачи</p>
             )}
             <TextArea

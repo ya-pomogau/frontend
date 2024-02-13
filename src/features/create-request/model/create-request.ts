@@ -12,7 +12,7 @@ export type TInitialStateForPopup = {
   location?: GeoCoordinates;
   categories: Category[];
   category: {
-    id: string;
+    _id: string;
     title: string;
   };
   description: string;
@@ -23,7 +23,7 @@ export type TInitialStateForPopup = {
   temporaryAddress: string;
   temporaryCoordinates?: GeoCoordinates;
   temporaryCategory: {
-    id: string;
+    _id: string;
     title: string;
   };
   temporaryDescriptionForTask: string;
@@ -33,13 +33,13 @@ export type TInitialStateForPopup = {
 
 export const InitialStateForPopup: TInitialStateForPopup = {
   taskId: '',
-  time: format(new Date(), 'hh:mm'),
+  time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
   location: [],
   categories: [],
   category: {
-    id: '',
+    _id: '',
     title: '',
   },
   description: '',
@@ -50,11 +50,11 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   temporaryAddress: '',
   temporaryCoordinates: [],
   temporaryCategory: {
-    id: '',
+    _id: '',
     title: '',
   },
   temporaryDescriptionForTask: '',
-  temporaryTime: format(new Date(), 'hh:mm'),
+  temporaryTime: '',
   temporaryDate: format(new Date(), 'dd.MM.yyyy'),
 };
 
@@ -76,7 +76,7 @@ export const createRequestModel = createSlice({
       state.categories = action.payload;
     },
     setCategory(state, action) {
-      state.category.id = action.payload.id;
+      state.category._id = action.payload._id;
       state.category.title = action.payload.title;
     },
     setDescriptionForTask(state, action) {
@@ -84,6 +84,9 @@ export const createRequestModel = createSlice({
     },
     changeCheckbox(state) {
       state.termlessRequest = !state.termlessRequest;
+    },
+    setTermlessRequest(state, action) {
+      state.termlessRequest = action.payload;
     },
     changeCurrentStep(state, action) {
       state.currentStep = action.payload;
@@ -110,10 +113,11 @@ export const createRequestModel = createSlice({
     },
     setTemporary(state, action) {
       state.temporaryDate = action.payload.initialData.date;
+      state.temporaryTime = action.payload.initialData.time;
       state.taskId = action.payload.initialData.taskId;
       state.temporaryAddress = action.payload.initialData.address;
-      //state.temporaryCoordinates = action.payload.initialData.coords;
-      state.temporaryCategory.id = action.payload.initialData.category.id;
+      state.temporaryCoordinates = action.payload.initialData.location;
+      state.temporaryCategory._id = action.payload.initialData.category._id;
       state.temporaryCategory.title = action.payload.initialData.category.title;
       state.temporaryDescriptionForTask =
         action.payload.initialData.description;
@@ -136,4 +140,5 @@ export const {
   clearState,
   changeCurrentStep,
   setTemporary,
+  setTermlessRequest,
 } = createRequestModel.actions;

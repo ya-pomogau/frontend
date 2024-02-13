@@ -11,7 +11,7 @@ import { CloseCrossIcon } from '../icons/close-cross-icon';
 import { Tooltip } from '../tooltip';
 import { Task } from 'entities/task/types';
 
-export type Option = { id: string; title: string };
+export type Option = { _id: string; title: string };
 
 interface IDropdownProps {
   placeholder: string;
@@ -75,7 +75,7 @@ const Dropdown = ({
   }, []);
 
   const openPopup = (item: Option) => {
-    const refKey = item.id.toString();
+    const refKey = item._id.toString();
     const boundingClientRect =
       refMap.current[refKey]?.current?.getBoundingClientRect();
     if (boundingClientRect) {
@@ -120,9 +120,9 @@ const Dropdown = ({
         <ul className={classNames('text', 'text_size_middle', styles.list)}>
           {items?.map((item) => {
             const itemSelect = commonSelected?.find((obj) => {
-              return obj.value === item.id;
+              return obj.value === item._id;
             });
-            const refKey = item.id.toString();
+            const refKey = item._id.toString();
             if (!refMap.current[refKey]) {
               refMap.current[refKey] = React.createRef<HTMLLIElement>();
             }
@@ -130,13 +130,13 @@ const Dropdown = ({
               <li
                 ref={itemSelect && refMap.current[refKey]}
                 className={itemSelect ? styles.itemSelected : styles.item}
-                key={item.id}
+                key={item._id}
                 onClick={() => {
                   itemSelect ? openPopup(item) : handleOnChange(item);
                 }}
               >
                 {item?.title}
-                {selected?.id === item.id && <CheckIcon color={'blue'} />}
+                {selected?._id === item._id && <CheckIcon color={'blue'} />}
               </li>
             );
           })}

@@ -12,6 +12,7 @@ import {
   setDescriptionForTask,
   setTime,
   setDate,
+  setTermlessRequest,
 } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
@@ -41,23 +42,29 @@ export const Request = ({ isMobile = true }: RequestProps) => {
     temporaryDescriptionForTask,
     temporaryDate,
     temporaryTime,
+    temporaryCategory,
   } = useAppSelector((state) => state.createRequest);
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseClick = () => {
-    dispatch(setDate(format(new Date(temporaryDate!), 'dd.MM.yyyy')));
-    dispatch(setTime(temporaryTime!));
-    dispatch(
-      setAddress({
-        additinalAddress: temporaryAddress,
-        coords: temporaryCoordinates,
-      })
-    );
-    dispatch(setDescriptionForTask(temporaryDescriptionForTask));
-    dispatch(setCategory({ temporaryCoordinates }));
     if (isTypeEdit && currentStep !== 4) {
+      if (temporaryDate !== null) {
+        dispatch(setDate(format(new Date(temporaryDate!), 'dd.MM.yyyy')));
+        dispatch(setTime(temporaryTime!));
+      } else {
+        dispatch(setTermlessRequest(true));
+        dispatch(setTime(''));
+      }
+      dispatch(
+        setAddress({
+          additinalAddress: temporaryAddress,
+          coords: temporaryCoordinates,
+        })
+      );
+      dispatch(setDescriptionForTask(temporaryDescriptionForTask));
+      dispatch(setCategory(temporaryCategory));
       dispatch(closePopup());
       dispatch(changeCurrentStep(4));
       dispatch(openPopup());

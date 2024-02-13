@@ -58,7 +58,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       ).toISOString();
 
       requestData = {
-        categoryId: category.id,
+        categoryId: category._id,
         location,
         date: dateObject,
         address,
@@ -68,7 +68,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       dispatch(closePopup());
     } else {
       requestData = {
-        categoryId: category.id,
+        categoryId: category._id,
         location,
         date: null,
         address,

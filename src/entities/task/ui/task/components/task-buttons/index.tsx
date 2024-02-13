@@ -26,9 +26,10 @@ import { useLocation } from 'react-router-dom';
 import { UserProfile } from 'entities/user/types';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
 import { useState } from 'react';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface TaskButtonsProps {
-  taskId?: string;
+  taskId: string;
   address: string;
   description: string;
   category: Category;
@@ -39,6 +40,7 @@ interface TaskButtonsProps {
   recipientReport: TaskReport | null;
   adminResolve: ResolveStatus | null;
   volunteer: UserProfile | null;
+  location: GeoCoordinates;
 }
 
 export const TaskButtons = ({
@@ -53,15 +55,16 @@ export const TaskButtons = ({
   recipientReport,
   adminResolve,
   volunteer,
+  location,
 }: TaskButtonsProps) => {
-  const location = useLocation();
+  const locationPath = useLocation();
   const dispatch = useAppDispatch();
   const userRole = useAppSelector((state) => state.user.role);
   const parsedDate = parseISO(date!);
-  const additinalAddress = address;
+  // const additinalAddress = address;
   const isTaskExpired = isAfter(new Date(), parsedDate);
   const isTaskUrgent = checkTaskUrgency(date!);
-  const isPageActive = location.pathname === '/profile/active';
+  const isPageActive = locationPath.pathname === '/profile/active';
   const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
 
   //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
@@ -73,16 +76,19 @@ export const TaskButtons = ({
     category,
     description,
     date,
+    location,
+    time: date === null ? '' : format(new Date(date!), 'HH:mm'),
   };
- 
+
   const handleEditButton = () => {
     if (date === null) {
       dispatch(changeCheckbox());
+    } else {
+      dispatch(setDate(format(new Date(date!), 'dd.MM.yyyy')));
+      dispatch(setTime(format(new Date(date!), 'HH:mm')));
     }
-    dispatch(setDate(format(new Date(date!), 'dd.MM.yyyy')));
-    dispatch(setTime(format(new Date(date!), 'HH:mm')));
     dispatch(setTemporary({ initialData }));
-    dispatch(setAddress({ additinalAddress }));
+    dispatch(setAddress({ additinalAddress: address, coords: location }));
     dispatch(setDescriptionForTask(description));
     dispatch(setCategory(category));
     dispatch(changeCurrentStep(4));

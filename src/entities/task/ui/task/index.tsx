@@ -31,6 +31,7 @@ export const TaskItem = ({
     volunteerReport,
     adminResolve,
     _id,
+    location,
   },
   userRole,
   extClassName,
@@ -112,6 +113,7 @@ export const TaskItem = ({
         />
         <TaskButtons
           //TODO: заменить completed conflict на правильные поля
+          location={location}
           taskId={_id}
           address={address}
           description={description}

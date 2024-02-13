@@ -20,7 +20,7 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   location: [],
   categories: [],
   category: {
-    id: '',
+    _id: '',
     title: '',
   },
   description: '',
@@ -31,7 +31,7 @@ export const InitialStateForPopup: TInitialStateForPopup = {
   temporaryAddress: '',
   temporaryCoordinates: [],
   temporaryCategory: {
-    id: '',
+    _id: '',
     title: '',
   },
   temporaryDescriptionForTask: '',
