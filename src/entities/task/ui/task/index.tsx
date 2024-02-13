@@ -1,59 +1,90 @@
 import classNames from 'classnames';
 import { CategoriesBackground } from 'shared/ui/categories-background';
-import placeholder from './img/placeholder.svg';
 import styles from './styles.module.css';
 import { TaskInfo } from './components/task-info';
 import { TaskDescription } from './components/task-description';
-import { TaskRecipient } from './components/task-recipient';
+import { TaskUser } from './components/task-user';
 import { TaskButtons } from './components/task-buttons';
-import { Category } from 'entities/task/types';
-import { UserProfile } from 'entities/user/types';
+import {
+  TaskStatus,
+  type Task,
+  TaskReport,
+  ResolveStatus,
+} from 'entities/task/types';
+import { UserRole } from 'shared/types/common.types';
 
-interface TaskItemProps {
-  category: Category;
-  date?: string;
-  address: string;
-  description: string;
-  count: number;
-  avatar?: string;
-  recipientName?: string;
-  recipientPhoneNumber?: string;
-  volunteer: UserProfile | null;
-  unreadMessages?: number;
-  isStatusActive?: boolean;
+export interface TaskItemProps {
+  item: Task;
   extClassName?: string;
+  userRole: UserRole | null;
 }
-// TODO: сделать передачу item в TaskItem вместо тысячи пропсов
 export const TaskItem = ({
-  category,
-  date,
-  address,
-  description,
-  count,
-  avatar = placeholder,
-  recipientName,
-  volunteer,
-  recipientPhoneNumber,
-  isStatusActive,
+  item: {
+    category,
+    date,
+    address,
+    status,
+    description,
+    recipient,
+    recipientReport,
+    volunteer,
+    volunteerReport,
+    adminResolve,
+  },
+  userRole,
   extClassName,
 }: TaskItemProps) => {
-  //TODO: confirmed && completed заменить на новые поля объекта
-  // const taskLayout =
-  //   confirmed && completed
-  //     ? styles.container_main_default
-  //     : confirmed
-  //     ? styles.container_main_confirmed
-  //     : conflict
-  //     ? styles.container_main_conflict
-  //     : styles.container_main_default;
-  //TODO: использовать деструктуризацию для записи полей таски
+  const taskConfirmed = () => {
+    if (
+      adminResolve === null ||
+      adminResolve === ResolveStatus.PENDING ||
+      adminResolve === ResolveStatus.VIRGIN
+    ) {
+      return (
+        (userRole === UserRole.VOLUNTEER &&
+          volunteerReport === TaskReport.FULFILLED) ||
+        (userRole === UserRole.RECIPIENT &&
+          recipientReport === TaskReport.FULFILLED)
+      );
+    } else if (adminResolve === ResolveStatus.FULFILLED) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const taskConflict = () => {
+    if (
+      adminResolve === null ||
+      adminResolve === ResolveStatus.PENDING ||
+      adminResolve === ResolveStatus.VIRGIN
+    ) {
+      return (
+        (userRole === UserRole.VOLUNTEER &&
+          volunteerReport === TaskReport.REJECTED) ||
+        (userRole === UserRole.RECIPIENT &&
+          recipientReport === TaskReport.REJECTED)
+      );
+    } else if (adminResolve === ResolveStatus.REJECTED) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const taskLayout = taskConfirmed()
+    ? styles.container_main_confirmed
+    : taskConflict()
+    ? styles.container_main_conflict
+    : '';
+
   return (
     <>
       <div
         className={classNames(
           styles.container_main,
           'text',
-          // taskLayout,
+          taskLayout,
           extClassName
         )}
       >
@@ -70,28 +101,25 @@ export const TaskItem = ({
         />
         <TaskDescription
           description={description}
-          count={count}
+          count={category.points}
           extClassName={styles.description}
         />
-        <TaskRecipient
-          avatar={avatar}
-          recipientName={recipientName}
-          recipientPhoneNumber={recipientPhoneNumber}
-          //TODO: заменить volunteer === null ? false : true на правильное условие
-          connection={volunteer === null ? false : true}
-          extClassName={styles.recipient}
+        <TaskUser
+          user={UserRole.RECIPIENT === userRole ? volunteer : recipient}
+          extClassName={styles.user}
+          date={date}
         />
         <TaskButtons
-          //TODO: заменить completed conflict на правильные поля
-          recipientName={recipientName}
           address={address}
           description={description}
           category={category}
           date={date}
-          isStatusActive
-          completed
-          conflict
+          conflict={status === TaskStatus.CONFLICTED}
+          volunteer={volunteer}
           extClassName={styles.buttons}
+          volunteerReport={volunteerReport}
+          recipientReport={recipientReport}
+          adminResolve={adminResolve}
         />
       </div>
     </>

@@ -1,4 +1,5 @@
 .main {
+  width: 181px;
   display: grid;
   grid-template-rows: repeat(3, max-content);
   justify-items: center;
@@ -15,6 +16,7 @@
 .info {
   grid-area: info;
   display: flex;
+  min-height: 44px;
   flex-direction: column;
   text-align: center;
   gap: 3px;
@@ -33,6 +35,7 @@
 @media screen and (max-width: 1150px) {
   .main {
     grid-template-rows: repeat(2, max-content);
+    justify-self: start;
     justify-items: start;
     gap: 5px;
     grid-template-areas: 'avatar info' 'empty buttons';

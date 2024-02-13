@@ -14,9 +14,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
+import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
+import { useLocation } from 'react-router-dom';
 
 interface TaskListProps {
-  userRole?: UserRole | null;
+  userRole: UserRole | null;
   tasks: Array<Task>;
   extClassName?: string;
   isStatusActive: boolean;
@@ -40,7 +42,8 @@ export const TaskList = ({
   handleClickAddTaskButton,
 }: TaskListProps) => {
   const buttonGuard = usePermission([UserStatus.CONFIRMED], UserRole.RECIPIENT);
-
+  const location = useLocation();
+  const isCompletedPage = location.pathname.includes('/profile/completed');
   const [isOpen, setIsOpen] = useState(false);
 
   const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
@@ -96,42 +99,34 @@ export const TaskList = ({
             extClassName
           )}
         >
-          {!isStatusActive && userRole === UserRole.RECIPIENT && (
-            <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
-              <RoundButton
-                buttonType="add"
-                onClick={
-                  buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
-                }
-                size={isMobile ? 'medium' : 'large'}
-                extClassName={styles.add_task_icon}
-              />
-
-              <h2
-                className={`${styles.title_add_list} ${
-                  isMobile ? 'text_size_medium' : 'text_size_large'
-                } text_type_regular`}
+          {!isStatusActive &&
+            userRole === UserRole.RECIPIENT &&
+            !isCompletedPage && (
+              <li
+                className={isMobile ? styles.add_task_mobile : styles.add_task}
               >
-                Создать заявку
-              </h2>
-            </li>
-          )}
-          {/* TODO: сделать передачу item в TaskItem вместо тысячи пропсов */}
+                <RoundButton
+                  buttonType="add"
+                  onClick={
+                    buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
+                  }
+                  size={isMobile ? 'medium' : 'large'}
+                  extClassName={styles.add_task_icon}
+                />
+
+                <h2
+                  className={`${styles.title_add_list} ${
+                    isMobile ? 'text_size_medium' : 'text_size_large'
+                  } text_type_regular`}
+                >
+                  Создать заявку
+                </h2>
+              </li>
+            )}
           {tasks &&
             tasks.map((item, index) => (
               <li key={index}>
-                <TaskItem
-                  category={item.category}
-                  date={item.date!}
-                  address={item.address}
-                  description={item.description}
-                  count={item.category.points}
-                  avatar={item.recipient.avatar}
-                  recipientName={item.recipient.name}
-                  recipientPhoneNumber={item.recipient.phone}
-                  volunteer={item.volunteer}
-                  isStatusActive={isStatusActive}
-                />
+                <TaskItem item={item} userRole={userRole} />
               </li>
             ))}
         </ul>
@@ -185,8 +180,7 @@ export const TaskList = ({
                     />
                   </div>
                   <div className={styles.text}>
-                    Вы пока не можете создавать заявку. Дождитесь подтверждения
-                    администратора
+                    {unauthorizedRecipientPopupMessage}
                   </div>
                 </Tooltip>
               )}

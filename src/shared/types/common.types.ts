@@ -28,8 +28,19 @@ export enum VariantCheckbox {
 }
 export enum TaskButtonType {
   close = 'close',
+  responded = 'responded',
+  conflict = 'conflict',
+  confirm = 'confirm',
+  phone = 'phone',
+}
+
+export enum ModalContentType {
+  close = 'close',
   conflict = 'conflict',
   confirm = 'confirm',
   phone = 'phone',
   cancel = 'cancel',
+  responded = 'responded',
+  admin = 'admin',
+  unfulfilled = 'unfulfilled',
 }

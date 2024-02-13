@@ -21,6 +21,5 @@ export const WithCloseButton: Story = {
   args: {
     children: <button>Кнопка</button>,
     modalContent: 'Какой-то текст',
-    closeButton: true,
   },
 };

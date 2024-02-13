@@ -1,4 +1,8 @@
-import { TaskButtonType, UserRole } from 'shared/types/common.types';
+import {
+  ModalContentType,
+  TaskButtonType,
+  UserRole,
+} from 'shared/types/common.types';
 import { SquareButton } from 'shared/ui/square-buttons';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
@@ -14,36 +18,49 @@ import {
   setDate,
   setDescriptionForTask,
 } from 'features/create-request/model';
-import { Category } from 'entities/task/types';
+import { Category, ResolveStatus, TaskReport } from 'entities/task/types';
+import { useLocation } from 'react-router-dom';
+import { UserProfile } from 'entities/user/types';
+import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
+import { useState } from 'react';
 
 interface TaskButtonsProps {
-  recipientName?: string;
   address: string;
   description: string;
   category: Category;
-  date?: string;
-  isStatusActive: boolean;
-  completed: boolean;
+  date: string | null;
   conflict: boolean;
   extClassName?: string;
+  volunteerReport: TaskReport | null;
+  recipientReport: TaskReport | null;
+  adminResolve: ResolveStatus | null;
+  volunteer: UserProfile | null;
 }
 
 export const TaskButtons = ({
-  recipientName,
   address,
   description,
   category,
   date,
-  isStatusActive = true,
-  completed,
   conflict,
   extClassName,
+  volunteerReport,
+  recipientReport,
+  adminResolve,
+  volunteer,
 }: TaskButtonsProps) => {
-  const parsedDate = parseISO(date!);
-  const comparedDateResult = isAfter(new Date(), parsedDate);
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const userRole = useAppSelector((state) => state.user.role);
+  const parsedDate = parseISO(date!);
   const additinalAddress = address;
+  const isTaskExpired = isAfter(new Date(), parsedDate);
+  const isTaskUrgent = checkTaskUrgency(date!);
+  const isPageActive = location.pathname === '/profile/active';
+  const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
+
+  //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
+  const [clicked, setClicked] = useState<boolean>(false);
 
   const handleEditButton = () => {
     dispatch(setDate(date));
@@ -53,79 +70,112 @@ export const TaskButtons = ({
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
-  //TODO: логика отображения, работы кнопок должна соответствовать миро доске
-  //TODO: в зависимости от роли, на некоторых попапах будет разных текст
   return (
-    <div className={classNames(extClassName, styles.buttons_action)}>
-      <ButtonWithModal
-        closeButton
-        modalContent={
-          <ModalContent
-            type={TaskButtonType.confirm}
-            active={isStatusActive}
-            date={date}
+    <div className={classNames(extClassName, styles.buttons)}>
+      {(isTaskExpired || !date) && isPageActive && (
+        <ButtonWithModal
+          setClicked={setClicked}
+          modalContent={
+            <ModalContent
+              type={clicked ? ModalContentType.admin : ModalContentType.confirm}
+              role={userRole}
+            />
+          }
+          extClassName={styles.confirm}
+        >
+          <SquareButton
+            buttonType={TaskButtonType.confirm}
+            disabledColor={
+              (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
+              (userRole === UserRole.RECIPIENT && !!recipientReport) ||
+              clicked
+            }
           />
-        }
-      >
-        <SquareButton
-          buttonType={TaskButtonType.confirm}
-          //переписать completed если бэк поменяется
-          extClassName={
-            recipientName && !date && completed
-              ? ''
-              : recipientName
-              ? ''
-              : styles.item_hidden
+        </ButtonWithModal>
+      )}
+      {userRole === UserRole.VOLUNTEER && isPageActive && (
+        <ButtonWithModal
+          extClassName={styles.close}
+          modalContent={
+            <ModalContent
+              type={
+                isTaskExpired || !date
+                  ? ModalContentType.responded
+                  : isTaskUrgent
+                  ? ModalContentType.cancel
+                  : ModalContentType.close
+              }
+              date={date}
+            />
           }
-        />
-      </ButtonWithModal>
-      <ButtonWithModal
-        closeButton
-        modalContent={<ModalContent type={TaskButtonType.close} />}
-      >
-        <SquareButton
-          buttonType={TaskButtonType.close}
-          extClassName={
-            (!date && recipientName) || !isStatusActive
-              ? styles.item_hidden
-              : styles.button_edit
-          }
-          //переписать completed если бэк поменяется
-          disabled={comparedDateResult || !completed}
-        />
-      </ButtonWithModal>
-      <ButtonWithModal
-        closeButton
-        modalContent={
-          <ModalContent
-            type={TaskButtonType.conflict}
-            active={isStatusActive}
-            conflict={conflict}
+        >
+          <SquareButton
+            buttonType={TaskButtonType.close}
+            disabledColor={isTaskUrgent}
           />
-        }
-      >
-        <SquareButton
-          buttonType={TaskButtonType.conflict}
-          //переписать conflict на подходящий параметр
-          extClassName={
-            recipientName && !date && !conflict
-              ? ''
-              : recipientName
-              ? ''
-              : !comparedDateResult
-              ? ''
-              : styles.item_hidden
+        </ButtonWithModal>
+      )}
+      {userRole === UserRole.RECIPIENT && isPageActive && (
+        <ButtonWithModal
+          extClassName={styles.close}
+          modalContent={
+            <ModalContent
+              type={
+                isTaskExpired || volunteer
+                  ? ModalContentType.responded
+                  : ModalContentType.close
+              }
+              date={date}
+            />
           }
-        />
-      </ButtonWithModal>
-      {userRole === UserRole.RECIPIENT && (
+        >
+          <SquareButton
+            buttonType={TaskButtonType.close}
+            disabledColor={isTaskUrgent}
+          />
+        </ButtonWithModal>
+      )}
+      {(isTaskExpired || !date) && (
+        <ButtonWithModal
+          setClicked={isPageActive ? setClicked : undefined}
+          extClassName={styles.conflict}
+          modalContent={
+            <ModalContent
+              type={
+                isPageActive
+                  ? clicked
+                    ? ModalContentType.admin
+                    : ModalContentType.conflict
+                  : unfulfilledTask
+                  ? ModalContentType.unfulfilled
+                  : ModalContentType.conflict
+              }
+              active={isPageActive}
+              conflict={conflict}
+              date={date}
+            />
+          }
+        >
+          <SquareButton
+            buttonType={TaskButtonType.conflict}
+            disabledColor={
+              (userRole === UserRole.VOLUNTEER &&
+                !!volunteerReport &&
+                isPageActive) ||
+              (userRole === UserRole.RECIPIENT &&
+                !!recipientReport &&
+                isPageActive) ||
+              conflict ||
+              (clicked && isPageActive)
+            }
+          />
+        </ButtonWithModal>
+      )}
+      {userRole === UserRole.RECIPIENT && !volunteer && isPageActive && (
         <SquareButton
           onClick={handleEditButton}
           buttonType="edit"
-          extClassName={
-            // не забыть удалить !
-            !recipientName ? styles.item_hidden : styles.button_edit
-          }
+          extClassName={styles.edit}
         />
       )}
     </div>
