@@ -74,7 +74,7 @@ export const TaskButtons = ({
     description,
     date,
   };
-
+ 
   const handleEditButton = () => {
     if (date === null) {
       dispatch(changeCheckbox());
