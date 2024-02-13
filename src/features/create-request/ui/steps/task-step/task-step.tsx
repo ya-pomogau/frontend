@@ -18,16 +18,18 @@ interface ITaskStepProps {
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, categories, category, isTypeEdit } =
-    useAppSelector((state) => state.createRequest);
+  const { description, categories, category, isTypeEdit } = useAppSelector(
+    (state) => state.createRequest
+  );
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
-    value: String(item._id),
-    label: item.title,
+    _id: item._id,
+    title: item.title,
   }));
 
   const handleTaskValueChange = (item: Option) => {
+    console.log('item', item);
     dispatch(setCategory(item));
   };
 
@@ -40,10 +42,10 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const propsButton = usePropsButtonCustom();
 
   const disabledBtn = () => {
-    if (descriptionForTask.length <= 5 || descriptionForTask.length > 300) {
+    if (description.length <= 5 || description.length > 300) {
       return true;
     }
-    if (category.value === '' && category.label === '') {
+    if (category._id === '' && category.title === '') {
       return true;
     }
   };
@@ -74,7 +76,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             />
 
             <TextArea
-              value={descriptionForTask}
+              value={description}
               label="Опишите задачу"
               name="task"
               placeholder="Например: Помогите выгулять собаку."
@@ -93,11 +95,11 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
-            {category.value === '' && category.label === '' && (
+            {category._id === '' && category.title === '' && (
               <p className={styles.messageAlert}>Выберите тип задачи</p>
             )}
             <TextArea
-              value={descriptionForTask}
+              value={description}
               label="Опишите задачу"
               name="task"
               placeholder="Например: Помогите выгулять собаку."
@@ -110,7 +112,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
       </div>
       <div className={styles.buttonsWrapper}>
         <div className={styles.alertWrapper}>
-          {descriptionForTask.length <= 5 && (
+          {description.length <= 5 && (
             <p className={styles.messageAlert}>Добавьте описание задачи</p>
           )}
         </div>

@@ -84,7 +84,6 @@ export const TaskList = ({
       window.removeEventListener('resize', getCoords);
     };
   }, []);
-
   return (
     <>
       {/* TODO: удалить след. строку, когда будут приходить данные тасок с сервера */}

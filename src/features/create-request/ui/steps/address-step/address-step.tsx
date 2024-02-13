@@ -26,7 +26,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const dispatch = useAppDispatch();
 
-  const { address, coordinates, isTypeEdit } = useAppSelector(
+  const { address, location, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
   useEffect(() => {
@@ -63,7 +63,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
             <InputAddress
               initialValue={address}
-              address={{ address, coords: coordinates || [] }}
+              address={{ address, coords: location || [] }}
               setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
@@ -73,13 +73,13 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               <YandexMap
                 width="260px"
                 height="350px"
-                coordinates={coordinates}
+                coordinates={location}
                 role={UserRole.RECIPIENT}
                 mapSettings={
-                  coordinates
+                  location
                     ? {
-                        latitude: coordinates[0],
-                        longitude: coordinates[1],
+                        latitude: location[0],
+                        longitude: location[1],
                         zoom: 17,
                       }
                     : undefined
@@ -118,7 +118,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             <InputAddress
               label="Укажите место встречи"
               initialValue={address}
-              address={{ address, coords: coordinates || [] }}
+              address={{ address, coords: location || [] }}
               setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
@@ -151,13 +151,13 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               <YandexMap
                 width="100%"
                 height="159px"
-                coordinates={coordinates}
+                coordinates={location}
                 role={UserRole.RECIPIENT}
                 mapSettings={
-                  coordinates
+                  location
                     ? {
-                        latitude: coordinates[0],
-                        longitude: coordinates[1],
+                        latitude: location[0],
+                        longitude: location[1],
                         zoom: 17,
                       }
                     : undefined
@@ -168,6 +168,9 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         )}
       </div>
       <div className={styles.buttonWrapper}>
+        {address === '' && (
+          <p className={styles.messageAlert}>Укажите место встречи</p>
+        )}
         {!isTypeEdit && (
           <Button
             buttonType="secondary"
@@ -178,6 +181,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         )}
         {
           <Button
+            disabled={address === ''}
             buttonType="primary"
             label={propsButton.label}
             onClick={propsButton.onClick}

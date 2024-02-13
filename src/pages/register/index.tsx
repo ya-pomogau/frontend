@@ -42,15 +42,15 @@ export function RegisterPage() {
     });
     const vk_id = `${vkId}`;
     const user = {
-      name,
+      name: name,
       phone,
       address: address.address,
-      vkId: vk_id,
-      role: role,
       location: {
         type: 'Point',
         coordinates: address.coords,
       },
+      vkId: vk_id,
+      role: role,
     };
     dispatch(newUserThunk(user));
   };

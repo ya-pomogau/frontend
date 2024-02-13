@@ -7,6 +7,12 @@ import {
   clearState,
   changeCurrentStep,
   openPopup,
+  setAddress,
+  setCategory,
+  setDescriptionForTask,
+  setTime,
+  setDate,
+  setTermlessRequest,
 } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
@@ -20,23 +26,46 @@ import { useGetCategoriesQuery } from 'services/categories-api';
 import { Tooltip } from '../../../../shared/ui/tooltip';
 import styles from './styles.module.css';
 import { Button } from '../../../../shared/ui/button';
+import { format } from 'date-fns';
 
 export interface RequestProps {
   isMobile?: boolean;
 }
 export const Request = ({ isMobile = true }: RequestProps) => {
   const dispatch = useAppDispatch();
-  const { currentStep, isPopupOpen, isTypeEdit } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const {
+    currentStep,
+    isPopupOpen,
+    isTypeEdit,
+    temporaryAddress,
+    temporaryCoordinates,
+    temporaryDescriptionForTask,
+    temporaryDate,
+    temporaryTime,
+    temporaryCategory,
+  } = useAppSelector((state) => state.createRequest);
   const data = useAppSelector((state) => state.user.data);
   const { data: categories } = useGetCategoriesQuery('');
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseClick = () => {
     if (isTypeEdit && currentStep !== 4) {
+      if (temporaryDate !== null) {
+        dispatch(setDate(format(new Date(temporaryDate!), 'dd.MM.yyyy')));
+        dispatch(setTime(temporaryTime!));
+      } else {
+        dispatch(setTermlessRequest(true));
+        dispatch(setTime(''));
+      }
+      dispatch(
+        setAddress({
+          additinalAddress: temporaryAddress,
+          coords: temporaryCoordinates,
+        })
+      );
+      dispatch(setDescriptionForTask(temporaryDescriptionForTask));
+      dispatch(setCategory(temporaryCategory));
       dispatch(closePopup());
-      dispatch(clearState());
       dispatch(changeCurrentStep(4));
       dispatch(openPopup());
       setIsOpen(false);

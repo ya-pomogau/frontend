@@ -12,6 +12,7 @@ interface TaskInfoProps {
 
 export const TaskInfo = ({ date, address, extClassName }: TaskInfoProps) => {
   const isMobile = useMediaQuery('(max-width:1150px)');
+
   return (
     <div className={classNames(extClassName, styles.infoDate)}>
       <div
