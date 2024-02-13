@@ -8,6 +8,7 @@ import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
 import systemSliceReducer from '../../services/system-slice';
+import createTaskSliceReducer from '../../services/create-task';
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     [tasksApi.reducerPath]: tasksApi.reducer,
     [authAdminApi.reducerPath]: authAdminApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
+    createTask: createTaskSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

@@ -36,7 +36,7 @@ const Dropdown = ({
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: tasks } = useGetTasksByStatusQuery('active');
+  // const { data: tasks } = useGetTasksByStatusQuery('active');
 
   // const userId = useAppSelector((state) => state.user.data?._id);
   const { categories } = useAppSelector((state) => state.createRequest);
@@ -50,14 +50,14 @@ const Dropdown = ({
   //   }
   // });
   // Получаем id категории
-  const categoryId = tasks.map((item: Task) => item.category._id);
+  // const categoryId = tasks.map((item: Task) => item.category._id);
   //Получем объект уже выбранной категории
-  const commonIds = categories.filter((obj) => categoryId.includes(obj._id));
+  // const commonIds = categories.filter((obj) => categoryId.includes(obj._id));
 
-  const commonSelected = commonIds?.map((item) => ({
-    value: String(item._id),
-    label: item.title,
-  }));
+  // const commonSelected = commonIds?.map((item) => ({
+  //   value: String(item._id),
+  //   label: item.title,
+  // }));
 
   const handleOnChange = useCallback(
     (item: Option) => {
@@ -119,20 +119,20 @@ const Dropdown = ({
       {isActive && (
         <ul className={classNames('text', 'text_size_middle', styles.list)}>
           {items?.map((item) => {
-            const itemSelect = commonSelected?.find((obj) => {
-              return obj.value === item._id;
-            });
-            const refKey = item._id.toString();
-            if (!refMap.current[refKey]) {
-              refMap.current[refKey] = React.createRef<HTMLLIElement>();
-            }
+            // const itemSelect = commonSelected?.find((obj) => {
+            //   return obj.value === item._id;
+            // });
+            // const refKey = item._id.toString();
+            // if (!refMap.current[refKey]) {
+            //   refMap.current[refKey] = React.createRef<HTMLLIElement>();
+            // }
             return (
               <li
-                ref={itemSelect && refMap.current[refKey]}
-                className={itemSelect ? styles.itemSelected : styles.item}
+                // ref={itemSelect && refMap.current[refKey]}
+                className={styles.item}
                 key={item._id}
                 onClick={() => {
-                  itemSelect ? openPopup(item) : handleOnChange(item);
+                  handleOnChange(item);
                 }}
               >
                 {item?.title}

@@ -15,6 +15,7 @@ import { CategoriesBackground } from 'shared/ui/categories-background';
 
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
+import createTask, { newTask } from 'services/create-task';
 interface ICommonStepProps {
   isMobile?: boolean;
 }
@@ -46,16 +47,11 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
   const handleSubmitClick = () => {
     let requestData = {};
+
     if (!termlessRequest) {
       const [year, month, day] = formattedDate.split('.');
       const [hours, minutes] = time.split(':');
-      const dateObject = new Date(
-        +year,
-        +month - 1,
-        +day,
-        +hours,
-        +minutes
-      ).toISOString();
+      const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
 
       requestData = {
         categoryId: category._id,
@@ -64,6 +60,18 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
+      dispatch(
+        newTask({
+          categoryId: category._id,
+          location: {
+            type: 'Point',
+            coordinates: location,
+          },
+          date: dateObject,
+          address,
+          description,
+        })
+      );
       dispatch(clearState());
       dispatch(closePopup());
     } else {
@@ -74,7 +82,18 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-
+      dispatch(
+        newTask({
+          categoryId: category._id,
+          location: {
+            type: 'Point',
+            coordinates: location,
+          },
+          date: null,
+          address,
+          description,
+        })
+      );
       dispatch(clearState());
       dispatch(closePopup());
     }
