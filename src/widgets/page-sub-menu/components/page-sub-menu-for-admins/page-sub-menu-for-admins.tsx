@@ -2,6 +2,7 @@ import { useAppSelector } from 'app/hooks';
 import { isRootSelector } from 'entities/user/model';
 import { PageSubMenu } from '../page-sub-menu/page-sub-menu';
 import { PageSubMenuLink } from '../page-sub-menu-link/page-sub-menu-link';
+import { UserRole } from 'shared/types/common.types';
 
 interface PageSubMenuForAdminsProps {
   counters: {
@@ -33,7 +34,7 @@ export const PageSubMenuForAdmins = ({
             text="Не обработанные"
             notifications={counters.notprocessed}
           />
-          {role === 'Admin' && isRoot ? (
+          {role === UserRole.ADMIN && isRoot ? (
             <PageSubMenuLink
               to="/profile/requests/admins"
               text="Админы"

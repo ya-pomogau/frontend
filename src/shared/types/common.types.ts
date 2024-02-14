@@ -51,3 +51,10 @@ export enum Tabs {
   NOTPROCESSED = 'notprocessed',
   ADMINS = 'admins',
 }
+
+export enum Tabs {
+  VOLUNTEERS = 'volunteers',
+  RECIPIENTS = 'recipients',
+  NOTPROCESSED = 'notprocessed',
+  ADMINS = 'admins',
+}

@@ -8,7 +8,6 @@ import { Input } from 'shared/ui/input';
 import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
-import { UserRole } from 'shared/types/common.types';
 import { IFilterValues } from 'features/filter/types';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { IDateUser } from 'pages/requests/test-users';
@@ -16,6 +15,7 @@ import {
   filterCardsUsersPageAdmin,
   filterUsersNamePageAdmin,
 } from 'shared/libs/utils';
+import { UserRole } from '../../shared/types/common.types';
 
 const userMock = [
   {
