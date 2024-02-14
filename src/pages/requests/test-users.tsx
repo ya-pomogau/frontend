@@ -10,8 +10,7 @@ export interface IDateUser {
   volunteerInfo: {
     approved: boolean;
     checked: boolean;
-    keys: boolean;
-    adminStatus: null;
+    isHasKeys: boolean;
     scores: number;
   };
 }
@@ -27,8 +26,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: true,
-      keys: true,
-      adminStatus: null,
+      isHasKeys: true,
       scores: 60,
     },
   },
@@ -42,8 +40,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: true,
-      adminStatus: null,
+      isHasKeys: true,
       scores: 60,
     },
   },
@@ -58,8 +55,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -73,8 +69,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -88,8 +83,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 40,
     },
   },
@@ -103,8 +97,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 40,
     },
   },
@@ -118,8 +111,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 40,
     },
   },
@@ -133,8 +125,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 40,
     },
   },
@@ -148,8 +139,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -163,8 +153,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -179,8 +168,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -194,8 +182,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -210,8 +197,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -225,8 +211,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -240,8 +225,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 40,
     },
   },
@@ -255,8 +239,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -270,8 +253,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -285,8 +267,7 @@ export const testUsers: IDateUser[] = [
     volunteerInfo: {
       approved: true,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 40,
     },
   },

@@ -28,8 +28,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -43,8 +42,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -58,8 +56,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -73,8 +70,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -88,8 +84,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },

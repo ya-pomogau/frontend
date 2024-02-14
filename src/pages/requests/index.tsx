@@ -35,6 +35,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
   //  pollingInterval: 30000,
   //});
   const { role } = useAppSelector((state) => state.user);
+  const isRoot = useAppSelector((state) => state.user.data?.isRoot);
   const usertest = useAppSelector(userSelector);
   const [activeTab, setActiveTab] = useState(incomeTab);
   const [searchName, setSearchName] = useState('');
@@ -97,7 +98,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
   }, [volunteersData]);
 
   const tabAdminsData = useMemo(() => {
-    if (role !== 'master') return [];
+    if (!isRoot) return [];
     return adminsData
       .sort((a: UserCardType, b: UserCardType) => {
         if (!a.volunteerInfo.approved) return 1;

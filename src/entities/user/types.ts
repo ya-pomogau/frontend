@@ -96,10 +96,3 @@ export type TVolunteerInfo = {
   isHasKeys: boolean;
   scores: number;
 };
-
-export type TVolunteerInfo = {
-  approved: boolean;
-  checked: boolean;
-  isHasKeys: boolean;
-  scores: number;
-};
