@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"npm start\" \"npm run storybook\" \"env-cmd -f .env start\"",
+    "dev": "concurrently \"npm start\" \"npm run storybook\" \"env-cmd -f .env start\"",
     "start": "react-scripts start",
     "storybook": "storybook dev -p 6006",
     "prettier": "prettier --check src/**/*.{ts,tsx,css}",
@@ -11,8 +11,7 @@
     "lint": "eslint src/",
     "build": "react-scripts build",
     "build-storybook": "storybook build",
-    "test": "react-scripts test",
-    "server": "json-server -w server/db.json --routes server/routes.json -p 3001"
+    "test": "react-scripts test"
   },
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.4",
