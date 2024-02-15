@@ -29,8 +29,7 @@ export const Desktop: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
-        role: UserRole.VOLUNTEER,
+        _id: '7',
       },
       category: {
         _id: 'id',
@@ -44,8 +43,7 @@ export const Desktop: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '6',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
@@ -69,8 +67,7 @@ export const Mobile: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
-        role: UserRole.VOLUNTEER,
+        _id: '5',
       },
       category: {
         _id: 'id',
@@ -84,8 +81,7 @@ export const Mobile: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '4',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
@@ -109,8 +105,7 @@ export const ExampleWithNoRecipient: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
-        role: UserRole.VOLUNTEER,
+        _id: '3',
       },
       category: {
         _id: 'id',
@@ -124,8 +119,7 @@ export const ExampleWithNoRecipient: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '3',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
@@ -149,8 +143,7 @@ export const ExampleConfirmed: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
-        role: UserRole.VOLUNTEER,
+        _id: '1',
       },
       category: {
         _id: 'id',
@@ -164,8 +157,7 @@ export const ExampleConfirmed: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '1',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
@@ -189,8 +181,7 @@ export const ExampleConflict: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
-        role: UserRole.VOLUNTEER,
+        _id: '1',
       },
       category: {
         _id: 'id',
@@ -204,8 +195,7 @@ export const ExampleConflict: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '3',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
@@ -229,8 +219,7 @@ export const ExampleWithIndefiniteDate: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
-        role: UserRole.VOLUNTEER,
+        _id: '2',
       },
       category: {
         _id: 'id',
@@ -243,9 +232,8 @@ export const ExampleWithIndefiniteDate: Story = {
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
+        _id: '1',
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',

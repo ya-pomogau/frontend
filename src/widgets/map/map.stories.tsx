@@ -1,7 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
-import { UserRole } from 'shared/types/common.types';
 import { TaskStatus } from 'entities/task/types';
 
 const meta = {
@@ -48,8 +47,7 @@ export const Default: Story = {
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
-          vkId: '3456789',
-          role: UserRole.RECIPIENT,
+          _id: '2',
         },
         recipientReport: null,
         volunteer: null,
@@ -75,8 +73,7 @@ export const Default: Story = {
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
-          vkId: '698456789',
-          role: UserRole.RECIPIENT,
+          _id: '1',
         },
         recipientReport: null,
         volunteer: null,

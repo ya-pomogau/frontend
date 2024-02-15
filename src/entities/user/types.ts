@@ -13,8 +13,7 @@ export type UserProfile = {
   phone: string;
   avatar: string;
   address: string;
-  vkId: string;
-  role: string;
+  _id: string;
 };
 
 // export type UserInfo = {
