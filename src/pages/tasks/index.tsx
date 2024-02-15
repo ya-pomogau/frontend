@@ -8,7 +8,6 @@ import { Input } from 'shared/ui/input';
 import { UserCard } from 'widgets/user-card';
 
 import styles from './styles.module.css';
-import { UserRole } from 'shared/types/common.types';
 import { IFilterValues } from 'features/filter/types';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { IDateUser } from 'pages/requests/test-users';
@@ -16,6 +15,7 @@ import {
   filterCardsUsersPageAdmin,
   filterUsersNamePageAdmin,
 } from 'shared/libs/utils';
+import { UserRole } from '../../shared/types/common.types';
 
 const userMock = [
   {
@@ -28,8 +28,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -43,8 +42,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -58,8 +56,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -73,8 +70,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -88,8 +84,7 @@ const userMock = [
     volunteerInfo: {
       approved: false,
       checked: false,
-      keys: false,
-      adminStatus: null,
+      isHasKeys: false,
       scores: 0,
     },
   },
@@ -151,6 +146,7 @@ export function TasksPage() {
                 userId={item.userId}
                 userNumber={item.userNumber}
                 volunteerInfo={item.volunteerInfo}
+                role={item.role}
               />
             </li>
           ))}
