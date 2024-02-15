@@ -6,7 +6,11 @@ import { ButtonWithModal } from 'widgets/button-with-modal';
 import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
-import { UserRole, ModalContentType } from 'shared/types/common.types';
+import {
+  UserRole,
+  ModalContentType,
+  TaskButtonType,
+} from 'shared/types/common.types';
 
 interface ModalContentProps {
   type: ModalContentType;
@@ -55,17 +59,18 @@ export const ModalContent = ({
               label="Помощь администратора"
               onClick={() => 1}
             />
-            {/* <ButtonWithModal
+            <ButtonWithModal
+              closeButton
               modalContent={
-                <ModalContent type={TaskButtonType.close} date={date} />
+                <ModalContent type={ModalContentType.cancel} date={date} />
               }
-            > */}
-            <Button
-              buttonType="primary"
-              label="Отменить заявку"
-              onClick={() => 2}
-            />
-            {/* </ButtonWithModal> */}
+            >
+              <Button
+                buttonType="primary"
+                label="Отменить заявку"
+                onClick={() => 2}
+              />
+            </ButtonWithModal>
           </div>
         </div>
       );

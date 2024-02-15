@@ -47,6 +47,7 @@ export const TaskUser = ({ user, extClassName, date }: TaskUserProps) => {
       </div>
       <div className={styles.buttons}>
         <ButtonWithModal
+          closeButton
           modalContent={
             <ModalContent type={ModalContentType.phone} date={date} />
           }
