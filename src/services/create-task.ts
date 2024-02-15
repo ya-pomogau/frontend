@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { TPointGeoJSON } from 'entities/user/types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 interface CreateTaskDto {
   categoryId: string;
-  location: TPointGeoJSON;
+  location: GeoCoordinates;
   date: Date | null;
   address: string;
   description: string;
@@ -18,6 +19,7 @@ export const newTask = createAsyncThunk(
       headers: {
         //eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json',
+        //eslint-disable-next-line @typescript-eslint/naming-convention
         Authorization: 'Bearer ' + token,
       },
       body: JSON.stringify(dto),

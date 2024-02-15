@@ -48,13 +48,13 @@ export const Request = ({ isMobile = true }: RequestProps) => {
   // const { data: categories } = useGetCategoriesQuery('');
   const categories = [
     {
-      _id: '8',
+      _id: '65ce10451f54b2c0027072e7',
       title: 'Помощь в готовке',
       points: 1,
       accessLevel: 3,
     },
     {
-      _id: '9',
+      _id: '65ce10571f54b2c0027072e8',
       title: 'Организация досуга',
       points: 1,
       accessLevel: 3,
