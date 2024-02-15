@@ -14,17 +14,29 @@ import {
   filterByDistance,
   filterByTime,
 } from 'shared/libs/utils';
+import { useGetTaskVirginQuery } from 'services/user-task-api';
 
 export function ProfileMapPage() {
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
   const query = queryString.parse(location.search);
 
-  const { isLoading, data: tasks } = useGetTasksQuery('', {
-    pollingInterval: 30000,
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
-  });
+  // const { isLoading, data: tasks } = useGetTasksQuery('', {
+  //   pollingInterval: 30000,
+  //   refetchOnFocus: true,
+  //   refetchOnReconnect: true,
+  // });
+  let latitude = '';
+  let longitude = '';
+  if (user && user.location) {
+    latitude = user.location[0].toString();
+    longitude = user.location[1].toString();
+  }
+  const {
+    data: tasks,
+    error,
+    isLoading,
+  } = useGetTaskVirginQuery(['volunteer', latitude, longitude]);
 
   const filteredTasks = useMemo((): Task[] => {
     //починить типизацию значений фильтра и убрать лишние условия

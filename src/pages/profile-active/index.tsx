@@ -13,13 +13,22 @@ import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { defaultObjFilteres } from 'features/filter/consts';
-import { UserStatus } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
+import { useGetTaskActiveQuery } from 'services/user-task-api';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
-  const { data: tasks, isLoading } = useGetTasksByStatusQuery('active');
   const { role, data } = useAppSelector((state) => state.user);
-  const isUnConfirmed = data?.status === UserStatus.UNCONFIRMED;
+  let query = '';
+  if (role === UserRole.RECIPIENT) {
+    query = UserRole.RECIPIENT.toLowerCase();
+  } else {
+    query = UserRole.VOLUNTEER.toLowerCase();
+  }
+  const { data: tasks, error, isLoading } = useGetTaskActiveQuery(query);
+  const isUnConfirmed = useAppSelector((state) => {
+    return state.user.data?.status === UserStatus.UNCONFIRMED;
+  });
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
@@ -27,7 +36,7 @@ export function ProfileActivePage() {
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
   useEffect(() => {
-    handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
+    tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
     // eslint-disable-next-line
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 

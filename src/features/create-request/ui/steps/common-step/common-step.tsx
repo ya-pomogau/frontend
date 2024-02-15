@@ -39,9 +39,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     dispatch(changeStepDecrement());
   };
 
-  //if(data === null){
+  // if(date === null){
   //  termlessRequest = true;
-  //}
+  // }
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
@@ -63,10 +63,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       dispatch(
         newTask({
           categoryId: category._id,
-          location: {
-            type: 'Point',
-            coordinates: location,
-          },
+          location: location,
           date: dateObject,
           address,
           description,
@@ -85,10 +82,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
       dispatch(
         newTask({
           categoryId: category._id,
-          location: {
-            type: 'Point',
-            coordinates: location,
-          },
+          location: location,
           date: null,
           address,
           description,
