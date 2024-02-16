@@ -5,9 +5,11 @@ import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { PasswordInput } from 'shared/ui/password-input';
+import { useAppDispatch } from 'app/hooks';
 
 import styles from './styles.module.css';
 import { useLoginMutation } from 'services/auth-admin-api';
+import { adminLoginThunk } from 'services/system-slice';
 import { setUser } from 'entities/user/model';
 
 interface ILoginForm {
@@ -17,19 +19,25 @@ interface ILoginForm {
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const [checkAdminState, setAdminCheckState] = useState(false);
+
+  // TODO предназначение checkAdminState непонятно. Пока поставил начальное значение true, чтобы отрабатывало условие логина при сабмите формы
+  const [checkAdminState, setAdminCheckState] = useState(true);
   const [inputError, setInputError] = useState(false);
+  const dispatch = useAppDispatch();
 
   const [inputFields, setInputFields] = useState<ILoginForm>({
     login: '',
     password: '',
   });
-  const [login, { isLoading }] = useLoginMutation();
+
+  // TODO закомментировал, т.к ссылается на ручку signin-admin, которой сейчас нет
+  // const [login, { isLoading }] = useLoginMutation();
 
   const handleAdminLogin = async () => {
     try {
-      const user = await login(inputFields).unwrap();
-      sessionStorage.setItem('auth_token', user.access_token);
+      // const user = await login(inputFields).unwrap();
+      // sessionStorage.setItem('auth_token', user.access_token);
+      dispatch(adminLoginThunk(inputFields));
       //dispatch(setUser(user));
       // navigate('/profile');
     } catch (err) {
