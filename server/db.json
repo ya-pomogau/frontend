@@ -6,10 +6,8 @@
       "phone": "+7 (901) 123-44-55",
       "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
       "address": "ул. Поселковая, д. 5",
-      "vkId": "https://vk.com/id123456789",
-      "role": "Admin",
-      "login": "root@mail.com",
-      "password": "459670778",
+      "coordinates": [59.821539, 30.178031],
+      "status": "activated",
       "isActive": true,
       "isRoot": true,
       "permissions": [
@@ -27,10 +25,8 @@
       "phone": "+7 (902) 123-44-55",
       "avatar": "https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg",
       "address": "ул. Стойкости, 17",
-      "vkId": "https://vk.com/id123456789",
-      "role": "Admin",
-      "login": "admin2@mail.com",
-      "password": "uoeft839",
+      "coordinates": [59.828347, 30.21187],
+      "status": "activated",
       "isActive": true,
       "isRoot": false,
       "permissions": [
@@ -46,59 +42,34 @@
       "phone": "+7 (901) 123-45-67",
       "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
       "address": "ул. Кораблестроителей, 19к1",
-      "vkId": "https://vk.com/id123456789",
-      "role": "Volunteer",
-      "score": 2500,
-      "status": 2,
-      "location": [
-        59.942575,
-        30.216757
-      ],
-      "keys": true
+      "coordinates": [59.942575, 30.216757],
+      "status": "verified",
+      "isHasKeys": true,
+      "scores": 2500,
+      "isActive": true
     },
     {
-      "id": "8",
-      "name": "Волонтеров Иван Иванович",
-      "phone": "+7 (901) 123-00-00",
-      "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
-      "address": "ул. Строителей, 15",
-      "vkId": "https://vk.com/id123456788",
-      "role": "Volunteer",
-      "score": 0,
-      "status": 0,
-      "location": [
-        55.686985,
-        37.529654
-      ],
-      "keys": false
-    },
-    {
-      "id": "4",
-      "name": "Реципиентов Алексей Борисович",
-      "phone": "+7 (916) 123-45-67",
+      "id": 4,
+      "createdAt": "2023-07-09T17:30Z",
+      "fullname": "Реципиентов Алексей Борисович",
+      "role": "recipient",
+      "vk": "https://vk.com/id123456789",
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
       "address": "ул. Нахимова, д. 9",
-      "vkId": "https://vk.com/id123456789",
-      "role": "Recipient",
-      "status": 1,
-      "location": [
-        59.941871,
-        30.223494
-      ]
-    },
+      "coordinates": [59.941871, 30.223494],
+      "status": "confirmed",
+      "isActive": true
+    }
+  ],
+  "tasks": [
     {
-      "id": "9",
-      "name": "Реципиентов Валерий Афонасьевич",
-      "phone": "+7 (916) 123-45-67",
-      "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
-      "address": "ул. Самарская, д. 9",
-      "vkId": "https://vk.com/id123456789",
-      "role": "Recipient",
-      "status": 0,
-      "location": [
-        59.941871,
-        30.223494
-      ]
+      "title": "Выгулять собаку (новая задача)",
+      "categoryId": 2,
+      "date": "2023-09-03T17:30Z",
+      "description": "string",
+      "recipientId": 4,
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [59.941871, 30.223494]
     }
   ],
   "tasksAvailable": [
@@ -116,28 +87,24 @@
       },
       "date": null,
       "recipient": {
-        "name": "Мария Иванова",
-        "phone": "+7 123 456 7890",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45",
-        "vkId": "4567890",
-        "role": "Recipient"
+        "id": 5,
+        "fullname": "Реципиентов Игорь Витальевич",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Наличная, 28/16В",
+        "coordinates": [59.941335, 30.227995],
+        "approved": true
       },
-      "recipientReport": null,
       "volunteer": null,
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
+      "address": "ул. Наличная, 28/16В",
+      "coordinates": [59.941335, 30.227995],
+      "chat": null
     },
     {
-      "_id": "2",
-      "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
-      "address": "Улица Парковая, 123",
-      "location": [
-        59.941335,
-        30.227995
-      ],
-      "status": "created",
+      "id": 24,
+      "title": "Задача 24",
       "category": {
         "_id": "1",
         "title": "Сопровождение",
@@ -146,25 +113,24 @@
       },
       "date": "2023-01-15T14:30:00Z",
       "recipient": {
-        "name": "Мария Иванова",
-        "phone": "+7 123 456 7890",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45",
-        "vkId": "4567890",
-        "role": "Recipient"
+        "id": 6,
+        "fullname": "Реципиентов Иван Николаевич",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "переулок Каховского, 3",
+        "coordinates": [59.95252, 30.243239],
+        "approved": true
       },
-      "recipientReport": null,
       "volunteer": null,
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
+      "address": "переулок Каховского, 3",
+      "coordinates": [59.95252, 30.243239],
+      "chat": null
     },
     {
-      "_id": "3",
-      "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
-      "address": "Улица Парковая, 123",
-      "location": [59.90017303411407, 30.40357427050727],
-      "status": "created",
+      "id": 33,
+      "title": "Задача 33",
       "category": {
         "_id": "1",
         "title": "Сопровождение",
@@ -173,18 +139,20 @@
       },
       "date": "2023-01-15T14:30:00Z",
       "recipient": {
-        "name": "Мария Иванова",
-        "phone": "+7 123 456 7890",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45",
-        "vkId": "4567890",
-        "role": "Recipient"
+        "id": 6,
+        "fullname": "Реципиентов Иван Николаевич",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "переулок Каховского, 3",
+        "coordinates": [59.95252, 30.243239],
+        "approved": true
       },
-      "recipientReport": null,
       "volunteer": null,
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
+      "address": "Малая Морская, 9",
+      "coordinates": [59.93594, 30.313128],
+      "chat": null
     }
   ],
   "tasksActive": [
@@ -192,10 +160,7 @@
       "_id": "1",
       "description": "Помочь убрать мусор в парке, только созданная задача (без волонтера)",
       "address": "Улица Парковая, 123",
-      "location": [
-        55.699788,
-        37.557059
-      ],
+      "location": [55.699788, 37.557059],
       "status": "accepted",
       "category": {
         "_id": "1",
@@ -208,90 +173,32 @@
         "name": "Мария Иванова",
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Мебельная, 77",
-        "vkId": "4567890",
-        "role": "Recipient"
-      },
-      "recipientReport": null,
-      "volunteer": null,
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
-    },
-    {
-      "_id": "2",
-      "description": "Помочь перенести мебель, таска взята волонтером",
-      "address": "Улица Мебельная, 77",
-      "location": [
-        60.699788,
-        40.557059
-      ],
-      "status": "accepted",
-      "category": {
-        "_id": "2",
-        "title": "Перевозка в личном транспорте",
-        "points": 1,
-        "accessLevel": 1
-      },
-      "date": "2024-02-11T18:00:00Z",
-      "recipient": {
-        "name": "Александр Петров Сергеевич",
-        "phone": "+7 987 654 3210",
-        "avatar": "",
-        "address": "Улица Мебельная, 77",
-        "vkId": "4567890",
-        "role": "Recipient"
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Нахимова, д. 9",
+        "coordinates": [59.941871, 30.223494],
+        "approved": true
       },
       "recipientReport": null,
       "volunteer": {
-        "_id": "vol123",
-        "name": "Волонтер Вася",
-        "phone": "+7 111 222 3333",
-        "avatar": "",
-        "address": "Улица Волонтёрская, 55",
-        "vkId": "4567890",
-        "role": "Volunteer"
+        "id": 7,
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [59.942575, 30.216757],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
       },
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
-    },
-    {
-      "_id": "3",
-      "description": "Посадить дерево в сквере, таска  взята волонтером",
-      "address": "Улица Деревенская, 30",
-      "location": [
-        59.699788,
-        41.557059
-      ],
-      "status": "accepted",
-      "category": {
-        "_id": "3",
-        "title": "Покупка продуктов",
-        "points": 1,
-        "accessLevel": 1
-      },
-      "date": "2024-02-13T16:45:00Z",
-      "recipient": {
-        "name": "Елена Сидорова",
-        "phone": "+7 555 666 7777",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Садовая, 10",
-        "vkId": "4567890",
-        "role": "Recipient"
-      },
-      "recipientReport": "fulfilled",
-      "volunteer": {
-        "name": "Валентин Захаров",
-        "phone": "+7 777 888 9999",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20",
-        "vkId": "4567890",
-        "role": "Volunteer"
-      },
-      "volunteerReport": "fulfilled",
-      "adminResolve": "fulfilled",
-      "isPendingChanges": false
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [59.941871, 30.223494],
+      "chat": {
+        "id": 4327,
+        "unread": 50
+      }
     },
     {
       "_id": "4",
@@ -307,25 +214,33 @@
       },
       "date": null,
       "recipient": {
-        "name": "Елена Сидорова",
-        "phone": "+7 555 666 7777",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Садовая, 10",
-        "vkId": "4567890",
-        "role": "Recipient"
+        "id": 5,
+        "fullname": "Реципиентов Игорь Витальевич",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://w0.peakpx.com/wallpaper/216/581/HD-wallpaper-jean-claude-van-damme-hand-face-man-actor.jpg",
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Наличная, 28/16В",
+        "coordinates": [59.941335, 30.227995],
+        "approved": true
       },
-      "recipientReport": "fulfilled",
       "volunteer": {
-        "name": "Валентин Захаров",
-        "phone": "+7 777 888 9999",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20",
-        "vkId": "4567890",
-        "role": "Volunteer"
+        "id": 7,
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [59.942575, 30.216757],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
       },
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
+      "address": "ул. Наличная, 28/16В",
+      "coordinates": [59.941871, 30.223494],
+      "chat": null
     }
   ],
   "tasksCompleted": [
@@ -346,29 +261,35 @@
         "name": "Елена Сидорова",
         "phone": "+7 555 666 7777",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Садовая, 10",
-        "vkId": "4567890",
-        "role": "Recipient"
+        "phone": "+7 (916) 123-45-67",
+        "address": "ул. Нахимова, д. 9",
+        "coordinates": [59.941871, 30.223494],
+        "approved": true
       },
-      "recipientReport": "fulfilled",
       "volunteer": {
-        "name": "Валентин Захаров",
-        "phone": "+7 777 888 9999",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20",
-        "vkId": "4567890",
-        "role": "Volunteer"
+        "id": 7,
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [59.942575, 30.216757],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
       },
-      "volunteerReport": "rejected",
-      "adminResolve": "pending",
-      "isPendingChanges": false
+      "address": "ул. Нахимова, д. 9",
+      "coordinates": [59.941871, 30.223494],
+      "chat": {
+        "id": 5678,
+        "unread": 0
+      }
     },
     {
-      "_id": "3",
-      "description": "Посадить дерево в сквере, таска  завершена",
-      "address": "Улица Деревенская, 30",
-      "location": [59.699788, 41.557059],
-      "status": "completed",
+      "id": 27,
+      "title": "Задача 27",
       "category": {
         "_id": "3",
         "title": "Покупка вещей/техники",
@@ -377,52 +298,33 @@
       },
       "date": "2023-03-10T16:45:00Z",
       "recipient": {
-        "name": "Елена Сидорова",
-        "phone": "+7 555 666 7777",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Садовая, 10",
-        "vkId": "4567890",
-        "role": "Recipient"
+        "id": 6,
+        "fullname": "Реципиентов Иван Николаевич",
+        "role": "recipient",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg",
+        "phone": "+7 (999) 123-45-67",
+        "address": "переулок Каховского, 3",
+        "coordinates": [59.95252, 30.243239],
+        "approved": true
       },
-      "recipientReport": "fulfilled",
       "volunteer": {
-        "name": "Валентин Захаров",
-        "phone": "+7 777 888 9999",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20",
-        "vkId": "4567890",
-        "role": "Volunteer"
+        "id": 7,
+        "fullname": "Волонтеров Петр Петрович",
+        "role": "volunteer",
+        "vk": "https://vk.com/id123456789",
+        "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
+        "phone": "+7 (926) 123-45-67",
+        "address": "ул. Кораблестроителей, 19к1",
+        "coordinates": [59.942575, 30.216757],
+        "approved": true,
+        "checked": true,
+        "isHasKeys": true,
+        "scores": 2500
       },
-      "volunteerReport": "fulfilled",
-      "adminResolve": null,
-      "isPendingChanges": false
-    },
-    {
-      "_id": "1",
-      "description": "Помочь убрать мусор в парке, только созданная задача (просрочена и без волонтера)",
-      "address": "Улица Парковая, 123",
-      "location": [59.91776040271765, 30.323923391601433],
-      "status": "created",
-      "category": {
-        "_id": "1",
-        "title": "Сопровождение",
-        "points": 1,
-        "accessLevel": 1
-      },
-      "date": "2023-02-01T16:45:00Z",
-      "recipient": {
-        "name": "Мария Иванова",
-        "phone": "+7 123 456 7890",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Цветочная, 45",
-        "vkId": "4567890",
-        "role": "Recipient"
-      },
-      "recipientReport": null,
-      "volunteer": null,
-      "volunteerReport": null,
-      "adminResolve": null,
-      "isPendingChanges": false
+      "address": "переулок Каховского, 3",
+      "coordinates": [59.95252, 30.243239],
+      "chat": null
     }
   ],
   "category": [
@@ -499,6 +401,220 @@
     },
     {
       "id": "LBpM4Gu"
+    }
+  ],
+  "messages": [
+    {
+      "chatmateInfo": {
+        "name": "Вася Пупкин Аркадьевич",
+        "phone": "+7(777) 77-77-77",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "1234"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 12,
+          "message": "Здравствуйте",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "234"
+        },
+        {
+          "date": "new Date('2023-05-15T21:00:00.000Z')",
+          "id": 23,
+          "message": " Я не смогу прийти",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "214"
+        },
+        {
+          "date": "new Date('2023-05-14T21:05:00.000Z')",
+          "id": 34,
+          "message": "Мурку нужно подоить",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "3442"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "chatmateInfo": {
+        "name": "Иванов Иван Иванович",
+        "phone": "+7(000) 000-00-00",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "1"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 41,
+          "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "1"
+        },
+        {
+          "date": "new Date('2023-05-15T21:00:00.000Z')",
+          "id": 32,
+          "message": "Договорились так и сделаем",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "2"
+        },
+        {
+          "date": "new Date('2023-05-14T21:05:00.000Z')",
+          "id": 23,
+          "message": "Отлично, спасибо, встретимся у 3-го подъезда",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "2"
+        }
+      ],
+      "id": 1
+    }
+  ],
+  "saveMessage": [
+    {
+      "chatmateInfo": {
+        "name": "Александр Владимирович Поветкин",
+        "phone": "+7(000) 000-00-00",
+        "userAvatarLink": "https://i.pravatar.cc/300",
+        "userId": "754"
+      },
+      "messages": [
+        {
+          "date": "new Date('2023-05-14T21:00:00.000Z')",
+          "id": 1,
+          "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+          "userAvatarLink": "https://i.pravatar.cc/300",
+          "userId": "743"
+        }
+      ],
+      "id": 3
+    }
+  ],
+  "conflicts": [
+    {
+      "id": 99,
+      "users": [
+        {
+          "id": 22342,
+          "chatmateInfo": {
+            "name": "Александр Владимирович Поветкин",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "234333"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 4324324,
+              "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "52345"
+            }
+          ]
+        },
+        {
+          "id": 663244,
+          "chatmateInfo": {
+            "name": "Смирнов Максим Валерьевич",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "7234347"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 882343,
+              "message": "У нас разногласие, помогите решить проблему",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "9923434"
+            }
+          ]
+        }
+      ],
+      "infoConflict": {
+        "date": "24.09.2022",
+        "time": "16:00",
+        "address": "ул. Нахимова, д.9, у подъезда №3",
+        "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
+      },
+      "conflict": [
+        {
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Петров Петр Петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "111"
+        },
+        {
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Зыбенко Михаил петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "222"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "users": [
+        {
+          "id": 22,
+          "chatmateInfo": {
+            "name": "Александр Владимирович Поветкин",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "33"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 44,
+              "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "55"
+            }
+          ]
+        },
+        {
+          "id": 66,
+          "chatmateInfo": {
+            "name": "Смирнов Максим Валерьевич",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "77"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 88,
+              "message": "У нас разногласие, помогите решить проблему",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "99"
+            }
+          ]
+        }
+      ],
+      "infoConflict": {
+        "date": "24.09.2022",
+        "time": "16:00",
+        "address": "ул. Нахимова, д.9, у подъезда №3",
+        "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
+      },
+      "conflict": [
+        {
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Петров Петр Петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "111"
+        },
+        {
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Зыбенко Михаил петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "222"
+        }
+      ]
     }
   ]
 }

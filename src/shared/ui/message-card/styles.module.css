@@ -1,0 +1,111 @@
+.cards-container {
+  width: 359px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.card_action {
+  background: var(--colors-interface-primary-additional);
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--colors-interface-primary-additional);
+}
+
+.img_action {
+  background: var(--colors-interface-white);
+}
+
+.user-info {
+  width: 230px;
+}
+
+.name {
+  width: 100%;
+  font-size: 16px;
+  -webkit-line-clamp: 1;
+}
+
+.id {
+  font-size: 8px;
+  color: var(--colors-interface-primary);
+}
+
+.length-limitation {
+  overflow: hidden; /* Скрывает текст, который не помещается */
+  text-overflow: ellipsis; /* Добавляет троеточие в конце текста */
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+.message {
+  width: 100%;
+  font-size: 12px;
+  -webkit-line-clamp: 1; /* Количество строк */
+}
+
+.counter {
+  background: var(--colors-interface-fuchsia);
+  color: var(--colors-interface-white);
+  text-align: center;
+}
+
+.radius {
+  font-size: 14px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.card {
+  box-sizing: border-box;
+  display: flex;
+  width: 359px;
+  height: 70px;
+  border-top: 0.5px solid var(--colors-interface-primary-additional);
+  border-bottom: 0.5px solid var(--colors-interface-primary-additional);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+
+.card-swipe {
+  width: 429px;
+  border: none;
+  padding-left: 70px;
+}
+
+.notification {
+  background: var(--colors-interface-orange-dark);
+}
+
+.vizabiliti {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 400px) {
+  .card {
+    margin: 0;
+    width: 100%;
+  }
+
+  .img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .name {
+    font-size: 12px;
+  }
+
+  .user-info {
+    width: 50vw;
+  }
+}

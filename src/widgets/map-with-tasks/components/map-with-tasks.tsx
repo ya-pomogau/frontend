@@ -8,7 +8,10 @@ import { Loader } from 'shared/ui/loader';
 import { useAppSelector } from 'app/hooks';
 
 export const MapWithTasks = () => {
-  const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
+  const { isLoading, data } = useGetTasksQuery('', {
+    pollingInterval: 30000,
+  });
+
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.data);
   const handleClick = useCallback(() => {
