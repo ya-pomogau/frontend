@@ -61,10 +61,10 @@ const Header = () => {
 
         {user && user.role === UserRole.ADMIN
           ? !isMobile && (
-              <SideBar position={positionConfigTop} links={linksTop} />
+              <SideBar position={positionConfigTop} links={linksTopAuthAdmin} />
             )
           : !isMobile && (
-              <SideBar position={positionConfigTop} links={linksTopAuthAdmin} />
+              <SideBar position={positionConfigTop} links={linksTop} />
             )}
 
         <div
@@ -88,6 +88,7 @@ const Header = () => {
           </button>
           {menuActive && (
             <DropDownMenu
+              role={user?.role}
               setMenuActive={setMenuActive}
               menuActive={menuActive}
             />
