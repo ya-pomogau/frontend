@@ -72,6 +72,9 @@ export const userTasksApi = createApi({
           : [];
       },
     }),
+    // createTask: build.mutation({
+    // инвалидация тэгов
+    // })
   }),
 });
 export const {
