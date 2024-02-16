@@ -57,7 +57,7 @@ export const userTasksApi = createApi({
         return result ? [{ type: 'Task', id }] : [];
       },
     }),
-    getTaskVirgin: build.query<Array<Task>, [string, string, string]>({
+    getTaskVirgin: build.query<Array<Task>, [string, number, number]>({
       query: (args) => {
         const [role, latitude, longitude] = args;
         const headers = {
