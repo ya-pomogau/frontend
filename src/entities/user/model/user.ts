@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { newUserThunk, userLoginThunk } from '../../../services/system-slice';
+import {
+  newUserThunk,
+  userLoginThunk,
+  adminLoginThunk,
+} from '../../../services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { User } from '../types';
 import { TCustomSelector } from 'shared/types/store.types';
@@ -161,6 +165,30 @@ export const userModel = createSlice({
         isLoading: true,
         isFailed: false,
         error: null,
+      }))
+      .addCase(adminLoginThunk.pending, (state, _) => ({
+        ...state,
+        isLoading: true,
+        isFailed: false,
+        error: null,
+      }))
+      .addCase(adminLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        if (user) {
+          return {
+            ...state,
+            role: user.role,
+            isLoading: false,
+          };
+        }
+      })
+      .addCase(adminLoginThunk.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        error: action.payload as string,
       })),
 });
 
