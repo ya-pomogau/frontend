@@ -13,25 +13,10 @@ export type UserProfile = {
   phone: string;
   avatar: string;
   address: string;
+  vkId: string;
+  role: UserRole;
   _id: string;
 };
-
-// export type UserInfo = {
-//   id: string;
-//   fullname: string;
-//   role: UserRole | null;
-//   status?: UserStatus;
-//   vk: string;
-//   avatar: string;
-//   phone: string;
-//   address: string;
-//   coordinates: GeoCoordinates;
-//   createdAt: string;
-//   isHasKeys?: boolean;
-//   scores?: number;
-//   permissions?: Array<AdminPermission> | null;
-//   isActive: boolean;
-// };
 
 export type User = {
   _id: string;

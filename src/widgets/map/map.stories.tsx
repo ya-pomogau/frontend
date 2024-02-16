@@ -2,6 +2,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
 import { TaskStatus } from 'entities/task/types';
+import { UserRole } from 'shared/types/common.types';
 
 const meta = {
   title: 'widgets/YandexMap',
@@ -47,6 +48,8 @@ export const Default: Story = {
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: 'https://vk.com/id123456789',
+          role: UserRole.RECIPIENT,
           _id: '2',
         },
         recipientReport: null,
@@ -54,6 +57,7 @@ export const Default: Story = {
         volunteerReport: null,
         adminResolve: null,
         isPendingChanges: false,
+        moderator: null,
       },
       {
         _id: '28',
@@ -73,6 +77,8 @@ export const Default: Story = {
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
+          vkId: 'https://vk.com/id123456789',
+          role: UserRole.RECIPIENT,
           _id: '1',
         },
         recipientReport: null,
@@ -80,6 +86,7 @@ export const Default: Story = {
         volunteerReport: null,
         adminResolve: null,
         isPendingChanges: false,
+        moderator: null,
       },
     ],
   },

@@ -40,4 +40,5 @@ export type Task = {
   volunteerReport: TaskReport | null;
   adminResolve: ResolveStatus | null; // null - вмешательства не требуется админа.
   isPendingChanges: boolean; //показывает что один участник ответил по выполнению заявки
+  moderator: UserProfile | null; //указывает на админа который решает конфликт
 };

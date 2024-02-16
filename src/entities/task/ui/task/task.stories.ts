@@ -30,6 +30,8 @@ export const Desktop: Story = {
         address: '',
         phone: '',
         _id: '7',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.VOLUNTEER,
       },
       category: {
         _id: 'id',
@@ -47,7 +49,10 @@ export const Desktop: Story = {
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -68,6 +73,8 @@ export const Mobile: Story = {
         address: '',
         phone: '',
         _id: '5',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.VOLUNTEER,
       },
       category: {
         _id: 'id',
@@ -85,7 +92,10 @@ export const Mobile: Story = {
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -106,6 +116,8 @@ export const ExampleWithNoRecipient: Story = {
         address: '',
         phone: '',
         _id: '3',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.VOLUNTEER,
       },
       category: {
         _id: 'id',
@@ -123,7 +135,10 @@ export const ExampleWithNoRecipient: Story = {
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -144,6 +159,8 @@ export const ExampleConfirmed: Story = {
         address: '',
         phone: '',
         _id: '1',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.VOLUNTEER,
       },
       category: {
         _id: 'id',
@@ -161,7 +178,10 @@ export const ExampleConfirmed: Story = {
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -182,6 +202,8 @@ export const ExampleConflict: Story = {
         address: '',
         phone: '',
         _id: '1',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.VOLUNTEER,
       },
       category: {
         _id: 'id',
@@ -199,7 +221,10 @@ export const ExampleConflict: Story = {
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -220,6 +245,8 @@ export const ExampleWithIndefiniteDate: Story = {
         address: '',
         phone: '',
         _id: '2',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.VOLUNTEER,
       },
       category: {
         _id: 'id',
@@ -237,7 +264,10 @@ export const ExampleWithIndefiniteDate: Story = {
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: 'https://vk.com/id123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
