@@ -21,11 +21,6 @@ export function ProfileMapPage() {
   const location = useLocation();
   const query = queryString.parse(location.search);
 
-  // const { isLoading, data: tasks } = useGetTasksQuery('', {
-  //   pollingInterval: 30000,
-  //   refetchOnFocus: true,
-  //   refetchOnReconnect: true,
-  // });
   let latitude = '';
   let longitude = '';
   if (user && user.location) {
@@ -37,34 +32,34 @@ export function ProfileMapPage() {
     error,
     isLoading,
   } = useGetTaskVirginQuery(['volunteer', latitude, longitude]);
+  // TODO: для чего этот фильтр для тасок?
+  // const filteredTasks = useMemo((): Task[] => {
+  //   //починить типизацию значений фильтра и убрать лишние условия
+  //   let result: Task[] = tasks ? tasks : [];
+  //   if (result.length && user) {
+  //     const { date, time, searchRadius } = query;
+  //     if (date && typeof date === 'string') {
+  //       result = result.filter((task: Task) => filterByDate(date, task.date!));
+  //     }
 
-  const filteredTasks = useMemo((): Task[] => {
-    //починить типизацию значений фильтра и убрать лишние условия
-    let result: Task[] = tasks ? tasks : [];
-    if (result.length && user) {
-      const { date, time, searchRadius } = query;
-      if (date && typeof date === 'string') {
-        result = result.filter((task: Task) => filterByDate(date, task.date!));
-      }
+  //     if (time && (typeof time === 'string' || Array.isArray(time))) {
+  //       result = result.filter(
+  //         (task: Task) => task.date && filterByTime(time, task.date!)
+  //       );
+  //     }
 
-      if (time && (typeof time === 'string' || Array.isArray(time))) {
-        result = result.filter(
-          (task: Task) => task.date && filterByTime(time, task.date!)
-        );
-      }
-
-      if (searchRadius && user.location && typeof searchRadius === 'string') {
-        result = result.filter((task: Task) =>
-          filterByDistance(
-            user.location!,
-            task.location,
-            parseInt(searchRadius, 10)
-          )
-        );
-      }
-    }
-    return result;
-  }, [query, tasks, user]);
+  //     if (searchRadius && user.location && typeof searchRadius === 'string') {
+  //       result = result.filter((task: Task) =>
+  //         filterByDistance(
+  //           user.location!,
+  //           task.location,
+  //           parseInt(searchRadius, 10)
+  //         )
+  //       );
+  //     }
+  //   }
+  //   return result;
+  // }, [query, tasks, user]);
 
   return (
     <>
@@ -89,7 +84,7 @@ export function ProfileMapPage() {
         tasks && (
           // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
           <YandexMap
-            tasks={filteredTasks}
+            tasks={tasks}
             mapSettings={{
               latitude:
                 user && Array.isArray(user.location)

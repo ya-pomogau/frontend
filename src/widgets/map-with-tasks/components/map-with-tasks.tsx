@@ -6,9 +6,7 @@ import { useGetTasksQuery } from 'services/tasks-api';
 import YandexMap from 'widgets/map';
 import { Loader } from 'shared/ui/loader';
 import { useAppSelector } from 'app/hooks';
-// type MapWithTasksType = {
-//   userLocation: Array<number>,
-// }
+
 export const MapWithTasks = () => {
   const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
   const navigate = useNavigate();

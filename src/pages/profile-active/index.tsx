@@ -6,7 +6,6 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { openPopup } from 'features/create-request/model';
 import { Request } from 'features/create-request';
-import { useGetTasksByStatusQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
 import { useEffect, useState } from 'react';
 import { IFilterValues } from 'features/filter/types';

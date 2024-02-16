@@ -15,13 +15,14 @@ import { CategoriesBackground } from 'shared/ui/categories-background';
 
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
-import createTask, { newTask } from 'services/create-task';
+import { useCreateTaskMutation } from 'services/user-task-api';
 interface ICommonStepProps {
   isMobile?: boolean;
 }
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
+  const [createTask, { data, error, isLoading }] = useCreateTaskMutation();
   const {
     taskId,
     time,
@@ -39,9 +40,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     dispatch(changeStepDecrement());
   };
 
-  // if(date === null){
-  //  termlessRequest = true;
-  // }
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
@@ -60,15 +58,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-      dispatch(
-        newTask({
-          categoryId: category._id,
-          location: location,
-          date: dateObject,
-          address,
-          description,
-        })
-      );
+      createTask({
+        categoryId: category._id,
+        location: location,
+        date: dateObject,
+        address,
+        description,
+      });
       dispatch(clearState());
       dispatch(closePopup());
     } else {
@@ -79,15 +75,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-      dispatch(
-        newTask({
-          categoryId: category._id,
-          location: location,
-          date: null,
-          address,
-          description,
-        })
-      );
+      createTask({
+        categoryId: category._id,
+        location: location,
+        date: null,
+        address,
+        description,
+      });
       dispatch(clearState());
       dispatch(closePopup());
     }
