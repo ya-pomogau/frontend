@@ -99,6 +99,7 @@ export const TaskButtons = ({
       {(isTaskExpired || !date) && isPageActive && (
         <ButtonWithModal
           setClicked={setClicked}
+          closeButton
           modalContent={
             <ModalContent
               type={clicked ? ModalContentType.admin : ModalContentType.confirm}
@@ -119,6 +120,7 @@ export const TaskButtons = ({
       )}
       {userRole === UserRole.VOLUNTEER && isPageActive && (
         <ButtonWithModal
+          closeButton
           extClassName={styles.close}
           modalContent={
             <ModalContent
@@ -141,6 +143,7 @@ export const TaskButtons = ({
       )}
       {userRole === UserRole.RECIPIENT && isPageActive && (
         <ButtonWithModal
+          closeButton
           extClassName={styles.close}
           modalContent={
             <ModalContent
@@ -161,6 +164,7 @@ export const TaskButtons = ({
       )}
       {(isTaskExpired || !date) && (
         <ButtonWithModal
+          closeButton
           setClicked={isPageActive ? setClicked : undefined}
           extClassName={styles.conflict}
           modalContent={
