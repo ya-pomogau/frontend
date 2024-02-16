@@ -1,7 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { Task } from 'entities/task/types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
+interface CreateTaskDto {
+  categoryId: string;
+  location: GeoCoordinates;
+  date: Date | null;
+  address: string;
+  description: string;
+}
 const token = localStorage.getItem('token');
 
 export const userTasksApi = createApi({
@@ -58,7 +66,7 @@ export const userTasksApi = createApi({
           Authorization: 'Bearer ' + token,
         };
         return {
-          url: `${role}/tasks/virgin?distance=10000&latitude=${latitude}&longitude=${longitude}`,
+          url: `${role}/tasks/virgin?distance=100000&latitude=${latitude}&longitude=${longitude}`,
           method: 'GET',
           headers,
         };
@@ -72,13 +80,25 @@ export const userTasksApi = createApi({
           : [];
       },
     }),
-    // createTask: build.mutation({
-    // инвалидация тэгов
-    // })
+    createTask: build.mutation<Task, CreateTaskDto>({
+      query: (dto) => ({
+        url: '/recipient/tasks',
+        method: 'POST',
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        body: dto,
+      }),
+      // указываем какие данные надо перезапросить при выполнении запроса
+      invalidatesTags: [{ type: 'Task', id: 'recipient' }],
+    }),
   }),
 });
 export const {
   useGetTaskActiveQuery,
   useGetTaskCompletedQuery,
   useGetTaskVirginQuery,
+  useCreateTaskMutation,
 } = userTasksApi;
