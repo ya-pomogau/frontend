@@ -6,7 +6,7 @@
       "phone": "+7 (901) 123-44-55",
       "avatar": "https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg",
       "address": "ул. Поселковая, д. 5",
-      "vkId": "https://vk.com/id123456789",
+      "vkId": "123456789",
       "role": "Admin",
       "login": "root@mail.com",
       "password": "459670778",
@@ -27,7 +27,7 @@
       "phone": "+7 (902) 123-44-55",
       "avatar": "https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg",
       "address": "ул. Стойкости, 17",
-      "vkId": "https://vk.com/id123456789",
+      "vkId": "123456789",
       "role": "Admin",
       "login": "admin2@mail.com",
       "password": "uoeft839",
@@ -46,7 +46,7 @@
       "phone": "+7 (901) 123-45-67",
       "avatar": "https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg",
       "address": "ул. Кораблестроителей, 19к1",
-      "vkId": "https://vk.com/id123456789",
+      "vkId": "123456789",
       "role": "Volunteer",
       "score": 2500,
       "status": 2,
@@ -62,7 +62,7 @@
       "phone": "+7 (901) 123-00-00",
       "avatar": "https://w-dog.ru/wallpapers/5/9/423831500799983/koshachij-lemur-obezyana-priroda.jpg",
       "address": "ул. Строителей, 15",
-      "vkId": "https://vk.com/id123456788",
+      "vkId": "123456789",
       "role": "Volunteer",
       "score": 0,
       "status": 0,
@@ -78,7 +78,7 @@
       "phone": "+7 (916) 123-45-67",
       "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
       "address": "ул. Нахимова, д. 9",
-      "vkId": "https://vk.com/id123456789",
+      "vkId": "123456789",
       "role": "Recipient",
       "status": 1,
       "location": [
@@ -92,7 +92,7 @@
       "phone": "+7 (916) 123-45-67",
       "avatar": "https://www.1zoom.ru/big2/541/255095-Sepik.jpg",
       "address": "ул. Самарская, д. 9",
-      "vkId": "https://vk.com/id123456789",
+      "vkId": "123456789",
       "role": "Recipient",
       "status": 0,
       "location": [
@@ -120,7 +120,7 @@
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Цветочная, 45",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "1"
       },
@@ -152,7 +152,7 @@
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Цветочная, 45",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "2"
       },
@@ -181,7 +181,7 @@
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Цветочная, 45",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "3"
       },
@@ -215,7 +215,7 @@
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Мебельная, 77",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "1"
       },
@@ -247,7 +247,7 @@
         "phone": "+7 987 654 3210",
         "avatar": "",
         "address": "Улица Мебельная, 77",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "1"
       },
@@ -257,7 +257,7 @@
         "phone": "+7 111 222 3333",
         "avatar": "",
         "address": "Улица Волонтёрская, 55",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Volunteer",
         "_id": "2"
       },
@@ -287,7 +287,7 @@
         "phone": "+7 555 666 7777",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Садовая, 10",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "4"
       },
@@ -297,14 +297,22 @@
         "phone": "+7 777 888 9999",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Захарова, 20",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Volunteer",
         "_id": "6"
       },
       "volunteerReport": "fulfilled",
       "adminResolve": "fulfilled",
       "isPendingChanges": false,
-      "moderator": null
+      "moderator": {
+        "name": "Admin Захаров",
+        "phone": "+7 777 888 9999",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "address": "Улица Захарова, 20",
+        "vkId": "123456789",
+        "role": "Admin",
+        "_id": "2"
+      }
     },
     {
       "_id": "4",
@@ -324,7 +332,7 @@
         "phone": "+7 555 666 7777",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Садовая, 10",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "4"
       },
@@ -334,13 +342,13 @@
         "phone": "+7 777 888 9999",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Захарова, 20",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Volunteer",
         "_id": "6"
       },
       "volunteerReport": null,
       "adminResolve": null,
-      "isPendingChanges": false,
+      "isPendingChanges": true,
       "moderator": null
     }
   ],
@@ -350,7 +358,7 @@
       "description": "Посадить дерево в сквере, таска с конфликтом",
       "address": "Улица Деревенская, 30",
       "location": [59.699788, 41.557059],
-      "status": "conflicted",
+      "status": "completed",
       "category": {
         "_id": "3",
         "title": "Покупка вещей/техники",
@@ -363,7 +371,7 @@
         "phone": "+7 555 666 7777",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Садовая, 10",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "4"
       },
@@ -373,14 +381,22 @@
         "phone": "+7 777 888 9999",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Захарова, 20",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Volunteer",
         "_id": "1"
       },
       "volunteerReport": "rejected",
-      "adminResolve": "pending",
+      "adminResolve": "rejected",
       "isPendingChanges": false,
-      "moderator": null
+      "moderator": {
+        "name": "Admin Захаров",
+        "phone": "+7 777 888 9999",
+        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
+        "address": "Улица Захарова, 20",
+        "vkId": "123456789",
+        "role": "Admin",
+        "_id": "2"
+      }
     },
     {
       "_id": "3",
@@ -400,7 +416,7 @@
         "phone": "+7 555 666 7777",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Садовая, 10",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "1"
       },
@@ -410,7 +426,7 @@
         "phone": "+7 777 888 9999",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Захарова, 20",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Volunteer",
         "_id": "2"
       },
@@ -424,7 +440,7 @@
       "description": "Помочь убрать мусор в парке, только созданная задача (просрочена и без волонтера)",
       "address": "Улица Парковая, 123",
       "location": [59.91776040271765, 30.323923391601433],
-      "status": "created",
+      "status": "completed",
       "category": {
         "_id": "1",
         "title": "Сопровождение",
@@ -437,7 +453,7 @@
         "phone": "+7 123 456 7890",
         "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
         "address": "Улица Цветочная, 45",
-        "vkId": "https://vk.com/id123456789",
+        "vkId": "123456789",
         "role": "Recipient",
         "_id": "3"
       },
