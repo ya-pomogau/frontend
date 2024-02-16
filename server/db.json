@@ -301,18 +301,10 @@
         "role": "Volunteer",
         "_id": "6"
       },
-      "volunteerReport": "fulfilled",
-      "adminResolve": "fulfilled",
+      "volunteerReport": null,
+      "adminResolve": null,
       "isPendingChanges": false,
-      "moderator": {
-        "name": "Admin Захаров",
-        "phone": "+7 777 888 9999",
-        "avatar": "https://tengu.ucoz.net/novosti/morio-higaonna.jpg",
-        "address": "Улица Захарова, 20",
-        "vkId": "123456789",
-        "role": "Admin",
-        "_id": "2"
-      }
+      "moderator": null
     },
     {
       "_id": "4",
