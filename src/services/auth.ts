@@ -3,6 +3,7 @@ import {
   ResponseDto,
   TAuthRoutes,
   TCreateUserDto,
+  TAdminLoginDto,
   TNewUserResponseDto,
   TVKLoginRequestDto,
   TVKLoginResponseDto,
@@ -50,6 +51,17 @@ class Auth {
       `${this.baseUrl}${this.routes.userRegister}`,
       fetchOptions
     ).then(Auth._checkResponse) as Promise<TNewUserResponseDto>;
+  }
+
+  public adminLogin(dto: TAdminLoginDto) {
+    const fetchOptions = {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify(dto),
+    };
+    return fetch(`${this.baseUrl}${this.routes.adminLogin}`, fetchOptions).then(
+      Auth._checkResponse
+    ) as Promise<TNewUserResponseDto>;
   }
 }
 
