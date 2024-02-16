@@ -177,13 +177,46 @@ export const userModel = createSlice({
           return state;
         }
         const { user = null } = action.payload;
-        if (user) {
-          return {
-            ...state,
-            role: user.role,
-            isLoading: false,
-          };
+        if (!user) {
+          return state;
         }
+        const {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          role,
+          vkId,
+          password,
+          login,
+          permissions,
+          isRoot,
+          isActive,
+        } = user;
+        const data: User = {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          role,
+          vkId,
+          password,
+          login,
+          permissions,
+          isRoot,
+          isActive,
+        };
+        return {
+          ...state,
+          isLoading: false,
+          isFailed: false,
+          error: null,
+          role,
+          data,
+          _id,
+        };
       })
       .addCase(adminLoginThunk.rejected, (state, action) => ({
         ...state,
