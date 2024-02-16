@@ -21,11 +21,11 @@ export function ProfileMapPage() {
   const location = useLocation();
   const query = queryString.parse(location.search);
 
-  let latitude = '';
-  let longitude = '';
+  let latitude = 0;
+  let longitude = 0;
   if (user && user.location) {
-    latitude = user.location[0].toString();
-    longitude = user.location[1].toString();
+    // обязателен именно такой порядок
+    [longitude, latitude] = user.location;
   }
   const {
     data: tasks,
