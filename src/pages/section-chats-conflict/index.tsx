@@ -1,8 +1,13 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import {
   useGetConflictsQuery,
   useDeleteConflictMutation,
+  useGetConflictAdminQuery,
+  useGetWorkConflictQuery,
+  useAddConflictHubMutation,
+  useDeleteConflictHubMutation,
+  useDeleteConflictWorkMutation,
 } from 'services/messages-api';
 import { MessageCard } from 'shared/ui/message-card';
 import { InfoConflict } from 'widgets/conflict-information';
@@ -20,12 +25,51 @@ import { IMessage } from 'shared/types/message';
 import { Message } from 'shared/ui/message';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import { useMediaQuery } from 'shared/hooks';
+import { useLocation } from 'react-router-dom';
 
 export const SectionChatsConflict = () => {
-  const { data } = useGetConflictsQuery('conflicts');
-  const dataMessage: IInfoConflicts[] = data;
-  const [deleteConflict] = useDeleteConflictMutation();
+  // TODO conflict
+  // const { data } = useGetConflictsQuery('conflicts');
+  // const dataMessage: IInfoConflicts[] = data;
+  //const [deleteConflict] = useDeleteConflictMutation();
   const isMobule = useMediaQuery('(max-width: 1150px)');
+
+  const location = useLocation();
+  const { data: conflict } = useGetConflictAdminQuery('addConflict');
+  const { data: workConflict } = useGetWorkConflictQuery('hubConfict');
+  const dataMessage: IInfoConflicts[] =
+    location.pathname === '/conflict' ? conflict : workConflict;
+  const [info, setInfo] = useState<IInfoConflicts>();
+  const getInfoUser = (ms: IInfoConflicts) => {
+    setInfo(ms);
+  };
+
+  const [addConflictWork] = useAddConflictHubMutation();
+  const [deleteConflictHub] = useDeleteConflictHubMutation();
+  const [deleteConflictWorkHub] = useDeleteConflictWorkMutation();
+  const handleMessage = async () => {
+    // if (dataMessage) {
+    //   await addMessage(dataMessage).unwrap();
+    //   await deleteMessage(dataMessage.id).unwrap();
+    //   setIsOpenConflict(false);
+    // }
+    if (info) {
+      await addConflictWork(info).unwrap();
+      await deleteConflictHub(info.id).unwrap();
+      setIsOpenConflict(false);
+    }
+  };
+
+  const handleDeleteMessage = async () => {
+    if (info) {
+      await deleteConflictWorkHub(info.id).unwrap();
+      setIsOpenConflict(false);
+    }
+  };
+  useEffect(() => {
+    setIsOpenConflict(false);
+  }, [location]);
+  // TODO conflict
 
   const [isOpenChats, setIsOpenChats] = useState<boolean>(false);
   const [isOpenConflict, setIsOpenConflict] = useState<boolean>(false);
@@ -72,12 +116,13 @@ export const SectionChatsConflict = () => {
     setInfoUsers({ users: users, id: id });
   };
 
-  const handleConflict = async () => {
-    if (infoConflict) {
-      await deleteConflict(infoConflict.id);
-      setIsOpenChats(false);
-    }
-  };
+  // TODO conflict
+  // const handleConflict = async () => {
+  //   if (infoConflict) {
+  //     await deleteConflict(infoConflict.id);
+  //     setIsOpenChats(false);
+  //   }
+  // };
 
   const hendleOpenConflictCard = (item: string) => {
     if (selectedCard !== item) {
@@ -121,6 +166,9 @@ export const SectionChatsConflict = () => {
         {dataMessage?.map((item) => (
           <div key={item.id}>
             <MessageCard
+              // TODO conflict
+              item={item}
+              // TODO conflict
               key={item.id}
               id={item.id}
               getConflict={() =>
@@ -146,6 +194,9 @@ export const SectionChatsConflict = () => {
                   userId: '',
                 },
               ]}
+              // TODO conflict
+              getInfo={getInfoUser}
+              // TODO conflict
               users={item.users}
               action={selectedCard === item.id + ''}
             />
@@ -177,20 +228,38 @@ export const SectionChatsConflict = () => {
             onClick={handleCloseConflict}
             chatmateInfo={infoMessage?.chatmateInfo}
             boxButton={
+              // TODO conflict
               <div className={styles['box-btn']}>
-                <Button
-                  label="Конфликт решен"
-                  buttonType="secondary"
-                  actionType="button"
-                  onClick={handleConflict}
-                />
-                <Button
-                  label="Ответить"
-                  buttonType="primary"
-                  actionType="button"
-                  onClick={handleOpenChats}
-                  customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
-                />
+                {location.pathname === '/conflict' ? (
+                  <Button
+                    size="small"
+                    buttonType="primary"
+                    label="Взять в работу"
+                    extClassName={styles.button}
+                    customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
+                    onClick={handleMessage}
+                  />
+                ) : (
+                  <div className={styles['box-btn']}>
+                    <Button
+                      label="Конфликт решен"
+                      buttonType="secondary"
+                      actionType="button"
+                      onClick={handleDeleteMessage}
+                    />
+                    <Button
+                      label="Ответить"
+                      buttonType="primary"
+                      actionType="button"
+                      onClick={handleOpenChats}
+                      disabled
+                      customIcon={
+                        <Icon color="white" icon="EmptyMessageIcon" />
+                      }
+                    />
+                  </div>
+                  // TODO conflict
+                )}
               </div>
             }
           >

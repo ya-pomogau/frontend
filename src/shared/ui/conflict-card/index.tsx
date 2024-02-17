@@ -2,6 +2,9 @@ import cn from 'classnames';
 import { SquareButton } from '../square-buttons';
 import styles from './styles.module.css';
 import { RoundButton } from '../round-button';
+import { ButtonWithModal } from 'widgets/button-with-modal';
+import { ModalContent } from 'widgets/task-buttons-content';
+import { ModalContentType, TaskButtonType } from 'shared/types/common.types';
 
 interface PropsConflictCard {
   optionCard: 'conflict' | 'confirm';
@@ -11,6 +14,8 @@ interface PropsConflictCard {
   id: string;
   onClickPhone?: () => void;
   onClickMessage?: () => void;
+  // TODO conflict
+  vkId?: string;
 }
 
 export function ConflictCard({
@@ -19,7 +24,13 @@ export function ConflictCard({
   name,
   image,
   id,
+  vkId,
 }: PropsConflictCard) {
+  // TODO conflict
+  const handelMessage = () => {
+    window.open(vkId, '_blank');
+  };
+  // TODO conflict
   return (
     <article className={styles['conflict-cart']}>
       <SquareButton
@@ -39,8 +50,16 @@ export function ConflictCard({
       </h4>
       <img className={styles.img} src={image} alt="фото" />
       <div className={styles.conteiner}>
-        <RoundButton buttonType="phone" />
-        <RoundButton buttonType="message" />
+        {/* TODO conflict */}
+        <ButtonWithModal
+          modalContent={<ModalContent type={ModalContentType.phone} />}
+        >
+          <RoundButton
+            buttonType={TaskButtonType.phone}
+            // disabled={isPageCompleted || !user ? true : false}
+          />
+        </ButtonWithModal>
+        <RoundButton buttonType="message" onClick={handelMessage} />
       </div>
       <h5 className={cn('text', 'text_type_regular', styles.name)}>{name}</h5>
       <p className={cn('text_type_regular', 'text', styles.id)}>{`ID ${id}`}</p>

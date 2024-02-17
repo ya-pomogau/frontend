@@ -7,6 +7,7 @@ import {
   IChatmateInfo,
   IConflictUser,
   IInfoConflict,
+  IInfoConflicts,
   IUsers,
 } from 'shared/types/conflict';
 
@@ -31,6 +32,9 @@ interface PropsMessageCard {
   getInfoChatsConflict?: (users: IUsers[], id: number) => void;
   users?: IUsers[];
   openChat?: boolean;
+  // TODO conflict
+  getInfo?: (ms: IInfoConflicts) => void;
+  item?: IInfoConflicts;
 }
 
 export const MessageCard: React.FC<PropsMessageCard> = (props) => {
@@ -60,6 +64,10 @@ export const MessageCard: React.FC<PropsMessageCard> = (props) => {
     }
     if (props.getInfoChatsConflict && props.users) {
       props.getInfoChatsConflict(props.users, props.id);
+    }
+    // TODO conflict
+    if (props.getInfo && props.item) {
+      props.getInfo(props.item);
     }
   };
 

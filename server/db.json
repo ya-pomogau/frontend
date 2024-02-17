@@ -565,7 +565,7 @@
   ],
   "conflicts": [
     {
-      "id": 99,
+      "id": 11213,
       "users": [
         {
           "id": 22342,
@@ -628,10 +628,10 @@
       ]
     },
     {
-      "id": 11,
+      "id": 123131,
       "users": [
         {
-          "id": 22,
+          "id": 2322,
           "chatmateInfo": {
             "name": "Александр Владимирович Поветкин",
             "phone": "+7(000) 000-00-00",
@@ -641,7 +641,7 @@
           "messages": [
             {
               "date": "new Date('2023-05-14T21:00:00.000Z')",
-              "id": 44,
+              "id": 4234,
               "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
               "userAvatarLink": "https://i.pravatar.cc/300",
               "userId": "55"
@@ -649,7 +649,7 @@
           ]
         },
         {
-          "id": 66,
+          "id": 62326,
           "chatmateInfo": {
             "name": "Смирнов Максим Валерьевич",
             "phone": "+7(000) 000-00-00",
@@ -690,5 +690,139 @@
         }
       ]
     }
-  ]
+  ],
+  "hubConfict": [
+    {
+      "id": 9999,
+      "users": [
+        {
+          "id": 22342,
+          "chatmateInfo": {
+            "name": "Александр Владимирович Поветкин",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "234333"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 4324324,
+              "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "52345"
+            }
+          ]
+        },
+        {
+          "id": 663244,
+          "chatmateInfo": {
+            "name": "Смирнов Максим Валерьевич",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "7234347"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 882343,
+              "message": "У нас разногласие, помогите решить проблему",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "9923434"
+            }
+          ]
+        }
+      ],
+      "infoConflict": {
+        "date": "24.09.2022",
+        "time": "16:00",
+        "address": "ул. Нахимова, д.9, у подъезда №3",
+        "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!"
+      },
+      "conflict": [
+        {
+          "vkId": "https://vk.com/id123456789",
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Петров Петр Петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "111"
+        },
+        {
+          "vkId": "https://vk.com/id123456789",
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Зыбенко Михаил петрович",
+          "image": "https://i.pravatar.cc/300",
+          "id": "222"
+        }
+      ]
+    },
+    {
+      "id": 234,
+      "users": [
+        {
+          "id": 2322,
+          "chatmateInfo": {
+            "name": "Александр Владимирович Поветкин",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "33"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 4234,
+              "message": "Здравствуйте, я буду сопровождать вас на мероприятии",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "55"
+            }
+          ]
+        },
+        {
+          "id": 62326,
+          "chatmateInfo": {
+            "name": "Смирнов Максим Валерьевич",
+            "phone": "+7(000) 000-00-00",
+            "userAvatarLink": "https://i.pravatar.cc/300",
+            "userId": "77"
+          },
+          "messages": [
+            {
+              "date": "new Date('2023-05-14T21:00:00.000Z')",
+              "id": 88,
+              "message": "Заболел и совсем нет сил даже ходить по квартире. Почти неделю собаку выгуливали соседи, но в пятницу они не смогут. Помогите, пожалуйста!",
+              "userAvatarLink": "https://i.pravatar.cc/300",
+              "userId": "99",
+              "vkId": "https://vk.com/id123456789"
+            }
+          ]
+        }
+      ],
+      "infoConflict": {
+        "date": "12.10.2023",
+        "time": "18:10",
+        "address": "ул. Нахимова, д.10",
+        "message": "Помочь убрать мусор в парке, только созданная задача (просрочена и без волонтера)"
+      },
+      "conflict": [
+        {
+          "vkId": "https://vk.com/id123456789",
+          "specialization": "recipient",
+          "option": "confirm",
+          "name": "Елена Сидорова",
+          "image": "https://i.pravatar.cc/300",
+          "id": "11123"
+        },
+        {
+          "specialization": "valanter",
+          "option": "conflict",
+          "name": "Смирнов Максим Валерьевич",
+          "image": "https://i.pravatar.cc/300",
+          "id": "22223",
+          "vkId": "https://vk.com/id123456788"
+        }
+      ]
+    }
+  ],
+  "addConflict": []
 }

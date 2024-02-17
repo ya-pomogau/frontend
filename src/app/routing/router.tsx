@@ -33,8 +33,9 @@ import { VKAuthPage } from 'pages/vk-auth';
 import { RegisterPage } from 'pages/register';
 import { Tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
-import { SectionChatPicker } from 'pages/section-chat-picker';
-import { SectionChatHub } from 'pages/section-chat-hub';
+// TODO conflict
+// import { SectionChatPicker } from 'pages/section-chat-picker';
+// import { SectionChatHub } from 'pages/section-chat-hub';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
 
 export const router = createBrowserRouter(
@@ -122,34 +123,44 @@ export const router = createBrowserRouter(
             path="/profile/requests/volunteers"
             element={<RequestsPage incomeTab={Tabs.VOLUNTEERS} />}
           />
-
           <Route
             path="/profile/requests/recipients"
             element={<RequestsPage incomeTab={Tabs.RECIPIENTS} />}
           />
-
           <Route
             path="/profile/requests/notprocessed"
             element={<RequestsPage incomeTab={Tabs.NOTPROCESSED} />}
           />
-
           <Route path="/profile/statistics" element={<StatisticsPage />} />
-
           <Route
             path="/profile/statistics/applications"
             element={<ApplicationsStatisticsPage />}
           />
-
           <Route
             path="/profile/statistics/users"
             element={<UsersStatisticsPage />}
           />
-
           <Route path="/profile/tasks" element={<TasksPage />} />
-
           <Route path="/profile/bids" element={<BidsPage />} />
 
           <Route
+            path="/conflict"
+            element={
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/conflict-hub"
+            element={
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            }
+          />
+          {/* Закомментирована на время показа */}
+          {/* <Route
             path="/chat"
             element={
               <ProfileChatsPages>
@@ -172,7 +183,7 @@ export const router = createBrowserRouter(
                 <SectionChatsConflict />
               </ProfileChatsPages>
             }
-          />
+          /> */}
         </Route>
         <Route
           element={

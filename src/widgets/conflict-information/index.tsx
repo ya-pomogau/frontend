@@ -9,6 +9,8 @@ import { IInfoConflict } from 'shared/types/conflict';
 export interface IConflict {
   specialization: 'valanter' | 'recipient';
   option: 'conflict' | 'confirm';
+  // TODO conflict
+  vkId?: string;
   name: string;
   image: string;
   id: string;
@@ -26,6 +28,8 @@ export const InfoConflict: FC<PropsInfoConflict> = (props) => {
         {props.conflict &&
           props.conflict.map((i) => (
             <ConflictCard
+              // TODO conflict
+              vkId={i.vkId}
               key={i.id}
               id={i.id}
               optionCard={i.option}

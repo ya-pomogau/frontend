@@ -2,8 +2,8 @@ import classnames from 'classnames';
 import { Avatar } from '../avatar';
 
 import styles from './styles.module.css';
-import { GradientDivider } from '../gradient-divider';
 import { Icon } from '../icons';
+import { GradientDivider } from '../gradient-divider';
 
 interface MessageProps {
   extClassName?: string;

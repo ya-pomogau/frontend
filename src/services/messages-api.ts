@@ -3,7 +3,8 @@ import { API_URL } from 'config/api-config';
 
 export const messagesApi = createApi({
   reducerPath: 'messagesApi',
-  tagTypes: ['Messages', 'Conflicts'],
+  // TODO conflict
+  tagTypes: ['Messages', 'Conflicts', 'hubConfict', 'workConflict'],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     // prepareHeaders: (headers) => {
@@ -55,12 +56,12 @@ export const messagesApi = createApi({
         result
           ? [
               ...result.map(({ id }: any) => ({
-                type: 'Conflicts' as const,
+                type: 'hubConfict' as const,
                 id,
               })),
-              { type: 'Conflicts', id: 'LIST' },
+              { type: 'hubConfict', id: 'LIST' },
             ]
-          : [{ type: 'Conflicts', id: 'LIST' }],
+          : [{ type: 'hubConfict', id: 'LIST' }],
     }),
     deleteMessage: build.mutation({
       query: (id) => ({
@@ -74,7 +75,56 @@ export const messagesApi = createApi({
         url: `conflicts/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: 'Conflicts', id: 'LIST' }],
+      invalidatesTags: [{ type: 'hubConfict', id: 'LIST' }],
+    }),
+    // TODO на время показа, потом удалим
+    getConflictAdmin: build.query({
+      query: () => `hubConfict`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }: any) => ({
+                type: 'hubConfict' as const,
+                id,
+              })),
+              { type: 'hubConfict', id: 'LIST' },
+            ]
+          : [{ type: 'hubConfict', id: 'LIST' }],
+    }),
+    addConflictHub: build.mutation({
+      query: (body) => ({
+        url: 'addConflict',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'workConflict', id: 'LIST' }],
+    }),
+    deleteConflictHub: build.mutation({
+      query: (id) => ({
+        url: `hubConfict/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'hubConfict', id: 'LIST' }],
+    }),
+    getWorkConflict: build.query({
+      query: () => `addConflict`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }: any) => ({
+                type: 'workConflict' as const,
+                id,
+              })),
+              { type: 'workConflict', id: 'LIST' },
+            ]
+          : [{ type: 'workConflict', id: 'LIST' }],
+    }),
+    deleteConflictWork: build.mutation({
+      query: (id) => ({
+        url: `addConflict/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'workConflict', id: 'LIST' }],
     }),
   }),
 });
@@ -86,4 +136,9 @@ export const {
   useGetConflictsQuery,
   useDeleteMessageMutation,
   useDeleteConflictMutation,
+  useGetConflictAdminQuery,
+  useAddConflictHubMutation,
+  useGetWorkConflictQuery,
+  useDeleteConflictHubMutation,
+  useDeleteConflictWorkMutation,
 } = messagesApi;

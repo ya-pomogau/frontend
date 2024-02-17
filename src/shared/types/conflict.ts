@@ -13,6 +13,8 @@ export interface IConflictUser {
   name: string;
   image: string;
   id: string;
+  // TODO conflict
+  vkId: string;
 }
 
 export interface IInfoConflict {
@@ -20,6 +22,8 @@ export interface IInfoConflict {
   time: string;
   address: string;
   message: string;
+  // TODO conflict
+  vkId: string;
 }
 
 export interface IConflict {
