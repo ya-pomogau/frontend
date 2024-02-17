@@ -18,7 +18,6 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      console.log(`token: '${token}'`);
       dispatch(checkTokenThunk(token));
     }
   }, []);
