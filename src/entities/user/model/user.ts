@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
+  checkTokenThunk,
   newUserThunk,
   userLoginThunk,
   adminLoginThunk,
@@ -168,63 +169,61 @@ export const userModel = createSlice({
         isFailed: false,
         error: null,
       }))
+      .addCase(checkTokenThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isLoading: true,
+      }))
+      .addCase(checkTokenThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const { createdAt, updatedAt, location, ...data } = user;
+        return {
+          ...state,
+          data: { ...data, location: location?.coordinates },
+          role: data.role,
+          _id: data._id,
+          isLoading: false,
+        };
+      })
+      .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isLoading: false,
+      }))
       .addCase(adminLoginThunk.pending, (state) => ({
         ...state,
-        isLoading: true,
-        isFailed: false,
         error: null,
+        isLoading: true,
       }))
       .addCase(adminLoginThunk.fulfilled, (state, action) => {
         if (!action.payload) {
           return state;
         }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null } = action.payload;
         if (!user) {
           return state;
         }
-        const {
-          _id,
-          name,
-          phone,
-          avatar,
-          address,
-          role,
-          vkId,
-          password,
-          login,
-          permissions,
-          isRoot,
-          isActive,
-        } = user;
-        const data: User = {
-          _id,
-          name,
-          phone,
-          avatar,
-          address,
-          role,
-          vkId,
-          password,
-          login,
-          permissions,
-          isRoot,
-          isActive,
-        };
+        const { createdAt, updatedAt, location, ...data } = user;
         return {
           ...state,
+          data: { ...data, location: location?.coordinates },
+          role: data.role,
+          _id: data._id,
           isLoading: false,
-          isFailed: false,
-          error: null,
-          role,
-          data,
-          _id,
         };
       })
-      .addCase(adminLoginThunk.rejected, (state, action) => ({
+      .addCase(adminLoginThunk.rejected, (state) => ({
         ...state,
         isLoading: false,
-        error: action.payload as string,
       })),
+      
 });
 
 export const {
