@@ -14,6 +14,10 @@ import { useAppSelector } from '../../app/hooks';
 import { userSelector } from '../../services/system-slice';
 import { UserCardType } from '../../shared/types/user-cards.types';
 import { Tabs, UserRole } from '../../shared/types/common.types';
+import {
+  useGetUserByRolesQuery,
+  useGetAllAdminsQuery,
+} from 'services/admin-api';
 
 interface PageProps {
   incomeTab: string;
@@ -34,6 +38,15 @@ export function RequestsPage({ incomeTab }: PageProps) {
   //const { adminIsLoading, adminData = [] } = useGetUsersQuery('admin', {
   //  pollingInterval: 30000,
   //});
+
+  const { data: data1 } = useGetUserByRolesQuery('volunteers');
+  const { data: allAdmins } = useGetAllAdminsQuery('');
+  const { data: data2 } = useGetUserByRolesQuery('recipients');
+  const { data: data3 } = useGetUserByRolesQuery('unconfirmed');
+  console.log('🚀  unconfirmed:', data3);
+  console.log('🚀  recipients:', data2);
+  console.log('🚀  allAdmins:', allAdmins);
+  console.log('🚀  volunteers:', data1);
   const { role } = useAppSelector((state) => state.user);
   const isRoot = useAppSelector((state) => state.user.data?.isRoot);
   const usertest = useAppSelector(userSelector);
@@ -148,20 +161,20 @@ export function RequestsPage({ incomeTab }: PageProps) {
         label="Введите имя "
       />
       {/* ToDo:Настроить лоадер в зависимости от получения данных : или получить все вкладки и показывать, или только открытую, остальные в фоне. */}
-      {/*{isLoading ? <Loader /> : tabContent}*/}
-      {
+      {/*{isLoading ? <Loader /> : tabContent}*/}a
+      {data1 && data2 && data3 && allAdmins && (
         <RequestsTab
           data={
             incomeTab === Tabs.VOLUNTEERS
-              ? tabVolunteersData
+              ? data1
               : incomeTab === Tabs.RECIPIENTS
-              ? tabRecipientsData
+              ? data2
               : incomeTab === Tabs.NOTPROCESSED
-              ? tabNotProcessedData
-              : tabAdminsData
+              ? data3
+              : allAdmins
           }
         />
-      }
+      )}
     </>
   );
 }
