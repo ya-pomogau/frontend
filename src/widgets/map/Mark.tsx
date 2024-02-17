@@ -34,11 +34,12 @@ const Mark: FC<MarkProps> = ({
     UserRole.VOLUNTEER
   );
   const [responseTask, error] = useResponseTaskMutation();
-
+  console.log(`isGranted: ${isGranted}`);
   const onClickButton = () => {
     // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
     showPopup();
-    responseTask(task._id);
+
+    isAuthorised && responseTask(task._id);
   };
 
   if (!ymaps) return null;

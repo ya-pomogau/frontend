@@ -84,15 +84,10 @@ export const TaskButtons = ({
     time: date === null ? '' : format(new Date(date!), 'HH:mm'),
   };
   const [fulfillTask] = useFulfillTaskMutation();
-  const [rejectTask] = useRejectTaskMutation();
+
   const handleFulfillClick = () => {
     if (userRole) {
       fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
-    }
-  };
-  const handleRejectClick = () => {
-    if (userRole) {
-      rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
   };
   const handleEditButton = () => {
@@ -118,7 +113,7 @@ export const TaskButtons = ({
           modalContent={
             <ModalContent
               type={clicked ? ModalContentType.admin : ModalContentType.confirm}
-              role={userRole}
+              userRole={userRole}
             />
           }
           extClassName={styles.confirm}
@@ -197,11 +192,12 @@ export const TaskButtons = ({
               active={isPageActive}
               conflict={conflict}
               date={date}
+              taskId={taskId}
+              userRole={userRole}
             />
           }
         >
           <SquareButton
-            onClick={handleRejectClick}
             buttonType={TaskButtonType.conflict}
             disabledColor={
               (userRole === UserRole.VOLUNTEER &&

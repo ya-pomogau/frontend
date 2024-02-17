@@ -11,13 +11,16 @@ import {
   ModalContentType,
   TaskButtonType,
 } from 'shared/types/common.types';
+import { useRejectTaskMutation } from 'services/user-task-api';
+import { useAppSelector } from 'app/hooks';
 
 interface ModalContentProps {
   type: ModalContentType;
   active?: boolean;
   conflict?: boolean;
   date?: string | null;
-  role?: UserRole | null;
+  userRole?: UserRole | null;
+  taskId?: string;
 }
 
 export const ModalContent = ({
@@ -25,9 +28,19 @@ export const ModalContent = ({
   active = true,
   conflict = true,
   date,
-  role,
+  userRole,
+  taskId,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
+  const [rejectTask] = useRejectTaskMutation();
+  const handleRejectClick = () => {
+    console.log('handleRejectClick');
+    console.log(`UserRole: '${userRole}', taskId: '${taskId}'`);
+    if (userRole && taskId) {
+      console.log('userRole && taskId');
+      rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
+    }
+  };
   switch (type) {
     case ModalContentType.close:
       return (
@@ -91,7 +104,11 @@ export const ModalContent = ({
                   className={classNames(styles.modalContent, styles.flexRow)}
                 >
                   <Button buttonType="secondary" label="Отменить" />
-                  <Button buttonType="primary" label="Подтвердить" />
+                  <Button
+                    buttonType="primary"
+                    label="Подтвердить"
+                    onClick={handleRejectClick}
+                  />
                 </div>
               )}
               {(active || !conflict) && (
@@ -117,7 +134,7 @@ export const ModalContent = ({
           <h3 className={titleStyle}>Благодарим за отзывчивость</h3>
           <p className={textStyle}>
             {`Мы ждем ответ ${
-              role === UserRole.RECIPIENT ? 'от волонтера' : 'от реципиента'
+              userRole === UserRole.RECIPIENT ? 'от волонтера' : 'от реципиента'
             }`}
           </p>
         </div>
