@@ -1,5 +1,12 @@
 .form {
   width: 50%;
+  padding-left: 30px;
+}
+
+@media (max-width: 920px) {
+  .form {
+    width: 94%;
+  }
 }
 
 .input {

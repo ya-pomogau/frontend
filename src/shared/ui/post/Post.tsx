@@ -18,16 +18,18 @@ interface ImageProps {
   alt: string;
 }
 
-interface PostProps {
+export interface PostProps {
+  id?: string;
   title: string;
   description: string;
   images: ImageProps[];
   author: Pick<UserInfo, 'id' | 'fullname' | 'avatar'>;
-  handleDeleteButton?: () => void;
-  handleEditButton?: () => void;
+  handleDeleteButton?: (id: string) => void;
+  handleEditButton?: (post: Partial<PostProps>) => void;
 }
 
 export const Post: FC<PostProps> = ({
+  id,
   title,
   description,
   images,
@@ -124,17 +126,34 @@ export const Post: FC<PostProps> = ({
 
         <div className={styles.buttons}>
           {handleDeleteButton && (
-            <SquareButton onClick={handleDeleteButton} buttonType={'close'} />
+            <SquareButton
+              onClick={() => handleDeleteButton(id!)}
+              buttonType={'close'}
+            />
           )}
           {handleEditButton && (
-            <SquareButton onClick={handleEditButton} buttonType={'edit'} />
+            <SquareButton
+              onClick={() =>
+                handleEditButton({
+                  id,
+                  title,
+                  description,
+                  images,
+                })
+              }
+              buttonType={'edit'}
+            />
           )}
         </div>
       </div>
       <div className={galleryStyle}>
-        {images.map(({ id, alt, src }) => (
-          <div key={id} className={styles['gallery-item']}>
-            <img className={styles['gallery-item-image']} src={src} alt={alt} />
+        {images.map((image) => (
+          <div key={image.id} className={styles['gallery-item']}>
+            <img
+              className={styles['gallery-item-image']}
+              src={image.src}
+              alt={image.alt}
+            />
           </div>
         ))}
       </div>

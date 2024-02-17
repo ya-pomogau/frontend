@@ -8,6 +8,7 @@ import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
 import systemSliceReducer from '../../services/system-slice';
+import { postsApi } from 'services/posts-api';
 
 export const store = configureStore({
   reducer: {
@@ -19,13 +20,15 @@ export const store = configureStore({
     [tasksApi.reducerPath]: tasksApi.reducer,
     [authAdminApi.reducerPath]: authAdminApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
+    [postsApi.reducerPath]: postsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(usersApi.middleware)
       .concat(tasksApi.middleware)
       .concat(authAdminApi.middleware)
-      .concat(categoriesApi.middleware),
+      .concat(categoriesApi.middleware)
+      .concat(postsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

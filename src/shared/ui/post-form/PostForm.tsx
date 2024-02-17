@@ -1,4 +1,4 @@
-import { ChangeEvent, type FC } from 'react';
+import { ChangeEvent, Ref, type FC } from 'react';
 import classNames from 'classnames';
 import { Button } from '../button';
 import { Input } from '../input';
@@ -9,6 +9,8 @@ import styles from './styles.module.css';
 import { FileTypes } from 'shared/types/common.types';
 
 interface PostFormProps {
+  loading?: boolean;
+  refPostForm?: Ref<HTMLFormElement>;
   title?: string;
   description?: string;
   images?: {
@@ -31,6 +33,8 @@ export const PostForm: FC<PostFormProps> = ({
   removeAttachment,
   handleChange,
   handleSubmit,
+  refPostForm,
+  loading,
 }) => {
   const imageTitleStyle = classNames(
     styles['image-title'],
@@ -40,7 +44,7 @@ export const PostForm: FC<PostFormProps> = ({
   );
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} ref={refPostForm}>
       <Input
         extClassName={styles.input}
         type="text"
@@ -86,6 +90,7 @@ export const PostForm: FC<PostFormProps> = ({
                 customIcon={<CloseCrossIcon size="14" color="blue" />}
                 extClassName={styles['close-cross-button']}
                 onClick={() => removeAttachment(id)}
+                type="button"
               />
             </div>
           ))}
@@ -95,7 +100,10 @@ export const PostForm: FC<PostFormProps> = ({
         onClick={handleSubmit}
         label="Опубликовать"
         buttonType="primary"
-      ></Button>
+        type="button"
+        isLoading={loading}
+        disabled={!title?.trim() || !description?.trim()}
+      />
     </form>
   );
 };
