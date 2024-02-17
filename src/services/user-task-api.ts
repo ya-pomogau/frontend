@@ -76,7 +76,8 @@ export const userTasksApi = createApi({
           console.error('Error occurred:', error);
         }
         return result
-          ? [{ type: 'Task', id: `${role}-${latitude}-${longitude}` }]
+          ? // ? [{ type: 'Task', id: `${role}-${latitude}-${longitude}` }]
+            [{ type: 'Task' }]
           : [];
       },
     }),
@@ -94,6 +95,53 @@ export const userTasksApi = createApi({
       // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive', id: 'recipient' }],
     }),
+    responseTask: build.mutation<Task, string>({
+      query: (id) => ({
+        url: `/volunteer/tasks/${id}/accept`,
+        method: 'PUT',
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      }),
+      // указываем какие данные надо перезапросить при выполнении запроса
+      invalidatesTags: [{ type: 'Task' }],
+    }),
+    fulfillTask: build.mutation<Task, { role: string; id: string }>({
+      query: (args) => {
+        const { role, id } = args;
+        const headers = {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        };
+        return {
+          url: `${role}/tasks/${id}/fulfill`,
+          method: 'PUT',
+          headers,
+        };
+      },
+      // указываем какие данные надо перезапросить при выполнении запроса
+      invalidatesTags: [{ type: 'TaskActive' }],
+    }),
+    rejectTask: build.mutation<Task, { role: string; id: string }>({
+      query: (args) => {
+        const { role, id } = args;
+        const headers = {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        };
+        return {
+          url: `${role}/tasks/${id}/reject`,
+          method: 'PUT',
+          headers,
+        };
+      },
+      // указываем какие данные надо перезапросить при выполнении запроса
+      invalidatesTags: [{ type: 'TaskActive' }],
+    }),
   }),
 });
 export const {
@@ -101,4 +149,7 @@ export const {
   useGetTaskCompletedQuery,
   useGetTaskVirginQuery,
   useCreateTaskMutation,
+  useResponseTaskMutation,
+  useFulfillTaskMutation,
+  useRejectTaskMutation,
 } = userTasksApi;
