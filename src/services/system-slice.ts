@@ -102,6 +102,22 @@ export const newUserThunk = createAsyncThunk(
   }
 );
 
+export const checkTokenThunk = createAsyncThunk(
+  'user/token',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const user = await authApi.checkToken(token);
+      console.dir(user);
+      if (!user) {
+        throw new Error('Ошибка получения пользователя по токену');
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      rejectWithValue(message as string);
+    }
+  }
+);
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
   vkUser: null,
@@ -163,6 +179,27 @@ const systemSlice = createSlice({
         ...state,
         isPending: false,
         isNew: false,
+      }))
+      .addCase(checkTokenThunk.pending, (state, _) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(checkTokenThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
       })),
 });
 

@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { newUserThunk, userLoginThunk } from '../../../services/system-slice';
+import {
+  checkTokenThunk,
+  newUserThunk,
+  userLoginThunk,
+} from '../../../services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { User } from '../types';
 import { TCustomSelector } from 'shared/types/store.types';
@@ -161,6 +165,59 @@ export const userModel = createSlice({
         isLoading: true,
         isFailed: false,
         error: null,
+      }))
+      .addCase(checkTokenThunk.pending, (state, _) => ({
+        ...state,
+        error: null,
+        isLoading: true,
+      }))
+      .addCase(checkTokenThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const { createdAt, updatedAt, location, ...data } = user;
+        // const {
+        //   _id,
+        //   name,
+        //   phone,
+        //   avatar,
+        //   address,
+        //   location,
+        //   role,
+        //   keys,
+        //   status,
+        //   vkId,
+        //   score,
+        // } = user;
+        // const data: User = {
+        //   _id,
+        //   name,
+        //   phone,
+        //   avatar,
+        //   address,
+        //   location: location?.coordinates,
+        //   role,
+        //   keys,
+        //   status,
+        //   vkId,
+        //   score,
+        // };
+        return {
+          ...state,
+          data: { ...data, location: location?.coordinates },
+          role: data.role,
+          _id: data._id,
+          isLoading: false,
+        };
+      })
+      .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isLoading: false,
       })),
 });
 

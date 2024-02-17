@@ -6,9 +6,15 @@ import { useGetTasksQuery } from 'services/tasks-api';
 import YandexMap from 'widgets/map';
 import { Loader } from 'shared/ui/loader';
 import { useAppSelector } from 'app/hooks';
+import { useGetTaskVirginQuery } from 'services/user-task-api';
 
 export const MapWithTasks = () => {
-  const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
+  // const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
+  const { data, isLoading } = useGetTaskVirginQuery([
+    'volunteer',
+    37.621157,
+    55.890017,
+  ]);
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.data);
   const handleClick = useCallback(() => {
