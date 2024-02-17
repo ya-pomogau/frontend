@@ -14,7 +14,7 @@ const token = localStorage.getItem('token');
 
 export const userTasksApi = createApi({
   reducerPath: 'userTask',
-  tagTypes: ['Task'],
+  tagTypes: ['Task', 'TaskActive', 'TaskCompleted'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
     getTaskActive: build.query<Array<Task>, string>({
@@ -34,7 +34,7 @@ export const userTasksApi = createApi({
         if (error) {
           console.error('Error occurred:', error);
         }
-        return result ? [{ type: 'Task', id }] : [];
+        return result ? [{ type: 'TaskActive', id }] : [];
       },
     }),
     getTaskCompleted: build.query<Array<Task>, string>({
@@ -54,7 +54,7 @@ export const userTasksApi = createApi({
         if (error) {
           console.error('Error occurred:', error);
         }
-        return result ? [{ type: 'Task', id }] : [];
+        return result ? [{ type: 'TaskCompleted', id }] : [];
       },
     }),
     getTaskVirgin: build.query<Array<Task>, [string, number, number]>({
@@ -92,7 +92,7 @@ export const userTasksApi = createApi({
         body: dto,
       }),
       // указываем какие данные надо перезапросить при выполнении запроса
-      invalidatesTags: [{ type: 'Task', id: 'recipient' }],
+      invalidatesTags: [{ type: 'TaskActive', id: 'recipient' }],
     }),
   }),
 });
