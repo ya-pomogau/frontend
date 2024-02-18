@@ -4,6 +4,7 @@ import {
   checkTokenThunk,
   newUserThunk,
   userLoginThunk,
+  adminLoginThunk,
 } from '../../../services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { User } from '../types';
@@ -181,32 +182,6 @@ export const userModel = createSlice({
           return state;
         }
         const { createdAt, updatedAt, location, ...data } = user;
-        // const {
-        //   _id,
-        //   name,
-        //   phone,
-        //   avatar,
-        //   address,
-        //   location,
-        //   role,
-        //   keys,
-        //   status,
-        //   vkId,
-        //   score,
-        // } = user;
-        // const data: User = {
-        //   _id,
-        //   name,
-        //   phone,
-        //   avatar,
-        //   address,
-        //   location: location?.coordinates,
-        //   role,
-        //   keys,
-        //   status,
-        //   vkId,
-        //   score,
-        // };
         return {
           ...state,
           data: { ...data, location: location?.coordinates },
@@ -215,9 +190,69 @@ export const userModel = createSlice({
           isLoading: false,
         };
       })
-      .addCase(checkTokenThunk.rejected, (state) => ({
+      .addCase(checkTokenThunk.rejected, (state, action) => ({
         ...state,
         isLoading: false,
+        isFailed: true,
+        error: action.payload as string,
+      }))
+      .addCase(adminLoginThunk.pending, (state, _) => ({
+        ...state,
+        isLoading: true,
+        isFailed: false,
+        error: null,
+      }))
+      .addCase(adminLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          role,
+          vkId,
+          password,
+          login,
+          permissions,
+          isRoot,
+          isActive,
+        } = user;
+        const data: User = {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          role,
+          vkId,
+          password,
+          login,
+          permissions,
+          isRoot,
+          isActive,
+        };
+        return {
+          ...state,
+          isLoading: false,
+          isFailed: false,
+          error: null,
+          role,
+          data,
+          _id,
+        };
+      })
+      .addCase(adminLoginThunk.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        isFailed: true,
+        error: action.payload as string,
       })),
 });
 

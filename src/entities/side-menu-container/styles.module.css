@@ -33,9 +33,9 @@
 
 @media (min-width: 414px) {
   .button__container {
-    gap: 10px;
+    gap: 8px;
     height: 426px;
-    padding: 30px 10px;
+    padding: 28px 10px;
   }
 
   .button__container--web {

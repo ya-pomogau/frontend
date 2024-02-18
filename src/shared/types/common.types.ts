@@ -45,3 +45,10 @@ export enum ModalContentType {
   admin = 'admin',
   unfulfilled = 'unfulfilled',
 }
+
+export enum Tabs {
+  VOLUNTEERS = 'volunteers',
+  RECIPIENTS = 'recipients',
+  NOTPROCESSED = 'notprocessed',
+  ADMINS = 'admins',
+}

@@ -73,3 +73,10 @@ export type UpdateUserInfo = {
   avatar: null | FormData;
   _id: string;
 };
+
+export type TVolunteerInfo = {
+  approved: boolean;
+  checked: boolean;
+  isHasKeys: boolean;
+  scores: number;
+};

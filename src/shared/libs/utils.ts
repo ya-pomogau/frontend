@@ -14,7 +14,6 @@ import {
 } from './constants';
 import { IDateUser } from 'pages/requests/test-users';
 import { UserRole } from 'shared/types/common.types';
-import { UserProps } from 'pages/requests-notprocessed';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -231,6 +230,17 @@ export const filterCardsUsersPageAdmin = (
       return setDate(array);
   }
 };
+//FIX: добавила сюда интерфейс, тк в админах удалилась страница pages-notprocesed
+export interface UserProps {
+  role: UserRole;
+  extClassName?: string;
+  avatarLink: string;
+  avatarName: string;
+  userName: string;
+  userId: number;
+  userNumber: string;
+  volunteerInfo?: any;
+}
 
 export const filterUsersNamePageAdmin = (
   array: IDateUser[],
