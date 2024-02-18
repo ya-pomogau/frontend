@@ -2,19 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { User } from 'entities/user/types';
 
-// TODO удалить _TOKEN
-console.log('🚀 ~ API_URL:', API_URL);
-
 export const adminsApi = createApi({
   reducerPath: 'adminsApi',
-  tagTypes: ['Unconfirmed'],
+  tagTypes: ['UsersByRole', 'Unconfirmed', 'Admins'],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
-      // TODO заменить _TOKEN на token
       if (token) {
-        console.log('🚀 ~ token:', token);
         headers.set('Authorization', `Bearer ${token}`);
         headers.set('Content-Type', 'application/json');
       }
@@ -22,15 +17,21 @@ export const adminsApi = createApi({
     },
   }),
   endpoints: (build) => ({
-    getUserByRoles: build.query({
+    getUserByRoles: build.query<User[], string>({
       query: (role) => {
         return {
           url: `admin/users/${role}`,
           method: 'GET',
         };
       },
+      providesTags: (result, error) => {
+        if (error) {
+          console.log('🚀 ~ error:', error);
+        }
+        return result ? [{ type: 'UsersByRole' }] : [];
+      },
     }),
-    getUnconfirmedUsers: build.query({
+    getUnconfirmedUsers: build.query<User[], any>({
       query: () => {
         return {
           url: 'admin/users/unconfirmed',
@@ -44,12 +45,18 @@ export const adminsApi = createApi({
         return result ? [{ type: 'Unconfirmed' }] : [];
       },
     }),
-    getAllAdmins: build.query({
+    getAllAdmins: build.query<User[], any>({
       query: () => {
         return {
           url: 'admin/all',
           method: 'GET',
         };
+      },
+      providesTags: (result, error) => {
+        if (error) {
+          console.log('🚀 ~ error:', error);
+        }
+        return result ? [{ type: 'Admins' }] : [];
       },
     }),
     confirmUser: build.mutation<User, string>({
@@ -59,13 +66,14 @@ export const adminsApi = createApi({
           method: 'PUT',
         };
       },
-      invalidatesTags: [{ type: 'Unconfirmed' }],
+      invalidatesTags: [{ type: 'Unconfirmed' }, { type: 'UsersByRole' }],
     }),
   }),
 });
 
 export const {
   useGetUserByRolesQuery,
+  useGetUnconfirmedUsersQuery,
   useGetAllAdminsQuery,
   useConfirmUserMutation,
 } = adminsApi;
