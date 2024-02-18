@@ -34,7 +34,7 @@ export function BlogPage() {
 
   const { values, handleChange, setValues } = useForm({
     title: '',
-    description: '',
+    text: '',
   });
 
   const refPostList = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ export function BlogPage() {
   };
 
   const handlePublishPost = async () => {
-    if (!(values.title.trim() && values.description.trim() && user)) return;
+    if (!(values.title.trim() && values.text.trim() && user)) return;
 
     const formData = new FormData();
 
@@ -68,10 +68,10 @@ export function BlogPage() {
         'content',
         JSON.stringify({
           title: values.title,
-          description: values.description,
+          text: values.text,
           author: {
             id: user.id,
-            fullname: user.fullname,
+            name: user.fullname,
             avatar: user.avatar,
           },
         })
@@ -83,10 +83,10 @@ export function BlogPage() {
 
       await addPost(formData);
 
-      setValues({ title: '', description: '' });
+      setValues({ title: '', text: '' });
     } else {
       await editPost({ ...values, id: idEditedPost });
-      setValues({ title: '', description: '' });
+      setValues({ title: '', text: '' });
 
       const index = posts?.findIndex((post) => post.id === idEditedPost);
       if (index !== undefined && index > -1) {
@@ -110,8 +110,8 @@ export function BlogPage() {
   const handleEditPost = (post: Partial<PostProps>) => {
     setValues({
       title: post.title,
-      description: post.description,
-      images: post.images,
+      text: post.text,
+      files: post.files,
     });
 
     setIdEditedPost(post.id);
@@ -133,7 +133,7 @@ export function BlogPage() {
           loading={isLoadingNewPost || isLoadingEditedPost}
           refPostForm={refPostForm}
           title={values.title}
-          description={values.description}
+          description={values.text}
           addAttachment={handleAddAttachment}
           removeAttachment={handleRemoveAttachment}
           handleChange={handleChange}
@@ -146,13 +146,13 @@ export function BlogPage() {
         <Loader />
       ) : (
         <div className={styles.posts} ref={refPostList}>
-          {posts?.map(({ id, title, description, images, author }) => (
+          {posts?.map(({ id, title, text, files, author }) => (
             <Post
               id={id}
               key={id}
               title={title}
-              description={description}
-              images={images}
+              text={text}
+              files={files}
               author={author}
               handleDeleteButton={isAdmin ? handleDeletePost : undefined}
               handleEditButton={isAdmin ? handleEditPost : undefined}

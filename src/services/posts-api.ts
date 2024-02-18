@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { PostProps } from 'shared/ui/post/Post';
 
+const token = localStorage.getItem('token');
+
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   tagTypes: ['Posts'],
@@ -19,7 +21,12 @@ export const postsApi = createApi({
     }),
     addPost: build.mutation<void, FormData>({
       query: (body) => ({
-        url: 'posts',
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        url: 'blog',
         method: 'POST',
         body,
         formData: true,
@@ -28,7 +35,12 @@ export const postsApi = createApi({
     }),
     editPost: build.mutation<void, Partial<PostProps>>({
       query: (body) => ({
-        url: `posts/${body.id}`,
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        url: `blog/${body.id}`,
         method: 'PATCH',
         body,
       }),
@@ -36,7 +48,12 @@ export const postsApi = createApi({
     }),
     deletePost: build.mutation<PostProps, string>({
       query: (id) => ({
-        url: `posts/${id}`,
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        url: `blog/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
