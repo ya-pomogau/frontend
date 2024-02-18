@@ -64,6 +64,7 @@ class Auth {
       Auth._checkResponse
     ) as Promise<TUser>;
   }
+
   public adminLogin(dto: TAdminLoginDto) {
     const fetchOptions = {
       method: 'POST',
