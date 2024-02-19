@@ -34,7 +34,7 @@ export function BlogPage() {
 
   const { values, handleChange, setValues } = useForm({
     title: '',
-    description: '',
+    text: '',
   });
 
   const refPostList = useRef<HTMLDivElement>(null);
@@ -59,36 +59,20 @@ export function BlogPage() {
   };
 
   const handlePublishPost = async () => {
-    if (!(values.title.trim() && values.description.trim() && user)) return;
-
-    const formData = new FormData();
+    if (!(values.title.trim() && values.text.trim() && user)) return;
 
     if (!idEditedPost) {
-      formData.append(
-        'content',
-        JSON.stringify({
-          title: values.title,
-          description: values.description,
-          author: {
-            id: user.id,
-            fullname: user.fullname,
-            avatar: user.avatar,
-          },
-        })
-      );
+      await addPost({
+        title: values.title,
+        text: values.text,
+      });
 
-      for (const attachment of attachments) {
-        formData.append('attachments', attachment.file);
-      }
-
-      await addPost(formData);
-
-      setValues({ title: '', description: '' });
+      setValues({ title: '', text: '' });
     } else {
-      await editPost({ ...values, id: idEditedPost });
-      setValues({ title: '', description: '' });
+      await editPost({ ...values, _id: idEditedPost });
+      setValues({ title: '', text: '' });
 
-      const index = posts?.findIndex((post) => post.id === idEditedPost);
+      const index = posts?.findIndex((post) => post._id === idEditedPost);
       if (index !== undefined && index > -1) {
         /* атрибут disabled у кнопки отправляющей форму блокирует scrollIntoView,
         подробное описание https://github.com/facebook/react/issues/20770 */
@@ -110,11 +94,11 @@ export function BlogPage() {
   const handleEditPost = (post: Partial<PostProps>) => {
     setValues({
       title: post.title,
-      description: post.description,
-      images: post.images,
+      text: post.text,
+      files: post.files,
     });
 
-    setIdEditedPost(post.id);
+    setIdEditedPost(post._id);
 
     refPostForm.current?.scrollIntoView({
       behavior: 'smooth',
@@ -133,7 +117,7 @@ export function BlogPage() {
           loading={isLoadingNewPost || isLoadingEditedPost}
           refPostForm={refPostForm}
           title={values.title}
-          description={values.description}
+          text={values.text}
           addAttachment={handleAddAttachment}
           removeAttachment={handleRemoveAttachment}
           handleChange={handleChange}
@@ -146,14 +130,15 @@ export function BlogPage() {
         <Loader />
       ) : (
         <div className={styles.posts} ref={refPostList}>
-          {posts?.map(({ id, title, description, images, author }) => (
+          {posts?.map(({ _id, title, text, files, author }) => (
             <Post
-              id={id}
-              key={id}
+              _id={_id}
+              key={_id}
               title={title}
-              description={description}
-              images={images}
+              text={text}
+              files={files}
               author={author}
+              // TODO когда будет работать авторизация, добавить проверку для отображения кнопок только для главного админа и автора поста
               handleDeleteButton={isAdmin ? handleDeletePost : undefined}
               handleEditButton={isAdmin ? handleEditPost : undefined}
             />

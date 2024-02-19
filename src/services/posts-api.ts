@@ -8,35 +8,49 @@ export const postsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
     getPosts: build.query<PostProps[], number>({
-      query: (limit) => `posts?${limit && `_limit=${limit}`}`,
+      query: (limit) => `system/posts`, // ?${limit && `_limit=${limit}`}`,
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'Posts' as const, id })),
+              ...result.map(({ _id }) => ({ type: 'Posts' as const, _id })),
               { type: 'Posts', id: 'LIST' },
             ]
           : [{ type: 'Posts', id: 'LIST' }],
     }),
-    addPost: build.mutation<void, FormData>({
+    addPost: build.mutation<void, Partial<PostProps>>({
       query: (body) => ({
-        url: 'posts',
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        url: 'admin/blog',
         method: 'POST',
         body,
-        formData: true,
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
     editPost: build.mutation<void, Partial<PostProps>>({
       query: (body) => ({
-        url: `posts/${body.id}`,
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        url: `admin/blog/${body._id}`,
         method: 'PATCH',
-        body,
+        body: { ...body, _id: undefined },
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
     deletePost: build.mutation<PostProps, string>({
       query: (id) => ({
-        url: `posts/${id}`,
+        headers: {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        url: `admin/blog/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],

@@ -19,20 +19,20 @@ interface ImageProps {
 }
 
 export interface PostProps {
-  id?: string;
+  _id?: string;
   title: string;
-  description: string;
-  images: ImageProps[];
+  text: string;
+  files: ImageProps[];
   author: Pick<UserInfo, 'id' | 'fullname' | 'avatar'>;
   handleDeleteButton?: (id: string) => void;
   handleEditButton?: (post: Partial<PostProps>) => void;
 }
 
 export const Post: FC<PostProps> = ({
-  id,
+  _id,
   title,
-  description,
-  images,
+  text,
+  files,
   author,
   handleDeleteButton,
   handleEditButton,
@@ -46,7 +46,7 @@ export const Post: FC<PostProps> = ({
 
     if (scrollHeight && scrollHeight < descriptionHeight)
       setFullDescription(true);
-  }, [description]);
+  }, [text]);
 
   const titleStyle = classnames(
     styles.title,
@@ -86,7 +86,7 @@ export const Post: FC<PostProps> = ({
 
   const galleryStyle = classnames(
     styles.gallery,
-    styles[`gallery-${images.length}`]
+    styles[`gallery-${files.length}`]
   );
 
   const handleFullDescriptionButton: MouseEventHandler = () => {
@@ -113,7 +113,7 @@ export const Post: FC<PostProps> = ({
       <div className={styles['text-block']}>
         <h2 className={titleStyle}>{title}</h2>
         <div ref={descriptionRef} className={descriptionStyle}>
-          <ReactMarkdown>{description}</ReactMarkdown>
+          <ReactMarkdown>{text}</ReactMarkdown>
         </div>
         {!fullDescription && (
           <button
@@ -127,7 +127,7 @@ export const Post: FC<PostProps> = ({
         <div className={styles.buttons}>
           {handleDeleteButton && (
             <SquareButton
-              onClick={() => handleDeleteButton(id!)}
+              onClick={() => handleDeleteButton(_id!)}
               buttonType={'close'}
             />
           )}
@@ -135,10 +135,10 @@ export const Post: FC<PostProps> = ({
             <SquareButton
               onClick={() =>
                 handleEditButton({
-                  id,
+                  _id,
                   title,
-                  description,
-                  images,
+                  text,
+                  files,
                 })
               }
               buttonType={'edit'}
@@ -147,7 +147,7 @@ export const Post: FC<PostProps> = ({
         </div>
       </div>
       <div className={galleryStyle}>
-        {images.map((image) => (
+        {files.map((image) => (
           <div key={image.id} className={styles['gallery-item']}>
             <img
               className={styles['gallery-item-image']}

@@ -12,7 +12,7 @@ interface PostFormProps {
   loading?: boolean;
   refPostForm?: Ref<HTMLFormElement>;
   title?: string;
-  description?: string;
+  text?: string;
   images?: {
     id: string;
     name: string;
@@ -27,7 +27,7 @@ interface PostFormProps {
 
 export const PostForm: FC<PostFormProps> = ({
   title,
-  description,
+  text,
   images,
   addAttachment,
   removeAttachment,
@@ -58,11 +58,11 @@ export const PostForm: FC<PostFormProps> = ({
         <TextArea
           rows={10}
           extClassName={styles.textarea}
-          name="description"
+          name="text"
           label="Текст блога"
           placeholder="Напишите, чем хотите поделиться?"
           onChange={handleChange}
-          value={description || ''}
+          value={text || ''}
         ></TextArea>
         <label className={styles['attachment-button']}>
           <FileAttachmentIcon size="24" color="white" />
@@ -102,7 +102,7 @@ export const PostForm: FC<PostFormProps> = ({
         buttonType="primary"
         type="button"
         isLoading={loading}
-        disabled={!title?.trim() || !description?.trim()}
+        disabled={!title?.trim() || !text?.trim()}
       />
     </form>
   );
