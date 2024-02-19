@@ -19,7 +19,7 @@ interface ImageProps {
 }
 
 export interface PostProps {
-  id?: string;
+  _id?: string;
   title: string;
   text: string;
   files: ImageProps[];
@@ -29,7 +29,7 @@ export interface PostProps {
 }
 
 export const Post: FC<PostProps> = ({
-  id,
+  _id,
   title,
   text,
   files,
@@ -127,7 +127,7 @@ export const Post: FC<PostProps> = ({
         <div className={styles.buttons}>
           {handleDeleteButton && (
             <SquareButton
-              onClick={() => handleDeleteButton(id!)}
+              onClick={() => handleDeleteButton(_id!)}
               buttonType={'close'}
             />
           )}
@@ -135,7 +135,7 @@ export const Post: FC<PostProps> = ({
             <SquareButton
               onClick={() =>
                 handleEditButton({
-                  id,
+                  _id,
                   title,
                   text,
                   files,

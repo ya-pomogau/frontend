@@ -2,34 +2,31 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { PostProps } from 'shared/ui/post/Post';
 
-const token = localStorage.getItem('token');
-
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   tagTypes: ['Posts'],
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (build) => ({
     getPosts: build.query<PostProps[], number>({
-      query: (limit) => `posts?${limit && `_limit=${limit}`}`,
+      query: (limit) => `system/posts`, // ?${limit && `_limit=${limit}`}`,
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }) => ({ type: 'Posts' as const, id })),
+              ...result.map(({ _id }) => ({ type: 'Posts' as const, _id })),
               { type: 'Posts', id: 'LIST' },
             ]
           : [{ type: 'Posts', id: 'LIST' }],
     }),
-    addPost: build.mutation<void, FormData>({
+    addPost: build.mutation<void, Partial<PostProps>>({
       query: (body) => ({
         headers: {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
-        url: 'blog',
+        url: 'admin/blog',
         method: 'POST',
         body,
-        formData: true,
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
@@ -38,11 +35,11 @@ export const postsApi = createApi({
         headers: {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
-        url: `blog/${body.id}`,
+        url: `admin/blog/${body._id}`,
         method: 'PATCH',
-        body,
+        body: { ...body, _id: undefined },
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
@@ -51,9 +48,9 @@ export const postsApi = createApi({
         headers: {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
-        url: `blog/${id}`,
+        url: `admin/blog/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],

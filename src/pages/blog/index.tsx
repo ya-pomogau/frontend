@@ -61,34 +61,18 @@ export function BlogPage() {
   const handlePublishPost = async () => {
     if (!(values.title.trim() && values.text.trim() && user)) return;
 
-    const formData = new FormData();
-
     if (!idEditedPost) {
-      formData.append(
-        'content',
-        JSON.stringify({
-          title: values.title,
-          text: values.text,
-          author: {
-            id: user.id,
-            name: user.fullname,
-            avatar: user.avatar,
-          },
-        })
-      );
-
-      for (const attachment of attachments) {
-        formData.append('attachments', attachment.file);
-      }
-
-      await addPost(formData);
+      await addPost({
+        title: values.title,
+        text: values.text,
+      });
 
       setValues({ title: '', text: '' });
     } else {
-      await editPost({ ...values, id: idEditedPost });
+      await editPost({ ...values, _id: idEditedPost });
       setValues({ title: '', text: '' });
 
-      const index = posts?.findIndex((post) => post.id === idEditedPost);
+      const index = posts?.findIndex((post) => post._id === idEditedPost);
       if (index !== undefined && index > -1) {
         /* атрибут disabled у кнопки отправляющей форму блокирует scrollIntoView,
         подробное описание https://github.com/facebook/react/issues/20770 */
@@ -114,7 +98,7 @@ export function BlogPage() {
       files: post.files,
     });
 
-    setIdEditedPost(post.id);
+    setIdEditedPost(post._id);
 
     refPostForm.current?.scrollIntoView({
       behavior: 'smooth',
@@ -133,7 +117,7 @@ export function BlogPage() {
           loading={isLoadingNewPost || isLoadingEditedPost}
           refPostForm={refPostForm}
           title={values.title}
-          description={values.text}
+          text={values.text}
           addAttachment={handleAddAttachment}
           removeAttachment={handleRemoveAttachment}
           handleChange={handleChange}
@@ -146,14 +130,15 @@ export function BlogPage() {
         <Loader />
       ) : (
         <div className={styles.posts} ref={refPostList}>
-          {posts?.map(({ id, title, text, files, author }) => (
+          {posts?.map(({ _id, title, text, files, author }) => (
             <Post
-              id={id}
-              key={id}
+              _id={_id}
+              key={_id}
               title={title}
               text={text}
               files={files}
               author={author}
+              // TODO когда будет работать авторизация, добавить проверку для отображения кнопок только для главного админа и автора поста
               handleDeleteButton={isAdmin ? handleDeletePost : undefined}
               handleEditButton={isAdmin ? handleEditPost : undefined}
             />
