@@ -45,7 +45,22 @@ export const Request = ({ isMobile = true }: RequestProps) => {
     temporaryCategory,
   } = useAppSelector((state) => state.createRequest);
   const data = useAppSelector((state) => state.user.data);
-  const { data: categories } = useGetCategoriesQuery('');
+  // const { data: categories } = useGetCategoriesQuery('');
+  const categories = [
+    {
+      _id: '65ce10451f54b2c0027072e7',
+      title: 'Помощь в готовке',
+      points: 1,
+      accessLevel: 3,
+    },
+    {
+      _id: '65ce10571f54b2c0027072e8',
+      title: 'Организация досуга',
+      points: 1,
+      accessLevel: 3,
+    },
+  ];
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseClick = () => {
@@ -89,7 +104,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
       document.removeEventListener('keydown', closeByEsc);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categories]);
+  }, []);
 
   if (!data) return null;
 
