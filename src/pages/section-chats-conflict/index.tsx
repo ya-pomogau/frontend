@@ -26,6 +26,7 @@ import { Message } from 'shared/ui/message';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import { useMediaQuery } from 'shared/hooks';
 import { useLocation } from 'react-router-dom';
+import { useGetTasksConfilctQuery } from 'services/admin-api';
 
 export const SectionChatsConflict = () => {
   // TODO conflict
@@ -33,6 +34,8 @@ export const SectionChatsConflict = () => {
   // const dataMessage: IInfoConflicts[] = data;
   //const [deleteConflict] = useDeleteConflictMutation();
   const isMobule = useMediaQuery('(max-width: 1150px)');
+  const { data: tasksServer } = useGetTasksConfilctQuery('');
+  console.log(tasksServer);
 
   const location = useLocation();
   const { data: conflict } = useGetConflictAdminQuery('addConflict');

@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
+import { Task } from 'entities/task/types';
 import { User } from 'entities/user/types';
 
 export const adminsApi = createApi({
   reducerPath: 'adminsApi',
-  tagTypes: ['UsersByRole', 'Unconfirmed', 'Admins'],
+  tagTypes: ['UsersByRole', 'Unconfirmed', 'Admins', 'ConflictedTasks'],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
@@ -68,6 +69,20 @@ export const adminsApi = createApi({
       },
       invalidatesTags: [{ type: 'Unconfirmed' }, { type: 'UsersByRole' }],
     }),
+    getTasksConfilct: build.query<Task[], any>({
+      query: () => {
+        return {
+          url: `/admin/tasks/conflicted`,
+          method: 'GET',
+        };
+      },
+      providesTags: (result, error) => {
+        if (error) {
+          console.log('🚀 ~ error:', error);
+        }
+        return result ? [{ type: 'ConflictedTasks' }] : [];
+      },
+    }),
   }),
 });
 
@@ -76,4 +91,5 @@ export const {
   useGetUnconfirmedUsersQuery,
   useGetAllAdminsQuery,
   useConfirmUserMutation,
+  useGetTasksConfilctQuery,
 } = adminsApi;

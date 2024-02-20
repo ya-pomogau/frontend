@@ -32,7 +32,7 @@ export const store = configureStore({
       .concat(tasksApi.middleware)
       .concat(authAdminApi.middleware)
       .concat(categoriesApi.middleware)
-      .concat(messagesApi.middleware),
+      .concat(messagesApi.middleware)
       .concat(userTasksApi.middleware)
       .concat(adminsApi.middleware),
 });
