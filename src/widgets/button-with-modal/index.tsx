@@ -1,12 +1,15 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
+import styles from './styles.module.css';
 
 interface ModalProps {
   children: ReactNode;
   modalContent: ReactNode;
   setClicked?: Dispatch<SetStateAction<boolean>>;
   extClassName?: string;
+  closeButton?: boolean;
 }
 
 interface Coords {
@@ -19,6 +22,7 @@ export const ButtonWithModal = ({
   modalContent,
   setClicked,
   extClassName,
+  closeButton = false,
 }: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -57,6 +61,12 @@ export const ButtonWithModal = ({
             right: `${coords?.right}px`,
           }}
         >
+          {closeButton && (
+            <CloseCrossIcon
+              color="blue"
+              className={`${styles.closeButton} close`}
+            />
+          )}
           {modalContent}
         </Tooltip>
       )}
