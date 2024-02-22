@@ -5,7 +5,7 @@ import { UserRole } from '../../../shared/types/common.types';
 interface UserInfoProps {
   role: UserRole;
   userName: string;
-  userId: number;
+  userId: string;
   userNumber: string;
 }
 

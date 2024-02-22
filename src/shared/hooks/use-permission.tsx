@@ -26,7 +26,7 @@ type Role = UserRole.VOLUNTEER | UserRole.RECIPIENT | UserRole.ADMIN;
 // TODO: возможно нужно будет дописать условие на isRoot тк админ и мастер имею одну и туже роль
 export default function usePermission(
   requirments: Array<Requirments>,
-  role: Role
+  role: Role | null
 ) {
   const userStatus = useAppSelector((state) => state.user.data?.status);
   const userRole = useAppSelector((state) => state.user.data?.role);
@@ -47,7 +47,7 @@ export default function usePermission(
       hasPermission.length > 0 ? (isAllowed = true) : (isAllowed = false);
     }
   } else {
-    isAllowed = true;
+    isAllowed = false;
   }
 
   return isAllowed;

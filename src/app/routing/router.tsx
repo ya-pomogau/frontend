@@ -32,6 +32,8 @@ import { BidsPage } from 'pages/bids';
 import { VKAuthPage } from 'pages/vk-auth';
 import { RegisterPage } from 'pages/register';
 import { Tabs } from '../../shared/types/common.types';
+import { ProfileChatsPages } from 'widgets/profile-chats';
+import { SectionChatsConflict } from 'pages/section-chats-conflict';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -72,7 +74,6 @@ export const router = createBrowserRouter(
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/out" element={<Logout />} />
-          <Route path="/chat" element={<></>} />
         </Route>
 
         <Route
@@ -119,32 +120,42 @@ export const router = createBrowserRouter(
             path="/profile/requests/volunteers"
             element={<RequestsPage incomeTab={Tabs.VOLUNTEERS} />}
           />
-
           <Route
             path="/profile/requests/recipients"
             element={<RequestsPage incomeTab={Tabs.RECIPIENTS} />}
           />
-
           <Route
             path="/profile/requests/notprocessed"
             element={<RequestsPage incomeTab={Tabs.NOTPROCESSED} />}
           />
-
           <Route path="/profile/statistics" element={<StatisticsPage />} />
-
           <Route
             path="/profile/statistics/applications"
             element={<ApplicationsStatisticsPage />}
           />
-
           <Route
             path="/profile/statistics/users"
             element={<UsersStatisticsPage />}
           />
-
           <Route path="/profile/tasks" element={<TasksPage />} />
-
           <Route path="/profile/bids" element={<BidsPage />} />
+
+          <Route
+            path="/chat"
+            element={
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chat-hub"
+            element={
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            }
+          />
         </Route>
         <Route
           element={

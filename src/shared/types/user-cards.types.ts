@@ -3,7 +3,7 @@ import { UserRole } from './common.types';
 
 export type UserCardType = {
   role: UserRole;
-  extClassName?: string;
+  // extClassName?: string;
   avatarLink: string;
   avatarName: string;
   userName: string;

@@ -5,10 +5,3 @@ export interface IMessage {
   message: string;
   date: Date;
 }
-
-export interface IChatmateInfo {
-  userId: string;
-  userAvatarLink: string;
-  name: string;
-  phone?: string;
-}

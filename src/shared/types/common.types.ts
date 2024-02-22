@@ -32,6 +32,7 @@ export enum TaskButtonType {
   conflict = 'conflict',
   confirm = 'confirm',
   phone = 'phone',
+  cancel = 'cancel',
 }
 
 export enum ModalContentType {

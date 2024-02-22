@@ -1,11 +1,17 @@
 import { cbLink } from 'shared/libs/utils';
 import { TPointGeoJSON, TUser } from '../entities/user/types';
-import { UserRole } from 'shared/types/common.types';
+import {
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from 'shared/types/common.types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export type TAuthRoutes = {
   userLogin: string;
   userRegister: string;
   adminLogin: string;
+  checkToken: string;
 };
 
 export interface TypedResponse<T = Record<string, unknown>> extends Response {

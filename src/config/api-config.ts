@@ -23,7 +23,8 @@ export const FRONT_URL =
 export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',
   userRegister: '/auth/new',
-  adminLogin: '/auth/admin',
+  adminLogin: '/auth/administrative',
+  checkToken: '/auth/token',
 };
 
 export const DEFAULT_HEADERS = {

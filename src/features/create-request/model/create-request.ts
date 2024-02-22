@@ -9,7 +9,7 @@ export type TInitialStateForPopup = {
   time: string;
   date: string;
   address: string;
-  location?: GeoCoordinates;
+  location: GeoCoordinates;
   categories: Category[];
   category: {
     _id: string;

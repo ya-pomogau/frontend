@@ -27,6 +27,10 @@ import { UserProfile } from 'entities/user/types';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
 import { useState } from 'react';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import {
+  useFulfillTaskMutation,
+  useRejectTaskMutation,
+} from 'services/user-task-api';
 
 interface TaskButtonsProps {
   taskId: string;
@@ -79,7 +83,13 @@ export const TaskButtons = ({
     location,
     time: date === null ? '' : format(new Date(date!), 'HH:mm'),
   };
+  const [fulfillTask] = useFulfillTaskMutation();
 
+  const handleFulfillClick = () => {
+    if (userRole) {
+      fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
+    }
+  };
   const handleEditButton = () => {
     if (date === null) {
       dispatch(changeCheckbox());
@@ -99,15 +109,17 @@ export const TaskButtons = ({
       {(isTaskExpired || !date) && isPageActive && (
         <ButtonWithModal
           setClicked={setClicked}
+          closeButton
           modalContent={
             <ModalContent
               type={clicked ? ModalContentType.admin : ModalContentType.confirm}
-              role={userRole}
+              userRole={userRole}
             />
           }
           extClassName={styles.confirm}
         >
           <SquareButton
+            onClick={handleFulfillClick}
             buttonType={TaskButtonType.confirm}
             disabledColor={
               (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
@@ -119,6 +131,7 @@ export const TaskButtons = ({
       )}
       {userRole === UserRole.VOLUNTEER && isPageActive && (
         <ButtonWithModal
+          closeButton
           extClassName={styles.close}
           modalContent={
             <ModalContent
@@ -141,6 +154,7 @@ export const TaskButtons = ({
       )}
       {userRole === UserRole.RECIPIENT && isPageActive && (
         <ButtonWithModal
+          closeButton
           extClassName={styles.close}
           modalContent={
             <ModalContent
@@ -161,6 +175,7 @@ export const TaskButtons = ({
       )}
       {(isTaskExpired || !date) && (
         <ButtonWithModal
+          closeButton
           setClicked={isPageActive ? setClicked : undefined}
           extClassName={styles.conflict}
           modalContent={
@@ -177,6 +192,8 @@ export const TaskButtons = ({
               active={isPageActive}
               conflict={conflict}
               date={date}
+              taskId={taskId}
+              userRole={userRole}
             />
           }
         >

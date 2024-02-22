@@ -136,7 +136,7 @@ export function TasksPage() {
           onChange={(e) => setSearchName(e.target.value)}
           extClassName={styles.input}
         />
-        <ul>
+        {/* <ul>
           {dateUsers.map((item) => (
             <li key={item.userId}>
               <UserCard
@@ -150,7 +150,7 @@ export function TasksPage() {
               />
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </>
   );

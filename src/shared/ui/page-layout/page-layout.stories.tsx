@@ -15,7 +15,7 @@ const mockedRecipientState = {
     avatar:
       'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
     address: 'ул. Нахимова, д. 9',
-    vkId: 'https://vk.com/id123456789',
+    vkId: '123456789',
     role: UserRole.RECIPIENT,
     status: 1,
     location: [59.942575, 30.216757],
@@ -32,7 +32,7 @@ const mockedMasterState = {
     phone: '+7 (901) 123-44-55',
     avatar: 'https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg',
     address: 'ул. Поселковая, д. 5',
-    vkId: 'https://vk.com/id123456789',
+    vkId: '123456789',
     role: UserRole.ADMIN,
     login: 'root@mail.com',
     password: '459670778',
@@ -60,7 +60,7 @@ const mockedAdminState = {
     avatar:
       'https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg',
     address: 'ул. Стойкости, 17',
-    vkId: 'https://vk.com/id123456789',
+    vkId: '123456789',
     role: UserRole.ADMIN,
     login: 'admin2@mail.com',
     password: 'uoeft839',
@@ -86,7 +86,7 @@ const mockedVolunteerState = {
     avatar:
       'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
     address: 'ул. Кораблестроителей, 19к1',
-    vkId: 'https://vk.com/id123456789',
+    vkId: '123456789',
     role: UserRole.VOLUNTEER,
     score: 2500,
     status: 2,

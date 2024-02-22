@@ -1,3 +1,4 @@
+import { IChatmateInfo } from 'shared/types/conflict';
 import { IMessage } from '../types';
 
 export const getMockMessages = (): IMessage[] => [
@@ -23,6 +24,13 @@ export const getMockMessages = (): IMessage[] => [
     date: new Date(2023, 4, 15, 0, 5, 0),
   },
 ];
+
+export const infoAdmin: IChatmateInfo = {
+  name: 'Vlad',
+  phone: '+7 (993) 993 32 12',
+  userAvatarLink: 'https://i.pravatar.cc/300',
+  userId: '9212144444',
+};
 
 export const sortMessages = (messages: IMessage[]) =>
   messages.sort((a, b) => (a.date > b.date ? 1 : -1));

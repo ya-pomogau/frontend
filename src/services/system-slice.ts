@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi } from './auth';
 import {
   ErrorDto,
+  TAdminLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
   TVKUserResponseObj,
@@ -83,6 +84,26 @@ export const userLoginThunk = createAsyncThunk(
   }
 );
 
+export const adminLoginThunk = createAsyncThunk(
+  'admin/login',
+  async (adminLoginDto: TAdminLoginDto, { rejectWithValue }) => {
+    try {
+      const { token, user } = await authApi.adminLogin(adminLoginDto);
+      if (!token || !user) {
+        throw new Error('Ошибка регистрации администратора');
+      }
+      if (token && !!user) {
+        localStorage.setItem('token', token);
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      console.log(`Error message: ${message}`);
+      rejectWithValue(message as string);
+    }
+  }
+);
+
 export const newUserThunk = createAsyncThunk(
   'user/new',
   async (newUserDto: TNewUserRequestDto, { rejectWithValue }) => {
@@ -102,6 +123,22 @@ export const newUserThunk = createAsyncThunk(
   }
 );
 
+export const checkTokenThunk = createAsyncThunk(
+  'user/token',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const user = await authApi.checkToken(token);
+      console.dir(user);
+      if (!user) {
+        throw new Error('Ошибка получения пользователя по токену');
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      rejectWithValue(message as string);
+    }
+  }
+);
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
   vkUser: null,
@@ -163,6 +200,48 @@ const systemSlice = createSlice({
         ...state,
         isPending: false,
         isNew: false,
+      }))
+      .addCase(checkTokenThunk.pending, (state, _) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(checkTokenThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
+      }))
+      .addCase(adminLoginThunk.pending, (state, _) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(adminLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(adminLoginThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
       })),
 });
 

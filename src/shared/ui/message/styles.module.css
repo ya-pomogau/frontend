@@ -12,6 +12,29 @@
   justify-content: flex-end;
 }
 
+.wrapper--send {
+  width: 223px;
+  padding: 5px 20px;
+  background: var(--colors-interface-primary-additional);
+  color: var(--colors-interface-white);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.wrapper--send:hover {
+  opacity: 0.8;
+}
+
+.achievement-title {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gradient-divider {
+  width: 60%;
+  margin: 5px auto 10px;
+}
+
 .avatar {
   max-width: 30px;
   max-height: 30px;
@@ -50,4 +73,17 @@
   position: relative;
   color: var(--colors-interface-white);
   z-index: 10;
+}
+
+@media (max-width: 1350px) {
+  .wrapper--send {
+    width: 160px;
+  }
+}
+
+@media (max-width: 400px) {
+  .wrapper--send {
+    width: 120px;
+    padding: 5px;
+  }
 }

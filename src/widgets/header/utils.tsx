@@ -7,6 +7,7 @@ import type {
   ISideBarPosition,
   ISideBarElementProps,
 } from 'widgets/header/navigation/types';
+import { ReadMessageIcon } from 'shared/ui/icons/read-message-icon';
 
 export const positionConfigTop: ISideBarPosition = {
   ulflexDirection: 'row',
@@ -50,6 +51,57 @@ export const linksTop: ISideBarElementProps[] = [
     title: 'Контакты',
     to: '/contacts',
     icon: <LocationIcon color="blue" />,
+  },
+];
+
+export const linksTopAuthUser: ISideBarElementProps[] = [
+  {
+    title: 'Личный кабинет',
+    to: '/profile',
+    icon: <PersonIcon color="blue" />,
+  },
+  {
+    title: 'Блог',
+    to: '/blog',
+    icon: <WriteMessageIcon color="blue" />,
+  },
+  {
+    title: 'Политика конфиденциальности',
+    to: '/policy',
+    icon: <LockIcon color="blue" />,
+  },
+  {
+    title: 'Контакты',
+    to: '/contacts',
+    icon: <LocationIcon color="blue" />,
+  },
+];
+
+export const linksTopAuthAdmin: ISideBarElementProps[] = [
+  {
+    title: 'Личный кабинет',
+    to: '/profile',
+    icon: <PersonIcon color="blue" />,
+  },
+  {
+    title: 'Блог',
+    to: '/blog',
+    icon: <WriteMessageIcon color="blue" />,
+  },
+  {
+    title: 'Политика конфиденциальности',
+    to: '/policy',
+    icon: <LockIcon color="blue" />,
+  },
+  {
+    title: 'Контакты',
+    to: '/contacts',
+    icon: <LocationIcon color="blue" />,
+  },
+  {
+    title: 'Чат',
+    to: '/chat',
+    icon: <ReadMessageIcon color="blue" />,
   },
 ];
 
