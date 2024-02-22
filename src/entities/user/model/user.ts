@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
+  adminLoginThunk,
   checkTokenThunk,
   newUserThunk,
   userLoginThunk,
@@ -181,32 +182,6 @@ export const userModel = createSlice({
           return state;
         }
         const { createdAt, updatedAt, location, ...data } = user;
-        // const {
-        //   _id,
-        //   name,
-        //   phone,
-        //   avatar,
-        //   address,
-        //   location,
-        //   role,
-        //   keys,
-        //   status,
-        //   vkId,
-        //   score,
-        // } = user;
-        // const data: User = {
-        //   _id,
-        //   name,
-        //   phone,
-        //   avatar,
-        //   address,
-        //   location: location?.coordinates,
-        //   role,
-        //   keys,
-        //   status,
-        //   vkId,
-        //   score,
-        // };
         return {
           ...state,
           data: { ...data, location: location?.coordinates },
@@ -216,6 +191,33 @@ export const userModel = createSlice({
         };
       })
       .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isLoading: false,
+      }))
+      .addCase(adminLoginThunk.pending, (state, _) => ({
+        ...state,
+        error: null,
+        isLoading: true,
+      }))
+      .addCase(adminLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const { createdAt, updatedAt, location, ...data } = user;
+        return {
+          ...state,
+          data: { ...data, location: location?.coordinates },
+          role: data.role,
+          _id: data._id,
+          isLoading: false,
+        };
+      })
+      .addCase(adminLoginThunk.rejected, (state) => ({
         ...state,
         isLoading: false,
       })),

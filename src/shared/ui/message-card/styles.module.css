@@ -19,8 +19,11 @@
   background: var(--colors-interface-white);
 }
 
-.user-info {
+.userInfo {
   width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .name {
@@ -34,9 +37,9 @@
   color: var(--colors-interface-primary);
 }
 
-.length-limitation {
-  overflow: hidden; /* Скрывает текст, который не помещается */
-  text-overflow: ellipsis; /* Добавляет троеточие в конце текста */
+.lengthLimitation {
+  overflow: hidden;
+  text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   display: -webkit-box;
 }
@@ -75,7 +78,7 @@
   cursor: pointer;
 }
 
-.card-swipe {
+.cardSwipe {
   width: 429px;
   border: none;
   padding-left: 70px;
@@ -105,7 +108,7 @@
     font-size: 12px;
   }
 
-  .user-info {
+  .userInfo {
     width: 50vw;
   }
 }

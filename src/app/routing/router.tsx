@@ -33,9 +33,6 @@ import { VKAuthPage } from 'pages/vk-auth';
 import { RegisterPage } from 'pages/register';
 import { Tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
-// TODO conflict
-// import { SectionChatPicker } from 'pages/section-chat-picker';
-// import { SectionChatHub } from 'pages/section-chat-hub';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
 
 export const router = createBrowserRouter(
@@ -144,27 +141,10 @@ export const router = createBrowserRouter(
           <Route path="/profile/bids" element={<BidsPage />} />
 
           <Route
-            path="/conflict"
-            element={
-              <ProfileChatsPages>
-                <SectionChatsConflict />
-              </ProfileChatsPages>
-            }
-          />
-          <Route
-            path="/conflict-hub"
-            element={
-              <ProfileChatsPages>
-                <SectionChatsConflict />
-              </ProfileChatsPages>
-            }
-          />
-          {/* Закомментирована на время показа */}
-          {/* <Route
             path="/chat"
             element={
               <ProfileChatsPages>
-                <SectionChatPicker />
+                <SectionChatsConflict />
               </ProfileChatsPages>
             }
           />
@@ -172,18 +152,10 @@ export const router = createBrowserRouter(
             path="/chat-hub"
             element={
               <ProfileChatsPages>
-                <SectionChatHub />
-              </ProfileChatsPages>
-            }
-          />
-          <Route
-            path="/chat-conflict"
-            element={
-              <ProfileChatsPages>
                 <SectionChatsConflict />
               </ProfileChatsPages>
             }
-          /> */}
+          />
         </Route>
         <Route
           element={

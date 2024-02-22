@@ -1,48 +1,29 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ConflictCard } from '.';
+import { TaskReport } from 'entities/task/types';
 
 const meta: Meta<typeof ConflictCard> = {
   title: 'uikit/ConflictCard',
   component: ConflictCard,
   tags: ['autodocs'],
   argTypes: {
-    optionCard: {
-      description: 'Выбор иконки, в зависимости от стороны конфликта',
-      type: 'boolean',
-      options: ['conflict', 'confirm'],
-      control: {
-        type: 'radio',
-      },
-      defaultValue: false,
-    },
-    specialization: {
-      description: 'Выбор специализации',
-      options: ['valanter', 'recipient'],
+    role: {
+      description: 'Выбор стороны конфликта',
+      options: ['recipient', 'volunteer'],
       control: {
         type: 'radio',
       },
       type: 'string',
       defaultValue: 'valanter',
     },
-    name: {
-      description: 'Имя пользователя',
+    status: {
+      description: 'Выбор стороны конфликта',
+      options: ['fulfilled', 'rejected'],
+      control: {
+        type: 'radio',
+      },
       type: 'string',
-      defaultValue: 'Потапенко Артур Иванович',
-    },
-    id: {
-      description: 'id пользователя',
-      type: 'string',
-      defaultValue: '23123',
-    },
-    onClickPhone: {
-      description: 'Функция для получения номера телефона пользователя',
-      type: 'function',
-      defaultValue: () => {},
-    },
-    onClickMessage: {
-      description: 'Функция для открытия чата пользователя',
-      type: 'function',
-      defaultValue: () => {},
+      defaultValue: 'fulfilled',
     },
   },
 };
@@ -53,10 +34,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Card: Story = {
   args: {
-    optionCard: 'confirm',
-    specialization: 'recipient',
-    name: 'Петров Петр Петрович',
-    image: 'https://i.pravatar.cc/300',
-    id: '11111114',
+    user: {
+      vkId: 'https://vk.com/id123456789',
+      address: 'Москва, улица Плещеева, 30',
+      avatar: 'https://i.pravatar.cc/300',
+      name: 'Петров Петр Петрович',
+      phone: '+7 (900) 800 80 80',
+      _id: '63d0d8b9c14df717e58b1991',
+    },
+    role: 'recipient',
+    status: TaskReport.FULFILLED,
   },
 };

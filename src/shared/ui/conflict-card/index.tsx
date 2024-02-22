@@ -5,37 +5,33 @@ import { RoundButton } from '../round-button';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
 import { ModalContentType, TaskButtonType } from 'shared/types/common.types';
+import { TaskReport } from 'entities/task/types';
 
-interface PropsConflictCard {
-  optionCard: 'conflict' | 'confirm';
-  specialization: 'valanter' | 'recipient';
+interface IUser {
+  address: string;
+  avatar: string;
   name: string;
-  image: string;
-  id: string;
-  onClickPhone?: () => void;
-  onClickMessage?: () => void;
-  // TODO conflict
-  vkId?: string;
+  phone: string;
+  _id: string;
+  vkId: string;
 }
 
-export function ConflictCard({
-  optionCard,
-  specialization,
-  name,
-  image,
-  id,
-  vkId,
-}: PropsConflictCard) {
-  // TODO conflict
-  const handelMessage = () => {
-    window.open(vkId, '_blank');
+interface PropsConflictCard {
+  user: IUser;
+  role: 'recipient' | 'volunteer';
+  status: TaskReport;
+}
+
+export function ConflictCard({ user, role, status }: PropsConflictCard) {
+  const handelClickChat = () => {
+    window.open(user.vkId, '_blank');
   };
-  // TODO conflict
+
   return (
-    <article className={styles['conflict-cart']}>
+    <article className={styles.conflictCard}>
       <SquareButton
         extClassName={styles.icon}
-        buttonType={optionCard === 'conflict' ? 'conflict' : 'confirm'}
+        buttonType={status === 'rejected' ? 'conflict' : 'confirm'}
       />
       <h4
         className={cn(
@@ -46,23 +42,23 @@ export function ConflictCard({
           styles.specialization
         )}
       >
-        {specialization === 'valanter' ? 'Волонтер' : 'Реципиент'}
+        {role === 'volunteer' ? 'Волонтер' : 'Реципиент'}
       </h4>
-      <img className={styles.img} src={image} alt="фото" />
+      <img className={styles.img} src={user.avatar} alt="фото" />
       <div className={styles.conteiner}>
-        {/* TODO conflict */}
         <ButtonWithModal
           modalContent={<ModalContent type={ModalContentType.phone} />}
         >
-          <RoundButton
-            buttonType={TaskButtonType.phone}
-            // disabled={isPageCompleted || !user ? true : false}
-          />
+          <RoundButton buttonType={TaskButtonType.phone} />
         </ButtonWithModal>
-        <RoundButton buttonType="message" onClick={handelMessage} />
+        <RoundButton buttonType="message" onClick={handelClickChat} />
       </div>
-      <h5 className={cn('text', 'text_type_regular', styles.name)}>{name}</h5>
-      <p className={cn('text_type_regular', 'text', styles.id)}>{`ID ${id}`}</p>
+      <h5 className={cn('text', 'text_type_regular', styles.name)}>
+        {user.name}
+      </h5>
+      <p
+        className={cn('text_type_regular', 'text', styles.id)}
+      >{`ID ${user._id}`}</p>
     </article>
   );
 }

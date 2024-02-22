@@ -9,14 +9,19 @@ import { IChatmateInfo } from 'shared/types/conflict';
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
   isOpen: boolean;
-  onClick: (text: string) => void;
+  onClick?: (text: string) => void;
   children: ReactNode;
   chatmateInfo?: IChatmateInfo;
   boxButton: ReactElement;
+  closeConflict: () => void;
 }
 
 export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
   const isMobile = useMediaQuery('(max-width: 550px)');
+
+  const handleClick = () => {
+    props.closeConflict();
+  };
 
   return (
     <article className={cn(styles.box, { [styles.box_action]: props.isOpen })}>
@@ -24,7 +29,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
         <div className={styles['user-info']}>
           {isMobile && (
             <Icon
-              onClick={() => props.onClick('close')}
+              onClick={handleClick}
               className={styles.cursor}
               color="#9798C9"
               icon="ArrowIcon"
@@ -89,7 +94,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
         <div className={styles['container-mobile']}>
           {isMobile && (
             <Icon
-              onClick={() => props.onClick('close')}
+              onClick={handleClick}
               className={cn(styles.arrow, styles.cursor)}
               color="#9798C9"
               icon="ArrowIcon"
@@ -114,7 +119,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
       <div className={styles['content-container']}>{props.children}</div>
       {!isMobile && (
         <Icon
-          onClick={() => props.onClick('close')}
+          onClick={handleClick}
           className={cn(styles['btn-close'], styles.cursor)}
           color="#9798C9"
           icon="CloseCrossIcon"

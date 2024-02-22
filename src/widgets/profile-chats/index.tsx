@@ -5,55 +5,36 @@ import styles from './styles.module.css';
 import { PageSubMenu } from 'widgets/page-sub-menu';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import {
-  useGetConflictAdminQuery,
-  useGetWorkConflictQuery,
-} from 'services/messages-api';
+  useGetTasksConfilctQuery,
+  useGetTasksWorkConflictQuery,
+} from 'services/admin-api';
 
 interface ProfileChatsPagesProps {
   children: ReactNode;
 }
 
 export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
-  // TODO conflict
-  const { data: conflict } = useGetConflictAdminQuery('addConflict');
-  const { data: workConflict } = useGetWorkConflictQuery('hubConfict');
-
+  const { data: conflict } = useGetTasksConfilctQuery('');
+  const { data: conflictIsWork } = useGetTasksWorkConflictQuery('');
   return (
     <>
       <SmartHeader
         icon={<Icon color="blue" icon="ReadMessageIcon" size="54" />}
         text="Чат"
       />
-      {/* Закомментирована на время показа */}
-      {/* <PageSubMenu
-        style={styles['sub-menu']}
-        links={
-          <>
-            <PageSubMenuLink text="Ждут ответа" to="/chat" notifications={2} />
-            <PageSubMenuLink text="В работе" to="/chat-hub" notifications={3} />
-            <PageSubMenuLink
-              text="Конфликтное закрытие"
-              to="/chat-conflict"
-              notifications={4}
-              styleSpan={styles['style-span']}
-            />
-          </>
-        }
-      /> */}
-      {/* TODO conflict */}
       <PageSubMenu
         style={styles['sub-menu']}
         links={
           <>
             <PageSubMenuLink
               text="Конфликты"
-              to="/conflict"
-              notifications={conflict ? conflict.length : ''}
+              to="/chat"
+              notifications={conflict ? conflict?.length : 0}
             />
             <PageSubMenuLink
-              text="Конфликтное закрытие"
-              to="/conflict-hub"
-              notifications={workConflict ? workConflict.length : ''}
+              text="Конфликты в работе"
+              to="/chat-hub"
+              notifications={conflictIsWork ? conflictIsWork?.length : 0}
               styleSpan={styles['style-span']}
             />
           </>

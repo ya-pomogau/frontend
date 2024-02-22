@@ -221,6 +221,27 @@ const systemSlice = createSlice({
       .addCase(checkTokenThunk.rejected, (state) => ({
         ...state,
         isPending: false,
+      }))
+      .addCase(adminLoginThunk.pending, (state, _) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(adminLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(adminLoginThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
       })),
 });
 

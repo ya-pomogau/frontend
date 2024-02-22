@@ -4,59 +4,77 @@ import { FC } from 'react';
 import { Icon } from 'shared/ui/icons';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import cn from 'classnames';
-import { IInfoConflict } from 'shared/types/conflict';
+import { TaskConflict, TaskReport } from 'entities/task/types';
+import { format } from 'date-fns';
 
-export interface IConflict {
-  specialization: 'valanter' | 'recipient';
-  option: 'conflict' | 'confirm';
-  // TODO conflict
-  vkId?: string;
-  name: string;
-  image: string;
-  id: string;
+interface IUser {
+  user: {
+    _id: string;
+    address: string;
+    avatar: string;
+    name: string;
+    phone: string;
+    vkId: string;
+  };
+  role: 'recipient' | 'volunteer';
+  report: TaskReport;
 }
 
 export interface PropsInfoConflict {
-  conflict?: IConflict[];
-  infoConflict?: IInfoConflict;
+  info: TaskConflict;
 }
 
 export const InfoConflict: FC<PropsInfoConflict> = (props) => {
+  const infoVolonter: IUser = {
+    user: props.info.volunteer,
+    role: 'volunteer',
+    report: props.info.volunteerReport,
+  };
+  const infoRecepient: IUser = {
+    user: props.info.recipient,
+    role: 'recipient',
+    report: props.info.recipientReport,
+  };
+  const users: IUser[] = [infoVolonter, infoRecepient];
+
   return (
     <article className={styles.wrapper}>
-      <div className={styles['box-cards']}>
-        {props.conflict &&
-          props.conflict.map((i) => (
-            <ConflictCard
-              // TODO conflict
-              vkId={i.vkId}
-              key={i.id}
-              id={i.id}
-              optionCard={i.option}
-              specialization={i.specialization}
-              name={i.name}
-              image={i.image}
-            />
-          ))}
+      <div className={styles.boxCards}>
+        {users.map((i) => (
+          <ConflictCard
+            key={i.user._id}
+            user={i.user}
+            role={i.role}
+            status={i.report}
+          />
+        ))}
       </div>
-      {props.infoConflict && (
-        <div className={styles['box-info']}>
+      {props && (
+        <div className={styles.boxInfo}>
           <p className={cn('text', 'm-0', styles.text)}>
             <Icon color="blue" icon="CalendarIcon" size="14" />
-            {` ${props.infoConflict.date} `}
-            <Icon color="blue" icon="ClockIcon" size="14" />
-            {` ${props.infoConflict.time}`}
+            {` ${
+              props.info.date
+                ? format(new Date(props.info.date), 'dd.MM.yyyy')
+                : 'бессрочно'
+            } `}
+            {props.info.date && (
+              <>
+                <Icon color="blue" icon="ClockIcon" size="14" />
+                {` ${format(new Date(props.info.date), 'HH.MM')}`}
+              </>
+            )}
           </p>
           <p className={cn('text', 'm-0', styles.text)}>
             <Icon color="blue" icon="LocationIcon" size="14" />
-            {` ${props.infoConflict.address}`}
+            {` ${props.info.address}`}
           </p>
           <CategoriesBackground
             theme="primary"
             size="medium"
-            content="Сопровождение"
+            content={props.info.category.title}
           />
-          <p className={cn('text', 'm-0')}>{props.infoConflict.message}</p>
+          <p className={cn('text', 'm-0')}>{props.info.description}</p>
         </div>
       )}
     </article>

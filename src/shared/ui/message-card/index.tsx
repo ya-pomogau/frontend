@@ -3,114 +3,59 @@ import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { IMessage } from 'shared/types/message';
-import {
-  IChatmateInfo,
-  IConflictUser,
-  IInfoConflict,
-  IInfoConflicts,
-  IUsers,
-} from 'shared/types/conflict';
+import { TaskConflict } from 'entities/task/types';
+import { UserProfile } from 'entities/user/types';
 
 interface PropsMessageCard {
-  chatmateInfo: IChatmateInfo;
-  message: IMessage[];
+  statusConflict: boolean;
+  description: string;
+  handleClickCard: (task: TaskConflict) => void;
+  message?: IMessage[];
   action: boolean;
-  onClick: (cardId: string) => void;
-  id: number;
-  getConflict?: (
-    conflict?: IConflictUser,
-    infoConflict?: IInfoConflict
-  ) => void;
-  getChat?: (
-    id: number,
-    chatmateInfo: IChatmateInfo,
-    message: IMessage[]
-  ) => void;
-  conflict?: IConflictUser;
-  infoConflict?: IInfoConflict;
+  user: UserProfile;
+  task?: TaskConflict;
   position?: boolean;
-  getInfoChatsConflict?: (users: IUsers[], id: number) => void;
-  users?: IUsers[];
-  openChat?: boolean;
-  // TODO conflict
-  getInfo?: (ms: IInfoConflicts) => void;
-  item?: IInfoConflicts;
 }
 
 export const MessageCard: React.FC<PropsMessageCard> = (props) => {
   const [hasNewMessage, setHasNewMessage] = useState(false);
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
-  const lastMessage = props.message.length - 1;
   const location = useLocation();
 
   useEffect(() => {
     setHasNewMessage(true);
   }, [props.message]);
 
-  useEffect(() => {
-    if (props.openChat) {
-      setHasNewMessage(true);
+  function handelClick() {
+    if (props.task) {
+      props.handleClickCard(props.task);
     }
-  }, [props.openChat]);
-
-  const handelClick = () => {
-    props.onClick(props.chatmateInfo.userId);
-
-    if (props.getChat) {
-      props.getChat(props.id, props.chatmateInfo, props.message);
-    }
-    if (props.getConflict) {
-      props.getConflict(props.conflict, props.infoConflict);
-    }
-    if (props.getInfoChatsConflict && props.users) {
-      props.getInfoChatsConflict(props.users, props.id);
-    }
-    // TODO conflict
-    if (props.getInfo && props.item) {
-      props.getInfo(props.item);
-    }
-  };
+  }
 
   return (
-    // <article onClick={handelClick} className={styles['cards-container']}>
     <article
       onClick={handelClick}
       className={cn(
         styles.card,
         { [styles.card_action]: props.action },
         {
-          [styles['card-swipe']]: props.position,
+          [styles.cardSwipe]: props.position,
         }
       )}
     >
-      {props.chatmateInfo.userAvatarLink ? (
-        <img
-          src={props.chatmateInfo.userAvatarLink}
-          alt="фото"
-          className={styles.img}
-        />
+      {props.user.avatar ? (
+        <img src={props.user.avatar} alt="фото" className={styles.img} />
       ) : (
         <div
           className={cn(styles.img, { [styles.img_action]: props.action })}
         />
       )}
-      <div className={styles['user-info']}>
-        <p
-          className={cn(defultStyle, styles.name, styles['length-limitation'])}
-        >
-          {props.chatmateInfo.name}
+      <div className={styles.userInfo}>
+        <p className={cn(defultStyle, styles.name, styles.lengthLimitation)}>
+          {props.statusConflict ? 'Оповещение о конфликте' : props.user.name}
         </p>
-        <span className={cn(defultStyle, styles.id)}>
-          {`ID ${props.chatmateInfo.userId}`}
-        </span>
-        <p
-          className={cn(
-            defultStyle,
-            styles.message,
-            styles['length-limitation']
-          )}
-        >
-          {props.message[lastMessage].message}
+        <p className={cn(defultStyle, styles.message, styles.lengthLimitation)}>
+          {props.description}
         </p>
       </div>
       {location.pathname === '/chat-conflict'
@@ -127,10 +72,9 @@ export const MessageCard: React.FC<PropsMessageCard> = (props) => {
                 [styles.vizabiliti]: !hasNewMessage,
               })}
             >
-              {props.message.length > 10 ? '+9' : props.message.length}
+              {/* {props.message.length > 10 ? '+9' : props.message.length} */}
             </span>
           )}
     </article>
-    // </article>
   );
 };
