@@ -52,14 +52,14 @@ export type TVKUserResponseObj = {
   first_name: string;
   last_name: string;
   id: string;
-  //  [key: string]: string;
+  email: string;
+  photo_max_orig: string;
 };
 
-export type TVKUserResponse = { response: Array<TVKUserResponseObj> };
 export type TVKLoginResponseDto = {
   token: string | null;
   user?: TUser;
-  vkUser: TVKUserResponse;
+  vkUser: TVKUserResponseObj;
 };
 
 export type TNewUserResponseDto = {

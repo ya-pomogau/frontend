@@ -15,8 +15,13 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export function RegisterPage() {
   const vkUser = useAppSelector(vkUserSelector);
-  const { firstName = '', lastName = '', vkId = '' } = vkUser ?? {};
-  const FIO = `${firstName} ${lastName}`;
+  const {
+    first_name = '',
+    last_name = '',
+    id = '',
+    photo_max_orig = '',
+  } = vkUser ?? {};
+  const FIO = `${first_name} ${last_name}`;
   const [name, setName] = useState<string>(FIO);
   //TODO: разобраться с получением телефона и записью его в стейт
   const [phone, setPhone] = useState<string>('');
@@ -40,11 +45,12 @@ export function RegisterPage() {
       location: address.coords,
       role: role,
     });
-    const vk_id = `${vkId}`;
+    const vk_id = `${id}`;
     const user = {
       name: name,
       phone,
       address: address.address,
+      avatar: photo_max_orig,
       location: {
         type: 'Point',
         coordinates: address.coords,
@@ -68,8 +74,8 @@ export function RegisterPage() {
     setRole(checkRole);
   };
   // определение внешнего вида кнопки выбора роли
-  const getRoleButtonType = (id: string) =>
-    role === id ? 'primary' : 'secondary';
+  const getRoleButtonType = (userRole: string) =>
+    role === userRole ? 'primary' : 'secondary';
 
   return (
     <>
