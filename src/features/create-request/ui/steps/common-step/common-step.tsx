@@ -15,12 +15,14 @@ import { CategoriesBackground } from 'shared/ui/categories-background';
 
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
+import { useCreateTaskMutation } from 'services/user-task-api';
 interface ICommonStepProps {
   isMobile?: boolean;
 }
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
+  const [createTask, { data, error, isLoading }] = useCreateTaskMutation();
   const {
     taskId,
     time,
@@ -38,24 +40,16 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     dispatch(changeStepDecrement());
   };
 
-  //if(data === null){
-  //  termlessRequest = true;
-  //}
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
   const handleSubmitClick = () => {
     let requestData = {};
+
     if (!termlessRequest) {
       const [year, month, day] = formattedDate.split('.');
       const [hours, minutes] = time.split(':');
-      const dateObject = new Date(
-        +year,
-        +month - 1,
-        +day,
-        +hours,
-        +minutes
-      ).toISOString();
+      const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
 
       requestData = {
         categoryId: category._id,
@@ -64,6 +58,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
+      createTask({
+        categoryId: category._id,
+        location: location,
+        date: dateObject,
+        address,
+        description,
+      });
       dispatch(clearState());
       dispatch(closePopup());
     } else {
@@ -74,7 +75,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-
+      createTask({
+        categoryId: category._id,
+        location: location,
+        date: null,
+        address,
+        description,
+      });
       dispatch(clearState());
       dispatch(closePopup());
     }

@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import Checkbox from 'shared/ui/checkbox';
 import styles from './styles.module.css';
-import { ButtonWithModal } from 'widgets/button-with-modal';
 import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
