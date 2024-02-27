@@ -10,7 +10,7 @@ import { Loader } from 'shared/ui/loader';
 import { IFilterValues } from 'features/filter/types';
 import { Task } from 'entities/task/types';
 import { useEffect, useState } from 'react';
-import { handleFilterTasks } from 'shared/libs/utils';
+import { getRoleForRequest, handleFilterTasks } from 'shared/libs/utils';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { useGetTaskCompletedQuery } from 'services/user-task-api';
@@ -19,13 +19,11 @@ export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   // const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
   const { role } = useAppSelector((state) => state.user);
-  let query = '';
-  if (role === UserRole.RECIPIENT) {
-    query = UserRole.RECIPIENT.toLowerCase();
-  } else {
-    query = UserRole.VOLUNTEER.toLowerCase();
-  }
-  const { data: tasks, error, isLoading } = useGetTaskCompletedQuery(query);
+  const {
+    data: tasks,
+    error,
+    isLoading,
+  } = useGetTaskCompletedQuery(getRoleForRequest(role));
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);

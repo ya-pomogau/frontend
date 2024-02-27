@@ -140,13 +140,15 @@ export const Request = ({ isMobile = true }: RequestProps) => {
 
   useEffect(() => {
     document.addEventListener('keydown', closeByEsc);
-    dispatch(setCategoryList(categories));
-
     return () => {
       document.removeEventListener('keydown', closeByEsc);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    dispatch(setCategoryList(categories));
+  }, [categories]);
 
   if (!data) return null;
 
