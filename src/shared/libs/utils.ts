@@ -17,6 +17,15 @@ import { UserRole } from 'shared/types/common.types';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
+export const getRoleForRequest = (role: UserRole | null) => {
+  let query = '';
+  if (role === UserRole.RECIPIENT) {
+    query = UserRole.RECIPIENT.toLowerCase();
+  } else {
+    query = UserRole.VOLUNTEER.toLowerCase();
+  }
+  return query;
+};
 
 export const getFullQueriesForYApi = (
   mainJSApi: string,
