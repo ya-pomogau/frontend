@@ -14,6 +14,7 @@ import { handleFilterTasks } from 'shared/libs/utils';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { useGetTaskActiveQuery } from 'services/user-task-api';
+import { isUnConfirmedSelector } from 'entities/user/model';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -25,9 +26,7 @@ export function ProfileActivePage() {
     query = UserRole.VOLUNTEER.toLowerCase();
   }
   const { data: tasks, error, isLoading } = useGetTaskActiveQuery(query);
-  const isUnConfirmed = useAppSelector((state) => {
-    return state.user.data?.status === UserStatus.UNCONFIRMED;
-  });
+  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
   const isMobile = useMediaQuery('(max-width:1150px)');
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
   const isMobileForPopup = useMediaQuery('(max-width:735px)');

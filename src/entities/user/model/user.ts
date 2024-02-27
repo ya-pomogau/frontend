@@ -5,7 +5,7 @@ import {
   userLoginThunk,
   adminLoginThunk,
 } from '../../../services/system-slice';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, UserStatus } from 'shared/types/common.types';
 import { User } from '../types';
 import { TCustomSelector } from 'shared/types/store.types';
 
@@ -28,6 +28,8 @@ const initialState: UserState = {
 };
 export const isRootSelector: TCustomSelector<boolean> = (state) =>
   !!state.user && (state.user.data?.isRoot ?? false);
+export const isUnConfirmedSelector: TCustomSelector<boolean> = (state) =>
+  state.user.data?.status === UserStatus.UNCONFIRMED;
 export const userModel = createSlice({
   name: 'user',
   initialState,
@@ -166,7 +168,7 @@ export const userModel = createSlice({
         isFailed: false,
         error: null,
       }))
-      .addCase(adminLoginThunk.pending, (state, _) => ({
+      .addCase(adminLoginThunk.pending, (state) => ({
         ...state,
         isLoading: true,
         isFailed: false,

@@ -14,6 +14,7 @@ import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { useGetTaskCompletedQuery } from 'services/user-task-api';
+import { isUnConfirmedSelector } from 'entities/user/model';
 
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -35,9 +36,7 @@ export function ProfileCompletedPage() {
     // eslint-disable-next-line
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
-  const isUnConfirmed = useAppSelector((state) => {
-    return state.user.data?.status === UserStatus.UNCONFIRMED;
-  });
+  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
   return (
     <>
