@@ -33,7 +33,7 @@ const Mark: FC<MarkProps> = ({
     [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
   );
-  const [responseTask, error] = useResponseTaskMutation();
+  const [responseTask] = useResponseTaskMutation();
 
   const onClickButton = () => {
     // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
