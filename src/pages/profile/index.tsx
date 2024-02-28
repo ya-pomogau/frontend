@@ -7,8 +7,6 @@ import { UserRole } from 'shared/types/common.types';
 export function ProfilePage() {
   const role = useAppSelector((state) => state.user.role);
   const isRoot = useAppSelector(isRootSelector);
-  // const { data: user } = useGetMeQuery('');
-  // console.log(user);
 
   if (role === UserRole.VOLUNTEER) {
     return <Navigate to="/profile/map" replace />;

@@ -57,7 +57,6 @@ export const DropDownMenu = ({ setMenuActive, menuActive }: MenuProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handlerOnClick = () => {
-    console.log('exit');
     dispatch(logoutUser());
     return navigate('/');
   };

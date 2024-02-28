@@ -45,7 +45,6 @@ export function RequestsNotprocessedPage() {
   const { isLoading, data } = useGetUncomfirmedQuery(role, {
     pollingInterval: 50000,
   });
-  console.log(dateUsers);
 
   useEffect(() => {
     filterCardsUsersPageAdmin(testUsers, searchRole, setDateUsers);

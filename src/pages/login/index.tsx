@@ -8,7 +8,6 @@ import { PasswordInput } from 'shared/ui/password-input';
 
 import styles from './styles.module.css';
 import { useLoginMutation } from 'services/auth-admin-api';
-import { setUser } from 'entities/user/model';
 
 interface ILoginForm {
   login: string;
@@ -16,7 +15,6 @@ interface ILoginForm {
 }
 
 export function LoginPage() {
-  const navigate = useNavigate();
   const [checkAdminState, setAdminCheckState] = useState(false);
   const [inputError, setInputError] = useState(false);
 
@@ -30,8 +28,6 @@ export function LoginPage() {
     try {
       const user = await login(inputFields).unwrap();
       sessionStorage.setItem('auth_token', user.access_token);
-      //dispatch(setUser(user));
-      // navigate('/profile');
     } catch (err) {
       console.log({
         status: err,

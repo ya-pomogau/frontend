@@ -75,7 +75,6 @@ export const InputAddress = (props: InputAddressProps) => {
         const firstGeoObject = res.geoObjects.get(0);
 
         const coords: GeoCoordinates = firstGeoObject.geometry.getCoordinates();
-        console.log(coords);
         setAddress(address.address, coords);
       });
     }
@@ -94,7 +93,6 @@ export const InputAddress = (props: InputAddressProps) => {
         const firstGeoObject = res.geoObjects.get(0);
 
         const coords: GeoCoordinates = firstGeoObject.geometry.getCoordinates();
-        console.log(coords);
         setAddress(address.address, coords);
       });
     }

@@ -23,7 +23,6 @@ export function RegisterPage() {
   } = vkUser ?? {};
   const FIO = `${first_name} ${last_name}`;
   const [name, setName] = useState<string>(FIO);
-  //TODO: разобраться с получением телефона и записью его в стейт
   const [phone, setPhone] = useState<string>('');
   const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
   const [address, setAddress] = useState<{
@@ -38,13 +37,6 @@ export function RegisterPage() {
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    console.log('Региcтрация:', {
-      name: name,
-      phone: phone,
-      address: address.address,
-      location: address.coords,
-      role: role,
-    });
     const vk_id = `${id}`;
     const user = {
       name: name,
