@@ -8,13 +8,7 @@ import { PasswordInput } from 'shared/ui/password-input';
 import { useAppDispatch } from 'app/hooks';
 
 import styles from './styles.module.css';
-import { useLoginMutation } from 'services/auth-admin-api';
 import { adminLoginThunk } from 'services/system-slice';
-import { setUser } from 'entities/user/model';
-import {
-  useGetUserByRolesQuery,
-  useGetAllAdminsQuery,
-} from 'services/admin-api';
 
 interface ILoginForm {
   login: string;
@@ -33,25 +27,10 @@ export function LoginPage() {
     login: '',
     password: '',
   });
-  // const { data } = useGetUserByRolesQuery('volunteers');
-  // // const { data: allAdmins } = useGetAllAdminsQuery();
-  // const { data: data2 } = useGetUserByRolesQuery('recipients');
-  // const { data: data3 } = useGetUserByRolesQuery('unconfirmed');
-  // console.log('🚀 ~ LoginPage ~ unconfirmed:', data3);
-  // console.log('🚀 ~ LoginPage ~ recipients:', data2);
-  // // console.log('🚀 ~ LoginPage ~ allAdmins:', allAdmins);
-  // console.log('🚀 ~ LoginPage ~ volunteers:', data);
-
-  // TODO закомментировал, т.к ссылается на ручку signin-admin, которой сейчас нет
-  // const [login, { isLoading }] = useLoginMutation();
 
   const handleAdminLogin = async () => {
     try {
-      // const user = await login(inputFields).unwrap();
-      // sessionStorage.setItem('auth_token', user.access_token);
       dispatch(adminLoginThunk(inputFields));
-      //dispatch(setUser(user));
-      // navigate('/profile');
     } catch (err) {
       console.log({
         status: err,

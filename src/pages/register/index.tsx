@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
@@ -33,13 +33,6 @@ export function RegisterPage() {
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    console.log('Региcтрация:', {
-      name: name,
-      phone: phone,
-      address: address.address,
-      location: address.coords,
-      role: role,
-    });
     const vk_id = `${vkId}`;
     const user = {
       name: name,
@@ -117,10 +110,10 @@ export function RegisterPage() {
           name="phone"
           value={phone}
           onChange={(event) => setPhone(event.target.value)}
-          placeholder="+7 (000) 000 00 00"
+          placeholder="+70010900213"
           type="tel"
-          pattern="^[+]7 \(\d{3}\) \d{3} \d{2} \d{2}$"
-          title="+7 (123) 456 78 90"
+          pattern="^[+]7\d{10}$"
+          title="+71234567890"
         />
 
         <div>

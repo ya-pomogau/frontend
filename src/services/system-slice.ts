@@ -78,7 +78,6 @@ export const userLoginThunk = createAsyncThunk(
       return { user, vkUser };
     } catch (error) {
       const { message } = error as ErrorDto;
-      console.log(`Error message: ${message}`);
       rejectWithValue(message as string);
     }
   }
