@@ -33,10 +33,7 @@ export const ModalContent = ({
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
   const handleRejectClick = () => {
-    console.log('handleRejectClick');
-    console.log(`UserRole: '${userRole}', taskId: '${taskId}'`);
     if (userRole && taskId) {
-      console.log('userRole && taskId');
       rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
   };

@@ -23,7 +23,6 @@ export function RegisterPage() {
   } = vkUser ?? {};
   const FIO = `${first_name} ${last_name}`;
   const [name, setName] = useState<string>(FIO);
-  //TODO: разобраться с получением телефона и записью его в стейт
   const [phone, setPhone] = useState<string>('');
   const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
   const [address, setAddress] = useState<{

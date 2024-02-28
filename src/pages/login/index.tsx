@@ -16,8 +16,6 @@ interface ILoginForm {
 }
 
 export function LoginPage() {
-  const navigate = useNavigate();
-
   // TODO предназначение checkAdminState непонятно. Пока поставил начальное значение true, чтобы отрабатывало условие логина при сабмите формы
   const [checkAdminState, setAdminCheckState] = useState(true);
   const [inputError, setInputError] = useState(false);
