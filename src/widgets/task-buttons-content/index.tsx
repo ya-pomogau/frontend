@@ -5,13 +5,8 @@ import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
-import {
-  UserRole,
-  ModalContentType,
-  TaskButtonType,
-} from 'shared/types/common.types';
+import { UserRole, ModalContentType } from 'shared/types/common.types';
 import { useRejectTaskMutation } from 'services/user-task-api';
-import { useAppSelector } from 'app/hooks';
 
 interface ModalContentProps {
   type: ModalContentType;

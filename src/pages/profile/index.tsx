@@ -1,6 +1,5 @@
 import { useAppSelector } from 'app/hooks';
 import { Navigate } from 'react-router-dom';
-import { useGetMeQuery } from 'services/auth-admin-api';
 import { isRootSelector } from 'entities/user/model';
 import { UserRole } from 'shared/types/common.types';
 
