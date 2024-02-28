@@ -148,7 +148,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
 
   useEffect(() => {
     dispatch(setCategoryList(categories));
-  }, [categories]);
+  }, []);
 
   if (!data) return null;
 
