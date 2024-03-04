@@ -17,6 +17,7 @@ interface TooltipProps {
   pointerPosition?: 'right' | 'center';
   changeVisible?: () => void;
   elementStyles?: CSSProperties;
+  idForModalRoot?: string;
 }
 
 export const Tooltip = ({
@@ -26,8 +27,9 @@ export const Tooltip = ({
   pointerPosition = 'right',
   changeVisible,
   elementStyles,
+  idForModalRoot = 'modal',
 }: TooltipProps) => {
-  const modalRoot = document.getElementById('modal') as HTMLElement;
+  const modalRoot = document.getElementById(idForModalRoot) as HTMLElement;
 
   const tooltipRef = useRef<HTMLDivElement>(null);
   const closeWithEsc = useCallback(
@@ -73,14 +75,9 @@ export const Tooltip = ({
 
   const tooltip = (
     <div
-      className={classnames(
-        styles.tooltip,
-        extClassName,
-        {
-          [styles['tooltip--visible']]: visible,
-        },
-        'tooltip'
-      )}
+      className={classnames(styles.tooltip, extClassName, {
+        [styles['tooltip--visible']]: visible,
+      })}
       ref={tooltipRef}
       style={elementStyles}
     >

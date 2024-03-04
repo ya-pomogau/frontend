@@ -5,24 +5,38 @@
   gap: 20px;
 }
 .mainPopUpWrapperMobile {
-  height: 554px;
+  height: auto;
   width: 300px;
+}
+
+.mainPopupOuterDiv{
+  position: relative;
 }
 
 .modal {
   position: absolute;
-  top: calc(50% - 160px);
-  left: calc(50% - 45px);
+  top: 40px;
+  right: -5px;
 }
 
 .modalMobile {
   position: absolute;
-  top: calc(50% - 230px);
-  left: calc(50% - 185px);
+  top: 40px;
+  right: -5px;
 }
 
 .button {
   width: 82px;
+}
+
+.tooltipOverlay {
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 11;
 }
 
 .tooltipContent {
