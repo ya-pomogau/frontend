@@ -77,13 +77,6 @@ export const TaskList = ({
     };
   }, []);
 
-  useEffect(() => {
-    window.addEventListener('resize', getCoords);
-
-    return () => {
-      window.removeEventListener('resize', getCoords);
-    };
-  }, []);
   return (
     <>
       {/* TODO: удалить след. строку, когда будут приходить данные тасок с сервера */}

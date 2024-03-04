@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApi } from './auth';
 import {
   ErrorDto,
+  TAdminLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
   TVKUserResponseObj,
@@ -75,6 +76,25 @@ export const userLoginThunk = createAsyncThunk(
         localStorage.setItem('token', token);
       }
       return { user, vkUser };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      rejectWithValue(message as string);
+    }
+  }
+);
+
+export const adminLoginThunk = createAsyncThunk(
+  'admin/login',
+  async (adminLoginDto: TAdminLoginDto, { rejectWithValue }) => {
+    try {
+      const { token, user } = await authApi.adminLogin(adminLoginDto);
+      if (!token || !user) {
+        throw new Error('Ошибка регистрации администратора');
+      }
+      if (token && !!user) {
+        localStorage.setItem('token', token);
+      }
+      return { user };
     } catch (error) {
       const { message } = error as ErrorDto;
       console.log(`Error message: ${message}`);
@@ -163,6 +183,27 @@ const systemSlice = createSlice({
         ...state,
         isPending: false,
         isNew: false,
+      }))
+      .addCase(adminLoginThunk.pending, (state, _) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(adminLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(adminLoginThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
       })),
 });
 

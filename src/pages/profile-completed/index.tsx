@@ -13,23 +13,30 @@ import { useEffect, useState } from 'react';
 import { handleFilterTasks } from 'shared/libs/utils';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { defaultObjFilteres } from 'features/filter/consts';
+import { useGetTaskCompletedQuery } from 'services/user-task-api';
+import { isUnConfirmedSelector } from 'entities/user/model';
 
 export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
-  const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
+  // const { data: tasks, isLoading } = useGetTasksByStatusQuery('completed');
   const { role } = useAppSelector((state) => state.user);
+  let query = '';
+  if (role === UserRole.RECIPIENT) {
+    query = UserRole.RECIPIENT.toLowerCase();
+  } else {
+    query = UserRole.VOLUNTEER.toLowerCase();
+  }
+  const { data: tasks, error, isLoading } = useGetTaskCompletedQuery(query);
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
+    tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
     // eslint-disable-next-line
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
-  const isConfirmed = useAppSelector((state) => {
-    return state.user.data?.status === UserStatus.UNCONFIRMED;
-  });
+  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
   return (
     <>
@@ -37,7 +44,7 @@ export function ProfileCompletedPage() {
         icon={<Icon color="blue" icon="CompletedApplicationIcon" size="54" />}
         text="Завершенные заявки"
         filter={
-          !isConfirmed ? (
+          !isUnConfirmed ? (
             <Filter
               items={{
                 sort: true,
@@ -59,7 +66,7 @@ export function ProfileCompletedPage() {
           userRole={role}
           isMobile={isMobile}
           isStatusActive={false}
-          tasks={!isConfirmed ? filterTasks : []}
+          tasks={!isUnConfirmed ? filterTasks : []}
           isLoading={isLoading}
         />
       )}
