@@ -24,6 +24,7 @@ export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',
   userRegister: '/auth/new',
   adminLogin: '/auth/administrative',
+  checkToken: '/auth/token',
 };
 
 export const DEFAULT_HEADERS = {

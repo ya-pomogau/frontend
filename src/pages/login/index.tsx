@@ -1,5 +1,5 @@
 import { FormEvent, ChangeEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -16,8 +16,6 @@ interface ILoginForm {
 }
 
 export function LoginPage() {
-  const navigate = useNavigate();
-
   // TODO предназначение checkAdminState непонятно. Пока поставил начальное значение true, чтобы отрабатывало условие логина при сабмите формы
   const [checkAdminState, setAdminCheckState] = useState(true);
   const [inputError, setInputError] = useState(false);

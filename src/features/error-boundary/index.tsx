@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import styles from './styles.module.css';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { enableError } from 'entities/error/model';
 
@@ -10,7 +9,6 @@ type ErrorBoundaryProps = {
 const ErrorBoundary = ({ children }: ErrorBoundaryProps) => {
   const errorText = useAppSelector((state) => state.user.error!);
   const dispatch = useAppDispatch();
-  console.log(`ErrorBoundary errorText: ${errorText}`);
   useEffect(() => {
     if (errorText != null) {
       dispatch(enableError(errorText));

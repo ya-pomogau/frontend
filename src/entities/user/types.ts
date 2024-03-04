@@ -61,9 +61,11 @@ export type TUser = {
 };
 
 export type TVKUser = {
-  firstName: string;
-  lastName: string;
-  vkId: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  id: string;
+  photo_max_orig: string;
 };
 // TODO: надо изменить
 export type UpdateUserInfo = {

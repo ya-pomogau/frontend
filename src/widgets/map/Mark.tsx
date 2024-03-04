@@ -9,9 +9,10 @@ import usePermission from 'shared/hooks/use-permission';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
+import { useResponseTaskMutation } from 'services/user-task-api';
 
 type MarkProps = {
-  task?: Task;
+  task: Task;
   onClick?: () => void;
   showPopup?: () => void;
   onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
@@ -32,12 +33,13 @@ const Mark: FC<MarkProps> = ({
     [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
   );
+  const [responseTask] = useResponseTaskMutation();
 
   const onClickButton = () => {
-    // Добавить обращение в бэкенд и после получения ответа показываем попап:
-    // Пока договорились использовать замоканные данные заявок
+    // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
+    showPopup();
 
-    !isAuthorised ? onClick() : showPopup();
+    isAuthorised && responseTask(task._id);
   };
 
   if (!ymaps) return null;

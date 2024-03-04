@@ -49,29 +49,10 @@ export const userLoginThunk = createAsyncThunk(
   async (userLoginDto: TVKLoginRequestDto, { rejectWithValue }) => {
     try {
       const tmpRes = await authApi.vkLogin(userLoginDto);
+      console.dir(tmpRes);
       const { token, user, vkUser: vkUserResponse } = tmpRes;
-      const vkUser = vkUserResponse
-        ? Object.entries(vkUserResponse.response[0]).reduce(
-            (acc, [key, value]) => {
-              const tmp: Partial<TVKUser> = {};
-              switch (key) {
-                case 'first_name': {
-                  return { ...acc, firstName: value };
-                }
-                case 'last_name': {
-                  return { ...acc, lastName: value };
-                }
-                case 'id': {
-                  return { ...acc, vkId: value };
-                }
-                default: {
-                  return acc;
-                }
-              }
-            },
-            {} as TVKUser
-          )
-        : null;
+      const vkUser = vkUserResponse ? vkUserResponse : null;
+
       if (token && !!user) {
         localStorage.setItem('token', token);
       }
@@ -122,6 +103,22 @@ export const newUserThunk = createAsyncThunk(
   }
 );
 
+export const checkTokenThunk = createAsyncThunk(
+  'user/token',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const user = await authApi.checkToken(token);
+      console.dir(user);
+      if (!user) {
+        throw new Error('Ошибка получения пользователя по токену');
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      rejectWithValue(message as string);
+    }
+  }
+);
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
   vkUser: null,
@@ -184,7 +181,28 @@ const systemSlice = createSlice({
         isPending: false,
         isNew: false,
       }))
-      .addCase(adminLoginThunk.pending, (state, _) => ({
+      .addCase(checkTokenThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(checkTokenThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
+      }))
+      .addCase(adminLoginThunk.pending, (state) => ({
         ...state,
         error: null,
         isPending: true,
