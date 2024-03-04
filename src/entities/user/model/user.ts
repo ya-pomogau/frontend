@@ -223,7 +223,6 @@ export const userModel = createSlice({
         ...state,
         isLoading: false,
       })),
-      
 });
 
 export const {

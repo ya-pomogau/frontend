@@ -7,6 +7,7 @@ import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
 import { UserRole, ModalContentType } from 'shared/types/common.types';
 import { useRejectTaskMutation } from 'services/user-task-api';
+import { ButtonWithModal } from 'widgets/button-with-modal';
 
 interface ModalContentProps {
   type: ModalContentType;

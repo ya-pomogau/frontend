@@ -64,7 +64,7 @@ class Auth {
       Auth._checkResponse
     ) as Promise<TNewUserResponseDto>;
   }
-  
+
   public checkToken(token: string) {
     const fetchOptions = {
       method: 'GET',

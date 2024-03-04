@@ -223,7 +223,6 @@ const systemSlice = createSlice({
         ...state,
         isPending: false,
       })),
-      
 });
 
 export const { resetUser } = systemSlice.actions;
