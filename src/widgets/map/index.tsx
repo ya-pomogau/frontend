@@ -9,6 +9,7 @@ import {
   unauthorizedVolunteerPopupMessage,
   thankForAssignTaskMessage,
   cantAssignTaskMessage,
+  unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
 import { ConflictIcon } from 'shared/ui/icons/conflict-icon';
 import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-icon';
@@ -41,7 +42,7 @@ interface YandexMapProps {
 export const YandexMap = ({
   width = 500,
   height = 500,
-  mapSettings = { latitude: 55.890017, longitude: 37.621157, zoom: 15 },
+  mapSettings = { latitude: 53.207529, longitude: 50.245496, zoom: 15 },
   radius,
   onClick,
   tasks,
@@ -141,7 +142,9 @@ export const YandexMap = ({
           onClickExit={onClickExit}
           hasCloseButton={true}
         >
-          {unauthorizedVolunteerPopupMessage}
+          {isAuthorised
+            ? unauthorizedVolunteerPopupMessage
+            : unauthorizedUserPopupMessage}
         </LightPopup>
       )}
       {isGranted && (
