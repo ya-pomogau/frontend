@@ -3,6 +3,7 @@ import { authApi } from './auth';
 import {
   ErrorDto,
   TAdminLoginDto,
+  TMockVkLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
   TVKUserResponseObj,
@@ -69,6 +70,26 @@ export const adminLoginThunk = createAsyncThunk(
   async (adminLoginDto: TAdminLoginDto, { rejectWithValue }) => {
     try {
       const { token, user } = await authApi.adminLogin(adminLoginDto);
+      if (!token || !user) {
+        throw new Error('Ошибка регистрации администратора');
+      }
+      if (token && !!user) {
+        localStorage.setItem('token', token);
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      console.log(`Error message: ${message}`);
+      rejectWithValue(message as string);
+    }
+  }
+);
+
+export const mockVkLoginThunk = createAsyncThunk(
+  'mockVk/login',
+  async (mockVkLoginDto: TMockVkLoginDto, { rejectWithValue }) => {
+    try {
+      const { token, user } = await authApi.mockVkLogin(mockVkLoginDto);
       if (!token || !user) {
         throw new Error('Ошибка регистрации администратора');
       }
@@ -220,6 +241,27 @@ const systemSlice = createSlice({
         };
       })
       .addCase(adminLoginThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
+      }))
+      .addCase(mockVkLoginThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(mockVkLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(mockVkLoginThunk.rejected, (state) => ({
         ...state,
         isPending: false,
       })),

@@ -5,6 +5,7 @@ import {
   newUserThunk,
   userLoginThunk,
   adminLoginThunk,
+  mockVkLoginThunk,
 } from '../../../services/system-slice';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { User } from '../types';
@@ -222,6 +223,65 @@ export const userModel = createSlice({
       .addCase(adminLoginThunk.rejected, (state) => ({
         ...state,
         isLoading: false,
+      }))
+      .addCase(mockVkLoginThunk.pending, (state) => ({
+        ...state,
+        isLoading: true,
+        isFailed: false,
+        error: null,
+      }))
+      .addCase(mockVkLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          role,
+          vkId,
+          password,
+          login,
+          permissions,
+          isRoot,
+          isActive,
+          status,
+        } = user;
+        const data: User = {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          role,
+          vkId,
+          password,
+          login,
+          permissions,
+          isRoot,
+          isActive,
+          status,
+        };
+        return {
+          ...state,
+          isLoading: false,
+          isFailed: false,
+          error: null,
+          role,
+          data,
+          _id,
+        };
+      })
+      .addCase(mockVkLoginThunk.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        error: action.payload as string,
       })),
 });
 

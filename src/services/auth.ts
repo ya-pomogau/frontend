@@ -4,6 +4,7 @@ import {
   TAuthRoutes,
   TCreateUserDto,
   TAdminLoginDto,
+  TMockVkLoginDto,
   TNewUserResponseDto,
   TVKLoginRequestDto,
   TVKLoginResponseDto,
@@ -63,6 +64,18 @@ class Auth {
     return fetch(`${this.baseUrl}${this.routes.adminLogin}`, fetchOptions).then(
       Auth._checkResponse
     ) as Promise<TNewUserResponseDto>;
+  }
+
+  public mockVkLogin(dto: TMockVkLoginDto) {
+    const fetchOptions = {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify(dto),
+    };
+    return fetch(
+      `${this.baseUrl}${this.routes.mockVkLogin}`,
+      fetchOptions
+    ).then(Auth._checkResponse) as Promise<TNewUserResponseDto>;
   }
 
   public checkToken(token: string) {

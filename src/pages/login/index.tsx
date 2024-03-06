@@ -8,7 +8,8 @@ import { PasswordInput } from 'shared/ui/password-input';
 import { useAppDispatch } from 'app/hooks';
 
 import styles from './styles.module.css';
-import { adminLoginThunk } from 'services/system-slice';
+// import { adminLoginThunk } from 'services/system-slice';
+import { mockVkLoginThunk } from 'services/system-slice';
 
 interface ILoginForm {
   login: string;
@@ -28,7 +29,14 @@ export function LoginPage() {
 
   const handleAdminLogin = async () => {
     try {
-      dispatch(adminLoginThunk(inputFields));
+      // dispatch(adminLoginThunk(inputFields));
+
+      // TODO Для логина по моковому vkId (как реципиет или волонтёр) использовать mockVkLoginThunk (vkId подставить из базы монго)  /// vkId может быть любой строкой  /// логин срабатывает при нажатии на кнопку Войти (данные в поля можно ввести любые)
+      dispatch(
+        mockVkLoginThunk({
+          vkId: '123qwerty',
+        })
+      );
     } catch (err) {
       console.log({
         status: err,
@@ -44,9 +52,9 @@ export function LoginPage() {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (checkAdminState) {
-      handleAdminLogin();
-    }
+    handleAdminLogin();
+    // if (checkAdminState) {
+    // }
     console.log('отправка');
   };
   return (
