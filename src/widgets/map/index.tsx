@@ -42,7 +42,7 @@ interface YandexMapProps {
 export const YandexMap = ({
   width = 500,
   height = 500,
-  mapSettings = { latitude: 53.207529, longitude: 50.245496, zoom: 15 },
+  mapSettings = { latitude: 55.890017, longitude: 37.621157, zoom: 15 },
   radius,
   onClick,
   tasks,
