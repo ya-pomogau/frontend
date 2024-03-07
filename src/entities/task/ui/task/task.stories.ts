@@ -18,7 +18,10 @@ export const Desktop: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -61,7 +64,10 @@ export const Mobile: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -104,7 +110,10 @@ export const ExampleWithNoRecipient: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -147,7 +156,10 @@ export const ExampleConfirmed: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -190,7 +202,10 @@ export const ExampleConflict: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -233,7 +248,10 @@ export const ExampleWithIndefiniteDate: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
