@@ -10,7 +10,6 @@ interface CreateTaskDto {
   address: string;
   description: string;
 }
-const token = localStorage.getItem('token');
 
 export const userTasksApi = createApi({
   reducerPath: 'userTask',
@@ -19,6 +18,7 @@ export const userTasksApi = createApi({
   endpoints: (build) => ({
     getTaskActive: build.query<Array<Task>, string>({
       query: (role) => {
+        const token = localStorage.getItem('token');
         const headers = {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
@@ -39,6 +39,7 @@ export const userTasksApi = createApi({
     }),
     getTaskCompleted: build.query<Array<Task>, string>({
       query: (role) => {
+        const token = localStorage.getItem('token');
         const headers = {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
@@ -60,6 +61,7 @@ export const userTasksApi = createApi({
     getTaskVirgin: build.query<Array<Task>, [string, number, number]>({
       query: (args) => {
         const [role, latitude, longitude] = args;
+        const token = localStorage.getItem('token');
         const headers = {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
@@ -84,6 +86,7 @@ export const userTasksApi = createApi({
     getTask: build.query<Array<Task>, { latitude: number; longitude: number }>({
       query: (args) => {
         const { latitude, longitude } = args;
+        const token = localStorage.getItem('token');
         const headers = {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
@@ -103,35 +106,42 @@ export const userTasksApi = createApi({
       },
     }),
     createTask: build.mutation<Task, CreateTaskDto>({
-      query: (dto) => ({
-        url: '/recipient/tasks',
-        method: 'POST',
-        headers: {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        },
-        body: dto,
-      }),
+      query: (dto) => {
+        const token = localStorage.getItem('token');
+        return {
+          url: '/recipient/tasks',
+          method: 'POST',
+          headers: {
+            //eslint-disable-next-line @typescript-eslint/naming-convention
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+          body: dto,
+        };
+      },
       // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive', id: 'recipient' }],
     }),
     responseTask: build.mutation<Task, string>({
-      query: (id) => ({
-        url: `/volunteer/tasks/${id}/accept`,
-        method: 'PUT',
-        headers: {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        },
-      }),
+      query: (id) => {
+        const token = localStorage.getItem('token');
+        return {
+          url: `/volunteer/tasks/${id}/accept`,
+          method: 'PUT',
+          headers: {
+            //eslint-disable-next-line @typescript-eslint/naming-convention
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+        };
+      },
       // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskVirgin' }],
     }),
     fulfillTask: build.mutation<Task, { role: string; id: string }>({
       query: (args) => {
         const { role, id } = args;
+        const token = localStorage.getItem('token');
         const headers = {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
@@ -149,6 +159,7 @@ export const userTasksApi = createApi({
     rejectTask: build.mutation<Task, { role: string; id: string }>({
       query: (args) => {
         const { role, id } = args;
+        const token = localStorage.getItem('token');
         const headers = {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
