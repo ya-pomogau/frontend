@@ -51,7 +51,7 @@ export const Tooltip = ({
       const target = e.target as HTMLElement;
       if (
         changeVisible &&
-        (!target.closest('.tooltip') || target.closest('.close')) &&
+        (!target.closest('#tooltip-component') || target.closest('.close')) &&
         !target.closest('#clock-element') &&
         target.getRootNode() === document
       ) {
@@ -75,6 +75,7 @@ export const Tooltip = ({
 
   const tooltip = (
     <div
+      id="tooltip-component"
       className={classnames(styles.tooltip, extClassName, {
         [styles['tooltip--visible']]: visible,
       })}
