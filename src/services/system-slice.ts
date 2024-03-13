@@ -14,6 +14,7 @@ import {
 import { RootState } from '../app/store';
 import { TUser, TVKUser } from '../entities/user/types';
 import { AdminPermission } from '../shared/types/common.types';
+import { setTokenAccess } from 'shared/libs/utils';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
   state.system.isPending;
@@ -54,7 +55,7 @@ export const userLoginThunk = createAsyncThunk(
       const vkUser = vkUserResponse ? vkUserResponse : null;
 
       if (token && !!user) {
-        localStorage.setItem('token', token);
+        setTokenAccess(token);
       }
       return { user, vkUser };
     } catch (error) {
@@ -73,7 +74,7 @@ export const adminLoginThunk = createAsyncThunk(
         throw new Error('Ошибка регистрации администратора');
       }
       if (token && !!user) {
-        localStorage.setItem('token', token);
+        setTokenAccess(token);
       }
       return { user };
     } catch (error) {
@@ -93,7 +94,7 @@ export const newUserThunk = createAsyncThunk(
         throw new Error('Ошибка регистрации пользователя');
       }
       if (token && !!user) {
-        localStorage.setItem('token', token);
+        setTokenAccess(token);
       }
       return { user };
     } catch (error) {

@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { getTokenAccess } from 'shared/libs/utils';
 
 interface CreateTaskDto {
   categoryId: string;
@@ -14,20 +15,22 @@ interface CreateTaskDto {
 export const userTasksApi = createApi({
   reducerPath: 'userTask',
   tagTypes: ['Task', 'TaskActive', 'TaskCompleted', 'TaskVirgin'],
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_URL,
+    prepareHeaders: (headers) => {
+      const token = getTokenAccess();
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (build) => ({
     getTaskActive: build.query<Array<Task>, string>({
       query: (role) => {
-        const token = localStorage.getItem('token');
-        const headers = {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        };
         return {
           url: `${role}/tasks/${role === 'recipient' ? 'active' : 'accepted'}`,
           method: 'GET',
-          headers,
         };
       },
       providesTags: (result, error, id) => {
@@ -39,16 +42,9 @@ export const userTasksApi = createApi({
     }),
     getTaskCompleted: build.query<Array<Task>, string>({
       query: (role) => {
-        const token = localStorage.getItem('token');
-        const headers = {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        };
         return {
           url: `${role}/tasks/completed`,
           method: 'GET',
-          headers,
         };
       },
       providesTags: (result, error, id) => {
@@ -61,16 +57,10 @@ export const userTasksApi = createApi({
     getTaskVirgin: build.query<Array<Task>, [string, number, number]>({
       query: (args) => {
         const [role, latitude, longitude] = args;
-        const token = localStorage.getItem('token');
-        const headers = {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        };
         return {
           url: `${role}/tasks/virgin?distance=100000&latitude=${latitude}&longitude=${longitude}`,
           method: 'GET',
-          headers,
+          // headers,
         };
       },
       providesTags: (result, error, [role, latitude, longitude]) => {
@@ -86,16 +76,9 @@ export const userTasksApi = createApi({
     getTask: build.query<Array<Task>, { latitude: number; longitude: number }>({
       query: (args) => {
         const { latitude, longitude } = args;
-        const token = localStorage.getItem('token');
-        const headers = {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        };
         return {
           url: `system/tasks/virgin?distance=100000&latitude=${latitude}&longitude=${longitude}`,
           method: 'GET',
-          headers,
         };
       },
       providesTags: (result, error) => {
@@ -107,15 +90,9 @@ export const userTasksApi = createApi({
     }),
     createTask: build.mutation<Task, CreateTaskDto>({
       query: (dto) => {
-        const token = localStorage.getItem('token');
         return {
           url: '/recipient/tasks',
           method: 'POST',
-          headers: {
-            //eslint-disable-next-line @typescript-eslint/naming-convention
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
-          },
           body: dto,
         };
       },
@@ -124,15 +101,9 @@ export const userTasksApi = createApi({
     }),
     responseTask: build.mutation<Task, string>({
       query: (id) => {
-        const token = localStorage.getItem('token');
         return {
           url: `/volunteer/tasks/${id}/accept`,
           method: 'PUT',
-          headers: {
-            //eslint-disable-next-line @typescript-eslint/naming-convention
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token,
-          },
         };
       },
       // указываем какие данные надо перезапросить при выполнении запроса
@@ -141,16 +112,9 @@ export const userTasksApi = createApi({
     fulfillTask: build.mutation<Task, { role: string; id: string }>({
       query: (args) => {
         const { role, id } = args;
-        const token = localStorage.getItem('token');
-        const headers = {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        };
         return {
           url: `${role}/tasks/${id}/fulfill`,
           method: 'PUT',
-          headers,
         };
       },
       // указываем какие данные надо перезапросить при выполнении запроса
@@ -159,16 +123,9 @@ export const userTasksApi = createApi({
     rejectTask: build.mutation<Task, { role: string; id: string }>({
       query: (args) => {
         const { role, id } = args;
-        const token = localStorage.getItem('token');
-        const headers = {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token,
-        };
         return {
           url: `${role}/tasks/${id}/reject`,
           method: 'PUT',
-          headers,
         };
       },
       // указываем какие данные надо перезапросить при выполнении запроса
