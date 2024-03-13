@@ -6,6 +6,7 @@ export const SET_KEYS = 'set keys';
 export const RESOLVE_CONFLICTS = 'resolve conflicts';
 export const BLOG = 'blog';
 export const INCREASE_SCORE = 'increase score';
+export const LOCAL_STORAGE_TOKEN_ACCESS = 'token_access';
 
 export const CAN_READ = { id: 0, name: READ };
 export const CAN_APPROVE = { id: 1, name: PROFILES_APPROVAL };
