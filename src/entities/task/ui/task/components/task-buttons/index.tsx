@@ -116,6 +116,7 @@ export const TaskButtons = ({
             <ModalContent
               type={clicked ? ModalContentType.admin : ModalContentType.confirm}
               userRole={userRole}
+              taskId={taskId}
             />
           }
           extClassName={styles.confirm}
@@ -160,6 +161,8 @@ export const TaskButtons = ({
           extClassName={styles.close}
           modalContent={
             <ModalContent
+              userRole={userRole}
+              taskId={taskId}
               type={
                 isTaskExpired || volunteer
                   ? ModalContentType.responded
