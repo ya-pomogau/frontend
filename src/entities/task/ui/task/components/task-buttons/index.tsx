@@ -86,7 +86,11 @@ export const TaskButtons = ({
   const [fulfillTask] = useFulfillTaskMutation();
 
   const handleFulfillClick = () => {
-    if (userRole) {
+    const shouldFulfillTask =
+      (userRole === UserRole.VOLUNTEER && !volunteerReport) ||
+      (userRole === UserRole.RECIPIENT && !recipientReport && volunteer);
+
+    if (shouldFulfillTask) {
       fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
   };

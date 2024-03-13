@@ -17,3 +17,6 @@ export const unauthorizedRecipientMessage =
 
 export const unauthorizedRecipientPopupMessage =
   'Вы пока не можете создавать заявку. Дождитесь подтверждения администратора';
+
+export const unauthorizedUserPopupMessage =
+  'Вы не можете откликнуться на заявку. Вам необходимо пройти авторизацию';

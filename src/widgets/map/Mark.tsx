@@ -237,11 +237,13 @@ const Mark: FC<MarkProps> = ({
     {
       isAuthorised: isAuthorised,
       isUrgentTask: isTaskUrgent(date!),
-      date: new Date(date!).toLocaleDateString(),
-      time: new Date(date!).toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-      }),
+      date: date ? new Date(date!).toLocaleDateString() : 'Бессрочно',
+      time: date
+        ? new Date(date!).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+        : '00:00',
       isDisabled: !isGranted,
     }
   );

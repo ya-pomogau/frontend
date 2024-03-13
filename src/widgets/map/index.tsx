@@ -9,6 +9,7 @@ import {
   unauthorizedVolunteerPopupMessage,
   thankForAssignTaskMessage,
   cantAssignTaskMessage,
+  unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
 import { ConflictIcon } from 'shared/ui/icons/conflict-icon';
 import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-icon';
@@ -141,7 +142,9 @@ export const YandexMap = ({
           onClickExit={onClickExit}
           hasCloseButton={true}
         >
-          {unauthorizedVolunteerPopupMessage}
+          {isAuthorised
+            ? unauthorizedVolunteerPopupMessage
+            : unauthorizedUserPopupMessage}
         </LightPopup>
       )}
       {isGranted && (
