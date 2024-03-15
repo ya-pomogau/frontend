@@ -163,6 +163,23 @@ export const userTasksApi = createApi({
       // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive' }],
     }),
+    deleteTask: build.mutation<Task, { role: string; id: string }>({
+      query: (args) => {
+        const { role, id } = args;
+        const headers = {
+          //eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        };
+        return {
+          url: `${role}/tasks/${id}/`,
+          method: 'DELETE',
+          headers,
+        };
+      },
+      // указываем какие данные надо перезапросить при выполнении запроса
+      invalidatesTags: [{ type: 'TaskActive' }],
+    }),
   }),
 });
 export const {
@@ -174,4 +191,5 @@ export const {
   useFulfillTaskMutation,
   useRejectTaskMutation,
   useGetTaskQuery,
+  useDeleteTaskMutation,
 } = userTasksApi;
