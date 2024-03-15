@@ -12,7 +12,6 @@ export type TAuthRoutes = {
   userRegister: string;
   adminLogin: string;
   checkToken: string;
-  mockVkLogin: string;
 };
 
 export interface TypedResponse<T = Record<string, unknown>> extends Response {
@@ -47,10 +46,6 @@ export type TCreateUserDto = {
 export type TAdminLoginDto = {
   login: string;
   password: string;
-};
-
-export type TMockVkLoginDto = {
-  vkId: string;
 };
 
 export type TVKUserResponseObj = {
