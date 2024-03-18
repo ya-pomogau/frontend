@@ -1,4 +1,5 @@
 .content {
+  width: 276px;
   box-sizing: border-box;
   position: relative;
   margin-top: 31px;
@@ -61,7 +62,6 @@
 }
 
 .exclamation_point_div {
-  margin-top: 10px;
   display: flex;
   align-items: start;
   gap: 5px;
@@ -194,6 +194,14 @@
   height: 100%;
 }
 
+.id {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
 @media all and (max-width: 1025px) {
   .content {
     width: 175px;
@@ -241,5 +249,13 @@
   .recipient_input::placeholder {
     font-size: 8px;
     padding: 10px;
+  }
+
+  .id {
+    font-size: 10px;
+  }
+
+  .tel {
+    font-size: 10px;
   }
 }

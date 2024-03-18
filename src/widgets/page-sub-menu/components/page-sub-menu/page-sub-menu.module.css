@@ -8,8 +8,9 @@
 
 @media screen and (max-width: 600px) {
   .tabContainer {
+    flex-wrap: wrap;
     padding: 16px 0 13px 14px;
     margin-left: 10px;
-    gap: 30px;
+    gap: 10px;
   }
 }
