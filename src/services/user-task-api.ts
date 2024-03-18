@@ -60,7 +60,6 @@ export const userTasksApi = createApi({
         return {
           url: `${role}/tasks/virgin?distance=100000&latitude=${latitude}&longitude=${longitude}`,
           method: 'GET',
-          // headers,
         };
       },
       providesTags: (result, error, [role, latitude, longitude]) => {

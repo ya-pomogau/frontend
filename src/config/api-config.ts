@@ -31,3 +31,5 @@ export const DEFAULT_HEADERS = {
   //eslint-disable-next-line @typescript-eslint/naming-convention
   'Content-Type': 'application/json',
 };
+
+export const LOCAL_STORAGE_TOKEN_ACCESS = 'token_access';
