@@ -2,6 +2,7 @@ import { FRONT_URL } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import { Task } from 'entities/task/types';
 import { IFilterValues } from 'features/filter/types';
+import { LOCAL_STORAGE_TOKEN_ACCESS } from 'config/api-config';
 // eslint-disable-next-line import/no-duplicates
 
 import {
@@ -260,4 +261,12 @@ export const filterUsersNamePageAdmin = (
       user.userName.toLowerCase().includes(searchName.toLowerCase()) &&
       user.role !== UserRole.ADMIN
   );
+};
+
+export const setTokenAccess = (token: string) => {
+  return localStorage.setItem(LOCAL_STORAGE_TOKEN_ACCESS, token);
+};
+
+export const getTokenAccess = () => {
+  return localStorage.getItem(LOCAL_STORAGE_TOKEN_ACCESS);
 };

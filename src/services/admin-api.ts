@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { User } from 'entities/user/types';
+import { getTokenAccess } from 'shared/libs/utils';
 
 export const adminsApi = createApi({
   reducerPath: 'adminsApi',
@@ -8,7 +9,7 @@ export const adminsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
+      const token = getTokenAccess();
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
         headers.set('Content-Type', 'application/json');
