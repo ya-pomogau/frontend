@@ -84,16 +84,15 @@ export const ModalContent = ({
         </div>
       );
     case ModalContentType.conflict:
-      // return userRole === UserRole.RECIPIENT && volunteer === false ? (
-      //   <div className={styles.modalTooltip}>
-      //     <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
-      //     <p className={textStyle}>
-      //       Вы не можете подтвердить не выполнение заявки, пока у заявки нет
-      //       волонтера.
-      //     </p>
-      //   </div>
-      // ) : (
-      return (
+      return userRole === UserRole.RECIPIENT && volunteer === false ? (
+        <div className={styles.modalTooltip}>
+          <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
+          <p className={textStyle}>
+            Вы не можете подтвердить не выполнение заявки, пока у заявки нет
+            волонтера.
+          </p>
+        </div>
+      ) : (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>
             {active
