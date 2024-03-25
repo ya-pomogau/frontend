@@ -30,8 +30,6 @@ export const ModalContent = ({
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
-  console.log(volunteer);
-  console.log(userRole === UserRole.RECIPIENT && volunteer);
   const handleRejectClick = () => {
     if (userRole && taskId) {
       rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
