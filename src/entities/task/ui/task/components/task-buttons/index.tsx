@@ -116,7 +116,14 @@ export const TaskButtons = ({
           closeButton
           modalContent={
             <ModalContent
-              type={clicked ? ModalContentType.admin : ModalContentType.confirm}
+              volunteer={!!volunteer}
+              type={
+                !volunteer && userRole === UserRole.RECIPIENT
+                  ? ModalContentType.confirm
+                  : clicked
+                  ? ModalContentType.admin
+                  : ModalContentType.confirm
+              }
               userRole={userRole}
             />
           }
@@ -126,9 +133,11 @@ export const TaskButtons = ({
             onClick={handleFulfillClick}
             buttonType={TaskButtonType.confirm}
             disabledColor={
-              (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
-              (userRole === UserRole.RECIPIENT && !!recipientReport) ||
-              clicked
+              !volunteer && userRole === UserRole.RECIPIENT
+                ? true
+                : (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
+                  (userRole === UserRole.RECIPIENT && !!recipientReport) ||
+                  clicked
             }
           />
         </ButtonWithModal>
@@ -185,6 +194,16 @@ export const TaskButtons = ({
           modalContent={
             <ModalContent
               type={
+                // isPageActive && !volunteer && userRole === UserRole.RECIPIENT
+                //   ? ModalContentType.conflict
+                //   : isPageActive
+                //   ? clicked
+                //     ? ModalContentType.admin
+                //     : ModalContentType.conflict
+                //   : unfulfilledTask
+                //   ? ModalContentType.unfulfilled
+                //   : ModalContentType.conflict
+
                 isPageActive
                   ? clicked
                     ? ModalContentType.admin
@@ -198,20 +217,30 @@ export const TaskButtons = ({
               date={date}
               taskId={taskId}
               userRole={userRole}
+              volunteer={!!volunteer}
             />
           }
         >
           <SquareButton
             buttonType={TaskButtonType.conflict}
             disabledColor={
-              (userRole === UserRole.VOLUNTEER &&
-                !!volunteerReport &&
-                isPageActive) ||
-              (userRole === UserRole.RECIPIENT &&
-                !!recipientReport &&
-                isPageActive) ||
-              conflict ||
-              (clicked && isPageActive)
+              // (userRole === UserRole.VOLUNTEER &&
+              //   !!volunteerReport &&
+              //   isPageActive) ||
+              // (userRole === UserRole.RECIPIENT &&
+              //   !!recipientReport &&
+              //   isPageActive) ||
+              // conflict ||
+              // (clicked && isPageActive)
+              !volunteer && userRole === UserRole.RECIPIENT
+                ? true
+                : (userRole === UserRole.VOLUNTEER &&
+                    !!volunteerReport &&
+                    isPageActive) ||
+                  (userRole === UserRole.RECIPIENT &&
+                    !!recipientReport &&
+                    isPageActive) ||
+                  (clicked && isPageActive)
             }
           />
         </ButtonWithModal>
