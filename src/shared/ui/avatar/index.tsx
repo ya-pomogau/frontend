@@ -11,12 +11,12 @@ interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 export const Avatar = ({
   extClassName,
-  avatarLink = 'https://i.pravatar.cc/300',
+  avatarLink,
   avatarName,
   ...props
 }: AvatarProps) => (
   <img
-    src={avatarLink}
+    src={avatarLink || 'https://i.pravatar.cc/100'}
     alt={avatarName}
     className={classnames(styles.avatar, extClassName)}
     {...props}

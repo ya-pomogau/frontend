@@ -34,7 +34,10 @@ export const Default: Story = {
         _id: '24',
         description: 'Помочь перенести мебель, таска взята волонтером',
         address: 'Улица Мебельная, 77',
-        location: [60.699788, 40.557059],
+        location: {
+          type: 'Point',
+          coordinates: [60.699788, 40.557059],
+        },
         status: TaskStatus.CREATED,
         category: {
           _id: '5',
@@ -63,7 +66,10 @@ export const Default: Story = {
         _id: '28',
         description: 'Помочь перенести мебель, таска взята волонтером',
         address: 'Улица Мебельная, 77',
-        location: [60.699788, 40.557059],
+        location: {
+          type: 'Point',
+          coordinates: [60.699788, 40.557059],
+        },
         status: TaskStatus.CREATED,
         category: {
           _id: '5',

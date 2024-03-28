@@ -92,7 +92,10 @@ export const ExampleActive: Story = {
           _id: '2',
         },
         address: 'переулок Каховского, 3',
-        location: [59.95252, 30.243239],
+        location: {
+          type: 'Point',
+          coordinates: [59.95252, 30.243239],
+        },
         status: TaskStatus.ACCEPTED,
         recipientReport: null,
         volunteerReport: null,
@@ -131,7 +134,10 @@ export const ExampleActive: Story = {
           _id: '1',
         },
         address: 'переулок Каховского, 3',
-        location: [59.95252, 30.243239],
+        location: {
+          type: 'Point',
+          coordinates: [59.95252, 30.243239],
+        },
         status: TaskStatus.ACCEPTED,
         recipientReport: null,
         volunteerReport: null,
@@ -179,7 +185,10 @@ export const ExampleNotActive: Story = {
           _id: '4',
         },
         address: 'переулок Каховского, 3',
-        location: [59.95252, 30.243239],
+        location: {
+          type: 'Point',
+          coordinates: [59.95252, 30.243239],
+        },
         status: TaskStatus.ACCEPTED,
         recipientReport: null,
         volunteerReport: null,
@@ -197,7 +206,10 @@ export const ExampleNotActive: Story = {
         },
         date: '2023-07-01T08:00Z',
         address: 'переулок Каховского, 3',
-        location: [59.95252, 30.243239],
+        location: {
+          type: 'Point',
+          coordinates: [59.95252, 30.243239],
+        },
         status: TaskStatus.ACCEPTED,
         description:
           'Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.',
