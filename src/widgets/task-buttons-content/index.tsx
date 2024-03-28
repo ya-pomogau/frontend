@@ -16,6 +16,7 @@ interface ModalContentProps {
   date?: string | null;
   userRole?: UserRole | null;
   taskId?: string;
+  volunteer?: boolean;
 }
 
 export const ModalContent = ({
@@ -25,6 +26,7 @@ export const ModalContent = ({
   date,
   userRole,
   taskId,
+  volunteer,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
@@ -80,7 +82,15 @@ export const ModalContent = ({
         </div>
       );
     case ModalContentType.conflict:
-      return (
+      return userRole === UserRole.RECIPIENT && volunteer === false ? (
+        <div className={styles.modalTooltip}>
+          <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
+          <p className={textStyle}>
+            Вы не можете подтвердить не выполнение заявки, пока у заявки нет
+            волонтера.
+          </p>
+        </div>
+      ) : (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>
             {active
@@ -121,7 +131,15 @@ export const ModalContent = ({
         </div>
       );
     case ModalContentType.confirm:
-      return (
+      return userRole === UserRole.RECIPIENT && volunteer === false ? (
+        <div className={styles.modalTooltip}>
+          <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
+          <p className={textStyle}>
+            Вы не можете подтвердить выполнение заявки, пока у заявки нет
+            волонтера.
+          </p>
+        </div>
+      ) : (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Благодарим за отзывчивость</h3>
           <p className={textStyle}>
