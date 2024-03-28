@@ -1,0 +1,50 @@
+.arrow-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 34px;
+  background: transparent;
+  cursor: pointer;
+  color: var(--colors-interface-white);
+  border: none;
+  box-sizing: border-box;
+  position: relative;
+  padding: 12px 0 8px 9px;
+  width: 170px;
+}
+
+.arrow-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0% 0%, 100% 30%, 93% 100%, 0% 100%);
+  background-color: var(--colors-interface-primary);
+  transition: var(--transition-hover);
+}
+
+.arrow-button:hover.arrow-button::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.arrow-button:active.arrow-button::before {
+  background-color: var(--colors-interface-blue-strong);
+}
+
+.arrow-button:disabled {
+  cursor: default;
+}
+
+.arrow-button:disabled.arrow-button::before {
+  background-color: var(--colors-interface-additional);
+}
+
+.arrow-buttonContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}

@@ -1,0 +1,50 @@
+.datePicker {
+  width: auto;
+}
+
+.dataPicker__calendar {
+  box-sizing: border-box;
+  width: 308px;
+  padding: 10px;
+  border-radius: 0;
+  font-family: 'Golos', sans-serif;
+  line-height: 14px;
+  background-color: white;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+}
+
+.dataPicker__calendar_mobile {
+  composes: dataPicker__calendar;
+  width: 260px;
+}
+
+.datePicker__calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.datePicker__headerMonth {
+  margin-right: 4px;
+  font-family: 'Golos', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--colors-interface-primary);
+}
+
+.dataPicker__calendarWeekDay {
+  font-weight: 400;
+  font-size: 12px;
+  border-radius: 2px;
+}
+
+.customInput {
+  display: block;
+  width: 260px;
+  text-align: left;
+  border: 1px solid var(--colors-interface-ford-white);
+  padding: 0 0 0 10px;
+  background-color: inherit;
+  color: var(--colors-interface-additional);
+  height: 34px;
+}

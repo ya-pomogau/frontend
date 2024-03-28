@@ -1,0 +1,104 @@
+.container {
+  margin: 50px 0 0 76px;
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  min-height: 221px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 54px;
+}
+
+.prevButton {
+  margin-right: 20px;
+}
+
+.time {
+  margin: 0;
+  margin-left: 20px;
+}
+
+.addressWrapper {
+  display: flex;
+  margin-top: 20px;
+}
+
+.typeOfTask {
+  margin: 0;
+  margin-top: 15px;
+}
+
+.descriptionForTask {
+  margin: 0;
+  margin-top: 5px;
+  height: 64px;
+  overflow-y: auto;
+}
+
+.dateWrapper {
+  display: flex;
+}
+
+.categories {
+  margin-top: 20px;
+}
+
+@media (max-width: 735px) {
+  .container {
+    align-items: flex-start;
+    margin: 0;
+    width: 260px;
+  }
+  .mainWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .buttonsWrapper {
+    margin-top: 50px;
+    justify-content: center;
+    width: 260px;
+  }
+  .task {
+    font-size: 24px;
+    line-height: 29px;
+    align-self: center;
+  }
+  .headerWrapper {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      #2e3192 49.28%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    width: 240px;
+    height: 1px;
+    margin-top: 4px;
+    align-self: center;
+  }
+  .dateWrapper {
+    margin: 0;
+    margin-top: 30px;
+  }
+  .typeOfTask {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .descriptionForTask {
+    margin-top: 10px;
+    height: 200px;
+    overflow-y: auto;
+  }
+  .categories {
+    width: 169px;
+  }
+}
+.edit_button {
+  padding-left: 10px;
+  padding-bottom: 0;
+  display: flex;
+  align-items: flex-end;
+}

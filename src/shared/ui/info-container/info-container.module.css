@@ -1,0 +1,39 @@
+.info-container-frame {
+  max-width: 295px;
+  min-height: 362px;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-container-border {
+  display: block;
+  position: absolute;
+  top: 88px;
+  z-index: -1;
+}
+
+.info-container-avatarWrapper {
+  width: 175px;
+  height: 175px;
+  margin: 0 auto;
+  border-radius: 512px;
+  background-color: var(--colors-interface-primary-additional);
+}
+
+.info-container-avatar {
+  min-width: 175px;
+  min-height: 175px;
+}
+
+.info-container-settings-button {
+  position: absolute;
+  bottom: -8px;
+  left: -7px;
+  z-index: 10;
+}
+
+.info-container-personal-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

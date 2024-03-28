@@ -1,0 +1,118 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background-origin: border-box;
+}
+
+.balances_box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 50px 30px 0 30px;
+  max-width: 826px;
+  gap: 5px;
+  text-align: left;
+}
+
+.balance_box {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  align-items: center;
+  width: 324px;
+  padding-right: 170px;
+}
+
+.balance_box > :nth-child(odd) {
+  padding-right: 0;
+}
+
+.balance_text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.balance_input::-webkit-inner-spin-button,
+.balance_input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.balance_input {
+  outline: none;
+  border: none;
+  width: 41px;
+  height: 34px;
+  border: 0.5px solid #9798c9;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+
+  background: #ffffff;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  color: #2e3192;
+
+  font-family: Golos;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+}
+
+.balance_input::placeholder {
+  color: #9798c9;
+  -webkit-text-stroke: 0.5px #2e3192;
+}
+
+.save_btn {
+  width: 196px;
+  height: 30px;
+  background: #2e3192;
+  color: #ffffff;
+  text-align: center;
+  line-height: 30px;
+  margin-top: 30px;
+  border: none;
+  outline: none;
+  margin-left: -25px;
+  cursor: pointer;
+}
+
+.save_btn span {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+
+@media all and (max-width: 1200px) {
+  body {
+    overflow-x: hidden;
+    background: linear-gradient(0deg, #ffffff, rgba(255, 255, 255, 0));
+    background-size: 100% 100vh;
+    background-attachment: fixed;
+  }
+  .container {
+    width: 414px;
+  }
+
+  .balances_box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 324px;
+  }
+
+  .balance_box {
+    padding-right: 0;
+  }
+
+  .save_btn {
+    margin-left: 0;
+  }
+}

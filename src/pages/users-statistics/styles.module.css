@@ -1,0 +1,45 @@
+.wrapper {
+  margin-left: 31px;
+  margin-top: 20px;
+}
+
+.role {
+  max-width: 476px;
+  box-sizing: border-box;
+  padding: 12px 0 10px 12px;
+  margin-bottom: 9px;
+}
+
+.role__fields {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  width: 100%;
+}
+
+.status {
+  max-width: 476px;
+  box-sizing: border-box;
+  padding: 6px 0 0 12px;
+  margin-bottom: 13px;
+}
+
+.buttons_container {
+  display: flex;
+  gap: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    margin-left: 0px;
+  }
+
+  .status {
+    max-width: 285px;
+  }
+
+  .role {
+    max-width: 285px;
+    margin-bottom: 5px;
+  }
+}

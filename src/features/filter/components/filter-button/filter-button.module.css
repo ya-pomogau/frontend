@@ -1,0 +1,26 @@
+.filterButton {
+  display: flex;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-hover);
+  outline-offset: 5px;
+}
+
+.filterButton:focus {
+  outline: 1px solid var(--colors-interface-primary);
+}
+
+.filterButton:hover {
+  opacity: 0.6;
+}
+
+@media all and (max-width: 1025px) {
+  .filterButton svg {
+    max-width: 30px;
+    max-height: 30px;
+  }
+}

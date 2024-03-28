@@ -1,0 +1,20 @@
+.setting-button {
+  background-image: url(./img/default.svg);
+  width: 41px;
+  height: 43px;
+  transition: var(--transition-hover);
+}
+
+.setting-button:hover {
+  background-image: url(./img/hover.svg);
+  transform: translate(7px, -7px);
+}
+
+.setting-button:disabled {
+  background-image: url(./img/disabled.svg);
+}
+
+.setting-button:disabled:hover {
+  cursor: default;
+  transform: unset;
+}

@@ -1,0 +1,16 @@
+.popupTitle {
+  display: flex;
+  gap: 10px;
+  border-bottom: var(--colors-interface-ford-white) 1px solid;
+  margin: 0;
+}
+
+.popupText {
+  margin: 10px 0 0 0;
+}
+
+.popupIcon {
+  margin: 25px 0;
+  display: flex;
+  justify-content: center;
+}

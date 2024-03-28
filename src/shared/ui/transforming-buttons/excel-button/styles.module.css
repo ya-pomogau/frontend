@@ -1,0 +1,10 @@
+.excel-button {
+  background-image: url(./img/default.svg);
+  width: 32px;
+  height: 32px;
+}
+
+.excel-button:hover {
+  background-image: url(./img/hover.svg);
+  transition: var(--transition-hover);
+}

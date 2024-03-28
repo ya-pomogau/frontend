@@ -1,0 +1,76 @@
+.chatWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 536px;
+}
+
+.avatar {
+  max-width: 52px;
+  max-height: 52px;
+}
+
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.phoneInfo {
+  display: flex;
+  gap: 42px;
+}
+
+@media (max-width: 360px) {
+  .phoneInfo {
+    gap: 10px;
+  }
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.messagesBlock {
+  background-color: var(--colors-interface-white);
+  border: 1px solid var(--colors-interface-ford-white);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.inputWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  width: 100%;
+}
+
+.input > div > input {
+  height: 37px;
+  font-size: 12px;
+  line-height: 14px;
+}
+.input > div > input::placeholder {
+  color: var(--colors-interface-primary);
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.button {
+  width: 37px;
+  height: 37px;
+  padding: 10px;
+}

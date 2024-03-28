@@ -1,0 +1,21 @@
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { enableError } from 'entities/error/model';
+
+type ErrorBoundaryProps = {
+  children: JSX.Element | JSX.Element[];
+};
+
+const ErrorBoundary = ({ children }: ErrorBoundaryProps) => {
+  const errorText = useAppSelector((state) => state.user.error!);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (errorText != null) {
+      dispatch(enableError(errorText));
+    }
+  }, [errorText]);
+
+  return <>{children}</>;
+};
+
+export default ErrorBoundary;

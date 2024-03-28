@@ -1,0 +1,63 @@
+.main {
+  width: 181px;
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  justify-items: center;
+  gap: 5px;
+  grid-template-areas: 'avatar' 'info' 'buttons';
+}
+
+.avatar {
+  grid-area: avatar;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.info {
+  grid-area: info;
+  display: flex;
+  min-height: 44px;
+  flex-direction: column;
+  text-align: center;
+  gap: 3px;
+}
+
+.phone {
+  color: var(--colors-interface-primary);
+}
+
+.buttons {
+  grid-area: buttons;
+  display: flex;
+  gap: 8px;
+}
+
+@media screen and (max-width: 1150px) {
+  .main {
+    grid-template-rows: repeat(2, max-content);
+    justify-self: start;
+    justify-items: start;
+    gap: 5px;
+    grid-template-areas: 'avatar info' 'empty buttons';
+  }
+
+  .avatar {
+    max-width: 60px;
+    max-height: 60px;
+  }
+
+  .info {
+    text-align: start;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+
+  .phone {
+    color: var(--colors-interface-primary);
+  }
+
+  .name {
+    font-size: 20px;
+    text-align: start;
+  }
+}

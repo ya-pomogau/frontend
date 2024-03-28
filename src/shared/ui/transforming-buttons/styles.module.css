@@ -1,0 +1,9 @@
+.styles_button {
+  cursor: pointer;
+  background-position: center;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}

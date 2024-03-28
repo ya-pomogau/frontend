@@ -1,0 +1,41 @@
+.container {
+  background-color: var(--colors-interface-white);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 4px 32px rgba(0, 0, 0, 0.16);
+  padding: 20px 30px 30px 30px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.exitButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.headerWrapper {
+  display: flex;
+}
+
+.avatar {
+  width: 52px;
+  height: 52px;
+}
+
+.profileDesc {
+  margin-left: 20px;
+}
+
+.phoneWrapper {
+  display: flex;
+  margin-top: 5px;
+}
+
+.phoneNumber {
+  margin-left: 42px;
+}
+
+@media (max-width: 735px) {
+  .container {
+    height: 100vh;
+  }
+}
