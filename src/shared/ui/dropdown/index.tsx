@@ -6,10 +6,11 @@ import { ArrowDownIcon } from '../icons/arrow-down-icon';
 
 import styles from './styles.module.css';
 import { useAppSelector } from 'app/hooks';
-import { useGetTasksByStatusQuery } from 'services/tasks-api';
+
 import { CloseCrossIcon } from '../icons/close-cross-icon';
 import { Tooltip } from '../tooltip';
 import { Task } from 'entities/task/types';
+import { useGetTaskActiveQuery } from 'services/user-task-api';
 
 export type Option = { _id: string; title: string };
 
@@ -36,28 +37,15 @@ const Dropdown = ({
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  // const { data: tasks } = useGetTasksByStatusQuery('active');
+  const { data: tasks } = useGetTaskActiveQuery('recipient');
 
-  // const userId = useAppSelector((state) => state.user.data?._id);
   const { categories } = useAppSelector((state) => state.createRequest);
-  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
-  // Фильтруем заявки по id
-  //BUG: эта функция не нужна так как по запросу активных тасок, будут приходить таски текущего пользователя
-  //BUG+ в GenericUserModelInterface (который на фронте записан в тип UserProfile) на бэке нет поля id
-  // const taskId = tasks.filter((item: Task) => {
-  //   if (item.recipient.id === userId) {
-  //     return item;
-  //   }
-  // });
-  // Получаем id категории
-  // const categoryId = tasks.map((item: Task) => item.category._id);
-  //Получем объект уже выбранной категории
-  // const commonIds = categories.filter((obj) => categoryId.includes(obj._id));
 
-  // const commonSelected = commonIds?.map((item) => ({
-  //   value: String(item._id),
-  //   label: item.title,
-  // }));
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+
+  const categoryId = tasks?.map((item: Task) => item.category._id);
+
+  const commonIds = categories?.filter((obj) => categoryId?.includes(obj._id));
 
   const handleOnChange = useCallback(
     (item: Option) => {
@@ -119,20 +107,20 @@ const Dropdown = ({
       {isActive && (
         <ul className={classNames('text', 'text_size_middle', styles.list)}>
           {items?.map((item) => {
-            // const itemSelect = commonSelected?.find((obj) => {
-            //   return obj.value === item._id;
-            // });
-            // const refKey = item._id.toString();
-            // if (!refMap.current[refKey]) {
-            //   refMap.current[refKey] = React.createRef<HTMLLIElement>();
-            // }
+            const itemSelect = commonIds?.find((obj) => {
+              return obj._id === item._id;
+            });
+            const refKey = item._id.toString();
+            if (!refMap.current[refKey]) {
+              refMap.current[refKey] = React.createRef<HTMLLIElement>();
+            }
             return (
               <li
-                // ref={itemSelect && refMap.current[refKey]}
-                className={styles.item}
+                ref={itemSelect && refMap.current[refKey]}
+                className={itemSelect ? styles.itemSelected : styles.item}
                 key={item._id}
                 onClick={() => {
-                  handleOnChange(item);
+                  itemSelect ? openPopup(item) : handleOnChange(item);
                 }}
               >
                 {item?.title}

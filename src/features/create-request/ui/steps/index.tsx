@@ -45,63 +45,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
     temporaryCategory,
   } = useAppSelector((state) => state.createRequest);
   const data = useAppSelector((state) => state.user.data);
-  // const { data: categories } = useGetCategoriesQuery('');
-  const categories = [
-    {
-      _id: '65ce10451f54b2c0027072e7',
-      title: 'Сопровождение',
-      points: 1,
-      accessLevel: 1,
-    },
-    {
-      _id: '65ce10571f54b2c0027072e8',
-      title: 'Покупка вещей',
-      points: 1,
-      accessLevel: 2,
-    },
-    {
-      _id: '65d1dbec3a9fae1fc97c0154',
-      title: 'Покупка вещей/техники',
-      points: 1,
-      accessLevel: 3,
-    },
-    {
-      _id: '65d1dc5b3a9fae1fc97c0155',
-      title: 'Помощь в уборке',
-      points: 1,
-      accessLevel: 1,
-    },
-    {
-      _id: '65d1dc8a3a9fae1fc97c0156',
-      title: 'Ремонт техники/жилья',
-      points: 1,
-      accessLevel: 3,
-    },
-    {
-      _id: '65d1dcad3a9fae1fc97c0157',
-      title: 'Перевозка в личном транспорте',
-      points: 1,
-      accessLevel: 3,
-    },
-    {
-      _id: '65d1dcd73a9fae1fc97c0158',
-      title: 'Помощь в подъёме/спуске',
-      points: 1,
-      accessLevel: 1,
-    },
-    {
-      _id: '65d1dcf93a9fae1fc97c0159',
-      title: 'Помощь в готовке',
-      points: 1,
-      accessLevel: 3,
-    },
-    {
-      _id: '65d1dd1d3a9fae1fc97c015a',
-      title: 'Организация досуга',
-      points: 1,
-      accessLevel: 1,
-    },
-  ];
+  const { data: categories } = useGetCategoriesQuery();
 
   const [isOpen, setIsOpen] = useState(false);
 
