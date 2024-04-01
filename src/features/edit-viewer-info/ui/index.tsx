@@ -83,7 +83,7 @@ export const EditViewerInfo = ({
     // }
     setUserData({ ...userData, [name]: value });
   };
-  
+
   const handlePick = () => {
     if (avatarPicker.current) {
       avatarPicker.current.click();
