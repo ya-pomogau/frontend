@@ -250,6 +250,11 @@ export const EditViewerInfo = ({
           </ul>
         </div>
         <Button
+          disabled={
+            valueName === userData.name &&
+            valuePhone === userData.phone &&
+            valueAddress === userData.address
+          }
           onClick={() => onClickSave(userData)}
           extClassName={styles.button}
           buttonType="primary"
