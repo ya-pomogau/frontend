@@ -9,11 +9,11 @@ import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
-import { useGetUserByIdQuery, useUpdateUsersMutation } from 'services/user-api';
-import { useAppSelector } from 'app/hooks';
+import { useUpdateUserProfileMutation } from 'services/user-api';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import styles from './styles.module.css';
 import { UserRole, UserStatus } from 'shared/types/common.types';
-import { isRootSelector } from 'entities/user/model';
+import { isRootSelector, setUser } from 'entities/user/model';
 
 export const UserInfo = () => {
   const role = useAppSelector((state) => state.user.role);
@@ -37,41 +37,42 @@ export const UserInfo = () => {
   //   if (!role) return null;
   // };
   // const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
-
+  const dispatch = useAppDispatch();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
-  const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
+  const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleOpenSettingClick = () => {
     setIsPopupOpen(true);
-    alert(
-      'При изменении формы сбрасывается аватар. Поправить потом можно в файле db.json'
-    );
   };
 
   const handleSaveViewerSettings = async (
-    userData: UpdateUserInfo,
-    avatarFile: FormData
+    userData: Omit<UpdateUserInfo, '_id'>
+    // avatarFile: FormData
   ) => {
-    if (isFormEdited) {
-      if (image) {
-        await updateUserData({ _id: userData?._id, file: avatarFile }).unwrap();
+    try {
+      if (isFormEdited) {
+        // if (image) {
+        //   //   await updateUserProfile({ _id: userData?._id, file: avatarFile }).unwrap();
+        //   // }
+        const resultAction = await updateUserProfile(userData);
+        if ('data' in resultAction) {
+          dispatch(setUser(resultAction.data));
+        } else {
+          console.error('Ошибка при обновлении профиля:', resultAction.error);
+        }
       }
-      if (
-        user?.name !== userData.name ||
-        user?.phone !== userData.phone ||
-        user?.address !== userData.address
-      )
-        await updateUserData(userData).unwrap();
+      setIsFormSaved(true);
+      setIsFormEdited(false);
+      setImage('');
+      setIsPopupOpen(false);
+    } catch (error) {
+      console.error('Ошибка при обновлении профиля:', error);
     }
-    setIsFormSaved(true);
-    setIsFormEdited(false);
-    setImage('');
-    setIsPopupOpen(false);
   };
 
   return user ? (
