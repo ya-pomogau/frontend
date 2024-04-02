@@ -7,6 +7,7 @@
   box-sizing: border-box;
   align-items: center;
   margin-bottom: 20px;
+  min-height: 100px;
 }
 
 .smartHeader__block {
