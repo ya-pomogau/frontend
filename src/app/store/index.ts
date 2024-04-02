@@ -8,6 +8,7 @@ import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
 import systemSliceReducer from '../../services/system-slice';
+import { messagesApi } from 'services/messages-api';
 import { userTasksApi } from 'services/user-task-api';
 import { adminsApi } from 'services/admin-api';
 
@@ -22,6 +23,7 @@ export const store = configureStore({
     [userTasksApi.reducerPath]: userTasksApi.reducer,
     [authAdminApi.reducerPath]: authAdminApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
+    [messagesApi.reducerPath]: messagesApi.reducer,
     [adminsApi.reducerPath]: adminsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -30,6 +32,7 @@ export const store = configureStore({
       .concat(tasksApi.middleware)
       .concat(authAdminApi.middleware)
       .concat(categoriesApi.middleware)
+      .concat(messagesApi.middleware)
       .concat(userTasksApi.middleware)
       .concat(adminsApi.middleware),
 });

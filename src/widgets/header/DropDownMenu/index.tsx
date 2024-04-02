@@ -6,12 +6,18 @@ import { SideBar } from 'widgets/header/navigation';
 
 import { useMediaQuery } from 'shared/hooks';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { positionConfigMenu, linksMenuMobileUnauthorized } from '../utils';
+import {
+  positionConfigMenu,
+  linksMenuMobileUnauthorized,
+  linksTopAuthAdmin,
+  linksTop,
+} from '../utils';
 
 import styles from './styles.module.css';
 import { DropDownMenuButton } from 'shared/ui/DropDownMenuButton';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from 'entities/user/model';
+import { UserRole } from 'shared/types/common.types';
 
 export const modalRoot = document.getElementById('modal') as HTMLElement;
 
@@ -23,9 +29,14 @@ const line = {
 interface MenuProps {
   setMenuActive: (arg: boolean) => void;
   menuActive: boolean;
+  role?: UserRole;
 }
 
-export const DropDownMenu = ({ setMenuActive, menuActive }: MenuProps) => {
+export const DropDownMenu = ({
+  setMenuActive,
+  menuActive,
+  role,
+}: MenuProps) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
   const ref = useRef(null);
 
@@ -82,7 +93,7 @@ export const DropDownMenu = ({ setMenuActive, menuActive }: MenuProps) => {
           {isMobile ? (
             <SideBar
               position={positionConfigMenu}
-              links={linksMenuMobileUnauthorized}
+              links={role === UserRole.ADMIN ? linksTopAuthAdmin : linksTop}
             />
           ) : (
             <div style={line}></div>

@@ -50,7 +50,6 @@ export const userLoginThunk = createAsyncThunk(
   async (userLoginDto: TVKLoginRequestDto, { rejectWithValue }) => {
     try {
       const tmpRes = await authApi.vkLogin(userLoginDto);
-      console.dir(tmpRes);
       const { token, user, vkUser: vkUserResponse } = tmpRes;
       const vkUser = vkUserResponse ? vkUserResponse : null;
 
@@ -60,6 +59,7 @@ export const userLoginThunk = createAsyncThunk(
       return { user, vkUser };
     } catch (error) {
       const { message } = error as ErrorDto;
+      console.log(`Error message: ${message}`);
       rejectWithValue(message as string);
     }
   }

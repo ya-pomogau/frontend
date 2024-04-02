@@ -1,0 +1,86 @@
+.conflictCard {
+  position: relative;
+  width: 230px;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.specialization {
+  position: absolute;
+  top: 0;
+  left: 17px;
+}
+
+.img {
+  display: block;
+  margin: 0 auto;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--colors-interface-primary-additional);
+}
+
+.conteiner {
+  width: 70px;
+  margin: 0 auto 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.name {
+  font-size: 16px;
+  margin: 0 0 0 17px;
+}
+
+.id {
+  font-size: 12px;
+  margin: 0 0 0 17px;
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 1400px) and (min-width: 1150px) {
+  .conflictCard {
+    width: 175px;
+  }
+
+  .specialization {
+    left: 0;
+    font-size: 12px;
+  }
+
+  .name {
+    font-size: 12px;
+    margin: 0 0 0 10px;
+  }
+
+  .id {
+    font-size: 8px;
+    margin: 0 0 0 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .conflictCard {
+    width: 175px;
+  }
+
+  .specialization {
+    left: 0;
+    font-size: 12px;
+  }
+
+  .name {
+    font-size: 12px;
+    margin: 0 0 0 10px;
+  }
+
+  .id {
+    font-size: 8px;
+    margin: 0 0 0 10px;
+  }
+}
