@@ -34,7 +34,7 @@ export const MapWithTasks = () => {
     navigate('/register');
   }, [navigate]);
 
-  return !callApi || !data || isLoading ? (
+  return !data || isLoading ? (
     // <Loader />
     // TODO: временная заглушка, чтобы не падала приложение, так как данные тасок еще не приходят с сервера
     <p>loading</p>
@@ -47,8 +47,12 @@ export const MapWithTasks = () => {
         onClick={handleClick}
         isAuthorised={user !== null ? true : false}
         mapSettings={{
-          latitude: startGeo.coords.latitude,
-          longitude: startGeo.coords.longitude,
+          latitude: startGeo.coords.latitude
+            ? startGeo.coords.latitude
+            : 55.890017,
+          longitude: startGeo.coords.longitude
+            ? startGeo.coords.longitude
+            : 37.621157,
           zoom: 15,
         }}
       />
