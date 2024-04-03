@@ -130,6 +130,14 @@ export const userTasksApi = createApi({
       // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive' }],
     }),
+    cancelTask: build.mutation<Task, { id: string }>({
+      query: ({ id }) => ({
+        url: `recipient/tasks/${id}`,
+        method: 'DELETE',
+      }),
+      // указываем какие данные надо перезапросить при выполнении запроса
+      invalidatesTags: [{ type: 'TaskActive' }],
+    }),
   }),
 });
 export const {
@@ -141,4 +149,5 @@ export const {
   useFulfillTaskMutation,
   useRejectTaskMutation,
   useGetTaskQuery,
+  useCancelTaskMutation,
 } = userTasksApi;

@@ -18,6 +18,9 @@ import { DropDownMenuButton } from 'shared/ui/DropDownMenuButton';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from 'entities/user/model';
 import { UserRole } from 'shared/types/common.types';
+import { VkIcon } from '../../../shared/ui/icons/vk-icon';
+import { handleRedirectVK } from '../../../shared/libs/utils';
+import { Button } from '../../../shared/ui/button';
 
 export const modalRoot = document.getElementById('modal') as HTMLElement;
 
@@ -102,7 +105,17 @@ export const DropDownMenu = ({
             Выход
           </DropDownMenuButton>
         </div>
-      ) : null}
+      ) : (
+        // TODO: временная мера на время тестирования клиентом.
+        <Button
+          buttonType="primary"
+          actionType="submit"
+          customIcon={<VkIcon color="white" size="24" />}
+          label="Войти через ВКонтакте"
+          size="medium"
+          onClick={() => handleRedirectVK()}
+        />
+      )}
     </div>,
     modalRoot
   );

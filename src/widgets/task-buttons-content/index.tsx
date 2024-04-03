@@ -5,8 +5,11 @@ import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
-import { UserRole, ModalContentType } from 'shared/types/common.types';
-import { useRejectTaskMutation } from 'services/user-task-api';
+import { ModalContentType, UserRole } from 'shared/types/common.types';
+import {
+  useCancelTaskMutation,
+  useRejectTaskMutation,
+} from 'services/user-task-api';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 
 interface ModalContentProps {
@@ -30,11 +33,19 @@ export const ModalContent = ({
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
+  const [cancelTask] = useCancelTaskMutation();
   const handleRejectClick = () => {
     if (userRole && taskId) {
       rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
   };
+
+  const handleCancelClick = () => {
+    if (userRole === UserRole.RECIPIENT && taskId) {
+      cancelTask({ id: taskId });
+    }
+  };
+
   switch (type) {
     case ModalContentType.close:
       return (
@@ -69,7 +80,12 @@ export const ModalContent = ({
             <ButtonWithModal
               closeButton
               modalContent={
-                <ModalContent type={ModalContentType.cancel} date={date} />
+                <ModalContent
+                  type={ModalContentType.cancel}
+                  taskId={taskId}
+                  userRole={userRole}
+                  date={date}
+                />
               }
             >
               <Button
@@ -172,6 +188,25 @@ export const ModalContent = ({
         </div>
       );
     case ModalContentType.cancel:
+      // TODO: сделать более нормальную проверку. Пока что дам возможность отменить бессрочные заявки.
+      if (!date) {
+        return (
+          <div className={styles.modalTooltip}>
+            <h3 className={titleStyle}>Подтвердите удаление заявки</h3>
+            <p className={textStyle}>
+              Заявка будет отменена без возможности восстановления.
+            </p>
+            <div className={styles.modalButtons}>
+              <Button
+                buttonType="primary"
+                label="Отменить"
+                onClick={handleCancelClick}
+              />
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>До начала заявки менее 24 часа</h3>

@@ -1,5 +1,11 @@
 import { memo, useState } from 'react';
-import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
+import {
+  Circle,
+  GeolocationControl,
+  Map,
+  YMaps,
+  ZoomControl,
+} from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
 import { getBounds } from 'shared/libs/utils';
@@ -99,6 +105,8 @@ export const YandexMap = ({
           width={width}
           height={height}
         >
+          <GeolocationControl options={{ float: 'left' }} />
+          <ZoomControl options={{ position: { top: 5, right: 5 } }} />
           {tasks?.map((task) => {
             let showPopup = showThankPopup;
             if (task.volunteer !== null) showPopup = showSorryPopup;

@@ -11,11 +11,13 @@ import { MenuIcon } from 'shared/ui/icons/menu-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { UnionIcon } from 'shared/ui/icons/union-icon';
 
-import styles from './styles.module.css';
 import { PopupChat } from 'entities/chat/ui/chat';
 import { infoAdmin } from 'entities/chat/ui/chat/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 import { DropDownMenu } from './DropDownMenu';
+
+import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
+import styles from './styles.module.css';
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
@@ -44,7 +46,7 @@ const Header = () => {
               <Avatar
                 extClassName={styles.header__avatar}
                 avatarName={user.name}
-                avatarLink={user.avatar}
+                avatarLink={user.avatar || defaultAvatar}
               />
             )}{' '}
           </div>

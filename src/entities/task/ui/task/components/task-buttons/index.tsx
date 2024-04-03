@@ -177,6 +177,8 @@ export const TaskButtons = ({
                   : ModalContentType.close
               }
               date={date}
+              userRole={userRole}
+              taskId={taskId}
             />
           }
         >

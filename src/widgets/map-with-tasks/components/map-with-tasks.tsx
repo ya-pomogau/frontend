@@ -1,5 +1,4 @@
-/* eslint-disable import/no-named-as-default */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import YandexMap from 'widgets/map';
@@ -9,27 +8,22 @@ import { useGetTaskQuery } from 'services/user-task-api';
 import useGeolocation from 'shared/hooks/use-geolocation';
 
 export const MapWithTasks = () => {
-  // const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
-  // const { data, isLoading } = useGetTaskVirginQuery([
-  //   'volunteer',
-  //   37.621157,
-  //   55.890017,
-  // ]);
+  const { coords, apiError } = useGeolocation();
+  const navigate = useNavigate();
 
-  const startGeo = useGeolocation();
-  const [callApi, setCallApi] = useState(false);
-  useEffect(() => {
-    if (startGeo.coords?.latitude && startGeo.coords?.longitude) {
-      setCallApi(true);
-    }
-  }, [startGeo.coords]);
+  const user = useAppSelector((state) => state.user.data);
+
+  const [longitude, latitude] = !apiError
+    ? [coords.longitude, coords.latitude]
+    : user && user.location
+    ? [user.location[0], user.location[1]]
+    : [37.621157, 55.890017];
 
   const { data, isLoading } = useGetTaskQuery({
-    latitude: callApi ? startGeo.coords.longitude : 37.621157,
-    longitude: callApi ? startGeo.coords.latitude : 55.890017,
+    latitude,
+    longitude,
   });
-  const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user.data);
+
   const handleClick = useCallback(() => {
     navigate('/register');
   }, [navigate]);
@@ -43,16 +37,12 @@ export const MapWithTasks = () => {
       <YandexMap
         tasks={data}
         width="100%"
-        height="90%"
+        height="80vh"
         onClick={handleClick}
-        isAuthorised={user !== null ? true : false}
+        isAuthorised={user !== null}
         mapSettings={{
-          latitude: startGeo.coords.latitude
-            ? startGeo.coords.latitude
-            : 55.890017,
-          longitude: startGeo.coords.longitude
-            ? startGeo.coords.longitude
-            : 37.621157,
+          latitude,
+          longitude,
           zoom: 15,
         }}
       />

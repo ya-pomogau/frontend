@@ -1,9 +1,7 @@
-import { FRONT_URL } from 'config/api-config';
+import { FRONT_URL, LOCAL_STORAGE_TOKEN_ACCESS } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import { Task } from 'entities/task/types';
 import { IFilterValues } from 'features/filter/types';
-import { LOCAL_STORAGE_TOKEN_ACCESS } from 'config/api-config';
-// eslint-disable-next-line import/no-duplicates
 
 import {
   DAYS_IN_MONTH,

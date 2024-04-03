@@ -9,9 +9,8 @@ import { PageLayout } from 'shared/ui/page-layout';
 export function Layout() {
   const location = useLocation();
   const isMaxWidthOverlay =
-    location.pathname.includes('/policy') || location.pathname.includes('/blog')
-      ? true
-      : false;
+    location.pathname.includes('/policy') ||
+    location.pathname.includes('/blog');
   return (
     <>
       <Header />

@@ -5,7 +5,6 @@ import {
   TAdminLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
-  TVKUserResponseObj,
 } from './auth.types';
 import {
   TCustomSelector,
@@ -79,8 +78,7 @@ export const adminLoginThunk = createAsyncThunk(
       return { user };
     } catch (error) {
       const { message } = error as ErrorDto;
-      console.log(`Error message: ${message}`);
-      rejectWithValue(message as string);
+      return rejectWithValue(message as string);
     }
   }
 );
@@ -228,3 +226,8 @@ const systemSlice = createSlice({
 
 export const { resetUser } = systemSlice.actions;
 export default systemSlice.reducer;
+
+export const actions = {
+  ...systemSlice.actions,
+  adminLoginThunk,
+};
