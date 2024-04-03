@@ -1,12 +1,14 @@
 import classNames from 'classnames';
 import { useState } from 'react';
+import { differenceInHours, parseISO } from 'date-fns';
 import Checkbox from 'shared/ui/checkbox';
 import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
-import { ModalContentType, UserRole } from 'shared/types/common.types';
+import { UserRole, ModalContentType } from 'shared/types/common.types';
 import {
+  useDeleteTaskMutation,
   useCancelTaskMutation,
   useRejectTaskMutation,
 } from 'services/user-task-api';
@@ -32,11 +34,35 @@ export const ModalContent = ({
   volunteer,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
+  const [deleteTask] = useDeleteTaskMutation();
   const [rejectTask] = useRejectTaskMutation();
   const [cancelTask] = useCancelTaskMutation();
+
   const handleRejectClick = () => {
     if (userRole && taskId) {
       rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
+    }
+  };
+
+  const handleDeleteClick = () => {
+    if (userRole && taskId && !isRemainLessThanDay(date)) {
+      deleteTask({ role: userRole.toLocaleLowerCase(), id: taskId });
+    }
+  };
+
+  const isRemainLessThanDay = (taskDeadline: string | null | undefined) => {
+    if (!taskDeadline) return false;
+
+    const now = new Date();
+    const parsedDate = parseISO(taskDeadline);
+    const hoursToDeadline = differenceInHours(parsedDate, now);
+    if (hoursToDeadline < 24) return true;
+    return false;
+  };
+
+  const handleSetReason = (reasonType: ReasonType) => {
+    if (reasonType !== null) {
+      setReason(reasonType);
     }
   };
 
@@ -55,19 +81,19 @@ export const ModalContent = ({
             <Checkbox
               label="Не смогу прийти"
               id={ReasonType.first}
-              onChange={() => setReason(ReasonType.first)}
+              onChange={() => handleSetReason(ReasonType.first)}
               checked={reason === ReasonType.first}
             />
             <Checkbox
               label="Отмена по обоюдному согласию"
               id={ReasonType.second}
-              onChange={() => setReason(ReasonType.second)}
+              onChange={() => handleSetReason(ReasonType.second)}
               checked={reason === ReasonType.second}
             />
             <Checkbox
               label="Не могу указать причину"
               id={ReasonType.third}
-              onChange={() => setReason(ReasonType.third)}
+              onChange={() => handleSetReason(ReasonType.third)}
               checked={reason === ReasonType.third}
             />
           </div>
@@ -80,6 +106,15 @@ export const ModalContent = ({
             <ButtonWithModal
               closeButton
               modalContent={
+              // TODO: проверить оба варианта
+                // <ModalContent
+                //   type={
+                //     isRemainLessThanDay(date)
+                //       ? ModalContentType.cancel
+                //       : ModalContentType.confirm
+                //   }
+                //   date={date}
+                // />
                 <ModalContent
                   type={ModalContentType.cancel}
                   taskId={taskId}
@@ -91,7 +126,8 @@ export const ModalContent = ({
               <Button
                 buttonType="primary"
                 label="Отменить заявку"
-                onClick={() => 2}
+                // TODO: проверить оба варианта
+                // onClick={handleDeleteClick}
               />
             </ButtonWithModal>
           </div>

@@ -1,6 +1,6 @@
 import { UserProfile } from 'entities/user/types';
 import { UserStatus } from 'shared/types/common.types';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
 
 export enum TaskStatus {
   CREATED = 'created', // только созданная заявка
@@ -30,7 +30,7 @@ export type Task = {
   _id: string;
   description: string;
   address: string;
-  location: GeoCoordinates;
+  location: PointGeoJSONInterface;
   status: TaskStatus;
   category: Category;
   date: string | null;

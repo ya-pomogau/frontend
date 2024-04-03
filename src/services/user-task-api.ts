@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { getTokenAccess } from 'shared/libs/utils';
 
 interface CreateTaskDto {
   categoryId: string;
@@ -11,6 +10,7 @@ interface CreateTaskDto {
   address: string;
   description: string;
 }
+const token = localStorage.getItem('token');
 
 export const userTasksApi = createApi({
   reducerPath: 'userTask',
