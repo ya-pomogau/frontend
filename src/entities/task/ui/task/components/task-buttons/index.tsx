@@ -27,10 +27,7 @@ import { UserProfile } from 'entities/user/types';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
 import { useState } from 'react';
 import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
-import {
-  useFulfillTaskMutation,
-  useRejectTaskMutation,
-} from 'services/user-task-api';
+import { useFulfillTaskMutation } from 'services/user-task-api';
 
 interface TaskButtonsProps {
   taskId: string;
@@ -182,8 +179,6 @@ export const TaskButtons = ({
                   : ModalContentType.close
               }
               date={date}
-              userRole={userRole}
-              taskId={taskId}
             />
           }
         >

@@ -8,7 +8,6 @@ import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
 import { UserRole, ModalContentType } from 'shared/types/common.types';
 import {
-  useDeleteTaskMutation,
   useCancelTaskMutation,
   useRejectTaskMutation,
 } from 'services/user-task-api';
@@ -34,7 +33,6 @@ export const ModalContent = ({
   volunteer,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
-  const [deleteTask] = useDeleteTaskMutation();
   const [rejectTask] = useRejectTaskMutation();
   const [cancelTask] = useCancelTaskMutation();
 
@@ -44,20 +42,13 @@ export const ModalContent = ({
     }
   };
 
-  const handleDeleteClick = () => {
-    if (userRole && taskId && !isRemainLessThanDay(date)) {
-      deleteTask({ role: userRole.toLocaleLowerCase(), id: taskId });
-    }
-  };
-
   const isRemainLessThanDay = (taskDeadline: string | null | undefined) => {
     if (!taskDeadline) return false;
 
     const now = new Date();
     const parsedDate = parseISO(taskDeadline);
     const hoursToDeadline = differenceInHours(parsedDate, now);
-    if (hoursToDeadline < 24) return true;
-    return false;
+    return hoursToDeadline < 24;
   };
 
   const handleSetReason = (reasonType: ReasonType) => {
@@ -106,7 +97,7 @@ export const ModalContent = ({
             <ButtonWithModal
               closeButton
               modalContent={
-              // TODO: проверить оба варианта
+                // TODO: проверить оба варианта
                 // <ModalContent
                 //   type={
                 //     isRemainLessThanDay(date)
@@ -225,7 +216,7 @@ export const ModalContent = ({
       );
     case ModalContentType.cancel:
       // TODO: сделать более нормальную проверку. Пока что дам возможность отменить бессрочные заявки.
-      if (!date) {
+      if (!date || isRemainLessThanDay(date)) {
         return (
           <div className={styles.modalTooltip}>
             <h3 className={titleStyle}>Подтвердите удаление заявки</h3>
