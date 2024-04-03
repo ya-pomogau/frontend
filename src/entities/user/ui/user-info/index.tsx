@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import styles from './styles.module.css';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { isRootSelector, setUser } from 'entities/user/model';
+import { setTokenAccess } from 'shared/libs/utils';
 
 export const UserInfo = () => {
   const role = useAppSelector((state) => state.user.role);
@@ -62,6 +63,7 @@ export const UserInfo = () => {
         const resultAction = await updateUserProfile(userData);
         if ('data' in resultAction) {
           dispatch(setUser(resultAction.data));
+          setTokenAccess(resultAction.data?.token);
         } else {
           console.error('Ошибка при обновлении профиля:', resultAction.error);
         }
