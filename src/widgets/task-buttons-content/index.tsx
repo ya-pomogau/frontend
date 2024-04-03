@@ -7,7 +7,10 @@ import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
 import { UserRole, ModalContentType } from 'shared/types/common.types';
-import { useDeleteTaskMutation } from 'services/user-task-api';
+import {
+  useDeleteTaskMutation,
+  useRejectTaskMutation,
+} from 'services/user-task-api';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 
 interface ModalContentProps {
@@ -29,7 +32,15 @@ export const ModalContent = ({
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [deleteTask] = useDeleteTaskMutation();
+  const [rejectTask] = useRejectTaskMutation();
+
   const handleRejectClick = () => {
+    if (userRole && taskId) {
+      rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
+    }
+  };
+
+  const handleDeleteClick = () => {
     if (userRole && taskId && !isRemainLessThanDay(date)) {
       deleteTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
@@ -97,7 +108,7 @@ export const ModalContent = ({
               <Button
                 buttonType="primary"
                 label="Отменить заявку"
-                onClick={handleRejectClick}
+                onClick={handleDeleteClick}
               />
             </ButtonWithModal>
           </div>
