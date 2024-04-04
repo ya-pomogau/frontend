@@ -106,7 +106,7 @@ export const userTasksApi = createApi({
         };
       },
       // указываем какие данные надо перезапросить при выполнении запроса
-      invalidatesTags: [{ type: 'TaskVirgin' }],
+      invalidatesTags: [{ type: 'TaskVirgin' }, { type: 'TaskActive' }],
     }),
     fulfillTask: build.mutation<Task, { role: string; id: string }>({
       query: (args) => {
