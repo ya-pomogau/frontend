@@ -18,6 +18,9 @@ import { DropDownMenu } from './DropDownMenu';
 
 import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import styles from './styles.module.css';
+import { Button } from 'shared/ui/button';
+import { handleRedirectVK } from 'shared/libs/utils';
+import { VkIcon } from 'shared/ui/icons/vk-icon';
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
@@ -40,15 +43,24 @@ const Header = () => {
   return (
     <header className={`${styles.header} ${isMobile && styles.header_mobile}`}>
       <div className={styles.header__container}>
-        {isMobile && (
+        {isMobile && user && (
           <div className={`${styles.header__avatar} `}>
-            {user && isMobile && (
-              <Avatar
-                extClassName={styles.header__avatar}
-                avatarName={user.name}
-                avatarLink={user.avatar || defaultAvatar}
-              />
-            )}{' '}
+            <Avatar
+              extClassName={styles.header__avatar}
+              avatarName={user.name}
+              avatarLink={user.avatar || defaultAvatar}
+            />
+          </div>
+        )}
+        {isMobile && !user && (
+          <div className={`${styles.header__button} `}>
+            <Button
+              buttonType="primary"
+              actionType="submit"
+              label="Войти"
+              size="small"
+              onClick={() => handleRedirectVK()}
+            />
           </div>
         )}
 
