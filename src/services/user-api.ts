@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
-import { User } from 'entities/user/types';
+import { User, UpdateUserInfo } from 'entities/user/types';
+import { getTokenAccess } from 'shared/libs/utils';
 import { UserRole } from 'shared/types/common.types';
 
 //нам не нужны отдельные функции fetch для использования RTK Query.
@@ -14,7 +15,7 @@ export const usersApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
-      const token = sessionStorage.getItem('token');
+      const token = getTokenAccess();
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
@@ -80,6 +81,13 @@ export const usersApi = createApi({
         method: 'GET',
       }),
     }),
+    updateUserProfile: build.mutation({
+      query: (body: Omit<UpdateUserInfo, '_id'>) => ({
+        url: `/system/profile`,
+        method: 'PATCH',
+        body: body,
+      }),
+    }),
   }),
 });
 
@@ -90,4 +98,5 @@ export const {
   useUpdateUsersMutation,
   useGetUncomfirmedQuery,
   useGetProfileQuery,
+  useUpdateUserProfileMutation,
 } = usersApi;

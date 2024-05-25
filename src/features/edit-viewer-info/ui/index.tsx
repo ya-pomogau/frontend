@@ -18,7 +18,7 @@ interface EditViewerInfoProps {
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
-  onClickSave: (userData: UpdateUserInfo, formData: FormData) => void;
+  onClickSave: (userData: Omit<UpdateUserInfo, '_id'>) => void;
   valueName: string;
   valuePhone: string;
   valueAddress: string;
@@ -57,15 +57,17 @@ export const EditViewerInfo = ({
   const avatarPicker = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const viewerData: UpdateUserInfo = {
+  const viewerData: Omit<UpdateUserInfo, '_id'> = {
     name: valueName,
     phone: valuePhone,
     address: valueAddress,
-    avatar: null,
-    _id: valueId,
+    // avatar: null,
+    // _id: valueId,
   };
-
   const [userData, setUserData] = useState(viewerData);
+  useEffect(() => {
+    setUserData(viewerData);
+  }, [valueName, valuePhone, valueAddress]);
   const avatarFile = new FormData();
 
   const handleChange = async (event: ViewerInputData) => {
@@ -73,12 +75,12 @@ export const EditViewerInfo = ({
     setIsFormSaved(false);
     avatarFile.delete('file');
     const { value, name, files } = event.target;
-    if (files) {
-      // Если загружен файл изображения, отрисовываем в компоненте аватара
-      setImage(URL.createObjectURL(files[0]));
-      avatarFile.append('file', files[0]);
-      setUserData({ ...userData, [name]: value });
-    }
+    // if (files) {
+    //   // Если загружен файл изображения, отрисовываем в компоненте аватара
+    //   setImage(URL.createObjectURL(files[0]));
+    //   avatarFile.append('file', files[0]);
+    //   setUserData({ ...userData, [name]: value });
+    // }
     setUserData({ ...userData, [name]: value });
   };
 
@@ -151,6 +153,7 @@ export const EditViewerInfo = ({
                 Изменить фото
               </button>
               <input
+                disabled
                 onChange={handleChange}
                 className={classnames(
                   styles.avatarBlock__hidden,
@@ -192,7 +195,7 @@ export const EditViewerInfo = ({
                 placeholder="Введите имя"
                 value={userData.name}
                 onChange={handleChange}
-                name="fullname"
+                name="name"
                 {...props}
               />
             </li>
@@ -247,7 +250,12 @@ export const EditViewerInfo = ({
           </ul>
         </div>
         <Button
-          onClick={() => onClickSave(userData, avatarFile)}
+          disabled={
+            valueName === userData.name &&
+            valuePhone === userData.phone &&
+            valueAddress === userData.address
+          }
+          onClick={() => onClickSave(userData)}
           extClassName={styles.button}
           buttonType="primary"
           label="Сохранить"
