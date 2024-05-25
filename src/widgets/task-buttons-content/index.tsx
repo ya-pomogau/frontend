@@ -1,12 +1,16 @@
 import classNames from 'classnames';
 import { useState } from 'react';
+import { differenceInHours, parseISO } from 'date-fns';
 import Checkbox from 'shared/ui/checkbox';
 import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
 import { ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
 import { UserRole, ModalContentType } from 'shared/types/common.types';
-import { useRejectTaskMutation } from 'services/user-task-api';
+import {
+  useCancelTaskMutation,
+  useRejectTaskMutation,
+} from 'services/user-task-api';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 
 interface ModalContentProps {
@@ -30,11 +34,35 @@ export const ModalContent = ({
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
+  const [cancelTask] = useCancelTaskMutation();
+
   const handleRejectClick = () => {
     if (userRole && taskId) {
       rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
   };
+
+  const isRemainLessThanDay = (taskDeadline: string | null | undefined) => {
+    if (!taskDeadline) return false;
+
+    const now = new Date();
+    const parsedDate = parseISO(taskDeadline);
+    const hoursToDeadline = differenceInHours(parsedDate, now);
+    return hoursToDeadline < 24;
+  };
+
+  const handleSetReason = (reasonType: ReasonType) => {
+    if (reasonType !== null) {
+      setReason(reasonType);
+    }
+  };
+
+  const handleCancelClick = () => {
+    if (userRole === UserRole.RECIPIENT && taskId) {
+      cancelTask({ id: taskId });
+    }
+  };
+
   switch (type) {
     case ModalContentType.close:
       return (
@@ -44,19 +72,19 @@ export const ModalContent = ({
             <Checkbox
               label="Не смогу прийти"
               id={ReasonType.first}
-              onChange={() => setReason(ReasonType.first)}
+              onChange={() => handleSetReason(ReasonType.first)}
               checked={reason === ReasonType.first}
             />
             <Checkbox
               label="Отмена по обоюдному согласию"
               id={ReasonType.second}
-              onChange={() => setReason(ReasonType.second)}
+              onChange={() => handleSetReason(ReasonType.second)}
               checked={reason === ReasonType.second}
             />
             <Checkbox
               label="Не могу указать причину"
               id={ReasonType.third}
-              onChange={() => setReason(ReasonType.third)}
+              onChange={() => handleSetReason(ReasonType.third)}
               checked={reason === ReasonType.third}
             />
           </div>
@@ -69,13 +97,28 @@ export const ModalContent = ({
             <ButtonWithModal
               closeButton
               modalContent={
-                <ModalContent type={ModalContentType.cancel} date={date} />
+                // TODO: проверить оба варианта
+                // <ModalContent
+                //   type={
+                //     isRemainLessThanDay(date)
+                //       ? ModalContentType.cancel
+                //       : ModalContentType.confirm
+                //   }
+                //   date={date}
+                // />
+                <ModalContent
+                  type={ModalContentType.cancel}
+                  taskId={taskId}
+                  userRole={userRole}
+                  date={date}
+                />
               }
             >
               <Button
                 buttonType="primary"
                 label="Отменить заявку"
-                onClick={() => 2}
+                // TODO: проверить оба варианта
+                // onClick={handleDeleteClick}
               />
             </ButtonWithModal>
           </div>
@@ -172,6 +215,25 @@ export const ModalContent = ({
         </div>
       );
     case ModalContentType.cancel:
+      // TODO: сделать более нормальную проверку. Пока что дам возможность отменить бессрочные заявки.
+      if (!date || isRemainLessThanDay(date)) {
+        return (
+          <div className={styles.modalTooltip}>
+            <h3 className={titleStyle}>Подтвердите удаление заявки</h3>
+            <p className={textStyle}>
+              Заявка будет отменена без возможности восстановления.
+            </p>
+            <div className={styles.modalButtons}>
+              <Button
+                buttonType="primary"
+                label="Отменить"
+                onClick={handleCancelClick}
+              />
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>До начала заявки менее 24 часа</h3>

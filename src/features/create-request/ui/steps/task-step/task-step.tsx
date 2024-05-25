@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -114,13 +114,12 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             />
           </>
         )}
+        {description.length <= 5 && (
+          <p className={styles.messageAlert}>Добавьте описание задачи</p>
+        )}
       </div>
       <div className={styles.buttonsWrapper}>
-        <div className={styles.alertWrapper}>
-          {description.length <= 5 && (
-            <p className={styles.messageAlert}>Добавьте описание задачи</p>
-          )}
-        </div>
+        <div className={styles.alertWrapper}></div>
         {!isTypeEdit && (
           <Button
             buttonType="secondary"

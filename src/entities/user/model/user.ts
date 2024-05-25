@@ -41,6 +41,7 @@ export const userModel = createSlice({
     logoutUser: (state) => {
       state.data = null;
       state.role = null;
+      localStorage.clear();
     },
     setUser: (state, { payload }: PayloadAction<User>) => {
       state.data = payload;

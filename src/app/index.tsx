@@ -8,9 +8,8 @@ import { getFullQueriesForYApi, getTokenAccess } from 'shared/libs/utils';
 import './assets/styles/index.css';
 import ErrorBoundary from 'features/error-boundary';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from './hooks';
+import { useAppDispatch } from './hooks';
 import { checkTokenThunk } from 'services/system-slice';
-import { useNavigate } from 'react-router-dom';
 
 function App() {
   const dispatch = useAppDispatch();

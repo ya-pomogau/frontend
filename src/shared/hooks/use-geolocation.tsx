@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface GeolocationPosition {
   coords: {
@@ -7,7 +7,16 @@ interface GeolocationPosition {
   };
 }
 
-const useGeolocation = (): GeolocationPosition => {
+const geolocationOptions: PositionOptions = {
+  enableHighAccuracy: true,
+  timeout: 1000 * 60 * 1,
+  maximumAge: 1000 * 3600 * 24,
+};
+
+const useGeolocation = (
+  options = geolocationOptions
+): GeolocationPosition & { apiError: string } => {
+  const [apiError, setApiError] = useState('');
   const [geolocation, setGeolocation] = useState<GeolocationPosition>({
     coords: {
       latitude: 0,
@@ -15,46 +24,46 @@ const useGeolocation = (): GeolocationPosition => {
     },
   });
 
-  useEffect(() => {
-    let isMounted = true;
+  const locationWatchId = useRef<unknown>(null);
 
-    if (navigator.geolocation) {
-      const successHandler = (position: GeolocationPosition) => {
-        if (isMounted) {
-          setGeolocation({
-            coords: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            },
-          });
-        }
-      };
+  const successHandler = (position: GeolocationPosition) => {
+    const { latitude, longitude } = position.coords;
 
-      const errorHandler = (error: GeolocationPositionError) => {
-        console.error('Ошибка при получении геолокации:', error);
-      };
+    setGeolocation({
+      coords: {
+        latitude,
+        longitude,
+      },
+    });
+  };
 
-      const options: PositionOptions = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      };
+  const errorHandler = (error: GeolocationPositionError) => {
+    setApiError(`Ошибка при получении геолокации: ${error}`);
+  };
 
-      const watchId = navigator.geolocation.watchPosition(
-        successHandler,
-        errorHandler,
-        options
-      );
-      return () => {
-        isMounted = false;
-        navigator.geolocation.clearWatch(watchId);
-      };
-    } else {
-      console.log('Геолокация не поддерживается');
+  const cancelLocationWatch = () => {
+    if (locationWatchId.current && navigator.geolocation) {
+      if (typeof locationWatchId.current === 'number') {
+        navigator.geolocation.clearWatch(locationWatchId.current);
+      }
     }
-  }, []);
+  };
 
-  return geolocation;
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setApiError('Геолокация не поддерживается');
+    }
+
+    locationWatchId.current = navigator.geolocation.watchPosition(
+      successHandler,
+      errorHandler,
+      options
+    );
+
+    return cancelLocationWatch;
+  }, [options]);
+
+  return { coords: geolocation.coords, apiError };
 };
 
 export default useGeolocation;

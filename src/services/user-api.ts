@@ -13,7 +13,6 @@ export const usersApi = createApi({
   tagTypes: ['Users', 'User'],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
-    // baseUrl: 'https://api.kraev.nomoredomains.xyz',
     prepareHeaders: (headers) => {
       const token = sessionStorage.getItem('token');
       if (token) {

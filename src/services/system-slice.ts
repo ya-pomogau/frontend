@@ -5,7 +5,6 @@ import {
   TAdminLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
-  TVKUserResponseObj,
 } from './auth.types';
 import {
   TCustomSelector,
@@ -50,7 +49,6 @@ export const userLoginThunk = createAsyncThunk(
   async (userLoginDto: TVKLoginRequestDto, { rejectWithValue }) => {
     try {
       const tmpRes = await authApi.vkLogin(userLoginDto);
-      console.dir(tmpRes);
       const { token, user, vkUser: vkUserResponse } = tmpRes;
       const vkUser = vkUserResponse ? vkUserResponse : null;
 
@@ -60,6 +58,7 @@ export const userLoginThunk = createAsyncThunk(
       return { user, vkUser };
     } catch (error) {
       const { message } = error as ErrorDto;
+      console.log(`Error message: ${message}`);
       rejectWithValue(message as string);
     }
   }
@@ -79,8 +78,7 @@ export const adminLoginThunk = createAsyncThunk(
       return { user };
     } catch (error) {
       const { message } = error as ErrorDto;
-      console.log(`Error message: ${message}`);
-      rejectWithValue(message as string);
+      return rejectWithValue(message as string);
     }
   }
 );
@@ -228,3 +226,8 @@ const systemSlice = createSlice({
 
 export const { resetUser } = systemSlice.actions;
 export default systemSlice.reducer;
+
+export const actions = {
+  ...systemSlice.actions,
+  adminLoginThunk,
+};

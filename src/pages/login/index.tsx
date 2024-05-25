@@ -1,14 +1,14 @@
-import { FormEvent, ChangeEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { PasswordInput } from 'shared/ui/password-input';
-import { useAppDispatch } from 'app/hooks';
+import { actions } from 'services/system-slice';
+import useForm from 'shared/hooks/use-form';
+import useAsyncAction from 'shared/hooks/useAsyncAction';
 
 import styles from './styles.module.css';
-import { adminLoginThunk } from 'services/system-slice';
 
 interface ILoginForm {
   login: string;
@@ -16,39 +16,25 @@ interface ILoginForm {
 }
 
 export function LoginPage() {
-  // TODO предназначение checkAdminState непонятно. Пока поставил начальное значение true, чтобы отрабатывало условие логина при сабмите формы
-  const [checkAdminState, setAdminCheckState] = useState(true);
-  const [inputError, setInputError] = useState(false);
-  const dispatch = useAppDispatch();
-
-  const [inputFields, setInputFields] = useState<ILoginForm>({
+  const [errorText, setErrorText] = useState('');
+  const [adminLogin, isLoading] = useAsyncAction(actions.adminLoginThunk);
+  const { values, handleChange, errors, isValid } = useForm<ILoginForm>({
     login: '',
     password: '',
   });
 
-  const handleAdminLogin = async () => {
-    try {
-      dispatch(adminLoginThunk(inputFields));
-    } catch (err) {
-      console.log({
-        status: err,
-        title: 'Error',
-        description: 'Ошибка при попытке авторизации админом',
-      });
-    }
-  };
+  const isButtonDisabled =
+    !values.login || !values.password || values.password.length < 6 || !isValid;
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (checkAdminState) {
-      handleAdminLogin();
+    try {
+      await adminLogin(values);
+    } catch (err) {
+      setErrorText(err as string);
     }
-    console.log('отправка');
   };
+
   return (
     <>
       <SmartHeader
@@ -57,26 +43,25 @@ export function LoginPage() {
         extClassName={styles.header}
       />
       <p className={styles.title}>Войти</p>
-
       <form className={styles.form} onSubmit={onSubmit}>
         <Input
           extClassName={styles.field}
           required
           label="Логин"
           name="login"
-          value={inputFields.login}
+          value={values.login}
           onChange={handleChange}
           placeholder="ФИО / Телефон / Логин"
           type="text"
-          error={inputError}
-          errorText={'Вы ввели неправильный логин'}
+          error={errors.login.length >= 1}
+          errorText="Вы ввели неправильный логин"
         />
         <PasswordInput
           extClassName={styles.field}
           required
-          label={'Пароль'}
+          label="Пароль"
           name="password"
-          value={inputFields.password}
+          value={values.password}
           onChange={handleChange}
           placeholder="от 6 символов"
           type="password"
@@ -87,17 +72,10 @@ export function LoginPage() {
           label="Войти"
           size="medium"
           extClassName={styles.button}
-          disabled={
-            !inputFields.login ||
-            !inputFields.password ||
-            inputFields.password.length < 6
-          }
+          disabled={isButtonDisabled}
         />
+        <span className={`${styles.error} text`}>{errorText}</span>
       </form>
-
-      <Link to="/pick" className={styles.templink}>
-        Авторизация под выбранной ролью
-      </Link>
     </>
   );
 }

@@ -26,11 +26,8 @@ import { useLocation } from 'react-router-dom';
 import { UserProfile } from 'entities/user/types';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
 import { useState } from 'react';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import {
-  useFulfillTaskMutation,
-  useRejectTaskMutation,
-} from 'services/user-task-api';
+import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
+import { useFulfillTaskMutation } from 'services/user-task-api';
 
 interface TaskButtonsProps {
   taskId: string;
@@ -44,7 +41,7 @@ interface TaskButtonsProps {
   recipientReport: TaskReport | null;
   adminResolve: ResolveStatus | null;
   volunteer: UserProfile | null;
-  location: GeoCoordinates;
+  location: PointGeoJSONInterface;
 }
 
 export const TaskButtons = ({
@@ -80,7 +77,7 @@ export const TaskButtons = ({
     category,
     description,
     date,
-    location,
+    location: location.coordinates,
     time: date === null ? '' : format(new Date(date!), 'HH:mm'),
   };
   const [fulfillTask] = useFulfillTaskMutation();
@@ -102,7 +99,9 @@ export const TaskButtons = ({
       dispatch(setTime(format(new Date(date!), 'HH:mm')));
     }
     dispatch(setTemporary({ initialData }));
-    dispatch(setAddress({ additinalAddress: address, coords: location }));
+    dispatch(
+      setAddress({ additinalAddress: address, coords: location.coordinates })
+    );
     dispatch(setDescriptionForTask(description));
     dispatch(setCategory(category));
     dispatch(changeCurrentStep(4));
@@ -125,6 +124,7 @@ export const TaskButtons = ({
                   : ModalContentType.confirm
               }
               userRole={userRole}
+              taskId={taskId}
             />
           }
           extClassName={styles.confirm}
@@ -171,6 +171,8 @@ export const TaskButtons = ({
           extClassName={styles.close}
           modalContent={
             <ModalContent
+              userRole={userRole}
+              taskId={taskId}
               type={
                 isTaskExpired || volunteer
                   ? ModalContentType.responded

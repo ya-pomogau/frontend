@@ -72,70 +72,82 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
   const propsButton = usePropsButtonCustom();
   return (
     <>
-      <div className={styles.dateContainer}>
-        <div className={styles.wrapperForTime}>
-          {isMobile && (
-            <TimePickerPopup
-              isPopupOpen={isOpenClockElement}
-              buttonRef={buttonRef}
-              setIsOpenClockElement={setIsOpenClockElement}
-              handleAcceptTime={() => handleAcceptTime}
-            />
-          )}
-          <p className={classNames(styles.time, 'text', 'text_type_regular ')}>
-            Время
-          </p>
-          <div className={styles.headerWrapper} />
-
-          <input
-            disabled={termlessRequest}
-            type="time"
-            id="time"
-            name="time"
-            onChange={handleTimeValueChange}
-            onClick={() => setIsOpenClockElement(!isOpenClockElement)}
-            value={time}
-            required
-            className={classNames(
-              'text',
-              'text_size_small',
-              'text_type_regular ',
-              styles.inputForTime
+      <div className={styles.dateWithButtonContainer}>
+        <div className={styles.dateContainer}>
+          <div className={styles.wrapperForTime}>
+            {isMobile && (
+              <TimePickerPopup
+                isPopupOpen={isOpenClockElement}
+                buttonRef={buttonRef}
+                setIsOpenClockElement={setIsOpenClockElement}
+                handleAcceptTime={() => handleAcceptTime}
+              />
             )}
-          />
+            <p
+              className={classNames(styles.time, 'text', 'text_type_regular ')}
+            >
+              Время
+            </p>
+            <div className={styles.headerWrapper} />
+
+            <input
+              disabled={termlessRequest}
+              type="time"
+              id="time"
+              name="time"
+              onChange={handleTimeValueChange}
+              onClick={() => setIsOpenClockElement(!isOpenClockElement)}
+              value={time}
+              required
+              className={classNames(
+                'text',
+                'text_size_small',
+                'text_type_regular ',
+                styles.inputForTime
+              )}
+            />
+          </div>
+          <div className={styles.wrapperForDate}>
+            <p
+              className={classNames('text', 'text_type_regular ', styles.date)}
+            >
+              Дата
+            </p>
+            <div className={styles.headerWrapperForDatePicker} />
+            <DatePicker
+              onChangeValue={handleDateValueChange}
+              value={dateValue}
+              isMobile={isMobile}
+              disabled={termlessRequest}
+            />
+          </div>
+          <div className={styles.checkbox}>
+            <Checkbox
+              label="Бессрочно"
+              onChange={handleCheckboxChange}
+              checked={termlessRequest}
+              id="termlessRequest"
+              extClassName="text_size_medium"
+            />
+          </div>
         </div>
-        <div className={styles.wrapperForDate}>
-          <p className={classNames('text', 'text_type_regular ', styles.date)}>
-            Дата
-          </p>
-          <div className={styles.headerWrapperForDatePicker} />
-          <DatePicker
-            onChangeValue={handleDateValueChange}
-            value={dateValue}
-            isMobile={isMobile}
-            disabled={termlessRequest}
-          />
+        <div className={styles.button}>
+          {(timeValidation || !time) && !termlessRequest && (
+            <p className={styles.validationMessage}>
+              {
+                'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
+              }
+            </p>
+          )}
+          <div className={styles.buttonWrapper}>
+            <Button
+              buttonType="primary"
+              disabled={(timeValidation || !time) && !termlessRequest}
+              label={propsButton.label}
+              onClick={propsButton.onClick}
+            />
+          </div>
         </div>
-        <div className={styles.checkbox}>
-          <Checkbox
-            label="Бессрочно"
-            onChange={handleCheckboxChange}
-            checked={termlessRequest}
-            id="termlessRequest"
-            extClassName="text_size_medium"
-          />
-        </div>
-      </div>
-      <div className={styles.button}>
-        {(timeValidation || !time) && !termlessRequest && (
-          <p className={styles.validationMessage}>{'Введите валидное время'}</p>
-        )}
-        <Button
-          buttonType="primary"
-          disabled={(timeValidation || !time) && !termlessRequest}
-          label={propsButton.label}
-          onClick={propsButton.onClick}
-        />
       </div>
     </>
   );

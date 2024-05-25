@@ -29,18 +29,12 @@ const getButtonTypeFromScore = (
   }
 };
 export const UserCard = ({ user }: UserCardProps) => {
-  // const { approved, checked, score, isHasKeys } = volunteerInfo;
   const { name, score, status, keys, role, avatar, _id, phone } = user;
-  const isVolonteerAcceptButtonDisabled =
-    status && status > UserStatus.UNCONFIRMED && role === UserRole.VOLUNTEER
-      ? true
-      : false;
-  // (score === 0 && status !== UserStatus.UNCONFIRMED) ||
-  // (score && score >= 30 && score < 60 && checked) ||
-  // (score && score >= 60);
-
-  // const isAcceptButtonExclamationPointIcon =
-  //   score && score >= 30 && !checked && score < 60;
+  const isVolonteerAcceptButtonDisabled = !!(
+    status &&
+    status > UserStatus.UNCONFIRMED &&
+    role === UserRole.VOLUNTEER
+  );
 
   const [confirmUser] = useConfirmUserMutation();
 
@@ -48,8 +42,7 @@ export const UserCard = ({ user }: UserCardProps) => {
     confirmUser(user._id);
   }, []);
 
-  const isKeyButtonExclamationPointIcon =
-    score && score >= 60 && !keys ? true : false;
+  const isKeyButtonExclamationPointIcon = !!(score && score >= 60 && !keys);
 
   return (
     <div

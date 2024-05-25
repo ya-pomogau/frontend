@@ -1,0 +1,42 @@
+.hub {
+  width: 100%;
+  margin-top: 37px;
+  display: flex;
+  gap: 20px;
+  height: 64vh;
+  position: relative;
+  overflow-y: auto;
+}
+
+.box-message {
+  min-width: 361px;
+  height: 98%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border: 1px solid var(--colors-interface-primary-additional);
+}
+
+.box-btn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+@media (max-width: 550px) {
+  .hub {
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .box-message {
+    min-width: 100px;
+    margin: 10px auto 0;
+  }
+
+  .box-btn {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+}

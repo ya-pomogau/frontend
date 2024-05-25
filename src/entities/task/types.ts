@@ -1,6 +1,6 @@
 import { UserProfile } from 'entities/user/types';
 import { UserStatus } from 'shared/types/common.types';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
 
 export enum TaskStatus {
   CREATED = 'created', // только созданная заявка
@@ -30,7 +30,7 @@ export type Task = {
   _id: string;
   description: string;
   address: string;
-  location: GeoCoordinates;
+  location: PointGeoJSONInterface;
   status: TaskStatus;
   category: Category;
   date: string | null;
@@ -41,4 +41,13 @@ export type Task = {
   adminResolve: ResolveStatus | null; // null - вмешательства не требуется админа.
   isPendingChanges: boolean; //показывает что один участник ответил по выполнению заявки
   moderator: UserProfile | null; //указывает на админа который решает конфликт
+};
+
+export type TaskConflict = Omit<
+  Task,
+  'volunteer' | 'recipientReport' | 'volunteerReport'
+> & {
+  volunteer: UserProfile;
+  recipientReport: TaskReport;
+  volunteerReport: TaskReport;
 };

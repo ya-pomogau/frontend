@@ -17,22 +17,27 @@ import { isUnConfirmedSelector } from 'entities/user/model';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
+
+  const [infoFilterTasks, setInfoFilterTasks] =
+    useState<IFilterValues>(defaultObjFilteres);
+  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
+  const isMobile = useMediaQuery('(max-width:1150px)');
+  const isMobileForPopup = useMediaQuery('(max-width:735px)');
+
   const { role, data } = useAppSelector((state) => state.user);
+  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
+  const { isPopupOpen } = useAppSelector((store) => store.createRequest);
+
   const {
     data: tasks,
     error,
     isLoading,
-  } = useGetTaskActiveQuery(getRoleForRequest(role));
-  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
-  const isMobile = useMediaQuery('(max-width:1150px)');
-  const { isPopupOpen } = useAppSelector((store) => store.createRequest);
-  const isMobileForPopup = useMediaQuery('(max-width:735px)');
-  const [infoFilterTasks, setInfoFilterTasks] =
-    useState<IFilterValues>(defaultObjFilteres);
-  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
+  } = useGetTaskActiveQuery(getRoleForRequest(role), {
+    skip: isUnConfirmed,
+  });
+
   useEffect(() => {
     tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
-    // eslint-disable-next-line
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
 
   return (
@@ -63,7 +68,7 @@ export function ProfileActivePage() {
           userRole={role}
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}
-          isStatusActive={!isUnConfirmed ? false : true}
+          isStatusActive={isUnConfirmed}
           tasks={!isUnConfirmed ? filterTasks : []}
           isLoading={isLoading}
         />

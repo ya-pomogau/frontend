@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { getTokenAccess } from 'shared/libs/utils';
+import { getTokenAccess } from '../shared/libs/utils';
 
 interface CreateTaskDto {
   categoryId: string;
@@ -106,7 +106,7 @@ export const userTasksApi = createApi({
         };
       },
       // указываем какие данные надо перезапросить при выполнении запроса
-      invalidatesTags: [{ type: 'TaskVirgin' }],
+      invalidatesTags: [{ type: 'TaskVirgin' }, { type: 'TaskActive' }],
     }),
     fulfillTask: build.mutation<Task, { role: string; id: string }>({
       query: (args) => {
@@ -130,6 +130,14 @@ export const userTasksApi = createApi({
       // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive' }],
     }),
+    cancelTask: build.mutation<Task, { id: string }>({
+      query: ({ id }) => ({
+        url: `recipient/tasks/${id}`,
+        method: 'DELETE',
+      }),
+      // указываем какие данные надо перезапросить при выполнении запроса
+      invalidatesTags: [{ type: 'TaskActive' }],
+    }),
   }),
 });
 export const {
@@ -141,4 +149,5 @@ export const {
   useFulfillTaskMutation,
   useRejectTaskMutation,
   useGetTaskQuery,
+  useCancelTaskMutation,
 } = userTasksApi;
