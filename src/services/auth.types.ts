@@ -1,11 +1,17 @@
 import { cbLink } from 'shared/libs/utils';
 import { TPointGeoJSON, TUser } from '../entities/user/types';
-import { UserRole } from 'shared/types/common.types';
+import {
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from 'shared/types/common.types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export type TAuthRoutes = {
   userLogin: string;
   userRegister: string;
   adminLogin: string;
+  checkToken: string;
 };
 
 export interface TypedResponse<T = Record<string, unknown>> extends Response {
@@ -46,14 +52,14 @@ export type TVKUserResponseObj = {
   first_name: string;
   last_name: string;
   id: string;
-  //  [key: string]: string;
+  email: string;
+  photo_max_orig: string;
 };
 
-export type TVKUserResponse = { response: Array<TVKUserResponseObj> };
 export type TVKLoginResponseDto = {
   token: string | null;
   user?: TUser;
-  vkUser: TVKUserResponse;
+  vkUser: TVKUserResponseObj;
 };
 
 export type TNewUserResponseDto = {

@@ -9,7 +9,7 @@ import usePermission from 'shared/hooks/use-permission';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 
 export function ContactsPage() {
-  const roleChecker = !usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
+  const roleChecker = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
 
   const [userData, setUserData] = React.useState({
     userEmail: 'www@yandex.ru',

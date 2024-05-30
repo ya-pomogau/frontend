@@ -1,21 +1,34 @@
-/* eslint-disable import/no-named-as-default */
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useGetTasksQuery } from 'services/tasks-api';
 import YandexMap from 'widgets/map';
 import { Loader } from 'shared/ui/loader';
 import { useAppSelector } from 'app/hooks';
+import { useGetTaskQuery } from 'services/user-task-api';
+import useGeolocation from 'shared/hooks/use-geolocation';
 
 export const MapWithTasks = () => {
-  const { isLoading, data } = useGetTasksQuery('', { pollingInterval: 30000 });
+  const { coords, apiError } = useGeolocation();
   const navigate = useNavigate();
+
   const user = useAppSelector((state) => state.user.data);
+
+  const [longitude, latitude] = !apiError
+    ? [coords.longitude, coords.latitude]
+    : user && user.location
+    ? [user.location[0], user.location[1]]
+    : [37.621157, 55.890017];
+
+  const { data, isLoading } = useGetTaskQuery({
+    latitude,
+    longitude,
+  });
+
   const handleClick = useCallback(() => {
     navigate('/register');
   }, [navigate]);
 
-  return isLoading || !data ? (
+  return !data || isLoading ? (
     // <Loader />
     // TODO: временная заглушка, чтобы не падала приложение, так как данные тасок еще не приходят с сервера
     <p>loading</p>
@@ -24,9 +37,14 @@ export const MapWithTasks = () => {
       <YandexMap
         tasks={data}
         width="100%"
-        height="90%"
+        height="80vh"
         onClick={handleClick}
-        isAuthorised={user !== null ? true : false}
+        isAuthorised={user !== null}
+        mapSettings={{
+          latitude,
+          longitude,
+          zoom: 15,
+        }}
       />
     )
   );

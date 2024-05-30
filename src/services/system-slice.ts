@@ -5,7 +5,6 @@ import {
   TAdminLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
-  TVKUserResponseObj,
 } from './auth.types';
 import {
   TCustomSelector,
@@ -14,6 +13,7 @@ import {
 import { RootState } from '../app/store';
 import { TUser, TVKUser } from '../entities/user/types';
 import { AdminPermission } from '../shared/types/common.types';
+import { setTokenAccess } from 'shared/libs/utils';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
   state.system.isPending;
@@ -50,34 +50,15 @@ export const userLoginThunk = createAsyncThunk(
     try {
       const tmpRes = await authApi.vkLogin(userLoginDto);
       const { token, user, vkUser: vkUserResponse } = tmpRes;
-      const vkUser = vkUserResponse
-        ? Object.entries(vkUserResponse.response[0]).reduce(
-            (acc, [key, value]) => {
-              const tmp: Partial<TVKUser> = {};
-              switch (key) {
-                case 'first_name': {
-                  return { ...acc, firstName: value };
-                }
-                case 'last_name': {
-                  return { ...acc, lastName: value };
-                }
-                case 'id': {
-                  return { ...acc, vkId: value };
-                }
-                default: {
-                  return acc;
-                }
-              }
-            },
-            {} as TVKUser
-          )
-        : null;
+      const vkUser = vkUserResponse ? vkUserResponse : null;
+
       if (token && !!user) {
-        localStorage.setItem('token', token);
+        setTokenAccess(token);
       }
       return { user, vkUser };
     } catch (error) {
       const { message } = error as ErrorDto;
+      console.log(`Error message: ${message}`);
       rejectWithValue(message as string);
     }
   }
@@ -92,13 +73,12 @@ export const adminLoginThunk = createAsyncThunk(
         throw new Error('Ошибка регистрации администратора');
       }
       if (token && !!user) {
-        localStorage.setItem('token', token);
+        setTokenAccess(token);
       }
       return { user };
     } catch (error) {
       const { message } = error as ErrorDto;
-      console.log(`Error message: ${message}`);
-      rejectWithValue(message as string);
+      return rejectWithValue(message as string);
     }
   }
 );
@@ -112,7 +92,7 @@ export const newUserThunk = createAsyncThunk(
         throw new Error('Ошибка регистрации пользователя');
       }
       if (token && !!user) {
-        localStorage.setItem('token', token);
+        setTokenAccess(token);
       }
       return { user };
     } catch (error) {
@@ -122,6 +102,22 @@ export const newUserThunk = createAsyncThunk(
   }
 );
 
+export const checkTokenThunk = createAsyncThunk(
+  'user/token',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const user = await authApi.checkToken(token);
+      console.dir(user);
+      if (!user) {
+        throw new Error('Ошибка получения пользователя по токену');
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      rejectWithValue(message as string);
+    }
+  }
+);
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
   vkUser: null,
@@ -184,7 +180,28 @@ const systemSlice = createSlice({
         isPending: false,
         isNew: false,
       }))
-      .addCase(adminLoginThunk.pending, (state, _) => ({
+      .addCase(checkTokenThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(checkTokenThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          isPending: false,
+        };
+      })
+      .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isPending: false,
+      }))
+      .addCase(adminLoginThunk.pending, (state) => ({
         ...state,
         error: null,
         isPending: true,
@@ -209,3 +226,8 @@ const systemSlice = createSlice({
 
 export const { resetUser } = systemSlice.actions;
 export default systemSlice.reducer;
+
+export const actions = {
+  ...systemSlice.actions,
+  adminLoginThunk,
+};

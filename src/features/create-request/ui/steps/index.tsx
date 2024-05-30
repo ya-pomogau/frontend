@@ -45,21 +45,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
     temporaryCategory,
   } = useAppSelector((state) => state.createRequest);
   const data = useAppSelector((state) => state.user.data);
-  // const { data: categories } = useGetCategoriesQuery('');
-  const categories = [
-    {
-      _id: '65ce10451f54b2c0027072e7',
-      title: 'Помощь в готовке',
-      points: 1,
-      accessLevel: 3,
-    },
-    {
-      _id: '65ce10571f54b2c0027072e8',
-      title: 'Организация досуга',
-      points: 1,
-      accessLevel: 3,
-    },
-  ];
+  const { data: categories } = useGetCategoriesQuery();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -98,12 +84,14 @@ export const Request = ({ isMobile = true }: RequestProps) => {
 
   useEffect(() => {
     document.addEventListener('keydown', closeByEsc);
-    dispatch(setCategoryList(categories));
-
     return () => {
       document.removeEventListener('keydown', closeByEsc);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    dispatch(setCategoryList(categories));
   }, []);
 
   if (!data) return null;
@@ -113,7 +101,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
       isOpened={isPopupOpen}
       onClose={isOpen ? undefined : handleCloseClick}
     >
-      <div>
+      <div id="mainPopupOuterDiv" className={styles.mainPopupOuterDiv}>
         <MainPopup
           name={data.name}
           avatarLink={data.avatar}
@@ -124,44 +112,39 @@ export const Request = ({ isMobile = true }: RequestProps) => {
           extClassName={isMobile ? styles.mainPopUpWrapperMobile : undefined}
         >
           {isOpen && (
-            <OverlayingPopup
-              extClassName={styles.tooltipWrapper}
-              isOpened={isOpen}
-              onClose={isOpen ? () => setIsOpen(false) : undefined}
-            >
-              <div>
-                <Tooltip
-                  visible
-                  extClassName={isMobile ? styles.modalMobile : styles.modal}
-                  pointerPosition="right"
-                  elementStyles={{
-                    zIndex: 11,
-                    width: 343,
-                    padding: 0,
-                  }}
-                >
-                  <div className={styles.tooltipContent}>
-                    <p className={styles.text}>
-                      Закрыть окно сейчас и удалить ранее внесенную информацию?
-                    </p>
-                    <div className={styles.buttonWrapper}>
-                      <Button
-                        buttonType="secondary"
-                        label="Вернуться"
-                        onClick={() => setIsOpen(false)}
-                        extClassName={styles.button}
-                      />
-                      <Button
-                        buttonType="primary"
-                        label="Закрыть"
-                        onClick={handleCloseClick}
-                        extClassName={styles.button}
-                      />
-                    </div>
+            <div className={styles.tooltipOverlay}>
+              <Tooltip
+                visible
+                extClassName={isMobile ? styles.modalMobile : styles.modal}
+                pointerPosition="right"
+                elementStyles={{
+                  zIndex: 11,
+                  width: 343,
+                  padding: 0,
+                }}
+                idForModalRoot="mainPopupOuterDiv"
+              >
+                <div className={styles.tooltipContent}>
+                  <p className={styles.text}>
+                    Закрыть окно сейчас и удалить ранее внесенную информацию?
+                  </p>
+                  <div className={styles.buttonWrapper}>
+                    <Button
+                      buttonType="secondary"
+                      label="Вернуться"
+                      onClick={() => setIsOpen(false)}
+                      extClassName={styles.button}
+                    />
+                    <Button
+                      buttonType="primary"
+                      label="Закрыть"
+                      onClick={handleCloseClick}
+                      extClassName={styles.button}
+                    />
                   </div>
-                </Tooltip>
-              </div>
-            </OverlayingPopup>
+                </div>
+              </Tooltip>
+            </div>
           )}
 
           {currentStep === CurrentPage.DATE_STEP && (

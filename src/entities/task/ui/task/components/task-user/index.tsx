@@ -47,19 +47,17 @@ export const TaskUser = ({ user, extClassName, date }: TaskUserProps) => {
       </div>
       <div className={styles.buttons}>
         <ButtonWithModal
+          closeButton
           modalContent={
             <ModalContent type={ModalContentType.phone} date={date} />
           }
         >
           <RoundButton
             buttonType={TaskButtonType.phone}
-            disabled={isPageCompleted || !user ? true : false}
+            disabled={isPageCompleted || !user}
           />
         </ButtonWithModal>
-        <RoundButton
-          buttonType="message"
-          disabled={isPageCompleted || !user ? true : false}
-        />
+        <RoundButton buttonType="message" disabled={isPageCompleted || !user} />
       </div>
     </div>
   );

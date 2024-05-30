@@ -18,7 +18,10 @@ export const Desktop: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -29,7 +32,8 @@ export const Desktop: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
+        _id: '7',
+        vkId: '123456789',
         role: UserRole.VOLUNTEER,
       },
       category: {
@@ -44,12 +48,14 @@ export const Desktop: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '6',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: '123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -58,7 +64,10 @@ export const Mobile: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -69,7 +78,8 @@ export const Mobile: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
+        _id: '5',
+        vkId: '123456789',
         role: UserRole.VOLUNTEER,
       },
       category: {
@@ -84,12 +94,14 @@ export const Mobile: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '4',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: '123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -98,7 +110,10 @@ export const ExampleWithNoRecipient: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -109,7 +124,8 @@ export const ExampleWithNoRecipient: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
+        _id: '3',
+        vkId: '123456789',
         role: UserRole.VOLUNTEER,
       },
       category: {
@@ -124,12 +140,14 @@ export const ExampleWithNoRecipient: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '3',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: '123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -138,7 +156,10 @@ export const ExampleConfirmed: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -149,7 +170,8 @@ export const ExampleConfirmed: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
+        _id: '1',
+        vkId: '123456789',
         role: UserRole.VOLUNTEER,
       },
       category: {
@@ -164,12 +186,14 @@ export const ExampleConfirmed: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '1',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: '123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -178,7 +202,10 @@ export const ExampleConflict: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -189,7 +216,8 @@ export const ExampleConflict: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
+        _id: '1',
+        vkId: '123456789',
         role: UserRole.VOLUNTEER,
       },
       category: {
@@ -204,12 +232,14 @@ export const ExampleConflict: Story = {
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
+        _id: '3',
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: '123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };
@@ -218,7 +248,10 @@ export const ExampleWithIndefiniteDate: Story = {
   args: {
     item: {
       _id: '1234',
-      location: [12, 1234],
+      location: {
+        type: 'Point',
+        coordinates: [12, 1234],
+      },
       status: TaskStatus.CREATED,
       recipientReport: TaskReport.FULFILLED,
       volunteerReport: TaskReport.FULFILLED,
@@ -229,7 +262,8 @@ export const ExampleWithIndefiniteDate: Story = {
         avatar: '',
         address: '',
         phone: '',
-        vkId: '145',
+        _id: '2',
+        vkId: '123456789',
         role: UserRole.VOLUNTEER,
       },
       category: {
@@ -243,13 +277,15 @@ export const ExampleWithIndefiniteDate: Story = {
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
       recipient: {
+        _id: '1',
         address: '',
-        vkId: '123',
-        role: UserRole.RECIPIENT,
         avatar: 'https://i.pravatar.cc/300',
         name: 'Петров Петр Петрович',
         phone: '+7(000) 000-00-00',
+        vkId: '123456789',
+        role: UserRole.RECIPIENT,
       },
+      moderator: null,
     },
   },
 };

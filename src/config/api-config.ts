@@ -24,9 +24,12 @@ export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',
   userRegister: '/auth/new',
   adminLogin: '/auth/administrative',
+  checkToken: '/auth/token',
 };
 
 export const DEFAULT_HEADERS = {
   //eslint-disable-next-line @typescript-eslint/naming-convention
   'Content-Type': 'application/json',
 };
+
+export const LOCAL_STORAGE_TOKEN_ACCESS = 'token_access';

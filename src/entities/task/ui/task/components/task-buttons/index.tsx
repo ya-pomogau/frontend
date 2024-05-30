@@ -26,7 +26,8 @@ import { useLocation } from 'react-router-dom';
 import { UserProfile } from 'entities/user/types';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
 import { useState } from 'react';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
+import { useFulfillTaskMutation } from 'services/user-task-api';
 
 interface TaskButtonsProps {
   taskId: string;
@@ -40,7 +41,7 @@ interface TaskButtonsProps {
   recipientReport: TaskReport | null;
   adminResolve: ResolveStatus | null;
   volunteer: UserProfile | null;
-  location: GeoCoordinates;
+  location: PointGeoJSONInterface;
 }
 
 export const TaskButtons = ({
@@ -76,10 +77,20 @@ export const TaskButtons = ({
     category,
     description,
     date,
-    location,
+    location: location.coordinates,
     time: date === null ? '' : format(new Date(date!), 'HH:mm'),
   };
+  const [fulfillTask] = useFulfillTaskMutation();
 
+  const handleFulfillClick = () => {
+    const shouldFulfillTask =
+      (userRole === UserRole.VOLUNTEER && !volunteerReport) ||
+      (userRole === UserRole.RECIPIENT && !recipientReport && volunteer);
+
+    if (shouldFulfillTask) {
+      fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
+    }
+  };
   const handleEditButton = () => {
     if (date === null) {
       dispatch(changeCheckbox());
@@ -88,7 +99,9 @@ export const TaskButtons = ({
       dispatch(setTime(format(new Date(date!), 'HH:mm')));
     }
     dispatch(setTemporary({ initialData }));
-    dispatch(setAddress({ additinalAddress: address, coords: location }));
+    dispatch(
+      setAddress({ additinalAddress: address, coords: location.coordinates })
+    );
     dispatch(setDescriptionForTask(description));
     dispatch(setCategory(category));
     dispatch(changeCurrentStep(4));
@@ -99,26 +112,39 @@ export const TaskButtons = ({
       {(isTaskExpired || !date) && isPageActive && (
         <ButtonWithModal
           setClicked={setClicked}
+          closeButton
           modalContent={
             <ModalContent
-              type={clicked ? ModalContentType.admin : ModalContentType.confirm}
-              role={userRole}
+              volunteer={!!volunteer}
+              type={
+                !volunteer && userRole === UserRole.RECIPIENT
+                  ? ModalContentType.confirm
+                  : clicked
+                  ? ModalContentType.admin
+                  : ModalContentType.confirm
+              }
+              userRole={userRole}
+              taskId={taskId}
             />
           }
           extClassName={styles.confirm}
         >
           <SquareButton
+            onClick={handleFulfillClick}
             buttonType={TaskButtonType.confirm}
             disabledColor={
-              (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
-              (userRole === UserRole.RECIPIENT && !!recipientReport) ||
-              clicked
+              !volunteer && userRole === UserRole.RECIPIENT
+                ? true
+                : (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
+                  (userRole === UserRole.RECIPIENT && !!recipientReport) ||
+                  clicked
             }
           />
         </ButtonWithModal>
       )}
       {userRole === UserRole.VOLUNTEER && isPageActive && (
         <ButtonWithModal
+          closeButton
           extClassName={styles.close}
           modalContent={
             <ModalContent
@@ -141,9 +167,12 @@ export const TaskButtons = ({
       )}
       {userRole === UserRole.RECIPIENT && isPageActive && (
         <ButtonWithModal
+          closeButton
           extClassName={styles.close}
           modalContent={
             <ModalContent
+              userRole={userRole}
+              taskId={taskId}
               type={
                 isTaskExpired || volunteer
                   ? ModalContentType.responded
@@ -161,12 +190,15 @@ export const TaskButtons = ({
       )}
       {(isTaskExpired || !date) && (
         <ButtonWithModal
+          closeButton
           setClicked={isPageActive ? setClicked : undefined}
           extClassName={styles.conflict}
           modalContent={
             <ModalContent
               type={
-                isPageActive
+                isPageActive && !volunteer && userRole === UserRole.RECIPIENT
+                  ? ModalContentType.conflict
+                  : isPageActive
                   ? clicked
                     ? ModalContentType.admin
                     : ModalContentType.conflict
@@ -177,20 +209,24 @@ export const TaskButtons = ({
               active={isPageActive}
               conflict={conflict}
               date={date}
+              taskId={taskId}
+              userRole={userRole}
+              volunteer={!!volunteer}
             />
           }
         >
           <SquareButton
             buttonType={TaskButtonType.conflict}
             disabledColor={
-              (userRole === UserRole.VOLUNTEER &&
-                !!volunteerReport &&
-                isPageActive) ||
-              (userRole === UserRole.RECIPIENT &&
-                !!recipientReport &&
-                isPageActive) ||
-              conflict ||
-              (clicked && isPageActive)
+              !volunteer && userRole === UserRole.RECIPIENT
+                ? true
+                : (userRole === UserRole.VOLUNTEER &&
+                    !!volunteerReport &&
+                    isPageActive) ||
+                  (userRole === UserRole.RECIPIENT &&
+                    !!recipientReport &&
+                    isPageActive) ||
+                  (clicked && isPageActive)
             }
           />
         </ButtonWithModal>

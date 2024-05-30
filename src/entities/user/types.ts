@@ -14,25 +14,9 @@ export type UserProfile = {
   avatar: string;
   address: string;
   vkId: string;
-  role: string;
+  role: UserRole;
+  _id: string;
 };
-
-// export type UserInfo = {
-//   id: string;
-//   fullname: string;
-//   role: UserRole | null;
-//   status?: UserStatus;
-//   vk: string;
-//   avatar: string;
-//   phone: string;
-//   address: string;
-//   coordinates: GeoCoordinates;
-//   createdAt: string;
-//   isHasKeys?: boolean;
-//   scores?: number;
-//   permissions?: Array<AdminPermission> | null;
-//   isActive: boolean;
-// };
 
 export type User = {
   _id: string;
@@ -77,16 +61,18 @@ export type TUser = {
 };
 
 export type TVKUser = {
-  firstName: string;
-  lastName: string;
-  vkId: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  id: string;
+  photo_max_orig: string;
 };
 // TODO: надо изменить
 export type UpdateUserInfo = {
   name: string;
   phone: string;
   address: string;
-  avatar: null | FormData;
+  avatar?: null | FormData;
   _id: string;
 };
 

@@ -1,10 +1,11 @@
-import React from 'react';
+import { useEffect } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDescriptionForTask,
   setCategory,
+  setCategoryList,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { TextArea } from 'shared/ui/text-area';
@@ -12,12 +13,17 @@ import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
+import { useGetCategoriesQuery } from 'services/categories-api';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
+  const { data } = useGetCategoriesQuery();
+  useEffect(() => {
+    dispatch(setCategoryList(data));
+  }, []);
   const { description, categories, category, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
@@ -108,13 +114,12 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             />
           </>
         )}
+        {description.length <= 5 && (
+          <p className={styles.messageAlert}>Добавьте описание задачи</p>
+        )}
       </div>
       <div className={styles.buttonsWrapper}>
-        <div className={styles.alertWrapper}>
-          {description.length <= 5 && (
-            <p className={styles.messageAlert}>Добавьте описание задачи</p>
-          )}
-        </div>
+        <div className={styles.alertWrapper}></div>
         {!isTypeEdit && (
           <Button
             buttonType="secondary"

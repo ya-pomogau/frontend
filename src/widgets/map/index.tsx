@@ -1,5 +1,11 @@
 import { memo, useState } from 'react';
-import { Circle, Map, YMaps } from '@pbe/react-yandex-maps';
+import {
+  Circle,
+  GeolocationControl,
+  Map,
+  YMaps,
+  ZoomControl,
+} from '@pbe/react-yandex-maps';
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import usePermission from 'shared/hooks/use-permission';
 import { getBounds } from 'shared/libs/utils';
@@ -9,6 +15,7 @@ import {
   unauthorizedVolunteerPopupMessage,
   thankForAssignTaskMessage,
   cantAssignTaskMessage,
+  unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
 import { ConflictIcon } from 'shared/ui/icons/conflict-icon';
 import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-icon';
@@ -41,7 +48,7 @@ interface YandexMapProps {
 export const YandexMap = ({
   width = 500,
   height = 500,
-  mapSettings = { latitude: 59.93, longitude: 30.31, zoom: 15 },
+  mapSettings = { latitude: 55.890017, longitude: 37.621157, zoom: 15 },
   radius,
   onClick,
   tasks,
@@ -98,6 +105,8 @@ export const YandexMap = ({
           width={width}
           height={height}
         >
+          <GeolocationControl options={{ float: 'left' }} />
+          <ZoomControl options={{ position: { top: 5, right: 5 } }} />
           {tasks?.map((task) => {
             let showPopup = showThankPopup;
             if (task.volunteer !== null) showPopup = showSorryPopup;
@@ -141,7 +150,9 @@ export const YandexMap = ({
           onClickExit={onClickExit}
           hasCloseButton={true}
         >
-          {unauthorizedVolunteerPopupMessage}
+          {isAuthorised
+            ? unauthorizedVolunteerPopupMessage
+            : unauthorizedUserPopupMessage}
         </LightPopup>
       )}
       {isGranted && (

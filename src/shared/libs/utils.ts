@@ -1,8 +1,7 @@
-import { FRONT_URL } from 'config/api-config';
+import { FRONT_URL, LOCAL_STORAGE_TOKEN_ACCESS } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import { Task } from 'entities/task/types';
 import { IFilterValues } from 'features/filter/types';
-// eslint-disable-next-line import/no-duplicates
 
 import {
   DAYS_IN_MONTH,
@@ -17,6 +16,15 @@ import { UserRole } from 'shared/types/common.types';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
+export const getRoleForRequest = (role: UserRole | null) => {
+  let query = '';
+  if (role === UserRole.RECIPIENT) {
+    query = UserRole.RECIPIENT.toLowerCase();
+  } else {
+    query = UserRole.VOLUNTEER.toLowerCase();
+  }
+  return query;
+};
 
 export const getFullQueriesForYApi = (
   mainJSApi: string,
@@ -251,4 +259,12 @@ export const filterUsersNamePageAdmin = (
       user.userName.toLowerCase().includes(searchName.toLowerCase()) &&
       user.role !== UserRole.ADMIN
   );
+};
+
+export const setTokenAccess = (token: string) => {
+  return localStorage.setItem(LOCAL_STORAGE_TOKEN_ACCESS, token);
+};
+
+export const getTokenAccess = () => {
+  return localStorage.getItem(LOCAL_STORAGE_TOKEN_ACCESS);
 };
