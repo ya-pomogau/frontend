@@ -10,7 +10,7 @@ import {
 // от того удовлетворяет пользователь хотя бы одному из перечисленных
 // требований или нет
 
-type Requirments =
+type Requirements =
   | UserStatus.CONFIRMED
   | UserStatus.UNCONFIRMED
   | UserStatus.ACTIVATED
@@ -25,7 +25,7 @@ type Requirments =
 type Role = UserRole.VOLUNTEER | UserRole.RECIPIENT | UserRole.ADMIN;
 // TODO: возможно нужно будет дописать условие на isRoot тк админ и мастер имею одну и туже роль
 export default function usePermission(
-  requirments: Array<Requirments>,
+  requirements: Array<Requirements>,
   role: Role | null
 ) {
   const userIsRoot = useAppSelector((state) => state.user.data?.isRoot);
@@ -43,12 +43,12 @@ export default function usePermission(
         isAllowed = true;
       } else {
         const userRights = { status: userStatus, ...userPermissions };
-        const hasPermission = requirments.filter((requirment) =>
+        const hasPermission = requirements.filter((requirement) =>
           Object.values(userRights).some(
-            (element) => JSON.stringify(element) === JSON.stringify(requirment)
+            (element) => JSON.stringify(element) === JSON.stringify(requirement)
           )
         );
-        hasPermission.length > 0 && hasPermission.length === requirments.length
+        hasPermission.length > 0 && hasPermission.length === requirements.length
           ? (isAllowed = true)
           : (isAllowed = false);
       }
