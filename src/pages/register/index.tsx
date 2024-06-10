@@ -13,7 +13,7 @@ import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import useForm from 'shared/hooks/use-form';
-import { InputPhone } from 'shared/ui/inputPhone';
+import { InputPhone } from 'shared/ui/input-phone';
 
 export interface IRegisterForm {
   name: string;
