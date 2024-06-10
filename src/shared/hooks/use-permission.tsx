@@ -24,7 +24,7 @@ type Requirements =
   | AdminPermission.BLOG
   | AdminPermission.CATEGORIES;
 type Role = UserRole.VOLUNTEER | UserRole.RECIPIENT | UserRole.ADMIN;
-// TODO: возможно нужно будет дописать условие на isRoot тк админ и мастер имею одну и туже роль
+
 export default function usePermission(
   requirements: Array<Requirements>,
   role: Role | null
@@ -33,30 +33,20 @@ export default function usePermission(
   const userStatus = useAppSelector((state) => state.user.data?.status);
   const userRole = useAppSelector((state) => state.user.data?.role);
   const userPermissions = useAppSelector(
-    (state) => state.user.data?.permissions
+    (state) => state.user.data?.permissions || []
   );
 
-  let isAllowed = false;
-
-  if (userRole === role) {
-    if (userRole) {
-      if (userIsRoot) {
-        isAllowed = true;
-      } else {
-        const userRights = { status: userStatus, ...userPermissions };
-        const hasPermission = requirements.filter((requirement) =>
-          Object.values(userRights).some(
-            (element) => JSON.stringify(element) === JSON.stringify(requirement)
-          )
-        );
-        hasPermission.length > 0 && hasPermission.length === requirements.length
-          ? (isAllowed = true)
-          : (isAllowed = false);
-      }
-    }
-  } else {
-    isAllowed = false;
+  if (userRole === UserRole.ADMIN && userIsRoot) {
+    return true;
   }
 
-  return isAllowed;
+  if (userRole !== role) {
+    return false;
+  }
+
+  const hasPermission = requirements.every((requirement) =>
+    [userStatus, ...userPermissions].some((element) => element === requirement)
+  );
+
+  return hasPermission && requirements.length > 1;
 }
