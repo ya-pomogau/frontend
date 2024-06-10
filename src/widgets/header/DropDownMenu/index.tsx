@@ -86,13 +86,16 @@ export const DropDownMenu = ({
     >
       {user ? (
         <div className={styles.wrapper}>
-          <DropDownMenuButton
-            isMobile={isMobile}
-            onClick={() => console.log('Нажали кнопку')}
-            buttonType="adminMessage"
-          >
-            Написать администратору
-          </DropDownMenuButton>
+          {/* eslint-disable-next-line eqeqeq */}
+          {role != 'Admin' && (
+            <DropDownMenuButton
+              isMobile={isMobile}
+              onClick={() => console.log('Нажали кнопку')}
+              buttonType="adminMessage"
+            >
+              Написать администратору
+            </DropDownMenuButton>
+          )}
           {isMobile ? (
             <SideBar
               position={positionConfigMenu}

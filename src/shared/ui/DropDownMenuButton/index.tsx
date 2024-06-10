@@ -49,7 +49,7 @@ export const DropDownMenuButton = forwardRef<
           </div>
         )}
 
-        {isMobile && (
+        {isMobile && buttonType === 'adminMessage' && (
           <svg
             className={`${styles.title__background}`}
             width="235"
