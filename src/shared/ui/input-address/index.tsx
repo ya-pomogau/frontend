@@ -108,6 +108,8 @@ export const InputAddress = (props: InputAddressProps) => {
 
   return (
     <Input
+      error={props.error}
+      errorText="Не введен адрес. Пожалуйста, укажите адрес, по которому требуется помощь!"
       value={address.address}
       ref={suggestInputRef}
       type="text"

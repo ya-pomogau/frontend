@@ -12,6 +12,17 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import useForm from 'shared/hooks/use-form';
+import { InputPhone } from 'shared/ui/inputPhone';
+
+export interface IRegisterForm {
+  name: string;
+  phone: string;
+  address: {
+    address: string;
+    coords: GeoCoordinates;
+  };
+}
 
 export function RegisterPage() {
   const vkUser = useAppSelector(vkUserSelector);
@@ -22,8 +33,30 @@ export function RegisterPage() {
     photo_max_orig = '',
   } = vkUser ?? {};
   const FIO = `${first_name} ${last_name}`;
-  const [name, setName] = useState<string>(FIO);
-  const [phone, setPhone] = useState<string>('');
+  const [error, setError] = useState({
+    name: false,
+    phone: false,
+    address: false,
+  });
+  const { values, handleChange } = useForm<IRegisterForm>({
+    name: '',
+    phone: '',
+    address: { address: '', coords: [] },
+  });
+
+  const handleError = (type: 'name' | 'phone' | 'address') => {
+    switch (type) {
+      case 'name':
+        setError({ ...error, [type]: values[type].length < 4 });
+        break;
+      case 'address':
+        setError({ ...error, [type]: address.address.length < 4 });
+        break;
+      default:
+        console.log('error');
+    }
+  };
+
   const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
   const [address, setAddress] = useState<{
     address: string;
@@ -39,8 +72,8 @@ export function RegisterPage() {
     event.preventDefault();
     const vk_id = `${id}`;
     const user = {
-      name: name,
-      phone,
+      name: values.name,
+      phone: values.phone,
       address: address.address,
       avatar: photo_max_orig,
       location: {
@@ -68,6 +101,8 @@ export function RegisterPage() {
   // определение внешнего вида кнопки выбора роли
   const getRoleButtonType = (userRole: string) =>
     role === userRole ? 'primary' : 'secondary';
+
+  const disabledBtn = error.name || error.phone || error.address;
 
   return (
     <>
@@ -98,34 +133,42 @@ export function RegisterPage() {
           />
         </div>
         <Input
+          onBlur={() => handleError('name')}
           extClassName={styles.field}
           required
           label="ФИО"
           name="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
+          value={values.name}
+          error={error.name}
+          errorText="Имя должно содержать больше символов"
+          onChange={handleChange}
           placeholder="ФИО"
           type="text"
         />
 
-        <Input
+        <InputPhone
+          onBlur={() => handleError('phone')}
+          error={error.phone}
+          errorText="Некорректный номер телефона"
           extClassName={styles.field}
-          required
           label="Телефон"
           name="phone"
-          value={phone}
-          onChange={(event) => setPhone(event.target.value)}
-          placeholder="+70010900213"
+          value={values.phone}
+          onChange={handleChange}
           type="tel"
-          pattern="^[+]7\d{10}$"
-          title="+71234567890"
+          placeholder="+7 (123) 456-78-90"
         />
 
         <div>
           <InputAddress
             required
+            onBlur={() => handleError('address')}
+            error={error.address}
             name="address"
+            extClassName={styles.field}
+            label="Адрес"
             address={address}
+            onChange={handleChange}
             setAddress={handleAddressValueChange}
           />
 
@@ -139,6 +182,7 @@ export function RegisterPage() {
           actionType="submit"
           label="Подтвердите корректность данных"
           size="extraLarge"
+          disabled={disabledBtn}
         />
       </form>
     </>

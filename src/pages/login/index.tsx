@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -17,6 +17,7 @@ interface ILoginForm {
 
 export function LoginPage() {
   const [errorText, setErrorText] = useState('');
+  const [error, setError] = useState(false);
   const [adminLogin, isLoading] = useAsyncAction(actions.adminLoginThunk);
   const { values, handleChange, errors, isValid } = useForm<ILoginForm>({
     login: '',
@@ -35,6 +36,18 @@ export function LoginPage() {
     }
   };
 
+  const validateField = (value: string) => {
+    setError(value.length < 4);
+  };
+
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.target.value) {
+      validateField(e.target.value);
+    } else {
+      setError(false);
+    }
+  };
+
   return (
     <>
       <SmartHeader
@@ -45,6 +58,7 @@ export function LoginPage() {
       <p className={styles.title}>Войти</p>
       <form className={styles.form} onSubmit={onSubmit}>
         <Input
+          onBlur={onBlur}
           extClassName={styles.field}
           required
           label="Логин"
@@ -53,7 +67,7 @@ export function LoginPage() {
           onChange={handleChange}
           placeholder="ФИО / Телефон / Логин"
           type="text"
-          error={errors.login.length >= 1}
+          error={error}
           errorText="Вы ввели неправильный логин"
         />
         <PasswordInput

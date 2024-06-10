@@ -34,7 +34,7 @@ export const PasswordInput = React.forwardRef<
 
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const validateField = (value: string) => {
-      setError(value.length < 2);
+      setError(value.length < 6);
     };
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
