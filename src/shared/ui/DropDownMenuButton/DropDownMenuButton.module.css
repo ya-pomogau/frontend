@@ -65,6 +65,8 @@
   line-height: 19px;
   color: black;
   justify-content: end;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 @media (max-width: 900px) {
