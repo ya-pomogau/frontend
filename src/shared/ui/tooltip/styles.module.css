@@ -42,3 +42,11 @@
   right: 20px;
   cursor: pointer;
 }
+
+
+@media (max-width: 510px) {
+  .tooltip {
+    left: 50%;
+    transform: translate(-50%);
+  }
+}

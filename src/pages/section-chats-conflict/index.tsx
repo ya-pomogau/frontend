@@ -68,6 +68,12 @@ export const SectionChatsConflict = () => {
             extClassName={styles.informer}
           />
         )}
+        {dataMessage?.length === 0 && location.pathname ==='/chat-progress' && (
+          <Informer
+            text="У Вас пока нет конфликтов в работе"
+            extClassName={styles.informer}
+          />
+        )}
         {dataMessage?.map((item) => (
           <div key={item._id}>
             <MessageCard

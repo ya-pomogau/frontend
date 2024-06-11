@@ -21,6 +21,7 @@
   flex-direction: column;
   align-items: flex-end;
   height: 750px;
+  width: 100%;
 }
 
 .boxBtn {
@@ -44,6 +45,7 @@
   .boxMessage {
     min-width: 100px;
     margin: 10px auto 0;
+    width: 100%;
   }
 
   .boxBtn {
@@ -51,5 +53,9 @@
     display: flex;
     justify-content: center;
     gap: 20px;
+  }
+
+  .boxConflict {
+    width: 0;
   }
 }
