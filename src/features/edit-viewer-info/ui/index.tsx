@@ -81,6 +81,16 @@ export const EditViewerInfo = ({
     //   avatarFile.append('file', files[0]);
     //   setUserData({ ...userData, [name]: value });
     // }
+
+    if (name === 'phone') {
+      const phoneRegex = /^[+]7\d{10}$/;
+      if (!phoneRegex.test(value)) {
+        setPhoneError('Неверный формат номера');
+      } else {
+        setPhoneError(null);
+      }
+    }
+
     setUserData({ ...userData, [name]: value });
   };
 
@@ -98,6 +108,8 @@ export const EditViewerInfo = ({
     setIsFormEdited(false);
     setIsPopupOpen(false);
   };
+
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
   useOutsideClick({
     elementRef: modalRef,
@@ -214,12 +226,15 @@ export const EditViewerInfo = ({
                 Тел.:{' '}
               </p>
               <Input
-                type="text"
+                type="tel"
                 extClassName={styles.input}
                 placeholder="Введите телефон"
                 value={userData.phone}
                 onChange={handleChange}
                 name="phone"
+                required
+                pattern="^[+]7\d{10}$"
+                title="+71234567890"
                 {...props}
               />
             </li>
@@ -251,9 +266,10 @@ export const EditViewerInfo = ({
         </div>
         <Button
           disabled={
-            valueName === userData.name &&
-            valuePhone === userData.phone &&
-            valueAddress === userData.address
+            (valueName === userData.name &&
+              valuePhone === userData.phone &&
+              valueAddress === userData.address) ||
+            phoneError !== null
           }
           onClick={() => onClickSave(userData)}
           extClassName={styles.button}
