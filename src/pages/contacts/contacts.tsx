@@ -12,7 +12,7 @@ import {
   useUpdateContactsMutation,
 } from '../../services/contacts-api';
 import { setContacts } from '../../entities/contacts/model';
-import { TContacts } from 'entities/contacts/types';
+import { TContacts } from '../../entities/contacts/types';
 
 export function ContactsPage() {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
