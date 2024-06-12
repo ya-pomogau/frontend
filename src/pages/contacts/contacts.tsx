@@ -11,10 +11,8 @@ import {
   TContacts,
 } from '../../shared/types/common.types';
 import useForm from '../../shared/hooks/use-form';
-import {
-  useGetContactsQuery,
-  useUpdateContactsMutation,
-} from '../../services/contacts-api';
+import { useGetContactsQuery } from '../../services/contacts-api';
+import { useUpdateContactsMutation } from '../../services/admin-api';
 
 export function ContactsPage() {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);

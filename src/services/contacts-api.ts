@@ -20,15 +20,7 @@ export const contactsApi = createApi({
     getContacts: build.query<TContacts, void>({
       query: () => 'system/contacts',
     }),
-    // для изменения контактов на бэке есть метод сервиса, но нет ручки
-    updateContacts: build.mutation<TContacts, TContacts>({
-      query: (newContacts) => ({
-        url: 'system/contacts',
-        method: 'PATCH',
-        body: newContacts,
-      }),
-    }),
   }),
 });
 
-export const { useGetContactsQuery, useUpdateContactsMutation } = contactsApi;
+export const { useGetContactsQuery } = contactsApi;
