@@ -22,10 +22,9 @@ export function ContactsPage() {
     socialNetwork: null,
   });
 
-  const [enableEdit, setEnableEdit] = useState({
-    email: false,
-    socialNetwork: false,
-  });
+  const [editingInput, setEditingInput] = useState<
+    'email' | 'socialNetwork' | null
+  >(null);
 
   const dispatch = useAppDispatch();
   const { email, socialNetwork } = useAppSelector((state) => state.contacts);
@@ -52,10 +51,7 @@ export function ContactsPage() {
         } else {
           console.error('Ошибка при сохранении данных:', resultAction.error);
         }
-        setEnableEdit({
-          email: false,
-          socialNetwork: false,
-        });
+        setEditingInput(null);
         setContactsData({
           email: email,
           socialNetwork: socialNetwork,
@@ -64,10 +60,7 @@ export function ContactsPage() {
         console.error('Ошибка при сохранении данных:', error);
       }
     } else {
-      setEnableEdit({
-        email: false,
-        socialNetwork: false,
-      });
+      setEditingInput(null);
       setContactsData({
         email: email,
         socialNetwork: socialNetwork,
@@ -79,17 +72,11 @@ export function ContactsPage() {
   };
 
   const emailHandler = () => {
-    setEnableEdit({
-      ...enableEdit,
-      email: true,
-    });
+    setEditingInput('email');
   };
 
   const socialNetworkHandler = () => {
-    setEnableEdit({
-      ...enableEdit,
-      socialNetwork: true,
-    });
+    setEditingInput('socialNetwork');
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +89,7 @@ export function ContactsPage() {
         text="Контакты"
         icon={<Icon color="blue" icon="ContactsIcon" size="54" />}
       />
-      <form onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles.container}>
           <div className={styles.element_box}>
             <h2
@@ -110,6 +97,7 @@ export function ContactsPage() {
                 'text',
                 'text_size_large',
                 'text_type_regular',
+                'm-0',
                 styles.title
               )}
             >
@@ -117,13 +105,17 @@ export function ContactsPage() {
             </h2>
             <input
               type="text"
-              className={styles.input}
+              className={`${styles.input} ${
+                editingInput === 'email'
+                  ? styles.input_mode_edit
+                  : styles.input_mode_link
+              }`}
               onChange={onChange}
               name="email"
               value={contactsData.email || ''}
-              readOnly={!enableEdit.email}
+              readOnly={editingInput !== 'email'}
               onClick={(e) => {
-                if (!enableEdit.email) {
+                if (editingInput !== 'email') {
                   e.preventDefault();
                   window.location.href = `mailto:${contactsData.email}`;
                 }
@@ -131,9 +123,25 @@ export function ContactsPage() {
             />
           </div>
           {isEditAllowed && (
-            <div onClick={emailHandler} className={styles.edit_box}>
+            <div
+              onClick={emailHandler}
+              className={
+                editingInput === 'email'
+                  ? styles.edit_box_hidden
+                  : styles.edit_box
+              }
+            >
               <Icon color="blue" icon="EditIcon" />
-              <p className={styles.edit_text}>Изменить данные</p>
+              <p
+                className={classNames(
+                  'text',
+                  'text_size_small',
+                  'text_type_regular',
+                  'm-0'
+                )}
+              >
+                Изменить данные
+              </p>
             </div>
           )}
         </div>
@@ -144,6 +152,7 @@ export function ContactsPage() {
                 'text',
                 'text_size_large',
                 'text_type_regular',
+                'm-0',
                 styles.title
               )}
             >
@@ -151,13 +160,17 @@ export function ContactsPage() {
             </h2>
             <input
               type="text"
-              className={styles.input}
+              className={`${styles.input} ${
+                editingInput === 'socialNetwork'
+                  ? styles.input_mode_edit
+                  : styles.input_mode_link
+              }`}
               onChange={onChange}
               name="socialNetwork"
               value={contactsData.socialNetwork || ''}
-              readOnly={!enableEdit.socialNetwork}
+              readOnly={editingInput !== 'socialNetwork'}
               onClick={(e) => {
-                if (!enableEdit.socialNetwork) {
+                if (editingInput !== 'socialNetwork') {
                   e.preventDefault();
                   window.location.href = `${contactsData.socialNetwork}`;
                 }
@@ -165,9 +178,25 @@ export function ContactsPage() {
             />
           </div>
           {isEditAllowed && (
-            <div onClick={socialNetworkHandler} className={styles.edit_box}>
+            <div
+              onClick={socialNetworkHandler}
+              className={
+                editingInput === 'socialNetwork'
+                  ? styles.edit_box_hidden
+                  : styles.edit_box
+              }
+            >
               <Icon color="blue" icon="EditIcon" />
-              <p className={styles.edit_text}>Изменить данные</p>
+              <p
+                className={classNames(
+                  'text',
+                  'text_size_small',
+                  'text_type_regular',
+                  'm-0'
+                )}
+              >
+                Изменить данные
+              </p>
             </div>
           )}
         </div>
@@ -175,7 +204,7 @@ export function ContactsPage() {
           <Button
             buttonType="primary"
             label="Сохранить"
-            disabled={!enableEdit.email && !enableEdit.socialNetwork}
+            disabled={editingInput === null}
             type="submit"
           />
         )}

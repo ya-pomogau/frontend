@@ -24,7 +24,7 @@ export const contactsApi = createApi({
     updateContacts: build.mutation<TContacts, TContacts>({
       query: (newContacts) => ({
         url: 'system/contacts',
-        method: 'POST',
+        method: 'PATCH',
         body: newContacts,
       }),
     }),
