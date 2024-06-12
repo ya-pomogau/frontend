@@ -26,4 +26,5 @@ export interface IIconProps<T = '24'> {
   onClick?:
     | (() => void)
     | ((e: React.MouseEvent<SVGSVGElement, MouseEvent>) => void);
+  height?: string;
 }

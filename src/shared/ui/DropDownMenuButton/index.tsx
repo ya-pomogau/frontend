@@ -26,7 +26,9 @@ export const DropDownMenuButton = forwardRef<
         size="24"
       />
     );
-    const logoutIcon = <Icon color="blue" icon="ExitIcon" size="24" />;
+    const logoutIcon = (
+      <Icon color="blue" icon="ExitIcon" size="24" height="20" />
+    );
     return (
       <button
         className={styles.adminButton}
@@ -49,7 +51,7 @@ export const DropDownMenuButton = forwardRef<
           </div>
         )}
 
-        {isMobile && (
+        {isMobile && buttonType === 'adminMessage' && (
           <svg
             className={`${styles.title__background}`}
             width="235"
