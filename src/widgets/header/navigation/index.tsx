@@ -6,19 +6,13 @@ import type { ISideBarElementProps, ISideBarProps } from './types';
 import styles from './styles.module.css';
 
 const SideBarItem = ({ title, to, icon, position }: ISideBarElementProps) => {
-  const { pathname } = useLocation();
-  const [link, setLink] = useState<string>('');
-
-  useEffect(() => {
-    setLink(pathname);
-  }, [pathname]);
+  const location = useLocation();
+  const isActive = location.pathname.startsWith(to);
 
   return (
     <NavLink
       to={to}
-      className={`${styles.link} ${
-        to === link ? styles.link_active : undefined
-      }`}
+      className={`${styles.link} ${isActive ? styles.link_active : undefined}`}
       style={{
         flexDirection: position?.flexDirection,
         justifyContent: position?.justifyContent,
