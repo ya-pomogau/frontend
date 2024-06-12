@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { userModel } from 'entities/user/model';
-import { contactsModel } from 'entities/contacts/model';
 import { createRequestModel } from 'features/create-request/model/create-request';
 import { usersApi } from 'services/user-api';
 import { contactsApi } from 'services/contacts-api';
@@ -18,7 +17,6 @@ export const store = configureStore({
   reducer: {
     error: errorModel.reducer,
     user: userModel.reducer,
-    contacts: contactsModel.reducer,
     createRequest: createRequestModel.reducer,
     system: systemSliceReducer,
     [usersApi.reducerPath]: usersApi.reducer,

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from '../config/api-config';
 import { getTokenAccess } from '../shared/libs/utils';
-import { TContacts } from '../entities/contacts/types';
+import { TContacts } from '../shared/types/common.types';
 
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',

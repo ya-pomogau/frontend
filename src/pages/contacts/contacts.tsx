@@ -1,18 +1,19 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.css';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { Icon } from '../../shared/ui/icons';
 import { Button } from '../../shared/ui/button';
 import usePermission from '../../shared/hooks/use-permission';
-import { UserRole, UserStatus } from '../../shared/types/common.types';
+import {
+  UserRole,
+  UserStatus,
+  TContacts,
+} from '../../shared/types/common.types';
 import {
   useGetContactsQuery,
   useUpdateContactsMutation,
 } from '../../services/contacts-api';
-import { setContacts } from '../../entities/contacts/model';
-import { TContacts } from '../../entities/contacts/types';
 
 export function ContactsPage() {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
@@ -26,55 +27,36 @@ export function ContactsPage() {
     'email' | 'socialNetwork' | null
   >(null);
 
-  const dispatch = useAppDispatch();
-  const { email, socialNetwork } = useAppSelector((state) => state.contacts);
+  const { data } = useGetContactsQuery();
   const [updateContacts, { isLoading }] = useUpdateContactsMutation();
-  const getContactsResult = useGetContactsQuery();
-
-  useEffect(() => {
-    if (getContactsResult.data) {
-      dispatch(setContacts(getContactsResult.data));
-    }
-  }, [getContactsResult]);
 
   useEffect(() => {
     setContactsData({
-      email: email,
-      socialNetwork: socialNetwork,
+      email: data?.email,
+      socialNetwork: data?.socialNetwork,
     });
-  }, [email, socialNetwork]);
+  }, [data]);
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (isEditAllowed) {
-      try {
-        const resultAction = await updateContacts(contactsData);
-        if ('data' in resultAction) {
-          dispatch(setContacts(resultAction.data));
-          setContactsData({
-            email: resultAction.data.email,
-            socialNetwork: resultAction.data.socialNetwork,
-          });
-        } else {
-          console.error('Ошибка при сохранении данных:', resultAction.error);
-        }
-        setEditingInput(null);
+    try {
+      const resultAction = await updateContacts(contactsData);
+      if ('data' in resultAction) {
         setContactsData({
-          email: email,
-          socialNetwork: socialNetwork,
+          email: resultAction.data.email,
+          socialNetwork: resultAction.data.socialNetwork,
         });
-      } catch (error) {
-        console.error('Ошибка при сохранении данных:', error);
+      } else {
+        console.error('Ошибка при сохранении данных:', resultAction.error);
+        setContactsData({
+          email: data?.email,
+          socialNetwork: data?.socialNetwork,
+        });
       }
-    } else {
+    } catch (error) {
+      console.error('Ошибка при сохранении данных:', error);
+    } finally {
       setEditingInput(null);
-      setContactsData({
-        email: email,
-        socialNetwork: socialNetwork,
-      });
-      console.log(
-        'Изменение контактых данных не доступно для текущего пользователя'
-      );
     }
   };
 
