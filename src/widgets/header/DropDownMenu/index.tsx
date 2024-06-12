@@ -24,11 +24,6 @@ import { Button } from '../../../shared/ui/button';
 
 export const modalRoot = document.getElementById('modal') as HTMLElement;
 
-const line = {
-  background: '#E0E0E0',
-  height: '1px',
-  width: '100%',
-};
 interface MenuProps {
   setMenuActive: (arg: boolean) => void;
   menuActive: boolean;
@@ -75,6 +70,14 @@ export const DropDownMenu = ({
     return navigate('/');
   };
 
+  const line = {
+    background: '#E0E0E0',
+    height: '1px',
+    width: '90%',
+    marginLeft: '20px',
+    marginTop: role === 'Admin' ? '20px' : '0',
+  };
+
   return createPortal(
     <div
       className={
@@ -86,13 +89,16 @@ export const DropDownMenu = ({
     >
       {user ? (
         <div className={styles.wrapper}>
-          <DropDownMenuButton
-            isMobile={isMobile}
-            onClick={() => console.log('Нажали кнопку')}
-            buttonType="adminMessage"
-          >
-            Написать администратору
-          </DropDownMenuButton>
+          {/* eslint-disable-next-line eqeqeq */}
+          {role != 'Admin' && (
+            <DropDownMenuButton
+              isMobile={isMobile}
+              onClick={() => console.log('Нажали кнопку')}
+              buttonType="adminMessage"
+            >
+              Написать администратору
+            </DropDownMenuButton>
+          )}
           {isMobile ? (
             <SideBar
               position={positionConfigMenu}
