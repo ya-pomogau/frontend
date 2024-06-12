@@ -37,14 +37,11 @@ export function ContactsPage() {
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      const resultAction = await updateContacts(values);
-      if (!('data' in resultAction)) {
-        console.error('Ошибка при сохранении данных:', resultAction.error);
-        values.email = data?.email;
-        values.socialNetwork = data?.socialNetwork;
-      }
+      await updateContacts(values);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
+      values.email = data?.email;
+      values.socialNetwork = data?.socialNetwork;
     } finally {
       setEditingInput(null);
     }
