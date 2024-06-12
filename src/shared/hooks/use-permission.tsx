@@ -28,6 +28,7 @@ export default function usePermission(
   requirments: Array<Requirments>,
   role: Role | null
 ) {
+  const isRootUser = useAppSelector((state) => state.user.data?.isRoot);
   const userStatus = useAppSelector((state) => state.user.data?.status);
   const userRole = useAppSelector((state) => state.user.data?.role);
   const userPermissions = useAppSelector(
@@ -36,18 +37,22 @@ export default function usePermission(
 
   let isAllowed = false;
 
-  if (userRole === role) {
-    if (userRole) {
-      const userRights = { status: userStatus, ...userPermissions };
-      const hasPermission = requirments.filter((requirment) =>
-        Object.values(userRights).some(
-          (element) => JSON.stringify(element) === JSON.stringify(requirment)
-        )
-      );
-      hasPermission.length > 0 ? (isAllowed = true) : (isAllowed = false);
-    }
+  if (isRootUser) {
+    isAllowed = true;
   } else {
-    isAllowed = false;
+    if (userRole === role) {
+      if (userRole) {
+        const userRights = { status: userStatus, ...userPermissions };
+        const hasPermission = requirments.filter((requirment) =>
+          Object.values(userRights).some(
+            (element) => JSON.stringify(element) === JSON.stringify(requirment)
+          )
+        );
+        hasPermission.length > 0 ? (isAllowed = true) : (isAllowed = false);
+      }
+    } else {
+      isAllowed = false;
+    }
   }
 
   return isAllowed;

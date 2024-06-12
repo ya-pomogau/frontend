@@ -1,36 +1,99 @@
-import React, { ChangeEvent, SyntheticEvent } from 'react';
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui/icons';
-import { SmartHeader } from 'shared/ui/smart-header';
-
 import styles from './styles.module.css';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { SmartHeader } from '../../shared/ui/smart-header';
+import { Icon } from '../../shared/ui/icons';
 import { Button } from '../../shared/ui/button';
-import usePermission from 'shared/hooks/use-permission';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import usePermission from '../../shared/hooks/use-permission';
+import { UserRole, UserStatus } from '../../shared/types/common.types';
+import {
+  useGetContactsQuery,
+  useUpdateContactsMutation,
+} from '../../services/contacts-api';
+import { setContacts } from '../../entities/contacts/model';
+import { TContacts } from 'entities/contacts/types';
 
 export function ContactsPage() {
-  const roleChecker = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
+  const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
 
-  const [userData, setUserData] = React.useState({
-    userEmail: 'www@yandex.ru',
-    userVKLink: 'https://vk.com/me2help',
+  const [contactsData, setContactsData] = useState<TContacts>({
+    email: null,
+    socialNetwork: null,
   });
 
-  const [enableEdit, setEnableEdit] = React.useState(false);
+  const [enableEdit, setEnableEdit] = useState({
+    email: false,
+    socialNetwork: false,
+  });
 
-  const onSubmit = (e: SyntheticEvent) => {
+  const dispatch = useAppDispatch();
+  const { email, socialNetwork } = useAppSelector((state) => state.contacts);
+  const [updateContacts, { isLoading }] = useUpdateContactsMutation();
+  const getContactsResult = useGetContactsQuery();
+
+  useEffect(() => {
+    if (getContactsResult.data) {
+      dispatch(setContacts(getContactsResult.data));
+      setContactsData({
+        email: email,
+        socialNetwork: socialNetwork,
+      });
+    }
+  }, [getContactsResult, email, socialNetwork]);
+
+  const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    setEnableEdit(false);
-    console.log(
-      `Данные email:${userData.userEmail} и  VK:${userData.userVKLink} отправлены на сервер`
-    );
+    if (isEditAllowed) {
+      try {
+        const resultAction = await updateContacts(contactsData);
+        if ('data' in resultAction) {
+          dispatch(setContacts(resultAction.data));
+        } else {
+          console.error('Ошибка при сохранении данных:', resultAction.error);
+        }
+        setEnableEdit({
+          email: false,
+          socialNetwork: false,
+        });
+        setContactsData({
+          email: email,
+          socialNetwork: socialNetwork,
+        });
+      } catch (error) {
+        console.error('Ошибка при сохранении данных:', error);
+      }
+    } else {
+      setEnableEdit({
+        email: false,
+        socialNetwork: false,
+      });
+      setContactsData({
+        email: email,
+        socialNetwork: socialNetwork,
+      });
+      console.log(
+        'Изменение контактых данных не доступно для текущего пользователя'
+      );
+    }
   };
-  const handleEnableEdit = () => {
-    setEnableEdit(true);
+
+  const emailHandler = () => {
+    setEnableEdit({
+      ...enableEdit,
+      email: true,
+    });
+  };
+
+  const socialNetworkHandler = () => {
+    setEnableEdit({
+      ...enableEdit,
+      socialNetwork: true,
+    });
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    setContactsData({ ...contactsData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -56,19 +119,19 @@ export function ContactsPage() {
               type="text"
               className={styles.input}
               onChange={onChange}
-              name="userEmail"
-              defaultValue={userData.userEmail}
-              readOnly={!enableEdit}
+              name="email"
+              value={contactsData.email || ''}
+              readOnly={!enableEdit.email}
               onClick={(e) => {
-                if (!enableEdit) {
+                if (!enableEdit.email) {
                   e.preventDefault();
-                  window.location.href = `mailto:${userData.userEmail}`;
+                  window.location.href = `mailto:${contactsData.email}`;
                 }
               }}
             />
           </div>
-          {roleChecker && (
-            <div onClick={handleEnableEdit} className={styles.edit_box}>
+          {isEditAllowed && (
+            <div onClick={emailHandler} className={styles.edit_box}>
               <Icon color="blue" icon="EditIcon" />
               <p className={styles.edit_text}>Изменить данные</p>
             </div>
@@ -90,29 +153,29 @@ export function ContactsPage() {
               type="text"
               className={styles.input}
               onChange={onChange}
-              name="userVKLink"
-              defaultValue={userData.userVKLink}
-              readOnly={!enableEdit}
+              name="socialNetwork"
+              value={contactsData.socialNetwork || ''}
+              readOnly={!enableEdit.socialNetwork}
               onClick={(e) => {
-                if (!enableEdit) {
+                if (!enableEdit.socialNetwork) {
                   e.preventDefault();
-                  window.location.href = `${userData.userVKLink}`;
+                  window.location.href = `${contactsData.socialNetwork}`;
                 }
               }}
             />
           </div>
-          {roleChecker && (
-            <div onClick={handleEnableEdit} className={styles.edit_box}>
+          {isEditAllowed && (
+            <div onClick={socialNetworkHandler} className={styles.edit_box}>
               <Icon color="blue" icon="EditIcon" />
               <p className={styles.edit_text}>Изменить данные</p>
             </div>
           )}
         </div>
-        {roleChecker && (
+        {isEditAllowed && (
           <Button
             buttonType="primary"
             label="Сохранить"
-            disabled={!enableEdit}
+            disabled={!enableEdit.email && !enableEdit.socialNetwork}
             type="submit"
           />
         )}
