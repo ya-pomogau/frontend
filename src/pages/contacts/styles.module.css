@@ -8,7 +8,7 @@
 
 .container {
   width: 100%;
-  padding: 20px 0px;
+  padding: 13px 0px 20px;
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
