@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.css';
 import { SmartHeader } from '../../shared/ui/smart-header';
@@ -10,6 +10,7 @@ import {
   UserStatus,
   TContacts,
 } from '../../shared/types/common.types';
+import useForm from '../../shared/hooks/use-form';
 import {
   useGetContactsQuery,
   useUpdateContactsMutation,
@@ -17,41 +18,30 @@ import {
 
 export function ContactsPage() {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
+  const [updateContacts, { isLoading }] = useUpdateContactsMutation();
+  const { data } = useGetContactsQuery();
 
-  const [contactsData, setContactsData] = useState<TContacts>({
-    email: null,
-    socialNetwork: null,
+  const { values, handleChange } = useForm<TContacts>({
+    email: data?.email,
+    socialNetwork: data?.socialNetwork,
   });
 
   const [editingInput, setEditingInput] = useState<
     'email' | 'socialNetwork' | null
   >(null);
 
-  const { data } = useGetContactsQuery();
-  const [updateContacts, { isLoading }] = useUpdateContactsMutation();
-
-  useEffect(() => {
-    setContactsData({
-      email: data?.email,
-      socialNetwork: data?.socialNetwork,
-    });
-  }, [data]);
+  const editBoxHandler = (inputName: 'email' | 'socialNetwork') => {
+    setEditingInput(inputName);
+  };
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      const resultAction = await updateContacts(contactsData);
-      if ('data' in resultAction) {
-        setContactsData({
-          email: resultAction.data.email,
-          socialNetwork: resultAction.data.socialNetwork,
-        });
-      } else {
+      const resultAction = await updateContacts(values);
+      if (!('data' in resultAction)) {
         console.error('Ошибка при сохранении данных:', resultAction.error);
-        setContactsData({
-          email: data?.email,
-          socialNetwork: data?.socialNetwork,
-        });
+        values.email = data?.email;
+        values.socialNetwork = data?.socialNetwork;
       }
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
@@ -60,29 +50,14 @@ export function ContactsPage() {
     }
   };
 
-  const emailHandler = () => {
-    setEditingInput('email');
-  };
-
-  const socialNetworkHandler = () => {
-    setEditingInput('socialNetwork');
-  };
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setContactsData({ ...contactsData, [e.target.name]: e.target.value });
-  };
-
-  const getContactContainer = (
-    inputName: 'email' | 'socialNetwork',
-    handler: () => void
-  ) => {
+  const getContactContainer = (inputName: 'email' | 'socialNetwork') => {
     const titleText = inputName === 'email' ? 'Эл. почта' : 'Соцсети';
     const editBoxText =
       inputName === 'email' ? 'Изменить эл. почту' : 'Изменить соцсети';
     const inputHref =
       inputName === 'email'
-        ? `mailto:${contactsData.email}`
-        : `${contactsData.socialNetwork}`;
+        ? `mailto:${values.email}`
+        : `${values.socialNetwork}`;
 
     return (
       <div className={styles.container}>
@@ -105,9 +80,9 @@ export function ContactsPage() {
                 ? styles.input_mode_edit
                 : styles.input_mode_link
             }`}
-            onChange={onChange}
+            onChange={handleChange}
             name={inputName}
-            value={contactsData[inputName] || ''}
+            value={values[inputName] || ''}
             readOnly={editingInput !== inputName}
             onClick={(e) => {
               if (editingInput !== inputName) {
@@ -119,7 +94,7 @@ export function ContactsPage() {
         </div>
         {isEditAllowed && (
           <div
-            onClick={handler}
+            onClick={() => editBoxHandler(inputName)}
             className={
               editingInput === inputName
                 ? styles.edit_box_hidden
@@ -150,8 +125,8 @@ export function ContactsPage() {
         icon={<Icon color="blue" icon="ContactsIcon" size="54" />}
       />
       <form className={styles.form} onSubmit={onSubmit}>
-        {getContactContainer('email', emailHandler)}
-        {getContactContainer('socialNetwork', socialNetworkHandler)}
+        {getContactContainer('email')}
+        {getContactContainer('socialNetwork')}
         {isEditAllowed && (
           <Button
             buttonType="primary"
