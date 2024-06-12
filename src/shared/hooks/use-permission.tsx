@@ -28,11 +28,16 @@ export default function usePermission(
   requirments: Array<Requirments>,
   role: Role | null
 ) {
+  const isRoot = useAppSelector((state) => state.user.data?.isRoot);
   const userStatus = useAppSelector((state) => state.user.data?.status);
   const userRole = useAppSelector((state) => state.user.data?.role);
   const userPermissions = useAppSelector(
     (state) => state.user.data?.permissions
   );
+
+  if (isRoot) {
+    return true;
+  }
 
   let isAllowed = false;
 
