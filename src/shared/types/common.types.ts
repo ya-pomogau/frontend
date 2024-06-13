@@ -54,6 +54,9 @@ export enum Tabs {
 }
 
 export type TContacts = {
+  _id: string | null | undefined;
   email: string | null | undefined;
   socialNetwork: string | null | undefined;
 };
+
+export type TContactsData = Omit<TContacts, '_id'>;

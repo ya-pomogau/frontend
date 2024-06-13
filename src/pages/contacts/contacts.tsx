@@ -8,7 +8,7 @@ import usePermission from '../../shared/hooks/use-permission';
 import {
   UserRole,
   UserStatus,
-  TContacts,
+  TContactsData,
 } from '../../shared/types/common.types';
 import useForm from '../../shared/hooks/use-form';
 import { useGetContactsQuery } from '../../services/contacts-api';
@@ -19,7 +19,7 @@ export function ContactsPage() {
   const [updateContacts, { isLoading }] = useUpdateContactsMutation();
   const { data } = useGetContactsQuery();
 
-  const { values, handleChange } = useForm<TContacts>({
+  const { values, handleChange } = useForm<TContactsData>({
     email: data?.email,
     socialNetwork: data?.socialNetwork,
   });
@@ -35,7 +35,7 @@ export function ContactsPage() {
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      await updateContacts(values);
+      await updateContacts({ _id: data?._id, ...values });
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
       values.email = data?.email;

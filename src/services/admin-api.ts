@@ -127,10 +127,10 @@ export const adminsApi = createApi({
       ],
     }),
     updateContacts: build.mutation<TContacts, TContacts>({
-      query: (newContacts) => ({
-        url: 'admin/contacts',
+      query: ({ _id, ...contactsData }) => ({
+        url: `admin/contacts/${_id}`,
         method: 'PATCH',
-        body: newContacts,
+        body: contactsData,
       }),
     }),
   }),
