@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.css';
 import { SmartHeader } from '../../shared/ui/smart-header';
@@ -14,15 +14,27 @@ import useForm from '../../shared/hooks/use-form';
 import { useGetContactsQuery } from '../../services/contacts-api';
 import { useUpdateContactsMutation } from '../../services/admin-api';
 
+const initialContactsValues = {
+  email: null,
+  socialNetwork: null,
+};
+
 export function ContactsPage() {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
   const [updateContacts, { isLoading }] = useUpdateContactsMutation();
+
   const { data } = useGetContactsQuery();
 
-  const { values, handleChange, isValid } = useForm<TContacts>({
-    email: data?.email,
-    socialNetwork: data?.socialNetwork,
-  });
+  const { values, setValues, handleChange, isValid } = useForm<TContacts>(
+    initialContactsValues
+  );
+
+  useEffect(() => {
+    setValues({
+      email: data?.email,
+      socialNetwork: data?.socialNetwork,
+    });
+  }, [data]);
 
   const [editingInput, setEditingInput] = useState<
     'email' | 'socialNetwork' | null
