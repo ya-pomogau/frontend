@@ -8,7 +8,7 @@ import usePermission from '../../shared/hooks/use-permission';
 import {
   UserRole,
   UserStatus,
-  TContactsData,
+  TContacts,
 } from '../../shared/types/common.types';
 import useForm from '../../shared/hooks/use-form';
 import { useGetContactsQuery } from '../../services/contacts-api';
@@ -19,7 +19,7 @@ export function ContactsPage() {
   const [updateContacts, { isLoading }] = useUpdateContactsMutation();
   const { data } = useGetContactsQuery();
 
-  const { values, handleChange } = useForm<TContactsData>({
+  const { values, handleChange, isValid } = useForm<TContacts>({
     email: data?.email,
     socialNetwork: data?.socialNetwork,
   });
@@ -32,10 +32,12 @@ export function ContactsPage() {
     setEditingInput(inputName);
   };
 
+  const isButtonDisabled = editingInput === null || !isValid;
+
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      await updateContacts({ _id: data?._id, ...values });
+      await updateContacts(values);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
       values.email = data?.email;
@@ -53,6 +55,7 @@ export function ContactsPage() {
       inputName === 'email'
         ? `mailto:${values.email}`
         : `${values.socialNetwork}`;
+    const inputType = inputName === 'email' ? 'email' : 'url';
 
     return (
       <div className={styles.container}>
@@ -69,7 +72,7 @@ export function ContactsPage() {
             {titleText}
           </h2>
           <input
-            type="text"
+            type={inputType}
             className={`${styles.input} ${
               editingInput === inputName
                 ? styles.input_mode_edit
@@ -126,7 +129,7 @@ export function ContactsPage() {
           <Button
             buttonType="primary"
             label="Сохранить"
-            disabled={editingInput === null}
+            disabled={isButtonDisabled}
             type="submit"
           />
         )}
