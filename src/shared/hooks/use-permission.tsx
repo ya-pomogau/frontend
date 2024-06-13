@@ -34,11 +34,6 @@ export default function usePermission(
     (state) => state.user.data?.permissions
   );
 
-  const isRoot = useAppSelector((state) => state.user.data?.isRoot);
-  if (isRoot) {
-    return true;
-  }
-
   let isAllowed = false;
 
   if (userRole === role) {
