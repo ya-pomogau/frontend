@@ -1,11 +1,11 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, SyntheticEvent, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { PasswordInput } from 'shared/ui/password-input';
 import { actions } from 'services/system-slice';
-import useForm from 'shared/hooks/use-form';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
 
 import styles from './styles.module.css';
@@ -17,34 +17,20 @@ interface ILoginForm {
 
 export function LoginPage() {
   const [errorText, setErrorText] = useState('');
-  const [error, setError] = useState(false);
-  const [adminLogin, isLoading] = useAsyncAction(actions.adminLoginThunk);
-  const { values, handleChange, errors, isValid } = useForm<ILoginForm>({
-    login: '',
-    password: '',
+  const [adminLogin] = useAsyncAction(actions.adminLoginThunk);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<ILoginForm>({
+    mode: 'onBlur',
   });
 
-  const isButtonDisabled =
-    !values.login || !values.password || values.password.length < 6 || !isValid;
-
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = async (data: ILoginForm) => {
     try {
-      await adminLogin(values);
+      await adminLogin(data);
     } catch (err) {
       setErrorText(err as string);
-    }
-  };
-
-  const validateField = (value: string) => {
-    setError(value.length < 4);
-  };
-
-  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (e.target.value) {
-      validateField(e.target.value);
-    } else {
-      setError(false);
     }
   };
 
@@ -56,27 +42,28 @@ export function LoginPage() {
         extClassName={styles.header}
       />
       <p className={styles.title}>Войти</p>
-      <form className={styles.form} onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <Input
-          onBlur={onBlur}
-          extClassName={styles.field}
-          required
           label="Логин"
-          name="login"
-          value={values.login}
-          onChange={handleChange}
           placeholder="ФИО / Телефон / Логин"
-          type="text"
-          error={error}
-          errorText="Вы ввели неправильный логин"
+          extClassName={styles.field}
+          error={errors?.login?.message ? true : false}
+          errorText={errors.login?.message}
+          {...register('login', {
+            required: 'Логин должен быть не менее 4 символов',
+            minLength: 4,
+          })}
         />
         <PasswordInput
           extClassName={styles.field}
           required
+          error={errors?.password?.message ? true : false}
+          errorText={errors.password?.message}
           label="Пароль"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
+          {...register('password', {
+            required: 'Пороль должен быть не менее 6 символов',
+            minLength: 6,
+          })}
           placeholder="от 6 символов"
           type="password"
         />
@@ -86,7 +73,7 @@ export function LoginPage() {
           label="Войти"
           size="medium"
           extClassName={styles.button}
-          disabled={isButtonDisabled}
+          disabled={!isValid}
         />
         <span className={`${styles.error} text`}>{errorText}</span>
       </form>
