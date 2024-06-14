@@ -3,6 +3,7 @@ import { API_URL } from 'config/api-config';
 import { TaskConflict } from 'entities/task/types';
 import { User } from 'entities/user/types';
 import { getTokenAccess } from 'shared/libs/utils';
+import { TContacts } from 'shared/types/common.types';
 
 export const adminsApi = createApi({
   reducerPath: 'adminsApi',
@@ -125,6 +126,13 @@ export const adminsApi = createApi({
         { type: 'WorkTasks' },
       ],
     }),
+    updateContacts: build.mutation<TContacts, TContacts>({
+      query: (contactsData) => ({
+        url: `admin/contacts`,
+        method: 'PATCH',
+        body: contactsData,
+      }),
+    }),
   }),
 });
 
@@ -137,4 +145,5 @@ export const {
   useGetTasksWorkConflictQuery,
   useTakeConflictTaskMutation,
   useResolСonflictMutation,
+  useUpdateContactsMutation,
 } = adminsApi;
