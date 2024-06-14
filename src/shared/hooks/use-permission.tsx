@@ -11,23 +11,24 @@ import {
 // требований или нет
 // так же проверяет, если пользователь isRoot - возвращает true
 
-type Requirements =
+type UserRequirements =
   | UserStatus.CONFIRMED
   | UserStatus.UNCONFIRMED
   | UserStatus.ACTIVATED
   | UserStatus.VERIFIED
-  | UserStatus.BLOCKED
-  | AdminPermission.CONFIRMATION
-  | AdminPermission.TASKS
-  | AdminPermission.KEYS
-  | AdminPermission.CONFLICTS
-  | AdminPermission.BLOG
-  | AdminPermission.CATEGORIES;
+  | UserStatus.BLOCKED;
+
+type AdminRequirements = `${AdminPermission}`;
+
 type Role = UserRole.VOLUNTEER | UserRole.RECIPIENT | UserRole.ADMIN;
 
-export default function usePermission(
-  requirements: Array<Requirements>,
-  role: Role | null
+type Requirements<R extends Role> = R extends UserRole.ADMIN
+  ? AdminRequirements
+  : UserRequirements;
+
+export default function usePermission<R extends Role>(
+  requirements: Requirements<R>[],
+  role: Role
 ) {
   const userIsRoot = useAppSelector((state) => state.user.data?.isRoot);
   const userStatus = useAppSelector((state) => state.user.data?.status);
