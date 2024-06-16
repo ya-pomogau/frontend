@@ -1,10 +1,12 @@
 import { FormEvent, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { InputAddress } from 'shared/ui/input-address';
+import { InputPhone } from 'shared/ui/input-phone';
 
 import styles from './styles.module.css';
 import { FilterItemsIds } from 'features/filter/consts';
@@ -12,8 +14,6 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import useForm from 'shared/hooks/use-form';
-import { InputPhone } from 'shared/ui/input-phone';
 
 export interface IRegisterForm {
   name: string;
@@ -33,30 +33,8 @@ export function RegisterPage() {
     photo_max_orig = '',
   } = vkUser ?? {};
   const FIO = `${first_name} ${last_name}`;
-  const [error, setError] = useState({
-    name: false,
-    phone: false,
-    address: false,
-  });
-  const { values, handleChange } = useForm<IRegisterForm>({
-    name: '',
-    phone: '',
-    address: { address: '', coords: [] },
-  });
-
-  const handleError = (type: 'name' | 'phone' | 'address') => {
-    switch (type) {
-      case 'name':
-        setError({ ...error, [type]: values[type].length < 4 });
-        break;
-      case 'address':
-        setError({ ...error, [type]: address.address.length < 4 });
-        break;
-      default:
-        console.log('error');
-    }
-  };
-
+  const [name, setName] = useState<string>(FIO);
+  const [phone, setPhone] = useState<string>('');
   const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
   const [address, setAddress] = useState<{
     address: string;
@@ -65,6 +43,13 @@ export function RegisterPage() {
     address: '',
     coords: [],
   });
+
+  const {
+    register,
+    formState: { errors },
+  } = useForm<IRegisterForm>({
+    mode: 'onBlur',
+  });
   const dispatch = useAppDispatch();
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (
     event: FormEvent<HTMLFormElement>
@@ -72,8 +57,8 @@ export function RegisterPage() {
     event.preventDefault();
     const vk_id = `${id}`;
     const user = {
-      name: values.name,
-      phone: values.phone,
+      name: name,
+      phone,
       address: address.address,
       avatar: photo_max_orig,
       location: {
@@ -101,8 +86,6 @@ export function RegisterPage() {
   // определение внешнего вида кнопки выбора роли
   const getRoleButtonType = (userRole: string) =>
     role === userRole ? 'primary' : 'secondary';
-
-  const disabledBtn = error.name || error.phone || error.address;
 
   return (
     <>
@@ -133,42 +116,52 @@ export function RegisterPage() {
           />
         </div>
         <Input
-          onBlur={() => handleError('name')}
+          {...register('name', {
+            required: 'Имя должго быть больше 4 симолов',
+            minLength: {
+              value: 4,
+              message: 'Имя должго быть больше 4 симолов',
+            },
+          })}
+          onChange={(event) => setName(event.target.value)}
+          value={name}
+          error={errors?.name?.message ? true : false}
+          errorText={errors.name?.message}
           extClassName={styles.field}
-          required
           label="ФИО"
-          name="name"
-          value={values.name}
-          error={error.name}
-          errorText="Имя должно содержать больше символов"
-          onChange={handleChange}
           placeholder="ФИО"
           type="text"
         />
 
         <InputPhone
-          onBlur={() => handleError('phone')}
-          error={error.phone}
-          errorText="Некорректный номер телефона"
+          {...register('phone', {
+            required: 'Введите номер телефона',
+          })}
+          setValue={setPhone}
+          value={phone}
+          onChange={(event) => setPhone(event.target.value)}
+          error={errors?.phone ? true : false}
+          errorText={errors.phone?.message}
           extClassName={styles.field}
           label="Телефон"
-          name="phone"
-          value={values.phone}
-          onChange={handleChange}
           type="tel"
           placeholder="+7 (123) 456-78-90"
         />
 
         <div>
           <InputAddress
-            required
-            onBlur={() => handleError('address')}
-            error={error.address}
-            name="address"
+            {...register('address', {
+              required: true,
+            })}
+            error={errors.address && address.address === '' ? true : false}
             extClassName={styles.field}
-            label="Адрес"
             address={address}
-            onChange={handleChange}
+            label="Адрес"
+            errorText={`Не введен адрес. Пожалуйста, укажите адрес, ${
+              role === 'Volunteer'
+                ? 'по которому требуется помощь'
+                : 'где вы находитесь'
+            }!`}
             setAddress={handleAddressValueChange}
           />
 
@@ -182,7 +175,14 @@ export function RegisterPage() {
           actionType="submit"
           label="Подтвердите корректность данных"
           size="extraLarge"
-          disabled={disabledBtn}
+          disabled={
+            errors.name ||
+            errors.phone ||
+            address.address === '' ||
+            phone.length < 11
+              ? true
+              : false
+          }
         />
       </form>
     </>

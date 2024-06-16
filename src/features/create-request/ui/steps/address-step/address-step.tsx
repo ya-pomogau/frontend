@@ -67,6 +67,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             <p className={placeTitleStyles}>Место встречи</p>
             <div className={styles.headerWrapper} />
             <InputAddress
+              value=""
               initialValue={address}
               address={{ address, coords: location || [] }}
               setAddress={handleAddressValueChange}
@@ -99,6 +100,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         ) : (
           <>
             <InputAddress
+              value=""
               label="Укажите место встречи"
               initialValue={address}
               address={{ address, coords: location || [] }}

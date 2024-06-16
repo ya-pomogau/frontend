@@ -13,6 +13,7 @@ export interface InputPhoneProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   extClassName?: string;
   error?: boolean;
+  setValue: (phone: string) => void;
   errorText?: string;
   customIcon?: React.ReactNode;
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -33,6 +34,8 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
       errorText,
       customIcon,
       onIconClick,
+      setValue,
+      value,
       ...props
     },
     ref
@@ -55,6 +58,10 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
 
     const iconClass = error ? styles.icon_error : styles.icon;
 
+    function cleanPhoneNumber(phoneNumber: string) {
+      return phoneNumber.replace(/[^0-9]/g, '');
+    }
+
     return (
       <div className={extClassName} data-testid={'div'}>
         {label && (
@@ -62,13 +69,13 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
             {label}
           </label>
         )}
-        <div className={styles.container}>
+        <div ref={ref} className={styles.container}>
           <MaskedInput
             data-testid={'input'}
             type={type}
             name={name}
             className={cn('phone', inputClass)}
-            onChange={onChange}
+            onChange={(e) => setValue(cleanPhoneNumber(e.target.value))}
             placeholder={placeholder}
             id={id}
             mask={[
@@ -76,7 +83,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
               '7',
               ' ',
               '(',
-              /[1-9]/,
+              /\d/,
               /\d/,
               /\d/,
               ')',

@@ -3,6 +3,7 @@ import React, {
   useRef,
   InputHTMLAttributes,
   ChangeEvent,
+  forwardRef,
 } from 'react';
 import { useYMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_SUGGEST_SWITCHER } from 'config/ymaps/switches-api';
@@ -26,12 +27,16 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   inputAttributes?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
-export const InputAddress = (props: InputAddressProps) => {
+export const InputAddress = forwardRef(function InputAddress(
+  props: InputAddressProps,
+  ref
+) {
   const {
     initialValue = '',
     inputAttributes = {},
     address,
     setAddress,
+    onChange,
     ...otherProps
   } = props;
 
@@ -109,12 +114,12 @@ export const InputAddress = (props: InputAddressProps) => {
   return (
     <Input
       error={props.error}
-      errorText="Не введен адрес. Пожалуйста, укажите адрес, по которому требуется помощь!"
       value={address.address}
+      errorText="Не введен адрес. Пожалуйста, укажите адрес, по которому требуется помощь"
       ref={suggestInputRef}
       type="text"
       placeholder={initPlaceholder}
       {...inputProps}
     />
   );
-};
+});
