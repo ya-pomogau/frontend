@@ -20,6 +20,7 @@
   width: 364px;
 }
 .text {
+  padding-top: 10px;
   font-family: 'Golos', sans-serif;
   font-size: 12px;
   line-height: 14px;
