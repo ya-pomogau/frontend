@@ -1,23 +1,18 @@
-/* eslint-disable react/display-name */
-/* eslint-disable import/no-named-as-default-member */
-import React, { useState } from 'react';
+import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react';
 
 import { Icon } from '../icons';
 import { Input } from '../input';
 
-interface PasswordInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   extClassName?: string;
   error?: boolean;
   errorText?: string;
 }
 
-export const PasswordInput = React.forwardRef<
-  HTMLInputElement,
-  PasswordInputProps
->(
+// eslint-disable-next-line react/display-name
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   (
     {
       error,

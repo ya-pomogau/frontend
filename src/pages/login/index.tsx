@@ -1,5 +1,5 @@
-import { FormEvent, SyntheticEvent, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
@@ -15,18 +15,34 @@ interface ILoginForm {
   password: string;
 }
 
+const LOGIN_VALIDATION_RULES = {
+  required: true,
+  minLength: {
+    value: 4,
+    message: 'Логин должен быть не менее 4 символов',
+  },
+};
+
+const PASSWORD_VALIDATION_RULES = {
+  required: true,
+  minLength: {
+    value: 6,
+    message: 'Пароль должен быть не менее 6 символов',
+  },
+};
+
 export function LoginPage() {
   const [errorText, setErrorText] = useState('');
   const [adminLogin] = useAsyncAction(actions.adminLoginThunk);
   const {
-    register,
+    control,
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<ILoginForm>({
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
-  const onSubmit = async (data: ILoginForm) => {
+  const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
     try {
       await adminLogin(data);
     } catch (err) {
@@ -43,29 +59,39 @@ export function LoginPage() {
       />
       <p className={styles.title}>Войти</p>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          label="Логин"
-          placeholder="ФИО / Телефон / Логин"
-          extClassName={styles.field}
-          error={errors?.login?.message ? true : false}
-          errorText={errors.login?.message}
-          {...register('login', {
-            required: 'Логин должен быть не менее 4 символов',
-            minLength: 4,
-          })}
+        <Controller
+          name="login"
+          rules={LOGIN_VALIDATION_RULES}
+          control={control}
+          render={({ field }) => (
+            <Input
+              label="Логин"
+              name={field.name}
+              onChange={field.onChange}
+              placeholder="ФИО / Телефон / Логин"
+              extClassName={styles.field}
+              error={!!errors?.login?.message}
+              errorText={errors.login?.message}
+            />
+          )}
         />
-        <PasswordInput
-          extClassName={styles.field}
-          required
-          error={errors?.password?.message ? true : false}
-          errorText={errors.password?.message}
-          label="Пароль"
-          {...register('password', {
-            required: 'Пороль должен быть не менее 6 символов',
-            minLength: 6,
-          })}
-          placeholder="от 6 символов"
-          type="password"
+        <Controller
+          name="password"
+          rules={PASSWORD_VALIDATION_RULES}
+          control={control}
+          render={({ field }) => (
+            <PasswordInput
+              extClassName={styles.field}
+              name={field.name}
+              onChange={field.onChange}
+              required
+              error={!!errors?.password?.message}
+              errorText={errors.password?.message}
+              label="Пароль"
+              placeholder="от 6 символов"
+              type="password"
+            />
+          )}
         />
         <Button
           buttonType="primary"

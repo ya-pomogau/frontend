@@ -1,6 +1,11 @@
-/* eslint-disable react/display-name */
-/* eslint-disable import/no-named-as-default-member */
-import { useMemo, InputHTMLAttributes, forwardRef } from 'react';
+import {
+  useMemo,
+  InputHTMLAttributes,
+  forwardRef,
+  ReactNode,
+  MouseEvent,
+  ChangeEvent,
+} from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
@@ -9,22 +14,21 @@ import MaskedInput from 'react-text-mask';
 
 export interface InputPhoneProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   extClassName?: string;
   error?: boolean;
-  setValue: (phone: string) => void;
   errorText?: string;
-  customIcon?: React.ReactNode;
-  onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+  customIcon?: ReactNode;
+  onIconClick?: (e: MouseEvent<HTMLDivElement>) => void;
   extClassNameInput?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
   (
     {
       type,
-      name,
       onChange,
       label,
       extClassName,
@@ -34,9 +38,6 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
       errorText,
       customIcon,
       onIconClick,
-      setValue,
-      value,
-      ...props
     },
     ref
   ) => {
@@ -44,10 +45,10 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
 
     const errorToRender = useMemo(
       () =>
-        error && errorText ? (
+        errorText ? (
           <span className={cn(styles.error, 'text')}>{errorText}</span>
         ) : null,
-      [error, errorText]
+      [errorText]
     );
 
     const inputClass = error
@@ -58,10 +59,6 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
 
     const iconClass = error ? styles.icon_error : styles.icon;
 
-    function cleanPhoneNumber(phoneNumber: string) {
-      return phoneNumber.replace(/[^0-9]/g, '');
-    }
-
     return (
       <div className={extClassName} data-testid={'div'}>
         {label && (
@@ -71,11 +68,9 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
         )}
         <div ref={ref} className={styles.container}>
           <MaskedInput
-            data-testid={'input'}
             type={type}
-            name={name}
+            data-testid={'input'}
             className={cn('phone', inputClass)}
-            onChange={(e) => setValue(cleanPhoneNumber(e.target.value))}
             placeholder={placeholder}
             id={id}
             mask={[
@@ -98,7 +93,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
               /\d/,
               /\d/,
             ]}
-            {...props}
+            onChange={onChange}
           />
           {errorToRender}
           <div className={iconClass} onClick={onIconClick}>
