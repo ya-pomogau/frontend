@@ -1,8 +1,10 @@
-import React, {
+import {
   useEffect,
   useRef,
   InputHTMLAttributes,
   ChangeEvent,
+  forwardRef,
+  ReactNode,
 } from 'react';
 import { useYMaps } from '@pbe/react-yandex-maps';
 import { YMAPS_SUGGEST_SWITCHER } from 'config/ymaps/switches-api';
@@ -11,7 +13,6 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { useAppSelector } from 'app/hooks';
 
 interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
-  initialValue?: string;
   name: string;
   address: {
     address: string;
@@ -22,16 +23,19 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   extClassName?: string;
   error?: boolean;
   errorText?: string;
-  customIcon?: React.ReactNode;
-  inputAttributes?: React.InputHTMLAttributes<HTMLInputElement>;
+  customIcon?: ReactNode;
+  inputAttributes?: InputHTMLAttributes<HTMLInputElement>;
 }
 
-export const InputAddress = (props: InputAddressProps) => {
+export const InputAddress = forwardRef(function InputAddress(
+  props: InputAddressProps,
+  ref
+) {
   const {
-    initialValue = '',
     inputAttributes = {},
     address,
     setAddress,
+    onChange,
     ...otherProps
   } = props;
 
@@ -108,11 +112,12 @@ export const InputAddress = (props: InputAddressProps) => {
 
   return (
     <Input
-      value={address.address}
+      defaultValue={address.address}
+      error={props.error}
       ref={suggestInputRef}
       type="text"
       placeholder={initPlaceholder}
       {...inputProps}
     />
   );
-};
+});
