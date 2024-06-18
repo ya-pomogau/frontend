@@ -52,3 +52,8 @@ export enum Tabs {
   NOTPROCESSED = 'notprocessed',
   ADMINS = 'admins',
 }
+
+export type TContacts = {
+  email: string | null | undefined;
+  socialNetwork: string | null | undefined;
+};

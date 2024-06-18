@@ -1,24 +1,22 @@
-/* eslint-disable react/display-name */
-/* eslint-disable import/no-named-as-default-member */
-import React, { useState } from 'react';
+import { ChangeEvent, forwardRef, InputHTMLAttributes, useState } from 'react';
 
 import { Icon } from '../icons';
 import { Input } from '../input';
 
-interface PasswordInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
+interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   extClassName?: string;
+  error?: boolean;
+  errorText?: string;
 }
 
-export const PasswordInput = React.forwardRef<
-  HTMLInputElement,
-  PasswordInputProps
->(
+// eslint-disable-next-line react/display-name
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   (
     {
+      error,
+      errorText,
       value,
       label = 'Пароль',
       name,
@@ -30,31 +28,16 @@ export const PasswordInput = React.forwardRef<
     ref
   ) => {
     const [visible, setVisibility] = useState(false);
-    const [error, setError] = useState(false);
 
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    const validateField = (value: string) => {
-      setError(value.length < 2);
-    };
-
-    const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (e.target.value) {
-        validateField(e.target.value);
-      } else {
-        setError(false);
-      }
-    };
-
-    const handleIconClick = (e: React.MouseEvent<HTMLDivElement>) => {
-      setVisibility(!visible);
+    const handleIconClick = () => {
+      setVisibility((state) => !state);
     };
 
     return (
       <Input
-        required
-        onBlur={onBlur}
+        ref={ref}
+        {...props}
         type={visible ? 'text' : 'password'}
-        value={value}
         label={label}
         name={name as string}
         onChange={onChange}
@@ -69,7 +52,7 @@ export const PasswordInput = React.forwardRef<
           )
         }
         error={error}
-        errorText={'Пароль не может быть таким коротким'}
+        errorText={errorText}
       />
     );
   }

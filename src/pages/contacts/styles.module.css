@@ -1,68 +1,60 @@
-.header {
-  height: 90px;
+.form {
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 20px;
 }
 
 .container {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0 30px 30px;
-  padding-bottom: 20px;
+  width: 100%;
+  padding: 13px 0px 20px;
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.title {
-  color: var(--colors-interface-primary-additional);
-  margin: 0;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.link {
-  text-decoration: none;
-  color: var(--colors-interface-primary);
-}
-
-.form {
-  max-width: 600px;
-  margin-left: 30px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: flex-end;
-}
-
-.text_area {
-  margin-bottom: 20px;
-  height: 122px;
-  width: 100%;
-}
-
-.button {
-  width: 94px;
 }
 
 .element_box {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 20px;
+}
+
+.title {
+  color: var(--colors-interface-primary-additional);
 }
 
 .input {
-  color: var(--colors-interface-primary);
   font-size: 24px;
   border: none;
   background-color: transparent;
   outline: none;
 }
 
-.input:hover {
+.input_mode_link {
+  color: var(--colors-interface-primary);
+}
+
+.input_mode_link:hover {
   cursor: pointer;
 }
+
+.input_mode_edit {
+  color: #000000;
+}
+
+.input_mode_edit:hover {
+  cursor: text;
+}
+
 .edit_box {
+  color: var(--colors-interface-primary);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
 }
 
@@ -70,6 +62,28 @@
   cursor: pointer;
 }
 
-.edit_text {
-  color: var(--colors-interface-primary);
+.edit_box_hidden {
+  display: none;
+}
+
+
+@media (max-width: 600px) {
+  .form {
+    padding: 0;
+  }
+
+  .container {
+    padding-bottom: 0;
+    border: none;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .element_box {
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+    border-image-source: var(--colors-interface-line);
+    border-image-slice: 1;
+  }
 }
