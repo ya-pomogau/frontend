@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { userModel } from 'entities/user/model';
 import { createRequestModel } from 'features/create-request/model/create-request';
 import { usersApi } from 'services/user-api';
+import { contactsApi } from 'services/contacts-api';
 import { tasksApi } from 'services/tasks-api';
 import { authAdminApi } from 'services/auth-admin-api';
 import { categoriesApi } from 'services/categories-api';
@@ -19,6 +20,7 @@ export const store = configureStore({
     createRequest: createRequestModel.reducer,
     system: systemSliceReducer,
     [usersApi.reducerPath]: usersApi.reducer,
+    [contactsApi.reducerPath]: contactsApi.reducer,
     [tasksApi.reducerPath]: tasksApi.reducer,
     [userTasksApi.reducerPath]: userTasksApi.reducer,
     [authAdminApi.reducerPath]: authAdminApi.reducer,
@@ -29,6 +31,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(usersApi.middleware)
+      .concat(contactsApi.middleware)
       .concat(tasksApi.middleware)
       .concat(authAdminApi.middleware)
       .concat(categoriesApi.middleware)

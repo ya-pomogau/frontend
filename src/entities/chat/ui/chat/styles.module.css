@@ -1,6 +1,7 @@
 .chatWrapper {
   width: 586px;
-  height: 374px;
+  min-height: 374px;
+  max-height: 391px;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -43,11 +44,11 @@
 
 .container-chat {
   width: 88%;
+  max-height: 252px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 20px;
-  margin-bottom: 30px;
 }
 
 .chat-container {

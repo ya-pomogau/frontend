@@ -26,6 +26,7 @@ export default function useForm<T>(initialValues: T) {
 
   return {
     values,
+    setValues,
     handleChange,
     errors,
     isValid,
