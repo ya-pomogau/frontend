@@ -91,6 +91,27 @@
   padding: 0 0 0 1px;
 }
 
+.input.input--error input {
+  border-bottom: 1.5px solid var(--colors-interface-red);
+}
+
+.errorText {
+  font-size: 10px;
+  line-height: 16.8px;
+  text-transform: lowercase;
+  color: var(--colors-interface-red);
+}
+
+.editViewerPopup {
+  position: relative;
+}
+
+.phoneErrorContainer {
+  position: absolute;
+  bottom: 31px;
+  left: 77px;
+}
+
 .button {
   border: none;
   margin-top: 6px;

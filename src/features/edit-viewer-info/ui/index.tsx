@@ -134,7 +134,11 @@ export const EditViewerInfo = ({
     <LightPopup isPopupOpen={isPopupOpen} onClickExit={handleClosePopup}>
       <div
         ref={modalRef}
-        className={classnames(styles.container, extClassName)}
+        className={classnames(
+          styles.container,
+          extClassName,
+          styles.editViewerPopup
+        )}
       >
         <div className={styles.containerInfo}>
           <div className={styles.headerElements}>
@@ -227,7 +231,10 @@ export const EditViewerInfo = ({
               </p>
               <Input
                 type="tel"
-                extClassName={styles.input}
+                extClassName={classnames(
+                  styles.input,
+                  phoneError && styles['input--error']
+                )}
                 placeholder="Введите телефон"
                 value={userData.phone}
                 onChange={handleChange}
@@ -263,6 +270,9 @@ export const EditViewerInfo = ({
               />
             </li>
           </ul>
+        </div>
+        <div className={styles.phoneErrorContainer}>
+          {phoneError && <span className={styles.errorText}>{phoneError}</span>}
         </div>
         <Button
           disabled={
