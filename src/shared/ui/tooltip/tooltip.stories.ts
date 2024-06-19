@@ -53,10 +53,10 @@ export const Default: Story = {
   },
 };
 
-export const CenterPointer: Story = {
+export const LeftPointer: Story = {
   args: {
     visible: true,
     children: 'Какой-то контент',
-    pointerPosition: 'center',
+    pointerPosition: 'left',
   },
 };

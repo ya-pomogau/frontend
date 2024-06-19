@@ -4,6 +4,8 @@ import {
   useRef,
   CSSProperties,
   useCallback,
+  useLayoutEffect,
+  useState,
 } from 'react';
 import { createPortal } from 'react-dom';
 import classnames from 'classnames';
@@ -14,7 +16,7 @@ interface TooltipProps {
   extClassName?: string;
   visible?: boolean;
   children: ReactNode;
-  pointerPosition?: 'right' | 'center';
+  pointerPosition?: 'right' | 'left';
   changeVisible?: () => void;
   elementStyles?: CSSProperties;
   idForModalRoot?: string;
@@ -73,6 +75,27 @@ export const Tooltip = ({
     };
   }, []);
 
+  const [pointerPositionState, setPointerPositionState] =
+    useState(pointerPosition);
+
+  useLayoutEffect(() => {
+    if (visible && tooltipRef.current) {
+      const rect = tooltipRef.current.getBoundingClientRect();
+      const leftEdgeDistance = rect.left;
+      const tooltipWidth = rect.width;
+      const windowWidth = window.innerWidth;
+
+      if (leftEdgeDistance < tooltipWidth) {
+        tooltipRef.current.style.transform = `translateX(87%)`;
+        setPointerPositionState('left');
+      } else {
+        tooltipRef.current.style.left = '';
+        tooltipRef.current.style.transform = '';
+        setPointerPositionState('right');
+      }
+    }
+  }, [visible]);
+
   const tooltip = (
     <div
       id="tooltip-component"
@@ -85,7 +108,7 @@ export const Tooltip = ({
       <div
         className={classnames(
           styles.pointer,
-          styles[`pointer--${pointerPosition}`]
+          styles[`pointer--${pointerPositionState}`]
         )}
       />
       {children}
