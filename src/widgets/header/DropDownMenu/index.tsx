@@ -28,12 +28,14 @@ interface MenuProps {
   setMenuActive: (arg: boolean) => void;
   menuActive: boolean;
   role?: UserRole;
+  setIsOpenChat: (arg: boolean) => void;
 }
 
 export const DropDownMenu = ({
   setMenuActive,
   menuActive,
   role,
+  setIsOpenChat,
 }: MenuProps) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
   const ref = useRef(null);
@@ -93,7 +95,7 @@ export const DropDownMenu = ({
           {role != 'Admin' && (
             <DropDownMenuButton
               isMobile={isMobile}
-              onClick={() => console.log('Нажали кнопку')}
+              onClick={() => setIsOpenChat(true)}
               buttonType="adminMessage"
             >
               Написать администратору
