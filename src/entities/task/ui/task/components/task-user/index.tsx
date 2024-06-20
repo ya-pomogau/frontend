@@ -33,12 +33,6 @@ export const TaskUser = ({
   const isMobile = useMediaQuery('(max-width:1150px)');
   const isPageCompleted = location.pathname === '/profile/completed';
   const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
-  console.log({
-    user: !user,
-    volunteer: !volunteer,
-    isPageCompleted: !isPageCompleted,
-    status: !(status === TaskStatus.COMPLETED),
-  });
 
   return (
     <div className={classNames(extClassName, styles.main)}>
