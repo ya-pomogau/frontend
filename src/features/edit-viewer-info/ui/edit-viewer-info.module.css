@@ -2,40 +2,43 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 287px;
+  max-width: 207px;
   background-color: #fff;
-  padding: 20px 20px 20px 33px;
+  padding: 0px 0px 0px 0px;
   cursor: auto;
 }
 
 .containerInfo {
   display: flex;
   flex-direction: column;
+  margin: -10px 0px 10px 32px;
 }
 
 .avatarBlock {
   display: flex;
   align-items: flex-end;
+  margin: 0px 0px 0px 1.5px;
 }
 
 .headerElements {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  padding: 0 12px 0 11px;
 }
 
 .infoBlock {
   display: flex;
   flex-direction: column;
-  padding: 0;
-  margin: 37px 0 15px 10px;
+  padding: 0 0 0 0;
+  margin: 38px 0 0px 23px;
   min-width: 235px;
 }
 
 .infoBlock__item {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 3.5px;
 }
 
 .avatarBlock__button {
@@ -70,7 +73,7 @@
 .infoBlock__text {
   color: var(--colors-interface-primary);
   margin-right: 20px;
-  width: 42px;
+  width: 32px;
 }
 
 .input {
@@ -82,14 +85,38 @@
   border-bottom: 0.2px solid var(--colors-interface-primary);
   max-height: 25px;
   font-size: 12px;
-  line-height: 14px;
-  margin-left: 20px;
-  margin-right: 20px;
+  line-height: 16.8px;
+  margin-left: 28px;
+  width: 138px;
+  padding: 0 0 0 1px;
+}
+
+.input.input--error input {
+  border-bottom: 1.5px solid var(--colors-interface-red);
+}
+
+.errorText {
+  font-size: 10px;
+  line-height: 16.8px;
+  text-transform: lowercase;
+  color: var(--colors-interface-red);
+}
+
+.editViewerPopup {
+  position: relative;
+}
+
+.phoneErrorContainer {
+  position: absolute;
+  bottom: 31px;
+  left: 77px;
 }
 
 .button {
   border: none;
-  margin-top: 5px;
+  margin-top: 6px;
+  margin-left: 46px;
+  padding: 7px 21px 4px;
 }
 
 .closeIcon:hover {
