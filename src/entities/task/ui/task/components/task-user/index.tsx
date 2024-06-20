@@ -33,6 +33,13 @@ export const TaskUser = ({
   const isMobile = useMediaQuery('(max-width:1150px)');
   const isPageCompleted = location.pathname === '/profile/completed';
   const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
+  console.log({
+    user: !user,
+    volunteer: !volunteer,
+    isPageCompleted: !isPageCompleted,
+    status: !(status === TaskStatus.COMPLETED),
+  });
+
   return (
     <div className={classNames(extClassName, styles.main)}>
       {user !== null ? (
@@ -73,7 +80,7 @@ export const TaskUser = ({
         <RoundButton
           buttonType="message"
           disabled={
-            !isPageCompleted ||
+            isPageCompleted ||
             !user ||
             !volunteer ||
             status === TaskStatus.COMPLETED
@@ -84,7 +91,7 @@ export const TaskUser = ({
       {isOpenChat && (
         <PopupChat
           isOpen={isOpenChat}
-          onClick={() => null}
+          onClick={() => setIsOpenChat(!isOpenChat)}
           messages={[]}
           chatmateInfo={infoAdmin}
           onAttachFileClick={() => {}}
