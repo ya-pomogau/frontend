@@ -110,6 +110,8 @@ export const TaskItem = ({
           user={UserRole.RECIPIENT === userRole ? volunteer : recipient}
           extClassName={styles.user}
           date={date}
+          volunteer={volunteer}
+          status={status}
         />
         <TaskButtons
           //TODO: заменить completed conflict на правильные поля
