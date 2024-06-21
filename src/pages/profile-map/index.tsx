@@ -102,7 +102,7 @@ export function ProfileMapPage() {
                 : undefined
             }
             width="100%"
-            height="100%"
+            height="60vh"
             onClick={() => 3}
             coordinates={user?.location}
             role={user && user.role}
