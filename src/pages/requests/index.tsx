@@ -28,6 +28,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
   const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed');
   const [searchName, setSearchName] = useState('');
   const [filteredName, setFilteredName] = useState<User[]>([]);
+  const [view, setView] = useState<'tiles' | 'list'>('tiles');
 
   useEffect(() => {
     const dataMap: Record<string, User[] | undefined> = {
@@ -67,6 +68,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
           notprocessed: unconfirmed ? unconfirmed?.length : 0,
           admins: admins ? admins?.length : 0,
         }}
+        onViewChange={setView}
       />
       <Input
         extClassName={styles.input}
@@ -80,7 +82,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
       {/* TODO:Настроить лоадер в зависимости от получения данных : или получить все вкладки и показывать, или только открытую, остальные в фоне. */}
       {/*{isLoading ? <Loader /> : tabContent}*/}
       {volunteers && recipients && unconfirmed && admins && (
-        <RequestsTab data={filteredName} />
+        <RequestsTab data={filteredName} view={view} />
       )}
     </>
   );

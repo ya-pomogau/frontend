@@ -5,8 +5,8 @@ import { Button } from 'shared/ui/button';
 import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
-import { useAppSelector } from '../../../app/hooks';
-import { AdminPermission } from '../../../shared/types/common.types';
+import { useAppSelector } from '../../../../app/hooks';
+import { AdminPermission } from '../../../types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
@@ -14,6 +14,7 @@ interface VolunteerActionsProps {
     score: number
   ) => 'primary' | 'partial' | 'secondary';
   score: number;
+  extClassName?: string;
   keys: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
   isKeyButtonExclamationPointIcon: boolean;
@@ -26,6 +27,7 @@ const VolunteerActions = ({
   isVolonteerAcceptButtonDisabled,
   getButtonTypeFromScore,
   score,
+  extClassName,
   isAcceptButtonExclamationPointIcon,
   isKeyButtonExclamationPointIcon,
   onAcceptButtonClick,
@@ -43,7 +45,7 @@ const VolunteerActions = ({
   const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
 
   return (
-    <div className={classnames(styles.buttons_div)}>
+    <div className={classnames(extClassName, styles.buttons_div)}>
       <div className={classnames(styles.volunteer_info)}>
         <VolunteerInfo
           extClassName={styles.customVolunteerInfo}

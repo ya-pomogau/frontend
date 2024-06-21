@@ -1,17 +1,24 @@
 import classnames from 'classnames';
 import styles from '../styles.module.css';
 import classes from '../styles.module.css';
-import { UserRole } from '../../../shared/types/common.types';
+import { UserRole } from '../../../types/common.types';
 
 interface UserInfoProps {
   role: UserRole;
   userName: string;
   userId: string;
   userNumber: string;
+  extraClasses?: string;
 }
 
-const UserInfo = ({ role, userName, userId, userNumber }: UserInfoProps) => (
-  <div className={styles.user_info}>
+const UserInfo = ({
+  role,
+  userName,
+  userId,
+  userNumber,
+  extraClasses,
+}: UserInfoProps) => (
+  <div className={classnames(styles.user_info, extraClasses)}>
     <h2
       className={classnames(
         styles.name_text,
@@ -47,7 +54,7 @@ const UserInfo = ({ role, userName, userId, userNumber }: UserInfoProps) => (
           'm-0 text text_size_small text_type_regular text_type_bold '
         )}
       >
-        тел:
+        Тел.:
       </p>
       <p
         className={classnames(
