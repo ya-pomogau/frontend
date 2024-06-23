@@ -96,6 +96,7 @@
 }
 
 .errorText {
+  margin: 0 5px;
   font-size: 10px;
   line-height: 16.8px;
   text-transform: lowercase;
