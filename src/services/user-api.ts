@@ -11,7 +11,7 @@ import { UserRole } from 'shared/types/common.types';
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
-  tagTypes: ['Users', 'User'],
+  tagTypes: ['Users', 'User', 'Profile'],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
     prepareHeaders: (headers) => {
@@ -80,6 +80,7 @@ export const usersApi = createApi({
         url: `/me`,
         method: 'GET',
       }),
+      providesTags: ['Profile'],
     }),
     updateUserProfile: build.mutation({
       query: (body: Omit<UpdateUserInfo, '_id'>) => ({
@@ -87,6 +88,7 @@ export const usersApi = createApi({
         method: 'PATCH',
         body: body,
       }),
+      invalidatesTags: ['Profile'],
     }),
   }),
 });

@@ -62,7 +62,13 @@ export const UserInfo = () => {
         //   // }
         const resultAction = await updateUserProfile(userData);
         if ('data' in resultAction) {
-          dispatch(setUser(resultAction.data));
+          // При установки User необходимо было в стор записать не объект location, а просто массив
+          dispatch(
+            setUser({
+              ...resultAction.data,
+              location: resultAction.data.location.coordinates,
+            })
+          );
           setTokenAccess(resultAction.data?.token);
         } else {
           console.error('Ошибка при обновлении профиля:', resultAction.error);
@@ -94,6 +100,7 @@ export const UserInfo = () => {
           valueName={user.name}
           valuePhone={user.phone}
           valueAddress={user.address}
+          valueLocation={user.location || []}
           isPopupOpen={isPopupOpen}
           valueId={user._id}
           buttonRef={buttonRef}

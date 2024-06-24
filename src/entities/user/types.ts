@@ -72,6 +72,7 @@ export type UpdateUserInfo = {
   name: string;
   phone: string;
   address: string;
+  location: TPointGeoJSON;
   avatar?: null | FormData;
   _id: string;
 };

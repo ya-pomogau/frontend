@@ -13,6 +13,8 @@ import type { UpdateUserInfo } from 'entities/user/types';
 import type { ViewerInputData } from '../types';
 
 import styles from './edit-viewer-info.module.css';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { InputAddress } from 'shared/ui/input-address';
 
 interface EditViewerInfoProps {
   extClassName?: string;
@@ -22,6 +24,7 @@ interface EditViewerInfoProps {
   valueName: string;
   valuePhone: string;
   valueAddress: string;
+  valueLocation: GeoCoordinates;
   valueId: string;
   isPopupOpen: boolean;
   buttonRef: React.RefObject<HTMLElement>;
@@ -42,6 +45,7 @@ export const EditViewerInfo = ({
   valueName,
   valuePhone,
   valueAddress,
+  valueLocation,
   valueId,
   isPopupOpen,
   buttonRef,
@@ -61,13 +65,14 @@ export const EditViewerInfo = ({
     name: valueName,
     phone: valuePhone,
     address: valueAddress,
+    location: { type: 'Point', coordinates: valueLocation },
     // avatar: null,
     // _id: valueId,
   };
   const [userData, setUserData] = useState(viewerData);
   useEffect(() => {
     setUserData(viewerData);
-  }, [valueName, valuePhone, valueAddress]);
+  }, [valueName, valuePhone, valueAddress, valueLocation]);
   const avatarFile = new FormData();
 
   const handleChange = async (event: ViewerInputData) => {
@@ -117,6 +122,19 @@ export const EditViewerInfo = ({
     onOutsideClick: handleClosePopup,
     enabled: isPopupOpen,
   });
+  // Функция для изменения данных адреса&координат
+  const handleAddressValueChange = (
+    newAddress: string,
+    coords?: GeoCoordinates
+  ) => {
+    setIsFormEdited(true);
+    setIsFormSaved(false);
+    setUserData({
+      ...userData,
+      address: newAddress,
+      location: { type: 'Point', coordinates: coords || [] },
+    });
+  };
 
   useEffect(() => {
     document.addEventListener('keydown', handleEscKeydown);
@@ -129,7 +147,6 @@ export const EditViewerInfo = ({
   const handleEscKeydown = (e: KeyboardEvent) => {
     e.key === 'Escape' && handleClosePopup();
   };
-
   return (
     <LightPopup isPopupOpen={isPopupOpen} onClickExit={handleClosePopup}>
       <div
@@ -259,14 +276,16 @@ export const EditViewerInfo = ({
                 {' '}
                 Адрес:{' '}
               </p>
-              <Input
-                type="text"
-                extClassName={styles.input}
-                placeholder="Введите адрес"
-                value={userData.address}
-                onChange={handleChange}
+              <InputAddress
                 name="address"
-                {...props}
+                defaultValue={userData.address}
+                onChange={handleChange}
+                extClassName={styles.input}
+                address={{
+                  address: userData.address,
+                  coords: userData.location.coordinates,
+                }}
+                setAddress={handleAddressValueChange}
               />
             </li>
           </ul>
