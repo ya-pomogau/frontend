@@ -10,9 +10,16 @@ import { EditIcon } from '../../shared/ui/icons/edit-icon';
 import React, { SyntheticEvent, useState } from 'react';
 import { Button } from '../../shared/ui/button';
 import { CloseIconThin } from '../../shared/ui/icons/close-icon-thin';
+import { useAppSelector } from '../../app/hooks';
+import { SmartHeader } from '../../shared/ui/smart-header';
+import { LockIcon } from '../../shared/ui/icons/lock-icon';
+import { useMediaQuery } from '../../shared/hooks';
 
 export function PolicyPage() {
-  // Нужно реализовать хранение значений titleMarkdown и descriptionMarkdown на сервере в базе данных
+  const { role, data } = useAppSelector((state) => state.user);
+  const isAdmin = role === 'Admin' && data && data.isRoot;
+  const isMobile = useMediaQuery('(max-width:1150px)');
+  // TODO Нужно реализовать хранение значений titleMarkdown и descriptionMarkdown на сервере в базе данных
   const [titleMarkdown, setTitleMarkdown] = useState(initTitleMarkdown);
   const [descriptionMarkdown, setDescriptionMarkdown] = useState(
     initDescriptionMarkdown
@@ -44,6 +51,11 @@ export function PolicyPage() {
   };
   return (
     <div className={style.wrapper}>
+      <SmartHeader
+        icon={<LockIcon color="blue" size="32" />}
+        text="Политика конфиденциальности"
+        extClassName={isMobile ? style.smartHeaderOn : style.smartHeaderOff}
+      />
       {!editState && (
         <>
           <div className={style.title}>
@@ -53,7 +65,11 @@ export function PolicyPage() {
             >
               {titleMarkdown}
             </ReactMarkdown>
-            <button className={style.editButton} onClick={handleEditButton}>
+            <button
+              className={style.editButton}
+              onClick={handleEditButton}
+              style={isAdmin ? { display: 'block' } : { display: 'none' }}
+            >
               <EditIcon color={'blue'} size={'24'} />
               <p className={style.editButtonText}>Редактировать</p>
             </button>
