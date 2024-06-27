@@ -4,16 +4,18 @@ import { User } from 'entities/user/types';
 
 interface TabProps {
   data: User[];
-  view: 'tiles' | 'list';
+  viewMode: 'tiles' | 'list';
 }
 
-export function RequestsTab({ data, view }: TabProps) {
+export function RequestsTab({ data, viewMode }: TabProps) {
   return (
     <div
-      className={view === 'list' ? styles.userCardsList : styles.userCardsTiles}
+      className={
+        viewMode === 'list' ? styles.userCardsList : styles.userCardsTiles
+      }
     >
       {data.map((user: User) => (
-        <UserCard key={user._id} user={user} viewMode={view} />
+        <UserCard key={user._id} user={user} viewMode={viewMode} />
       ))}
     </div>
   );
