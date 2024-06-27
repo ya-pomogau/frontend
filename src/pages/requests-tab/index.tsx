@@ -9,7 +9,9 @@ interface TabProps {
 
 export function RequestsTab({ data, view }: TabProps) {
   return (
-    <div className={styles.userCards}>
+    <div
+      className={view === 'list' ? styles.userCardsList : styles.userCardsTiles}
+    >
       {data.map((user: User) => (
         <UserCard key={user._id} user={user} viewMode={view} />
       ))}

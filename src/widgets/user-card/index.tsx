@@ -1,8 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { UserRole, UserStatus } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
 import { useConfirmUserMutation } from 'services/admin-api';
-import { UserCardTile } from 'shared/ui/user-cards/user-card-tile';
+import { UserCardTiles } from 'shared/ui/user-cards/user-card-tiles';
 import { UserCardList } from 'shared/ui/user-cards/user-card-list';
 
 interface UserCardProps {
@@ -23,7 +23,7 @@ const getButtonTypeFromScore = (
 };
 
 export const UserCard = ({ user, viewMode }: UserCardProps) => {
-  const { name, score, status, keys, role, avatar, _id, phone } = user;
+  const { score, status, keys, role } = user;
   const isVolonteerAcceptButtonDisabled = !!(
     status &&
     status > UserStatus.UNCONFIRMED &&
@@ -39,7 +39,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   const isKeyButtonExclamationPointIcon = !!(score && score >= 60 && !keys);
 
   return viewMode === 'tiles' ? (
-    <UserCardTile
+    <UserCardTiles
       user={user}
       handleConfirmClick={handleConfirmClick}
       isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}

@@ -31,9 +31,9 @@
   scroll-snap-type: y mandatory;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .timePickerPopup__item {
   display: block;

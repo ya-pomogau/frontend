@@ -6,6 +6,10 @@
   position: absolute;
 }
 
+.wrapper::-webkit-scrollbar {
+  width: 0;
+}
+
 .markdownStyles {
   font-family: 'Golos', sans-serif;
   font-weight: 400;
@@ -14,6 +18,9 @@
   overflow-y: scroll;
   padding-bottom: 30px;
   margin-bottom: 50px;
+}
+.markdownStyles::-webkit-scrollbar {
+  width: 0;
 }
 
 .markdownStyles h1 {

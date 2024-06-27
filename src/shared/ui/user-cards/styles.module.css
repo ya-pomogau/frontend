@@ -4,7 +4,12 @@
   margin-left: 8px;
 }
 
-.grid_two {
+.grid_two_list {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.grid_two_tiles {
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -159,6 +164,19 @@
   padding-left: 10px;
 }
 
+.recipient_textarea {
+  height: 90px;
+  width: 186px;
+  font-family: 'Golos', sans-serif;
+  border: 0.5px solid #2e3192;
+  font-size: 12px;
+  color: #2e3192;
+  resize: none;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
 .id {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -188,6 +206,13 @@
     /* padding: 10px; */
     color: #2e3192;
     line-height: 37px;
+  }
+
+  .recipient_textarea {
+    height: 60px;
+    width: 140px;
+    padding-left: 5px;
+    padding-top: 5px;
   }
 
   .recipient_input::placeholder {

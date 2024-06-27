@@ -43,30 +43,31 @@ export const UserCardList = ({
 
       <UserInfo
         userName={name}
+        viewMode="list"
         userId={_id}
         userNumber={phone}
         role={role}
         extraClasses={styles.user_info_space}
-      />
-
-      {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
-        <div className={classnames(styles.icons_div)}>
-          <RoundButton
-            buttonType="phone"
-            onClick={() => {
-              window.location.href = 'tel:' + phone;
-            }}
-          />
-          <RoundButton
-            buttonType="message"
-            onClick={() => console.log('message button pressed')}
-          />
-        </div>
-      )}
+      >
+        {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
+          <div className={classnames(styles.icons_div)}>
+            <RoundButton
+              buttonType="phone"
+              onClick={() => {
+                window.location.href = 'tel:' + phone;
+              }}
+            />
+            <RoundButton
+              buttonType="message"
+              onClick={() => console.log('message button pressed')}
+            />
+          </div>
+        )}
+      </UserInfo>
 
       {role === UserRole.VOLUNTEER && (
         <VolunteerActions
-          extClassName={styles.buttons_div_list}
+          extClassName={styles.buttons_div_list_volunteers}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
@@ -85,6 +86,8 @@ export const UserCardList = ({
 
       {role === UserRole.RECIPIENT && (
         <RecipientActions
+          viewMode="list"
+          extClassName={styles.buttons_div_list_recipients}
           approved={status !== UserStatus.UNCONFIRMED}
           onConfirmClick={handleConfirmClick}
           onBlockClick={() => {

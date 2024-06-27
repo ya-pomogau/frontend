@@ -9,7 +9,7 @@ import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 
-export interface UserCardTileProps {
+export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
@@ -19,13 +19,13 @@ export interface UserCardTileProps {
   ) => 'primary' | 'partial' | 'secondary';
 }
 
-export const UserCardTile = ({
+export const UserCardTiles = ({
   user,
   handleConfirmClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
   getButtonTypeFromScore,
-}: UserCardTileProps) => {
+}: UserCardTilesProps) => {
   const { name, role, avatar, phone, _id, score, keys, status } = user;
 
   return (

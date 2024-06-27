@@ -1,12 +1,22 @@
-.userCards {
+.userCardsTiles {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   margin: 35px 0 0 30px;
-  width: 95%;
-  height: auto;
+  width: 96%;
   max-height: 65vh;
   overflow-y: auto;
+}
+
+.userCardsList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 35px 0 0 30px;
+  width: 96%;
+  overflow-y: auto;
+  max-height: 65vh;
 }
 
 .input {

@@ -5,19 +5,24 @@ import { Input } from 'shared/ui/input';
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../../app/hooks';
 import { AdminPermission } from '../../../types/common.types';
+import { TextArea } from 'shared/ui/text-area';
 
 interface RecipientActionsProps {
+  viewMode?: string;
   approved: boolean;
+  extClassName?: string;
   onConfirmClick: () => void;
   onBlockClick: () => void;
 }
 
 const RecipientActions = ({
+  viewMode = 'tiles',
   approved,
+  extClassName,
   onConfirmClick,
   onBlockClick,
 }: RecipientActionsProps) => {
-  const [recipientInputValue, setRecipientInputValue] = useState('');
+  const [recipientValue, setRecipientValue] = useState('');
   const adminPermissions = useAppSelector(
     (state) => state.user.data?.permissions
   );
@@ -26,21 +31,33 @@ const RecipientActions = ({
   );
 
   return (
-    <div className={classnames(styles.buttons_div)}>
-      <Input
-        className={classnames(styles.recipient_input)}
-        name="name"
-        onChange={(e) => {
-          setRecipientInputValue(e.target.value);
-        }}
-        value={recipientInputValue}
-        placeholder="Впишите вашу фамилию"
-        type="text"
-      />
+    <div className={classnames(extClassName, styles.buttons_div)}>
+      {viewMode === 'list' ? (
+        <TextArea
+          className={classnames(styles.recipient_textarea)}
+          name="name"
+          onChange={(e) => {
+            setRecipientValue(e.target.value);
+          }}
+          placeholder="Впишите вашу фамилию"
+          value={recipientValue}
+        />
+      ) : (
+        <Input
+          className={classnames(styles.recipient_input)}
+          name="name"
+          onChange={(e) => {
+            setRecipientValue(e.target.value);
+          }}
+          value={recipientValue}
+          placeholder="Впишите вашу фамилию"
+          type="text"
+        />
+      )}
 
       <Button
         disabled={approved || !approvePermission}
-        buttonType={recipientInputValue ? 'primary' : 'secondary'}
+        buttonType={recipientValue ? 'primary' : 'secondary'}
         label="Подтвердить"
         onClick={onConfirmClick}
       />
