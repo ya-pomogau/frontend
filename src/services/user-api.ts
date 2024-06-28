@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
+import { User, UpdateUserInfo } from 'entities/user/types';
+import { getTokenAccess } from 'shared/libs/utils';
+import { UserRole } from 'shared/types/common.types';
 
 //нам не нужны отдельные функции fetch для использования RTK Query.
 //Данный код генерирует нам хуки для получения данных. Напрмиер, хук useGetUsersQuery принимает userRole
@@ -11,9 +14,8 @@ export const usersApi = createApi({
   tagTypes: ['Users', 'User'],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
-    // baseUrl: 'https://api.kraev.nomoredomains.xyz',
     prepareHeaders: (headers) => {
-      const token = sessionStorage.getItem('token');
+      const token = getTokenAccess();
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }
@@ -26,12 +28,15 @@ export const usersApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ id }: any) => ({ type: 'Users' as const, id })),
-              { type: 'Users', id: 'LIST' },
+              ...result.map(({ _id }: any) => ({
+                type: 'Users' as const,
+                _id,
+              })),
+              { type: 'Users', _id: 'LIST' },
             ]
-          : [{ type: 'Users', id: 'LIST' }],
+          : [{ type: 'Users', _id: 'LIST' }],
     }),
-    getUserById: build.query({
+    getUserById: build.query<User, string>({
       query: (userId) => `users/${userId}`,
       providesTags: ['User'],
     }),
@@ -41,21 +46,21 @@ export const usersApi = createApi({
     getUncomfirmed: build.query({
       query: (adminRole) =>
         `users?${
-          adminRole === 'admin'
+          adminRole === UserRole.ADMIN
             ? 'role_ne=admin&role_ne=master'
             : 'role_ne=master'
         }`, //пока для теста просто отдаю список без проверки статуса, далее надо будет добавить условие статуса необработанных
     }),
     updateUsers: build.mutation({
       query: (body) => ({
-        url: body.file ? `users/avatar/${body.id}` : `users/${body.id}`,
+        url: body.file ? `users/avatar/${body._id}` : `users/${body._id}`,
         method: 'PATCH',
         body: body.file ? body.file : body,
         // headers: 'Здесь будет JWT',
       }),
-      async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ _id, ...patch }, { dispatch, queryFulfilled }) {
         const patchResult = dispatch(
-          usersApi.util.updateQueryData('getUserById', id, (draft: any) => {
+          usersApi.util.updateQueryData('getUserById', _id, (draft: any) => {
             Object.assign(draft, patch);
           })
         );
@@ -65,8 +70,8 @@ export const usersApi = createApi({
           patchResult.undo();
         }
       },
-      invalidatesTags: (result, error, { id }) => [
-        { type: 'User', id: 'LIST' },
+      invalidatesTags: (result, error, { _id }) => [
+        { type: 'User', _id: 'LIST' },
       ],
     }),
     // Данные о пользователе полученные от БД
@@ -74,6 +79,13 @@ export const usersApi = createApi({
       query: () => ({
         url: `/me`,
         method: 'GET',
+      }),
+    }),
+    updateUserProfile: build.mutation({
+      query: (body: Omit<UpdateUserInfo, '_id'>) => ({
+        url: `/system/profile`,
+        method: 'PATCH',
+        body: body,
       }),
     }),
   }),
@@ -86,4 +98,5 @@ export const {
   useUpdateUsersMutation,
   useGetUncomfirmedQuery,
   useGetProfileQuery,
+  useUpdateUserProfileMutation,
 } = usersApi;

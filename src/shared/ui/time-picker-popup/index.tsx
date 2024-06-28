@@ -4,6 +4,8 @@ import styles from './styles.module.css';
 import { LightPopup } from '../light-popup';
 import { useOutsideClick } from 'shared/hooks/use-outside-click';
 import './styles.css';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { setTime } from '../../../features/create-request/model';
 
 interface ITimePickerPopup {
   isPopupOpen: boolean;
@@ -31,6 +33,7 @@ export function TimePickerPopup({
 
   const [wheelHour, setWheelHour] = useState('00');
   const [wheelMinute, setWheelMinute] = useState('00');
+  const dispatch = useAppDispatch();
 
   const handleClosePopup = () => {
     setIsOpenClockElement(false);
@@ -50,6 +53,7 @@ export function TimePickerPopup({
     } else if (endTime && setEndTime) {
       setEndTime(`${wheelHour}:${wheelMinute}`);
     }
+    dispatch(setTime(`${wheelHour}:${wheelMinute}`));
     handleClosePopup();
   }
 

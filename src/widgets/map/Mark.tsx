@@ -3,91 +3,79 @@
 /* eslint-disable react/no-this-in-sfc */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React from 'react';
+import { FC, memo } from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
-import './styles.css';
 import usePermission from 'shared/hooks/use-permission';
-import { ACTIVATED, CONFIRMED, VERIFIED } from 'shared/libs/statuses';
+import { UserRole, UserStatus } from 'shared/types/common.types';
+import { Task } from 'entities/task/types';
+import { isTaskUrgent } from 'shared/libs/utils';
+import { useResponseTaskMutation } from 'services/user-task-api';
 
 type MarkProps = {
-  id?: number;
-  coordinates?: [number, number];
-  isUrgentTask?: boolean;
-  fullName?: string;
-  phone?: string;
-  avatar?: string;
-  description?: string;
-  count?: number;
+  task: Task;
   onClick?: () => void;
+  showPopup?: () => void;
+  onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
-  title?: string;
-  date?: string;
-  time?: string;
 };
 
-export const Mark = React.memo(
-  ({
-    id,
-    coordinates,
-    isUrgentTask,
-    fullName,
-    phone,
-    avatar,
-    description,
-    title,
-    count,
-    onClick,
-    isAuthorised,
-    date,
-    time,
-  }: MarkProps) => {
-    const ymaps = useYMaps(['templateLayoutFactory']);
+const Mark: FC<MarkProps> = ({
+  task,
+  onClick,
+  showPopup,
+  isAuthorised,
+}: MarkProps) => {
+  const { description, location, date } = task;
 
-    const isGranted = usePermission(
-      [CONFIRMED, ACTIVATED, VERIFIED],
-      'volunteer'
-    );
-    const onUncomfirmedClick = () => {
-      alert(
-        'Тут будет попап о том, что вы еще не можете откликаться на заявки'
-      );
-    };
+  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
 
-    if (!ymaps) return null;
+  const isGranted = usePermission(
+    [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
+    UserRole.VOLUNTEER
+  );
+  const [responseTask] = useResponseTaskMutation();
 
-    const Iconlayout = ymaps.templateLayoutFactory.createClass(
-      `{% if properties.isUrgentTask %} 
+  const onClickButton = () => {
+    // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
+    showPopup();
+
+    isAuthorised && responseTask(task._id);
+  };
+
+  if (!ymaps) return null;
+
+  const Iconlayout = ymaps.templateLayoutFactory.createClass(
+    `{% if properties.isUrgentTask %}
       <div class="mark_container">
         <svg width="53" height="53" viewBox="0 0 53 53" fill="#D60080" xmlns="http://www.w3.org/2000/svg">
           <circle cx="26.5" cy="26.5" r="26.5" />
           <path fill-rule="evenodd" clip-rule="evenodd" d="M20.3135 18.7243C20.3135 22.1202 23.1941 24.801 26.8427 24.801C30.4914 24.801 33.3719 22.1202 33.3719 18.7243C33.3719 15.3285 30.4914 12.6475 26.8427 12.6475C23.1941 12.6475 20.3135 15.3285 20.3135 18.7243ZM21.4658 18.7243C21.4658 16.0434 23.7702 13.7198 26.8427 13.7198C29.9153 13.7198 32.4117 16.0434 32.2197 18.7243C32.2197 21.4053 29.9153 23.7286 26.8427 23.7286C23.9622 23.7286 21.4658 21.584 21.4658 18.7243Z" fill="#FBFDFF"/>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M26.2664 44.1036C26.4584 44.2824 26.6504 44.461 26.8425 44.461C27.2264 44.461 27.4186 44.461 27.6106 44.1036L37.7885 23.7283C39.3248 20.3325 39.1327 16.4004 37.0203 13.1832C34.908 10.1448 31.4513 8.17873 27.6106 8H26.2664C22.4257 8.17873 18.969 9.96608 16.8566 13.1832C14.7442 16.4004 14.3601 20.3325 16.0884 23.7283L26.2664 44.1036ZM26.2664 8.89365H27.8027C31.2593 9.07238 34.3318 10.8598 36.2522 13.7195C38.1725 16.5792 38.3646 20.3326 36.8284 23.371L27.0345 42.8524L17.2407 23.371C15.7044 20.3326 15.8964 16.5792 17.8168 13.7195C19.5451 10.8598 22.8098 9.07238 26.2664 8.89365Z" fill="#FBFDFF"/>
         </svg>
-      </div> {% else %} 
+      </div> {% else %}
       <div class="mark_container">
-        <svg width="53" height="53" viewBox="0 0 53 53" fill="#2E3192" xmlns="http://www.w3.org/2000/svg"> 
+        <svg width="53" height="53" viewBox="0 0 53 53" fill="#2E3192" xmlns="http://www.w3.org/2000/svg">
           <circle cx="26.5" cy="26.5" r="26.5" />
           <path fill-rule="evenodd" clip-rule="evenodd" d="M20.3135 18.7243C20.3135 22.1202 23.1941 24.801 26.8427 24.801C30.4914 24.801 33.3719 22.1202 33.3719 18.7243C33.3719 15.3285 30.4914 12.6475 26.8427 12.6475C23.1941 12.6475 20.3135 15.3285 20.3135 18.7243ZM21.4658 18.7243C21.4658 16.0434 23.7702 13.7198 26.8427 13.7198C29.9153 13.7198 32.4117 16.0434 32.2197 18.7243C32.2197 21.4053 29.9153 23.7286 26.8427 23.7286C23.9622 23.7286 21.4658 21.584 21.4658 18.7243Z" fill="#FBFDFF"/>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M26.2664 44.1036C26.4584 44.2824 26.6504 44.461 26.8425 44.461C27.2264 44.461 27.4186 44.461 27.6106 44.1036L37.7885 23.7283C39.3248 20.3325 39.1327 16.4004 37.0203 13.1832C34.908 10.1448 31.4513 8.17873 27.6106 8H26.2664C22.4257 8.17873 18.969 9.96608 16.8566 13.1832C14.7442 16.4004 14.3601 20.3325 16.0884 23.7283L26.2664 44.1036ZM26.2664 8.89365H27.8027C31.2593 9.07238 34.3318 10.8598 36.2522 13.7195C38.1725 16.5792 38.3646 20.3326 36.8284 23.371L27.0345 42.8524L17.2407 23.371C15.7044 20.3326 15.8964 16.5792 17.8168 13.7195C19.5451 10.8598 22.8098 9.07238 26.2664 8.89365Z" fill="#FBFDFF"/>
         </svg>
       </div> {% endif %}
       `,
-      {
-        build() {
-          Iconlayout.superclass.build.call(this);
+    {
+      build() {
+        Iconlayout.superclass.build.call(this);
+        // На метку добавляем кликабильную зону
+        this.getData().options.set('shape', {
+          type: 'Circle',
+          coordinates: [28, 28],
+          radius: 30,
+        });
+      },
+    }
+  );
 
-          // На метку добавляем кликабильную зону
-          this.getData().options.set('shape', {
-            type: 'Circle',
-            coordinates: [28, 28],
-            radius: 30,
-          });
-        },
-      }
-    );
-
-    const Balloonlayout = ymaps.templateLayoutFactory.createClass(
-      `{% if properties.isAuthorised %} 
+  const Balloonlayout = ymaps.templateLayoutFactory.createClass(
+    `{% if properties.isAuthorised %}
       <div class="task_container">
         <div class="close_icon">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="#2E3192" xmlns="http://www.w3.org/2000/svg">
@@ -95,12 +83,12 @@ export const Mark = React.memo(
           </svg>
         </div>
         <div class="task_bio">
-          <img src="{{properties.avatar}}" alt={{properties.fullName}} class="task_avatar"/>
+          <img src="{{properties.recipient.avatar}}" alt={{properties.recipient.name}} class="task_avatar"/>
           <div>
             <p class="task_recipient_name">
-              {{properties.fullName}}
+              {{properties.recipient.name}}
             </p>
-            <p class="task_recipient_phone">{{properties.phone}}</p>
+            <p class="task_recipient_phone">{{properties.recipient.phone}}</p>
           </div>
         </div>
         <div class="task_description_container">
@@ -122,7 +110,7 @@ export const Mark = React.memo(
           <p class={% if properties.isUrgentTask %} "task_date_text_urgent" {% else %} "task_date_text" {% endif %}>{{properties.date}}</p>
         </div>
           <div class="task_box">
-            <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.count}}</p>
+            <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.category.points}}</p>
               <svg width="47" height="36" viewBox="0 0 47 36" fill={% if properties.isUrgentTask %} "#D60080" {% else %} "#2E3192" {% endif %} xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.5 33C29.8497 33 36.0168 29.1956 37.704 21.9962C37.7102 21.9962 37.7165 21.9962 37.7228 21.9962L37.7358 21.9962C41.1954 21.9962 44 18.5281 44 14.8806C44 11.233 41.1954 7.76493 37.7358 7.76493C37.025 7.76493 36.0506 7.68529 35.4137 7.91528C32.6319 3.3266 28.0485 1 22.5 1C16.9515 1 12.3681 3.3266 9.58627 7.91528C8.94939 7.68529 7.97502 7.76493 7.2642 7.76493C3.80458 7.76493 1 11.233 1 14.8806C1 18.5281 3.80458 21.4851 7.2642 21.4851C7.27482 21.4851 7.28543 21.485 7.29604 21.485C8.98319 28.6844 15.1503 33 22.5 33Z"/>
                 <path d="M33.5569 17.7272C33.5569 24.5554 28.2856 30.0908 21.7831 30.0908C15.2806 30.0908 10.0093 24.5554 10.0093 17.7272C10.0093 10.8989 15.2806 5.36353 21.7831 5.36353C28.2856 5.36353 33.5569 10.8989 33.5569 17.7272Z" stroke="white" stroke-width="0.5"/>
@@ -144,11 +132,11 @@ export const Mark = React.memo(
       <p class={% if properties.isUrgentTask %} "task_date_text_urgent" {% else %} "task_date_text" {% endif %}>{{properties.time}}</p>
       </div>
         </div>
-       
+
         <div class="task_button_container">
-          <button 
+          <button
             type="button"
-            class={% if properties.isUrgentTask %} "submit_button_urgent" {% else %} "submit_button" {% endif %}
+            class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
           >
             Откликнуться
           </button>
@@ -162,7 +150,7 @@ export const Mark = React.memo(
           </svg>
         </div>
         <div class="task_bio">
-          <img src="{{properties.avatar}}" alt={{properties.fullName}} class="task_avatar"/>
+          <img src="{{properties.recipient.avatar}}" alt={{properties.recipient.name}} class="task_avatar"/>
           <div>
             <p class="task_recipient_name">
                Нужна помощь
@@ -172,12 +160,12 @@ export const Mark = React.memo(
         </div>
         <div class="task_description_container">
           <p class="task_description task_description_hidden" >
-            {{properties.title}}
+            {{properties.category.title}}
           </p>
           <button type="button" class="task_button"></button>
         </div>
         <div class="task_icon_box">
-          <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.count}}</p>
+          <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.category.count}}</p>
           <svg width="47" height="36" viewBox="0 0 47 36" fill={% if properties.isUrgentTask %} "#D60080" {% else %} "#2E3192" {% endif %} xmlns="http://www.w3.org/2000/svg">
             <path d="M22.5 33C29.8497 33 36.0168 29.1956 37.704 21.9962C37.7102 21.9962 37.7165 21.9962 37.7228 21.9962L37.7358 21.9962C41.1954 21.9962 44 18.5281 44 14.8806C44 11.233 41.1954 7.76493 37.7358 7.76493C37.025 7.76493 36.0506 7.68529 35.4137 7.91528C32.6319 3.3266 28.0485 1 22.5 1C16.9515 1 12.3681 3.3266 9.58627 7.91528C8.94939 7.68529 7.97502 7.76493 7.2642 7.76493C3.80458 7.76493 1 11.233 1 14.8806C1 18.5281 3.80458 21.4851 7.2642 21.4851C7.27482 21.4851 7.28543 21.485 7.29604 21.485C8.98319 28.6844 15.1503 33 22.5 33Z"/>
             <path d="M33.5569 17.7272C33.5569 24.5554 28.2856 30.0908 21.7831 30.0908C15.2806 30.0908 10.0093 24.5554 10.0093 17.7272C10.0093 10.8989 15.2806 5.36353 21.7831 5.36353C28.2856 5.36353 33.5569 10.8989 33.5569 17.7272Z" stroke="white" stroke-width="0.5"/>
@@ -189,9 +177,9 @@ export const Mark = React.memo(
           </svg>
         </div>
         <div class="task_button_container">
-          <button 
+          <button
             type="button"
-            class={% if properties.isUrgentTask %} "submit_button_urgent" {% else %} "submit_button" {% endif %}
+            class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
           >
             Откликнуться
           </button>
@@ -199,77 +187,80 @@ export const Mark = React.memo(
       </div> {% endif %}
       `,
 
-      {
-        build() {
-          Balloonlayout.superclass.build.call(this);
+    {
+      build() {
+        Balloonlayout.superclass.build.call(this);
 
-          const mainContainer = this.getParentElement();
-          const taskContainer = mainContainer.querySelector('.task_container');
+        const mainContainer = this.getParentElement();
+        const taskContainer = mainContainer.querySelector('.task_container');
 
-          // Добавляем слушатель на кпонку "читать"
-          const buttonRead = taskContainer.querySelector('.task_button');
+        // Добавляем слушатель на кпонку "читать"
+        const buttonRead = taskContainer.querySelector('.task_button');
 
-          const descriptionContainer = taskContainer.querySelector(
-            '.task_description_hidden'
-          );
-          // Изменяем видимость кнопки "читать" в зависимости от длины контента
-          const hendleReadButton = () => {
-            if ([...description].length < 140) {
-              buttonRead.textContent = '';
-            }
-          };
-          hendleReadButton();
-          const onReadClick = () => {
-            descriptionContainer.classList.toggle('task_description_hidden');
-            // eslint-disable-next-line no-unused-expressions
-            buttonRead.textContent === 'Читать'
-              ? (buttonRead.textContent = 'Свернуть')
-              : (buttonRead.textContent = 'Читать');
-          };
-          buttonRead.addEventListener('click', onReadClick);
+        const descriptionContainer = taskContainer.querySelector(
+          '.task_description_hidden'
+        );
+        // Изменяем видимость кнопки "читать" в зависимости от длины контента
+        const hendleReadButton = () => {
+          if ([...description].length < 140) {
+            buttonRead.textContent = '';
+          }
+        };
+        hendleReadButton();
+        const onReadClick = () => {
+          descriptionContainer.classList.toggle('task_description_hidden');
+          // eslint-disable-next-line no-unused-expressions
+          buttonRead.textContent === 'Читать'
+            ? (buttonRead.textContent = 'Свернуть')
+            : (buttonRead.textContent = 'Читать');
+        };
+        buttonRead.addEventListener('click', onReadClick);
 
-          // Добавляем слушатель на кпонку "Закрыть окно".
-          const buttonClose = taskContainer.querySelector('.close_icon');
-          const onCloseClick = () => {
-            this.getData().map.balloon.close();
-          };
-          buttonClose.addEventListener('click', onCloseClick);
+        // Добавляем слушатель на кпонку "Закрыть окно".
+        const buttonClose = taskContainer.querySelector('.close_icon');
+        const onCloseClick = () => {
+          this.getData().map.balloon.close();
+        };
+        buttonClose.addEventListener('click', onCloseClick);
 
-          // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
-          const button = taskContainer
-            .querySelector('.task_button_container')
-            .querySelector('button');
-          button.addEventListener(
-            'click',
-            isGranted ? onClick : onUncomfirmedClick
-          );
-        },
-      }
-    );
+        // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
+        const button = taskContainer.querySelector(
+          '.task_button_container > button'
+        );
+        button.addEventListener('click', onClickButton);
+      },
+    }
+  );
 
-    return (
-      <Placemark
-        geometry={coordinates}
-        options={{
-          iconLayout: Iconlayout,
-          balloonLayout: Balloonlayout,
-          hideIconOnBalloonOpen: false,
-          balloonOffset: [-158, 66],
-          balloonPanelMaxMapArea: 0,
-        }}
-        properties={{
-          isUrgentTask,
-          fullName,
-          phone,
-          avatar,
-          description,
-          count,
-          title,
-          isAuthorised,
-          date,
-          time,
-        }}
-      />
-    );
-  }
-);
+  const properties = Object.assign(
+    { ...task },
+    {
+      isAuthorised: isAuthorised,
+      isUrgentTask: isTaskUrgent(date!),
+      date: date ? new Date(date!).toLocaleDateString() : 'Бессрочно',
+      time: date
+        ? new Date(date!).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+        : '00:00',
+      isDisabled: !isGranted,
+    }
+  );
+
+  return (
+    <Placemark
+      geometry={location}
+      options={{
+        iconLayout: Iconlayout,
+        balloonLayout: Balloonlayout,
+        hideIconOnBalloonOpen: false,
+        balloonOffset: [-158, 66],
+        balloonPanelMaxMapArea: 0,
+      }}
+      properties={properties}
+    />
+  );
+};
+
+export default memo(Mark);

@@ -21,6 +21,8 @@ interface ImageProps {
 export interface PostProps {
   _id?: string;
   title: string;
+  description: string;
+  images: ImageProps[];
   text: string;
   files: ImageProps[];
   author: Pick<UserInfo, 'id' | 'fullname' | 'avatar'>;

@@ -21,8 +21,11 @@
   --colors-interface-green: #009245;
   --colors-interface-orange: #f37920;
   --colors-interface-orange-bright: #fbb03b;
+  --colors-interface-orange-dark: #f37920;
   --colors-interface-orange-soft: #f9bc90;
+  --colors-interface-red: #ff0000;
   --colors-interface-pink: #c9006d;
+  --colors-interface-fuchsia: #d60080;
   --colors-interface-pink-soft: #e163b3;
   --colors-interface-red-soft: #fd6868;
   --colors-interface-ford-white: #e0e0e0;
@@ -61,9 +64,13 @@ body {
   font-family: 'Golos', sans-serif;
 }
 
+.text-inter {
+  font-family: 'Inter', sans-serif;
+}
+
 .text_size_small {
   font-size: 12px;
-  line-height: 14px;
+  line-height: 16.8px;
 }
 
 .text_size_middle {
@@ -73,7 +80,7 @@ body {
 
 .text_size_medium {
   font-size: 16px;
-  line-height: 19px;
+  line-height: 22.4px;
 }
 
 .text_size_large {
@@ -87,6 +94,7 @@ body {
 
 .text_type_bold {
   font-weight: 700;
+  line-height: 14.4px;
 }
 
 .m-0 {

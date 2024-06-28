@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import queryString from 'query-string';
 import { cbLink, isEmptyObj } from 'shared/libs/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -23,15 +23,19 @@ export const VKAuthPage = () => {
   const isError = useAppSelector((state) => state.error.isError);
 
   const [dto, setDto] = useState<TVKLoginRequestDto | null>(null);
-
+  const isUserRequested = useRef<boolean>(false);
   useEffect(() => {
     const queryObj = queryString.parse(location.search) as TVKLoginRequestDto;
-
-    if (!isEmptyObj(queryObj) && queryObj.code && queryObj.state) {
+    if (
+      !isEmptyObj(queryObj) &&
+      queryObj.code &&
+      queryObj.state &&
+      !isUserRequested.current
+    ) {
       queryObj.redirectUrl = cbLink;
-      setDto(queryObj);
+      dispatch(userLoginThunk(queryObj));
+      isUserRequested.current = true;
     }
-    console.dir(queryObj);
   }, [location.search]);
 
   useEffect(() => {
@@ -41,19 +45,17 @@ export const VKAuthPage = () => {
   }, [dto, dispatch]);
 
   useEffect(() => {
-    console.dir(vkUser); //TODO: потом удалить
-    if (!user) {
+    console.log('user');
+    console.log(user);
+    console.log('vkUser');
+    console.log(vkUser);
+    if (!user && !!vkUser) {
       navigate('/register');
-    }
-  }, [user, vkUser, navigate]);
-
-  useEffect(() => {
-    console.dir(user); //TODO: потом удалить
-    if (user) {
+    } else if (user) {
       navigate('/profile');
     }
-  }, [user, navigate]);
-
+  }, [user, vkUser, navigate]);
+  //TODO: реализовать вывод ошибки при запросе и лоадер
   return (
     <>
       {isError && <div>ошибка </div>}

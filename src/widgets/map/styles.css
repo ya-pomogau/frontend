@@ -128,7 +128,7 @@
 
 .task_icon_box {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 4px;
   gap: 4px;
@@ -173,20 +173,17 @@
 
 .submit_button_urgent {
   background-color: var(--colors-interface-pink);
-  border: none;
-  color: white;
-  font-family: 'Golos', sans-serif;
-  font-size: 12px;
-  line-height: 14px;
-  padding: 8px 28px;
-  margin: 0 auto;
 }
 
 .submit_button_urgent:hover {
-  cursor: pointer;
   background-color: var(--colors-interface-pink-soft);
-  transition: var(--transition-hover);
 }
+
+.submit_button_disabled,
+.submit_button_disabled:hover {
+  background-color: var(--colors-interface-additional);
+}
+
 .task_box {
   display: flex;
   align-items: center;

@@ -1,14 +1,15 @@
 import classNames from 'classnames';
+import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Button } from 'shared/ui/button';
-import {
-  setAddress,
-  changeStepDecrement,
-  changeStepIncrement,
-} from 'features/create-request/model';
+import { setAddress } from 'features/create-request/model';
 import YandexMap from 'widgets/map';
 import { InputAddress } from 'shared/ui/input-address';
+
+import usePropsButtonCustom from '../useButtonPropsCustom';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
+import { UserRole } from 'shared/types/common.types';
 
 import styles from './address-step.module.css';
 
@@ -17,46 +18,56 @@ interface IAddressProps {
 }
 
 export const AddressStep = ({ isMobile }: IAddressProps) => {
-  const { address, coordinates } = useAppSelector(
+  const dispatch = useAppDispatch();
+
+  const coord = useAppSelector((store) => store.user.data?.location);
+  const { address, location, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
-  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!address) {
+      dispatch(setAddress({ additinalAddress: '', coords: coord }));
+    }
+  }, []);
 
   const handleAddressValueChange = (
     additinalAddress: string,
-    coords?: [number, number] | []
+    coords?: GeoCoordinates
   ) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
+  const isEmptyAddress = address === '';
 
-  const handlePreviousStepClick = () => {
-    dispatch(changeStepDecrement());
-  };
+  const propsButton = usePropsButtonCustom();
+
+  const placeTitleStyles = classNames(
+    'text',
+    'text_type_regular ',
+    'm-0',
+    styles.place
+  );
+
+  const warningTextStyles = 'text text_size_small text_type_regular m-0';
+
+  const mapSettings = location
+    ? {
+        latitude: location[0],
+        longitude: location[1],
+        zoom: 17,
+      }
+    : undefined;
 
   return (
     <>
       <div className={styles.addressContainer}>
         {isMobile ? (
           <>
-            <p
-              className={classNames(
-                'text',
-                'text_type_regular ',
-                'm-0',
-                styles.place
-              )}
-            >
-              Место встречи
-            </p>
+            <p className={placeTitleStyles}>Место встречи</p>
             <div className={styles.headerWrapper} />
-
             <InputAddress
-              initialValue={address}
-              address={{ address, coords: coordinates || [] }}
+              address={{ address, coords: location || [] }}
               setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
@@ -66,36 +77,15 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               <YandexMap
                 width="260px"
                 height="350px"
-                coordinates={coordinates}
-                mapSettings={
-                  coordinates
-                    ? {
-                        latitude: coordinates[0],
-                        longitude: coordinates[1],
-                        zoom: 15,
-                      }
-                    : undefined
-                }
+                coordinates={location}
+                role={UserRole.RECIPIENT}
+                mapSettings={mapSettings}
               />
               <div className={styles.alertWrapper}>
-                <p
-                  className={classNames(
-                    'text',
-                    'text_size_small',
-                    'text_type_regular ',
-                    'm-0',
-                    styles.text
-                  )}
-                >
+                <p className={`${warningTextStyles} ${styles.text}`}>
                   * Будьте осторожны, если указываете домашний адрес,
                   <span
-                    className={classNames(
-                      'text',
-                      'text_size_small',
-                      'text_type_regular ',
-                      'm-0',
-                      styles.selectedText
-                    )}
+                    className={`${warningTextStyles} ${styles.selectedText}`}
                   >
                     &nbsp;не&nbsp;
                   </span>
@@ -109,32 +99,16 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           <>
             <InputAddress
               label="Укажите место встречи"
-              initialValue={address}
-              address={{ address, coords: coordinates || [] }}
+              address={{ address, coords: location || [] }}
               setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
             />
-            <p
-              className={classNames(
-                'text',
-                'text_size_small',
-                'text_type_regular ',
-                styles.text
-              )}
-            >
+            <p className={`${warningTextStyles} ${styles.text}`}>
               * Будьте осторожны, если указываете домашний
               <br />
               адрес,
-              <span
-                className={classNames(
-                  'text',
-                  'text_size_small',
-                  'text_type_regular ',
-                  'm-0',
-                  styles.selectedText
-                )}
-              >
+              <span className={`${warningTextStyles} ${styles.selectedText}`}>
                 &nbsp;не&nbsp;
               </span>
               пишите его полностью.
@@ -143,33 +117,34 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               <YandexMap
                 width="100%"
                 height="159px"
-                coordinates={coordinates}
-                mapSettings={
-                  coordinates
-                    ? {
-                        latitude: coordinates[0],
-                        longitude: coordinates[1],
-                        zoom: 15,
-                      }
-                    : undefined
-                }
+                coordinates={location}
+                role={UserRole.RECIPIENT}
+                mapSettings={mapSettings}
               />
             </div>
           </>
         )}
       </div>
+      {isEmptyAddress && (
+        <p className={styles.messageAlert}>Укажите место встречи</p>
+      )}
       <div className={styles.buttonWrapper}>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
-        <Button
-          buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
-        />
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
+            extClassName={styles.prevButton}
+          />
+        )}
+        {
+          <Button
+            disabled={isEmptyAddress}
+            buttonType="primary"
+            label={propsButton.label}
+            onClick={propsButton.onClick}
+          />
+        }
       </div>
     </>
   );

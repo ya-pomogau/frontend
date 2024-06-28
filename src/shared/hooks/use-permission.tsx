@@ -1,65 +1,53 @@
 import { useAppSelector } from 'app/hooks';
 import {
-  BLOG,
-  CREATE_TASKS,
-  INCREASE_SCORE,
-  PROFILES_APPROVAL,
-  READ,
-  RESOLVE_CONFLICTS,
-  SET_KEYS,
-} from 'shared/libs/permissions-names';
-import {
-  ACTIVATED,
-  CONFIRMED,
-  UNCONFIRMED,
-  VERIFIED,
-} from 'shared/libs/statuses';
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from 'shared/types/common.types';
 
 // хук использует массив необходимых компоненту разрешений, роль, к которой они
 // применяюся и сравнивает их с состоянием юзера, возвращая true или false, в зависимости
 // от того удовлетворяет пользователь хотя бы одному из перечисленных
 // требований или нет
+// так же проверяет, если пользователь isRoot - возвращает true
 
-type Requirments =
-  | typeof UNCONFIRMED
-  | typeof CONFIRMED
-  | typeof ACTIVATED
-  | typeof VERIFIED
-  | { id: number; name: typeof READ }
-  | { id: number; name: typeof PROFILES_APPROVAL }
-  | { id: number; name: typeof CREATE_TASKS }
-  | { id: number; name: typeof SET_KEYS }
-  | { id: number; name: typeof RESOLVE_CONFLICTS }
-  | { id: number; name: typeof BLOG }
-  | { id: number; name: typeof INCREASE_SCORE };
+type UserRequirements =
+  | UserStatus.CONFIRMED
+  | UserStatus.UNCONFIRMED
+  | UserStatus.ACTIVATED
+  | UserStatus.VERIFIED
+  | UserStatus.BLOCKED;
 
-type Role = 'volunteer' | 'recipient' | 'admin' | 'master' | 'any';
+type AdminRequirements = `${AdminPermission}`;
 
-export default function usePermission(
-  requirments: Array<Requirments>,
-  role: Role | null
+type Role = UserRole.VOLUNTEER | UserRole.RECIPIENT | UserRole.ADMIN;
+
+type Requirements<R extends Role> = R extends UserRole.ADMIN
+  ? AdminRequirements
+  : UserRequirements;
+
+export default function usePermission<R extends Role>(
+  requirements: Requirements<R>[],
+  role: Role
 ) {
+  const userIsRoot = useAppSelector((state) => state.user.data?.isRoot);
   const userStatus = useAppSelector((state) => state.user.data?.status);
   const userRole = useAppSelector((state) => state.user.data?.role);
   const userPermissions = useAppSelector(
-    (state) => state.user.data?.permissions
+    (state) => state.user.data?.permissions || []
   );
 
-  let isAllowed = false;
-
-  if (userRole === role || role === 'any') {
-    if (userRole) {
-      const userRights = { status: userStatus, ...userPermissions };
-      const hasPermission = requirments.filter((requirment) =>
-        Object.values(userRights).some(
-          (element) => JSON.stringify(element) === JSON.stringify(requirment)
-        )
-      );
-      hasPermission.length > 0 ? (isAllowed = true) : (isAllowed = false);
-    }
-  } else {
-    isAllowed = true;
+  if (userRole === UserRole.ADMIN && userIsRoot) {
+    return true;
   }
 
-  return isAllowed;
+  if (userRole !== role) {
+    return false;
+  }
+
+  const hasPermission = requirements.every((requirement) =>
+    [userStatus, ...userPermissions].some((element) => element === requirement)
+  );
+
+  return hasPermission && requirements.length > 1;
 }

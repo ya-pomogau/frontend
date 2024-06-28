@@ -17,12 +17,14 @@ import {
   enableConnectionError,
 } from 'entities/user/model';
 import { useGetUserByIdQuery } from 'services/user-api';
+import { UserRole } from 'shared/types/common.types';
+import { isRootSelector } from 'entities/user/model';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
-  const [userId, setUserId] = useState<number | null>(null);
-
+  const [userId, setUserId] = useState<string | null>(null);
+  const isRoot = useAppSelector(isRootSelector);
   const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
 
   const removeRole = () => {
@@ -32,23 +34,33 @@ export function PickRolePage() {
   };
 
   const getVolunteerRole = () => {
-    dispatch(setUserRole('volunteer'));
-    setUserId(7);
+    dispatch(setUserRole(UserRole.VOLUNTEER));
+    setUserId('7');
+  };
+
+  const getUnconfirmedVolunteerRole = () => {
+    dispatch(setUserRole(UserRole.VOLUNTEER));
+    setUserId('8');
   };
 
   const getRecipientRole = () => {
-    setUserId(4);
-    dispatch(setUserRole('recipient'));
+    setUserId('4');
+    dispatch(setUserRole(UserRole.RECIPIENT));
+  };
+
+  const getUnconfirmedRecipient = () => {
+    dispatch(setUserRole(UserRole.RECIPIENT));
+    setUserId('9');
   };
 
   const getAdminRole = () => {
-    dispatch(setUserRole('admin'));
-    setUserId(2);
+    dispatch(setUserRole(UserRole.ADMIN));
+    setUserId('2');
   };
 
   const getMasterAdminRole = () => {
-    dispatch(setUserRole('master'));
-    setUserId(1);
+    dispatch(setUserRole(UserRole.ADMIN));
+    setUserId('1');
   };
 
   const handleEnableConnectionError = () => {
@@ -62,14 +74,15 @@ export function PickRolePage() {
   };
 
   const getPageYouWouldBeRedirected = () => {
+    if (isRoot) {
+      return '/profile/requests';
+    }
     switch (role) {
-      case 'volunteer':
+      case UserRole.VOLUNTEER:
         return '/profile/map';
-      case 'recipient':
+      case UserRole.RECIPIENT:
         return '/profile/active';
-      case 'admin':
-        return '/profile/requests';
-      case 'master':
+      case UserRole.ADMIN:
         return '/profile/requests';
       default:
         return '/';
@@ -77,7 +90,7 @@ export function PickRolePage() {
   };
 
   useEffect(() => {
-    if (userId) {
+    if (userId && data) {
       refetch().then(() => dispatch(setUser(data)));
     }
     if (error) {
@@ -115,8 +128,23 @@ export function PickRolePage() {
         </li>
 
         <li>
+          <button
+            onClick={getUnconfirmedVolunteerRole}
+            style={{ marginRight: 10 }}
+          >
+            Получить роль волонтера, еще не одобренного админом.
+          </button>
+        </li>
+
+        <li>
           <button onClick={getRecipientRole} style={{ marginRight: 10 }}>
             Получить роль рецепиента.
+          </button>
+        </li>
+
+        <li>
+          <button onClick={getUnconfirmedRecipient} style={{ marginRight: 10 }}>
+            Получить роль неактивированного рецепиента.
           </button>
         </li>
 

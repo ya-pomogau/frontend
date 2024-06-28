@@ -1,36 +1,131 @@
-import React, { ChangeEvent, SyntheticEvent } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui/icons';
-import { SmartHeader } from 'shared/ui/smart-header';
-import { VERIFIED } from 'shared/libs/statuses';
-
 import styles from './styles.module.css';
+import { SmartHeader } from '../../shared/ui/smart-header';
+import { Icon } from '../../shared/ui/icons';
 import { Button } from '../../shared/ui/button';
-import usePermission from 'shared/hooks/use-permission';
+import usePermission from '../../shared/hooks/use-permission';
+import {
+  UserRole,
+  UserStatus,
+  TContacts,
+} from '../../shared/types/common.types';
+import useForm from '../../shared/hooks/use-form';
+import { useGetContactsQuery } from '../../services/contacts-api';
+import { useUpdateContactsMutation } from '../../services/admin-api';
+
+const initialContactsValues = {
+  email: null,
+  socialNetwork: null,
+};
 
 export function ContactsPage() {
-  const roleChecker = !usePermission([VERIFIED], 'admin');
+  const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
+  const [updateContacts, { isLoading }] = useUpdateContactsMutation();
 
-  const [userData, setUserData] = React.useState({
-    userEmail: 'www@yandex.ru',
-    userVKLink: 'https://vk.com/me2help',
-  });
+  const { data } = useGetContactsQuery();
 
-  const [enableEdit, setEnableEdit] = React.useState(false);
+  const { values, setValues, handleChange, isValid } = useForm<TContacts>(
+    initialContactsValues
+  );
 
-  const onSubmit = (e: SyntheticEvent) => {
+  useEffect(() => {
+    setValues({
+      email: data?.email,
+      socialNetwork: data?.socialNetwork,
+    });
+  }, [data]);
+
+  const [editingInput, setEditingInput] = useState<
+    'email' | 'socialNetwork' | null
+  >(null);
+
+  const editBoxHandler = (inputName: 'email' | 'socialNetwork') => {
+    setEditingInput(inputName);
+  };
+
+  const isButtonDisabled = editingInput === null || !isValid;
+
+  const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    setEnableEdit(false);
-    console.log(
-      `Данные email:${userData.userEmail} и  VK:${userData.userVKLink} отправлены на сервер`
-    );
-  };
-  const handleEnableEdit = () => {
-    setEnableEdit(true);
+    try {
+      await updateContacts(values);
+    } catch (error) {
+      console.error('Ошибка при сохранении данных:', error);
+      values.email = data?.email;
+      values.socialNetwork = data?.socialNetwork;
+    } finally {
+      setEditingInput(null);
+    }
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+  const getContactContainer = (inputName: 'email' | 'socialNetwork') => {
+    const titleText = inputName === 'email' ? 'Эл. почта' : 'Соцсети';
+    const editBoxText =
+      inputName === 'email' ? 'Изменить эл. почту' : 'Изменить соцсети';
+    const inputHref =
+      inputName === 'email'
+        ? `mailto:${values.email}`
+        : `${values.socialNetwork}`;
+    const inputType = inputName === 'email' ? 'email' : 'url';
+
+    return (
+      <div className={styles.container}>
+        <div className={styles.element_box}>
+          <h2
+            className={classNames(
+              'text',
+              'text_size_large',
+              'text_type_regular',
+              'm-0',
+              styles.title
+            )}
+          >
+            {titleText}
+          </h2>
+          <input
+            type={inputType}
+            className={`${styles.input} ${
+              editingInput === inputName
+                ? styles.input_mode_edit
+                : styles.input_mode_link
+            }`}
+            onChange={handleChange}
+            name={inputName}
+            value={values[inputName] || ''}
+            readOnly={editingInput !== inputName}
+            onClick={(e) => {
+              if (editingInput !== inputName) {
+                e.preventDefault();
+                window.location.href = inputHref;
+              }
+            }}
+          />
+        </div>
+        {isEditAllowed && (
+          <div
+            onClick={() => editBoxHandler(inputName)}
+            className={
+              editingInput === inputName
+                ? styles.edit_box_hidden
+                : styles.edit_box
+            }
+          >
+            <Icon color="blue" icon="EditIcon" />
+            <p
+              className={classNames(
+                'text',
+                'text_size_small',
+                'text_type_regular',
+                'm-0'
+              )}
+            >
+              {editBoxText}
+            </p>
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -39,80 +134,14 @@ export function ContactsPage() {
         text="Контакты"
         icon={<Icon color="blue" icon="ContactsIcon" size="54" />}
       />
-      <form onSubmit={onSubmit}>
-        <div className={styles.container}>
-          <div className={styles.element_box}>
-            <h2
-              className={classNames(
-                'text',
-                'text_size_large',
-                'text_type_regular',
-                styles.title
-              )}
-            >
-              Эл. почта
-            </h2>
-            <input
-              type="text"
-              className={styles.input}
-              onChange={onChange}
-              name="userEmail"
-              defaultValue={userData.userEmail}
-              readOnly={!enableEdit}
-              onClick={(e) => {
-                if (!enableEdit) {
-                  e.preventDefault();
-                  window.location.href = `mailto:${userData.userEmail}`;
-                }
-              }}
-            />
-          </div>
-          {roleChecker && (
-            <div onClick={handleEnableEdit} className={styles.edit_box}>
-              <Icon color="blue" icon="EditIcon" />
-              <p className={styles.edit_text}>Изменить данные</p>
-            </div>
-          )}
-        </div>
-        <div className={styles.container}>
-          <div className={styles.element_box}>
-            <h2
-              className={classNames(
-                'text',
-                'text_size_large',
-                'text_type_regular',
-                styles.title
-              )}
-            >
-              Страница VK
-            </h2>
-            <input
-              type="text"
-              className={styles.input}
-              onChange={onChange}
-              name="userVKLink"
-              defaultValue={userData.userVKLink}
-              readOnly={!enableEdit}
-              onClick={(e) => {
-                if (!enableEdit) {
-                  e.preventDefault();
-                  window.location.href = `${userData.userVKLink}`;
-                }
-              }}
-            />
-          </div>
-          {roleChecker && (
-            <div onClick={handleEnableEdit} className={styles.edit_box}>
-              <Icon color="blue" icon="EditIcon" />
-              <p className={styles.edit_text}>Изменить данные</p>
-            </div>
-          )}
-        </div>
-        {roleChecker && (
+      <form className={styles.form} onSubmit={onSubmit}>
+        {getContactContainer('email')}
+        {getContactContainer('socialNetwork')}
+        {isEditAllowed && (
           <Button
             buttonType="primary"
             label="Сохранить"
-            disabled={!enableEdit}
+            disabled={isButtonDisabled}
             type="submit"
           />
         )}

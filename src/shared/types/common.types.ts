@@ -1,4 +1,5 @@
 export enum UserStatus {
+  BLOCKED = -1,
   UNCONFIRMED = 0,
   CONFIRMED = 1,
   VERIFIED = 2,
@@ -12,16 +13,51 @@ export enum UserRole {
 }
 
 export enum AdminPermission {
-  CONFIRMATION = 'confirm users',
-  TASKS = 'create tasks',
-  KEYS = 'give keys',
-  CONFLICTS = 'resolve conflicts',
-  BLOG = 'write the blog',
-  CATEGORIES = 'change categories',
+  CONFIRMATION = 'CONFIRM_USER',
+  TASKS = 'CREATE_TASK',
+  KEYS = 'GIVE_KEY',
+  CONFLICTS = 'RESOLVE_CONFLICT',
+  BLOG = 'EDIT_BLOG',
+  CATEGORIES = 'SET_CATEGORY_POINTS',
 }
 
-export enum FileTypes {
-  JPG = '.jpg',
-  JPEG = '.jpeg',
-  PNG = '.png',
+export enum VariantCheckbox {
+  DATE = 'date',
+  DECREASINGPOINTS = 'decreasingPoints',
+  INCREASINGPOINTS = 'increasingPoints',
 }
+export enum TaskButtonType {
+  close = 'close',
+  responded = 'responded',
+  conflict = 'conflict',
+  confirm = 'confirm',
+  phone = 'phone',
+  cancel = 'cancel',
+}
+
+export enum ModalContentType {
+  close = 'close',
+  conflict = 'conflict',
+  confirm = 'confirm',
+  phone = 'phone',
+  cancel = 'cancel',
+  responded = 'responded',
+  admin = 'admin',
+  unfulfilled = 'unfulfilled',
+}
+
+export enum Tabs {
+  VOLUNTEERS = 'volunteers',
+  RECIPIENTS = 'recipients',
+  NOTPROCESSED = 'notprocessed',
+  ADMINS = 'admins',
+}
+
+export type TContacts = {
+  email: string | null | undefined;
+  socialNetwork: string | null | undefined;
+};
+
+export type TPoints<T extends string> = {
+  [key in T]: number;
+};

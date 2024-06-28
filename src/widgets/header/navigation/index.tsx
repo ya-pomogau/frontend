@@ -13,12 +13,13 @@ const SideBarItem = ({ title, to, icon, position }: ISideBarElementProps) => {
     setLink(pathname);
   }, [pathname]);
 
+  const isActive =
+    to === link || (to === '/profile' && pathname.startsWith('/profile/'));
+
   return (
     <NavLink
       to={to}
-      className={`${styles.link} ${
-        to === link ? styles.link_active : undefined
-      }`}
+      className={`${styles.link} ${isActive ? styles.link_active : ''}`}
       style={{
         flexDirection: position?.flexDirection,
         justifyContent: position?.justifyContent,
@@ -38,7 +39,7 @@ export const SideBar = ({ links, position }: ISideBarProps) => (
       className={`${styles.links} `}
       style={{ flexDirection: position.ulflexDirection, gap: position.ulgap }}
     >
-      {links.map((item) => (
+      {links?.map((item) => (
         <SideBarItem
           key={item.to}
           title={item.title}

@@ -1,29 +1,118 @@
 import classNames from 'classnames';
-
+import { format, parse } from 'date-fns';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { changeStepDecrement, closePopup } from 'features/create-request/model';
+import {
+  setDate,
+  changeCurrentStep,
+  changeStepDecrement,
+  closePopup,
+  openPopup,
+  clearState,
+} from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 
 import styles from './common-step.module.css';
-
+import { EditButton } from 'shared/ui/edit-button';
+import { useCreateTaskMutation } from 'services/user-task-api';
 interface ICommonStepProps {
   isMobile?: boolean;
 }
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const { time, address, category, descriptionForTask, date } = useAppSelector(
-    (state) => state.createRequest
-  );
+  const [createTask, { data, error, isLoading }] = useCreateTaskMutation();
+  const {
+    taskId,
+    time,
+    address,
+    category,
+    description,
+    date,
+    isTypeEdit,
+    termlessRequest,
+    location,
+    temporaryCategory,
+  } = useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
   };
 
+  const parseDate = parse(date, 'dd.MM.yyyy', new Date());
+  const formattedDate = format(parseDate, 'yyyy.MM.dd');
+
   const handleSubmitClick = () => {
-    dispatch(closePopup());
+    let requestData = {};
+
+    if (!termlessRequest) {
+      const [year, month, day] = formattedDate.split('.');
+      const [hours, minutes] = time.split(':');
+      const dateObject = new Date(+year, +month - 1, +day, +hours, +minutes);
+
+      requestData = {
+        categoryId: category._id,
+        location,
+        date: dateObject,
+        address,
+        description,
+      };
+      createTask({
+        categoryId: category._id,
+        location: location,
+        date: dateObject,
+        address,
+        description,
+      });
+      dispatch(clearState());
+      dispatch(closePopup());
+    } else {
+      requestData = {
+        categoryId: category._id,
+        location,
+        date: null,
+        address,
+        description,
+      };
+      createTask({
+        categoryId: category._id,
+        location: location,
+        date: null,
+        address,
+        description,
+      });
+      dispatch(clearState());
+      dispatch(closePopup());
+    }
+    if (isTypeEdit) {
+      const updateTask = { ...requestData, taskId: taskId };
+      console.log('это редактирование', updateTask);
+    } else {
+      console.log('это новая таска', requestData);
+    }
+  };
+
+  const handleEditButton = (typeButton: string) => {
+    switch (typeButton) {
+      case 'date':
+        dispatch(setDate(format(new Date(), 'dd.MM.yyyy')));
+        dispatch(changeCurrentStep(1));
+        dispatch(openPopup());
+        break;
+
+      case 'coordinates':
+        dispatch(changeCurrentStep(2));
+        dispatch(openPopup());
+        break;
+
+      case 'description':
+        dispatch(changeCurrentStep(3));
+        dispatch(openPopup());
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -63,18 +152,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content={category.label}
+              content={category.title}
               extClassName={styles.categories}
             />
-            <p
-              className={classNames(
-                'text_size_medium',
-                'text_type_bold ',
-                styles.typeOfTask
-              )}
-            >
-              13
-            </p>
             <p
               className={classNames(
                 'text_size_medium',
@@ -82,7 +162,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.descriptionForTask
               )}
             >
-              {descriptionForTask}
+              {description}
             </p>
           </>
         ) : (
@@ -95,48 +175,71 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 styles.dateWrapper
               )}
             >
-              <p className={classNames('text_size_large', 'm-0')}>{date}</p>
-              <p className={classNames('text_size_large', styles.time)}>
-                {time}
-              </p>
+              {!termlessRequest ? (
+                <>
+                  <p className={classNames('text_size_large', 'm-0')}>{date}</p>
+                  <p className={classNames('text_size_large', styles.time)}>
+                    {time}
+                    {termlessRequest}
+                  </p>
+                </>
+              ) : (
+                <p className={classNames('text_size_large', 'm-0')}>
+                  Заявка без срока
+                </p>
+              )}
+              {isTypeEdit ? (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить дату и время"
+                  onClick={() => handleEditButton('date')}
+                />
+              ) : null}
             </div>
             <div className={styles.addressWrapper}>
               <LocationIcon color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
+              {isTypeEdit && (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить адрес"
+                  onClick={() => handleEditButton('coordinates')}
+                />
+              )}
             </div>
             <CategoriesBackground
               theme="primary"
               size="medium"
-              content={category.label}
+              content={category.title}
               extClassName={styles.categories}
             />
-            <p
-              className={classNames(
-                'text_size_medium',
-                'text_type_bold ',
-                styles.typeOfTask
-              )}
-            >
-              123
-            </p>
             <p
               className={classNames(
                 'text_size_medium',
                 styles.descriptionForTask
               )}
             >
-              {descriptionForTask}
+              {description}
+              {isTypeEdit ? (
+                <EditButton
+                  extClassName={styles.edit_button}
+                  label="Изменить задание"
+                  onClick={() => handleEditButton('description')}
+                />
+              ) : null}
             </p>
           </>
         )}
       </div>
       <div className={styles.buttonsWrapper}>
-        <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label="Вернуться"
+            onClick={handlePreviousStepClick}
+            extClassName={styles.prevButton}
+          />
+        )}
         <Button
           buttonType="primary"
           label="Опубликовать"

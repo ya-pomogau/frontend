@@ -1,57 +1,55 @@
-import { FormEvent, ChangeEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { PasswordInput } from 'shared/ui/password-input';
+import { actions } from 'services/system-slice';
+import useAsyncAction from 'shared/hooks/useAsyncAction';
 
 import styles from './styles.module.css';
-import { useLoginMutation } from 'services/auth-admin-api';
-import { setUser } from 'entities/user/model';
 
 interface ILoginForm {
   login: string;
   password: string;
 }
 
+const LOGIN_VALIDATION_RULES = {
+  required: true,
+  minLength: {
+    value: 4,
+    message: 'Логин должен быть не менее 4 символов',
+  },
+};
+
+const PASSWORD_VALIDATION_RULES = {
+  required: true,
+  minLength: {
+    value: 6,
+    message: 'Пароль должен быть не менее 6 символов',
+  },
+};
+
 export function LoginPage() {
-  const navigate = useNavigate();
-  const [checkAdminState, setAdminCheckState] = useState(false);
-  const [inputError, setInputError] = useState(false);
-
-  const [inputFields, setInputFields] = useState<ILoginForm>({
-    login: '',
-    password: '',
+  const [errorText, setErrorText] = useState('');
+  const [adminLogin] = useAsyncAction(actions.adminLoginThunk);
+  const {
+    control,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<ILoginForm>({
+    mode: 'onChange',
   });
-  const [login, { isLoading }] = useLoginMutation();
 
-  const handleAdminLogin = async () => {
+  const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
     try {
-      const user = await login(inputFields).unwrap();
-      sessionStorage.setItem('auth_token', user.access_token);
-      //dispatch(setUser(user));
-      navigate('/profile');
+      await adminLogin(data);
     } catch (err) {
-      console.log({
-        status: err,
-        title: 'Error',
-        description: 'Ошибка при попытке авторизации админом',
-      });
+      setErrorText(err as string);
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputFields({ ...inputFields, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (checkAdminState) {
-      handleAdminLogin();
-    }
-    console.log('отправка');
-  };
   return (
     <>
       <SmartHeader
@@ -60,29 +58,40 @@ export function LoginPage() {
         extClassName={styles.header}
       />
       <p className={styles.title}>Войти</p>
-
-      <form className={styles.form} onSubmit={onSubmit}>
-        <Input
-          extClassName={styles.field}
-          required
-          label="Логин"
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <Controller
           name="login"
-          value={inputFields.login}
-          onChange={handleChange}
-          placeholder="ФИО / Телефон / Логин"
-          type="text"
-          error={inputError}
-          errorText={'Вы ввели неправильный логин'}
+          rules={LOGIN_VALIDATION_RULES}
+          control={control}
+          render={({ field }) => (
+            <Input
+              label="Логин"
+              name={field.name}
+              onChange={field.onChange}
+              placeholder="ФИО / Телефон / Логин"
+              extClassName={styles.field}
+              error={!!errors?.login?.message}
+              errorText={errors.login?.message}
+            />
+          )}
         />
-        <PasswordInput
-          extClassName={styles.field}
-          required
-          label={'Пароль'}
+        <Controller
           name="password"
-          value={inputFields.password}
-          onChange={handleChange}
-          placeholder="от 6 символов"
-          type="password"
+          rules={PASSWORD_VALIDATION_RULES}
+          control={control}
+          render={({ field }) => (
+            <PasswordInput
+              extClassName={styles.field}
+              name={field.name}
+              onChange={field.onChange}
+              required
+              error={!!errors?.password?.message}
+              errorText={errors.password?.message}
+              label="Пароль"
+              placeholder="от 6 символов"
+              type="password"
+            />
+          )}
         />
         <Button
           buttonType="primary"
@@ -90,17 +99,10 @@ export function LoginPage() {
           label="Войти"
           size="medium"
           extClassName={styles.button}
-          disabled={
-            !inputFields.login ||
-            !inputFields.password ||
-            inputFields.password.length < 6
-          }
+          disabled={!isValid}
         />
+        <span className={`${styles.error} text`}>{errorText}</span>
       </form>
-
-      <Link to="/pick" className={styles.templink}>
-        Авторизация под выбранной ролью
-      </Link>
     </>
   );
 }

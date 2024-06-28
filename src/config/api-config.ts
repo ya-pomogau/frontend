@@ -23,10 +23,13 @@ export const FRONT_URL =
 export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',
   userRegister: '/auth/new',
-  adminLogin: '/auth/admin',
+  adminLogin: '/auth/administrative',
+  checkToken: '/auth/token',
 };
 
 export const DEFAULT_HEADERS = {
-  // 'Content-Type': 'application/json',
-  contentType: 'application/json',
+  //eslint-disable-next-line @typescript-eslint/naming-convention
+  'Content-Type': 'application/json',
 };
+
+export const LOCAL_STORAGE_TOKEN_ACCESS = 'token_access';

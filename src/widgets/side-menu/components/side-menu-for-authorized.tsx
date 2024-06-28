@@ -3,17 +3,20 @@ import { VolunteerSideMenu } from './volunter-side-menu';
 import { RecipientSideMenu } from './recipient-side-menu';
 import { AdminSideMenu } from './admin-side-menu';
 import { MasterSideMenu } from './master-side-menu';
+import { UserRole } from 'shared/types/common.types';
+import { isRootSelector } from 'entities/user/model';
 
 export const SideMenuForAuthorized = () => {
   const { role } = useAppSelector((state) => state.user);
+  const isRoot = useAppSelector(isRootSelector);
 
-  if (role === 'volunteer') return <VolunteerSideMenu />;
+  if (role === UserRole.VOLUNTEER) return <VolunteerSideMenu />;
 
-  if (role === 'recipient') return <RecipientSideMenu />;
+  if (role === UserRole.RECIPIENT) return <RecipientSideMenu />;
 
-  if (role === 'admin') return <AdminSideMenu />;
+  if (role === UserRole.ADMIN && !isRoot) return <AdminSideMenu />;
 
-  if (role === 'master') return <MasterSideMenu />;
+  if (isRoot) return <MasterSideMenu />;
 
   return <VolunteerSideMenu />;
 };

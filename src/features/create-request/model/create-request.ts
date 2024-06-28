@@ -1,39 +1,61 @@
+import { Data } from './../../../widgets/map/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
+import { Category } from 'entities/task/types';
+import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export type TInitialStateForPopup = {
+  taskId: string;
   time: string;
   date: string;
   address: string;
-  coordinates: [number, number] | undefined;
-  categories: {
-    id: number;
-    name: string;
-  }[];
+  location: GeoCoordinates;
+  categories: Category[];
   category: {
-    value: string;
-    label: string;
+    _id: string;
+    title: string;
   };
-  descriptionForTask: string;
+  description: string;
   currentStep: number;
   termlessRequest: boolean;
   isPopupOpen: boolean;
+  isTypeEdit: boolean;
+  temporaryAddress: string;
+  temporaryCoordinates?: GeoCoordinates;
+  temporaryCategory: {
+    _id: string;
+    title: string;
+  };
+  temporaryDescriptionForTask: string;
+  temporaryTime: string;
+  temporaryDate: string;
 };
 
 export const InitialStateForPopup: TInitialStateForPopup = {
+  taskId: '',
   time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
-  coordinates: undefined,
+  location: [],
   categories: [],
   category: {
-    value: '',
-    label: '',
+    _id: '',
+    title: '',
   },
-  descriptionForTask: '',
+  description: '',
   currentStep: 1,
   termlessRequest: false,
   isPopupOpen: false,
+  isTypeEdit: false,
+  temporaryAddress: '',
+  temporaryCoordinates: [],
+  temporaryCategory: {
+    _id: '',
+    title: '',
+  },
+  temporaryDescriptionForTask: '',
+  temporaryTime: '',
+  temporaryDate: format(new Date(), 'dd.MM.yyyy'),
 };
 
 export const createRequestModel = createSlice({
@@ -48,20 +70,27 @@ export const createRequestModel = createSlice({
     },
     setAddress(state, action) {
       state.address = action.payload.additinalAddress;
-      state.coordinates = action.payload.coords;
+      state.location = action.payload.coords;
     },
     setCategoryList(state, action) {
       state.categories = action.payload;
     },
     setCategory(state, action) {
-      state.category.value = action.payload.value;
-      state.category.label = action.payload.label;
+      state.category._id = action.payload._id;
+      state.category.title = action.payload.title;
     },
     setDescriptionForTask(state, action) {
-      state.descriptionForTask = action.payload;
+      state.description = action.payload;
     },
     changeCheckbox(state) {
       state.termlessRequest = !state.termlessRequest;
+    },
+    setTermlessRequest(state, action) {
+      state.termlessRequest = action.payload;
+    },
+    changeCurrentStep(state, action) {
+      state.currentStep = action.payload;
+      state.isTypeEdit = true;
     },
     changeStepIncrement(state) {
       const increment = (prev: number) => prev + 1;
@@ -76,7 +105,22 @@ export const createRequestModel = createSlice({
     },
     closePopup(state) {
       state.currentStep = InitialStateForPopup.currentStep;
+      state.isTypeEdit = false;
       state.isPopupOpen = false;
+    },
+    clearState(state) {
+      Object.assign(state, InitialStateForPopup);
+    },
+    setTemporary(state, action) {
+      state.temporaryDate = action.payload.initialData.date;
+      state.temporaryTime = action.payload.initialData.time;
+      state.taskId = action.payload.initialData.taskId;
+      state.temporaryAddress = action.payload.initialData.address;
+      state.temporaryCoordinates = action.payload.initialData.location;
+      state.temporaryCategory._id = action.payload.initialData.category._id;
+      state.temporaryCategory.title = action.payload.initialData.category.title;
+      state.temporaryDescriptionForTask =
+        action.payload.initialData.description;
     },
   },
 });
@@ -93,4 +137,8 @@ export const {
   changeCheckbox,
   openPopup,
   closePopup,
+  clearState,
+  changeCurrentStep,
+  setTemporary,
+  setTermlessRequest,
 } = createRequestModel.actions;

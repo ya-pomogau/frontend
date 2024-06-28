@@ -9,10 +9,12 @@ import styles from './styles.module.css';
 import { ConflictIcon } from '../icons/conflict-icon';
 
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  taskId?: number;
   extClassName?: string;
   buttonType: 'close' | 'edit' | 'confirm' | 'conflict';
   onClick?: () => void;
   customIcon?: ReactNode;
+  disabledColor?: boolean;
 }
 
 const defautlIcons = {
@@ -23,15 +25,18 @@ const defautlIcons = {
 };
 
 export const SquareButton = ({
+  taskId,
   extClassName,
   buttonType,
   customIcon,
+  disabledColor = false,
   ...props
 }: SquareButtonProps) => (
   <button
     type="button"
     className={classnames(
       styles['square-button'],
+      disabledColor && styles.disabledColor,
       styles[`square-button--${buttonType}`],
       extClassName
     )}

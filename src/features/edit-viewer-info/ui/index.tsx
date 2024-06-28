@@ -18,11 +18,11 @@ interface EditViewerInfoProps {
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
-  onClickSave: (userData: UpdateUserInfo, formData: FormData) => void;
+  onClickSave: (userData: Omit<UpdateUserInfo, '_id'>) => void;
   valueName: string;
   valuePhone: string;
   valueAddress: string;
-  valueId: number;
+  valueId: string;
   isPopupOpen: boolean;
   buttonRef: React.RefObject<HTMLElement>;
   isFormSaved: boolean;
@@ -57,15 +57,17 @@ export const EditViewerInfo = ({
   const avatarPicker = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const viewerData: UpdateUserInfo = {
-    fullname: valueName,
+  const viewerData: Omit<UpdateUserInfo, '_id'> = {
+    name: valueName,
     phone: valuePhone,
     address: valueAddress,
-    avatar: null,
-    id: valueId,
+    // avatar: null,
+    // _id: valueId,
   };
-
   const [userData, setUserData] = useState(viewerData);
+  useEffect(() => {
+    setUserData(viewerData);
+  }, [valueName, valuePhone, valueAddress]);
   const avatarFile = new FormData();
 
   const handleChange = async (event: ViewerInputData) => {
@@ -73,12 +75,22 @@ export const EditViewerInfo = ({
     setIsFormSaved(false);
     avatarFile.delete('file');
     const { value, name, files } = event.target;
-    if (files) {
-      // Если загружен файл изображения, отрисовываем в компоненте аватара
-      setImage(URL.createObjectURL(files[0]));
-      avatarFile.append('file', files[0]);
-      setUserData({ ...userData, [name]: value });
+    // if (files) {
+    //   // Если загружен файл изображения, отрисовываем в компоненте аватара
+    //   setImage(URL.createObjectURL(files[0]));
+    //   avatarFile.append('file', files[0]);
+    //   setUserData({ ...userData, [name]: value });
+    // }
+
+    if (name === 'phone') {
+      const phoneRegex = /^[+]7\d{10}$/;
+      if (!phoneRegex.test(value)) {
+        setPhoneError('Неверный формат номера');
+      } else {
+        setPhoneError(null);
+      }
     }
+
     setUserData({ ...userData, [name]: value });
   };
 
@@ -96,6 +108,8 @@ export const EditViewerInfo = ({
     setIsFormEdited(false);
     setIsPopupOpen(false);
   };
+
+  const [phoneError, setPhoneError] = useState<string | null>(null);
 
   useOutsideClick({
     elementRef: modalRef,
@@ -120,7 +134,11 @@ export const EditViewerInfo = ({
     <LightPopup isPopupOpen={isPopupOpen} onClickExit={handleClosePopup}>
       <div
         ref={modalRef}
-        className={classnames(styles.container, extClassName)}
+        className={classnames(
+          styles.container,
+          extClassName,
+          styles.editViewerPopup
+        )}
       >
         <div className={styles.containerInfo}>
           <div className={styles.headerElements}>
@@ -151,6 +169,7 @@ export const EditViewerInfo = ({
                 Изменить фото
               </button>
               <input
+                disabled
                 onChange={handleChange}
                 className={classnames(
                   styles.avatarBlock__hidden,
@@ -190,9 +209,9 @@ export const EditViewerInfo = ({
                 type="text"
                 extClassName={styles.input}
                 placeholder="Введите имя"
-                value={userData.fullname}
+                value={userData.name}
                 onChange={handleChange}
-                name="fullname"
+                name="name"
                 {...props}
               />
             </li>
@@ -211,12 +230,18 @@ export const EditViewerInfo = ({
                 Тел.:{' '}
               </p>
               <Input
-                type="text"
-                extClassName={styles.input}
+                type="tel"
+                extClassName={classnames(
+                  styles.input,
+                  phoneError && styles['input--error']
+                )}
                 placeholder="Введите телефон"
                 value={userData.phone}
                 onChange={handleChange}
                 name="phone"
+                required
+                pattern="^[+]7\d{10}$"
+                title="+71234567890"
                 {...props}
               />
             </li>
@@ -246,8 +271,17 @@ export const EditViewerInfo = ({
             </li>
           </ul>
         </div>
+        <div className={styles.phoneErrorContainer}>
+          {phoneError && <span className={styles.errorText}>{phoneError}</span>}
+        </div>
         <Button
-          onClick={() => onClickSave(userData, avatarFile)}
+          disabled={
+            (valueName === userData.name &&
+              valuePhone === userData.phone &&
+              valueAddress === userData.address) ||
+            phoneError !== null
+          }
+          onClick={() => onClickSave(userData)}
           extClassName={styles.button}
           buttonType="primary"
           label="Сохранить"

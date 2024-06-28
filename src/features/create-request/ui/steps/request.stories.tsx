@@ -13,19 +13,30 @@ import { YMaps } from '@pbe/react-yandex-maps';
 import { Request } from '.';
 
 export const InitialStateForPopup: TInitialStateForPopup = {
+  taskId: '',
   time: '',
   date: format(new Date(), 'dd.MM.yyyy'),
   address: '',
-  coordinates: undefined,
+  location: [],
   categories: [],
   category: {
-    value: '',
-    label: '',
+    _id: '',
+    title: '',
   },
-  descriptionForTask: '',
+  description: '',
   currentStep: 1,
   termlessRequest: false,
   isPopupOpen: false,
+  isTypeEdit: false,
+  temporaryAddress: '',
+  temporaryCoordinates: [],
+  temporaryCategory: {
+    _id: '',
+    title: '',
+  },
+  temporaryDescriptionForTask: '',
+  temporaryTime: format(new Date(), 'hh:mm'),
+  temporaryDate: format(new Date(), 'dd.MM.yyyy'),
 };
 
 // eslint-disable-next-line react/prop-types

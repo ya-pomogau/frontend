@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { useCallback } from 'react';
 import classnames from 'classnames';
 
 import { Avatar } from '../../shared/ui/avatar';
@@ -6,20 +6,15 @@ import { Avatar } from '../../shared/ui/avatar';
 import styles from './styles.module.css';
 import { RoundButton } from '../../shared/ui/round-button';
 import UserInfo from './components/user-info';
+import { UserRole, UserStatus } from '../../shared/types/common.types';
 import VolunteerActions from './components/volonteer-actions';
 import RecipientActions from './components/recipient-actions';
 import AdminActions from './components/admin-actions';
+import { User } from 'entities/user/types';
+import { useConfirmUserMutation } from 'services/admin-api';
 
 interface UserCardProps {
-  role?: 'volunteer' | 'recipient' | 'admin' | 'master';
-  extClassName?: string;
-  avatarLink: string;
-  avatarName: string;
-  userName: string;
-  userId: number;
-  userNumber: string;
-  children?: ReactNode;
-  volunteerInfo?: any;
+  user: User;
 }
 
 const getButtonTypeFromScore = (
@@ -33,49 +28,42 @@ const getButtonTypeFromScore = (
     return 'secondary';
   }
 };
+export const UserCard = ({ user }: UserCardProps) => {
+  const { name, score, status, keys, role, avatar, _id, phone } = user;
+  const isVolonteerAcceptButtonDisabled = !!(
+    status &&
+    status > UserStatus.UNCONFIRMED &&
+    role === UserRole.VOLUNTEER
+  );
 
-export const UserCard = ({
-  role,
-  extClassName,
-  avatarLink,
-  avatarName,
-  userName,
-  userId,
-  userNumber,
-  children,
-  volunteerInfo,
-}: UserCardProps) => {
-  const { approved, checked, scores, isHasKeys } = volunteerInfo;
+  const [confirmUser] = useConfirmUserMutation();
 
-  const isVolonteerAcceptButtonDisabled =
-    (scores === 0 && approved) ||
-    (scores >= 30 && scores < 60 && checked) ||
-    scores >= 60;
+  const handleConfirmClick = useCallback(() => {
+    confirmUser(user._id);
+  }, []);
 
-  const isAcceptButtonExclamationPointIcon =
-    scores >= 30 && !checked && scores < 60;
-
-  const isKeyButtonExclamationPointIcon =
-    scores >= 60 && !checked && !isHasKeys;
+  const isKeyButtonExclamationPointIcon = !!(score && score >= 60 && !keys);
 
   return (
     <div
       className={classnames(
         styles.content,
-        extClassName,
-        role === 'admin' && styles.admin_content
+        // extClassName,
+        role === UserRole.ADMIN && styles.admin_content
       )}
     >
       <Avatar
         extClassName={styles.avatar}
-        avatarName={avatarName}
-        avatarLink={avatarLink}
+        avatarName={`аватар пользователя ${name}`}
+        avatarLink={avatar}
       />
-      {(role === 'volunteer' || role === 'recipient') && (
+      {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
         <div className={classnames(styles.icons_div)}>
           <RoundButton
             buttonType="phone"
-            onClick={() => console.log('call button pressed')}
+            onClick={() => {
+              window.location.href = 'tel:' + phone;
+            }}
           />
           <RoundButton
             buttonType="message"
@@ -84,48 +72,37 @@ export const UserCard = ({
         </div>
       )}
 
-      <UserInfo
-        userName={userName}
-        userId={userId}
-        userNumber={userNumber}
-        role={role}
-      />
+      <UserInfo userName={name} userId={_id} userNumber={phone} role={role} />
 
-      {role === 'volunteer' && (
+      {role === UserRole.VOLUNTEER && (
         <VolunteerActions
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
-          scores={scores}
-          isAcceptButtonExclamationPointIcon={
-            isAcceptButtonExclamationPointIcon
-          }
+          score={score || 0}
+          isAcceptButtonExclamationPointIcon={true}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
-          onAcceptButtonClick={() =>
-            console.log('"подтвердить" button pressed')
-          }
+          onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={() =>
             console.log('"Заблокировать" button pressed')
           }
           onGiveKeysButtonClick={() =>
             console.log('"Дать ключи" button pressed')
           }
-          keys={isHasKeys}
+          keys={keys || false}
         />
       )}
 
-      {role === 'recipient' && (
+      {role === UserRole.RECIPIENT && (
         <RecipientActions
-          approved={approved}
-          onConfirmClick={() => {
-            console.log('Recipient confirm button pressed');
-          }}
+          approved={status !== UserStatus.UNCONFIRMED}
+          onConfirmClick={handleConfirmClick}
           onBlockClick={() => {
             console.log('Recipient block button pressed');
           }}
         />
       )}
 
-      {role === 'admin' && (
+      {role === UserRole.ADMIN && (
         <AdminActions
           onAdminSaveClick={() => {
             console.log('Admin save button pressed');
@@ -136,7 +113,7 @@ export const UserCard = ({
         />
       )}
 
-      {children}
+      {/* {children} */}
     </div>
   );
 };

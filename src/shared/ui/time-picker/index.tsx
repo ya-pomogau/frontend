@@ -46,7 +46,7 @@ export function TimePickerElement({
         type="text"
         id="timepicker"
         className={styles.timePickerContainer__input}
-        placeholder="_ _ : _ _"
+        placeholder="00:00"
         onFocus={(e) => handleFocus(e)}
         onBlur={(e) => (e.target.type = 'text')}
         minLength={2}

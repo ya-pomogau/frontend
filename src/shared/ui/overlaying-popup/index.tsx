@@ -24,19 +24,14 @@ export const OverlayingPopup = ({
 
   return (
     <Portal isOpened>
-      <div
-        className={classNames(styles.popup, extClassName)}
-        role="dialog"
-        id="label"
-      >
-        {/* Возможно не понадобится в будущем т.к. оверлей перекрывает содержимое модалки и делает невозможным нажатие кнопок. Без него задний фон затемняется а интерфейс не доступен*/}
-        {/* <div
-          className={classNames(styles.overlay)}
+      <div className={classNames(styles.popup)} role="dialog" id="label">
+        <div
+          className={classNames(styles.overlay, extClassName)}
           role="button"
           tabIndex={0}
           onClick={onClose}
           aria-labelledby="label"
-        ></div> */}
+        ></div>
         {children}
       </div>
     </Portal>

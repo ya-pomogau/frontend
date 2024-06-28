@@ -1,112 +1,84 @@
-/* import {
-  BLOG,
-  CREATE_TASKS,
-  INCREASE_SCORE,
-  PROFILES_APPROVAL,
-  READ,
-  RESOLVE_CONFLICTS,
-  SET_KEYS,
-} from 'shared/libs/permissions-names'; */
 import {
-  ACTIVATED,
-  CONFIRMED,
-  UNCONFIRMED,
-  VERIFIED,
-} from 'shared/libs/statuses';
-import { AdminPermission } from '../../shared/types/common.types';
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from '../../shared/types/common.types';
 import {
   GeoCoordinates,
   PointGeoJSONInterface,
 } from 'shared/types/point-geojson.types';
 
-export type UserRole = 'recipient' | 'volunteer' | 'master' | 'admin';
-/*type PermissionType = {
-
-  id: number;
-  name:
-    | typeof READ
-    | typeof PROFILES_APPROVAL
-    | typeof CREATE_TASKS
-    | typeof SET_KEYS
-    | typeof RESOLVE_CONFLICTS
-    | typeof BLOG
-    | typeof INCREASE_SCORE;
-};
-*/
-// пример для всех перечисленных в брифе прав
-// [
-//   { id: 0, name: 'read' },
-//   { id: 1, name: 'profiles approval' },
-//   { id: 2, name: 'create tasks' },
-//   { id: 3, name: 'set keys' },
-//   { id: 4, name: 'resolve conflicts' },
-//   { id: 5, name: 'blog' },
-//   { id: 7, name: 'increase score' },
-// ]
-
-type StatusType =
-  | typeof UNCONFIRMED
-  | typeof CONFIRMED
-  | typeof ACTIVATED
-  | typeof VERIFIED;
-
-export type UserInfo = {
-  id: string;
-  fullname: string;
-  role: UserRole | null;
-  status: StatusType | null;
-  vk: string;
-  avatar: string;
+export type UserProfile = {
+  name: string;
   phone: string;
+  avatar: string;
   address: string;
-  coordinates: GeoCoordinates;
-  createdAt: string;
-  isHasKeys?: boolean;
-  scores?: number;
-  permissions?: Array<AdminPermission> | null;
-  isActive: boolean;
+  vkId: string;
+  role: UserRole;
+  _id: string;
+};
+
+export type User = {
+  _id: string;
+  name: string;
+  phone: string;
+  avatar: string;
+  address: string;
+  vkId: string;
+  role: UserRole;
+  score?: number;
+  status?: UserStatus;
+  location?: GeoCoordinates;
+  keys?: boolean;
+  permissions?: AdminPermission[];
+  login?: string;
+  password?: string;
+  isRoot?: boolean;
+  isActive?: boolean;
 };
 
 export type TPointGeoJSON = PointGeoJSONInterface;
 
-export type TUserProfile = {
-  fullName: string;
-  firstName: string;
-  middleName: string;
-  lastName: string;
+export type TUser = {
+  _id: string;
+  name: string;
   phone: string;
   avatar: string;
   address: string;
-};
-
-export type TUser = {
-  _id: string;
-  profile: TUserProfile;
-  location: TPointGeoJSON;
+  vkId: string;
   role: UserRole;
-  status: StatusType;
+  score?: number;
+  status?: UserStatus;
+  location?: TPointGeoJSON;
+  keys?: boolean;
+  permissions?: AdminPermission[];
+  login?: string;
+  password?: string;
+  isRoot?: boolean;
+  isActive?: boolean;
   createdAt: Date | string;
   updatedAt: Date | string;
-  isHasKeys?: boolean;
-  scores?: number;
-  permissions?: Array<AdminPermission> | null;
-  isActive: boolean;
-  vkId: string;
-  isRoot: boolean;
-  login: string;
 };
 
 export type TVKUser = {
-  firstName: string;
-  lastName: string;
-  vkId: string;
   email: string;
+  first_name: string;
+  last_name: string;
+  id: string;
+  photo_max_orig: string;
 };
-
+// TODO: надо изменить
 export type UpdateUserInfo = {
-  fullname: string;
+  name: string;
   phone: string;
   address: string;
-  avatar: null | FormData;
-  id: number;
+  avatar?: null | FormData;
+  _id: string;
+};
+
+export type TVolunteerInfo = {
+  approved: boolean;
+  checked: boolean;
+  isHasKeys: boolean;
+  scores: number;
 };

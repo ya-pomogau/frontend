@@ -57,12 +57,12 @@ export const UserCategoriesBlock = ({
           onChange={handleCheckboxChange}
         />
 
-        <Checkbox
+        {/* <Checkbox
           label="Не обработанные"
           checked={filter.includes(FilterItemsIds.UNHANDLED)}
           id={FilterItemsIds.UNHANDLED}
           onChange={handleCheckboxChange}
-        />
+        /> */}
       </div>
     </div>
   );

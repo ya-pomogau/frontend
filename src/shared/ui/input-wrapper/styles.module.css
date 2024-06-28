@@ -1,0 +1,82 @@
+.inputWrapper {
+  margin: 5px auto 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.input {
+  width: 100%;
+}
+
+.input > div > input {
+  height: 37px;
+  font-size: 12px;
+  line-height: 14px;
+}
+.input > div > input::placeholder {
+  color: var(--colors-interface-primary);
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.button {
+  width: 37px;
+  height: 37px;
+  padding: 10px;
+}
+
+.file {
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.file-box {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  height: 17px;
+  gap: 10px;
+}
+
+.file-name {
+  max-width: 90%;
+  color: var(--colors-interface-primary);
+}
+
+.btn-close {
+  cursor: pointer;
+}
+
+.box-message {
+  margin-top: 10px;
+  width: 200px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 550px) {
+  .box {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .inputWrapper {
+    margin: 20px auto 0;
+  }
+
+  .file-box {
+    width: 85%;
+    margin: 10px auto 0;
+  }
+
+  .box-message {
+    width: 85%;
+  }
+}

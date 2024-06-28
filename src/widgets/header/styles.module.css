@@ -183,3 +183,10 @@
     border: none;
   }
 }
+
+@media (max-width: 450px) {
+  .header__container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

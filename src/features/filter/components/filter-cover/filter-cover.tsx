@@ -1,21 +1,22 @@
-import { useEffect, ReactElement, Dispatch, SetStateAction } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, ReactElement, FormEvent } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
-import { getQuery } from '../../libs';
 
 import type { IFilterValues } from 'features/filter/types';
 
 import styles from './filter-cover.module.css';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { defaultObjFilteres } from 'features/filter/consts';
+import { useSearchParams } from 'react-router-dom';
 
 interface FilterCoverProps {
   closeFilterMenu: () => void;
   position: { top: number; right: number };
   filterMenu: ReactElement;
   filterValues: IFilterValues;
-  setFilterValues: Dispatch<SetStateAction<IFilterValues>>;
+  setFilteres?: (item: IFilterValues) => void;
+  onReset: () => void;
 }
 
 export const FilterCover = ({
@@ -23,47 +24,58 @@ export const FilterCover = ({
   position,
   filterMenu,
   filterValues,
-  setFilterValues,
+  onReset,
+  setFilteres,
 }: FilterCoverProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const newSearchParams = new URLSearchParams();
 
   useEffect(() => {
-    const queryParams = getQuery(searchParams);
-
     if (window.innerWidth > 768) {
-      setFilterValues({
+      setFilteres?.({
         ...filterValues,
-        ...queryParams,
       });
     } else {
       setTimeout(() => {
-        setFilterValues({
+        setFilteres?.({
           ...filterValues,
-          ...queryParams,
         });
       }, 0);
     }
+    // eslint-disable-next-line
   }, []);
 
   const applyFilter = () => {
-    let params = `?`;
-
     Object.entries(filterValues).forEach(([key, value]) => {
-      if (value.length) {
-        params += `${key}=${value}&`;
+      if (Array.isArray(value)) {
+        if (value[0] !== '00:00' && value[1] !== '00:00' && value.length > 0) {
+          newSearchParams.set(key, value.toString());
+        }
+      }
+
+      if (typeof value === 'string' && value.length > 0) {
+        newSearchParams.set(key, value);
       }
     });
-
-    setSearchParams(params);
-    console.log(filterValues);
+    setSearchParams(newSearchParams);
+    setFilteres?.(filterValues);
     closeFilterMenu();
   };
 
-  const resetFilter = () => {};
+  const resetFilter = () => {
+    onReset();
+    setFilteres?.(defaultObjFilteres);
+    closeFilterMenu();
+  };
 
   const filterPositionStyles = {
     top: `${position.top}px`,
     right: `${window.innerWidth - position.right - 10}px`,
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    applyFilter();
   };
 
   return (
@@ -74,7 +86,11 @@ export const FilterCover = ({
       extClassName={styles.tooltip}
       visible
     >
-      <form name="formFilter">
+      <form
+        name="formFilter"
+        onSubmit={(e) => handleSubmit(e)}
+        onReset={() => resetFilter()}
+      >
         <div className={styles.wrapper}>
           {filterMenu}
           <div
@@ -86,16 +102,14 @@ export const FilterCover = ({
               label="Сбросить фильтры"
               buttonType="secondary"
               size="medium"
-              actionType="button"
+              actionType="reset"
               customIcon={<CloseCrossIcon color={'blue'} />}
-              onClick={resetFilter}
             />
             <Button
-              onClick={applyFilter}
               label="Применить"
               buttonType="primary"
               size="medium"
-              actionType="button"
+              actionType="submit"
             />
           </div>
         </div>

@@ -25,6 +25,7 @@ import { NotFoundPage } from 'pages/not-found';
 
 import styles from './styles.module.css';
 import useUser from 'shared/hooks/use-user';
+import { UserRole } from 'shared/types/common.types';
 
 export function RecipientPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
@@ -53,7 +54,7 @@ export function RecipientPage() {
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
 
   useEffect(() => {
-    dispatch(setUserRole('recipient'));
+    dispatch(setUserRole(UserRole.RECIPIENT));
     window.addEventListener('resize', getButtonPosition);
     return () => {
       window.removeEventListener('resize', getButtonPosition);
@@ -139,12 +140,8 @@ export function RecipientPage() {
               }
             >
               <TaskList
-                userRole="recipient"
+                userRole={UserRole.RECIPIENT}
                 isMobile={isMobile}
-                handleClickCloseButton={() => 2}
-                handleClickConfirmButton={() => 3}
-                handleClickMessageButton={() => 5}
-                handleClickPnoneButton={() => 6}
                 handleClickAddTaskButton={() => dispatch(openPopup())}
                 isStatusActive
                 tasks={[]}
@@ -181,12 +178,8 @@ export function RecipientPage() {
                       />
                     )} */}
               <TaskList
-                userRole="recipient"
+                userRole={UserRole.RECIPIENT}
                 isMobile={isMobile}
-                handleClickCloseButton={() => 2}
-                handleClickConfirmButton={() => 3}
-                handleClickMessageButton={() => 5}
-                handleClickPnoneButton={() => 6}
                 isStatusActive={false}
                 tasks={[]}
                 isLoading={false}

@@ -4,6 +4,7 @@ import { format, parseISO } from 'date-fns';
 import { DatePicker } from 'shared/ui/date-picker';
 
 import styles from '../styles.module.css';
+import classNames from 'classnames';
 
 interface CalenderBlockProps {
   onChange: (name: string, value: string[] | string) => void;
@@ -50,6 +51,15 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   return (
     <div className={styles.filterBlock}>
+      <p
+        className={classNames(
+          styles.filterBlockText,
+          'text',
+          'text_size_small'
+        )}
+      >
+        Дата
+      </p>
       <div>
         <DatePicker
           value={filterDate ? parseISO(filterDate) : getNewDate()}
@@ -58,6 +68,15 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
           inline={window.innerWidth > 768 || false}
         />
       </div>
+      <p
+        className={classNames(
+          styles.filterBlockText,
+          'text',
+          'text_size_small'
+        )}
+      >
+        Дата
+      </p>
     </div>
   );
 };

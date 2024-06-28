@@ -1,24 +1,36 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { UserInfo, UserRole } from '../types';
-import { userLoginThunk } from '../../../services/system-slice';
+
+import {
+  checkTokenThunk,
+  newUserThunk,
+  userLoginThunk,
+  adminLoginThunk,
+} from '../../../services/system-slice';
+import { UserRole, UserStatus } from 'shared/types/common.types';
+import { User } from '../types';
+import { TCustomSelector } from 'shared/types/store.types';
 
 type UserState = {
-  id?: string;
+  _id: string;
   role: UserRole | null;
-  data: UserInfo | null;
+  data: User | null;
   isLoading: boolean;
   isFailed: boolean;
   error?: string | null | undefined;
 };
 
 const initialState: UserState = {
+  _id: '',
   role: null,
   data: null,
   isLoading: false,
   isFailed: false,
   error: null,
 };
-
+export const isRootSelector: TCustomSelector<boolean> = (state) =>
+  !!state.user && (state.user.data?.isRoot ?? false);
+export const isUnConfirmedSelector: TCustomSelector<boolean> = (state) =>
+  state.user.data?.status === UserStatus.UNCONFIRMED;
 export const userModel = createSlice({
   name: 'user',
   initialState,
@@ -29,8 +41,9 @@ export const userModel = createSlice({
     logoutUser: (state) => {
       state.data = null;
       state.role = null;
+      localStorage.clear();
     },
-    setUser: (state, { payload }) => {
+    setUser: (state, { payload }: PayloadAction<User>) => {
       state.data = payload;
     },
     enableBlokedError: (state) => {
@@ -55,30 +68,29 @@ export const userModel = createSlice({
         }
         const {
           _id,
-          profile: { fullName, avatar, address, phone },
-          location: { coordinates },
-          permissions,
-          role,
-          isHasKeys,
-          status,
-          vkId,
-          scores,
-        } = user;
-        const data: UserInfo = {
-          fullname: fullName,
+          name,
+          phone,
           avatar,
           address,
-          phone,
-          isHasKeys,
-          status,
+          location,
           role,
-          vk: vkId,
-          id: _id,
-          coordinates,
-          createdAt: 'a long long time ago in a far away galaxy...',
-          scores,
-          isActive: true,
-          permissions,
+          keys,
+          status,
+          vkId,
+          score,
+        } = user;
+        const data: User = {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          location: location?.coordinates,
+          role,
+          keys,
+          status,
+          vkId,
+          score,
         };
         return {
           ...state,
@@ -87,7 +99,7 @@ export const userModel = createSlice({
           error: null,
           role,
           data,
-          id: _id,
+          _id,
         };
       })
       .addCase(userLoginThunk.rejected, (state, action) => ({
@@ -101,6 +113,116 @@ export const userModel = createSlice({
         isLoading: true,
         isFailed: false,
         error: null,
+      }))
+      .addCase(newUserThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          location,
+          role,
+          keys,
+          status,
+          vkId,
+          score,
+        } = user;
+        const data: User = {
+          _id,
+          name,
+          phone,
+          avatar,
+          address,
+          location: location?.coordinates,
+          role,
+          keys,
+          status,
+          vkId,
+          score,
+        };
+        return {
+          ...state,
+          isLoading: false,
+          isFailed: false,
+          error: null,
+          role,
+          data,
+          _id,
+        };
+      })
+      .addCase(newUserThunk.rejected, (state, action) => ({
+        ...state,
+        isLoading: false,
+        isFailed: true,
+        error: action.payload as string,
+      }))
+      .addCase(newUserThunk.pending, (state) => ({
+        ...state,
+        isLoading: true,
+        isFailed: false,
+        error: null,
+      }))
+      .addCase(checkTokenThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isLoading: true,
+      }))
+      .addCase(checkTokenThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const { createdAt, updatedAt, location, ...data } = user;
+        return {
+          ...state,
+          data: { ...data, location: location?.coordinates },
+          role: data.role,
+          _id: data._id,
+          isLoading: false,
+        };
+      })
+      .addCase(checkTokenThunk.rejected, (state) => ({
+        ...state,
+        isLoading: false,
+      }))
+      .addCase(adminLoginThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isLoading: true,
+      }))
+      .addCase(adminLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { user = null } = action.payload;
+        if (!user) {
+          return state;
+        }
+        const { createdAt, updatedAt, location, ...data } = user;
+        return {
+          ...state,
+          data: { ...data, location: location?.coordinates },
+          role: data.role,
+          _id: data._id,
+          isLoading: false,
+        };
+      })
+      .addCase(adminLoginThunk.rejected, (state) => ({
+        ...state,
+        isLoading: false,
       })),
 });
 

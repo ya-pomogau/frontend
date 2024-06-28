@@ -38,16 +38,16 @@ const DropDownWithHooks = () => {
       placeholder={'Выберите город'}
       items={[
         {
-          value: '1',
-          label: 'Москва',
+          _id: '1',
+          title: 'Москва',
         },
         {
-          value: '2',
-          label: 'Санкт-Петербург',
+          _id: '2',
+          title: 'Санкт-Петербург',
         },
         {
-          value: '3',
-          label: 'Екатеринбург',
+          _id: '3',
+          title: 'Екатеринбург',
         },
       ]}
       onChange={setSelected}

@@ -1,50 +1,35 @@
 import { useState } from 'react';
 
 import { FilterWrapper } from 'features/filter/components/filter-wrapper';
-import { IFilterValues } from 'features/filter/types';
+import { FilterProps, IFilterValues } from 'features/filter/types';
 import { SortByBlock } from 'features/filter/ui/sortBy-block';
-import { CategoriesBlock } from 'features/filter/ui/categories-block';
 import { RadiusBlock } from 'features/filter/ui/radius-block';
 import { CalenderBlock } from 'features/filter/ui/calender-block';
 import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
+import { CategoriesBlock } from './ui/categories-block';
+import { defaultObjFilteres } from './consts';
 
-export interface FilteringProps {
-  items: {
-    categories?: boolean;
-    radius?: boolean;
-    sort?: boolean;
-    date?: boolean;
-    time?: boolean;
-    userCategories?: boolean;
-  };
-
-  notFoundFilter?: never;
-}
-
-export interface NotFoundFilterProps {
-  items?: never;
-
-  notFoundFilter: boolean;
-}
-
-export type FilterProps = FilteringProps | NotFoundFilterProps;
-
-export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
-  const [filterValues, setFilterValues] = useState<IFilterValues>({
-    sortBy: '',
-    categories: [],
-    searchRadius: '',
-    date: '',
-    time: ['', ''],
-  });
+export const Filter = ({
+  items,
+  notFoundFilter = false,
+  setFilteres,
+}: FilterProps) => {
+  const [filterValues, setFilterValues] =
+    useState<IFilterValues>(defaultObjFilteres);
 
   const handleFilterChange = (
     name: string,
     value: string | string[] | boolean
   ) => {
-    setFilterValues({ ...filterValues, [name]: value });
-    console.log(filterValues);
+    setFilterValues((prevFilterValues) => ({
+      ...prevFilterValues,
+      [name]: value,
+    }));
+  };
+
+  const handleReset = () => {
+    setFilterValues(defaultObjFilteres);
   };
 
   if (notFoundFilter) {
@@ -61,10 +46,9 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
               onChange={handleFilterChange}
             />
           )}
-
           {items?.categories && (
             <CategoriesBlock
-              selectedCategories={filterValues.categories}
+              selectedServies={filterValues.categories}
               onChange={handleFilterChange}
             />
           )}
@@ -99,7 +83,8 @@ export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
         </>
       }
       filterValues={filterValues}
-      setFilterValues={setFilterValues}
+      onReset={handleReset}
+      setFilteres={setFilteres}
     />
   );
 };

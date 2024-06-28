@@ -1,32 +1,37 @@
-import React from 'react';
+import { useEffect } from 'react';
 import classNames from 'classnames';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDescriptionForTask,
-  changeStepDecrement,
-  changeStepIncrement,
   setCategory,
+  setCategoryList,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
 import { TextArea } from 'shared/ui/text-area';
 import Dropdown, { Option } from '../../../../../shared/ui/dropdown';
 
 import styles from './task-step.module.css';
+import usePropsButtonCustom from '../useButtonPropsCustom';
+import { useGetCategoriesQuery } from 'services/categories-api';
 
 interface ITaskStepProps {
   isMobile?: boolean;
 }
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
-  const { descriptionForTask, categories, category } = useAppSelector(
+  const { data } = useGetCategoriesQuery();
+  useEffect(() => {
+    dispatch(setCategoryList(data));
+  }, []);
+  const { description, categories, category, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
-    value: String(item.id),
-    label: item.name,
+    _id: item._id,
+    title: item.title,
   }));
 
   const handleTaskValueChange = (item: Option) => {
@@ -39,12 +44,15 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     dispatch(setDescriptionForTask(e.target.value));
   };
 
-  const handleNextStepClick = () => {
-    dispatch(changeStepIncrement());
-  };
+  const propsButton = usePropsButtonCustom();
 
-  const handlePreviousStepClick = () => {
-    dispatch(changeStepDecrement());
+  const disabledBtn = () => {
+    if (description.length <= 5 || description.length > 300) {
+      return true;
+    }
+    if (category._id === '' && category.title === '') {
+      return true;
+    }
   };
 
   return (
@@ -71,8 +79,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
+
             <TextArea
-              value={descriptionForTask}
+              value={description}
               label="Опишите задачу"
               name="task"
               placeholder="Например: Помогите выгулять собаку."
@@ -91,8 +100,11 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
+            {category._id === '' && category.title === '' && (
+              <p className={styles.messageAlert}>Выберите тип задачи</p>
+            )}
             <TextArea
-              value={descriptionForTask}
+              value={description}
               label="Опишите задачу"
               name="task"
               placeholder="Например: Помогите выгулять собаку."
@@ -102,18 +114,25 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
             />
           </>
         )}
+        {description.length <= 5 && (
+          <p className={styles.messageAlert}>Добавьте описание задачи</p>
+        )}
       </div>
       <div className={styles.buttonsWrapper}>
+        <div className={styles.alertWrapper}></div>
+        {!isTypeEdit && (
+          <Button
+            buttonType="secondary"
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
+            extClassName={styles.prevButton}
+          />
+        )}
         <Button
-          buttonType="secondary"
-          label="Вернуться"
-          onClick={handlePreviousStepClick}
-          extClassName={styles.prevButton}
-        />
-        <Button
+          disabled={disabledBtn()}
           buttonType="primary"
-          label="Продолжить"
-          onClick={handleNextStepClick}
+          label={propsButton.label}
+          onClick={propsButton.onClick}
         />
       </div>
     </div>

@@ -10,7 +10,7 @@ import { ButtonsNameForStatisticsPage } from 'pages/application-statistics';
 import { useState } from 'react';
 
 interface IUsersRoleOptions {
-  value: 'volunteer' | 'recipient';
+  value: 'Volunteer' | 'Recipient';
   label: 'Волонтер' | 'Реципиент';
 }
 
@@ -20,8 +20,8 @@ interface IUsersStatusOptions {
 }
 
 export const usersRoleOptions: Array<IUsersRoleOptions> = [
-  { value: 'volunteer', label: 'Волонтер' },
-  { value: 'recipient', label: 'Реципиент' },
+  { value: 'Volunteer', label: 'Волонтер' },
+  { value: 'Recipient', label: 'Реципиент' },
 ];
 
 export const usersStatusOptions: Array<IUsersStatusOptions> = [
