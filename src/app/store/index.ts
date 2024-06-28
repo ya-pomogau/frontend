@@ -12,6 +12,7 @@ import systemSliceReducer from '../../services/system-slice';
 import { messagesApi } from 'services/messages-api';
 import { userTasksApi } from 'services/user-task-api';
 import { adminsApi } from 'services/admin-api';
+import { postsApi } from 'services/posts-api';
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ export const store = configureStore({
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [messagesApi.reducerPath]: messagesApi.reducer,
     [adminsApi.reducerPath]: adminsApi.reducer,
+    [postsApi.reducerPath]: postsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -38,6 +40,7 @@ export const store = configureStore({
       .concat(messagesApi.middleware)
       .concat(userTasksApi.middleware)
       .concat(adminsApi.middleware),
+      .concat(postsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
