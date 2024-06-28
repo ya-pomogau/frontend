@@ -40,7 +40,7 @@ export function BlogPage() {
   const refPostList = useRef<HTMLDivElement>(null);
   const refPostForm = useRef<HTMLFormElement>(null);
 
-  const isAdmin = user?.role === 'admin' || user?.role === 'master';
+  const isAdmin = user?.role === 'Admin';
 
   const handleAddAttachment = (fileList: FileList | null) => {
     if (!fileList) return;
@@ -93,9 +93,8 @@ export function BlogPage() {
 
   const handleEditPost = (post: Partial<PostProps>) => {
     setValues({
-      title: post.title,
-      text: post.text,
-      files: post.files,
+      title: post.title as string,
+      text: post.text as string,
     });
 
     setIdEditedPost(post._id);

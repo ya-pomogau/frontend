@@ -39,7 +39,7 @@ export const store = configureStore({
       .concat(categoriesApi.middleware)
       .concat(messagesApi.middleware)
       .concat(userTasksApi.middleware)
-      .concat(adminsApi.middleware),
+      .concat(adminsApi.middleware)
       .concat(postsApi.middleware),
 });
 
