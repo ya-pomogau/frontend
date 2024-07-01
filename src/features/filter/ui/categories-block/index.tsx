@@ -1,4 +1,4 @@
-import { useRef, ChangeEvent } from 'react';
+import { useRef, ChangeEvent, useEffect } from 'react';
 import classnames from 'classnames';
 
 import Checkbox from 'shared/ui/checkbox';
@@ -7,6 +7,7 @@ import { FilterItemsIds } from '../../consts';
 import styles from '../styles.module.css';
 import usePermission from 'shared/hooks/use-permission';
 import { UserRole, UserStatus } from 'shared/types/common.types';
+import { useAppSelector } from 'app/hooks';
 
 interface CategoriesBlockProps {
   selectedServies: string[];
@@ -20,18 +21,21 @@ export const CategoriesBlock = ({
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
 
   const volunteerMainGuard = usePermission(
-    [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
+    [UserStatus.CONFIRMED, UserStatus.VERIFIED, UserStatus.ACTIVATED],
+    UserRole.VOLUNTEER
+  );
+  
+  const volunteerHigherGuard = usePermission(
+    [UserStatus.CONFIRMED, UserStatus.VERIFIED],
+    UserRole.VOLUNTEER
+  );
+  const volunteerSpecialGuard = usePermission(
+    [UserStatus.CONFIRMED],
     UserRole.VOLUNTEER
   );
 
-  const volunteerSpecialGuard = usePermission(
-    [UserStatus.ACTIVATED, UserStatus.VERIFIED],
-    UserRole.VOLUNTEER
-  );
-  const volunteerhigherGuard = usePermission(
-    [UserStatus.VERIFIED],
-    UserRole.VOLUNTEER
-  );
+  const userRole = useAppSelector((state) => state.user.data?.role);
+  const isVolunteer = userRole === 'Volunteer';
 
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     let newValue: string[];
@@ -64,7 +68,7 @@ export const CategoriesBlock = ({
             checked={selectedServies.includes(FilterItemsIds.SERVIS_1)}
             id={FilterItemsIds.SERVIS_1}
             onChange={handleCheckboxChange}
-            disabled={!volunteerMainGuard ?? false}
+            disabled={isVolunteer ? !volunteerSpecialGuard : false}
             extClassName={classnames('text_size_small')}
           />
           <Checkbox
@@ -73,7 +77,7 @@ export const CategoriesBlock = ({
             checked={selectedServies.includes(FilterItemsIds.SERVIS_2)}
             id={FilterItemsIds.SERVIS_2}
             onChange={handleCheckboxChange}
-            disabled={!volunteerMainGuard ?? false}
+            disabled={isVolunteer ? !volunteerHigherGuard : false}
             extClassName={classnames('text_size_small')}
           />
         </div>
@@ -84,7 +88,7 @@ export const CategoriesBlock = ({
             checked={selectedServies.includes(FilterItemsIds.SERVIS_3)}
             id={FilterItemsIds.SERVIS_3}
             onChange={handleCheckboxChange}
-            disabled={!volunteerMainGuard ?? false}
+            disabled={isVolunteer ? !volunteerSpecialGuard : false}
             extClassName={classnames('text_size_small')}
           />
           <Checkbox
@@ -93,7 +97,7 @@ export const CategoriesBlock = ({
             checked={selectedServies.includes(FilterItemsIds.SERVIS_4)}
             id={FilterItemsIds.SERVIS_4}
             onChange={handleCheckboxChange}
-            disabled={!volunteerSpecialGuard ?? false}
+            disabled={isVolunteer ? !volunteerHigherGuard : false}
             extClassName={classnames('text_size_small')}
           />
         </div>
@@ -105,7 +109,7 @@ export const CategoriesBlock = ({
               checked={selectedServies.includes(FilterItemsIds.SERVIS_5)}
               id={FilterItemsIds.SERVIS_5}
               onChange={handleCheckboxChange}
-              disabled={!volunteerSpecialGuard ?? false}
+              disabled={isVolunteer ? !volunteerSpecialGuard : false}
               extClassName={classnames('text_size_small')}
             />
           </div>
@@ -115,7 +119,7 @@ export const CategoriesBlock = ({
             checked={selectedServies.includes(FilterItemsIds.SERVIS_6)}
             id={FilterItemsIds.SERVIS_6}
             onChange={handleCheckboxChange}
-            disabled={!volunteerhigherGuard ?? false}
+            disabled={isVolunteer ? !volunteerMainGuard : false}
             extClassName={classnames('text_size_small')}
           />
         </div>
@@ -127,7 +131,7 @@ export const CategoriesBlock = ({
               checked={selectedServies.includes(FilterItemsIds.SERVIS_7)}
               id={FilterItemsIds.SERVIS_7}
               onChange={handleCheckboxChange}
-              disabled={!volunteerSpecialGuard ?? false}
+              disabled={isVolunteer ? !volunteerMainGuard : false}
               extClassName={classnames('text_size_small')}
             />
           </div>
@@ -137,7 +141,7 @@ export const CategoriesBlock = ({
             checked={selectedServies.includes(FilterItemsIds.SERVIS_8)}
             id={FilterItemsIds.SERVIS_8}
             onChange={handleCheckboxChange}
-            disabled={!volunteerhigherGuard ?? false}
+            disabled={isVolunteer ? !volunteerHigherGuard : false}
             extClassName={classnames('text_size_small')}
           />
         </div>
@@ -148,7 +152,7 @@ export const CategoriesBlock = ({
             checked={selectedServies.includes(FilterItemsIds.SERVIS_9)}
             id={FilterItemsIds.SERVIS_9}
             onChange={handleCheckboxChange}
-            disabled={!volunteerSpecialGuard ?? false}
+            disabled={isVolunteer ? !volunteerMainGuard : false}
             extClassName={classnames('text_size_small')}
           />
         </div>

@@ -15,11 +15,14 @@ import {
   filterByTime,
 } from 'shared/libs/utils';
 import { useGetTaskVirginQuery } from 'services/user-task-api';
+import { isUnConfirmedSelector } from 'entities/user/model';
 
 export function ProfileMapPage() {
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
   const query = queryString.parse(location.search);
+  const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
+  const isVolunteer = user?.role === 'Volunteer';
 
   let latitude = 0;
   let longitude = 0;
@@ -67,14 +70,18 @@ export function ProfileMapPage() {
         icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
         text="Карта заявок"
         filter={
-          <Filter
-            items={{
-              categories: true,
-              radius: true,
-              date: true,
-              time: true,
-            }}
-          />
+          !isUnconfirmed && isVolunteer ? (
+            <Filter
+              items={{
+                categories: true,
+                radius: true,
+                date: true,
+                time: true,
+              }}
+            />
+          ) : (
+            <></>
+          )
         }
       />
 

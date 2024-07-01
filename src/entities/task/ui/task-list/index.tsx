@@ -188,7 +188,13 @@ export const TaskList = ({
             extClassName
           )}
         >
-          <Informer text="У Вас нет завершенных заявок" />
+          <Informer
+            text={
+              isCompletedPage
+                ? 'У Вас нет завершенных заявок'
+                : 'У Вас пока нет заявок'
+            }
+          />
         </div>
       )}
     </>
