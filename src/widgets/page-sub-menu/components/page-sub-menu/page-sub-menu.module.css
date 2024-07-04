@@ -1,7 +1,7 @@
 .tabContainer {
   display: flex;
   flex-flow: row nowrap;
-  gap: 39px;
+  gap: 32px;
   padding: 13px 0 13px 14px;
   margin-left: 32px;
 }

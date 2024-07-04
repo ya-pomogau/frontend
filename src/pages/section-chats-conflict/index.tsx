@@ -56,15 +56,17 @@ export const SectionChatsConflict = () => {
   return (
     <div className={styles.conflict}>
       <div className={styles.boxMessage}>
-        {dataMessage?.length === 0 && location.pathname === '/chat-hub' && (
+        {dataMessage?.length === 0 && (
           <Informer
-            text="У Вас пока нет конфликтов в работе"
-            extClassName={styles.informer}
-          />
-        )}
-        {dataMessage?.length === 0 && location.pathname === '/chat' && (
-          <Informer
-            text="У Вас пока нет конфликтов"
+            text={
+              location.pathname === '/chat-hub'
+                ? 'У Вас пока нет конфликтов'
+                : location.pathname === '/chat'
+                ? 'У Вас пока нет чатов в ожидании'
+                : location.pathname === '/chat-progress'
+                ? 'У Вас пока нет чатов в работе'
+                : ''
+            }
             extClassName={styles.informer}
           />
         )}

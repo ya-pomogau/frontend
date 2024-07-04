@@ -10,9 +10,8 @@ import { useMediaQuery } from 'shared/hooks';
 
 export const MapWithTasks = () => {
   const { coords, apiError } = useGeolocation();
-  const mediaQuery = useMediaQuery('(max-width: 910px)');
   const navigate = useNavigate();
-
+  const mediaQuery = useMediaQuery('(max-width: 910px)');
   const user = useAppSelector((state) => state.user.data);
 
   const [longitude, latitude] = !apiError
@@ -39,7 +38,7 @@ export const MapWithTasks = () => {
       <YandexMap
         tasks={data}
         width="100%"
-        height={mediaQuery ? '78vh' : '70vh'}
+        height={mediaQuery ? '75vh' : '64vh'}
         onClick={handleClick}
         isAuthorised={user !== null}
         mapSettings={{
