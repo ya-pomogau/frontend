@@ -1,10 +1,12 @@
-import { FormEvent, useState } from 'react';
+import { useMemo } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { InputAddress } from 'shared/ui/input-address';
+import { InputPhone } from 'shared/ui/input-phone';
 
 import styles from './styles.module.css';
 import { FilterItemsIds } from 'features/filter/consts';
@@ -13,7 +15,40 @@ import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
+export interface IRegisterForm {
+  name: string;
+  phone: string;
+  address: {
+    address: string;
+    coords: GeoCoordinates;
+  };
+  role: UserRole;
+}
+
+const NAME_VALIDATION_RULES = {
+  required: true,
+  minLength: {
+    value: 4,
+    message: 'Имя должно быть больше 4 символов',
+  },
+};
+
+const PHONE_VALIDATION_RULES = {
+  required: true,
+  pattern: {
+    value: /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/,
+    message: 'Введите номер телефона в формате +7 (000) 000-00-00',
+  },
+};
+
+const ADDRESS_VALIDATION_RULES = {
+  required: true,
+  validate: (value: IRegisterForm['address']) => value.address !== '',
+};
+
 export function RegisterPage() {
+  const dispatch = useAppDispatch();
+
   const vkUser = useAppSelector(vkUserSelector);
   const {
     first_name = '',
@@ -22,24 +57,43 @@ export function RegisterPage() {
     photo_max_orig = '',
   } = vkUser ?? {};
   const FIO = `${first_name} ${last_name}`;
-  const [name, setName] = useState<string>(FIO);
-  const [phone, setPhone] = useState<string>('');
-  const [role, setRole] = useState<UserRole>(UserRole.VOLUNTEER);
-  const [address, setAddress] = useState<{
-    address: string;
-    coords: GeoCoordinates;
-  }>({
-    address: '',
-    coords: [],
+
+  const {
+    control,
+    setValue,
+    getValues,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<IRegisterForm>({
+    mode: 'onChange',
+    defaultValues: useMemo(
+      () => ({
+        address: {
+          address: '',
+          coords: [],
+        },
+        name: FIO,
+        phone: '',
+        role: UserRole.VOLUNTEER,
+      }),
+      [FIO]
+    ),
   });
-  const dispatch = useAppDispatch();
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = (
-    event: FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
+
+  // TODO: если нужно привести номер телефона к вариации без пробела
+  // function cleanPhoneNumber(phoneNumber: string) {
+  //   return phoneNumber.replace(/[^0-9]/g, '');
+  // }
+
+  const onSubmit: SubmitHandler<IRegisterForm> = ({
+    address,
+    name,
+    phone,
+    role,
+  }) => {
     const vk_id = `${id}`;
     const user = {
-      name: name,
+      name,
       phone,
       address: address.address,
       avatar: photo_max_orig,
@@ -48,7 +102,7 @@ export function RegisterPage() {
         coordinates: address.coords,
       },
       vkId: vk_id,
-      role: role,
+      role,
     };
     dispatch(newUserThunk(user));
   };
@@ -57,17 +111,25 @@ export function RegisterPage() {
     newAddress: string,
     coords?: GeoCoordinates
   ) => {
-    setAddress({
-      address: newAddress,
-      coords: coords || [],
-    });
+    setValue(
+      'address',
+      { address: newAddress, coords: coords || [] },
+      { shouldValidate: true }
+    );
   };
-  const handleRoleButtonClick = (checkRole: UserRole) => {
-    setRole(checkRole);
+
+  const handleRoleButtonClick = (newRole: UserRole) => {
+    setValue('role', newRole, { shouldValidate: true });
   };
-  // определение внешнего вида кнопки выбора роли
+
   const getRoleButtonType = (userRole: string) =>
-    role === userRole ? 'primary' : 'secondary';
+    getValues('role') === userRole ? 'primary' : 'secondary';
+
+  const addressErrorMessage = `Не введен адрес. Пожалуйста, укажите адрес, ${
+    getValues('role') === UserRole.RECIPIENT
+      ? 'по которому требуется помощь'
+      : 'где вы находитесь'
+  }!`;
 
   return (
     <>
@@ -78,7 +140,7 @@ export function RegisterPage() {
       />
       <p className={styles.titlePrimary}>Зарегистрироваться</p>
 
-      <form className={styles.form} onSubmit={onSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.buttonContainer}>
           <Button
             buttonType={getRoleButtonType(FilterItemsIds.VOLUNTEER)}
@@ -97,36 +159,58 @@ export function RegisterPage() {
             actionType="button"
           />
         </div>
-        <Input
-          extClassName={styles.field}
-          required
-          label="ФИО"
+        <Controller
           name="name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          placeholder="ФИО"
-          type="text"
+          rules={NAME_VALIDATION_RULES}
+          control={control}
+          render={({ field }) => (
+            <Input
+              defaultValue={field.value}
+              name={field.name}
+              onChange={field.onChange}
+              error={!!errors?.name?.message}
+              errorText={errors.name?.message}
+              extClassName={styles.field}
+              label="ФИО"
+              placeholder="ФИО"
+              type="text"
+            />
+          )}
         />
-
-        <Input
-          extClassName={styles.field}
-          required
-          label="Телефон"
+        <Controller
           name="phone"
-          value={phone}
-          onChange={(event) => setPhone(event.target.value)}
-          placeholder="+70010900213"
-          type="tel"
-          pattern="^[+]7\d{10}$"
-          title="+71234567890"
+          rules={PHONE_VALIDATION_RULES}
+          control={control}
+          render={({ field }) => (
+            <InputPhone
+              name="phone"
+              defaultValue={field.value}
+              errorText={errors?.phone?.message as unknown as string}
+              onChange={field.onChange}
+              extClassName={styles.field}
+              type="tel"
+              placeholder="+7 (123) 456-78-90"
+            />
+          )}
         />
-
         <div>
-          <InputAddress
-            required
+          <Controller
             name="address"
-            address={address}
-            setAddress={handleAddressValueChange}
+            rules={ADDRESS_VALIDATION_RULES}
+            control={control}
+            render={({ field }) => (
+              <InputAddress
+                name={field.name}
+                defaultValue={field.value.address}
+                onChange={field.onChange}
+                error={!!errors.address}
+                extClassName={styles.field}
+                address={field.value}
+                label="Адрес"
+                errorText={addressErrorMessage}
+                setAddress={handleAddressValueChange}
+              />
+            )}
           />
 
           <p className={styles.text}>
@@ -139,6 +223,7 @@ export function RegisterPage() {
           actionType="submit"
           label="Подтвердите корректность данных"
           size="extraLarge"
+          disabled={!isValid}
         />
       </form>
     </>

@@ -1,7 +1,3 @@
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
-import { useMemo } from 'react';
-
 import { useAppSelector } from 'app/hooks';
 import { YandexMap } from 'widgets/map';
 import { Filter } from 'features/filter';

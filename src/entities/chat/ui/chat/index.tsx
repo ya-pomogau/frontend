@@ -98,6 +98,13 @@ export const PopupChat = ({
         </div>
 
         <InputWrapper
+          extClassInput={classnames({
+            [styles.input_inner_mobile]: isMobile && isOpen,
+          })}
+          extClass={classnames({
+            [styles.input_container_mobile]: isMobile && isOpen,
+          })}
+          customIconSize={isMobile ? '32' : '24'}
           getFile={() => {}}
           placeholder="Напишите сообщение..."
           inputValue={inputValue}
