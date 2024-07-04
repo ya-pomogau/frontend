@@ -13,6 +13,8 @@ import {
 } from 'shared/libs/utils';
 import { useGetTaskVirginQuery } from 'services/user-task-api';
 import { useMediaQuery } from 'shared/hooks';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 export function ProfileMapPage() {
   const user = useAppSelector((store) => store.user.data);
