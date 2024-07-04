@@ -14,12 +14,15 @@ const SideBarItem = ({ title, to, icon, position }: ISideBarElementProps) => {
   }, [location.pathname]);
   const isActive = location.pathname.startsWith(to);
   const is_active =
-    to === link || (to === '/profile' && location.pathname.startsWith('/profile/'));
+    to === link ||
+    (to === '/profile' && location.pathname.startsWith('/profile/'));
 
   return (
     <NavLink
       to={to}
-      className={`${styles.link} ${(isActive || is_active) ? styles.link_active : undefined}`}
+      className={`${styles.link} ${
+        isActive || is_active ? styles.link_active : undefined
+      }`}
       style={{
         flexDirection: position?.flexDirection,
         justifyContent: position?.justifyContent,
