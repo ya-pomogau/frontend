@@ -1,26 +1,22 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { Message } from 'shared/ui/message';
 import { IMessageHub, messageHub } from 'shared/libs/utils';
 import { MessageCard } from 'shared/ui/message-card';
+import { InputWrapper } from 'shared/ui/input-wrapper';
 import styles from './styles.module.css';
-import { Button } from 'shared/ui/button';
-import { Icon } from 'shared/ui/icons';
 import WrapperMessage from 'shared/ui/wrapper-messages';
 
-export const SectionChatHub = () => {
+export const SectionInWorkChats = () => {
   const [isOpen, setIpOpen] = useState<boolean>(false);
-  const [selectedCard, setSelectedCard] = useState<string>('');
   const [infoMessage, setInfoMessage] = useState<IMessageHub | null>(null);
+  const [selectedCard, setSelectedCard] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [fileInput, setFileInput] = useState<string>('');
 
   const handleVisibleMessage = (text: string) => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);
-  };
-
-  const handelCloseWrapper = () => {
-    setIpOpen((state) => !state);
-    setSelectedCard('');
   };
 
   const handleClickCard = (task: IMessageHub) => {
@@ -29,11 +25,21 @@ export const SectionChatHub = () => {
     setInfoMessage(task);
   };
 
+  const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { value } = target;
+    setInputValue(value);
+  };
+
+  const handelCloseWrapper = () => {
+    setIpOpen((state) => !state);
+    setSelectedCard('');
+  };
+
   return (
-    <div className={styles.hub}>
+    <div className={styles.picker}>
       <WrapperMessage
         information={!!messageHub.length}
-        title="У Вас пока нет чатов в ожидании"
+        title="У Вас пока нет чатов в работе"
       >
         {messageHub?.map((item) => (
           <MessageCard
@@ -47,7 +53,6 @@ export const SectionChatHub = () => {
           />
         ))}
       </WrapperMessage>
-
       {isOpen && (
         <WindowInteractionUsers
           closeConflict={handelCloseWrapper}
@@ -56,21 +61,15 @@ export const SectionChatHub = () => {
           onClick={handleVisibleMessage}
           chatmateInfo={infoMessage?.user}
           boxButton={
-            <div className={styles.boxBtn}>
-              <Button
-                buttonType="primary"
-                actionType="submit"
-                label="Взять в работу"
-                customIcon={
-                  <Icon
-                    icon="EmptyMessageIcon"
-                    color="white"
-                    onClick={() => {}}
-                    size="24"
-                  />
-                }
-              />
-            </div>
+            <InputWrapper
+              placeholder="Напишите сообщение..."
+              inputValue={inputValue}
+              name="input"
+              onClickBtn={() => {}}
+              onChange={handleInputChange}
+              getFile={setFileInput}
+              containerMessages={true}
+            />
           }
         >
           {infoMessage?.messages.map((m) => (

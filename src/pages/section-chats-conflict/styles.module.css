@@ -7,18 +7,6 @@
   position: relative;
 }
 
-.boxMessage {
-  display: flex;
-  flex-direction: column;
-  max-height: 608px;
-  min-width: 361px;
-  max-width: 361px;
-  height: 98%;
-  box-sizing: border-box;
-  overflow-y: auto;
-  border: 1px solid var(--colors-interface-primary-additional);
-}
-
 .boxConflict {
   display: flex;
   flex-direction: column;
@@ -33,22 +21,11 @@
   gap: 20px;
 }
 
-.informer {
-  width: 60%;
-  margin: 30% auto;
-}
-
 @media (max-width: 550px) {
   .conflict {
     width: 100%;
     margin: 0 auto;
     gap: 0;
-  }
-
-  .boxMessage {
-    min-width: 100px;
-    margin: 10px auto 0;
-    width: 100%;
   }
 
   .boxBtn {
