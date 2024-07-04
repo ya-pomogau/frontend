@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import classnames from 'classnames';
 
 import { Avatar } from '../../../shared/ui/avatar';
@@ -10,7 +11,6 @@ import { LightPopup } from 'shared/ui/light-popup';
 import { useOutsideClick } from 'shared/hooks/use-outside-click';
 
 import type { UpdateUserInfo } from 'entities/user/types';
-import type { ViewerInputData } from '../types';
 
 import styles from './edit-viewer-info.module.css';
 
@@ -54,44 +54,29 @@ export const EditViewerInfo = ({
   setImage,
   ...props
 }: EditViewerInfoProps) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+    reset,
+    watch,
+  } = useForm({
+    defaultValues: {
+      name: valueName,
+      phone: valuePhone,
+      address: valueAddress,
+    },
+  });
+
   const avatarPicker = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const viewerData: Omit<UpdateUserInfo, '_id'> = {
-    name: valueName,
-    phone: valuePhone,
-    address: valueAddress,
-    // avatar: null,
-    // _id: valueId,
-  };
-  const [userData, setUserData] = useState(viewerData);
-  useEffect(() => {
-    setUserData(viewerData);
-  }, [valueName, valuePhone, valueAddress]);
-  const avatarFile = new FormData();
-
-  const handleChange = async (event: ViewerInputData) => {
-    setIsFormEdited(true);
-    setIsFormSaved(false);
-    avatarFile.delete('file');
-    const { value, name, files } = event.target;
-    // if (files) {
-    //   // Если загружен файл изображения, отрисовываем в компоненте аватара
-    //   setImage(URL.createObjectURL(files[0]));
-    //   avatarFile.append('file', files[0]);
-    //   setUserData({ ...userData, [name]: value });
-    // }
-
-    if (name === 'phone') {
-      const phoneRegex = /^[+]7\d{10}$/;
-      if (!phoneRegex.test(value)) {
-        setPhoneError('Неверный формат номера');
-      } else {
-        setPhoneError(null);
-      }
-    }
-
-    setUserData({ ...userData, [name]: value });
+  const onSubmit = (data: Omit<UpdateUserInfo, '_id'>) => {
+    onClickSave(data);
+    setIsFormSaved(true);
+    setIsFormEdited(false);
+    setIsPopupOpen(false);
   };
 
   const handlePick = () => {
@@ -101,15 +86,11 @@ export const EditViewerInfo = ({
   };
 
   const handleClosePopup = () => {
-    if (!isFormSaved) {
-      setUserData(viewerData);
-    }
     setImage('');
     setIsFormEdited(false);
     setIsPopupOpen(false);
+    reset();
   };
-
-  const [phoneError, setPhoneError] = useState<string | null>(null);
 
   useOutsideClick({
     elementRef: modalRef,
@@ -129,6 +110,11 @@ export const EditViewerInfo = ({
   const handleEscKeydown = (e: KeyboardEvent) => {
     e.key === 'Escape' && handleClosePopup();
   };
+
+  useEffect(() => {
+    setIsFormEdited(true);
+    setIsFormSaved(false);
+  }, [watch('name'), watch('phone'), watch('address')]);
 
   return (
     <LightPopup isPopupOpen={isPopupOpen} onClickExit={handleClosePopup}>
@@ -170,7 +156,6 @@ export const EditViewerInfo = ({
               </button>
               <input
                 disabled
-                onChange={handleChange}
                 className={classnames(
                   styles.avatarBlock__hidden,
                   'text',
@@ -190,103 +175,127 @@ export const EditViewerInfo = ({
               onClick={handleClosePopup}
             />
           </div>
-          <ul className={classnames(styles.infoBlock, 'list')}>
-            <li className={styles.infoBlock__item}>
-              <p
-                className={classnames(
-                  styles.infoBlock__text,
-                  'text',
-                  'text_size_small',
-                  'm-0',
-                  'p-0',
-                  'text_type_bold'
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <ul className={classnames(styles.infoBlock, 'list')}>
+              <li className={styles.infoBlock__item}>
+                <p
+                  className={classnames(
+                    styles.infoBlock__text,
+                    'text',
+                    'text_size_small',
+                    'm-0',
+                    'p-0',
+                    'text_type_bold'
+                  )}
+                >
+                  {' '}
+                  Имя:{' '}
+                </p>
+                <Controller
+                  name="name"
+                  control={control}
+                  rules={{ required: 'Пустое поле' }}
+                  render={({ field }) => (
+                    <Input
+                      type="text"
+                      extClassName={styles.input}
+                      placeholder="Введите имя"
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.name && (
+                  <span className={styles.errorText}>
+                    {errors.name.message}
+                  </span>
                 )}
-              >
-                {' '}
-                Имя:{' '}
-              </p>
-              <Input
-                type="text"
-                extClassName={styles.input}
-                placeholder="Введите имя"
-                value={userData.name}
-                onChange={handleChange}
-                name="name"
-                {...props}
-              />
-            </li>
-            <li className={styles.infoBlock__item}>
-              <p
-                className={classnames(
-                  styles.infoBlock__text,
-                  'text',
-                  'text_size_small',
-                  'm-0',
-                  'p-0',
-                  'text_type_bold'
+              </li>
+              <li className={styles.infoBlock__item}>
+                <p
+                  className={classnames(
+                    styles.infoBlock__text,
+                    'text',
+                    'text_size_small',
+                    'm-0',
+                    'p-0',
+                    'text_type_bold'
+                  )}
+                >
+                  {' '}
+                  Тел.:{' '}
+                </p>
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={{
+                    required: 'Пустое поле',
+                    pattern: {
+                      value: /^[+]7\d{10}$/,
+                      message: 'Неверный формат номера',
+                    },
+                  }}
+                  render={({ field }) => (
+                    <Input
+                      type="tel"
+                      extClassName={classnames(
+                        styles.input,
+                        errors.phone && styles['input--error']
+                      )}
+                      placeholder="Введите телефон"
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.phone && (
+                  <span className={styles.errorText}>
+                    {errors.phone.message}
+                  </span>
                 )}
-              >
-                {' '}
-                Тел.:{' '}
-              </p>
-              <Input
-                type="tel"
-                extClassName={classnames(
-                  styles.input,
-                  phoneError && styles['input--error']
+              </li>
+              <li className={styles.infoBlock__item}>
+                <p
+                  className={classnames(
+                    styles.infoBlock__text,
+                    'text',
+                    'text_size_small',
+                    'm-0',
+                    'p-0',
+                    'text_type_bold'
+                  )}
+                >
+                  {' '}
+                  Адрес:{' '}
+                </p>
+                <Controller
+                  name="address"
+                  control={control}
+                  rules={{ required: 'Пустое поле' }}
+                  render={({ field }) => (
+                    <Input
+                      type="text"
+                      extClassName={styles.input}
+                      placeholder="Введите адрес"
+                      {...field}
+                    />
+                  )}
+                />
+                {errors.address && (
+                  <span className={styles.errorText}>
+                    {errors.address.message}
+                  </span>
                 )}
-                placeholder="Введите телефон"
-                value={userData.phone}
-                onChange={handleChange}
-                name="phone"
-                required
-                pattern="^[+]7\d{10}$"
-                title="+71234567890"
-                {...props}
-              />
-            </li>
-            <li className={styles.infoBlock__item}>
-              <p
-                className={classnames(
-                  styles.infoBlock__text,
-                  'text',
-                  'text_size_small',
-                  'm-0',
-                  'p-0',
-                  'text_type_bold'
-                )}
-              >
-                {' '}
-                Адрес:{' '}
-              </p>
-              <Input
-                type="text"
-                extClassName={styles.input}
-                placeholder="Введите адрес"
-                value={userData.address}
-                onChange={handleChange}
-                name="address"
-                {...props}
-              />
-            </li>
-          </ul>
+              </li>
+            </ul>
+            <Button
+              type="submit"
+              disabled={Object.keys(errors).length > 0}
+              extClassName={styles.button}
+              buttonType="primary"
+              label="Сохранить"
+              size="medium"
+            />
+          </form>
         </div>
-        <div className={styles.phoneErrorContainer}>
-          {phoneError && <span className={styles.errorText}>{phoneError}</span>}
-        </div>
-        <Button
-          disabled={
-            (valueName === userData.name &&
-              valuePhone === userData.phone &&
-              valueAddress === userData.address) ||
-            phoneError !== null
-          }
-          onClick={() => onClickSave(userData)}
-          extClassName={styles.button}
-          buttonType="primary"
-          label="Сохранить"
-          size="medium"
-        />
       </div>
     </LightPopup>
   );

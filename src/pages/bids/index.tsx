@@ -7,7 +7,7 @@ export function BidsPage() {
     <>
       <SmartHeader
         icon={<Icon color="blue" icon="SettingsIcon" size="46" />}
-        text="Настройка балов"
+        text="Настройка баллов"
       />
       <div>
         <BalanceSettings />

@@ -3,16 +3,13 @@ import classnames from 'classnames';
 
 import styles from '../styles.module.css';
 import { TimePickerElement } from 'shared/ui/time-picker';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'app/store';
 
 interface TimeBlockProps {
   onChange: (name: string, value: string[] | string) => void;
   filterTime: Array<string>;
 }
 
-export const TimeBlock = ({ onChange, filterTime }: TimeBlockProps) => {
-  const dispatch = useDispatch();
+export const TimeBlock = ({ onChange }: TimeBlockProps) => {
   const [isMobile, setIsMobile] = useState(false);
   const buttonRef = useRef<HTMLInputElement>(null);
   const [startTime, setStartTime] = useState<string>('00:00');

@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { Category } from 'entities/task/types';
 import { getTokenAccess } from 'shared/libs/utils';
+import { TPoints } from 'shared/types/common.types';
 
 type CategoryRequest = {
   accessLevel: number;
@@ -47,6 +48,15 @@ export const categoriesApi = createApi({
         body: category,
       }),
     }),
+    //TODO На бэке есть метод сервиса updatePoints, но в отсутствует соответствующая ручка (url написан предполагаемый)
+    updatePoints: build.mutation<Category, TPoints<string>>({
+      query: (points) => ({
+        //url и метод написаны предполагаемые, изменить после добавления ручки
+        url: `admin/categories/points`,
+        method: 'PATCH',
+        body: points,
+      }),
+    }),
     //Сервер выдает 500 ошибку, не может найти по id
     deleteCategory: build.mutation<void, string>({
       query: (id) => ({
@@ -62,5 +72,6 @@ export const {
   useGetCategoryByIdQuery,
   useAddCategoryMutation,
   useUpdateCategoryMutation,
+  useUpdatePointsMutation,
   useDeleteCategoryMutation,
 } = categoriesApi;

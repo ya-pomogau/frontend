@@ -1,7 +1,18 @@
+import { SyntheticEvent, useEffect } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.css';
-import { ChangeEvent, useState } from 'react';
-import { Button } from 'shared/ui/button';
+import { Button } from '../../shared/ui/button';
+import usePermission from '../../shared/hooks/use-permission';
+import useForm from '../../shared/hooks/use-form';
+import {
+  AdminPermission,
+  UserRole,
+  TPoints,
+} from '../../shared/types/common.types';
+import {
+  useGetCategoriesQuery,
+  useUpdatePointsMutation,
+} from '../../services/categories-api';
 import BalanceSettingsItem from './components/balance-settings-item';
 
 interface BalanceSettingsProps {
@@ -9,83 +20,57 @@ interface BalanceSettingsProps {
 }
 
 export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
-  const [balanceItems, setBalanceItems] = useState([
-    {
-      title: 'Перевозка в личном транспорте',
-      inputValue: '1',
-    },
-    {
-      title: 'Покупка вещей/техники',
-      inputValue: '1',
-    },
-    {
-      title: 'Сопровождение',
-      inputValue: '1',
-    },
-    {
-      title: 'Помощь в уборке',
-      inputValue: '1',
-    },
-    {
-      title: 'Покупка продуктов',
-      inputValue: '1',
-    },
-    {
-      title: 'Организация досуга',
-      inputValue: '1',
-    },
-    {
-      title: 'Помощь в подъёме/спуске',
-      inputValue: '1',
-    },
-    {
-      title: 'Ремонт техники/жилья',
-      inputValue: '1',
-    },
-    {
-      title: 'Помощь в готовке',
-      inputValue: '1',
-    },
-    {
-      title: 'Срочные',
-      inputValue: '1',
-    },
-  ]);
+  const isEditAllowed = usePermission(
+    [AdminPermission.CATEGORIES],
+    UserRole.ADMIN
+  );
+  const { data } = useGetCategoriesQuery();
+  const [updatePoints, { isLoading }] = useUpdatePointsMutation();
+  const { values, setValues, handleChange } = useForm<TPoints<string>>({});
 
-  const handleInputChange = (index: number, value: string) => {
-    const updatedItems = [...balanceItems];
-    updatedItems[index].inputValue = value;
-    setBalanceItems(updatedItems);
-  };
+  useEffect(() => {
+    const initialValues: TPoints<string> = {};
+    data?.map((item) => {
+      const { title, points } = item;
+      initialValues[title] = points;
+    });
+    setValues(initialValues);
+  }, [data]);
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log('Form submitted');
+    try {
+      await updatePoints(values);
+    } catch (error) {
+      console.error('Ошибка при сохранении данных:', error);
+    }
   };
 
   return (
-    <div className={classnames(styles.container, extClassName)}>
-      <form onSubmit={handleSubmit}>
-        <div className={classnames(styles.balances_box)}>
-          {balanceItems.map((item, index) => (
+    <form
+      className={classnames(styles.container, extClassName)}
+      onSubmit={handleSubmit}
+    >
+      <div className={classnames(styles.balances_box)}>
+        {data &&
+          data.map((item, index) => (
             <BalanceSettingsItem
               key={index}
               title={item.title}
-              inputValue={item.inputValue}
-              onInputChange={(value: string) => handleInputChange(index, value)}
+              inputValue={`${values[item.title]}`}
+              handleChange={handleChange}
             />
           ))}
-        </div>
-        <Button
-          className={classnames(styles.save_btn)}
-          buttonType={'primary'}
-          label={'Сохранить'}
-          size="large"
-          actionType="submit"
-          onClick={() => console.log('Save button pressed')}
-          onSubmit={() => console.log('Submit')}
-        />
-      </form>
-    </div>
+      </div>
+      <Button
+        extClassName={classnames(styles.save_btn)}
+        buttonType="primary"
+        label="Сохранить"
+        size="large"
+        actionType="submit"
+        disabled={!isEditAllowed}
+      />
+    </form>
   );
 };
