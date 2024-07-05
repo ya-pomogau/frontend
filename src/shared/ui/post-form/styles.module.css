@@ -1,0 +1,61 @@
+.form {
+  width: 50%;
+  padding-left: 30px;
+}
+
+@media (max-width: 920px) {
+  .form {
+    width: 94%;
+  }
+}
+
+.input {
+  padding-bottom: 10px;
+}
+
+.text-block {
+  position: relative;
+}
+
+.textarea {
+  padding-bottom: 10px;
+}
+
+.attachment-button {
+  position: absolute;
+  bottom: 23px;
+  right: 23px;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+  border-style: none;
+}
+
+.input-file {
+  display: none;
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.image {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.image-title {
+  margin: 0;
+  color: var(--colors-interface-primary);
+}
+
+.close-cross-button {
+  border-style: none;
+  text-align: right;
+  padding: 0;
+  height: 14px;
+}
