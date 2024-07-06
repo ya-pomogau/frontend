@@ -1,9 +1,9 @@
-import { useState, SyntheticEvent } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'shared/hooks/media-query';
-import { positionConfigTop, linksTop, linksTopAuthAdmin } from './utils';
+import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
 
 import { Logo } from 'shared/ui/logo';
 import { SideBar } from 'widgets/header/navigation';
@@ -20,7 +20,6 @@ import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
 import { handleRedirectVK } from 'shared/libs/utils';
-import { VkIcon } from 'shared/ui/icons/vk-icon';
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
@@ -105,6 +104,7 @@ const Header = () => {
               role={user?.role}
               setMenuActive={setMenuActive}
               menuActive={menuActive}
+              setIsOpenChat={setIsOpenChat}
             />
           )}
         </div>

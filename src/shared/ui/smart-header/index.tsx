@@ -1,7 +1,5 @@
-import { ReactElement, ReactNode, MouseEvent } from 'react';
-
+import { ReactElement } from 'react';
 import classnames from 'classnames';
-
 import styles from './styles.module.css';
 
 interface SmartHeaderProps {
@@ -10,6 +8,7 @@ interface SmartHeaderProps {
   filter?: ReactElement;
   extClassName?: string;
 }
+
 export const SmartHeader = ({
   text,
   icon,

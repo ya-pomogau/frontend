@@ -5,6 +5,7 @@ import { Button } from 'shared/ui/button';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
 import { Message } from '../message';
+import { IIconProps } from '../icons/utils';
 
 interface PropsInputWrapper {
   placeholder: string;
@@ -14,8 +15,10 @@ interface PropsInputWrapper {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClickBtn: () => void;
   extClassButton?: string;
+  extClass?: string;
   getFile: (value: string) => void;
   containerMessages: boolean;
+  customIconSize?: '14' | '24' | '32' | '46' | '54' | '101' | '196';
 }
 
 export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
@@ -80,7 +83,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
   ];
 
   return (
-    <div className={styles.box}>
+    <div className={cn(props.extClass, styles.box)}>
       <form className={styles.inputWrapper} onSubmit={handleSubmit}>
         <Input
           placeholder={props.placeholder}
@@ -98,7 +101,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
                 onInput={handleFile}
                 onChange={handleFileChange}
               />
-              <Icon color="blue" icon="PinIcon" />
+              <Icon color="blue" icon="PinIcon" size={props.customIconSize} />
             </label>
           }
         />
