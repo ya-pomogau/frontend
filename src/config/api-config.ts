@@ -22,6 +22,7 @@ export const FRONT_URL =
 
 export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',
+  adminRegister: 'admin/create',
   userRegister: '/auth/new',
   adminLogin: '/auth/administrative',
   checkToken: '/auth/token',

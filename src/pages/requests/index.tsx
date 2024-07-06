@@ -53,7 +53,12 @@ export function RequestsPage({ incomeTab }: PageProps) {
       <SmartHeader
         icon={
           incomeTab === Tabs.ADMINS ? (
-            <Icon color="blue" icon="CheckInBoxIcon" size="54" />
+            <Icon
+              color="blue"
+              icon="CheckInBoxIcon"
+              size="54"
+              className={styles.iconCheckInBox}
+            />
           ) : (
             <Icon color="blue" icon="BlockIcon" size="54" />
           )
@@ -80,10 +85,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
         }}
       />
       {incomeTab === Tabs.ADMINS && (
-        <NavLink
-          className={styles.addNewAdminSection}
-          to={'/profile/create-new-admin'}
-        >
+        <NavLink to={'/profile/create-new-admin'} className={styles.navLink}>
           <GradientDivider />
           <div className={styles.addNewAdminSectionInner}>
             <Icon color="blue" icon="PlusFilledIcon" />

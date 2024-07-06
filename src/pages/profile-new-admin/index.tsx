@@ -15,8 +15,7 @@ import { InputPhone } from 'shared/ui/input-phone';
 import { PasswordInput } from 'shared/ui/password-input';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { useAppDispatch } from 'app/hooks';
-import { UserRole } from 'shared/types/common.types';
-import { newUserThunk } from 'services/system-slice';
+import { useCreateNewAdminMutation } from 'services/admin-api';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -31,12 +30,10 @@ interface INewAdminForm {
   };
   password: string;
   repeatedPassword: string;
-  role: UserRole;
 }
 
 export function CreateNewAdminPage() {
-  const dispatch = useAppDispatch();
-
+  const [createNewAdmin] = useCreateNewAdminMutation();
   const navigate = useNavigate();
 
   const [adminCredentials, setAdminCredentials] = useState<{
@@ -117,7 +114,6 @@ export function CreateNewAdminPage() {
       },
       password: '',
       repeatedPassword: '',
-      role: UserRole.ADMIN,
     },
   });
 
@@ -127,34 +123,29 @@ export function CreateNewAdminPage() {
     phone,
     address,
     password,
-    role,
   }) => {
     const user = {
       name: fullName,
+      login: email,
       phone,
       address: address.address,
-      avatar: '',
-      location: {
-        type: 'Point',
-        coordinates: address.coords,
-      },
-      role,
       password,
-      vkId: String(nanoid),
+      vkId: nanoid(),
     };
+
     try {
-      const resultAction = await dispatch(newUserThunk(user)).unwrap();
+      await createNewAdmin(user).unwrap();
       setAdminCredentials({ email, password });
       navigate('/profile/requests/volunteers');
     } catch (error) {
-      console.error('Ошибка при регистрации администратора:', error);
+      console.error(error);
     }
   };
 
   return (
     <>
       <SmartHeader
-        icon={<Icon color="blue" icon="RegistrationIcon" size="54" />}
+        icon={<Icon color="white" icon="NewAdminIcon" size="54" />}
         text="Добавление администраторов"
         extClassName={styles.header}
       />

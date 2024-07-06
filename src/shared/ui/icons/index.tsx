@@ -48,6 +48,7 @@ import { ConflictIcon } from './conflict-icon';
 import { AccordionIconArrow } from './accordion-arrow';
 import { CheckInBoxIcon } from './check-in-box';
 import { PlusFilledIcon } from './plus-filled-icon';
+import { NewAdminIcon } from './new-admin-icon';
 
 const icons = {
   ExcelIcon,
@@ -96,6 +97,7 @@ const icons = {
   AccordionIconArrow,
   CheckInBoxIcon,
   PlusFilledIcon,
+  NewAdminIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
