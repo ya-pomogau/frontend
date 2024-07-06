@@ -2,6 +2,17 @@
   text-decoration: none;
 }
 
+.addNewAdminSectionInner{
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 20px 40px;
+}
+
+.title {
+  color: var(--colors-interface-primary-additional);
+}
+
 .tabContainer__text {
   margin-right: 6px;
   color: var(--colors-interface-additional);

@@ -37,7 +37,7 @@ export const PageSubMenuForAdmins = ({
           {role === UserRole.ADMIN && isRoot ? (
             <PageSubMenuLink
               to="/profile/requests/admins"
-              text="Админы"
+              text="Администраторы"
               notifications={counters.admins}
             />
           ) : (

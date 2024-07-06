@@ -34,6 +34,7 @@ import { RegisterPage } from 'pages/register';
 import { Tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
+import { CreateNewAdminPage } from 'pages/profile-new-admin';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -170,6 +171,10 @@ export const router = createBrowserRouter(
           <Route
             path="/profile/requests/admins"
             element={<RequestsPage incomeTab={Tabs.ADMINS} />}
+          />
+          <Route
+            path="/profile/create-new-admin"
+            element={<CreateNewAdminPage />}
           />
         </Route>
       </Route>

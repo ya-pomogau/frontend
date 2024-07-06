@@ -46,6 +46,8 @@ import { ExclamationPMark } from './excalamation-mark';
 
 import { ConflictIcon } from './conflict-icon';
 import { AccordionIconArrow } from './accordion-arrow';
+import { CheckInBoxIcon } from './check-in-box';
+import { PlusFilledIcon } from './plus-filled-icon';
 
 const icons = {
   ExcelIcon,
@@ -92,6 +94,8 @@ const icons = {
   ArrowDownIcon,
   ConflictIcon,
   AccordionIconArrow,
+  CheckInBoxIcon,
+  PlusFilledIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
