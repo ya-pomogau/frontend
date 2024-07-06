@@ -24,7 +24,7 @@ export const CategoriesBlock = ({
     [UserStatus.CONFIRMED, UserStatus.VERIFIED, UserStatus.ACTIVATED],
     UserRole.VOLUNTEER
   );
-  
+
   const volunteerHigherGuard = usePermission(
     [UserStatus.CONFIRMED, UserStatus.VERIFIED],
     UserRole.VOLUNTEER
