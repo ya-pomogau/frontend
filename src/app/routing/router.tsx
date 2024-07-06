@@ -34,6 +34,7 @@ import { RegisterPage } from 'pages/register';
 import { Tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
+import { SectionChatPicker } from 'pages/section-chat-picker';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -142,6 +143,14 @@ export const router = createBrowserRouter(
 
           <Route
             path="/chat"
+            element={
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chat-progress"
             element={
               <ProfileChatsPages>
                 <SectionChatsConflict />

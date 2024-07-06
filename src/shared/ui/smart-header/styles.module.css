@@ -24,6 +24,9 @@
 
 .settingIcon {
   display: flex;
+  margin-right: 10px;
+  /* margin-top: -12px; */
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
 }
@@ -36,6 +39,7 @@
   }
 
   .settingIcon {
+    margin-right: 10px;
     max-width: 35px;
     max-height: 35px;
   }
