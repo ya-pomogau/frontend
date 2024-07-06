@@ -5,11 +5,12 @@ import styles from './styles.module.css';
 import { IMessage } from 'shared/types/message';
 import { TaskConflict } from 'entities/task/types';
 import { UserProfile } from 'entities/user/types';
+import { IMessageHub } from 'shared/libs/utils';
 
 interface PropsMessageCard {
   statusConflict: boolean;
   description: string;
-  handleClickCard: (task: TaskConflict) => void;
+  handleClickCard: (task: TaskConflict | IMessageHub) => void;
   message?: IMessage[];
   action: boolean;
   user: UserProfile;
@@ -29,6 +30,12 @@ export const MessageCard: React.FC<PropsMessageCard> = (props) => {
   function handelClick() {
     if (props.task) {
       props.handleClickCard(props.task);
+    } else if (props.message) {
+      props.handleClickCard({
+        user: props.user,
+        messages: props.message,
+        id: props.user._id,
+      });
     }
   }
 

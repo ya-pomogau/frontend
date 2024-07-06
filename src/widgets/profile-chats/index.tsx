@@ -32,18 +32,18 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
           <>
             <PageSubMenuLink
               text="Ждут ответа"
-              to="/chat"
+              to="/chats-hub"
               notifications={conflict ? conflict?.length : 0}
             />
             <PageSubMenuLink
               text="В работе"
-              to="/chat-progress"
+              to="/chats-in-work"
               // TODO: подключить данные количества конфликтов в работе
               // notifications={conflictInProgress ? conflictInProgress?.length : 0}
             />
             <PageSubMenuLink
               text="Конфликтное закрытие"
-              to="/chat-hub"
+              to="/chats-conflict"
               notifications={conflictIsWork ? conflictIsWork?.length : 0}
               styleSpan={styles['style-span']}
             />
