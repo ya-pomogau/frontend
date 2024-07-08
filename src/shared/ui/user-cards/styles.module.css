@@ -1,34 +1,15 @@
-.content {
-  width: 276px;
-  box-sizing: border-box;
-  position: relative;
-  margin-top: 31px;
-  padding: 32px 30px 0 30px;
-  min-height: 128px;
-  width: 276px;
-  border: 1px solid var(--colors-interface-blue-strong);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  height: 300px;
-}
-
-.avatar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 62px;
-  height: 62px;
-  transform: translate(107px, -31px);
-}
-
 .user_info {
   display: grid;
   row-gap: 12px;
   margin-left: 8px;
 }
 
-.grid_two {
+.grid_two_list {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.grid_two_tiles {
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -39,22 +20,15 @@
   opacity: 0.5;
 }
 
-.icons_div {
-  width: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 8px;
-}
-
 .buttons_div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 5px;
   padding-bottom: 25px;
+}
+.buttons_div > :first-child {
+  margin-bottom: 10px;
 }
 
 .volunteer_info {
@@ -190,8 +164,17 @@
   padding-left: 10px;
 }
 
-.admin_content {
-  height: 100%;
+.recipient_textarea {
+  height: 90px;
+  width: 186px;
+  font-family: 'Golos', sans-serif;
+  border: 0.5px solid #2e3192;
+  font-size: 12px;
+  color: #2e3192;
+  resize: none;
+  padding: 0;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 .id {
@@ -203,27 +186,6 @@
 }
 
 @media all and (max-width: 1025px) {
-  .content {
-    width: 175px;
-    padding: 41px 10px 0 10px;
-  }
-
-  .admin_content {
-    padding: 41px 30px 0 30px;
-    min-height: 128px;
-    width: 276px;
-    height: 100%;
-  }
-
-  .avatar {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 62px;
-    height: 62px;
-    transform: translate(-50%, -31px);
-  }
-
   .buttons_div {
     padding-bottom: 10px;
   }
@@ -244,6 +206,13 @@
     /* padding: 10px; */
     color: #2e3192;
     line-height: 37px;
+  }
+
+  .recipient_textarea {
+    height: 60px;
+    width: 140px;
+    padding-left: 5px;
+    padding-top: 5px;
   }
 
   .recipient_input::placeholder {
