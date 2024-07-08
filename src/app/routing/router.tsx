@@ -25,7 +25,6 @@ import { StatisticsPage } from 'pages/statistics';
 import { ApplicationsStatisticsPage } from 'pages/application-statistics';
 import { UsersStatisticsPage } from 'pages/users-statistics';
 import { TasksPage } from 'pages/tasks';
-import { TasksProfilePage } from 'pages/tasks-profile';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
@@ -141,26 +140,7 @@ export const router = createBrowserRouter(
             path="/profile/statistics/users"
             element={<UsersStatisticsPage />}
           />
-          <Route
-            path="/profile/tasks"
-            element={<Navigate to={'/profile/tasks/recipients'} />}
-          />
-          <Route
-            path="/profile/tasks/recipients"
-            element={<TasksPage incomeTab={Tabs.RECIPIENTS} />}
-          />
-          <Route
-            path="/profile/tasks/volunteers"
-            element={<TasksPage incomeTab={Tabs.VOLUNTEERS} />}
-          />
-          <Route
-            path="/profile/tasks/recipients/:userId"
-            element={<TasksProfilePage incomeTab={Tabs.RECIPIENTS} />}
-          />
-          <Route
-            path="/profile/tasks/volunteers/:userId"
-            element={<TasksProfilePage incomeTab={Tabs.VOLUNTEERS} />}
-          />
+          <Route path="/profile/tasks" element={<TasksPage />} />
           <Route path="/profile/bids" element={<BidsPage />} />
 
           <Route
