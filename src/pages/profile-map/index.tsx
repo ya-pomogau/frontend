@@ -5,9 +5,6 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
-import { useMemo } from 'react';
 import { Task } from 'entities/task/types';
 import {
   filterByDate,
@@ -15,11 +12,17 @@ import {
   filterByTime,
 } from 'shared/libs/utils';
 import { useGetTaskVirginQuery } from 'services/user-task-api';
+import { useMediaQuery } from 'shared/hooks';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
+import { isUnConfirmedSelector } from 'entities/user/model';
 
 export function ProfileMapPage() {
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
   const query = queryString.parse(location.search);
+  const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
+  const isVolunteer = user?.role === 'Volunteer';
 
   let latitude = 0;
   let longitude = 0;
@@ -32,6 +35,16 @@ export function ProfileMapPage() {
     error,
     isLoading,
   } = useGetTaskVirginQuery(['volunteer', latitude, longitude]);
+  const mediaQuery = useMediaQuery('(max-width: 910px)');
+  const containerHeight =
+    user?.status === 0
+      ? mediaQuery
+        ? '62vh'
+        : 'calc(64vh - 78px)'
+      : mediaQuery
+      ? '75vh'
+      : '64vh';
+
   // TODO: для чего этот фильтр для тасок?
   // const filteredTasks = useMemo((): Task[] => {
   //   //починить типизацию значений фильтра и убрать лишние условия
@@ -67,14 +80,18 @@ export function ProfileMapPage() {
         icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
         text="Карта заявок"
         filter={
-          <Filter
-            items={{
-              categories: true,
-              radius: true,
-              date: true,
-              time: true,
-            }}
-          />
+          !isUnconfirmed && isVolunteer ? (
+            <Filter
+              items={{
+                categories: true,
+                radius: true,
+                date: true,
+                time: true,
+              }}
+            />
+          ) : (
+            <></>
+          )
         }
       />
 
@@ -102,7 +119,7 @@ export function ProfileMapPage() {
                 : undefined
             }
             width="100%"
-            height="100%"
+            height={containerHeight}
             onClick={() => 3}
             coordinates={user?.location}
             role={user && user.role}

@@ -5,13 +5,14 @@ import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { IChatmateInfo } from 'shared/types/conflict';
+import { UserProfile } from 'entities/user/types';
 
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
   isOpen: boolean;
   onClick?: (text: string) => void;
   children: ReactNode;
-  chatmateInfo?: IChatmateInfo;
+  chatmateInfo?: UserProfile;
   boxButton: ReactElement;
   closeConflict: () => void;
 }
@@ -38,7 +39,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
           )}
           <img
             className={styles.img}
-            src={props.chatmateInfo?.userAvatarLink}
+            src={props.chatmateInfo?.avatar}
             alt="фото"
           />
           <div className={styles.container}>
@@ -61,7 +62,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
                 styles.id,
                 styles['display-none']
               )}
-            >{`ID ${props.chatmateInfo?.userId}`}</p>
+            >{`ID ${props.chatmateInfo?._id}`}</p>
             <p
               className={cn(
                 'text-inter',

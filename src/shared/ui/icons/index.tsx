@@ -46,6 +46,8 @@ import { ExclamationPMark } from './excalamation-mark';
 
 import { ConflictIcon } from './conflict-icon';
 import { AccordionIconArrow } from './accordion-arrow';
+import { TilesIcon } from './tiles-icon';
+import { ListIcon } from './list-icon';
 import { CheckInBoxIcon } from './check-in-box';
 import { PlusFilledIcon } from './plus-filled-icon';
 import { NewAdminIcon } from './new-admin-icon';
@@ -98,6 +100,8 @@ const icons = {
   CheckInBoxIcon,
   PlusFilledIcon,
   NewAdminIcon,
+  TilesIcon,
+  ListIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;

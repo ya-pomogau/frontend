@@ -7,15 +7,7 @@
   position: relative;
 }
 
-.box-message {
-  min-width: 361px;
-  height: 98%;
-  box-sizing: border-box;
-  overflow-y: auto;
-  border: 1px solid var(--colors-interface-primary-additional);
-}
-
-.box-btn {
+.boxBtn {
   display: flex;
   justify-content: flex-end;
   gap: 20px;
@@ -27,12 +19,7 @@
     margin: 0 auto;
   }
 
-  .box-message {
-    min-width: 100px;
-    margin: 10px auto 0;
-  }
-
-  .box-btn {
+  .boxBtn {
     margin-top: 40px;
     display: flex;
     justify-content: center;

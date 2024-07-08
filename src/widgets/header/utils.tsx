@@ -100,7 +100,7 @@ export const linksTopAuthAdmin: ISideBarElementProps[] = [
   },
   {
     title: 'Чат',
-    to: '/chat',
+    to: '/chats-hub',
     icon: <ReadMessageIcon color="blue" />,
   },
 ];

@@ -25,6 +25,7 @@ import { StatisticsPage } from 'pages/statistics';
 import { ApplicationsStatisticsPage } from 'pages/application-statistics';
 import { UsersStatisticsPage } from 'pages/users-statistics';
 import { TasksPage } from 'pages/tasks';
+import { TasksProfilePage } from 'pages/tasks-profile';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
@@ -34,6 +35,8 @@ import { RegisterPage } from 'pages/register';
 import { Tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
+import { SectionInWorkChats } from 'pages/section-in-work-chats';
+import { SectionChatHub } from 'pages/section-chat-hub';
 import { CreateNewAdminPage } from 'pages/profile-new-admin';
 
 export const router = createBrowserRouter(
@@ -138,19 +141,46 @@ export const router = createBrowserRouter(
             path="/profile/statistics/users"
             element={<UsersStatisticsPage />}
           />
-          <Route path="/profile/tasks" element={<TasksPage />} />
+          <Route
+            path="/profile/tasks"
+            element={<Navigate to={'/profile/tasks/recipients'} />}
+          />
+          <Route
+            path="/profile/tasks/recipients"
+            element={<TasksPage incomeTab={Tabs.RECIPIENTS} />}
+          />
+          <Route
+            path="/profile/tasks/volunteers"
+            element={<TasksPage incomeTab={Tabs.VOLUNTEERS} />}
+          />
+          <Route
+            path="/profile/tasks/recipients/:userId"
+            element={<TasksProfilePage incomeTab={Tabs.RECIPIENTS} />}
+          />
+          <Route
+            path="/profile/tasks/volunteers/:userId"
+            element={<TasksProfilePage incomeTab={Tabs.VOLUNTEERS} />}
+          />
           <Route path="/profile/bids" element={<BidsPage />} />
 
           <Route
-            path="/chat"
+            path="/chats-hub"
             element={
               <ProfileChatsPages>
-                <SectionChatsConflict />
+                <SectionChatHub />
               </ProfileChatsPages>
             }
           />
           <Route
-            path="/chat-hub"
+            path="/chats-in-work"
+            element={
+              <ProfileChatsPages>
+                <SectionInWorkChats />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chats-conflict"
             element={
               <ProfileChatsPages>
                 <SectionChatsConflict />

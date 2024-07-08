@@ -28,8 +28,8 @@
   right: 4%;
 }
 
-.pointer--center {
-  right: 50%;
+.pointer--left {
+  left: 4%;
 }
 
 .tooltip--visible {
@@ -41,4 +41,16 @@
   top: 15px;
   right: 20px;
   cursor: pointer;
+}
+
+
+@media (max-width: 573px) {
+  .tooltip {
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  .pointer {
+    display: none;
+  }
 }

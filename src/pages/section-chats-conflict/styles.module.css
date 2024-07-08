@@ -7,31 +7,18 @@
   position: relative;
 }
 
-.boxMessage {
-  min-width: 361px;
-  max-width: 361px;
-  height: 98%;
-  box-sizing: border-box;
-  overflow-y: auto;
-  border: 1px solid var(--colors-interface-primary-additional);
-}
-
 .boxConflict {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   height: 750px;
+  width: 100%;
 }
 
 .boxBtn {
   display: flex;
   justify-content: flex-end;
   gap: 20px;
-}
-
-.informer {
-  width: 60%;
-  margin: 30% auto;
 }
 
 @media (max-width: 550px) {
@@ -41,15 +28,14 @@
     gap: 0;
   }
 
-  .boxMessage {
-    min-width: 100px;
-    margin: 10px auto 0;
-  }
-
   .boxBtn {
     margin-top: 40px;
     display: flex;
     justify-content: center;
     gap: 20px;
+  }
+
+  .boxConflict {
+    width: 0;
   }
 }
