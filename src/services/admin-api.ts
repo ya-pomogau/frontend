@@ -4,6 +4,7 @@ import { TaskConflict } from 'entities/task/types';
 import { User } from 'entities/user/types';
 import { getTokenAccess } from 'shared/libs/utils';
 import { TContacts } from 'shared/types/common.types';
+import { TCreateAdminDto, TNewUserResponseDto } from './auth.types';
 
 export const adminsApi = createApi({
   reducerPath: 'adminsApi',
@@ -133,6 +134,14 @@ export const adminsApi = createApi({
         body: contactsData,
       }),
     }),
+    createNewAdmin: build.mutation<TNewUserResponseDto, TCreateAdminDto>({
+      query: (dto) => ({
+        url: 'admin/create',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [{ type: 'Admins' }],
+    }),
   }),
 });
 
@@ -146,4 +155,5 @@ export const {
   useTakeConflictTaskMutation,
   useResolСonflictMutation,
   useUpdateContactsMutation,
+  useCreateNewAdminMutation,
 } = adminsApi;

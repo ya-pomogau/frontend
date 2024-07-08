@@ -2,6 +2,25 @@
   text-decoration: none;
 }
 
+.navLink {
+  text-decoration: none;
+}
+
+.addNewAdminSectionInner {
+  display: flex;
+  align-items: center;
+  gap: 82px;
+  padding: 35px 65px 20px 65px;
+}
+
+.iconCheckInBox {
+  margin-top: 15px;
+}
+
+.title {
+  color: var(--colors-interface-primary-additional);
+}
+
 .tabContainer__text {
   margin-right: 6px;
   color: var(--colors-interface-additional);

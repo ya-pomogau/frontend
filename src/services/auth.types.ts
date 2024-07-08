@@ -10,6 +10,7 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 export type TAuthRoutes = {
   userLogin: string;
   userRegister: string;
+  adminRegister: string;
   adminLogin: string;
   checkToken: string;
 };
@@ -44,6 +45,11 @@ export type TCreateUserDto = {
 };
 
 export type TAdminLoginDto = {
+  login: string;
+  password: string;
+};
+
+export type TCreateAdminDto = Omit<TCreateUserDto, 'location' | 'role'> & {
   login: string;
   password: string;
 };

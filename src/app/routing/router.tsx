@@ -37,6 +37,7 @@ import { ProfileChatsPages } from 'widgets/profile-chats';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
 import { SectionInWorkChats } from 'pages/section-in-work-chats';
 import { SectionChatHub } from 'pages/section-chat-hub';
+import { CreateNewAdminPage } from 'pages/profile-new-admin';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -200,6 +201,10 @@ export const router = createBrowserRouter(
           <Route
             path="/profile/requests/admins"
             element={<RequestsPage incomeTab={Tabs.ADMINS} />}
+          />
+          <Route
+            path="/profile/create-new-admin"
+            element={<CreateNewAdminPage />}
           />
         </Route>
       </Route>
