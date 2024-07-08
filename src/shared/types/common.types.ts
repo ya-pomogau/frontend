@@ -57,3 +57,13 @@ export type TContacts = {
   email: string | null | undefined;
   socialNetwork: string | null | undefined;
 };
+
+export type TPoints<T extends string> = {
+  [key in T]: number;
+};
+
+export enum FileTypes {
+  JPG = '.jpg',
+  JPEG = '.jpeg',
+  PNG = '.png',
+}

@@ -133,7 +133,7 @@ const Dropdown = ({
       {isOpen && (
         <Tooltip
           visible
-          pointerPosition={'center'}
+          pointerPosition={'right'}
           changeVisible={() => setIsOpen(false)}
           elementStyles={{
             position: 'absolute',

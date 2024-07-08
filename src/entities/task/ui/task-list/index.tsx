@@ -155,7 +155,7 @@ export const TaskList = ({
                 <Tooltip
                   visible
                   extClassName={styles.modal}
-                  pointerPosition="center"
+                  pointerPosition="right"
                   changeVisible={() => popupClose()}
                   elementStyles={{
                     position: 'absolute',
@@ -188,7 +188,13 @@ export const TaskList = ({
             extClassName
           )}
         >
-          <Informer text="У Вас нет завершенных заявок" />
+          <Informer
+            text={
+              isCompletedPage
+                ? 'У Вас нет завершенных заявок'
+                : 'У Вас пока нет заявок'
+            }
+          />
         </div>
       )}
     </>

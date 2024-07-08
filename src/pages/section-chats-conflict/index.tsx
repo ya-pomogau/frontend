@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 import { MessageCard } from 'shared/ui/message-card';
 import { InfoConflict } from 'widgets/conflict-information';
@@ -12,8 +13,7 @@ import {
   useResolСonflictMutation,
 } from 'services/admin-api';
 import { TaskConflict } from 'entities/task/types';
-import { useLocation } from 'react-router-dom';
-import { Informer } from 'shared/ui/informer';
+import WrapperMessage from 'shared/ui/wrapper-messages';
 
 export const SectionChatsConflict = () => {
   const location = useLocation();
@@ -23,7 +23,7 @@ export const SectionChatsConflict = () => {
   const [resolСonflict] = useResolСonflictMutation();
 
   const dataMessage: TaskConflict[] | undefined =
-    location.pathname === '/chat' ? tasks : tasksWork;
+    location.pathname === '/available-chats' ? tasks : tasksWork;
   const [getInfoTask, setGetInfoTask] = useState<TaskConflict>();
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [isOpenConflict, setIsOpenConflict] = useState<boolean>(false);
@@ -41,6 +41,7 @@ export const SectionChatsConflict = () => {
 
   const handleCloseConflict = () => {
     setIsOpenConflict((state) => !state);
+    setSelectedCard('');
   };
 
   const getWorkTask = async (id: string | undefined) => {
@@ -55,19 +56,10 @@ export const SectionChatsConflict = () => {
 
   return (
     <div className={styles.conflict}>
-      <div className={styles.boxMessage}>
-        {dataMessage?.length === 0 && location.pathname === '/chat-hub' && (
-          <Informer
-            text="У Вас пока нет конфликтов в работе"
-            extClassName={styles.informer}
-          />
-        )}
-        {dataMessage?.length === 0 && location.pathname === '/chat' && (
-          <Informer
-            text="У Вас пока нет конфликтов"
-            extClassName={styles.informer}
-          />
-        )}
+      <WrapperMessage
+        information={dataMessage && dataMessage.length > 0 ? true : false}
+        title="У Вас пока нет конфликтов"
+      >
         {dataMessage?.map((item) => (
           <div key={item._id}>
             <MessageCard
@@ -75,12 +67,12 @@ export const SectionChatsConflict = () => {
               description={item.description}
               action={selectedCard === item._id}
               user={item.recipient}
-              handleClickCard={handleClickCard}
+              handleClickCard={() => handleClickCard(item)}
               task={item}
             />
           </div>
         ))}
-      </div>
+      </WrapperMessage>
 
       <div className={styles.boxConflict}>
         {isOpenConflict && (

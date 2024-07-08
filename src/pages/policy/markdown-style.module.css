@@ -1,9 +1,8 @@
 .wrapper {
   display: block;
   width: 100%;
-  height: 90vh;
+  height: 85vh;
   overflow-y: scroll;
-  position: absolute;
 }
 
 .wrapper::-webkit-scrollbar {
@@ -15,9 +14,6 @@
   font-weight: 400;
   line-height: 22.4px;
   height: 90%;
-  overflow-y: scroll;
-  padding-bottom: 30px;
-  margin-bottom: 50px;
 }
 .markdownStyles::-webkit-scrollbar {
   width: 0;
@@ -30,10 +26,22 @@
   font-weight: 400;
 }
 
+@media (max-width: 1050px) {
+  .markdownStyles h1 {
+    margin: 20px 0 0;
+  }
+}
+
 .markdownStyles h2 {
   margin: 30px 0 25px;
   line-height: 19.2px;
   font-size: 16px;
+}
+
+@media (max-width: 1050px) {
+  .markdownStyles h2 {
+    margin: 20px 0 10px;
+  }
 }
 
 .markdownStyles p {
@@ -53,4 +61,115 @@
 }
 .markdownStyles blockquote > p {
   margin: 0;
+}
+
+.title {
+  display: flex;
+  align-items: end;
+  gap: 28px;
+}
+
+.editButton {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  display: flex;
+  gap: 5px;
+  align-items: end;
+}
+
+.editButtonText {
+  color: rgb(46, 49, 146);
+  font-family: 'Golos', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.editTitleText {
+  font-family: 'Golos', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleInput {
+  all: unset;
+  display: block;
+  border: 1px solid #2E3192;
+  height: 34px;
+  margin-bottom: 10px;
+}
+
+.editDescriptionText {
+  font-family: 'Golos', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-bottom: 5px;
+}
+
+.descriptionInput {
+  all: unset;
+  display: block;
+  border: 1px solid #2E3192;
+  height: 618px;
+  margin-bottom: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.closeButton {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  display: flex;
+  gap: 10px;
+}
+
+.closeButtonText {
+  color: rgb(46, 49, 146);
+  font-family: 'Golos', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.smartHeaderOn {
+  display: block;
+  height: 55px;
+  min-height: 30px;
+  padding: 7px 20px 14px 20px;
+  margin: 0;
+}
+
+.smartHeaderOff {
+  display: none;
 }

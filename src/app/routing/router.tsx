@@ -34,6 +34,8 @@ import { RegisterPage } from 'pages/register';
 import { Tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
+import { SectionInWorkChats } from 'pages/section-in-work-chats';
+import { SectionChatHub } from 'pages/section-chat-hub';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -141,15 +143,23 @@ export const router = createBrowserRouter(
           <Route path="/profile/bids" element={<BidsPage />} />
 
           <Route
-            path="/chat"
+            path="/chats-hub"
             element={
               <ProfileChatsPages>
-                <SectionChatsConflict />
+                <SectionChatHub />
               </ProfileChatsPages>
             }
           />
           <Route
-            path="/chat-hub"
+            path="/chats-in-work"
+            element={
+              <ProfileChatsPages>
+                <SectionInWorkChats />
+              </ProfileChatsPages>
+            }
+          />
+          <Route
+            path="/chats-conflict"
             element={
               <ProfileChatsPages>
                 <SectionChatsConflict />

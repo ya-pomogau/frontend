@@ -49,5 +49,5 @@ export default function usePermission<R extends Role>(
     [userStatus, ...userPermissions].some((element) => element === requirement)
   );
 
-  return hasPermission && requirements.length > 1;
+  return hasPermission && requirements.length > 0;
 }

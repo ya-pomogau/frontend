@@ -18,19 +18,21 @@ interface ImageProps {
   alt: string;
 }
 
-interface PostProps {
+export interface PostProps {
+  _id?: string;
   title: string;
-  description: string;
-  images: ImageProps[];
+  text: string;
+  files: ImageProps[];
   author: Pick<User, '_id' | 'name' | 'avatar'>;
-  handleDeleteButton?: () => void;
-  handleEditButton?: () => void;
+  handleDeleteButton?: (id: string) => void;
+  handleEditButton?: (post: Partial<PostProps>) => void;
 }
 
 export const Post: FC<PostProps> = ({
+  _id,
   title,
-  description,
-  images,
+  text,
+  files,
   author,
   handleDeleteButton,
   handleEditButton,
@@ -44,7 +46,7 @@ export const Post: FC<PostProps> = ({
 
     if (scrollHeight && scrollHeight < descriptionHeight)
       setFullDescription(true);
-  }, [description]);
+  }, [text]);
 
   const titleStyle = classnames(
     styles.title,
@@ -84,7 +86,7 @@ export const Post: FC<PostProps> = ({
 
   const galleryStyle = classnames(
     styles.gallery,
-    styles[`gallery-${images.length}`]
+    styles[`gallery-${files.length}`]
   );
 
   const handleFullDescriptionButton: MouseEventHandler = () => {
@@ -111,7 +113,7 @@ export const Post: FC<PostProps> = ({
       <div className={styles['text-block']}>
         <h2 className={titleStyle}>{title}</h2>
         <div ref={descriptionRef} className={descriptionStyle}>
-          <ReactMarkdown>{description}</ReactMarkdown>
+          <ReactMarkdown>{text}</ReactMarkdown>
         </div>
         {!fullDescription && (
           <button
@@ -124,17 +126,34 @@ export const Post: FC<PostProps> = ({
 
         <div className={styles.buttons}>
           {handleDeleteButton && (
-            <SquareButton onClick={handleDeleteButton} buttonType={'close'} />
+            <SquareButton
+              onClick={() => handleDeleteButton(_id!)}
+              buttonType={'close'}
+            />
           )}
           {handleEditButton && (
-            <SquareButton onClick={handleEditButton} buttonType={'edit'} />
+            <SquareButton
+              onClick={() =>
+                handleEditButton({
+                  _id,
+                  title,
+                  text,
+                  files,
+                })
+              }
+              buttonType={'edit'}
+            />
           )}
         </div>
       </div>
       <div className={galleryStyle}>
-        {images.map(({ id, alt, src }) => (
-          <div key={id} className={styles['gallery-item']}>
-            <img className={styles['gallery-item-image']} src={src} alt={alt} />
+        {files.map((image) => (
+          <div key={image.id} className={styles['gallery-item']}>
+            <img
+              className={styles['gallery-item-image']}
+              src={image.src}
+              alt={image.alt}
+            />
           </div>
         ))}
       </div>

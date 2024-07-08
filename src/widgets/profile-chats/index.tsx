@@ -16,6 +16,10 @@ interface ProfileChatsPagesProps {
 export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   const { data: conflict } = useGetTasksConfilctQuery('');
   const { data: conflictIsWork } = useGetTasksWorkConflictQuery('');
+
+  // TODO: добавить данные для раздела "В работе"
+  // const { data: conflictInProgress } = useGetTasksProgressConflictQuery('');
+
   return (
     <>
       <SmartHeader
@@ -27,13 +31,19 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
         links={
           <>
             <PageSubMenuLink
-              text="Конфликты"
-              to="/chat"
+              text="Ждут ответа"
+              to="/chats-hub"
               notifications={conflict ? conflict?.length : 0}
             />
             <PageSubMenuLink
-              text="Конфликты в работе"
-              to="/chat-hub"
+              text="В работе"
+              to="/chats-in-work"
+              // TODO: подключить данные количества конфликтов в работе
+              // notifications={conflictInProgress ? conflictInProgress?.length : 0}
+            />
+            <PageSubMenuLink
+              text="Конфликтное закрытие"
+              to="/chats-conflict"
               notifications={conflictIsWork ? conflictIsWork?.length : 0}
               styleSpan={styles['style-span']}
             />
