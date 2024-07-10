@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm start\" \"npm run storybook\"",
-    "start": "vite --open --port 3001",
+    "start": "vite --open --port 3000",
     "storybook": "storybook dev -p 6007",
     "prettier": "prettier --check src/**/*.{ts,tsx,css}",
     "prettier:format": "prettier --write \"src/**/*.{ts,tsx,scss,css,json}\"",
