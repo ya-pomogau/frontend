@@ -45,10 +45,6 @@ export const VKAuthPage = () => {
   }, [dto, dispatch]);
 
   useEffect(() => {
-    console.log('user');
-    console.log(user);
-    console.log('vkUser');
-    console.log(vkUser);
     if (!user && !!vkUser) {
       navigate('/register');
     } else if (user) {
