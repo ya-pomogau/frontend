@@ -55,6 +55,10 @@ body {
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .border {
   border-width: 2px;
   border-style: solid;

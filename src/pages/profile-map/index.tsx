@@ -37,35 +37,6 @@ export function ProfileMapPage() {
       ? '75vh'
       : '64vh';
 
-  // TODO: для чего этот фильтр для тасок?
-  // const filteredTasks = useMemo((): Task[] => {
-  //   //починить типизацию значений фильтра и убрать лишние условия
-  //   let result: Task[] = tasks ? tasks : [];
-  //   if (result.length && user) {
-  //     const { date, time, searchRadius } = query;
-  //     if (date && typeof date === 'string') {
-  //       result = result.filter((task: Task) => filterByDate(date, task.date!));
-  //     }
-
-  //     if (time && (typeof time === 'string' || Array.isArray(time))) {
-  //       result = result.filter(
-  //         (task: Task) => task.date && filterByTime(time, task.date!)
-  //       );
-  //     }
-
-  //     if (searchRadius && user.location && typeof searchRadius === 'string') {
-  //       result = result.filter((task: Task) =>
-  //         filterByDistance(
-  //           user.location!,
-  //           task.location,
-  //           parseInt(searchRadius, 10)
-  //         )
-  //       );
-  //     }
-  //   }
-  //   return result;
-  // }, [query, tasks, user]);
-
   return (
     <>
       <SmartHeader
@@ -91,7 +62,6 @@ export function ProfileMapPage() {
         <Loader />
       ) : (
         tasks && (
-          // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
           <YandexMap
             tasks={tasks}
             mapSettings={{

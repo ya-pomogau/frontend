@@ -144,8 +144,7 @@
   max-width: 1256px;
   min-width: min-content;
   margin: 0 auto;
-  height: 44px;
-  padding-top: 45px;
+  padding-top: 35px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
