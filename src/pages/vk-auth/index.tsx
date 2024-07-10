@@ -27,7 +27,7 @@ export const VKAuthPage = () => {
   useEffect(() => {
     const queryObj = queryString.parse(location.search) as TVKLoginRequestDto;
     if (
-      !isEmptyObj(queryObj) &&
+      isEmptyObj(queryObj) &&
       queryObj.code &&
       queryObj.state &&
       !isUserRequested.current

@@ -28,7 +28,7 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const InputAddress = forwardRef(function InputAddress(
-  props: InputAddressProps,
+  props: InputAddressProps, ref
 ) {
   const {
     inputAttributes = {},
@@ -37,6 +37,8 @@ export const InputAddress = forwardRef(function InputAddress(
     onChange,
     ...otherProps
   } = props;
+
+  console.log(`this is ref ===>`, ref);
 
   const suggestInputRef = useRef<HTMLInputElement>(null);
   const initPlaceholder = useAppSelector((store) => store.user.data?.address);
