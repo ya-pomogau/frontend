@@ -25,7 +25,6 @@ export function ProfileCompletedPage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   const {
     data: tasks,
-    error,
     isLoading,
   } = useGetTaskCompletedQuery(getRoleForRequest(role));
 

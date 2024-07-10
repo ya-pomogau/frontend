@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { CheckIcon } from '../icons/check-icon';
@@ -112,7 +112,7 @@ const Dropdown = ({
             });
             const refKey = item._id.toString();
             if (!refMap.current[refKey]) {
-              refMap.current[refKey] = React.createRef<HTMLLIElement>();
+              refMap.current[refKey] = createRef<HTMLLIElement>();
             }
             return (
               <li

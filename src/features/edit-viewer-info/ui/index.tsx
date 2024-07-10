@@ -42,20 +42,16 @@ export const EditViewerInfo = ({
   valueName,
   valuePhone,
   valueAddress,
-  valueId,
   isPopupOpen,
   buttonRef,
   isFormSaved,
   setIsFormSaved,
   setIsPopupOpen,
-  isFormEdited,
   setIsFormEdited,
   image,
   setImage,
-  ...props
 }: EditViewerInfoProps) => {
   const {
-    register,
     handleSubmit,
     control,
     formState: { errors },

@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 import { InfoContainer } from 'shared/ui/info-container';
 import { InfoContainerContent } from 'shared/ui/info-container-content';
@@ -12,8 +11,8 @@ import type { UpdateUserInfo } from 'entities/user/types';
 import { useUpdateUserProfileMutation } from 'services/user-api';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import styles from './styles.module.css';
-import { UserRole, UserStatus } from 'shared/types/common.types';
-import { isRootSelector, setUser } from 'entities/user/model';
+import { UserRole } from 'shared/types/common.types';
+import { setUser } from 'entities/user/model';
 import { setTokenAccess } from 'shared/libs/utils';
 
 export const UserInfo = () => {

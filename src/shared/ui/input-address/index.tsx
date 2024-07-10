@@ -29,7 +29,6 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const InputAddress = forwardRef(function InputAddress(
   props: InputAddressProps,
-  ref
 ) {
   const {
     inputAttributes = {},

@@ -1,13 +1,12 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {
-  markdown,
   initTitleMarkdown,
   initDescriptionMarkdown,
 } from './content';
 import style from './markdown-style.module.css';
 import { EditIcon } from '../../shared/ui/icons/edit-icon';
-import React, { SyntheticEvent, useState } from 'react';
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Button } from '../../shared/ui/button';
 import { CloseIconThin } from '../../shared/ui/icons/close-icon-thin';
 import { useAppSelector } from '../../app/hooks';
@@ -35,11 +34,11 @@ export function PolicyPage() {
   const handleCloseButton = () => {
     setEditState(false);
   };
-  const onChangeTitleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeTitleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setTitleInput(event.target.value);
   };
   const onChangeDescriptionInput = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: ChangeEvent<HTMLTextAreaElement>
   ) => {
     setDescriptionInput(event.target.value);
   };

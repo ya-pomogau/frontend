@@ -1,8 +1,8 @@
-import React from 'react';
 import classnames from 'classnames';
 import styles from '../styles.module.css';
 import classes from '../styles.module.css';
 import { UserRole } from '../../../types/common.types';
+import { ReactNode } from 'react';
 
 interface UserInfoProps {
   role: UserRole;
@@ -11,7 +11,7 @@ interface UserInfoProps {
   userNumber: string;
   extraClasses?: string;
   viewMode?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 const UserInfo = ({

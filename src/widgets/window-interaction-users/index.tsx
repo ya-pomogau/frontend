@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { GradientDivider } from 'shared/ui/gradient-divider';
-import { IChatmateInfo } from 'shared/types/conflict';
 import { UserProfile } from 'entities/user/types';
 
 interface IWindowInteractionUsers {

@@ -41,12 +41,8 @@ export const getFullQueriesForYApi = (
   return mainJSApi + additionalQueries;
 };
 
-export const isEmptyObj = (obj: object): boolean => {
-  for (const key in obj) {
-    return false;
-  }
-  return true;
-};
+export const isEmptyObj = (obj: object) => Object.keys(obj).length > 0;
+
 //callback link для возращения после авторизации
 export const cbLink = `${FRONT_URL}/vk-auth`;
 

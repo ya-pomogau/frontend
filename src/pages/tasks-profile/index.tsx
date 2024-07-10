@@ -1,26 +1,21 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Filter } from 'features/filter';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
 
 import styles from './styles.module.css';
 
-import { Tabs, UserRole, UserStatus } from '../../shared/types/common.types';
-import { useGetUserByIdQuery } from 'services/user-api';
-import { useGetTaskActiveQuery } from 'services/user-task-api';
+import { Tabs, UserRole } from '../../shared/types/common.types';
 import { UserCardForTasks } from 'widgets/user-card-for-tasks';
 import SearchButton from 'shared/ui/search-button';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { TaskList } from 'entities/task/ui/task-list';
 import { useMediaQuery } from 'shared/hooks';
-import { openPopup, setDate } from 'features/create-request/model';
+import { openPopup } from 'features/create-request/model';
 
 // удалить импорт моковых данных после настройки сервера
-import { mockedUsers } from '../tasks/index';
+import { mockedUsers } from '../tasks';
 import { Task, TaskStatus, TaskReport } from 'entities/task/types';
-import { useRef, useState } from 'react';
-import { useEffect } from '@storybook/preview-api';
 import { Request } from 'features/create-request';
 
 interface TaskListProps {

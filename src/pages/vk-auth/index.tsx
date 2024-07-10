@@ -22,7 +22,7 @@ export const VKAuthPage = () => {
   const isNew = useAppSelector(isNewSelector);
   const isError = useAppSelector((state) => state.error.isError);
 
-  const [dto, setDto] = useState<TVKLoginRequestDto | null>(null);
+  const [dto] = useState<TVKLoginRequestDto | null>(null);
   const isUserRequested = useRef<boolean>(false);
   useEffect(() => {
     const queryObj = queryString.parse(location.search) as TVKLoginRequestDto;

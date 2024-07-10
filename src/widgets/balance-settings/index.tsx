@@ -25,7 +25,7 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
     UserRole.ADMIN
   );
   const { data } = useGetCategoriesQuery();
-  const [updatePoints, { isLoading }] = useUpdatePointsMutation();
+  const [updatePoints] = useUpdatePointsMutation();
   const { values, setValues, handleChange } = useForm<TPoints<string>>({});
 
   useEffect(() => {

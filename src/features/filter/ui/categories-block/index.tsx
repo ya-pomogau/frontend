@@ -1,4 +1,4 @@
-import { useRef, ChangeEvent, useEffect } from 'react';
+import { useRef, ChangeEvent } from 'react';
 import classnames from 'classnames';
 
 import Checkbox from 'shared/ui/checkbox';

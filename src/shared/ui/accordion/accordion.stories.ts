@@ -20,7 +20,7 @@ export const Default: Story = {
       { value: 'blocked', label: 'Заблокированный' },
     ],
     placeholder: 'Header text',
-    onChange: (value: string) => {
+    onChange: () => {
       console.log('Записали это значение');
     },
   },

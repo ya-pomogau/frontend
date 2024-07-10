@@ -3,14 +3,7 @@ import { YandexMap } from 'widgets/map';
 import { Filter } from 'features/filter';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
-import { Task } from 'entities/task/types';
-import {
-  filterByDate,
-  filterByDistance,
-  filterByTime,
-} from 'shared/libs/utils';
 import { useGetTaskVirginQuery } from 'services/user-task-api';
 import { useMediaQuery } from 'shared/hooks';
 import { useLocation } from 'react-router-dom';
@@ -32,7 +25,6 @@ export function ProfileMapPage() {
   }
   const {
     data: tasks,
-    error,
     isLoading,
   } = useGetTaskVirginQuery(['volunteer', latitude, longitude]);
   const mediaQuery = useMediaQuery('(max-width: 910px)');

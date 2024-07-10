@@ -5,8 +5,8 @@
 
 // !!!
 
-import { useState, MouseEvent, useRef, useEffect } from 'react';
-import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'shared/hooks';
@@ -16,15 +16,11 @@ import { ContentLayout } from 'shared/ui/content-layout';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { TaskList } from 'entities/task/ui/task-list';
-import { SideMenuContainer } from 'entities/side-menu-container';
-import { CardButton } from 'shared/ui/card-button';
 
 import { Request } from 'features/create-request';
 import { openPopup } from 'features/create-request/model';
 import { NotFoundPage } from 'pages/not-found';
 
-import styles from './styles.module.css';
-import useUser from 'shared/hooks/use-user';
 import { UserRole } from 'shared/types/common.types';
 
 export function RecipientPage() {
@@ -32,24 +28,15 @@ export function RecipientPage() {
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
 
   const dispatch = useAppDispatch();
-
-  const isAuth = useUser();
-  const [isFilterVisibel, setIsFilterVisibel] = useState(false);
   const buttonFilterRef = useRef<Element>();
   // данные о позиции кнопки вызова фильтра, на основе которых определяется позиция фильтра
-  const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
+  const [_, setButtonPosition] = useState({ top: 0, right: 0 });
   // открытие фильтра и определение данных о позиции кнопки, вызвавшей фильтр
   const getButtonPosition = () => {
     const buttonRect = buttonFilterRef.current?.getBoundingClientRect();
     if (buttonRect) {
       setButtonPosition({ top: buttonRect.bottom, right: buttonRect.right });
     }
-  };
-  const openFilter = (e: MouseEvent) => {
-    e.stopPropagation();
-    buttonFilterRef.current = e.currentTarget;
-    getButtonPosition();
-    setIsFilterVisibel(!isFilterVisibel);
   };
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
 

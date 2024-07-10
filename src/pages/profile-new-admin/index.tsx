@@ -1,9 +1,7 @@
 import styles from './styles.module.css';
 import {
   Controller,
-  FieldValues,
   SubmitHandler,
-  UseFormGetValues,
   useForm,
 } from 'react-hook-form';
 import { Icon } from 'shared/ui/icons';
@@ -14,7 +12,6 @@ import { InputAddress } from 'shared/ui/input-address';
 import { InputPhone } from 'shared/ui/input-phone';
 import { PasswordInput } from 'shared/ui/password-input';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { useAppDispatch } from 'app/hooks';
 import { useCreateNewAdminMutation } from 'services/admin-api';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +33,7 @@ export function CreateNewAdminPage() {
   const [createNewAdmin] = useCreateNewAdminMutation();
   const navigate = useNavigate();
 
-  const [adminCredentials, setAdminCredentials] = useState<{
+  const [_, setAdminCredentials] = useState<{
     email: string;
     password: string;
   } | null>(null);
