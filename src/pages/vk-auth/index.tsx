@@ -22,12 +22,12 @@ export const VKAuthPage = () => {
   const isNew = useAppSelector(isNewSelector);
   const isError = useAppSelector((state) => state.error.isError);
 
-  const [dto, setDto] = useState<TVKLoginRequestDto | null>(null);
+  const [dto] = useState<TVKLoginRequestDto | null>(null);
   const isUserRequested = useRef<boolean>(false);
   useEffect(() => {
     const queryObj = queryString.parse(location.search) as TVKLoginRequestDto;
     if (
-      !isEmptyObj(queryObj) &&
+      isEmptyObj(queryObj) &&
       queryObj.code &&
       queryObj.state &&
       !isUserRequested.current
@@ -45,10 +45,6 @@ export const VKAuthPage = () => {
   }, [dto, dispatch]);
 
   useEffect(() => {
-    console.log('user');
-    console.log(user);
-    console.log('vkUser');
-    console.log(vkUser);
     if (!user && !!vkUser) {
       navigate('/register');
     } else if (user) {

@@ -28,7 +28,6 @@ const VolunteerActions = ({
   getButtonTypeFromScore,
   score,
   extClassName,
-  isAcceptButtonExclamationPointIcon,
   isKeyButtonExclamationPointIcon,
   onAcceptButtonClick,
   onBlockButtonClick,

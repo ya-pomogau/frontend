@@ -22,7 +22,7 @@ interface ICommonStepProps {
 
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
-  const [createTask, { data, error, isLoading }] = useCreateTaskMutation();
+  const [createTask] = useCreateTaskMutation();
   const {
     taskId,
     time,
@@ -33,7 +33,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     isTypeEdit,
     termlessRequest,
     location,
-    temporaryCategory,
   } = useAppSelector((state) => state.createRequest);
 
   const handlePreviousStepClick = () => {

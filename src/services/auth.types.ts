@@ -1,11 +1,7 @@
-import { cbLink } from 'shared/libs/utils';
 import { TPointGeoJSON, TUser } from '../entities/user/types';
 import {
-  AdminPermission,
   UserRole,
-  UserStatus,
 } from 'shared/types/common.types';
-import { GeoCoordinates } from 'shared/types/point-geojson.types';
 
 export type TAuthRoutes = {
   userLogin: string;

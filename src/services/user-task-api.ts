@@ -62,7 +62,7 @@ export const userTasksApi = createApi({
           method: 'GET',
         };
       },
-      providesTags: (result, error, [role, latitude, longitude]) => {
+      providesTags: (result, error) => {
         if (error) {
           console.error('Error occurred:', error);
         }

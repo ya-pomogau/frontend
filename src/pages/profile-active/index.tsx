@@ -24,13 +24,12 @@ export function ProfileActivePage() {
   const isMobile = useMediaQuery('(max-width:1150px)');
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
 
-  const { role, data } = useAppSelector((state) => state.user);
+  const { role } = useAppSelector((state) => state.user);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
 
   const {
     data: tasks,
-    error,
     isLoading,
   } = useGetTaskActiveQuery(getRoleForRequest(role), {
     skip: isUnConfirmed,

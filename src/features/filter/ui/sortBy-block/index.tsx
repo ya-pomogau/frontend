@@ -3,8 +3,7 @@ import { ChangeEvent } from 'react';
 import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
 import Checkbox from 'shared/ui/checkbox';
-import { useAppSelector } from 'app/hooks';
-import { UserRole, VariantCheckbox } from 'shared/types/common.types';
+import { VariantCheckbox } from 'shared/types/common.types';
 
 interface SortByBlockProps {
   filter: string;
@@ -12,7 +11,6 @@ interface SortByBlockProps {
 }
 
 export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
-  const { role } = useAppSelector((state) => state.user);
 
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     onChange('sortBy', target.id);

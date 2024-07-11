@@ -1,4 +1,4 @@
-import React from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.css';
 
@@ -31,8 +31,8 @@ type TStepButton = {
   direction: 'right' | 'left';
   buttonClassName?: string;
   iconClassName?: string;
-} & React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
+} & DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
 

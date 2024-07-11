@@ -1,5 +1,4 @@
 import { IMessage } from 'entities/chat/ui/chat/types';
-import { Category, ResolveStatus } from 'entities/task/types';
 
 export interface IChatmateInfo {
   name: string;

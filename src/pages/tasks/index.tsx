@@ -9,10 +9,7 @@ import { PageSubMenu } from '../../widgets/page-sub-menu';
 
 import styles from './styles.module.css';
 
-// import { IFilterValues } from 'features/filter/types';
-// import { defaultObjFilteres } from 'features/filter/consts';
 import { Tabs, UserRole } from '../../shared/types/common.types';
-import { useGetUserByRolesQuery } from 'services/admin-api';
 import { User } from 'entities/user/types';
 import { TasksTab } from 'pages/tasks-tab';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
@@ -21,7 +18,6 @@ export interface PageProps {
   incomeTab: string;
 }
 
-// удалить моковые данные (mockedState) после настройки бэка
 export const mockedUsers = [
   {
     _id: '1',

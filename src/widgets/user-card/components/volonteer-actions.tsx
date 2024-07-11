@@ -26,7 +26,6 @@ const VolunteerActions = ({
   isVolonteerAcceptButtonDisabled,
   getButtonTypeFromScore,
   score,
-  isAcceptButtonExclamationPointIcon,
   isKeyButtonExclamationPointIcon,
   onAcceptButtonClick,
   onBlockButtonClick,

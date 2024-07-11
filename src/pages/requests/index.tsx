@@ -2,7 +2,6 @@ import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import classNames from 'classnames';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
-import { Loader } from 'shared/ui/loader';
 import styles from './styles.module.css';
 import { Input } from 'shared/ui/input';
 import { NavLink } from 'react-router-dom';

@@ -1,6 +1,6 @@
 import { getColor, IIconProps } from './utils';
 
-export const ConflictIcon = ({ color, size = '24', ...props }: IIconProps) => (
+export const ConflictIcon = ({ color }: IIconProps) => (
   <svg
     width="6"
     height="23"

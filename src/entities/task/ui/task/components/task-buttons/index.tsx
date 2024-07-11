@@ -54,7 +54,6 @@ export const TaskButtons = ({
   extClassName,
   volunteerReport,
   recipientReport,
-  adminResolve,
   volunteer,
   location,
 }: TaskButtonsProps) => {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { withRouter } from 'storybook-addon-remix-react-router';
 
 import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
@@ -200,7 +200,7 @@ export const VolunteerSideMenuExample: Story = {
   args: {
     authRequired: true,
   },
-  render: ({ ...args }) => (
+  render: () => (
     <Mockstore initialState={mockedVolunteerState}>
       <VolunteerSideMenu />
     </Mockstore>
@@ -214,7 +214,7 @@ export const RecipientSideMenuExample: Story = {
   args: {
     authRequired: true,
   },
-  render: ({ ...args }) => (
+  render: () => (
     <Mockstore initialState={mockedRecipientState}>
       <RecipientSideMenu />
     </Mockstore>
@@ -228,7 +228,7 @@ export const AdminSideMenuExample: Story = {
   args: {
     authRequired: true,
   },
-  render: ({ ...args }) => (
+  render: () => (
     <Mockstore initialState={mockedAdminState}>
       <AdminSideMenu />
     </Mockstore>
@@ -242,7 +242,7 @@ export const MasterSideMenuExample: Story = {
   args: {
     authRequired: true,
   },
-  render: ({ ...args }) => (
+  render: () => (
     <Mockstore initialState={mockedMasterState}>
       <MasterSideMenu />
     </Mockstore>
@@ -256,7 +256,7 @@ export const FeedbackSideMenuExample: Story = {
   args: {
     authRequired: false,
   },
-  render: ({ ...args }) => (
+  render: () => (
     <Mockstore initialState={mockedMasterState}>
       <FeedbackSideMenu />
     </Mockstore>
