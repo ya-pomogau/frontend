@@ -8,6 +8,7 @@ import styles from '../styles.module.css';
 import usePermission from 'shared/hooks/use-permission';
 import { UserRole, UserStatus } from 'shared/types/common.types';
 import { useAppSelector } from 'app/hooks';
+import { useGetCategoriesQuery } from 'services/categories-api';
 
 interface CategoriesBlockProps {
   selectedServies: string[];
@@ -19,6 +20,11 @@ export const CategoriesBlock = ({
   onChange,
 }: CategoriesBlockProps) => {
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
+
+  const categories = useGetCategoriesQuery().currentData;
+  useEffect(() => {
+    console.log(categories);
+  }, []);
 
   const volunteerMainGuard = usePermission(
     [UserStatus.CONFIRMED, UserStatus.VERIFIED, UserStatus.ACTIVATED],
@@ -48,6 +54,32 @@ export const CategoriesBlock = ({
     onChange('categories', newValue);
   };
 
+  const checkAccess = (category: string) => {
+    if (
+      category === FilterItemsIds.SERVIS_1 ||
+      category === FilterItemsIds.SERVIS_3 ||
+      category === FilterItemsIds.SERVIS_5
+    ) {
+      return !volunteerSpecialGuard;
+    }
+
+    if (
+      category === FilterItemsIds.SERVIS_2 ||
+      category === FilterItemsIds.SERVIS_4 ||
+      category === FilterItemsIds.SERVIS_8
+    ) {
+      return !volunteerHigherGuard;
+    }
+
+    if (
+      category === FilterItemsIds.SERVIS_6 ||
+      category === FilterItemsIds.SERVIS_7 ||
+      category === FilterItemsIds.SERVIS_9
+    ) {
+      return !volunteerMainGuard;
+    }
+  };
+
   return (
     <div className={styles.filterBlock} ref={categoriesBlockRef}>
       <div
@@ -62,99 +94,18 @@ export const CategoriesBlock = ({
       </div>
       <div className={styles.checkboxesWrapper}>
         <div className={styles.row}>
-          <Checkbox
-            name="taskCategory"
-            label="Сопровождение"
-            checked={selectedServies.includes(FilterItemsIds.SERVIS_1)}
-            id={FilterItemsIds.SERVIS_1}
-            onChange={handleCheckboxChange}
-            disabled={isVolunteer ? !volunteerSpecialGuard : false}
-            extClassName={classnames('text_size_small')}
-          />
-          <Checkbox
-            name="taskCategory"
-            label="Перевозка в личном транспорте"
-            checked={selectedServies.includes(FilterItemsIds.SERVIS_2)}
-            id={FilterItemsIds.SERVIS_2}
-            onChange={handleCheckboxChange}
-            disabled={isVolunteer ? !volunteerHigherGuard : false}
-            extClassName={classnames('text_size_small')}
-          />
-        </div>
-        <div className={styles.row}>
-          <Checkbox
-            name="taskCategory"
-            label="Покупка продуктов"
-            checked={selectedServies.includes(FilterItemsIds.SERVIS_3)}
-            id={FilterItemsIds.SERVIS_3}
-            onChange={handleCheckboxChange}
-            disabled={isVolunteer ? !volunteerSpecialGuard : false}
-            extClassName={classnames('text_size_small')}
-          />
-          <Checkbox
-            name="taskCategory"
-            label="Помощ в подъёме/спуске"
-            checked={selectedServies.includes(FilterItemsIds.SERVIS_4)}
-            id={FilterItemsIds.SERVIS_4}
-            onChange={handleCheckboxChange}
-            disabled={isVolunteer ? !volunteerHigherGuard : false}
-            extClassName={classnames('text_size_small')}
-          />
-        </div>
-        <div className={styles.row}>
-          <div className={styles.box}>
+          {categories?.map((category) => (
             <Checkbox
+              key={category._id}
               name="taskCategory"
-              label="Покупка вещей/техники"
-              checked={selectedServies.includes(FilterItemsIds.SERVIS_5)}
-              id={FilterItemsIds.SERVIS_5}
+              label={category.title}
+              checked={selectedServies.includes(category.title)}
+              id={category.title}
               onChange={handleCheckboxChange}
-              disabled={isVolunteer ? !volunteerSpecialGuard : false}
+              disabled={(isVolunteer && checkAccess(category.title)) || false}
               extClassName={classnames('text_size_small')}
             />
-          </div>
-          <Checkbox
-            name="taskCategory"
-            label="Помощь в готовке"
-            checked={selectedServies.includes(FilterItemsIds.SERVIS_6)}
-            id={FilterItemsIds.SERVIS_6}
-            onChange={handleCheckboxChange}
-            disabled={isVolunteer ? !volunteerMainGuard : false}
-            extClassName={classnames('text_size_small')}
-          />
-        </div>
-        <div className={styles.row}>
-          <div className={styles.box}>
-            <Checkbox
-              name="taskCategory"
-              label="Помощь в уборке"
-              checked={selectedServies.includes(FilterItemsIds.SERVIS_7)}
-              id={FilterItemsIds.SERVIS_7}
-              onChange={handleCheckboxChange}
-              disabled={isVolunteer ? !volunteerMainGuard : false}
-              extClassName={classnames('text_size_small')}
-            />
-          </div>
-          <Checkbox
-            name="taskCategory"
-            label="Организация досуга"
-            checked={selectedServies.includes(FilterItemsIds.SERVIS_8)}
-            id={FilterItemsIds.SERVIS_8}
-            onChange={handleCheckboxChange}
-            disabled={isVolunteer ? !volunteerHigherGuard : false}
-            extClassName={classnames('text_size_small')}
-          />
-        </div>
-        <div className={styles.box}>
-          <Checkbox
-            name="taskCategory"
-            label="Ремонт техники/жилья"
-            checked={selectedServies.includes(FilterItemsIds.SERVIS_9)}
-            id={FilterItemsIds.SERVIS_9}
-            onChange={handleCheckboxChange}
-            disabled={isVolunteer ? !volunteerMainGuard : false}
-            extClassName={classnames('text_size_small')}
-          />
+          ))}
         </div>
       </div>
     </div>

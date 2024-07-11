@@ -14,17 +14,23 @@
 .filterBlock {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 11px;
+}
+
+.filterDataBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .filterBlockTitle {
   border-bottom: 1px solid var(--colors-interface-ford-white);
-  padding-bottom: 8px;
+  padding-bottom: 3px;
   color: var(--colors-interface-black);
 }
 
 .filterBlockText {
-  margin: 5px 0;
+  margin: 0;
 }
 
 .filterBlockTime {
@@ -40,8 +46,11 @@
 }
 
 .row {
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(5, 29px);
+  gap: 10px 30px;
 }
 
 .buttonWrapper {
@@ -65,7 +74,8 @@
 }
 
 .calendar {
-  width: 100%;
+  padding: 12px;
+  border: 0.5px solid #818C99;
 }
 
 .box {
