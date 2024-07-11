@@ -1,9 +1,10 @@
 .tabContainer {
+  margin-top: -11px;
   display: flex;
   flex-flow: row nowrap;
-  gap: 32px;
+  gap: 35px;
   padding: 13px 0 13px 14px;
-  margin-left: 32px;
+  margin-left: 36px;
 }
 
 @media screen and (max-width: 600px) {

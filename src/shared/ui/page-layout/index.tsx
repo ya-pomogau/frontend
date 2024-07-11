@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 import { useAppSelector } from 'app/hooks';
-import { Loader } from '../loader';
 
 import styles from './styles.module.css';
 import { UserInfo } from 'entities/user';
@@ -23,12 +22,10 @@ interface PageLayoutProps {
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
-  const isLoadingUserData = useAppSelector((state) => state.user.isLoading);
   const userRole = useAppSelector((state) => state.user.role);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmed;
-  //const isLoadingTasksData = useAppSelector((state) => state.tasks.isLoading);
   const location = useLocation();
 
   return (

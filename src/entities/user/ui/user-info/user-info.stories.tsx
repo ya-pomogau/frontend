@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import { withRouter } from 'storybook-addon-react-router-v6';
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { withRouter } from 'storybook-addon-remix-react-router';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { UserInfo } from '.';
 import { usersApi } from 'services/user-api';
@@ -103,17 +103,10 @@ const unauthorizedState = {
   isFailed: false,
 };
 
-const Mockstore = ({ initialState, children }: Record<any, any>) => (
+const Mockstore = ({ children }: Record<any, any>) => (
   <Provider
     store={configureStore({
       reducer: usersApi.reducer,
-      // reducer: {
-      //   user: createSlice({
-      //     name: 'user',
-      //     initialState,
-      //     reducers: {},
-      //   }).reducer,
-      // },
     })}
   >
     {children}

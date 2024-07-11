@@ -70,7 +70,7 @@ export const usersApi = createApi({
           patchResult.undo();
         }
       },
-      invalidatesTags: (result, error, { _id }) => [
+      invalidatesTags: () => [
         { type: 'User', _id: 'LIST' },
       ],
     }),

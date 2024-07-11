@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import classnames from 'classnames';
 import styles from '../styles.module.css';
 import { Input } from '../../../shared/ui/input';
@@ -10,11 +10,11 @@ interface BalanceSettingsItemProps {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const BalanceSettingsItem: React.FC<BalanceSettingsItemProps> = ({
+const BalanceSettingsItem = ({
   title,
   inputValue,
   handleChange,
-}) => {
+}: BalanceSettingsItemProps) => {
   return (
     <div className={classnames(styles.balance_box)}>
       <div>

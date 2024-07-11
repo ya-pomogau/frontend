@@ -47,12 +47,7 @@
 
 .input {
   max-width: 351px;
-  border-radius: 10px;
-}
-
-.input input {
-  border-radius: 10px;
-  margin-bottom: 32px;
+  margin: 30px 0 0 40px;
 }
 
 .users_card_box {

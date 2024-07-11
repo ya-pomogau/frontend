@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 import { Icon } from 'shared/ui/icons';

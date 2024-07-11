@@ -1,10 +1,10 @@
-import React from 'react';
 import classNames from 'classnames';
 
 import { Avatar } from '../avatar';
 import { SquareButton } from '../square-buttons';
 
 import styles from './main-popup.module.css';
+import { ReactNode } from 'react';
 
 interface MainPopupProps {
   extClassName?: string;
@@ -12,7 +12,7 @@ interface MainPopupProps {
   phoneNumber?: string;
   avatarName: string;
   avatarLink?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
   handleCloseClick: () => void;
   isMobile?: boolean;
 }

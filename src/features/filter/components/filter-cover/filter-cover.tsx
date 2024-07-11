@@ -27,7 +27,7 @@ export const FilterCover = ({
   onReset,
   setFilteres,
 }: FilterCoverProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
   const newSearchParams = new URLSearchParams();
 
   useEffect(() => {

@@ -13,7 +13,7 @@ export const SectionInWorkChats = () => {
   const [infoMessage, setInfoMessage] = useState<IMessageHub | null>(null);
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>('');
-  const [fileInput, setFileInput] = useState<string>('');
+  const [_, setFileInput] = useState<string>('');
 
   const handleVisibleMessage = (text: string) => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);

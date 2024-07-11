@@ -1,10 +1,10 @@
 import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
-
+import classNames from 'classnames';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
-import { Loader } from 'shared/ui/loader';
 import styles from './styles.module.css';
 import { Input } from 'shared/ui/input';
+import { NavLink } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { Filter } from '../../features/filter';
@@ -16,6 +16,7 @@ import {
   useGetUnconfirmedUsersQuery,
 } from 'services/admin-api';
 import { User } from 'entities/user/types';
+import { GradientDivider } from 'shared/ui/gradient-divider';
 
 interface PageProps {
   incomeTab: string;
@@ -28,13 +29,14 @@ export function RequestsPage({ incomeTab }: PageProps) {
   const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed');
   const [searchName, setSearchName] = useState('');
   const [filteredName, setFilteredName] = useState<User[]>([]);
+  const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
 
   useEffect(() => {
     const dataMap: Record<string, User[] | undefined> = {
       [Tabs.VOLUNTEERS]: volunteers,
       [Tabs.RECIPIENTS]: recipients,
       [Tabs.NOTPROCESSED]: unconfirmed,
-      default: admins,
+      [Tabs.ADMINS]: admins,
     };
 
     const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
@@ -48,18 +50,32 @@ export function RequestsPage({ incomeTab }: PageProps) {
 
   return (
     <>
-      {incomeTab === Tabs.NOTPROCESSED ? (
-        <SmartHeader
-          icon={<Icon color="blue" icon="BlockIcon" size="54" />}
-          text="Подтверждение / Блокировка"
-          filter={<Filter items={{ userCategories: true }} />}
-        />
-      ) : (
-        <SmartHeader
-          icon={<Icon color="blue" icon="BlockIcon" size="54" />}
-          text="Подтверждение / Блокировка"
-        />
-      )}
+      <SmartHeader
+        icon={
+          incomeTab === Tabs.ADMINS ? (
+            <Icon
+              color="blue"
+              icon="CheckInBoxIcon"
+              size="54"
+              className={styles.iconCheckInBox}
+            />
+          ) : (
+            <Icon color="blue" icon="BlockIcon" size="54" />
+          )
+        }
+        text={
+          incomeTab === Tabs.ADMINS
+            ? 'Управление администраторами'
+            : 'Подтверждение / Блокировка'
+        }
+        filter={
+          incomeTab === Tabs.NOTPROCESSED ? (
+            <Filter items={{ userCategories: true }} />
+          ) : (
+            <></>
+          )
+        }
+      />
       <PageSubMenuForAdmins
         counters={{
           volunteers: volunteers ? volunteers?.length : 0,
@@ -67,7 +83,28 @@ export function RequestsPage({ incomeTab }: PageProps) {
           notprocessed: unconfirmed ? unconfirmed?.length : 0,
           admins: admins ? admins?.length : 0,
         }}
+        onViewChange={setViewMode}
       />
+      {incomeTab === Tabs.ADMINS && (
+        <NavLink to={'/profile/create-new-admin'} className={styles.navLink}>
+          <GradientDivider />
+          <div className={styles.addNewAdminSectionInner}>
+            <Icon color="blue" icon="PlusFilledIcon" />
+            <h2
+              className={classNames(
+                'text',
+                'text_size_large',
+                'text_type_regular',
+                'm-0',
+                styles.title
+              )}
+            >
+              Создать администратора
+            </h2>
+          </div>
+          <GradientDivider />
+        </NavLink>
+      )}
       <Input
         extClassName={styles.input}
         value={searchName}
@@ -80,7 +117,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
       {/* TODO:Настроить лоадер в зависимости от получения данных : или получить все вкладки и показывать, или только открытую, остальные в фоне. */}
       {/*{isLoading ? <Loader /> : tabContent}*/}
       {volunteers && recipients && unconfirmed && admins && (
-        <RequestsTab data={filteredName} />
+        <RequestsTab data={filteredName} viewMode={viewMode} />
       )}
     </>
   );

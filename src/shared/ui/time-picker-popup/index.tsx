@@ -1,21 +1,21 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react';
+import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from 'react';
 import { Button } from '../button';
 import styles from './styles.module.css';
 import { LightPopup } from '../light-popup';
 import { useOutsideClick } from 'shared/hooks/use-outside-click';
 import './styles.css';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppDispatch } from '../../../app/hooks';
 import { setTime } from '../../../features/create-request/model';
 
 interface ITimePickerPopup {
   isPopupOpen: boolean;
   buttonRef: RefObject<HTMLElement> | undefined;
-  setIsOpenClockElement: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenClockElement: Dispatch<SetStateAction<boolean>>;
   handleAcceptTime: () => void;
   startTime?: string;
-  setStartTime?: React.Dispatch<React.SetStateAction<string>>;
+  setStartTime?: Dispatch<SetStateAction<string>>;
   endTime?: string;
-  setEndTime?: React.Dispatch<React.SetStateAction<string>>;
+  setEndTime?: Dispatch<SetStateAction<string>>;
 }
 
 export function TimePickerPopup({

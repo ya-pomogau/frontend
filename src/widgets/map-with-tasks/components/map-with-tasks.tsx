@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import YandexMap from 'widgets/map';
-import { Loader } from 'shared/ui/loader';
 import { useAppSelector } from 'app/hooks';
 import { useGetTaskQuery } from 'services/user-task-api';
 import useGeolocation from 'shared/hooks/use-geolocation';

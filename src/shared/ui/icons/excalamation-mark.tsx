@@ -1,4 +1,4 @@
-import { getColor, IIconProps } from './utils';
+import { IIconProps } from './utils';
 
 export const ExclamationPMark = ({ color, ...props }: IIconProps) => (
   <svg

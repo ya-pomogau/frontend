@@ -21,7 +21,7 @@ const initialContactsValues = {
 
 export function ContactsPage() {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
-  const [updateContacts, { isLoading }] = useUpdateContactsMutation();
+  const [updateContacts] = useUpdateContactsMutation();
 
   const { data } = useGetContactsQuery();
 

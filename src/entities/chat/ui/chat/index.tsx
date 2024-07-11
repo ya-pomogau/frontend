@@ -28,7 +28,6 @@ interface PopupChatProps {
 export const PopupChat = ({
   messages,
   chatmateInfo,
-  onAttachFileClick,
   onMessageSend,
   isOpen,
   onClick,

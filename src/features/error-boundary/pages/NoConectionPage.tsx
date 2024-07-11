@@ -1,15 +1,10 @@
 import { SmartHeader } from 'shared/ui/smart-header';
-import { ErrorDialog } from 'shared/ui/error-dialog';
 import image from '../assets/no-conection.png';
 import styles from '../styles.module.css';
 import { Icon } from 'shared/ui/icons';
 import { Filter } from 'features/filter';
 
-interface ErrorDialogProps {
-  text?: string;
-}
-
-export const NoConectionPage = ({ text }: ErrorDialogProps) => {
+export const NoConectionPage = () => {
   return (
     <>
       <SmartHeader

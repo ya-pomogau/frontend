@@ -1,11 +1,10 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import cn from 'classnames';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
 import { Message } from '../message';
-import { IIconProps } from '../icons/utils';
 
 interface PropsInputWrapper {
   placeholder: string;
@@ -36,7 +35,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
   };
 
   const getBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
+    return new Promise((_, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {

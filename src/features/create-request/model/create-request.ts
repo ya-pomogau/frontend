@@ -1,4 +1,3 @@
-import { Data } from './../../../widgets/map/types';
 import { createSlice } from '@reduxjs/toolkit';
 import { format } from 'date-fns';
 import { Category } from 'entities/task/types';

@@ -25,6 +25,7 @@ import { StatisticsPage } from 'pages/statistics';
 import { ApplicationsStatisticsPage } from 'pages/application-statistics';
 import { UsersStatisticsPage } from 'pages/users-statistics';
 import { TasksPage } from 'pages/tasks';
+import { TasksProfilePage } from 'pages/tasks-profile';
 import { SettingsPage } from 'pages/settings';
 import { LoginPage } from 'pages/login';
 import { Logout } from 'pages/logout';
@@ -36,6 +37,7 @@ import { ProfileChatsPages } from 'widgets/profile-chats';
 import { SectionChatsConflict } from 'pages/section-chats-conflict';
 import { SectionInWorkChats } from 'pages/section-in-work-chats';
 import { SectionChatHub } from 'pages/section-chat-hub';
+import { CreateNewAdminPage } from 'pages/profile-new-admin';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -139,7 +141,26 @@ export const router = createBrowserRouter(
             path="/profile/statistics/users"
             element={<UsersStatisticsPage />}
           />
-          <Route path="/profile/tasks" element={<TasksPage />} />
+          <Route
+            path="/profile/tasks"
+            element={<Navigate to={'/profile/tasks/recipients'} />}
+          />
+          <Route
+            path="/profile/tasks/recipients"
+            element={<TasksPage incomeTab={Tabs.RECIPIENTS} />}
+          />
+          <Route
+            path="/profile/tasks/volunteers"
+            element={<TasksPage incomeTab={Tabs.VOLUNTEERS} />}
+          />
+          <Route
+            path="/profile/tasks/recipients/:userId"
+            element={<TasksProfilePage incomeTab={Tabs.RECIPIENTS} />}
+          />
+          <Route
+            path="/profile/tasks/volunteers/:userId"
+            element={<TasksProfilePage incomeTab={Tabs.VOLUNTEERS} />}
+          />
           <Route path="/profile/bids" element={<BidsPage />} />
 
           <Route
@@ -180,6 +201,10 @@ export const router = createBrowserRouter(
           <Route
             path="/profile/requests/admins"
             element={<RequestsPage incomeTab={Tabs.ADMINS} />}
+          />
+          <Route
+            path="/profile/create-new-admin"
+            element={<CreateNewAdminPage />}
           />
         </Route>
       </Route>

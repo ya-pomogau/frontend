@@ -1,13 +1,13 @@
-import React from 'react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
 import HeartIcon from './assets/heart-icon.png';
+import { ReactNode } from 'react';
 
 interface InformerProps {
   extClassName?: string;
   text?: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 }
 
 export const Informer = ({ text, extClassName, icon }: InformerProps) => (

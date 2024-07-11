@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import ReactDOM from 'react-dom';
+import {createPortal} from 'react-dom';
 
 interface IPortalProps {
   children: ReactNode;
@@ -13,5 +13,5 @@ export const Portal = ({ children, isOpened }: IPortalProps) => {
     return null;
   }
 
-  return ReactDOM.createPortal(children, modalRoot);
+  return createPortal(children, modalRoot);
 };

@@ -8,7 +8,6 @@ import { useMediaQuery } from 'shared/hooks';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   positionConfigMenu,
-  linksMenuMobileUnauthorized,
   linksTopAuthAdmin,
   linksTop,
 } from '../utils';
@@ -33,7 +32,6 @@ interface MenuProps {
 
 export const DropDownMenu = ({
   setMenuActive,
-  menuActive,
   role,
   setIsOpenChat,
 }: MenuProps) => {

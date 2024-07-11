@@ -83,7 +83,6 @@ export const Tooltip = ({
       const rect = tooltipRef.current.getBoundingClientRect();
       const leftEdgeDistance = rect.left;
       const tooltipWidth = rect.width;
-      const windowWidth = window.innerWidth;
 
       if (leftEdgeDistance < tooltipWidth) {
         tooltipRef.current.style.transform = `translateX(87%)`;

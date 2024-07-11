@@ -3,14 +3,7 @@ import { YandexMap } from 'widgets/map';
 import { Filter } from 'features/filter';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { useGetTasksQuery } from 'services/tasks-api';
 import { Loader } from 'shared/ui/loader';
-import { Task } from 'entities/task/types';
-import {
-  filterByDate,
-  filterByDistance,
-  filterByTime,
-} from 'shared/libs/utils';
 import { useGetTaskVirginQuery } from 'services/user-task-api';
 import { useMediaQuery } from 'shared/hooks';
 import { useLocation } from 'react-router-dom';
@@ -32,7 +25,6 @@ export function ProfileMapPage() {
   }
   const {
     data: tasks,
-    error,
     isLoading,
   } = useGetTaskVirginQuery(['volunteer', latitude, longitude]);
   const mediaQuery = useMediaQuery('(max-width: 910px)');
@@ -44,35 +36,6 @@ export function ProfileMapPage() {
       : mediaQuery
       ? '75vh'
       : '64vh';
-
-  // TODO: для чего этот фильтр для тасок?
-  // const filteredTasks = useMemo((): Task[] => {
-  //   //починить типизацию значений фильтра и убрать лишние условия
-  //   let result: Task[] = tasks ? tasks : [];
-  //   if (result.length && user) {
-  //     const { date, time, searchRadius } = query;
-  //     if (date && typeof date === 'string') {
-  //       result = result.filter((task: Task) => filterByDate(date, task.date!));
-  //     }
-
-  //     if (time && (typeof time === 'string' || Array.isArray(time))) {
-  //       result = result.filter(
-  //         (task: Task) => task.date && filterByTime(time, task.date!)
-  //       );
-  //     }
-
-  //     if (searchRadius && user.location && typeof searchRadius === 'string') {
-  //       result = result.filter((task: Task) =>
-  //         filterByDistance(
-  //           user.location!,
-  //           task.location,
-  //           parseInt(searchRadius, 10)
-  //         )
-  //       );
-  //     }
-  //   }
-  //   return result;
-  // }, [query, tasks, user]);
 
   return (
     <>
@@ -99,7 +62,6 @@ export function ProfileMapPage() {
         <Loader />
       ) : (
         tasks && (
-          // при рефетче к таскам карта сбрасывается обратно на координаты пользователя
           <YandexMap
             tasks={tasks}
             mapSettings={{

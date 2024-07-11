@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { PasswordInput } from '.';
-import { userEvent, within } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/test';
 
 /**
  * Компонент построен на уже существующем компоненте Input и может быть использован при

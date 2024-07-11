@@ -3,7 +3,6 @@ import {
   changeCurrentStep,
   changeStepDecrement,
   changeStepIncrement,
-  closePopup,
 } from 'features/create-request/model';
 
 type usePropsButtonCustomType = {
