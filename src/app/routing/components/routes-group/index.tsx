@@ -51,7 +51,7 @@ export const RoutesGroup = ({
     if (!role) {
       return <Outlet />;
     } else {
-      <Navigate to="/" replace />;
+      return <Navigate to="/" replace />;
     }
   }
 

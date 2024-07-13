@@ -2,13 +2,13 @@ import { TAuthRoutes } from '../services/auth.types';
 
 const {
   NODE_ENV,
-  REACT_APP_HOST_PROD,
-  REACT_APP_HOST_DEV,
-  REACT_APP_HOST_LOCAL,
-  REACT_APP_FRONT_PROD,
-  REACT_APP_FRONT_DEV,
-  REACT_APP_FRONT_LOCAL,
-} = process.env;
+  VITE_APP_HOST_PROD: REACT_APP_HOST_PROD,
+  VITE_APP_HOST_DEV: REACT_APP_HOST_DEV,
+  VITE_APP_HOST_LOCAL: REACT_APP_HOST_LOCAL,
+  VITE_APP_FRONT_PROD: REACT_APP_FRONT_PROD,
+  VITE_APP_FRONT_DEV: REACT_APP_FRONT_DEV,
+  VITE_APP_FRONT_LOCAL: REACT_APP_FRONT_LOCAL,
+} = import.meta.env;
 
 export const API_URL =
   NODE_ENV === 'production'
@@ -22,6 +22,7 @@ export const FRONT_URL =
 
 export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',
+  adminRegister: 'admin/create',
   userRegister: '/auth/new',
   adminLogin: '/auth/administrative',
   checkToken: '/auth/token',

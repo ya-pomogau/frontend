@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 interface CategoriesBackgroundProps {
   extClassName?: string;
   theme: 'success' | 'primary' | 'warning' | 'secondary';
-  content?: string | React.ReactNode;
+  content?: string | ReactNode;
   size?: 'medium' | 'large';
 }
 

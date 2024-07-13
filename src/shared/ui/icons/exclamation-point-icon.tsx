@@ -1,5 +1,3 @@
-import { getColor, IIconProps } from './utils';
-
 export const ExclamationPointIcon = () => (
   <svg
     width="18"

@@ -1,22 +1,21 @@
-/* eslint-disable import/no-named-as-default-member */
-import React from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
+import { ChangeEvent, forwardRef, TextareaHTMLAttributes } from 'react';
 
 interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
   name: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   label?: string;
   extClassName?: string;
   maxLength?: number;
 }
 
 // eslint-disable-next-line react/display-name
-export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       value,

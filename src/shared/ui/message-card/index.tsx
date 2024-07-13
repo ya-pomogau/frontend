@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
@@ -18,7 +18,7 @@ interface PropsMessageCard {
   position?: boolean;
 }
 
-export const MessageCard: React.FC<PropsMessageCard> = (props) => {
+export const MessageCard = (props: PropsMessageCard) => {
   const [hasNewMessage, setHasNewMessage] = useState(false);
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
   const location = useLocation();

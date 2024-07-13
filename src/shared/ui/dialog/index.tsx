@@ -18,7 +18,6 @@ export const Dialog = ({
   title,
   isExitButton = false,
   isAlertDialog = false,
-  isConfirmDialog = false,
   extClassName,
 }: DialogProps) => (
   <div className={classNames(styles.container, extClassName)}>

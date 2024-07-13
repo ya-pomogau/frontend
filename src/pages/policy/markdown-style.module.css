@@ -5,11 +5,18 @@
   overflow-y: scroll;
 }
 
+.wrapper::-webkit-scrollbar {
+  width: 0;
+}
+
 .markdownStyles {
   font-family: 'Golos', sans-serif;
   font-weight: 400;
   line-height: 22.4px;
   height: 90%;
+}
+.markdownStyles::-webkit-scrollbar {
+  width: 0;
 }
 
 .markdownStyles h1 {
@@ -104,7 +111,7 @@
 .titleInput {
   all: unset;
   display: block;
-  border: 1px solid #2E3192;
+  border: 1px solid #2e3192;
   height: 34px;
   margin-bottom: 10px;
 }
@@ -122,7 +129,7 @@
 .descriptionInput {
   all: unset;
   display: block;
-  border: 1px solid #2E3192;
+  border: 1px solid #2e3192;
   height: 618px;
   margin-bottom: 10px;
 }

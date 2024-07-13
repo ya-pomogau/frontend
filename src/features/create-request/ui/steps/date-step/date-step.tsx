@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useRef } from 'react';
+import { useMemo, useEffect, useState, useRef, ChangeEvent } from 'react';
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
 
@@ -20,7 +20,7 @@ interface IDateStepProps {
 }
 
 export const DateStep = ({ isMobile }: IDateStepProps) => {
-  const { time, termlessRequest, date, isTypeEdit } = useAppSelector(
+  const { time, termlessRequest, date } = useAppSelector(
     (state) => state.createRequest
   );
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
     dispatch(setDate(formattedDate));
   };
 
-  const handleTimeValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTimeValueChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setTime(e.target.value));
   };
 

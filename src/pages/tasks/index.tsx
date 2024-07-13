@@ -1,133 +1,166 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { Filter } from 'features/filter';
+// import { Filter } from 'features/filter';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
-import { UserCard } from 'widgets/user-card';
+import { PageSubMenu } from '../../widgets/page-sub-menu';
 
 import styles from './styles.module.css';
-import { IFilterValues } from 'features/filter/types';
-import { defaultObjFilteres } from 'features/filter/consts';
-import { IDateUser } from 'pages/requests/test-users';
-import {
-  filterCardsUsersPageAdmin,
-  filterUsersNamePageAdmin,
-} from 'shared/libs/utils';
-import { UserRole } from '../../shared/types/common.types';
 
-const userMock = [
+import { Tabs, UserRole } from '../../shared/types/common.types';
+import { User } from 'entities/user/types';
+import { TasksTab } from 'pages/tasks-tab';
+import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
+
+export interface PageProps {
+  incomeTab: string;
+}
+
+export const mockedUsers = [
   {
+    _id: '1',
+    name: 'Иванов Иван Иванович',
+    phone: '+7 (111) 222-22-22',
+    avatar: 'https://i.pravatar.cc/300',
+    address: 'Москва, Ленинский проспект, 65к1',
+    vkId: '123456',
     role: UserRole.VOLUNTEER,
-    avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: 'Avatar',
-    userId: 1,
-    userName: 'Иванов Иван Иванович',
-    userNumber: '+7 (111) 222-22-22',
-    volunteerInfo: {
-      approved: false,
-      checked: false,
-      isHasKeys: false,
-      scores: 0,
-    },
+    score: 0,
+    status: 2,
+    keys: false,
+    isActive: true,
   },
   {
+    _id: '2',
+    name: 'Молчанов Егор Артёмович',
+    phone: '+7 (111) 222-22-22',
+    avatar: 'https://i.pravatar.cc/300',
+    address: 'Улица Садовая, 10',
+    vkId: '654321',
     role: UserRole.RECIPIENT,
-    avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: 'Avatar',
-    userId: 2,
-    userName: 'Молчанов Егор Артёмович',
-    userNumber: '+7 (111) 222-22-22',
-    volunteerInfo: {
-      approved: false,
-      checked: false,
-      isHasKeys: false,
-      scores: 0,
-    },
+    score: 0,
+    status: 1,
+    keys: false,
+    isActive: true,
   },
   {
+    _id: '3',
+    name: 'Суворов Лазарь Валентинович',
+    phone: '+7 (111) 222-22-22',
+    avatar: 'https://i.pravatar.cc/300',
+    address: 'Москва, Ленинский проспект, 45',
+    vkId: '789456',
     role: UserRole.VOLUNTEER,
-    avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: 'Avatar',
-    userId: 3,
-    userName: 'Суворов Лазарь Валентинович',
-    userNumber: '+7 (111) 222-22-22',
-    volunteerInfo: {
-      approved: false,
-      checked: false,
-      isHasKeys: false,
-      scores: 0,
-    },
+    score: 0,
+    status: 2,
+    keys: false,
+    isActive: false,
   },
   {
+    _id: '4',
+    name: 'Ефремов Мартын Ростиславович',
+    phone: '+7 (111) 222-22-22',
+    avatar: 'https://i.pravatar.cc/300',
+    address: 'Москва, Ленинский проспект, 35',
+    vkId: '987654',
     role: UserRole.RECIPIENT,
-    avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: 'Avatar',
-    userId: 4,
-    userName: 'Ефремов Мартын Ростиславович',
-    userNumber: '+7 (111) 222-22-22',
-    volunteerInfo: {
-      approved: false,
-      checked: false,
-      isHasKeys: false,
-      scores: 0,
-    },
+    score: 0,
+    status: 1,
+    keys: false,
+    isActive: false,
   },
   {
+    _id: '5',
+    name: 'Смирнов Иван Павлович',
+    phone: '+7 (111) 222-22-22',
+    avatar: 'https://i.pravatar.cc/300',
+    address: 'Москва, Ленинский проспект, 15',
+    vkId: '123789',
     role: UserRole.VOLUNTEER,
-    avatarLink: 'https://i.pravatar.cc/300"',
-    avatarName: 'Avatar',
-    userId: 5,
-    userName: 'Ефремов Мартын Ростиславович',
-    userNumber: '+7 (111) 222-22-22',
-    volunteerInfo: {
-      approved: false,
-      checked: false,
-      isHasKeys: false,
-      scores: 0,
-    },
+    score: 0,
+    status: 2,
+    keys: false,
+    isActive: true,
   },
 ];
 
-export function TasksPage() {
+export function TasksPage({ incomeTab }: PageProps) {
+  // раскоментировать после настройки сервера
+  // const [searchRole, setSearchRole] =
+  //   useState<IFilterValues>(defaultObjFilteres);
+
+  const navigate = useNavigate();
+
+  // раскоментировать 2 строки после настройки сервера
+  // const { data: recipients } = useGetUserByRolesQuery('recipients');
+  // const { data: volunteers } = useGetUserByRolesQuery('volunteers');
   const [searchName, setSearchName] = useState('');
-  const [searchRole, setSearchRole] =
-    useState<IFilterValues>(defaultObjFilteres);
-  const [dateUsers, setDateUsers] = useState<IDateUser[]>(userMock);
-
-  // const filter = userMock.filter((user) =>
-  //   user.userName.toLowerCase().includes(value.toLowerCase())
-  // );
+  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    filterCardsUsersPageAdmin(userMock, searchRole, setDateUsers);
-    setSearchName('');
-    // eslint-disable-next-line
-  }, [searchRole]);
+    const filterActiveUsers = (users: User[] | undefined): User[] => {
+      return users ? users.filter((user) => user.isActive) : [];
+    };
 
-  useEffect(() => {
-    setDateUsers(filterUsersNamePageAdmin(dateUsers, searchName));
-    // eslint-disable-next-line
-  }, [searchName]);
+    // раскоментировать 2 строки после настройки сервера
+    // const dataMap: Record<string, User[] | undefined> = {
+    //   [Tabs.VOLUNTEERS]: filterActiveUsers(volunteers),
+    //   [Tabs.RECIPIENTS]: filterActiveUsers(recipients),
+    // };
+
+    const dataMap: Record<string, User[]> = {
+      [Tabs.VOLUNTEERS]: filterActiveUsers(
+        mockedUsers.filter((user) => user.role === UserRole.VOLUNTEER)
+      ),
+      [Tabs.RECIPIENTS]: filterActiveUsers(
+        mockedUsers.filter((user) => user.role === UserRole.RECIPIENT)
+      ),
+    };
+
+    const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
+      (user) => user.name.toLowerCase().includes(searchName.toLowerCase())
+    );
+
+    if (filteredData) {
+      setFilteredUsers(filteredData);
+    }
+  }, [
+    searchName,
+    incomeTab,
+    // раскоментировать 1 строку после настройки сервера
+    // volunteers, recipients
+  ]);
+
+  const handleUserClick = (user: User) => {
+    if (user.role === UserRole.RECIPIENT) {
+      navigate(`/profile/tasks/recipients/${user._id}`);
+    } else if (user.role === UserRole.VOLUNTEER) {
+      navigate(`/profile/tasks/volunteers/${user._id}`);
+    }
+  };
 
   return (
     <>
       <SmartHeader
         icon={<Icon color="blue" icon="SettingsIcon" size="54" />}
         text="Создание / Редактирование заявки"
-        filter={
-          <Filter
-            items={{ userCategories: true }}
-            setFilteres={setSearchRole}
-          />
+        // filter={
+        //   <Filter
+        //     items={{ userCategories: true }}
+        //     setFilteres={setSearchRole}
+        //   />
+        // }
+      />
+      <PageSubMenu
+        links={
+          <>
+            <PageSubMenuLink to="/profile/tasks/recipients" text="Реципиенты" />
+            <PageSubMenuLink to="/profile/tasks/volunteers" text="Волонтеры" />
+          </>
         }
       />
-
-      <div>
-        <Link to={'/profile/bids'}>Настроить баллы</Link>
-      </div>
-
       <div>
         <Input
           value={searchName}
@@ -135,22 +168,12 @@ export function TasksPage() {
           name="Name"
           onChange={(e) => setSearchName(e.target.value)}
           extClassName={styles.input}
+          type="name"
         />
-        {/* <ul>
-          {dateUsers.map((item) => (
-            <li key={item.userId}>
-              <UserCard
-                avatarLink={item.avatarLink}
-                avatarName={item.avatarName}
-                userName={item.userName}
-                userId={item.userId}
-                userNumber={item.userNumber}
-                volunteerInfo={item.volunteerInfo}
-                role={item.role}
-              />
-            </li>
-          ))}
-        </ul> */}
+
+        {filteredUsers && (
+          <TasksTab data={filteredUsers} onUserClick={handleUserClick} />
+        )}
       </div>
     </>
   );

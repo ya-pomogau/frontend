@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable import/no-duplicates */
-import React, { ReactNode, forwardRef } from 'react';
+import { ReactNode, forwardRef, Ref } from 'react';
 import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
 } from 'react-datepicker';
@@ -9,7 +9,7 @@ import ru from 'date-fns/locale/ru';
 import { subDays } from 'date-fns';
 
 import { getMonth } from './lib';
-import { StepButton } from '../step-button/index';
+import { StepButton } from '../step-button';
 
 import './react-datepicker.css';
 import styles from './styles.module.css';
@@ -47,7 +47,7 @@ function customHeader({
 const CustomInput = forwardRef(
   (
     { value, onClick }: { value: any; onClick: any },
-    ref: React.Ref<HTMLButtonElement>
+    ref: Ref<HTMLButtonElement>
   ) => (
     <button
       type="button"
@@ -91,7 +91,7 @@ export function DatePicker({
   };
 
   interface MyCalendar {
-    children: React.ReactNode | React.ReactNode[] | undefined;
+    children: ReactNode | ReactNode[] | undefined;
   }
 
   const calendarContainerDisabled = ({ children }: MyCalendar) => (

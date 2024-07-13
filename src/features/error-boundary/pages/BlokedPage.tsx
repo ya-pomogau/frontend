@@ -1,5 +1,4 @@
 import { SmartHeader } from 'shared/ui/smart-header';
-import { ErrorDialog } from 'shared/ui/error-dialog';
 import image from '../assets/privacy.png';
 import styles from '../styles.module.css';
 import { Icon } from 'shared/ui/icons';

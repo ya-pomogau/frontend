@@ -1,15 +1,15 @@
-import React from 'react';
+import { ChangeEvent, forwardRef, SelectHTMLAttributes } from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 import { AccordionIconArrow } from '../icons/accordion-arrow';
 
-interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   options: Array<{ value: string; label: string }>;
   name: string;
   placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   label?: string;
   extClassName?: string;
   selectedValue?: string;
@@ -17,7 +17,7 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 // eslint-disable-next-line import/no-named-as-default-member, react/display-name
-export const Select = React.forwardRef<HTMLSelectElement, Props>(
+export const Select = forwardRef<HTMLSelectElement, Props>(
   (
     {
       options,

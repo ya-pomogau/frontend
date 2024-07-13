@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PageLayout } from '.';
 import { Provider } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { withRouter } from 'storybook-addon-react-router-v6';
-import { Loader } from '../loader';
+import { withRouter } from 'storybook-addon-remix-react-router';
 import { UserRole } from 'shared/types/common.types';
 
 const mockedRecipientState = {
@@ -98,10 +97,6 @@ const mockedVolunteerState = {
 };
 
 const mockedTasksState = {
-  isLoading: false,
-};
-
-const mockedTasksLoadingState = {
   isLoading: false,
 };
 

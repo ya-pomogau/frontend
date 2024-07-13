@@ -1,6 +1,6 @@
-import { LegacyRef, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import classNames from 'classnames';
-import { SettingsButton } from '../transforming-buttons/settings-button';
+import { SettingsButton } from '../transforming-buttons';
 import { Avatar } from '../avatar';
 
 import styles from './info-container.module.css';
@@ -14,7 +14,6 @@ interface InfoContainerProps {
   avatar?: string;
   name: string;
   onClickSettingsButton?: () => void;
-  buttonRef?: LegacyRef<HTMLButtonElement>;
 }
 
 export const InfoContainer = ({
@@ -23,7 +22,6 @@ export const InfoContainer = ({
   avatar,
   name,
   onClickSettingsButton,
-  buttonRef,
 }: InfoContainerProps) => {
   const isAuth = useUser();
 
@@ -53,7 +51,6 @@ export const InfoContainer = ({
           extClassName={styles['info-container-settings-button']}
           onClick={onClickSettingsButton}
           disabled={!isAuth}
-          buttonRef={buttonRef}
         />
       )}
     </div>
