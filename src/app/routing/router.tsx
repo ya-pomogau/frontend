@@ -3,12 +3,14 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Navigate,
+  Router,
 } from 'react-router-dom';
 
 import { RoutesGroup } from 'app/routing/components/routes-group';
 
 import { Layout } from 'pages/layout';
 
+import { Routes } from '../../shared/config';
 import { UnauthPage } from 'pages/unauth';
 import { RequestsPage } from 'pages/requests';
 import { BlogPage } from 'pages/blog';
@@ -42,26 +44,26 @@ import { CreateNewAdminPage } from 'pages/profile-new-admin';
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Layout />}>
+      <Route path={Routes.ROOT} element={<Layout />}>
         <Route element={<RoutesGroup publicRoutes />}>
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path={Routes.PROFILE} element={<ProfilePage />} />
           <Route index element={<UnauthPage />} />
 
-          <Route path="/blog" element={<BlogPage />} />
+          <Route path={Routes.BLOG} element={<BlogPage />} />
 
-          <Route path="/policy" element={<PolicyPage />} />
+          <Route path={Routes.POLICY} element={<PolicyPage />} />
 
-          <Route path="/contacts" element={<ContactsPage />} />
-          <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path={Routes.CONTACTS} element={<ContactsPage />} />
+          <Route path={Routes.FEEDBACK} element={<FeedbackPage />} />
 
           {/* Удалить когда система аутификации будет готова */}
-          <Route path="/pick" element={<PickRolePage />} />
+          <Route path={Routes.PICK} element={<PickRolePage />} />
         </Route>
 
         <Route element={<RoutesGroup onlyUnauthorized />}>
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/vk-auth" element={<VKAuthPage />} />
+          <Route path={Routes.REGISTER} element={<RegisterPage />} />
+          <Route path={Routes.LOGIN} element={<LoginPage />} />
+          <Route path={Routes.VK_AUTH} element={<VKAuthPage />} />
         </Route>
 
         <Route
@@ -75,9 +77,9 @@ export const router = createBrowserRouter(
             />
           }
         >
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/out" element={<Logout />} />
+          <Route path={Routes.PROFILE} element={<ProfilePage />} />
+          <Route path={Routes.SETTINGS} element={<SettingsPage />} />
+          <Route path={Routes.OUT} element={<Logout />} />
         </Route>
 
         <Route
@@ -89,7 +91,7 @@ export const router = createBrowserRouter(
             />
           }
         >
-          <Route path="/profile/map" element={<ProfileMapPage />} />
+          <Route path={Routes.PROFILE_MAP} element={<ProfileMapPage />} />
         </Route>
 
         <Route
@@ -102,9 +104,12 @@ export const router = createBrowserRouter(
             />
           }
         >
-          <Route path="/profile/active" element={<ProfileActivePage />} />
+          <Route path={Routes.PROFILE_ACTIVE} element={<ProfileActivePage />} />
 
-          <Route path="/profile/completed" element={<ProfileCompletedPage />} />
+          <Route
+            path={Routes.PROFILE_COMPLETED}
+            element={<ProfileCompletedPage />}
+          />
         </Route>
 
         <Route
@@ -117,54 +122,57 @@ export const router = createBrowserRouter(
           }
         >
           <Route
-            path="/profile/requests"
-            element={<Navigate to={'/profile/requests/volunteers'} />}
+            path={Routes.PROFILE_REQUESTS}
+            element={<Navigate to={Routes.PROFILE_REQUESTS_VOLUNTEERS} />}
           />
           <Route
-            path="/profile/requests/volunteers"
+            path={Routes.PROFILE_REQUESTS_VOLUNTEERS}
             element={<RequestsPage incomeTab={Tabs.VOLUNTEERS} />}
           />
           <Route
-            path="/profile/requests/recipients"
+            path={Routes.PROFILE_REQUESTS_RECIPIENTS}
             element={<RequestsPage incomeTab={Tabs.RECIPIENTS} />}
           />
           <Route
-            path="/profile/requests/notprocessed"
+            path={Routes.PROFILE_REQUESTS_NOTPROCESSED}
             element={<RequestsPage incomeTab={Tabs.NOTPROCESSED} />}
           />
-          <Route path="/profile/statistics" element={<StatisticsPage />} />
           <Route
-            path="/profile/statistics/applications"
+            path={Routes.PROFILE_STATISTICS}
+            element={<StatisticsPage />}
+          />
+          <Route
+            path={Routes.PROFILE_STATISTICS_APPLICATIONS}
             element={<ApplicationsStatisticsPage />}
           />
           <Route
-            path="/profile/statistics/users"
+            path={Routes.PROFILE_STATISTICS_USERS}
             element={<UsersStatisticsPage />}
           />
           <Route
-            path="/profile/tasks"
-            element={<Navigate to={'/profile/tasks/recipients'} />}
+            path={Routes.PROFILE_TASKS}
+            element={<Navigate to={Routes.PROFILE_TASKS_RECIPIENTS} />}
           />
           <Route
-            path="/profile/tasks/recipients"
+            path={Routes.PROFILE_TASKS_RECIPIENTS}
             element={<TasksPage incomeTab={Tabs.RECIPIENTS} />}
           />
           <Route
-            path="/profile/tasks/volunteers"
+            path={Routes.PROFILE_TASKS_VOLUNTEERS}
             element={<TasksPage incomeTab={Tabs.VOLUNTEERS} />}
           />
           <Route
-            path="/profile/tasks/recipients/:userId"
+            path={Routes.PROFILE_TASKS_RECIPIENTS_USERID}
             element={<TasksProfilePage incomeTab={Tabs.RECIPIENTS} />}
           />
           <Route
-            path="/profile/tasks/volunteers/:userId"
+            path={Routes.PROFILE_TASKS_VOLUNTEERS_USERID}
             element={<TasksProfilePage incomeTab={Tabs.VOLUNTEERS} />}
           />
-          <Route path="/profile/bids" element={<BidsPage />} />
+          <Route path={Routes.PROFILE_BIDS} element={<BidsPage />} />
 
           <Route
-            path="/chats-hub"
+            path={Routes.CHAT_HUB}
             element={
               <ProfileChatsPages>
                 <SectionChatHub />
@@ -172,7 +180,7 @@ export const router = createBrowserRouter(
             }
           />
           <Route
-            path="/chats-in-work"
+            path={Routes.CHAT_IN_WORK}
             element={
               <ProfileChatsPages>
                 <SectionInWorkChats />
@@ -180,7 +188,7 @@ export const router = createBrowserRouter(
             }
           />
           <Route
-            path="/chats-conflict"
+            path={Routes.CHAT_CONFLICT}
             element={
               <ProfileChatsPages>
                 <SectionChatsConflict />
@@ -199,17 +207,17 @@ export const router = createBrowserRouter(
           }
         >
           <Route
-            path="/profile/requests/admins"
+            path={Routes.PROFILE_REQUESTS_ADMINS}
             element={<RequestsPage incomeTab={Tabs.ADMINS} />}
           />
           <Route
-            path="/profile/create-new-admin"
+            path={Routes.PROFILE_CREATE_NEW_ADMIN}
             element={<CreateNewAdminPage />}
           />
         </Route>
       </Route>
 
-      <Route path="*" element={<NotFoundPage />} />
+      <Route path={Routes.NOT_FOUND} element={<NotFoundPage />} />
     </>
   )
 );
