@@ -29,7 +29,7 @@ export const FilterItemsIds = {
 export const defaultObjFilteres = {
   sortBy: '',
   categories: [],
-  searchRadius: '',
+  searchRadius: '5',
   date: '',
   time: ['00:00', '00:00'],
   userCategories: '',

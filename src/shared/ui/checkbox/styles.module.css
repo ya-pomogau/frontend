@@ -84,3 +84,9 @@
 .checkbox:disabled:hover + label > .checkboxIconWrapper > .checkboxIcon {
   cursor: default;
 }
+
+@media (width < 768px) {
+  .checkboxIconWrapper {
+    margin-right: 10px;
+  }
+}

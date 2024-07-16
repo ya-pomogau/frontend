@@ -28,11 +28,10 @@
   line-height: 14px;
 }
 
-.timePickerContainer__input:focus{
-  background-color: transparent;
-  text-decoration: none;
-}
-
 input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
+}
+ 
+input[type='time']:focus {
+  outline: none;
 }

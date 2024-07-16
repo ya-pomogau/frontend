@@ -8,13 +8,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 25px;
 }
 
 .filterBlock {
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: 12px;
 }
 
 .filterDataBlock {
@@ -74,7 +74,6 @@
 }
 
 .calendar {
-  padding: 12px;
   border: 0.5px solid #818C99;
 }
 
@@ -85,5 +84,12 @@
 @media screen and (max-width: 768px) {
   .tooltip {
     max-width: 343px;
+  }
+}
+
+@media (width < 768px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 10px 11px;
   }
 }

@@ -50,7 +50,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
   }, []);
 
   return (
-    <div className={styles.filterBlock}>
+    <div>
       <p
         className={classNames(
           styles.filterBlockText,

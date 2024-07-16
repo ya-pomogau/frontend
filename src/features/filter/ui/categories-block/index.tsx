@@ -22,9 +22,6 @@ export const CategoriesBlock = ({
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
 
   const categories = useGetCategoriesQuery().currentData;
-  useEffect(() => {
-    console.log(categories);
-  }, []);
 
   const volunteerMainGuard = usePermission(
     [UserStatus.CONFIRMED, UserStatus.VERIFIED, UserStatus.ACTIVATED],
