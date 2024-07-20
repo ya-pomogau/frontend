@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   gap: 20px;
   margin: 35px 0 0 30px;
-  width: 96%;
+  width: 94%;
   max-height: 65vh;
   height: 400px;
   overflow-y: auto;
@@ -19,7 +19,7 @@
   flex-direction: column;
   gap: 15px;
   margin: 35px 0 0 30px;
-  width: 96%;
+  width: 94%;
   overflow-y: auto;
   max-height: 65vh;
 }
@@ -46,8 +46,13 @@
   .userCardsTiles {
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
+    gap: 10px;
+    margin: 30px auto;
+  }
+
+  .userCardsList {
+    flex-wrap: wrap;
+    gap: 10px;
     margin: 30px auto;
   }
 
@@ -61,19 +66,36 @@
 @media (max-width: 720px) {
   .userCardsList {
     flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
-    margin: 30px auto;
+    justify-content: start;
+  }
+
+  .userCardsTiles {
+    justify-content: start;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 650px) {
   .userCardsList {
     justify-content: center;
   }
 
   .userCardsTiles {
     justify-content: center;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 420px) {
+  .userCardsList {
+    justify-content: start;
+    width: 94%;
+    flex-wrap: wrap;
+    margin: 30px auto;
+  }
+
+  .userCardsTiles {
+    justify-content: start;
+    width: 94%;
+    flex-wrap: wrap;
+    margin: 30px auto;
   }
 }
