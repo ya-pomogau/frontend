@@ -4,6 +4,7 @@ import { User } from 'entities/user/types';
 import { useConfirmUserMutation } from 'services/admin-api';
 import { UserCardTiles } from 'shared/ui/user-cards/user-card-tiles';
 import { UserCardList } from 'shared/ui/user-cards/user-card-list';
+import { useMediaQuery } from 'shared/hooks';
 
 interface UserCardProps {
   user: User;
@@ -23,6 +24,7 @@ const getButtonTypeFromScore = (
 };
 
 export const UserCard = ({ user, viewMode }: UserCardProps) => {
+  const mediaQuery = useMediaQuery('(max-width: 720px)');
   const { score, status, keys, role } = user;
   const isVolonteerAcceptButtonDisabled = !!(
     status &&
@@ -38,7 +40,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
 
   const isKeyButtonExclamationPointIcon = !!(score && score >= 60 && !keys);
 
-  return viewMode === 'tiles' ? (
+  return viewMode === 'tiles' || mediaQuery ? (
     <UserCardTiles
       user={user}
       handleConfirmClick={handleConfirmClick}

@@ -39,7 +39,6 @@
 .avatar {
   width: 100px;
   height: 100px;
-  overflow: hidden;
 }
 
 .icons_div {
@@ -62,12 +61,20 @@
   min-width: 180px;
 }
 
-@media all and (max-width: 1025px) {
-  .content {
-    width: 175px;
-    padding: 41px 10px 0 10px;
-    gap: 5px;
+@media (max-width: 1300px) {
+  .buttons_div_list_volunteers {
+    margin-left: 0;
   }
+}
+
+@media all and (max-width: 1200px) {
+  .content {
+    height: 120px;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+  }
+
   .buttons_div_list_volunteers {
     column-gap: 20px;
   }
@@ -80,11 +87,8 @@
   }
 
   .avatar {
-    position: absolute;
-    left: 50%;
-    top: 0;
     width: 62px;
     height: 62px;
-    transform: translate(-50%, -31px);
+    margin: 0 10px 0 0;
   }
 }

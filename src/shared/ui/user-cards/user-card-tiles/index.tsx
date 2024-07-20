@@ -54,9 +54,7 @@ export const UserCardTiles = ({
           />
         </div>
       )}
-
       <UserInfo userName={name} userId={_id} userNumber={phone} role={role} />
-
       {role === UserRole.VOLUNTEER && (
         <VolunteerActions
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
@@ -74,7 +72,6 @@ export const UserCardTiles = ({
           keys={keys || false}
         />
       )}
-
       {role === UserRole.RECIPIENT && (
         <RecipientActions
           approved={status !== UserStatus.UNCONFIRMED}
@@ -84,7 +81,6 @@ export const UserCardTiles = ({
           }}
         />
       )}
-
       {role === UserRole.ADMIN && (
         <AdminActions
           onAdminSaveClick={() => {
@@ -95,7 +91,6 @@ export const UserCardTiles = ({
           }}
         />
       )}
-
       {/* {children} */}
     </div>
   );
