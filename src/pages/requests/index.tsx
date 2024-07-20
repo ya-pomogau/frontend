@@ -117,7 +117,11 @@ export function RequestsPage({ incomeTab }: PageProps) {
       {/* TODO:Настроить лоадер в зависимости от получения данных : или получить все вкладки и показывать, или только открытую, остальные в фоне. */}
       {/*{isLoading ? <Loader /> : tabContent}*/}
       {volunteers && recipients && unconfirmed && admins && (
-        <RequestsTab data={filteredName} viewMode={viewMode} />
+        <RequestsTab
+          height={incomeTab === Tabs.ADMINS ? '40vh' : '55vh'}
+          data={filteredName}
+          viewMode={viewMode}
+        />
       )}
     </>
   );
