@@ -35,7 +35,8 @@
   height: 100%;
 }
 
-@media screen and (min-width: 921px) and (max-width: 1100px) {
+@media screen and (min-width: 900px) and (max-width: 1100px),
+  screen and (max-width: 415px) {
   .content {
     width: 175px;
     padding: 41px 10px 0 10px;
@@ -45,41 +46,12 @@
   .avatar {
     position: absolute;
     left: 50%;
-    top: 0;
-    width: 62px;
-    height: 62px;
     transform: translate(-50%, -31px);
   }
 }
 
-@media screen and (min-width: 400px) and (max-width: 420px) {
-  .content {
-    width: 175px;
-    padding: 41px 10px 0 10px;
-    gap: 10px;
-  }
-
-  .avatar {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 62px;
-    height: 62px;
-    transform: translate(-50%, -31px);
-  }
-}
-
-@media (max-width: 414px) {
+@media screen and (max-width: 414px) {
   .content {
     width: 100%;
-  }
-
-  .avatar {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 62px;
-    height: 62px;
-    transform: translate(-50%, -31px);
   }
 }
