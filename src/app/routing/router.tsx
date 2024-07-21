@@ -3,7 +3,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Navigate,
-  Router,
 } from 'react-router-dom';
 
 import { RoutesGroup } from 'app/routing/components/routes-group';
