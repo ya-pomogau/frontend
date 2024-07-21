@@ -93,14 +93,7 @@ export function DatePicker({
   interface MyCalendar {
     children: ReactNode | ReactNode[] | undefined;
   }
-
-  const calendarContainerDisabled = ({ children }: MyCalendar) => (
-    <div style={{ opacity: 0.5, pointerEvents: 'none' }}>{children}</div>
-  );
-
-  const calendarContainerActive = ({ children }: MyCalendar) => (
-    <div>{children}</div>
-  );
+  
 
   return (
     <ReactDatePicker
@@ -119,13 +112,11 @@ export function DatePicker({
       }
       dateFormat="dd MMMM yyyy"
       fixedHeight
+      popperClassName={styles.customPopper}
       renderCustomHeader={customHeader}
       dayClassName={() => styles.dataPicker__calendarWeekDay}
       minDate={minDate}
       customInput={<CustomInput value={undefined} onClick={undefined} />}
-      calendarContainer={
-        disabled ? calendarContainerDisabled : calendarContainerActive
-      }
     />
   );
 }

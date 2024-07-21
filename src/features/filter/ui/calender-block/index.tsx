@@ -50,7 +50,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
   }, []);
 
   return (
-    <div className={styles.filterBlock}>
+    <div>
       <p
         className={classNames(
           styles.filterBlockText,
@@ -60,7 +60,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
       >
         Дата
       </p>
-      <div>
+      <div className={styles.calendar}>
         <DatePicker
           value={filterDate ? parseISO(filterDate) : getNewDate()}
           isMobile={isCalenderMobil}
@@ -68,15 +68,6 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
           inline={window.innerWidth > 768 || false}
         />
       </div>
-      <p
-        className={classNames(
-          styles.filterBlockText,
-          'text',
-          'text_size_small'
-        )}
-      >
-        Дата
-      </p>
     </div>
   );
 };

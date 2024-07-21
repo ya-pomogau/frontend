@@ -14,8 +14,15 @@
 }
 
 .dataPicker__calendar_mobile {
-  composes: dataPicker__calendar;
-  width: 260px;
+  box-sizing: border-box;
+  margin-left: -2px;
+  width: 285px;
+  padding: 10px;
+  border-radius: 0;
+  font-family: 'Golos', sans-serif;
+  line-height: 14px;
+  background-color: white;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 
 .datePicker__calendarHeader {
@@ -38,11 +45,15 @@
   border-radius: 2px;
 }
 
+.customPopper {
+  padding-top: 6px !important; /* Убираем дефолтный паддинг сверху */
+}
+
 .customInput {
   display: block;
-  width: 260px;
+  width: 283px;
   text-align: left;
-  border: 1px solid var(--colors-interface-ford-white);
+  border: none;
   padding: 0 0 0 10px;
   background-color: inherit;
   color: var(--colors-interface-additional);
