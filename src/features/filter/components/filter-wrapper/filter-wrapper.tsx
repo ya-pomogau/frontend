@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, ReactElement, useCallback } from 'react';
+import { useState, useRef, ReactElement, useCallback, useEffect } from 'react';
 
 import { FilterButton } from 'features/filter/components/filter-button';
 import { FilterCover } from 'features/filter/components/filter-cover';
@@ -27,8 +27,8 @@ export const FilterWrapper = ({
 
     if (buttonRect) {
       setFilterPosition({
-        top: buttonRect.bottom + 20,
-        right: buttonRect.right,
+        top: buttonRect.bottom + window.scrollY + 15,
+        right: buttonRect.right + 5,
       });
     }
   }, []);

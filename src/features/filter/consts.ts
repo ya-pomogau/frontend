@@ -18,7 +18,7 @@ export const FilterItemsIds = {
   SERVIS_1: 'Сопровождение',
   SERVIS_2: 'Перевозка в личном транспорте',
   SERVIS_3: 'Покупка продуктов',
-  SERVIS_4: 'Помощ в подъёме/спуске',
+  SERVIS_4: 'Помощь в подъёме/спуске',
   SERVIS_5: 'Покупка вещей/техники',
   SERVIS_6: 'Помощь в готовке',
   SERVIS_7: 'Помощь в уборке',
@@ -29,7 +29,7 @@ export const FilterItemsIds = {
 export const defaultObjFilteres = {
   sortBy: '',
   categories: [],
-  searchRadius: '',
+  searchRadius: '5',
   date: '',
   time: ['00:00', '00:00'],
   userCategories: '',
