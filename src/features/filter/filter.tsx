@@ -9,6 +9,7 @@ import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
 import { CategoriesBlock } from './ui/categories-block';
 import { defaultObjFilteres } from './consts';
+import styles from './styles.module.css';
 
 export const Filter = ({
   items,
@@ -66,20 +67,21 @@ export const Filter = ({
               onChange={handleFilterChange}
             />
           )}
+          <div className={styles.dateBlock}>
+            {items?.time && (
+              <TimeBlock
+                filterTime={filterValues.time}
+                onChange={handleFilterChange}
+              />
+            )}
 
-          {items?.time && (
-            <TimeBlock
-              filterTime={filterValues.time}
-              onChange={handleFilterChange}
-            />
-          )}
-
-          {items?.date && (
-            <CalenderBlock
-              filterDate={filterValues.date}
-              onChange={handleFilterChange}
-            />
-          )}
+            {items?.date && (
+              <CalenderBlock
+                filterDate={filterValues.date}
+                onChange={handleFilterChange}
+              />
+            )}
+          </div>
         </>
       }
       filterValues={filterValues}
