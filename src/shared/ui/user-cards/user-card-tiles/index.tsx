@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import classnames from 'classnames';
+
+import styles from './styles.module.css';
 import VolunteerActions from 'shared/ui/user-cards/components/volonteer-actions';
 import RecipientActions from 'shared/ui/user-cards/components/recipient-actions';
 import AdminActions from 'shared/ui/user-cards/components/admin-actions';
-import styles from './styles.module.css';
 import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
@@ -27,12 +29,19 @@ export const UserCardTiles = ({
   getButtonTypeFromScore,
 }: UserCardTilesProps) => {
   const { name, role, avatar, phone, _id, score, keys, status } = user;
+  const [isActon, setIsAction] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setIsAction((state) => !state);
+  };
 
   return (
     <div
       className={classnames(
         styles.content,
-        role === UserRole.ADMIN && styles.admin_content
+        role === UserRole.ADMIN && isActon
+          ? styles.admin_content_action
+          : styles.admin_content
       )}
     >
       <Avatar
@@ -87,6 +96,7 @@ export const UserCardTiles = ({
 
       {role === UserRole.ADMIN && (
         <AdminActions
+          onSwitchArrow={handleClick}
           onAdminSaveClick={() => {
             console.log('Admin save button pressed');
           }}

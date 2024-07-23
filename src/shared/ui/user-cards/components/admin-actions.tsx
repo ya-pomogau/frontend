@@ -11,11 +11,13 @@ import styles from '../styles.module.css';
 interface AdminActionsProps {
   onAdminSaveClick: () => void;
   onAdminBlockClick: () => void;
+  onSwitchArrow: () => void;
 }
 
 const AdminActions = ({
   onAdminSaveClick,
   onAdminBlockClick,
+  onSwitchArrow,
 }: AdminActionsProps) => {
   const [isAdminDropdownListClosed, setAdminDropdownListClosed] =
     useState(true);
@@ -65,7 +67,7 @@ const AdminActions = ({
               className={classnames(styles.admin_arrow_down)}
               onClick={() => setAdminDropdownListClosed(false)}
             >
-              <ArrowDownIcon color={'blue'} />
+              <ArrowDownIcon color={'blue'} onClick={onSwitchArrow} />
             </div>
           </div>
         </>
@@ -75,7 +77,7 @@ const AdminActions = ({
             className={classnames(styles.admin_arrow_up)}
             onClick={() => setAdminDropdownListClosed(true)}
           >
-            <ArrowDownIcon color={'blue'} />
+            <ArrowDownIcon color={'blue'} onClick={onSwitchArrow} />
           </div>
           <div className={classnames(styles.admin_checkboxes)}>
             <Checkbox

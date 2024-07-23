@@ -32,7 +32,11 @@
 }
 
 .admin_content {
-  height: 100%;
+  height: 282px;
+}
+
+.admin_content_action {
+  height: 513px;
 }
 
 @media screen and (min-width: 900px) and (max-width: 1100px),
