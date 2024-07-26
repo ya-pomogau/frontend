@@ -6,12 +6,14 @@ import { useAppSelector } from 'app/hooks';
 import { useGetTaskQuery } from 'services/user-task-api';
 import useGeolocation from 'shared/hooks/use-geolocation';
 import { useMediaQuery } from 'shared/hooks';
+import { isUnConfirmedSelector } from 'entities/user/model';
 
 export const MapWithTasks = () => {
   const { coords, apiError } = useGeolocation();
   const navigate = useNavigate();
   const mediaQuery = useMediaQuery('(max-width: 910px)');
   const user = useAppSelector((state) => state.user.data);
+  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
   const [longitude, latitude] = !apiError
     ? [coords.longitude, coords.latitude]
@@ -22,6 +24,8 @@ export const MapWithTasks = () => {
   const { data, isLoading } = useGetTaskQuery({
     latitude,
     longitude,
+    }, {
+    skip: isUnConfirmed,
   });
 
   const handleClick = useCallback(() => {

@@ -1,4 +1,4 @@
-.user_info {
+f.user_info {
     display: grid;
     row-gap: 12px;
     margin-left: 8px;
@@ -14,6 +14,18 @@
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 28px;
+}
+
+.grid_ID{
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.grid_phone{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
 .id_color {
