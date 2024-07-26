@@ -1,4 +1,4 @@
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { YandexMap } from 'widgets/map';
 import { Filter } from 'features/filter';
 import { SmartHeader } from 'shared/ui/smart-header';
@@ -9,13 +9,20 @@ import { useMediaQuery } from 'shared/hooks';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { isUnConfirmedSelector } from 'entities/user/model';
+import { useEffect } from 'react';
+import { socketActions } from 'entities/chat/model';
 
 export function ProfileMapPage() {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
   const query = queryString.parse(location.search);
   const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
   const isVolunteer = user?.role === 'Volunteer';
+
+  useEffect(() => {
+    dispatch(socketActions.startConnecting());
+  }, []);
 
   let latitude = 0;
   let longitude = 0;
@@ -23,10 +30,11 @@ export function ProfileMapPage() {
     // обязателен именно такой порядок
     [longitude, latitude] = user.location;
   }
-  const {
-    data: tasks,
-    isLoading,
-  } = useGetTaskVirginQuery(['volunteer', latitude, longitude]);
+  const { data: tasks, isLoading } = useGetTaskVirginQuery([
+    'volunteer',
+    latitude,
+    longitude,
+  ]);
   const mediaQuery = useMediaQuery('(max-width: 910px)');
   const containerHeight =
     user?.status === 0
