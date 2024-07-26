@@ -1,0 +1,18 @@
+services:
+  frontend:
+    container_name: i-help-frontend-dev
+    hostname: frontend
+    image: i-help-frontend:dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./src:/app/src
+      - ./.storybook:/app/.storybook
+      - ./public:/app/public
+      - ./index.html:/app/index.html
+    ports:
+      - ${CONTAINER_PORT}:${PORT}
+    env_file:
+      - .env.dev
+    restart: on-failure
