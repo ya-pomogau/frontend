@@ -13,16 +13,20 @@ export function Layout() {
     location.pathname.includes('/blog');
   return (
     <>
-      <Header />
-      <main className={styles.main}>
-        <PageLayout content={<Outlet />} />
-      </main>
-      <div
-        className={isMaxWidthOverlay ? styles.overlayMaxWidth : styles.overlay}
-      />
-      <footer className={styles.footer}>
-        <BottomBar />
-      </footer>
+      <div className={styles.wrapper}>
+        <Header />
+        <main className={styles.main}>
+          <PageLayout content={<Outlet />} />
+        </main>
+        <div
+          className={
+            isMaxWidthOverlay ? styles.overlayMaxWidth : styles.overlay
+          }
+        />
+        <footer className={styles.footer}>
+          <BottomBar />
+        </footer>
+      </div>
     </>
   );
 }

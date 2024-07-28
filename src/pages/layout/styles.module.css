@@ -1,6 +1,11 @@
+.wrapper {
+  max-width: 1255px;
+  margin: 0 auto;
+}
+
 .main {
   height: calc(100% - 141px);
-  padding: 0 92px;
+  /* padding: 0 92px; */
   margin-top: 28px;
   position: relative;
 }
@@ -24,9 +29,14 @@
 }
 
 @media screen and (max-width: 1300px) {
-  .main {
-    padding: 0 25px;
+  .wrapper {
+    margin: 0 25px;
   }
+
+  /* .main {
+    padding: 0 25px;
+  } */
+
   .overlay {
     left: 318px;
     width: calc(100% - 358px);
@@ -50,9 +60,13 @@
 }
 
 @media all and (max-width: 415px) {
+  .wrapper {
+    margin: 0 30px;
+  }
+
   .main {
     margin-top: 20px;
-    padding: 0 14px;
+    /* padding: 0 14px; */
   }
 }
 
