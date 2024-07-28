@@ -8,21 +8,24 @@ import { PageLayout } from 'shared/ui/page-layout';
 
 export function Layout() {
   const location = useLocation();
+  const pageBlog = location.pathname === '/blog';
   const isMaxWidthOverlay =
     location.pathname.includes('/policy') ||
     location.pathname.includes('/blog');
   return (
     <>
       <Header />
-      <main className={styles.main}>
+      <main className={`${styles.main} ${pageBlog && styles.blogPage}`}>
         <PageLayout content={<Outlet />} />
       </main>
       <div
         className={isMaxWidthOverlay ? styles.overlayMaxWidth : styles.overlay}
       />
-      <footer className={styles.footer}>
-        <BottomBar />
-      </footer>
+      {!pageBlog && (
+        <footer className={styles.footer}>
+          <BottomBar />
+        </footer>
+      )}
     </>
   );
 }

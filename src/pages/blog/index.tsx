@@ -1,3 +1,6 @@
+import { useRef, useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
+
 import {
   useAddPostMutation,
   useDeletePostMutation,
@@ -13,13 +16,13 @@ import useForm from 'shared/hooks/use-form';
 import { useAppSelector } from 'app/hooks';
 import { Loader } from 'shared/ui/loader';
 import { PostProps } from 'shared/ui/post/Post';
-import { useRef, useState } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
+import { useMediaQuery } from 'shared/hooks';
 
 const postsPerPage = 10;
 
 export function BlogPage() {
   const user = useAppSelector((store) => store.user.data);
+  const mediaQuery = useMediaQuery('(max-width: 415px)');
 
   const { data: posts, isLoading } = useGetPostsQuery(postsPerPage);
   const [addPost, { isLoading: isLoadingNewPost }] = useAddPostMutation();
@@ -106,10 +109,20 @@ export function BlogPage() {
 
   return (
     <div className={styles['blog-page']}>
-      <SmartHeader
-        icon={<Icon color="blue" icon="PopularIcon" size="46" />}
-        text="Блог"
-      />
+      {mediaQuery ? (
+        <div className={styles.background}>
+          <SmartHeader
+            extClassName={styles.smartHeader}
+            icon={<Icon color="blue" icon="PopularIcon" size="46" />}
+            text="Блог"
+          />
+        </div>
+      ) : (
+        <SmartHeader
+          icon={<Icon color="blue" icon="PopularIcon" size="46" />}
+          text="Блог"
+        />
+      )}
 
       {isAdmin && (
         <PostForm

@@ -1,5 +1,37 @@
+.blog-page {
+  width: 78%;
+  margin: 0 auto;
+}
+
 .posts {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.background {
+  height: 95px;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  width: 100%;
+  background-image: url(../../app/assets/images/background-blog-page.svg);
+  background-size: cover;
+  object-fit: cover;
+}
+
+@media (max-width: 1440px) {
+  .blog-page {
+    width: 85vw;
+  }
+}
+
+@media (max-width: 415px) {
+  .blog-page {
+    width: 100vw;
+  }
+
+  .smartHeader {
+    width: 92%;
+    margin: 0 auto;
+  }
 }

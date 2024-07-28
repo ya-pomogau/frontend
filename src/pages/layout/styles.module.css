@@ -5,6 +5,13 @@
   position: relative;
 }
 
+.blogPage {
+  margin: 0 auto;
+  padding-top: 30px;
+  background-image: url(../../app/assets/images/background-blog-page.svg);
+  object-fit: cover;
+}
+
 .overlay {
   position: absolute;
   bottom: 22px;
@@ -31,6 +38,10 @@
     left: 318px;
     width: calc(100% - 358px);
   }
+
+  .blogPage {
+    padding-top: 30px;
+  }
 }
 
 @media screen and (max-width: 920px) {
@@ -47,12 +58,23 @@
   .main {
     height: calc(100vh - 53px - 22px - 30px);
   }
+
+  .blogPage {
+    padding-top: 30px;
+    height: 100%;
+  }
 }
 
 @media all and (max-width: 415px) {
   .main {
     margin-top: 20px;
     padding: 0 14px;
+  }
+
+  .blogPage {
+    margin: 0;
+    padding: 0;
+    background-image: none;
   }
 }
 
