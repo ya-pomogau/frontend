@@ -21,7 +21,7 @@ const UserInfo = ({ role, userName, userId, userNumber }: UserInfoProps) => (
       {userName}
     </h2>
     {role === UserRole.RECIPIENT && (
-      <div className={classnames(styles.grid_two, styles.id_color)}>
+      <div className={classnames(styles.grid_ID, styles.id_color)}>
         <p
           className={classnames(
             styles.id,
@@ -40,7 +40,7 @@ const UserInfo = ({ role, userName, userId, userNumber }: UserInfoProps) => (
         </p>
       </div>
     )}
-    <div className={styles.grid_two}>
+    <div className={styles.grid_phone}>
       <p
         className={classnames(
           classes.tel,
