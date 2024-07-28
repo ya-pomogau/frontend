@@ -43,8 +43,13 @@
   screen and (max-width: 415px) {
   .content {
     width: 175px;
+    height: 310px;
     padding: 41px 10px 0 10px;
     gap: 10px;
+  }
+
+  .admin_content_action {
+    height: 545px;
   }
 
   .avatar {

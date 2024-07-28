@@ -34,3 +34,30 @@ export const defaultObjFilteres = {
   time: ['00:00', '00:00'],
   userCategories: '',
 };
+
+// export enum AccessRights {
+//   createTask = 'CREATE_TASK',
+//   confirmUser = 'CONFIRM_USER',
+//   giveKey = 'GIVE_KEY',
+//   resolveConflict = 'RESOLVE_CONFLICT',
+//   contentEditor = 'EDIT_BLOG',
+//   categoryPoints = 'SET_CATEGORY_POINTS',
+// }
+
+// export enum AdminPermission {
+//   CONFIRMATION = AccessRights.confirmUser,
+//   TASKS = AccessRights.createTask,
+//   KEYS = AccessRights.giveKey,
+//   CONFLICTS = AccessRights.resolveConflict,
+//   BLOG = AccessRights.contentEditor,
+//   CATEGORIES = AccessRights.categoryPoints,
+// }
+
+// export const privilegiesData: AdminPermission = {
+//   CONFIRMATION: '',
+//   TASKS: '',
+//   KEYS: '',
+//   CONFLICTS: '',
+//   BLOG: '',
+//   CATEGORIES: ''
+// };

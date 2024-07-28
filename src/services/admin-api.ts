@@ -3,8 +3,12 @@ import { API_URL } from 'config/api-config';
 import { TaskConflict } from 'entities/task/types';
 import { User } from 'entities/user/types';
 import { getTokenAccess } from 'shared/libs/utils';
-import { TContacts } from 'shared/types/common.types';
-import { TCreateAdminDto, TNewUserResponseDto } from './auth.types';
+import { AdminPermission, TContacts } from 'shared/types/common.types';
+import {
+  AccessRights,
+  TCreateAdminDto,
+  TNewUserResponseDto,
+} from './auth.types';
 
 export const adminsApi = createApi({
   reducerPath: 'adminsApi',
@@ -142,6 +146,22 @@ export const adminsApi = createApi({
       }),
       invalidatesTags: [{ type: 'Admins' }],
     }),
+    AddAdminPrivilegies: build.mutation<
+      { _id: string; body: AdminPermission[] | undefined },
+      any
+    >({
+      query: ({ _id, body }) => ({
+        url: `admin/${_id}/privileges`,
+        method: 'PUT',
+        body: { privileges: body },
+      }),
+    }),
+    blockAdmin: build.mutation<{ id: string }, any>({
+      query: ({ id }) => ({
+        url: `admin/${id}/activate`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -156,4 +176,6 @@ export const {
   useResolСonflictMutation,
   useUpdateContactsMutation,
   useCreateNewAdminMutation,
+  useAddAdminPrivilegiesMutation,
+  useBlockAdminMutation,
 } = adminsApi;

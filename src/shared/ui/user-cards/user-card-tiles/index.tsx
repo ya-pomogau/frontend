@@ -9,8 +9,15 @@ import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
-import { UserRole, UserStatus } from 'shared/types/common.types';
-
+import {
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from 'shared/types/common.types';
+import {
+  useAddAdminPrivilegiesMutation,
+  useBlockAdminMutation,
+} from 'services/admin-api';
 export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
@@ -28,11 +35,24 @@ export const UserCardTiles = ({
   isKeyButtonExclamationPointIcon,
   getButtonTypeFromScore,
 }: UserCardTilesProps) => {
-  const { name, role, avatar, phone, _id, score, keys, status } = user;
+  const { name, role, avatar, phone, _id, score, keys, status, permissions } =
+    user;
   const [isActon, setIsAction] = useState<boolean>(false);
+  const [addAdminPrivilegies] = useAddAdminPrivilegiesMutation();
+  const [blockAdmin] = useBlockAdminMutation();
 
   const handleClick = () => {
     setIsAction((state) => !state);
+  };
+  console.log(user);
+
+  const handleAddPrivileges = async (body: AdminPermission[] | undefined) => {
+    try {
+      const result = await addAdminPrivilegies({ _id, body });
+      console.log('Privileges added:', result);
+    } catch (err) {
+      console.error('Error adding privileges:', err);
+    }
   };
 
   return (
@@ -96,11 +116,11 @@ export const UserCardTiles = ({
 
       {role === UserRole.ADMIN && (
         <AdminActions
+          permissions={permissions}
           onSwitchArrow={handleClick}
-          onAdminSaveClick={() => {
-            console.log('Admin save button pressed');
-          }}
+          onAdminSaveClick={handleAddPrivileges}
           onAdminBlockClick={() => {
+            blockAdmin(_id);
             console.log('Admin block button pressed');
           }}
         />
