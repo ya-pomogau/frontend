@@ -25,31 +25,31 @@ export const MapWithTasks = () => {
     latitude,
     longitude,
     }, {
-    skip: isUnConfirmed,
+    skip: isUnConfirmed || !user,
   });
+
+  const tasks = data || [];
 
   const handleClick = useCallback(() => {
     navigate('/register');
   }, [navigate]);
 
-  return !data || isLoading ? (
+  return isLoading ? (
     // <Loader />
     // TODO: временная заглушка, чтобы не падала приложение, так как данные тасок еще не приходят с сервера
     <p>loading</p>
   ) : (
-    data && (
-      <YandexMap
-        tasks={data}
-        width="100%"
-        height={mediaQuery ? '75vh' : '64vh'}
-        onClick={handleClick}
-        isAuthorised={user !== null}
-        mapSettings={{
-          latitude,
-          longitude,
-          zoom: 15,
-        }}
-      />
-    )
+    <YandexMap
+      tasks={tasks}
+      width="100%"
+      height={mediaQuery ? '75vh' : '64vh'}
+      onClick={handleClick}
+      isAuthorised={user !== null}
+      mapSettings={{
+        latitude,
+        longitude,
+        zoom: 15,
+      }}
+    />
   );
 };
