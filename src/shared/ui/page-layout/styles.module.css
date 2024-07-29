@@ -1,6 +1,6 @@
 .main {
   display: grid;
-  grid-template-columns: 295px 1fr;
+  grid-template-columns: 295px minmax(300px, 1fr);
   gap: 10px 20px;
   align-content: start;
   max-width: 1256px;
@@ -8,7 +8,7 @@
 }
 
 .mainWithMessage {
-  grid-template: auto 1fr / 295px 1fr;
+  grid-template: auto 1fr / 295px minmax(300px, 1fr);
 }
 
 .mainWithMessage .side {
@@ -17,6 +17,10 @@
 
 .side {
   display: block;
+}
+
+.content { 
+  width: 100%;
 }
 
 @media all and (max-width: 920px) {

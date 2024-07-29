@@ -150,13 +150,6 @@
   align-items: flex-end;
 }
 
-@media (max-width: 1050px) {
-  .header__container {
-    padding-left: 47px;
-    padding-right: 47px;
-  }
-}
-
 @media (max-width: 900px) {
   .wrapper {
     margin: 0 30px;
@@ -164,8 +157,8 @@
 
   .header__container {
     height: 42px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
     padding-top: 10px;
     align-items: center;
     height: 60px;
@@ -186,13 +179,6 @@
 
   .header__title__container {
     border: none;
-  }
-}
-
-@media (max-width: 450px) {
-  .header__container {
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 

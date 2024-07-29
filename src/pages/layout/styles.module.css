@@ -1,11 +1,5 @@
-.wrapper {
-  max-width: 1255px;
-  margin: 0 auto;
-}
-
 .main {
   height: calc(100% - 141px);
-  /* padding: 0 92px; */
   margin-top: 28px;
   position: relative;
 }
@@ -19,6 +13,7 @@
   width: calc(100% - 384px);
   pointer-events: none;
 }
+
 .overlayMaxWidth {
   position: absolute;
   bottom: 22px;
@@ -29,14 +24,6 @@
 }
 
 @media screen and (max-width: 1300px) {
-  .wrapper {
-    margin: 0 25px;
-  }
-
-  /* .main {
-    padding: 0 25px;
-  } */
-
   .overlay {
     left: 318px;
     width: calc(100% - 358px);
@@ -45,34 +32,55 @@
 
 @media screen and (max-width: 920px) {
   .main {
-    height: calc(100vh - 89px - 22px - 30px);
+    height: calc(100vh - 53px - 22px - 30px);
   }
+
   .overlay {
     left: 0;
     width: 100%;
+    bottom: -22px;
   }
 }
 
 @media screen and (max-width: 900px) {
   .main {
-    height: calc(100vh - 53px - 22px - 30px);
+    height: calc(100vh - 33px - 22px - 30px);
+  }
+
+  .overlay {
+    left: 0;
+    width: 100%;
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 812px) {
+  .main {
+    height: calc(100vh - 20px - 30px);
+  }
+
+  .overlay {
+    left: 0;
+    width: 100%;
+    bottom: -35px;
   }
 }
 
 @media all and (max-width: 415px) {
-  .wrapper {
-    margin: 0 30px;
-  }
-
   .main {
     margin-top: 20px;
-    /* padding: 0 14px; */
+    height: 100vh;
+  }
+
+  .overlay {
+    bottom: -82px;  
   }
 }
 
 .footer {
-  max-width: 1440px;
-  margin: 0 auto;
+  width: calc(100% + 25px * 2);
+  margin-left: -25px;
+  margin-right: -25px;
   height: 22px;
   overflow: hidden;
 }
