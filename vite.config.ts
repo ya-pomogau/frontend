@@ -8,4 +8,8 @@ export default defineConfig({
   build: {
     outDir: './build',
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./vitest.setup.ts'],
+  },
 });

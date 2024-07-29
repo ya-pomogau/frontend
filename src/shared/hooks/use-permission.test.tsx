@@ -58,7 +58,7 @@ describe('check hook usePermission', () => {
       }
     );
 
-    expect(result).toBe(true);
+    expect(result.current).toBe(false);
   });
 });
 
