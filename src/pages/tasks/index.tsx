@@ -13,6 +13,7 @@ import { Tabs, UserRole } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
 import { TasksTab } from 'pages/tasks-tab';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
+import { useGetUserByRolesQuery } from 'services/admin-api';
 
 export interface PageProps {
   incomeTab: string;
@@ -93,30 +94,15 @@ export function TasksPage({ incomeTab }: PageProps) {
 
   const navigate = useNavigate();
 
-  // раскоментировать 2 строки после настройки сервера
-  // const { data: recipients } = useGetUserByRolesQuery('recipients');
-  // const { data: volunteers } = useGetUserByRolesQuery('volunteers');
+  const recipients = useGetUserByRolesQuery(Tabs.RECIPIENTS).data;
+  const volunteers = useGetUserByRolesQuery(Tabs.VOLUNTEERS).data;
   const [searchName, setSearchName] = useState('');
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    const filterActiveUsers = (users: User[] | undefined): User[] => {
-      return users ? users.filter((user) => user.isActive) : [];
-    };
-
-    // раскоментировать 2 строки после настройки сервера
-    // const dataMap: Record<string, User[] | undefined> = {
-    //   [Tabs.VOLUNTEERS]: filterActiveUsers(volunteers),
-    //   [Tabs.RECIPIENTS]: filterActiveUsers(recipients),
-    // };
-
-    const dataMap: Record<string, User[]> = {
-      [Tabs.VOLUNTEERS]: filterActiveUsers(
-        mockedUsers.filter((user) => user.role === UserRole.VOLUNTEER)
-      ),
-      [Tabs.RECIPIENTS]: filterActiveUsers(
-        mockedUsers.filter((user) => user.role === UserRole.RECIPIENT)
-      ),
+    const dataMap: Record<string, User[] | undefined> = {
+      [Tabs.VOLUNTEERS]: volunteers,
+      [Tabs.RECIPIENTS]: recipients,
     };
 
     const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
@@ -130,7 +116,7 @@ export function TasksPage({ incomeTab }: PageProps) {
     searchName,
     incomeTab,
     // раскоментировать 1 строку после настройки сервера
-    // volunteers, recipients
+    volunteers, recipients
   ]);
 
   const handleUserClick = (user: User) => {

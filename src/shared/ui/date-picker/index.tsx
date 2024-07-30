@@ -84,16 +84,10 @@ export function DatePicker({
   extClassName,
   minDate = subDays(new Date(), 0),
   inline = true,
-  disabled,
 }: IDatePickerProps) {
   const handleOnChange = (date: Date) => {
     if (date) onChangeValue(date);
   };
-
-  interface MyCalendar {
-    children: ReactNode | ReactNode[] | undefined;
-  }
-  
 
   return (
     <ReactDatePicker
