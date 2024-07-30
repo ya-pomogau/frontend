@@ -28,6 +28,7 @@
 .phoneWrapper {
   display: flex;
   margin-top: 5px;
+  align-items: center;
 }
 
 .phoneNumber {
@@ -39,3 +40,5 @@
     height: 100vh;
   }
 }
+
+

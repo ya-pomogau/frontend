@@ -82,15 +82,15 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                 mapSettings={mapSettings}
               />
               <div className={styles.alertWrapper}>
-                <p className={`${warningTextStyles} ${styles.text}`}>
-                  * Будьте осторожны, если указываете домашний адрес,
-                  <span
-                    className={`${warningTextStyles} ${styles.selectedText}`}
-                  >
-                    &nbsp;не&nbsp;
-                  </span>
-                  пишите его полностью.
-                </p>
+              <p className={`${warningTextStyles} ${styles.text}`}>
+              * Рекомендуем
+              <span className={`${warningTextStyles} ${styles.selectedText}`}>
+                &nbsp;не&nbsp;
+              </span>
+              указывать полный домашний адрес с номером квартиры
+              <br />
+              в целях безопасности. Достаточно улицы, номера дома и подъезда.
+            </p>
               </div>
               <div className={styles.wrapperForGradient} />
             </div>
@@ -105,13 +105,13 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               extClassName={styles.input}
             />
             <p className={`${warningTextStyles} ${styles.text}`}>
-              * Будьте осторожны, если указываете домашний
-              <br />
-              адрес,
+              * Рекомендуем
               <span className={`${warningTextStyles} ${styles.selectedText}`}>
                 &nbsp;не&nbsp;
               </span>
-              пишите его полностью.
+              указывать полный домашний адрес с номером квартиры
+              <br />
+              в целях безопасности. Достаточно улицы, номера дома и подъезда.
             </p>
             <div className={styles.map}>
               <YandexMap

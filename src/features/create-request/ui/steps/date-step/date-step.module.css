@@ -29,7 +29,7 @@
 
 .button {
   display: flex;
-  flex-direction: column;
+  justify-content: end;
 }
 
 .inputForTime {
@@ -135,10 +135,6 @@ input[type='time']::-webkit-calendar-picker-indicator {
   padding-bottom: 20px;
   color: red;
   text-align: center;
-}
-
-.buttonWrapper {
-  margin: auto;
 }
 
 .dateWithButtonContainer {
