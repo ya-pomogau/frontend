@@ -6,14 +6,14 @@ import { EditIcon } from '../../shared/ui/icons/edit-icon';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Button } from '../../shared/ui/button';
 import { CloseIconThin } from '../../shared/ui/icons/close-icon-thin';
-import { useAppSelector } from '../../app/hooks';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { LockIcon } from '../../shared/ui/icons/lock-icon';
 import { useMediaQuery } from '../../shared/hooks';
+import usePermission from '../../shared/hooks/use-permission';
+import { UserRole } from 'shared/types/common.types';
 
 export function PolicyPage() {
-  const { role, data } = useAppSelector((state) => state.user);
-  const isMainAdmin = role === 'Admin' && data && data.isRoot;
+  const isMainAdmin = usePermission([], UserRole.ADMIN);
   const isMobile = useMediaQuery('(max-width:900px)');
   // TODO Нужно реализовать хранение значений titleMarkdown и descriptionMarkdown на сервере в базе данных
   const [titleMarkdown, setTitleMarkdown] = useState(initTitleMarkdown);
@@ -61,14 +61,12 @@ export function PolicyPage() {
             >
               {titleMarkdown}
             </ReactMarkdown>
-            <button
-              className={style.editButton}
-              onClick={handleEditButton}
-              style={isMainAdmin ? { display: 'flex' } : { display: 'none' }}
-            >
-              <EditIcon color={'blue'} size={'20'} height="18" />
-              <p className={style.editButtonText}>Редактировать</p>
-            </button>
+            {isMainAdmin && (
+              <button className={style.editButton} onClick={handleEditButton}>
+                <EditIcon color={'blue'} size={'20'} height="18" />
+                <p className={style.editButtonText}>Редактировать</p>
+              </button>
+            )}
           </div>
           <ReactMarkdown
             className={style.markdownStyles}
