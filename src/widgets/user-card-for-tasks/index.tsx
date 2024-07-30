@@ -36,10 +36,12 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
             onClick={() => {
               window.location.href = 'tel:' + phone;
             }}
+            disabled
           />
           <RoundButton
             buttonType="message"
             onClick={() => console.log('message button pressed')}
+            disabled
           />
         </div>
       )}

@@ -5,11 +5,13 @@ import { User } from 'entities/user/types';
 interface TabProps {
   data: User[];
   viewMode: 'tiles' | 'list';
+  height?: string;
 }
 
-export function RequestsTab({ data, viewMode }: TabProps) {
+export function RequestsTab({ data, viewMode, height }: TabProps) {
   return (
     <div
+      style={{ height: height }}
       className={
         viewMode === 'list' ? styles.userCardsList : styles.userCardsTiles
       }

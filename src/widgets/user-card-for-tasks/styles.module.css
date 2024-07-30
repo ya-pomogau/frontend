@@ -1,10 +1,10 @@
 .content {
   width: 276px;
+  min-height: 172px;
   box-sizing: border-box;
   position: relative;
   margin-top: 31px;
   padding: 32px 30px 10px 30px;
-  min-height: 128px;
   border: 1px solid var(--colors-interface-blue-strong);
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
 }
 
 .user_info {
-  display: grid;
+  display: flex;
   row-gap: 12px;
   margin-left: 8px;
 }

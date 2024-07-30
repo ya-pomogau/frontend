@@ -29,10 +29,7 @@ const UserInfo = ({
     <div className={classnames(styles.user_info, extraClasses)}>
       <div>
         <h2
-          className={classnames(
-            styles.name_text,
-            'm-0 text text_size_medium text_type_regular'
-          )}
+          className={classnames(styles.name_text, 'm-0 text text_type_regular')}
         >
           {userName}
         </h2>

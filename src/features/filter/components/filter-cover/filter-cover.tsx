@@ -45,6 +45,8 @@ export const FilterCover = ({
     // eslint-disable-next-line
   }, []);
 
+  const buttonStyle = { marginTop: '-15px' };
+
   const applyFilter = () => {
     Object.entries(filterValues).forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -64,7 +66,7 @@ export const FilterCover = ({
 
   const resetFilter = () => {
     onReset();
-    setFilteres?.(defaultObjFilteres);
+    setSearchParams(defaultObjFilteres);
     closeFilterMenu();
   };
 
@@ -99,6 +101,7 @@ export const FilterCover = ({
             }`}
           >
             <Button
+              style={buttonStyle}
               label="Сбросить фильтры"
               buttonType="secondary"
               size="medium"
@@ -106,6 +109,7 @@ export const FilterCover = ({
               customIcon={<CloseCrossIcon color={'blue'} />}
             />
             <Button
+              style={buttonStyle}
               label="Применить"
               buttonType="primary"
               size="medium"
