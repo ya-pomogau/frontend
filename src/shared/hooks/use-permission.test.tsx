@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { configureStore } from '@reduxjs/toolkit';
 import { renderHook } from '@testing-library/react';
 import { Provider } from 'react-redux';
@@ -6,13 +6,53 @@ import { UserState, userModel } from '../../entities/user/model';
 import { User } from '../../entities/user/types';
 import { AdminPermission, UserRole, UserStatus } from '../types/common.types';
 import usePermission from './use-permission';
-// import { describe } from 'node:test';
 
 // Создаем тут пользователя, тип его обязательно UserState, иначе TS ругаться будет
-const testUser: UserState = {
+
+const defaultVolunteer: UserState = {
   isFailed: false,
   isLoading: false,
-  _id: '123',
+  _id: 'volunteer',
+  role: UserRole.VOLUNTEER,
+  data: {
+    _id: 'string',
+    name: 'string',
+    phone: 'string',
+    avatar: 'string',
+    address: 'string',
+    vkId: 'string',
+    role: UserRole.VOLUNTEER,
+    permissions: [],
+    password: 'string',
+    isRoot: false,
+    isActive: true,
+  },
+};
+
+const defaultRecipient: UserState = {
+  isFailed: false,
+  isLoading: false,
+  _id: 'recipient',
+  role: UserRole.RECIPIENT,
+  data: {
+    _id: 'string',
+    name: 'string',
+    phone: 'string',
+    avatar: 'string',
+    address: 'string',
+    vkId: 'string',
+    role: UserRole.RECIPIENT,
+    permissions: [],
+    password: 'string',
+    isRoot: false,
+    isActive: true,
+  },
+};
+
+const defaultAdmin: UserState = {
+  isFailed: false,
+  isLoading: false,
+  _id: 'admin',
   role: UserRole.ADMIN,
   data: {
     _id: 'string',
@@ -22,35 +62,126 @@ const testUser: UserState = {
     address: 'string',
     vkId: 'string',
     role: UserRole.ADMIN,
-    permissions: [AdminPermission.CONFIRMATION],
+    permissions: [AdminPermission.BLOG],
     password: 'string',
     isRoot: false,
     isActive: true,
   },
 };
 
-describe('check hook usePermission', () => {
-  it('check volunteer', () => {
+describe('check how usePermission works with rootUser', () => {
+  it('for rootUser without admin permissions hook returns true', () => {
     const store = configureStore({
       reducer: { user: userModel.reducer },
       preloadedState: {
         user: {
-          ...testUser,
-          role: UserRole.VOLUNTEER,
+          ...defaultAdmin,
+          role: UserRole.ADMIN,
           data: {
-            ...testUser.data,
-            role: UserRole.VOLUNTEER,
+            ...defaultAdmin.data,
+            permissions: [],
+            isRoot: true,
           } as User,
         },
       },
     });
 
-    const useAppSelector = vi.fn();
+    const { result } = renderHook(() => usePermission([], UserRole.ADMIN), {
+      wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
+    });
 
-    useAppSelector.mockReturnValue(testUser);
+    expect(result.current).toBe(true);
+  });
+
+  it('for rootUser with admin permissions hook returns true', () => {
+    const store = configureStore({
+      reducer: { user: userModel.reducer },
+      preloadedState: {
+        user: {
+          ...defaultAdmin,
+          role: UserRole.ADMIN,
+          data: {
+            ...defaultAdmin.data,
+            isRoot: true,
+          } as User,
+        },
+      },
+    });
 
     const { result } = renderHook(
-      () => usePermission([UserStatus.CONFIRMED], UserRole.VOLUNTEER),
+      () => usePermission([AdminPermission.BLOG], UserRole.ADMIN),
+      {
+        wrapper: ({ children }) => (
+          <Provider store={store}>{children}</Provider>
+        ),
+      }
+    );
+
+    expect(result.current).toBe(true);
+  });
+});
+
+describe('check how usePermission works with admin', () => {
+  it('for admin without permissions hook returns false', () => {
+    const store = configureStore({
+      reducer: { user: userModel.reducer },
+      preloadedState: {
+        user: {
+          ...defaultAdmin,
+          role: UserRole.ADMIN,
+          data: {
+            ...defaultAdmin.data,
+            permissions: [],
+          } as User,
+        },
+      },
+    });
+
+    const { result } = renderHook(() => usePermission([], UserRole.ADMIN), {
+      wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
+    });
+
+    expect(result.current).toBe(false);
+  });
+
+  it('for admin with permissions hook returns true', () => {
+    const store = configureStore({
+      reducer: { user: userModel.reducer },
+      preloadedState: {
+        user: {
+          ...defaultAdmin,
+          role: UserRole.ADMIN,
+        },
+      },
+    });
+
+    const { result } = renderHook(
+      () => usePermission([AdminPermission.BLOG], UserRole.ADMIN),
+      {
+        wrapper: ({ children }) => (
+          <Provider store={store}>{children}</Provider>
+        ),
+      }
+    );
+
+    expect(result.current).toBe(true);
+  });
+});
+
+describe('check how usePermission works with volunteer', () => {
+  it('for volunteer hook returns false', () => {
+    const store = configureStore({
+      reducer: { user: userModel.reducer },
+      preloadedState: {
+        user: {
+          ...defaultVolunteer,
+          role: UserRole.VOLUNTEER,
+        },
+      },
+    });
+
+    const { result } = renderHook(
+      () => usePermission([UserStatus.ACTIVATED], UserRole.VOLUNTEER),
       {
         wrapper: ({ children }) => (
           <Provider store={store}>{children}</Provider>
@@ -62,14 +193,27 @@ describe('check hook usePermission', () => {
   });
 });
 
-// пример ниже отрабатывает без ошибки
+describe('check how usePermission works with recipient', () => {
+  it('for recipient hook returns false', () => {
+    const store = configureStore({
+      reducer: { user: userModel.reducer },
+      preloadedState: {
+        user: {
+          ...defaultRecipient,
+          role: UserRole.RECIPIENT,
+        },
+      },
+    });
 
-// function sum(a: number, b: number): number {
-//   return a + b;
-// }
+    const { result } = renderHook(
+      () => usePermission([UserStatus.ACTIVATED], UserRole.RECIPIENT),
+      {
+        wrapper: ({ children }) => (
+          <Provider store={store}>{children}</Provider>
+        ),
+      }
+    );
 
-// describe('1+2=3', () => {
-//   it('adds 1 + 2 to equal 3', () => {
-//     expect(sum(1, 2)).toBe(3);
-//   });
-// });
+    expect(result.current).toBe(false);
+  });
+});
