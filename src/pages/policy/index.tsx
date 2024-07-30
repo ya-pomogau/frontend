@@ -1,9 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import {
-  initTitleMarkdown,
-  initDescriptionMarkdown,
-} from './content';
+import { initTitleMarkdown, initDescriptionMarkdown } from './content';
 import style from './markdown-style.module.css';
 import { EditIcon } from '../../shared/ui/icons/edit-icon';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
@@ -16,8 +13,8 @@ import { useMediaQuery } from '../../shared/hooks';
 
 export function PolicyPage() {
   const { role, data } = useAppSelector((state) => state.user);
-  const isAdmin = role === 'Admin' && data && data.isRoot;
-  const isMobile = useMediaQuery('(max-width:1150px)');
+  const isMainAdmin = role === 'Admin' && data && data.isRoot;
+  const isMobile = useMediaQuery('(max-width:900px)');
   // TODO Нужно реализовать хранение значений titleMarkdown и descriptionMarkdown на сервере в базе данных
   const [titleMarkdown, setTitleMarkdown] = useState(initTitleMarkdown);
   const [descriptionMarkdown, setDescriptionMarkdown] = useState(
@@ -67,9 +64,9 @@ export function PolicyPage() {
             <button
               className={style.editButton}
               onClick={handleEditButton}
-              style={isAdmin ? { display: 'block' } : { display: 'none' }}
+              style={isMainAdmin ? { display: 'flex' } : { display: 'none' }}
             >
-              <EditIcon color={'blue'} size={'24'} />
+              <EditIcon color={'blue'} size={'20'} height="18" />
               <p className={style.editButtonText}>Редактировать</p>
             </button>
           </div>
