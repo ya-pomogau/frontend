@@ -7,6 +7,7 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": true
   },
+  "include": ["vite.config.ts"]
 }
