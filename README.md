@@ -25,29 +25,34 @@
 
 Должен быть установлен NodeJS v18.15
 
-1. [Форкнуть](https://github.com/ya-pomogau/frontend/fork) репозиторий проекта
-2. Склонировать **из своего репозитория** проект на локальную машину
-3. Установить зависимости именно `npm ci`
+1. Склонировать [репозиторий фронтенда](https://github.com/ya-pomogau/frontend)
+   ```shell
+   git clone git@github.com:ya-pomogau/frontend.git
+   ```
+2. Установить зависимости **именно** `npm ci`
 
    ```shell
    npm ci
    ```
 
-4. Скопировать `.env.development.example` в `.env.development` - `vite` именно по такому имени будет брать переменные окружения для локальной разработки
-5. Запустить скрипт фронтенда и storybook в concurrent режиме
+3. Скопировать `.env.development.example` в `.env.development` - `vite` по такому имени будет искать файл с переменными окружения для локальной разработки
+4. Запустить скрипт фронтенда и storybook в concurrent режиме
 
    ```shell
    npm run dev
    ```
 
-6. Браузер автоматически откроет новые вкладки http://localhost:3000/ (проект) и http://localhost:6007/ (storybook)
+5. Фронтенд доступен на `PORT` из `.env.development` (по умолчанию http://localhost:3000)
+6. Storybook доступен на http://localhost:6007
 
 ## Локальная разработка c докером
 
-1. [Форкнуть](https://github.com/ya-pomogau/frontend/fork) репозиторий проекта
-2. Склонировать **из своего репозитория** проект на локальную машину
-3. Скопировать `.env.dev.example` в `.env.dev`
-4. Запустить контейнер фронта
+1. Склонировать [репозиторий фронтенда](https://github.com/ya-pomogau/frontend)
+   ```shell
+   git clone git@github.com:ya-pomogau/frontend.git
+   ```
+2. Скопировать `.env.dev.example` в `.env.dev`
+3. Запустить контейнер фронта
 
    ```shell
    docker compose -f docker-compose.dev.yml --env-file=.env.dev up --build
