@@ -45,7 +45,7 @@ export const EditViewerInfo = ({
     reset,
   } = useForm({
     defaultValues: {
-      name: userName,
+      name: '',
       phone: userPhone,
       address: userAddress,
     },
@@ -140,14 +140,14 @@ export const EditViewerInfo = ({
         </fieldset>
         <fieldset className={classnames(styles.fieldset, styles.infoBlock)}>
           <legend className="visually-hidden">Контактные данные</legend>
-          <ProfileInput label="Имя:">
+          <ProfileInput label="Имя">
             <FormInput
               type="text"
               name="name"
               rules={{
                 required: {
                   value: true,
-                  message: 'Имя обязательно',
+                  message: 'Имя не может быть пустым',
                 },
               }}
               control={control}
@@ -155,12 +155,12 @@ export const EditViewerInfo = ({
               placeholder="Введите имя"
             />
           </ProfileInput>
-          <ProfileInput label="Тел.:">
+          <ProfileInput label="Тел:">
             <FormInput
               type="tel"
               name="phone"
               rules={{
-                required: 'Телефон обязателен',
+                required: 'Неверный формат номера',
                 pattern: {
                   value: /^([+]7|8)\d{10}$/,
                   message: 'Неверный формат номера',
@@ -175,7 +175,7 @@ export const EditViewerInfo = ({
             <FormInput
               type="text"
               name="address"
-              rules={{ required: 'Адрес обязателен' }}
+              rules={{ required: 'Адрес не может быть пустым' }}
               control={control}
               extClassName={classnames(styles.input, 'text_size_medium')}
               placeholder="Введите адрес"
