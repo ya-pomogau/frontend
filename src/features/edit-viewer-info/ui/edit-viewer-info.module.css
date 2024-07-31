@@ -3,7 +3,7 @@
   --margin-inline-end: 70px;
   cursor: auto;
   padding: 40px var(--margin-inline-end) 40px var(--margin-inline-start);
-  min-width: 360px;
+  max-width: 360px;
 }
 
 .editProfile {
@@ -50,7 +50,7 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 26px 10px;
-  padding: 16px 0 30px 0;
+  padding: 17px 0 30px 0;
   color: var(--colors-interface-primary);
 }
 
