@@ -45,7 +45,7 @@ export const EditViewerInfo = ({
     reset,
   } = useForm({
     defaultValues: {
-      name: '',
+      name: userName,
       phone: userPhone,
       address: userAddress,
     },
