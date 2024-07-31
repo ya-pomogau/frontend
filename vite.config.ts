@@ -25,7 +25,7 @@ export default defineConfig(({ command, mode }) => {
         setupFiles: ['./vitest.setup.ts'],
       },
       server: {
-        open: true,
+        open: Boolean(process.env.VITE_OPEN),
         host: true,
         port: +process.env.VITE_PORT!,
       },

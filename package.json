@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm start\" \"npm run storybook\"",
     "start": "vite",
+    "start:docker": "docker-compose -f docker-compose.dev.yml --env-file=.env.dev up --build",
     "storybook": "storybook dev -p 6007",
     "prettier": "prettier --check src/**/*.{ts,tsx,css}",
     "prettier:format": "prettier --write \"src/**/*.{ts,tsx,scss,css,json}\"",
