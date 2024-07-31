@@ -1,4 +1,5 @@
-::-webkit-scrollbar {
+.userCardsTiles::-webkit-scrollbar,
+.userCardsList::-webkit-scrollbar {
   width: 0;
 }
 
