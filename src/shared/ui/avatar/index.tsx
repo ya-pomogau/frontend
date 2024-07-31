@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
-  avatarLink: string;
+  avatarLink: string | undefined;
   avatarName: string;
 }
 

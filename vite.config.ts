@@ -36,6 +36,7 @@ export default defineConfig(({ command, mode }) => {
       ...defaultConfig,
       build: {
         outDir: './build',
+        emptyOutDir: true
       },
     };
   }
