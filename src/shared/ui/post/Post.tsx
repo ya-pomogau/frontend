@@ -22,7 +22,8 @@ export interface PostProps {
   _id?: string;
   title: string;
   text: string;
-  files: ImageProps[];
+  // files: ImageProps[];
+  files: string[];
   author: Pick<User, '_id' | 'name' | 'avatar'>;
   handleDeleteButton?: (id: string) => void;
   handleEditButton?: (post: Partial<PostProps>) => void;
@@ -148,11 +149,18 @@ export const Post: FC<PostProps> = ({
       </div>
       <div className={galleryStyle}>
         {files.map((image) => (
-          <div key={image.id} className={styles['gallery-item']}>
+          // <div key={image.id} className={styles['gallery-item']}>
+          //   <img
+          //     className={styles['gallery-item-image']}
+          //     src={image.src}
+          //     alt={image.alt}
+          //   />
+          // </div>
+          <div key={image} className={styles['gallery-item']}>
             <img
               className={styles['gallery-item-image']}
-              src={image.src}
-              alt={image.alt}
+              src={image}
+              alt={image}
             />
           </div>
         ))}

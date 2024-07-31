@@ -23,6 +23,7 @@ const postsPerPage = 10;
 export function BlogPage() {
   const user = useAppSelector((store) => store.user.data);
   const mediaQuery = useMediaQuery('(max-width: 415px)');
+  const [fileInput, setFileInput] = useState<string[]>(['']);
 
   const { data: posts, isLoading } = useGetPostsQuery(postsPerPage);
   const [addPost, { isLoading: isLoadingNewPost }] = useAddPostMutation();
@@ -63,11 +64,13 @@ export function BlogPage() {
 
   const handlePublishPost = async () => {
     if (!(values.title.trim() && values.text.trim() && user)) return;
+    const img = attachments.map((item) => item.name);
 
     if (!idEditedPost) {
       await addPost({
         title: values.title,
         text: values.text,
+        files: fileInput,
       });
 
       setValues({ title: '', text: '' });
@@ -106,6 +109,29 @@ export function BlogPage() {
       behavior: 'smooth',
     });
   };
+  console.log(fileInput);
+
+  const getBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+      reader.onerror = (error) => {
+        console.log('Error: ', error);
+        reject(error);
+      };
+    });
+  };
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.files && e.currentTarget.files.length > 0) {
+      const file = e.currentTarget.files[0];
+      const base64 = await getBase64(file);
+      setFileInput((state) => [...state, base64]);
+    }
+  };
 
   return (
     <div className={styles['blog-page']}>
@@ -130,7 +156,7 @@ export function BlogPage() {
           refPostForm={refPostForm}
           title={values.title}
           text={values.text}
-          addAttachment={handleAddAttachment}
+          addAttachment={handleFile}
           removeAttachment={handleRemoveAttachment}
           handleChange={handleChange}
           handleSubmit={handlePublishPost}

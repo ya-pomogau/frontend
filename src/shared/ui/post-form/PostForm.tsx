@@ -17,7 +17,7 @@ interface PostFormProps {
     id: string;
     name: string;
   }[];
-  addAttachment: (fileList: FileList | null) => void;
+  addAttachment: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeAttachment: (id: string) => void;
   handleChange: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -72,10 +72,11 @@ export const PostForm: FC<PostFormProps> = ({
             name="fileAttachment"
             accept={[FileTypes.JPEG, FileTypes.JPG, FileTypes.PNG].join(',')}
             multiple
-            onChange={(e) => {
-              addAttachment(e.target.files);
-              e.target.value = '';
-            }}
+            onInput={addAttachment}
+            // onChange={(e) => {
+            //   addAttachment(e.target.value);
+            //   e.target.value = '';
+            // }}
           ></input>
         </label>
       </div>
