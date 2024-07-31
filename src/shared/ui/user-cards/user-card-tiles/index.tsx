@@ -44,7 +44,6 @@ export const UserCardTiles = ({
   const handleClick = () => {
     setIsAction((state) => !state);
   };
-  console.log(user);
 
   const handleAddPrivileges = async (body: AdminPermission[] | undefined) => {
     try {
@@ -54,6 +53,7 @@ export const UserCardTiles = ({
       console.error('Error adding privileges:', err);
     }
   };
+  console.log(_id);
 
   return (
     <div

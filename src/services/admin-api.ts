@@ -152,7 +152,7 @@ export const adminsApi = createApi({
     >({
       query: ({ _id, body }) => ({
         url: `admin/${_id}/privileges`,
-        method: 'PUT',
+        method: 'PATCH',
         body: { privileges: body },
       }),
     }),
@@ -178,4 +178,5 @@ export const {
   useCreateNewAdminMutation,
   useAddAdminPrivilegiesMutation,
   useBlockAdminMutation,
+  useDeleteAdminPrivilegiesMutation,
 } = adminsApi;
