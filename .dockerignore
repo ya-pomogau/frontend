@@ -1,0 +1,9 @@
+*
+# ignore all except below
+!src/
+!.storybook/
+!public/
+!tsconfig*.json
+!package*.json
+!vite.config.ts
+!index.html

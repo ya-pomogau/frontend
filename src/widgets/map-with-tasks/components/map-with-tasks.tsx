@@ -6,12 +6,14 @@ import { useAppSelector } from 'app/hooks';
 import { useGetTaskQuery } from 'services/user-task-api';
 import useGeolocation from 'shared/hooks/use-geolocation';
 import { useMediaQuery } from 'shared/hooks';
+import { isUnConfirmedSelector } from 'entities/user/model';
 
 export const MapWithTasks = () => {
   const { coords, apiError } = useGeolocation();
   const navigate = useNavigate();
   const mediaQuery = useMediaQuery('(max-width: 910px)');
   const user = useAppSelector((state) => state.user.data);
+  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
   const [longitude, latitude] = !apiError
     ? [coords.longitude, coords.latitude]
@@ -22,30 +24,32 @@ export const MapWithTasks = () => {
   const { data, isLoading } = useGetTaskQuery({
     latitude,
     longitude,
+    }, {
+    skip: isUnConfirmed || !user,
   });
+
+  const tasks = data || [];
 
   const handleClick = useCallback(() => {
     navigate('/register');
   }, [navigate]);
 
-  return !data || isLoading ? (
+  return isLoading ? (
     // <Loader />
     // TODO: временная заглушка, чтобы не падала приложение, так как данные тасок еще не приходят с сервера
     <p>loading</p>
   ) : (
-    data && (
-      <YandexMap
-        tasks={data}
-        width="100%"
-        height={mediaQuery ? '75vh' : '64vh'}
-        onClick={handleClick}
-        isAuthorised={user !== null}
-        mapSettings={{
-          latitude,
-          longitude,
-          zoom: 15,
-        }}
-      />
-    )
+    <YandexMap
+      tasks={tasks}
+      width="100%"
+      height={mediaQuery ? '75vh' : '64vh'}
+      onClick={handleClick}
+      isAuthorised={user !== null}
+      mapSettings={{
+        latitude,
+        longitude,
+        zoom: 15,
+      }}
+    />
   );
 };

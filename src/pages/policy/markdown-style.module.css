@@ -1,22 +1,26 @@
 .wrapper {
   display: block;
   width: 100%;
-  height: 85vh;
+  height: 100%;
   overflow-y: scroll;
+  /* padding нужен, чтобы вмещался скролбар */
+  padding-right: 10px;
 }
 
-.wrapper::-webkit-scrollbar {
-  width: 0;
+/* Нужно, чтобы был отступ в конце основного текста */
+.wrapper > .markdownStyles::after {
+  content: '';
+  display: block;
+  width: 100%;
+  /* По высоте такой же как и затемнение */
+  height: 150px;
 }
 
 .markdownStyles {
   font-family: 'Golos', sans-serif;
   font-weight: 400;
   line-height: 22.4px;
-  height: 90%;
-}
-.markdownStyles::-webkit-scrollbar {
-  width: 0;
+  height: 85%;
 }
 
 .markdownStyles h1 {
@@ -26,7 +30,7 @@
   font-weight: 400;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   .markdownStyles h1 {
     margin: 20px 0 0;
   }
@@ -38,7 +42,7 @@
   font-size: 16px;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   .markdownStyles h2 {
     margin: 20px 0 10px;
   }
@@ -59,6 +63,14 @@
   margin-block-end: 0;
   padding-left: 2px;
 }
+
+@media (max-width: 900px) {
+  .markdownStyles blockquote {
+    margin-inline-start: 0;
+    padding-left: 0;
+  }
+}
+
 .markdownStyles blockquote > p {
   margin: 0;
 }
@@ -66,7 +78,14 @@
 .title {
   display: flex;
   align-items: end;
-  gap: 28px;
+  gap: 30px;
+}
+
+@media (max-width: 900px) {
+  .title {
+    gap: 3px;
+    align-items: start;
+  }
 }
 
 .editButton {
@@ -82,6 +101,12 @@
   align-items: end;
 }
 
+@media (max-width: 900px) {
+  .editButton {
+    margin: 20px 0 0;
+  }
+}
+
 .editButtonText {
   color: rgb(46, 49, 146);
   font-family: 'Golos', sans-serif;
@@ -90,6 +115,7 @@
   line-height: 140%;
   margin-block-start: 0;
   margin-block-end: 0;
+  padding-bottom: 1px;
 }
 
 .editTitleText {
@@ -106,14 +132,21 @@
 .editForm {
   display: flex;
   flex-direction: column;
+  height: calc(100% - 101px);
+}
+
+@media all and (max-width: 900px) {
+  .editForm {
+    height: calc(100% - 55px - 19px);
+  }
 }
 
 .titleInput {
   all: unset;
   display: block;
   border: 1px solid #2e3192;
-  height: 34px;
   margin-bottom: 10px;
+  padding: 10px 12px 7px 12px;
 }
 
 .editDescriptionText {
@@ -130,14 +163,16 @@
   all: unset;
   display: block;
   border: 1px solid #2e3192;
-  height: 618px;
+  height: 85%;
   margin-bottom: 10px;
+  padding: 15px 16px;
 }
 
 .buttonContainer {
   display: flex;
   gap: 30px;
   align-items: center;
+  z-index: 1;
 }
 
 .closeButton {
