@@ -157,10 +157,16 @@ export const adminsApi = createApi({
       }),
     }),
     blockAdmin: build.mutation<{ id: string }, any>({
-      query: ({ id }) => ({
+      query: (id) => ({
         url: `admin/${id}/activate`,
         method: 'DELETE',
       }),
+      invalidatesTags: (result, error) => {
+        if (error) {
+          console.log('🚀 ~ error:', error);
+        }
+        return result ? [{ type: 'Admins' }] : [];
+      },
     }),
   }),
 });
@@ -178,5 +184,4 @@ export const {
   useCreateNewAdminMutation,
   useAddAdminPrivilegiesMutation,
   useBlockAdminMutation,
-  useDeleteAdminPrivilegiesMutation,
 } = adminsApi;

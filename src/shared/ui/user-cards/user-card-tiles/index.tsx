@@ -53,7 +53,6 @@ export const UserCardTiles = ({
       console.error('Error adding privileges:', err);
     }
   };
-  console.log(_id);
 
   return (
     <div
