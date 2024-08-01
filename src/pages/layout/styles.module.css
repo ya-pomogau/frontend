@@ -7,10 +7,10 @@
 .overlay {
   position: absolute;
   bottom: 22px;
-  left: 384px;
+  left: 315px;
   background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
   height: 152px;
-  width: calc(100% - 384px);
+  width: calc(100% - 315px);
   pointer-events: none;
 }
 
@@ -23,57 +23,36 @@
   pointer-events: none;
 }
 
-@media screen and (max-width: 1300px) {
-  .overlay {
-    left: 318px;
-    width: calc(100% - 358px);
-  }
-}
-
 @media screen and (max-width: 920px) {
   .main {
-    height: calc(100vh - 53px - 22px - 30px);
+    height: calc(100% - 160px);
   }
 
   .overlay {
     left: 0;
     width: 100%;
-    bottom: -22px;
+    bottom: 22px;
   }
 }
 
 @media screen and (max-width: 900px) {
   .main {
-    height: calc(100vh - 33px - 22px - 30px);
-  }
-
-  .overlay {
-    left: 0;
-    width: 100%;
-    bottom: 0;
-  }
-}
-
-@media screen and (max-width: 812px) {
-  .main {
-    height: calc(100vh - 20px - 30px);
-  }
-
-  .overlay {
-    left: 0;
-    width: 100%;
-    bottom: -35px;
+    height: calc(100% - 112px);
   }
 }
 
 @media all and (max-width: 415px) {
   .main {
+    height: calc(100% - 42px);
     margin-top: 20px;
-    height: 100vh;
   }
 
   .overlay {
-    bottom: -82px;  
+    bottom: -40px;
+  }
+
+  .overlayMaxWidth {
+    bottom: -40px;;
   }
 }
 

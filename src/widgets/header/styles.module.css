@@ -71,7 +71,7 @@
 }
 
 .header__logo {
-  margin: 5px;
+  margin-bottom: 5px;
 }
 
 .header__logo_mobile {
@@ -156,7 +156,6 @@
   }
 
   .header__container {
-    height: 42px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 10px;
