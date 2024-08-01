@@ -1,5 +1,5 @@
 .main {
-  height: calc(100% - 141px);
+  height: calc(100% - 90px - 28px - 22px);
   padding: 0 92px;
   margin-top: 28px;
   position: relative;
@@ -44,10 +44,13 @@
   }
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 1050px) {
   .main {
-    height: calc(100vh - 89px - 22px - 30px);
+    height: calc(100% - 108px - 28px - 22px);
   }
+}
+
+@media screen and (max-width: 920px) {
   .overlay {
     left: 0;
     width: 100%;
@@ -56,7 +59,7 @@
 
 @media screen and (max-width: 900px) {
   .main {
-    height: calc(100vh - 53px - 22px - 30px);
+    height: calc(100% - 42px - 28px - 22px);
   }
 
   .blogPage {
@@ -67,6 +70,7 @@
 
 @media all and (max-width: 415px) {
   .main {
+    height: calc(100% - 42px - 20px - 22px);
     margin-top: 20px;
     padding: 0 14px;
   }

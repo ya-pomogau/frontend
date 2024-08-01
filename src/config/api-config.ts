@@ -1,7 +1,7 @@
 import { TAuthRoutes } from '../services/auth.types';
 
 const {
-  NODE_ENV,
+  VITE_MODE: NODE_ENV,
   VITE_APP_HOST_PROD: REACT_APP_HOST_PROD,
   VITE_APP_HOST_DEV: REACT_APP_HOST_DEV,
   VITE_APP_HOST_LOCAL: REACT_APP_HOST_LOCAL,

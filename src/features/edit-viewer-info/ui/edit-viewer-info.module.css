@@ -1,72 +1,75 @@
 .container {
+  --margin-inline-start: 40px;
+  --margin-inline-end: 70px;
   cursor: auto;
-  padding: 20px 39px 20px 33px;
+  padding: 40px var(--margin-inline-end) 40px var(--margin-inline-start);
+  max-width: 360px;
 }
 
-.headerElements {
+.editProfile {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0 20px;
+  align-items: center;
 }
 
-.avatarBlock {
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.avatarField {
   display: flex;
-  align-items: flex-end;
+  flex-direction: row;
   gap: 20px;
+  align-items: center;
+  align-self: flex-start;
 }
 
-.avatar {
-  max-width: 51px;
-  max-height: 51px;
+.avatarField__image {
+  max-width: 100px;
+  max-height: 100px;
 }
 
-.avatarBlock__button {
+.avatarField__uploadButton {
   border: none;
-  padding: 0 0 5px 0;
+  padding: 0;
   background-color: transparent;
   cursor: pointer;
   transition: var(--transition-hover);
+  color: var(--colors-interface-primary);
   border-bottom: 1px solid var(--colors-interface-primary);
 }
 
-.avatarBlock__hidden {
-  opacity: 0;
-  height: 0;
-  width: 0;
-  overflow: hidden;
-}
-
-.avatarBlock__button:hover {
+.avatarField__uploadButton:hover {
   opacity: 0.6;
 }
 
 .infoBlock {
-  display: flex;
-  flex-direction: column;
-  padding: 43px 0 20px 10px;
-  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 26px 10px;
+  padding: 17px 0 30px 0;
+  color: var(--colors-interface-primary);
 }
 
 .infoBlock__item {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
   gap: 19px;
-}
-
-.infoBlock__text {
-  color: var(--colors-interface-primary);
+  height: 24px;
 }
 
 .input input {
   border: 0;
   color: var(--colors-interface-primary);
-  border: none;
   border-bottom: 0.2px solid var(--colors-interface-primary);
   max-height: 20px;
-  font-size: 12px;
-  line-height: 16.8px;
-  width: 138px;
+  line-height: 22.4px;
+  width: 100%;
   padding: 0 0 5px 0;
 }
 
@@ -76,16 +79,16 @@
 
 .input span {
   margin: 0;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 14px;
-  color: var(--colors-interface-red);
+  color: var(--colors-interface-orange);
   position: absolute;
-  top: 20px;
+  top: 26px;
   left: 0;
 }
 
 .button {
-  border: none;
-  padding: 8px 21px;
-  margin: 0 auto;
+  margin-inline-start: calc(
+    var(--margin-inline-end) - var(--margin-inline-start)
+  );
 }

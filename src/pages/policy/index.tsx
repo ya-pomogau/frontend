@@ -1,23 +1,20 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import {
-  initTitleMarkdown,
-  initDescriptionMarkdown,
-} from './content';
+import { initTitleMarkdown, initDescriptionMarkdown } from './content';
 import style from './markdown-style.module.css';
 import { EditIcon } from '../../shared/ui/icons/edit-icon';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Button } from '../../shared/ui/button';
 import { CloseIconThin } from '../../shared/ui/icons/close-icon-thin';
-import { useAppSelector } from '../../app/hooks';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { LockIcon } from '../../shared/ui/icons/lock-icon';
 import { useMediaQuery } from '../../shared/hooks';
+import usePermission from '../../shared/hooks/use-permission';
+import { UserRole } from 'shared/types/common.types';
 
 export function PolicyPage() {
-  const { role, data } = useAppSelector((state) => state.user);
-  const isAdmin = role === 'Admin' && data && data.isRoot;
-  const isMobile = useMediaQuery('(max-width:1150px)');
+  const isMainAdmin = usePermission([], UserRole.ADMIN);
+  const isMobile = useMediaQuery('(max-width:900px)');
   // TODO Нужно реализовать хранение значений titleMarkdown и descriptionMarkdown на сервере в базе данных
   const [titleMarkdown, setTitleMarkdown] = useState(initTitleMarkdown);
   const [descriptionMarkdown, setDescriptionMarkdown] = useState(
@@ -64,14 +61,12 @@ export function PolicyPage() {
             >
               {titleMarkdown}
             </ReactMarkdown>
-            <button
-              className={style.editButton}
-              onClick={handleEditButton}
-              style={isAdmin ? { display: 'block' } : { display: 'none' }}
-            >
-              <EditIcon color={'blue'} size={'24'} />
-              <p className={style.editButtonText}>Редактировать</p>
-            </button>
+            {isMainAdmin && (
+              <button className={style.editButton} onClick={handleEditButton}>
+                <EditIcon color={'blue'} size={'20'} height="18" />
+                <p className={style.editButtonText}>Редактировать</p>
+              </button>
+            )}
           </div>
           <ReactMarkdown
             className={style.markdownStyles}

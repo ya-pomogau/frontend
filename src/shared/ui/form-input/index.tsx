@@ -42,6 +42,7 @@ export const FormInput = <T extends FieldValues>({
   });
 
   const iconClass = error ? styles.icon_error : styles.icon;
+  const inputClass = error ? styles.input_error : styles.input;
 
   return (
     <div className={extClassName} data-testid={'div'}>
@@ -59,7 +60,7 @@ export const FormInput = <T extends FieldValues>({
           onChange={field.onChange}
           value={field.value}
           ref={field.ref}
-          className={cn('text', styles.input)}
+          className={cn('text', inputClass)}
           placeholder={placeholder}
         />
         {Boolean(error) && error?.message && (

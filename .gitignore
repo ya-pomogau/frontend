@@ -12,6 +12,7 @@ build
 # misc
 .DS_Store
 .env*
+!.env.*example
 
 # ide
 .vscode

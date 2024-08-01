@@ -10,7 +10,7 @@ import { UserRole, UserStatus } from 'shared/types/common.types';
 import { User } from '../types';
 import { TCustomSelector } from 'shared/types/store.types';
 
-type UserState = {
+export type UserState = {
   _id: string;
   role: UserRole | null;
   data: User | null;
