@@ -5,24 +5,6 @@
   position: relative;
 }
 
-.overlay {
-  position: absolute;
-  bottom: 22px;
-  left: 384px;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
-  height: 152px;
-  width: calc(100% - 384px);
-  pointer-events: none;
-}
-.overlayMaxWidth {
-  position: absolute;
-  bottom: 22px;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
-  height: 152px;
-  width: 100%;
-  pointer-events: none;
-}
-
 @media screen and (max-width: 1300px) {
   .main {
     padding: 0 25px;

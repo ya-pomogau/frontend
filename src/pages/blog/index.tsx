@@ -110,7 +110,7 @@ export function BlogPage() {
         icon={<Icon color="blue" icon="PopularIcon" size="46" />}
         text="Блог"
       />
-
+      <div className={styles.overlay} />
       {isAdmin && (
         <PostForm
           loading={isLoadingNewPost || isLoadingEditedPost}
