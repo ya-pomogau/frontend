@@ -1,14 +1,23 @@
+import { useState } from 'react';
 import classnames from 'classnames';
+
+import styles from './styles.module.css';
 import VolunteerActions from 'shared/ui/user-cards/components/volonteer-actions';
 import RecipientActions from 'shared/ui/user-cards/components/recipient-actions';
 import AdminActions from 'shared/ui/user-cards/components/admin-actions';
-import styles from './styles.module.css';
 import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
-import { UserRole, UserStatus } from 'shared/types/common.types';
-
+import {
+  AdminPermission,
+  UserRole,
+  UserStatus,
+} from 'shared/types/common.types';
+import {
+  useAddAdminPrivilegiesMutation,
+  useBlockAdminMutation,
+} from 'services/admin-api';
 export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
@@ -26,13 +35,32 @@ export const UserCardTiles = ({
   isKeyButtonExclamationPointIcon,
   getButtonTypeFromScore,
 }: UserCardTilesProps) => {
-  const { name, role, avatar, phone, _id, score, keys, status } = user;
+  const { name, role, avatar, phone, _id, score, keys, status, permissions } =
+    user;
+  const [isActon, setIsAction] = useState<boolean>(false);
+  const [addAdminPrivilegies] = useAddAdminPrivilegiesMutation();
+  const [blockAdmin] = useBlockAdminMutation();
+
+  const handleClick = () => {
+    setIsAction((state) => !state);
+  };
+
+  const handleAddPrivileges = async (body: AdminPermission[] | undefined) => {
+    try {
+      const result = await addAdminPrivilegies({ _id, body });
+      console.log('Privileges added:', result);
+    } catch (err) {
+      console.error('Error adding privileges:', err);
+    }
+  };
 
   return (
     <div
       className={classnames(
         styles.content,
-        role === UserRole.ADMIN && styles.admin_content
+        role === UserRole.ADMIN && isActon
+          ? styles.admin_content_action
+          : styles.admin_content
       )}
     >
       <Avatar
@@ -87,10 +115,11 @@ export const UserCardTiles = ({
 
       {role === UserRole.ADMIN && (
         <AdminActions
-          onAdminSaveClick={() => {
-            console.log('Admin save button pressed');
-          }}
+          permissions={permissions}
+          onSwitchArrow={handleClick}
+          onAdminSaveClick={handleAddPrivileges}
           onAdminBlockClick={() => {
+            blockAdmin(_id);
             console.log('Admin block button pressed');
           }}
         />
