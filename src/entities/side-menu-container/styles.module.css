@@ -1,4 +1,4 @@
-.button__container {
+.sideMenuContainer {
   gap: 5px;
   width: 100%;
   box-sizing: border-box;
@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
-  margin-top: 30px;
 }
 
 .overlay {
@@ -23,30 +22,29 @@
   height: 100%;
 }
 
-.button__container--mobile {
+.sideMenuContainer--mobile {
   border: none;
 }
 
-.button__container--mob {
+.sideMenuContainer--mob {
   max-width: 354px;
 }
 
 @media (min-width: 414px) {
-  .button__container {
+  .sideMenuContainer {
     gap: 8px;
-    height: 426px;
     padding: 28px 10px;
   }
 
-  .button__container--web {
+  .sideMenuContainer--web {
     max-width: 295px;
   }
 
-  .button__container--sea {
+  .sideMenuContainer--sea {
     border: 2px solid var(--colors-interface-blue-strong);
   }
 
-  .button__container--main {
+  .sideMenuContainer--main {
     border: 2px solid var(--colors-interface-primary);
   }
 }
