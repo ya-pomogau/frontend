@@ -1,7 +1,6 @@
+import { Interface } from 'readline';
 import { TPointGeoJSON, TUser } from '../entities/user/types';
-import {
-  UserRole,
-} from 'shared/types/common.types';
+import { UserRole } from 'shared/types/common.types';
 
 export type TAuthRoutes = {
   userLogin: string;
