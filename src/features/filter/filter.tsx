@@ -8,6 +8,8 @@ import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
 import { CategoriesBlock } from './ui/categories-block';
 import styles from './styles.module.css';
+import { useState } from 'react';
+import { Informer } from 'shared/ui/informer';
 
 export const Filter = ({
   items,
@@ -27,10 +29,21 @@ export const Filter = ({
     defaultValues,
   });
 
+  const [filterResults, setFilterResults] = useState<any[]>([]); 
+  const [noResults, setNoResults] = useState(false); 
+  const [isFilterApplied, setIsFilterApplied] = useState(false); 
+
   const onSubmit = (data: IFilterValues) => {
     if (setFilteres) {
-      setFilteres(data);
+      const results = performFilter(data); 
+      setFilterResults(results); 
+      setNoResults(results.length === 0); 
+      setIsFilterApplied(true); 
     }
+  };
+
+  const performFilter = (filterData: IFilterValues) => {
+    return []; 
   };
 
   if (notFoundFilter) {
@@ -121,10 +134,20 @@ export const Filter = ({
             </>
           }
           filterValues={formValues} 
-          onReset={() => reset(defaultValues)}
+          onReset={() => {
+            reset(defaultValues);
+            setFilterResults([]); 
+            setNoResults(false); 
+            setIsFilterApplied(false); 
+          }}
           setFilteres={setFilteres}
         />
-      </form>
+       </form>
+      {isFilterApplied && noResults && (
+        <div className={styles.noResults}>
+          <Informer text="По вашему запросу ничего не найдено" />
+        </div>
+      )}
     </div>
   );
 };
