@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
-import { Form } from './components/index';
+import { NewAdminForm } from './components';
 
 export function CreateNewAdminPage() {
   return (
@@ -12,7 +12,7 @@ export function CreateNewAdminPage() {
         extClassName={styles.header}
       />
       <h2 className={styles.titlePrimary}>Добавить администратора</h2>
-      <Form />
+      <NewAdminForm />
     </>
   );
 }

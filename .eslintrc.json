@@ -97,6 +97,14 @@
           "PascalCase"
         ],
         "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "property",
+        "filter": {
+          "regex": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)?$",
+          "match": true
+        },
+        "format": null
       }
     ],
     "prettier/prettier": [

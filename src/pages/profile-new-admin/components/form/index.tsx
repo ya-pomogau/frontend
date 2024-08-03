@@ -1,4 +1,8 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { nanoid } from 'nanoid';
+import { useNavigate } from 'react-router-dom';
+import { joiResolver } from '@hookform/resolvers/joi';
+
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { InputAddress } from 'shared/ui/input-address';
@@ -6,12 +10,10 @@ import { InputPhone } from 'shared/ui/input-phone';
 import { PasswordInput } from 'shared/ui/password-input';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { useCreateNewAdminMutation } from 'services/admin-api';
-import { nanoid } from 'nanoid';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import styles from './styles.module.css';
 import { schema } from './form.schema';
-import { joiResolver } from '@hookform/resolvers/joi';
+import { Routes } from 'shared/config';
+
+import styles from './styles.module.css';
 
 export interface INewAdminForm {
   fullName: string;
@@ -25,14 +27,9 @@ export interface INewAdminForm {
   repeatedPassword: string;
 }
 
-export const Form = () => {
+export const NewAdminForm = () => {
   const [createNewAdmin] = useCreateNewAdminMutation();
   const navigate = useNavigate();
-
-  const [_, setAdminCredentials] = useState<{
-    email: string;
-    password: string;
-  } | null>(null);
 
   const handleAddressValueChange = (
     newAddress: string,
@@ -84,8 +81,7 @@ export const Form = () => {
 
     try {
       await createNewAdmin(user).unwrap();
-      setAdminCredentials({ email, password });
-      navigate('/profile/requests/volunteers');
+      navigate(Routes.PROFILE_REQUESTS_VOLUNTEERS);
     } catch (error) {
       console.error(error);
     }
@@ -119,7 +115,7 @@ export const Form = () => {
             label="Эл. почта"
             placeholder="Введите электронную почту"
             type="email"
-						autoComplete="off"
+            autoComplete="off"
           />
         )}
       />
@@ -147,7 +143,7 @@ export const Form = () => {
             defaultValue={field.value.address}
             onChange={field.onChange}
             error={!!errors?.address?.address?.message}
-            errorText={errors.address?.message}
+            errorText={errors.address?.address?.message}
             extClassName={styles.field_minus_margin}
             address={field.value}
             label="Адрес проживания"
@@ -169,7 +165,7 @@ export const Form = () => {
             label="Придумайте пароль"
             placeholder="от 6 символов"
             type="password"
-						autoComplete="new-password"
+            autoComplete="off"
           />
         )}
       />

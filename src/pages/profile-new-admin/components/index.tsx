@@ -1,1 +1,1 @@
-export { Form } from './form/index';
+export { NewAdminForm } from './form';
