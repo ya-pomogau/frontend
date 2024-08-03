@@ -9,8 +9,3 @@
 .field {
   width: 359px;
 }
-
-.field_minus_margin {
-  width: 359px;
-  margin-block-start: -10px;
-}

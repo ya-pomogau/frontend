@@ -1,7 +1,10 @@
-import styles from './styles.module.css';
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { NewAdminForm } from './components';
+
+import styles from './styles.module.css';
+
+const titleStyles = `${styles.titlePrimary} text text_size_large m-0 text_type_regular`;
 
 export function CreateNewAdminPage() {
   return (
@@ -9,9 +12,8 @@ export function CreateNewAdminPage() {
       <SmartHeader
         icon={<Icon color="white" icon="NewAdminIcon" size="54" />}
         text="Добавление администраторов"
-        extClassName={styles.header}
       />
-      <h2 className={styles.titlePrimary}>Добавить администратора</h2>
+      <h2 className={titleStyles}>Добавить администратора</h2>
       <NewAdminForm />
     </>
   );

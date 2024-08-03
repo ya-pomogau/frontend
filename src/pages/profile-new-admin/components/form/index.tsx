@@ -27,6 +27,18 @@ export interface INewAdminForm {
   repeatedPassword: string;
 }
 
+const defaultValues: INewAdminForm = {
+  fullName: '',
+  email: '',
+  phone: '',
+  address: {
+    address: '',
+    coords: [],
+  },
+  password: '',
+  repeatedPassword: '',
+};
+
 export const NewAdminForm = () => {
   const [createNewAdmin] = useCreateNewAdminMutation();
   const navigate = useNavigate();
@@ -49,19 +61,11 @@ export const NewAdminForm = () => {
     formState: { errors, isValid },
   } = useForm<INewAdminForm>({
     mode: 'onChange',
-    defaultValues: {
-      fullName: '',
-      email: '',
-      phone: '',
-      address: {
-        address: '',
-        coords: [],
-      },
-      password: '',
-      repeatedPassword: '',
-    },
+    defaultValues,
     resolver: joiResolver(schema),
   });
+
+  console.log('e', errors);
 
   const onSubmit: SubmitHandler<INewAdminForm> = async ({
     fullName,
@@ -115,7 +119,6 @@ export const NewAdminForm = () => {
             label="Эл. почта"
             placeholder="Введите электронную почту"
             type="email"
-            autoComplete="off"
           />
         )}
       />
@@ -144,7 +147,7 @@ export const NewAdminForm = () => {
             onChange={field.onChange}
             error={!!errors?.address?.address?.message}
             errorText={errors.address?.address?.message}
-            extClassName={styles.field_minus_margin}
+            extClassName={styles.field}
             address={field.value}
             label="Адрес проживания"
             placeholder="ул. Потолочного, д. 3"
@@ -165,7 +168,6 @@ export const NewAdminForm = () => {
             label="Придумайте пароль"
             placeholder="от 6 символов"
             type="password"
-            autoComplete="off"
           />
         )}
       />
@@ -182,6 +184,7 @@ export const NewAdminForm = () => {
             label="Повторите пароль"
             placeholder="от 6 символов"
             type="password"
+            autoComplete="new-password"
           />
         )}
       />
