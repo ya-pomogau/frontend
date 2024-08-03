@@ -5,7 +5,7 @@ import styles from '../styles.module.css';
 import classNames from 'classnames';
 
 interface CalenderBlockProps {
-  onChange: (name: string, value: string | string[]) => void;
+  onChange: (value: string) => void;  
   filterDate: string;
 }
 
@@ -14,7 +14,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   const handleDateChange = (date: Date) => {
     const formattedDate = format(date, 'yyyy-MM-dd');
-    onChange('date', formattedDate);
+    onChange(formattedDate);  
   };
 
   useEffect(() => {

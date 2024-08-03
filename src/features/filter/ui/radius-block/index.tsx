@@ -1,33 +1,28 @@
 import classnames from 'classnames';
-
 import { Button } from 'shared/ui/button';
 import { FilterItemsIds } from '../../consts';
-
 import styles from '../styles.module.css';
 import { useLocation } from 'react-router-dom';
 
 interface RadiusBlockProps {
   filter: string;
-  onChange: (name: string, value: string[] | string) => void;
+  onChange: (value: string) => void;  
 }
 
 export const RadiusBlock = ({ filter, onChange }: RadiusBlockProps) => {
   const location = useLocation();
 
-  // определение внешнего вида копки радуса с учетом текущего выбора фильтра
   const getRadiusButtonType = (id: string) =>
     filter === id ? 'primary' : 'secondary';
 
-  // изменение текущего состояния фильтра в части радиуса
   const handleRadiusButtonClick = (id: string) => {
     if (filter === id && location.pathname !== '/profile/map') {
-      onChange('searchRadius', '');
+      onChange('');  
     } else {
-      onChange('searchRadius', id);
+      onChange(id);  
     }
   };
 
-  // установление изначального значения радиуса поиска активных заявок
   if (filter === '' && location.pathname === '/profile/map') {
     filter = FilterItemsIds.RADIUS_5;
     setTimeout(() => {
