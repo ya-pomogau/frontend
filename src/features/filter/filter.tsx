@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useForm, Controller } from 'react-hook-form';
 import { FilterWrapper } from 'features/filter/components/filter-wrapper';
 import { FilterProps, IFilterValues } from 'features/filter/types';
 import { SortByBlock } from 'features/filter/ui/sortBy-block';
@@ -8,7 +7,6 @@ import { CalenderBlock } from 'features/filter/ui/calender-block';
 import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
 import { CategoriesBlock } from './ui/categories-block';
-import { defaultObjFilteres } from './consts';
 import styles from './styles.module.css';
 
 export const Filter = ({
@@ -16,21 +14,23 @@ export const Filter = ({
   notFoundFilter = false,
   setFilteres,
 }: FilterProps) => {
-  const [filterValues, setFilterValues] =
-    useState<IFilterValues>(defaultObjFilteres);
-
-  const handleFilterChange = (
-    name: string,
-    value: string | string[] | boolean
-  ) => {
-    setFilterValues((prevFilterValues) => ({
-      ...prevFilterValues,
-      [name]: value,
-    }));
+  const defaultValues: IFilterValues = {
+    categories: [],
+    searchRadius: '',
+    sortBy: '',
+    date: '',
+    time: [],
+    userCategories: [],
   };
 
-  const handleReset = () => {
-    setFilterValues(defaultObjFilteres);
+  const { control, handleSubmit, reset } = useForm<IFilterValues>({
+    defaultValues,
+  });
+
+  const onSubmit = (data: IFilterValues) => {
+    if (setFilteres) {
+      setFilteres(data);
+    }
   };
 
   if (notFoundFilter) {
@@ -38,55 +38,94 @@ export const Filter = ({
   }
 
   return (
-    <FilterWrapper
-      filterMenu={
-        <>
-          {items?.sort && (
-            <SortByBlock
-              filter={filterValues.sortBy}
-              onChange={handleFilterChange}
-            />
-          )}
-          {items?.categories && (
-            <CategoriesBlock
-              selectedServies={filterValues.categories}
-              onChange={handleFilterChange}
-            />
-          )}
-
-          {items?.userCategories && (
-            <UserCategoriesBlock
-              filter={filterValues.categories}
-              onChange={handleFilterChange}
-            />
-          )}
-
-          {items?.radius && (
-            <RadiusBlock
-              filter={filterValues.searchRadius}
-              onChange={handleFilterChange}
-            />
-          )}
-          <div className={styles.dateBlock}>
-            {items?.time && (
-              <TimeBlock
-                filterTime={filterValues.time}
-                onChange={handleFilterChange}
-              />
-            )}
-
-            {items?.date && (
-              <CalenderBlock
-                filterDate={filterValues.date}
-                onChange={handleFilterChange}
-              />
-            )}
-          </div>
-        </>
-      }
-      filterValues={filterValues}
-      onReset={handleReset}
-      setFilteres={setFilteres}
-    />
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FilterWrapper
+          filterMenu={
+            <>
+              {items?.sort && (
+                <Controller
+                  name="sortBy"
+                  control={control}
+                  render={({ field }) => (
+                    <SortByBlock
+                      filter={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              )}
+              {items?.categories && (
+                <Controller
+                  name="categories"
+                  control={control}
+                  render={({ field }) => (
+                    <CategoriesBlock
+                      selectedServies={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              )}
+              {items?.userCategories && (
+                <Controller
+                  name="userCategories"
+                  control={control}
+                  render={({ field }) => (
+                    <UserCategoriesBlock
+                      filter={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              )}
+              {items?.radius && (
+                <Controller
+                  name="searchRadius"
+                  control={control}
+                  render={({ field }) => (
+                    <RadiusBlock
+                      filter={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              )}
+              <div className={styles.dateBlock}>
+                {items?.time && (
+                  <Controller
+                    name="time"
+                    control={control}
+                    render={({ field }) => (
+                      <TimeBlock
+                        filterTime={field.value}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
+                )}
+                {items?.date && (
+                  <Controller
+                    name="date"
+                    control={control}
+                    render={({ field }) => (
+                      <CalenderBlock
+                        filterDate={field.value}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
+                )}
+              </div>
+            </>
+          }
+          filterValues={defaultValues}
+          onReset={() => reset(defaultValues)}
+          setFilteres={setFilteres}
+        />
+      </form>
+    </div>
   );
 };
+
+//чекбокс и кнопка сделана, но после настройки useForm и избавления от defaultObjFilteres не пойму в чем проблема

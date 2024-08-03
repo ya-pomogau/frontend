@@ -13,7 +13,8 @@ interface SortByBlockProps {
 export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
 
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    onChange('sortBy', target.id);
+    const newValue = target.checked ? target.id : '';
+    onChange('sortBy', newValue);
   };
 
   return (
