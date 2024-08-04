@@ -17,6 +17,7 @@ export interface TypedResponse<T = Record<string, unknown>> extends Response {
 export type ResponseDto = {
   [key: string]: unknown;
 };
+
 export type ErrorDto = {
   message: string;
   httpStatusCode: number;
