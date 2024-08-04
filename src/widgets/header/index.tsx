@@ -25,7 +25,7 @@ const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useMediaQuery('(max-width: 920px)');
   const user = useAppSelector((state) => state.user.data);
 
   const handleClick = (evt: SyntheticEvent) => {
