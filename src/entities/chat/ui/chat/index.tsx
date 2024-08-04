@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import classnames from 'classnames';
 
 // import { PinIcon } from 'shared/ui/icons/pin-icon';
@@ -36,6 +36,27 @@ export const PopupChat = ({
   const [inputValue, setInputValue] = useState<string>('');
   const sortedMessages = sortMessages(messages);
 
+  const [mesagesInChat, setMesagesInChat] = useState(sortedMessages);
+  const [currentMessagesPage, setCurrentMessagesPage] = useState(1);
+  const [messagesShown] = useState(10);
+
+  const lastMessage = currentMessagesPage * messagesShown;
+  const firstMessage = lastMessage - messagesShown;
+  const currentMessages = mesagesInChat.slice(firstMessage, lastMessage);
+
+  useEffect(() => {
+    const modal = document.getElementById('openedChatPopup') as HTMLElement;
+    modal.addEventListener('scroll', scrollHandler)
+
+    return function () {
+      modal.removeEventListener('scroll', scrollHandler)
+    }
+  }, [])
+
+  const scrollHandler = (e) => {
+    console.log('scroll')
+  }
+
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setInputValue(value);
@@ -48,7 +69,7 @@ export const PopupChat = ({
   };
 
   return (
-    <div
+    <div id="openedChatPopup" 
       className={classnames(styles.chatWrapper, {
         [styles.chatWrapper_action]: isOpen,
       })}
@@ -84,7 +105,7 @@ export const PopupChat = ({
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>
         <div className={styles.messagesBlock}>
-          {sortedMessages?.map((message) => (
+          {currentMessages?.map((message) => (
             <Message
               type={
                 message.userId === chatmateInfo.userId ? 'incoming' : 'outgoing'

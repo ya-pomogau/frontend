@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { PopupChat } from '../../../../../chat/ui/chat';
 import { infoAdmin } from '../../../../../chat/ui/chat/libs/utils';
 import { TaskStatus } from '../../../../types';
+import { mockChatMessages } from '../../../../../chat/mock-messages';
 
 interface TaskUserProps {
   user: UserProfile | null;
@@ -86,7 +87,7 @@ export const TaskUser = ({
         <PopupChat
           isOpen={isOpenChat}
           onClick={() => setIsOpenChat(!isOpenChat)}
-          messages={[]}
+          messages={mockChatMessages}
           chatmateInfo={infoAdmin}
           onAttachFileClick={() => {}}
         />
