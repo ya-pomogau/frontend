@@ -1,1 +1,0 @@
-export { ContactsPage } from './contacts';
