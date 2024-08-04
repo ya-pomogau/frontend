@@ -29,7 +29,6 @@ import {
 } from 'react-hook-form';
 import { useGetContactsQuery } from '../../services/contacts-api';
 import { useUpdateContactsMutation } from '../../services/admin-api';
-let renderCount = 0;
 
 interface InputContactsProps<FormInputs extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -42,6 +41,7 @@ interface InputContactsProps<FormInputs extends FieldValues>
   buttonText?: string;
   isAllowed: boolean;
   link: string;
+  isSubmit: {};
 }
 
 const InputContacts = <T extends FieldValues>({
@@ -54,6 +54,7 @@ const InputContacts = <T extends FieldValues>({
   buttonText,
   isAllowed,
   link,
+  isSubmit,
 }: InputContactsProps<T>) => {
   const { field, fieldState } = useController({
     name,
@@ -62,6 +63,11 @@ const InputContacts = <T extends FieldValues>({
   });
   const inputRef = useRef<HTMLInputElement>(null);
   const [editingInput, setEditingInput] = useState<string>('');
+  const [isSubmited, setIsSubmited] = useState({});
+  useEffect(() => {
+    setIsSubmited(isSubmit);
+    setEditingInput('');
+  }, [isSubmit, isSubmited]);
 
   const editBoxHandler = (
     elm: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
@@ -139,7 +145,6 @@ const InputContacts = <T extends FieldValues>({
 export function ContactsPage() {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
   const [updateContacts] = useUpdateContactsMutation();
-  renderCount++;
 
   const { data } = useGetContactsQuery();
 
@@ -183,20 +188,16 @@ export function ContactsPage() {
       console.error('Ошибка при сохранении данных:', error);
       setValueEmail(data?.email as string);
       setValueNetwork(data?.socialNetwork as string);
-    } finally {
-      window.location.reload();
     }
   };
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset({ ...submittedData });
-      console.log(submittedData);
     }
   }, [formState, submittedData, reset]);
 
   return (
     <>
-      <div className="counter">Render Count: {renderCount}</div>
       <SmartHeader
         text="Контакты"
         icon={<Icon color="blue" icon="ContactsIcon" size="54" />}
@@ -216,6 +217,7 @@ export function ContactsPage() {
           prefixHref="mailto:"
           isAllowed={isEditAllowed}
           link={values_contacts.email}
+          isSubmit={submittedData}
         />
         <InputContacts
           control={control}
@@ -230,6 +232,7 @@ export function ContactsPage() {
           buttonText="изменить&nbsp;соцсети"
           isAllowed={isEditAllowed}
           link={values_contacts.socialNetwork}
+          isSubmit={submittedData}
         />
 
         {isEditAllowed && (
