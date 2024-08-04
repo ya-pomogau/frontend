@@ -67,7 +67,7 @@ const InputContacts = <T extends FieldValues>({
   useEffect(() => {
     setIsSubmited(isSubmit);
     setEditingInput('');
-  }, [isSubmit, isSubmited]);
+  }, [isSubmit]);
 
   const editBoxHandler = (
     elm: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
