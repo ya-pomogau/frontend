@@ -44,10 +44,11 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
     const id = nanoid();
 
     const errorToRender = useMemo(
-      () =>
-        errorText ? (
-          <span className={cn(styles.error, 'text')}>{errorText}</span>
-        ) : null,
+      () => (
+        <span className={cn(styles.error, 'text')}>
+          {errorText === ' ' ? <span>&nbsp;</span> : errorText}
+        </span>
+      ),
       [errorText]
     );
 

@@ -1,24 +1,11 @@
 .form {
   min-width: 360px;
   display: grid;
-  gap: 25px;
+  gap: 4px;
   padding-left: 45px;
   justify-items: flex-start;
 }
 
-.container {
-  position: relative;
-}
-
 .field {
   width: 359px;
-}
-
-.error {
-  position: absolute;
-  margin-top: 8px;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
-  color: var(--colors-interface-orange);
 }

@@ -39,11 +39,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const id = nanoid();
 
     const errorToRender = useMemo(
-      () =>
-        error && errorText ? (
-          <span className={cn(styles.error, 'text')}>{errorText}</span>
-        ) : null,
-      [error, errorText]
+      () => (
+        <span className={cn(styles.error, 'text')}>
+          {errorText === ' ' ? <span>&nbsp;</span> : errorText}
+        </span>
+      ),
+      [errorText]
     );
 
     const inputClass = error

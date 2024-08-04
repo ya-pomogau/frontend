@@ -2,7 +2,6 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import cn from 'classnames';
 
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
@@ -97,57 +96,45 @@ export const NewAdminForm = () => {
         name="fullName"
         control={control}
         render={({ field }) => (
-          <div className={styles.container}>
-            <Input
-              {...field}
-              error={!!errors?.fullName?.message}
-              extClassName={styles.field}
-              label="ФИО"
-              placeholder="Введите имя"
-              type="text"
-            />
-            <span className={cn(styles.error, 'text')}>
-              {errors.fullName?.message}
-            </span>
-          </div>
+          <Input
+            {...field}
+            error={!!errors?.fullName?.message}
+            errorText={errors.fullName?.message || ' '}
+            extClassName={styles.field}
+            label="ФИО"
+            placeholder="Введите имя"
+            type="text"
+          />
         )}
       />
       <Controller
         name="email"
         control={control}
         render={({ field }) => (
-          <div className={styles.container}>
-            <Input
-              {...field}
-              error={!!errors?.email?.message}
-              extClassName={styles.field}
-              label="Эл. почта"
-              placeholder="Введите электронную почту"
-              type="email"
-            />
-            <span className={cn(styles.error, 'text')}>
-              {errors.email?.message}
-            </span>
-          </div>
+          <Input
+            {...field}
+            error={!!errors?.email?.message}
+            errorText={errors.email?.message || ' '}
+            extClassName={styles.field}
+            label="Эл. почта"
+            placeholder="Введите электронную почту"
+            type="email"
+          />
         )}
       />
       <Controller
         name="phone"
         control={control}
         render={({ field }) => (
-          <div className={styles.container}>
-            <InputPhone
-              {...field}
-              error={!!errors?.phone?.message}
-              extClassName={styles.field}
-              type="tel"
-              label="Телефон"
-              placeholder="+7 (000) 000-00-00"
-            />
-            <span className={cn(styles.error, 'text')}>
-              {errors?.phone?.message as unknown as string}
-            </span>
-          </div>
+          <InputPhone
+            {...field}
+						error={!!errors?.phone?.message}
+            errorText={(errors?.phone?.message as unknown as string) || ' '}
+            extClassName={styles.field}
+            type="tel"
+            label="Телефон"
+            placeholder="+7 (000) 000-00-00"
+          />
         )}
       />
 
@@ -155,63 +142,51 @@ export const NewAdminForm = () => {
         name="address"
         control={control}
         render={({ field }) => (
-          <div className={styles.container}>
-            <InputAddress
-              name={field.name}
-              defaultValue={field.value.address}
-              onChange={field.onChange}
-              error={!!errors?.address?.address?.message}
-              extClassName={styles.field}
-              address={field.value}
-              label="Адрес проживания"
-              placeholder="ул. Потолочного, д. 3"
-              setAddress={handleAddressValueChange}
-            />
-            <span className={cn(styles.error, 'text')}>
-              {errors.address?.address?.message}
-            </span>
-          </div>
+          <InputAddress
+            name={field.name}
+            defaultValue={field.value.address}
+            onChange={field.onChange}
+            error={!!errors?.address?.address?.message}
+            errorText={errors.address?.address?.message || ' '}
+            extClassName={styles.field}
+            address={field.value}
+            label="Адрес проживания"
+            placeholder="ул. Потолочного, д. 3"
+            setAddress={handleAddressValueChange}
+          />
         )}
       />
       <Controller
         name="password"
         control={control}
         render={({ field }) => (
-          <div className={styles.container}>
-            <PasswordInput
-              extClassName={styles.field}
-              name={field.name}
-              onChange={field.onChange}
-              error={!!errors?.password?.message}
-              label="Придумайте пароль"
-              placeholder="от 6 символов"
-              type="password"
-            />
-            <span className={cn(styles.error, 'text')}>
-              {errors.password?.message}
-            </span>
-          </div>
+          <PasswordInput
+            extClassName={styles.field}
+            name={field.name}
+            onChange={field.onChange}
+            error={!!errors?.password?.message}
+            errorText={errors.password?.message || ' '}
+            label="Придумайте пароль"
+            placeholder="от 6 символов"
+            type="password"
+          />
         )}
       />
       <Controller
         name="repeatedPassword"
         control={control}
         render={({ field }) => (
-          <div className={styles.container}>
-            <PasswordInput
-              extClassName={styles.field}
-              name={field.name}
-              onChange={field.onChange}
-              error={!!errors?.repeatedPassword?.message}
-              label="Повторите пароль"
-              placeholder="от 6 символов"
-              type="password"
-              autoComplete="new-password"
-            />
-            <span className={cn(styles.error, 'text')}>
-              {errors.repeatedPassword?.message}
-            </span>
-          </div>
+          <PasswordInput
+            extClassName={styles.field}
+            name={field.name}
+            onChange={field.onChange}
+            error={!!errors?.repeatedPassword?.message}
+            errorText={errors.repeatedPassword?.message || ' '}
+            label="Повторите пароль"
+            placeholder="от 6 символов"
+            type="password"
+            autoComplete="new-password"
+          />
         )}
       />
       <Button
