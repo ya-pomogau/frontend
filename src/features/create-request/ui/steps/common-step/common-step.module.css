@@ -3,7 +3,6 @@
   top: -8px;
 
 }
-
 .container {
   margin: 50px 0 0 76px;
   display: flex;
@@ -40,8 +39,32 @@
 .descriptionForTask {
   margin: 0;
   margin-top: 5px;
-  height: 64px;
-  overflow-y: auto;
+  height: auto;
+  overflow: hidden; 
+  max-height: 64px; 
+  transition: max-height 0.3s ease; 
+}
+
+.descriptionForTask.expanded {
+  min-height: 195px;
+  resize: none;
+  transition: var(--transition-hover);
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  appearance: auto;
+  -webkit-rtl-ordering: logical;
+  resize: -internal-textarea-auto;
+  cursor: text;
+  overflow-wrap: break-word;
+  background-color: field;
 }
 
 .dateWrapper {
@@ -67,11 +90,15 @@
     margin-top: 50px;
     justify-content: center;
     width: 260px;
+    position: relative;
+    bottom: -140px;
   }
   .task {
     font-size: 24px;
     line-height: 29px;
     align-self: center;
+    position: relative;
+    bottom: -10px;
   }
   .headerWrapper {
     background: linear-gradient(
@@ -84,20 +111,57 @@
     height: 1px;
     margin-top: 4px;
     align-self: center;
+    position: relative;
+    bottom: -10px
   }
   .dateWrapper {
     margin: 0;
     margin-top: 30px;
+    position: relative;
+    bottom: -12px
+  }
+
+  .addressWrapper {
+    position: relative;
+    bottom: -15px
   }
   .typeOfTask {
     margin-top: 5px;
     margin-bottom: 10px;
   }
+  
   .descriptionForTask {
-    margin-top: 10px;
-    height: 200px;
-    overflow-y: auto;
+    margin: 0;
+    margin-top: 5px;
+    height: auto;
+    overflow: hidden; 
+    max-height: 64px; 
+    max-width: 250px;
+    transition: max-height 0.3s ease; 
   }
+
+  .descriptionForTask.expanded {
+    min-height: 170px;
+    resize: none;
+    transition: var(--transition-hover);
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    resize: -internal-textarea-auto;
+    cursor: text;
+    overflow-wrap: break-word;
+    background-color: field;
+  }
+
   .categories {
     width: 169px;
   }
@@ -107,4 +171,13 @@
   padding-bottom: 0;
   display: flex;
   align-items: flex-end;
+}
+
+.readMoreButton {
+  background: none;
+  border: none;
+  color: var(--colors-interface-primary);
+  cursor: pointer;
+  padding: 0;
+  margin-left: 5px;
 }

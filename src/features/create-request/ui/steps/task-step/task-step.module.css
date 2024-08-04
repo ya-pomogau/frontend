@@ -72,6 +72,9 @@ top: 12px ;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
+    position: relative;
+    bottom: 8px;
+    left: -40px;
   }
   .mainWrapper {
     width: 260px;
@@ -90,21 +93,39 @@ top: 12px ;
     height: 1px;
     margin-top: 4px;
     margin-bottom: 17px;
+    position: relative;
+    bottom: 1px;
+    left: 12px;
   }
   .task {
     font-size: 24px;
     line-height: 29px;
+    position: relative;
+    bottom: -1px;
+    left: 25px;
   }
   .textarea {
     min-height: 0;
     height: 150px;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 270px;
+    position: relative;
+    bottom: -1px;
+    left: 28px;
   }
   .buttonsWrapper {
     margin-top: 180px;
     justify-content: center;
     margin-bottom: 8px;
+    position: relative;
+    bottom: 10px;
+    left: -7px;
+  }
+  
+  .messageAlert {
+  position: relative;
+  bottom: -10px;
+  left: 10px;
   }
 }
