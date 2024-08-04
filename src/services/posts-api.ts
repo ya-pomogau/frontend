@@ -35,7 +35,7 @@ export const postsApi = createApi({
         headers: {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: 'Bearer ' + localStorage.getItem('token_access'),
         },
         url: `admin/blog/${body._id}`,
         method: 'PATCH',
@@ -48,7 +48,7 @@ export const postsApi = createApi({
         headers: {
           //eslint-disable-next-line @typescript-eslint/naming-convention
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          Authorization: 'Bearer ' + localStorage.getItem('token_access'),
         },
         url: `admin/blog/${id}`,
         method: 'DELETE',

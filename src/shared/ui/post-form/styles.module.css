@@ -1,6 +1,7 @@
 .form {
   width: 50%;
   padding-left: 30px;
+  position: relative;
 }
 
 @media (max-width: 920px) {
@@ -17,14 +18,10 @@
   position: relative;
 }
 
-.textarea {
-  padding-bottom: 10px;
-}
-
 .attachment-button {
   position: absolute;
-  bottom: 23px;
-  right: 23px;
+  top: 235px;
+  right: 15px;
   cursor: pointer;
   background-color: transparent;
   padding: 0;
@@ -36,6 +33,7 @@
 }
 
 .images {
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;

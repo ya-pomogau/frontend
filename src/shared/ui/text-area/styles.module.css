@@ -13,6 +13,12 @@
   box-sizing: border-box;
 }
 
+.input_error {
+  composes: input;
+  border-color: var(--colors-interface-orange) !important;
+  color: var(--colors-interface-red) !important;
+}
+
 .input_without_label {
   composes: input;
   height: 100%;
@@ -53,4 +59,12 @@
 .for_storybook {
   width: 440px;
   height: 170px;
+}
+
+.error {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: var(--colors-interface-orange);
 }

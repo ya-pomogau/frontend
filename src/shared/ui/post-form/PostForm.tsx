@@ -1,4 +1,4 @@
-import { ChangeEvent, Ref, type FC } from 'react';
+import { ChangeEvent, Ref, useEffect, type FC } from 'react';
 import classNames from 'classnames';
 import { Button } from '../button';
 import { Input } from '../input';
@@ -7,6 +7,31 @@ import { FileAttachmentIcon } from '../icons/file-attachment-icon';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
 import styles from './styles.module.css';
 import { FileTypes } from 'shared/types/common.types';
+import { useForm } from 'react-hook-form';
+import { FormInput } from '../form-input';
+import useFormField from 'shared/hooks/use-form-field';
+import { useAddPostMutation } from 'services/posts-api';
+
+const TITLE_VALIDATION_RULES = {
+  required: 'Обязательное поле',
+  minLength: {
+    value: 4,
+    message: 'Имя должно быть больше 4 символов',
+  },
+};
+
+const TEXT_VALIDATION_RULES = {
+  required: 'Обязательное поле',
+  minLength: {
+    value: 4,
+    message: 'Имя должно быть больше 6 символов',
+  },
+};
+
+interface IForm {
+  title: string;
+  text: string;
+}
 
 interface PostFormProps {
   loading?: boolean;
@@ -17,25 +42,50 @@ interface PostFormProps {
     id: string;
     name: string;
   }[];
-  addAttachment: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  addAttachment: (fileList: FileList | null) => void;
   removeAttachment: (id: string) => void;
-  handleChange: (
+  handleChange?: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  handleSubmit: () => void;
 }
 
 export const PostForm: FC<PostFormProps> = ({
-  title,
-  text,
-  images,
   addAttachment,
   removeAttachment,
-  handleChange,
-  handleSubmit,
   refPostForm,
   loading,
+  images,
+  title,
+  text,
 }) => {
+  const [addPost] = useAddPostMutation();
+  const {
+    control,
+    handleSubmit: onSubmit,
+    formState: { isValid },
+    reset,
+  } = useForm<IForm>({
+    mode: 'onChange',
+    defaultValues: {
+      title: '',
+      text: '',
+    },
+  });
+
+  useEffect(() => {
+    if (title !== undefined && text !== undefined) {
+      reset({ title, text });
+    }
+  }, [title, text, reset]);
+
+  const titleField = useFormField('title', control, TITLE_VALIDATION_RULES);
+  const textField = useFormField('text', control, TEXT_VALIDATION_RULES);
+
+  const handleSubmitForm = (data: IForm) => {
+    addPost({ title: data.title, text: data.text });
+    reset();
+  };
+
   const imageTitleStyle = classNames(
     styles['image-title'],
     'text',
@@ -44,16 +94,21 @@ export const PostForm: FC<PostFormProps> = ({
   );
 
   return (
-    <form className={styles.form} ref={refPostForm}>
-      <Input
+    <form
+      className={styles.form}
+      ref={refPostForm}
+      onSubmit={onSubmit(handleSubmitForm)}
+    >
+      <FormInput
         extClassName={styles.input}
-        type="text"
+        control={control}
+        value={titleField.value}
+        rules={TITLE_VALIDATION_RULES}
         name="title"
-        onChange={handleChange}
+        onChange={titleField.onChange}
         label="Заголовок"
         placeholder="Благотворительность в рекламе"
-        value={title}
-      ></Input>
+      />
       <div className={styles['text-block']}>
         <TextArea
           rows={10}
@@ -61,9 +116,10 @@ export const PostForm: FC<PostFormProps> = ({
           name="text"
           label="Текст блога"
           placeholder="Напишите, чем хотите поделиться?"
-          onChange={handleChange}
-          value={text || ''}
-        ></TextArea>
+          onChange={textField.onChange}
+          value={textField.value}
+          error={textField.error}
+        />
         <label className={styles['attachment-button']}>
           <FileAttachmentIcon size="24" color="white" />
           <input
@@ -72,12 +128,11 @@ export const PostForm: FC<PostFormProps> = ({
             name="fileAttachment"
             accept={[FileTypes.JPEG, FileTypes.JPG, FileTypes.PNG].join(',')}
             multiple
-            onInput={addAttachment}
-            // onChange={(e) => {
-            //   addAttachment(e.target.value);
-            //   e.target.value = '';
-            // }}
-          ></input>
+            onChange={(e) => {
+              addAttachment(e.target.files);
+              e.target.value = '';
+            }}
+          />
         </label>
       </div>
       <div className={styles.images}>
@@ -98,12 +153,11 @@ export const PostForm: FC<PostFormProps> = ({
       </div>
 
       <Button
-        onClick={handleSubmit}
+        type="submit"
         label="Опубликовать"
         buttonType="primary"
-        type="button"
         isLoading={loading}
-        disabled={!title?.trim() || !text?.trim()}
+        disabled={!isValid}
       />
     </form>
   );

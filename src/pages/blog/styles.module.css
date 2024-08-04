@@ -1,6 +1,16 @@
 .blog-page {
   width: 78%;
   margin: 0 auto;
+  height: 80vh;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.blog-page::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .posts {
