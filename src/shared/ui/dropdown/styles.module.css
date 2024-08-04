@@ -5,10 +5,10 @@
 }
 
 .label {
-  color: var(--colors-interface-primary);
+  left: 1px; 
   position: relative;
   bottom: 8px;
-  left: 1px;
+  
 }
 
 .button {

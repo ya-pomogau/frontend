@@ -5,6 +5,8 @@
 .text {
   margin: 5px 0;
   grid-column-start: 2;
+  position: relative;
+  bottom: 5px;
 }
 
 .addressContainer {
@@ -15,6 +17,8 @@
 
 .input {
   grid-column-start: 2;
+  position: relative;
+  bottom: 8px;
 }
 
 .place {
@@ -30,6 +34,8 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 37.5px;
+  position: relative;
+  bottom: 7px;
 }
 
 .prevButton {

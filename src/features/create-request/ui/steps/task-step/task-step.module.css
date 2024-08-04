@@ -1,7 +1,10 @@
+
 .taskContainer {
   display: grid;
   grid-template-columns: 76px 450px;
   margin-top: 20px;
+  position: relative;
+  left: -5px;
 }
 
 .task {
@@ -17,12 +20,22 @@
   grid-column-start: 2;
   margin-top: 20px;
   min-height: 195px;
+  position: relative;
+  bottom: 20px;
 }
 
 .buttonsWrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  position: relative;
+  bottom: 6px;
+  right: -15px;
+}
+
+.mainWrapper {
+position: relative;
+top: 12px ;
 }
 
 .prevButton {
@@ -35,12 +48,13 @@
   font-family: 'Golos', sans-serif;
   font-size: 14px;
   grid-column-start: 2;
+  min-height: 20px
 }
 
 .alertWrapper {
   display: flex;
   flex-direction: column;
-  max-height: 20px;
+  max-height: 15px;
 }
 
 .closeWrapper {

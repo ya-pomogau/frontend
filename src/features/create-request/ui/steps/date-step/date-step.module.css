@@ -55,6 +55,16 @@ input[type='time']::-webkit-calendar-picker-indicator {
   margin-bottom: 5px;
 }
 
+.button--primary:disabled {
+  position: relative;
+  right: 0px;
+}
+
+.button--partial:disabled {
+  position: relative;
+  right: 0px;
+}
+
 @media (max-width: 735px) {
   .dateContainer {
     display: flex;
@@ -66,11 +76,15 @@ input[type='time']::-webkit-calendar-picker-indicator {
   .time {
     font-size: 24px;
     line-height: 29px;
+    position: relative;
+    top: 11px;
   }
 
   .date {
     font-size: 24px;
     line-height: 29px;
+    position: relative;
+    top: 5px;
   }
 
   .headerWrapper {
@@ -109,11 +123,16 @@ input[type='time']::-webkit-calendar-picker-indicator {
     flex-direction: column;
     align-items: center;
     margin-top: 29px;
-    margin-bottom: 4px;
+    margin-bottom: 10px;
+    transform: translateY(20px);
+    position: relative;
+    top: -30px;
   }
 
   .inputForTime {
     margin-top: 10px;
+    position: relative;
+    left: -1px;
   }
 
   .datePicker {
@@ -121,22 +140,40 @@ input[type='time']::-webkit-calendar-picker-indicator {
   }
 
   .checkbox {
-    min-width: 197px;
+    min-width: 150px;
+    position: relative;
+    top: -26px;
   }
 
   .button {
     justify-content: center;
+    position: relative;
+    top: -33px;
   }
+
+  .dateWithButtonContainer {
+    max-width: 526px;
+    position: relative;
+    top: 10px;
+  }
+
+  .validationMessage {
+    position: relative;
+    top: 32px;
+    left: 50px;
+  }
+
 }
 
 .validationMessage {
   font-family: 'Golos', sans-serif;
   margin: 0;
-  padding-bottom: 20px;
   color: red;
   text-align: center;
 }
 
 .dateWithButtonContainer {
   max-width: 526px;
+  position: relative;
+  top: -4px;
 }

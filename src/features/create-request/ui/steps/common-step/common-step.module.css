@@ -1,3 +1,9 @@
+.mainWrapper {
+  position: relative;
+  top: -8px;
+
+}
+
 .container {
   margin: 50px 0 0 76px;
   display: flex;
@@ -9,7 +15,7 @@
 .buttonsWrapper {
   display: flex;
   justify-content: flex-end;
-  margin-top: 54px;
+  margin-top: 55px;
 }
 
 .prevButton {
