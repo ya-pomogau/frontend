@@ -22,6 +22,7 @@
   flex-direction: column;
   justify-content: flex-end;
   row-gap: 20px;
+  width: 100%;
 }
 
 .title {
@@ -37,6 +38,7 @@
 
 .input_mode_link {
   color: var(--colors-interface-primary);
+  width: max-content;
 }
 
 .input_mode_link:hover {
@@ -56,6 +58,9 @@
   display: flex;
   align-items: flex-end;
   gap: 10px;
+  width: max-content;
+  background: none;
+  border: none;
 }
 
 .edit_box:hover {
@@ -85,4 +90,8 @@
     border-image-source: var(--colors-interface-line);
     border-image-slice: 1;
   }
+}
+
+.error {
+  color: red;
 }
