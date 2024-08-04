@@ -1,13 +1,14 @@
-// src/pages/login/components/form/index.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { PasswordInput } from 'shared/ui/password-input';
 import { actions } from 'services/system-slice';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
-import { joiResolver } from '@hookform/resolvers/joi';
 import { schema } from './schema';
+
 import styles from './styles.module.css';
 
 export interface ILoginForm {
@@ -15,7 +16,7 @@ export interface ILoginForm {
   password: string;
 }
 
-const Form: React.FC = () => {
+const LoginForm = () => {
   const [errorText, setErrorText] = useState('');
   const [adminLogin] = useAsyncAction(actions.adminLoginThunk);
   const {
@@ -82,4 +83,4 @@ const Form: React.FC = () => {
   );
 };
 
-export default Form;
+export default LoginForm;

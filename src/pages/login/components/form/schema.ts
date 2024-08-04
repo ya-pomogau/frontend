@@ -8,15 +8,9 @@ export const schema = Joi.object<ILoginForm>({
     'any.required': 'Логин обязателен',
   }),
 
-  password: Joi.string()
-    .min(6)
-    .pattern(/^[a-zA-Z0-9]+$/)
-    .required()
-    .messages({
-      'string.empty': 'Пароль не может быть пустым',
-      'string.pattern.base':
-        'Пароль может содержать только латинские буквы и цифры',
-      'string.min': 'Минимальная длина пароля 6 символов',
-      'any.required': 'Пароль обязателен',
-    }),
+  password: Joi.string().min(6).required().messages({
+    'string.empty': 'Пароль не может быть пустым',
+    'string.min': 'Минимальная длина пароля 6 символов',
+    'any.required': 'Пароль обязателен',
+  }),
 });

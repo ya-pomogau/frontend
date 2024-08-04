@@ -1,7 +1,10 @@
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
-import { Form } from './components';
+import { LoginForm } from './components';
+
 import styles from './styles.module.css';
+
+const titleStyles = `${styles.title} text text_size_large m-0 text_type_regular`;
 
 export function LoginPage() {
   return (
@@ -11,8 +14,8 @@ export function LoginPage() {
         icon={<Icon color="blue" icon="LoginIcon" size="54" />}
         extClassName={styles.header}
       />
-      <p className={styles.title}>Войти</p>
-      <Form />
+      <p className={titleStyles}>Войти</p>
+      <LoginForm />
     </>
   );
 }
