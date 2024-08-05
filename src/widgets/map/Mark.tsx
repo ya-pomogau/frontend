@@ -14,6 +14,7 @@ import { useResponseTaskMutation } from 'services/user-task-api';
 type MarkProps = {
   task: Task;
   onClick?: () => void;
+  onOpenTask?: (task: Task) => void;
   showPopup?: () => void;
   onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
@@ -23,6 +24,7 @@ const Mark: FC<MarkProps> = ({
   task,
   onClick,
   showPopup,
+  onOpenTask,
   isAuthorised,
 }: MarkProps) => {
   const { description, location, date } = task;
@@ -202,10 +204,12 @@ const Mark: FC<MarkProps> = ({
         );
         // Изменяем видимость кнопки "читать" в зависимости от длины контента
         const hendleReadButton = () => {
+          if (onOpenTask) onOpenTask(task);
           if ([...description].length < 140) {
             buttonRead.textContent = '';
           }
         };
+
         hendleReadButton();
         const onReadClick = () => {
           descriptionContainer.classList.toggle('task_description_hidden');

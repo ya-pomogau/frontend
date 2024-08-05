@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import {
   Circle,
   GeolocationControl,
@@ -64,6 +64,7 @@ export const YandexMap = ({
   const [isVisible, setVisibility] = useState(false);
   const [isSorryPopupVisible, setSorryPopupVisible] = useState(false);
   const [isThankPopupVisible, setThankPopupVisible] = useState(false);
+  const ref = useRef<any>(null);
 
   const showUnauthorithedPopup = () => {
     setVisibility(true);
@@ -79,6 +80,14 @@ export const YandexMap = ({
     setVisibility(false);
     setSorryPopupVisible(false);
     setThankPopupVisible(false);
+  };
+
+  const onOpenTask = (task: Task) => {
+    if (ref.current) {
+      ref.current.panTo(task.location.coordinates, {
+        delay: 0,
+      });
+    }
   };
 
   return (
@@ -104,6 +113,7 @@ export const YandexMap = ({
           }}
           width={width}
           height={height}
+          instanceRef={ref}
         >
           <GeolocationControl options={{ float: 'left' }} />
           <ZoomControl options={{ position: { top: 5, right: 5 } }} />
@@ -117,6 +127,7 @@ export const YandexMap = ({
                 onClick={onClick}
                 showPopup={showPopup}
                 key={task._id}
+                onOpenTask={onOpenTask}
                 isAuthorised={isAuthorised}
               />
             );
