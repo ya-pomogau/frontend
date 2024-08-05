@@ -1,9 +1,5 @@
 .title {
-  margin: 0;
   padding: 40px 30px 12px;
-  font-family: 'Golos', sans-serif;
-  font-size: 24px;
-  line-height: 29px;
   color: var(--colors-interface-primary);
 }
 
@@ -14,6 +10,5 @@
 
   .title {
     padding: 0 10px 20px;
-    font-size: 16px;
   }
 }

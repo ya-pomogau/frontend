@@ -1,28 +1,24 @@
 .form {
-    display: grid;
-    gap: 24px;
-    padding: 30px 0 0 42px;
-    justify-items: flex-start;
+  display: grid;
+  gap: 24px;
+  padding: 30px 0 0 42px;
+  justify-items: flex-start;
 }
 
 .field {
-    min-width: 364px;
-}
-
-.error {
-    color: var(--colors-interface-orange);
+  min-width: 364px;
 }
 
 @media all and (max-width: 415px) {
-    .form {
-        padding: 40px 0 0 10px;
-    }
+  .form {
+    padding: 40px 0 0 10px;
+  }
 
-    .button {
-        margin-top: 12px;
-    }
+  .button {
+    margin-top: 12px;
+  }
 
-    .field {
-        min-width: 98%;
-    }
+  .field {
+    min-width: 98%;
+  }
 }
