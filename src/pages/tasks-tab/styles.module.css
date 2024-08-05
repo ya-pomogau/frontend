@@ -6,6 +6,7 @@
   width: 95%;
   overflow-y: auto;
   justify-content: space-between;
+  max-height: calc(65vh - 141px);
 }
 
 .input {

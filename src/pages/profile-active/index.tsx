@@ -28,12 +28,12 @@ export function ProfileActivePage() {
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
 
-  const {
-    data: tasks,
-    isLoading,
-  } = useGetTaskActiveQuery(getRoleForRequest(role), {
-    skip: isUnConfirmed,
-  });
+  const { data: tasks, isLoading } = useGetTaskActiveQuery(
+    getRoleForRequest(role),
+    {
+      skip: isUnConfirmed,
+    }
+  );
 
   useEffect(() => {
     tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
