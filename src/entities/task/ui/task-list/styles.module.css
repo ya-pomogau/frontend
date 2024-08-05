@@ -56,7 +56,6 @@
 .add_task_mobile {
   display: flex;
   flex-direction: column;
-  height: 106px;
   width: 100%;
   align-items: center;
   justify-content: center;

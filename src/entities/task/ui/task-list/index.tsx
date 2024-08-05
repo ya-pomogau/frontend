@@ -16,6 +16,7 @@ import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
 import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
 import { useLocation } from 'react-router-dom';
+import { useAppSelector } from 'app/hooks';
 
 interface TaskListProps {
   userRole: UserRole | null;
@@ -43,6 +44,7 @@ export const TaskList = ({
   handleClickAddTaskButton,
   isTabPage,
 }: TaskListProps) => {
+  const { role } = useAppSelector((state) => state.user);
   const buttonGuard = usePermission([UserStatus.CONFIRMED], UserRole.RECIPIENT);
   const location = useLocation();
   const isCompletedPage = location.pathname.includes('/profile/completed');
@@ -93,29 +95,30 @@ export const TaskList = ({
             extClassName
           )}
         >
-          {((!isStatusActive &&
-            userRole === UserRole.RECIPIENT &&
-            !isCompletedPage) ||
-            (userRole === UserRole.RECIPIENT && isTabPage)) && (
-            <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
-              <RoundButton
-                buttonType="add"
-                onClick={
-                  buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
-                }
-                size={isMobile ? 'medium' : 'large'}
-                extClassName={styles.add_task_icon}
-              />
-
-              <h2
-                className={`${styles.title_add_list} ${
-                  isMobile ? 'text_size_medium' : 'text_size_large'
-                } text_type_regular`}
+          {((!isStatusActive && role === UserRole.ADMIN && !isCompletedPage) ||
+            (role === UserRole.ADMIN && isTabPage)) &&
+            userRole === UserRole.RECIPIENT && (
+              <li
+                className={isMobile ? styles.add_task_mobile : styles.add_task}
               >
-                Создать заявку
-              </h2>
-            </li>
-          )}
+                <RoundButton
+                  buttonType="add"
+                  onClick={
+                    buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
+                  }
+                  size={isMobile ? 'medium' : 'large'}
+                  extClassName={styles.add_task_icon}
+                />
+
+                <h2
+                  className={`${styles.title_add_list} ${
+                    isMobile ? 'text_size_medium' : 'text_size_large'
+                  } text_type_regular`}
+                >
+                  Создать заявку
+                </h2>
+              </li>
+            )}
           {tasks &&
             tasks.map((item, index) => (
               <li key={index}>
@@ -132,9 +135,16 @@ export const TaskList = ({
             extClassName
           )}
         >
-          <Informer text="У Вас пока нет заявок" />
-
-          {userRole === UserRole.RECIPIENT && (
+          <Informer
+            text={
+              userRole === UserRole.RECIPIENT
+                ? 'У данного реципиента нет активных заявок'
+                : userRole === UserRole.VOLUNTEER
+                ? 'У данного волонтера нет заявок в работе'
+                : 'Нет доступных заявок'
+            }
+          />
+          {role === UserRole.RECIPIENT && (
             <>
               <p
                 className={`${styles.title_add_empty} text_size_large text_type_regular text `}

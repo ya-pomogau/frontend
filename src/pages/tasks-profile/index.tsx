@@ -7,7 +7,7 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import styles from './styles.module.css';
 
 import { Tabs, UserRole } from '../../shared/types/common.types';
-import { useGetProfileQuery, useGetUserByIdQuery } from 'services/user-api';
+import { useGetUserByIdQuery } from 'services/user-api';
 import { useGetTaskActiveQuery } from 'services/user-task-api';
 import { UserCardForTasks } from 'widgets/user-card-for-tasks';
 import SearchButton from 'shared/ui/search-button';
@@ -28,9 +28,7 @@ interface TaskListProps {
 
 export function TasksProfilePage({ incomeTab }: TaskListProps) {
   const { userId } = useParams<{ userId: string }>();
-  console.log(userId);
-  const { data: user } = useGetProfileQuery(userId ?? skipToken);
-  console.log(user);
+  const { data: user } = useGetUserByIdQuery(userId ?? skipToken);
   const { data: userTasks } = useGetTaskActiveQuery(userId ?? skipToken);
   const navigate = useNavigate();
   const isMobileForPopup = useMediaQuery('(max-width:735px)');
