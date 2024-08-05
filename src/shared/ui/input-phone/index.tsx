@@ -1,5 +1,4 @@
 import {
-  useMemo,
   InputHTMLAttributes,
   forwardRef,
   ReactNode,
@@ -42,14 +41,6 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
     ref
   ) => {
     const id = nanoid();
-
-    const errorToRender = useMemo(
-      () =>
-        errorText ? (
-          <span className={cn(styles.error, 'text')}>{errorText}</span>
-        ) : null,
-      [errorText]
-    );
 
     const inputClass = error
       ? styles.input_error
@@ -95,7 +86,9 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
             ]}
             onChange={onChange}
           />
-          {errorToRender}
+          <span className={cn(styles.error, 'text')}>
+            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
+          </span>
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>

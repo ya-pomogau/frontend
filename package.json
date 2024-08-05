@@ -18,12 +18,14 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@pbe/react-yandex-maps": "^1.2.4",
     "@reduxjs/toolkit": "^1.9.5",
     "@vitejs/plugin-react": "^4.3.1",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
+    "joi": "^17.13.3",
     "nanoid": "^4.0.2",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
