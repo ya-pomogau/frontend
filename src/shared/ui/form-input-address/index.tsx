@@ -15,7 +15,7 @@ interface FormInputAddressProps<FormInputs extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<FormInputs>;
   name: FieldPath<FormInputs>;
-  rules: RegisterOptions<FormInputs> | any;
+  rules?: RegisterOptions<FormInputs> | any;
   setAddress: (address: string, coords?: GeoCoordinates) => void;
   label?: string;
   extClassName?: string;

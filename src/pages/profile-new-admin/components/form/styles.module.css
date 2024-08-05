@@ -1,0 +1,11 @@
+.form {
+  min-width: 360px;
+  display: grid;
+  gap: 4px;
+  padding-left: 45px;
+  justify-items: flex-start;
+}
+
+.field {
+  width: 359px;
+}
