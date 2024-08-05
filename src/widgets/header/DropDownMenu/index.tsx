@@ -6,11 +6,7 @@ import { SideBar } from 'widgets/header/navigation';
 
 import { useMediaQuery } from 'shared/hooks';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import {
-  positionConfigMenu,
-  linksTopAuthAdmin,
-  linksTop,
-} from '../utils';
+import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
 
 import styles from './styles.module.css';
 import { DropDownMenuButton } from 'shared/ui/DropDownMenuButton';
@@ -35,7 +31,7 @@ export const DropDownMenu = ({
   role,
   setIsOpenChat,
 }: MenuProps) => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useMediaQuery('(max-width: 920px)');
   const ref = useRef(null);
 
   const user = useAppSelector((state) => state.user.data);
