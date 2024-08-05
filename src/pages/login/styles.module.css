@@ -4,10 +4,6 @@
 }
 
 @media all and (max-width: 415px) {
-  .header {
-    min-height: 55px;
-  }
-
   .title {
     padding: 0 10px 20px;
   }

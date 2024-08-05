@@ -12,7 +12,6 @@ export function LoginPage() {
       <SmartHeader
         text="Вход"
         icon={<Icon color="blue" icon="LoginIcon" size="54" />}
-        extClassName={styles.header}
       />
       <p className={titleStyles}>Войти</p>
       <LoginForm />
