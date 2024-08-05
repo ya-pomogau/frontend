@@ -13,6 +13,7 @@ import { PostProps } from 'shared/ui/post/Post';
 import { IValuesBlog } from 'shared/types/blog.types';
 import { LightPopup } from 'shared/ui/light-popup';
 import { Button } from 'shared/ui/button';
+import { AdminPermission } from 'shared/types/common.types';
 
 const postsPerPage = 10;
 
@@ -35,8 +36,7 @@ export function BlogPage() {
   const refPostList = useRef<HTMLDivElement>(null);
   const refPostForm = useRef<HTMLFormElement>(null);
 
-  const isAdmin = user?.role === 'Admin';
-  //const isAdmin = user?.permissions?.includes(AdminPermission.BLOG);
+  const isAdmin = user?.permissions?.includes(AdminPermission.BLOG);
 
   const handleOpenPopup = () => {
     setIsAction((state) => !state);

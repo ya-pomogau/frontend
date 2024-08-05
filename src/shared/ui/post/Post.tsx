@@ -1,5 +1,5 @@
-import { useState, type FC, type MouseEventHandler, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { useState, type FC, type MouseEventHandler, useRef } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.css';
 import { Avatar } from '../avatar';
