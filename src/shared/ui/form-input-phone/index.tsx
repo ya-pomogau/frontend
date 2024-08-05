@@ -36,7 +36,7 @@ export interface FormInputPhoneProps<FormInputs extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<FormInputs>;
   name: FieldPath<FormInputs>;
-  rules: RegisterOptions<FormInputs>;
+  rules?: RegisterOptions<FormInputs>;
   label?: string;
   extClassName?: string;
 }
