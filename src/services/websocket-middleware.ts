@@ -68,8 +68,8 @@ export const websocketMiddleware: Middleware = (store) => {
       });
 
       if (actions.closeSocketConnection.match(action)) {
-        socket.emit(SocketEvent.CLOSE);
         console.log(`-> Socket connection is closing`);
+        socket.disconnect();
       }
 
       socket.on(SocketEvent.DISCONNECT, (reason) => {
