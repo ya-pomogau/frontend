@@ -1,15 +1,18 @@
 .content {
   box-sizing: border-box;
+  font-family: 'Golos', sans-serif;
   position: relative;
   margin-top: 33px;
   padding: 32px 30px 0 30px;
-  min-height: 128px;
   width: 276px;
   border: 1px solid var(--colors-interface-blue-strong);
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  height: 298px;
+  gap: 17px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.8px;
+  height: max-content;
 }
 
 .avatar {
@@ -32,9 +35,13 @@
 }
 
 .admin_content {
-  height: 282px;
+  height: 256px;
+  max-height: 288px;
 }
 
+.admin_save_btn {
+  height: 288px;
+}
 .admin_content_action {
   height: 513px;
 }
