@@ -1,14 +1,18 @@
 .main {
   display: grid;
-  grid-template-columns: 295px 1fr;
+  grid-template-columns: 295px minmax(300px, 1fr);
   gap: 10px 20px;
   align-content: start;
   max-width: 1256px;
   margin: 0 auto;
 }
 
+.content {
+  height: 100%;
+}
+
 .mainWithMessage {
-  grid-template: auto 1fr / 295px 1fr;
+  grid-template: auto 1fr / 295px minmax(300px, 1fr);
 }
 
 .mainWithMessage .side {
@@ -19,20 +23,17 @@
   display: block;
 }
 
+.content { 
+  width: 100%;
+}
+
 @media all and (max-width: 920px) {
   .main {
     gap: 10px;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(300px, 1fr);
   }
 
   .side {
     display: none;
-  }
-
-  .content {
-    overflow-y: hidden;
-    height: 100%;
-    max-height: 100%;
-    position: relative;
   }
 }

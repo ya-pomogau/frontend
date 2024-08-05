@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { useAppSelector } from 'app/hooks';
 import { isRootSelector } from 'entities/user/model';
 import { PageSubMenu } from '../page-sub-menu/page-sub-menu';
@@ -5,7 +8,6 @@ import { PageSubMenuLink } from '../page-sub-menu-link/page-sub-menu-link';
 import { UserRole } from 'shared/types/common.types';
 import styles from './styles.module.css';
 
-import { useState } from 'react';
 import { ViewModeButton } from 'shared/ui/view-mode-button';
 
 interface PageSubMenuForAdminsProps {
@@ -21,6 +23,7 @@ export const PageSubMenuForAdmins = ({
 }: PageSubMenuForAdminsProps) => {
   const { role } = useAppSelector((state) => state.user);
   const isRoot = useAppSelector(isRootSelector);
+  const location = useLocation();
 
   const [selectedView, setSelectedView] = useState<'tiles' | 'list'>('tiles');
 
@@ -61,18 +64,22 @@ export const PageSubMenuForAdmins = ({
           </>
         }
       />
-      <div className={styles.viewModeButtons}>
-        <ViewModeButton
-          modeIcon="tiles"
-          selected={selectedView === 'tiles'}
-          onClick={() => handleViewChange('tiles')}
-        />
-        <ViewModeButton
-          modeIcon="list"
-          selected={selectedView === 'list'}
-          onClick={() => handleViewChange('list')}
-        />
-      </div>
+      {location.pathname !== '/profile/requests/admins' ? (
+        <div className={styles.viewModeButtons}>
+          <ViewModeButton
+            modeIcon="tiles"
+            selected={selectedView === 'tiles'}
+            onClick={() => handleViewChange('tiles')}
+          />
+          <ViewModeButton
+            modeIcon="list"
+            selected={selectedView === 'list'}
+            onClick={() => handleViewChange('list')}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

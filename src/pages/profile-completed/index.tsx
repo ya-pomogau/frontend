@@ -26,7 +26,9 @@ export function ProfileCompletedPage() {
   const {
     data: tasks,
     isLoading,
-  } = useGetTaskCompletedQuery(getRoleForRequest(role));
+  } = useGetTaskCompletedQuery(getRoleForRequest(role), {
+    skip: isUnConfirmed,
+  });
 
   useEffect(() => {
     tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);

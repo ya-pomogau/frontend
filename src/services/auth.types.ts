@@ -1,7 +1,6 @@
+import { Interface } from 'readline';
 import { TPointGeoJSON, TUser } from '../entities/user/types';
-import {
-  UserRole,
-} from 'shared/types/common.types';
+import { UserRole } from 'shared/types/common.types';
 
 export type TAuthRoutes = {
   userLogin: string;
@@ -18,6 +17,7 @@ export interface TypedResponse<T = Record<string, unknown>> extends Response {
 export type ResponseDto = {
   [key: string]: unknown;
 };
+
 export type ErrorDto = {
   message: string;
   httpStatusCode: number;

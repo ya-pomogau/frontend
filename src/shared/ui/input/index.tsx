@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable import/no-named-as-default-member */
-import { useMemo, InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
@@ -38,14 +38,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const id = nanoid();
 
-    const errorToRender = useMemo(
-      () =>
-        error && errorText ? (
-          <span className={cn(styles.error, 'text')}>{errorText}</span>
-        ) : null,
-      [error, errorText]
-    );
-
     const inputClass = error
       ? styles.input_error
       : extClassNameInput
@@ -73,7 +65,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={id}
             {...props}
           />
-          {errorToRender}
+          <span className={cn(styles.error, 'text')}>
+            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
+          </span>
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>
