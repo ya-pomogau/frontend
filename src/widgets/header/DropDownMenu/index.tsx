@@ -4,20 +4,20 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 
-import styles from './styles.module.css';
-
-import { SideBar } from '../../../widgets/header/navigation';
 import { UserRole } from '../../../shared/types/common.types';
-import { DropDownMenuButton } from '../../../shared/ui/DropDownMenuButton';
-import { VkIcon } from '../../../shared/ui/icons/vk-icon';
-import { Button } from '../../../shared/ui/button';
-
-import { logoutUser } from '../../../entities/user/model';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { useMediaQuery } from '../../../shared/hooks';
 import { handleRedirectVK } from '../../../shared/libs/utils';
+import { logoutUser } from '../../../entities/user/model';
 import { closeSocketConnection } from '../../../services/system-slice';
+
+import { SideBar } from '../../../widgets/header/navigation';
+import { DropDownMenuButton } from '../../../shared/ui/DropDownMenuButton';
+import { VkIcon } from '../../../shared/ui/icons/vk-icon';
+import { Button } from '../../../shared/ui/button';
 import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
+
+import styles from './styles.module.css';
 
 export const modalRoot = document.getElementById('modal') as HTMLElement;
 

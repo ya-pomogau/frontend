@@ -1,13 +1,13 @@
 import { Middleware } from 'redux';
 import { io, Socket } from 'socket.io-client';
+
 import { API_HOST } from '../config/api-config';
 import {
   SocketConnectionStatus,
   SocketEvent,
-  TSocketMessage,
 } from '../shared/types/store.types';
+import { getTokenAccess } from '../shared/libs/utils';
 import { actions } from './system-slice';
-import { getTokenAccess } from 'shared/libs/utils';
 
 // Объект для отправки тестового message. Удалить после реализации продовой версии
 const testEventObj = {

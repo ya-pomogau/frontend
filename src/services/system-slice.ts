@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authApi } from './auth';
+
+import { RootState } from '../app/store';
 import {
   ErrorDto,
   TAdminLoginDto,
@@ -11,10 +12,10 @@ import {
   TCustomSelector,
   TSystemSliceState,
 } from '../shared/types/store.types';
-import { RootState } from '../app/store';
-import { TUser, TVKUser } from '../entities/user/types';
 import { AdminPermission } from '../shared/types/common.types';
+import { TUser, TVKUser } from '../entities/user/types';
 import { setTokenAccess } from '../shared/libs/utils';
+import { authApi } from './auth';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
   state.system.isPending;

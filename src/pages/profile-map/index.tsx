@@ -1,16 +1,18 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
+
+import { isUnConfirmedSelector } from '../../entities/user/model';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useMediaQuery } from '../../shared/hooks';
+import { useGetTaskVirginQuery } from '../../services/user-task-api';
+import { startSocketConnection } from '../../services/system-slice';
+
 import { YandexMap } from '../../widgets/map';
 import { Filter } from '../../features/filter';
-import { isUnConfirmedSelector } from '../../entities/user/model';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { Icon } from '../../shared/ui/icons';
 import { Loader } from '../../shared/ui/loader';
-import { useGetTaskVirginQuery } from '../../services/user-task-api';
-import { useMediaQuery } from '../../shared/hooks';
-import { startSocketConnection } from 'services/system-slice';
 
 export function ProfileMapPage() {
   const dispatch = useAppDispatch();
