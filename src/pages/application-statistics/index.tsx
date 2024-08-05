@@ -120,16 +120,15 @@ export const ApplicationsStatisticsPage = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     const formData = {
       period: {
-        from: watch('period.from'),
-        to: watch('period.to'),
+        from: period.from,
+        to: period.to,
       },
       statusApplication: selectedCategoryFromAccordion,
       currentStatusApplication: currentStatusApplicationCheckbox,
     };
-    console.log(data)
   };
 
-  const { control, handleSubmit, watch } = useForm<IFormInput>();
+  const { control, handleSubmit } = useForm<IFormInput>();
 
   const disabledButton =
     !selectedCategoryFromAccordion || !period.from || !period.to;
@@ -205,20 +204,36 @@ export const ApplicationsStatisticsPage = () => {
         </div>
         <div className={styles.status_application}>
           <Fieldset title="Статус заявки" view={FieldsetView.COLUMN}>
-            <Accordion
-              name="status_application"
-              arrayOptions={statusApplicationOptions}
-              onChange={handleFormAccordion}
-              placeholder={String(statusApplicationOptions.find(n => n.value === selectedCategoryFromAccordion)?.label || 'Выберите статус заявки')}
+            <Controller
+              name="statusApplication"
+              control={control}
+              render={() => (
+                <Accordion
+                  name="status_application"
+                  arrayOptions={statusApplicationOptions}
+                  onChange={handleFormAccordion}
+                  placeholder={String(
+                    statusApplicationOptions.find(
+                      (n) => n.value === selectedCategoryFromAccordion
+                    )?.label || 'Выберите статус заявки'
+                  )}
+                />
+              )}
             />
           </Fieldset>
         </div>
-        <Checkbox
-          label="Статус на данный момент"
+        <Controller
           name="currentStatusApplication"
-          id="currentStatusApplication"
-          extClassName={styles.current_status_application_checkbox}
-          onChange={handleCurrentStatusApplicationCheckbox}
+          control={control}
+          render={() => (
+            <Checkbox
+              label="Статус на данный момент"
+              name="currentStatusApplication"
+              id="currentStatusApplication"
+              extClassName={styles.current_status_application_checkbox}
+              onChange={handleCurrentStatusApplicationCheckbox}
+            />
+          )}
         />
         <div className={styles.buttons_container}>
           <Button

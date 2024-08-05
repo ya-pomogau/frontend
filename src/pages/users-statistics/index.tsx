@@ -8,6 +8,7 @@ import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
 import { ButtonsNameForStatisticsPage } from 'pages/application-statistics';
 import { useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 interface IUsersRoleOptions {
   value: 'Volunteer' | 'Recipient';
@@ -17,6 +18,11 @@ interface IUsersRoleOptions {
 interface IUsersStatusOptions {
   value: 'new' | 'activ' | 'notActive' | 'blocked';
   label: 'Новый' | 'Активный' | 'Не активный' | 'Заблокированный';
+}
+
+interface IFormInput {
+  usersRoleOptions: string;
+  usersStatusOptions: string;
 }
 
 export const usersRoleOptions: Array<IUsersRoleOptions> = [
@@ -42,22 +48,14 @@ export const UsersStatisticsPage = () => {
   const handleRoleAccordion = (value: string) => {
     setRoleAccordion(value);
   };
-  const handleSubmit = (
-    e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>
-  ) => {
-    e.preventDefault();
-    const buttonName = e.nativeEvent.submitter as HTMLButtonElement;
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
     const formData = {
       userStatus: statusAccordion,
       userRole: roleAccordion,
     };
-    if (buttonName.name === ButtonsNameForStatisticsPage.downloadReport) {
-      console.log(formData);
-    }
-    if (buttonName.name === ButtonsNameForStatisticsPage.generateReport) {
-      console.log(formData);
-    }
   };
+
+  const { control, handleSubmit } = useForm<IFormInput>();
 
   const disabledButton = !statusAccordion || !roleAccordion;
   return (
@@ -71,16 +69,25 @@ export const UsersStatisticsPage = () => {
         id="applicationStatisticForm"
         name="applicationStatisticForm"
         className={styles.wrapper}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.role}>
           <Fieldset title="Роль" view={FieldsetView.ROW}>
             <div className={styles.role__fields}>
-              <Accordion
-                name="user_role"
-                arrayOptions={usersRoleOptions}
-                onChange={handleRoleAccordion}
-                placeholder="Выберите роль"
+              <Controller
+                name="usersRoleOptions"
+                control={control}
+                render={() => (
+                  <Accordion
+                    name="user_role"
+                    arrayOptions={usersRoleOptions}
+                    onChange={handleRoleAccordion}
+                    placeholder={String(
+                      usersRoleOptions.find((n) => n.value === roleAccordion)
+                        ?.label || 'Выберите роль'
+                    )}
+                  />
+                )}
               />
             </div>
           </Fieldset>
@@ -88,11 +95,21 @@ export const UsersStatisticsPage = () => {
         <div className={styles.status}>
           <Fieldset title="Статус" view={FieldsetView.COLUMN}>
             <div className={styles.status_fields}>
-              <Accordion
-                name="user_status"
-                arrayOptions={usersStatusOptions}
-                onChange={handleStatusAccordion}
-                placeholder="Выберите статус"
+              <Controller
+                name="usersStatusOptions"
+                control={control}
+                render={() => (
+                  <Accordion
+                    name="user_status"
+                    arrayOptions={usersStatusOptions}
+                    onChange={handleStatusAccordion}
+                    placeholder={String(
+                      usersStatusOptions.find(
+                        (n) => n.value === statusAccordion
+                      )?.label || 'Выберите статус'
+                    )}
+                  />
+                )}
               />
             </div>
           </Fieldset>
