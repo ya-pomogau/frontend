@@ -7,6 +7,7 @@
 .mainPopUpWrapperMobile {
   height: auto;
   width: 300px;
+  min-height: 600px;
 }
 
 .mainPopupOuterDiv {
