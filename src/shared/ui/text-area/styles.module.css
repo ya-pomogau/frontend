@@ -3,6 +3,7 @@
 }
 
 .input {
+  font-size: 16px;
   width: 100%;
   height: calc(100% - 26px);
   resize: none;
@@ -11,6 +12,12 @@
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.input::-webkit-scrollbar {
+  display: none; /* для Chrome, Safari и Opera */
 }
 
 .input_error {
@@ -67,4 +74,11 @@
   line-height: 14px;
   font-weight: 400;
   color: var(--colors-interface-orange);
+}
+
+@media (max-width: 415px) {
+  .input {
+    font-size: 12px;
+    height: 104px;
+  }
 }

@@ -1,16 +1,17 @@
 import { ChangeEvent, Ref, useEffect, type FC } from 'react';
 import classNames from 'classnames';
+import { useForm } from 'react-hook-form';
+
 import { Button } from '../button';
-import { Input } from '../input';
 import { TextArea } from '../text-area';
 import { FileAttachmentIcon } from '../icons/file-attachment-icon';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
 import styles from './styles.module.css';
 import { FileTypes } from 'shared/types/common.types';
-import { useForm } from 'react-hook-form';
 import { FormInput } from '../form-input';
 import useFormField from 'shared/hooks/use-form-field';
-import { useAddPostMutation } from 'services/posts-api';
+import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
+import { IBlogForm, IValuesBlog } from 'shared/types/blog.types';
 
 const TITLE_VALIDATION_RULES = {
   required: 'Обязательное поле',
@@ -28,11 +29,6 @@ const TEXT_VALIDATION_RULES = {
   },
 };
 
-interface IForm {
-  title: string;
-  text: string;
-}
-
 interface PostFormProps {
   loading?: boolean;
   refPostForm?: Ref<HTMLFormElement>;
@@ -47,6 +43,8 @@ interface PostFormProps {
   handleChange?: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  idEditedPost: string | undefined;
+  setValues: (value: IValuesBlog) => void;
 }
 
 export const PostForm: FC<PostFormProps> = ({
@@ -57,14 +55,17 @@ export const PostForm: FC<PostFormProps> = ({
   images,
   title,
   text,
+  idEditedPost,
+  setValues,
 }) => {
   const [addPost] = useAddPostMutation();
+  const [editPost] = useEditPostMutation();
   const {
     control,
     handleSubmit: onSubmit,
     formState: { isValid },
     reset,
-  } = useForm<IForm>({
+  } = useForm<IBlogForm>({
     mode: 'onChange',
     defaultValues: {
       title: '',
@@ -81,8 +82,18 @@ export const PostForm: FC<PostFormProps> = ({
   const titleField = useFormField('title', control, TITLE_VALIDATION_RULES);
   const textField = useFormField('text', control, TEXT_VALIDATION_RULES);
 
-  const handleSubmitForm = (data: IForm) => {
-    addPost({ title: data.title, text: data.text });
+  const handleSubmitForm = (data: IBlogForm) => {
+    idEditedPost
+      ? editPost({
+          title: data.title,
+          text: data.text,
+          _id: idEditedPost,
+        })
+      : addPost({ title: data.title, text: data.text });
+    setValues({
+      title: '',
+      text: '',
+    });
     reset();
   };
 

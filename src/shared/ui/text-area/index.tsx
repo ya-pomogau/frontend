@@ -50,7 +50,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             value={value}
             name={name}
             onChange={onChange}
-            className={cn(inputClass, 'text', 'text_size_medium', {
+            className={cn(inputClass, 'text', {
               [styles.input_error]: !!error,
             })}
             placeholder={placeholder}

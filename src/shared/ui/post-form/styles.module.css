@@ -20,7 +20,7 @@
 
 .attachment-button {
   position: absolute;
-  top: 235px;
+  top: 200px;
   right: 15px;
   cursor: pointer;
   background-color: transparent;
@@ -56,4 +56,10 @@
   text-align: right;
   padding: 0;
   height: 14px;
+}
+
+@media (max-width: 415px) {
+  .attachment-button {
+    top: 95px;
+  }
 }

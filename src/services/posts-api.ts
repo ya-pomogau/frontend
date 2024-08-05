@@ -30,7 +30,10 @@ export const postsApi = createApi({
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
-    editPost: build.mutation<void, Partial<PostProps>>({
+    editPost: build.mutation<
+      { title: string; text: string; _id: string },
+      Partial<PostProps>
+    >({
       query: (body) => ({
         headers: {
           //eslint-disable-next-line @typescript-eslint/naming-convention
@@ -39,7 +42,7 @@ export const postsApi = createApi({
         },
         url: `admin/blog/${body._id}`,
         method: 'PATCH',
-        body: { ...body, _id: undefined },
+        body: { title: body.title, text: body.text },
       }),
       invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),

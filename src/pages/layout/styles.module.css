@@ -71,14 +71,7 @@
 @media all and (max-width: 415px) {
   .main {
     height: calc(100% - 42px - 20px - 22px);
-    margin-top: 20px;
-    padding: 0 14px;
-  }
-
-  .blogPage {
-    margin: 0;
-    padding: 0;
-    background-image: none;
+    padding: 20px 0 14px;
   }
 }
 
