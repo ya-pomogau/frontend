@@ -24,7 +24,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
   const setTypeCalender = () => {
     if (window.innerWidth <= 768) {
       setIsCalenderMobil(true);
-    } else {
+    } else {    
       setIsCalenderMobil(false);
     }
   };
