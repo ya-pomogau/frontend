@@ -2,38 +2,39 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { RoutesGroup } from 'app/routing/components/routes-group';
 
-import { Layout } from 'pages/layout';
-
 import { Routes } from '../../shared/config';
-import { UnauthPage } from 'pages/unauth';
-import { RequestsPage } from 'pages/requests';
-import { BlogPage } from 'pages/blog';
-import { PolicyPage } from 'pages/policy';
-import { ContactsPage } from 'pages/contacts';
-import { FeedbackPage } from 'pages/feedback';
-import { ProfilePage } from 'pages/profile';
-import { PickRolePage } from 'pages/pick-role-page-temporary';
-import { NotFoundPage } from 'pages/not-found';
-import { ProfileMapPage } from 'pages/profile-map';
-import { ProfileActivePage } from 'pages/profile-active';
-import { ProfileCompletedPage } from 'pages/profile-completed';
-import { StatisticsPage } from 'pages/statistics';
-import { ApplicationsStatisticsPage } from 'pages/application-statistics';
-import { UsersStatisticsPage } from 'pages/users-statistics';
-import { TasksPage } from 'pages/tasks';
-import { TasksProfilePage } from 'pages/tasks-profile';
-import { SettingsPage } from 'pages/settings';
-import { LoginPage } from 'pages/login';
-import { Logout } from 'pages/logout';
-import { BidsPage } from 'pages/bids';
-import { VKAuthPage } from 'pages/vk-auth';
-import { RegisterPage } from 'pages/register';
+import {
+  Layout,
+  UnauthPage,
+  RequestsPage,
+  BlogPage,
+  PolicyPage,
+  ContactsPage,
+  FeedbackPage,
+  ProfilePage,
+  PickRolePage,
+  NotFoundPage,
+  ProfileMapPage,
+  ProfileActivePage,
+  ProfileCompletedPage,
+  StatisticsPage,
+  ApplicationsStatisticsPage,
+  SectionChatsConflict,
+  SectionInWorkChats,
+  SectionChatHub,
+  CreateNewAdminPage,
+  UsersStatisticsPage,
+  TasksPage,
+  TasksProfilePage,
+  SettingsPage,
+  LoginPage,
+  Logout,
+  BidsPage,
+  VKAuthPage,
+  RegisterPage,
+} from 'pages';
 import { Tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
-import { SectionChatsConflict } from 'pages/section-chats-conflict';
-import { SectionInWorkChats } from 'pages/section-in-work-chats';
-import { SectionChatHub } from 'pages/section-chat-hub';
-import { CreateNewAdminPage } from 'pages/profile-new-admin';
 
 export const router = createBrowserRouter([
   {
