@@ -49,13 +49,18 @@ export const websocketMiddleware: Middleware = (store) => {
         );
       });
 
+      socket.on(SocketEvent.CONNECT_USER_MESSAGE, ({ data }) => {
+        console.log(`-> The server has a message for you: ${data.message}`);
+        dispatch(actions.setSocketMessage(data));
+      });
+
       socket.emit(SocketEvent.TEST, testEventObj);
     }
 
     if (isSocketConnected) {
-      socket.on(SocketEvent.MESSAGE, (message: TSocketMessage) => {
-        dispatch(actions.setSocketMessage(message));
-        console.log(`-> The following message was received: ${message}`);
+      socket.on(SocketEvent.MESSAGE, ({ data }) => {
+        console.log(`-> The server has a message for you: ${data.message}`);
+        dispatch(actions.setSocketMessage(data));
       });
 
       socket.on(SocketEvent.CONNECT_ERROR, (error) => {

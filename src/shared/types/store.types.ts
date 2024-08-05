@@ -3,11 +3,12 @@ import { RootState } from '../../app/store';
 
 export enum SocketEvent {
   CONNECT = 'connect',
+  CONNECT_USER_MESSAGE = 'connect_user',
+  MESSAGE = 'message',
   CONNECT_ERROR = 'connect_error',
   DISCONNECT = 'disconnect',
   CLOSE = 'close',
-  MESSAGE = 'message',
-  TEST = 'test_event', //временное событие, удалить после реализации нужного события
+  TEST = 'test_event', //временное событие, удалить после реализации нужного
 }
 
 export enum SocketConnectionStatus {
@@ -19,7 +20,6 @@ export enum SocketConnectionStatus {
 }
 
 export type TSocketMessage = {
-  event: string;
   data: object | string;
 };
 
