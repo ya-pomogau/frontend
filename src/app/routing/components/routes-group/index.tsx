@@ -2,6 +2,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { UserRole } from 'shared/types/common.types';
+import { useEffect, useState } from 'react';
 
 interface CommonRouteProps {
   someflag?: never;
@@ -42,6 +43,11 @@ export const RoutesGroup = ({
   isRoot,
 }: RoutesGroupProps) => {
   const { isLoading, role } = useAppSelector((state) => state.user);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
+
+  useEffect(() => {
+    setIsFirstLoading(false);
+  }, []);
 
   if (publicRoutes) {
     return <Outlet />;
@@ -58,14 +64,16 @@ export const RoutesGroup = ({
   if (isLoading) {
     return null;
   }
+
   if (isRoot) {
     return <Outlet />;
   }
+
   if (allowed === undefined) {
     return <Navigate to="/" replace />;
   }
 
-  if (!role || !allowed![role]) {
+  if ((!role || !allowed![role]) && !isFirstLoading) {
     return <Navigate to="/" replace />;
   }
 
