@@ -13,7 +13,6 @@ import { messagesApi } from 'services/messages-api';
 import { userTasksApi } from 'services/user-task-api';
 import { adminsApi } from 'services/admin-api';
 import { postsApi } from 'services/posts-api';
-import { socketSlice } from 'entities/chat/model';
 import { websocketMiddleware } from 'services/websocket-middleware';
 
 export const store = configureStore({
@@ -22,7 +21,6 @@ export const store = configureStore({
     user: userModel.reducer,
     createRequest: createRequestModel.reducer,
     system: systemSliceReducer,
-    [socketSlice.name]: socketSlice.reducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [contactsApi.reducerPath]: contactsApi.reducer,
     [tasksApi.reducerPath]: tasksApi.reducer,
@@ -42,9 +40,9 @@ export const store = configureStore({
       .concat(categoriesApi.middleware)
       .concat(messagesApi.middleware)
       .concat(userTasksApi.middleware)
-      .concat(websocketMiddleware)
       .concat(adminsApi.middleware)
-      .concat(postsApi.middleware),
+      .concat(postsApi.middleware)
+      .concat(websocketMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -4,7 +4,7 @@ import { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { getTokenAccess } from '../shared/libs/utils';
 
-interface CreateTaskDto {
+export interface CreateTaskDto {
   categoryId: string;
   location: GeoCoordinates;
   date: Date | null;

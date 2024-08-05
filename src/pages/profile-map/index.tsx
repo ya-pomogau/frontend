@@ -1,16 +1,16 @@
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { YandexMap } from 'widgets/map';
-import { Filter } from 'features/filter';
-import { SmartHeader } from 'shared/ui/smart-header';
-import { Icon } from 'shared/ui/icons';
-import { Loader } from 'shared/ui/loader';
-import { useGetTaskVirginQuery } from 'services/user-task-api';
-import { useMediaQuery } from 'shared/hooks';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
-import { isUnConfirmedSelector } from 'entities/user/model';
-import { useEffect } from 'react';
-import { socketActions } from 'entities/chat/model';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { YandexMap } from '../../widgets/map';
+import { Filter } from '../../features/filter';
+import { isUnConfirmedSelector } from '../../entities/user/model';
+import { SmartHeader } from '../../shared/ui/smart-header';
+import { Icon } from '../../shared/ui/icons';
+import { Loader } from '../../shared/ui/loader';
+import { useGetTaskVirginQuery } from '../../services/user-task-api';
+import { useMediaQuery } from '../../shared/hooks';
+import { startSocketConnection } from 'services/system-slice';
 
 export function ProfileMapPage() {
   const dispatch = useAppDispatch();
@@ -21,8 +21,10 @@ export function ProfileMapPage() {
   const isVolunteer = user?.role === 'Volunteer';
 
   useEffect(() => {
-    dispatch(socketActions.startConnecting());
-  }, []);
+    if (user) {
+      dispatch(startSocketConnection());
+    }
+  }, [user]);
 
   let latitude = 0;
   let longitude = 0;

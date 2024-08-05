@@ -2,20 +2,22 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { SideBar } from 'widgets/header/navigation';
-
-import { useMediaQuery } from 'shared/hooks';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './styles.module.css';
-import { DropDownMenuButton } from 'shared/ui/DropDownMenuButton';
-import { useNavigate } from 'react-router-dom';
-import { logoutUser } from 'entities/user/model';
-import { UserRole } from 'shared/types/common.types';
+
+import { SideBar } from '../../../widgets/header/navigation';
+import { UserRole } from '../../../shared/types/common.types';
+import { DropDownMenuButton } from '../../../shared/ui/DropDownMenuButton';
 import { VkIcon } from '../../../shared/ui/icons/vk-icon';
-import { handleRedirectVK } from '../../../shared/libs/utils';
 import { Button } from '../../../shared/ui/button';
+
+import { logoutUser } from '../../../entities/user/model';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useMediaQuery } from '../../../shared/hooks';
+import { handleRedirectVK } from '../../../shared/libs/utils';
+import { closeSocketConnection } from '../../../services/system-slice';
+import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
 
 export const modalRoot = document.getElementById('modal') as HTMLElement;
 
@@ -63,6 +65,7 @@ export const DropDownMenu = ({
   const navigate = useNavigate();
   const handlerOnClick = () => {
     dispatch(logoutUser());
+    dispatch(closeSocketConnection());
     return navigate('/');
   };
 
