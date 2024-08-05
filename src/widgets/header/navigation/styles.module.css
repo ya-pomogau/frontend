@@ -3,6 +3,7 @@
 .links {
   display: flex;
   margin: 0;
+  padding: 0;
 }
 
 .link {
@@ -64,7 +65,7 @@
     align-items: center;
     margin-top: 10px;
   }
-  
+
   .link__title {
   min-width: unset;
   max-width: min-content;
@@ -95,7 +96,6 @@
   .link__icon {
     display: flex;
     margin-top: 0;
-    margin-bottom: 0;
     justify-content: center;
     margin-bottom: 8px;
     border-bottom: 4px solid transparent;

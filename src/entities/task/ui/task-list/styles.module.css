@@ -3,6 +3,8 @@
   grid-template-columns: 1fr;
   row-gap: 20px;
   width: 100%;
+  max-height: 65vh;
+  overflow-y: auto;
 }
 
 .content:last-child {
@@ -91,4 +93,10 @@
 }
 .wrapperBtn {
   position: relative;
+}
+
+@media screen and (max-width: 415px) {
+  .content {
+    max-height: 75vh;
+  }
 }
