@@ -3,7 +3,6 @@ import classnames from 'classnames';
 
 // import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
-import { Message } from 'shared/ui/message';
 
 import { sortMessages } from './libs/utils';
 import { SquareButton } from 'shared/ui/square-buttons';
@@ -15,6 +14,7 @@ import { Icon } from 'shared/ui/icons';
 import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
 import { GradientDivider } from 'shared/ui/gradient-divider';
+import { MessagesList } from './components/messages-list';
 
 interface PopupChatProps {
   messages: IMessage[];
@@ -36,12 +36,12 @@ export const PopupChat = ({
   const [inputValue, setInputValue] = useState<string>('');
   const sortedMessages = sortMessages(messages);
 
-  const [mesagesInChat, setMesagesInChat] = useState(sortedMessages);
+  const [mesagesInChat] = useState(sortedMessages);
   const [currentMessagesPage, setCurrentMessagesPage] = useState(1);
   const [messagesShown] = useState(10);
 
   const lastMessage = currentMessagesPage * messagesShown;
-  const firstMessage = lastMessage - messagesShown;
+  const firstMessage = 0;
   const currentMessages = mesagesInChat.slice(firstMessage, lastMessage);
 
   useEffect(() => {
@@ -51,10 +51,12 @@ export const PopupChat = ({
     return function () {
       modal.removeEventListener('scroll', scrollHandler)
     }
-  }, [])
+  }, []) 
 
   const scrollHandler = (e) => {
-    console.log('scroll')
+    if (e.currentTarget.clientHeight + e.currentTarget.scrollTop >= e.currentTarget.scrollHeight - 5) {
+      setCurrentMessagesPage(prevState => prevState + 1)
+    }
   }
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +71,7 @@ export const PopupChat = ({
   };
 
   return (
-    <div id="openedChatPopup" 
+    <div 
       className={classnames(styles.chatWrapper, {
         [styles.chatWrapper_action]: isOpen,
       })}
@@ -104,17 +106,11 @@ export const PopupChat = ({
       </div>
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>
-        <div className={styles.messagesBlock}>
-          {currentMessages?.map((message) => (
-            <Message
-              type={
-                message.userId === chatmateInfo.userId ? 'incoming' : 'outgoing'
-              }
-              messageText={message.message}
-              avatarLink={message.userAvatarLink}
-              key={message.id}
-            />
-          ))}
+        <div id="openedChatPopup" className={styles.messagesBlock}>
+          <MessagesList 
+            currentMessages={currentMessages}
+            chatmateInfo={chatmateInfo}
+          />
         </div>
 
         <InputWrapper

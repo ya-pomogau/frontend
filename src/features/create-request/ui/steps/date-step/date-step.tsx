@@ -15,6 +15,7 @@ import { DatePicker } from 'shared/ui/date-picker';
 import styles from './date-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
+
 interface IDateStepProps {
   isMobile?: boolean;
 }
@@ -43,8 +44,8 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
 
   useEffect(() => {
     const dateNow = new Date();
-    const currentTime = format(dateNow, 'HH:mm'); // привожу в нужный формат
-    const currentDate = dateNow.toLocaleDateString(); // получаем текущую дату в формате "дд.мм.гггг"
+    const currentTime = format(dateNow, 'HH:mm'); 
+    const currentDate = dateNow.toLocaleDateString(); 
 
     if (
       (time && time < currentTime && date && currentDate === date) ||
@@ -83,9 +84,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
                 handleAcceptTime={() => handleAcceptTime}
               />
             )}
-            <p
-              className={classNames(styles.time, 'text', 'text_type_regular ')}
-            >
+            <p className={classNames(styles.time, 'text', 'text_type_regular ')}>
               Время
             </p>
             <div className={styles.headerWrapper} />
@@ -108,9 +107,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
             />
           </div>
           <div className={styles.wrapperForDate}>
-            <p
-              className={classNames('text', 'text_type_regular ', styles.date)}
-            >
+            <p className={classNames('text', 'text_type_regular ', styles.date)}>
               Дата
             </p>
             <div className={styles.headerWrapperForDatePicker} />
@@ -139,7 +136,7 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
               }
             </p>
           )}
-          <div className={styles.buttonWrapper}>
+          <div className={classNames(styles.buttonWrapper, 'buttonWithRightMargin')}>
             <Button
               buttonType="primary"
               disabled={(timeValidation || !time) && !termlessRequest}

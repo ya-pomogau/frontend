@@ -1,9 +1,16 @@
 @import '../../app/assets/styles/common.css';
 
 .header {
-  width: 100%;
+  margin-top: 30px;
   border-bottom: 1px solid #e0e0e0;
   position: relative;
+}
+
+.header__container {
+  display: grid;
+  grid-template-columns: 23.3% 71% 5.7%;
+  align-items: center;
+  justify-items: start;
 }
 
 .header_mobile {
@@ -18,8 +25,6 @@
 }
 
 .header_title {
-  padding: 0;
-  margin: 0;
   color: aliceblue;
 }
 
@@ -28,16 +33,11 @@
   border: none;
   background-color: inherit;
   cursor: pointer;
-  padding-bottom: 12px;
-  margin-left: 20px;
-  margin-bottom: 4px;
-  max-width: 68px;
+  object-fit: fill;
 }
 
 .header__button__container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   gap: 5px;
 }
 
@@ -46,7 +46,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 14.4px;
+  line-height: 16.8px;
   color: var(--colors-interface-primary);
 }
 
@@ -71,7 +71,7 @@
 }
 
 .header__logo {
-  margin-bottom: 5px;
+  padding-top: 12px;
 }
 
 .header__logo_mobile {
@@ -82,6 +82,9 @@
 
 .header__menu__container {
   position: relative;
+  padding-top: 10px;
+  justify-self: end;
+  max-width: 70px;
 }
 
 .header__menu__container_hidden {
@@ -113,10 +116,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: auto;
-  margin-right: 0;
+  margin: 0 0 0 auto;
   width: 132px;
   text-align: right;
 }
@@ -135,43 +135,39 @@
 }
 
 .header__avatar {
-  max-width: 42px;
-  max-height: 42px;
-  padding-bottom: 8px;
-}
-
-.header__container {
-  max-width: 1256px;
-  min-width: min-content;
-  margin: 0 auto;
-  padding-top: 35px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  max-width: 43px;
+  max-height: 43px;
 }
 
 @media (max-width: 1050px) {
   .header__container {
-    padding-left: 72px;
-    padding-right: 72px;
+    max-width: 1000px;
   }
 }
 
-@media (max-width: 900px) {
-  .header__container {
-    height: 42px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
+@media (max-width: 920px) {
+  .header {
+    margin-top: 0;
   }
 
+  .header__container {
+    min-height: 60px;
+  }
+
+  .header__logo {
+    min-width: 30px;
+  }
   .header__sidebar__container {
     margin-top: 10px;
     padding-left: 25px;
   }
 
   .header__button {
-    padding-bottom: 8px;
+    padding-bottom: 0;
+  }
+
+  .header__menu__container {
+  grid-column-start: 3;
   }
 
   .header__menu {
@@ -185,7 +181,10 @@
 
 @media (max-width: 450px) {
   .header__container {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0;
   }
+
+  .header__menu__container {
+    grid-column-start: 3;
+    }
 }

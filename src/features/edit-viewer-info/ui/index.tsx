@@ -1,12 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import classnames from 'classnames';
 
-import { Avatar } from '../../../shared/ui/avatar';
-import { Button } from '../../../shared/ui/button';
-import { FormInput } from '../../../shared/ui/form-input';
-
+import { Avatar } from 'shared/ui/avatar';
+import { Button } from 'shared/ui/button';
+import { FormInput } from 'shared/ui/form-input';
 import { LightPopup } from 'shared/ui/light-popup';
+
+import { ProfileInput } from './profile-input';
 
 import styles from './edit-viewer-info.module.css';
 
@@ -52,96 +53,114 @@ export const EditViewerInfo = ({
   });
 
   const avatarPicker = useRef<HTMLInputElement>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [fileDataURL, setFileDataURL] = useState<string | undefined>(
+    userAvatar
+  );
 
   const onSubmit: EditViewerInfoProps['onSave'] = (data) => {
     onSave(data);
     onClose();
   };
 
-  useEffect(() => reset(), [isOpen]);
-
-  const handlePick = () => {
-    if (avatarPicker.current) {
-      avatarPicker.current.click();
+  const changeAvatarHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    const file = e.target.files;
+    if (file && file[0].type.match(/image\/(png|jpg|jpeg)/i)) {
+      setFile(file[0]);
+    } else {
+      alert('Invalid image format');
     }
   };
 
-  const inputLabelStyles = classnames(
-    styles.infoBlock__text,
-    'text',
-    'text_size_small',
-    'm-0',
-    'p-0',
-    'text_type_bold'
-  );
+  const handlePickAvatar = () =>
+    avatarPicker.current && avatarPicker.current.click();
 
-  const popupStyles = classnames(styles.container, extClassName);
+  useEffect(() => reset(), [isOpen]);
+
+  useEffect(() => {
+    let fileReader: FileReader;
+    let isCancel = false;
+
+    if (file) {
+      fileReader = new FileReader();
+      fileReader.onload = (e: ProgressEvent<FileReader>) => {
+        e.target && !isCancel && setFileDataURL(e.target.result?.toString());
+      };
+
+      fileReader.readAsDataURL(file);
+    }
+
+    return () => {
+      isCancel = true;
+      if (fileReader && fileReader.readyState === 1) {
+        fileReader.abort();
+      }
+    };
+  }, [file]);
 
   return (
     <LightPopup
-      extClassName={popupStyles}
+      extClassName={classnames(styles.container, extClassName)}
       hasCloseButton
       isPopupOpen={isOpen}
       onClickExit={onClose}
     >
-      <div className={styles.headerElements}>
-        <div className={styles.avatarBlock}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.editProfile}>
+        <fieldset className={classnames(styles.fieldset, styles.avatarField)}>
+          <legend className="visually-hidden">Аватар</legend>
           <Avatar
-            extClassName={styles.avatar}
-            avatarLink={userAvatar}
-            avatarName={`Аватар пользователя ${userName}`}
+            extClassName={styles.avatarField__image}
+            avatarLink={fileDataURL}
+            avatarName="Аватар пользователя"
+          />
+          <label htmlFor="avatarUpload" className="visually-hidden">
+            Изменить фото
+          </label>
+          <input
+            onChange={changeAvatarHandler}
+            className="visually-hidden"
+            id="avatarUpload"
+            type="file"
+            name="avatar"
+            accept="image/*"
+            ref={avatarPicker}
           />
           <button
-            onClick={handlePick}
+            onClick={handlePickAvatar}
             className={classnames(
-              styles.avatarBlock__button,
+              styles.avatarField__uploadButton,
               'text',
-              'text_size_small'
+              'text_size_medium'
             )}
             type="button"
           >
             Изменить фото
           </button>
-          <input
-            disabled
-            className={classnames(
-              styles.avatarBlock__hidden,
-              'text',
-              'text_size_small'
-            )}
-            placeholder="Изменить фото"
-            type="file"
-            name="avatar"
-            accept="image/*,.png,.jpg,.gif,.web,"
-            ref={avatarPicker}
-          />
-        </div>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ul className={classnames(styles.infoBlock, 'list')}>
-          <li className={styles.infoBlock__item}>
-            <p className={inputLabelStyles}>Имя:</p>
+        </fieldset>
+        <fieldset className={classnames(styles.fieldset, styles.infoBlock)}>
+          <legend className="visually-hidden">Контактные данные</legend>
+          <ProfileInput label="Имя">
             <FormInput
               type="text"
               name="name"
               rules={{
                 required: {
                   value: true,
-                  message: 'Имя обязательно',
+                  message: 'Имя не может быть пустым',
                 },
               }}
               control={control}
               extClassName={styles.input}
               placeholder="Введите имя"
             />
-          </li>
-          <li className={styles.infoBlock__item}>
-            <p className={inputLabelStyles}>Тел.:</p>
+          </ProfileInput>
+          <ProfileInput label="Тел:">
             <FormInput
               type="tel"
               name="phone"
               rules={{
-                required: 'Телефон обязателен',
+                required: 'Неверный формат номера',
                 pattern: {
                   value: /^([+]7|8)\d{10}$/,
                   message: 'Неверный формат номера',
@@ -151,19 +170,18 @@ export const EditViewerInfo = ({
               extClassName={styles.input}
               placeholder="Введите телефон"
             />
-          </li>
-          <li className={styles.infoBlock__item}>
-            <p className={inputLabelStyles}>Адрес:</p>
+          </ProfileInput>
+          <ProfileInput label="Адрес:">
             <FormInput
               type="text"
               name="address"
-              rules={{ required: 'Адрес обязателен' }}
+              rules={{ required: 'Адрес не может быть пустым' }}
               control={control}
-              extClassName={styles.input}
+              extClassName={classnames(styles.input, 'text_size_medium')}
               placeholder="Введите адрес"
             />
-          </li>
-        </ul>
+          </ProfileInput>
+        </fieldset>
         <Button
           type="submit"
           disabled={Object.keys(errors).length > 0}
