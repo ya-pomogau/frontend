@@ -10,7 +10,7 @@
 .task_container {
   position: relative;
   font-family: 'Golos', sans-serif;
-  width: 310px;
+  width: 370px;
   padding: 30px 30px 20px 30px;
   background-color: white;
 }
@@ -24,7 +24,7 @@
 .close_icon {
   position: absolute;
   top: 12px;
-  right: 12px;
+  right: 20px;
 }
 
 .close_icon:hover {
@@ -110,7 +110,7 @@
   padding: 0;
   color: var(--colors-interface-primary);
   font-size: 16px;
-  line-height: 20px;
+  line-height: 16.8px; /* ! */
 }
 
 .task_button:hover {
@@ -118,12 +118,16 @@
 }
 
 .task_icon_container {
+  margin: 8px 0 14px 0;
+}
+
+.task_icon_date_count {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 4px;
+  margin-bottom: 7px;
   gap: 4px;
-  margin: 10px 0 0 0;
+  /* margin: 10px 0 0 0; */
 }
 
 .task_icon_box {
@@ -137,9 +141,10 @@
 
 .task_count {
   color: var(--colors-interface-primary);
-  font-size: 24px;
+  font-size: 26px;
   line-height: 29px;
-  margin: 0;
+  margin: 0 6px;
+  font-family: 'Inter';
 }
 
 .task_count_urgent {
@@ -160,8 +165,8 @@
   color: white;
   font-family: 'Golos', sans-serif;
   font-size: 12px;
-  line-height: 14px;
-  padding: 8px 28px;
+  line-height: 16.8px;
+  padding: 7px 32px;
   margin: 0 auto;
 }
 
@@ -188,11 +193,11 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  margin: 3px;
+  /* margin: 3px; */
 }
 
 .task_date_text {
-  margin: 0;
+  margin: 0 0 0 5px;
   padding: 0;
   color: #2e3192;
   font-family: 'Golos', sans-serif;
