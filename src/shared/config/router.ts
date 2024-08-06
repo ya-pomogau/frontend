@@ -3,12 +3,12 @@ export const Routes = {
   PROFILE: '/profile',
   PROFILE_RECIPIENT: {
     ROOT: '/profile/recipient',
-    DEFAULT: 'active',
+    ACTIVE: 'active',
     COMPLETED: 'completed',
   },
   PROFILE_VOLUNTEER: {
     ROOT: '/profile/volunteer',
-    DEFAULT: 'map',
+    MAP: 'map',
     ACTIVE: 'active',
     COMPLETED: 'completed',
   },

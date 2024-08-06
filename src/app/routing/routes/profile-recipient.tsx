@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { redirect, RouteObject } from 'react-router-dom';
 import { Routes } from 'shared/config';
 
 export const profileRecipient: RouteObject = {
@@ -9,12 +9,16 @@ export const profileRecipient: RouteObject = {
   children: [
     {
       index: true,
+      loader: () => redirect(Routes.PROFILE_RECIPIENT.ACTIVE),
+    },
+    {
+      path: Routes.PROFILE_RECIPIENT.ACTIVE,
       lazy: async () => ({
         Component: (await import('pages/profile-active')).ProfileActivePage,
       }),
     },
     {
-      path: `${Routes.PROFILE_RECIPIENT.COMPLETED}`,
+      path: Routes.PROFILE_RECIPIENT.COMPLETED,
       lazy: async () => ({
         Component: (await import('pages/profile-completed'))
           .ProfileCompletedPage,
