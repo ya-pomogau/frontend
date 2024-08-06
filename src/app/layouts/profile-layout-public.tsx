@@ -10,7 +10,6 @@ import styles from './profile-layout.module.css';
 
 export const ProfileLayoutPublic = () => {
   const { role } = useAppSelector((state) => state.user);
-  console.log('role:', role);
 
   const navigateTo =
     `${Routes[`PROFILE_${role?.toUpperCase()}`]?.ROOT}` ?? Routes.ROOT;

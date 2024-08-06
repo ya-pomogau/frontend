@@ -18,7 +18,6 @@ const ProtectedRoute = ({
 }: ProtectedRouteProps) => {
   const { role } = useAppSelector((state) => state.user);
   const location = useLocation();
-  console.log('->', role);
 
   // user unauth, but route only for auth users
   if (!role && !onlyUnAuth) {
