@@ -6,9 +6,15 @@ interface UserInfoProps {
   userName: string;
   userId: string;
   userNumber: string;
+  userRole: string;
 }
 
-const UserInfo = ({ userName, userId, userNumber }: UserInfoProps) => (
+const UserInfo = ({
+  userName,
+  userId,
+  userNumber,
+  userRole,
+}: UserInfoProps) => (
   <div className={styles.user_info}>
     <h2
       className={classnames(

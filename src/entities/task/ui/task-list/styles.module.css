@@ -48,6 +48,7 @@
   width: 100%;
   height: 128px;
   align-content: center;
+  border-top: 1px solid;
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
