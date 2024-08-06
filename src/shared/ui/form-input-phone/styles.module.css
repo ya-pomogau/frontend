@@ -35,10 +35,10 @@
 
 .label {
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 18px;
-  font-weight: 400;
-  color: var(--colors-interface-primary);
+  font-weight: 400; 
+  color: #000000;
   margin-bottom: 8px;
 }
 

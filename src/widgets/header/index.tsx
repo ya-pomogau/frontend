@@ -3,29 +3,25 @@ import { NavLink } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { useMediaQuery } from 'shared/hooks/media-query';
-import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
-
-import { Logo } from 'shared/ui/logo';
-import { SideBar } from 'widgets/header/navigation';
+import { Logo, Avatar, Button } from 'shared/ui';
 import { MenuIcon } from 'shared/ui/icons/menu-icon';
-import { Avatar } from 'shared/ui/avatar';
 import { UnionIcon } from 'shared/ui/icons/union-icon';
-
+import { handleRedirectVK } from 'shared/libs/utils';
 import { PopupChat } from 'entities/chat/ui/chat';
 import { infoAdmin } from 'entities/chat/ui/chat/libs/utils';
 import { UserRole } from 'shared/types/common.types';
+import { SideBar } from './navigation';
 import { DropDownMenu } from './DropDownMenu';
+import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
 
 import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import styles from './styles.module.css';
-import { Button } from 'shared/ui/button';
-import { handleRedirectVK } from 'shared/libs/utils';
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useMediaQuery('(max-width: 920px)');
   const user = useAppSelector((state) => state.user.data);
 
   const handleClick = (evt: SyntheticEvent) => {
