@@ -11,7 +11,7 @@ import { FileTypes } from 'shared/types/common.types';
 import { FormInput } from '../form-input';
 import useFormField from 'shared/hooks/use-form-field';
 import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
-import { IBlogForm, IValuesBlog } from 'shared/types/blog.types';
+import { IBlogForm } from 'shared/types/blog.types';
 
 const TITLE_VALIDATION_RULES = {
   required: 'Обязательное поле',
@@ -24,8 +24,8 @@ const TITLE_VALIDATION_RULES = {
 const TEXT_VALIDATION_RULES = {
   required: 'Обязательное поле',
   minLength: {
-    value: 4,
-    message: 'Имя должно быть больше 6 символов',
+    value: 100,
+    message: 'Имя должно быть больше 100 символов',
   },
 };
 
