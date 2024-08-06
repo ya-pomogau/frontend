@@ -84,9 +84,10 @@ export const YandexMap = ({
 
   const onOpenTask = (task: Task) => {
     if (ref.current) {
-      ref.current.panTo(task.location.coordinates, {
-        delay: 0,
-      });
+      const [x, y] = task.location.coordinates;
+      ref.current.setCenter([x-0.004, y], 15, {
+        checkZoomRange: true
+    });
     }
   };
 
