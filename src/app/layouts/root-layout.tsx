@@ -3,19 +3,18 @@ import { Outlet } from 'react-router-dom';
 import Header from 'widgets/header';
 import { BottomBar } from 'shared/ui/bottom-bar';
 
-import styles from './styles.module.css';
-import { PageLayout } from 'shared/ui/page-layout';
+import styles from './root-layout.module.css';
 
-export function Layout() {
+export const RootLayout = () => {
   return (
     <>
       <Header />
       <main className={styles.main}>
-        <PageLayout content={<Outlet />} />
+        <Outlet />
       </main>
       <footer className={styles.footer}>
         <BottomBar />
       </footer>
     </>
   );
-}
+};
