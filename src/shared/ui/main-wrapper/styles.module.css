@@ -1,0 +1,20 @@
+.wrapper {
+  max-width: 1255px;
+  margin: 0 auto;
+  min-height: 1024px;
+  height: 100vh;
+  display: block;
+  position: relative;
+}
+
+@media screen and (max-width: 1305px) {
+  .wrapper {
+    margin: 0 25px;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .wrapper {
+    min-height: auto;
+  }
+}

@@ -3,7 +3,6 @@ import {
   useRef,
   InputHTMLAttributes,
   ChangeEvent,
-  forwardRef,
   ReactNode,
 } from 'react';
 import { useYMaps } from '@pbe/react-yandex-maps';
@@ -27,9 +26,7 @@ interface InputAddressProps extends InputHTMLAttributes<HTMLInputElement> {
   inputAttributes?: InputHTMLAttributes<HTMLInputElement>;
 }
 
-export const InputAddress = forwardRef(function InputAddress(
-  props: InputAddressProps, ref
-) {
+export const InputAddress = (props: InputAddressProps) => {
   const {
     inputAttributes = {},
     address,
@@ -37,8 +34,6 @@ export const InputAddress = forwardRef(function InputAddress(
     onChange,
     ...otherProps
   } = props;
-
-  console.log(`this is ref ===>`, ref);
 
   const suggestInputRef = useRef<HTMLInputElement>(null);
   const initPlaceholder = useAppSelector((store) => store.user.data?.address);
@@ -121,4 +116,4 @@ export const InputAddress = forwardRef(function InputAddress(
       {...inputProps}
     />
   );
-});
+};
