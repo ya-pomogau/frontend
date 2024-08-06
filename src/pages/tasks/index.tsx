@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
 // import { Filter } from 'features/filter';
@@ -14,6 +15,7 @@ import { User } from 'entities/user/types';
 import { TasksTab } from 'pages/tasks-tab';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import { useGetUserByRolesQuery } from 'services/admin-api';
+import usePermission from 'shared/hooks/use-permission';
 
 export interface PageProps {
   incomeTab: string;
@@ -91,7 +93,7 @@ export function TasksPage({ incomeTab }: PageProps) {
   // раскоментировать после настройки сервера
   // const [searchRole, setSearchRole] =
   //   useState<IFilterValues>(defaultObjFilteres);
-
+  const isMainAdmin = usePermission([], UserRole.ADMIN);
   const navigate = useNavigate();
 
   const recipients = useGetUserByRolesQuery(Tabs.RECIPIENTS).data;
@@ -116,7 +118,8 @@ export function TasksPage({ incomeTab }: PageProps) {
     searchName,
     incomeTab,
     // раскоментировать 1 строку после настройки сервера
-    volunteers, recipients
+    volunteers,
+    recipients,
   ]);
 
   const handleUserClick = (user: User) => {
@@ -125,6 +128,32 @@ export function TasksPage({ incomeTab }: PageProps) {
     } else if (user.role === UserRole.VOLUNTEER) {
       navigate(`/profile/tasks/volunteers/${user._id}`);
     }
+  };
+
+  const configurePointsButton = (textButton: string) => {
+    return (
+      <>
+        {isMainAdmin && (
+          <button
+            className={styles.editButton}
+            onClick={() => navigate(`/profile/bids`)}
+          >
+            <Icon color="blue" icon="EditIcon" />
+            <p
+              className={classNames(
+                'text',
+                'text_size_small',
+                'text_type_regular',
+                'm-0',
+                styles.editButtonText
+              )}
+            >
+              {textButton}
+            </p>
+          </button>
+        )}
+      </>
+    );
   };
 
   return (
@@ -139,14 +168,23 @@ export function TasksPage({ incomeTab }: PageProps) {
         //   />
         // }
       />
-      <PageSubMenu
-        links={
-          <>
-            <PageSubMenuLink to="/profile/tasks/recipients" text="Реципиенты" />
-            <PageSubMenuLink to="/profile/tasks/volunteers" text="Волонтеры" />
-          </>
-        }
-      />
+      <div className={styles.menu_block}>
+        <PageSubMenu
+          links={
+            <>
+              <PageSubMenuLink
+                to="/profile/tasks/recipients"
+                text="Реципиенты"
+              />
+              <PageSubMenuLink
+                to="/profile/tasks/volunteers"
+                text="Волонтеры"
+              />
+            </>
+          }
+        />
+        {configurePointsButton('Настроить баллы')}
+      </div>
       <div>
         <Input
           value={searchName}
