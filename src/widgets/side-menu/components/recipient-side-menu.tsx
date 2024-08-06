@@ -1,6 +1,7 @@
 import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Icon } from 'shared/ui/icons';
+import { Routes } from 'shared/config';
 
 export const RecipientSideMenu = () => {
   return (
@@ -9,13 +10,13 @@ export const RecipientSideMenu = () => {
       links={
         <>
           <SideMenuLink
-            to="/profile/active"
+            to={`${Routes.PROFILE_RECIPIENT.ROOT}`}
             text="Активные заявки"
             icon={<Icon color="white" icon="ActiveApplicationIcon" size="54" />}
           />
 
           <SideMenuLink
-            to="/profile/completed"
+            to={`${Routes.PROFILE_RECIPIENT.COMPLETED}`}
             text="Завершенные заявки"
             icon={
               <Icon color="white" icon="CompletedApplicationIcon" size="54" />
