@@ -1,6 +1,6 @@
-import { SyntheticEvent, useEffect } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.css';
+
 import { Button } from '../../shared/ui/button';
 import usePermission from '../../shared/hooks/use-permission';
 import useForm from '../../shared/hooks/use-form';
@@ -15,6 +15,8 @@ import {
 } from '../../services/categories-api';
 import BalanceSettingsItem from './components/balance-settings-item';
 
+import styles from './styles.module.css';
+
 interface BalanceSettingsProps {
   extClassName?: string;
 }
@@ -27,6 +29,7 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();
   const { values, setValues, handleChange } = useForm<TPoints<string>>({});
+  const [isСhanged, setIsСhanged] = useState(false);
 
   useEffect(() => {
     const initialValues: TPoints<string> = {};
@@ -36,6 +39,11 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
     });
     setValues(initialValues);
   }, [data]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChange(e);
+    setIsСhanged(true);
+  };
 
   //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
   const handleSubmit = async (e: SyntheticEvent) => {
@@ -59,7 +67,7 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
               key={index}
               title={item.title}
               inputValue={`${values[item.title]}`}
-              handleChange={handleChange}
+              handleChange={handleInputChange}
             />
           ))}
       </div>
@@ -69,7 +77,7 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
         label="Сохранить"
         size="large"
         actionType="submit"
-        disabled={!isEditAllowed}
+        disabled={!isEditAllowed || !isСhanged}
       />
     </form>
   );
