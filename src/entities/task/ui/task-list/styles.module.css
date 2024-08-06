@@ -7,6 +7,15 @@
   overflow-y: auto;
 }
 
+.contentAdmin {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
+  width: 100%;
+  max-height: calc(65vh - 170px);
+  overflow-y: auto;
+}
+
 .content:last-child {
   margin-bottom: 60px;
 }
@@ -98,5 +107,9 @@
 @media screen and (max-width: 415px) {
   .content {
     max-height: 75vh;
+  }
+
+  .contentAdmin {
+    max-height: calc(75vh - 170px);
   }
 }

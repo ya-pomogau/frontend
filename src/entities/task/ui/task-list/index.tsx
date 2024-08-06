@@ -88,8 +88,7 @@ export const TaskList = ({
       {!isLoading && tasks && (
         <ul
           className={classNames(
-            styles.content,
-            'list',
+            role === UserRole.ADMIN ? styles.contentAdmin : styles.content,
             'p-0',
             'm-0',
             extClassName

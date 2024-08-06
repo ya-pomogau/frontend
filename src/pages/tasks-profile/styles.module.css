@@ -14,8 +14,6 @@
 
 .taskContainer {
   padding-left: 30px;
-  max-height: calc(65vh - 170px);
-  overflow-y: auto;
   font-family: 'Golos', sans-serif;
 }
 
