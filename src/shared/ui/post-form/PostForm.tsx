@@ -43,8 +43,8 @@ interface PostFormProps {
   handleChange?: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  handleSubmit: () => void;
   idEditedPost: string | undefined;
-  setValues: (value: IValuesBlog) => void;
 }
 
 export const PostForm: FC<PostFormProps> = ({
@@ -55,8 +55,8 @@ export const PostForm: FC<PostFormProps> = ({
   images,
   title,
   text,
+  handleSubmit,
   idEditedPost,
-  setValues,
 }) => {
   const [addPost] = useAddPostMutation();
   const [editPost] = useEditPostMutation();
@@ -90,10 +90,7 @@ export const PostForm: FC<PostFormProps> = ({
           _id: idEditedPost,
         })
       : addPost({ title: data.title, text: data.text });
-    setValues({
-      title: '',
-      text: '',
-    });
+    handleSubmit();
     reset();
   };
 

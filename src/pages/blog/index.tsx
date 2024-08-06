@@ -92,7 +92,12 @@ export function BlogPage() {
       />
       {isAdmin && (
         <PostForm
-          setValues={setValues}
+          handleSubmit={() => {
+            setValues({
+              title: '',
+              text: '',
+            });
+          }}
           idEditedPost={idEditedPost}
           refPostForm={refPostForm}
           title={values.title}

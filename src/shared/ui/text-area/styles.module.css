@@ -17,7 +17,7 @@
 }
 
 .input::-webkit-scrollbar {
-  display: none; /* для Chrome, Safari и Opera */
+  display: none;
 }
 
 .input_error {
