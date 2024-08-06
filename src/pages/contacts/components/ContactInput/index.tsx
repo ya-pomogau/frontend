@@ -1,8 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes, MouseEvent } from 'react';
 import cn from 'classnames';
-
 import { Icon } from 'shared/ui/icons';
-
 import styles from './styles.module.css';
 
 type InputProps = DetailedHTMLProps<
@@ -16,6 +14,8 @@ interface ContactInputProps extends InputProps {
   label: string;
   editText: string;
   onEdit: () => void;
+  error?: boolean;
+  errorText?: string;
 }
 
 export const ContactInput = ({
@@ -28,6 +28,8 @@ export const ContactInput = ({
   onChange,
   onEdit,
   editText,
+  error,
+  errorText,
 }: ContactInputProps) => {
   const titleStyles = `${styles.title} text text_size_large text_type_regular m-0`;
 
@@ -65,6 +67,17 @@ export const ContactInput = ({
             {editText}
           </p>
         </div>
+      )}
+      {isEditAllowed && (
+        <span
+          className={
+            !isEditable && !error
+              ? styles.edit_box_hidden
+              : styles.error_contacts
+          }
+        >
+          {errorText === ' ' ? <span>&nbsp;</span> : errorText}
+        </span>
       )}
     </div>
   );
