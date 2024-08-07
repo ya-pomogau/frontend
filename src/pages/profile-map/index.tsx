@@ -1,47 +1,59 @@
+import { useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
+
 import { useAppSelector } from 'app/hooks';
+import { useGetTaskVirginQuery } from 'services/user-task-api';
 import { YandexMap } from 'widgets/map';
 import { Filter } from 'features/filter';
+import { isUnConfirmedSelector } from 'entities/user/model';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Icon } from 'shared/ui/icons';
 import { Loader } from 'shared/ui/loader';
-import { useGetTaskVirginQuery } from 'services/user-task-api';
-import { useMediaQuery } from 'shared/hooks';
-import { useLocation } from 'react-router-dom';
-import queryString from 'query-string';
-import { isUnConfirmedSelector } from 'entities/user/model';
+import { UserRole } from 'shared/types/common.types';
 
 export function ProfileMapPage() {
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
   const query = queryString.parse(location.search);
   const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
-  const isVolunteer = user?.role === 'Volunteer';
 
-  console.log('Refactor');
-
+  const isVolunteer = user?.role === UserRole.VOLUNTEER;
+  const MAP_ZOOM = 15;
   let latitude = 0;
   let longitude = 0;
+
+  const mapSettings = useMemo(() => {
+    const [userLatitude, userLongitude] = [
+      user && Array.isArray(user.location) ? user.location[0] : 59.938955,
+      user && Array.isArray(user.location) ? user.location[1] : 30.315644,
+    ];
+
+    return {
+      latitude: userLatitude,
+      longitude: userLongitude,
+      zoom: MAP_ZOOM,
+    };
+  }, [user]);
+
+  const radius =
+    query.searchRadius && typeof query.searchRadius === 'string'
+      ? parseInt(query.searchRadius)
+      : undefined;
+
   if (user && user.location) {
     // обязателен именно такой порядок
     [longitude, latitude] = user.location;
   }
+
   const { data: tasks, isLoading } = useGetTaskVirginQuery([
-    'volunteer',
+    UserRole.VOLUNTEER.toLocaleLowerCase(),
     latitude,
     longitude,
   ]);
-  const mediaQuery = useMediaQuery('(max-width: 910px)');
-  const containerHeight =
-    user?.status === 0
-      ? mediaQuery
-        ? '62vh'
-        : 'calc(64vh - 78px)'
-      : mediaQuery
-      ? '75vh'
-      : '64vh';
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <SmartHeader
         icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
         text="Карта заявок"
@@ -60,31 +72,16 @@ export function ProfileMapPage() {
           )
         }
       />
-
       {isLoading ? (
         <Loader />
       ) : (
         tasks && (
           <YandexMap
             tasks={tasks}
-            mapSettings={{
-              latitude:
-                user && Array.isArray(user.location)
-                  ? user.location[0]
-                  : 59.938955,
-              longitude:
-                user && Array.isArray(user.location)
-                  ? user.location[1]
-                  : 30.315644,
-              zoom: 15,
-            }}
-            radius={
-              query.searchRadius && typeof query.searchRadius === 'string'
-                ? parseInt(query.searchRadius)
-                : undefined
-            }
+            mapSettings={mapSettings}
+            radius={radius}
             width="100%"
-            height={containerHeight}
+            height="100%"
             onClick={() => 3}
             coordinates={user?.location}
             role={user && user.role}
@@ -92,6 +89,6 @@ export function ProfileMapPage() {
           />
         )
       )}
-    </>
+    </div>
   );
 }
