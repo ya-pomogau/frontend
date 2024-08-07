@@ -17,16 +17,19 @@ export function ProfileMapPage() {
   const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
   const isVolunteer = user?.role === 'Volunteer';
 
+  console.log('Refactor');
+
   let latitude = 0;
   let longitude = 0;
   if (user && user.location) {
     // обязателен именно такой порядок
     [longitude, latitude] = user.location;
   }
-  const {
-    data: tasks,
-    isLoading,
-  } = useGetTaskVirginQuery(['volunteer', latitude, longitude]);
+  const { data: tasks, isLoading } = useGetTaskVirginQuery([
+    'volunteer',
+    latitude,
+    longitude,
+  ]);
   const mediaQuery = useMediaQuery('(max-width: 910px)');
   const containerHeight =
     user?.status === 0
