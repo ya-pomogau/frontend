@@ -31,7 +31,7 @@ export const ContactInput = ({
   errorText,
 }: ContactInputProps) => {
   const formStyles = `text text_type_regular m-0`;
-  const titleStyles = `${styles.title} ${formStyles} text_size_large`;
+  const titleStyles = `${styles.title} ${formStyles}`;
   const editTextStyles = `${formStyles} text_size_small`;
   interface IErrorStyle {
     color: string;
