@@ -11,7 +11,7 @@ import { useUpdateContactsMutation } from 'services/admin-api';
 
 type EditableType = Record<keyof TContacts, boolean>;
 
-interface ContactsForm extends TContacts {
+export interface ContactsForm extends TContacts {
   editableInputs: EditableType | null;
 }
 interface ContactFormProps {
@@ -41,8 +41,6 @@ export const ContactForm = ({ isEditAllowed }: ContactFormProps) => {
   });
 
   const isButtonDisabled = !isValid || !isDirty;
-
-  //console.log('isValid', isValid, 'isDirty', isDirty, 'errors', errors);
 
   const onEdit = (editingInput: keyof TContacts) => {
     setValue('editableInputs', {

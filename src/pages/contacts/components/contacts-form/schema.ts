@@ -1,7 +1,7 @@
 import Joi from 'joi';
-import { TContacts } from 'shared/types/common.types';
+import { ContactsForm } from './index';
 
-export const schema = Joi.object<TContacts>({
+export const schema = Joi.object<ContactsForm>({
   email: Joi.string()
     .required()
     .pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)
@@ -9,7 +9,6 @@ export const schema = Joi.object<TContacts>({
       'string.pattern.base': 'Неверный формат электронной почты',
       'string.empty': 'Укажите адрес электронной почты',
     }),
-
   socialNetwork: Joi.string()
     .required()
     .pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)
@@ -17,4 +16,5 @@ export const schema = Joi.object<TContacts>({
       'string.pattern.base': 'Неверный формат ссылки',
       'string.empty': 'Укажите ссылку на соцсети',
     }),
+  editableInputs: Joi.object(),
 });
