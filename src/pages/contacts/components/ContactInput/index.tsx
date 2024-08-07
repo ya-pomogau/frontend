@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes, MouseEvent } from 'react';
 import cn from 'classnames';
+
 import { Icon } from 'shared/ui/icons';
 import styles from './styles.module.css';
 
@@ -14,7 +15,6 @@ interface ContactInputProps extends InputProps {
   label: string;
   editText: string;
   onEdit: () => void;
-  error?: boolean;
   errorText?: string;
 }
 
@@ -28,14 +28,30 @@ export const ContactInput = ({
   onChange,
   onEdit,
   editText,
-  error,
   errorText,
 }: ContactInputProps) => {
-  const titleStyles = `${styles.title} text text_size_large text_type_regular m-0`;
+  const formStyles = `text text_type_regular m-0`;
+  const titleStyles = `${styles.title} ${formStyles} text_size_large`;
+  const editTextStyles = `${formStyles} text_size_small`;
+  interface IErrorStyle {
+    color: string;
+    marginTop: number;
+    minHeight: number;
+    fontSize: number;
+  }
+  const errorStyle: IErrorStyle = {
+    color: 'orange',
+    marginTop: 8,
+    minHeight: 16,
+    fontSize: 14,
+  };
 
   const inputStyles = cn(styles.input, {
     [styles.input_mode_edit]: isEditable,
     [styles.input_mode_link]: !isEditable,
+  });
+  const errorTextStyles = cn({
+    [styles.edit_box_hidden]: !isEditable,
   });
 
   const handleClick = (e: MouseEvent<HTMLInputElement>) => {
@@ -58,26 +74,18 @@ export const ContactInput = ({
         />
       </div>
       {isEditAllowed && (
-        <div
-          onClick={onEdit}
-          className={isEditable ? styles.edit_box_hidden : styles.edit_box}
-        >
-          <Icon color="blue" icon="EditIcon" />
-          <p className="text text_size_small text_type_regular m-0">
-            {editText}
-          </p>
-        </div>
-      )}
-      {isEditAllowed && (
-        <span
-          className={
-            !isEditable && !error
-              ? styles.edit_box_hidden
-              : styles.error_contacts
-          }
-        >
-          {errorText === ' ' ? <span>&nbsp;</span> : errorText}
-        </span>
+        <>
+          <div
+            onClick={onEdit}
+            className={isEditable ? styles.edit_box_hidden : styles.edit_box}
+          >
+            <Icon color="blue" icon="EditIcon" />
+            <p className={editTextStyles}>{editText}</p>
+          </div>
+          <span className={errorTextStyles} style={errorStyle}>
+            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
+          </span>
+        </>
       )}
     </div>
   );

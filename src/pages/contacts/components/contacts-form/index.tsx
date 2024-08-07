@@ -1,24 +1,26 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { schema } from './schema';
-import styles from './styles.module.css';
-import { ContactInput } from '../ContactInput';
-import { TContacts } from 'shared/types/common.types';
 
-import { Button } from 'shared/ui/button';
+import usePermission from 'shared/hooks/use-permission';
+import { UserRole, UserStatus, TContacts } from 'shared/types/common.types';
+
 import { useGetContactsQuery } from 'services/contacts-api';
 import { useUpdateContactsMutation } from 'services/admin-api';
+
+import { Button } from 'shared/ui/button';
+import { ContactInput } from '../ContactInput';
+import { schema } from './schema';
+
+import styles from './styles.module.css';
 
 type EditableType = Record<keyof TContacts, boolean>;
 
 export interface ContactsForm extends TContacts {
   editableInputs: EditableType | null;
 }
-interface ContactFormProps {
-  isEditAllowed: boolean;
-}
 
-export const ContactForm = ({ isEditAllowed }: ContactFormProps) => {
+export const ContactForm = () => {
+  const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
   const [updateContacts] = useUpdateContactsMutation();
 
   const { data: contacts } = useGetContactsQuery();
@@ -82,7 +84,6 @@ export const ContactForm = ({ isEditAllowed }: ContactFormProps) => {
               (watch('editableInputs') as EditableType)?.[field.name] || false
             }
             onEdit={() => onEdit(field.name)}
-            error={!!errors?.email?.message}
             errorText={errors.email?.message}
           />
         )}
@@ -103,7 +104,6 @@ export const ContactForm = ({ isEditAllowed }: ContactFormProps) => {
               (watch('editableInputs') as EditableType)?.[field.name] || false
             }
             onEdit={() => onEdit(field.name)}
-            error={!!errors?.socialNetwork?.message}
             errorText={errors.socialNetwork?.message}
           />
         )}
@@ -112,7 +112,7 @@ export const ContactForm = ({ isEditAllowed }: ContactFormProps) => {
         <Button
           buttonType="primary"
           label="Сохранить"
-          disabled={isButtonDisabled}
+          disabled={isButtonDisabled || getValues('editableInputs') === null}
           type="submit"
         />
       )}
