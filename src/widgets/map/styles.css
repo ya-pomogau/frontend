@@ -110,7 +110,7 @@
   padding: 0;
   color: var(--colors-interface-primary);
   font-size: 16px;
-  line-height: 16.8px; /* ! */
+  line-height: 16.8px;
 }
 
 .task_button:hover {
@@ -127,7 +127,6 @@
   align-items: center;
   margin-bottom: 7px;
   gap: 4px;
-  /* margin: 10px 0 0 0; */
 }
 
 .task_icon_box {
@@ -193,7 +192,6 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  /* margin: 3px; */
 }
 
 .task_date_text {
