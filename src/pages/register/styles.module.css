@@ -6,24 +6,3 @@
   line-height: 29px;
   color: var(--colors-interface-primary);
 }
-.form {
-  max-width: 377px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding-left: 18px;
-  justify-items: flex-start;
-}
-
-.text {
-  padding-top: 10px;
-  font-family: 'Golos', sans-serif;
-  font-size: 12px;
-  line-height: 14px;
-  padding-bottom: 6px;
-}
-.buttonContainer {
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-}
