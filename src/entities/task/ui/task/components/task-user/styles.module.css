@@ -1,63 +1,78 @@
-.main {
-  width: 181px;
+.userInfo {
   display: grid;
-  grid-template-rows: repeat(3, max-content);
-  justify-items: center;
-  gap: 5px;
-  grid-template-areas: 'avatar' 'info' 'buttons';
+  justify-self: start;
+  gap: 6px;
+  grid-template-areas: 'avatar info' 'empty buttons';
+  grid-auto-rows: min-content;
+  margin-top: 4px;
 }
 
 .avatar {
-  grid-area: avatar;
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 60px;
+  max-height: 60px;
 }
 
 .info {
   grid-area: info;
   display: flex;
-  min-height: 44px;
   flex-direction: column;
-  text-align: center;
   gap: 3px;
+  text-align: start;
+  justify-content: space-around;
+}
+
+.name {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: start;
 }
 
 .phone {
-  color: var(--colors-interface-primary);
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
 }
 
 .buttons {
   grid-area: buttons;
   display: flex;
   gap: 8px;
+  margin-top: 8px;
 }
 
-@media screen and (max-width: 1150px) {
-  .main {
-    grid-template-rows: repeat(2, max-content);
-    justify-self: start;
-    justify-items: start;
-    gap: 5px;
-    grid-template-areas: 'avatar info' 'empty buttons';
+@media screen and (min-width: 1151px) {
+  .userInfo {
+    grid-area: recipient;
+    justify-self: end;
+    margin-right: 9px;
+    margin-top: 7px;
+    width: 181px;
+    justify-items: center;
+    grid-template-areas: 'avatar' 'info' 'buttons';
   }
 
   .avatar {
-    max-width: 60px;
-    max-height: 60px;
+    grid-area: avatar;
+    max-width: 100px;
+    max-height: 100px;
   }
 
   .info {
+    text-align: center;
+  }
+
+  .name {
+    font-size: 16px;
     text-align: start;
-    align-items: flex-start;
-    justify-content: space-around;
   }
 
   .phone {
     color: var(--colors-interface-primary);
   }
 
-  .name {
-    font-size: 20px;
-    text-align: start;
+  .buttons {
+    margin-top: 0px;
   }
 }

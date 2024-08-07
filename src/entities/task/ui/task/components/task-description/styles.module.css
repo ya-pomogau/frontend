@@ -1,59 +1,12 @@
-.descriptionMain {
-  display: grid;
-  box-sizing: border-box;
-  grid-template-rows: repeat(2, max-content);
-  line-height: 24px;
-  grid-template-areas:
-    'description'
-    'iconGrid';
-}
-
-.textWithButton {
+.taskDescription {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   grid-area: description;
-  max-width: 333px;
-  position: relative;
-  display: flex;
-}
-
-.description_hidden {
-  max-height: 120px;
-  -webkit-line-clamp: 5;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.button {
-  position: absolute;
-  height: 22px;
-  right: -45px;
-  bottom: 0;
-  background: none;
-  display: block;
-  border: none;
-  padding: 0;
-  color: var(--colors-interface-primary);
-}
-
-.buttonUnderText {
-  position: relative;
-  width: auto;
-  right: 0;
-}
-
-.button:hover {
-  cursor: pointer;
-  color: var(--colors-interface-primary-additional);
-  transition: var(--transition-hover);
-}
-
-.icon {
-  grid-area: iconGrid;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  margin-right: 5px;
+  width: 100%;
+  border-bottom: 1px solid;
+  border-image-source: var(--colors-interface-line);
+  border-image-slice: 1;
 }
 
 .count {
@@ -61,32 +14,92 @@
 }
 
 @media screen and (max-width: 1150px) {
-  .descriptionMain {
-    grid-template-rows: repeat(2, max-content);
-    border-bottom: 1px solid;
-    border-image-source: var(--colors-interface-line);
-    border-image-slice: 1;
-    gap: 37px;
-    grid-template-areas: 'description' 'iconGrid';
-  }
-
-  .textWithButton {
-    max-width: 600px;
-    margin-right: 58px;
-  }
-
-  .description {
-    max-width: 600px;
-    min-width: 100%;
-  }
-
-  .button {
-    position: absolute;
-    bottom: -27px;
-    right: 0;
-  }
-
   .icon {
     justify-self: end;
+  }
+}
+
+.card__expandable {
+  margin-top: 20px;
+  padding-right: 40px;
+}
+
+.card__task {
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #2c2d2e;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Установите количество строк */
+  -webkit-box-orient: vertical;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.expandBtn {
+  appearance: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: var(--colors-interface-primary);
+  width: fit-content;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  float: right;
+}
+
+.taskExpanded {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
+.score {
+  align-self: flex-end;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  margin-top: 4px;
+  margin-right: 6px;
+}
+
+.scoreText {
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--colors-interface-primary);
+}
+
+@media screen and (min-width: 1151px) {
+  .taskDescription {
+    padding-left: 14px;
+    margin-top: 25px;
+    border: none;
+  }
+
+  .card__task {
+    -webkit-line-clamp: 5;
+  }
+
+  .card__expandable {
+    display: flex;
+    align-items: end;
+  }
+
+  .taskExpanded {
+    display: inline;
+  }
+
+  .expandBtn {
+    float: none;
+  }
+
+  [class*='card__expandable']:has([class*='taskExpanded']) {
+    display: inline;
+    padding-right: 104px;
+  }
+
+  .score {
+    align-self: start;
   }
 }
