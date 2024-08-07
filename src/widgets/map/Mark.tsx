@@ -10,6 +10,7 @@ import { UserRole, UserStatus } from 'shared/types/common.types';
 import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
 import { useResponseTaskMutation } from 'services/user-task-api';
+import type { Dispatch, SetStateAction } from 'react';
 
 type MarkProps = {
   task: Task;
@@ -206,7 +207,7 @@ const Mark: FC<MarkProps> = ({
         // Изменяем видимость кнопки "читать" в зависимости от длины контента
         const hendleReadButton = () => {
           if (onOpenTask) onOpenTask(task);
-          if ([...description].length < 125) {
+          if (description.length < 140) {
             buttonRead.textContent = '';
           }
         };
