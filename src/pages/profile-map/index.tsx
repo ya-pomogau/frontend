@@ -52,8 +52,13 @@ export function ProfileMapPage() {
     longitude,
   ]);
 
+  const containerHeight =
+    user?.status === 0
+      ? 'clamp(60dvh,75dvh - 10vw, 75dvh)'
+      : 'clamp(70dvh,85dvh - 10vw, 85dvh)';
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <>
       <SmartHeader
         icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
         text="Карта заявок"
@@ -81,7 +86,7 @@ export function ProfileMapPage() {
             mapSettings={mapSettings}
             radius={radius}
             width="100%"
-            height="100%"
+            height={containerHeight}
             onClick={() => 3}
             coordinates={user?.location}
             role={user && user.role}
@@ -89,6 +94,6 @@ export function ProfileMapPage() {
           />
         )
       )}
-    </div>
+    </>
   );
 }
