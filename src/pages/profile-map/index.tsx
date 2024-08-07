@@ -24,10 +24,10 @@ export function ProfileMapPage() {
   let longitude = 0;
 
   const mapSettings = useMemo(() => {
-    const [userLatitude, userLongitude] = [
-      user && Array.isArray(user.location) ? user.location[0] : 59.938955,
-      user && Array.isArray(user.location) ? user.location[1] : 30.315644,
-    ];
+    const [userLatitude, userLongitude] =
+      user && Array.isArray(user.location)
+        ? [user.location[0], user.location[1]]
+        : [59.938955, 30.315644];
 
     return {
       latitude: userLatitude,
@@ -52,10 +52,9 @@ export function ProfileMapPage() {
     longitude,
   ]);
 
-  const containerHeight =
-    user?.status === 0
-      ? 'clamp(60dvh,75dvh - 10vw, 75dvh)'
-      : 'clamp(70dvh,85dvh - 10vw, 85dvh)';
+  const containerHeight = isUnconfirmed
+    ? 'clamp(60dvh,75dvh - 10vw, 75dvh)'
+    : 'clamp(70dvh,85dvh - 10vw, 85dvh)';
 
   return (
     <>
