@@ -52,11 +52,3 @@
     bottom: -40px;;
   }
 }
-
-.footer {
-  width: calc(100% + 25px * 2);
-  margin-left: -25px;
-  margin-right: -25px;
-  height: 22px;
-  overflow: hidden;
-}

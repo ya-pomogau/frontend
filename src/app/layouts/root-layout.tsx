@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import Header from 'widgets/header';
-import { BottomBar } from 'shared/ui/bottom-bar';
+import Footer from 'widgets/footer';
 
 import styles from './root-layout.module.css';
 
@@ -12,9 +12,7 @@ export const RootLayout = () => {
       <main className={styles.main}>
         <Outlet />
       </main>
-      <footer className={styles.footer}>
-        <BottomBar />
-      </footer>
+      <Footer />
     </>
   );
 };
