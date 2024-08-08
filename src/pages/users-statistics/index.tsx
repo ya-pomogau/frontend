@@ -7,7 +7,6 @@ import { Button } from 'shared/ui/button';
 import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
 import { ButtonsNameForStatisticsPage } from 'pages/application-statistics';
-import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 interface IUsersRoleOptions {
@@ -38,26 +37,20 @@ export const usersStatusOptions: Array<IUsersStatusOptions> = [
 ];
 
 export const UsersStatisticsPage = () => {
-  const [statusAccordion, setStatusAccordion] = useState<string | null>(null);
-  const [roleAccordion, setRoleAccordion] = useState<string | null>(null);
-
-  const handleStatusAccordion = (value: string) => {
-    setStatusAccordion(value);
-  };
-
-  const handleRoleAccordion = (value: string) => {
-    setRoleAccordion(value);
-  };
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     const formData = {
-      userStatus: statusAccordion,
-      userRole: roleAccordion,
+      userStatus: watch('usersStatusOptions'),
+      userRole: watch('usersRoleOptions'),
     };
   };
 
-  const { control, handleSubmit } = useForm<IFormInput>();
+  const { control, handleSubmit, watch } = useForm<IFormInput>({defaultValues: {
+    usersRoleOptions: '',
+    usersStatusOptions: ''
+  }});
 
-  const disabledButton = !statusAccordion || !roleAccordion;
+  const disabledButton =
+    !watch('usersStatusOptions') || !watch('usersRoleOptions');
   return (
     <>
       <SmartHeader
@@ -77,14 +70,14 @@ export const UsersStatisticsPage = () => {
               <Controller
                 name="usersRoleOptions"
                 control={control}
-                render={() => (
+                render={({ field: { onChange, value } }) => (
                   <Accordion
                     name="user_role"
                     arrayOptions={usersRoleOptions}
-                    onChange={handleRoleAccordion}
+                    onChange={onChange}
                     placeholder={String(
-                      usersRoleOptions.find((n) => n.value === roleAccordion)
-                        ?.label || 'Выберите роль'
+                      usersRoleOptions.find((n) => n.value === value)?.label ||
+                        'Выберите роль'
                     )}
                   />
                 )}
@@ -98,15 +91,14 @@ export const UsersStatisticsPage = () => {
               <Controller
                 name="usersStatusOptions"
                 control={control}
-                render={() => (
+                render={({ field: { value, onChange } }) => (
                   <Accordion
                     name="user_status"
                     arrayOptions={usersStatusOptions}
-                    onChange={handleStatusAccordion}
+                    onChange={onChange}
                     placeholder={String(
-                      usersStatusOptions.find(
-                        (n) => n.value === statusAccordion
-                      )?.label || 'Выберите статус'
+                      usersStatusOptions.find((n) => n.value === value)
+                        ?.label || 'Выберите статус'
                     )}
                   />
                 )}

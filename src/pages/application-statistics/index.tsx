@@ -7,13 +7,14 @@ import { FieldsetView } from 'shared/ui/fieldset/utils';
 import { Accordion } from 'shared/ui/accordion';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import DatePicker, { ReactDatePickerCustomHeaderProps } from 'react-datepicker';
 import { addYears } from 'date-fns';
 import { StepButton } from 'shared/ui/step-button';
 import { getMonth } from 'shared/ui/date-picker/lib';
 import ru from 'date-fns/locale/ru';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { customHeader } from 'shared/ui/date-picker';
 
 interface IStatusApplicationOptions {
   value: 'open' | 'atWork' | 'close';
@@ -32,41 +33,11 @@ export enum FieldsName {
 
 interface IFormInput {
   period: {
-    from: Date;
-    to: Date;
+    from: Date | null;
+    to: Date | null;
   };
   statusApplication: string;
   currentStatusApplication?: boolean;
-}
-
-function customHeader({
-  date,
-  decreaseMonth,
-  increaseMonth,
-  prevMonthButtonDisabled,
-  nextMonthButtonDisabled,
-}: ReactDatePickerCustomHeaderProps): ReactNode {
-  const month = getMonth(date);
-
-  return (
-    <div className={styles.datePicker__calendarHeader}>
-      <StepButton
-        direction="left"
-        onClick={decreaseMonth}
-        type="button"
-        disabled={prevMonthButtonDisabled}
-      />
-      <div>
-        <span className={styles.datePicker__headerMonth}>{month}</span>
-      </div>
-      <StepButton
-        direction="right"
-        onClick={increaseMonth}
-        type="button"
-        disabled={nextMonthButtonDisabled}
-      />
-    </div>
-  );
 }
 
 const statusApplicationOptions: Array<IStatusApplicationOptions> = [
@@ -78,60 +49,28 @@ const templateDatePeriod = 'дд.мм.гггг';
 const templateDateFormat = 'dd.MM.yyyy';
 
 export const ApplicationsStatisticsPage = () => {
-  const [selectedCategoryFromAccordion, setSelectedCategoryFromAccordion] =
-    useState<string | null>(null);
-
-  const [period, setPeriod] = useState<{
-    from: Date | null;
-    to: Date | null;
-  }>({ from: null, to: null });
-
-  const [
-    currentStatusApplicationCheckbox,
-    setCurrentStatusApplicationCheckbox,
-  ] = useState<boolean>(false);
-
-  const handleFormAccordion = (value: string) => {
-    setSelectedCategoryFromAccordion(value);
-  };
-
-  const handleInputDate = (
-    periodField: string,
-    date: Date,
-    e: React.FormEvent<HTMLInputElement>
-  ) => {
-    e.preventDefault();
-    switch (periodField) {
-      case 'from':
-        setPeriod({ ...period, from: date });
-        break;
-      case 'to':
-        setPeriod({ ...period, to: date });
-        break;
-      default:
-        return;
-    }
-  };
-
-  const handleCurrentStatusApplicationCheckbox = () => {
-    setCurrentStatusApplicationCheckbox(!currentStatusApplicationCheckbox);
-  };
-
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     const formData = {
       period: {
-        from: period.from,
-        to: period.to,
+        from: watch('period.from'),
+        to: watch('period.from'),
       },
-      statusApplication: selectedCategoryFromAccordion,
-      currentStatusApplication: currentStatusApplicationCheckbox,
+      statusApplication: watch('statusApplication'),
+      currentStatusApplication: watch('currentStatusApplication'),
     };
   };
 
-  const { control, handleSubmit } = useForm<IFormInput>();
+  const { control, watch, handleSubmit } = useForm<IFormInput>({defaultValues: {
+    period: {
+      from: null,
+      to: null,
+    },
+    statusApplication: '',
+    currentStatusApplication: false
+  }});
 
   const disabledButton =
-    !selectedCategoryFromAccordion || !period.from || !period.to;
+    !watch('period.from') || !watch('period.to') || !watch('statusApplication');
 
   return (
     <>
@@ -153,19 +92,14 @@ export const ApplicationsStatisticsPage = () => {
               <Controller
                 name="period.from"
                 control={control}
-                render={() => (
+                render={({ field: { value, name, onChange } }) => (
                   <DatePicker
                     dateFormat={templateDateFormat}
-                    selected={period.from}
-                    name={FieldsName.from}
-                    onChange={(
-                      date: Date,
-                      e: React.SyntheticEvent<HTMLInputElement, Event>
-                    ) => {
-                      handleInputDate(FieldsName.from, date, e);
-                    }}
+                    selected={value}
+                    name={name}
+                    onChange={onChange}
                     placeholderText={templateDatePeriod}
-                    maxDate={period.to || new Date()}
+                    maxDate={watch('period.to') || new Date()}
                     minDate={addYears(new Date(), -2)}
                     className={styles.period__input_field}
                     renderCustomHeader={customHeader}
@@ -178,20 +112,15 @@ export const ApplicationsStatisticsPage = () => {
               <Controller
                 name="period.to"
                 control={control}
-                render={() => (
+                render={({ field: { value, name, onChange } }) => (
                   <DatePicker
                     dateFormat={templateDateFormat}
-                    selected={period.to}
-                    name={FieldsName.to}
-                    onChange={(
-                      date: Date,
-                      e: React.SyntheticEvent<HTMLInputElement, Event>
-                    ) => {
-                      handleInputDate(FieldsName.to, date, e);
-                    }}
+                    selected={value}
+                    name={name}
+                    onChange={onChange}
                     placeholderText={templateDatePeriod}
                     maxDate={new Date()}
-                    minDate={period.from || addYears(new Date(), -2)}
+                    minDate={watch('period.from') || addYears(new Date(), -2)}
                     className={styles.period__input_field}
                     renderCustomHeader={customHeader}
                     calendarClassName={styles.dataPicker__calendar}
@@ -207,15 +136,14 @@ export const ApplicationsStatisticsPage = () => {
             <Controller
               name="statusApplication"
               control={control}
-              render={() => (
+              render={({ field: { onChange, value } }) => (
                 <Accordion
                   name="status_application"
                   arrayOptions={statusApplicationOptions}
-                  onChange={handleFormAccordion}
+                  onChange={onChange}
                   placeholder={String(
-                    statusApplicationOptions.find(
-                      (n) => n.value === selectedCategoryFromAccordion
-                    )?.label || 'Выберите статус заявки'
+                    statusApplicationOptions.find((n) => n.value === value)
+                      ?.label || 'Выберите статус заявки'
                   )}
                 />
               )}
@@ -225,13 +153,13 @@ export const ApplicationsStatisticsPage = () => {
         <Controller
           name="currentStatusApplication"
           control={control}
-          render={() => (
+          render={({ field: { onChange } }) => (
             <Checkbox
               label="Статус на данный момент"
               name="currentStatusApplication"
               id="currentStatusApplication"
               extClassName={styles.current_status_application_checkbox}
-              onChange={handleCurrentStatusApplicationCheckbox}
+              onChange={onChange}
             />
           )}
         />
