@@ -17,6 +17,7 @@
 }
 
 .title {
+    font: var(--font-golos-24-28);
     color: var(--colors-interface-primary-additional);
 }
 
@@ -56,6 +57,15 @@
 
 .edit_box_hidden {
     display: none;
+}
+
+.edit_text {
+    font: var(--font-golos-12-16);
+}
+
+.error_text {
+    color: var(--colors-interface-orange);
+    font: var(--font-golos-14-16);
 }
 
 @media (max-width: 600px) {

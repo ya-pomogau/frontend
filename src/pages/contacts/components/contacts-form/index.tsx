@@ -3,11 +3,10 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import usePermission from 'shared/hooks/use-permission';
 import { UserRole, UserStatus, TContacts } from 'shared/types/common.types';
-
+import { Button } from 'shared/ui';
 import { useGetContactsQuery } from 'services/contacts-api';
 import { useUpdateContactsMutation } from 'services/admin-api';
 
-import { Button } from 'shared/ui/button';
 import { ContactInput } from '../ContactInput';
 import { schema } from './schema';
 
@@ -18,6 +17,12 @@ type EditableType = Record<keyof TContacts, boolean>;
 export interface ContactsForm extends TContacts {
   editableInputs: EditableType | null;
 }
+
+const InputKey = {
+  editable_inputs: 'editableInputs',
+  email: 'email',
+  socialNetwork: 'socialNetwork',
+} as const;
 
 export const ContactForm = () => {
   const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
@@ -45,8 +50,8 @@ export const ContactForm = () => {
   const isButtonDisabled = !isValid || !isDirty;
 
   const onEdit = (editingInput: keyof TContacts) => {
-    setValue('editableInputs', {
-      ...((getValues('editableInputs') as object) || {}),
+    setValue(InputKey.editable_inputs, {
+      ...((getValues(InputKey.editable_inputs) as object) || {}),
       [editingInput]: true,
     } as EditableType);
   };
@@ -61,7 +66,7 @@ export const ContactForm = () => {
         socialNetwork,
       });
 
-      setValue('editableInputs', null);
+      setValue(InputKey.editable_inputs, null);
     } catch (err) {
       console.error('Ошибка при сохранении данных:', err);
     }
@@ -70,7 +75,7 @@ export const ContactForm = () => {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Controller
         control={control}
-        name="email"
+        name={InputKey.email}
         render={({ field }) => (
           <ContactInput
             type="email"
@@ -81,7 +86,8 @@ export const ContactForm = () => {
             isEditAllowed={isEditAllowed}
             editText="изменить&nbsp;эл.почту"
             isEditable={
-              (watch('editableInputs') as EditableType)?.[field.name] || false
+              (watch(InputKey.editable_inputs) as EditableType)?.[field.name] ||
+              false
             }
             onEdit={() => onEdit(field.name)}
             errorText={errors.email?.message}
@@ -90,7 +96,7 @@ export const ContactForm = () => {
       />
       <Controller
         control={control}
-        name="socialNetwork"
+        name={InputKey.socialNetwork}
         render={({ field }) => (
           <ContactInput
             type="url"
@@ -101,7 +107,8 @@ export const ContactForm = () => {
             isEditAllowed={isEditAllowed}
             editText="изменить&nbsp;соцсети"
             isEditable={
-              (watch('editableInputs') as EditableType)?.[field.name] || false
+              (watch(InputKey.editable_inputs) as EditableType)?.[field.name] ||
+              false
             }
             onEdit={() => onEdit(field.name)}
             errorText={errors.socialNetwork?.message}
@@ -112,7 +119,9 @@ export const ContactForm = () => {
         <Button
           buttonType="primary"
           label="Сохранить"
-          disabled={isButtonDisabled || getValues('editableInputs') === null}
+          disabled={
+            isButtonDisabled || getValues(InputKey.editable_inputs) === null
+          }
           type="submit"
         />
       )}
