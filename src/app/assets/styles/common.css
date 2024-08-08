@@ -105,23 +105,23 @@ body {
 }
 
 .text_size_small {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
+  font-size: 12px;
+  line-height: 16.8px;
 }
 
 .text_size_middle {
-  font-size: var(--font-size-middle);
-  line-height: var(--line-height-middle);
+  font-size: 12px;
+  line-height: 18px;
 }
 
 .text_size_medium {
-  font-size: var(--font-size-medium);
-  line-height: var(--line-height-medium);
+  font-size: 14px;
+  line-height: 22.4px;
 }
 
 .text_size_large {
-  font-size: var(--font-size-l);
-  line-height: var(--line-height-large);
+  font-size: 24px;
+  line-height: 29px;
 }
 
 .text_type_regular {
