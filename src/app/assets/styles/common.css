@@ -57,17 +57,22 @@
     var(--line-height-large) var(--font-family-golos);
   --font-golos-medium: var(--font-weight-regular) var(--font-size-m) /
     var(--line-height-medium) var(--font-family-golos);
-  --font-golos-small: var(--font-weight-regular) var(--font-size-small) /
-    var(--line-height-small) var(--font-family-golos);
   --font-inter-large: var(--font-weight-bold) var(--font-size-l) /
     var(--line-height-large) var(--font-family-inter);
   --font-inter-medium: var(--font-weight-bold) var(--font-size-m) /
     var(--line-height-medium) var(--font-family-inter);
   --font-inter-small: var(--font-weight-bold) var(--font-size-small) /
     var(--line-height-small) var(--font-family-inter);
+
+  --font-golos-12-16: var(--font-weight-regular) var(--font-size-small) /
+    var(--line-height-small) var(--font-family-golos);
+  --font-golos-14-16: var(--font-weight-regular) var(--font-size-middle) /
+    var(--line-height-small) var(--font-family-golos);
+  --font-golos-24-28: var(--font-weight-regular) var(--font-size-medium) /
+    var(--line-height-large) var(--font-family-golos);
 }
 
-body {
+body, p, h1, h2, h3, h4, h5, h6 {
   margin: 0;
   background-color: var(--colors-interface-background);
 }
