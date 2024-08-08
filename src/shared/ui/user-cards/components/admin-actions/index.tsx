@@ -56,17 +56,19 @@ const AdminActions = ({
 
   return (
     <div className={classnames(styles.buttons_div)}>
-      <Input
-        className={classnames(styles.admin_login_input)}
-        label="Логин"
-        name="login"
-        onChange={(e) => {
-          console.log(e);
-        }}
-        value={'Login'}
-        placeholder="Логин"
-        type="text"
-      />
+      <div className={classnames(styles.admin_login_box)}>
+        <Input
+          className={classnames(styles.admin_login_input)}
+          label="Логин"
+          name="login"
+          onChange={(e) => {
+            console.log(e);
+          }}
+          value={'Login'}
+          placeholder="Логин"
+          type="text"
+        />
+      </div>
       <div className={classnames(styles.admin_password_box)}>
         <Input
           className={classnames(styles.admin_password_input)}
@@ -79,12 +81,12 @@ const AdminActions = ({
           placeholder="Пароль"
           type={'password'}
         />
-        <EditIcon
-          onClick={handleModalOpen}
-          className={classnames(styles.admin_edit_icon)}
-          color={'blue'}
-        />
       </div>
+      <EditIcon
+        onClick={handleModalOpen}
+        className={classnames(styles.admin_edit_icon)}
+        color={'blue'}
+      />
 
       {isAdminDropdownListClosed ? (
         <>
