@@ -39,7 +39,7 @@ export const TaskInfo = ({ date, address, extClassName }: TaskInfoProps) => {
       >
         <Icon color="blue" icon="ClockIcon" size="24" className={styles.icon} />
         <p className={classNames('m-0', styles.sizeText)}>
-          {date ? format(new Date(date), 'HH:mm') : '00:00-00:00'}
+          {date ? format(new Date(date), 'HH:mm') : 'бессрочно'} 
         </p>
       </div>
       <div className={styles.address}>

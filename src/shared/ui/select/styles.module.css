@@ -6,7 +6,7 @@
   padding: 12px;
   width: 100%;
   transition: var(--transition-hover);
-  height: 44px;
+  height: 30px;
   color: var(--colors-interface-additional);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
@@ -25,10 +25,10 @@
 
 .label {
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 18px;
   font-weight: 400;
-  color: var(--colors-interface-primary);
+  color: #000000;
   margin-bottom: 8px;
 }
 
