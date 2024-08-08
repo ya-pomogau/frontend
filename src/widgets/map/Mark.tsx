@@ -42,7 +42,7 @@ const Mark: FC<MarkProps> = ({
     // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
     showPopup();
 
-    isAuthorised && responseTask(task._id);
+    isAuthorised && isGranted && responseTask(task._id);
   };
 
   if (!ymaps) return null;
