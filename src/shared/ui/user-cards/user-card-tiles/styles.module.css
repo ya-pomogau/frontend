@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   gap: 9px;
-  height: 298px;
+  max-height: 319px;
 }
 
 .avatar {
@@ -32,12 +32,7 @@
 }
 
 .admin_content {
-  height: 256px;
-  max-height: 288px;
-}
-
-.admin_content_action {
-  height: 513px;
+  min-height: 256px;
 }
 
 @media screen and (min-width: 900px) and (max-width: 1100px),

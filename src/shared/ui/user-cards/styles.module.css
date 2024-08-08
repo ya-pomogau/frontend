@@ -40,7 +40,7 @@
 
 .admin_login_box {
   width: 236px;
-  height: 39px;
+  min-height: 39px;
   padding-block-start: 8px;
   margin-inline-start: -10px;
   cursor: not-allowed;
