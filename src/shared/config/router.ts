@@ -1,6 +1,23 @@
 export const Routes = {
   ROOT: '/',
   PROFILE: '/profile',
+  PROFILE_RECIPIENT: {
+    ROOT: '/profile/recipient',
+    ACTIVE: 'active',
+    COMPLETED: 'completed',
+  },
+  PROFILE_VOLUNTEER: {
+    ROOT: '/profile/volunteer',
+    MAP: 'map',
+    ACTIVE: 'active',
+    COMPLETED: 'completed',
+  },
+  PROFILE_ADMIN: {
+    ROOT: '/profile/admin',
+    DEFAULT: 'requests',
+    STATISTICS: 'statistics',
+    TASKS: 'tasks',
+  },
   BLOG: '/blog',
   POLICY: '/policy',
   CONTACTS: '/contacts',

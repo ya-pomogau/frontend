@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { initTitleMarkdown, initDescriptionMarkdown } from './content';
-import style from './markdown-style.module.css';
+import styles from './markdown-style.module.css';
 import { EditIcon } from '../../shared/ui/icons/edit-icon';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Button } from '../../shared/ui/button';
@@ -46,30 +46,31 @@ export function PolicyPage() {
     setEditState(false);
   };
   return (
-    <div className={style.wrapper}>
+    <div className={styles.wrapper}>
       <SmartHeader
         icon={<LockIcon color="blue" size="32" />}
         text="Политика конфиденциальности"
-        extClassName={isMobile ? style.smartHeaderOn : style.smartHeaderOff}
+        extClassName={isMobile ? styles.smartHeaderOn : styles.smartHeaderOff}
       />
+      <div className={styles.overlay} />
       {!editState && (
         <>
-          <div className={style.title}>
+          <div className={styles.title}>
             <ReactMarkdown
-              className={style.markdownStyles}
+              className={styles.markdownStyles}
               remarkPlugins={[remarkGfm]}
             >
               {titleMarkdown}
             </ReactMarkdown>
             {isMainAdmin && (
-              <button className={style.editButton} onClick={handleEditButton}>
+              <button className={styles.editButton} onClick={handleEditButton}>
                 <EditIcon color={'blue'} size={'20'} height="18" />
-                <p className={style.editButtonText}>Редактировать</p>
+                <p className={styles.editButtonText}>Редактировать</p>
               </button>
             )}
           </div>
           <ReactMarkdown
-            className={style.markdownStyles}
+            className={styles.markdownStyles}
             remarkPlugins={[remarkGfm]}
           >
             {descriptionMarkdown}
@@ -77,32 +78,32 @@ export function PolicyPage() {
         </>
       )}
       {editState && (
-        <form className={style.editForm} onSubmit={onSubmit}>
-          <p className={style.editTitleText}>Заголовок</p>
+        <form className={styles.editForm} onSubmit={onSubmit}>
+          <p className={styles.editTitleText}>Заголовок</p>
           <input
             type={'text'}
             name={'title'}
             value={titleInput}
-            className={style.titleInput}
+            className={styles.titleInput}
             onChange={onChangeTitleInput}
           />
-          <p className={style.editDescriptionText}>Текст</p>
+          <p className={styles.editDescriptionText}>Текст</p>
           <textarea
-            className={style.descriptionInput}
+            className={styles.descriptionInput}
             name={'description'}
             value={descriptionInput}
             onChange={onChangeDescriptionInput}
           ></textarea>
-          <div className={style.buttonContainer}>
+          <div className={styles.buttonContainer}>
             <Button
               buttonType="primary"
               actionType="submit"
               label="Опубликовать"
               size="extraLarge"
             />
-            <button className={style.closeButton} onClick={handleCloseButton}>
+            <button className={styles.closeButton} onClick={handleCloseButton}>
               <CloseIconThin color={'blue'}></CloseIconThin>
-              <p className={style.closeButtonText}>Закрыть без изменений</p>
+              <p className={styles.closeButtonText}>Закрыть без изменений</p>
             </button>
           </div>
         </form>

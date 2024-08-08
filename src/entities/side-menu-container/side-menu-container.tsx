@@ -22,9 +22,9 @@ export const SideMenuContainer = ({
 }: SideMenuContainerProps) => (
   <div
     className={classnames(
-      styles.button__container,
-      styles[`button__container--${size}`],
-      styles[`button__container--${border}`],
+      styles.sideMenuContainer,
+      styles[`sideMenuContainer--${size}`],
+      styles[`sideMenuContainer--${border}`],
       extClassName
     )}
     style={{ border }}

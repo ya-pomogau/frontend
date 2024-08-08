@@ -4,23 +4,20 @@
   position: relative;
 }
 
-.overlay {
-  position: absolute;
-  bottom: 22px;
-  left: 315px;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
-  height: 152px;
-  width: calc(100% - 315px);
-  pointer-events: none;
+@media screen and (max-width: 1300px) {
+  .main {
+    padding: 0 25px;
+  }
+  .overlay {
+    left: 318px;
+    width: calc(100% - 358px);
+  }
 }
 
-.overlayMaxWidth {
-  position: absolute;
-  bottom: 22px;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
-  height: 152px;
-  width: 100%;
-  pointer-events: none;
+@media screen and (max-width: 1050px) {
+  .main {
+    height: calc(100% - 108px - 28px - 22px);
+  }
 }
 
 @media screen and (max-width: 920px) {

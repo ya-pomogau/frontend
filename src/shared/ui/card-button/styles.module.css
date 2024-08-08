@@ -7,11 +7,11 @@
   cursor: pointer;
   height: 114px;
   padding: 0 12px;
+  width: 100%;
 }
 
 @media (max-width: 360px) {
   .card-button {
-    width: 200px;
   }
 }
 
@@ -21,14 +21,12 @@
 
 @media (min-width: 361px) and (max-width: 735px) {
   .card-button {
-    width: 224px;
     padding: 0 26px;
   }
 }
 
 @media (min-width: 736px) {
   .card-button {
-    width: 276px;
     padding: 0 30px;
   }
 }
@@ -45,7 +43,6 @@
 
 .card-buttonContent {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   width: 100%;
 }

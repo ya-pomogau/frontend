@@ -7,10 +7,13 @@ export const PageSubMenuAdminStatistics = () => {
       links={
         <>
           <PageSubMenuLink
-            to="/profile/statistics/applications"
+            to={`/profile/admin/statistics/applications`}
             text="Заявки"
           />
-          <PageSubMenuLink to="/profile/statistics/users" text="Пользователи" />
+          <PageSubMenuLink
+            to={`/profile/admin/statistics/users`}
+            text="Пользователи"
+          />
         </>
       }
     />

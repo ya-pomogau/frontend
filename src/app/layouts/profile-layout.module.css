@@ -1,0 +1,11 @@
+.profileLayout {
+  display: grid;
+  grid-template-columns: 295px 1fr;
+  gap: 0 20px;
+}
+
+.sideMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
