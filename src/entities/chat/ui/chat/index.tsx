@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 
 // import { PinIcon } from 'shared/ui/icons/pin-icon';
@@ -34,6 +34,7 @@ export const PopupChat = ({
 }: PopupChatProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const [inputValue, setInputValue] = useState<string>('');
+  const openedChatPopupRef = useRef<HTMLDivElement>(null);
   const sortedMessages = sortMessages(messages);
 
   const [mesagesInChat] = useState(sortedMessages);
@@ -45,19 +46,22 @@ export const PopupChat = ({
   const currentMessages = mesagesInChat.slice(firstMessage, lastMessage);
 
   useEffect(() => {
-    const modal = document.getElementById('openedChatPopup') as HTMLElement;
-    modal.addEventListener('scroll', scrollHandler)
+    openedChatPopupRef.current?.addEventListener('scroll', scrollHandler);
 
     return function () {
-      modal.removeEventListener('scroll', scrollHandler)
-    }
-  }, []) 
+      openedChatPopupRef.current?.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
 
-  const scrollHandler = (e) => {
-    if (e.currentTarget.clientHeight + e.currentTarget.scrollTop >= e.currentTarget.scrollHeight - 5) {
-      setCurrentMessagesPage(prevState => prevState + 1)
+  const scrollHandler = (e: Event) => {
+    const targetDiv: HTMLDivElement = e.target as HTMLDivElement;
+    if (
+      targetDiv.clientHeight + targetDiv.scrollTop >=
+      targetDiv.scrollHeight - 5
+    ) {
+      setCurrentMessagesPage((prevState) => prevState + 1);
     }
-  }
+  };
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
@@ -71,7 +75,7 @@ export const PopupChat = ({
   };
 
   return (
-    <div 
+    <div
       className={classnames(styles.chatWrapper, {
         [styles.chatWrapper_action]: isOpen,
       })}
@@ -106,8 +110,8 @@ export const PopupChat = ({
       </div>
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>
-        <div id="openedChatPopup" className={styles.messagesBlock}>
-          <MessagesList 
+        <div ref={openedChatPopupRef} id="openedChatPopup" className={styles.messagesBlock}>
+          <MessagesList
             currentMessages={currentMessages}
             chatmateInfo={chatmateInfo}
           />
