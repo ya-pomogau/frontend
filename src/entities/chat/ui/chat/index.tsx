@@ -1,9 +1,8 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState, useRef } from 'react';
 import classnames from 'classnames';
 
 // import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
-import { Message } from 'shared/ui/message';
 
 import { sortMessages } from './libs/utils';
 import { SquareButton } from 'shared/ui/square-buttons';
@@ -15,6 +14,7 @@ import { Icon } from 'shared/ui/icons';
 import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
 import { GradientDivider } from 'shared/ui/gradient-divider';
+import { MessagesList } from './components/messages-list';
 
 interface PopupChatProps {
   messages: IMessage[];
@@ -34,7 +34,34 @@ export const PopupChat = ({
 }: PopupChatProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
   const [inputValue, setInputValue] = useState<string>('');
+  const openedChatPopupRef = useRef<HTMLDivElement>(null);
   const sortedMessages = sortMessages(messages);
+
+  const [mesagesInChat] = useState(sortedMessages);
+  const [currentMessagesPage, setCurrentMessagesPage] = useState(1);
+  const [messagesShown] = useState(10);
+
+  const lastMessage = currentMessagesPage * messagesShown;
+  const firstMessage = 0;
+  const currentMessages = mesagesInChat.slice(firstMessage, lastMessage);
+
+  useEffect(() => {
+    openedChatPopupRef.current?.addEventListener('scroll', scrollHandler);
+
+    return function () {
+      openedChatPopupRef.current?.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
+
+  const scrollHandler = (e: Event) => {
+    const targetDiv: HTMLDivElement = e.target as HTMLDivElement;
+    if (
+      targetDiv.clientHeight + targetDiv.scrollTop >=
+      targetDiv.scrollHeight - 5
+    ) {
+      setCurrentMessagesPage((prevState) => prevState + 1);
+    }
+  };
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
@@ -83,17 +110,11 @@ export const PopupChat = ({
       </div>
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>
-        <div className={styles.messagesBlock}>
-          {sortedMessages?.map((message) => (
-            <Message
-              type={
-                message.userId === chatmateInfo.userId ? 'incoming' : 'outgoing'
-              }
-              messageText={message.message}
-              avatarLink={message.userAvatarLink}
-              key={message.id}
-            />
-          ))}
+        <div ref={openedChatPopupRef} id="openedChatPopup" className={styles.messagesBlock}>
+          <MessagesList
+            currentMessages={currentMessages}
+            chatmateInfo={chatmateInfo}
+          />
         </div>
 
         <InputWrapper

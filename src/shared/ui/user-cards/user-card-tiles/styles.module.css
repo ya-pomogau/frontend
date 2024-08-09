@@ -32,15 +32,24 @@
 }
 
 .admin_content {
-  height: 100%;
+  height: 282px;
+}
+
+.admin_content_action {
+  height: 513px;
 }
 
 @media screen and (min-width: 900px) and (max-width: 1100px),
   screen and (max-width: 415px) {
   .content {
     width: 175px;
+    height: 310px;
     padding: 41px 10px 0 10px;
     gap: 10px;
+  }
+
+  .admin_content_action {
+    height: 545px;
   }
 
   .avatar {

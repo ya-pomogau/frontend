@@ -21,13 +21,17 @@ interface ITaskStepProps {
 
 export const TaskStep = ({ isMobile }: ITaskStepProps) => {
   const { data } = useGetCategoriesQuery();
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(setCategoryList(data));
-  }, []);
+    if (data) {
+      dispatch(setCategoryList(data));
+    }
+  }, [data, dispatch]);
+
   const { description, categories, category, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
-  const dispatch = useAppDispatch();
 
   const optionsForSelect = categories?.map((item) => ({
     _id: item._id,
@@ -53,6 +57,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     if (category._id === '' && category.title === '') {
       return true;
     }
+    return false;
   };
 
   return (
@@ -79,7 +84,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
-
+            {category._id === '' && category.title === '' && (
+              <p className={styles.messageAlert}>Выберите тип задачи</p>
+            )}
             <TextArea
               value={description}
               label="Опишите задачу"
@@ -89,6 +96,9 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               extClassName={styles.textarea}
               maxLength={300}
             />
+            {description.length <= 5 && (
+              <p className={styles.messageAlert}>Добавьте описание задачи</p>
+            )}
           </>
         ) : (
           <>
@@ -112,10 +122,10 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               extClassName={styles.textarea}
               maxLength={300}
             />
+            {description.length <= 5 && (
+              <p className={styles.messageAlert}>Добавьте описание задачи</p>
+            )}
           </>
-        )}
-        {description.length <= 5 && (
-          <p className={styles.messageAlert}>Добавьте описание задачи</p>
         )}
       </div>
       <div className={styles.buttonsWrapper}>
@@ -138,3 +148,4 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
     </div>
   );
 };
+
