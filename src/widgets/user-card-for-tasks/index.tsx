@@ -46,12 +46,7 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
         </div>
       )}
 
-      <UserInfo
-        userName={name}
-        userId={_id}
-        userNumber={phone}
-        userRole={role}
-      />
+      <UserInfo userName={name} userId={_id} userNumber={phone} />
     </div>
   );
 };

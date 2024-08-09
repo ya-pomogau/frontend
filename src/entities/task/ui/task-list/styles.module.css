@@ -7,13 +7,12 @@
   overflow-y: auto;
 }
 
-.contentAdmin {
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 20px;
-  width: 100%;
+.content_admin {
   max-height: calc(65vh - 170px);
-  overflow-y: auto;
+}
+
+.content_default {
+  max-height: 65vh;
 }
 
 .content:last-child {
@@ -23,19 +22,17 @@
 .content_empty {
   display: flex;
   flex-direction: column;
-  padding-top: 126px;
   width: 100%;
   justify-content: center;
   align-items: center;
 }
 
+.content_empty_desktop {
+  padding-top: 126px;
+}
+
 .content_empty_mobile {
-  display: flex;
-  flex-direction: column;
   padding-top: 80px;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
 }
 
 .add_task_icon {

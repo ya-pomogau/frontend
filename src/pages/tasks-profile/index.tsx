@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { skipToken } from '@reduxjs/toolkit/query/react';
+// import { skipToken } from '@reduxjs/toolkit/query/react';
 
 import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
@@ -7,8 +7,8 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import styles from './styles.module.css';
 
 import { Tabs, UserRole } from '../../shared/types/common.types';
-import { useGetUserByIdQuery } from 'services/user-api';
-import { useGetTaskActiveQuery } from 'services/user-task-api';
+// import { useGetUserByIdQuery } from 'services/user-api';
+// import { useGetTaskActiveQuery } from 'services/user-task-api';
 import { UserCardForTasks } from 'widgets/user-card-for-tasks';
 import SearchButton from 'shared/ui/search-button';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -102,14 +102,10 @@ const mockedTasks = [
 
 interface TaskListProps {
   incomeTab: string;
-  handleClickAddTaskButton?: () => void;
-  isStatusActive?: boolean;
-  userRole?: string;
-  userId?: string;
 }
 
 export function TasksProfilePage({ incomeTab }: TaskListProps) {
-  const { userId } = useParams<{ userId: string }>();
+  // const { userId } = useParams<{ userId: string }>();
   // TODO: user userTasks
   // const { data: user } = useGetUserByIdQuery(userId ?? skipToken);
   // const { data: userTasks } = useGetTaskActiveQuery(userId ?? skipToken);

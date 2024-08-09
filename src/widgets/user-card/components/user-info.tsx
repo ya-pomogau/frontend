@@ -1,20 +1,13 @@
 import classnames from 'classnames';
 import styles from '../styles.module.css';
-import classes from '../styles.module.css';
 
 interface UserInfoProps {
   userName: string;
   userId: string;
   userNumber: string;
-  userRole: string;
 }
 
-const UserInfo = ({
-  userName,
-  userId,
-  userNumber,
-  userRole,
-}: UserInfoProps) => (
+const UserInfo = ({ userName, userId, userNumber }: UserInfoProps) => (
   <div className={styles.user_info}>
     <h2
       className={classnames(
@@ -35,7 +28,7 @@ const UserInfo = ({
       </p>
       <p
         className={classnames(
-          classes.id,
+          styles.id,
           'm-0 text text_size_small text_type_regular'
         )}
       >
@@ -45,7 +38,7 @@ const UserInfo = ({
     <div className={styles.grid_phone}>
       <p
         className={classnames(
-          classes.tel,
+          styles.tel,
           'm-0 text text_size_small text_type_regular text_type_bold '
         )}
       >
@@ -53,7 +46,7 @@ const UserInfo = ({
       </p>
       <p
         className={classnames(
-          classes.tel,
+          styles.tel,
           'm-0 text text_size_small text_type_regular text_type_regular '
         )}
       >

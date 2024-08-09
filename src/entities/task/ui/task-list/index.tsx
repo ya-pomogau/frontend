@@ -73,6 +73,7 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
+
   useEffect(() => {
     window.addEventListener('resize', getCoords);
 
@@ -88,9 +89,12 @@ export const TaskList = ({
       {!isLoading && tasks && (
         <ul
           className={classNames(
-            role === UserRole.ADMIN ? styles.contentAdmin : styles.content,
-            'p-0',
-            'm-0',
+            styles.content,
+            {
+              [styles.content_admin]: role === UserRole.ADMIN,
+              [styles.content_default]: role !== UserRole.ADMIN,
+            },
+            'p-0 m-0',
             extClassName
           )}
         >
@@ -98,31 +102,41 @@ export const TaskList = ({
             userRole === UserRole.RECIPIENT &&
             !isCompletedPage) ||
             (userRole === UserRole.RECIPIENT && isTabPage)) && (
-            <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
+            <li
+              className={classNames({
+                [styles.add_task_mobile]: isMobile,
+                [styles.add_task]: !isMobile,
+              })}
+            >
               <RoundButton
                 buttonType="add"
                 onClick={
                   buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
                 }
                 size={isMobile ? 'medium' : 'large'}
-                extClassName={styles.add_task_icon}
+                extClassName={classNames(styles.add_task_icon, {
+                  [styles.add_task_icon_unconf]: !buttonGuard,
+                })}
               />
-
               <h2
-                className={`${styles.title_add_list} ${
-                  isMobile ? 'text_size_medium' : 'text_size_large'
-                } text_type_regular`}
+                className={classNames(
+                  styles.title_add_list,
+                  {
+                    text_size_medium: isMobile,
+                    text_size_large: !isMobile,
+                  },
+                  'text_type_regular'
+                )}
               >
                 Создать заявку
               </h2>
             </li>
           )}
-          {tasks &&
-            tasks.map((item, index) => (
-              <li key={index}>
-                <TaskItem item={item} userRole={userRole} />
-              </li>
-            ))}
+          {tasks.map((item, index) => (
+            <li key={index}>
+              <TaskItem item={item} userRole={userRole} />
+            </li>
+          ))}
         </ul>
       )}
 
@@ -133,7 +147,11 @@ export const TaskList = ({
         role !== UserRole.ADMIN && (
           <div
             className={classNames(
-              isMobile ? styles.content_empty_mobile : styles.content_empty,
+              styles.content_empty,
+              {
+                [styles.content_empty_mobile]: isMobile,
+                [styles.content_empty_desktop]: !isMobile,
+              },
               extClassName
             )}
           >
@@ -142,7 +160,7 @@ export const TaskList = ({
             {userRole === UserRole.RECIPIENT && (
               <>
                 <p
-                  className={`${styles.title_add_empty} text_size_large text_type_regular text `}
+                  className={`${styles.title_add_empty} text_size_large text_type_regular text`}
                 >
                   {' '}
                   Хотите создать заявку?
@@ -196,7 +214,11 @@ export const TaskList = ({
         isStatusActive && (
           <div
             className={classNames(
-              isMobile ? styles.content_empty_mobile : styles.content_empty,
+              styles.content_empty,
+              {
+                [styles.content_empty_mobile]: isMobile,
+                [styles.content_empty_desktop]: !isMobile,
+              },
               extClassName
             )}
           >
@@ -215,7 +237,11 @@ export const TaskList = ({
       {!isLoading && tasks && tasks.length === 0 && !isStatusActive && (
         <div
           className={classNames(
-            isMobile ? styles.content_empty_mobile : styles.content_empty,
+            styles.content_empty,
+            {
+              [styles.content_empty_mobile]: isMobile,
+              [styles.content_empty_desktop]: !isMobile,
+            },
             extClassName
           )}
         >

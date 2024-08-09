@@ -7,10 +7,10 @@
 .overlay {
   position: absolute;
   bottom: 22px;
-  left: 318px;
+  left: 315px;
   background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
   height: 152px;
-  width: calc(100% - 358px);
+  width: calc(100% - 315px);
   pointer-events: none;
 }
 
