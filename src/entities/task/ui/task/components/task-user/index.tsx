@@ -5,7 +5,6 @@ import styles from './styles.module.css';
 import { ModalContent } from 'widgets/task-buttons-content';
 import { RoundButton } from 'shared/ui/round-button';
 import classNames from 'classnames';
-// import { useMediaQuery } from 'shared/hooks';
 import placeholder from '../../img/placeholder.svg';
 import { DefaultAvatar } from '../../img/default-avatar';
 import { UserProfile } from 'entities/user/types';
@@ -31,7 +30,6 @@ export const TaskUser = ({
   status,
 }: TaskUserProps) => {
   const location = useLocation();
-  // const isMobile = useMediaQuery('(max-width:1150px)');
   const isPageCompleted = location.pathname === '/profile/completed';
   const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 
