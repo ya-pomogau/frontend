@@ -1,35 +1,12 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import styles from './styles.module.css';
 import { Icon } from 'shared/ui/icons';
 import classNames from 'classnames';
-// import { useMediaQuery } from 'shared/hooks';
 
 interface TaskDescriptionProps {
   description: string;
   count: number;
   extClassName?: string;
-}
-
-function setButtonVisibility(
-  expandable: HTMLParagraphElement,
-  btn: HTMLButtonElement
-) {
-  if (expandable.scrollHeight > expandable.clientHeight) {
-    btn.style.display = 'inline';
-    btn.textContent = 'Читать';
-  } else {
-    btn.style.display = 'none';
-  }
-}
-
-function handleExpandClick(
-  btn: HTMLButtonElement,
-  expandable: HTMLParagraphElement
-) {
-  expandable.classList.toggle(expandedClass);
-  btn.textContent = expandable.classList.contains(expandedClass)
-    ? 'Свернуть'
-    : 'Читать';
 }
 
 const expandedClass = styles.taskExpanded;
@@ -40,13 +17,29 @@ export const TaskDescription = ({
   extClassName,
 }: TaskDescriptionProps) => {
   const textRef = useRef<HTMLParagraphElement>(null);
-  const btnRef = useRef<HTMLButtonElement>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
+
+  const setButtonVisibility = (expandable: HTMLParagraphElement) => {
+    if (expandable.scrollHeight > expandable.clientHeight) {
+      setIsButtonVisible(true);
+    } else {
+      setIsButtonVisible(false);
+    }
+  };
+
+  const handleExpandClick = () => {
+    if (textRef.current) {
+      setIsExpanded(!isExpanded);
+    }
+  };
 
   useLayoutEffect(() => {
     const handleResize = () => {
-      if (textRef.current && btnRef.current) {
+      if (textRef.current) {
         textRef.current.classList.remove(expandedClass);
-        setButtonVisibility(textRef.current, btnRef.current);
+        setIsExpanded(false);
+        setButtonVisibility(textRef.current);
       }
     };
 
@@ -59,25 +52,25 @@ export const TaskDescription = ({
     };
   }, []);
 
-  // const isMobile = useMediaQuery('(max-width:1150px)');
-
   return (
     <div className={classNames(extClassName, styles.taskDescription)}>
       <div className={styles.card__expandable}>
-        <p ref={textRef} className={styles.card__task}>
+        <p
+          ref={textRef}
+          className={classNames(styles.card__task, {
+            [expandedClass]: isExpanded,
+          })}
+        >
           {description}
         </p>
-        <button
-          onClick={(e) => {
-            if (textRef.current) {
-              handleExpandClick(e.target as HTMLButtonElement, textRef.current);
-            }
-          }}
-          ref={btnRef}
-          className={classNames(styles.expandBtn, 'text')}
-        >
-          Читать
-        </button>
+        {isButtonVisible && (
+          <button
+            onClick={handleExpandClick}
+            className={classNames(styles.expandBtn, 'text')}
+          >
+            {isExpanded ? 'Свернуть' : 'Читать'}
+          </button>
+        )}
       </div>
 
       <div className={styles.score}>
