@@ -1,11 +1,11 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
 import Header from 'widgets/header';
-import { BottomBar } from 'shared/ui/bottom-bar';
+import Footer from 'widgets/footer';
+import MainWrapper from 'shared/ui/main-wrapper';
+import { PageLayout } from 'shared/ui/page-layout';
 
 import styles from './styles.module.css';
-import { PageLayout } from 'shared/ui/page-layout';
-import MainWrapper from 'shared/ui/main-wrapper';
 
 export function Layout() {
   const location = useLocation();
@@ -24,9 +24,7 @@ export function Layout() {
             isMaxWidthOverlay ? styles.overlayMaxWidth : styles.overlay
           }
         />
-        <footer className={styles.footer}>
-          <BottomBar />
-        </footer>
+        <Footer />
       </MainWrapper>
     </>
   );
