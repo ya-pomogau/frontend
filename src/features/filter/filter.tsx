@@ -9,13 +9,13 @@ import { TimeBlock } from './ui/time-block';
 import { CategoriesBlock } from './ui/categories-block';
 import styles from './styles.module.css';
 import { useState } from 'react';
-import { Informer } from 'shared/ui/informer';
 
 export const Filter = ({
-  items,
+  items = {},
   notFoundFilter = false,
   setFilteres,
-}: FilterProps) => {
+  onFilterSubmit,
+}: FilterProps & { onFilterSubmit: (filteredTasks: any[]) => void }) => {
   const defaultValues: IFilterValues = {
     categories: [],
     searchRadius: '',
@@ -29,21 +29,20 @@ export const Filter = ({
     defaultValues,
   });
 
-  const [filterResults, setFilterResults] = useState<any[]>([]); 
-  const [noResults, setNoResults] = useState(false); 
-  const [isFilterApplied, setIsFilterApplied] = useState(false); 
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [noResults, setNoResults] = useState(false);
 
   const onSubmit = (data: IFilterValues) => {
     if (setFilteres) {
-      const results = performFilter(data); 
-      setFilterResults(results); 
-      setNoResults(results.length === 0); 
-      setIsFilterApplied(true); 
+      const results = performFilter(data);
+      setNoResults(results.length === 0);
+      setIsFilterApplied(true);
+      onFilterSubmit(results);
     }
   };
 
   const performFilter = (filterData: IFilterValues) => {
-    return []; 
+    return [];
   };
 
   if (notFoundFilter) {
@@ -133,21 +132,15 @@ export const Filter = ({
               </div>
             </>
           }
-          filterValues={formValues} 
+          filterValues={formValues}
           onReset={() => {
             reset(defaultValues);
-            setFilterResults([]); 
-            setNoResults(false); 
-            setIsFilterApplied(false); 
+            setNoResults(false);
+            setIsFilterApplied(false);
           }}
           setFilteres={setFilteres}
         />
-       </form>
-      {isFilterApplied && noResults && (
-        <div className={styles.noResults}>
-          <Informer text="По вашему запросу ничего не найдено" />
-        </div>
-      )}
+      </form>
     </div>
   );
 };

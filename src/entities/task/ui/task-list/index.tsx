@@ -48,6 +48,9 @@ export const TaskList = ({
   const isCompletedPage = location.pathname.includes('/profile/completed');
   const [isOpen, setIsOpen] = useState(false);
 
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [noResults, setNoResults] = useState(false);
+
   const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const popupClose = () => {
@@ -79,8 +82,18 @@ export const TaskList = ({
     };
   }, []);
 
+  const onFilterSubmit = (filteredTasks: Array<Task>) => {
+    setIsFilterApplied(true);
+    setNoResults(filteredTasks.length === 0);
+  };
+
   return (
     <>
+      {isFilterApplied && noResults && (
+        <div className={styles.noResults}>
+          <Informer text="По вашему запросу ничего не найдено" />
+        </div>
+      )}
       {/* TODO: удалить след. строку, когда будут приходить данные тасок с сервера */}
       {!tasks && <p>список тасок, которые будут получены с сервера</p>}
       {!isLoading && tasks && (
