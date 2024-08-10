@@ -16,6 +16,7 @@ import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { Tooltip } from 'shared/ui/tooltip';
 import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
 import { useLocation } from 'react-router-dom';
+import { useAppSelector } from 'app/hooks';
 
 interface TaskListProps {
   userRole: UserRole | null;
@@ -43,6 +44,7 @@ export const TaskList = ({
   handleClickAddTaskButton,
   isTabPage,
 }: TaskListProps) => {
+  const { role } = useAppSelector((state) => state.user);
   const buttonGuard = usePermission([UserStatus.CONFIRMED], UserRole.RECIPIENT);
   const location = useLocation();
   const isCompletedPage = location.pathname.includes('/profile/completed');
@@ -71,6 +73,7 @@ export const TaskList = ({
     }
     setIsOpen((prev) => !prev);
   };
+
   useEffect(() => {
     window.addEventListener('resize', getCoords);
 
@@ -87,9 +90,11 @@ export const TaskList = ({
         <ul
           className={classNames(
             styles.content,
-            'list',
-            'p-0',
-            'm-0',
+            {
+              [styles.content_admin]: role === UserRole.ADMIN,
+              [styles.content_default]: role !== UserRole.ADMIN,
+            },
+            'p-0 m-0',
             extClassName
           )}
         >
@@ -97,95 +102,146 @@ export const TaskList = ({
             userRole === UserRole.RECIPIENT &&
             !isCompletedPage) ||
             (userRole === UserRole.RECIPIENT && isTabPage)) && (
-            <li className={isMobile ? styles.add_task_mobile : styles.add_task}>
+            <li
+              className={classNames({
+                [styles.add_task_mobile]: isMobile,
+                [styles.add_task]: !isMobile,
+              })}
+            >
               <RoundButton
                 buttonType="add"
                 onClick={
                   buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
                 }
                 size={isMobile ? 'medium' : 'large'}
-                extClassName={styles.add_task_icon}
+                extClassName={classNames(styles.add_task_icon, {
+                  [styles.add_task_icon_unconf]: !buttonGuard,
+                })}
               />
-
               <h2
-                className={`${styles.title_add_list} ${
-                  isMobile ? 'text_size_medium' : 'text_size_large'
-                } text_type_regular`}
+                className={classNames(
+                  styles.title_add_list,
+                  {
+                    text_size_medium: isMobile,
+                    text_size_large: !isMobile,
+                  },
+                  'text_type_regular'
+                )}
               >
                 Создать заявку
               </h2>
             </li>
           )}
-          {tasks &&
-            tasks.map((item, index) => (
-              <li key={index}>
-                <TaskItem item={item} userRole={userRole} />
-              </li>
-            ))}
+          {tasks.map((item, index) => (
+            <li key={index}>
+              <TaskItem item={item} userRole={userRole} />
+            </li>
+          ))}
         </ul>
       )}
 
-      {!isLoading && tasks && tasks.length === 0 && isStatusActive && (
-        <div
-          className={classNames(
-            isMobile ? styles.content_empty_mobile : styles.content_empty,
-            extClassName
-          )}
-        >
-          <Informer text="У Вас пока нет заявок" />
+      {!isLoading &&
+        tasks &&
+        tasks.length === 0 &&
+        isStatusActive &&
+        role !== UserRole.ADMIN && (
+          <div
+            className={classNames(
+              styles.content_empty,
+              {
+                [styles.content_empty_mobile]: isMobile,
+                [styles.content_empty_desktop]: !isMobile,
+              },
+              extClassName
+            )}
+          >
+            <Informer text="У Вас пока нет заявок" />
 
-          {userRole === UserRole.RECIPIENT && (
-            <>
-              <p
-                className={`${styles.title_add_empty} text_size_large text_type_regular text `}
-              >
-                {' '}
-                Хотите создать заявку?
-              </p>
-              <div className={styles.wrapperBtn} ref={buttonRef}>
-                <RoundButton
-                  buttonType="add"
-                  onClick={
-                    buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
-                  }
-                  extClassName={styles.add_task_icon_unconf}
-                  size="large"
-                />
-              </div>
-              {isOpen && (
-                <Tooltip
-                  visible
-                  extClassName={styles.modal}
-                  pointerPosition="right"
-                  changeVisible={() => popupClose()}
-                  elementStyles={{
-                    position: 'absolute',
-                    top: `${popupPosion?.top}px`,
-                    right: `${popupPosion?.right}px`,
-                  }}
+            {userRole === UserRole.RECIPIENT && (
+              <>
+                <p
+                  className={`${styles.title_add_empty} text_size_large text_type_regular text`}
                 >
-                  <div className={styles.closeWrapper}>
-                    <CloseCrossIcon
-                      className={styles.closeIcon}
-                      size="14"
-                      color="blue"
-                      onClick={() => popupClose()}
-                    />
-                  </div>
-                  <div className={styles.text}>
-                    {unauthorizedRecipientPopupMessage}
-                  </div>
-                </Tooltip>
-              )}
-            </>
-          )}
-        </div>
-      )}
+                  {' '}
+                  Хотите создать заявку?
+                </p>
+                <div className={styles.wrapperBtn} ref={buttonRef}>
+                  <RoundButton
+                    buttonType="add"
+                    onClick={
+                      buttonGuard
+                        ? handleClickAddTaskButton
+                        : handleDeniedAccess
+                    }
+                    extClassName={styles.add_task_icon_unconf}
+                    size="large"
+                  />
+                </div>
+                {isOpen && (
+                  <Tooltip
+                    visible
+                    extClassName={styles.modal}
+                    pointerPosition="right"
+                    changeVisible={() => popupClose()}
+                    elementStyles={{
+                      position: 'absolute',
+                      top: `${popupPosion?.top}px`,
+                      right: `${popupPosion?.right}px`,
+                    }}
+                  >
+                    <div className={styles.closeWrapper}>
+                      <CloseCrossIcon
+                        className={styles.closeIcon}
+                        size="14"
+                        color="blue"
+                        onClick={() => popupClose()}
+                      />
+                    </div>
+                    <div className={styles.text}>
+                      {unauthorizedRecipientPopupMessage}
+                    </div>
+                  </Tooltip>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
+      {role === UserRole.ADMIN &&
+        !isLoading &&
+        tasks &&
+        tasks.length === 0 &&
+        isStatusActive && (
+          <div
+            className={classNames(
+              styles.content_empty,
+              {
+                [styles.content_empty_mobile]: isMobile,
+                [styles.content_empty_desktop]: !isMobile,
+              },
+              extClassName
+            )}
+          >
+            <Informer
+              text={
+                userRole === UserRole.RECIPIENT
+                  ? 'У данного реципиента нет активных заявок'
+                  : userRole === UserRole.VOLUNTEER
+                  ? 'У данного волонтера нет заявок в работе'
+                  : 'Нет доступных заявок'
+              }
+            />
+          </div>
+        )}
 
       {!isLoading && tasks && tasks.length === 0 && !isStatusActive && (
         <div
           className={classNames(
-            isMobile ? styles.content_empty_mobile : styles.content_empty,
+            styles.content_empty,
+            {
+              [styles.content_empty_mobile]: isMobile,
+              [styles.content_empty_desktop]: !isMobile,
+            },
             extClassName
           )}
         >
