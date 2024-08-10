@@ -9,16 +9,6 @@
   border-image-slice: 1;
 }
 
-.count {
-  color: var(--colors-interface-primary);
-}
-
-@media screen and (max-width: 1150px) {
-  .icon {
-    justify-self: end;
-  }
-}
-
 .card__expandable {
   margin-top: 20px;
   padding-right: 40px;
@@ -26,22 +16,23 @@
 
 .card__task {
   overflow: hidden;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  color: #2c2d2e;
+  font: var(--font-golos-16-22);
+  color: var(--colors-interface-dark-gray);
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* Установите количество строк */
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   margin: 0;
   overflow-wrap: anywhere;
 }
 
+.taskExpanded {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
 .expandBtn {
   appearance: none;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
+  font: var(--font-golos-16-22);
   color: var(--colors-interface-primary);
   width: fit-content;
   border: none;
@@ -50,23 +41,16 @@
   float: right;
 }
 
-.taskExpanded {
-  display: block;
-  -webkit-line-clamp: unset;
-}
-
 .score {
   align-self: flex-end;
   display: flex;
   gap: 3px;
   align-items: center;
-  margin-top: 4px;
-  margin-right: 6px;
+  margin: 4px 6px 0 0;
 }
 
 .scoreText {
-  font-weight: 400;
-  font-size: 12px;
+  font: var(--font-golos-12-14);
   color: var(--colors-interface-primary);
 }
 
@@ -94,7 +78,7 @@
     float: none;
   }
 
-  [class*='card__expandable']:has([class*='taskExpanded']) {
+  .card__expandable:has(.taskExpanded) {
     display: inline;
     padding-right: 104px;
   }
