@@ -36,7 +36,6 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  /* max-width: clamp(222px, 50vw, 100%); */
   font-size: 16px;
   font-weight: 700;
 }
@@ -55,16 +54,15 @@
     margin-top: 44px;
     grid-template-areas: 'date' 'time' 'address';
     grid-auto-columns: auto;
+    font: var(--font-golos-24-28);
   }
 
   .date {
-    font-size: 24px;
-    font-weight: 400;
+    font: inherit;
   }
 
   .time {
-    font-size: 24px;
-    font-weight: 400;
+    font: inherit;
     margin-left: 0;
   }
 
