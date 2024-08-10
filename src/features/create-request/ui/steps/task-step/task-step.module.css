@@ -1,7 +1,10 @@
+
 .taskContainer {
   display: grid;
   grid-template-columns: 76px 450px;
   margin-top: 20px;
+  position: relative;
+  left: -5px;
 }
 
 .task {
@@ -17,12 +20,22 @@
   grid-column-start: 2;
   margin-top: 20px;
   min-height: 195px;
+  position: relative;
+  bottom: 20px;
 }
 
 .buttonsWrapper {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  position: relative;
+  bottom: 6px;
+  right: -15px;
+}
+
+.mainWrapper {
+position: relative;
+top: 12px ;
 }
 
 .prevButton {
@@ -35,12 +48,13 @@
   font-family: 'Golos', sans-serif;
   font-size: 14px;
   grid-column-start: 2;
+  min-height: 20px
 }
 
 .alertWrapper {
   display: flex;
   flex-direction: column;
-  max-height: 20px;
+  max-height: 15px;
 }
 
 .closeWrapper {
@@ -57,7 +71,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0;
+    margin: 0 auto;
+    position: relative;
+    bottom: 8px;
+    left: -40px;
   }
   .mainWrapper {
     width: 260px;
@@ -76,21 +93,39 @@
     height: 1px;
     margin-top: 4px;
     margin-bottom: 17px;
+    position: relative;
+    bottom: 1px;
+    left: 12px;
   }
   .task {
     font-size: 24px;
     line-height: 29px;
+    position: relative;
+    bottom: -1px;
+    left: 25px;
   }
   .textarea {
     min-height: 0;
     height: 150px;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 270px;
+    position: relative;
+    bottom: -1px;
+    left: 28px;
   }
   .buttonsWrapper {
     margin-top: 180px;
     justify-content: center;
     margin-bottom: 8px;
+    position: relative;
+    bottom: 10px;
+    left: -7px;
+  }
+  
+  .messageAlert {
+  position: relative;
+  bottom: -10px;
+  left: 10px;
   }
 }

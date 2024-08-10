@@ -97,6 +97,10 @@ export const UserCardList = ({
       )}
 
       {role === UserRole.ADMIN && (
+        // TODO: FIX THIS
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         <AdminActions
           onAdminSaveClick={() => {
             console.log('Admin save button pressed');
