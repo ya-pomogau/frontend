@@ -1,19 +1,20 @@
-import { ModalContentType, TaskButtonType } from 'shared/types/common.types';
-import { Avatar } from 'shared/ui/avatar';
-import { ButtonWithModal } from 'widgets/button-with-modal';
-import styles from './styles.module.css';
-import { ModalContent } from 'widgets/task-buttons-content';
-import { RoundButton } from 'shared/ui/round-button';
 import classNames from 'classnames';
-import placeholder from '../../img/placeholder.svg';
+import { useLocation } from 'react-router-dom';
+
+import { ButtonWithModal, ModalContent } from 'widgets';
+import { RoundButton, Avatar } from 'shared/ui';
+import { Routes } from 'shared/config';
+import { useControlModal } from 'shared/hooks';
+import { ModalContentType, TaskButtonType } from 'shared/types/common.types';
 import { DefaultAvatar } from '../../img/default-avatar';
 import { UserProfile } from 'entities/user/types';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import { PopupChat } from '../../../../../chat/ui/chat';
 import { infoAdmin } from '../../../../../chat/ui/chat/libs/utils';
 import { TaskStatus } from '../../../../types';
 import { mockChatMessages } from '../../../../../chat/mock-messages';
+
+import placeholder from '../../img/placeholder.svg';
+import styles from './styles.module.css';
 
 interface TaskUserProps {
   user: UserProfile | null;
@@ -30,8 +31,10 @@ export const TaskUser = ({
   status,
 }: TaskUserProps) => {
   const location = useLocation();
-  const isPageCompleted = location.pathname === '/profile/completed';
-  const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
+  const { isOpen, handleOpen, handleClose } = useControlModal();
+  const isPageCompleted = location.pathname === Routes.PROFILE_COMPLETED;
+  const isButtonDisabled =
+    isPageCompleted || !user || !volunteer || status === TaskStatus.COMPLETED;
 
   return (
     <div className={classNames(extClassName, styles.userInfo)}>
@@ -62,24 +65,17 @@ export const TaskUser = ({
         </ButtonWithModal>
         <RoundButton
           buttonType="message"
-          disabled={
-            isPageCompleted ||
-            !user ||
-            !volunteer ||
-            status === TaskStatus.COMPLETED
-          }
-          onClick={() => setIsOpenChat(!isOpenChat)}
+          disabled={isButtonDisabled}
+          onClick={handleOpen}
         />
       </div>
-      {isOpenChat && (
-        <PopupChat
-          isOpen={isOpenChat}
-          onClick={() => setIsOpenChat(!isOpenChat)}
-          messages={mockChatMessages}
-          chatmateInfo={infoAdmin}
-          onAttachFileClick={() => {}}
-        />
-      )}
+      <PopupChat
+        isOpen={isOpen}
+        onClick={handleClose}
+        messages={mockChatMessages}
+        chatmateInfo={infoAdmin}
+        onAttachFileClick={() => {}}
+      />
     </div>
   );
 };
