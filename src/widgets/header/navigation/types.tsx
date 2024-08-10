@@ -19,7 +19,3 @@ export interface ISideBarProps {
   links: ISideBarElementProps[] | null;
   position: ISideBarPosition;
 }
-
-export interface NavLinkRenderProps {
-  isActive: boolean;
-};

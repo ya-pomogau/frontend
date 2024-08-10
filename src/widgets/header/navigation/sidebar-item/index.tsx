@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, NavLinkRenderProps } from 'react-router-dom';
 
-import type { ISideBarElementProps, NavLinkRenderProps } from './../types';
+import type { ISideBarElementProps } from './../types';
 
 import styles from './styles.module.css';
 
