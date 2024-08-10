@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import classnames from 'classnames';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
