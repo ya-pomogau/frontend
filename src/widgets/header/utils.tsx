@@ -2,7 +2,7 @@ import { WriteMessageIcon } from 'shared/ui/icons/write-message-icon';
 import { PersonIcon } from 'shared/ui/icons/person-icon';
 import { LockIcon } from 'shared/ui/icons/lock-icon';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
-
+import { Routes } from '../../shared/config';
 import type {
   ISideBarPosition,
   ISideBarElementProps,
@@ -34,22 +34,22 @@ export const positionConfigMenu: ISideBarPosition = {
 export const linksTop: ISideBarElementProps[] = [
   {
     title: 'Личный кабинет',
-    to: '/profile',
+    to: `${Routes.PROFILE}`,
     icon: <PersonIcon color="blue" />,
   },
   {
     title: 'Блог',
-    to: '/blog',
+    to: `${Routes.BLOG}`,
     icon: <WriteMessageIcon color="blue" />,
   },
   {
     title: 'Политика конфиденциальности',
-    to: '/policy',
+    to: `${Routes.POLICY}`,
     icon: <LockIcon color="blue" />,
   },
   {
     title: 'Контакты',
-    to: '/contacts',
+    to: `${Routes.CONTACTS}`,
     icon: <LocationIcon color="blue" />,
   },
 ];
@@ -57,22 +57,22 @@ export const linksTop: ISideBarElementProps[] = [
 export const linksTopAuthUser: ISideBarElementProps[] = [
   {
     title: 'Личный кабинет',
-    to: '/profile',
+    to: `${Routes.PROFILE}`,
     icon: <PersonIcon color="blue" />,
   },
   {
     title: 'Блог',
-    to: '/blog',
+    to: `${Routes.BLOG}`,
     icon: <WriteMessageIcon color="blue" />,
   },
   {
     title: 'Политика конфиденциальности',
-    to: '/policy',
+    to: `${Routes.POLICY}`,
     icon: <LockIcon color="blue" />,
   },
   {
     title: 'Контакты',
-    to: '/contacts',
+    to: `${Routes.CONTACTS}`,
     icon: <LocationIcon color="blue" />,
   },
 ];
@@ -80,27 +80,27 @@ export const linksTopAuthUser: ISideBarElementProps[] = [
 export const linksTopAuthAdmin: ISideBarElementProps[] = [
   {
     title: 'Личный кабинет',
-    to: '/profile',
+    to: `${Routes.PROFILE}`,
     icon: <PersonIcon color="blue" />,
   },
   {
     title: 'Блог',
-    to: '/blog',
+    to: `${Routes.BLOG}`,
     icon: <WriteMessageIcon color="blue" />,
   },
   {
     title: 'Политика конфиденциальности',
-    to: '/policy',
+    to: `${Routes.POLICY}`,
     icon: <LockIcon color="blue" />,
   },
   {
     title: 'Контакты',
-    to: '/contacts',
+    to: `${Routes.CONTACTS}`,
     icon: <LocationIcon color="blue" />,
   },
   {
     title: 'Чат',
-    to: '/chats-hub',
+    to: `${Routes.CHAT_HUB}`,
     icon: <ReadMessageIcon color="blue" />,
   },
 ];
@@ -108,22 +108,22 @@ export const linksTopAuthAdmin: ISideBarElementProps[] = [
 export const linksMenuMobileUnauthorized: ISideBarElementProps[] = [
   {
     title: 'Личный кабинет',
-    to: '/profile',
+    to: `${Routes.PROFILE}`,
     icon: <PersonIcon color="blue" />,
   },
   {
     title: 'Блог',
-    to: '/blog',
+    to: `${Routes.BLOG}`,
     icon: <WriteMessageIcon color="blue" />,
   },
   {
     title: 'Политика конфиденциальности',
-    to: '/policy',
+    to: `${Routes.POLICY}`,
     icon: <LockIcon color="blue" />,
   },
   {
     title: 'Контакты',
-    to: '/contacts',
+    to: `${Routes.CONTACTS}`,
     icon: <LocationIcon color="blue" />,
   },
 ];

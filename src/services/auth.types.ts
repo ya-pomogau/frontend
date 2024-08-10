@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { Interface } from 'readline';
 import { TPointGeoJSON, TUser } from '../entities/user/types';
 import { UserRole } from 'shared/types/common.types';
