@@ -6,19 +6,12 @@
 // !!!
 import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import {
-  setUserRole,
-  setUser,
-  logoutUser,
-  enableAnyError,
-  enableBlokedError,
-  enableConnectionError,
-} from 'entities/user/model';
+
+import { useAppSelector, useAppDispatch } from 'app/hooks';
+import { setUserRole, setUser, isRootSelector } from 'entities/user/model';
 import { useGetUserByIdQuery } from 'services/user-api';
 import { UserRole } from 'shared/types/common.types';
-import { isRootSelector } from 'entities/user/model';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
@@ -30,47 +23,16 @@ export function PickRolePage() {
   const removeRole = () => {
     dispatch(setUserRole(null));
     setUserId(null);
-    dispatch(dispatch(logoutUser()));
   };
 
   const getVolunteerRole = () => {
     dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId('7');
-  };
-
-  const getUnconfirmedVolunteerRole = () => {
-    dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId('8');
-  };
-
-  const getRecipientRole = () => {
-    setUserId('4');
-    dispatch(setUserRole(UserRole.RECIPIENT));
-  };
-
-  const getUnconfirmedRecipient = () => {
-    dispatch(setUserRole(UserRole.RECIPIENT));
-    setUserId('9');
-  };
-
-  const getAdminRole = () => {
-    dispatch(setUserRole(UserRole.ADMIN));
-    setUserId('2');
-  };
-
-  const getMasterAdminRole = () => {
-    dispatch(setUserRole(UserRole.ADMIN));
     setUserId('1');
   };
 
-  const handleEnableConnectionError = () => {
-    dispatch(enableConnectionError());
-  };
-  const handleEnableBlokedError = () => {
-    dispatch(enableBlokedError());
-  };
-  const handleEnableAnyError = () => {
-    dispatch(enableAnyError());
+  const getRecipientRole = () => {
+    dispatch(setUserRole(UserRole.RECIPIENT));
+    setUserId('23118510435');
   };
 
   const getPageYouWouldBeRedirected = () => {
@@ -82,8 +44,6 @@ export function PickRolePage() {
         return '/profile/map';
       case UserRole.RECIPIENT:
         return '/profile/active';
-      case UserRole.ADMIN:
-        return '/profile/requests';
       default:
         return '/';
     }
@@ -116,65 +76,14 @@ export function PickRolePage() {
         }}
       >
         <li>
-          <button onClick={removeRole} style={{ marginRight: 10 }}>
-            Убрать у себя роль
-          </button>
-        </li>
-
-        <li>
           <button onClick={getVolunteerRole} style={{ marginRight: 10 }}>
-            Получить роль волонтера.
-          </button>
-        </li>
-
-        <li>
-          <button
-            onClick={getUnconfirmedVolunteerRole}
-            style={{ marginRight: 10 }}
-          >
-            Получить роль волонтера, еще не одобренного админом.
+            Волонтер
           </button>
         </li>
 
         <li>
           <button onClick={getRecipientRole} style={{ marginRight: 10 }}>
-            Получить роль рецепиента.
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getUnconfirmedRecipient} style={{ marginRight: 10 }}>
-            Получить роль неактивированного рецепиента.
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getAdminRole} style={{ marginRight: 10 }}>
-            Получить роль администратора.
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getMasterAdminRole} style={{ marginRight: 10 }}>
-            Получить роль главного администратора.
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={handleEnableConnectionError}
-            style={{ marginRight: 10 }}
-          >
-            Добавить ошибку подключения.
-          </button>
-        </li>
-        <li>
-          <button onClick={handleEnableBlokedError} style={{ marginRight: 10 }}>
-            Добавить ошибку пользователь заблокирован.
-          </button>
-        </li>
-        <li>
-          <button onClick={handleEnableAnyError} style={{ marginRight: 10 }}>
-            Добавить любую ошибку.
+            Реципиент
           </button>
         </li>
       </ul>
