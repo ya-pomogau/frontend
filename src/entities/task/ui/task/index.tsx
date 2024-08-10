@@ -82,7 +82,7 @@ export const TaskItem = ({
 
   return (
     <>
-      <div
+      <article
         className={classNames(
           styles.container_main,
           'text',
@@ -128,7 +128,7 @@ export const TaskItem = ({
           recipientReport={recipientReport}
           adminResolve={adminResolve}
         />
-      </div>
+      </article>
     </>
   );
 };

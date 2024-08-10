@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import styles from './styles.module.css';
-import { Icon } from 'shared/ui/icons';
 import classNames from 'classnames';
-import { useMediaQuery } from 'shared/hooks';
+import { useRef } from 'react';
+
+import { useTruncatedText } from 'shared/hooks';
+import { Icon } from 'shared/ui';
+
+import styles from './styles.module.css';
 
 interface TaskDescriptionProps {
   description: string;
@@ -15,40 +17,29 @@ export const TaskDescription = ({
   count,
   extClassName,
 }: TaskDescriptionProps) => {
-  const isMobile = useMediaQuery('(max-width:1150px)');
-  const [isHidden, setIsHidden] = useState(true);
-  return (
-    <div className={classNames(extClassName, styles.descriptionMain)}>
-      <div className={styles.textWithButton}>
-        <p
-          className={classNames(
-            styles.description,
-            isHidden && styles.description_hidden,
-            'm-0'
-          )}
-        >
-          {description}
-          {description.length > 198 && (
-            <button
-              type="button"
-              className={`text text_size_medium ${styles.button} ${
-                !isHidden && !isMobile && styles.buttonUnderText
-              } `}
-              onClick={() => setIsHidden(!isHidden)}
-            >
-              {isHidden ? 'Читать' : 'Свернуть'}
-            </button>
-          )}
-        </p>
-      </div>
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const { isTruncated, isExpanded, toggleIsShowingMore } =
+    useTruncatedText(textRef);
 
-      <div className={styles.icon}>
-        <Icon
-          color="blue"
-          icon={isMobile ? 'FinishedApplicationIcon' : 'BallsIcon'}
-          size={isMobile ? '32' : '46'}
-        />
-        <p className={`${styles.count} text_size_small`}>{count}</p>
+  const textStyles = classNames(styles.card__task, {
+    [styles.taskExpanded]: isExpanded,
+  });
+
+  return (
+    <div className={classNames(extClassName, styles.taskDescription)}>
+      <div className={styles.card__expandable}>
+        <p ref={textRef} className={textStyles}>
+          {description}
+        </p>
+        {isTruncated && (
+          <button onClick={toggleIsShowingMore} className={styles.expandBtn}>
+            {isExpanded ? 'Свернуть' : 'Читать'}
+          </button>
+        )}
+      </div>
+      <div className={styles.score}>
+        <Icon color="blue" icon="BallsIcon" size="46" />
+        <span className={styles.scoreText}>{count}</span>
       </div>
     </div>
   );
