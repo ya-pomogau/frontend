@@ -9,6 +9,7 @@
   --font-size-m: 46px;
   --font-size-small: 12px;
   --font-size-middle: 14px;
+  --font-size-s: 16px;
   --font-size-medium: 24px;
 
   --line-height-s: 36px;
@@ -48,6 +49,7 @@
   --colors-interface-pink-soft: #e163b3;
   --colors-interface-red-soft: #fd6868;
   --colors-interface-ford-white: #e0e0e0;
+  --colors-interface-dark-gray: #2c2d2e;
 
   --transition-hover: all 100ms ease-out;
   --common-element-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
@@ -64,10 +66,14 @@
   --font-inter-small: var(--font-weight-bold) var(--font-size-small) /
     var(--line-height-small) var(--font-family-inter);
 
+  --font-golos-12-14: var(--font-weight-regular) var(--font-size-small) /
+    var(--line-height-xs) var(--font-family-golos);
   --font-golos-12-16: var(--font-weight-regular) var(--font-size-small) /
     var(--line-height-small) var(--font-family-golos);
   --font-golos-14-16: var(--font-weight-regular) var(--font-size-middle) /
     var(--line-height-small) var(--font-family-golos);
+  --font-golos-16-22: var(--font-weight-regular) var(--font-size-s) /
+    var(--line-height-medium) var(--font-family-golos);
   --font-golos-24-28: var(--font-weight-regular) var(--font-size-medium) /
     var(--line-height-large) var(--font-family-golos);
 }
