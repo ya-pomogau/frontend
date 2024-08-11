@@ -20,12 +20,13 @@ import { TaskList } from 'entities/task/ui/task-list';
 import { Request } from 'features/create-request';
 import { openPopup } from 'features/create-request/model';
 import { NotFoundPage } from 'pages/not-found';
+import { Brackpoints } from 'shared/config';
 
 import { UserRole } from 'shared/types/common.types';
 
 export function RecipientPage() {
-  const isMobile = useMediaQuery('(max-width:1150px)');
-  const isMobileForPopup = useMediaQuery('(max-width:735px)');
+  const isMobile = useMediaQuery(Brackpoints.IS_MOBILE_1150);
+  const isMobileForPopup = useMediaQuery(Brackpoints.IS_MOBILE_POPUP);
 
   const dispatch = useAppDispatch();
   const buttonFilterRef = useRef<Element>();

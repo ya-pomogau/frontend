@@ -18,6 +18,7 @@ import { openPopup } from 'features/create-request/model';
 
 import { Request } from 'features/create-request';
 import { TaskReport, TaskStatus } from 'entities/task/types';
+import { Brackpoints } from 'shared/config';
 
 // Моковые данные (удалить)
 const mockedUser = {
@@ -114,7 +115,7 @@ export function TasksProfilePage({ incomeTab }: TaskListProps) {
   const userTasks = mockedTasks;
 
   const navigate = useNavigate();
-  const isMobileForPopup = useMediaQuery('(max-width:735px)');
+  const isMobileForPopup = useMediaQuery(Brackpoints.IS_MOBILE_POPUP);
 
   const dispatch = useAppDispatch();
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
@@ -123,7 +124,7 @@ export function TasksProfilePage({ incomeTab }: TaskListProps) {
     navigate(-1);
   };
 
-  const isMobile = useMediaQuery('(max-width:1150px)');
+  const isMobile = useMediaQuery(Brackpoints.IS_MOBILE_1150);
 
   return (
     <>

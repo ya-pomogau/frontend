@@ -15,6 +15,7 @@ import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
 import { Routes } from 'shared/config';
 import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import { MenuButton } from './components';
+import { Brackpoints } from 'shared/config';
 
 import styles from './styles.module.css';
 
@@ -22,7 +23,7 @@ const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 
-  const isMobile = useMediaQuery('(max-width: 920px)');
+  const isMobile = useMediaQuery(Brackpoints.IS_MOBILE_MENU);
   const user = useAppSelector((state) => state.user.data);
   const isAdmin = user && user.role === UserRole.ADMIN;
 

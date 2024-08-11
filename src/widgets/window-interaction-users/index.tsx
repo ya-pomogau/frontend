@@ -5,6 +5,7 @@ import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { UserProfile } from 'entities/user/types';
+import { Brackpoints } from 'shared/config';
 
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
@@ -17,7 +18,7 @@ interface IWindowInteractionUsers {
 }
 
 export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
-  const isMobile = useMediaQuery('(max-width: 550px)');
+  const isMobile = useMediaQuery(Brackpoints.IS_MOBILE_CHAT);
 
   const handleClick = () => {
     props.closeConflict();
