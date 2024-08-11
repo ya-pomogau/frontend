@@ -1,18 +1,19 @@
-import { ChangeEvent, useState } from 'react';
 import classnames from 'classnames';
 
 // import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { SquareButton } from 'shared/ui/square-buttons';
 
-import styles from './styles.module.css';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import { useMediaQuery } from 'shared/hooks';
+import useForm from 'shared/hooks/use-form';
 import { Icon } from 'shared/ui/icons';
 import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { MessagesList } from './components/messages-list';
+
+import styles from './styles.module.css';
 
 interface PopupChatProps {
   messages: IMessage[];
@@ -31,16 +32,14 @@ export const PopupChat = ({
   onClick,
 }: PopupChatProps) => {
   const isMobile = useMediaQuery('(max-width: 600px)');
-  const [inputValue, setInputValue] = useState<string>('');
 
-  const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const { value } = target;
-    setInputValue(value);
-  };
+  const { values, handleChange } = useForm({
+    message: '',
+  });
 
   const handleSendClick = () => {
     if (onMessageSend) {
-      onMessageSend(inputValue);
+      onMessageSend(values.message);
     }
   };
 
@@ -95,9 +94,9 @@ export const PopupChat = ({
           customIconSize={isMobile ? '32' : '24'}
           getFile={() => {}}
           placeholder="Напишите сообщение..."
-          inputValue={inputValue}
+          inputValue={values.message}
           name="message"
-          onChange={handleInputChange}
+          onChange={handleChange}
           onClickBtn={handleSendClick}
           containerMessages={false}
         />

@@ -19,7 +19,7 @@ export const MessagesList = ({
 
   const openedChatPopupRef = useRef<HTMLDivElement>(null);
 
-  const currentMessages = useLazyScroll( { messages, openedChatPopupRef } )
+  const currentMessages = useLazyScroll( { messages, openedChatPopupRef } );
 
   return (
     <div ref={openedChatPopupRef} className={styles.messagesBlock}>
