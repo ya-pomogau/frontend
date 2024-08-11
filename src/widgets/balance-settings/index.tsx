@@ -1,9 +1,9 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import classnames from 'classnames';
+import { Controller, useForm } from 'react-hook-form';
 
 import { Button } from '../../shared/ui/button';
 import usePermission from '../../shared/hooks/use-permission';
-import useForm from '../../shared/hooks/use-form';
 import {
   AdminPermission,
   UserRole,
@@ -28,28 +28,27 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   );
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();
-  const { values, setValues, handleChange } = useForm<TPoints<string>>({});
-  const [isСhanged, setIsСhanged] = useState(false);
+  const {
+    setValue,
+    handleSubmit,
+    getValues,
+    control,
+    formState: { isDirty },
+  } = useForm<TPoints<string>>({});
 
   useEffect(() => {
     const initialValues: TPoints<string> = {};
     data?.map((item) => {
       const { title, points } = item;
       initialValues[title] = points;
+      setValue(item.title, item.points);
     });
-    setValues(initialValues);
   }, [data]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(e);
-    setIsСhanged(true);
-  };
-
   //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
-  const handleSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
+  const onSubmit = async () => {
     try {
-      await updatePoints(values);
+      await updatePoints(getValues());
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
@@ -58,26 +57,33 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   return (
     <form
       className={classnames(styles.container, extClassName)}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <div className={classnames(styles.balances_box)}>
         {data &&
           data.map((item, index) => (
-            <BalanceSettingsItem
+            <Controller
+              control={control}
+              name={item.title}
               key={index}
-              title={item.title}
-              inputValue={`${values[item.title]}`}
-              handleChange={handleInputChange}
+              render={({ field }) => (
+                <BalanceSettingsItem
+                  title={item.title}
+                  inputValue={String(field.value)}
+                  handleChange={(e) => field.onChange(+e.target.value)}
+                />
+              )}
             />
           ))}
       </div>
+
       <Button
         extClassName={classnames(styles.save_btn)}
         buttonType="primary"
         label="Сохранить"
         size="large"
         actionType="submit"
-        disabled={!isEditAllowed || !isСhanged}
+        disabled={!isEditAllowed || !isDirty}
       />
     </form>
   );

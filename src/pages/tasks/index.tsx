@@ -7,15 +7,14 @@ import { Icon } from 'shared/ui/icons';
 import { SmartHeader } from 'shared/ui/smart-header';
 import { Input } from 'shared/ui/input';
 import { PageSubMenu } from '../../widgets/page-sub-menu';
-
-import styles from './styles.module.css';
-
 import { Tabs, UserRole } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
 import { TasksTab } from 'pages/tasks-tab';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import { useGetUserByRolesQuery } from 'services/admin-api';
 import usePermission from 'shared/hooks/use-permission';
+
+import styles from './styles.module.css';
 
 export interface PageProps {
   incomeTab: string;
