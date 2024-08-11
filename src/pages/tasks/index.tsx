@@ -113,13 +113,7 @@ export function TasksPage({ incomeTab }: PageProps) {
     if (filteredData) {
       setFilteredUsers(filteredData);
     }
-  }, [
-    searchName,
-    incomeTab,
-    // раскоментировать 1 строку после настройки сервера
-    volunteers,
-    recipients,
-  ]);
+  }, [searchName, incomeTab, volunteers, recipients]);
 
   const handleUserClick = (user: User) => {
     if (user.role === UserRole.RECIPIENT) {

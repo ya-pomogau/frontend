@@ -8,7 +8,7 @@ import styles from '../styles.module.css';
 
 interface BalanceSettingsItemProps {
   title: string;
-  inputValue: string;
+  inputValue: number;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 

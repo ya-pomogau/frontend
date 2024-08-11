@@ -29,12 +29,19 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();
   const {
-    setValue,
+    control,
     handleSubmit,
     getValues,
-    control,
-    formState: { isDirty },
-  } = useForm<TPoints<string>>({});
+    setValue,
+    formState: { isDirty, isValid },
+  } = useForm<Record<string, number>>({
+    values: (data || []).reduce((acc, value) => {
+      const { title, points } = value;
+      acc[title] = points;
+
+      return acc;
+    }, {} as Record<string, number>),
+  });
 
   useEffect(() => {
     const initialValues: TPoints<string> = {};
@@ -69,7 +76,7 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
               render={({ field }) => (
                 <BalanceSettingsItem
                   title={item.title}
-                  inputValue={String(field.value)}
+                  inputValue={field.value}
                   handleChange={(e) => field.onChange(+e.target.value)}
                 />
               )}
@@ -83,7 +90,7 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
         label="Сохранить"
         size="large"
         actionType="submit"
-        disabled={!isEditAllowed || !isDirty}
+        disabled={!isEditAllowed || !isDirty || !isValid}
       />
     </form>
   );
