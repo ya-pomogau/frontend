@@ -58,9 +58,11 @@ export const RoutesGroup = ({
   if (isLoading) {
     return null;
   }
+
   if (isRoot) {
     return <Outlet />;
   }
+
   if (allowed === undefined) {
     return <Navigate to="/" replace />;
   }

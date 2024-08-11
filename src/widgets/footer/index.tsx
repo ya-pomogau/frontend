@@ -1,6 +1,6 @@
 import { BottomBar } from 'shared/ui/bottom-bar';
 
-import styles from './style.module.css';
+import styles from './styles.module.css';
 
 const Footer = () => {
   return (

@@ -1,4 +1,4 @@
-f.user_info {
+.user_info {
     display: grid;
     row-gap: 12px;
     margin-left: 8px;
@@ -9,6 +9,7 @@ f.user_info {
     flex-direction: row;
     gap: 5px;
 }
+
 .grid_two_tiles {
     width: 100%;
     display: grid;
@@ -39,6 +40,7 @@ f.user_info {
     gap: 5px;
     padding-bottom: 25px;
 }
+
 .buttons_div > :first-child {
     margin-bottom: 10px;
 }

@@ -1,12 +1,11 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
 import Header from 'widgets/header';
-
+import Footer from 'widgets/footer';
 import MainWrapper from 'shared/ui/main-wrapper';
 import { PageLayout } from 'shared/ui/page-layout';
 
 import styles from './styles.module.css';
-import Footer from 'widgets/footer';
 
 export function Layout() {
   const location = useLocation();
