@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import styles from '../styles.module.css';
-import classes from '../styles.module.css';
+
 import { UserRole } from '../../../types/common.types';
 import { ReactNode } from 'react';
 
@@ -52,7 +52,7 @@ const UserInfo = ({
             </p>
             <p
               className={classnames(
-                classes.id,
+                styles.id,
                 'm-0 text text_size_small text_type_regular'
               )}
             >
@@ -69,7 +69,7 @@ const UserInfo = ({
       >
         <p
           className={classnames(
-            classes.tel,
+            styles.tel,
             'm-0 text text_size_small text_type_regular text_type_bold '
           )}
         >
@@ -77,7 +77,7 @@ const UserInfo = ({
         </p>
         <p
           className={classnames(
-            classes.tel,
+            styles.tel,
             'm-0 text text_size_small text_type_regular text_type_regular '
           )}
         >

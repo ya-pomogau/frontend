@@ -16,7 +16,8 @@
 .dataPicker__calendar_mobile {
   box-sizing: border-box;
   margin-left: -2px;
-  width: 285px;
+  width: 268px;
+  height: 248px;
   padding: 10px;
   border-radius: 0;
   font-family: 'Golos', sans-serif;

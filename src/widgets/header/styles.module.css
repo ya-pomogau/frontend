@@ -1,16 +1,12 @@
 @import '../../app/assets/styles/common.css';
 
 .header {
-  max-width: 1440px;
   margin-top: 30px;
-  padding-left: 92px;
-  padding-right: 30px;
   border-bottom: 1px solid #e0e0e0;
   position: relative;
 }
 
 .header__container {
-  max-width: 1256px;
   display: grid;
   grid-template-columns: 23.3% 71% 5.7%;
   align-items: center;
@@ -30,32 +26,6 @@
 
 .header_title {
   color: aliceblue;
-}
-
-.header__button {
-  background-repeat: no-repeat;
-  border: none;
-  background-color: inherit;
-  cursor: pointer;
-  object-fit: fill;
-}
-
-.header__button__container {
-  display: flex;
-  gap: 5px;
-}
-
-.header__button__text {
-  font-family: 'Golos';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16.8px;
-  color: var(--colors-interface-primary);
-}
-
-.header__button:focus-visible {
-  outline: none;
 }
 
 .header__menu {
@@ -120,10 +90,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: auto;
-  margin-right: 0;
+  margin: 0 0 0 auto;
   width: 132px;
   text-align: right;
 }
@@ -147,11 +114,6 @@
 }
 
 @media (max-width: 1050px) {
-  .header{
-    padding-left: 50px;
-    padding-right: 20px;
-  }
-
   .header__container {
     max-width: 1000px;
   }
@@ -174,12 +136,8 @@
     padding-left: 25px;
   }
 
-  .header__button {
-    padding-bottom: 0px;
-  }
-
   .header__menu__container {
-  grid-column-start: 3;
+    grid-column-start: 3;
   }
 
   .header__menu {
@@ -198,5 +156,5 @@
 
   .header__menu__container {
     grid-column-start: 3;
-    }
+  }
 }

@@ -1,13 +1,12 @@
 .container_main {
+  max-width: 889px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: max-content 1fr 186px max-content;
-  grid-template-rows: 1fr;
-  padding-top: 4px;
-  box-sizing: border-box;
+  grid-template-columns: 160px 1fr 186px max-content;
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
-  padding-bottom: 20px;
+  padding-bottom: 12px;
   position: relative;
   grid-template-areas: 'taskInfo description recipient buttons';
 }
@@ -27,28 +26,9 @@
 .category {
   width: 100%;
   position: absolute;
-  top: 0;
+  top: 4px;
   left: 0;
-}
-
-.taskInfo {
-  grid-area: taskInfo;
-  margin-right: 20px;
-}
-
-.description {
-  grid-area: description;
-  margin-top: 40px;
-  width: 100%;
-}
-
-.user {
-  grid-area: recipient;
-  max-width: 181px;
-  box-sizing: border-box;
-  justify-self: end;
-  margin-right: 9px;
-  margin-top: 7px;
+  padding-top: 3px;
 }
 
 .buttons {
@@ -67,16 +47,14 @@
     border: 1px solid var(--colors-interface-blue-very-soft);
   }
 
+  .category {
+    top: 0;
+  }
+
   .recipient {
     justify-self: start;
     margin-right: 0;
     max-width: 100%;
-  }
-
-  .description {
-    margin-top: 20px;
-    padding-bottom: 5px;
-    margin-bottom: 16px;
   }
 }
 

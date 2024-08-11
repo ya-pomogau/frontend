@@ -183,7 +183,7 @@ export const SidemenuWithLinks: Story = {
 
             <SideMenuLink
               to="/tasks"
-              text="Создание / Редактирование заявки"
+              text="Заявки / Работа с заявками"
               icon={<Icon color="white" icon="CreateApplication" size="54" />}
             />
           </>

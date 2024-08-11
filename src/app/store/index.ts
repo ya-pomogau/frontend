@@ -13,6 +13,7 @@ import { messagesApi } from 'services/messages-api';
 import { userTasksApi } from 'services/user-task-api';
 import { adminsApi } from 'services/admin-api';
 import { postsApi } from 'services/posts-api';
+import { websocketMiddleware } from 'services/websocket-middleware';
 
 export const store = configureStore({
   reducer: {
@@ -40,7 +41,8 @@ export const store = configureStore({
       .concat(messagesApi.middleware)
       .concat(userTasksApi.middleware)
       .concat(adminsApi.middleware)
-      .concat(postsApi.middleware),
+      .concat(postsApi.middleware)
+      .concat(websocketMiddleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
