@@ -12,6 +12,9 @@ import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { setUserRole, setUser, isRootSelector } from 'entities/user/model';
 import { useGetUserByIdQuery } from 'services/user-api';
 import { UserRole } from 'shared/types/common.types';
+import { actions, checkTokenThunk } from 'services/system-slice';
+import { getTokenAccess } from 'shared/libs/utils';
+import useAsyncAction from 'shared/hooks/useAsyncAction';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
@@ -19,6 +22,8 @@ export function PickRolePage() {
   const [userId, setUserId] = useState<string | null>(null);
   const isRoot = useAppSelector(isRootSelector);
   const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
+
+  const [mockLogin] = useAsyncAction(actions.mockUserLoginThunk);
 
   const removeRole = () => {
     dispatch(setUserRole(null));
@@ -50,13 +55,24 @@ export function PickRolePage() {
   };
 
   useEffect(() => {
+    if (userId) {
+      mockLogin(userId).then(() => {
+        const token = getTokenAccess();
+        if (token) {
+          dispatch(checkTokenThunk(token));
+        }
+      });
+    }
+  }, [userId, mockLogin, dispatch]);
+
+  useEffect(() => {
     if (userId && data) {
       refetch().then(() => dispatch(setUser(data)));
     }
     if (error) {
       removeRole();
     }
-  }, [data, userId, error]);
+  }, [data, userId, error, refetch, dispatch]);
 
   return (
     <div>
