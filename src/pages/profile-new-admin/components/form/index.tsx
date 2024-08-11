@@ -99,7 +99,7 @@ export const NewAdminForm = () => {
           <Input
             {...field}
             error={!!errors?.fullName?.message}
-            errorText={errors.fullName?.message}
+            errorText={errors.fullName?.message || ' '}
             extClassName={styles.field}
             label="ФИО"
             placeholder="Введите имя"
@@ -114,7 +114,7 @@ export const NewAdminForm = () => {
           <Input
             {...field}
             error={!!errors?.email?.message}
-            errorText={errors.email?.message}
+            errorText={errors.email?.message || ' '}
             extClassName={styles.field}
             label="Эл. почта"
             placeholder="Введите электронную почту"
@@ -128,7 +128,8 @@ export const NewAdminForm = () => {
         render={({ field }) => (
           <InputPhone
             {...field}
-            errorText={errors?.phone?.message as unknown as string}
+						error={!!errors?.phone?.message}
+            errorText={(errors?.phone?.message as unknown as string) || ' '}
             extClassName={styles.field}
             type="tel"
             label="Телефон"
@@ -146,7 +147,7 @@ export const NewAdminForm = () => {
             defaultValue={field.value.address}
             onChange={field.onChange}
             error={!!errors?.address?.address?.message}
-            errorText={errors.address?.address?.message}
+            errorText={errors.address?.address?.message || ' '}
             extClassName={styles.field}
             address={field.value}
             label="Адрес проживания"
@@ -164,7 +165,7 @@ export const NewAdminForm = () => {
             name={field.name}
             onChange={field.onChange}
             error={!!errors?.password?.message}
-            errorText={errors.password?.message}
+            errorText={errors.password?.message || ' '}
             label="Придумайте пароль"
             placeholder="от 6 символов"
             type="password"
@@ -180,7 +181,7 @@ export const NewAdminForm = () => {
             name={field.name}
             onChange={field.onChange}
             error={!!errors?.repeatedPassword?.message}
-            errorText={errors.repeatedPassword?.message}
+            errorText={errors.repeatedPassword?.message || ' '}
             label="Повторите пароль"
             placeholder="от 6 символов"
             type="password"
