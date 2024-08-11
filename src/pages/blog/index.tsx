@@ -84,74 +84,76 @@ export function BlogPage() {
   };
 
   return (
-    <div className={styles['blog-page']}>
-      <SmartHeader
-        extClassName={styles.smartHeader}
-        icon={<Icon color="blue" icon="PopularIcon" size="46" />}
-        text="Блог"
-      />
-      {isAdmin && (
-        <PostForm
-          handleSubmit={() => {
-            setValues({
-              title: '',
-              text: '',
-            });
-          }}
-          idEditedPost={idEditedPost}
-          refPostForm={refPostForm}
-          title={values.title}
-          text={values.text}
-          addAttachment={handleAddAttachment}
-          removeAttachment={handleRemoveAttachment}
-          images={attachments}
+    <section className={styles.background}>
+      <div className={styles['blog-page']}>
+        <SmartHeader
+          extClassName={styles.smartHeader}
+          icon={<Icon color="blue" icon="PopularIcon" size="46" />}
+          text="Блог"
         />
-      )}
-
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className={styles.posts} ref={refPostList}>
-          {posts?.map(({ _id, title, text, files, author }) => (
-            <Post
-              _id={_id}
-              key={_id}
-              title={title}
-              text={text}
-              files={files}
-              author={author}
-              // TODO когда будет работать авторизация, добавить проверку для отображения кнопок только для главного админа и автора поста
-              handleDeleteButton={isAdmin ? handleGetIdPost : undefined}
-              handleEditButton={isAdmin ? handleEditPost : undefined}
-            />
-          ))}
-        </div>
-      )}
-      <LightPopup
-        isPopupOpen={isAction}
-        onClickExit={handleOpenPopup}
-        extClassName={styles.popup}
-      >
-        <Icon
-          className={styles.btnClose}
-          color="blue"
-          icon="CloseCrossIcon"
-          size="24"
-          onClick={handleOpenPopup}
-        />
-        <h4 className={`${styles.textWarning} ${'text'}`}>
-          Удалить публикацию?
-        </h4>
-        <div className={styles.btnContainer}>
-          <Button
-            actionType="button"
-            buttonType="primary"
-            label="Удалить"
-            size="small"
-            onClick={handleDeletePost}
+        {isAdmin && (
+          <PostForm
+            handleSubmit={() => {
+              setValues({
+                title: '',
+                text: '',
+              });
+            }}
+            idEditedPost={idEditedPost}
+            refPostForm={refPostForm}
+            title={values.title}
+            text={values.text}
+            addAttachment={handleAddAttachment}
+            removeAttachment={handleRemoveAttachment}
+            images={attachments}
           />
-        </div>
-      </LightPopup>
-    </div>
+        )}
+
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className={styles.posts} ref={refPostList}>
+            {posts?.map(({ _id, title, text, files, author }) => (
+              <Post
+                _id={_id}
+                key={_id}
+                title={title}
+                text={text}
+                files={files}
+                author={author}
+                // TODO когда будет работать авторизация, добавить проверку для отображения кнопок только для главного админа и автора поста
+                handleDeleteButton={isAdmin ? handleGetIdPost : undefined}
+                handleEditButton={isAdmin ? handleEditPost : undefined}
+              />
+            ))}
+          </div>
+        )}
+        <LightPopup
+          isPopupOpen={isAction}
+          onClickExit={handleOpenPopup}
+          extClassName={styles.popup}
+        >
+          <Icon
+            className={styles.btnClose}
+            color="blue"
+            icon="CloseCrossIcon"
+            size="24"
+            onClick={handleOpenPopup}
+          />
+          <h4 className={`${styles.textWarning} ${'text'}`}>
+            Удалить публикацию?
+          </h4>
+          <div className={styles.btnContainer}>
+            <Button
+              actionType="button"
+              buttonType="primary"
+              label="Удалить"
+              size="small"
+              onClick={handleDeletePost}
+            />
+          </div>
+        </LightPopup>
+      </div>
+    </section>
   );
 }
