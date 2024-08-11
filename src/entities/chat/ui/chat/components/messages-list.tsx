@@ -1,18 +1,28 @@
+import { useRef } from 'react';
+
 import { IMessage } from 'shared/types/message';
 import { Message } from 'shared/ui/message';
 import { IChatmateInfo } from 'shared/types/conflict';
+import { useLazyScroll } from '../hooks/useLazyScroll';
+
+import styles from '../styles.module.css';
 
 interface MessagesListProps {
-  currentMessages: IMessage[];
+  messages: IMessage[];
   chatmateInfo: IChatmateInfo;
 }
 
 export const MessagesList = ({
-  currentMessages,
+  messages,
   chatmateInfo,
 }: MessagesListProps) => {
+
+  const openedChatPopupRef = useRef<HTMLDivElement>(null);
+
+  const currentMessages = useLazyScroll( { messages, openedChatPopupRef } )
+
   return (
-    <div>
+    <div ref={openedChatPopupRef} className={styles.messagesBlock}>
       {currentMessages?.map((message) => (
         <Message
           type={
