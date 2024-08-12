@@ -5,7 +5,7 @@ import { useConfirmUserMutation } from 'services/admin-api';
 import { UserCardTiles } from 'shared/ui/user-cards/user-card-tiles';
 import { UserCardList } from 'shared/ui/user-cards/user-card-list';
 import { useMediaQuery } from 'shared/hooks';
-import { Brackpoints } from 'shared/config';
+import { Breakpoints } from 'shared/config';
 
 interface UserCardProps {
   user: User;
@@ -25,7 +25,7 @@ const getButtonTypeFromScore = (
 };
 
 export const UserCard = ({ user, viewMode }: UserCardProps) => {
-  const mediaQuery = useMediaQuery(Brackpoints.IS_MOBILE_MENU);
+  const mediaQuery = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
   const { score, status, keys, role } = user;
   const isVolonteerAcceptButtonDisabled = !!(
     status &&

@@ -13,7 +13,7 @@ import { getRoleForRequest, handleFilterTasks } from 'shared/libs/utils';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { useGetTaskCompletedQuery } from 'services/user-task-api';
 import { isUnConfirmedSelector } from 'entities/user/model';
-import { Brackpoints } from 'shared/config';
+import { Breakpoints } from 'shared/config';
 
 export function ProfileCompletedPage() {
   const [infoFilterTasks, setInfoFilterTasks] =
@@ -23,7 +23,7 @@ export function ProfileCompletedPage() {
   const { role } = useAppSelector((state) => state.user);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
-  const isMobile = useMediaQuery(Brackpoints.IS_MOBILE_1150);
+  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_1150);
   const {
     data: tasks,
     isLoading,

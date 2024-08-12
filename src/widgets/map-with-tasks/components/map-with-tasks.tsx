@@ -7,12 +7,12 @@ import { useGetTaskQuery } from 'services/user-task-api';
 import useGeolocation from 'shared/hooks/use-geolocation';
 import { useMediaQuery } from 'shared/hooks';
 import { isUnConfirmedSelector } from 'entities/user/model';
-import { Brackpoints } from 'shared/config';
+import { Breakpoints } from 'shared/config';
 
 export const MapWithTasks = () => {
   const { coords, apiError } = useGeolocation();
   const navigate = useNavigate();
-  const mediaQuery = useMediaQuery(Brackpoints.IS_MOBILE_MENU);
+  const mediaQuery = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
   const user = useAppSelector((state) => state.user.data);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 

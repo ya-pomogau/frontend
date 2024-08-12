@@ -16,7 +16,7 @@ import { DropDownMenuButton } from '../../../shared/ui/DropDownMenuButton';
 import { VkIcon } from '../../../shared/ui/icons/vk-icon';
 import { Button } from '../../../shared/ui/button';
 import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
-import { Brackpoints } from 'shared/config';
+import { Breakpoints } from 'shared/config';
 
 import styles from './styles.module.css';
 
@@ -34,7 +34,7 @@ export const DropDownMenu = ({
   role,
   setIsOpenChat,
 }: MenuProps) => {
-  const isMobile = useMediaQuery(Brackpoints.IS_MOBILE_MENU);
+  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
   const ref = useRef(null);
 
   const user = useAppSelector((state) => state.user.data);
