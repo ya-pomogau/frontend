@@ -23,7 +23,7 @@ export const Filter = ({
     userCategories: [],
   };
 
-  const { control, handleSubmit, reset } = useForm<IFilterValues>({
+  const { control, handleSubmit, reset, watch } = useForm<IFilterValues>({
     defaultValues,
   });
 
@@ -37,6 +37,7 @@ export const Filter = ({
     return null;
   }
 
+  const formValues = watch();
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -119,7 +120,7 @@ export const Filter = ({
               </div>
             </>
           }
-          filterValues={defaultValues}
+          filterValues={formValues} 
           onReset={() => reset(defaultValues)}
           setFilteres={setFilteres}
         />
@@ -127,5 +128,3 @@ export const Filter = ({
     </div>
   );
 };
-
-//чекбокс и кнопка сделана, но после настройки useForm и избавления от defaultObjFilteres не пойму в чем проблема

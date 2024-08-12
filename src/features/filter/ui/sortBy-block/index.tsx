@@ -7,14 +7,13 @@ import { VariantCheckbox } from 'shared/types/common.types';
 
 interface SortByBlockProps {
   filter: string;
-  onChange: (name: string, value: string[] | string) => void;
+  onChange: (value: string) => void;  // Обновляем типизацию
 }
 
 export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
-
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const newValue = target.checked ? target.id : '';
-    onChange('sortBy', newValue);
+    onChange(newValue);  // Упрощаем вызов
   };
 
   return (
