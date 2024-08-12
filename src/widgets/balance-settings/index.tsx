@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import classnames from 'classnames';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from '../../shared/ui/button';
 import usePermission from '../../shared/hooks/use-permission';
@@ -31,7 +31,6 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   const {
     control,
     handleSubmit,
-    getValues,
     setValue,
     formState: { isDirty, isValid },
   } = useForm<Record<string, number>>({
@@ -53,9 +52,9 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   }, [data]);
 
   //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
-  const onSubmit = async () => {
+  const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
     try {
-      await updatePoints(getValues());
+      await updatePoints(formData);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
@@ -77,7 +76,7 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
                 <BalanceSettingsItem
                   title={item.title}
                   inputValue={field.value}
-                  handleChange={(e) => field.onChange(+e.target.value)}
+                  handleChange={field.onChange}
                 />
               )}
             />
