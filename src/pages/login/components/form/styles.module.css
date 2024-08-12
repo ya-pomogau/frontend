@@ -9,6 +9,14 @@
   min-width: 364px;
 }
 
+.error {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: var(--colors-interface-orange);
+}
+
 @media all and (max-width: 415px) {
   .form {
     padding: 40px 0 0 10px;
