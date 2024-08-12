@@ -33,7 +33,7 @@ export const PopupChat = ({
   isOpen,
   onClick,
 }: PopupChatProps) => {
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_CHAT);
+  const isMobile = useMediaQuery(Breakpoints.S);
   const [inputValue, setInputValue] = useState<string>('');
   const openedChatPopupRef = useRef<HTMLDivElement>(null);
   const sortedMessages = sortMessages(messages);

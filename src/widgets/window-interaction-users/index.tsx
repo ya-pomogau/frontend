@@ -18,7 +18,7 @@ interface IWindowInteractionUsers {
 }
 
 export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_CHAT);
+  const isMobile = useMediaQuery(Breakpoints.S);
 
   const handleClick = () => {
     props.closeConflict();

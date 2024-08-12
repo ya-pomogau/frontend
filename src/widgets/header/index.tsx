@@ -23,7 +23,7 @@ const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
+  const isMobile = useMediaQuery(Breakpoints.L);
   const user = useAppSelector((state) => state.user.data);
   const isAdmin = user && user.role === UserRole.ADMIN;
 

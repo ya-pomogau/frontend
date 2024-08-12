@@ -23,7 +23,7 @@ export function ProfileCompletedPage() {
   const { role } = useAppSelector((state) => state.user);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_1150);
+  const isMobile = useMediaQuery(Breakpoints.XL);
   const {
     data: tasks,
     isLoading,

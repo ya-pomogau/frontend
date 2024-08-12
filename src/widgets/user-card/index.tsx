@@ -25,7 +25,7 @@ const getButtonTypeFromScore = (
 };
 
 export const UserCard = ({ user, viewMode }: UserCardProps) => {
-  const mediaQuery = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
+  const mediaQuery = useMediaQuery(Breakpoints.L);
   const { score, status, keys, role } = user;
   const isVolonteerAcceptButtonDisabled = !!(
     status &&

@@ -34,7 +34,7 @@ export const DropDownMenu = ({
   role,
   setIsOpenChat,
 }: MenuProps) => {
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
+  const isMobile = useMediaQuery(Breakpoints.L);
   const ref = useRef(null);
 
   const user = useAppSelector((state) => state.user.data);

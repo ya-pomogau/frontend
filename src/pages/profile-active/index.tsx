@@ -26,8 +26,8 @@ export function ProfileActivePage() {
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_1150);
-  const isMobileForPopup = useMediaQuery(Breakpoints.IS_MOBILE_POPUP);
+  const isMobile = useMediaQuery(Breakpoints.XL);
+  const isMobileForPopup = useMediaQuery(Breakpoints.M);
 
   const { role } = useAppSelector((state) => state.user);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);

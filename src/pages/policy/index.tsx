@@ -15,7 +15,7 @@ import { Breakpoints } from 'shared/config';
 
 export function PolicyPage() {
   const isMainAdmin = usePermission([], UserRole.ADMIN);
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
+  const isMobile = useMediaQuery(Breakpoints.L);
   // TODO Нужно реализовать хранение значений titleMarkdown и descriptionMarkdown на сервере в базе данных
   const [titleMarkdown, setTitleMarkdown] = useState(initTitleMarkdown);
   const [descriptionMarkdown, setDescriptionMarkdown] = useState(

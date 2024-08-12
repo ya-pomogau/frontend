@@ -115,7 +115,7 @@ export function TasksProfilePage({ incomeTab }: TaskListProps) {
   const userTasks = mockedTasks;
 
   const navigate = useNavigate();
-  const isMobileForPopup = useMediaQuery(Breakpoints.IS_MOBILE_POPUP);
+  const isMobileForPopup = useMediaQuery(Breakpoints.M);
 
   const dispatch = useAppDispatch();
   const { isPopupOpen } = useAppSelector((store) => store.createRequest);
@@ -124,7 +124,7 @@ export function TasksProfilePage({ incomeTab }: TaskListProps) {
     navigate(-1);
   };
 
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_1150);
+  const isMobile = useMediaQuery(Breakpoints.XL);
 
   return (
     <>

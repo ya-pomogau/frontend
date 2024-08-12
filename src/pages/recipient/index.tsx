@@ -25,8 +25,8 @@ import { Breakpoints } from 'shared/config';
 import { UserRole } from 'shared/types/common.types';
 
 export function RecipientPage() {
-  const isMobile = useMediaQuery(Breakpoints.IS_MOBILE_1150);
-  const isMobileForPopup = useMediaQuery(Breakpoints.IS_MOBILE_POPUP);
+  const isMobile = useMediaQuery(Breakpoints.XL);
+  const isMobileForPopup = useMediaQuery(Breakpoints.M);
 
   const dispatch = useAppDispatch();
   const buttonFilterRef = useRef<Element>();

@@ -12,7 +12,7 @@ import { Breakpoints } from 'shared/config';
 export const MapWithTasks = () => {
   const { coords, apiError } = useGeolocation();
   const navigate = useNavigate();
-  const mediaQuery = useMediaQuery(Breakpoints.IS_MOBILE_MENU);
+  const mediaQuery = useMediaQuery(Breakpoints.L);
   const user = useAppSelector((state) => state.user.data);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
