@@ -26,6 +26,7 @@
   font-size: 20px;
   font-weight: 400;
   text-align: start;
+  background-color: transparent;
 }
 
 .phone {
@@ -33,6 +34,7 @@
   font-size: 16px;
   font-weight: 400;
   color: #000;
+  background-color: transparent;
 }
 
 .buttons {

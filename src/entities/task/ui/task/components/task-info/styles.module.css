@@ -19,6 +19,7 @@
   gap: 3px;
   font-size: 16px;
   font-weight: 700;
+  background-color: transparent;
 }
 
 .time {
@@ -29,6 +30,7 @@
   font-size: 16px;
   font-weight: 700;
   margin-left: 28px;
+  background-color: transparent;
 }
 
 .address {
@@ -38,6 +40,7 @@
   gap: 3px;
   font-size: 16px;
   font-weight: 700;
+  background-color: transparent;
 }
 
 .icon {
