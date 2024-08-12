@@ -18,26 +18,26 @@ import useAsyncAction from 'shared/hooks/useAsyncAction';
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
-  const { role } = useAppSelector((state) => state.user);
-  const [userId, setUserId] = useState<string | null>(null);
+  const role = useAppSelector((state) => state.user.role);
   const isRoot = useAppSelector(isRootSelector);
+
+  const [userId, setUserId] = useState<string | null>(null);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
   const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
 
   const [mockLogin] = useAsyncAction(actions.mockUserLoginThunk);
 
-  const removeRole = () => {
-    dispatch(setUserRole(null));
-    setUserId(null);
-  };
-
   const getVolunteerRole = () => {
     dispatch(setUserRole(UserRole.VOLUNTEER));
     setUserId('1');
+    setIsFirstRender(false);
   };
 
   const getRecipientRole = () => {
     dispatch(setUserRole(UserRole.RECIPIENT));
     setUserId('23118510435');
+    setIsFirstRender(false);
   };
 
   const getPageYouWouldBeRedirected = () => {
@@ -55,48 +55,43 @@ export function PickRolePage() {
   };
 
   useEffect(() => {
-    if (userId) {
-      mockLogin(userId).then(() => {
-        const token = getTokenAccess();
-        if (token) {
-          dispatch(checkTokenThunk(token));
-        }
-      });
-    }
+    if (!userId) return;
+
+    mockLogin(userId).then(() => {
+      const token = getTokenAccess();
+      if (token) {
+        dispatch(checkTokenThunk(token));
+      }
+    });
   }, [userId, mockLogin, dispatch]);
 
   useEffect(() => {
-    if (userId && data) {
-      refetch().then(() => dispatch(setUser(data)));
-    }
+    if (!userId || !data) return;
+
+    refetch().then(() => {
+      dispatch(setUser(data));
+    });
+
     if (error) {
-      removeRole();
+      dispatch(setUserRole(null));
+      setUserId(null);
     }
-  }, [data, userId, error, refetch, dispatch]);
+  }, [data, userId, error]);
 
   return (
     <div>
       <h1>Временная страница выбора ролей</h1>
 
-      {!role ? (
-        <h2>Сейчас у вас нет роли</h2>
-      ) : (
-        <h2>Сейчас у вас роль: {role}</h2>
-      )}
+      {isFirstRender && !role && <h2>Сейчас у вас нет роли</h2>}
 
-      <ul
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 10,
-        }}
-      >
+      {role && <h2>Сейчас у вас роль: {role}</h2>}
+
+      <ul style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <li>
           <button onClick={getVolunteerRole} style={{ marginRight: 10 }}>
             Волонтер
           </button>
         </li>
-
         <li>
           <button onClick={getRecipientRole} style={{ marginRight: 10 }}>
             Реципиент
@@ -106,7 +101,7 @@ export function PickRolePage() {
 
       <h2>
         В соответствии с вашей ролью, если бы в приложении была настроена
-        аутификация, вас бы перенаправило на страницу:{' '}
+        аутентификация, вас бы перенаправило на страницу:{' '}
         {getPageYouWouldBeRedirected()}
       </h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
