@@ -27,7 +27,6 @@
   margin: 0;
   text-align: right;
   font-family: 'Golos';
-
   font-size: 16px;
   line-height: 19px;
 }
@@ -69,7 +68,7 @@
   margin-top: 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 920px) {
   .title {
     font-size: 12px;
     line-height: 14px;
@@ -80,5 +79,6 @@
     width: 100%;
     color: #fbfdff;
     z-index: 2;
+    background-color: transparent;
   }
 }
