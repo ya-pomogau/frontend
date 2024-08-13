@@ -17,6 +17,10 @@
   background-color: transparent;
 }
 
+/*.link:nth-child(2) {*/
+/*  min-width: 120px;*/
+/*}*/
+
 .link_active {
   border-bottom: 4px solid var(--colors-interface-primary);
 }
@@ -25,8 +29,9 @@
   display: flex;
   justify-content: center;
   margin: 0;
-  padding: 0 7px 0 0;
+  padding: 0 7px 8px;
   border-bottom: 4px solid transparent;
+  min-width: 134px;
 }
 
 .link_active .link__title {
@@ -59,8 +64,10 @@
   }
 
   .link__title {
+    min-width: unset;
     border-bottom: 4px solid transparent;
     justify-content: end;
+    padding: 0 7px 0 0;
   }
 
   .link__icon {

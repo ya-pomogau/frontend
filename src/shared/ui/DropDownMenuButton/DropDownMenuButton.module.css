@@ -12,7 +12,6 @@
 .adminButton {
   margin-bottom: 20px;
   margin-top: 20px;
-  /*padding-bottom: 20px;*/
   border-bottom: 1px solid var(--colors-interface-ford-white);
   display: flex;
   color: var(--colors-interface-primary);
