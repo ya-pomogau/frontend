@@ -15,7 +15,7 @@ import { SideBar } from '../../../widgets/header/navigation';
 import { DropDownMenuButton } from '../../../shared/ui/DropDownMenuButton';
 import { VkIcon } from '../../../shared/ui/icons/vk-icon';
 import { Button } from '../../../shared/ui/button';
-import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
+import { linksTop, linksTopAuthAdmin, positionConfigMenu } from '../utils';
 
 import styles from './styles.module.css';
 
@@ -107,7 +107,7 @@ export const DropDownMenu = ({
             <div style={line}></div>
           )}
           <DropDownMenuButton isMobile={isMobile} onClick={handlerOnClick}>
-            Выход
+            Выйти
           </DropDownMenuButton>
         </div>
       ) : (
