@@ -1,6 +1,6 @@
 .content {
   width: 276px;
-  min-height: 172px;
+  max-height: 172px;
   box-sizing: border-box;
   position: relative;
   margin-top: 31px;
@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 210px;
   cursor: pointer;
 }
 
