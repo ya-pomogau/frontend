@@ -8,14 +8,25 @@ import {
   useGetTasksConfilctQuery,
   useGetTasksWorkConflictQuery,
 } from 'services/admin-api';
+import { useAppSelector } from 'app/hooks';
+import { AdminPermission } from 'shared/types/common.types';
 
 interface ProfileChatsPagesProps {
   children: ReactNode;
 }
 
 export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
-  const { data: conflict } = useGetTasksConfilctQuery('');
-  const { data: conflictIsWork } = useGetTasksWorkConflictQuery('');
+  const user = useAppSelector((store) => store.user.data);
+  const isConflictsPermissionGranted =
+    user?.permissions?.some((item) => item === AdminPermission.CONFIRMATION) ??
+    false;
+
+  const { data: conflict } = useGetTasksConfilctQuery('', {
+    skip: !isConflictsPermissionGranted,
+  });
+  const { data: conflictIsWork } = useGetTasksWorkConflictQuery('', {
+    skip: !isConflictsPermissionGranted,
+  });
 
   // TODO: добавить данные для раздела "В работе"
   // const { data: conflictInProgress } = useGetTasksProgressConflictQuery('');

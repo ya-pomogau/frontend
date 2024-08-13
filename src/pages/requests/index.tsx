@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Filter } from '../../features/filter';
 import { RequestsTab } from '../requests-tab';
-import { Tabs } from '../../shared/types/common.types';
+import { AdminPermission, Tabs } from '../../shared/types/common.types';
 import {
   useGetUserByRolesQuery,
   useGetAllAdminsQuery,
@@ -17,16 +17,30 @@ import {
 } from 'services/admin-api';
 import { User } from 'entities/user/types';
 import { GradientDivider } from 'shared/ui/gradient-divider';
+import { useAppSelector } from 'app/hooks';
 
 interface PageProps {
   incomeTab: string;
 }
 
 export function RequestsPage({ incomeTab }: PageProps) {
-  const { data: volunteers } = useGetUserByRolesQuery('volunteers');
-  const { data: admins } = useGetAllAdminsQuery('');
-  const { data: recipients } = useGetUserByRolesQuery('recipients');
-  const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed');
+  const user = useAppSelector((store) => store.user.data);
+  const isConfirmationPermissionGranted =
+    user?.permissions?.some((item) => item === AdminPermission.CONFIRMATION) ??
+    false;
+
+  const { data: volunteers } = useGetUserByRolesQuery('volunteers', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: admins } = useGetAllAdminsQuery('', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: recipients } = useGetUserByRolesQuery('recipients', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed', {
+    skip: !isConfirmationPermissionGranted,
+  });
   const [searchName, setSearchName] = useState('');
   const [filteredName, setFilteredName] = useState<User[]>([]);
   const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
