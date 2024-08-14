@@ -61,7 +61,7 @@ export const TaskList = ({
 
     if (box) {
       setPopupPosion({
-        right: window.innerWidth - box.right - box.width * 2.25 + 14,
+        right: window.innerWidth - box.right - box.width * 2.04 + 14,
         top: box.top + window.scrollY + box.height * 1.2,
       });
     }

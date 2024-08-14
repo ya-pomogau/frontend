@@ -87,7 +87,8 @@
 .text {
   font-family: 'Golos', sans-serif;
   max-width: 294px;
-  margin: auto;
+  margin: 4px 28px 0 0;
+  line-height: 22px;
 }
 .closeWrapper {
   display: flex;
