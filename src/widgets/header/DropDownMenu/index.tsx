@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +5,13 @@ import cn from 'classnames';
 
 import { UserRole } from '../../../shared/types/common.types';
 import { useAppDispatch } from '../../../app/hooks';
-import { useMediaQuery } from '../../../shared/hooks';
+import { useMediaQuery, useUser } from '../../../shared/hooks';
 import { Routes } from '../../../shared/config';
-import { logoutUser } from '../../../entities/user/model';
+import { logoutUser } from '../../../entities';
 import { closeSocketConnection } from '../../../services/system-slice';
-import useUser from 'shared/hooks/use-user';
-import { UnauthorizedUser } from 'entities/user/ui/user-info/unauthorized-user';
 
-import { SideBar } from '../../../widgets/header/navigation';
-import { DropDownMenuButton } from '../../../shared/ui/DropDownMenuButton';
+import { SideBar } from '../navigation';
+import { DropDownMenuButton } from '../../../shared/ui';
 import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
 
 import styles from './styles.module.css';
@@ -78,9 +74,8 @@ export const DropDownMenu = ({
 
   return createPortal(
     <div className={sidebarContainerStyles} ref={ref}>
-      {isAuth ? (
+      {isAuth && (
         <div className={styles.wrapper}>
-          {/* eslint-disable-next-line eqeqeq */}
           {!isAdmin && (
             <DropDownMenuButton
               isMobile={isMobile}
@@ -102,8 +97,6 @@ export const DropDownMenu = ({
             Выход
           </DropDownMenuButton>
         </div>
-      ) : (
-        <UnauthorizedUser />
       )}
     </div>,
     modalRoot

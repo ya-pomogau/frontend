@@ -2,37 +2,32 @@ import { SyntheticEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
-import { useAppSelector } from 'app/hooks';
-import { useMediaQuery } from 'shared/hooks/media-query';
+import { useControlModal, useMediaQuery, useUser } from 'shared/hooks';
 import { Logo, Avatar, Button } from 'shared/ui';
+import { Routes } from 'shared/config';
 import { handleRedirectVK } from 'shared/libs/utils';
 import { PopupChat } from 'entities/chat/ui/chat';
 import { infoAdmin } from 'entities/chat/ui/chat/libs/utils';
-import { UserRole } from 'shared/types/common.types';
 import { SideBar } from './navigation';
 import { DropDownMenu } from './DropDownMenu';
 import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
-import { Routes } from 'shared/config';
-import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import { MenuButton } from './components';
+import { UserRole } from '../../shared/types/common.types';
 
+import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import styles from './styles.module.css';
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
-  const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
+  const { isOpen, handleOpen, handleClose } = useControlModal();
 
   const isMobile = useMediaQuery('(max-width: 920px)');
-  const user = useAppSelector((state) => state.user.data);
-  const isAdmin = user && user.role === UserRole.ADMIN;
+  const user = useUser();
+  const isAdmin = user?.role === UserRole.ADMIN;
 
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
     setMenuActive(!menuActive);
-  };
-
-  const hendleChat = () => {
-    setIsOpenChat((state) => !state);
   };
 
   const isMenuHidden = !user && !isMobile;
@@ -77,23 +72,25 @@ const Header = () => {
             )}
 
         <div className={headerMenuStyles}>
-          <MenuButton onClick={handleClick} isMobile={isMobile} />
+          {Boolean(user) && (
+            <MenuButton onClick={handleClick} isMobile={isMobile} />
+          )}
 
           {menuActive && (
             <DropDownMenu
               role={user?.role}
               setMenuActive={setMenuActive}
               menuActive={menuActive}
-              setIsOpenChat={setIsOpenChat}
+              setIsOpenChat={handleOpen}
             />
           )}
         </div>
       </div>
 
-      {isOpenChat && (
+      {isOpen && (
         <PopupChat
-          isOpen={isOpenChat}
-          onClick={hendleChat}
+          isOpen={isOpen}
+          onClick={isOpen ? handleClose : handleOpen}
           messages={[]}
           chatmateInfo={infoAdmin}
           onAttachFileClick={() => {}}
