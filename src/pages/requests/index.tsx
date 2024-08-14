@@ -1,32 +1,48 @@
-import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui/icons';
-import { SmartHeader } from 'shared/ui/smart-header';
-import styles from './styles.module.css';
-import { Input } from 'shared/ui/input';
 import { NavLink } from 'react-router-dom';
-
 import { useEffect, useState } from 'react';
+
+import { PageSubMenuForAdmins } from 'widgets';
+import { Icon, SmartHeader, Input, GradientDivider } from 'shared/ui';
+import { usePermission } from 'shared/hooks';
 import { Filter } from '../../features/filter';
 import { RequestsTab } from '../requests-tab';
-import { Tabs } from '../../shared/types/common.types';
+import {
+  AdminPermission,
+  Tabs,
+  UserRole,
+} from '../../shared/types/common.types';
 import {
   useGetUserByRolesQuery,
   useGetAllAdminsQuery,
   useGetUnconfirmedUsersQuery,
 } from 'services/admin-api';
 import { User } from 'entities/user/types';
-import { GradientDivider } from 'shared/ui/gradient-divider';
+
+import styles from './styles.module.css';
 
 interface PageProps {
   incomeTab: string;
 }
 
 export function RequestsPage({ incomeTab }: PageProps) {
-  const { data: volunteers } = useGetUserByRolesQuery('volunteers');
-  const { data: admins } = useGetAllAdminsQuery('');
-  const { data: recipients } = useGetUserByRolesQuery('recipients');
-  const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed');
+  const isConfirmationPermissionGranted = usePermission(
+    [AdminPermission.CONFIRMATION],
+    UserRole.ADMIN
+  );
+
+  const { data: volunteers } = useGetUserByRolesQuery('volunteers', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: admins } = useGetAllAdminsQuery('', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: recipients } = useGetUserByRolesQuery('recipients', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed', {
+    skip: !isConfirmationPermissionGranted,
+  });
   const [searchName, setSearchName] = useState('');
   const [filteredName, setFilteredName] = useState<User[]>([]);
   const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
