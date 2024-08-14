@@ -18,6 +18,7 @@
   overflow: hidden;
   font: var(--font-golos-16-22);
   color: var(--colors-interface-dark-gray);
+  background-color: transparent;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -52,6 +53,7 @@
 .scoreText {
   font: var(--font-golos-12-14);
   color: var(--colors-interface-primary);
+  background-color: transparent;
 }
 
 @media screen and (min-width: 1151px) {
