@@ -6,14 +6,14 @@ import cn from 'classnames';
 import { UserRole } from '../../../shared/types/common.types';
 import { useAppDispatch } from '../../../app/hooks';
 import { useMediaQuery, useUser } from '../../../shared/hooks';
-import { Routes } from '../../../shared/config';
+import { Routes, Breakpoints } from '../../../shared/config';
 import { logoutUser } from '../../../entities';
 import { closeSocketConnection } from '../../../services/system-slice';
 
 import { SideBar } from '../navigation';
 import { DropDownMenuButton } from '../../../shared/ui';
 import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
-import { Breakpoints } from 'shared/config';
+
 
 import styles from './styles.module.css';
 
@@ -95,7 +95,7 @@ export const DropDownMenu = ({
             <div className={lineStyles}></div>
           )}
           <DropDownMenuButton isMobile={isMobile} onClick={handlerOnClick}>
-            Выход
+            Выйти
           </DropDownMenuButton>
         </div>
       )}

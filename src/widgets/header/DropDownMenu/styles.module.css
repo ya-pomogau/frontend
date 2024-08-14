@@ -37,6 +37,7 @@
 .header__sidebar__container_mobile {
   right: 13px;
   top: 44px;
-  padding: 10px 28px 20px 30px;
+  background-color: var(--colors-interface-white);
+  padding: 11px 28px 20px 30px;
   width: 252px;
 }
