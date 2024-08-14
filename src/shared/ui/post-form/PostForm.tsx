@@ -1,12 +1,33 @@
-import { ChangeEvent, Ref, type FC } from 'react';
+import { ChangeEvent, Ref, useEffect, type FC } from 'react';
 import classNames from 'classnames';
+import { useForm } from 'react-hook-form';
+
 import { Button } from '../button';
-import { Input } from '../input';
 import { TextArea } from '../text-area';
 import { FileAttachmentIcon } from '../icons/file-attachment-icon';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
-import styles from './styles.module.css';
 import { FileTypes } from 'shared/types/common.types';
+import { FormInput } from '../form-input';
+import useFormField from 'shared/hooks/use-form-field';
+import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
+import { IBlogForm } from 'shared/types/blog.types';
+import styles from './styles.module.css';
+
+const TITLE_VALIDATION_RULES = {
+  required: 'Обязательное поле',
+  minLength: {
+    value: 4,
+    message: 'Имя должно быть больше 4 символов',
+  },
+};
+
+const TEXT_VALIDATION_RULES = {
+  required: 'Обязательное поле',
+  minLength: {
+    value: 100,
+    message: 'Имя должно быть больше 100 символов',
+  },
+};
 
 interface PostFormProps {
   loading?: boolean;
@@ -19,23 +40,60 @@ interface PostFormProps {
   }[];
   addAttachment: (fileList: FileList | null) => void;
   removeAttachment: (id: string) => void;
-  handleChange: (
+  handleChange?: (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   handleSubmit: () => void;
+  idEditedPost: string | undefined;
 }
 
 export const PostForm: FC<PostFormProps> = ({
-  title,
-  text,
-  images,
   addAttachment,
   removeAttachment,
-  handleChange,
-  handleSubmit,
   refPostForm,
   loading,
+  images,
+  title,
+  text,
+  handleSubmit,
+  idEditedPost,
 }) => {
+  const [addPost] = useAddPostMutation();
+  const [editPost] = useEditPostMutation();
+  const {
+    control,
+    handleSubmit: onSubmit,
+    formState: { isValid },
+    reset,
+  } = useForm<IBlogForm>({
+    mode: 'onChange',
+    defaultValues: {
+      title: '',
+      text: '',
+    },
+  });
+
+  useEffect(() => {
+    if (title !== undefined && text !== undefined) {
+      reset({ title, text });
+    }
+  }, [title, text, reset]);
+
+  const titleField = useFormField('title', control, TITLE_VALIDATION_RULES);
+  const textField = useFormField('text', control, TEXT_VALIDATION_RULES);
+
+  const handleSubmitForm = (data: IBlogForm) => {
+    idEditedPost
+      ? editPost({
+          title: data.title,
+          text: data.text,
+          _id: idEditedPost,
+        })
+      : addPost({ title: data.title, text: data.text });
+    handleSubmit();
+    reset();
+  };
+
   const imageTitleStyle = classNames(
     styles['image-title'],
     'text',
@@ -44,16 +102,21 @@ export const PostForm: FC<PostFormProps> = ({
   );
 
   return (
-    <form className={styles.form} ref={refPostForm}>
-      <Input
+    <form
+      className={styles.form}
+      ref={refPostForm}
+      onSubmit={onSubmit(handleSubmitForm)}
+    >
+      <FormInput
         extClassName={styles.input}
-        type="text"
+        control={control}
+        value={titleField.value}
+        rules={TITLE_VALIDATION_RULES}
         name="title"
-        onChange={handleChange}
+        onChange={titleField.onChange}
         label="Заголовок"
         placeholder="Благотворительность в рекламе"
-        value={title}
-      ></Input>
+      />
       <div className={styles['text-block']}>
         <TextArea
           rows={10}
@@ -61,9 +124,10 @@ export const PostForm: FC<PostFormProps> = ({
           name="text"
           label="Текст блога"
           placeholder="Напишите, чем хотите поделиться?"
-          onChange={handleChange}
-          value={text || ''}
-        ></TextArea>
+          onChange={textField.onChange}
+          value={textField.value}
+          error={textField.error}
+        />
         <label className={styles['attachment-button']}>
           <FileAttachmentIcon size="24" color="white" />
           <input
@@ -76,7 +140,7 @@ export const PostForm: FC<PostFormProps> = ({
               addAttachment(e.target.files);
               e.target.value = '';
             }}
-          ></input>
+          />
         </label>
       </div>
       <div className={styles.images}>
@@ -97,12 +161,11 @@ export const PostForm: FC<PostFormProps> = ({
       </div>
 
       <Button
-        onClick={handleSubmit}
+        type="submit"
         label="Опубликовать"
         buttonType="primary"
-        type="button"
         isLoading={loading}
-        disabled={!title?.trim() || !text?.trim()}
+        disabled={!isValid}
       />
     </form>
   );

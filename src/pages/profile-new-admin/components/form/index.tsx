@@ -128,7 +128,7 @@ export const NewAdminForm = () => {
         render={({ field }) => (
           <InputPhone
             {...field}
-						error={!!errors?.phone?.message}
+            error={!!errors?.phone?.message}
             errorText={(errors?.phone?.message as unknown as string) || ' '}
             extClassName={styles.field}
             type="tel"
