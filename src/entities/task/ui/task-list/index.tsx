@@ -181,7 +181,7 @@ export const TaskList = ({
                   <Tooltip
                     visible
                     extClassName={styles.modal}
-                    pointerPosition="right"
+                    pointerPosition="center"
                     changeVisible={() => popupClose()}
                     elementStyles={{
                       position: 'absolute',
