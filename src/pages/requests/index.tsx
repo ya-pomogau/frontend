@@ -1,33 +1,35 @@
-import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui/icons';
-import { SmartHeader } from 'shared/ui/smart-header';
-import styles from './styles.module.css';
-import { Input } from 'shared/ui/input';
 import { NavLink } from 'react-router-dom';
-
 import { useEffect, useState } from 'react';
+
+import { PageSubMenuForAdmins } from 'widgets';
+import { Icon, SmartHeader, Input, GradientDivider } from 'shared/ui';
+import { usePermission } from 'shared/hooks';
 import { Filter } from '../../features/filter';
 import { RequestsTab } from '../requests-tab';
-import { AdminPermission, Tabs } from '../../shared/types/common.types';
+import {
+  AdminPermission,
+  Tabs,
+  UserRole,
+} from '../../shared/types/common.types';
 import {
   useGetUserByRolesQuery,
   useGetAllAdminsQuery,
   useGetUnconfirmedUsersQuery,
 } from 'services/admin-api';
 import { User } from 'entities/user/types';
-import { GradientDivider } from 'shared/ui/gradient-divider';
-import { useAppSelector } from 'app/hooks';
+
+import styles from './styles.module.css';
 
 interface PageProps {
   incomeTab: string;
 }
 
 export function RequestsPage({ incomeTab }: PageProps) {
-  const user = useAppSelector((store) => store.user.data);
-  const isConfirmationPermissionGranted =
-    user?.permissions?.some((item) => item === AdminPermission.CONFIRMATION) ??
-    false;
+  const isConfirmationPermissionGranted = usePermission(
+    [AdminPermission.CONFIRMATION],
+    UserRole.ADMIN
+  );
 
   const { data: volunteers } = useGetUserByRolesQuery('volunteers', {
     skip: !isConfirmationPermissionGranted,
