@@ -36,8 +36,8 @@
 
 .label {
   display: inline-block;
-  font-size: 12px; 
-  line-height: 18px; 
+  font-size: 12px;
+  line-height: 18px;
   font-weight: 400;
   color: #000000;
   margin-bottom: 6px;
@@ -58,8 +58,6 @@
   display: flex;
   position: absolute;
   right: 12px;
-  top: 50%;
-  transform: translate(0, -50%);
   cursor: pointer;
   transition: var(--transition-hover);
 }
