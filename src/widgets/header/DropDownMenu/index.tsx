@@ -13,6 +13,7 @@ import { closeSocketConnection } from '../../../services/system-slice';
 import { SideBar } from '../navigation';
 import { DropDownMenuButton } from '../../../shared/ui';
 import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
+import { Breakpoints } from 'shared/config';
 
 import styles from './styles.module.css';
 
@@ -30,7 +31,7 @@ export const DropDownMenu = ({
   role,
   setIsOpenChat,
 }: MenuProps) => {
-  const isMobile = useMediaQuery('(max-width: 920px)');
+  const isMobile = useMediaQuery(Breakpoints.L);
   const ref = useRef(null);
 
   const isAuth = useUser();

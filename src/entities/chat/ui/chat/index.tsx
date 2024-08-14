@@ -15,6 +15,7 @@ import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { MessagesList } from './components/messages-list';
+import { Breakpoints } from 'shared/config';
 
 interface PopupChatProps {
   messages: IMessage[];
@@ -32,7 +33,7 @@ export const PopupChat = ({
   isOpen,
   onClick,
 }: PopupChatProps) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery(Breakpoints.S);
   const [inputValue, setInputValue] = useState<string>('');
   const openedChatPopupRef = useRef<HTMLDivElement>(null);
   const sortedMessages = sortMessages(messages);

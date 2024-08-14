@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import { useControlModal, useMediaQuery, useUser } from 'shared/hooks';
 import { Logo, Avatar, Button } from 'shared/ui';
-import { Routes } from 'shared/config';
+import { Routes, Breakpoints } from 'shared/config';
 import { handleRedirectVK } from 'shared/libs/utils';
 import { PopupChat } from 'entities/chat/ui/chat';
 import { infoAdmin } from 'entities/chat/ui/chat/libs/utils';
@@ -21,7 +21,7 @@ const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const { isOpen, handleOpen, handleClose } = useControlModal();
 
-  const isMobile = useMediaQuery('(max-width: 920px)');
+  const isMobile = useMediaQuery(Breakpoints.L);
   const user = useUser();
   const isAdmin = user?.role === UserRole.ADMIN;
 
