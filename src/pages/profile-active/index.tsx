@@ -17,6 +17,7 @@ import { TaskList } from '../../entities/task/ui/task-list';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { Icon } from '../../shared/ui/icons';
 import { Loader } from '../../shared/ui/loader';
+import { Breakpoints } from 'shared/config';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
@@ -25,8 +26,8 @@ export function ProfileActivePage() {
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
-  const isMobile = useMediaQuery('(max-width:1150px)');
-  const isMobileForPopup = useMediaQuery('(max-width:735px)');
+  const isMobile = useMediaQuery(Breakpoints.XL);
+  const isMobileForPopup = useMediaQuery(Breakpoints.M);
 
   const { role } = useAppSelector((state) => state.user);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);

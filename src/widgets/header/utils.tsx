@@ -4,8 +4,8 @@ import { LockIcon } from 'shared/ui/icons/lock-icon';
 import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { Routes } from '../../shared/config';
 import type {
-  ISideBarPosition,
   ISideBarElementProps,
+  ISideBarPosition,
 } from 'widgets/header/navigation/types';
 import { ReadMessageIcon } from 'shared/ui/icons/read-message-icon';
 
@@ -22,7 +22,8 @@ export const positionConfigTop: ISideBarPosition = {
 
 export const positionConfigMenu: ISideBarPosition = {
   ulflexDirection: 'column',
-  ulgap: 35,
+  ulgap: 30,
+  // ulgap: 35,
   element: {
     flexDirection: 'row-reverse',
     justifyContent: 'flex-start',

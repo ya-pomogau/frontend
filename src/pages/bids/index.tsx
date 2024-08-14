@@ -1,5 +1,4 @@
-import { Icon } from 'shared/ui/icons';
-import { SmartHeader } from 'shared/ui/smart-header';
+import { Icon, SmartHeader } from 'shared/ui';
 import { BalanceSettings } from 'widgets/balance-settings';
 
 export function BidsPage() {
