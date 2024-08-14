@@ -1,13 +1,15 @@
 .wrapper {
   margin-left: 30px;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .period {
   max-width: 464px;
   box-sizing: border-box;
-  padding: 12px 14px 0px 0px;
-  margin-bottom: 30px;
+  padding: 5px 14px 0px 0px;
+  margin-bottom: 27px;
 }
 
 .period__fields {
@@ -28,6 +30,36 @@
 
 .period__points:first-child {
   margin-left: 0;
+}
+
+.calendar__buttons {
+  width: 5px;
+}
+
+.datePicker__calendarHeader{
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.datePicker__headerMonth {
+  margin-right: 4px;
+  font-family: 'Golos', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--colors-interface-primary);
+}
+
+.dataPicker__calendar {
+  box-sizing: border-box;
+  width: 250px;
+  padding: 10px;
+  border-radius: 0;
+  font-family: 'Golos', sans-serif;
+  line-height: 14px;
+  background-color: white;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 
 .period__input_field {
@@ -84,5 +116,9 @@
     display: flex;
     gap: 20px;
     z-index: 0;
+  }
+
+  .dataPicker__calendar {
+    width: 200px;
   }
 }

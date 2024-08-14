@@ -7,9 +7,14 @@ import { FieldsetView } from 'shared/ui/fieldset/utils';
 import { Accordion } from 'shared/ui/accordion';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import { ReactNode } from 'react';
+import DatePicker, { ReactDatePickerCustomHeaderProps } from 'react-datepicker';
 import { addYears } from 'date-fns';
+import { StepButton } from 'shared/ui/step-button';
+import { getMonth } from 'shared/ui/date-picker/lib';
+import ru from 'date-fns/locale/ru';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { customHeader } from 'shared/ui/date-picker';
 
 interface IStatusApplicationOptions {
   value: 'open' | 'atWork' | 'close';
@@ -26,6 +31,15 @@ export enum FieldsName {
   from = 'from',
 }
 
+interface IFormInput {
+  period: {
+    from: Date | null;
+    to: Date | null;
+  };
+  statusApplication: string;
+  currentStatusApplication?: boolean;
+}
+
 const statusApplicationOptions: Array<IStatusApplicationOptions> = [
   { value: 'open', label: 'Открытые' },
   { value: 'atWork', label: 'В работе' },
@@ -35,68 +49,28 @@ const templateDatePeriod = 'дд.мм.гггг';
 const templateDateFormat = 'dd.MM.yyyy';
 
 export const ApplicationsStatisticsPage = () => {
-  const [selectedCategoryFromAccordion, setSelectedCategoryFromAccordion] =
-    useState<string | null>(null);
-
-  const [period, setPeriod] = useState<{
-    from: Date | null;
-    to: Date | null;
-  }>({ from: null, to: null });
-
-  const [
-    currentStatusApplicationCheckbox,
-    setCurrentStatusApplicationCheckbox,
-  ] = useState<boolean>(false);
-
-  const handleFormAccordion = (value: string) => {
-    setSelectedCategoryFromAccordion(value);
-  };
-
-  const handleInputDate = (
-    periodField: string,
-    date: Date,
-    e: React.FormEvent<HTMLInputElement>
-  ) => {
-    e.preventDefault();
-    switch (periodField) {
-      case 'from':
-        setPeriod({ ...period, from: date });
-        break;
-      case 'to':
-        setPeriod({ ...period, to: date });
-        break;
-      default:
-        return;
-    }
-  };
-
-  const handleCurrentStatusApplicationCheckbox = () => {
-    setCurrentStatusApplicationCheckbox(!currentStatusApplicationCheckbox);
-  };
-
-  const handleSubmit = (
-    e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>
-  ) => {
-    e.preventDefault();
-    const buttonName = e.nativeEvent.submitter as HTMLButtonElement;
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
     const formData = {
       period: {
-        from: period.from,
-        to: period.to,
+        from: watch('period.from'),
+        to: watch('period.from'),
       },
-      statusApplication: selectedCategoryFromAccordion,
-      currentStatusApplication: currentStatusApplicationCheckbox,
+      statusApplication: watch('statusApplication'),
+      currentStatusApplication: watch('currentStatusApplication'),
     };
-    if (buttonName.name === ButtonsNameForStatisticsPage.downloadReport) {
-      console.log(formData);
-    }
-    if (buttonName.name === ButtonsNameForStatisticsPage.generateReport) {
-      console.log(formData);
-    }
   };
 
+  const { control, watch, handleSubmit } = useForm<IFormInput>({defaultValues: {
+    period: {
+      from: null,
+      to: null,
+    },
+    statusApplication: '',
+    currentStatusApplication: false
+  }});
+
   const disabledButton =
-    !selectedCategoryFromAccordion || !period.from || !period.to;
+    !watch('period.from') || !watch('period.to') || !watch('statusApplication');
 
   return (
     <>
@@ -109,62 +83,85 @@ export const ApplicationsStatisticsPage = () => {
         id="applicationStatisticForm"
         name="applicationStatisticForm"
         className={styles.wrapper}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.period}>
           <Fieldset title="Период" view={FieldsetView.ROW}>
             <div className={styles.period__fields}>
               <p className={styles.period__points}>от</p>
-              <DatePicker
-                dateFormat={templateDateFormat}
-                selected={period.from}
-                name={FieldsName.from}
-                onChange={(
-                  date: Date,
-                  e: React.SyntheticEvent<HTMLInputElement, Event>
-                ) => {
-                  handleInputDate(FieldsName.from, date, e);
-                }}
-                placeholderText={templateDatePeriod}
-                maxDate={period.to || new Date()}
-                minDate={addYears(new Date(), -2)}
-                className={styles.period__input_field}
+              <Controller
+                name="period.from"
+                control={control}
+                render={({ field: { value, name, onChange } }) => (
+                  <DatePicker
+                    dateFormat={templateDateFormat}
+                    selected={value}
+                    name={name}
+                    onChange={onChange}
+                    placeholderText={templateDatePeriod}
+                    maxDate={watch('period.to') || new Date()}
+                    minDate={addYears(new Date(), -2)}
+                    className={styles.period__input_field}
+                    renderCustomHeader={customHeader}
+                    locale={ru}
+                    calendarClassName={styles.dataPicker__calendar}
+                  />
+                )}
               />
               <p className={styles.period__points}>до</p>
-              <DatePicker
-                dateFormat={templateDateFormat}
-                selected={period.to}
-                name={FieldsName.to}
-                onChange={(
-                  date: Date,
-                  e: React.SyntheticEvent<HTMLInputElement, Event>
-                ) => {
-                  handleInputDate(FieldsName.to, date, e);
-                }}
-                placeholderText={templateDatePeriod}
-                maxDate={new Date()}
-                minDate={period.from || addYears(new Date(), -2)}
-                className={styles.period__input_field}
+              <Controller
+                name="period.to"
+                control={control}
+                render={({ field: { value, name, onChange } }) => (
+                  <DatePicker
+                    dateFormat={templateDateFormat}
+                    selected={value}
+                    name={name}
+                    onChange={onChange}
+                    placeholderText={templateDatePeriod}
+                    maxDate={new Date()}
+                    minDate={watch('period.from') || addYears(new Date(), -2)}
+                    className={styles.period__input_field}
+                    renderCustomHeader={customHeader}
+                    calendarClassName={styles.dataPicker__calendar}
+                    locale={ru}
+                  />
+                )}
               />
             </div>
           </Fieldset>
         </div>
         <div className={styles.status_application}>
           <Fieldset title="Статус заявки" view={FieldsetView.COLUMN}>
-            <Accordion
-              name="status_application"
-              arrayOptions={statusApplicationOptions}
-              onChange={handleFormAccordion}
-              placeholder="Выберите статус заявки"
+            <Controller
+              name="statusApplication"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <Accordion
+                  name="status_application"
+                  arrayOptions={statusApplicationOptions}
+                  onChange={onChange}
+                  placeholder={String(
+                    statusApplicationOptions.find((n) => n.value === value)
+                      ?.label || 'Выберите статус заявки'
+                  )}
+                />
+              )}
             />
           </Fieldset>
         </div>
-        <Checkbox
-          label="Статус на данный момент"
+        <Controller
           name="currentStatusApplication"
-          id="currentStatusApplication"
-          extClassName={styles.current_status_application_checkbox}
-          onChange={handleCurrentStatusApplicationCheckbox}
+          control={control}
+          render={({ field: { onChange } }) => (
+            <Checkbox
+              label="Статус на данный момент"
+              name="currentStatusApplication"
+              id="currentStatusApplication"
+              extClassName={styles.current_status_application_checkbox}
+              onChange={onChange}
+            />
+          )}
         />
         <div className={styles.buttons_container}>
           <Button

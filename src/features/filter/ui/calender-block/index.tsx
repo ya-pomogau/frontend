@@ -5,7 +5,7 @@ import styles from '../styles.module.css';
 import classNames from 'classnames';
 
 interface CalenderBlockProps {
-  onChange: (value: string) => void;  
+  onChange: (value: string) => void;
   filterDate: string;
 }
 
@@ -14,14 +14,37 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   const handleDateChange = (date: Date) => {
     const formattedDate = format(date, 'yyyy-MM-dd');
-    onChange(formattedDate);  
+    onChange(formattedDate);
   };
+
+  // определение того, в каком виде должен быть календарь: десктопном или мобильном, в том числе
+  // для случаев, когда изменение размера экрана происходит из-за изменения размера браузера
+  // const setTypeCalender = () => {
+  //   if (window.innerWidth <= 768) {
+  //     setIsCalenderMobil(true);
+  //   } else {
+  //     setIsCalenderMobil(false);
+  //   }
+  // };
+  // // получение текущей даты (без времени внутри суток)
+  // function getNewDate() {
+  //   const newDate = new Date();
+  //   const newDateWithoutTime = new Date(
+  //     newDate.getFullYear(),
+  //     newDate.getMonth(),
+  //     newDate.getDate()
+  //   );
+  //   setTimeout(() => {
+  //     handleDateChange(newDateWithoutTime);
+  //   });
+  //   return newDateWithoutTime;
+  // }
 
   useEffect(() => {
     const setTypeCalender = () => {
       setIsCalenderMobil(window.innerWidth <= 768);
     };
-    setTypeCalender(); 
+    setTypeCalender();
     window.addEventListener('resize', setTypeCalender);
     return () => {
       window.removeEventListener('resize', setTypeCalender);

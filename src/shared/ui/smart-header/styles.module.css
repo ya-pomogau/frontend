@@ -1,7 +1,7 @@
 .smartHeader__container {
   min-height: 89px;
   margin-bottom: 20px;
-  padding: 0 30px 0 28px;
+  padding: 0 30px 0 18px;
   border: 2px solid var(--colors-interface-primary);
   display: flex;
   justify-content: space-between;
@@ -22,7 +22,6 @@
 
 .settingIcon {
   display: flex;
-  margin-right: 10px;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
