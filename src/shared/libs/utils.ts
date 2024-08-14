@@ -48,7 +48,9 @@ export const cbLink = `${FRONT_URL}/vk-auth`;
 
 //функция редиректа на VK
 export const handleRedirectVK = () => {
-  window.location.href = `https://oauth.vk.com/authorize?client_id=${import.meta.env.VITE_APP_CLIENT_ID}&display=page&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
+  window.location.href = `https://oauth.vk.com/authorize?client_id=${
+    import.meta.env.VITE_APP_CLIENT_ID
+  }&display=page&redirect_uri=${cbLink}&scope=email&response_type=code&v=5.120&state=4194308`;
 };
 
 export const sortTasks = (
@@ -343,5 +345,23 @@ export const messageHub: IMessageHub[] = [
       },
     ],
     id: '1',
+  },
+];
+
+export const dataImages = [
+  {
+    id: 1,
+    src: 'https://i.ibb.co/x2B4X45/0999.jpg"',
+    alt: 'фото',
+  },
+  {
+    id: 2,
+    src: 'https://i.ibb.co/sjxTZ8q/4da8181ca5ebd399a5b5e2304c7408b2.jpg"',
+    alt: 'фото',
+  },
+  {
+    id: 3,
+    src: 'https://i.ibb.co/x2B4X45/0999.jpg"',
+    alt: 'фото',
   },
 ];

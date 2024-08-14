@@ -7,6 +7,8 @@ import {
   TNewUserResponseDto,
   TVKLoginRequestDto,
   TVKLoginResponseDto,
+  TMockLoginRequestDto,
+  TMockLoginResponseDto,
   TypedResponse,
 } from './auth.types';
 import { API_URL, AUTH_ROUTES, DEFAULT_HEADERS } from '../config/api-config';
@@ -70,10 +72,20 @@ class Auth {
       method: 'GET',
       headers: { ...this.headers, Authorization: `Bearer ${token}` },
     };
-    console.dir(fetchOptions);
     return fetch(`${this.baseUrl}${this.routes.checkToken}`, fetchOptions).then(
       Auth._checkResponse
     ) as Promise<TUser>;
+  }
+
+  public mockLogin(dto: TMockLoginRequestDto) {
+    const fetchOptions = {
+      method: 'POST',
+      headers: this.headers,
+      body: JSON.stringify(dto),
+    };
+    return fetch(`${this.baseUrl}${this.routes.mockLogin}`, fetchOptions)
+      .then(Auth._checkResponse)
+      .then((response) => response as TMockLoginResponseDto);
   }
 }
 
