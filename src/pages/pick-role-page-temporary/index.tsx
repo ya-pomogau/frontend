@@ -1,77 +1,37 @@
-// !!!
-
-// ЭТО ВРЕМЕННАЯ СТРАНИЦА ДЛЯ РУЧНОГО ВЫБОРА РОЛЕЙ. ДОСТУПНА ПО РОУТУ /pick
-// СТРАНИЦУ НЕОБХОДИМО УДАЛИТЬ ПОСЛЕ РЕАЛИЗАЦИИ СИСТЕМЫ АУТИФИКАЦИИ
-
-// !!!
-import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import {
-  setUserRole,
-  setUser,
-  logoutUser,
-  enableAnyError,
-  enableBlokedError,
-  enableConnectionError,
-} from 'entities/user/model';
-import { useGetUserByIdQuery } from 'services/user-api';
-import { UserRole } from 'shared/types/common.types';
+
+import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { isRootSelector } from 'entities/user/model';
+import { UserRole } from 'shared/types/common.types';
+import { actions, checkTokenThunk } from 'services/system-slice';
+import { getTokenAccess } from 'shared/libs/utils';
+import useAsyncAction from 'shared/hooks/useAsyncAction';
+
+const MOCK_USERS = {
+  Volunteer: '222',
+  Recipient: '333',
+  UnconfirmedRecipient: '555',
+  UnconfirmedVolunteer: '111',
+};
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
-  const { role } = useAppSelector((state) => state.user);
-  const [userId, setUserId] = useState<string | null>(null);
+  const role = useAppSelector((state) => state.user.role);
   const isRoot = useAppSelector(isRootSelector);
-  const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
 
-  const removeRole = () => {
-    dispatch(setUserRole(null));
-    setUserId(null);
-    dispatch(dispatch(logoutUser()));
-  };
+  const [userId, setUserId] = useState<string | null>(null);
+  const [value, setValue] = useState<string | null>(null);
 
-  const getVolunteerRole = () => {
-    dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId('7');
+  const [mockLogin] = useAsyncAction(actions.mockUserLoginThunk);
+
+  const handleEditId = (id: string) => {
+    setUserId(id);
   };
 
-  const getUnconfirmedVolunteerRole = () => {
-    dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId('8');
-  };
+  // '1'
 
-  const getRecipientRole = () => {
-    setUserId('4');
-    dispatch(setUserRole(UserRole.RECIPIENT));
-  };
-
-  const getUnconfirmedRecipient = () => {
-    dispatch(setUserRole(UserRole.RECIPIENT));
-    setUserId('9');
-  };
-
-  const getAdminRole = () => {
-    dispatch(setUserRole(UserRole.ADMIN));
-    setUserId('2');
-  };
-
-  const getMasterAdminRole = () => {
-    dispatch(setUserRole(UserRole.ADMIN));
-    setUserId('1');
-  };
-
-  const handleEnableConnectionError = () => {
-    dispatch(enableConnectionError());
-  };
-  const handleEnableBlokedError = () => {
-    dispatch(enableBlokedError());
-  };
-  const handleEnableAnyError = () => {
-    dispatch(enableAnyError());
-  };
+  // '23118510435'
 
   const getPageYouWouldBeRedirected = () => {
     if (isRoot) {
@@ -82,106 +42,71 @@ export function PickRolePage() {
         return '/profile/map';
       case UserRole.RECIPIENT:
         return '/profile/active';
-      case UserRole.ADMIN:
-        return '/profile/requests';
       default:
         return '/';
     }
   };
 
   useEffect(() => {
-    if (userId && data) {
-      refetch().then(() => dispatch(setUser(data)));
-    }
-    if (error) {
-      removeRole();
-    }
-  }, [data, userId, error]);
+    if (!userId) return;
+
+    mockLogin(userId).then(() => {
+      const token = getTokenAccess();
+      if (token) {
+        dispatch(checkTokenThunk(token));
+      }
+    });
+  }, [userId, mockLogin, dispatch]);
 
   return (
     <div>
       <h1>Временная страница выбора ролей</h1>
 
-      {!role ? (
-        <h2>Сейчас у вас нет роли</h2>
-      ) : (
-        <h2>Сейчас у вас роль: {role}</h2>
-      )}
+      {role && <h2>Сейчас у вас роль: {role}</h2>}
 
-      <ul
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 10,
-        }}
-      >
-        <li>
-          <button onClick={removeRole} style={{ marginRight: 10 }}>
-            Убрать у себя роль
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getVolunteerRole} style={{ marginRight: 10 }}>
-            Получить роль волонтера.
-          </button>
-        </li>
-
+      <ul style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <li>
           <button
-            onClick={getUnconfirmedVolunteerRole}
+            onClick={() => handleEditId(MOCK_USERS.Volunteer)}
             style={{ marginRight: 10 }}
           >
-            Получить роль волонтера, еще не одобренного админом.
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getRecipientRole} style={{ marginRight: 10 }}>
-            Получить роль рецепиента.
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getUnconfirmedRecipient} style={{ marginRight: 10 }}>
-            Получить роль неактивированного рецепиента.
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getAdminRole} style={{ marginRight: 10 }}>
-            Получить роль администратора.
-          </button>
-        </li>
-
-        <li>
-          <button onClick={getMasterAdminRole} style={{ marginRight: 10 }}>
-            Получить роль главного администратора.
+            Волонтер
           </button>
         </li>
         <li>
           <button
-            onClick={handleEnableConnectionError}
+            onClick={() => handleEditId(MOCK_USERS.UnconfirmedVolunteer)}
             style={{ marginRight: 10 }}
           >
-            Добавить ошибку подключения.
+            Неподтвержденный Волонтер
           </button>
         </li>
         <li>
-          <button onClick={handleEnableBlokedError} style={{ marginRight: 10 }}>
-            Добавить ошибку пользователь заблокирован.
+          <button
+            onClick={() => handleEditId(MOCK_USERS.Recipient)}
+            style={{ marginRight: 10 }}
+          >
+            Реципиент
           </button>
         </li>
         <li>
-          <button onClick={handleEnableAnyError} style={{ marginRight: 10 }}>
-            Добавить любую ошибку.
+          <button
+            onClick={() => handleEditId(MOCK_USERS.UnconfirmedRecipient)}
+            style={{ marginRight: 10 }}
+          >
+            Неподтвержденный Реципиент
           </button>
+        </li>
+        <li>
+          <p>Extra user</p>
+          <input onChange={({ target }) => setValue(target.value)} />
+          <button onClick={() => setUserId(value)}>Check</button>
         </li>
       </ul>
 
       <h2>
         В соответствии с вашей ролью, если бы в приложении была настроена
-        аутификация, вас бы перенаправило на страницу:{' '}
+        аутентификация, вас бы перенаправило на страницу:{' '}
         {getPageYouWouldBeRedirected()}
       </h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -192,15 +117,6 @@ export function PickRolePage() {
           }}
         >
           Перейти на страницу: {getPageYouWouldBeRedirected()}
-        </Link>
-
-        <Link
-          to={'/'}
-          style={{
-            fontSize: 25,
-          }}
-        >
-          Перейти на главную (посмотреть полный флоу редиректов):{' '}
         </Link>
       </div>
     </div>

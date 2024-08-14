@@ -1,21 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-import { RootState } from '../app/store';
+import { authApi } from './auth';
 import {
   ErrorDto,
   TAdminLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
+  TMockLoginRequestDto,
 } from './auth.types';
 import {
   SocketConnectionStatus,
   TCustomSelector,
   TSystemSliceState,
 } from '../shared/types/store.types';
-import { AdminPermission } from '../shared/types/common.types';
+import { RootState } from '../app/store';
 import { TUser, TVKUser } from '../entities/user/types';
-import { setTokenAccess } from '../shared/libs/utils';
-import { authApi } from './auth';
+import { AdminPermission } from '../shared/types/common.types';
+import { setTokenAccess } from 'shared/libs/utils';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
   state.system.isPending;
@@ -120,6 +120,27 @@ export const checkTokenThunk = createAsyncThunk(
     }
   }
 );
+
+export const mockUserLoginThunk = createAsyncThunk(
+  'user/mockLogin',
+  async (vkId: string, { rejectWithValue }) => {
+    try {
+      const mockLoginDto: TMockLoginRequestDto = { vkId };
+      const { token, user } = await authApi.mockLogin(mockLoginDto);
+      if (!token || !user) {
+        throw new Error('Ошибка выполнения mockLogin');
+      }
+      if (token && !!user) {
+        setTokenAccess(token);
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      return rejectWithValue(message as string);
+    }
+  }
+);
+
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
   vkUser: null,
@@ -158,7 +179,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null, vkUser = null } = action.payload;
         return {
           ...state,
@@ -181,7 +201,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null } = action.payload;
         return {
           ...state,
@@ -205,7 +224,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null } = action.payload;
         return {
           ...state,
@@ -226,7 +244,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null } = action.payload;
         return {
           ...state,
@@ -237,6 +254,29 @@ const systemSlice = createSlice({
       .addCase(adminLoginThunk.rejected, (state) => ({
         ...state,
         isPending: false,
+      }))
+      .addCase(mockUserLoginThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(mockUserLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          vkUser: null,
+          isPending: false,
+          isNew: false,
+        };
+      })
+      .addCase(mockUserLoginThunk.rejected, (state, action) => ({
+        ...state,
+        isPending: false,
+        error: action.payload as string,
       })),
 });
 
@@ -252,4 +292,5 @@ export default systemSlice.reducer;
 export const actions = {
   ...systemSlice.actions,
   adminLoginThunk,
+  mockUserLoginThunk,
 };

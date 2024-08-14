@@ -29,6 +29,7 @@ export const AUTH_ROUTES: TAuthRoutes = {
   userRegister: '/auth/new',
   adminLogin: '/auth/administrative',
   checkToken: '/auth/token',
+  mockLogin: '/auth/mock',
 };
 
 export const DEFAULT_HEADERS = {
