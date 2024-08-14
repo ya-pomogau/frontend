@@ -45,9 +45,12 @@ export default function usePermission<R extends Role>(
     return false;
   }
 
-  const hasPermission = requirements.every((requirement) =>
-    [userStatus, ...userPermissions].some((element) => element === requirement)
-  );
+  const hasPermission = 
+    userRole === UserRole.ADMIN
+      ? requirements.every((requirement) =>
+          userPermissions.some((element) => element === requirement)
+        )
+      : requirements.some((requirement) => userStatus === requirement);
 
   return hasPermission && requirements.length > 0;
 }
