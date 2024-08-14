@@ -1,46 +1,44 @@
-import {
-  useAddPostMutation,
-  useDeletePostMutation,
-  useEditPostMutation,
-  useGetPostsQuery,
-} from 'services/posts-api';
-import { Icon } from 'shared/ui/icons';
-import { Post } from 'shared/ui/post';
-import { PostForm } from 'shared/ui/post-form';
-import { SmartHeader } from 'shared/ui/smart-header';
-import styles from './styles.module.css';
-import useForm from 'shared/hooks/use-form';
-import { useAppSelector } from 'app/hooks';
-import { Loader } from 'shared/ui/loader';
-import { PostProps } from 'shared/ui/post/Post';
 import { useRef, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
+
+import { useDeletePostMutation, useGetPostsQuery } from 'services/posts-api';
+import {
+  Icon,
+  Post,
+  PostForm,
+  SmartHeader,
+  Loader,
+  LightPopup,
+  Button,
+} from 'shared/ui';
+import { useControlModal, usePermission } from 'shared/hooks';
+import { PostProps } from 'shared/ui/post/Post';
+import { IValuesBlog } from 'shared/types/blog.types';
+import { AdminPermission, UserRole } from 'shared/types/common.types';
+
+import styles from './styles.module.css';
 
 const postsPerPage = 10;
 
 export function BlogPage() {
-  const user = useAppSelector((store) => store.user.data);
-
+  const isAdmin = usePermission([AdminPermission.BLOG], UserRole.ADMIN);
+  const { isOpen, handleOpen, handleClose } = useControlModal();
   const { data: posts, isLoading } = useGetPostsQuery(postsPerPage);
-  const [addPost, { isLoading: isLoadingNewPost }] = useAddPostMutation();
+  const [deletePost] = useDeletePostMutation();
+
   const [attachments, setAttachments] = useState<
     { file: File; id: string; name: string }[]
   >([]);
-  const [editPost, { isLoading: isLoadingEditedPost }] = useEditPostMutation();
   const [idEditedPost, setIdEditedPost] = useState<string | undefined>(
     undefined
   );
-  const [deletePost] = useDeletePostMutation();
 
-  const { values, handleChange, setValues } = useForm({
+  const [values, setValues] = useState<IValuesBlog>({
     title: '',
     text: '',
   });
 
-  const refPostList = useRef<HTMLDivElement>(null);
   const refPostForm = useRef<HTMLFormElement>(null);
-
-  const isAdmin = user?.role === 'Admin';
 
   const handleAddAttachment = (fileList: FileList | null) => {
     if (!fileList) return;
@@ -58,37 +56,16 @@ export function BlogPage() {
     setAttachments(attachments.filter((attachment) => attachment.id !== id));
   };
 
-  const handlePublishPost = async () => {
-    if (!(values.title.trim() && values.text.trim() && user)) return;
-
-    if (!idEditedPost) {
-      await addPost({
-        title: values.title,
-        text: values.text,
-      });
-
-      setValues({ title: '', text: '' });
-    } else {
-      await editPost({ ...values, _id: idEditedPost });
-      setValues({ title: '', text: '' });
-
-      const index = posts?.findIndex((post) => post._id === idEditedPost);
-      if (index !== undefined && index > -1) {
-        /* атрибут disabled у кнопки отправляющей форму блокирует scrollIntoView,
-        подробное описание https://github.com/facebook/react/issues/20770 */
-        setTimeout(() => {
-          refPostList.current?.children[index]?.scrollIntoView({
-            behavior: 'smooth',
-          });
-        }, 500);
-      }
-
-      setIdEditedPost(undefined);
-    }
+  const handleGetIdPost = async (id: string) => {
+    handleOpen();
+    setIdEditedPost(id);
   };
 
-  const handleDeletePost = async (id: string) => {
-    await deletePost(id);
+  const handleDeletePost = async () => {
+    if (idEditedPost) {
+      await deletePost(idEditedPost);
+    }
+    handleClose();
   };
 
   const handleEditPost = (post: Partial<PostProps>) => {
@@ -105,45 +82,67 @@ export function BlogPage() {
   };
 
   return (
-    <div className={styles['blog-page']}>
-      <SmartHeader
-        icon={<Icon color="blue" icon="PopularIcon" size="46" />}
-        text="Блог"
-      />
-
-      {isAdmin && (
-        <PostForm
-          loading={isLoadingNewPost || isLoadingEditedPost}
-          refPostForm={refPostForm}
-          title={values.title}
-          text={values.text}
-          addAttachment={handleAddAttachment}
-          removeAttachment={handleRemoveAttachment}
-          handleChange={handleChange}
-          handleSubmit={handlePublishPost}
-          images={attachments}
+    <section className={styles.background}>
+      <div className={styles['blog-page']}>
+        <SmartHeader
+          extClassName={styles.smartHeader}
+          icon={<Icon color="blue" icon="PopularIcon" size="46" />}
+          text="Блог"
         />
-      )}
+        {isAdmin && (
+          <PostForm
+            handleSubmit={() => {
+              setValues({
+                title: '',
+                text: '',
+              });
+            }}
+            idEditedPost={idEditedPost}
+            refPostForm={refPostForm}
+            title={values.title}
+            text={values.text}
+            addAttachment={handleAddAttachment}
+            removeAttachment={handleRemoveAttachment}
+            images={attachments}
+          />
+        )}
 
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className={styles.posts} ref={refPostList}>
-          {posts?.map(({ _id, title, text, files, author }) => (
-            <Post
-              _id={_id}
-              key={_id}
-              title={title}
-              text={text}
-              files={files}
-              author={author}
-              // TODO когда будет работать авторизация, добавить проверку для отображения кнопок только для главного админа и автора поста
-              handleDeleteButton={isAdmin ? handleDeletePost : undefined}
-              handleEditButton={isAdmin ? handleEditPost : undefined}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className={styles.posts}>
+            {posts?.map(({ _id, title, text, files, author }) => (
+              <Post
+                _id={_id}
+                key={_id}
+                title={title}
+                text={text}
+                files={files}
+                author={author}
+                handleDeleteButton={isAdmin ? handleGetIdPost : undefined}
+                handleEditButton={isAdmin ? handleEditPost : undefined}
+              />
+            ))}
+          </div>
+        )}
+        <LightPopup
+          hasCloseButton={true}
+          isPopupOpen={isOpen}
+          onClickExit={handleClose}
+          extClassName={styles.popup}
+        >
+          <h4 className={`${styles.textWarning} text`}>Удалить публикацию?</h4>
+          <div className={styles.btnContainer}>
+            <Button
+              actionType="button"
+              buttonType="primary"
+              label="Удалить"
+              size="small"
+              onClick={handleDeletePost}
             />
-          ))}
-        </div>
-      )}
-    </div>
+          </div>
+        </LightPopup>
+      </div>
+    </section>
   );
 }

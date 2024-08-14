@@ -5,8 +5,10 @@ import {
   TAdminLoginDto,
   TNewUserRequestDto,
   TVKLoginRequestDto,
+  TMockLoginRequestDto,
 } from './auth.types';
 import {
+  SocketConnectionStatus,
   TCustomSelector,
   TSystemSliceState,
 } from '../shared/types/store.types';
@@ -118,11 +120,34 @@ export const checkTokenThunk = createAsyncThunk(
     }
   }
 );
+
+export const mockUserLoginThunk = createAsyncThunk(
+  'user/mockLogin',
+  async (vkId: string, { rejectWithValue }) => {
+    try {
+      const mockLoginDto: TMockLoginRequestDto = { vkId };
+      const { token, user } = await authApi.mockLogin(mockLoginDto);
+      if (!token || !user) {
+        throw new Error('Ошибка выполнения mockLogin');
+      }
+      if (token && !!user) {
+        setTokenAccess(token);
+      }
+      return { user };
+    } catch (error) {
+      const { message } = error as ErrorDto;
+      return rejectWithValue(message as string);
+    }
+  }
+);
+
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
   vkUser: null,
   isPending: false,
   isNew: false,
+  socketConnectionStatus: null,
+  socketMessage: null,
 };
 
 const systemSlice = createSlice({
@@ -130,6 +155,18 @@ const systemSlice = createSlice({
   initialState: systemSliceInitialState,
   reducers: {
     resetUser: () => systemSliceInitialState,
+    startSocketConnection: (state) => {
+      state.socketConnectionStatus = SocketConnectionStatus.INIT;
+    },
+    setSocketConnectionStatus: (state, action) => {
+      state.socketConnectionStatus = action.payload;
+    },
+    setSocketMessage: (state, action) => {
+      state.socketMessage = action.payload;
+    },
+    closeSocketConnection: (state) => {
+      state.socketConnectionStatus = SocketConnectionStatus.CLOSED;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -142,7 +179,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null, vkUser = null } = action.payload;
         return {
           ...state,
@@ -165,7 +201,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null } = action.payload;
         return {
           ...state,
@@ -189,7 +224,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null } = action.payload;
         return {
           ...state,
@@ -210,7 +244,6 @@ const systemSlice = createSlice({
         if (!action.payload) {
           return state;
         }
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         const { user = null } = action.payload;
         return {
           ...state,
@@ -221,13 +254,43 @@ const systemSlice = createSlice({
       .addCase(adminLoginThunk.rejected, (state) => ({
         ...state,
         isPending: false,
+      }))
+      .addCase(mockUserLoginThunk.pending, (state) => ({
+        ...state,
+        error: null,
+        isPending: true,
+      }))
+      .addCase(mockUserLoginThunk.fulfilled, (state, action) => {
+        if (!action.payload) {
+          return state;
+        }
+        const { user = null } = action.payload;
+        return {
+          ...state,
+          user,
+          vkUser: null,
+          isPending: false,
+          isNew: false,
+        };
+      })
+      .addCase(mockUserLoginThunk.rejected, (state, action) => ({
+        ...state,
+        isPending: false,
+        error: action.payload as string,
       })),
 });
 
-export const { resetUser } = systemSlice.actions;
+export const {
+  resetUser,
+  startSocketConnection,
+  setSocketConnectionStatus,
+  setSocketMessage,
+  closeSocketConnection,
+} = systemSlice.actions;
 export default systemSlice.reducer;
 
 export const actions = {
   ...systemSlice.actions,
   adminLoginThunk,
+  mockUserLoginThunk,
 };

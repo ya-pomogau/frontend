@@ -4,6 +4,8 @@
   flex-direction: column;
   align-items: start;
   gap: 20px;
+  position: relative;
+  background-color: var(--colors-interface-white);
 }
 
 .author {
@@ -33,7 +35,6 @@
 
 .text-block {
   width: 100%;
-  position: relative;
 }
 
 .buttons {
@@ -102,6 +103,7 @@
 .gallery {
   display: grid;
   gap: 5px;
+  padding-bottom: 10px;
 }
 
 .gallery-item-image {

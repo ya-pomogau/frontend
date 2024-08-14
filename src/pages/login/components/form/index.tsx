@@ -5,11 +5,12 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { PasswordInput } from 'shared/ui/password-input';
-import { actions } from 'services/system-slice';
+import { actions, startSocketConnection } from 'services/system-slice';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
 import { schema } from './schema';
 
 import styles from './styles.module.css';
+import { useAppDispatch } from '../../../../app/hooks';
 
 export interface ILoginForm {
   login: string;
@@ -17,6 +18,7 @@ export interface ILoginForm {
 }
 
 const LoginForm = () => {
+  const dispatch = useAppDispatch();
   const [errorText, setErrorText] = useState('');
   const [adminLogin] = useAsyncAction(actions.adminLoginThunk);
   const {
@@ -31,6 +33,7 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
     try {
       await adminLogin(data);
+      dispatch(startSocketConnection());
     } catch (err) {
       setErrorText(err as string);
     }

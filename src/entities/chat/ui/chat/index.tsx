@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 
-// import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
 import { SquareButton } from 'shared/ui/square-buttons';
 
@@ -12,6 +11,7 @@ import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { MessagesList } from './components/messages-list';
+import { Breakpoints } from 'shared/config';
 
 import styles from './styles.module.css';
 
@@ -31,7 +31,7 @@ export const PopupChat = ({
   isOpen,
   onClick,
 }: PopupChatProps) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery(Breakpoints.S);
 
   const { values, handleChange } = useForm({
     message: '',
