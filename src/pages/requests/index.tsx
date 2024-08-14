@@ -17,6 +17,8 @@ import {
 } from 'services/admin-api';
 import { User } from 'entities/user/types';
 import { GradientDivider } from 'shared/ui/gradient-divider';
+import { IFilterValues } from 'features/filter/types';
+import { FilterItemsIds } from 'features/filter/consts';
 
 interface PageProps {
   incomeTab: string;
@@ -31,7 +33,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
   const [filteredName, setFilteredName] = useState<User[]>([]);
   const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
 
-  useEffect(() => {
+  const getFilteredTabData = () => {
     const dataMap: Record<string, User[] | undefined> = {
       [Tabs.VOLUNTEERS]: volunteers,
       [Tabs.RECIPIENTS]: recipients,
@@ -39,9 +41,29 @@ export function RequestsPage({ incomeTab }: PageProps) {
       [Tabs.ADMINS]: admins,
     };
 
-    const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
-      (card) => card.name.toLowerCase().includes(searchName.toLowerCase())
+    return dataMap[incomeTab as keyof typeof dataMap]?.filter((card) =>
+      card.name.toLowerCase().includes(searchName.toLowerCase())
     );
+  };
+
+  const handleApplyFilters = (filter: IFilterValues) => {
+    if (incomeTab === Tabs.NOTPROCESSED) {
+      const { categories } = filter;
+
+      const filteredData = getFilteredTabData()?.filter(
+        (card) =>
+          categories.includes(FilterItemsIds.ALL) ||
+          categories.includes(card.role)
+      );
+
+      if (filteredData) {
+        setFilteredName(filteredData);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const filteredData = getFilteredTabData();
 
     if (filteredData) {
       setFilteredName(filteredData);
@@ -70,7 +92,14 @@ export function RequestsPage({ incomeTab }: PageProps) {
         }
         filter={
           incomeTab === Tabs.NOTPROCESSED ? (
-            <Filter items={{ userCategories: true }} />
+            getFilteredTabData()?.length ? (
+              <Filter
+                items={{ userCategories: true }}
+                setFilteres={handleApplyFilters}
+              />
+            ) : (
+              <Filter notFoundFilter={true} />
+            )
           ) : (
             <></>
           )

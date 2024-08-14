@@ -67,6 +67,7 @@ export const FilterCover = ({
   const resetFilter = () => {
     onReset();
     setSearchParams(defaultObjFilteres);
+    setFilteres?.(defaultObjFilteres);
     closeFilterMenu();
   };
 
