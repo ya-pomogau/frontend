@@ -1,20 +1,19 @@
-// !!!
-
-// ЭТО ВРЕМЕННАЯ СТРАНИЦА ДЛЯ РУЧНОГО ВЫБОРА РОЛЕЙ. ДОСТУПНА ПО РОУТУ /pick
-// СТРАНИЦУ НЕОБХОДИМО УДАЛИТЬ ПОСЛЕ РЕАЛИЗАЦИИ СИСТЕМЫ АУТИФИКАЦИИ
-
-// !!!
-import { skipToken } from '@reduxjs/toolkit/query/react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
-import { setUserRole, setUser, isRootSelector } from 'entities/user/model';
-import { useGetUserByIdQuery } from 'services/user-api';
+import { isRootSelector } from 'entities/user/model';
 import { UserRole } from 'shared/types/common.types';
 import { actions, checkTokenThunk } from 'services/system-slice';
 import { getTokenAccess } from 'shared/libs/utils';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
+
+const MOCK_USERS = {
+  Volunteer: '222',
+  Recipient: '333',
+  UnconfirmedRecipient: '555',
+  UnconfirmedVolunteer: '111',
+};
 
 export function PickRolePage() {
   const dispatch = useAppDispatch();
@@ -22,23 +21,17 @@ export function PickRolePage() {
   const isRoot = useAppSelector(isRootSelector);
 
   const [userId, setUserId] = useState<string | null>(null);
-  const [isFirstRender, setIsFirstRender] = useState(true);
-
-  const { data, refetch, error } = useGetUserByIdQuery(userId ?? skipToken);
+  const [value, setValue] = useState<string | null>(null);
 
   const [mockLogin] = useAsyncAction(actions.mockUserLoginThunk);
 
-  const getVolunteerRole = () => {
-    dispatch(setUserRole(UserRole.VOLUNTEER));
-    setUserId('1');
-    setIsFirstRender(false);
+  const handleEditId = (id: string) => {
+    setUserId(id);
   };
 
-  const getRecipientRole = () => {
-    dispatch(setUserRole(UserRole.RECIPIENT));
-    setUserId('23118510435');
-    setIsFirstRender(false);
-  };
+  // '1'
+
+  // '23118510435'
 
   const getPageYouWouldBeRedirected = () => {
     if (isRoot) {
@@ -65,37 +58,49 @@ export function PickRolePage() {
     });
   }, [userId, mockLogin, dispatch]);
 
-  useEffect(() => {
-    if (!userId || !data) return;
-
-    refetch().then(() => {
-      dispatch(setUser(data));
-    });
-
-    if (error) {
-      dispatch(setUserRole(null));
-      setUserId(null);
-    }
-  }, [data, userId, error]);
-
   return (
     <div>
       <h1>Временная страница выбора ролей</h1>
-
-      {isFirstRender && !role && <h2>Сейчас у вас нет роли</h2>}
 
       {role && <h2>Сейчас у вас роль: {role}</h2>}
 
       <ul style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <li>
-          <button onClick={getVolunteerRole} style={{ marginRight: 10 }}>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.Volunteer)}
+            style={{ marginRight: 10 }}
+          >
             Волонтер
           </button>
         </li>
         <li>
-          <button onClick={getRecipientRole} style={{ marginRight: 10 }}>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.UnconfirmedVolunteer)}
+            style={{ marginRight: 10 }}
+          >
+            Неподтвержденный Волонтер
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.Recipient)}
+            style={{ marginRight: 10 }}
+          >
             Реципиент
           </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.UnconfirmedRecipient)}
+            style={{ marginRight: 10 }}
+          >
+            Неподтвержденный Реципиент
+          </button>
+        </li>
+        <li>
+          <p>Extra user</p>
+          <input onChange={({ target }) => setValue(target.value)} />
+          <button onClick={() => setUserId(value)}>Check</button>
         </li>
       </ul>
 
@@ -112,15 +117,6 @@ export function PickRolePage() {
           }}
         >
           Перейти на страницу: {getPageYouWouldBeRedirected()}
-        </Link>
-
-        <Link
-          to={'/'}
-          style={{
-            fontSize: 25,
-          }}
-        >
-          Перейти на главную (посмотреть полный флоу редиректов):{' '}
         </Link>
       </div>
     </div>
