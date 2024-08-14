@@ -3,13 +3,11 @@ import classnames from 'classnames';
 import { Avatar } from 'shared/ui/avatar';
 import { SquareButton } from 'shared/ui/square-buttons';
 
-import { InputWrapper } from 'shared/ui/input-wrapper';
-import { useMediaQuery } from 'shared/hooks';
-import useForm from 'shared/hooks/use-form';
+import { InputWrapper, GradientDivider } from 'shared/ui';
+import { useMediaQuery, useForm } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
-import { GradientDivider } from 'shared/ui/gradient-divider';
 import { MessagesList } from './components/messages-list';
 import { Breakpoints } from 'shared/config';
 
@@ -79,10 +77,7 @@ export const PopupChat = ({
       </div>
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>
-          <MessagesList
-            messages={messages}
-            chatmateInfo={chatmateInfo}
-          />
+        <MessagesList messages={messages} chatmateInfo={chatmateInfo} />
 
         <InputWrapper
           extClassInput={classnames({
