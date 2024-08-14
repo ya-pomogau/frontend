@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 import { authApi } from './auth';
 import {
   ErrorDto,
@@ -9,6 +8,7 @@ import {
   TMockLoginRequestDto,
 } from './auth.types';
 import {
+  SocketConnectionStatus,
   TCustomSelector,
   TSystemSliceState,
 } from '../shared/types/store.types';
@@ -146,6 +146,8 @@ const systemSliceInitialState: TSystemSliceState = {
   vkUser: null,
   isPending: false,
   isNew: false,
+  socketConnectionStatus: null,
+  socketMessage: null,
 };
 
 const systemSlice = createSlice({
@@ -153,6 +155,18 @@ const systemSlice = createSlice({
   initialState: systemSliceInitialState,
   reducers: {
     resetUser: () => systemSliceInitialState,
+    startSocketConnection: (state) => {
+      state.socketConnectionStatus = SocketConnectionStatus.INIT;
+    },
+    setSocketConnectionStatus: (state, action) => {
+      state.socketConnectionStatus = action.payload;
+    },
+    setSocketMessage: (state, action) => {
+      state.socketMessage = action.payload;
+    },
+    closeSocketConnection: (state) => {
+      state.socketConnectionStatus = SocketConnectionStatus.CLOSED;
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -266,7 +280,13 @@ const systemSlice = createSlice({
       })),
 });
 
-export const { resetUser } = systemSlice.actions;
+export const {
+  resetUser,
+  startSocketConnection,
+  setSocketConnectionStatus,
+  setSocketMessage,
+  closeSocketConnection,
+} = systemSlice.actions;
 export default systemSlice.reducer;
 
 export const actions = {

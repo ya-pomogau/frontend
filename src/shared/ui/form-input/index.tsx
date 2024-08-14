@@ -14,7 +14,7 @@ export interface FormInputProps<FormInputs extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<FormInputs>;
   name: FieldPath<FormInputs>;
-  rules: RegisterOptions<FormInputs>;
+  rules?: RegisterOptions<FormInputs>;
   label?: string;
   customIcon?: ReactNode;
   onIconClick?: (e: MouseEvent<HTMLDivElement>) => void;

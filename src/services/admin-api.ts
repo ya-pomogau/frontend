@@ -4,11 +4,7 @@ import { TaskConflict } from 'entities/task/types';
 import { User } from 'entities/user/types';
 import { getTokenAccess } from 'shared/libs/utils';
 import { AdminPermission, TContacts } from 'shared/types/common.types';
-import {
-  AccessRights,
-  TCreateAdminDto,
-  TNewUserResponseDto,
-} from './auth.types';
+import { TCreateAdminDto, TNewUserResponseDto } from './auth.types';
 
 export const adminsApi = createApi({
   reducerPath: 'adminsApi',
@@ -18,6 +14,7 @@ export const adminsApi = createApi({
     'Admins',
     'ConflictedTasks',
     'WorkTasks',
+    'UserDetails',
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,

@@ -8,6 +8,7 @@ const {
   VITE_APP_FRONT_PROD: REACT_APP_FRONT_PROD,
   VITE_APP_FRONT_DEV: REACT_APP_FRONT_DEV,
   VITE_APP_FRONT_LOCAL: REACT_APP_FRONT_LOCAL,
+  VITE_APP_API_HOST: REACT_APP_API_HOST,
 } = import.meta.env;
 
 export const API_URL =
@@ -19,6 +20,8 @@ export const FRONT_URL =
   NODE_ENV === 'production'
     ? REACT_APP_FRONT_PROD
     : REACT_APP_FRONT_DEV ?? REACT_APP_FRONT_LOCAL;
+
+export const API_HOST = REACT_APP_API_HOST;
 
 export const AUTH_ROUTES: TAuthRoutes = {
   userLogin: '/auth/vk',

@@ -11,6 +11,7 @@
   width: 94%;
   max-height: 65vh;
   overflow-y: auto;
+  max-height: calc(65vh - 141px);
 }
 
 .userCardsList {

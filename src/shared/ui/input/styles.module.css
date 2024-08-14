@@ -7,7 +7,7 @@
 .input {
   padding: 12px;
   transition: var(--transition-hover);
-  height: 44px;
+  height: 30px;
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
@@ -17,7 +17,8 @@
 
 .input_error {
   composes: input;
-  border-color: var(--colors-interface-orange);
+  border-color: var(--colors-interface-orange) !important;
+  color: var(--colors-interface-red) !important;
 }
 
 .input::placeholder {
@@ -35,13 +36,12 @@
 
 .label {
   display: inline-block;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 12px; 
+  line-height: 18px; 
   font-weight: 400;
-  color: var(--colors-interface-primary);
-  margin-bottom: 8px;
+  color: #000000;
+  margin-bottom: 6px;
 }
-
 .error {
   margin-top: 8px;
   font-size: 12px;

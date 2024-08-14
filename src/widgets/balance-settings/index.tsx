@@ -1,19 +1,16 @@
-import { SyntheticEvent, useEffect } from 'react';
 import classnames from 'classnames';
-import styles from './styles.module.css';
-import { Button } from '../../shared/ui/button';
-import usePermission from '../../shared/hooks/use-permission';
-import useForm from '../../shared/hooks/use-form';
-import {
-  AdminPermission,
-  UserRole,
-  TPoints,
-} from '../../shared/types/common.types';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
+import { Button } from 'shared/ui';
+import { usePermission } from 'shared/hooks';
+import { AdminPermission, UserRole, TPoints } from 'shared/types/common.types';
 import {
   useGetCategoriesQuery,
   useUpdatePointsMutation,
-} from '../../services/categories-api';
+} from 'services/categories-api';
 import BalanceSettingsItem from './components/balance-settings-item';
+
+import styles from './styles.module.css';
 
 interface BalanceSettingsProps {
   extClassName?: string;
@@ -26,22 +23,23 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   );
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();
-  const { values, setValues, handleChange } = useForm<TPoints<string>>({});
+  const {
+    control,
+    handleSubmit,
+    formState: { isDirty, isValid },
+  } = useForm<Record<string, number>>({
+    values: (data || []).reduce((acc, value) => {
+      const { title, points } = value;
+      acc[title] = points;
 
-  useEffect(() => {
-    const initialValues: TPoints<string> = {};
-    data?.map((item) => {
-      const { title, points } = item;
-      initialValues[title] = points;
-    });
-    setValues(initialValues);
-  }, [data]);
+      return acc;
+    }, {} as Record<string, number>),
+  });
 
   //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
-  const handleSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
     try {
-      await updatePoints(values);
+      await updatePoints(formData);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
@@ -50,26 +48,33 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   return (
     <form
       className={classnames(styles.container, extClassName)}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <div className={classnames(styles.balances_box)}>
         {data &&
           data.map((item, index) => (
-            <BalanceSettingsItem
+            <Controller
+              control={control}
+              name={item.title}
               key={index}
-              title={item.title}
-              inputValue={`${values[item.title]}`}
-              handleChange={handleChange}
+              render={({ field }) => (
+                <BalanceSettingsItem
+                  title={item.title}
+                  inputValue={field.value}
+                  handleChange={field.onChange}
+                />
+              )}
             />
           ))}
       </div>
+
       <Button
         extClassName={classnames(styles.save_btn)}
         buttonType="primary"
         label="Сохранить"
         size="large"
         actionType="submit"
-        disabled={!isEditAllowed}
+        disabled={!isEditAllowed || !isDirty || !isValid}
       />
     </form>
   );
