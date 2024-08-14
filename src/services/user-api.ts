@@ -70,9 +70,7 @@ export const usersApi = createApi({
           patchResult.undo();
         }
       },
-      invalidatesTags: () => [
-        { type: 'User', _id: 'LIST' },
-      ],
+      invalidatesTags: () => [{ type: 'User', _id: 'LIST' }],
     }),
     // Данные о пользователе полученные от БД
     getProfile: build.query({

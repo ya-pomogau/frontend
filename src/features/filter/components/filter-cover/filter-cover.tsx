@@ -67,6 +67,7 @@ export const FilterCover = ({
   const resetFilter = () => {
     onReset();
     setSearchParams(defaultObjFilteres);
+    setFilteres?.(defaultObjFilteres);
     closeFilterMenu();
   };
 
@@ -80,6 +81,16 @@ export const FilterCover = ({
     applyFilter();
   };
 
+  const isFilterSelected = () => {
+    return (
+      filterValues.categories.length > 0 ||
+      filterValues.searchRadius.length > 0 ||
+      filterValues.sortBy.length > 0 ||
+      filterValues.date.length > 0 ||
+      filterValues.time.length > 0 ||
+      filterValues.userCategories.length > 0
+    );
+  };
   return (
     <Tooltip
       pointerPosition="right"
@@ -90,8 +101,8 @@ export const FilterCover = ({
     >
       <form
         name="formFilter"
-        onSubmit={(e) => handleSubmit(e)}
-        onReset={() => resetFilter()}
+        onSubmit={handleSubmit}
+        onReset={resetFilter}
       >
         <div className={styles.wrapper}>
           {filterMenu}
@@ -114,6 +125,7 @@ export const FilterCover = ({
               buttonType="primary"
               size="medium"
               actionType="submit"
+              disabled={!isFilterSelected()} 
             />
           </div>
         </div>
