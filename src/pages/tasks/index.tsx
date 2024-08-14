@@ -2,17 +2,15 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-// import { Filter } from 'features/filter';
-import { Icon } from 'shared/ui/icons';
-import { SmartHeader } from 'shared/ui/smart-header';
-import { Input } from 'shared/ui/input';
-import { PageSubMenu } from '../../widgets/page-sub-menu';
-import { Tabs, UserRole } from '../../shared/types/common.types';
+import { Icon, SmartHeader, Input } from 'shared/ui';
+import { usePermission } from 'shared/hooks';
+import { Routes } from 'shared/config';
+import { PageSubMenu } from 'widgets';
+import { TasksTab } from 'pages';
+import { Tabs, UserRole } from 'shared/types/common.types';
 import { User } from 'entities/user/types';
-import { TasksTab } from 'pages/tasks-tab';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import { useGetUserByRolesQuery } from 'services/admin-api';
-import usePermission from 'shared/hooks/use-permission';
 
 import styles from './styles.module.css';
 
@@ -49,9 +47,9 @@ export function TasksPage({ incomeTab }: PageProps) {
 
   const handleUserClick = (user: User) => {
     if (user.role === UserRole.RECIPIENT) {
-      navigate(`/profile/tasks/recipients/${user._id}`);
+      navigate(`${Routes.PROFILE_TASKS_RECIPIENTS}/${user._id}`);
     } else if (user.role === UserRole.VOLUNTEER) {
-      navigate(`/profile/tasks/volunteers/${user._id}`);
+      navigate(`${Routes.PROFILE_TASKS_VOLUNTEERS}${user._id}`);
     }
   };
 
