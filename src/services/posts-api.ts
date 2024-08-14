@@ -1,11 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { PostProps } from 'shared/ui/post/Post';
+import { getTokenAccess } from '../shared/libs/utils';
 
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   tagTypes: ['Posts'],
-  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_URL,
+    prepareHeaders: (headers) => {
+      const token = getTokenAccess();
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (build) => ({
     getPosts: build.query<PostProps[], number>({
       query: () => `system/posts`, // ?${limit && `_limit=${limit}`}`,
@@ -19,11 +29,6 @@ export const postsApi = createApi({
     }),
     addPost: build.mutation<void, Partial<PostProps>>({
       query: (body) => ({
-        headers: {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token_access'),
-        },
         url: 'admin/blog',
         method: 'POST',
         body,
@@ -35,11 +40,6 @@ export const postsApi = createApi({
       Partial<PostProps>
     >({
       query: (body) => ({
-        headers: {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token_access'),
-        },
         url: `admin/blog/${body._id}`,
         method: 'PATCH',
         body: { title: body.title, text: body.text },
@@ -48,11 +48,6 @@ export const postsApi = createApi({
     }),
     deletePost: build.mutation<PostProps, string>({
       query: (id) => ({
-        headers: {
-          //eslint-disable-next-line @typescript-eslint/naming-convention
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token_access'),
-        },
         url: `admin/blog/${id}`,
         method: 'DELETE',
       }),

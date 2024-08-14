@@ -2,45 +2,43 @@ import { useRef, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { useDeletePostMutation, useGetPostsQuery } from 'services/posts-api';
-import { Icon } from 'shared/ui/icons';
-import { Post } from 'shared/ui/post';
-import { PostForm } from 'shared/ui/post-form';
-import { SmartHeader } from 'shared/ui/smart-header';
-import styles from './styles.module.css';
-import { useAppSelector } from 'app/hooks';
-import { Loader } from 'shared/ui/loader';
+import {
+  Icon,
+  Post,
+  PostForm,
+  SmartHeader,
+  Loader,
+  LightPopup,
+  Button,
+} from 'shared/ui';
+import { useControlModal, usePermission } from 'shared/hooks';
 import { PostProps } from 'shared/ui/post/Post';
 import { IValuesBlog } from 'shared/types/blog.types';
-import { LightPopup } from 'shared/ui/light-popup';
-import { Button } from 'shared/ui/button';
-import { AdminPermission } from 'shared/types/common.types';
+import { AdminPermission, UserRole } from 'shared/types/common.types';
+
+import styles from './styles.module.css';
 
 const postsPerPage = 10;
 
 export function BlogPage() {
-  const user = useAppSelector((store) => store.user.data);
-  const [isAction, setIsAction] = useState(false);
+  const isAdmin = usePermission([AdminPermission.BLOG], UserRole.ADMIN);
+  const { isOpen, handleOpen, handleClose } = useControlModal();
   const { data: posts, isLoading } = useGetPostsQuery(postsPerPage);
+  const [deletePost] = useDeletePostMutation();
+
   const [attachments, setAttachments] = useState<
     { file: File; id: string; name: string }[]
   >([]);
   const [idEditedPost, setIdEditedPost] = useState<string | undefined>(
     undefined
   );
-  const [deletePost] = useDeletePostMutation();
+
   const [values, setValues] = useState<IValuesBlog>({
     title: '',
     text: '',
   });
 
-  const refPostList = useRef<HTMLDivElement>(null);
   const refPostForm = useRef<HTMLFormElement>(null);
-
-  const isAdmin = user?.permissions?.includes(AdminPermission.BLOG);
-
-  const handleOpenPopup = () => {
-    setIsAction((state) => !state);
-  };
 
   const handleAddAttachment = (fileList: FileList | null) => {
     if (!fileList) return;
@@ -59,7 +57,7 @@ export function BlogPage() {
   };
 
   const handleGetIdPost = async (id: string) => {
-    handleOpenPopup();
+    handleOpen();
     setIdEditedPost(id);
   };
 
@@ -67,7 +65,7 @@ export function BlogPage() {
     if (idEditedPost) {
       await deletePost(idEditedPost);
     }
-    handleOpenPopup();
+    handleClose();
   };
 
   const handleEditPost = (post: Partial<PostProps>) => {
@@ -112,7 +110,7 @@ export function BlogPage() {
         {isLoading ? (
           <Loader />
         ) : (
-          <div className={styles.posts} ref={refPostList}>
+          <div className={styles.posts}>
             {posts?.map(({ _id, title, text, files, author }) => (
               <Post
                 _id={_id}
@@ -121,7 +119,6 @@ export function BlogPage() {
                 text={text}
                 files={files}
                 author={author}
-                // TODO когда будет работать авторизация, добавить проверку для отображения кнопок только для главного админа и автора поста
                 handleDeleteButton={isAdmin ? handleGetIdPost : undefined}
                 handleEditButton={isAdmin ? handleEditPost : undefined}
               />
@@ -129,20 +126,12 @@ export function BlogPage() {
           </div>
         )}
         <LightPopup
-          isPopupOpen={isAction}
-          onClickExit={handleOpenPopup}
+          hasCloseButton={true}
+          isPopupOpen={isOpen}
+          onClickExit={handleClose}
           extClassName={styles.popup}
         >
-          <Icon
-            className={styles.btnClose}
-            color="blue"
-            icon="CloseCrossIcon"
-            size="24"
-            onClick={handleOpenPopup}
-          />
-          <h4 className={`${styles.textWarning} ${'text'}`}>
-            Удалить публикацию?
-          </h4>
+          <h4 className={`${styles.textWarning} text`}>Удалить публикацию?</h4>
           <div className={styles.btnContainer}>
             <Button
               actionType="button"

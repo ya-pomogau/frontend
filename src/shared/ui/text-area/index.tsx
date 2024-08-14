@@ -1,9 +1,8 @@
 import cn from 'classnames';
-import { nanoid } from 'nanoid';
+import { ChangeEvent, forwardRef, TextareaHTMLAttributes, useId } from 'react';
+import { FieldError } from 'react-hook-form';
 
 import styles from './styles.module.css';
-import { ChangeEvent, forwardRef, TextareaHTMLAttributes } from 'react';
-import { FieldError } from 'react-hook-form';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
@@ -31,7 +30,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     },
     ref
   ) => {
-    const id = nanoid();
+    const id = useId();
 
     const inputClass = label ? styles.input : styles.input_without_label;
 

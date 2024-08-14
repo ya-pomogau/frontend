@@ -6,12 +6,12 @@ import { Button } from '../button';
 import { TextArea } from '../text-area';
 import { FileAttachmentIcon } from '../icons/file-attachment-icon';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
-import styles from './styles.module.css';
 import { FileTypes } from 'shared/types/common.types';
 import { FormInput } from '../form-input';
 import useFormField from 'shared/hooks/use-form-field';
 import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
 import { IBlogForm } from 'shared/types/blog.types';
+import styles from './styles.module.css';
 
 const TITLE_VALIDATION_RULES = {
   required: 'Обязательное поле',
