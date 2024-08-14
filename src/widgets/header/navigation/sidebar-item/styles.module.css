@@ -1,21 +1,18 @@
 .link {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
   text-decoration: none;
   list-style: none;
+  align-items: center;
   color: var(--colors-interface-black);
   font-family: 'Golos';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 22.3px;
+  line-height: 1.2;
   max-height: 60px;
-}
-
-.link:nth-child(2) {
-  min-width: 120px;
+  min-height: 39px;
+  background-color: transparent;
 }
 
 .link_active {
@@ -35,51 +32,35 @@
   padding-bottom: 4px;
 }
 
-.link:not(.link_active):hover .link__title {
+.link:not(.link_active):hover .link__title{
   border-bottom: 4px solid var(--colors-interface-primary-additional);
 }
 
-.link__icon {
-  display: flex;
-  margin-top: auto;
-  margin-bottom: auto;
-  justify-content: center;
-}
-
-@media screen and (min-width: 920px) and (max-width: 1200px) {
-  .link {
-    min-width: unset;
-    padding: 0;
-    align-items: center;
-    margin-top: 10px;
-  }
-
+@media screen and (min-width: 921px) and (max-width: 1200px) {
   .link__title {
-    min-width: unset;
-    max-width: min-content;
-    line-height: 16px;
+    min-width: 7.5vw;
   }
 }
 
 @media (max-width: 920px) {
   .link {
+    display: flex;
+    flex-direction: column;
     min-width: unset;
     padding: 0;
-    max-height: 29px;
-    margin-top: 10px;
   }
 
   .link__title {
-    padding: 0 2px 8px 0;
+    min-width: unset;
     border-bottom: 4px solid transparent;
     justify-content: end;
+    padding: 0 7px 0 0;
   }
 
   .link__icon {
     display: flex;
     margin-top: 0;
     justify-content: center;
-    margin-bottom: 8px;
     border-bottom: 4px solid transparent;
   }
 

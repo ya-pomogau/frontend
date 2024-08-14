@@ -52,7 +52,7 @@ const LoginForm = () => {
             placeholder="ФИО / Телефон / Логин"
             extClassName={styles.field}
             error={!!errors?.login?.message}
-            errorText={errors.login?.message}
+            errorText={errors.login?.message || ' '}
           />
         )}
       />
@@ -66,7 +66,7 @@ const LoginForm = () => {
             onChange={field.onChange}
             required
             error={!!errors?.password?.message}
-            errorText={errors.password?.message}
+            errorText={errors.password?.message || ' '}
             label="Пароль"
             placeholder="от 6 символов"
             type="password"
