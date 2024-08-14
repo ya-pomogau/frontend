@@ -14,6 +14,7 @@ export const adminsApi = createApi({
     'Admins',
     'ConflictedTasks',
     'WorkTasks',
+    'UserDetails',
   ],
   baseQuery: fetchBaseQuery({
     baseUrl: API_URL,
