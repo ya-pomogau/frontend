@@ -1,0 +1,26 @@
+.header__button {
+  background-repeat: no-repeat;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  object-fit: fill;
+  padding-bottom: 0;
+}
+
+.header__button:focus-visible {
+  outline: none;
+}
+
+.header__button__container {
+  display: flex;
+  gap: 5px;
+}
+
+.header__button__text {
+  font-family: 'Golos';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16.8px;
+  color: var(--colors-interface-primary);
+}

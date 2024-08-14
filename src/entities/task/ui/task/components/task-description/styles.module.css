@@ -1,92 +1,91 @@
-.descriptionMain {
-  display: grid;
-  box-sizing: border-box;
-  grid-template-rows: repeat(2, max-content);
-  line-height: 24px;
-  grid-template-areas:
-    'description'
-    'iconGrid';
-}
-
-.textWithButton {
+.taskDescription {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   grid-area: description;
-  max-width: 333px;
-  position: relative;
-  display: flex;
+  width: 100%;
+  border-bottom: 1px solid;
+  border-image-source: var(--colors-interface-line);
+  border-image-slice: 1;
 }
 
-.description_hidden {
-  max-height: 120px;
-  -webkit-line-clamp: 5;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+.card__expandable {
+  margin-top: 20px;
+  padding-right: 40px;
+}
+
+.card__task {
   overflow: hidden;
-  text-overflow: ellipsis;
+  font: var(--font-golos-16-22);
+  color: var(--colors-interface-dark-gray);
+  background-color: transparent;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
-.button {
-  position: absolute;
-  height: 22px;
-  right: -45px;
-  bottom: 0;
-  background: none;
+.taskExpanded {
   display: block;
+  -webkit-line-clamp: unset;
+}
+
+.expandBtn {
+  appearance: none;
+  font: var(--font-golos-16-22);
+  color: var(--colors-interface-primary);
+  width: fit-content;
   border: none;
-  padding: 0;
-  color: var(--colors-interface-primary);
-}
-
-.buttonUnderText {
-  position: relative;
-  width: auto;
-  right: 0;
-}
-
-.button:hover {
+  background-color: transparent;
   cursor: pointer;
-  color: var(--colors-interface-primary-additional);
-  transition: var(--transition-hover);
+  float: right;
 }
 
-.icon {
-  grid-area: iconGrid;
+.score {
+  align-self: flex-end;
   display: flex;
+  gap: 3px;
   align-items: center;
-  gap: 5px;
-  margin-right: 5px;
+  margin: 4px 6px 0 0;
 }
 
-.count {
+.scoreText {
+  font: var(--font-golos-12-14);
   color: var(--colors-interface-primary);
+  background-color: transparent;
 }
 
-@media screen and (max-width: 1150px) {
-  .descriptionMain {
-    grid-template-rows: repeat(2, max-content);
-    border-bottom: 1px solid;
-    border-image-source: var(--colors-interface-line);
-    border-image-slice: 1;
-    gap: 37px;
-    grid-template-areas: 'description' 'iconGrid';
+@media screen and (min-width: 1151px) {
+  .taskDescription {
+    padding-left: 14px;
+    margin-top: 25px;
+    border: none;
   }
 
-  .textWithButton {
-    max-width: 600px;
-    margin-right: 58px;
+  .card__task {
+    -webkit-line-clamp: 5;
   }
 
-  .description {
-    max-width: 600px;
-    min-width: 100%;
+  .card__expandable {
+    display: flex;
+    align-items: end;
   }
 
-  .button {
-    position: absolute;
-    bottom: -27px;
-    right: 0;
+  .taskExpanded {
+    display: inline;
   }
 
-  .icon {
-    justify-self: end;
+  .expandBtn {
+    float: none;
+  }
+
+  .card__expandable:has(.taskExpanded) {
+    display: inline;
+    padding-right: 104px;
+  }
+
+  .score {
+    align-self: start;
   }
 }

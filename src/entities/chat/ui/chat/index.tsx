@@ -1,20 +1,17 @@
-import { ChangeEvent, useState } from 'react';
 import classnames from 'classnames';
 
-// import { PinIcon } from 'shared/ui/icons/pin-icon';
 import { Avatar } from 'shared/ui/avatar';
-import { Message } from 'shared/ui/message';
-
-import { sortMessages } from './libs/utils';
 import { SquareButton } from 'shared/ui/square-buttons';
 
-import styles from './styles.module.css';
-import { InputWrapper } from 'shared/ui/input-wrapper';
-import { useMediaQuery } from 'shared/hooks';
+import { InputWrapper, GradientDivider } from 'shared/ui';
+import { useMediaQuery, useForm } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { IMessage } from 'shared/types/message';
 import { IChatmateInfo } from 'shared/types/conflict';
-import { GradientDivider } from 'shared/ui/gradient-divider';
+import { MessagesList } from './components/messages-list';
+import { Breakpoints } from 'shared/config';
+
+import styles from './styles.module.css';
 
 interface PopupChatProps {
   messages: IMessage[];
@@ -32,18 +29,15 @@ export const PopupChat = ({
   isOpen,
   onClick,
 }: PopupChatProps) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
-  const [inputValue, setInputValue] = useState<string>('');
-  const sortedMessages = sortMessages(messages);
+  const isMobile = useMediaQuery(Breakpoints.S);
 
-  const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const { value } = target;
-    setInputValue(value);
-  };
+  const { values, handleChange } = useForm({
+    message: '',
+  });
 
   const handleSendClick = () => {
     if (onMessageSend) {
-      onMessageSend(inputValue);
+      onMessageSend(values.message);
     }
   };
 
@@ -83,18 +77,7 @@ export const PopupChat = ({
       </div>
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>
-        <div className={styles.messagesBlock}>
-          {sortedMessages?.map((message) => (
-            <Message
-              type={
-                message.userId === chatmateInfo.userId ? 'incoming' : 'outgoing'
-              }
-              messageText={message.message}
-              avatarLink={message.userAvatarLink}
-              key={message.id}
-            />
-          ))}
-        </div>
+        <MessagesList messages={messages} chatmateInfo={chatmateInfo} />
 
         <InputWrapper
           extClassInput={classnames({
@@ -106,9 +89,9 @@ export const PopupChat = ({
           customIconSize={isMobile ? '32' : '24'}
           getFile={() => {}}
           placeholder="Напишите сообщение..."
-          inputValue={inputValue}
+          inputValue={values.message}
           name="message"
-          onChange={handleInputChange}
+          onChange={handleChange}
           onClickBtn={handleSendClick}
           containerMessages={false}
         />

@@ -22,7 +22,7 @@ export const AdminSideMenu = () => {
 
           <SideMenuLink
             to="/profile/tasks"
-            text="Создание / Редактирование заявки"
+            text="Заявки / Работа с заявками"
             icon={<Icon color="white" icon="CreateApplication" size="54" />}
           />
         </>

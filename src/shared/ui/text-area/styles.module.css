@@ -3,6 +3,7 @@
 }
 
 .input {
+  font-size: 16px;
   width: 100%;
   height: calc(100% - 26px);
   resize: none;
@@ -11,6 +12,18 @@
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.input::-webkit-scrollbar {
+  display: none;
+}
+
+.input_error {
+  composes: input;
+  border-color: var(--colors-interface-orange) !important;
+  color: var(--colors-interface-red) !important;
 }
 
 .input_without_label {
@@ -33,10 +46,10 @@
 
 .label {
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 18px;
   font-weight: 400;
-  color: var(--colors-interface-primary);
+  color: #000000;
   margin-bottom: 8px;
 }
 
@@ -53,4 +66,19 @@
 .for_storybook {
   width: 440px;
   height: 170px;
+}
+
+.error {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: var(--colors-interface-orange);
+}
+
+@media (max-width: 415px) {
+  .input {
+    font-size: 12px;
+    height: 104px;
+  }
 }

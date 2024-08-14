@@ -1,7 +1,5 @@
 import { TPointGeoJSON, TUser } from '../entities/user/types';
-import {
-  UserRole,
-} from 'shared/types/common.types';
+import { UserRole } from 'shared/types/common.types';
 
 export type TAuthRoutes = {
   userLogin: string;
@@ -9,6 +7,7 @@ export type TAuthRoutes = {
   adminRegister: string;
   adminLogin: string;
   checkToken: string;
+  mockLogin: string;
 };
 
 export interface TypedResponse<T = Record<string, unknown>> extends Response {
@@ -18,6 +17,7 @@ export interface TypedResponse<T = Record<string, unknown>> extends Response {
 export type ResponseDto = {
   [key: string]: unknown;
 };
+
 export type ErrorDto = {
   message: string;
   httpStatusCode: number;
@@ -77,4 +77,13 @@ export type TNewUserRequestDto = {
   role: UserRole;
   vkId: string;
   location: TPointGeoJSON;
+};
+
+export type TMockLoginRequestDto = {
+  vkId: string;
+};
+
+export type TMockLoginResponseDto = {
+  token: string;
+  user: TUser;
 };
