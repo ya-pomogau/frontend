@@ -1,12 +1,35 @@
 .form {
   display: grid;
-  gap: 24px;
+  gap: 4px;
   padding: 30px 0 0 42px;
   justify-items: flex-start;
 }
 
 .field {
-  min-width: 364px;
+  width: 359px;
+}
+
+.error {
+  margin-top: 8px;
+  font: var(--font-golos-12-14);
+  color: var(--colors-interface-orange);
+}
+
+.field label {
+  font-size: var(--font-size-middle);
+  margin-bottom: 8px;
+}
+
+.field input {
+  height: 44px;
+}
+.field span {
+  margin-top: 6px;
+}
+
+.button {
+  height: 28px;
+  padding: 8px 17px;
 }
 
 @media all and (max-width: 415px) {
@@ -15,10 +38,22 @@
   }
 
   .button {
-    margin-top: 12px;
+    margin-top: 6px;
   }
 
   .field {
     min-width: 98%;
+  }
+
+  .field label {
+    font-size: var(--font-size-small);
+  }
+
+  .field span {
+    margin-top: 9px;
+  }
+
+  .button {
+    padding: 8px 16px;
   }
 }
