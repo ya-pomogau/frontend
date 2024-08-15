@@ -38,7 +38,7 @@ export const UserCardTiles = ({
   const { name, role, avatar, phone, _id, score, keys, status, permissions } =
     user;
   const [isActon, setIsAction] = useState<boolean>(false);
-  const [addAdminPrivilegies] = useAddAdminPrivilegiesMutation();
+  const [addAdminPrivileges] = useAddAdminPrivilegiesMutation();
   const [blockAdmin] = useBlockAdminMutation();
 
   const handleClick = () => {
@@ -47,7 +47,7 @@ export const UserCardTiles = ({
 
   const handleAddPrivileges = async (body: AdminPermission[] | undefined) => {
     try {
-      const result = await addAdminPrivilegies({ _id, body });
+      const result = await addAdminPrivileges({ _id, body });
       console.log('Privileges added:', result);
     } catch (err) {
       console.error('Error adding privileges:', err);

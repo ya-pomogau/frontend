@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { SmartHeader, Icon, Loader } from 'shared/ui';
+import { useMediaQuery } from 'shared/hooks';
+import { isUnConfirmedSelector, TaskList } from 'entities';
+import { Breakpoints } from 'shared/config';
 import { Task } from '../../entities/task/types';
-import { isUnConfirmedSelector } from '../../entities/user/model';
 import { IFilterValues } from '../../features/filter/types';
 import { defaultObjFilteres } from '../../features/filter/consts';
 import { openPopup } from '../../features/create-request/model';
 import { Request } from '../../features/create-request';
 import { useGetTaskActiveQuery } from '../../services/user-task-api';
 import { startSocketConnection } from '../../services/system-slice';
-import { useMediaQuery } from '../../shared/hooks';
 import { getRoleForRequest, handleFilterTasks } from '../../shared/libs/utils';
 
 import { Filter } from '../../features/filter';
-import { TaskList } from '../../entities/task/ui/task-list';
-import { SmartHeader } from '../../shared/ui/smart-header';
-import { Icon } from '../../shared/ui/icons';
-import { Loader } from '../../shared/ui/loader';
-import { Breakpoints } from 'shared/config';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();

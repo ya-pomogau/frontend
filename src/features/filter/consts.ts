@@ -28,7 +28,7 @@ export const FilterItemsIds = {
 
 export const defaultObjFilteres = {
   sortBy: '',
-  categories: [FilterItemsIds.ALL],
+  categories: [],
   searchRadius: '5',
   date: '',
   time: ['00:00', '00:00'],
