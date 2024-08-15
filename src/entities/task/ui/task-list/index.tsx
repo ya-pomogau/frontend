@@ -156,17 +156,22 @@ export const TaskList = ({
               extClassName
             )}
           >
-            <Informer extClassName={styles.content_empty_note} text="У Вас пока нет заявок" />
+            <Informer
+              extClassName={styles.content_empty_note}
+              text="У Вас пока нет заявок"
+            />
 
             {userRole === UserRole.RECIPIENT && (
               <>
                 <p
                   className={classNames(
-                    styles.title_add_empty, 'text_size_large', 'text_type_regular',
+                    styles.title_add_empty,
+                    'text_size_large',
+                    'text_type_regular',
                     {
                       [styles.title_add_empty_mobile]: isMobile,
                       [styles.title_add_empty_desktop]: !isMobile,
-                    },
+                    }
                   )}
                 >
                   {' '}
