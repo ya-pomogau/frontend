@@ -78,6 +78,7 @@
 .title_add_empty {
   color: var(--colors-interface-primary);
   margin-top: 87px;
+  font-family: var(--font-family-inter);
 }
 .modal {
   position: absolute;
@@ -101,6 +102,16 @@
 .wrapperBtn {
   position: relative;
   margin-top: 15px;
+}
+
+.content_empty_arrow {
+  position: absolute;
+  left: 109px;
+  top: -15px;
+}
+
+.content_empty_note span {
+  font-family: var(--font-family-inter);
 }
 
 @media screen and (max-width: 415px) {
