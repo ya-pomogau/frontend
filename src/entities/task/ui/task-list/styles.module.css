@@ -77,9 +77,17 @@
 
 .title_add_empty {
   color: var(--colors-interface-primary);
-  margin-top: 87px;
   font-family: var(--font-family-inter);
 }
+
+.title_add_empty_mobile{
+  margin-top: 20px;
+}
+
+.title_add_empty_desktop{
+  margin-top: 87px;
+}
+
 .modal {
   position: absolute;
   /* top: calc(50% + 340px);
