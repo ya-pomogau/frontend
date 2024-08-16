@@ -3,7 +3,7 @@
   color: var(--colors-interface-primary);
 }
 
-@media all and (max-width: 415px) {
+@media all and (max-width: 550px) {
   .title {
     padding: 0 10px 20px;
   }

@@ -13,7 +13,7 @@
   color: var(--colors-interface-black);
 }
 
-@media all and (max-width: 1025px) {
+@media all and (max-width: 920px) {
   .container {
     padding: 20px 10px;
   }

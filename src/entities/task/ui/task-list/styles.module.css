@@ -101,7 +101,7 @@
   position: relative;
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 550px) {
   .content {
     max-height: 75vh;
   }

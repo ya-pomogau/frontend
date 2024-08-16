@@ -858,7 +858,7 @@
   width: 3rem;
   line-height: 3rem;
 }
-@media (max-width: 400px), (max-height: 550px) {
+@media (max-width: 550px), (max-height: 550px) {
   .react-datepicker__portal .react-datepicker__day-name,
   .react-datepicker__portal .react-datepicker__day,
   .react-datepicker__portal .react-datepicker__time-name {

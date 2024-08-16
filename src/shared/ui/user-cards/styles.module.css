@@ -311,7 +311,7 @@
   color: var(--colors-interface-white);
 }
 
-@media all and (max-width: 1100px) {
+@media all and (max-width: 1150px) {
   .buttons_div {
     padding-bottom: 10px;
   }
