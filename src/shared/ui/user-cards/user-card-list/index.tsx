@@ -1,13 +1,15 @@
 import classnames from 'classnames';
+
 import VolunteerActions from 'shared/ui/user-cards/components/volonteer-actions';
 import RecipientActions from 'shared/ui/user-cards/components/recipient-actions';
 import AdminActions from 'shared/ui/user-cards/components/admin-actions';
-import styles from './styles.module.css';
 import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
 import { UserRole, UserStatus } from 'shared/types/common.types';
+
+import styles from './styles.module.css';
 
 interface UserCardListProps {
   user: User;

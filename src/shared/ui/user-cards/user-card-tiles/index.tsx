@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import classnames from 'classnames';
 
-import styles from './styles.module.css';
 import VolunteerActions from 'shared/ui/user-cards/components/volonteer-actions';
 import RecipientActions from 'shared/ui/user-cards/components/recipient-actions';
 import AdminActions from 'shared/ui/user-cards/components/admin-actions';
@@ -18,6 +17,9 @@ import {
   useAddAdminPrivilegiesMutation,
   useBlockAdminMutation,
 } from 'services/admin-api';
+
+import styles from './styles.module.css';
+
 export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
@@ -87,6 +89,7 @@ export const UserCardTiles = ({
 
       {role === UserRole.VOLUNTEER && (
         <VolunteerActions
+          extClassName={styles.buttons_div_tiles_volunteers}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
@@ -105,6 +108,7 @@ export const UserCardTiles = ({
 
       {role === UserRole.RECIPIENT && (
         <RecipientActions
+          extClassName={styles.buttons_div_tiles_recipient}
           approved={status !== UserStatus.UNCONFIRMED}
           onConfirmClick={handleConfirmClick}
           onBlockClick={() => {

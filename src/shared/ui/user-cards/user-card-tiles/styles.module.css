@@ -1,3 +1,15 @@
+.buttons_div_tiles_volunteers {
+  row-gap: 5px;
+}
+
+.buttons_div_tiles_recipient {
+  row-gap: 5px;
+}
+
+.buttons_div_tiles_volunteers > :first-child {
+  margin-bottom: 10px;
+}
+
 .content {
   box-sizing: border-box;
   position: relative;
