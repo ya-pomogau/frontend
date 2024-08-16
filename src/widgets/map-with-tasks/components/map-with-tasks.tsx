@@ -22,12 +22,15 @@ export const MapWithTasks = () => {
     ? [user.location[0], user.location[1]]
     : [37.621157, 55.890017];
 
-  const { data, isLoading } = useGetTaskQuery({
-    latitude,
-    longitude,
-    }, {
-    skip: isUnConfirmed || !user,
-  });
+  const { data, isLoading } = useGetTaskQuery(
+    {
+      latitude,
+      longitude,
+    },
+    {
+      skip: isUnConfirmed || !user,
+    }
+  );
 
   const tasks = data || [];
 
@@ -43,7 +46,7 @@ export const MapWithTasks = () => {
     <YandexMap
       tasks={tasks}
       width="100%"
-      height={mediaQuery ? '75vh' : '64vh'}
+      height={mediaQuery ? '75vh' : '709px'}
       onClick={handleClick}
       isAuthorised={user !== null}
       mapSettings={{
