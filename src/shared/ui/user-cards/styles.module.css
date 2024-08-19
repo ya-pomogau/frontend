@@ -69,6 +69,7 @@
   left: 85%; /* по макету ширина - 15px */
   transform: translateY(-50%);
   width: 20px;
+  cursor: pointer;
 }
 
 .admin_password_input {
@@ -159,6 +160,7 @@
   line-height: 16px;
   letter-spacing: 0%;
   text-align: left;
+  cursor: pointer;
 }
 
 .admin_block_btn {

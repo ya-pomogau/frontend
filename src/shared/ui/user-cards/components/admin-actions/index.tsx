@@ -13,8 +13,8 @@ import { ResetPassword } from './reset-password';
 import { AdminDropdownMenu } from './dropdown';
 
 interface AdminActionsProps {
-  permissions: AdminPermission[] | undefined;
-  onAdminSaveClick: (body: AdminPermission[] | undefined) => void;
+  permissions: AdminPermission[];
+  onAdminSaveClick: (body: AdminPermission[]) => void;
   onAdminBlockClick: () => void;
   onSwitchArrow: () => void;
 }
@@ -42,9 +42,34 @@ const AdminActions = ({
 
   const watchedPrivilegies = watch('privilegies');
 
+  const hasPrivelegiesChanged = (
+    a: AdminPermission[],
+    b: AdminPermission[]
+  ) => {
+    if (a.length !== b.length) {
+      return true;
+    }
+    const map = new Map();
+    for (const elem of a) {
+      map.set(elem, (map.get(elem) || 0) + 1);
+    }
+    for (const elem of b) {
+      if (!map.has(elem)) {
+        return true;
+      }
+      map.set(elem, map.get(elem) - 1);
+      if (map.get(elem) < 0) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   useEffect(() => {
-    setIsSaveButtonVisible(watchedPrivilegies.length !== 0);
-  }, [watchedPrivilegies]);
+    setIsSaveButtonVisible(
+      hasPrivelegiesChanged(watchedPrivilegies, permissions)
+    );
+  }, [permissions, watchedPrivilegies]);
 
   const handleFilterChange = (name: AdminPermission) => {
     const updatedPrivilegies = watchedPrivilegies.includes(name)
@@ -80,6 +105,7 @@ const AdminActions = ({
           value={'Пароль'}
           placeholder="Пароль"
           type={'password'}
+          readOnly
         />
       </div>
       <EditIcon
