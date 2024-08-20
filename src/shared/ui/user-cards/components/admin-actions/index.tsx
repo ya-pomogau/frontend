@@ -42,7 +42,7 @@ const AdminActions = ({
 
   const watchedPrivilegies = watch('privilegies');
 
-  const hasPrivelegiesChanged = (
+  const havePrivelegiesChanged = (
     a: AdminPermission[],
     b: AdminPermission[]
   ) => {
@@ -67,7 +67,7 @@ const AdminActions = ({
 
   useEffect(() => {
     setIsSaveButtonVisible(
-      hasPrivelegiesChanged(watchedPrivilegies, permissions)
+      havePrivelegiesChanged(watchedPrivilegies, permissions)
     );
   }, [permissions, watchedPrivilegies]);
 
@@ -105,7 +105,7 @@ const AdminActions = ({
           value={'Пароль'}
           placeholder="Пароль"
           type={'password'}
-          readOnly
+          disabled
         />
       </div>
       <EditIcon
