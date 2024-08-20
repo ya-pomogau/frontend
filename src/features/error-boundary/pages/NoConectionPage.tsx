@@ -14,7 +14,7 @@ export const NoConectionPage = () => {
           <Filter
             items={{
               categories: true,
-              radius: true,
+              searchRadius: true,
               date: true,
             }}
           />

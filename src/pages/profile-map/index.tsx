@@ -74,7 +74,7 @@ export function ProfileMapPage() {
             <Filter
               items={{
                 categories: true,
-                radius: true,
+                searchRadius: true,
                 date: true,
                 time: true,
               }}

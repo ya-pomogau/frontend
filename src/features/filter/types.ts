@@ -9,12 +9,7 @@ export interface IFilterValues {
 
 export interface FilteringProps {
   items: {
-    categories?: boolean;
-    radius?: boolean;
-    sort?: boolean;
-    date?: boolean;
-    time?: boolean;
-    userCategories?: boolean;
+    [key in keyof IFilterValues]?: boolean;
   };
   setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
