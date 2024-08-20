@@ -37,7 +37,7 @@
 }
 
 @media screen and (min-width: 920px) and (max-width: 1150px),
-  screen and (max-width: 550px) {
+  screen and (max-width: 415px) {
   .content {
     width: 175px;
     height: 310px;
@@ -56,7 +56,7 @@
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 415px) {
   .content {
     width: 100%;
   }

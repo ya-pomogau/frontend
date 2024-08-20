@@ -1,5 +1,6 @@
 :root {
-  --breakpoints-xxs: 360px; 
+  --breakpoints-xxxs: 360px;
+  --breakpoints-xxs: 415px; 
   --breakpoints-xs: 550px; 
   --breakpoints-sm: 735px; 
   --breakpoints-md: 920px; 
