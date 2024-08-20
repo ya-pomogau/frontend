@@ -28,7 +28,7 @@
   margin-top: 20px;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1300px) {
   .header__sidebar__container {
     right: calc((100vw - 1256px) / 2 - 10px);
   }
