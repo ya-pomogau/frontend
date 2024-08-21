@@ -42,7 +42,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   useEffect(() => {
     const setTypeCalender = () => {
-      setIsCalenderMobil(window.innerWidth <= 920);
+      setIsCalenderMobil(window.innerWidth <= 768);
     };
     setTypeCalender();
     window.addEventListener('resize', setTypeCalender);
@@ -61,7 +61,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
           value={filterDate ? parseISO(filterDate) : new Date()}
           isMobile={isCalenderMobil}
           onChangeValue={handleDateChange}
-          inline={window.innerWidth > 920}
+          inline={window.innerWidth > 768}
         />
       </div>
     </div>
