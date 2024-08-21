@@ -6,20 +6,20 @@ import Checkbox from 'shared/ui/checkbox';
 import { VariantCheckbox } from 'shared/types/common.types';
 
 interface SortByBlockProps {
-  filter: string;
-  onChange: (value: string) => void;  // Обновляем типизацию
+  value: string;
+  onChange: (value: string) => void; // Обновляем типизацию
 }
 
-export const SortByBlock = ({ filter, onChange }: SortByBlockProps) => {
+export const SortByBlock = ({ value, onChange }: SortByBlockProps) => {
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const newValue = target.checked ? target.id : '';
-    onChange(newValue);  // Упрощаем вызов
+    onChange(newValue); // Упрощаем вызов
   };
 
   return (
     <Fieldset title="Отображать" view={FieldsetView.COLUMN}>
       <Checkbox
-        checked={filter === VariantCheckbox.DATE}
+        checked={value === VariantCheckbox.DATE}
         id={VariantCheckbox.DATE}
         label="По дате"
         onChange={handleCheckboxChange}

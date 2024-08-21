@@ -6,10 +6,10 @@ import classNames from 'classnames';
 
 interface CalenderBlockProps {
   onChange: (value: string) => void;
-  filterDate: string;
+  value: string;
 }
 
-export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
+export const CalenderBlock = ({ onChange, value }: CalenderBlockProps) => {
   const [isCalenderMobil, setIsCalenderMobil] = useState(false);
 
   const handleDateChange = (date: Date) => {
@@ -53,12 +53,18 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   return (
     <div>
-      <p className={classNames(styles.filterBlockText, 'text', 'text_size_small')}>
+      <p
+        className={classNames(
+          styles.filterBlockText,
+          'text',
+          'text_size_small'
+        )}
+      >
         Дата
       </p>
       <div className={styles.calendar}>
         <DatePicker
-          value={filterDate ? parseISO(filterDate) : new Date()}
+          value={value ? parseISO(value) : new Date()}
           isMobile={isCalenderMobil}
           onChangeValue={handleDateChange}
           inline={window.innerWidth > 768}

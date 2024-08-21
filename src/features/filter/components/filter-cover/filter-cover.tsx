@@ -1,4 +1,4 @@
-import { FormEvent, ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
@@ -10,7 +10,7 @@ import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from 'features/filter/ui/time-block';
 import { CategoriesBlock } from 'features/filter/ui/categories-block';
 
-import type { IFilterValues } from 'features/filter/types';
+import type { FilterProps, IFilterValues } from 'features/filter/types';
 
 import styles from './filter-cover.module.css';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
@@ -19,49 +19,59 @@ import { useSearchParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 
 interface FilterCoverProps {
+  filterMenu: FilterProps['items'];
   closeFilterMenu: () => void;
   position: { top: number; right: number };
-  // filterMenu: ReactElement;
-  filterMenu: { [key in keyof IFilterValues]?: boolean } | undefined;
-  // filterValues: IFilterValues;
   setFilteres?: (item: IFilterValues) => void;
-  // onReset: () => void;
 }
 
 export const FilterCover = ({
-  closeFilterMenu,
-  position,
   filterMenu,
   setFilteres,
-}: // filterValues,
-// onReset,
-FilterCoverProps) => {
+  closeFilterMenu,
+  position,
+}: FilterCoverProps) => {
   const [_, setSearchParams] = useSearchParams();
   const newSearchParams = new URLSearchParams();
 
-  const defaultValues: IFilterValues = {
-    categories: [],
-    searchRadius: '',
-    sortBy: '',
-    date: '',
-    time: [],
-    userCategories: [],
+  const defaultValues = {
+    categories: { value: [], component: CategoriesBlock },
+    searchRadius: { value: '', component: RadiusBlock },
+    sortBy: { value: '', component: SortByBlock },
+    date: { value: '', component: CalenderBlock },
+    time: { value: [], component: TimeBlock },
+    userCategories: { value: [], component: UserCategoriesBlock },
   };
 
-  // const { control, handleSubmit, reset, watch } = useForm<IFilterValues>({
-  const { control, reset, watch } = useForm<IFilterValues>({
-    defaultValues,
+  const getDefaultValues = (filterParams: FilterProps['items']) => {
+    const ret: {
+      values: Partial<IFilterValues>;
+      components: {
+        [key in keyof Partial<IFilterValues>]?: ReactElement;
+      };
+    } = {
+      values: {},
+      components: {},
+    };
+    if (filterParams)
+      Object.keys(filterParams).map((item) => {
+        if (filterParams[item]) {
+          ret.values[item] = defaultValues[item].value;
+          ret.components[item] = defaultValues[item].component;
+        }
+      });
+    return ret;
+  };
+
+  const { values, components } = getDefaultValues(filterMenu);
+
+  const { control, handleSubmit, reset, watch } = useForm<
+    Partial<IFilterValues>
+  >({
+    values,
   });
 
-  const onSubmit = (data: IFilterValues) => {
-    if (setFilteres) {
-      setFilteres(data);
-    }
-  };
-
   const filterValues = watch();
-
-  // filterValues={formValues}
 
   useEffect(() => {
     if (window.innerWidth > 768) {
@@ -97,9 +107,10 @@ FilterCoverProps) => {
     closeFilterMenu();
   };
 
+  const onSubmit = () => applyFilter();
+
   const resetFilter = () => {
-    // onReset();
-    reset(defaultValues);
+    reset(values);
     setSearchParams(defaultObjFilteres);
     setFilteres?.(defaultObjFilteres);
     closeFilterMenu();
@@ -110,93 +121,14 @@ FilterCoverProps) => {
     right: `${window.innerWidth - position.right - 10}px`,
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    applyFilter();
-  };
-
-  const items = filterMenu;
-
-  const element: ReactElement = (
-    <>
-      {items?.sortBy && (
-        <Controller
-          name="sortBy"
-          control={control}
-          render={({ field }) => (
-            <SortByBlock filter={field.value} onChange={field.onChange} />
-          )}
-        />
-      )}
-      {items?.categories && (
-        <Controller
-          name="categories"
-          control={control}
-          render={({ field }) => (
-            <CategoriesBlock
-              selectedServies={field.value}
-              onChange={field.onChange}
-            />
-          )}
-        />
-      )}
-      {items?.userCategories && (
-        <Controller
-          name="userCategories"
-          control={control}
-          render={({ field }) => (
-            <UserCategoriesBlock
-              filter={field.value}
-              onChange={field.onChange}
-            />
-          )}
-        />
-      )}
-      {items?.searchRadius && (
-        <Controller
-          name="searchRadius"
-          control={control}
-          render={({ field }) => (
-            <RadiusBlock filter={field.value} onChange={field.onChange} />
-          )}
-        />
-      )}
-      <div className={styles.dateBlock}>
-        {items?.time && (
-          <Controller
-            name="time"
-            control={control}
-            render={({ field }) => (
-              <TimeBlock filterTime={field.value} onChange={field.onChange} />
-            )}
-          />
-        )}
-        {items?.date && (
-          <Controller
-            name="date"
-            control={control}
-            render={({ field }) => (
-              <CalenderBlock
-                filterDate={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
-        )}
-      </div>
-    </>
-  );
-
   const isFilterSelected = () => {
-    return (
-      filterValues.categories.length > 0 ||
-      filterValues.searchRadius.length > 0 ||
-      filterValues.sortBy.length > 0 ||
-      filterValues.date.length > 0 ||
-      filterValues.time.length > 0 ||
-      filterValues.userCategories.length > 0
-    );
+    let ret = false;
+    Object.keys(filterValues).forEach((category) => {
+      if (filterValues[category].length > 0) ret = true;
+    });
+    return ret;
   };
+
   return (
     <Tooltip
       pointerPosition="right"
@@ -205,9 +137,25 @@ FilterCoverProps) => {
       extClassName={styles.tooltip}
       visible
     >
-      <form name="formFilter" onSubmit={handleSubmit} onReset={resetFilter}>
+      <form
+        name="formFilter"
+        onSubmit={handleSubmit(onSubmit)}
+        onReset={resetFilter}
+      >
         <div className={styles.wrapper}>
-          {element}
+          {Object.keys(components).map((name, i) => (
+            <Controller
+              key={i}
+              name={name as keyof IFilterValues}
+              control={control}
+              render={({ field }) => {
+                const Component = components[name as keyof IFilterValues];
+                return (
+                  <Component onChange={field.onChange} value={field.value} />
+                );
+              }}
+            />
+          ))}
           <div
             className={`${styles.buttonWrapper} ${
               window.innerWidth <= 768 ? styles.buttonWrapper__mobile : null
