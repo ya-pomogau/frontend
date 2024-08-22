@@ -31,7 +31,7 @@ export const FilterCover = ({
   const newSearchParams = new URLSearchParams();
 
   useEffect(() => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 920) {
       setFilteres?.({
         ...filterValues,
       });
@@ -108,7 +108,7 @@ export const FilterCover = ({
           {filterMenu}
           <div
             className={`${styles.buttonWrapper} ${
-              window.innerWidth <= 768 ? styles.buttonWrapper__mobile : null
+              window.innerWidth <= 920 ? styles.buttonWrapper__mobile : null
             }`}
           >
             <Button

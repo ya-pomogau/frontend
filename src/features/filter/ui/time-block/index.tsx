@@ -16,7 +16,7 @@ export const TimeBlock = ({ onChange }: TimeBlockProps) => {
   const [endTime, setEndTime] = useState<string>('00:00');
 
   const setTypeResolution = () => {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 920) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
