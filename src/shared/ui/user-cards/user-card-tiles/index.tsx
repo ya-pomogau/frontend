@@ -89,7 +89,7 @@ export const UserCardTiles = ({
 
       {role === UserRole.VOLUNTEER && (
         <VolunteerActions
-          extClassName={styles.buttons_div_tiles_volunteers}
+          extClassName={classnames(styles.buttons, styles.buttons_volunteers)}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
@@ -108,7 +108,7 @@ export const UserCardTiles = ({
 
       {role === UserRole.RECIPIENT && (
         <RecipientActions
-          extClassName={styles.buttons_div_tiles_recipient}
+          extClassName={styles.buttons}
           approved={status !== UserStatus.UNCONFIRMED}
           onConfirmClick={handleConfirmClick}
           onBlockClick={() => {
