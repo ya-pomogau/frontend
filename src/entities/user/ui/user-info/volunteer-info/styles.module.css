@@ -1,0 +1,14 @@
+.dataWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+}
+
+.volunteerInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  justify-content: center;
+}

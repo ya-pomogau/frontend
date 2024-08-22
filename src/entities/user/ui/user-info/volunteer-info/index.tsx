@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { BallsIcon } from 'shared/ui/icons/balls-icon';
 import { KeyIcon } from 'shared/ui/icons/key-icon';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 interface VolunteerInfoProps {
   score: number;

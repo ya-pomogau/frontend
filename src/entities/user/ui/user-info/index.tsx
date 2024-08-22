@@ -6,18 +6,17 @@ import { UnauthorizedUser } from './unauthorized-user';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
 import { useUpdateUserProfileMutation } from 'services/user-api';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import styles from './styles.module.css';
+import { useAppDispatch } from 'app/hooks';
 import { UserRole } from 'shared/types/common.types';
 import { setUser } from 'entities/user/model';
 import { setTokenAccess } from 'shared/libs/utils';
-import { useControlModal, useRouteMatch } from 'shared/hooks';
+import { useControlModal, useRouteMatch, useUser } from 'shared/hooks';
 
 export const UserInfo = () => {
   const dispatch = useAppDispatch();
   const { isOpen, handleOpen, handleClose } = useControlModal();
 
-  const user = useAppSelector((state) => state.user.data);
+  const user = useUser();
   const isInAuthUser = useRouteMatch(['/register', '/login', '/vk-auth']);
 
   const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
@@ -56,17 +55,15 @@ export const UserInfo = () => {
         isOpen={isOpen}
         onClose={handleClose}
       />
-      <div className={styles.contentWrapper}>
-        <InfoContainerContent
-          id={user.vkId}
-          name={user.name}
-          phone={user.phone}
-          address={user.address}
-        />
-        {user.role === UserRole.VOLUNTEER && (
-          <VolunteerInfo score={user.score || 0} hasKey={user.keys || false} />
-        )}
-      </div>
+      <InfoContainerContent
+        id={user.vkId}
+        name={user.name}
+        phone={user.phone}
+        address={user.address}
+      />
+      {user.role === UserRole.VOLUNTEER && (
+        <VolunteerInfo score={user.score || 0} hasKey={user.keys || false} />
+      )}
     </InfoContainer>
   ) : (
     <InfoContainer name="Незарегистрированный пользователь">
