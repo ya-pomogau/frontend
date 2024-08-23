@@ -1,78 +1,113 @@
-import classnames from 'classnames';
-import Checkbox from 'shared/ui/checkbox';
-import { Button } from 'shared/ui/button';
+import { Control, Controller } from 'react-hook-form';
+
+import { Button, Checkbox } from 'shared/ui';
 import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
-import styles from '../../styles.module.css';
 import { AdminPermission } from 'shared/types/common.types';
 
+import styles from '../../styles.module.css';
+
 interface AdminDropdownMenuProps {
-  privilegies: AdminPermission[] | undefined;
-  handleFilterChange: (name: AdminPermission) => void;
   onAdminBlockClick: () => void;
   onSwitchArrow: () => void;
   setAdminDropdownListClosed: (closed: boolean) => void;
+  control: Control<Record<AdminPermission, boolean>, unknown>;
 }
 
 export const AdminDropdownMenu = ({
-  privilegies,
-  handleFilterChange,
   onAdminBlockClick,
   onSwitchArrow,
   setAdminDropdownListClosed,
+  control,
 }: AdminDropdownMenuProps) => {
   return (
-    <div className={classnames(styles.admin_dropdown_list_opened_box)}>
+    <div className={styles.admin_dropdown_list_opened_box}>
       <div
-        className={classnames(styles.admin_arrow_up)}
+        className={styles.admin_arrow_up}
         onClick={() => setAdminDropdownListClosed(true)}
       >
-        <ArrowDownIcon color={'blue'} onClick={onSwitchArrow} />
+        <ArrowDownIcon color="blue" onClick={onSwitchArrow} />
       </div>
-      <div className={classnames(styles.admin_checkboxes)}>
-        <Checkbox
-          extClassName={styles.admin_checkbox}
-          id={Math.random() + ''}
-          label={'Подтверждать аккаунты'}
-          checked={privilegies?.includes(AdminPermission.CONFIRMATION)}
-          onChange={() => handleFilterChange(AdminPermission.CONFIRMATION)}
+      <div className={styles.admin_checkboxes}>
+        <Controller
+          control={control}
+          name={AdminPermission.CONFIRMATION}
+          render={({ field }) => (
+            <Checkbox
+              id={field.name}
+              extClassName={styles.admin_checkbox}
+              label="Подтверждать аккаунты"
+              checked={field.value}
+              onChange={field.onChange}
+            />
+          )}
         />
-        <Checkbox
-          extClassName={styles.admin_checkbox}
-          id={Math.random() + ''}
-          label={'Создавать заявки'}
-          checked={privilegies?.includes(AdminPermission.TASKS)}
-          onChange={() => handleFilterChange(AdminPermission.TASKS)}
+        <Controller
+          control={control}
+          name={AdminPermission.TASKS}
+          render={({ field }) => (
+            <Checkbox
+              id={field.name}
+              extClassName={styles.admin_checkbox}
+              label="Создавать заявки"
+              checked={field.value}
+              onChange={field.onChange}
+            />
+          )}
         />
-        <Checkbox
-          extClassName={styles.admin_checkbox}
-          id={Math.random() + ''}
-          label={'Раздавать ключи'}
-          checked={privilegies?.includes(AdminPermission.KEYS)}
-          onChange={() => handleFilterChange(AdminPermission.KEYS)}
+        <Controller
+          control={control}
+          name={AdminPermission.KEYS}
+          render={({ field }) => (
+            <Checkbox
+              id={field.name}
+              extClassName={styles.admin_checkbox}
+              label="Раздавать ключи"
+              checked={field.value}
+              onChange={field.onChange}
+            />
+          )}
         />
-        <Checkbox
-          extClassName={styles.admin_checkbox}
-          id={Math.random() + ''}
-          label={'Решать споры'}
-          checked={privilegies?.includes(AdminPermission.CONFLICTS)}
-          onChange={() => handleFilterChange(AdminPermission.CONFLICTS)}
+        <Controller
+          control={control}
+          name={AdminPermission.CONFLICTS}
+          render={({ field }) => (
+            <Checkbox
+              id={field.name}
+              extClassName={styles.admin_checkbox}
+              label="Решать споры"
+              checked={field.value}
+              onChange={field.onChange}
+            />
+          )}
         />
-        <Checkbox
-          extClassName={styles.admin_checkbox}
-          id={Math.random() + ''}
-          label={'Контент блог'}
-          checked={privilegies?.includes(AdminPermission.BLOG)}
-          onChange={() => handleFilterChange(AdminPermission.BLOG)}
+        <Controller
+          control={control}
+          name={AdminPermission.BLOG}
+          render={({ field }) => (
+            <Checkbox
+              id={field.name}
+              extClassName={styles.admin_checkbox}
+              label="Контент блог"
+              checked={field.value}
+              onChange={field.onChange}
+            />
+          )}
         />
-        <Checkbox
-          extClassName={styles.admin_checkbox}
-          id={Math.random() + ''}
-          label={'Повышение балов'}
-          checked={privilegies?.includes(AdminPermission.CATEGORIES)}
-          onChange={() => handleFilterChange(AdminPermission.CATEGORIES)}
+        <Controller
+          control={control}
+          name={AdminPermission.CATEGORIES}
+          render={({ field }) => (
+            <Checkbox
+              id={field.name}
+              extClassName={styles.admin_checkbox}
+              label="Повышение балов"
+              checked={field.value}
+              onChange={field.onChange}
+            />
+          )}
         />
       </div>
-      <div className={classnames(styles.admin_block_btn)}>
+      <div className={styles.admin_block_btn}>
         <Button
           buttonType="secondary"
           label="Заблокировать"
