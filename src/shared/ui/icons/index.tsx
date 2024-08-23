@@ -39,6 +39,7 @@ import { PasswordOpenIcon } from './password-open-icon';
 import { PasswordCloseIcon } from './password-close-icon';
 import { CheckIcon } from './check-icon';
 import { ArrowDownIcon } from './arrow-down-icon';
+import { ArrowNotify } from './arrow-notify';
 import { ExcelIcon } from './excel-icon';
 
 import { ExclamationPointIcon } from './exclamation-point-icon';
@@ -69,6 +70,7 @@ const icons = {
   LocationIcon,
   SettingsIcon,
   ArrowIcon,
+  ArrowNotify,
   PinIcon,
   SendIcon,
   EditIcon,

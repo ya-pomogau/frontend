@@ -23,6 +23,4 @@ export {
   enableAnyError,
 } from './user/model/user';
 export { isRootSelector, isUnConfirmedSelector } from './user/model/user';
-export { UnauthorizedUser } from './user/ui/user-info/unauthorized-user/unauthorized-user';
-export { VolunteerInfo } from './user/ui/user-info/volunteer-info/volunteer-info';
 export { UserInfo } from './user/ui/user-info';
