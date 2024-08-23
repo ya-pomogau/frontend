@@ -1,102 +1,101 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import classnames from 'classnames';
 
-import { Input } from 'shared/ui/input';
-import { EditIcon } from 'shared/ui/icons/edit-icon';
-import { Button } from 'shared/ui/button';
-import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
-import styles from '../../styles.module.css';
-import { AdminPermission } from 'shared/types/common.types';
+import { Input, Button } from 'shared/ui';
 import { useControlModal } from 'shared/hooks';
+import { EditIcon } from 'shared/ui/icons/edit-icon';
+import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
+import { AdminPermission } from 'shared/types/common.types';
+import {
+  useAddAdminPrivilegiesMutation,
+  useBlockAdminMutation,
+} from 'services/admin-api';
+
 import { ResetPassword } from './reset-password';
 import { AdminDropdownMenu } from './dropdown';
 
+import styles from '../../styles.module.css';
+
+const defaultValues = {
+  CONFIRM_USER: false,
+  CREATE_TASK: false,
+  GIVE_KEY: false,
+  RESOLVE_CONFLICT: false,
+  EDIT_BLOG: false,
+  SET_CATEGORY_POINTS: false,
+};
+
+const getDefaultValues = (initialValues: AdminPermission[]) => {
+  return initialValues.reduce((acc, value) => {
+    if (value in acc) {
+      acc[value] = true;
+    }
+
+    return acc;
+  }, defaultValues);
+};
+
 interface AdminActionsProps {
+  id: string;
   permissions: AdminPermission[];
-  onAdminSaveClick: (body: AdminPermission[]) => void;
-  onAdminBlockClick: () => void;
   onSwitchArrow: () => void;
 }
 
 const AdminActions = ({
-  onAdminSaveClick,
-  onAdminBlockClick,
+  id,
   onSwitchArrow,
   permissions,
 }: AdminActionsProps) => {
+  const [addAdminPrivileges] = useAddAdminPrivilegiesMutation();
+  const [blockAdmin] = useBlockAdminMutation();
+
   const [isAdminDropdownListClosed, setAdminDropdownListClosed] =
     useState(true);
-  const [isSaveButtonVisible, setIsSaveButtonVisible] = useState(false);
   const {
     isOpen: isModalOpen,
     handleOpen: handleModalOpen,
     handleClose: handleModalClose,
   } = useControlModal();
 
-  const { watch, setValue } = useForm({
-    defaultValues: {
-      privilegies: permissions ?? [],
-    },
+  const {
+    control,
+    getValues,
+    formState: { isDirty },
+  } = useForm<Record<AdminPermission, boolean>>({
+    values: getDefaultValues(permissions),
   });
 
-  const watchedPrivilegies = watch('privilegies');
+  const handleSubmit = async () => {
+    const values = getValues();
+    const keysArray = Object.keys(values) as AdminPermission[];
 
-  const havePrivelegiesChanged = (
-    a: AdminPermission[],
-    b: AdminPermission[]
-  ) => {
-    if (a.length !== b.length) {
-      return true;
-    }
-    const map = new Map();
-    for (const elem of a) {
-      map.set(elem, (map.get(elem) || 0) + 1);
-    }
-    for (const elem of b) {
-      if (!map.has(elem)) {
-        return true;
-      }
-      map.set(elem, map.get(elem) - 1);
-      if (map.get(elem) < 0) {
-        return true;
-      }
-    }
-    return false;
+    const result = keysArray.filter((key) => values[key]);
+
+    await addAdminPrivileges({ _id: id, result });
   };
 
-  useEffect(() => {
-    setIsSaveButtonVisible(
-      havePrivelegiesChanged(watchedPrivilegies, permissions)
-    );
-  }, [permissions, watchedPrivilegies]);
-
-  const handleFilterChange = (name: AdminPermission) => {
-    const updatedPrivilegies = watchedPrivilegies.includes(name)
-      ? watchedPrivilegies.filter((priv: AdminPermission) => priv !== name)
-      : [...watchedPrivilegies, name];
-
-    setValue('privilegies', updatedPrivilegies);
+  const handleBlock = async () => {
+    await blockAdmin(id);
   };
 
   return (
-    <div className={classnames(styles.buttons_div)}>
-      <div className={classnames(styles.admin_login_box)}>
+    <div className={styles.buttons_div}>
+      <div className={styles.admin_login_box}>
         <Input
-          className={classnames(styles.admin_login_input)}
+          className={styles.admin_login_input}
           label="Логин"
           name="login"
           onChange={(e) => {
             console.log(e);
           }}
-          value={'Login'}
+          value="Login"
           placeholder="Логин"
           type="text"
         />
       </div>
-      <div className={classnames(styles.admin_password_box)}>
+      <div className={styles.admin_password_box}>
         <Input
-          className={classnames(styles.admin_password_input)}
+          className={styles.admin_password_input}
           label="Пароль"
           name="password"
           onChange={(e) => {
@@ -110,24 +109,24 @@ const AdminActions = ({
       </div>
       <EditIcon
         onClick={handleModalOpen}
-        className={classnames(styles.admin_edit_icon)}
+        className={styles.admin_edit_icon}
         color={'blue'}
       />
 
       {isAdminDropdownListClosed ? (
         <>
-          {isSaveButtonVisible && (
-            <div className={classnames(styles.admin_save_btn)}>
+          {isDirty && (
+            <div className={styles.admin_save_btn}>
               <Button
                 buttonType="primary"
                 label="Сохранить"
-                onClick={() => onAdminSaveClick(watchedPrivilegies)}
+                onClick={handleSubmit}
               />
             </div>
           )}
-          <div className={classnames(styles.admin_dropdown_list_closed_box)}>
+          <div className={styles.admin_dropdown_list_closed_box}>
             <div
-              className={classnames(styles.admin_arrow_down)}
+              className={styles.admin_arrow_down}
               onClick={() => setAdminDropdownListClosed(false)}
             >
               <ArrowDownIcon color={'blue'} onClick={onSwitchArrow} />
@@ -136,9 +135,8 @@ const AdminActions = ({
         </>
       ) : (
         <AdminDropdownMenu
-          privilegies={watchedPrivilegies}
-          handleFilterChange={handleFilterChange}
-          onAdminBlockClick={onAdminBlockClick}
+          control={control}
+          onAdminBlockClick={handleBlock}
           onSwitchArrow={onSwitchArrow}
           setAdminDropdownListClosed={setAdminDropdownListClosed}
         />
