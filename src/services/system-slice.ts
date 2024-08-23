@@ -16,6 +16,13 @@ import { RootState } from '../app/store';
 import { TUser, TVKUser } from '../entities/user/types';
 import { AdminPermission } from '../shared/types/common.types';
 import { setTokenAccess } from 'shared/libs/utils';
+import { CategoriesBlock } from '../features/filter/ui/categories-block';
+import { RadiusBlock } from '../features/filter/ui/radius-block';
+import { SortByBlock } from '../features/filter/ui/sortBy-block';
+import { CalenderBlock } from '../features/filter/ui/calender-block';
+import { TimeBlock } from '../features/filter/ui/time-block';
+import { UserCategoriesBlock } from '../features/filter/ui/userCategories-block';
+import { IFilterValues } from '../features/filter/types';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
   state.system.isPending;
@@ -45,6 +52,9 @@ export const permissionsSelector: TCustomSelector<
   state.system.user.permissions.length > 0
     ? state.system.user.permissions
     : null;
+
+export const filterDataSelector: TCustomSelector<IFilterValues> = (state) =>
+  state.system.filterData;
 
 export const userLoginThunk = createAsyncThunk(
   'user/login',
@@ -148,6 +158,15 @@ const systemSliceInitialState: TSystemSliceState = {
   isNew: false,
   socketConnectionStatus: null,
   socketMessage: null,
+
+  filterData: {
+    categories: [],
+    searchRadius: '',
+    sortBy: '',
+    date: '',
+    time: [],
+    userCategories: [],
+  },
 };
 
 const systemSlice = createSlice({
@@ -166,6 +185,9 @@ const systemSlice = createSlice({
     },
     closeSocketConnection: (state) => {
       state.socketConnectionStatus = SocketConnectionStatus.CLOSED;
+    },
+    setFilterData: (state, action) => {
+      state.filterData = action.payload;
     },
   },
   extraReducers: (builder) =>
@@ -286,6 +308,7 @@ export const {
   setSocketConnectionStatus,
   setSocketMessage,
   closeSocketConnection,
+  setFilterData,
 } = systemSlice.actions;
 export default systemSlice.reducer;
 
