@@ -8,6 +8,7 @@ import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
 import { TimeBlock } from './ui/time-block';
 import { CategoriesBlock } from './ui/categories-block';
 import styles from './styles.module.css';
+import { FilterItemsIds } from './consts';
 
 export const Filter = ({
   items,
@@ -20,7 +21,7 @@ export const Filter = ({
     sortBy: '',
     date: '',
     time: [],
-    userCategories: [],
+    userCategories: [FilterItemsIds.ALL],
   };
 
   const { control, handleSubmit, reset, watch } = useForm<IFilterValues>({
@@ -120,7 +121,7 @@ export const Filter = ({
               </div>
             </>
           }
-          filterValues={formValues} 
+          filterValues={formValues}
           onReset={() => reset(defaultValues)}
           setFilteres={setFilteres}
         />
