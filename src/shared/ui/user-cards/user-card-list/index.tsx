@@ -1,13 +1,12 @@
-import classnames from 'classnames';
-import VolunteerActions from 'shared/ui/user-cards/components/volonteer-actions';
-import RecipientActions from 'shared/ui/user-cards/components/recipient-actions';
-import AdminActions from 'shared/ui/user-cards/components/admin-actions';
-import styles from './styles.module.css';
-import { RoundButton } from '../../round-button';
-import UserInfo from 'shared/ui/user-cards/components/user-info';
-import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
 import { UserRole, UserStatus } from 'shared/types/common.types';
+import VolunteerActions from '../components/volonteer-actions';
+import RecipientActions from '../components/recipient-actions';
+import UserInfo from '../components/user-info';
+import { RoundButton } from '../../round-button';
+import { Avatar } from '../../avatar';
+
+import styles from './styles.module.css';
 
 interface UserCardListProps {
   user: User;
@@ -29,12 +28,7 @@ export const UserCardList = ({
   const { name, role, avatar, phone, _id, score, keys, status } = user;
 
   return (
-    <div
-      className={classnames(
-        styles.content,
-        role === UserRole.ADMIN && styles.admin_content
-      )}
-    >
+    <div className={styles.content}>
       <Avatar
         extClassName={styles.avatar}
         avatarName={`аватар пользователя ${name}`}
@@ -50,7 +44,7 @@ export const UserCardList = ({
         extraClasses={styles.user_info_space}
       >
         {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
-          <div className={classnames(styles.icons_div)}>
+          <div className={styles.icons_div}>
             <RoundButton
               buttonType="phone"
               onClick={() => {
@@ -95,23 +89,6 @@ export const UserCardList = ({
           }}
         />
       )}
-
-      {role === UserRole.ADMIN && (
-        // TODO: FIX THIS
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        <AdminActions
-          onAdminSaveClick={() => {
-            console.log('Admin save button pressed');
-          }}
-          onAdminBlockClick={() => {
-            console.log('Admin block button pressed');
-          }}
-        />
-      )}
-
-      {/* {children} */}
     </div>
   );
 };
