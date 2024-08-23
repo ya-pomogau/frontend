@@ -19,16 +19,12 @@ export const VolunteerInfo = ({
   <div className={classnames(extClassName, styles.volunteerInfo)}>
     <div className={styles.dataWrapper}>
       <BallsIcon size="32" color="blue" />
-      <span className={classnames('text', 'text_size_small', styles.count)}>
-        {score}
-      </span>
+      <span className="text text_size_small">{score}</span>
     </div>
     {hasKey && (
       <div className={styles.dataWrapper}>
         <KeyIcon size="24" color="blue" />
-        <span className={classnames('text', 'text_size_small', styles.count)}>
-          {hasKey}
-        </span>
+        <span className="text text_size_small">{hasKey}</span>
       </div>
     )}
   </div>

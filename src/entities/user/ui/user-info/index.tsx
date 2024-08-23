@@ -1,23 +1,26 @@
-import { InfoContainer } from 'shared/ui/info-container';
-import { InfoContainerContent } from 'shared/ui/info-container-content';
-import { Loader } from 'shared/ui/loader';
-import { VolunteerInfo } from './volunteer-info';
-import { UnauthorizedUser } from './unauthorized-user';
+import { useAppDispatch } from 'app/hooks';
+import { InfoContainer, InfoContainerContent, Loader } from 'shared/ui';
+import { useControlModal, useRouteMatch, useUser } from 'shared/hooks';
+import { UserRole } from 'shared/types/common.types';
+import { setTokenAccess } from 'shared/libs/utils';
+import { Routes } from 'shared/config';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
 import { useUpdateUserProfileMutation } from 'services/user-api';
-import { useAppDispatch } from 'app/hooks';
-import { UserRole } from 'shared/types/common.types';
 import { setUser } from 'entities/user/model';
-import { setTokenAccess } from 'shared/libs/utils';
-import { useControlModal, useRouteMatch, useUser } from 'shared/hooks';
+import { VolunteerInfo } from './volunteer-info';
+import { UnauthorizedUser } from './unauthorized-user';
 
 export const UserInfo = () => {
   const dispatch = useAppDispatch();
   const { isOpen, handleOpen, handleClose } = useControlModal();
 
   const user = useUser();
-  const isInAuthUser = useRouteMatch(['/register', '/login', '/vk-auth']);
+  const isInAuthUser = useRouteMatch([
+    Routes.REGISTER,
+    Routes.LOGIN,
+    Routes.VK_AUTH,
+  ]);
 
   const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
 
