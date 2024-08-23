@@ -1,3 +1,11 @@
+.buttons {
+  row-gap: 5px;
+}
+
+.buttons_volunteers > :first-child {
+  margin-bottom: 10px;
+}
+
 .content {
   position: relative;
   margin-top: 33px;
@@ -52,6 +60,10 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, -31px);
+  }
+
+  .buttons_volunteers > :first-child {
+    margin-bottom: 0;
   }
 }
 
