@@ -16,7 +16,7 @@ interface TooltipProps {
   extClassName?: string;
   visible?: boolean;
   children: ReactNode;
-  pointerPosition?: 'right' | 'left';
+  pointerPosition?: 'right' | 'left' | 'center';
   changeVisible?: () => void;
   elementStyles?: CSSProperties;
   idForModalRoot?: string;
@@ -90,7 +90,7 @@ export const Tooltip = ({
       } else {
         tooltipRef.current.style.left = '';
         tooltipRef.current.style.transform = '';
-        setPointerPositionState('right');
+        setPointerPositionState(pointerPosition);
       }
     }
   }, [visible]);
