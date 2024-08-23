@@ -1,7 +1,7 @@
 .user_info {
   display: grid;
-  row-gap: 12px;
-  margin-left: 8px;
+  row-gap: 11px;
+  margin-left: 9px;
 }
 
 .grid_two_list {
@@ -24,11 +24,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3px;
   padding-bottom: 25px;
-}
-.buttons_div > :first-child {
-  margin-bottom: 10px;
 }
 
 .volunteer_info {
@@ -42,55 +38,71 @@
   flex-direction: column;
 }
 
+.admin_login_box {
+  width: 236px;
+  min-height: 39px;
+  padding-block-start: 8px;
+  margin-inline-start: -10px;
+  cursor: not-allowed;
+}
+
 .admin_login_input {
   border: none;
-
   outline: none;
   background-color: transparent;
   pointer-events: none;
-  cursor: not-allowed;
-  padding-left: 5px;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 17px;
+  margin-block-start: -5px;
+  padding-inline-start: 10px;
   letter-spacing: 0em;
   text-align: left;
-  color: #2e3192;
+  color: var(--colors-interface-primary);
 }
 
 .admin_password_box {
+  margin-inline-start: -10px;
   position: relative;
 }
 
 .admin_edit_icon {
   position: absolute;
-  top: 70%;
-  right: 10px;
+  top: 179px; /* по макету половина иконки минус вся длина до элемента*/
+  left: 85%; /* по макету ширина - 15px */
   transform: translateY(-50%);
   width: 20px;
+  cursor: pointer;
 }
 
 .admin_password_input {
-  width: 216px;
+  width: 236px;
   height: 30px;
   top: 197px;
   left: 20px;
   border: 0.5px;
-  border: 0.5px solid #2e3192;
-  color: linear-gradient(0deg, #2e3192, #2e3192),
-    linear-gradient(0deg, #ffffff, #ffffff);
-  padding-left: 10px;
+  border: 0.5px solid var(--colors-interface-primary);
+  color: linear-gradient(
+      0deg,
+      var(--colors-interface-primary),
+      var(--colors-interface-primary)
+    ),
+    linear-gradient(
+      0deg,
+      var(--colors-interface-white),
+      var(--colors-interface-white)
+    );
+  padding-inline-start: 10px;
+  margin-block-start: -5px;
   content: '*****';
 }
 
 .admin_save_btn {
-  padding-top: 20px;
+  padding-top: 13px;
   margin: auto;
 }
 
 .admin_dropdown_list_closed_box {
   position: relative;
   width: 129%;
+  margin-top: 8.5px;
   margin-left: -30px;
   border-top: 1px solid;
   border-image-source: linear-gradient(
@@ -136,16 +148,19 @@
 .admin_checkboxes {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding-top: 30px;
+  gap: 14px;
   padding: 30px 33px 30px 33px;
 }
 
 .admin_checkbox {
+  letter-spacing: 0em;
+  font-family: Nunito Sans, sans-serif;
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
-  letter-spacing: 0em;
+  letter-spacing: 0%;
+  text-align: left;
+  cursor: pointer;
 }
 
 .admin_block_btn {
@@ -169,7 +184,6 @@
   width: 186px;
   font-family: 'Golos', sans-serif;
   border: 0.5px solid #2e3192;
-  font-size: 12px;
   color: #2e3192;
   resize: none;
   padding: 0;
@@ -180,13 +194,123 @@
 .id {
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  line-clamp: 1;
   display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 
 .name_text {
   font-size: 16px;
+  line-height: 22.4px;
+}
+
+.modalContainer {
+  position: absolute;
+  width: 296px;
+  height: 252px;
+  background: var(--colors-interface-white);
+  top: 5px;
+  left: 0px;
+  bottom: -5px;
+  font-family: Golos;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.8px;
+  text-align: left;
+}
+
+.modalContent {
+  width: 100%;
+  height: 100%;
+  padding-inline: 30px;
+  padding-block: 13px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16),
+    0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+/*крестик закрытия*/
+.close {
+  width: 14px;
+  height: 14px;
+  background: url('../icons/close-icon-thin.tsx') no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Стили для текста "Смена пароля" */
+.modalTitle {
+  margin: 0;
+  width: 236px;
+  height: 45px;
+  padding: 5px 0px 5px 0px;
+  border-bottom: 1px solid rgb(224, 224, 224);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px 5px 0px;
+}
+
+/* Стили для инпута с лейбелом */
+.input_with_label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 236px;
+  height: 52px;
+}
+
+/* Стили для поля */
+.input_field {
+  width: 236px;
+  height: 30px;
+  top: 95px;
+  left: 30px;
+  border: 0.5px 0 0 0;
+  border: 0.5px solid var(--colors-interface-primary);
+  box-shadow: inset 0 0 0 0.5px rgba(46, 49, 146, 1);
+}
+
+/* Стили для кнопки*/
+
+.modalBtn {
+  width: 95px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: 10px;
+  background-color: var(--colors-interface-primary);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0px 16px 0px 16px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0%;
+  color: var(--colors-interface-white);
 }
 
 @media all and (max-width: 1100px) {

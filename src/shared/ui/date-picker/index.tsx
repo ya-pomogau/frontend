@@ -14,7 +14,7 @@ import { StepButton } from '../step-button';
 import './react-datepicker.css';
 import styles from './styles.module.css';
 
-function customHeader({
+export function customHeader({
   date,
   decreaseMonth,
   increaseMonth,

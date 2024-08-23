@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import classnames from 'classnames';
 
-import styles from './styles.module.css';
 import VolunteerActions from 'shared/ui/user-cards/components/volonteer-actions';
 import RecipientActions from 'shared/ui/user-cards/components/recipient-actions';
 import AdminActions from 'shared/ui/user-cards/components/admin-actions';
@@ -9,15 +8,10 @@ import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
-import {
-  AdminPermission,
-  UserRole,
-  UserStatus,
-} from 'shared/types/common.types';
-import {
-  useAddAdminPrivilegiesMutation,
-  useBlockAdminMutation,
-} from 'services/admin-api';
+import { UserRole, UserStatus } from 'shared/types/common.types';
+
+import styles from './styles.module.css';
+
 export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
@@ -38,20 +32,9 @@ export const UserCardTiles = ({
   const { name, role, avatar, phone, _id, score, keys, status, permissions } =
     user;
   const [isActon, setIsAction] = useState<boolean>(false);
-  const [addAdminPrivilegies] = useAddAdminPrivilegiesMutation();
-  const [blockAdmin] = useBlockAdminMutation();
 
   const handleClick = () => {
     setIsAction((state) => !state);
-  };
-
-  const handleAddPrivileges = async (body: AdminPermission[] | undefined) => {
-    try {
-      const result = await addAdminPrivilegies({ _id, body });
-      console.log('Privileges added:', result);
-    } catch (err) {
-      console.error('Error adding privileges:', err);
-    }
   };
 
   return (
@@ -87,6 +70,7 @@ export const UserCardTiles = ({
 
       {role === UserRole.VOLUNTEER && (
         <VolunteerActions
+          extClassName={classnames(styles.buttons, styles.buttons_volunteers)}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
@@ -105,6 +89,7 @@ export const UserCardTiles = ({
 
       {role === UserRole.RECIPIENT && (
         <RecipientActions
+          extClassName={styles.buttons}
           approved={status !== UserStatus.UNCONFIRMED}
           onConfirmClick={handleConfirmClick}
           onBlockClick={() => {
@@ -115,17 +100,11 @@ export const UserCardTiles = ({
 
       {role === UserRole.ADMIN && (
         <AdminActions
-          permissions={permissions}
+          id={_id}
+          permissions={permissions || []}
           onSwitchArrow={handleClick}
-          onAdminSaveClick={handleAddPrivileges}
-          onAdminBlockClick={() => {
-            blockAdmin(_id);
-            console.log('Admin block button pressed');
-          }}
         />
       )}
-
-      {/* {children} */}
     </div>
   );
 };

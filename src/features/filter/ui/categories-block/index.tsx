@@ -12,7 +12,7 @@ import { useGetCategoriesQuery } from 'services/categories-api';
 
 interface CategoriesBlockProps {
   selectedServies: string[];
-  onChange: (name: string, value: string[]) => void;
+  onChange: (value: string[]) => void;  
 }
 
 export const CategoriesBlock = ({
@@ -48,7 +48,7 @@ export const CategoriesBlock = ({
     } else {
       newValue = selectedServies.filter((item) => item !== target.id);
     }
-    onChange('categories', newValue);
+    onChange(newValue);  
   };
 
   const checkAccess = (category: string) => {

@@ -1,37 +1,55 @@
-import { PageSubMenuForAdmins } from 'widgets/page-sub-menu';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui/icons';
-import { SmartHeader } from 'shared/ui/smart-header';
-import styles from './styles.module.css';
-import { Input } from 'shared/ui/input';
 import { NavLink } from 'react-router-dom';
-
 import { useEffect, useState } from 'react';
+
+import { PageSubMenuForAdmins } from 'widgets';
+import { Icon, SmartHeader, Input, GradientDivider } from 'shared/ui';
+import { usePermission } from 'shared/hooks';
 import { Filter } from '../../features/filter';
 import { RequestsTab } from '../requests-tab';
-import { Tabs } from '../../shared/types/common.types';
+import {
+  AdminPermission,
+  Tabs,
+  UserRole,
+} from '../../shared/types/common.types';
 import {
   useGetUserByRolesQuery,
   useGetAllAdminsQuery,
   useGetUnconfirmedUsersQuery,
 } from 'services/admin-api';
 import { User } from 'entities/user/types';
-import { GradientDivider } from 'shared/ui/gradient-divider';
+import { IFilterValues } from 'features/filter/types';
+import { FilterItemsIds } from 'features/filter/consts';
+
+import styles from './styles.module.css';
 
 interface PageProps {
   incomeTab: string;
 }
 
 export function RequestsPage({ incomeTab }: PageProps) {
-  const { data: volunteers } = useGetUserByRolesQuery('volunteers');
-  const { data: admins } = useGetAllAdminsQuery('');
-  const { data: recipients } = useGetUserByRolesQuery('recipients');
-  const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed');
+  const isConfirmationPermissionGranted = usePermission(
+    [AdminPermission.CONFIRMATION],
+    UserRole.ADMIN
+  );
+
+  const { data: volunteers } = useGetUserByRolesQuery('volunteers', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: admins } = useGetAllAdminsQuery('', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: recipients } = useGetUserByRolesQuery('recipients', {
+    skip: !isConfirmationPermissionGranted,
+  });
+  const { data: unconfirmed } = useGetUnconfirmedUsersQuery('unconfirmed', {
+    skip: !isConfirmationPermissionGranted,
+  });
   const [searchName, setSearchName] = useState('');
   const [filteredName, setFilteredName] = useState<User[]>([]);
   const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
 
-  useEffect(() => {
+  const getFilteredTabData = () => {
     const dataMap: Record<string, User[] | undefined> = {
       [Tabs.VOLUNTEERS]: volunteers,
       [Tabs.RECIPIENTS]: recipients,
@@ -39,9 +57,29 @@ export function RequestsPage({ incomeTab }: PageProps) {
       [Tabs.ADMINS]: admins,
     };
 
-    const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
-      (card) => card.name.toLowerCase().includes(searchName.toLowerCase())
+    return dataMap[incomeTab as keyof typeof dataMap]?.filter((card) =>
+      card.name.toLowerCase().includes(searchName.toLowerCase())
     );
+  };
+
+  const handleApplyFilters = (filter: IFilterValues) => {
+    if (incomeTab === Tabs.NOTPROCESSED) {
+      const { categories } = filter;
+
+      const filteredData = getFilteredTabData()?.filter(
+        (card) =>
+          categories.includes(FilterItemsIds.ALL) ||
+          categories.includes(card.role)
+      );
+
+      if (filteredData) {
+        setFilteredName(filteredData);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const filteredData = getFilteredTabData();
 
     if (filteredData) {
       setFilteredName(filteredData);
@@ -70,7 +108,14 @@ export function RequestsPage({ incomeTab }: PageProps) {
         }
         filter={
           incomeTab === Tabs.NOTPROCESSED ? (
-            <Filter items={{ userCategories: true }} />
+            getFilteredTabData()?.length ? (
+              <Filter
+                items={{ userCategories: true }}
+                setFilteres={handleApplyFilters}
+              />
+            ) : (
+              <Filter notFoundFilter={true} />
+            )
           ) : (
             <></>
           )
