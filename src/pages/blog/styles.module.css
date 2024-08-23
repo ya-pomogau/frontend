@@ -1,9 +1,24 @@
 .background {
   margin-top: -30px;
+  padding-top: 30px;
   width: 100%;
-  height: 100vh;
+  position: relative;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100%;
+  margin-left: calc(-50vw + 50%);
   background-image: url(../../app/assets/images/background-blog-page.svg);
-  object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .blog-page {
