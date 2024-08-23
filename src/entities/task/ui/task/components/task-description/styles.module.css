@@ -56,7 +56,7 @@
   background-color: transparent;
 }
 
-@media screen and (min-width: 1151px) {
+@media screen and (min-width: 1150px) {
   .taskDescription {
     padding-left: 14px;
     margin-top: 25px;

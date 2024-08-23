@@ -1,4 +1,13 @@
 :root {
+  --breakpoints-xxxs: 360px;
+  --breakpoints-xxs: 415px; 
+  --breakpoints-xs: 550px; 
+  --breakpoints-sm: 735px; 
+  --breakpoints-md: 920px; 
+  --breakpoints-lg: 1150px;
+  --breakpoints-xl: 1300px;
+  --breakpoints-xxl: 1440px;
+
   --font-family-golos: 'Golos', sans-serif;
   --font-family-inter: 'Inter', sans-serif;
 
@@ -78,7 +87,14 @@
     var(--line-height-large) var(--font-family-golos);
 }
 
-body, p, h1, h2, h3, h4, h5, h6 {
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 

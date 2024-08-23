@@ -76,7 +76,7 @@
   color: var(--colors-interface-orange);
 }
 
-@media (max-width: 415px) {
+@media (max-width: 550px) {
   .input {
     font-size: 12px;
     height: 104px;
