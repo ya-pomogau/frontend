@@ -32,5 +32,5 @@ export const defaultObjFilteres = {
   searchRadius: '5',
   date: '',
   time: ['00:00', '00:00'],
-  userCategories: '',
+  userCategories: [FilterItemsIds.ALL],
 };

@@ -32,11 +32,11 @@
   padding-bottom: 4px;
 }
 
-.link:not(.link_active):hover .link__title{
+.link:not(.link_active):hover .link__title {
   border-bottom: 4px solid var(--colors-interface-primary-additional);
 }
 
-@media screen and (min-width: 921px) and (max-width: 1200px) {
+@media screen and (min-width: 920px) and (max-width: 1300px) {
   .link__title {
     min-width: 7.5vw;
   }

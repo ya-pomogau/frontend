@@ -58,7 +58,7 @@
   height: 14px;
 }
 
-@media (max-width: 415px) {
+@media (max-width: 550px) {
   .attachment-button {
     top: 95px;
   }

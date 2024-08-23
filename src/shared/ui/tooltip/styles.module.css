@@ -1,11 +1,12 @@
 .tooltip {
   position: relative;
-  display: inline-block;
-  padding: 30px 30px 20px 30px;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 16.8px 20px 20px 30px;
   visibility: hidden;
   max-width: 400px;
+  width: 370px;
   box-sizing: border-box;
-  width: 100%;
   z-index: 15;
 }
 
@@ -32,6 +33,10 @@
   left: 4%;
 }
 
+.pointer--center {
+  right: 50%;
+}
+
 .tooltip--visible {
   visibility: visible;
 }
@@ -43,8 +48,7 @@
   cursor: pointer;
 }
 
-
-@media (max-width: 573px) {
+@media (max-width: 550px) {
   .tooltip {
     left: 50%;
     transform: translate(-50%);

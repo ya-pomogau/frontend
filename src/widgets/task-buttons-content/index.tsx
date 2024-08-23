@@ -12,6 +12,8 @@ import {
   useRejectTaskMutation,
 } from 'services/user-task-api';
 import { ButtonWithModal } from 'widgets/button-with-modal';
+import { useControlModal } from 'shared/hooks';
+import { infoAdmin, PopupChat } from 'entities';
 
 interface ModalContentProps {
   type: ModalContentType;
@@ -35,6 +37,7 @@ export const ModalContent = ({
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
   const [cancelTask] = useCancelTaskMutation();
+  const { isOpen, handleOpen, handleClose } = useControlModal();
 
   const handleRejectClick = () => {
     if (userRole && taskId) {
@@ -61,6 +64,10 @@ export const ModalContent = ({
     if (userRole === UserRole.RECIPIENT && taskId) {
       cancelTask({ id: taskId });
     }
+  };
+
+  const isReasonUnselected = () => {
+    return !reason;
   };
 
   switch (type) {
@@ -92,8 +99,17 @@ export const ModalContent = ({
             <Button
               buttonType="secondary"
               label="Помощь администратора"
-              onClick={() => 1}
+              onClick={() => handleOpen()}
             />
+            {isOpen && (
+              <PopupChat
+                isOpen={isOpen}
+                onClick={handleClose}
+                messages={[]}
+                chatmateInfo={infoAdmin}
+                onAttachFileClick={() => {}}
+              />
+            )}
             <ButtonWithModal
               closeButton
               modalContent={
@@ -117,6 +133,7 @@ export const ModalContent = ({
               <Button
                 buttonType="primary"
                 label="Отменить заявку"
+                disabled={isReasonUnselected()}
                 // TODO: проверить оба варианта
                 // onClick={handleDeleteClick}
               />
@@ -165,8 +182,17 @@ export const ModalContent = ({
                         ? 'Помощь администратора'
                         : 'Написать администратору'
                     }
-                    onClick={() => 1}
+                    onClick={() => handleOpen()}
                   />
+                  {isOpen && (
+                    <PopupChat
+                      isOpen={isOpen}
+                      onClick={handleClose}
+                      messages={[]}
+                      chatmateInfo={infoAdmin}
+                      onAttachFileClick={() => {}}
+                    />
+                  )}
                 </div>
               )}
             </>
@@ -200,8 +226,17 @@ export const ModalContent = ({
             <Button
               buttonType="secondary"
               label={'Написать администратору'}
-              onClick={() => 1}
+              onClick={() => handleOpen()}
             />
+            {isOpen && (
+              <PopupChat
+                isOpen={isOpen}
+                onClick={handleClose}
+                messages={[]}
+                chatmateInfo={infoAdmin}
+                onAttachFileClick={() => {}}
+              />
+            )}
           </div>
         </div>
       );
@@ -216,7 +251,7 @@ export const ModalContent = ({
       );
     case ModalContentType.cancel:
       // TODO: сделать более нормальную проверку. Пока что дам возможность отменить бессрочные заявки.
-      if (!date || isRemainLessThanDay(date)) {
+      if (!date || !isRemainLessThanDay(date)) {
         return (
           <div className={styles.modalTooltip}>
             <h3 className={titleStyle}>Подтвердите удаление заявки</h3>
@@ -241,7 +276,20 @@ export const ModalContent = ({
             Вы не можете отменить заявку самостоятельно.
           </p>
           <div className={styles.modalButtons}>
-            <Button buttonType="primary" label="Написать администратору" />
+            <Button
+              buttonType="primary"
+              label="Написать администратору"
+              onClick={() => handleOpen()}
+            />
+            {isOpen && (
+              <PopupChat
+                isOpen={isOpen}
+                onClick={handleClose}
+                messages={[]}
+                chatmateInfo={infoAdmin}
+                onAttachFileClick={() => {}}
+              />
+            )}
           </div>
         </div>
       );
@@ -253,7 +301,20 @@ export const ModalContent = ({
             Вы не можете отменить или отредактировать заявку самостоятельно.
           </p>
           <div className={styles.modalButtons}>
-            <Button buttonType="primary" label="Написать администратору" />
+            <Button
+              buttonType="primary"
+              label="Написать администратору"
+              onClick={() => handleOpen()}
+            />
+            {isOpen && (
+              <PopupChat
+                isOpen={isOpen}
+                onClick={handleClose}
+                messages={[]}
+                chatmateInfo={infoAdmin}
+                onAttachFileClick={() => {}}
+              />
+            )}
           </div>
         </div>
       );

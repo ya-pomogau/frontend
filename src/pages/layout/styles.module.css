@@ -36,13 +36,13 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 920px) {
   .main {
     height: calc(100% - 112px);
   }
 }
 
-@media all and (max-width: 415px) {
+@media all and (max-width: 550px) {
   .main {
     height: calc(100% - 42px);
     margin-top: 20px;
