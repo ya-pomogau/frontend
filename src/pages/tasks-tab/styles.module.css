@@ -7,8 +7,3 @@
   overflow-y: auto;
   max-height: calc(65vh - 141px);
 }
-
-.input {
-  margin: 28px 0 0 42px;
-  width: 351px;
-}
