@@ -14,7 +14,6 @@ export { ProfileActivePage } from './profile-active';
 export { ProfileCompletedPage } from './profile-completed';
 export { ProfileMapPage } from './profile-map';
 export { CreateNewAdminPage } from './profile-new-admin';
-export { RecipientPage } from './recipient';
 export { RegisterPage } from './register';
 export { RequestsPage } from './requests';
 export { RequestsTab } from './requests-tab';

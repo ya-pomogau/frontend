@@ -1,8 +1,8 @@
-import { SmartHeader } from 'shared/ui/smart-header';
-import { Icon } from 'shared/ui/icons';
+import { SmartHeader, Icon } from 'shared/ui';
+
+import { RegisterForm } from './components';
 
 import styles from './styles.module.css';
-import { RegisterForm } from './components';
 
 export function RegisterPage() {
   return (
