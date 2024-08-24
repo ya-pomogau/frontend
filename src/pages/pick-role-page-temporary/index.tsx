@@ -13,6 +13,11 @@ const MOCK_USERS = {
   Recipient: '333',
   UnconfirmedRecipient: '555',
   UnconfirmedVolunteer: '111',
+  BlockedVolunteer: '888',
+  BlockedRecipient: '777',
+  VolunteerWith30tasks: '999',
+  VolunteerWith60tasks: '1111',
+  VolunteerWith60tasksAndKey: '2222',
 };
 
 export function PickRolePage() {
@@ -28,10 +33,6 @@ export function PickRolePage() {
   const handleEditId = (id: string) => {
     setUserId(id);
   };
-
-  // '1'
-
-  // '23118510435'
 
   const getPageYouWouldBeRedirected = () => {
     if (isRoot) {
@@ -83,6 +84,38 @@ export function PickRolePage() {
         </li>
         <li>
           <button
+            onClick={() => handleEditId(MOCK_USERS.BlockedVolunteer)}
+            style={{ marginRight: 10 }}
+          >
+            Заблокированный Волонтер
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.VolunteerWith30tasks)}
+            style={{ marginRight: 10 }}
+          >
+            Волонтер c 30-ю завершенными заявками
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.VolunteerWith60tasks)}
+            style={{ marginRight: 10 }}
+          >
+            Волонтер c 60-ю завершенными заявками
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.VolunteerWith60tasksAndKey)}
+            style={{ marginRight: 10 }}
+          >
+            Волонтер c 60-ю завершенными заявками и ключом
+          </button>
+        </li>
+        <li>
+          <button
             onClick={() => handleEditId(MOCK_USERS.Recipient)}
             style={{ marginRight: 10 }}
           >
@@ -95,6 +128,14 @@ export function PickRolePage() {
             style={{ marginRight: 10 }}
           >
             Неподтвержденный Реципиент
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleEditId(MOCK_USERS.BlockedRecipient)}
+            style={{ marginRight: 10 }}
+          >
+            Заблокированный Реципиент
           </button>
         </li>
         <li>
