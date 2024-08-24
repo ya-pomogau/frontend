@@ -1,6 +1,7 @@
 .title {
   padding: 40px 30px 12px;
   color: var(--colors-interface-primary);
+  font: var(--font-golos-24-28);
 }
 
 @media all and (max-width: 550px) {
