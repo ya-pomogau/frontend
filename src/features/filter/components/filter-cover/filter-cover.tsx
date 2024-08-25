@@ -6,7 +6,6 @@ import { Button } from 'shared/ui/button';
 import { useMediaQuery } from 'shared/hooks';
 import { Breakpoints } from 'shared/config';
 
-import type { IFilterValues } from 'features/filter/types';
 import { SortByBlock } from 'features/filter/ui/sortBy-block';
 import { RadiusBlock } from 'features/filter/ui/radius-block';
 import { CalenderBlock } from 'features/filter/ui/calender-block';
