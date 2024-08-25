@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import Header from 'widgets/header';
 import Footer from 'widgets/footer';
@@ -8,24 +8,14 @@ import { PageLayout } from 'shared/ui/page-layout';
 import styles from './styles.module.css';
 
 export function Layout() {
-  const location = useLocation();
-  const isMaxWidthOverlay =
-    location.pathname.includes('/policy') ||
-    location.pathname.includes('/blog');
   return (
-    <>
-      <MainWrapper>
-        <Header />
-        <main className={styles.main}>
-          <PageLayout content={<Outlet />} />
-        </main>
-        <div
-          className={
-            isMaxWidthOverlay ? styles.overlayMaxWidth : styles.overlay
-          }
-        />
-        <Footer />
-      </MainWrapper>
-    </>
+    <MainWrapper>
+      <Header />
+      <main className={styles.main}>
+        <PageLayout content={<Outlet />} />
+      </main>
+      <div className={styles.overlay} />
+      <Footer />
+    </MainWrapper>
   );
 }

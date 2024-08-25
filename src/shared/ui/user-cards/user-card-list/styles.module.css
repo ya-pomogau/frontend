@@ -68,7 +68,7 @@
   }
 }
 
-@media all and (max-width: 1200px) {
+@media all and (max-width: 1300px) {
   .content {
     height: 120px;
     gap: 5px;

@@ -1,8 +1,12 @@
-import { ReactElement, useEffect } from 'react';
+import { useEffect, ReactElement, FormEvent } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
 
+import { useMediaQuery } from 'shared/hooks';
+import { Breakpoints } from 'shared/config';
+
+import type { IFilterValues } from 'features/filter/types';
 import { SortByBlock } from 'features/filter/ui/sortBy-block';
 import { RadiusBlock } from 'features/filter/ui/radius-block';
 import { CalenderBlock } from 'features/filter/ui/calender-block';
@@ -33,6 +37,7 @@ export const FilterCover = ({
 }: FilterCoverProps) => {
   const [_, setSearchParams] = useSearchParams();
   const newSearchParams = new URLSearchParams();
+  const isMobile = useMediaQuery(Breakpoints.L);
 
   const defaultValues = {
     categories: { value: [], component: CategoriesBlock },
@@ -74,7 +79,7 @@ export const FilterCover = ({
   const filterValues = watch();
 
   useEffect(() => {
-    if (window.innerWidth > 768) {
+    if (!isMobile) {
       setFilteres?.({
         ...filterValues,
       });
@@ -158,7 +163,7 @@ export const FilterCover = ({
           ))}
           <div
             className={`${styles.buttonWrapper} ${
-              window.innerWidth <= 768 ? styles.buttonWrapper__mobile : null
+              isMobile ? styles.buttonWrapper__mobile : null
             }`}
           >
             <Button

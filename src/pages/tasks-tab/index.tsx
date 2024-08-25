@@ -1,6 +1,6 @@
 import { UserCardForTasks } from 'widgets/user-card-for-tasks';
-import styles from './styles.module.css';
 import { User } from 'entities/user/types';
+import styles from './styles.module.css';
 
 interface TabProps {
   data: User[];

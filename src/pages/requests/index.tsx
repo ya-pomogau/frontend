@@ -64,12 +64,12 @@ export function RequestsPage({ incomeTab }: PageProps) {
 
   const handleApplyFilters = (filter: IFilterValues) => {
     if (incomeTab === Tabs.NOTPROCESSED) {
-      const { categories } = filter;
+      const { userCategories } = filter;
 
       const filteredData = getFilteredTabData()?.filter(
         (card) =>
-          categories.includes(FilterItemsIds.ALL) ||
-          categories.includes(card.role)
+          userCategories.includes(FilterItemsIds.ALL) ||
+          userCategories.includes(card.role)
       );
 
       if (filteredData) {

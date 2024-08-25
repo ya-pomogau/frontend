@@ -51,7 +51,7 @@
   width: 22px;
 }
 
-@media screen and (min-width: 1151px) {
+@media screen and (min-width: 1150px) {
   .taskInfo {
     gap: 5px;
     margin-top: 44px;

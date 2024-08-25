@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import classnames from 'classnames';
+import { useMediaQuery } from 'shared/hooks';
+import { Breakpoints } from 'shared/config';
 
 import styles from '../styles.module.css';
 import { TimePickerElement } from 'shared/ui/time-picker';
@@ -10,30 +12,14 @@ interface TimeBlockProps {
 }
 
 export const TimeBlock = ({ onChange }: TimeBlockProps) => {
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery(Breakpoints.L);
   const buttonRef = useRef<HTMLInputElement>(null);
   const [startTime, setStartTime] = useState<string>('00:00');
   const [endTime, setEndTime] = useState<string>('00:00');
 
-  const setTypeResolution = () => {
-    if (window.innerWidth <= 768) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  };
-
   useEffect(() => {
     onChange([startTime, endTime]);
   }, [startTime, endTime]);
-
-  useEffect(() => {
-    setTypeResolution();
-    window.addEventListener('resize', setTypeResolution);
-    return () => {
-      window.removeEventListener('resize', setTypeResolution);
-    };
-  }, []);
 
   return (
     <div className={styles.filterBlock}>

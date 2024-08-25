@@ -1,24 +1,26 @@
-import { InfoContainer } from 'shared/ui/info-container';
-import { InfoContainerContent } from 'shared/ui/info-container-content';
-import { Loader } from 'shared/ui/loader';
-import { VolunteerInfo } from './volunteer-info';
-import { UnauthorizedUser } from './unauthorized-user';
+import { useAppDispatch } from 'app/hooks';
+import { InfoContainer, InfoContainerContent, Loader } from 'shared/ui';
+import { useControlModal, useRouteMatch, useUser } from 'shared/hooks';
+import { UserRole } from 'shared/types/common.types';
+import { setTokenAccess } from 'shared/libs/utils';
+import { Routes } from 'shared/config';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
 import { useUpdateUserProfileMutation } from 'services/user-api';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
-import styles from './styles.module.css';
-import { UserRole } from 'shared/types/common.types';
 import { setUser } from 'entities/user/model';
-import { setTokenAccess } from 'shared/libs/utils';
-import { useControlModal, useRouteMatch } from 'shared/hooks';
+import { VolunteerInfo } from './volunteer-info';
+import { UnauthorizedUser } from './unauthorized-user';
 
 export const UserInfo = () => {
   const dispatch = useAppDispatch();
   const { isOpen, handleOpen, handleClose } = useControlModal();
 
-  const user = useAppSelector((state) => state.user.data);
-  const isInAuthUser = useRouteMatch(['/register', '/login', '/vk-auth']);
+  const user = useUser();
+  const isInAuthUser = useRouteMatch([
+    Routes.REGISTER,
+    Routes.LOGIN,
+    Routes.VK_AUTH,
+  ]);
 
   const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
 
@@ -56,17 +58,15 @@ export const UserInfo = () => {
         isOpen={isOpen}
         onClose={handleClose}
       />
-      <div className={styles.contentWrapper}>
-        <InfoContainerContent
-          id={user.vkId}
-          name={user.name}
-          phone={user.phone}
-          address={user.address}
-        />
-        {user.role === UserRole.VOLUNTEER && (
-          <VolunteerInfo score={user.score || 0} hasKey={user.keys || false} />
-        )}
-      </div>
+      <InfoContainerContent
+        id={user.vkId}
+        name={user.name}
+        phone={user.phone}
+        address={user.address}
+      />
+      {user.role === UserRole.VOLUNTEER && (
+        <VolunteerInfo score={user.score || 0} hasKey={user.keys || false} />
+      )}
     </InfoContainer>
   ) : (
     <InfoContainer name="Незарегистрированный пользователь">

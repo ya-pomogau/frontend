@@ -1,4 +1,5 @@
 .titlePrimary {
   padding: 40px 18px 12px 35px;
-  color: var(--colors-interface-primary);
+  color: var(--colors-interface-primary-additional);
+  font: var(--font-golos-24-28);
 }
