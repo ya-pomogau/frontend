@@ -2,7 +2,7 @@ import { FilterWrapper } from 'features/filter/components/filter-wrapper';
 import { FilterProps } from 'features/filter/types';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-// import { resetFilterData, setFilterData } from '../../services/system-slice';
+import { resetFilterData } from './model';
 
 export const Filter = ({
   items,
@@ -11,20 +11,11 @@ export const Filter = ({
 }: FilterProps) => {
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   return () => {
-  //     console.log('ttt');
-  //     const zzz = {
-  //       categories: [],
-  //       searchRadius: '',
-  //       sortBy: '',
-  //       date: '',
-  //       time: [],
-  //       userCategories: [],
-  //     };
-  //     // dispatch(setFilterData(zzz));
-  //   };
-  // }, []);
+  useEffect(() => {
+    return () => {
+      dispatch(resetFilterData());
+    };
+  }, []);
 
   if (notFoundFilter) {
     return null;

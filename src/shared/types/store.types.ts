@@ -1,6 +1,5 @@
 import { TUser, TVKUser } from '../../entities/user/types';
 import { RootState } from '../../app/store';
-import { IFilterValues } from '../../features/filter/types';
 
 export enum SocketEvent {
   CONNECT = 'connect',

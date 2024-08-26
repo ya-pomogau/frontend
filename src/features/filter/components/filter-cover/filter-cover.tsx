@@ -1,5 +1,4 @@
-import { ReactElement, Ref, useEffect } from 'react';
-import { useEffect, ReactElement, FormEvent } from 'react';
+import { useEffect, ReactElement } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
@@ -23,8 +22,12 @@ import { useSearchParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-// import { userSelector } from '../../../../services';
-// import { setFilterData } from '../../../../services/system-slice';
+import {
+  emptyFilterData,
+  filterDataSelector,
+  resetFilterData,
+  setFilterData,
+} from '../../model';
 
 interface FilterCoverProps {
   filterMenu: FilterProps['items'];
@@ -45,7 +48,7 @@ export const FilterCover = ({
 
   const dispatch = useAppDispatch();
 
-  // const someFilterData = useAppSelector(filterDataSelector);
+  const someFilterData = useAppSelector(filterDataSelector);
 
   const defaultValues = {
     categories: { value: [], component: CategoriesBlock },
@@ -69,8 +72,7 @@ export const FilterCover = ({
     if (filterParams)
       Object.keys(filterParams).map((item) => {
         if (filterParams[item]) {
-          ret.values[item] = defaultValues[item].value;
-          // ret.values[item] = someFilterData[item];
+          ret.values[item] = someFilterData[item];
           ret.components[item] = defaultValues[item].component;
         }
       });
@@ -118,16 +120,11 @@ export const FilterCover = ({
     });
     setSearchParams(newSearchParams);
     setFilteres?.(filterValues);
-    let zzz = {
-      categories: [],
-      searchRadius: '',
-      sortBy: '',
-      date: '',
-      time: [],
-      userCategories: [],
+    const newFilterData = {
+      ...emptyFilterData,
+      ...filterValues,
     };
-    zzz = { ...zzz, ...filterValues };
-    // dispatch(setFilterData(zzz));
+    dispatch(setFilterData(newFilterData));
     closeFilterMenu();
   };
 
@@ -135,15 +132,7 @@ export const FilterCover = ({
 
   const resetFilter = () => {
     reset(values);
-    const zzz = {
-      categories: [],
-      searchRadius: '',
-      sortBy: '',
-      date: '',
-      time: [],
-      userCategories: [],
-    };
-    // dispatch(setFilterData(zzz));
+    dispatch(resetFilterData());
     setSearchParams(defaultObjFilteres);
     setFilteres?.(defaultObjFilteres);
     closeFilterMenu();
