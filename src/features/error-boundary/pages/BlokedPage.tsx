@@ -3,22 +3,22 @@ import image from '../assets/privacy.png';
 import styles from '../styles.module.css';
 import { Icon } from 'shared/ui/icons';
 import { Filter } from 'features/filter';
+import { useState } from 'react';
+import { IFilterValues } from '../../filter/types';
 
 export const BlokedPage = () => {
+  const [filterData, setFilterData] = useState<Partial<IFilterValues>>({
+    categories: [],
+    searchRadius: '',
+    date: '',
+  });
+
   return (
     <>
       <SmartHeader
         icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
         text="Карта заявок"
-        filter={
-          <Filter
-            items={{
-              categories: true,
-              searchRadius: true,
-              date: true,
-            }}
-          />
-        }
+        filter={<Filter items={filterData} setFilterData={setFilterData} />}
       />
       <div className={styles.content_box}>
         <img

@@ -8,15 +8,15 @@ export interface IFilterValues {
 }
 
 export interface FilteringProps {
-  items: {
-    [key in keyof IFilterValues]?: boolean;
-  };
+  items: Partial<IFilterValues>;
+  setFilterData?: (filterData: Partial<IFilterValues>) => void;
   setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
 }
 
 export interface NotFoundFilterProps {
   items?: never;
+  setFilterData?: (filterData: Partial<IFilterValues>) => void;
   setFilteres?: (date: IFilterValues) => void;
   notFoundFilter: boolean;
 }

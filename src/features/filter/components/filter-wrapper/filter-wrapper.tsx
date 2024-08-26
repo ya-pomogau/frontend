@@ -2,16 +2,17 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FilterButton } from 'features/filter/components/filter-button';
 import { FilterCover } from 'features/filter/components/filter-cover';
-import { FilterProps, IFilterValues } from 'features/filter/types';
+import { IFilterValues } from 'features/filter/types';
 
 interface FilterWrapperProps {
-  // filterMenu: { [key in keyof IFilterValues]?: boolean } | undefined;
-  filterMenu: FilterProps['items'];
+  filterMenu?: Partial<IFilterValues>;
+  setFilterData?: (filterData: Partial<IFilterValues>) => void;
   setFilteres?: (data: IFilterValues) => void;
 }
 
 export const FilterWrapper = ({
   filterMenu,
+  setFilterData,
   setFilteres,
 }: FilterWrapperProps) => {
   const [isFilterMenuVisible, setFilterMenuVisible] = useState(false);
@@ -52,6 +53,7 @@ export const FilterWrapper = ({
 
       {isFilterMenuVisible && (
         <FilterCover
+          setFilterData={setFilterData}
           closeFilterMenu={toggleFilterMenu}
           position={filterPosition}
           filterMenu={filterMenu}

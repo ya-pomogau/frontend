@@ -20,6 +20,11 @@ export function ProfileActivePage() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user.data);
 
+  const [filterData, setFilterData] = useState<Partial<IFilterValues>>({
+    sortBy: '',
+    categories: [],
+  });
+
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
@@ -45,6 +50,7 @@ export function ProfileActivePage() {
     if (user) {
       dispatch(startSocketConnection());
     }
+    console.log('info', infoFilterTasks);
   }, [user]);
 
   return (
@@ -55,12 +61,8 @@ export function ProfileActivePage() {
         filter={
           !isUnConfirmed ? (
             <Filter
-              items={{
-                sortBy: true,
-                categories: true,
-                searchRadius: false,
-                date: false,
-              }}
+              items={filterData}
+              setFilterData={setFilterData}
               setFilteres={setInfoFilterTasks}
             />
           ) : (

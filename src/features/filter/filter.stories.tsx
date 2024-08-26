@@ -57,11 +57,15 @@ type Story = StoryObj<typeof meta>;
 export const DefaultFilter: Story & any = {
   args: {
     items: {
-      sortBy: false,
-      categories: true,
-      searchRadius: true,
-      time: true,
-      date: true,
+      // sortBy: false,
+      // categories: true,
+      // searchRadius: true,
+      // time: true,
+      // date: true,
+      categories: [],
+      searchRadius: '',
+      time: [],
+      date: '',
     },
   },
   render: ({ ...args }: FilteringProps) => (
@@ -82,11 +86,13 @@ export const DefaultFilter: Story & any = {
 export const FilterTasksVolunteers: Story & any = {
   args: {
     items: {
-      sort: true,
-      categories: true,
-      radius: false,
-      time: false,
-      date: false,
+      // sortBy: true,
+      // categories: true,
+      // searchRadius: false,
+      // time: false,
+      // date: false,
+      sortBy: '',
+      categories: [],
     },
   },
   render: ({ ...args }: FilteringProps) => (
@@ -107,11 +113,13 @@ export const FilterTasksVolunteers: Story & any = {
 export const FilterTasksRecipien: Story & any = {
   args: {
     items: {
-      sort: true,
-      categories: true,
-      radius: false,
-      time: false,
-      date: false,
+      // sortBy: true,
+      // categories: true,
+      // searchRadius: false,
+      // time: false,
+      // date: false,
+      sortBy: '',
+      categories: [],
     },
   },
   render: ({ ...args }: FilteringProps) => (

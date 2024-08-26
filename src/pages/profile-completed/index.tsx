@@ -20,6 +20,11 @@ export function ProfileCompletedPage() {
     useState<IFilterValues>(defaultObjFilteres);
   const [filterTasks, setFilterTasks] = useState<Task[]>([]);
 
+  const [filterData, setFilterData] = useState<Partial<IFilterValues>>({
+    sortBy: '',
+    categories: [],
+  });
+
   const { role } = useAppSelector((state) => state.user);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
@@ -43,12 +48,8 @@ export function ProfileCompletedPage() {
         filter={
           !isUnConfirmed ? (
             <Filter
-              items={{
-                sortBy: true,
-                categories: true,
-                searchRadius: false,
-                date: false,
-              }}
+              items={filterData}
+              setFilterData={setFilterData}
               setFilteres={setInfoFilterTasks}
             />
           ) : (

@@ -1,4 +1,4 @@
-import { useEffect, ReactElement, FormEvent } from 'react';
+import { useEffect, ReactElement } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
@@ -25,6 +25,7 @@ interface FilterCoverProps {
   filterMenu: FilterProps['items'];
   closeFilterMenu: () => void;
   position: { top: number; right: number };
+  setFilterData?: (filterData: Partial<IFilterValues>) => void;
   setFilteres?: (item: IFilterValues) => void;
 }
 
@@ -32,6 +33,7 @@ export const FilterCover = ({
   filterMenu,
   setFilteres,
   closeFilterMenu,
+  setFilterData,
   position,
 }: FilterCoverProps) => {
   const [_, setSearchParams] = useSearchParams();
@@ -47,7 +49,7 @@ export const FilterCover = ({
     userCategories: { value: [], component: UserCategoriesBlock },
   };
 
-  const getDefaultValues = (filterParams: FilterProps['items']) => {
+  const getInitialValues = (filterParams: FilterProps['items']) => {
     const ret: {
       values: Partial<IFilterValues>;
       components: {
@@ -60,14 +62,23 @@ export const FilterCover = ({
     if (filterParams)
       Object.keys(filterParams).map((item) => {
         if (filterParams[item]) {
-          ret.values[item] = defaultValues[item].value;
+          ret.values[item] = filterMenu[item];
           ret.components[item] = defaultValues[item].component;
         }
       });
     return ret;
   };
 
-  const { values, components } = getDefaultValues(filterMenu);
+  let defFilterData: Partial<IFilterValues> = {};
+
+  if (filterMenu)
+    Object.keys(filterMenu).map((item) => {
+      if (filterMenu[item]) {
+        defFilterData[item] = defaultValues[item].value;
+      }
+    });
+
+  const { values, components } = getInitialValues(filterMenu);
 
   const { control, handleSubmit, reset, watch } = useForm<
     Partial<IFilterValues>
@@ -108,6 +119,7 @@ export const FilterCover = ({
     });
     setSearchParams(newSearchParams);
     setFilteres?.(filterValues);
+    setFilterData?.(filterValues);
     closeFilterMenu();
   };
 
@@ -116,6 +128,7 @@ export const FilterCover = ({
   const resetFilter = () => {
     reset(values);
     setSearchParams(defaultObjFilteres);
+    setFilterData?.(defFilterData);
     setFilteres?.(defaultObjFilteres);
     closeFilterMenu();
   };

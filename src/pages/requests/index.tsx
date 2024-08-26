@@ -48,6 +48,9 @@ export function RequestsPage({ incomeTab }: PageProps) {
   const [searchName, setSearchName] = useState('');
   const [filteredName, setFilteredName] = useState<User[]>([]);
   const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
+  const [filterData, setFilterData] = useState<Partial<IFilterValues>>({
+    userCategories: [],
+  });
 
   const getFilteredTabData = () => {
     const dataMap: Record<string, User[] | undefined> = {
@@ -110,7 +113,8 @@ export function RequestsPage({ incomeTab }: PageProps) {
           incomeTab === Tabs.NOTPROCESSED ? (
             getFilteredTabData()?.length ? (
               <Filter
-                items={{ userCategories: true }}
+                items={filterData}
+                setFilterData={setFilterData}
                 setFilteres={handleApplyFilters}
               />
             ) : (

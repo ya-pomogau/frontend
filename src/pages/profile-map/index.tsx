@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -12,8 +12,16 @@ import { Filter } from '../../features/filter';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { Icon } from '../../shared/ui/icons';
 import { Loader } from '../../shared/ui/loader';
+import { IFilterValues } from '../../features/filter/types';
 
 export function ProfileMapPage() {
+  const [filterData, setFilterData] = useState<Partial<IFilterValues>>({
+    categories: [],
+    searchRadius: '',
+    date: '',
+    time: [],
+  });
+
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
@@ -71,14 +79,7 @@ export function ProfileMapPage() {
         text="Карта заявок"
         filter={
           !isUnconfirmed && isVolunteer ? (
-            <Filter
-              items={{
-                categories: true,
-                searchRadius: true,
-                date: true,
-                time: true,
-              }}
-            />
+            <Filter items={filterData} setFilterData={setFilterData} />
           ) : (
             <></>
           )

@@ -3,6 +3,7 @@ import { FilterProps } from 'features/filter/types';
 
 export const Filter = ({
   items,
+  setFilterData,
   notFoundFilter = false,
   setFilteres,
 }: FilterProps) => {
@@ -10,5 +11,11 @@ export const Filter = ({
     return null;
   }
 
-  return <FilterWrapper filterMenu={items} setFilteres={setFilteres} />;
+  return (
+    <FilterWrapper
+      filterMenu={items}
+      setFilterData={setFilterData}
+      setFilteres={setFilteres}
+    />
+  );
 };
