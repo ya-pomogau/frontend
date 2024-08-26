@@ -19,11 +19,8 @@ import { useSearchParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { userSelector } from '../../../../services';
-import {
-  filterDataSelector,
-  setFilterData,
-} from '../../../../services/system-slice';
+// import { userSelector } from '../../../../services';
+// import { setFilterData } from '../../../../services/system-slice';
 
 interface FilterCoverProps {
   filterMenu: FilterProps['items'];
@@ -43,7 +40,7 @@ export const FilterCover = ({
 
   const dispatch = useAppDispatch();
 
-  const someFilterData = useAppSelector(filterDataSelector);
+  // const someFilterData = useAppSelector(filterDataSelector);
 
   const defaultValues = {
     categories: { value: [], component: CategoriesBlock },
@@ -67,8 +64,8 @@ export const FilterCover = ({
     if (filterParams)
       Object.keys(filterParams).map((item) => {
         if (filterParams[item]) {
-          // ret.values[item] = defaultValues[item].value;
-          ret.values[item] = someFilterData[item];
+          ret.values[item] = defaultValues[item].value;
+          // ret.values[item] = someFilterData[item];
           ret.components[item] = defaultValues[item].component;
         }
       });
@@ -125,7 +122,7 @@ export const FilterCover = ({
       userCategories: [],
     };
     zzz = { ...zzz, ...filterValues };
-    dispatch(setFilterData(zzz));
+    // dispatch(setFilterData(zzz));
     closeFilterMenu();
   };
 
@@ -133,7 +130,7 @@ export const FilterCover = ({
 
   const resetFilter = () => {
     reset(values);
-    let zzz = {
+    const zzz = {
       categories: [],
       searchRadius: '',
       sortBy: '',
@@ -141,7 +138,7 @@ export const FilterCover = ({
       time: [],
       userCategories: [],
     };
-    dispatch(setFilterData(zzz));
+    // dispatch(setFilterData(zzz));
     setSearchParams(defaultObjFilteres);
     setFilteres?.(defaultObjFilteres);
     closeFilterMenu();

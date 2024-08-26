@@ -31,7 +31,6 @@ export type TSystemSliceState = {
   isNew: boolean;
   socketConnectionStatus: SocketConnectionStatus | null;
   socketMessage: TSocketMessage | null;
-  filterData: IFilterValues;
 };
 
 export type TCustomSelector<T> = (state: RootState) => T;

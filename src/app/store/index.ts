@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { userModel } from 'entities/user/model';
 import { createRequestModel } from 'features/create-request/model/create-request';
+import { filterDataModel } from 'features/filter/model/filtrer-data';
 import { usersApi } from 'services/user-api';
 import { contactsApi } from 'services/contacts-api';
 import { tasksApi } from 'services/tasks-api';
@@ -20,6 +21,7 @@ export const store = configureStore({
     error: errorModel.reducer,
     user: userModel.reducer,
     createRequest: createRequestModel.reducer,
+    filterData: filterDataModel.reducer,
     system: systemSliceReducer,
     [usersApi.reducerPath]: usersApi.reducer,
     [contactsApi.reducerPath]: contactsApi.reducer,
