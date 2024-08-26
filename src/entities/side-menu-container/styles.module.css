@@ -31,7 +31,7 @@
   max-width: 354px;
 }
 
-@media (min-width: 414px) {
+@media (min-width: 550px) {
   .button__container {
     gap: 8px;
     height: 426px;

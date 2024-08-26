@@ -36,7 +36,7 @@
   width: 5px;
 }
 
-.datePicker__calendarHeader{
+.datePicker__calendarHeader {
   height: 20px;
   display: flex;
   align-items: center;
@@ -94,7 +94,7 @@
   gap: 20px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 550px) {
   .wrapper {
     margin-left: 12px;
   }

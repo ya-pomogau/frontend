@@ -9,3 +9,8 @@
 .field {
   width: 359px;
 }
+
+.field label {
+  color: var(--colors-interface-primary);
+  font: var(--font-golos-14-16);
+}

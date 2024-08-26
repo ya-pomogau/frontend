@@ -38,7 +38,7 @@
   content: '';
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 920px) {
   .tabContainer__text {
     font-family: Golos, 'sans-serif';
     font-size: 12px;

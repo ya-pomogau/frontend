@@ -1,7 +1,6 @@
 .mainWrapper {
   position: relative;
   top: -8px;
-
 }
 .container {
   margin: 50px 0 0 76px;
@@ -40,9 +39,9 @@
   margin: 0;
   margin-top: 5px;
   height: auto;
-  overflow: hidden; 
-  max-height: 64px; 
-  transition: max-height 0.3s ease; 
+  overflow: hidden;
+  max-height: 64px;
+  transition: max-height 0.3s ease;
 }
 
 .descriptionForTask.expanded {
@@ -112,32 +111,32 @@
     margin-top: 4px;
     align-self: center;
     position: relative;
-    bottom: -10px
+    bottom: -10px;
   }
   .dateWrapper {
     margin: 0;
     margin-top: 30px;
     position: relative;
-    bottom: -12px
+    bottom: -12px;
   }
 
   .addressWrapper {
     position: relative;
-    bottom: -15px
+    bottom: -15px;
   }
   .typeOfTask {
     margin-top: 5px;
     margin-bottom: 10px;
   }
-  
+
   .descriptionForTask {
     margin: 0;
     margin-top: 5px;
     height: auto;
-    overflow: hidden; 
-    max-height: 64px; 
+    overflow: hidden;
+    max-height: 64px;
     max-width: 250px;
-    transition: max-height 0.3s ease; 
+    transition: max-height 0.3s ease;
   }
 
   .descriptionForTask.expanded {

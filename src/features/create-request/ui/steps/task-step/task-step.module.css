@@ -1,4 +1,3 @@
-
 .taskContainer {
   display: grid;
   grid-template-columns: 76px 450px;
@@ -34,8 +33,8 @@
 }
 
 .mainWrapper {
-position: relative;
-top: 12px ;
+  position: relative;
+  top: 12px;
 }
 
 .prevButton {
@@ -48,7 +47,7 @@ top: 12px ;
   font-family: 'Golos', sans-serif;
   font-size: 14px;
   grid-column-start: 2;
-  min-height: 20px
+  min-height: 20px;
 }
 
 .alertWrapper {
@@ -122,10 +121,10 @@ top: 12px ;
     bottom: 10px;
     left: -7px;
   }
-  
+
   .messageAlert {
-  position: relative;
-  bottom: -10px;
-  left: 10px;
+    position: relative;
+    bottom: -10px;
+    left: 10px;
   }
 }

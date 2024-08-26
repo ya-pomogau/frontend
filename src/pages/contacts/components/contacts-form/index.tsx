@@ -1,13 +1,13 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import usePermission from 'shared/hooks/use-permission';
-import { UserRole, UserStatus, TContacts } from 'shared/types/common.types';
+import { usePermission } from 'shared/hooks';
 import { Button } from 'shared/ui';
+import { UserRole, UserStatus, TContacts } from 'shared/types/common.types';
 import { useGetContactsQuery } from 'services/contacts-api';
 import { useUpdateContactsMutation } from 'services/admin-api';
 
-import { ContactInput } from '../ContactInput';
+import { ContactInput } from '../contact-input';
 import { schema } from './schema';
 
 import styles from './styles.module.css';
@@ -128,5 +128,3 @@ export const ContactForm = () => {
     </form>
   );
 };
-
-export default ContactForm;
