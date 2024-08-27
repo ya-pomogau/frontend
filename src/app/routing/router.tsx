@@ -10,7 +10,6 @@ import {
   BlogPage,
   PolicyPage,
   ContactsPage,
-  FeedbackPage,
   ProfilePage,
   PickRolePage,
   NotFoundPage,
@@ -26,7 +25,6 @@ import {
   UsersStatisticsPage,
   TasksPage,
   TasksProfilePage,
-  SettingsPage,
   LoginPage,
   Logout,
   BidsPage,
@@ -49,7 +47,6 @@ export const router = createBrowserRouter([
           { path: Routes.BLOG, element: <BlogPage /> },
           { path: Routes.POLICY, element: <PolicyPage /> },
           { path: Routes.CONTACTS, element: <ContactsPage /> },
-          { path: Routes.FEEDBACK, element: <FeedbackPage /> },
           // Удалить когда система аутификации будет готова
           { path: Routes.PICK, element: <PickRolePage /> },
         ],
@@ -70,7 +67,6 @@ export const router = createBrowserRouter([
         ),
         children: [
           { path: Routes.PROFILE, element: <ProfilePage /> },
-          { path: Routes.SETTINGS, element: <SettingsPage /> },
           { path: Routes.OUT, element: <Logout /> },
         ],
       },

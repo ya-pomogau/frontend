@@ -23,7 +23,7 @@
   gap: 11px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 920px) {
   .tooltip {
     max-width: 343px;
   }

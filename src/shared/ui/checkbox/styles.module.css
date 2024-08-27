@@ -85,7 +85,7 @@
   cursor: default;
 }
 
-@media (width < 768px) {
+@media (width < 920px) {
   .checkboxIconWrapper {
     margin-right: 10px;
   }

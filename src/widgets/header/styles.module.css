@@ -113,7 +113,7 @@
   max-height: 43px;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1150px) {
   .header__container {
     max-width: 1000px;
   }
@@ -149,7 +149,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 550px) {
   .header__container {
     padding: 0;
   }

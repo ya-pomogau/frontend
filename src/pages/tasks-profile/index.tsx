@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { skipToken } from '@reduxjs/toolkit/query/react';
 
 import { Icon } from 'shared/ui/icons';

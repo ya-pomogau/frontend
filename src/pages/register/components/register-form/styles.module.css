@@ -9,9 +9,7 @@
 
 .text {
   padding-top: 10px;
-  font-family: 'Golos', sans-serif;
-  font-size: 12px;
-  line-height: 14px;
+  font: var(--font-golos-12-14);
   padding-bottom: 6px;
 }
 

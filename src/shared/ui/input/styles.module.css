@@ -72,7 +72,7 @@
   transition: var(--transition-hover);
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 550px) {
   .label {
     font-size: 12px;
     line-height: 14px;

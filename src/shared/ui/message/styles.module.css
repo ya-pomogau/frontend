@@ -75,13 +75,13 @@
   z-index: 10;
 }
 
-@media (max-width: 1350px) {
+@media (max-width: 1300px) {
   .wrapper--send {
     width: 160px;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 550px) {
   .wrapper--send {
     width: 120px;
     padding: 5px;
