@@ -77,7 +77,7 @@ export const TaskButtons = ({
     description,
     date,
     location: location.coordinates,
-    time: '',
+    time: date === null ? '' : format(new Date(date!), 'HH:mm'),
   };
   const [fulfillTask] = useFulfillTaskMutation();
 
