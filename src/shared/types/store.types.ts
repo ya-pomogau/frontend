@@ -1,16 +1,6 @@
 import { TUser, TVKUser } from '../../entities/user/types';
 import { RootState } from '../../app/store';
 
-export enum SocketEvent {
-  CONNECT = 'connect',
-  CONNECT_USER_MESSAGE = 'connect_user',
-  MESSAGE = 'message',
-  CONNECT_ERROR = 'connect_error',
-  DISCONNECT = 'disconnect',
-  CLOSE = 'close',
-  TEST = 'test_event', //временное событие, удалить после реализации нужного
-}
-
 export enum SocketConnectionStatus {
   INIT = 'init', //подключение устанавливается
   CONNECT_ERROR = 'connect_error', //ошибка подключения
@@ -19,7 +9,25 @@ export enum SocketConnectionStatus {
   DISCONNECTED = `disconnected`, //подключение прервано
 }
 
-export type TSocketMessage = {
+// TODO: Сверить и привести к единообразию интерфейсы сообщений на фронте и на бэке
+export enum wsEventMessage {
+  ON_CONNECT = 'connect',
+  ON_CONNECT_ERROR = 'connect_error',
+  ON_DISCONNECT = 'disconnect',
+  ON_MESSAGE = 'message',
+  ON_TEST = 'test_event', //временное событие, удалить после реализации нужного
+  ON_ERROR = 'error',
+  ON_REFRESH_TOKEN = 'RefreshToken',
+  ON_DISCONNECTION = 'Disconnection',
+  EMIT_CLOSE = 'close',
+}
+
+export type wsTokenPayload = {
+  user: TUser;
+  token: string;
+};
+
+export type wsTestMessage = {
   data: object | string;
 };
 
@@ -29,7 +37,7 @@ export type TSystemSliceState = {
   isPending: boolean;
   isNew: boolean;
   socketConnectionStatus: SocketConnectionStatus | null;
-  socketMessage: TSocketMessage | null;
+  socketMessage: wsTestMessage | null;
 };
 
 export type TCustomSelector<T> = (state: RootState) => T;
