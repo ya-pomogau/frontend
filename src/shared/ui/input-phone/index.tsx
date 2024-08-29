@@ -4,6 +4,7 @@ import {
   ReactNode,
   MouseEvent,
   ChangeEvent,
+  useState,
 } from 'react';
 import cn from 'classnames';
 import { nanoid } from 'nanoid';
@@ -33,22 +34,43 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
       extClassName,
       extClassNameInput,
       placeholder,
-      error,
-      errorText,
+      error = false,
+      errorText = 'Некорректный номер телефона',
       customIcon,
       onIconClick,
     },
     ref
   ) => {
     const id = nanoid();
+    const [isValid, setIsValid] = useState<boolean>(true);
 
-    const inputClass = error
-      ? styles.input_error
-      : extClassNameInput
-      ? extClassNameInput
-      : styles.input;
+    const validatePhoneNumber = (value: string) => {
+      if (value.trim() === '') {
+        return true;
+      }
+      const phoneRegex = /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/;
+      return phoneRegex.test(value);
+    };
 
-    const iconClass = error ? styles.icon_error : styles.icon;
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      const valid = validatePhoneNumber(value);
+
+      setIsValid(valid);
+
+      if (onChange) {
+        onChange(e);
+      }
+    };
+
+    const inputClass =
+      !isValid || error
+        ? styles.input_error
+        : extClassNameInput
+        ? extClassNameInput
+        : styles.input;
+
+    const iconClass = !isValid || error ? styles.icon_error : styles.icon;
 
     return (
       <div className={extClassName} data-testid={'div'}>
@@ -84,11 +106,11 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
               /\d/,
               /\d/,
             ]}
-            onChange={onChange}
+            onChange={handleChange}
           />
-          <span className={cn(styles.error, 'text')}>
-            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
-          </span>
+          {(error || !isValid) && (
+            <span className={cn(styles.error, 'text')}>{errorText}</span>
+          )}
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>
