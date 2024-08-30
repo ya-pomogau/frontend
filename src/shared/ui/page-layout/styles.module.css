@@ -20,7 +20,12 @@
 }
 
 .side {
-  display: block;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
 }
 
 .content {
@@ -34,6 +39,6 @@
   }
 
   .side {
-    display: none;
+    align-items: center;
   }
 }
