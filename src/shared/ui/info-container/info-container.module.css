@@ -52,15 +52,11 @@
     max-width: 354px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
 
   .info-container-content {
     max-width: 354px;
     padding: 0 60px;
-  }
-
-  .info-container-settings-button {
-    left: -50px;
   }
 }

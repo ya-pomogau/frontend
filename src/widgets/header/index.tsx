@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useControlModal, useMediaQuery, useUser } from 'shared/hooks';
@@ -43,11 +43,13 @@ const Header = () => {
     <header className={headerStyles}>
       <div className={styles.header__container}>
         {isMobile && user && (
-          <Avatar
+          <Link to="/profile">
+            <Avatar
             extClassName={styles.header__avatar}
             avatarName={user.name}
             avatarLink={user.avatar || defaultAvatar}
-          />
+            />
+          </Link>
         )}
         {isMobile && !user && (
           <Button
