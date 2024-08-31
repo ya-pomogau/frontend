@@ -21,10 +21,10 @@
   cursor: pointer;
   color: var(--colors-interface-primary-additional);
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Golos, 'sans-serif';
-  font-size: 12px;
+  font-family: var(--font-family-golos);
+  font-size: var(--font-size-small);
   font-style: normal;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   line-height: 20px; /* 166.667% */
   letter-spacing: -0.32px;
 }
@@ -42,11 +42,7 @@
   box-sizing: border-box;
   color: var(--colors-interface-black);
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Golos, 'sans-serif';
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px; /* 129.412% */
+  font: var(--font-golos-16-22);
   letter-spacing: -0.408px;
 }
 

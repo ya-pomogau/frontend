@@ -25,10 +25,10 @@
 
 .label {
   display: inline-block;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
-  color: #000000;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-middle);
+  font-weight: var(--font-weight-regular);
+  color: var(--colors-interface-black);
   margin-bottom: 8px;
 }
 
