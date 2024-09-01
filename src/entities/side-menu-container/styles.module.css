@@ -56,8 +56,8 @@
     height: auto;
   }
 
-  .button__container--main, .button__container--sea {
+  .button__container--main,
+  .button__container--sea {
     border: none;
   }
 }
-

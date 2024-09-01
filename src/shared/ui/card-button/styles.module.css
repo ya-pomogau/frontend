@@ -21,7 +21,7 @@
 }
 .card-button:disabled {
   cursor: default;
-} 
+}
 
 .card-buttonImg {
   display: flex;
@@ -53,7 +53,7 @@
     padding: 12px;
     height: 100%;
   }
-  
+
   .card-buttonLabel {
     flex: 1;
     font-size: var(--font-size-small);

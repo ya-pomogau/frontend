@@ -14,7 +14,7 @@ import { checkTokenThunk } from 'services/system-slice';
 function App() {
   const dispatch = useAppDispatch();
   const location = window.location;
-  window.localStorage.setItem("currentPathName", location.pathname);
+  window.localStorage.setItem('currentPathName', location.pathname);
 
   useEffect(() => {
     const token = getTokenAccess();

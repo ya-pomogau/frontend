@@ -11,7 +11,7 @@ export function ProfilePage() {
   const isRoot = useAppSelector(isRootSelector);
   const isMobile = useMediaQuery(Breakpoints.L);
 
-  if(isMobile) return null;
+  if (isMobile) return null;
 
   if (role === UserRole.VOLUNTEER) {
     return <Navigate to={Routes.PROFILE_MAP} replace />;
@@ -30,8 +30,4 @@ export function ProfilePage() {
   }
 
   return <Navigate to="/" replace />;
-
 }
-
-
-

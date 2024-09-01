@@ -9,16 +9,20 @@ import { Breakpoints, Routes } from 'shared/config';
 export function UnauthPage() {
   const navigate = useNavigate();
   const user = useUser();
-  const pathname = window.localStorage.getItem("currentPathName");
-  const isMobile = useMediaQuery(Breakpoints.L)
+  const pathname = window.localStorage.getItem('currentPathName');
+  const isMobile = useMediaQuery(Breakpoints.L);
 
   useEffect(() => {
     if (user && !isMobile) {
       navigate(Routes.PROFILE);
-    } else if(user && isMobile && (pathname === Routes.ROOT || pathname === Routes.LOGIN)){
-      navigate(Routes.PROFILE); 
-    }else if(user && isMobile && !(pathname === Routes.ROOT)){
-      navigate(pathname ? pathname : Routes.PROFILE); 
+    } else if (
+      user &&
+      isMobile &&
+      (pathname === Routes.ROOT || pathname === Routes.LOGIN)
+    ) {
+      navigate(Routes.PROFILE);
+    } else if (user && isMobile && !(pathname === Routes.ROOT)) {
+      navigate(pathname ? pathname : Routes.PROFILE);
     }
   }, [user, isMobile]);
 

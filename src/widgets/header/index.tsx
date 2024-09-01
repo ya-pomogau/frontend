@@ -46,9 +46,9 @@ const Header = () => {
         {isMobile && user && location.pathname !== Routes.PROFILE && (
           <Link to="/profile">
             <Avatar
-            extClassName={styles.header__avatar}
-            avatarName={user.name}
-            avatarLink={user.avatar || defaultAvatar}
+              extClassName={styles.header__avatar}
+              avatarName={user.name}
+              avatarLink={user.avatar || defaultAvatar}
             />
           </Link>
         )}

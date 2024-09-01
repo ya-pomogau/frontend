@@ -29,8 +29,8 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmed;
   const location = useLocation();
-  const isProfilePage = location.pathname === '/profile'; 
-  const isMobile = useMediaQuery(Breakpoints.L)
+  const isProfilePage = location.pathname === '/profile';
+  const isMobile = useMediaQuery(Breakpoints.L);
 
   return (
     <>
@@ -43,7 +43,11 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
         <div
           className={styles.main + ' ' + (hasMessage && styles.mainWithMessage)}
         >
-          <div className={`${styles.side} ${isMobile && !isProfilePage ? styles.hidden : ""}`}>
+          <div
+            className={`${styles.side} ${
+              isMobile && !isProfilePage ? styles.hidden : ''
+            }`}
+          >
             <div className={styles.user}>
               <UserInfo />
             </div>
