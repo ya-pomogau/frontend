@@ -3,7 +3,7 @@
 }
 
 .select {
-  padding: 12px;
+  padding: 4px 12px;
   width: 100%;
   transition: var(--transition-hover);
   height: 30px;
@@ -23,6 +23,10 @@
   border-color: var(--colors-interface-blue-navy);
 }
 
+.select_error {
+  border-color: var(--colors-interface-orange);
+}
+
 .label {
   display: inline-block;
   font-size: 12px;
@@ -36,11 +40,23 @@
   position: absolute;
   height: 24px;
   width: 33px;
-  bottom: 10px;
+  bottom: 5px;
   right: 1px;
   background-color: var(--colors-interface-white);
   cursor: pointer;
   pointer-events: none;
+}
+
+.icon_error {
+  bottom: 23px;
+}
+
+.error {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: var(--colors-interface-orange);
 }
 
 .icon:focus {
