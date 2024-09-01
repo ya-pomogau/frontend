@@ -48,14 +48,11 @@
   font-size: 14px;
   grid-column-start: 2;
   min-height: 20px;
-<<<<<<< HEAD
   opacity: 0;
 }
 
 .messageAlertActive {
   opacity: 1;
-=======
->>>>>>> 02459156e7016294815aa2ddfc7a1f1b03609e0a
 }
 
 .alertWrapper {

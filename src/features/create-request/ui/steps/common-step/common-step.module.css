@@ -44,13 +44,8 @@
   margin-top: 5px;
   height: auto;
   overflow: hidden;
-<<<<<<< HEAD
   max-height: 64px; 
   transition: max-height 0.3s ease; 
-=======
-  max-height: 64px;
-  transition: max-height 0.3s ease;
->>>>>>> 02459156e7016294815aa2ddfc7a1f1b03609e0a
 }
 
 .descriptionForTask.expanded {
@@ -189,10 +184,5 @@
   color: var(--colors-interface-primary);
   cursor: pointer;
   padding: 0;
-<<<<<<< HEAD
   align-self: flex-start;
 }
-=======
-  margin-left: 5px;
-}
->>>>>>> 02459156e7016294815aa2ddfc7a1f1b03609e0a
