@@ -15,52 +15,6 @@
   row-gap: 5px;
 }
 
-.balance_box {
-  display: grid;
-  grid-template-columns: 1fr 41px 46px;
-  align-items: center;
-  column-gap: 10px;
-}
-
-.balance_text {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 22px;
-}
-
-.balance_input::-webkit-inner-spin-button,
-.balance_input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
-}
-
-.balance_input {
-  outline: none;
-  border: none;
-  width: 41px;
-  height: 34px;
-  border: 0.5px solid #9798c9;
-  box-sizing: border-box;
-  text-align: center;
-
-  background: #ffffff;
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  color: #2e3192;
-
-  font-family: Golos;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 17px;
-  letter-spacing: 0em;
-}
-
-.balance_input::placeholder {
-  color: #9798c9;
-  -webkit-text-stroke: 0.5px #2e3192;
-}
-
 .save_btn {
   align-self: center;
   width: 196px;
@@ -69,10 +23,11 @@
 @media all and (max-width: 1150px) {
   body {
     overflow-x: hidden;
-    background: linear-gradient(0deg, #ffffff, rgba(255, 255, 255, 0));
+    background: linear-gradient(0deg, var(--colors-interface-white), rgba(255, 255, 255, 0));
     background-size: 100% 100vh;
     background-attachment: fixed;
   }
+  
   .container {
     width: 414px;
     padding: 0px 30px;
