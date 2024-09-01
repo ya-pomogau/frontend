@@ -74,20 +74,20 @@
 }
 
 .calendar {
-  border: 0.5px solid #818C99;
+  border: 0.5px solid #818c99;
 }
 
 .box {
   width: 129px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 920px) {
   .tooltip {
     max-width: 343px;
   }
 }
 
-@media (width < 768px) {
+@media (width < 920px) {
   .row {
     grid-template-columns: 1fr;
     gap: 10px 11px;

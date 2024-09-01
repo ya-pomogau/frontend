@@ -19,14 +19,14 @@
   background-color: var(--colors-interface-blue-strong);
 }
 
-@media (min-width: 361px) and (max-width: 735px) {
+@media (min-width: 360px) and (max-width: 735px) {
   .card-button {
     width: 224px;
     padding: 0 26px;
   }
 }
 
-@media (min-width: 736px) {
+@media (min-width: 735px) {
   .card-button {
     width: 276px;
     padding: 0 30px;

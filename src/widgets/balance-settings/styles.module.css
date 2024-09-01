@@ -66,7 +66,7 @@
   width: 196px;
 }
 
-@media all and (max-width: 1200px) {
+@media all and (max-width: 1150px) {
   body {
     overflow-x: hidden;
     background: linear-gradient(0deg, #ffffff, rgba(255, 255, 255, 0));

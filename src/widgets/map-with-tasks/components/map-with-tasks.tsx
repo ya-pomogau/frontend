@@ -5,7 +5,7 @@ import YandexMap from 'widgets/map';
 import { useAppSelector } from 'app/hooks';
 import { useGetTaskQuery } from 'services/user-task-api';
 import useGeolocation from 'shared/hooks/use-geolocation';
-import { useMediaQuery } from 'shared/hooks';
+import { useMediaQuery, useUser } from 'shared/hooks';
 import { isUnConfirmedSelector } from 'entities/user/model';
 import { Breakpoints } from 'shared/config';
 
@@ -13,21 +13,24 @@ export const MapWithTasks = () => {
   const { coords, apiError } = useGeolocation();
   const navigate = useNavigate();
   const mediaQuery = useMediaQuery(Breakpoints.L);
-  const user = useAppSelector((state) => state.user.data);
+  const user = useUser();
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
   const [longitude, latitude] = !apiError
     ? [coords.longitude, coords.latitude]
     : user && user.location
-    ? [user.location[0], user.location[1]]
+    ? user.location
     : [37.621157, 55.890017];
 
-  const { data, isLoading } = useGetTaskQuery({
-    latitude,
-    longitude,
-    }, {
-    skip: isUnConfirmed || !user,
-  });
+  const { data, isLoading } = useGetTaskQuery(
+    {
+      latitude,
+      longitude,
+    },
+    {
+      skip: isUnConfirmed || !user,
+    }
+  );
 
   const tasks = data || [];
 
@@ -43,7 +46,7 @@ export const MapWithTasks = () => {
     <YandexMap
       tasks={tasks}
       width="100%"
-      height={mediaQuery ? '75vh' : '64vh'}
+      height={mediaQuery ? '75vh' : '709px'}
       onClick={handleClick}
       isAuthorised={user !== null}
       mapSettings={{

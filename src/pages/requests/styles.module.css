@@ -71,7 +71,7 @@
   width: 351px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
   .input {
     width: 95%;
     margin: 0 auto;

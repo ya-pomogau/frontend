@@ -1,12 +1,10 @@
-.input_inner_mobile :nth-child(2n){
+.input_inner_mobile :nth-child(2n) {
   right: 0;
 }
 
-.input_container_mobile > :nth-child(2n){
+.input_container_mobile > :nth-child(2n) {
   margin-left: -8px;
 }
-
-
 
 .chatWrapper {
   width: 586px;
@@ -96,7 +94,7 @@
   overflow-y: auto;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1150px) {
   .chatWrapper {
     width: 50vw;
   }
@@ -107,13 +105,13 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 920px) {
   .chatWrapper {
     width: 55vw;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
   .chatWrapper {
     position: fixed;
     top: 0;
@@ -128,7 +126,7 @@
     gap: 0;
     align-content: flex-start;
   }
-  .container-chat{
+  .container-chat {
     max-height: 100%;
   }
 
@@ -158,5 +156,4 @@
     gap: 0;
     margin: 0 auto;
   }
-
 }

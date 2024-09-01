@@ -18,7 +18,7 @@
   opacity: 0.6;
 }
 
-@media all and (max-width: 1025px) {
+@media all and (max-width: 1150px) {
   .filterButton svg {
     max-width: 30px;
     max-height: 30px;

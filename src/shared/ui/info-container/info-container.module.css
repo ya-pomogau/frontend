@@ -25,6 +25,16 @@
   min-height: 175px;
 }
 
+.info-container-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 147px;
+  box-sizing: border-box;
+  padding: 0 20px 0 30px;
+  margin-top: 3px;
+  color: var(--colors-interface-primary);
+}
+
 .info-container-settings-button {
   position: absolute;
   bottom: -8px;
