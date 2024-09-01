@@ -94,6 +94,7 @@
 
 @media (max-width: 735px) {
   .dropdown {
+    width: 271px;
     max-width: 271px;
   }
 

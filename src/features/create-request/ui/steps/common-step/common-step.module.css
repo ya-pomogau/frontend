@@ -8,13 +8,13 @@
   display: flex;
   flex-direction: column;
   width: 450px;
-  min-height: 221px;
+  min-height: 150px;
 }
 
 .buttonsWrapper {
   display: flex;
   justify-content: flex-end;
-  margin-top: 55px;
+  margin-top: 45px;
 }
 
 .prevButton {
@@ -31,6 +31,10 @@
   margin-top: 20px;
 }
 
+.address {
+  width: min-content;
+}
+
 .typeOfTask {
   margin: 0;
   margin-top: 15px;
@@ -40,13 +44,13 @@
   margin: 0;
   margin-top: 5px;
   height: auto;
-  overflow: hidden; 
+  overflow: hidden;
   max-height: 64px; 
   transition: max-height 0.3s ease; 
 }
 
 .descriptionForTask.expanded {
-  min-height: 195px;
+  max-height: min-content;
   resize: none;
   transition: var(--transition-hover);
   box-sizing: border-box;
@@ -72,6 +76,7 @@
 }
 
 .categories {
+  padding: 7px 2px 5px 10px;
   margin-top: 20px;
 }
 
@@ -80,6 +85,7 @@
     align-items: flex-start;
     margin: 0;
     width: 260px;
+    height: 300px;
   }
   .mainWrapper {
     display: flex;
@@ -87,7 +93,7 @@
     align-items: center;
   }
   .buttonsWrapper {
-    margin-top: 50px;
+    margin-top: 80px;
     justify-content: center;
     width: 260px;
     position: relative;
@@ -141,7 +147,7 @@
   }
 
   .descriptionForTask.expanded {
-    min-height: 170px;
+    min-height: 185px;
     resize: none;
     transition: var(--transition-hover);
     box-sizing: border-box;
@@ -163,7 +169,7 @@
   }
 
   .categories {
-    width: 169px;
+    width: 250px;
   }
 }
 .edit_button {
@@ -179,5 +185,5 @@
   color: var(--colors-interface-primary);
   cursor: pointer;
   padding: 0;
-  margin-left: 5px;
+  align-self: flex-start;
 }

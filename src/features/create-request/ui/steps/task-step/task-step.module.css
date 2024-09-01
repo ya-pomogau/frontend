@@ -48,7 +48,12 @@ top: 12px ;
   font-family: 'Golos', sans-serif;
   font-size: 14px;
   grid-column-start: 2;
-  min-height: 20px
+  min-height: 20px;
+  opacity: 0;
+}
+
+.messageAlertActive {
+  opacity: 1;
 }
 
 .alertWrapper {
@@ -96,6 +101,11 @@ top: 12px ;
     position: relative;
     bottom: 1px;
     left: 12px;
+  }
+  .select {
+    position: relative;
+    left: 28px;
+    bottom: -1px;
   }
   .task {
     font-size: 24px;

@@ -166,10 +166,15 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 
 .validationMessage {
+  opacity: 0;
   font-family: 'Golos', sans-serif;
   margin: 0;
   color: red;
   text-align: center;
+}
+
+.validationMessageActive {
+  opacity: 1;
 }
 
 .dateWithButtonContainer {
