@@ -58,6 +58,8 @@
   display: flex;
   position: absolute;
   right: 12px;
+  top: 50%;
+  transform: translate(0, -50%);
   cursor: pointer;
   transition: var(--transition-hover);
 }
