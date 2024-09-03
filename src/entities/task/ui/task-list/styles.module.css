@@ -103,7 +103,22 @@
   position: relative;
 }
 
-@media screen and (max-width: 415px) {
+.content_empty_arrow {
+  position: absolute;
+  left: 109px;
+  top: -15px;
+}
+
+.content_empty_note span {
+  font-family: var(--font-family-inter);
+}
+
+.medium_add_button {
+  width: 60px;
+  height: 60px;
+}
+
+@media screen and (max-width: 550px) {
   .content {
     max-height: 75vh;
   }
