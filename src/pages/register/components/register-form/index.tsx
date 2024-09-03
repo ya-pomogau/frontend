@@ -2,14 +2,11 @@ import { useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
+import { Button, FormInput, FormInputPhone, FormInputAddress } from 'shared/ui';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole } from 'shared/types/common.types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { Button } from 'shared/ui/button';
-import { FormInput } from 'shared/ui/form-input';
-import { FormInputPhone } from 'shared/ui/form-input-phone';
-import { FormInputAddress } from 'shared/ui/form-input-address';
 import { schema } from './schema';
 
 import styles from './styles.module.css';

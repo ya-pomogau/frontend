@@ -2,15 +2,13 @@ import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { Input } from 'shared/ui/input';
-import { Button } from 'shared/ui/button';
-import { PasswordInput } from 'shared/ui/password-input';
+import { useAppDispatch } from 'app/hooks';
+import { Input, Button, PasswordInput } from 'shared/ui';
 import { actions, startSocketConnection } from 'services/system-slice';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
 import { schema } from './schema';
 
 import styles from './styles.module.css';
-import { useAppDispatch } from '../../../../app/hooks';
 
 export interface ILoginForm {
   login: string;

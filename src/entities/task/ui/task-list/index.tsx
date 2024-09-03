@@ -17,6 +17,7 @@ import { Tooltip } from 'shared/ui/tooltip';
 import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from 'app/hooks';
+import { Icon } from 'shared/ui';
 
 interface TaskListProps {
   userRole: UserRole | null;
@@ -61,7 +62,7 @@ export const TaskList = ({
 
     if (box) {
       setPopupPosion({
-        right: window.innerWidth - box.right - box.width * 2.25 + 14,
+        right: window.innerWidth - box.right - box.width * 2.04 + 14,
         top: box.top + window.scrollY + box.height * 1.2,
       });
     }
@@ -159,17 +160,33 @@ export const TaskList = ({
               extClassName
             )}
           >
-            <Informer text="У Вас пока нет заявок" />
+            <Informer
+              extClassName={styles.content_empty_note}
+              text="У Вас пока нет заявок"
+            />
 
             {userRole === UserRole.RECIPIENT && (
               <>
                 <p
-                  className={`${styles.title_add_empty} text_size_large text_type_regular text`}
+                  className={classNames(
+                    styles.title_add_empty,
+                    'text_size_large',
+                    'text_type_regular',
+                    {
+                      [styles.title_add_empty_mobile]: isMobile,
+                      [styles.title_add_empty_desktop]: !isMobile,
+                    }
+                  )}
                 >
                   {' '}
                   Хотите создать заявку?
                 </p>
                 <div className={styles.wrapperBtn} ref={buttonRef}>
+                  <Icon
+                    className={styles.content_empty_arrow}
+                    icon="ArrowNotify"
+                    color={'blue'}
+                  />
                   <RoundButton
                     buttonType="addLarge"
                     onClick={
@@ -185,7 +202,7 @@ export const TaskList = ({
                   <Tooltip
                     visible
                     extClassName={styles.modal}
-                    pointerPosition="right"
+                    pointerPosition="center"
                     changeVisible={() => popupClose()}
                     elementStyles={{
                       position: 'absolute',

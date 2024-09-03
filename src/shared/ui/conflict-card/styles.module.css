@@ -43,7 +43,7 @@
   opacity: 0.5;
 }
 
-@media screen and (max-width: 1400px) and (min-width: 1150px) {
+@media screen and (max-width: 1440px) and (min-width: 1150px) {
   .conflictCard {
     width: 175px;
   }
@@ -64,7 +64,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 550px) {
   .conflictCard {
     width: 175px;
     display: flex;

@@ -6,7 +6,7 @@
   margin-left: 36px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 550px) {
   .tabContainer {
     flex-wrap: wrap;
     padding: 16px 0 13px 14px;

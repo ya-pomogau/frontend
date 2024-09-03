@@ -5,18 +5,9 @@
 }
 
 .overlay {
-  position: absolute;
-  bottom: 22px;
-  left: 315px;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
-  height: 152px;
-  width: calc(100% - 315px);
-  pointer-events: none;
-}
-
-.overlayMaxWidth {
-  position: absolute;
-  bottom: 22px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   background: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
   height: 152px;
   width: 100%;
@@ -35,23 +26,19 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 920px) {
   .main {
     height: calc(100% - 112px);
   }
 }
 
-@media all and (max-width: 415px) {
+@media all and (max-width: 550px) {
   .main {
     height: calc(100% - 42px);
     margin-top: 20px;
   }
 
   .overlay {
-    bottom: -40px;
-  }
-
-  .overlayMaxWidth {
     bottom: -40px;
   }
 }

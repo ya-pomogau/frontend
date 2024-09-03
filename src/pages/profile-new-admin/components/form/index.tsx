@@ -3,15 +3,17 @@ import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { Input } from 'shared/ui/input';
-import { Button } from 'shared/ui/button';
-import { InputAddress } from 'shared/ui/input-address';
-import { InputPhone } from 'shared/ui/input-phone';
-import { PasswordInput } from 'shared/ui/password-input';
+import {
+  Input,
+  Button,
+  InputAddress,
+  InputPhone,
+  PasswordInput,
+} from 'shared/ui';
+import { Routes } from 'shared/config';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { useCreateNewAdminMutation } from 'services/admin-api';
 import { schema } from './form.schema';
-import { Routes } from 'shared/config';
 
 import styles from './styles.module.css';
 
@@ -64,8 +66,6 @@ export const NewAdminForm = () => {
     defaultValues,
     resolver: joiResolver(schema),
   });
-
-  console.log('e', errors);
 
   const onSubmit: SubmitHandler<INewAdminForm> = async ({
     fullName,

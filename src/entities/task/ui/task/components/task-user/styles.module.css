@@ -44,7 +44,7 @@
   margin-top: 8px;
 }
 
-@media screen and (min-width: 1151px) {
+@media screen and (min-width: 1150px) {
   .userInfo {
     grid-area: recipient;
     justify-self: end;

@@ -1,19 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { useAppSelector } from 'app/hooks';
-import { MapWithTasks } from 'widgets/map-with-tasks';
-
-import { SmartHeader } from 'shared/ui/smart-header';
-import { Icon } from 'shared/ui/icons';
+import { MapWithTasks } from 'widgets';
+import { SmartHeader, Icon } from 'shared/ui';
+import { useUser } from 'shared/hooks';
+import { Routes } from 'shared/config';
 
 export function UnauthPage() {
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user.data);
+  const user = useUser();
 
   useEffect(() => {
     if (user) {
-      navigate('/profile');
+      navigate(Routes.PROFILE);
     }
   }, [user]);
 
@@ -23,7 +22,6 @@ export function UnauthPage() {
         icon={<Icon color="blue" icon="MapApplicationIcon" size="54" />}
         text="Карта заявок"
       />
-
       <MapWithTasks />
     </>
   );
