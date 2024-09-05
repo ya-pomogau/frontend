@@ -70,7 +70,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
           )}
           <div className={styles.content}>
             {isError
-              ? (errorText !== 'Ошибка подключения' && (
+              ? (errorText === 'Ошибка подключения' && (
                   <NoConnectionPage errorText={errorText as string} />
                 )) ||
                 (isBlockedSelector && <BlockedPage />)

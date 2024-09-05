@@ -7,6 +7,8 @@ import styles from './info-container.module.css';
 import placeholder from './img/placeholder.svg';
 import useUser from 'shared/hooks/use-user';
 import { DefaultAvatar } from 'entities/task/ui/task/img/default-avatar';
+import { useAppSelector } from '../../../app/hooks';
+import { isUserBlockedSelector } from '../../../entities/user/model';
 
 interface InfoContainerProps {
   extClassName?: string;
@@ -24,6 +26,7 @@ export const InfoContainer = ({
   onClickSettingsButton,
 }: InfoContainerProps) => {
   const isAuth = useUser();
+  const isBlockedSelector = useAppSelector(isUserBlockedSelector);
 
   return (
     <div className={classNames(styles['info-container-frame'], extClassName)}>
@@ -44,7 +47,7 @@ export const InfoContainer = ({
         )}
       </div>
       <div className={styles['info-container-content']}>{children}</div>
-      {isAuth && (
+      {isAuth && !isBlockedSelector && (
         <SettingsButton
           extClassName={styles['info-container-settings-button']}
           onClick={onClickSettingsButton}

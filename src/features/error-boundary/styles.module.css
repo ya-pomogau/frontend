@@ -42,6 +42,7 @@
   color: #2e3192;
 }
 .link {
+  color: rgba(46, 49, 146, 1);
   font-family: Inter;
   font-weight: 400;
   text-decoration: none;

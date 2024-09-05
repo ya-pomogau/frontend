@@ -9,7 +9,7 @@ interface IErrorBoundaryUI {
   errorText?: string;
   iconConfig: IconProps;
   headerText: string;
-  filterItemsConfig: TFilterItems;
+  filterItemsConfig?: TFilterItems;
   imageSrc: string;
   imageAlt: string;
   children?: ReactNode;
@@ -30,7 +30,7 @@ export const ErrorBoundaryUI: FC<IErrorBoundaryUI> = ({
       <SmartHeader
         icon={<Icon {...iconConfig} />}
         text={headerText}
-        filter={<Filter items={filterItemsConfig} />}
+        filter={filterItemsConfig && <Filter items={filterItemsConfig} />}
       />
       <div className={styles.content_box}>
         <img className={styles.image} src={imageSrc} alt={imageAlt}></img>

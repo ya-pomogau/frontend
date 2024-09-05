@@ -9,17 +9,11 @@ export const BlockedPage = () => {
     icon: 'LockIcon',
     size: '54',
   };
-  const filterItemsConfig = {
-    categories: true,
-    radius: true,
-    date: true,
-  };
 
   return (
     <ErrorBoundaryUI
       iconConfig={iconConfig}
       headerText={'Блокировка'}
-      filterItemsConfig={filterItemsConfig}
       imageSrc={image}
       imageAlt="disconnection_image"
     >
