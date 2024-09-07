@@ -124,6 +124,11 @@
   font-family: var(--font-family-inter);
 }
 
+.medium_add_button {
+  width: 60px;
+  height: 60px;
+}
+
 @media screen and (max-width: 550px) {
   .content {
     max-height: 75vh;
