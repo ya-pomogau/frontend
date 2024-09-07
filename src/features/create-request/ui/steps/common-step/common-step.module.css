@@ -99,8 +99,8 @@
     bottom: -140px;
   }
   .task {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
     align-self: center;
     position: relative;
     bottom: -10px;
@@ -109,7 +109,7 @@
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      #2e3192 49.28%,
+      var(--colors-interface-primary) 49.28%,
       rgba(255, 255, 255, 0) 100%
     );
     width: 240px;

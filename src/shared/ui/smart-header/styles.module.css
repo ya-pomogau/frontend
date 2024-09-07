@@ -16,8 +16,8 @@
 
 .settingText {
   color: var(--colors-interface-primary);
-  font-size: 24px;
-  line-height: 29px;
+  font-size: var(--font-size-medium);
+  line-height: var(--line-height-large);
 }
 
 .settingIcon {
@@ -41,7 +41,7 @@
   }
 
   .settingText {
-    font-size: 16px;
+    font-size: var(--font-size-s);
     line-height: 19px;
   }
 }

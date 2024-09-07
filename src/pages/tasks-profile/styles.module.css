@@ -14,7 +14,7 @@
 
 .taskContainer {
   padding-left: 30px;
-  font-family: 'Golos', sans-serif;
+  font-family: var(--font-family-golos);
 }
 
 .input {
@@ -49,7 +49,7 @@
 
 .title_add_list {
   color: var(--colors-interface-primary-additional);
-  font-family: 'Golos', sans-serif;
+  font-family: var(--font-family-golos);
   max-width: 294px;
   margin: auto;
 }

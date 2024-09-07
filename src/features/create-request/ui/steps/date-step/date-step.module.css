@@ -21,8 +21,8 @@
 }
 
 .time {
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-size-small);
+  line-height: var(--font-size-middle);
   margin: 0;
   margin-bottom: 5px;
 }
@@ -49,8 +49,8 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 
 .date {
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
   margin: 0;
   margin-bottom: 5px;
 }
@@ -74,15 +74,15 @@ input[type='time']::-webkit-calendar-picker-indicator {
   }
 
   .time {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
     position: relative;
     top: 11px;
   }
 
   .date {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
     position: relative;
     top: 5px;
   }
@@ -91,7 +91,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      #2e3192 49.28%,
+      var(--colors-interface-primary) 49.28%,
       rgba(255, 255, 255, 0) 100%
     );
     width: 240px;
@@ -103,7 +103,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      #2e3192 49.28%,
+      var(--colors-interface-primary) 49.28%,
       rgba(255, 255, 255, 0) 100%
     );
     width: 240px;
@@ -165,10 +165,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 
 .validationMessage {
+  font-family: var(--font-family-golos);
   opacity: 0;
-  font-family: 'Golos', sans-serif;
   margin: 0;
-  color: red;
+  color: var(--colors-interface-red);
   text-align: center;
 }
 
