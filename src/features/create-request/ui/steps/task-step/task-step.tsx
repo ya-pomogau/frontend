@@ -84,9 +84,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
-            {category._id === '' && category.title === '' && (
-              <p className={styles.messageAlert}>Выберите тип задачи</p>
-            )}
+            <p className={classNames(styles.messageAlert, category._id === '' && category.title === '' && styles.messageAlertActive)}>Выберите тип задачи</p>
             <TextArea
               value={description}
               label="Опишите задачу"
@@ -96,9 +94,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               extClassName={styles.textarea}
               maxLength={300}
             />
-            {description.length <= 5 && (
-              <p className={styles.messageAlert}>Добавьте описание задачи</p>
-            )}
+            <p className={classNames(styles.messageAlert, description.length <= 5 && styles.messageAlertActive)}>Добавьте описание задачи</p>
           </>
         ) : (
           <>
@@ -110,9 +106,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               items={optionsForSelect}
               extClassName={styles.select}
             />
-            {category._id === '' && category.title === '' && (
-              <p className={styles.messageAlert}>Выберите тип задачи</p>
-            )}
+            <p className={classNames(styles.messageAlert, category._id === '' && category.title === '' && styles.messageAlertActive)}>Выберите тип задачи</p>
             <TextArea
               value={description}
               label="Опишите задачу"
@@ -122,9 +116,7 @@ export const TaskStep = ({ isMobile }: ITaskStepProps) => {
               extClassName={styles.textarea}
               maxLength={300}
             />
-            {description.length <= 5 && (
-              <p className={styles.messageAlert}>Добавьте описание задачи</p>
-            )}
+            <p className={classNames(styles.messageAlert, description.length <= 5 && styles.messageAlertActive)}>Добавьте описание задачи</p>
           </>
         )}
       </div>

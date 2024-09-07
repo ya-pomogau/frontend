@@ -48,11 +48,9 @@
 }
 
 .text {
-  font-family: 'Golos', sans-serif;
-  font-size: 16px;
-  color: rgba(44, 45, 46, 1);
+  font: var(--font-golos-16-22);
+  color: var(--colors-interface-dark-gray);
   width: 265px;
   height: 44px;
-  line-height: 22px;
   margin: 0;
 }

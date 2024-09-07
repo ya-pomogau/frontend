@@ -8,9 +8,7 @@ export function BidsPage() {
         icon={<Icon color="blue" icon="SettingsIcon" size="46" />}
         text="Настройка баллов"
       />
-      <div>
-        <BalanceSettings />
-      </div>
+      <BalanceSettings />
     </>
   );
 }
