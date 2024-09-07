@@ -49,6 +49,12 @@ export function RequestsPage({ incomeTab }: PageProps) {
   const [filteredName, setFilteredName] = useState<User[]>([]);
   const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
 
+  const sortByStatus = (u1: User, u2: User) => {
+    if (!u1.status) return 1;
+    if (!u2.status) return -1;
+    return u2.status - u1.status;
+  };
+
   const getFilteredTabData = () => {
     const dataMap: Record<string, User[] | undefined> = {
       [Tabs.VOLUNTEERS]: volunteers,
@@ -57,9 +63,11 @@ export function RequestsPage({ incomeTab }: PageProps) {
       [Tabs.ADMINS]: admins,
     };
 
-    return dataMap[incomeTab as keyof typeof dataMap]?.filter((card) =>
-      card.name.toLowerCase().includes(searchName.toLowerCase())
-    );
+    return dataMap[incomeTab as keyof typeof dataMap]
+      ?.filter((card) =>
+        card.name.toLowerCase().includes(searchName.toLowerCase())
+      )
+      .sort(sortByStatus);
   };
 
   const handleApplyFilters = (filter: IFilterValues) => {

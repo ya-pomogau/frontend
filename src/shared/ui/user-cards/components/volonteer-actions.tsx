@@ -10,6 +10,7 @@ import { AdminPermission } from '../../../types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
+  isUserBlocked: boolean;
   getButtonTypeFromScore: (
     score: number
   ) => 'primary' | 'partial' | 'secondary';
@@ -25,6 +26,7 @@ interface VolunteerActionsProps {
 
 const VolunteerActions = ({
   isVolonteerAcceptButtonDisabled,
+  isUserBlocked,
   getButtonTypeFromScore,
   score,
   extClassName,
@@ -64,7 +66,7 @@ const VolunteerActions = ({
       <Button
         disabled={!approvePermission}
         buttonType="secondary"
-        label="Заблокировать"
+        label={isUserBlocked ? 'Разблокировать' : 'Заблокировать'}
         onClick={onBlockButtonClick}
       />
       <div className={classnames(styles.exclamation_point_div)}>
