@@ -14,6 +14,8 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   extClassName?: string;
   selectedValue?: string;
   selectPlaceholder?: boolean;
+  error?: boolean;
+  errorText?: string;
 }
 
 // eslint-disable-next-line import/no-named-as-default-member, react/display-name
@@ -28,6 +30,8 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
       extClassName,
       selectedValue,
       selectPlaceholder,
+      error,
+      errorText = 'Ошибка выбора задачи',
       ...props
     },
     ref
@@ -45,7 +49,9 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
           ref={ref}
           name={name}
           defaultValue={selectedValue}
-          className={cn(styles.select, 'text', 'text_size_medium')}
+          className={cn(styles.select, 'text', 'text_size_medium', {
+            [styles.select_error]: error,
+          })}
           onChange={onChange}
           id={id}
           {...props}
@@ -59,9 +65,10 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
             </option>
           ))}
         </select>
-        <div className={styles.icon}>
+        <div className={cn(styles.icon, { [styles.icon_error]: error })}>
           <AccordionIconArrow />
         </div>
+        {error && <span className={cn(styles.error, 'text')}>{errorText}</span>}
       </div>
     );
   }
