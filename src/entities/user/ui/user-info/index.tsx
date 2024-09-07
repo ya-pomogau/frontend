@@ -1,4 +1,4 @@
-import { useAppDispatch } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { InfoContainer, InfoContainerContent, Loader } from 'shared/ui';
 import { useControlModal, useRouteMatch, useUser } from 'shared/hooks';
 import { UserRole } from 'shared/types/common.types';
@@ -7,7 +7,7 @@ import { Routes } from 'shared/config';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
 import type { UpdateUserInfo } from 'entities/user/types';
 import { useUpdateUserProfileMutation } from 'services/user-api';
-import { setUser } from 'entities/user/model';
+import { isUserBlockedSelector, setUser } from 'entities/user/model';
 import { VolunteerInfo } from './volunteer-info';
 import { UnauthorizedUser } from './unauthorized-user';
 
@@ -23,6 +23,7 @@ export const UserInfo = () => {
   ]);
 
   const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
+  const isBlockedSelector = useAppSelector(isUserBlockedSelector);
 
   const handleSaveViewerSettings = async (
     userData: Omit<UpdateUserInfo, '_id'>
@@ -58,14 +59,21 @@ export const UserInfo = () => {
         isOpen={isOpen}
         onClose={handleClose}
       />
-      <InfoContainerContent
-        id={user.vkId}
-        name={user.name}
-        phone={user.phone}
-        address={user.address}
-      />
-      {user.role === UserRole.VOLUNTEER && (
-        <VolunteerInfo score={user.score || 0} hasKey={user.keys || false} />
+      {!isBlockedSelector && (
+        <>
+          <InfoContainerContent
+            id={user.vkId}
+            name={user.name}
+            phone={user.phone}
+            address={user.address}
+          />
+          {user.role === UserRole.VOLUNTEER && (
+            <VolunteerInfo
+              score={user.score || 0}
+              hasKey={user.keys || false}
+            />
+          )}
+        </>
       )}
     </InfoContainer>
   ) : (
