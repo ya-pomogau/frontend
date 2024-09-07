@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 interface UserCardListProps {
   user: User;
   handleConfirmClick: () => void;
+  handleBlockClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
@@ -21,6 +22,7 @@ interface UserCardListProps {
 export const UserCardList = ({
   user,
   handleConfirmClick,
+  handleBlockClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
   getButtonTypeFromScore,
@@ -63,14 +65,13 @@ export const UserCardList = ({
         <VolunteerActions
           extClassName={styles.buttons_div_list_volunteers}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
+          isUserBlocked={status === UserStatus.BLOCKED}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
           isAcceptButtonExclamationPointIcon={true}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
-          onBlockButtonClick={() =>
-            console.log('"Заблокировать" button pressed')
-          }
+          onBlockButtonClick={handleBlockClick}
           onGiveKeysButtonClick={() =>
             console.log('"Дать ключи" button pressed')
           }
@@ -83,10 +84,9 @@ export const UserCardList = ({
           viewMode="list"
           extClassName={styles.buttons_div_list_recipients}
           approved={status !== UserStatus.UNCONFIRMED}
+          isUserBlocked={status === UserStatus.BLOCKED}
           onConfirmClick={handleConfirmClick}
-          onBlockClick={() => {
-            console.log('Recipient block button pressed');
-          }}
+          onBlockClick={handleBlockClick}
         />
       )}
     </div>

@@ -28,25 +28,21 @@
   min-width: 285px;
 }
 
-.text_blocked {
-  font-family: Inter ;
-  font-weight: 400;
-  font-size: 24px;
-  color: #9798c9;
-  line-height: 29.5px;
+.text_bloked {
+  font-size: var(--font-size-medium);
+  color: var(--colors-interface-primary-additional);
+  line-height: var(--line-height-large);
   max-width: 285px;
 }
 .text_contact {
-  font-size: 24px;
-  line-height: 29.05px;
-  color: #2e3192;
+  font-size: var(--font-size-medium);
+  line-height: var(--line-height-large);
+  color: var(--colors-interface-primary);
 }
 .link {
   color: rgba(46, 49, 146, 1);
-  font-family: Inter;
-  font-weight: 400;
   text-decoration: none;
-  font-size: 24px;
+  font-size: var(--font-size-medium);
 }
 
 .box {

@@ -21,7 +21,12 @@
 }
 
 .side {
-  display: block;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
 }
 
 .content {
@@ -34,7 +39,11 @@
     grid-template-columns: minmax(300px, 1fr);
   }
 
+  .user {
+    width: 354px;
+  }
+
   .side {
-    display: none;
+    align-items: center;
   }
 }

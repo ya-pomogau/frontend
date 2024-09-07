@@ -15,6 +15,7 @@ import styles from './styles.module.css';
 export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
+  handleBlockClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
@@ -25,6 +26,7 @@ export interface UserCardTilesProps {
 export const UserCardTiles = ({
   user,
   handleConfirmClick,
+  handleBlockClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
   getButtonTypeFromScore,
@@ -71,15 +73,14 @@ export const UserCardTiles = ({
       {role === UserRole.VOLUNTEER && (
         <VolunteerActions
           extClassName={classnames(styles.buttons, styles.buttons_volunteers)}
+          isUserBlocked={status === UserStatus.BLOCKED}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
           isAcceptButtonExclamationPointIcon={true}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
-          onBlockButtonClick={() =>
-            console.log('"Заблокировать" button pressed')
-          }
+          onBlockButtonClick={handleBlockClick}
           onGiveKeysButtonClick={() =>
             console.log('"Дать ключи" button pressed')
           }
@@ -91,10 +92,9 @@ export const UserCardTiles = ({
         <RecipientActions
           extClassName={styles.buttons}
           approved={status !== UserStatus.UNCONFIRMED}
+          isUserBlocked={status === UserStatus.BLOCKED}
           onConfirmClick={handleConfirmClick}
-          onBlockClick={() => {
-            console.log('Recipient block button pressed');
-          }}
+          onBlockClick={handleBlockClick}
         />
       )}
 

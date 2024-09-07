@@ -18,9 +18,9 @@
 }
 
 .text {
-  font-size: 16px;
+  font-size: var(--font-size-s);
   line-height: 16px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--colors-interface-primary);
 }
 
