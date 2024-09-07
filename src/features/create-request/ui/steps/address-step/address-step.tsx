@@ -125,9 +125,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
             </>
           )}
         </div>
-        {isEmptyAddress && (
-          <p className={styles.messageAlert}>Укажите место встречи</p>
-        )}
+        <p className={classNames(styles.messageAlert, isEmptyAddress && styles.messageAlertActive)}>Укажите место встречи</p>
         <div className={styles.buttonWrapper}>
           {!isTypeEdit && (
             <Button

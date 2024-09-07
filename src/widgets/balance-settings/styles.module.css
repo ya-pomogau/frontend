@@ -15,6 +15,47 @@
   row-gap: 5px;
 }
 
+.balance_box {
+  display: grid;
+  grid-template-columns: 1fr 41px 46px;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.balance_text {
+  font: var(--font-golos-16-22);
+}
+
+.balance_input::-webkit-inner-spin-button,
+.balance_input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.balance_input {
+  outline: none;
+  border: none;
+  width: 41px;
+  height: 34px;
+  border: 0.5px solid var(--colors-interface-primary-additional);
+  box-sizing: border-box;
+  text-align: center;
+
+  background: var(--colors-interface-white);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  color: var(--colors-interface-primary);
+
+  font: var(--font-golos-12-16);
+  letter-spacing: 0em;
+}
+
+.balance_input::placeholder {
+  color: var(--colors-interface-primary-additional);
+  -webkit-text-stroke: 0.5px var(--colors-interface-primary);
+}
+
 .save_btn {
   align-self: center;
   width: 196px;
@@ -23,11 +64,11 @@
 @media all and (max-width: 1150px) {
   body {
     overflow-x: hidden;
-    background: linear-gradient(0deg, var(--colors-interface-white), rgba(255, 255, 255, 0));
+    background: var(--colors-interface-white);
     background-size: 100% 100vh;
     background-attachment: fixed;
   }
-  
+
   .container {
     width: 414px;
     padding: 0px 30px;
