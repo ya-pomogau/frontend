@@ -47,6 +47,11 @@
   font: var(--font-golos-14-16);
   grid-column-start: 2;
   min-height: 20px;
+  opacity: 0;
+}
+
+.messageAlertActive {
+  opacity: 1;
 }
 
 .alertWrapper {
@@ -94,6 +99,11 @@
     position: relative;
     bottom: 1px;
     left: 12px;
+  }
+  .select {
+    position: relative;
+    left: 28px;
+    bottom: -1px;
   }
   .task {
     font-size: var(--font-size-medium);
