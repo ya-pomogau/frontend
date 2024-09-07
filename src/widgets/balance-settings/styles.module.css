@@ -23,9 +23,7 @@
 }
 
 .balance_text {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 22px;
+  font: var(--font-golos-16-22);
 }
 
 .balance_input::-webkit-inner-spin-button,
@@ -40,25 +38,22 @@
   border: none;
   width: 41px;
   height: 34px;
-  border: 0.5px solid #9798c9;
+  border: 0.5px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
   text-align: center;
 
-  background: #ffffff;
+  background: var(--colors-interface-white);
   background-origin: border-box;
   background-clip: content-box, border-box;
-  color: #2e3192;
+  color: var(--colors-interface-primary);
 
-  font-family: Golos;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 17px;
+  font: var(--font-golos-12-16);
   letter-spacing: 0em;
 }
 
 .balance_input::placeholder {
-  color: #9798c9;
-  -webkit-text-stroke: 0.5px #2e3192;
+  color: var(--colors-interface-primary-additional);
+  -webkit-text-stroke: 0.5px var(--colors-interface-primary);
 }
 
 .save_btn {
@@ -69,7 +64,7 @@
 @media all and (max-width: 1150px) {
   body {
     overflow-x: hidden;
-    background: linear-gradient(0deg, #ffffff, rgba(255, 255, 255, 0));
+    background: var(--colors-interface-white);
     background-size: 100% 100vh;
     background-attachment: fixed;
   }

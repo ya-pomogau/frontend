@@ -5,11 +5,7 @@
   list-style: none;
   align-items: center;
   color: var(--colors-interface-black);
-  font-family: 'Golos';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.2;
+  font: var(--font-golos-16-22);
   max-height: 60px;
   min-height: 39px;
   background-color: transparent;
