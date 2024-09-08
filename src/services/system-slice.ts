@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { authApi } from './auth';
 import {
   ErrorDto,
@@ -8,14 +9,14 @@ import {
   TMockLoginRequestDto,
 } from './auth.types';
 import {
-  SocketConnectionStatus,
   TCustomSelector,
   TSystemSliceState,
 } from '../shared/types/store.types';
 import { RootState } from '../app/store';
 import { TUser, TVKUser } from '../entities/user/types';
 import { AdminPermission } from '../shared/types/common.types';
-import { setTokenAccess } from 'shared/libs/utils';
+import { setTokenAccess } from '../shared/libs/utils';
+import { SocketConnectionStatus } from '../shared/types/websocket.types';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
   state.system.isPending;
@@ -147,7 +148,6 @@ const systemSliceInitialState: TSystemSliceState = {
   isPending: false,
   isNew: false,
   socketConnectionStatus: null,
-  socketMessage: null,
 };
 
 const systemSlice = createSlice({
@@ -160,9 +160,6 @@ const systemSlice = createSlice({
     },
     setSocketConnectionStatus: (state, action) => {
       state.socketConnectionStatus = action.payload;
-    },
-    setSocketMessage: (state, action) => {
-      state.socketMessage = action.payload;
     },
     closeSocketConnection: (state) => {
       state.socketConnectionStatus = SocketConnectionStatus.CLOSED;
@@ -284,7 +281,6 @@ export const {
   resetUser,
   startSocketConnection,
   setSocketConnectionStatus,
-  setSocketMessage,
   closeSocketConnection,
 } = systemSlice.actions;
 export default systemSlice.reducer;

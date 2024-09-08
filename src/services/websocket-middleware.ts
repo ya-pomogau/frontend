@@ -8,21 +8,23 @@ import { io, Socket } from 'socket.io-client';
 import { WS_HOST } from '../config/api-config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import {
-  SocketConnectionStatus,
-  wsEventMessage,
-  wsTokenPayload,
-} from '../shared/types/store.types';
+import { getTokenAccess, setTokenAccess } from '../shared/libs/utils';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { getTokenAccess, setTokenAccess } from '../shared/libs/utils';
+import {
+  SocketConnectionStatus,
+  wsMessageKind,
+  wsTokenPayload,
+} from '../shared/types/websocket.types';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { setUser } from '../entities/user/model';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
+import { User } from '../entities/user/types';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { actions } from './system-slice';
-import { User } from 'entities/user/types';
 
 // Объект для отправки тестового message. Удалить после реализации продовой версии
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -63,24 +65,23 @@ export const websocketMiddleware: Middleware = (store) => {
         },
       });
 
-      socket.on(wsEventMessage.ON_CONNECT, () => {
+      socket.on(wsMessageKind.CONNECT, () => {
         console.log(`-> Connected to socket on ${WS_HOST}`);
         dispatch(
           actions.setSocketConnectionStatus(SocketConnectionStatus.CONNECTED)
         );
       });
 
-      socket.emit(wsEventMessage.ON_TEST, testEventObj);
+      socket.emit(wsMessageKind.TEST_EVENT, testEventObj);
     }
 
     if (isSocketConnected) {
-      socket.on(wsEventMessage.ON_MESSAGE, ({ data }) => {
-        console.log(`-> The server has a message for you: ${data.message}`);
-        dispatch(actions.setSocketMessage(data));
+      socket.on(wsMessageKind.NEW_MESSAGE, ({ data }) => {
+        console.log(`-> The server has a message for you: ${data}`);
       });
 
       // обработчик получения обновленного токена и данных пользователя
-      socket.on(wsEventMessage.ON_REFRESH_TOKEN, ({ data }) => {
+      socket.on(wsMessageKind.REFRESH_TOKEN, ({ data }) => {
         const { token, user } = data as wsTokenPayload;
 
         console.log(`-> The server send refreshed token for you: ${token}`);
@@ -92,7 +93,7 @@ export const websocketMiddleware: Middleware = (store) => {
         );
       });
 
-      socket.on(wsEventMessage.ON_CONNECT_ERROR, (error) => {
+      socket.on(wsMessageKind.CONNECT_ERROR, (error) => {
         console.log(`-> Connection error: ${error.message}`);
       });
 
@@ -101,7 +102,7 @@ export const websocketMiddleware: Middleware = (store) => {
         socket.disconnect();
       }
 
-      socket.on(wsEventMessage.ON_DISCONNECT, (reason) => {
+      socket.on(wsMessageKind.DISCONNECT, (reason) => {
         dispatch(
           actions.setSocketConnectionStatus(SocketConnectionStatus.DISCONNECTED)
         );
