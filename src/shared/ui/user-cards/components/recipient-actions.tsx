@@ -10,6 +10,7 @@ import { TextArea } from 'shared/ui/text-area';
 interface RecipientActionsProps {
   viewMode?: string;
   approved: boolean;
+  isUserBlocked: boolean;
   extClassName?: string;
   onConfirmClick: () => void;
   onBlockClick: () => void;
@@ -18,6 +19,7 @@ interface RecipientActionsProps {
 const RecipientActions = ({
   viewMode = 'tiles',
   approved,
+  isUserBlocked,
   extClassName,
   onConfirmClick,
   onBlockClick,
@@ -65,7 +67,7 @@ const RecipientActions = ({
       <Button
         disabled={!approvePermission}
         buttonType="secondary"
-        label="Заблокировать"
+        label={isUserBlocked ? 'Разблокировать' : 'Заблокировать'}
         onClick={onBlockClick}
       />
     </div>

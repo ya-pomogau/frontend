@@ -3,18 +3,28 @@ import { useEffect } from 'react';
 
 import { MapWithTasks } from 'widgets';
 import { SmartHeader, Icon } from 'shared/ui';
-import { useUser } from 'shared/hooks';
-import { Routes } from 'shared/config';
+import { useMediaQuery, useUser } from 'shared/hooks';
+import { Breakpoints, Routes } from 'shared/config';
 
 export function UnauthPage() {
   const navigate = useNavigate();
   const user = useUser();
+  const pathname = window.localStorage.getItem('currentPathName');
+  const isMobile = useMediaQuery(Breakpoints.L);
 
   useEffect(() => {
-    if (user) {
+    if (user && !isMobile) {
       navigate(Routes.PROFILE);
+    } else if (
+      user &&
+      isMobile &&
+      (pathname === Routes.ROOT || pathname === Routes.LOGIN)
+    ) {
+      navigate(Routes.PROFILE);
+    } else if (user && isMobile && !(pathname === Routes.ROOT)) {
+      navigate(pathname ? pathname : Routes.PROFILE);
     }
-  }, [user]);
+  }, [user, isMobile]);
 
   return (
     <>

@@ -18,7 +18,7 @@
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    #2e3192 49.28%,
+    var(--colors-interface-primary) 49.28%,
     rgba(255, 255, 255, 0) 100%
   );
   width: 100%;

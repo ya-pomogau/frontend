@@ -56,7 +56,7 @@
 }
 
 .tabContainer__number {
-  background: #d60080;
+  background: var(--colors-interface-fuchsia);
   border-radius: 9px;
   min-width: 18px;
   height: 18px;

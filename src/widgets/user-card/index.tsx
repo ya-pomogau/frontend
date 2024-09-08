@@ -1,7 +1,11 @@
 import { useCallback } from 'react';
 import { UserRole, UserStatus } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
-import { useConfirmUserMutation } from 'services/admin-api';
+import {
+  useBlockUserMutation,
+  useConfirmUserMutation,
+  usePromoteUserMutation,
+} from 'services/admin-api';
 import { UserCardTiles } from 'shared/ui/user-cards/user-card-tiles';
 import { UserCardList } from 'shared/ui/user-cards/user-card-list';
 import { useMediaQuery } from 'shared/hooks';
@@ -29,15 +33,25 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   const { score, status, keys, role } = user;
   const isVolonteerAcceptButtonDisabled = !!(
     status &&
-    status > UserStatus.UNCONFIRMED &&
+    (status > UserStatus.UNCONFIRMED || status < UserStatus.UNCONFIRMED) &&
     role === UserRole.VOLUNTEER
   );
 
   const [confirmUser] = useConfirmUserMutation();
+  const [blockUser] = useBlockUserMutation();
+  const [promoteUser] = usePromoteUserMutation();
 
   const handleConfirmClick = useCallback(() => {
     confirmUser(user._id);
   }, [confirmUser, user._id]);
+
+  const handleBlockClick = () => {
+    if (status === UserStatus.BLOCKED) {
+      promoteUser(user._id);
+    } else {
+      blockUser(user._id);
+    }
+  };
 
   const isKeyButtonExclamationPointIcon = !!(score && score >= 60 && !keys);
 
@@ -45,6 +59,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
     <UserCardTiles
       user={user}
       handleConfirmClick={handleConfirmClick}
+      handleBlockClick={handleBlockClick}
       isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
       isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
       getButtonTypeFromScore={getButtonTypeFromScore}
@@ -53,6 +68,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
     <UserCardList
       user={user}
       handleConfirmClick={handleConfirmClick}
+      handleBlockClick={handleBlockClick}
       isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
       isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
       getButtonTypeFromScore={getButtonTypeFromScore}
