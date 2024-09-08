@@ -1,23 +1,31 @@
 import { UserProfile } from 'entities/user/types';
-import { UserStatus } from 'shared/types/common.types';
+import { UserStatus, ValueOf } from 'shared/types/common.types';
 import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
 
-export enum TaskStatus {
-  CREATED = 'created', // только созданная заявка
-  ACCEPTED = 'accepted', //взятая в работу волонтером
-  COMPLETED = 'completed', //выполненная
-  CONFLICTED = `conflicted`, //конфликтная заявка
-}
-export enum ResolveStatus {
-  VIRGIN = 'virgin', //конфликт есть, но не взят в работу.
-  PENDING = 'pending', //конфликт есть и взят в работу.
-  FULFILLED = 'fulfilled', //конфликт разрешён как "Выполнено"
-  REJECTED = 'rejected', //конфликт разрешён как "Не выполнено"
-}
-export enum TaskReport {
-  FULFILLED = 'fulfilled', //отмечана как выполненная
-  REJECTED = 'rejected', //отмечана как не выполненная
-}
+export const TaskStatus = {
+  CREATED: 'created', // только созданная заявка
+  ACCEPTED: 'accepted', //взятая в работу волонтером
+  COMPLETED: 'completed', //выполненная
+  CONFLICTED: 'conflicted', //конфликтная заявка
+} as const;
+
+export type TaskStatus = ValueOf<typeof TaskStatus>;
+
+export const ResolveStatus = {
+  VIRGIN: 'virgin', //конфликт есть, но не взят в работу.
+  PENDING: 'pending', //конфликт есть и взят в работу.
+  FULFILLED: 'fulfilled', //конфликт разрешён как "Выполнено"
+  REJECTED: 'rejected', //конфликт разрешён как "Не выполнено"
+} as const;
+
+export type ResolveStatus = ValueOf<typeof ResolveStatus>;
+
+export const TaskReport = {
+  FULFILLED: 'fulfilled', //отмечана как выполненная
+  REJECTED: 'rejected', //отмечана как не выполненная
+} as const;
+
+export type TaskReport = ValueOf<typeof TaskReport>;
 
 export type Category = {
   _id: string;

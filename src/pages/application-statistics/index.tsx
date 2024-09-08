@@ -15,21 +15,28 @@ import { getMonth } from 'shared/ui/date-picker/lib';
 import ru from 'date-fns/locale/ru';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { customHeader } from 'shared/ui/date-picker';
+import { ValueOf } from 'shared/types/common.types';
 
 interface IStatusApplicationOptions {
   value: 'open' | 'atWork' | 'close';
   label: 'Открытые' | 'В работе' | 'Закрытые';
 }
 
-export enum ButtonsNameForStatisticsPage {
-  generateReport = 'generateReport',
-  downloadReport = 'downloadReport',
-}
+export const ButtonsNameForStatisticsPage = {
+  generateReport: 'generateReport',
+  downloadReport: 'downloadReport',
+} as const;
 
-export enum FieldsName {
-  to = 'to',
-  from = 'from',
-}
+export type ButtonsNameForStatisticsPage = ValueOf<
+  typeof ButtonsNameForStatisticsPage
+>;
+
+export const FieldsName = {
+  to: 'to',
+  from: 'from',
+} as const;
+
+export type FieldsName = ValueOf<typeof FieldsName>;
 
 interface IFormInput {
   period: {
@@ -60,14 +67,16 @@ export const ApplicationsStatisticsPage = () => {
     };
   };
 
-  const { control, watch, handleSubmit } = useForm<IFormInput>({defaultValues: {
-    period: {
-      from: null,
-      to: null,
+  const { control, watch, handleSubmit } = useForm<IFormInput>({
+    defaultValues: {
+      period: {
+        from: null,
+        to: null,
+      },
+      statusApplication: '',
+      currentStatusApplication: false,
     },
-    statusApplication: '',
-    currentStatusApplication: false
-  }});
+  });
 
   const disabledButton =
     !watch('period.from') || !watch('period.to') || !watch('statusApplication');
