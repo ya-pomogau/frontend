@@ -1,9 +1,10 @@
-import { act, renderHook } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
+import { act } from 'react';
 import { describe, expect, it } from 'vitest';
 import { useControlModal } from './useControlModal';
 
 describe('check useControlModal', () => {
-  it('should return false when hook create', () => {
+  it('should return false when hook created', () => {
     const { result } = renderHook(() => useControlModal());
     expect(result.current.isOpen).toBe(false);
   });
