@@ -59,6 +59,8 @@
   --colors-interface-red-soft: #fd6868;
   --colors-interface-ford-white: #e0e0e0;
   --colors-interface-dark-gray: #2c2d2e;
+  --color-interface-turquoise: #acdfdb;
+  --color-interface-orange-very-soft: #f7e4d7;
 
   --transition-hover: all 100ms ease-out;
   --common-element-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),

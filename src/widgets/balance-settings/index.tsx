@@ -1,9 +1,7 @@
-import classnames from 'classnames';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from 'shared/ui';
-import { usePermission } from 'shared/hooks';
-import { adminPermission, userRole, TPoints } from 'shared/types/common.types';
+import { TPoints } from 'shared/types/common.types';
 import {
   useGetCategoriesQuery,
   useUpdatePointsMutation,
@@ -12,15 +10,7 @@ import BalanceSettingsItem from './components/balance-settings-item';
 
 import styles from './styles.module.css';
 
-interface BalanceSettingsProps {
-  extClassName?: string;
-}
-
-export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
-  const isEditAllowed = usePermission(
-    [adminPermission.CATEGORIES],
-    userRole.ADMIN
-  );
+export const BalanceSettings = () => {
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();
   const {
@@ -47,10 +37,10 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
 
   return (
     <form
-      className={classnames(styles.container, extClassName)}
+      className={styles.container}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className={classnames(styles.balances_box)}>
+      <div className={styles.balances_box}>
         {data &&
           data.map((item, index) => (
             <Controller
@@ -69,12 +59,12 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
       </div>
 
       <Button
-        extClassName={classnames(styles.save_btn)}
+        extClassName={styles.save_btn}
         buttonType="primary"
         label="Сохранить"
         size="large"
         actionType="submit"
-        disabled={!isEditAllowed || !isDirty || !isValid}
+        disabled={!isDirty || !isValid}
       />
     </form>
   );

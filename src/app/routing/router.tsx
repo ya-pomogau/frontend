@@ -138,14 +138,14 @@ export const router = createBrowserRouter([
           },
           {
             path: Routes.CHAT_HUB,
-            element: (
-              <ProfileChatsPages>
-                <SectionChatHub />
-              </ProfileChatsPages>
-            ),
+            element: <Navigate to={Routes.CHAT_HUB_UNREVIEWED} />,
           },
           {
-            path: Routes.CHAT_IN_WORK,
+            path: Routes.CHAT_CONFLICT,
+            element: <Navigate to={Routes.CHAT_CONFLICT_UNREVIEWED} />,
+          },
+          {
+            path: Routes.CHAT_HUB_UNREVIEWED,
             element: (
               <ProfileChatsPages>
                 <SectionInWorkChats />
@@ -153,7 +153,39 @@ export const router = createBrowserRouter([
             ),
           },
           {
-            path: Routes.CHAT_CONFLICT,
+            path: Routes.CHAT_HUB_IN_WORK,
+            element: (
+              <ProfileChatsPages>
+                <SectionInWorkChats />
+              </ProfileChatsPages>
+            ),
+          },
+          {
+            path: Routes.CHAT_HUB_COMPLETED,
+            element: (
+              <ProfileChatsPages>
+                <SectionInWorkChats />
+              </ProfileChatsPages>
+            ),
+          },
+          {
+            path: Routes.CHAT_CONFLICT_UNREVIEWED,
+            element: (
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            ),
+          },
+          {
+            path: Routes.CHAT_CONFLICT_IN_WORK,
+            element: (
+              <ProfileChatsPages>
+                <SectionChatsConflict />
+              </ProfileChatsPages>
+            ),
+          },
+          {
+            path: Routes.CHAT_CONFLICT_COMPLETED,
             element: (
               <ProfileChatsPages>
                 <SectionChatsConflict />

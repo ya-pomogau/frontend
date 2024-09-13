@@ -31,6 +31,8 @@ export const isRootSelector: TCustomSelector<boolean> = (state) =>
   !!state.user && (state.user.data?.isRoot ?? false);
 export const isUnConfirmedSelector: TCustomSelector<boolean> = (state) =>
   state.user.data?.status === userStatus.UNCONFIRMED;
+export const isUserBlockedSelector: TCustomSelector<boolean> = (state) =>
+  state.user.data?.status === userStatus.BLOCKED;
 export const userModel = createSlice({
   name: 'user',
   initialState,

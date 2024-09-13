@@ -24,16 +24,16 @@
 .name {
   margin: 0;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   text-align: start;
   background-color: transparent;
 }
 
 .phone {
   margin: 0;
-  font-size: 16px;
-  font-weight: 400;
-  color: #000;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  color: var(--colors-interface-black);
   background-color: transparent;
 }
 
@@ -66,7 +66,7 @@
   }
 
   .name {
-    font-size: 16px;
+    font-size: var(--font-size-s);
     text-align: start;
   }
 

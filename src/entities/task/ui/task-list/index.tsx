@@ -117,14 +117,18 @@ export const TaskList = ({
               })}
             >
               <RoundButton
-                buttonType="add"
+                buttonType="addMedium"
                 onClick={
                   buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
                 }
-                size={isMobile ? 'medium' : 'large'}
-                extClassName={classNames(styles.add_task_icon, {
-                  [styles.add_task_icon_unconf]: !buttonGuard,
-                })}
+                size={'medium'}
+                extClassName={classNames(
+                  styles.add_task_icon,
+                  {
+                    [styles.add_task_icon_unconf]: !buttonGuard,
+                  },
+                  styles.medium_add_button
+                )}
               />
               <h2
                 className={classNames(
@@ -191,7 +195,7 @@ export const TaskList = ({
                     color={'blue'}
                   />
                   <RoundButton
-                    buttonType="add"
+                    buttonType="addLarge"
                     onClick={
                       buttonGuard
                         ? handleClickAddTaskButton

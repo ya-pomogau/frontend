@@ -129,13 +129,11 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
           </div>
         </div>
         <div className={styles.button}>
-          {(timeValidation || !time) && !termlessRequest && (
-            <p className={styles.validationMessage}>
-              {
-                'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
-              }
-            </p>
-          )}
+            <p className={classNames(styles.validationMessage, (timeValidation || !time) && !termlessRequest && styles.validationMessageActive)}>
+                {
+                  'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
+                }
+              </p>
           <div className={classNames(styles.buttonWrapper, 'buttonWithRightMargin')}>
             <Button
               buttonType="primary"
