@@ -42,7 +42,7 @@ export const Disabled: Story = {
 
 export const AddButton: Story = {
   args: {
-    buttonType: 'add',
+    buttonType: 'addLarge',
   },
 };
 

@@ -20,7 +20,6 @@ import {
   ApplicationsStatisticsPage,
   SectionChatsConflict,
   SectionInWorkChats,
-  SectionChatHub,
   CreateNewAdminPage,
   UsersStatisticsPage,
   TasksPage,

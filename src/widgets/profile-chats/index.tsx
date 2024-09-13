@@ -39,6 +39,12 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
     skip: !isConflictsPermissionGranted,
   });
 
+  console.log(
+    `this is conflict, conflictIsWork ===>`,
+    conflict,
+    conflictIsWork
+  );
+
   // TODO: добавить данные для раздела "Конфликты" "Завершенные"
   // const { data: conflictCompleted } = useGetTasksConflictCompletedQuery('', {
   //   skip: !isConflictsPermissionGranted,

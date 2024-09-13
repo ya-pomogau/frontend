@@ -20,6 +20,7 @@ import {
 } from 'entities/user/model';
 import { useMediaQuery } from 'shared/hooks';
 import { Breakpoints } from 'shared/config';
+import { BlockedPage } from '../../../features/error-boundary/pages/blockedPage';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -79,9 +80,9 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
           <div className={styles.content}>
             {isError
               ? (errorText === 'Ошибка подключения' && (
-                <NoConnectionPage errorText={errorText as string} />
-              )) ||
-              (isBlockedSelector && <BlockedPage />)
+                  <NoConnectionPage errorText={errorText as string} />
+                )) ||
+                (isBlockedSelector && <BlockedPage />)
               : content}
           </div>
         </div>
