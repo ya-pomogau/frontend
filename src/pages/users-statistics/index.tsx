@@ -38,10 +38,7 @@ export const usersStatusOptions: Array<IUsersStatusOptions> = [
 
 export const UsersStatisticsPage = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const formData = {
-      userStatus: watch('usersStatusOptions'),
-      userRole: watch('usersRoleOptions'),
-    };
+    console.log(`this is data ===>`, data);
   };
 
   const { control, handleSubmit, watch } = useForm<IFormInput>({

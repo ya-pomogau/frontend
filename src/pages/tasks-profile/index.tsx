@@ -17,7 +17,7 @@ import { useMediaQuery } from 'shared/hooks';
 import { openPopup } from 'features/create-request/model';
 
 import { Request } from 'features/create-request';
-import { taskReport, taskStatus } from 'entities/task/types';
+import { Task, taskReport, taskStatus } from 'entities/task/types';
 import { Breakpoints } from 'shared/config';
 
 // Моковые данные (удалить)
@@ -31,7 +31,7 @@ const mockedUser = {
   role: userRole.VOLUNTEER,
 };
 
-const mockedTasks = [
+const mockedTasks: Task[] = [
   {
     _id: '1',
     description:

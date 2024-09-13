@@ -240,7 +240,7 @@ export const filterCardsUsersPageAdmin = (
 };
 //FIX: добавила сюда интерфейс, тк в админах удалилась страница pages-notprocesed
 export interface UserProps {
-  role: userRole;
+  role: UserRole;
   extClassName?: string;
   avatarLink: string;
   avatarName: string;

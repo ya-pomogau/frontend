@@ -7,12 +7,12 @@ import { fieldsetView } from 'shared/ui/fieldset/utils';
 import { Accordion } from 'shared/ui/accordion';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
-import { ReactNode } from 'react';
-import DatePicker, { ReactDatePickerCustomHeaderProps } from 'react-datepicker';
+import DatePicker from 'react-datepicker';
+// eslint-disable-next-line import/no-duplicates
+import { ru } from 'date-fns/locale';
+// eslint-disable-next-line import/no-duplicates
 import { addYears } from 'date-fns';
-import { StepButton } from 'shared/ui/step-button';
-import { getMonth } from 'shared/ui/date-picker/lib';
-import ru from 'date-fns/locale/ru';
+
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { customHeader } from 'shared/ui/date-picker';
 import { ValueOf } from 'shared/types/common.types';
@@ -57,14 +57,7 @@ const templateDateFormat = 'dd.MM.yyyy';
 
 export const ApplicationsStatisticsPage = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const formData = {
-      period: {
-        from: watch('period.from'),
-        to: watch('period.from'),
-      },
-      statusApplication: watch('statusApplication'),
-      currentStatusApplication: watch('currentStatusApplication'),
-    };
+    console.log(`this is data ===>`, data);
   };
 
   const { control, watch, handleSubmit } = useForm<IFormInput>({
