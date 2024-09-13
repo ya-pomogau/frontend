@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { UserRole, UserStatus } from '../../shared/types/common.types';
+import { userRole, userStatus } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
 import { useConfirmUserMutation } from 'services/admin-api';
 import { UserCardTiles } from 'shared/ui/user-cards/user-card-tiles';
@@ -29,8 +29,8 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   const { score, status, keys, role } = user;
   const isVolonteerAcceptButtonDisabled = !!(
     status &&
-    status > UserStatus.UNCONFIRMED &&
-    role === UserRole.VOLUNTEER
+    status > userStatus.UNCONFIRMED &&
+    role === userRole.VOLUNTEER
   );
 
   const [confirmUser] = useConfirmUserMutation();

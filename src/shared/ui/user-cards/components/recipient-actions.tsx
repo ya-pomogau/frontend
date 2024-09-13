@@ -4,7 +4,7 @@ import { Button } from 'shared/ui/button';
 import { Input } from 'shared/ui/input';
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../../app/hooks';
-import { AdminPermission } from '../../../types/common.types';
+import { adminPermission } from '../../../types/common.types';
 import { TextArea } from 'shared/ui/text-area';
 
 interface RecipientActionsProps {
@@ -27,7 +27,7 @@ const RecipientActions = ({
     (state) => state.user.data?.permissions
   );
   const approvePermission = adminPermissions?.includes(
-    AdminPermission.CONFIRMATION
+    adminPermission.CONFIRMATION
   );
 
   return (

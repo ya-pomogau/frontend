@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'config/api-config';
 import { User, UpdateUserInfo } from 'entities/user/types';
 import { getTokenAccess } from 'shared/libs/utils';
-import { UserRole } from 'shared/types/common.types';
+import { userRole as userRoles } from 'shared/types/common.types';
 
 //нам не нужны отдельные функции fetch для использования RTK Query.
 //Данный код генерирует нам хуки для получения данных. Напрмиер, хук useGetUsersQuery принимает userRole
@@ -46,7 +46,7 @@ export const usersApi = createApi({
     getUncomfirmed: build.query({
       query: (adminRole) =>
         `users?${
-          adminRole === UserRole.ADMIN
+          adminRole === userRoles.ADMIN
             ? 'role_ne=admin&role_ne=master'
             : 'role_ne=master'
         }`, //пока для теста просто отдаю список без проверки статуса, далее надо будет добавить условие статуса необработанных

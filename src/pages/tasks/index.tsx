@@ -7,7 +7,7 @@ import { usePermission } from 'shared/hooks';
 import { Routes } from 'shared/config';
 import { PageSubMenu } from 'widgets';
 import { TasksTab } from 'pages';
-import { Tabs, UserRole } from 'shared/types/common.types';
+import { tabs, userRole } from 'shared/types/common.types';
 import { User } from 'entities/user/types';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import { useGetUserByRolesQuery } from 'services/admin-api';
@@ -22,18 +22,18 @@ export function TasksPage({ incomeTab }: PageProps) {
   // раскоментировать после настройки сервера
   // const [searchRole, setSearchRole] =
   //   useState<IFilterValues>(defaultObjFilteres);
-  const isMainAdmin = usePermission([], UserRole.ADMIN);
+  const isMainAdmin = usePermission([], userRole.ADMIN);
   const navigate = useNavigate();
 
-  const recipients = useGetUserByRolesQuery(Tabs.RECIPIENTS).data;
-  const volunteers = useGetUserByRolesQuery(Tabs.VOLUNTEERS).data;
+  const recipients = useGetUserByRolesQuery(tabs.RECIPIENTS).data;
+  const volunteers = useGetUserByRolesQuery(tabs.VOLUNTEERS).data;
   const [searchName, setSearchName] = useState('');
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const dataMap: Record<string, User[] | undefined> = {
-      [Tabs.VOLUNTEERS]: volunteers,
-      [Tabs.RECIPIENTS]: recipients,
+      [tabs.VOLUNTEERS]: volunteers,
+      [tabs.RECIPIENTS]: recipients,
     };
 
     const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
@@ -46,9 +46,9 @@ export function TasksPage({ incomeTab }: PageProps) {
   }, [searchName, incomeTab, volunteers, recipients]);
 
   const handleUserClick = (user: User) => {
-    if (user.role === UserRole.RECIPIENT) {
+    if (user.role === userRole.RECIPIENT) {
       navigate(`${Routes.PROFILE_TASKS_RECIPIENTS}/${user._id}`);
-    } else if (user.role === UserRole.VOLUNTEER) {
+    } else if (user.role === userRole.VOLUNTEER) {
       navigate(`${Routes.PROFILE_TASKS_VOLUNTEERS}${user._id}`);
     }
   };

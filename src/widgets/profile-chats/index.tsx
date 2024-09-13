@@ -9,7 +9,7 @@ import {
   useGetTasksConfilctQuery,
   useGetTasksWorkConflictQuery,
 } from 'services/admin-api';
-import { AdminPermission, UserRole } from 'shared/types/common.types';
+import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -19,8 +19,8 @@ interface ProfileChatsPagesProps {
 
 export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   const isConflictsPermissionGranted = usePermission(
-    [AdminPermission.CONFLICTS],
-    UserRole.ADMIN
+    [adminPermission.CONFLICTS],
+    userRole.ADMIN
   );
 
   const { data: conflict } = useGetTasksConfilctQuery('', {

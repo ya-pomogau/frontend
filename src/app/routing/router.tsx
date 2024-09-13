@@ -31,7 +31,7 @@ import {
   VKAuthPage,
   RegisterPage,
 } from 'pages';
-import { Tabs } from '../../shared/types/common.types';
+import { tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
 
 export const router = createBrowserRouter([
@@ -90,15 +90,15 @@ export const router = createBrowserRouter([
           },
           {
             path: Routes.PROFILE_REQUESTS_VOLUNTEERS,
-            element: <RequestsPage incomeTab={Tabs.VOLUNTEERS} />,
+            element: <RequestsPage incomeTab={tabs.VOLUNTEERS} />,
           },
           {
             path: Routes.PROFILE_REQUESTS_RECIPIENTS,
-            element: <RequestsPage incomeTab={Tabs.RECIPIENTS} />,
+            element: <RequestsPage incomeTab={tabs.RECIPIENTS} />,
           },
           {
             path: Routes.PROFILE_REQUESTS_NOTPROCESSED,
-            element: <RequestsPage incomeTab={Tabs.NOTPROCESSED} />,
+            element: <RequestsPage incomeTab={tabs.NOTPROCESSED} />,
           },
           {
             path: Routes.PROFILE_STATISTICS,
@@ -118,19 +118,19 @@ export const router = createBrowserRouter([
           },
           {
             path: Routes.PROFILE_TASKS_RECIPIENTS,
-            element: <TasksPage incomeTab={Tabs.RECIPIENTS} />,
+            element: <TasksPage incomeTab={tabs.RECIPIENTS} />,
           },
           {
             path: Routes.PROFILE_TASKS_VOLUNTEERS,
-            element: <TasksPage incomeTab={Tabs.VOLUNTEERS} />,
+            element: <TasksPage incomeTab={tabs.VOLUNTEERS} />,
           },
           {
             path: Routes.PROFILE_TASKS_RECIPIENTS_USERID,
-            element: <TasksProfilePage incomeTab={Tabs.RECIPIENTS} />,
+            element: <TasksProfilePage incomeTab={tabs.RECIPIENTS} />,
           },
           {
             path: Routes.PROFILE_TASKS_VOLUNTEERS_USERID,
-            element: <TasksProfilePage incomeTab={Tabs.VOLUNTEERS} />,
+            element: <TasksProfilePage incomeTab={tabs.VOLUNTEERS} />,
           },
           {
             path: Routes.PROFILE_BIDS,
@@ -167,7 +167,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: Routes.PROFILE_REQUESTS_ADMINS,
-            element: <RequestsPage incomeTab={Tabs.ADMINS} />,
+            element: <RequestsPage incomeTab={tabs.ADMINS} />,
           },
           {
             path: Routes.PROFILE_CREATE_NEW_ADMIN,

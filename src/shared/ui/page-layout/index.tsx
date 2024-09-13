@@ -13,7 +13,7 @@ import {
   unauthorizedRecipientMessage,
   unauthorizedVolunteerMessage,
 } from 'shared/libs/constants';
-import { UserRole } from 'shared/types/common.types';
+import { userRole as userRoles } from 'shared/types/common.types';
 import { isUnConfirmedSelector } from 'entities/user/model';
 
 interface PageLayoutProps {
@@ -54,12 +54,12 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-          {isUnConfirmed && userRole === UserRole.RECIPIENT && (
+          {isUnConfirmed && userRole === userRoles.RECIPIENT && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedRecipientMessage} />
             </div>
           )}
-          {isUnConfirmed && userRole === UserRole.VOLUNTEER && (
+          {isUnConfirmed && userRole === userRoles.VOLUNTEER && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>

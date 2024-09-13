@@ -12,7 +12,7 @@ import {
   RADIANS_IN_DEGREE,
 } from './constants';
 import { IDateUser } from 'pages/requests/test-users';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, userRole } from 'shared/types/common.types';
 import { UserProfile } from 'entities/user/types';
 import { IMessage } from 'shared/types/message';
 
@@ -20,10 +20,10 @@ export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
 export const getRoleForRequest = (role: UserRole | null) => {
   let query = '';
-  if (role === UserRole.RECIPIENT) {
-    query = UserRole.RECIPIENT.toLowerCase();
+  if (role === userRole.RECIPIENT) {
+    query = userRole.RECIPIENT.toLowerCase();
   } else {
-    query = UserRole.VOLUNTEER.toLowerCase();
+    query = userRole.VOLUNTEER.toLowerCase();
   }
   return query;
 };
@@ -230,17 +230,17 @@ export const filterCardsUsersPageAdmin = (
   switch (search.categories[0]) {
     case 'all':
       return setDate(array);
-    case UserRole.VOLUNTEER:
-      return setDate(filterCardsPageAdmin(array, UserRole.VOLUNTEER));
-    case UserRole.RECIPIENT:
-      return setDate(filterCardsPageAdmin(array, UserRole.RECIPIENT));
+    case userRole.VOLUNTEER:
+      return setDate(filterCardsPageAdmin(array, userRole.VOLUNTEER));
+    case userRole.RECIPIENT:
+      return setDate(filterCardsPageAdmin(array, userRole.RECIPIENT));
     default:
       return setDate(array);
   }
 };
 //FIX: добавила сюда интерфейс, тк в админах удалилась страница pages-notprocesed
 export interface UserProps {
-  role: UserRole;
+  role: userRole;
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
@@ -257,7 +257,7 @@ export const filterUsersNamePageAdmin = (
   return array.filter(
     (user: UserProps) =>
       user.userName.toLowerCase().includes(searchName.toLowerCase()) &&
-      user.role !== UserRole.ADMIN
+      user.role !== userRole.ADMIN
   );
 };
 
@@ -283,7 +283,7 @@ export const messageHub: IMessageHub[] = [
       avatar: 'https://i.pravatar.cc/300',
       address: 'Puscino',
       vkId: 'asd2342',
-      role: UserRole.RECIPIENT,
+      role: userRole.RECIPIENT,
       _id: '1234',
     },
     messages: [
@@ -318,7 +318,7 @@ export const messageHub: IMessageHub[] = [
       avatar: 'https://i.pravatar.cc/300',
       address: 'Puscino 213',
       vkId: '12',
-      role: UserRole.RECIPIENT,
+      role: userRole.RECIPIENT,
       _id: 'asd123',
     },
     messages: [

@@ -3,7 +3,7 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { PageSubMenuAdminStatistics } from 'widgets/page-sub-menu/components/page-sub-menu-admin-statistics/page-sub-menu-admin-statistics';
 import styles from './styles.module.css';
 import Fieldset from 'shared/ui/fieldset';
-import { FieldsetView } from 'shared/ui/fieldset/utils';
+import { fieldsetView } from 'shared/ui/fieldset/utils';
 import { Accordion } from 'shared/ui/accordion';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
@@ -22,21 +22,21 @@ interface IStatusApplicationOptions {
   label: 'Открытые' | 'В работе' | 'Закрытые';
 }
 
-export const ButtonsNameForStatisticsPage = {
+export const buttonsNameForStatisticsPage = {
   generateReport: 'generateReport',
   downloadReport: 'downloadReport',
 } as const;
 
 export type ButtonsNameForStatisticsPage = ValueOf<
-  typeof ButtonsNameForStatisticsPage
+  typeof buttonsNameForStatisticsPage
 >;
 
-export const FieldsName = {
+export const fieldsName = {
   to: 'to',
   from: 'from',
 } as const;
 
-export type FieldsName = ValueOf<typeof FieldsName>;
+export type FieldsName = ValueOf<typeof fieldsName>;
 
 interface IFormInput {
   period: {
@@ -95,7 +95,7 @@ export const ApplicationsStatisticsPage = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.period}>
-          <Fieldset title="Период" view={FieldsetView.ROW}>
+          <Fieldset title="Период" view={fieldsetView.ROW}>
             <div className={styles.period__fields}>
               <p className={styles.period__points}>от</p>
               <Controller
@@ -141,7 +141,7 @@ export const ApplicationsStatisticsPage = () => {
           </Fieldset>
         </div>
         <div className={styles.status_application}>
-          <Fieldset title="Статус заявки" view={FieldsetView.COLUMN}>
+          <Fieldset title="Статус заявки" view={fieldsetView.COLUMN}>
             <Controller
               name="statusApplication"
               control={control}
@@ -177,16 +177,16 @@ export const ApplicationsStatisticsPage = () => {
             buttonType="primary"
             label="Сформировать отчет"
             actionType="submit"
-            id={ButtonsNameForStatisticsPage.generateReport}
-            name={ButtonsNameForStatisticsPage.generateReport}
+            id={buttonsNameForStatisticsPage.generateReport}
+            name={buttonsNameForStatisticsPage.generateReport}
             disabled={disabledButton}
           />
           <Button
             buttonType="secondary"
             label="Скачать отчет"
             actionType="submit"
-            id={ButtonsNameForStatisticsPage.downloadReport}
-            name={ButtonsNameForStatisticsPage.downloadReport}
+            id={buttonsNameForStatisticsPage.downloadReport}
+            name={buttonsNameForStatisticsPage.downloadReport}
             disabled={disabledButton}
             customIcon={<Icon icon="ExcelIcon" color="blue" />}
           />

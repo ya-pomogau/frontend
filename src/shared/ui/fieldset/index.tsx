@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
 
-import { FieldsetView } from './utils';
+import { fieldsetView, FieldsetView } from './utils';
 
 import styles from './styles.module.css';
 
@@ -14,7 +14,7 @@ interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
 
 const Fieldset = ({
   title,
-  view = FieldsetView.COLUMN,
+  view = fieldsetView.COLUMN,
   children,
   ...props
 }: FieldsetProps) => (

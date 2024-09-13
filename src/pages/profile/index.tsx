@@ -2,22 +2,22 @@ import { Navigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { isRootSelector } from 'entities/user/model';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 import { Routes } from 'shared/config';
 
 export function ProfilePage() {
   const role = useAppSelector((state) => state.user.role);
   const isRoot = useAppSelector(isRootSelector);
 
-  if (role === UserRole.VOLUNTEER) {
+  if (role === userRole.VOLUNTEER) {
     return <Navigate to={Routes.PROFILE_MAP} replace />;
   }
 
-  if (role === UserRole.RECIPIENT) {
+  if (role === userRole.RECIPIENT) {
     return <Navigate to={Routes.PROFILE_ACTIVE} replace />;
   }
 
-  if (role === UserRole.ADMIN && !isRoot) {
+  if (role === userRole.ADMIN && !isRoot) {
     return <Navigate to={Routes.PROFILE_REQUESTS} replace />;
   }
 

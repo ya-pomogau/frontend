@@ -8,7 +8,7 @@ import {
   TMockLoginRequestDto,
 } from './auth.types';
 import {
-  SocketConnectionStatus,
+  socketConnectionStatus,
   TCustomSelector,
   TSystemSliceState,
 } from '../shared/types/store.types';
@@ -156,7 +156,7 @@ const systemSlice = createSlice({
   reducers: {
     resetUser: () => systemSliceInitialState,
     startSocketConnection: (state) => {
-      state.socketConnectionStatus = SocketConnectionStatus.INIT;
+      state.socketConnectionStatus = socketConnectionStatus.INIT;
     },
     setSocketConnectionStatus: (state, action) => {
       state.socketConnectionStatus = action.payload;
@@ -165,7 +165,7 @@ const systemSlice = createSlice({
       state.socketMessage = action.payload;
     },
     closeSocketConnection: (state) => {
-      state.socketConnectionStatus = SocketConnectionStatus.CLOSED;
+      state.socketConnectionStatus = socketConnectionStatus.CLOSED;
     },
   },
   extraReducers: (builder) =>

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ConflictCard } from '.';
-import { TaskReport } from 'entities/task/types';
+import { taskReport } from 'entities/task/types';
 
 const meta: Meta<typeof ConflictCard> = {
   title: 'uikit/ConflictCard',
@@ -43,6 +43,6 @@ export const Card: Story = {
       _id: '63d0d8b9c14df717e58b1991',
     },
     role: 'recipient',
-    status: TaskReport.FULFILLED,
+    status: taskReport.FULFILLED,
   },
 };

@@ -2,7 +2,7 @@ import { TUser, TVKUser } from '../../entities/user/types';
 import { RootState } from '../../app/store';
 import { ValueOf } from './common.types';
 
-export const SocketEvent = {
+export const socketEvent = {
   CONNECT: 'connect',
   CONNECT_USER_MESSAGE: 'connect_user',
   MESSAGE: 'message',
@@ -12,9 +12,9 @@ export const SocketEvent = {
   TEST: 'test_event', //временное событие, удалить после реализации нужного
 } as const;
 
-export type SocketEvent = ValueOf<typeof SocketEvent>;
+export type SocketEvent = ValueOf<typeof socketEvent>;
 
-export const SocketConnectionStatus = {
+export const socketConnectionStatus = {
   INIT: 'init', //подключение устанавливается
   CONNECT_ERROR: 'connect_error', //ошибка подключения
   CONNECTED: 'connected', //подключение установлено
@@ -22,7 +22,7 @@ export const SocketConnectionStatus = {
   DISCONNECTED: 'disconnected', //подключение прервано
 } as const;
 
-export type SocketConnectionStatus = ValueOf<typeof SocketConnectionStatus>;
+export type SocketConnectionStatus = ValueOf<typeof socketConnectionStatus>;
 
 export type TSocketMessage = {
   data: object | string;

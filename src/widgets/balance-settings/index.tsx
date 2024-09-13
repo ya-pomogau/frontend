@@ -3,7 +3,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from 'shared/ui';
 import { usePermission } from 'shared/hooks';
-import { AdminPermission, UserRole, TPoints } from 'shared/types/common.types';
+import { adminPermission, userRole, TPoints } from 'shared/types/common.types';
 import {
   useGetCategoriesQuery,
   useUpdatePointsMutation,
@@ -18,8 +18,8 @@ interface BalanceSettingsProps {
 
 export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
   const isEditAllowed = usePermission(
-    [AdminPermission.CATEGORIES],
-    UserRole.ADMIN
+    [adminPermission.CATEGORIES],
+    userRole.ADMIN
   );
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();

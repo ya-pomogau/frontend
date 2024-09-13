@@ -2,30 +2,30 @@ import { UserProfile } from 'entities/user/types';
 import { UserStatus, ValueOf } from 'shared/types/common.types';
 import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
 
-export const TaskStatus = {
+export const taskStatus = {
   CREATED: 'created', // только созданная заявка
   ACCEPTED: 'accepted', //взятая в работу волонтером
   COMPLETED: 'completed', //выполненная
   CONFLICTED: 'conflicted', //конфликтная заявка
 } as const;
 
-export type TaskStatus = ValueOf<typeof TaskStatus>;
+export type TaskStatus = ValueOf<typeof taskStatus>;
 
-export const ResolveStatus = {
+export const resolveStatus = {
   VIRGIN: 'virgin', //конфликт есть, но не взят в работу.
   PENDING: 'pending', //конфликт есть и взят в работу.
   FULFILLED: 'fulfilled', //конфликт разрешён как "Выполнено"
   REJECTED: 'rejected', //конфликт разрешён как "Не выполнено"
 } as const;
 
-export type ResolveStatus = ValueOf<typeof ResolveStatus>;
+export type ResolveStatus = ValueOf<typeof resolveStatus>;
 
-export const TaskReport = {
+export const taskReport = {
   FULFILLED: 'fulfilled', //отмечана как выполненная
   REJECTED: 'rejected', //отмечана как не выполненная
 } as const;
 
-export type TaskReport = ValueOf<typeof TaskReport>;
+export type TaskReport = ValueOf<typeof taskReport>;
 
 export type Category = {
   _id: string;

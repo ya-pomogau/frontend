@@ -8,7 +8,11 @@ import { TaskItem } from '../task';
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import {
+  UserRole,
+  userRole as userRoles,
+  userStatus,
+} from 'shared/types/common.types';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -46,7 +50,10 @@ export const TaskList = ({
   isTabPage,
 }: TaskListProps) => {
   const { role } = useAppSelector((state) => state.user);
-  const buttonGuard = usePermission([UserStatus.CONFIRMED], UserRole.RECIPIENT);
+  const buttonGuard = usePermission(
+    [userStatus.CONFIRMED],
+    userRoles.RECIPIENT
+  );
   const location = useLocation();
   const isCompletedPage = location.pathname.includes('/profile/completed');
   const [isOpen, setIsOpen] = useState(false);
@@ -92,17 +99,17 @@ export const TaskList = ({
           className={classNames(
             styles.content,
             {
-              [styles.content_admin]: role === UserRole.ADMIN,
-              [styles.content_default]: role !== UserRole.ADMIN,
+              [styles.content_admin]: role === userRoles.ADMIN,
+              [styles.content_default]: role !== userRoles.ADMIN,
             },
             'p-0 m-0',
             extClassName
           )}
         >
           {((!isStatusActive &&
-            userRole === UserRole.RECIPIENT &&
+            userRole === userRoles.RECIPIENT &&
             !isCompletedPage) ||
-            (userRole === UserRole.RECIPIENT && isTabPage)) && (
+            (userRole === userRoles.RECIPIENT && isTabPage)) && (
             <li
               className={classNames({
                 [styles.add_task_mobile]: isMobile,
@@ -145,7 +152,7 @@ export const TaskList = ({
         tasks &&
         tasks.length === 0 &&
         isStatusActive &&
-        role !== UserRole.ADMIN && (
+        role !== userRoles.ADMIN && (
           <div
             className={classNames(
               styles.content_empty,
@@ -161,7 +168,7 @@ export const TaskList = ({
               text="У Вас пока нет заявок"
             />
 
-            {userRole === UserRole.RECIPIENT && (
+            {userRole === userRoles.RECIPIENT && (
               <>
                 <p
                   className={classNames(
@@ -224,7 +231,7 @@ export const TaskList = ({
           </div>
         )}
 
-      {role === UserRole.ADMIN &&
+      {role === userRoles.ADMIN &&
         !isLoading &&
         tasks &&
         tasks.length === 0 &&
@@ -241,9 +248,9 @@ export const TaskList = ({
           >
             <Informer
               text={
-                userRole === UserRole.RECIPIENT
+                userRole === userRoles.RECIPIENT
                   ? 'У данного реципиента нет активных заявок'
-                  : userRole === UserRole.VOLUNTEER
+                  : userRole === userRoles.VOLUNTEER
                   ? 'У данного волонтера нет заявок в работе'
                   : 'Нет доступных заявок'
               }

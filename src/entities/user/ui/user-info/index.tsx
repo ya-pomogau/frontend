@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'app/hooks';
 import { InfoContainer, InfoContainerContent, Loader } from 'shared/ui';
 import { useControlModal, useRouteMatch, useUser } from 'shared/hooks';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 import { setTokenAccess } from 'shared/libs/utils';
 import { Routes } from 'shared/config';
 import { EditViewerInfo } from 'features/edit-viewer-info/ui';
@@ -64,7 +64,7 @@ export const UserInfo = () => {
         phone={user.phone}
         address={user.address}
       />
-      {user.role === UserRole.VOLUNTEER && (
+      {user.role === userRole.VOLUNTEER && (
         <VolunteerInfo score={user.score || 0} hasKey={user.keys || false} />
       )}
     </InfoContainer>
