@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import { withRouter } from 'storybook-addon-remix-react-router';
 
 import Header from '.';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 
 const mockedRecipientState = {
-  role: UserRole.RECIPIENT,
+  role: userRole.RECIPIENT,
   data: {
     id: 4,
     fullname: 'Реципиентов Алексей Борисович',
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     vk: 'https://vk.com/id123456789',
     avatar: 'https://tengu.ucoz.net/novosti/morio-higaonna.jpg',
     phone: '+7 (916) 123-45-67',

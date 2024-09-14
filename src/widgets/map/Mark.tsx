@@ -6,7 +6,7 @@
 import { FC, memo } from 'react';
 import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import usePermission from 'shared/hooks/use-permission';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import { userRole, userStatus } from 'shared/types/common.types';
 import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
 import { useResponseTaskMutation } from 'services/user-task-api';
@@ -33,8 +33,8 @@ const Mark: FC<MarkProps> = ({
   const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
 
   const isGranted = usePermission(
-    [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
-    UserRole.VOLUNTEER
+    [userStatus.CONFIRMED, userStatus.ACTIVATED, userStatus.VERIFIED],
+    userRole.VOLUNTEER
   );
   const [responseTask] = useResponseTaskMutation();
 

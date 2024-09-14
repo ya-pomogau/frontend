@@ -10,11 +10,11 @@ import { SmartHeader } from '../../shared/ui/smart-header';
 import { LockIcon } from '../../shared/ui/icons/lock-icon';
 import { useMediaQuery } from '../../shared/hooks';
 import usePermission from '../../shared/hooks/use-permission';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 import { Breakpoints } from 'shared/config';
 
 export function PolicyPage() {
-  const isMainAdmin = usePermission([], UserRole.ADMIN);
+  const isMainAdmin = usePermission([], userRole.ADMIN);
   const isMobile = useMediaQuery(Breakpoints.L);
   // TODO Нужно реализовать хранение значений titleMarkdown и descriptionMarkdown на сервере в базе данных
   const [titleMarkdown, setTitleMarkdown] = useState(initTitleMarkdown);

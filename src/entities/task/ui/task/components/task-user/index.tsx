@@ -5,12 +5,12 @@ import { ButtonWithModal, ModalContent } from 'widgets';
 import { RoundButton, Avatar } from 'shared/ui';
 import { Routes } from 'shared/config';
 import { useControlModal } from 'shared/hooks';
-import { ModalContentType, TaskButtonType } from 'shared/types/common.types';
+import { modalContentType, taskButtonType } from 'shared/types/common.types';
 import { DefaultAvatar } from '../../img/default-avatar';
 import { UserProfile } from 'entities/user/types';
 import { PopupChat } from '../../../../../chat/ui/chat';
 import { infoAdmin } from '../../../../../chat/ui/chat/libs/utils';
-import { TaskStatus } from '../../../../types';
+import { taskStatus, TaskStatus } from '../../../../types';
 import { mockChatMessages } from '../../../../../chat/mock-messages';
 
 import placeholder from '../../img/placeholder.svg';
@@ -34,7 +34,7 @@ export const TaskUser = ({
   const { isOpen, handleOpen, handleClose } = useControlModal();
   const isPageCompleted = location.pathname === Routes.PROFILE_COMPLETED;
   const isButtonDisabled =
-    isPageCompleted || !user || !volunteer || status === TaskStatus.COMPLETED;
+    isPageCompleted || !user || !volunteer || status === taskStatus.COMPLETED;
 
   return (
     <div className={classNames(extClassName, styles.userInfo)}>
@@ -55,11 +55,11 @@ export const TaskUser = ({
         <ButtonWithModal
           closeButton
           modalContent={
-            <ModalContent type={ModalContentType.phone} date={date} />
+            <ModalContent type={modalContentType.phone} date={date} />
           }
         >
           <RoundButton
-            buttonType={TaskButtonType.phone}
+            buttonType={taskButtonType.phone}
             disabled={isPageCompleted || !user}
           />
         </ButtonWithModal>

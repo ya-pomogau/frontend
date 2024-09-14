@@ -12,14 +12,15 @@ import {
   unauthorizedRecipientMessage,
   unauthorizedVolunteerMessage,
 } from 'shared/libs/constants';
-import { UserRole } from 'shared/types/common.types';
+
+import { userRole as userRoles } from 'shared/types/common.types';
 import {
   isUnConfirmedSelector,
   isUserBlockedSelector,
 } from 'entities/user/model';
-import { BlockedPage } from '../../../features/error-boundary/pages/blockedPage';
 import { useMediaQuery } from 'shared/hooks';
 import { Breakpoints } from 'shared/config';
+import { BlockedPage } from '../../../features/error-boundary/pages/blockedPage';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -66,12 +67,12 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-          {isUnConfirmed && userRole === UserRole.RECIPIENT && (
+          {isUnConfirmed && userRole === userRoles.RECIPIENT && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedRecipientMessage} />
             </div>
           )}
-          {isUnConfirmed && userRole === UserRole.VOLUNTEER && (
+          {isUnConfirmed && userRole === userRoles.VOLUNTEER && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>

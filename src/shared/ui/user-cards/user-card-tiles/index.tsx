@@ -8,7 +8,7 @@ import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import { userRole, userStatus } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -43,7 +43,7 @@ export const UserCardTiles = ({
     <div
       className={classnames(
         styles.content,
-        role === UserRole.ADMIN && isActon
+        role === userRole.ADMIN && isActon
           ? styles.admin_content_action
           : styles.admin_content
       )}
@@ -53,7 +53,7 @@ export const UserCardTiles = ({
         avatarName={`аватар пользователя ${name}`}
         avatarLink={avatar}
       />
-      {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
+      {(role === userRole.VOLUNTEER || role === userRole.RECIPIENT) && (
         <div className={classnames(styles.icons_div)}>
           <RoundButton
             buttonType="phone"
@@ -70,10 +70,10 @@ export const UserCardTiles = ({
 
       <UserInfo userName={name} userId={_id} userNumber={phone} role={role} />
 
-      {role === UserRole.VOLUNTEER && (
+      {role === userRole.VOLUNTEER && (
         <VolunteerActions
           extClassName={classnames(styles.buttons, styles.buttons_volunteers)}
-          isUserBlocked={status === UserStatus.BLOCKED}
+          isUserBlocked={status === userStatus.BLOCKED}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
@@ -88,17 +88,17 @@ export const UserCardTiles = ({
         />
       )}
 
-      {role === UserRole.RECIPIENT && (
+      {role === userRole.RECIPIENT && (
         <RecipientActions
           extClassName={styles.buttons}
-          approved={status !== UserStatus.UNCONFIRMED}
-          isUserBlocked={status === UserStatus.BLOCKED}
+          approved={status !== userStatus.UNCONFIRMED}
+          isUserBlocked={status === userStatus.BLOCKED}
           onConfirmClick={handleConfirmClick}
           onBlockClick={handleBlockClick}
         />
       )}
 
-      {role === UserRole.ADMIN && (
+      {role === userRole.ADMIN && (
         <AdminActions
           id={_id}
           permissions={permissions || []}
