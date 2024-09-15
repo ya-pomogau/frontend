@@ -17,6 +17,7 @@ export interface UserCardTilesProps {
   handleConfirmClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
+  isAcceptButtonExclamationPointIcon:boolean;
   getButtonTypeFromScore: (
     score: number
   ) => 'primary' | 'partial' | 'secondary';
@@ -27,6 +28,7 @@ export const UserCardTiles = ({
   handleConfirmClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   getButtonTypeFromScore,
 }: UserCardTilesProps) => {
   const { name, role, avatar, phone, _id, score, keys, status, permissions } =
@@ -74,8 +76,9 @@ export const UserCardTiles = ({
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
-          isAcceptButtonExclamationPointIcon={true}
+          // isAcceptButtonExclamationPointIcon={true}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
+          isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={() =>
             console.log('"Заблокировать" button pressed')

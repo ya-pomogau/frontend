@@ -13,6 +13,7 @@ interface UserCardListProps {
   handleConfirmClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
+  isAcceptButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
     score: number
   ) => 'primary' | 'partial' | 'secondary';
@@ -23,6 +24,7 @@ export const UserCardList = ({
   handleConfirmClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   getButtonTypeFromScore,
 }: UserCardListProps) => {
   const { name, role, avatar, phone, _id, score, keys, status } = user;
@@ -65,7 +67,7 @@ export const UserCardList = ({
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
-          isAcceptButtonExclamationPointIcon={true}
+          isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={() =>

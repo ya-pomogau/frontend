@@ -29,6 +29,7 @@ const VolunteerActions = ({
   score,
   extClassName,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   onAcceptButtonClick,
   onBlockButtonClick,
   onGiveKeysButtonClick,
@@ -42,7 +43,13 @@ const VolunteerActions = ({
     AdminPermission.CONFIRMATION
   );
   const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
+// Log the button state for debugging purposes
+// console.log('Approve Permission:', approvePermission);
+// console.log('isVolonteerAcceptButtonDisabled:', isVolonteerAcceptButtonDisabled);
+// console.log('Score:',);
 
+  // Determine if the "Дать ключи" button should be disabled
+  const isGiveKeysButtonDisabled = score < 60 || keysPermission;
   return (
     <div className={classnames(extClassName, styles.buttons_div)}>
       <div className={classnames(styles.volunteer_info)}>
@@ -59,12 +66,12 @@ const VolunteerActions = ({
           label="Подтвердить"
           onClick={onAcceptButtonClick}
         />
-        {/* {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />} */}
+        { isAcceptButtonExclamationPointIcon && <ExclamationPointIcon /> }
       </div>
       <Button
         disabled={!approvePermission}
         buttonType="secondary"
-        label="Заблокировать"
+        label="Забло"
         onClick={onBlockButtonClick}
       />
       <div className={classnames(styles.exclamation_point_div)}>
@@ -72,7 +79,7 @@ const VolunteerActions = ({
           buttonType="secondary"
           label="Дать ключи"
           onClick={onGiveKeysButtonClick}
-          disabled={!keysPermission}
+          disabled={isGiveKeysButtonDisabled}
         />
         {isKeyButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>
