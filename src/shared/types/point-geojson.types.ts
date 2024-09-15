@@ -1,6 +1,6 @@
-export type GeoCoordinates = Array<number>;
+export type GeoCoordinates = [number, number];
 
 export interface PointGeoJSONInterface {
-  type: string;
+  type: 'Point';
   coordinates: GeoCoordinates;
 }
