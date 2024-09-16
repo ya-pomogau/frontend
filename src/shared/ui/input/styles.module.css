@@ -13,6 +13,9 @@
   box-sizing: border-box;
   font-size: var(--font-size-s);
   line-height: 19px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .input_error {
@@ -60,16 +63,16 @@
   right: 12px;
   cursor: pointer;
   transition: var(--transition-hover);
+  top: 12%;
 }
 
 .icon_error {
   display: flex;
   position: absolute;
   right: 12px;
-  top: 35%;
-  transform: translate(0, -50%);
+  top: 12%;
   cursor: pointer;
-  transition: var(--transition-hover);
+  transition: var(--transition-hover); 
 }
 
 @media screen and (max-width: 550px) {
