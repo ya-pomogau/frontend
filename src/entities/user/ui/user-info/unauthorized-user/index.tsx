@@ -12,7 +12,12 @@ export const UnauthorizedUser = () => {
       customIcon={<VkIcon color="white" size="24" />}
       label="Войти через ВКонтакте"
       size="extraLarge"
-      onClick={() => handleRedirectVK()}
+      onClick={() => {
+        // Временно, пока не уберут предупреждение в консоли
+        confirm(
+          'Внимание-вниманиеЭто важно, чёрт возьми! Ни в коем случае не копируйте и не вставляйте что‑либо сюда, вы рискуете потерять доступ к своему аккаунту.Ввод информации сюда может дать злоумышленникам доступ к вашему аккаунту VK ID'
+        ) && handleRedirectVK();
+      }}
       extClassName={styles.buttonsWrapper}
     />
   );
