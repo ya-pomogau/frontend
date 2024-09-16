@@ -82,7 +82,7 @@ export function TasksPage({ incomeTab }: PageProps) {
   return (
     <>
       <SmartHeader
-        icon={<Icon color="blue" icon="SettingsIcon" size="54" />}
+        icon={<Icon color="blue" icon="CreateApplication" size="54" />}
         text="Создание / Редактирование заявки"
         // filter={
         //   <Filter
