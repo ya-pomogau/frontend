@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useGetTaskVirginQuery } from '../../services/user-task-api';
 import { isUnConfirmedSelector } from '../../entities/user/model';
-import { UserRole } from '../../shared/types/common.types';
+import { userRole } from '../../shared/types/common.types';
 import { startSocketConnection } from '../../services/system-slice';
 import { YandexMap } from '../../widgets/map';
 import { Filter } from '../../features/filter';
@@ -26,7 +26,7 @@ export function ProfileMapPage() {
     }
   }, [user]);
 
-  const isVolunteer = user?.role === UserRole.VOLUNTEER;
+  const isVolunteer = user?.role === userRole.VOLUNTEER;
   const MAP_ZOOM = 15;
   let latitude = 0;
   let longitude = 0;
@@ -55,7 +55,7 @@ export function ProfileMapPage() {
   }
 
   const { data: tasks, isLoading } = useGetTaskVirginQuery([
-    UserRole.VOLUNTEER.toLocaleLowerCase(),
+    userRole.VOLUNTEER.toLocaleLowerCase(),
     latitude,
     longitude,
   ]);

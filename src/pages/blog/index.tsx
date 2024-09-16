@@ -14,14 +14,14 @@ import {
 import { useControlModal, usePermission } from 'shared/hooks';
 import { PostProps } from 'shared/ui/post/Post';
 import { IValuesBlog } from 'shared/types/blog.types';
-import { AdminPermission, UserRole } from 'shared/types/common.types';
+import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
 const postsPerPage = 10;
 
 export function BlogPage() {
-  const isAdmin = usePermission([AdminPermission.BLOG], UserRole.ADMIN);
+  const isAdmin = usePermission([adminPermission.BLOG], userRole.ADMIN);
   const { isOpen, handleOpen, handleClose } = useControlModal();
   const { data: posts, isLoading } = useGetPostsQuery(postsPerPage);
   const [deletePost] = useDeletePostMutation();

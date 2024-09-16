@@ -12,7 +12,7 @@ import { SideBar } from './navigation';
 import { DropDownMenu } from './DropDownMenu';
 import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
 import { MenuButton } from './components';
-import { UserRole } from '../../shared/types/common.types';
+import { userRole } from '../../shared/types/common.types';
 
 import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import styles from './styles.module.css';
@@ -24,7 +24,7 @@ const Header = () => {
 
   const isMobile = useMediaQuery(Breakpoints.L);
   const user = useUser();
-  const isAdmin = user?.role === UserRole.ADMIN;
+  const isAdmin = user?.role === userRole.ADMIN;
 
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
