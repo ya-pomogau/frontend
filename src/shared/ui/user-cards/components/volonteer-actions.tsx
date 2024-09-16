@@ -6,14 +6,16 @@ import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../../app/hooks';
-import { AdminPermission } from '../../../types/common.types';
+import { AdminPermission, UserStatus } from '../../../types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
   score: number;
+  status: UserStatus;
   extClassName?: string;
   keys: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
@@ -27,6 +29,7 @@ const VolunteerActions = ({
   isVolonteerAcceptButtonDisabled,
   getButtonTypeFromScore,
   score,
+  status,
   extClassName,
   isKeyButtonExclamationPointIcon,
   isAcceptButtonExclamationPointIcon,
@@ -43,12 +46,7 @@ const VolunteerActions = ({
     AdminPermission.CONFIRMATION
   );
   const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
-// Log the button state for debugging purposes
-// console.log('Approve Permission:', approvePermission);
-// console.log('isVolonteerAcceptButtonDisabled:', isVolonteerAcceptButtonDisabled);
-// console.log('Score:',);
 
-  // Determine if the "Дать ключи" button should be disabled
   const isGiveKeysButtonDisabled = score < 60 || keysPermission;
   return (
     <div className={classnames(extClassName, styles.buttons_div)}>
@@ -62,7 +60,7 @@ const VolunteerActions = ({
       <div className={classnames(styles.exclamation_point_div)}>
         <Button
           disabled={isVolonteerAcceptButtonDisabled || !approvePermission}
-          buttonType={getButtonTypeFromScore(score)}
+          buttonType={getButtonTypeFromScore(score, status)}
           label="Подтвердить"
           onClick={onAcceptButtonClick}
         />
@@ -71,7 +69,7 @@ const VolunteerActions = ({
       <Button
         disabled={!approvePermission}
         buttonType="secondary"
-        label="Забло"
+        label="Заблокировать"
         onClick={onBlockButtonClick}
       />
       <div className={classnames(styles.exclamation_point_div)}>

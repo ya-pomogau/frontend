@@ -15,7 +15,8 @@ interface UserCardListProps {
   isKeyButtonExclamationPointIcon: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
 }
 
@@ -67,6 +68,7 @@ export const UserCardList = ({
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
+          status={ status || 0}
           isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}

@@ -76,6 +76,7 @@ export const UserCardTiles = ({
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
+          status={ status || 0}
           // isAcceptButtonExclamationPointIcon={true}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
