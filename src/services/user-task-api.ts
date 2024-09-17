@@ -98,6 +98,17 @@ export const userTasksApi = createApi({
       // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive', id: 'recipient' }],
     }),
+    updateTask: build.mutation<Task, {id: string; dto:CreateTaskDto}>({
+      query: (args) => {
+        const { id, dto } = args;
+        return {
+          url: `/recipient/tasks/${id}`,
+          method: 'PATCH',
+          body: dto,
+        };
+      },
+      invalidatesTags: [{ type: 'TaskActive', id: 'recipient' }],
+    }),
     responseTask: build.mutation<Task, string>({
       query: (id) => {
         return {
@@ -145,6 +156,7 @@ export const {
   useGetTaskCompletedQuery,
   useGetTaskVirginQuery,
   useCreateTaskMutation,
+  useUpdateTaskMutation,
   useResponseTaskMutation,
   useFulfillTaskMutation,
   useRejectTaskMutation,
