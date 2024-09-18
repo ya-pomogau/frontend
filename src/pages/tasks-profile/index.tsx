@@ -6,7 +6,7 @@ import { SmartHeader } from 'shared/ui/smart-header';
 
 import styles from './styles.module.css';
 
-import { Tabs, UserRole } from '../../shared/types/common.types';
+import { tabs, userRole } from '../../shared/types/common.types';
 // import { useGetUserByIdQuery } from 'services/user-api';
 // import { useGetTaskActiveQuery } from 'services/user-task-api';
 import { UserCardForTasks } from 'widgets/user-card-for-tasks';
@@ -17,7 +17,7 @@ import { useMediaQuery } from 'shared/hooks';
 import { openPopup } from 'features/create-request/model';
 
 import { Request } from 'features/create-request';
-import { TaskReport, TaskStatus } from 'entities/task/types';
+import { Task, taskReport, taskStatus } from 'entities/task/types';
 import { Breakpoints } from 'shared/config';
 
 // Моковые данные (удалить)
@@ -28,17 +28,17 @@ const mockedUser = {
   avatar: 'https://i.pravatar.cc/300',
   address: 'Улица Лесная, 12',
   vkId: '123456',
-  role: UserRole.VOLUNTEER,
+  role: userRole.VOLUNTEER,
 };
 
-const mockedTasks = [
+const mockedTasks: Task[] = [
   {
     _id: '1',
     description:
       'Помочь убрать мусор в парке, только созданная задача (без волонтера)',
     address: 'Улица Парковая, 123',
     location: { type: 'Point', coordinates: [55.699788, 37.557059] },
-    status: TaskStatus.ACCEPTED,
+    status: taskStatus.ACCEPTED,
     category: {
       _id: '1',
       title: 'Сопровождение',
@@ -52,7 +52,7 @@ const mockedTasks = [
       avatar: 'https://i.pravatar.cc/300',
       address: 'Улица Садовая, 10',
       vkId: '654321',
-      role: UserRole.RECIPIENT,
+      role: userRole.RECIPIENT,
       _id: '2',
     },
     recipientReport: null,
@@ -67,7 +67,7 @@ const mockedTasks = [
     description: 'Помочь перенести мебель, таска взята волонтером',
     address: 'Улица Мебельная, 77',
     location: { type: 'Point', coordinates: [60.699788, 40.557059] },
-    status: TaskStatus.COMPLETED,
+    status: taskStatus.COMPLETED,
     category: {
       _id: '2',
       title: 'Перевозка в личном транспорте',
@@ -81,20 +81,20 @@ const mockedTasks = [
       avatar: '',
       address: 'Улица Мебельная, 77',
       vkId: '123456789',
-      role: UserRole.RECIPIENT,
+      role: userRole.RECIPIENT,
       _id: '9',
     },
-    recipientReport: TaskReport.FULFILLED,
+    recipientReport: taskReport.FULFILLED,
     volunteer: {
       name: 'Смирнов Иван Павлович',
       phone: '+7 (111) 222-22-22',
       avatar: 'https://i.pravatar.cc/300',
       address: 'Москва, Ленинский проспект, 15',
       vkId: '123789',
-      role: UserRole.VOLUNTEER,
+      role: userRole.VOLUNTEER,
       _id: '5',
     },
-    volunteerReport: TaskReport.REJECTED,
+    volunteerReport: taskReport.REJECTED,
     adminResolve: null,
     isPendingChanges: false,
     moderator: null,
@@ -140,9 +140,9 @@ export function TasksProfilePage({ incomeTab }: TaskListProps) {
       <div className={styles.taskContainer}>
         <TaskList
           userRole={
-            incomeTab === Tabs.RECIPIENTS
-              ? UserRole.RECIPIENT
-              : UserRole.VOLUNTEER
+            incomeTab === tabs.RECIPIENTS
+              ? userRole.RECIPIENT
+              : userRole.VOLUNTEER
           }
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}

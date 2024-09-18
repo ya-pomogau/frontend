@@ -22,7 +22,7 @@ import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-ic
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import { userRole, UserRole, userStatus } from 'shared/types/common.types';
 
 import classNames from 'classnames';
 import './styles.css';
@@ -57,8 +57,8 @@ export const YandexMap = ({
   isAuthorised,
 }: YandexMapProps) => {
   const isGranted = usePermission(
-    [UserStatus.CONFIRMED, UserStatus.ACTIVATED, UserStatus.VERIFIED],
-    UserRole.VOLUNTEER
+    [userStatus.CONFIRMED, userStatus.ACTIVATED, userStatus.VERIFIED],
+    userRole.VOLUNTEER
   );
 
   const [isVisible, setVisibility] = useState(false);
@@ -85,9 +85,9 @@ export const YandexMap = ({
   const onOpenTask = (task: Task) => {
     if (ref.current) {
       const [x, y] = task.location.coordinates;
-      ref.current.setCenter([x-0.004, y], 15, {
-        checkZoomRange: true
-    });
+      ref.current.setCenter([x - 0.004, y], 15, {
+        checkZoomRange: true,
+      });
     }
   };
 
@@ -136,7 +136,7 @@ export const YandexMap = ({
           {
             <UserMark
               location={coordinates}
-              draggable={role === UserRole.RECIPIENT}
+              draggable={role === userRole.RECIPIENT}
             />
           }
           {radius && (

@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { UserRole, UserStatus } from '../../shared/types/common.types';
+import { userRole, userStatus } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
 import {
   useBlockUserMutation,
@@ -33,8 +33,8 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   const { score, status, keys, role } = user;
   const isVolonteerAcceptButtonDisabled = !!(
     status &&
-    (status > UserStatus.UNCONFIRMED || status < UserStatus.UNCONFIRMED) &&
-    role === UserRole.VOLUNTEER
+    (status > userStatus.UNCONFIRMED || status < userStatus.UNCONFIRMED) &&
+    role === userRole.VOLUNTEER
   );
 
   const [confirmUser] = useConfirmUserMutation();
@@ -46,7 +46,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   }, [confirmUser, user._id]);
 
   const handleBlockClick = () => {
-    if (status === UserStatus.BLOCKED) {
+    if (status === userStatus.BLOCKED) {
       promoteUser(user._id);
     } else {
       blockUser(user._id);

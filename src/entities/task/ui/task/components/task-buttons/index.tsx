@@ -1,7 +1,7 @@
 import {
-  ModalContentType,
-  TaskButtonType,
-  UserRole,
+  modalContentType,
+  taskButtonType,
+  userRole as userRoles,
 } from 'shared/types/common.types';
 import { SquareButton } from 'shared/ui/square-buttons';
 import { ButtonWithModal } from 'widgets/button-with-modal';
@@ -83,8 +83,8 @@ export const TaskButtons = ({
 
   const handleFulfillClick = () => {
     const shouldFulfillTask =
-      (userRole === UserRole.VOLUNTEER && !volunteerReport) ||
-      (userRole === UserRole.RECIPIENT && !recipientReport && volunteer);
+      (userRole === userRoles.VOLUNTEER && !volunteerReport) ||
+      (userRole === userRoles.RECIPIENT && !recipientReport && volunteer);
 
     if (shouldFulfillTask) {
       fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
@@ -116,11 +116,11 @@ export const TaskButtons = ({
             <ModalContent
               volunteer={!!volunteer}
               type={
-                !volunteer && userRole === UserRole.RECIPIENT
-                  ? ModalContentType.confirm
+                !volunteer && userRole === userRoles.RECIPIENT
+                  ? modalContentType.confirm
                   : clicked
-                  ? ModalContentType.admin
-                  : ModalContentType.confirm
+                  ? modalContentType.admin
+                  : modalContentType.confirm
               }
               userRole={userRole}
               taskId={taskId}
@@ -130,18 +130,18 @@ export const TaskButtons = ({
         >
           <SquareButton
             onClick={handleFulfillClick}
-            buttonType={TaskButtonType.confirm}
+            buttonType={taskButtonType.confirm}
             disabledColor={
-              !volunteer && userRole === UserRole.RECIPIENT
+              !volunteer && userRole === userRoles.RECIPIENT
                 ? true
-                : (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
-                  (userRole === UserRole.RECIPIENT && !!recipientReport) ||
+                : (userRole === userRoles.VOLUNTEER && !!volunteerReport) ||
+                  (userRole === userRoles.RECIPIENT && !!recipientReport) ||
                   clicked
             }
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.VOLUNTEER && isPageActive && (
+      {userRole === userRoles.VOLUNTEER && isPageActive && (
         <ButtonWithModal
           closeButton
           extClassName={styles.close}
@@ -149,22 +149,22 @@ export const TaskButtons = ({
             <ModalContent
               type={
                 isTaskExpired || !date
-                  ? ModalContentType.responded
+                  ? modalContentType.responded
                   : isTaskUrgent
-                  ? ModalContentType.cancel
-                  : ModalContentType.close
+                  ? modalContentType.cancel
+                  : modalContentType.close
               }
               date={date}
             />
           }
         >
           <SquareButton
-            buttonType={TaskButtonType.close}
+            buttonType={taskButtonType.close}
             disabledColor={isTaskUrgent}
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.RECIPIENT && isPageActive && (
+      {userRole === userRoles.RECIPIENT && isPageActive && (
         <ButtonWithModal
           closeButton
           extClassName={styles.close}
@@ -174,15 +174,15 @@ export const TaskButtons = ({
               taskId={taskId}
               type={
                 isTaskExpired || volunteer
-                  ? ModalContentType.responded
-                  : ModalContentType.close
+                  ? modalContentType.responded
+                  : modalContentType.close
               }
               date={date}
             />
           }
         >
           <SquareButton
-            buttonType={TaskButtonType.close}
+            buttonType={taskButtonType.close}
             disabledColor={isTaskUrgent}
           />
         </ButtonWithModal>
@@ -195,15 +195,15 @@ export const TaskButtons = ({
           modalContent={
             <ModalContent
               type={
-                isPageActive && !volunteer && userRole === UserRole.RECIPIENT
-                  ? ModalContentType.conflict
+                isPageActive && !volunteer && userRole === userRoles.RECIPIENT
+                  ? modalContentType.conflict
                   : isPageActive
                   ? clicked
-                    ? ModalContentType.admin
-                    : ModalContentType.conflict
+                    ? modalContentType.admin
+                    : modalContentType.conflict
                   : unfulfilledTask
-                  ? ModalContentType.unfulfilled
-                  : ModalContentType.conflict
+                  ? modalContentType.unfulfilled
+                  : modalContentType.conflict
               }
               active={isPageActive}
               conflict={conflict}
@@ -215,14 +215,14 @@ export const TaskButtons = ({
           }
         >
           <SquareButton
-            buttonType={TaskButtonType.conflict}
+            buttonType={taskButtonType.conflict}
             disabledColor={
-              !volunteer && userRole === UserRole.RECIPIENT
+              !volunteer && userRole === userRoles.RECIPIENT
                 ? true
-                : (userRole === UserRole.VOLUNTEER &&
+                : (userRole === userRoles.VOLUNTEER &&
                     !!volunteerReport &&
                     isPageActive) ||
-                  (userRole === UserRole.RECIPIENT &&
+                  (userRole === userRoles.RECIPIENT &&
                     !!recipientReport &&
                     isPageActive) ||
                   (clicked && isPageActive)
@@ -230,7 +230,7 @@ export const TaskButtons = ({
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.RECIPIENT && !volunteer && isPageActive && (
+      {userRole === userRoles.RECIPIENT && !volunteer && isPageActive && (
         <SquareButton
           onClick={handleEditButton}
           buttonType="edit"
