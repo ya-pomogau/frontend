@@ -43,6 +43,12 @@ export const usersApi = createApi({
     getUsers: build.query({
       query: (userRole = '') => `users?role=${userRole}`,
     }),
+    getAdminUserById: build.query({
+      query: (userId) => `admin/users/${userId}`,
+    }),
+    getAdminUserTasksById: build.query({
+      query: (userId) => `admin/users/${userId}/tasks`,
+    }),
     getUncomfirmed: build.query({
       query: (adminRole) =>
         `users?${
@@ -91,6 +97,8 @@ export const usersApi = createApi({
 
 export const {
   useGetUserByIdQuery,
+  useGetAdminUserByIdQuery,
+  useGetAdminUserTasksByIdQuery,
   useGetAllUsersQuery,
   useGetUsersQuery,
   useUpdateUsersMutation,

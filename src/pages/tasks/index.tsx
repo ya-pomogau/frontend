@@ -49,7 +49,7 @@ export function TasksPage({ incomeTab }: PageProps) {
     if (user.role === userRole.RECIPIENT) {
       navigate(`${Routes.PROFILE_TASKS_RECIPIENTS}/${user._id}`);
     } else if (user.role === userRole.VOLUNTEER) {
-      navigate(`${Routes.PROFILE_TASKS_VOLUNTEERS}${user._id}`);
+      navigate(`${Routes.PROFILE_TASKS_VOLUNTEERS}/${user._id}`);
     }
   };
 
@@ -82,7 +82,7 @@ export function TasksPage({ incomeTab }: PageProps) {
   return (
     <>
       <SmartHeader
-        icon={<Icon color="blue" icon="SettingsIcon" size="54" />}
+        icon={<Icon color="blue" icon="CreateApplication" size="54" />}
         text="Создание / Редактирование заявки"
         // filter={
         //   <Filter
