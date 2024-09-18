@@ -10,6 +10,11 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     disabled: { type: 'boolean' },
     customIcon: { type: 'string' },
+    actionType: { 
+      type: 'string', 
+      options: ['submit', 'reset', 'button'], 
+      control: { type: 'radio'} 
+    }
   },
 };
 
