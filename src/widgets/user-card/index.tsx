@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { userRole, userStatus } from '../../shared/types/common.types';
+import {userStatus, userRole, UserStatus, UserRole} from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
 import {
   useBlockUserMutation,
@@ -22,7 +22,7 @@ const getButtonTypeFromScore = (
 ): 'primary' | 'partial' | 'secondary' => {
   if (!score && !status) {
     return 'primary';
-  }  if (  score < 60 &&status&&status> UserStatus.UNCONFIRMED) {
+  }  if (  score < 60 &&status&&status> userStatus.UNCONFIRMED) {
     return 'partial';
   } else {
     return 'secondary';
@@ -35,7 +35,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
  
   const AcceptButtonDisabled = (status?: UserStatus, score?: number, role?: UserRole)=>{
   if (score && status && role){
-    if (score < 30 || score >= 60  && status === UserStatus.CONFIRMED && role === UserRole.VOLUNTEER)
+    if (score < 30 || score >= 60  && status === userStatus.CONFIRMED && role === userRole.VOLUNTEER)
      { return true}
     
   } else if (!status){

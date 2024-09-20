@@ -6,7 +6,8 @@ import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../app/hooks';
-import { AdminPermission, UserStatus } from '../../../shared/types/common.types';
+import {  UserStatus, adminPermission } from '../../../shared/types/common.types';
+import { AdminPermission } from '../../../shared/types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
@@ -43,7 +44,7 @@ const VolunteerActions = ({
   const approvePermission = adminPermissions?.includes(
     adminPermission.CONFIRMATION
   );
-  const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
+  const keysPermission = adminPermissions?.includes(adminPermission.KEYS);
   const isGiveKeysButtonDisabled = score < 60 || keysPermission;
 
   return (
