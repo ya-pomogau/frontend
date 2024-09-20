@@ -166,13 +166,15 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               {description}
+            </p>
+            {[...description].length > 170 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={styles.readMoreButton}
               >
                 {isExpanded ? 'Скрыть' : 'Читать'}
               </button>
-            </p>
+            )}
           </>
         ) : (
           <>
@@ -244,6 +246,14 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 />
               ) : null}
             </p>
+            {[...description].length > 160 && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className={styles.readMoreButton}
+              >
+                {isExpanded ? 'Скрыть' : 'Читать'}
+              </button>
+            )}
           </>
         )}
       </div>
