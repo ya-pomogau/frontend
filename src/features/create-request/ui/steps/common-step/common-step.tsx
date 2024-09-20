@@ -45,6 +45,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
+  const categorySize = category.title.length > 22 ? "large" : "medium";
+
   const handleSubmitClick = () => {
     let requestData = {};
 
@@ -119,21 +121,42 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
   return (
     <div className={styles.mainWrapper}>
-      <div className={classNames('text', 'text_type_regular', styles.container)}>
+      <div
+        className={classNames('text', 'text_type_regular', styles.container)}
+      >
         {isMobile ? (
           <>
-            <p className={classNames('text', 'text_type_regular', 'm-0', styles.task)}>
+            <p
+              className={classNames(
+                'text',
+                'text_type_regular',
+                'm-0',
+                styles.task
+              )}
+            >
               Дело
             </p>
             <div className={styles.headerWrapper} />
-            <div className={classNames('text', 'text_type_bold', styles.dateWrapper)}>
+            <div
+              className={classNames(
+                'text',
+                'text_type_bold',
+                styles.dateWrapper
+              )}
+            >
               {!termlessRequest ? (
                 <>
-                  <p className={classNames('text_size_medium', 'm-0')}>{date}</p>
-                  <p className={classNames('text_size_medium', styles.time)}>{time}</p>
+                  <p className={classNames('text_size_medium', 'm-0')}>
+                    {date}
+                  </p>
+                  <p className={classNames('text_size_medium', styles.time)}>
+                    {time}
+                  </p>
                 </>
               ) : (
-                <p className={classNames('text_size_medium', 'm-0')}>Заявка без срока</p>
+                <p className={classNames('text_size_medium', 'm-0')}>
+                  Заявка без срока
+                </p>
               )}
             </div>
             <div className={styles.addressWrapper}>
@@ -142,7 +165,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <CategoriesBackground
               theme="primary"
-              size="medium"
+              size={categorySize}
               content={category.title}
               extClassName={styles.categories}
             />
@@ -155,14 +178,26 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               {description}
-              <button onClick={() => setIsExpanded(!isExpanded)} className={styles.readMoreButton}>
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
             </p>
+            {[...description].length > 170 && (
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className={styles.readMoreButton}
+                >
+                  {isExpanded ? 'Скрыть' : 'Читать'}
+                </button>
+              )}
           </>
         ) : (
           <>
-            <div className={classNames('text', 'text_type_regular', 'm-0', styles.dateWrapper)}>
+            <div
+              className={classNames(
+                'text',
+                'text_type_regular',
+                'm-0',
+                styles.dateWrapper
+              )}
+            >
               {!termlessRequest ? (
                 <>
                   <p className={classNames('text_size_large', 'm-0')}>{date}</p>
@@ -172,7 +207,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                   </p>
                 </>
               ) : (
-                <p className={classNames('text_size_large', 'm-0')}>Заявка без срока</p>
+                <p className={classNames('text_size_large', 'm-0')}>
+                  Заявка без срока
+                </p>
               )}
               {isTypeEdit ? (
                 <EditButton
@@ -195,7 +232,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <CategoriesBackground
               theme="primary"
-              size="medium"
+              size={categorySize}
               content={category.title}
               extClassName={styles.categories}
             />
@@ -207,9 +244,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               {description}
-              <button onClick={() => setIsExpanded(!isExpanded)} className={styles.readMoreButton}>
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
               {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}
@@ -218,6 +252,14 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 />
               ) : null}
             </p>
+            {[...description].length > 160 && (
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className={styles.readMoreButton}
+                >
+                  {isExpanded ? 'Скрыть' : 'Читать'}
+                </button>
+              )}
           </>
         )}
       </div>
@@ -230,7 +272,11 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             extClassName={styles.prevButton}
           />
         )}
-        <Button buttonType="primary" label="Опубликовать" onClick={handleSubmitClick} />
+        <Button
+          buttonType="primary"
+          label="Опубликовать"
+          onClick={handleSubmitClick}
+        />
       </div>
     </div>
   );

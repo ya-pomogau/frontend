@@ -41,7 +41,7 @@ const VolunteerActions = ({
     (state) => state.user.data?.permissions
   );
   const approvePermission = adminPermissions?.includes(
-    AdminPermission.CONFIRMATION
+    adminPermission.CONFIRMATION
   );
   const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
   const isGiveKeysButtonDisabled = score < 60 || keysPermission;

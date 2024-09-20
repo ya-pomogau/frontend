@@ -7,12 +7,14 @@
 .input {
   padding: 12px;
   transition: var(--transition-hover);
-  height: 30px;
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: var(--font-size-s);
   line-height: 19px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .input_error {
@@ -36,17 +38,17 @@
 
 .label {
   display: inline-block;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
-  color: #000000;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-middle);
+  font-weight: var(--font-weight-regular);
+  color: var(--colors-interface-black);
   margin-bottom: 6px;
 }
 .error {
   margin-top: 8px;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-regular);
   color: var(--colors-interface-orange);
 }
 
@@ -60,27 +62,27 @@
   right: 12px;
   cursor: pointer;
   transition: var(--transition-hover);
+  top: 12%;
 }
 
 .icon_error {
   display: flex;
   position: absolute;
   right: 12px;
-  top: 35%;
-  transform: translate(0, -50%);
+  top: 12%;
   cursor: pointer;
-  transition: var(--transition-hover);
+  transition: var(--transition-hover); 
 }
 
 @media screen and (max-width: 550px) {
   .label {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-xs);
   }
 
   .input {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-xs);
   }
 }
 

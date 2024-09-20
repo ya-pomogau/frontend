@@ -4,10 +4,10 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { UserInfo } from '.';
 import { usersApi } from 'services/user-api';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 
 const mockedMasterState = {
-  role: UserRole.ADMIN,
+  role: userRole.ADMIN,
   data: {
     id: '1',
     name: 'Админов Главный Админович',
@@ -34,7 +34,7 @@ const mockedMasterState = {
 };
 
 const mockedAdminState = {
-  role: UserRole.ADMIN,
+  role: userRole.ADMIN,
   data: {
     id: '2',
     name: 'Админов Семен Семенович',
@@ -60,7 +60,7 @@ const mockedAdminState = {
 };
 
 const mockedVolunteerState = {
-  role: UserRole.VOLUNTEER,
+  role: userRole.VOLUNTEER,
   data: {
     id: '7',
     name: 'Волонтеров Петр Петрович',
@@ -80,7 +80,7 @@ const mockedVolunteerState = {
 };
 
 const mockedRecipientState = {
-  role: UserRole.RECIPIENT,
+  role: userRole.RECIPIENT,
   data: {
     id: '4',
     name: 'Реципиентов Алексей Борисович',

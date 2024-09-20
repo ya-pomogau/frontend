@@ -1,6 +1,47 @@
 import { getColor, IIconProps } from './utils';
 
-export const AddIcon = ({ color, size = '24', ...props }: IIconProps<'66'>) => (
+export const AddMediumIcon = ({
+  color,
+  size = '24',
+  ...props
+}: IIconProps<'48'>) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox={`0 0 ${size} ${size}`}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <rect
+      x="0.834961"
+      y="23.7861"
+      width="47.061"
+      height="1.69512"
+      rx="0.847561"
+      fill={getColor(color)}
+      stroke={getColor(color)}
+      strokeWidth="0.5"
+    />
+    <rect
+      x="23.5186"
+      y="48.165"
+      width="47.061"
+      height="1.69512"
+      rx="0.847561"
+      transform="rotate(-90 23.5186 48.165)"
+      fill={getColor(color)}
+      stroke={getColor(color)}
+      strokeWidth="0.5"
+    />
+  </svg>
+);
+
+export const AddLargeIcon = ({
+  color,
+  size = '24',
+  ...props
+}: IIconProps<'66'>) => (
   <svg
     width={size}
     height={size}

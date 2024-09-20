@@ -79,6 +79,15 @@ export const adminsApi = createApi({
       },
       invalidatesTags: [{ type: 'Unconfirmed' }, { type: 'UsersByRole' }],
     }),
+    promoteUser: build.mutation<User, string>({
+      query: (id) => {
+        return {
+          url: `admin/users/${id}/promote`,
+          method: 'PUT',
+        };
+      },
+      invalidatesTags: [{ type: 'Unconfirmed' }, { type: 'UsersByRole' }],
+    }),
     getTasksConfilct: build.query<TaskConflict[], string>({
       query: () => {
         return {
@@ -165,6 +174,18 @@ export const adminsApi = createApi({
         return result ? [{ type: 'Admins' }] : [];
       },
     }),
+    blockUser: build.mutation<{ id: string }, any>({
+      query: (id) => ({
+        url: `admin/users/${id}/confirm`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error) => {
+        if (error) {
+          console.log('🚀 ~ error:', error);
+        }
+        return result ? [{ type: 'Unconfirmed' }, { type: 'UsersByRole' }] : [];
+      },
+    }),
   }),
 });
 
@@ -173,6 +194,7 @@ export const {
   useGetUnconfirmedUsersQuery,
   useGetAllAdminsQuery,
   useConfirmUserMutation,
+  usePromoteUserMutation,
   useGetTasksConfilctQuery,
   useGetTasksWorkConflictQuery,
   useTakeConflictTaskMutation,
@@ -181,4 +203,5 @@ export const {
   useCreateNewAdminMutation,
   useAddAdminPrivilegiesMutation,
   useBlockAdminMutation,
+  useBlockUserMutation,
 } = adminsApi;

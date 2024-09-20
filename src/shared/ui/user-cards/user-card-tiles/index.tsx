@@ -8,13 +8,14 @@ import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import { userRole, userStatus } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
 export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
+  handleBlockClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
   isAcceptButtonExclamationPointIcon:boolean;
@@ -26,6 +27,7 @@ export interface UserCardTilesProps {
 export const UserCardTiles = ({
   user,
   handleConfirmClick,
+  handleBlockClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
   isAcceptButtonExclamationPointIcon,
@@ -43,7 +45,7 @@ export const UserCardTiles = ({
     <div
       className={classnames(
         styles.content,
-        role === UserRole.ADMIN && isActon
+        role === userRole.ADMIN && isActon
           ? styles.admin_content_action
           : styles.admin_content
       )}
@@ -53,7 +55,7 @@ export const UserCardTiles = ({
         avatarName={`аватар пользователя ${name}`}
         avatarLink={avatar}
       />
-      {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
+      {(role === userRole.VOLUNTEER || role === userRole.RECIPIENT) && (
         <div className={classnames(styles.icons_div)}>
           <RoundButton
             buttonType="phone"
@@ -70,9 +72,10 @@ export const UserCardTiles = ({
 
       <UserInfo userName={name} userId={_id} userNumber={phone} role={role} />
 
-      {role === UserRole.VOLUNTEER && (
+      {role === userRole.VOLUNTEER && (
         <VolunteerActions
           extClassName={classnames(styles.buttons, styles.buttons_volunteers)}
+          isUserBlocked={status === userStatus.BLOCKED}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
@@ -81,9 +84,7 @@ export const UserCardTiles = ({
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
-          onBlockButtonClick={() =>
-            console.log('"Заблокировать" button pressed')
-          }
+          onBlockButtonClick={handleBlockClick}
           onGiveKeysButtonClick={() =>
             console.log('"Дать ключи" button pressed')
           }
@@ -91,18 +92,17 @@ export const UserCardTiles = ({
         />
       )}
 
-      {role === UserRole.RECIPIENT && (
+      {role === userRole.RECIPIENT && (
         <RecipientActions
           extClassName={styles.buttons}
-          approved={status !== UserStatus.UNCONFIRMED}
+          approved={status !== userStatus.UNCONFIRMED}
+          isUserBlocked={status === userStatus.BLOCKED}
           onConfirmClick={handleConfirmClick}
-          onBlockClick={() => {
-            console.log('Recipient block button pressed');
-          }}
+          onBlockClick={handleBlockClick}
         />
       )}
 
-      {role === UserRole.ADMIN && (
+      {role === userRole.ADMIN && (
         <AdminActions
           id={_id}
           permissions={permissions || []}

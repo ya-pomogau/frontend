@@ -3,7 +3,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 
 import { usePermission } from 'shared/hooks';
 import { Button } from 'shared/ui';
-import { UserRole, UserStatus, TContacts } from 'shared/types/common.types';
+import { userRole, userStatus, TContacts } from 'shared/types/common.types';
 import { useGetContactsQuery } from 'services/contacts-api';
 import { useUpdateContactsMutation } from 'services/admin-api';
 
@@ -25,7 +25,7 @@ const InputKey = {
 } as const;
 
 export const ContactForm = () => {
-  const isEditAllowed = usePermission([UserStatus.VERIFIED], UserRole.ADMIN);
+  const isEditAllowed = usePermission([userStatus.VERIFIED], userRole.ADMIN);
   const [updateContacts] = useUpdateContactsMutation();
 
   const { data: contacts } = useGetContactsQuery();
