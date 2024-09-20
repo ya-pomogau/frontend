@@ -7,10 +7,12 @@ export interface IFilterValues {
   userCategories: string[];
 }
 
+export type TFilterItems {
+  [key in keyof IFilterValues]?: boolean;
+}
+
 export interface FilteringProps {
-  items: {
-    [key in keyof IFilterValues]?: boolean;
-  };
+  items: TFilterItems;
   setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
 }

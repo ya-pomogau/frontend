@@ -9,8 +9,8 @@ import { API_HOST } from '../config/api-config';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {
-  SocketConnectionStatus,
-  SocketEvent,
+  socketConnectionStatus,
+  socketEvent,
 } from '../shared/types/store.types';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -47,7 +47,7 @@ export const websocketMiddleware: Middleware = (store) => {
     // const isSocketConnected =
     //   socket &&
     //   store.getState().system.socketConnectionStatus ===
-    //     SocketConnectionStatus.CONNECTED;
+    //     socketConnectionStatus.CONNECTED;
     //
     // if (!socket && actions.startSocketConnection.match(action)) {
     //   console.log(`-> Starting connection to socket on ${API_HOST}:`, action);
@@ -58,28 +58,28 @@ export const websocketMiddleware: Middleware = (store) => {
     //     },
     //   });
     //
-    //   socket.on(SocketEvent.CONNECT, () => {
+    //   socket.on(socketEvent.CONNECT, () => {
     //     console.log(`-> Connected to socket on ${API_HOST}`);
     //     dispatch(
-    //       actions.setSocketConnectionStatus(SocketConnectionStatus.CONNECTED)
+    //       actions.setSocketConnectionStatus(socketConnectionStatus.CONNECTED)
     //     );
     //   });
     //
-    //   socket.on(SocketEvent.CONNECT_USER_MESSAGE, ({ data }) => {
+    //   socket.on(socketEvent.CONNECT_USER_MESSAGE, ({ data }) => {
     //     console.log(`-> The server has a message for you: ${data.message}`);
     //     dispatch(actions.setSocketMessage(data));
     //   });
     //
-    //   socket.emit(SocketEvent.TEST, testEventObj);
+    //   socket.emit(socketEvent.TEST, testEventObj);
     // }
     //
     // if (isSocketConnected) {
-    //   socket.on(SocketEvent.MESSAGE, ({ data }) => {
+    //   socket.on(socketEvent.MESSAGE, ({ data }) => {
     //     console.log(`-> The server has a message for you: ${data.message}`);
     //     dispatch(actions.setSocketMessage(data));
     //   });
     //
-    //   socket.on(SocketEvent.CONNECT_ERROR, (error) => {
+    //   socket.on(socketEvent.CONNECT_ERROR, (error) => {
     //     console.log(`-> Connection error: ${error.message}`);
     //   });
     //
@@ -88,9 +88,9 @@ export const websocketMiddleware: Middleware = (store) => {
     //     socket.disconnect();
     //   }
     //
-    //   socket.on(SocketEvent.DISCONNECT, (reason) => {
+    //   socket.on(socketEvent.DISCONNECT, (reason) => {
     //     dispatch(
-    //       actions.setSocketConnectionStatus(SocketConnectionStatus.DISCONNECTED)
+    //       actions.setSocketConnectionStatus(socketConnectionStatus.DISCONNECTED)
     //     );
     //     console.log(`-> Socket connection was dropped: ${reason}`);
     //   });

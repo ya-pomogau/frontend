@@ -9,10 +9,10 @@
 
 .task_container {
   position: relative;
-  font-family: 'Golos', sans-serif;
+  font-family: var(--font-family-golos);
   width: 370px;
   padding: 30px 30px 20px 30px;
-  background-color: white;
+  background-color: var(--colors-interface-white);
 }
 
 @media screen and (max-width: 735px) {
@@ -38,7 +38,7 @@
 
 .task_container::after {
   border: 10px solid transparent;
-  border-bottom-color: white;
+  border-bottom-color: var(--colors-interface-white);
   bottom: 100%;
   content: '';
   position: absolute;
@@ -70,14 +70,14 @@
 
 @media screen and (max-width: 735px) {
   .task_recipient_name {
-    font-size: 16px;
+    font-size: var(--font-size-s);
     line-height: 20px;
   }
 }
 
 .task_recipient_phone {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--font-size-s);
   line-height: 20px;
 }
 
@@ -89,7 +89,7 @@
 }
 
 .task_description {
-  font: 16px/20px 'Golos', sans-serif;
+  font: 16px/20px var(--font-family-golos);
   margin: 0;
   margin-top: 10px;
 }
@@ -109,8 +109,8 @@
   border: none;
   padding: 0;
   color: var(--colors-interface-primary);
-  font-size: 16px;
-  line-height: 16.8px;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-small);
 }
 
 .task_button:hover {
@@ -141,15 +141,15 @@
 .task_count {
   color: var(--colors-interface-primary);
   font-size: 26px;
-  line-height: 29px;
+  line-height: var(--line-height-large);
   margin: 0 6px;
-  font-family: 'Inter';
+  font-family: var(--font-family-inter);
 }
 
 .task_count_urgent {
   color: var(--colors-interface-pink);
-  font-size: 24px;
-  line-height: 29px;
+  font-size: var(--font-size-medium);
+  line-height: var(--line-height-large);
   margin: 0;
 }
 
@@ -161,10 +161,8 @@
 .submit_button {
   background-color: var(--colors-interface-primary);
   border: none;
-  color: white;
-  font-family: 'Golos', sans-serif;
-  font-size: 12px;
-  line-height: 16.8px;
+  color: var(--colors-interface-white);
+  font: var(--font-golos-12-16);
   padding: 7px 32px;
   margin: 0 auto;
 }
@@ -197,19 +195,13 @@
 .task_date_text {
   margin: 0 0 0 5px;
   padding: 0;
-  color: #2e3192;
-  font-family: 'Golos', sans-serif;
-  font-size: 24px;
-  line-height: 28.8px;
-  font-weight: 400;
+  color: var(--colors-interface-primary);
+  font: var(--font-golos-24-28);
 }
 
 .task_date_text_urgent {
   margin: 0;
   padding: 0;
-  color: #d60080;
-  font-family: 'Golos', sans-serif;
-  font-size: 24px;
-  line-height: 28.8px;
-  font-weight: 400;
+  color: var(--colors-interface-fuchsia);
+  font: var(--font-golos-24-28);
 }

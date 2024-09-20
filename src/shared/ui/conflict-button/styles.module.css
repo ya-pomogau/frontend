@@ -1,0 +1,30 @@
+.button {
+  background: transparent;
+  border: 1px solid #ff0000;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.button:hover {
+  background: #e6e4e4;
+}
+
+.disabledColor {
+  pointer-events: none;
+  background: var(--colors-interface-additional);
+  cursor: default;
+  border: none;
+}
+
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 20px;
+}

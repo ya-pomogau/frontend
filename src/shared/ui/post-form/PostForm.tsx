@@ -6,7 +6,7 @@ import { Button } from '../button';
 import { TextArea } from '../text-area';
 import { FileAttachmentIcon } from '../icons/file-attachment-icon';
 import { CloseCrossIcon } from '../icons/close-cross-icon';
-import { FileTypes } from 'shared/types/common.types';
+import { fileTypes } from 'shared/types/common.types';
 import { FormInput } from '../form-input';
 import useFormField from 'shared/hooks/use-form-field';
 import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
@@ -134,7 +134,7 @@ export const PostForm: FC<PostFormProps> = ({
             className={styles['input-file']}
             type="file"
             name="fileAttachment"
-            accept={[FileTypes.JPEG, FileTypes.JPG, FileTypes.PNG].join(',')}
+            accept={[fileTypes.JPEG, fileTypes.JPG, fileTypes.PNG].join(',')}
             multiple
             onChange={(e) => {
               addAttachment(e.target.files);

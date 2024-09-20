@@ -12,13 +12,13 @@
 
 .input > div > input {
   height: 37px;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
 }
 .input > div > input::placeholder {
   color: var(--colors-interface-primary);
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
 }
 
 .button {

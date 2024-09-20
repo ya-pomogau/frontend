@@ -74,7 +74,7 @@
 
 .title_add_list {
   color: var(--colors-interface-primary-additional);
-  font-family: 'Golos', sans-serif;
+  font-family: var(--font-family-golos);
 }
 
 .title_add_empty {
@@ -96,7 +96,7 @@
   left: calc(46vw + 30px); */
 }
 .text {
-  font-family: 'Golos', sans-serif;
+  font-family: var(--font-family-golos);
   max-width: 294px;
   margin: 4px 28px 0 0;
   line-height: 22px;
@@ -122,6 +122,11 @@
 
 .content_empty_note span {
   font-family: var(--font-family-inter);
+}
+
+.medium_add_button {
+  width: 60px;
+  height: 60px;
 }
 
 @media screen and (max-width: 550px) {

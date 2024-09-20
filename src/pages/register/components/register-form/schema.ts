@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { IRegisterForm } from './index';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 
 export const schema = Joi.object<IRegisterForm>({
   role: Joi.required(),
@@ -25,14 +25,14 @@ export const schema = Joi.object<IRegisterForm>({
       coords: Joi.any(),
     })
     .when('role', {
-      is: UserRole.RECIPIENT,
+      is: userRole.RECIPIENT,
       then: Joi.required().messages({
         'string.empty':
           'Не введен адрес. Пожалуйста, укажите адрес, по которому требуется помощь!',
       }),
     })
     .when('role', {
-      is: UserRole.VOLUNTEER,
+      is: userRole.VOLUNTEER,
       then: Joi.required().messages({
         'string.empty':
           'Не введен адрес. Пожалуйста, укажите адрес, где вы находитесь!',
