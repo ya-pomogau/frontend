@@ -15,11 +15,7 @@ import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
-import {
-  CreateTaskDto,
-  useCreateTaskMutation,
-  useUpdateTaskMutation,
-} from 'services/user-task-api';
+import { CreateTaskDto, useCreateTaskMutation, useUpdateTaskMutation } from 'services/user-task-api';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -50,6 +46,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
+  const categorySize = category.title.length > 22 ? "large" : "medium";
+
   const handleSubmitClick = () => {
     let requestData = {};
 
@@ -60,7 +58,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
       requestData = {
         categoryId: category._id,
-        location: location,
+        location,
         date: dateObject,
         address,
         description,
@@ -70,7 +68,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     } else {
       requestData = {
         categoryId: category._id,
-        location: location,
+        location,
         date: null,
         address,
         description,
@@ -153,7 +151,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <CategoriesBackground
               theme="primary"
-              size="medium"
+              size={categorySize}
               content={category.title}
               extClassName={styles.categories}
             />
@@ -168,13 +166,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               {description}
             </p>
             {[...description].length > 170 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={styles.readMoreButton}
-              >
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
-            )}
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className={styles.readMoreButton}
+                >
+                  {isExpanded ? 'Скрыть' : 'Читать'}
+                </button>
+              )}
           </>
         ) : (
           <>
@@ -220,7 +218,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <CategoriesBackground
               theme="primary"
-              size="medium"
+              size={categorySize}
               content={category.title}
               extClassName={styles.categories}
             />
@@ -232,12 +230,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             >
               {description}
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={styles.readMoreButton}
-              >
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
               {isTypeEdit ? (
                 <EditButton
                   extClassName={styles.edit_button}
@@ -247,13 +239,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               ) : null}
             </p>
             {[...description].length > 160 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={styles.readMoreButton}
-              >
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
-            )}
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className={styles.readMoreButton}
+                >
+                  {isExpanded ? 'Скрыть' : 'Читать'}
+                </button>
+              )}
           </>
         )}
       </div>
