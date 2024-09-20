@@ -6,14 +6,16 @@ import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../app/hooks';
-import { AdminPermission } from '../../../shared/types/common.types';
+import { AdminPermission, UserStatus } from '../../../shared/types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
   score: number;
+  status: UserStatus;
   keys: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
   isKeyButtonExclamationPointIcon: boolean;
@@ -26,7 +28,9 @@ const VolunteerActions = ({
   isVolonteerAcceptButtonDisabled,
   getButtonTypeFromScore,
   score,
+  status,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   onAcceptButtonClick,
   onBlockButtonClick,
   onGiveKeysButtonClick,
@@ -40,6 +44,7 @@ const VolunteerActions = ({
     AdminPermission.CONFIRMATION
   );
   const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
+  const isGiveKeysButtonDisabled = score < 60 || keysPermission;
 
   return (
     <div className={classnames(styles.buttons_div)}>
@@ -53,11 +58,11 @@ const VolunteerActions = ({
       <div className={classnames(styles.exclamation_point_div)}>
         <Button
           disabled={isVolonteerAcceptButtonDisabled || !approvePermission}
-          buttonType={getButtonTypeFromScore(score)}
+          buttonType={getButtonTypeFromScore(score, status)}
           label="Подтвердить"
           onClick={onAcceptButtonClick}
         />
-        {/* {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />} */}
+        {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>
       <Button
         disabled={!approvePermission}
@@ -70,7 +75,7 @@ const VolunteerActions = ({
           buttonType="secondary"
           label="Дать ключи"
           onClick={onGiveKeysButtonClick}
-          disabled={!keysPermission}
+          disabled={isGiveKeysButtonDisabled}
         />
         {isKeyButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>
