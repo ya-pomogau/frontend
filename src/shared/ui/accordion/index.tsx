@@ -11,11 +11,13 @@ interface IAccordionProps {
     extraClassListInput?: string;
     extraClassLabel?: string;
     extraClassLabelText?: string;
+    //extraClassSelectedInput?: string;
   };
   arrayOptions: Array<{ value: string; label: string }>;
   name: string;
   placeholder: string;
   onChange: (value: string) => void;
+  //isSelected?: boolean;
 }
 
 export const Accordion = ({
@@ -24,6 +26,7 @@ export const Accordion = ({
   name,
   onChange,
   placeholder,
+  //isSelected
 }: IAccordionProps) => {
   const [isOpenList, setIsOpenList] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -79,6 +82,8 @@ export const Accordion = ({
                       name={name}
                       value={option.value}
                       className={classListInput}
+                      // className={String(isSelected? extraClasses?.extraClassSelectedInput && classListInput : classListInput)}
+                      //disabled={isSelected}
                       defaultChecked={option.value === selectedCategory}
                     />
                     <span className={classLabelText}>{option.label}</span>

@@ -30,6 +30,8 @@ import styles from './styles.module.css';
 import { useFulfillTaskMutation } from 'services/user-task-api';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { AdminSelectModal } from 'widgets';
+import { useControlModal } from 'shared/hooks';
 
 interface TaskButtonsProps {
   taskId: string;
@@ -69,9 +71,11 @@ export const TaskButtons = ({
   const isTaskUrgent = checkTaskUrgency(date!);
   const isPageActive = locationPath.pathname === '/profile/active';
   const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
+  const { isOpen, handleOpen, handleClose } = useControlModal();
 
   //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
   const [clicked, setClicked] = useState<boolean>(false);
+
 
   const initialData = {
     taskId,
@@ -112,6 +116,7 @@ export const TaskButtons = ({
 
   const handleConflictRootAdminButton = () => {
     console.log('Нажата кнопка инициации конфликта');
+    handleOpen()
   };
 
   return (
@@ -251,6 +256,7 @@ export const TaskButtons = ({
           onClick={handleConflictRootAdminButton}
         />
       )}
+      <AdminSelectModal isOpen={isOpen} onClose={handleClose}></AdminSelectModal>
     </div>
   );
 };

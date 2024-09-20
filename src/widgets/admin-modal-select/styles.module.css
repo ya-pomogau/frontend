@@ -1,0 +1,33 @@
+.modal {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.scroll {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  overflow: auto;
+  width: 100%;
+  height: calc(30vh / 2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.button {
+  width: 100%;
+  height: 100px;
+}
+
+.error {
+  display: block;
+  margin-top: 10px;
+}
