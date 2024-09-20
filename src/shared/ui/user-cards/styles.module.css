@@ -56,6 +56,7 @@
   letter-spacing: 0em;
   text-align: left;
   color: var(--colors-interface-primary);
+  position: relative;
 }
 
 .admin_password_box {
@@ -65,7 +66,7 @@
 
 .admin_edit_icon {
   position: absolute;
-  top: 179px; /* по макету половина иконки минус вся длина до элемента*/
+  top: 35px;
   left: 85%; /* по макету ширина - 15px */
   transform: translateY(-50%);
   width: 20px;
@@ -108,7 +109,7 @@
   border-image-source: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    #2e3192 49.28%,
+    var(--colors-interface-primary) 49.28%,
     rgba(255, 255, 255, 0) 100%
   );
   border-image-slice: 1;
@@ -131,7 +132,7 @@
   border-image-source: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    #2e3192 49.28%,
+    var(--colors-interface-primary) 49.28%,
     rgba(255, 255, 255, 0) 100%
   );
   border-image-slice: 1;
@@ -155,9 +156,9 @@
 .admin_checkbox {
   letter-spacing: 0em;
   font-family: Nunito Sans, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--font-size-s);
   letter-spacing: 0%;
   text-align: left;
   cursor: pointer;
@@ -173,18 +174,18 @@
 .recipient_input {
   width: 196px;
   height: 37px;
-  border: 0.5px solid #2e3192;
-  font-size: 12px;
-  color: #2e3192;
+  border: 0.5px solid var(--colors-interface-primary);
+  font-size: var(--font-size-small);
+  color: var(--colors-interface-primary);
   padding-left: 10px;
 }
 
 .recipient_textarea {
   height: 90px;
   width: 186px;
-  font-family: 'Golos', sans-serif;
-  border: 0.5px solid #2e3192;
-  color: #2e3192;
+  font-family: var(--font-family-golos);
+  border: 0.5px solid var(--colors-interface-primary);
+  color: var(--colors-interface-primary);
   resize: none;
   padding: 0;
   padding-left: 10px;
@@ -200,8 +201,8 @@
 }
 
 .name_text {
-  font-size: 16px;
-  line-height: 22.4px;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-medium);
 }
 
 .modalContainer {
@@ -212,10 +213,7 @@
   top: 5px;
   left: 0px;
   bottom: -5px;
-  font-family: Golos;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16.8px;
+  font: var(--font-golos-14-16);
   text-align: left;
 }
 
@@ -261,8 +259,8 @@
   height: 45px;
   padding: 5px 0px 5px 0px;
   border-bottom: 1px solid rgb(224, 224, 224);
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
   line-height: 19.2px;
   display: flex;
   flex-direction: row;
@@ -306,9 +304,9 @@
   outline: none;
   cursor: pointer;
   padding: 0px 16px 0px 16px;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 140%;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-small);
   letter-spacing: 0%;
   color: var(--colors-interface-white);
 }
@@ -323,7 +321,7 @@
   }
 
   .name_text {
-    font-size: 12px;
+    font-size: var(--font-size-small);
   }
 
   .admin_password_input {
@@ -337,10 +335,10 @@
   .recipient_input {
     width: 140px;
     height: 30px;
-    border: 0.5px solid #2e3192;
+    border: 0.5px solid var(--colors-interface-primary);
     font-size: 8px;
     /* padding: 10px; */
-    color: #2e3192;
+    color: var(--colors-interface-primary);
     line-height: 37px;
   }
 

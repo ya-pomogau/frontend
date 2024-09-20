@@ -6,10 +6,11 @@ import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../../app/hooks';
-import { AdminPermission } from '../../../types/common.types';
+import { adminPermission } from '../../../types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
+  isUserBlocked: boolean;
   getButtonTypeFromScore: (
     score: number
   ) => 'primary' | 'partial' | 'secondary';
@@ -25,6 +26,7 @@ interface VolunteerActionsProps {
 
 const VolunteerActions = ({
   isVolonteerAcceptButtonDisabled,
+  isUserBlocked,
   getButtonTypeFromScore,
   score,
   extClassName,
@@ -39,9 +41,9 @@ const VolunteerActions = ({
     (state) => state.user.data?.permissions
   );
   const approvePermission = adminPermissions?.includes(
-    AdminPermission.CONFIRMATION
+    adminPermission.CONFIRMATION
   );
-  const keysPermission = adminPermissions?.includes(AdminPermission.KEYS);
+  const keysPermission = adminPermissions?.includes(adminPermission.KEYS);
 
   return (
     <div className={classnames(extClassName, styles.buttons_div)}>
@@ -64,7 +66,7 @@ const VolunteerActions = ({
       <Button
         disabled={!approvePermission}
         buttonType="secondary"
-        label="Заблокировать"
+        label={isUserBlocked ? 'Разблокировать' : 'Заблокировать'}
         onClick={onBlockButtonClick}
       />
       <div className={classnames(styles.exclamation_point_div)}>

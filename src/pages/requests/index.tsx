@@ -8,9 +8,9 @@ import { usePermission } from 'shared/hooks';
 import { Filter } from '../../features/filter';
 import { RequestsTab } from '../requests-tab';
 import {
-  AdminPermission,
-  Tabs,
-  UserRole,
+  adminPermission,
+  tabs,
+  userRole,
 } from '../../shared/types/common.types';
 import {
   useGetUserByRolesQuery,
@@ -29,8 +29,8 @@ interface PageProps {
 
 export function RequestsPage({ incomeTab }: PageProps) {
   const isConfirmationPermissionGranted = usePermission(
-    [AdminPermission.CONFIRMATION],
-    UserRole.ADMIN
+    [adminPermission.CONFIRMATION],
+    userRole.ADMIN
   );
 
   const { data: volunteers } = useGetUserByRolesQuery('volunteers', {
@@ -86,13 +86,15 @@ export function RequestsPage({ incomeTab }: PageProps) {
       [Tabs.ADMINS]: sortedAdms,
     };
 
-    return dataMap[incomeTab as keyof typeof dataMap]?.filter((card) =>
-      card.name.toLowerCase().includes(searchName.toLowerCase())
-    );
+    return dataMap[incomeTab as keyof typeof dataMap]
+      ?.filter((card) =>
+        card.name.toLowerCase().includes(searchName.toLowerCase())
+      )
+      .sort(sortByStatus);
   };
 
   const handleApplyFilters = (filter: IFilterValues) => {
-    if (incomeTab === Tabs.NOTPROCESSED) {
+    if (incomeTab === tabs.NOTPROCESSED) {
       const { userCategories } = filter;
 
       const filteredData = getFilteredTabData()?.filter(
@@ -119,7 +121,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
     <>
       <SmartHeader
         icon={
-          incomeTab === Tabs.ADMINS ? (
+          incomeTab === tabs.ADMINS ? (
             <Icon
               color="blue"
               icon="CheckInBoxIcon"
@@ -131,12 +133,12 @@ export function RequestsPage({ incomeTab }: PageProps) {
           )
         }
         text={
-          incomeTab === Tabs.ADMINS
+          incomeTab === tabs.ADMINS
             ? 'Управление администраторами'
             : 'Подтверждение / Блокировка'
         }
         filter={
-          incomeTab === Tabs.NOTPROCESSED ? (
+          incomeTab === tabs.NOTPROCESSED ? (
             getFilteredTabData()?.length ? (
               <Filter
                 items={{ userCategories: true }}
@@ -159,7 +161,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
         }}
         onViewChange={setViewMode}
       />
-      {incomeTab === Tabs.ADMINS && (
+      {incomeTab === tabs.ADMINS && (
         <NavLink to={'/profile/create-new-admin'} className={styles.navLink}>
           <GradientDivider />
           <div className={styles.addNewAdminSectionInner}>
@@ -192,7 +194,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
       {/*{isLoading ? <Loader /> : tabContent}*/}
       {volunteers && recipients && unconfirmed && admins && (
         <RequestsTab
-          height={incomeTab === Tabs.ADMINS ? '40vh' : '55vh'}
+          height={incomeTab === tabs.ADMINS ? '40vh' : '55vh'}
           data={filteredName}
           viewMode={viewMode}
         />

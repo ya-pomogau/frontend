@@ -22,7 +22,7 @@
 }
 
 .place {
-  font-size: 12px;
+  font-size: var(--font-size-small);
   line-height: 14px;
 }
 
@@ -43,12 +43,17 @@
 }
 
 .messageAlert {
+  opacity: 0;
   text-align: center;
-  color: red;
+  color: var(--colors-interface-red);
   margin: 10px auto 0 auto;
-  font-family: 'Golos', sans-serif;
-  font-size: 14px;
+  font-family: var(--font-family-golos);
+  font-size: var(--font-size-middle);
   grid-column-start: 2;
+}
+
+.messageAlertActive {
+  opacity: 1;
 }
 
 @media (max-width: 735px) {
@@ -60,8 +65,8 @@
     z-index: 9;
   }
   .place {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
   }
   .headerWrapper {
     background: linear-gradient(
