@@ -49,7 +49,9 @@ const VolunteerActions = ({
   );
   const keysPermission = adminPermissions?.includes(adminPermission.KEYS);
 
-  const isGiveKeysButtonDisabled = score < 60 || keysPermission;
+  const isGiveKeysButtonDisabled = score < 60 || keysPermission|| isKeysNullOrOne;
+
+
   return (
     <div className={classnames(extClassName, styles.buttons_div)}>
       <div className={classnames(styles.volunteer_info)}>
