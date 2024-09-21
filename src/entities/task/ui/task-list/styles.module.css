@@ -38,6 +38,7 @@
 .add_task_icon {
   justify-self: center;
 }
+
 .add_task_icon_unconf {
   justify-self: center;
   background-color: var(--colors-interface-additional);
@@ -92,23 +93,25 @@
 
 .modal {
   position: absolute;
-  /* top: calc(50% + 340px);
-  left: calc(46vw + 30px); */
 }
+
 .text {
   font-family: var(--font-family-golos);
   max-width: 294px;
   margin: 4px 28px 0 0;
   line-height: 22px;
 }
+
 .closeWrapper {
   display: flex;
   justify-content: flex-end;
 }
+
 .closeIcon:hover {
   opacity: 0.5;
   cursor: pointer;
 }
+
 .wrapperBtn {
   position: relative;
   margin-top: 15px;
