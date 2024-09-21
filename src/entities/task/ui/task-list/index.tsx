@@ -1,27 +1,25 @@
 import classNames from 'classnames';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import usePermission from 'shared/hooks/use-permission';
-
-import { Informer } from 'shared/ui/informer';
+import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
+import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { useAppSelector } from 'app/hooks';
 import { RoundButton } from 'shared/ui/round-button';
+import { Informer } from 'shared/ui/informer';
 import { TaskItem } from '../task';
-
-import type { Task } from 'entities/task/types';
-
-import styles from './styles.module.css';
+import { Tooltip } from 'shared/ui/tooltip';
+import { Icon } from 'shared/ui';
 import {
   UserRole,
   userRole as userRoles,
   userStatus,
 } from 'shared/types/common.types';
 
-import { useEffect, useRef, useState } from 'react';
+import type { Task } from 'entities/task/types';
 
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
-import { Tooltip } from 'shared/ui/tooltip';
-import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
-import { useLocation } from 'react-router-dom';
-import { useAppSelector } from 'app/hooks';
-import { Icon } from 'shared/ui';
+import styles from './styles.module.css';
 
 interface TaskListProps {
   userRole: UserRole | null;
@@ -49,24 +47,37 @@ export const TaskList = ({
   handleClickAddTaskButton,
   isTabPage,
 }: TaskListProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
+
+  const buttonRef = useRef<HTMLDivElement>(null);
+
   const { role } = useAppSelector((state) => state.user);
+
+  const location = useLocation();
+
+  const isAdmin = role === userRoles.ADMIN;
+  const isRecipient = userRole === userRoles.RECIPIENT;
+  const isCompletedPage = location.pathname.includes('/profile/completed');
   const buttonGuard = usePermission(
     [userStatus.CONFIRMED],
     userRoles.RECIPIENT
   );
-  const location = useLocation();
-  const isCompletedPage = location.pathname.includes('/profile/completed');
-  const [isOpen, setIsOpen] = useState(false);
-
-  const [popupPosion, setPopupPosion] = useState<Coords | null>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const popupClose = () => {
-    setIsOpen(false);
-  };
+  const hasAccess =
+    (!isStatusActive && isRecipient && !isCompletedPage) ||
+    (isRecipient && isTabPage);
+  const contentStyles = classNames(
+    styles.content,
+    {
+      [styles.content_admin]: isAdmin,
+      [styles.content_default]: !isAdmin,
+    },
+    'p-0 m-0',
+    extClassName
+  );
 
   const getCoords = () => {
     const box = buttonRef.current?.getBoundingClientRect();
-
     if (box) {
       setPopupPosion({
         right: window.innerWidth - box.right - box.width * 2.04 + 14,
@@ -82,9 +93,12 @@ export const TaskList = ({
     setIsOpen((prev) => !prev);
   };
 
+  const popupClose = () => {
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     window.addEventListener('resize', getCoords);
-
     return () => {
       window.removeEventListener('resize', getCoords);
     };
@@ -92,24 +106,10 @@ export const TaskList = ({
 
   return (
     <>
-      {/* TODO: удалить след. строку, когда будут приходить данные тасок с сервера */}
       {!tasks && <p>список тасок, которые будут получены с сервера</p>}
       {!isLoading && tasks && (
-        <ul
-          className={classNames(
-            styles.content,
-            {
-              [styles.content_admin]: role === userRoles.ADMIN,
-              [styles.content_default]: role !== userRoles.ADMIN,
-            },
-            'p-0 m-0',
-            extClassName
-          )}
-        >
-          {((!isStatusActive &&
-            userRole === userRoles.RECIPIENT &&
-            !isCompletedPage) ||
-            (userRole === userRoles.RECIPIENT && isTabPage)) && (
+        <ul className={contentStyles}>
+          {hasAccess && (
             <li
               className={classNames({
                 [styles.add_task_mobile]: isMobile,
@@ -172,7 +172,7 @@ export const TaskList = ({
               text="У Вас пока нет заявок"
             />
 
-            {userRole === userRoles.RECIPIENT && (
+            {isRecipient && (
               <>
                 <p
                   className={classNames(
@@ -235,7 +235,7 @@ export const TaskList = ({
           </div>
         )}
 
-      {role === userRoles.ADMIN &&
+      {isAdmin &&
         !isLoading &&
         tasks &&
         tasks.length === 0 &&
