@@ -1,5 +1,5 @@
 import { User } from 'entities/user/types';
-import { userRole, userStatus } from 'shared/types/common.types';
+import { userRole, UserStatus, userStatus } from 'shared/types/common.types';
 import VolunteerActions from '../components/volonteer-actions';
 import RecipientActions from '../components/recipient-actions';
 import UserInfo from '../components/user-info';

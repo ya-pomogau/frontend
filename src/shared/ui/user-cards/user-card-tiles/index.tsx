@@ -8,7 +8,7 @@ import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
-import { userRole, userStatus } from 'shared/types/common.types';
+import { userRole, UserStatus, userStatus } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -20,7 +20,8 @@ export interface UserCardTilesProps {
   isKeyButtonExclamationPointIcon: boolean;
   isAcceptButtonExclamationPointIcon:boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
 }
 
@@ -80,7 +81,6 @@ export const UserCardTiles = ({
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
           status={ status || 0}
-          // isAcceptButtonExclamationPointIcon={true}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}

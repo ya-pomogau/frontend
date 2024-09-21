@@ -32,12 +32,14 @@ const getButtonTypeFromScore = (
 export const UserCard = ({ user, viewMode }: UserCardProps) => {
   const mediaQuery = useMediaQuery(Breakpoints.L);
   const { score, status, keys, role } = user;
+ const belowScoreAccept = 30;
+ const passScoreAccept = 60;
  
   const AcceptButtonDisabled = (status?: UserStatus, score?: number, role?: UserRole)=>{
   if (score && status && role){
-    if (score < 30 || score >= 60  && status === userStatus.CONFIRMED && role === userRole.VOLUNTEER)
+    if (score < belowScoreAccept|| score >= passScoreAccept  && status === userStatus.CONFIRMED && role === userRole.VOLUNTEER)
      { return true}
-    
+  
   } else if (!status){
     return false
   } else return true

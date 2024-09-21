@@ -13,7 +13,7 @@
 
 .button--partial,
 .button--partial:disabled,
-.button--partial:active
+.button--partial:active 
  {
   background: linear-gradient(
     to right,
@@ -22,8 +22,7 @@
   );
   border: 1px solid var(--colors-interface-primary);
 }
-
- .button--partial:hover {
+.button--partial:hover:enabled {
   background: var(--colors-interface-blue-strong);
   border: none;
 }
@@ -32,8 +31,7 @@
   background-color: var(--colors-interface-primary);
 }
 
-.button--primary:hover,
-.button--partial:hover {
+.button--primary:hover {
   background-color: var(--colors-interface-blue-strong);
 }
 
@@ -111,7 +109,7 @@
   );
 }
 
-.button--partial:hover > .buttonContent--partial {
+.button--partial:hover:enabled > .buttonContent--partial {
   color: var(--colors-interface-white);
 }
 
