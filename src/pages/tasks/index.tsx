@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
-import classNames from 'classnames';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
+import { TasksTab } from 'pages';
+import { PageSubMenu, PageSubMenuLink } from 'widgets';
+import { User } from 'entities/user/types';
+import { useGetUserByRolesQuery } from 'services/admin-api';
 import { Icon, SmartHeader, Input } from 'shared/ui';
 import { usePermission } from 'shared/hooks';
 import { Routes } from 'shared/config';
-import { PageSubMenu } from 'widgets';
-import { TasksTab } from 'pages';
 import { tabs, userRole } from 'shared/types/common.types';
-import { User } from 'entities/user/types';
-import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
-import { useGetUserByRolesQuery } from 'services/admin-api';
 
 import styles from './styles.module.css';
 
@@ -19,30 +18,29 @@ export interface PageProps {
 }
 
 export function TasksPage({ incomeTab }: PageProps) {
-  // раскоментировать после настройки сервера
-  // const [searchRole, setSearchRole] =
-  //   useState<IFilterValues>(defaultObjFilteres);
-  const isMainAdmin = usePermission([], userRole.ADMIN);
+  const [searchName, setSearchName] = useState('');
+
   const navigate = useNavigate();
 
-  const recipients = useGetUserByRolesQuery(tabs.RECIPIENTS).data;
-  const volunteers = useGetUserByRolesQuery(tabs.VOLUNTEERS).data;
-  const [searchName, setSearchName] = useState('');
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const hasTasksPermission = usePermission(['CREATE_TASK'], userRole.ADMIN);
+  const isMainAdmin = usePermission([], userRole.ADMIN);
 
-  useEffect(() => {
+  const recipients = hasTasksPermission
+    ? useGetUserByRolesQuery(tabs.RECIPIENTS).data
+    : undefined;
+  const volunteers = hasTasksPermission
+    ? useGetUserByRolesQuery(tabs.VOLUNTEERS).data
+    : undefined;
+
+  const filteredData = useMemo(() => {
     const dataMap: Record<string, User[] | undefined> = {
       [tabs.VOLUNTEERS]: volunteers,
       [tabs.RECIPIENTS]: recipients,
     };
 
-    const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
-      (user) => user.name.toLowerCase().includes(searchName.toLowerCase())
+    return dataMap[incomeTab as keyof typeof dataMap]?.filter((user) =>
+      user.name.toLowerCase().includes(searchName.toLowerCase())
     );
-
-    if (filteredData) {
-      setFilteredUsers(filteredData);
-    }
   }, [searchName, incomeTab, volunteers, recipients]);
 
   const handleUserClick = (user: User) => {
@@ -84,12 +82,6 @@ export function TasksPage({ incomeTab }: PageProps) {
       <SmartHeader
         icon={<Icon color="blue" icon="CreateApplication" size="54" />}
         text="Создание / Редактирование заявки"
-        // filter={
-        //   <Filter
-        //     items={{ userCategories: true }}
-        //     setFilteres={setSearchRole}
-        //   />
-        // }
       />
       <div className={styles.menu_block}>
         <PageSubMenu
@@ -106,22 +98,24 @@ export function TasksPage({ incomeTab }: PageProps) {
             </>
           }
         />
-        {configurePointsButton('Настроить баллы')}
+        {hasTasksPermission && configurePointsButton('Настроить баллы')}
       </div>
-      <div>
-        <Input
-          value={searchName}
-          label="Введите имя "
-          name="Name"
-          onChange={(e) => setSearchName(e.target.value)}
-          extClassName={styles.input}
-          type="name"
-        />
+      {hasTasksPermission && (
+        <div>
+          <Input
+            value={searchName}
+            label="Введите имя "
+            name="Name"
+            onChange={(e) => setSearchName(e.target.value)}
+            extClassName={styles.input}
+            type="name"
+          />
 
-        {filteredUsers && (
-          <TasksTab data={filteredUsers} onUserClick={handleUserClick} />
-        )}
-      </div>
+          {filteredData && (
+            <TasksTab data={filteredData} onUserClick={handleUserClick} />
+          )}
+        </div>
+      )}
     </>
   );
 }
