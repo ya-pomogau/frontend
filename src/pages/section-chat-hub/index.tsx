@@ -2,17 +2,20 @@ import { useState } from 'react';
 
 import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { Message } from 'shared/ui/message';
-import { IMessageHub, messageHub } from 'shared/libs/utils';
 import { MessageCard } from 'shared/ui/message-card';
 import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
 import { Icon } from 'shared/ui/icons';
 import WrapperMessage from 'shared/ui/wrapper-messages';
+import { TaskChatInfo, TaskChatMetaInterface } from 'shared/types/chat.types';
+import { mockUserChatsResponse } from 'entities/chat/mock-response';
 
 export const SectionChatHub = () => {
   const [isOpen, setIpOpen] = useState<boolean>(false);
   const [selectedCard, setSelectedCard] = useState<string>('');
-  const [infoMessage, setInfoMessage] = useState<IMessageHub | null>(null);
+  const [infoMessage, setInfoMessage] = useState<TaskChatMetaInterface | null>(
+    null
+  );
 
   const handleVisibleMessage = (text: string) => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);
@@ -23,8 +26,8 @@ export const SectionChatHub = () => {
     setSelectedCard('');
   };
 
-  const handleClickCard = (task: IMessageHub) => {
-    setSelectedCard(task.id);
+  const handleClickCard = (task: TaskChatMetaInterface) => {
+    setSelectedCard(task._id);
     setIpOpen(true);
     setInfoMessage(task);
   };
@@ -32,20 +35,22 @@ export const SectionChatHub = () => {
   return (
     <div className={styles.hub}>
       <WrapperMessage
-        information={!!messageHub.length}
+        information={!!mockUserChatsResponse.task.length}
         title="У Вас пока нет чатов в ожидании"
       >
-        {messageHub?.map((item) => (
-          <MessageCard
-            key={item.id}
-            statusConflict
-            description={item.user.phone}
-            action={selectedCard === item.id}
-            user={item.user}
-            handleClickCard={() => handleClickCard(item)}
-            message={item.messages}
-          />
-        ))}
+        {mockUserChatsResponse.task?.map(
+          ({ meta: item }: { meta: TaskChatMetaInterface }) => (
+            <MessageCard
+              key={item._id}
+              statusConflict={!item.isActive}
+              description={item.volunteer.phone}
+              action={selectedCard === item._id}
+              user={item.recipient}
+              handleClickCard={() => handleClickCard(item.taskId)}
+              unreads={item.unreads}
+            />
+          )
+        )}
       </WrapperMessage>
 
       {isOpen && (

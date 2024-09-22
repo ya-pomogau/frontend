@@ -2,19 +2,16 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
-import { IMessage } from 'shared/types/message';
 import { TaskConflict } from 'entities/task/types';
-import { UserProfile } from 'entities/user/types';
-import { IMessageHub } from 'shared/libs/utils';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 interface PropsMessageCard {
   statusConflict: boolean;
   description: string;
-  handleClickCard: (task: TaskConflict | IMessageHub) => void;
-  message?: IMessage[];
+  handleClickCard: (task: string) => void;
+  unreads: number;
   action: boolean;
-  user: UserProfile;
-  task?: TaskConflict;
+  user: AnyUserInterface;
   position?: boolean;
 }
 
@@ -25,15 +22,15 @@ export const MessageCard = (props: PropsMessageCard) => {
 
   useEffect(() => {
     setHasNewMessage(true);
-  }, [props.message]);
+  }, [props.unreads]);
 
   function handelClick() {
-    if (props.task) {
+    if (props.statusConflict) {
       props.handleClickCard(props.task);
-    } else if (props.message) {
+    } else if (props.unreads) {
       props.handleClickCard({
         user: props.user,
-        messages: props.message,
+        messages: props.unreads,
         id: props.user._id,
       });
     }
@@ -79,7 +76,7 @@ export const MessageCard = (props: PropsMessageCard) => {
                 [styles.vizabiliti]: !hasNewMessage,
               })}
             >
-              {/* {props.message.length > 10 ? '+9' : props.message.length} */}
+              {/* {props.unreads.length > 10 ? '+9' : props.unreads.length} */}
             </span>
           )}
     </article>

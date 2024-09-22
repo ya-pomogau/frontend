@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from 'react';
 
 import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { Message } from 'shared/ui/message';
-import { IMessageHub, messageHub } from 'shared/libs/utils';
 import { MessageCard } from 'shared/ui/message-card';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import styles from './styles.module.css';
@@ -10,7 +9,9 @@ import WrapperMessage from 'shared/ui/wrapper-messages';
 
 export const SectionInWorkChats = () => {
   const [isOpen, setIpOpen] = useState<boolean>(false);
-  const [infoMessage, setInfoMessage] = useState<IMessageHub | null>(null);
+  const [infoMessage, setInfoMessage] = useState<TaskChatMetaInterface | null>(
+    null
+  );
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>('');
   const [_, setFileInput] = useState<string>('');

@@ -14,6 +14,10 @@ import {
 } from 'services/admin-api';
 import { TaskConflict } from 'entities/task/types';
 import WrapperMessage from 'shared/ui/wrapper-messages';
+import {
+  ConflictChatInfo,
+  ConflictChatsTupleMetaInterface,
+} from 'shared/types/chat.types';
 
 export const SectionChatsConflict = () => {
   const location = useLocation();
@@ -22,13 +26,14 @@ export const SectionChatsConflict = () => {
   const [takeConflictTask] = useTakeConflictTaskMutation();
   const [resolСonflict] = useResolСonflictMutation();
 
-  const dataMessage: TaskConflict[] | undefined =
+  const dataMessage: ConflictChatInfo[] | undefined =
     location.pathname === '/available-chats' ? tasks : tasksWork;
-  const [getInfoTask, setGetInfoTask] = useState<TaskConflict>();
+  const [getInfoTask, setGetInfoTask] =
+    useState<ConflictChatsTupleMetaInterface>();
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [isOpenConflict, setIsOpenConflict] = useState<boolean>(false);
 
-  const handleClickCard = (task: TaskConflict) => {
+  const handleClickCard = (task: ConflictChatsTupleMetaInterface) => {
     setSelectedCard(task._id);
     setGetInfoTask(task);
     setIsOpenConflict(true);
@@ -60,18 +65,20 @@ export const SectionChatsConflict = () => {
         information={dataMessage && dataMessage.length > 0 ? true : false}
         title="У Вас пока нет конфликтов"
       >
-        {dataMessage?.map((item) => (
-          <div key={item._id}>
-            <MessageCard
-              statusConflict
-              description={item.description}
-              action={selectedCard === item._id}
-              user={item.recipient}
-              handleClickCard={() => handleClickCard(item)}
-              task={item}
-            />
-          </div>
-        ))}
+        {dataMessage?.map(
+          ({ meta: item }: { meta: ConflictChatsTupleMetaInterface }) => (
+            <div key={item._id}>
+              <MessageCard
+                statusConflict
+                description={item.description}
+                action={selectedCard === item._id}
+                user={item.recipient}
+                handleClickCard={() => handleClickCard(item)}
+                task={item}
+              />
+            </div>
+          )
+        )}
       </WrapperMessage>
 
       <div className={styles.boxConflict}>
