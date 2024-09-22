@@ -9,7 +9,7 @@ import { useGetUserByRolesQuery } from 'services/admin-api';
 import { Icon, SmartHeader, Input } from 'shared/ui';
 import { usePermission } from 'shared/hooks';
 import { Routes } from 'shared/config';
-import { tabs, userRole } from 'shared/types/common.types';
+import { tabs, userRole, adminPermission } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -22,15 +22,17 @@ export function TasksPage({ incomeTab }: PageProps) {
 
   const navigate = useNavigate();
 
-  const hasTasksPermission = usePermission(['CREATE_TASK'], userRole.ADMIN);
-  const isMainAdmin = usePermission([], userRole.ADMIN);
+  const hasTasksPermission = usePermission(
+    [adminPermission.TASKS],
+    userRole.ADMIN
+  );
 
-  const recipients = hasTasksPermission
-    ? useGetUserByRolesQuery(tabs.RECIPIENTS).data
-    : undefined;
-  const volunteers = hasTasksPermission
-    ? useGetUserByRolesQuery(tabs.VOLUNTEERS).data
-    : undefined;
+  const recipients = useGetUserByRolesQuery(tabs.RECIPIENTS, {
+    skip: !hasTasksPermission,
+  }).data;
+  const volunteers = useGetUserByRolesQuery(tabs.VOLUNTEERS, {
+    skip: !hasTasksPermission,
+  }).data;
 
   const filteredData = useMemo(() => {
     const dataMap: Record<string, User[] | undefined> = {
@@ -54,7 +56,7 @@ export function TasksPage({ incomeTab }: PageProps) {
   const configurePointsButton = (textButton: string) => {
     return (
       <>
-        {isMainAdmin && (
+        {hasTasksPermission && (
           <button
             className={styles.editButton}
             onClick={() => navigate(`/profile/bids`)}
