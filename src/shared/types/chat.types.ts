@@ -142,13 +142,13 @@ export interface ConflictChatInfo {
 }
 
 /* #####################
-################# RESPONSE
+############### RESPONSE
 ##################### */
 
 export interface GetUserChatsResponseInterface {
   task: Array<TaskChatInfo>;
   system: Array<SystemChatInfo>;
-  conflict: Array<ConflictChatInfo>;
+  // conflict: Array<ConflictChatInfo>;
 }
 
 export interface GetAdminChatsResponseInterface {
