@@ -1,9 +1,13 @@
-import { TaskChatInfo, TaskChatMetaInterface } from 'shared/types/chat.types';
+import {
+  chatTypes,
+  TaskChatInfo,
+  TaskChatMetaInterface,
+} from 'shared/types/chat.types';
 import { mockChatMessages } from './mock-messages';
 import { mockRecipient, mockVolunteer } from './mock-users';
 
-export const mockMetaChatMessage: TaskChatMetaInterface = {
-  type: 'TaskChat',
+export const mockTaskChatMeta: TaskChatMetaInterface = {
+  type: chatTypes.TASK_CHAT,
   _id: '42',
   isActive: true,
   recipient: mockRecipient,
@@ -12,10 +16,10 @@ export const mockMetaChatMessage: TaskChatMetaInterface = {
   createdAt: new Date(2024, 7, 15, 0, 0, 0),
   updatedAt: new Date(2024, 7, 16, 31, 0, 0),
   unreads: 3,
-  watermark: '',
+  watermark: '98',
 };
 
 export const mockTasks: TaskChatInfo = {
-  meta: mockMetaChatMessage,
+  meta: mockTaskChatMeta,
   chats: mockChatMessages,
 };
