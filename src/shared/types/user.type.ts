@@ -1,6 +1,7 @@
 import {
   AdminPermission,
   DatabaseIdAndTimestampsInterface,
+  UserRole,
   UserStatus,
 } from './common.types';
 import { PointGeoJSONInterface } from './point-geojson.types';
@@ -11,7 +12,7 @@ export interface UserInterface extends DatabaseIdAndTimestampsInterface {
   avatar: string;
   address: string;
   vkId: string;
-  role: string;
+  role: UserRole;
 }
 
 export interface VolunteerInterface extends UserInterface {

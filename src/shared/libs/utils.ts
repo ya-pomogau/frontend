@@ -13,8 +13,6 @@ import {
 } from './constants';
 import { IDateUser } from 'pages/requests/test-users';
 import { UserRole, userRole } from 'shared/types/common.types';
-import { UserProfile } from 'entities/user/types';
-import { IMessage } from 'shared/types/message';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -268,85 +266,6 @@ export const setTokenAccess = (token: string) => {
 export const getTokenAccess = () => {
   return localStorage.getItem(LOCAL_STORAGE_TOKEN_ACCESS);
 };
-
-export interface IMessageHub {
-  user: UserProfile;
-  messages: IMessage[];
-  id: string;
-}
-
-export const messageHub: IMessageHub[] = [
-  {
-    user: {
-      name: 'Вася Пупкин Аркадьевич',
-      phone: '+7(777) 77-77-77',
-      avatar: 'https://i.pravatar.cc/300',
-      address: 'Puscino',
-      vkId: 'asd2342',
-      role: userRole.RECIPIENT,
-      _id: '1234',
-    },
-    messages: [
-      {
-        date: new Date('2023-05-14T21:00:00.000Z'),
-        id: 12,
-        message: 'Здравствуйте',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '234',
-      },
-      {
-        date: new Date('2023-05-15T21:00:00.000Z'),
-        id: 23,
-        message: ' Я не смогу прийти',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '214',
-      },
-      {
-        date: new Date('2023-05-14T21:05:00.000Z'),
-        id: 34,
-        message: 'Мурку нужно подоить',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '3442',
-      },
-    ],
-    id: '2',
-  },
-  {
-    user: {
-      name: 'Иванов Иван Иванович',
-      phone: '+7(987) 11-00-02',
-      avatar: 'https://i.pravatar.cc/300',
-      address: 'Puscino 213',
-      vkId: '12',
-      role: userRole.RECIPIENT,
-      _id: 'asd123',
-    },
-    messages: [
-      {
-        date: new Date('2023-05-14T21:00:00.000Z'),
-        id: 41,
-        message: 'Здравствуйте, я буду сопровождать вас на мероприятии',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '1',
-      },
-      {
-        date: new Date('2023-05-15T21:00:00.000Z'),
-        id: 32,
-        message: 'Договорились так и сделаем',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '2',
-      },
-      {
-        date: new Date('2023-05-14T21:05:00.000Z'),
-        id: 23,
-        message: 'Отлично, спасибо, встретимся у 3-го подъезда',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '2',
-      },
-    ],
-    id: '1',
-  },
-];
 
 export const dataImages = [
   {
