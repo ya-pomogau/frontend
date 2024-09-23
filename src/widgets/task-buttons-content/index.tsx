@@ -4,9 +4,14 @@ import { differenceInHours, parseISO } from 'date-fns';
 import Checkbox from 'shared/ui/checkbox';
 import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
-import { ReasonType } from './types';
+import { reasonType as reasonTypes, ReasonType } from './types';
 import { textStyle, titleStyle } from './utils';
-import { UserRole, ModalContentType } from 'shared/types/common.types';
+import {
+  UserRole,
+  userRole as userRoles,
+  ModalContentType,
+  modalContentType,
+} from 'shared/types/common.types';
 import {
   useCancelTaskMutation,
   useRejectTaskMutation,
@@ -61,7 +66,7 @@ export const ModalContent = ({
   };
 
   const handleCancelClick = () => {
-    if (userRole === UserRole.RECIPIENT && taskId) {
+    if (userRole === userRoles.RECIPIENT && taskId) {
       cancelTask({ id: taskId });
     }
   };
@@ -71,28 +76,28 @@ export const ModalContent = ({
   };
 
   switch (type) {
-    case ModalContentType.close:
+    case modalContentType.close:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Укажите причину отмены</h3>
           <div className={classNames(styles.modalContent, styles.flexColumn)}>
             <Checkbox
               label="Не смогу прийти"
-              id={ReasonType.first}
-              onChange={() => handleSetReason(ReasonType.first)}
-              checked={reason === ReasonType.first}
+              id={reasonTypes.first}
+              onChange={() => handleSetReason(reasonTypes.first)}
+              checked={reason === reasonTypes.first}
             />
             <Checkbox
               label="Отмена по обоюдному согласию"
-              id={ReasonType.second}
-              onChange={() => handleSetReason(ReasonType.second)}
-              checked={reason === ReasonType.second}
+              id={reasonTypes.second}
+              onChange={() => handleSetReason(reasonTypes.second)}
+              checked={reason === reasonTypes.second}
             />
             <Checkbox
               label="Не могу указать причину"
-              id={ReasonType.third}
-              onChange={() => handleSetReason(ReasonType.third)}
-              checked={reason === ReasonType.third}
+              id={reasonTypes.third}
+              onChange={() => handleSetReason(reasonTypes.third)}
+              checked={reason === reasonTypes.third}
             />
           </div>
           <div className={styles.modalButtons}>
@@ -117,13 +122,13 @@ export const ModalContent = ({
                 // <ModalContent
                 //   type={
                 //     isRemainLessThanDay(date)
-                //       ? ModalContentType.cancel
-                //       : ModalContentType.confirm
+                //       ? modalContentType.cancel
+                //       : modalContentType.confirm
                 //   }
                 //   date={date}
                 // />
                 <ModalContent
-                  type={ModalContentType.cancel}
+                  type={modalContentType.cancel}
                   taskId={taskId}
                   userRole={userRole}
                   date={date}
@@ -141,8 +146,8 @@ export const ModalContent = ({
           </div>
         </div>
       );
-    case ModalContentType.conflict:
-      return userRole === UserRole.RECIPIENT && volunteer === false ? (
+    case modalContentType.conflict:
+      return userRole === userRoles.RECIPIENT && volunteer === false ? (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
           <p className={textStyle}>
@@ -199,8 +204,8 @@ export const ModalContent = ({
           }
         </div>
       );
-    case ModalContentType.confirm:
-      return userRole === UserRole.RECIPIENT && volunteer === false ? (
+    case modalContentType.confirm:
+      return userRole === userRoles.RECIPIENT && volunteer === false ? (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
           <p className={textStyle}>
@@ -213,12 +218,14 @@ export const ModalContent = ({
           <h3 className={titleStyle}>Благодарим за отзывчивость</h3>
           <p className={textStyle}>
             {`Мы ждем ответ ${
-              userRole === UserRole.RECIPIENT ? 'от волонтера' : 'от реципиента'
+              userRole === userRoles.RECIPIENT
+                ? 'от волонтера'
+                : 'от реципиента'
             }`}
           </p>
         </div>
       );
-    case ModalContentType.admin:
+    case modalContentType.admin:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Связь с администратором</h3>
@@ -240,7 +247,7 @@ export const ModalContent = ({
           </div>
         </div>
       );
-    case ModalContentType.phone:
+    case modalContentType.phone:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Номер телефона:</h3>
@@ -249,7 +256,7 @@ export const ModalContent = ({
           </a>
         </div>
       );
-    case ModalContentType.cancel:
+    case modalContentType.cancel:
       // TODO: сделать более нормальную проверку. Пока что дам возможность отменить бессрочные заявки.
       if (!date || !isRemainLessThanDay(date)) {
         return (
@@ -293,7 +300,7 @@ export const ModalContent = ({
           </div>
         </div>
       );
-    case ModalContentType.responded:
+    case modalContentType.responded:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>На заявку откликнулись</h3>
@@ -318,7 +325,7 @@ export const ModalContent = ({
           </div>
         </div>
       );
-    case ModalContentType.unfulfilled:
+    case modalContentType.unfulfilled:
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>На заявку не откликнулись</h3>

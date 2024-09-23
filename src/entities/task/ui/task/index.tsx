@@ -6,12 +6,12 @@ import { TaskDescription } from './components/task-description';
 import { TaskUser } from './components/task-user';
 import { TaskButtons } from './components/task-buttons';
 import {
-  TaskStatus,
+  taskStatus,
   type Task,
-  TaskReport,
-  ResolveStatus,
+  taskReport,
+  resolveStatus,
 } from 'entities/task/types';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, userRole as userRoles } from 'shared/types/common.types';
 
 export interface TaskItemProps {
   item: Task;
@@ -39,16 +39,16 @@ export const TaskItem = ({
   const taskConfirmed = () => {
     if (
       adminResolve === null ||
-      adminResolve === ResolveStatus.PENDING ||
-      adminResolve === ResolveStatus.VIRGIN
+      adminResolve === resolveStatus.PENDING ||
+      adminResolve === resolveStatus.VIRGIN
     ) {
       return (
-        (userRole === UserRole.VOLUNTEER &&
-          volunteerReport === TaskReport.FULFILLED) ||
-        (userRole === UserRole.RECIPIENT &&
-          recipientReport === TaskReport.FULFILLED)
+        (userRole === userRoles.VOLUNTEER &&
+          volunteerReport === taskReport.FULFILLED) ||
+        (userRole === userRoles.RECIPIENT &&
+          recipientReport === taskReport.FULFILLED)
       );
-    } else if (adminResolve === ResolveStatus.FULFILLED) {
+    } else if (adminResolve === resolveStatus.FULFILLED) {
       return true;
     } else {
       return false;
@@ -58,16 +58,16 @@ export const TaskItem = ({
   const taskConflict = () => {
     if (
       adminResolve === null ||
-      adminResolve === ResolveStatus.PENDING ||
-      adminResolve === ResolveStatus.VIRGIN
+      adminResolve === resolveStatus.PENDING ||
+      adminResolve === resolveStatus.VIRGIN
     ) {
       return (
-        (userRole === UserRole.VOLUNTEER &&
-          volunteerReport === TaskReport.REJECTED) ||
-        (userRole === UserRole.RECIPIENT &&
-          recipientReport === TaskReport.REJECTED)
+        (userRole === userRoles.VOLUNTEER &&
+          volunteerReport === taskReport.REJECTED) ||
+        (userRole === userRoles.RECIPIENT &&
+          recipientReport === taskReport.REJECTED)
       );
-    } else if (adminResolve === ResolveStatus.REJECTED) {
+    } else if (adminResolve === resolveStatus.REJECTED) {
       return true;
     } else {
       return false;
@@ -107,7 +107,7 @@ export const TaskItem = ({
           extClassName={styles.description}
         />
         <TaskUser
-          user={UserRole.RECIPIENT === userRole ? volunteer : recipient}
+          user={userRoles.RECIPIENT === userRole ? volunteer : recipient}
           extClassName={styles.user}
           date={date}
           volunteer={volunteer}
@@ -121,7 +121,7 @@ export const TaskItem = ({
           description={description}
           category={category}
           date={date}
-          conflict={status === TaskStatus.CONFLICTED}
+          conflict={status === taskStatus.CONFLICTED}
           volunteer={volunteer}
           extClassName={styles.buttons}
           volunteerReport={volunteerReport}

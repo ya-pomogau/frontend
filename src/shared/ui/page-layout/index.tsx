@@ -6,15 +6,21 @@ import styles from './styles.module.css';
 import { UserInfo } from 'entities/user';
 import { FeedbackSideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
 import { useLocation } from 'react-router-dom';
-import { ErrorDialog } from '../error-dialog';
-import { NoConectionPage } from 'features/error-boundary/pages/NoConectionPage';
+import { NoConnectionPage } from 'features/error-boundary/pages/noConnectionPage';
 import { RegistrationNotice } from '../registration-notice';
 import {
   unauthorizedRecipientMessage,
   unauthorizedVolunteerMessage,
 } from 'shared/libs/constants';
-import { UserRole } from 'shared/types/common.types';
-import { isUnConfirmedSelector } from 'entities/user/model';
+
+import { userRole as userRoles } from 'shared/types/common.types';
+import {
+  isUnConfirmedSelector,
+  isUserBlockedSelector,
+} from 'entities/user/model';
+import { useMediaQuery } from 'shared/hooks';
+import { Breakpoints } from 'shared/config';
+import { BlockedPage } from '../../../features/error-boundary/pages/blockedPage';
 
 interface PageLayoutProps {
   content?: ReactNode;
@@ -24,9 +30,12 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   const { isError, errorText } = useAppSelector((state) => state.error);
   const userRole = useAppSelector((state) => state.user.role);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
+  const isBlockedSelector = useAppSelector(isUserBlockedSelector);
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
   const hasMessage = isUnConfirmed;
   const location = useLocation();
+  const isProfilePage = location.pathname === '/profile';
+  const isMobile = useMediaQuery(Breakpoints.L);
 
   return (
     <>
@@ -39,7 +48,11 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
         <div
           className={styles.main + ' ' + (hasMessage && styles.mainWithMessage)}
         >
-          <div className={styles.side}>
+          <div
+            className={`${styles.side} ${
+              isMobile && !isProfilePage ? styles.hidden : ''
+            }`}
+          >
             <div className={styles.user}>
               <UserInfo />
             </div>
@@ -54,19 +67,23 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
               <SideMenuForAuthorized />
             )}
           </div>
-          {isUnConfirmed && userRole === UserRole.RECIPIENT && (
+          {isUnConfirmed && userRole === userRoles.RECIPIENT && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedRecipientMessage} />
             </div>
           )}
-          {isUnConfirmed && userRole === UserRole.VOLUNTEER && (
+          {isUnConfirmed && userRole === userRoles.VOLUNTEER && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>
           )}
           <div className={styles.content}>
-            {isError && <ErrorDialog text={errorText}></ErrorDialog>}
-            {errorText !== 'Ошибка подключения' ? content : <NoConectionPage />}
+            {isError
+              ? (errorText === 'Ошибка подключения' && (
+                  <NoConnectionPage errorText={errorText as string} />
+                )) ||
+                (isBlockedSelector && <BlockedPage />)
+              : content}
           </div>
         </div>
       )}

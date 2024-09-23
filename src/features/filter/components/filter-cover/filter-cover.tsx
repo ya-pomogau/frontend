@@ -82,9 +82,7 @@ export const FilterCover = ({
 
   const { control, handleSubmit, reset, watch } = useForm<
     Partial<IFilterValues>
-  >({
-    values,
-  });
+  >({ values });
 
   const filterValues = watch();
 

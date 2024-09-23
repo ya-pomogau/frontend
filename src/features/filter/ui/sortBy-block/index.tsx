@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 
 import Fieldset from 'shared/ui/fieldset';
-import { FieldsetView } from 'shared/ui/fieldset/utils';
+import { fieldsetView } from 'shared/ui/fieldset/utils';
 import Checkbox from 'shared/ui/checkbox';
-import { VariantCheckbox } from 'shared/types/common.types';
+import { variantCheckbox } from 'shared/types/common.types';
 
 interface SortByBlockProps {
   value: string;
@@ -17,26 +17,26 @@ export const SortByBlock = ({ value, onChange }: SortByBlockProps) => {
   };
 
   return (
-    <Fieldset title="Отображать" view={FieldsetView.COLUMN}>
+    <Fieldset title="Отображать" view={fieldsetView.COLUMN}>
       <Checkbox
-        checked={value === VariantCheckbox.DATE}
-        id={VariantCheckbox.DATE}
+        checked={value === variantCheckbox.DATE}
+        id={variantCheckbox.DATE}
         label="По дате"
         onChange={handleCheckboxChange}
       />
       {/* Закоментили, так как так и не определились нужны ли у волонтера в фильтрах другие параметры кроме даты */}
-      {/* {role === UserRole.VOLUNTEER && (
+      {/* {role === userRole.VOLUNTEER && (
         <>
           <Checkbox
-            checked={filter === VariantCheckbox.DECREASINGPOINTS}
-            id={VariantCheckbox.DECREASINGPOINTS}
+            checked={filter === variantCheckbox.DECREASINGPOINTS}
+            id={variantCheckbox.DECREASINGPOINTS}
             label="По убывающим баллам"
             onChange={handleCheckboxChange}
           />
 
           <Checkbox
-            checked={filter === VariantCheckbox.INCREASINGPOINTS}
-            id={VariantCheckbox.INCREASINGPOINTS}
+            checked={filter === variantCheckbox.INCREASINGPOINTS}
+            id={variantCheckbox.INCREASINGPOINTS}
             label="По возростающим баллам"
             onChange={handleCheckboxChange}
           />

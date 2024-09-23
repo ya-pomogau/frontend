@@ -3,6 +3,7 @@ import {
   AdminPermission,
   UserRole,
   UserStatus,
+  userRole as userRoles,
 } from 'shared/types/common.types';
 
 // хук использует массив необходимых компоненту разрешений, роль, к которой они
@@ -11,18 +12,13 @@ import {
 // требований или нет
 // так же проверяет, если пользователь isRoot - возвращает true
 
-type UserRequirements =
-  | UserStatus.CONFIRMED
-  | UserStatus.UNCONFIRMED
-  | UserStatus.ACTIVATED
-  | UserStatus.VERIFIED
-  | UserStatus.BLOCKED;
+type UserRequirements = UserStatus;
 
-type AdminRequirements = `${AdminPermission}`;
+type AdminRequirements = AdminPermission;
 
-type Role = UserRole.VOLUNTEER | UserRole.RECIPIENT | UserRole.ADMIN;
+type Role = UserRole;
 
-type Requirements<R extends Role> = R extends UserRole.ADMIN
+type Requirements<R extends Role> = R extends typeof userRoles.ADMIN
   ? AdminRequirements
   : UserRequirements;
 
@@ -37,7 +33,7 @@ export default function usePermission<R extends Role>(
     (state) => state.user.data?.permissions || []
   );
 
-  if (userRole === UserRole.ADMIN && userIsRoot) {
+  if (userRole === userRoles.ADMIN && userIsRoot) {
     return true;
   }
 
@@ -45,8 +41,8 @@ export default function usePermission<R extends Role>(
     return false;
   }
 
-  const hasPermission = 
-    userRole === UserRole.ADMIN
+  const hasPermission =
+    userRole === userRoles.ADMIN
       ? requirements.every((requirement) =>
           userPermissions.some((element) => element === requirement)
         )
