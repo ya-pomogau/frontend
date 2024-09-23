@@ -24,12 +24,12 @@ export function ProfileCompletedPage() {
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
   const isMobile = useMediaQuery(Breakpoints.XL);
-  const {
-    data: tasks,
-    isLoading,
-  } = useGetTaskCompletedQuery(getRoleForRequest(role), {
-    skip: isUnConfirmed,
-  });
+  const { data: tasks, isLoading } = useGetTaskCompletedQuery(
+    getRoleForRequest(role),
+    {
+      skip: isUnConfirmed,
+    }
+  );
 
   useEffect(() => {
     tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);

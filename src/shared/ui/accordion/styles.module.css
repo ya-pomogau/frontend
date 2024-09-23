@@ -56,7 +56,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 
 .list_label_text::after {
@@ -82,12 +81,12 @@
 
 @media (max-width: 400px) {
   .list_label_text {
-  font-size: small;
+    font-size: small;
   }
 }
 
 @media (max-width: 350px) {
   .list_label_text {
-  font-size: x-small;
+    font-size: x-small;
   }
 }

@@ -19,5 +19,4 @@ export { ModalContent } from './task-buttons-content';
 export { UserCard } from './user-card';
 export { UserCardForTasks } from './user-card-for-tasks';
 export { WindowInteractionUsers } from './window-interaction-users';
-///
-export {AdminSelectModal } from './admin-modal-select'
+export { AdminSelectModal } from './admin-modal-select';

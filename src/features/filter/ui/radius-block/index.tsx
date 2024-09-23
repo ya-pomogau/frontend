@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 interface RadiusBlockProps {
   filter: string;
-  onChange: (value: string) => void;  
+  onChange: (value: string) => void;
 }
 
 export const RadiusBlock = ({ filter, onChange }: RadiusBlockProps) => {
@@ -17,9 +17,9 @@ export const RadiusBlock = ({ filter, onChange }: RadiusBlockProps) => {
 
   const handleRadiusButtonClick = (id: string) => {
     if (filter === id && location.pathname !== '/profile/map') {
-      onChange('');  
+      onChange('');
     } else {
-      onChange(id);  
+      onChange(id);
     }
   };
 
