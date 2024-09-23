@@ -19,43 +19,43 @@ export const wsMessageKind = {
   DISCONNECTION_EVENT: 'Disconnection',
 } as const;
 
-export type wsMessageKind = ValueOf<typeof wsMessageKind>;
+export type WsMessageKind = ValueOf<typeof wsMessageKind>;
 
-export type wsTokenPayload = {
+export type WsTokenPayload = {
   user: AnyUserInterface;
   token: string;
 };
 
-export type wsMetaPayload = {
+export type WsMetaPayload = {
   system: Array<SystemChatMetaInterface>;
   tasks: Array<TaskChatMetaInterface>;
   conflicts: Array<ConflictChatsTupleMetaInterface>;
 };
 
-export type wsChatPageQueryPayload = {
+export type WsChatPageQueryPayload = {
   chatId: string;
   limit: number;
   skip: number;
 };
 
-export type wsMessagesPayload = { messages: Array<MessageInterface> };
+export type WsMessagesPayload = { messages: Array<MessageInterface> };
 
-export type wsDisconnectionPayload = {
+export type WsDisconnectionPayload = {
   userId: string;
 };
 
-export type wsPayloadType =
-  | wsTokenPayload
-  | wsMetaPayload
-  | wsChatPageQueryPayload
-  | wsMessagesPayload
-  | wsDisconnectionPayload;
+export type WsPayloadType =
+  | WsTokenPayload
+  | WsMetaPayload
+  | WsChatPageQueryPayload
+  | WsMessagesPayload
+  | WsDisconnectionPayload;
 
-export type wsMessageData = {
-  data: wsPayloadType;
+export type WsMessageData = {
+  data: WsPayloadType;
 };
 
-export type wsConnectedUserData = {
+export type WsConnectedUserData = {
   user: AnyUserInterface;
   sockets: Array<string>;
 };
