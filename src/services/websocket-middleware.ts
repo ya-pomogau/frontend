@@ -18,13 +18,13 @@ import { getTokenAccess } from '../shared/libs/utils';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { actions } from './system-slice';
-import { WSChatsResponseInterface } from 'shared/types/chat.types';
 import { mockChatMessages } from 'entities/chat/mock-messages';
+import { wsConnectedUserData } from 'shared/types/websockets.types';
 
 // Объект для отправки тестового message. Удалить после реализации продовой версии
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const testEventObj: WSChatsResponseInterface = {
+const testEventObj: wsConnectedUserData = {
   data: {
     messages: mockChatMessages,
   },
