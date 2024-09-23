@@ -7,9 +7,9 @@ export interface IFilterValues {
   userCategories: string[];
 }
 
-export type TFilterItems {
+export type TFilterItems = {
   [key in keyof IFilterValues]?: boolean;
-}
+};
 
 export interface FilteringProps {
   items: TFilterItems;
