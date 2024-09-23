@@ -17,10 +17,6 @@
 }
 
 .header__button__text {
-  font-family: 'Golos';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16.8px;
+  font: var(--font-golos-12-16);
   color: var(--colors-interface-primary);
 }

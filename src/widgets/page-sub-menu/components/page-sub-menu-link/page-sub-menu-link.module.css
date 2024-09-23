@@ -19,7 +19,7 @@
 }
 
 .tabContainer__number {
-  background: #d60080;
+  background: var(--colors-interface-fuchsia);
   border-radius: 9px;
   min-width: 18px;
   height: 18px;
@@ -40,10 +40,6 @@
 
 @media screen and (max-width: 920px) {
   .tabContainer__text {
-    font-family: Golos, 'sans-serif';
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 140%;
+    font: var(--font-golos-12-16);
   }
 }

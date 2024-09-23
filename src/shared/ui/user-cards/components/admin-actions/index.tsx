@@ -106,13 +106,12 @@ const AdminActions = ({
           type={'password'}
           disabled
         />
+        <EditIcon
+          onClick={handleModalOpen}
+          className={styles.admin_edit_icon}
+          color={'blue'}
+        />
       </div>
-      <EditIcon
-        onClick={handleModalOpen}
-        className={styles.admin_edit_icon}
-        color={'blue'}
-      />
-
       {isAdminDropdownListClosed ? (
         <>
           {isDirty && (
