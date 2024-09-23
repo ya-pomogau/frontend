@@ -7,15 +7,18 @@ import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';
 import { Icon } from 'shared/ui/icons';
 import WrapperMessage from 'shared/ui/wrapper-messages';
-import { TaskChatInfo, TaskChatMetaInterface } from 'shared/types/chat.types';
+import {
+  TaskChatContent,
+  TaskChatInfo,
+  TaskChatMetaInterface,
+} from 'shared/types/chat.types';
 import { mockUserChatsResponse } from 'entities/chat/mock-response';
+import { mockChatMessages } from 'entities/chat/mock-messages';
 
 export const SectionChatHub = () => {
   const [isOpen, setIpOpen] = useState<boolean>(false);
   const [selectedCard, setSelectedCard] = useState<string>('');
-  const [infoMessage, setInfoMessage] = useState<TaskChatMetaInterface | null>(
-    null
-  );
+  const [infoMessage, setInfoMessage] = useState<TaskChatContent | null>(null);
 
   const handleVisibleMessage = (text: string) => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);
@@ -29,7 +32,7 @@ export const SectionChatHub = () => {
   const handleClickCard = (task: TaskChatMetaInterface) => {
     setSelectedCard(task._id);
     setIpOpen(true);
-    setInfoMessage(task);
+    setInfoMessage(mockChatMessages);
   };
 
   return (
@@ -78,12 +81,12 @@ export const SectionChatHub = () => {
             </div>
           }
         >
-          {infoMessage?.messages.map((m) => (
+          {infoMessage?.map((m) => (
             <Message
-              type={m.userId === infoMessage.user._id ? 'incoming' : 'outgoing'}
-              messageText={m.message}
-              avatarLink={m.userAvatarLink}
-              key={m.id}
+              type={m.author._id === ___.user._id ? 'incoming' : 'outgoing'}
+              messageText={m.body}
+              avatarLink={m.author.avatar}
+              key={m._id}
             />
           ))}
         </WindowInteractionUsers>

@@ -17,7 +17,12 @@ import WrapperMessage from 'shared/ui/wrapper-messages';
 import {
   ConflictChatInfo,
   ConflictChatsTupleMetaInterface,
+  TaskChatMetaInterface,
 } from 'shared/types/chat.types';
+import {
+  mockAdminChatsResponse,
+  mockUserChatsResponse,
+} from 'entities/chat/mock-response';
 
 export const SectionChatsConflict = () => {
   const location = useLocation();
@@ -33,7 +38,7 @@ export const SectionChatsConflict = () => {
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [isOpenConflict, setIsOpenConflict] = useState<boolean>(false);
 
-  const handleClickCard = (task: ConflictChatsTupleMetaInterface) => {
+  const handleClickCard = (task: TaskChatMetaInterface) => {
     setSelectedCard(task._id);
     setGetInfoTask(task);
     setIsOpenConflict(true);
@@ -62,19 +67,19 @@ export const SectionChatsConflict = () => {
   return (
     <div className={styles.conflict}>
       <WrapperMessage
-        information={dataMessage && dataMessage.length > 0 ? true : false}
+        information={!!mockUserChatsResponse.task.length}
         title="У Вас пока нет конфликтов"
       >
-        {dataMessage?.map(
-          ({ meta: item }: { meta: ConflictChatsTupleMetaInterface }) => (
+        {mockUserChatsResponse.task?.map(
+          ({ meta: item }: { meta: TaskChatMetaInterface }) => (
             <div key={item._id}>
               <MessageCard
-                statusConflict
-                description={item.description}
+                statusConflict={!item.isActive}
+                description={item.volunteer.phone}
                 action={selectedCard === item._id}
                 user={item.recipient}
                 handleClickCard={() => handleClickCard(item)}
-                task={item}
+                unreads={item.unreads}
               />
             </div>
           )
@@ -94,7 +99,7 @@ export const SectionChatsConflict = () => {
                     label="Взять в работу"
                     buttonType="primary"
                     actionType="button"
-                    onClick={() => getWorkTask(getInfoTask?._id)}
+                    onClick={() => getWorkTask(getInfoTask?.taskId)}
                     customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
                   />
                 ) : (
@@ -103,7 +108,9 @@ export const SectionChatsConflict = () => {
                       label="Конфликт решен"
                       buttonType="secondary"
                       actionType="button"
-                      onClick={() => handleResolutionConflict(getInfoTask?._id)}
+                      onClick={() =>
+                        handleResolutionConflict(getInfoTask?.taskId)
+                      }
                     />
                     <Button
                       label="Ответить"

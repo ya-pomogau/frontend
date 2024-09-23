@@ -2,17 +2,16 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
-import { TaskConflict } from 'entities/task/types';
 import { AnyUserInterface } from 'shared/types/user.type';
 
 interface PropsMessageCard {
   statusConflict: boolean;
   description: string;
   handleClickCard: (task: string) => void;
-  unreads: number;
   action: boolean;
   user: AnyUserInterface;
   position?: boolean;
+  unreads: number;
 }
 
 export const MessageCard = (props: PropsMessageCard) => {
@@ -25,15 +24,15 @@ export const MessageCard = (props: PropsMessageCard) => {
   }, [props.unreads]);
 
   function handelClick() {
-    if (props.statusConflict) {
-      props.handleClickCard(props.task);
-    } else if (props.unreads) {
-      props.handleClickCard({
-        user: props.user,
-        messages: props.unreads,
-        id: props.user._id,
-      });
-    }
+    // if (props.statusConflict) {
+    //   props.handleClickCard(props.task);
+    // } else if (props.unreads) {
+    //   props.handleClickCard({
+    //     user: props.user,
+    //     messages: props.unreads,
+    //     id: props.user._id,
+    //   });
+    // }
   }
 
   return (

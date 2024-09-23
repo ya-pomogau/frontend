@@ -6,10 +6,13 @@ import { MessageCard } from 'shared/ui/message-card';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import styles from './styles.module.css';
 import WrapperMessage from 'shared/ui/wrapper-messages';
+import { TaskChatContent, TaskChatMetaInterface } from 'shared/types/chat.types';
+import { mockChatMessages } from 'entities/chat/mock-messages';
+import { mockAdminChatsResponse, mockUserChatsResponse } from 'entities/chat/mock-response';
 
 export const SectionInWorkChats = () => {
   const [isOpen, setIpOpen] = useState<boolean>(false);
-  const [infoMessage, setInfoMessage] = useState<TaskChatMetaInterface | null>(
+  const [infoMessage, setInfoMessage] = useState<TaskChatContent | null>(
     null
   );
   const [selectedCard, setSelectedCard] = useState<string>('');
@@ -20,10 +23,10 @@ export const SectionInWorkChats = () => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);
   };
 
-  const handleClickCard = (task: IMessageHub) => {
-    setSelectedCard(task.id);
+  const handleClickCard = (task: TaskChatMetaInterface) => {
+    setSelectedCard(task._id);
     setIpOpen(true);
-    setInfoMessage(task);
+    setInfoMessage(mockChatMessages);
   };
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -38,29 +41,32 @@ export const SectionInWorkChats = () => {
 
   return (
     <div className={styles.picker}>
+      
       <WrapperMessage
-        information={!!messageHub.length}
+        information={!!mockUserChatsResponse.task.length}
         title="У Вас пока нет чатов в работе"
       >
-        {messageHub?.map((item) => (
+        {mockUserChatsResponse.task?.map(
+          ({ meta: item }: { meta: TaskChatMetaInterface }) => (
           <MessageCard
-            key={item.id}
-            statusConflict
-            description={item.user.phone}
-            action={selectedCard === item.id}
-            user={item.user}
+            key={item._id}
+            statusConflict={!item.isActive}
+            description={item.volunteer.phone}
+            action={selectedCard === item._id}
+            user={item.recipient}
             handleClickCard={() => handleClickCard(item)}
-            message={item.messages}
+            unreads={item.unreads}
           />
         ))}
       </WrapperMessage>
+
       {isOpen && (
         <WindowInteractionUsers
           closeConflict={handelCloseWrapper}
           option="chat"
           isOpen={isOpen}
           onClick={handleVisibleMessage}
-          chatmateInfo={infoMessage?.user}
+          chatmateInfo={infoMessage?.}
           boxButton={
             <InputWrapper
               placeholder="Напишите сообщение..."
@@ -73,12 +79,12 @@ export const SectionInWorkChats = () => {
             />
           }
         >
-          {infoMessage?.messages.map((m) => (
+          {infoMessage?.map((m) => (
             <Message
-              type={m.userId === infoMessage.user._id ? 'incoming' : 'outgoing'}
-              messageText={m.message}
-              avatarLink={m.userAvatarLink}
-              key={m.id}
+              type={m.author._id === ___.user._id ? 'incoming' : 'outgoing'}
+              messageText={m.body}
+              avatarLink={m.author.avatar}
+              key={m._id}
             />
           ))}
         </WindowInteractionUsers>
