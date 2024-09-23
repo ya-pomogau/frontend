@@ -67,7 +67,7 @@ export const userTasksApi = createApi({
           console.error('Error occurred:', error);
         }
         return result
-          ? // ? [{ type: 'Task', id: `${role}-${latitude}-${longitude}` }]
+          ? 
             [{ type: 'TaskVirgin' }]
           : [];
       },
@@ -95,7 +95,6 @@ export const userTasksApi = createApi({
           body: dto,
         };
       },
-      // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive', id: 'recipient' }],
     }),
     responseTask: build.mutation<Task, string>({
@@ -105,7 +104,6 @@ export const userTasksApi = createApi({
           method: 'PUT',
         };
       },
-      // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskVirgin' }, { type: 'TaskActive' }],
     }),
     fulfillTask: build.mutation<Task, { role: string; id: string }>({
@@ -116,7 +114,6 @@ export const userTasksApi = createApi({
           method: 'PUT',
         };
       },
-      // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive' }],
     }),
     rejectTask: build.mutation<Task, { role: string; id: string }>({
@@ -127,7 +124,6 @@ export const userTasksApi = createApi({
           method: 'PUT',
         };
       },
-      // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive' }],
     }),
     cancelTask: build.mutation<Task, { id: string }>({
@@ -135,7 +131,6 @@ export const userTasksApi = createApi({
         url: `recipient/tasks/${id}`,
         method: 'DELETE',
       }),
-      // указываем какие данные надо перезапросить при выполнении запроса
       invalidatesTags: [{ type: 'TaskActive' }],
     }),
   }),
