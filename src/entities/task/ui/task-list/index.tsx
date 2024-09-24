@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { usePermission, useUser, useControlModal } from 'shared/hooks';
 import { RoundButton, Informer, Tooltip, Icon } from 'shared/ui';
+import { Routes } from 'shared/config';
 import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
 import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { TaskItem } from '../task';
@@ -53,7 +54,7 @@ export const TaskList = ({
   const role = user?.role;
 
   const location = useLocation();
-  const isCompletedPage = location.pathname.includes('/profile/completed');
+  const isCompletedPage = location.pathname.includes(Routes.PROFILE_COMPLETED);
 
   const isAdmin = role === userRoles.ADMIN;
   const isRecipient = userRole === userRoles.RECIPIENT;
@@ -134,7 +135,7 @@ export const TaskList = ({
     if (!isOpen) {
       getCoords();
     }
-    handleOpen();
+    !isOpen ? handleOpen() : handleClose();
   };
 
   useEffect(() => {
@@ -200,7 +201,7 @@ export const TaskList = ({
                   visible
                   extClassName={styles.modal}
                   pointerPosition="center"
-                  changeVisible={() => handleClose()}
+                  changeVisible={handleClose}
                   elementStyles={{
                     position: 'absolute',
                     top: `${popupPosion?.top}px`,
@@ -212,7 +213,7 @@ export const TaskList = ({
                       className={styles.closeIcon}
                       size="14"
                       color="blue"
-                      onClick={() => handleClose()}
+                      onClick={handleClose}
                     />
                   </div>
                   <div className={styles.text}>
