@@ -8,7 +8,7 @@ import { RoundButton } from '../../round-button';
 import UserInfo from 'shared/ui/user-cards/components/user-info';
 import { Avatar } from '../../avatar';
 import { User } from 'entities/user/types';
-import { userRole, userStatus } from 'shared/types/common.types';
+import { userRole, UserStatus, userStatus } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -18,8 +18,10 @@ export interface UserCardTilesProps {
   handleBlockClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
+  isAcceptButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
 }
 
@@ -29,6 +31,7 @@ export const UserCardTiles = ({
   handleBlockClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   getButtonTypeFromScore,
 }: UserCardTilesProps) => {
   const { name, role, avatar, phone, _id, score, keys, status, permissions } =
@@ -69,7 +72,6 @@ export const UserCardTiles = ({
       )}
 
       <UserInfo userName={name} userId={_id} userNumber={phone} role={role} />
-
       {role === userRole.VOLUNTEER && (
         <VolunteerActions
           extClassName={classnames(styles.buttons, styles.buttons_volunteers)}
@@ -77,8 +79,11 @@ export const UserCardTiles = ({
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
-          isAcceptButtonExclamationPointIcon={true}
+          status={status || 0}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
+          isAcceptButtonExclamationPointIcon={
+            isAcceptButtonExclamationPointIcon
+          }
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={handleBlockClick}
           onGiveKeysButtonClick={() =>
