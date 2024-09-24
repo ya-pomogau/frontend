@@ -4,22 +4,42 @@ import { Breakpoints } from 'shared/config';
 import { describe, expect, it, vi } from 'vitest';
 
 describe('useMediaQuery check', () => {
-  it('', () => {
+  it('should return false when windowSize and query not matched', async () => {
+    const match = (query: string, windowSize: string) => {
+      if (query === windowSize) {
+        return true;
+      }
+      return false;
+    };
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       enumerable: true,
       value: vi.fn().mockImplementation((query) => ({
-        matches: true,
+        matches: match(query, windowSize),
         media: query,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
       })),
     });
-    const { result } = renderHook(() => useMediaQuery(Breakpoints.L));
-    console.log(result);
+    const windowSize = Breakpoints.L;
+    const { result } = renderHook(() => useMediaQuery(Breakpoints.XL));
+    expect(result.current).toBe(false);
+  });
+  it('should return true when windowSize and query matched', async () => {
+    const match = (query: string, windowSize: string) => {
+      if (query === windowSize) {
+        return true;
+      }
+      return false;
+    };
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      enumerable: true,
+      value: vi.fn().mockImplementation((query) => ({
+        matches: match(query, windowSize),
+        media: query,
+      })),
+    });
+    const windowSize = Breakpoints.XL;
+    const { result } = renderHook(() => useMediaQuery(Breakpoints.XL));
+    expect(result.current).toBe(true);
   });
 });
