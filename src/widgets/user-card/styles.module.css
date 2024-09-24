@@ -53,7 +53,8 @@
   display: flex;
   align-items: start;
   gap: 5px;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
 }
 
 .admin_login_input {
@@ -91,8 +92,16 @@
   left: 20px;
   border: 0.5px;
   border: 0.5px solid var(--colors-interface-primary);
-  color: linear-gradient(0deg, var(--colors-interface-primary), var(--colors-interface-primary)),
-    linear-gradient(0deg, var(--colors-interface-white), var(--colors-interface-white));
+  color: linear-gradient(
+      0deg,
+      var(--colors-interface-primary),
+      var(--colors-interface-primary)
+    ),
+    linear-gradient(
+      0deg,
+      var(--colors-interface-white),
+      var(--colors-interface-white)
+    );
   padding-left: 10px;
   content: '*****';
 }

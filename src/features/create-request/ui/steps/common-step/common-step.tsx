@@ -45,7 +45,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
-  const categorySize = category.title.length > 22 ? "large" : "medium";
+  const categorySize = category.title.length > 22 ? 'large' : 'medium';
 
   const handleSubmitClick = () => {
     let requestData = {};
@@ -180,13 +180,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               {description}
             </p>
             {[...description].length > 170 && (
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className={styles.readMoreButton}
-                >
-                  {isExpanded ? 'Скрыть' : 'Читать'}
-                </button>
-              )}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className={styles.readMoreButton}
+              >
+                {isExpanded ? 'Скрыть' : 'Читать'}
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -253,13 +253,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               ) : null}
             </p>
             {[...description].length > 160 && (
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className={styles.readMoreButton}
-                >
-                  {isExpanded ? 'Скрыть' : 'Читать'}
-                </button>
-              )}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className={styles.readMoreButton}
+              >
+                {isExpanded ? 'Скрыть' : 'Читать'}
+              </button>
+            )}
           </>
         )}
       </div>

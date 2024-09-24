@@ -18,11 +18,7 @@ const BalanceSettingsItem = ({
 }: BalanceSettingsItemProps) => {
   return (
     <div className={styles.balance_box}>
-      <p
-        className={styles.balance_text}
-      >
-        {title}
-      </p>
+      <p className={styles.balance_text}>{title}</p>
       <Input
         className={styles.balance_input}
         defaultValue={inputValue}

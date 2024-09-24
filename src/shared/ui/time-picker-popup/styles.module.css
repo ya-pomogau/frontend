@@ -80,7 +80,13 @@
   height: 1px;
   width: 240px;
   border: none;
-  background: linear-gradient(to right, var(--colors-interface-white), var(--colors-interface-primary), var(--colors-interface-white)) 50% 0%;
+  background: linear-gradient(
+      to right,
+      var(--colors-interface-white),
+      var(--colors-interface-primary),
+      var(--colors-interface-white)
+    )
+    50% 0%;
 }
 
 .timePicker input {

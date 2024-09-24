@@ -1,31 +1,31 @@
 .balance_box {
-    display: grid;
-    grid-template-columns: 1fr 41px 46px;
-    align-items: center;
-    column-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 41px 46px;
+  align-items: center;
+  column-gap: 10px;
 }
 
 .balance_text {
-    font-family: var(--font-family-golos);
-    font-size: var(--font-size-s);
-    line-height: 22px;
+  font-family: var(--font-family-golos);
+  font-size: var(--font-size-s);
+  line-height: 22px;
 }
 
 .balance_input {
-    outline: none;
-    width: 41px;
-    height: 34px;
-    border: 0.5px solid var(--colors-interface-primary-additional);
-    text-align: center;
-   
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    color: var(--colors-interface-primary);
-  
-    font-family: var(--font-family-golos);
-    font-size: var(--font-size-small);
-    line-height: 17px;
-    letter-spacing: 0em;
+  outline: none;
+  width: 41px;
+  height: 34px;
+  border: 0.5px solid var(--colors-interface-primary-additional);
+  text-align: center;
+
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  color: var(--colors-interface-primary);
+
+  font-family: var(--font-family-golos);
+  font-size: var(--font-size-small);
+  line-height: 17px;
+  letter-spacing: 0em;
 }
 
 .balance_input::-webkit-inner-spin-button,
@@ -41,10 +41,8 @@
 }
 
 @media screen and (max-width: 920px) {
-
-    .balance_text {
-        font-size: var(--font-size-middle);
-        line-height: var(--line-height-medium);
-    }
-
+  .balance_text {
+    font-size: var(--font-size-middle);
+    line-height: var(--line-height-medium);
+  }
 }

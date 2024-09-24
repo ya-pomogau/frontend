@@ -84,7 +84,7 @@ export function DatePicker({
   extClassName,
   minDate = subDays(new Date(), 0),
   inline = true,
-  disabled = false
+  disabled = false,
 }: IDatePickerProps) {
   const handleOnChange = (date: Date) => {
     if (date) onChangeValue(date);
