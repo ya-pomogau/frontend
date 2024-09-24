@@ -35,7 +35,8 @@
   display: flex;
   align-items: start;
   gap: 5px;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
 }
 
 .admin_login_box {
@@ -56,6 +57,7 @@
   letter-spacing: 0em;
   text-align: left;
   color: var(--colors-interface-primary);
+  position: relative;
 }
 
 .admin_password_box {
@@ -65,7 +67,7 @@
 
 .admin_edit_icon {
   position: absolute;
-  top: 179px; /* по макету половина иконки минус вся длина до элемента*/
+  top: 35px;
   left: 85%; /* по макету ширина - 15px */
   transform: translateY(-50%);
   width: 20px;
