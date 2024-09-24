@@ -43,7 +43,13 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
 
   return (
     <div>
-      <p className={classNames(styles.filterBlockText, 'text', 'text_size_small')}>
+      <p
+        className={classNames(
+          styles.filterBlockText,
+          'text',
+          'text_size_small'
+        )}
+      >
         Дата
       </p>
       <div className={styles.calendar}>

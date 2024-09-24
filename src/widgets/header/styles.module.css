@@ -21,7 +21,12 @@
 .header__gradient-divider {
   height: 1px;
   width: 100%;
-  background: linear-gradient(to right, var(--colors-interface-white) 0%, var(--colors-interface-primary) 50%, var(--colors-interface-white) 100%);
+  background: linear-gradient(
+    to right,
+    var(--colors-interface-white) 0%,
+    var(--colors-interface-primary) 50%,
+    var(--colors-interface-white) 100%
+  );
 }
 
 .header_title {
