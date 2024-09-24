@@ -18,7 +18,7 @@ export interface UserCardTilesProps {
   handleBlockClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
-  isAcceptButtonExclamationPointIcon:boolean;
+  isAcceptButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
     score: number,
     status?: UserStatus
@@ -72,7 +72,6 @@ export const UserCardTiles = ({
       )}
 
       <UserInfo userName={name} userId={_id} userNumber={phone} role={role} />
-
       {role === userRole.VOLUNTEER && (
         <VolunteerActions
           extClassName={classnames(styles.buttons, styles.buttons_volunteers)}
@@ -80,9 +79,11 @@ export const UserCardTiles = ({
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
-          status={ status || 0}
+          status={status || 0}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
-          isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
+          isAcceptButtonExclamationPointIcon={
+            isAcceptButtonExclamationPointIcon
+          }
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={handleBlockClick}
           onGiveKeysButtonClick={() =>

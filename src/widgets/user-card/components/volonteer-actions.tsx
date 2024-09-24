@@ -6,8 +6,10 @@ import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../app/hooks';
-import {  UserStatus, adminPermission } from '../../../shared/types/common.types';
-import { AdminPermission } from '../../../shared/types/common.types';
+import {
+  UserStatus,
+  adminPermission,
+} from '../../../shared/types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
