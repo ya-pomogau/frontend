@@ -51,7 +51,7 @@ export {
   useFulfillTaskMutation,
   useRejectTaskMutation,
   useGetTaskQuery,
-  useCancelTaskMutation
+  useCancelTaskMutation,
 } from './user-task-api';
 
 export {
@@ -67,3 +67,5 @@ export {
   newUserThunk,
   checkTokenThunk,
 } from './system-slice';
+
+export { websocketMiddleware } from './websocket-middleware';

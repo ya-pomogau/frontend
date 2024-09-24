@@ -66,10 +66,7 @@ export const userTasksApi = createApi({
         if (error) {
           console.error('Error occurred:', error);
         }
-        return result
-          ? 
-            [{ type: 'TaskVirgin' }]
-          : [];
+        return result ? [{ type: 'TaskVirgin' }] : [];
       },
     }),
     getTask: build.query<Array<Task>, { latitude: number; longitude: number }>({

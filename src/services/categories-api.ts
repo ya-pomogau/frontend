@@ -31,7 +31,4 @@ export const categoriesApi = createApi({
   }),
 });
 
-export const {
-  useGetCategoriesQuery,
-  useUpdatePointsMutation,
-} = categoriesApi;
+export const { useGetCategoriesQuery, useUpdatePointsMutation } = categoriesApi;

@@ -1,16 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import {
+  postsApi,
+  categoriesApi,
+  usersApi,
+  userTasksApi,
+  adminsApi,
+  contactsApi,
+  websocketMiddleware,
+} from 'services';
 import { userModel } from 'entities/user/model';
-import { createRequestModel } from 'features/create-request/model/create-request';
-import { usersApi } from 'services/user-api';
-import { contactsApi } from 'services/contacts-api';
-import { categoriesApi } from 'services/categories-api';
 import { errorModel } from 'entities/error/model';
+import { createRequestModel } from 'features/create-request/model/create-request';
 import systemSliceReducer from '../../services/system-slice';
-import { userTasksApi } from 'services/user-task-api';
-import { adminsApi } from 'services/admin-api';
-import { postsApi } from 'services/posts-api';
-import { websocketMiddleware } from 'services/websocket-middleware';
 
 export const store = configureStore({
   reducer: {
