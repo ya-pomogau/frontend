@@ -53,32 +53,6 @@ export function TasksPage({ incomeTab }: PageProps) {
     }
   };
 
-  const configurePointsButton = (textButton: string) => {
-    return (
-      <>
-        {hasTasksPermission && (
-          <button
-            className={styles.editButton}
-            onClick={() => navigate(`/profile/bids`)}
-          >
-            <Icon color="blue" icon="EditIcon" />
-            <p
-              className={classNames(
-                'text',
-                'text_size_small',
-                'text_type_regular',
-                'm-0',
-                styles.editButtonText
-              )}
-            >
-              {textButton}
-            </p>
-          </button>
-        )}
-      </>
-    );
-  };
-
   return (
     <>
       <SmartHeader
@@ -90,17 +64,35 @@ export function TasksPage({ incomeTab }: PageProps) {
           links={
             <>
               <PageSubMenuLink
-                to="/profile/tasks/recipients"
+                to={Routes.PROFILE_TASKS_RECIPIENTS}
                 text="Реципиенты"
               />
               <PageSubMenuLink
-                to="/profile/tasks/volunteers"
+                to={Routes.PROFILE_TASKS_VOLUNTEERS}
                 text="Волонтеры"
               />
             </>
           }
         />
-        {hasTasksPermission && configurePointsButton('Настроить баллы')}
+        {hasTasksPermission && (
+          <button
+            className={styles.editButton}
+            onClick={() => navigate(Routes.PROFILE_BIDS)}
+          >
+            <Icon color="blue" icon="EditIcon" />
+            <p
+              className={classNames(
+                'text',
+                'text_size_small',
+                'text_type_regular',
+                'm-0',
+                styles.editButtonText
+              )}
+            >
+              Настроить баллы
+            </p>
+          </button>
+        )}
       </div>
       {hasTasksPermission && (
         <div>
