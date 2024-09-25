@@ -46,6 +46,10 @@ export const SubmenuDefault: Story = {
       description:
         'Слот для элементов PageSubMenuLink. Оборачиваем в <></> и вставляем PageSubMenuLink.',
     },
+    style: {
+      description:
+        'Аргумент для подключения дополнительных стилей. Пример: style={styles[имя css-свойства]}'
+    }
   },
   render: ({ ...args }) => (
     <Mockstore initialState={mockedUnauthorizedState}>

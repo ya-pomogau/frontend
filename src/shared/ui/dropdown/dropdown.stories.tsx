@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import Dropdown, { Option } from './index';
 import { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from 'app/store';
+import Provider from 'react-redux/es/components/Provider';
 
 const meta: Meta<typeof Dropdown> = {
   title: 'uikit/DropDown',
@@ -24,6 +26,15 @@ const meta: Meta<typeof Dropdown> = {
       description: 'Лэйбл над текстом',
     },
   },
+  decorators: [
+    (Story) => (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Story />
+        </BrowserRouter>
+      </Provider>
+    ),
+  ],
 };
 
 export default meta;
