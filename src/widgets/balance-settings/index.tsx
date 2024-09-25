@@ -36,10 +36,7 @@ export const BalanceSettings = () => {
   };
 
   return (
-    <form
-      className={styles.container}
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.balances_box}>
         {data &&
           data.map((item, index) => (

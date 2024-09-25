@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
-import classNames from 'classnames';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
+import { TasksTab } from 'pages';
+import { PageSubMenu, PageSubMenuLink } from 'widgets';
+import { User } from 'entities/user/types';
+import { useGetUserByRolesQuery } from 'services/admin-api';
 import { Icon, SmartHeader, Input } from 'shared/ui';
 import { usePermission } from 'shared/hooks';
 import { Routes } from 'shared/config';
-import { PageSubMenu } from 'widgets';
-import { TasksTab } from 'pages';
-import { tabs, userRole } from 'shared/types/common.types';
-import { User } from 'entities/user/types';
-import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
-import { useGetUserByRolesQuery } from 'services/admin-api';
+import { tabs, userRole, adminPermission } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -19,30 +18,31 @@ export interface PageProps {
 }
 
 export function TasksPage({ incomeTab }: PageProps) {
-  // раскоментировать после настройки сервера
-  // const [searchRole, setSearchRole] =
-  //   useState<IFilterValues>(defaultObjFilteres);
-  const isMainAdmin = usePermission([], userRole.ADMIN);
+  const [searchName, setSearchName] = useState('');
+
   const navigate = useNavigate();
 
-  const recipients = useGetUserByRolesQuery(tabs.RECIPIENTS).data;
-  const volunteers = useGetUserByRolesQuery(tabs.VOLUNTEERS).data;
-  const [searchName, setSearchName] = useState('');
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
+  const hasTasksPermission = usePermission(
+    [adminPermission.TASKS],
+    userRole.ADMIN
+  );
 
-  useEffect(() => {
+  const recipients = useGetUserByRolesQuery(tabs.RECIPIENTS, {
+    skip: !hasTasksPermission,
+  }).data;
+  const volunteers = useGetUserByRolesQuery(tabs.VOLUNTEERS, {
+    skip: !hasTasksPermission,
+  }).data;
+
+  const filteredData = useMemo(() => {
     const dataMap: Record<string, User[] | undefined> = {
       [tabs.VOLUNTEERS]: volunteers,
       [tabs.RECIPIENTS]: recipients,
     };
 
-    const filteredData = dataMap[incomeTab as keyof typeof dataMap]?.filter(
-      (user) => user.name.toLowerCase().includes(searchName.toLowerCase())
+    return dataMap[incomeTab as keyof typeof dataMap]?.filter((user) =>
+      user.name.toLowerCase().includes(searchName.toLowerCase())
     );
-
-    if (filteredData) {
-      setFilteredUsers(filteredData);
-    }
   }, [searchName, incomeTab, volunteers, recipients]);
 
   const handleUserClick = (user: User) => {
@@ -53,13 +53,31 @@ export function TasksPage({ incomeTab }: PageProps) {
     }
   };
 
-  const configurePointsButton = (textButton: string) => {
-    return (
-      <>
-        {isMainAdmin && (
+  return (
+    <>
+      <SmartHeader
+        icon={<Icon color="blue" icon="CreateApplication" size="54" />}
+        text="Создание / Редактирование заявки"
+      />
+      <div className={styles.menu_block}>
+        <PageSubMenu
+          links={
+            <>
+              <PageSubMenuLink
+                to={Routes.PROFILE_TASKS_RECIPIENTS}
+                text="Реципиенты"
+              />
+              <PageSubMenuLink
+                to={Routes.PROFILE_TASKS_VOLUNTEERS}
+                text="Волонтеры"
+              />
+            </>
+          }
+        />
+        {hasTasksPermission && (
           <button
             className={styles.editButton}
-            onClick={() => navigate(`/profile/bids`)}
+            onClick={() => navigate(Routes.PROFILE_BIDS)}
           >
             <Icon color="blue" icon="EditIcon" />
             <p
@@ -71,57 +89,27 @@ export function TasksPage({ incomeTab }: PageProps) {
                 styles.editButtonText
               )}
             >
-              {textButton}
+              Настроить баллы
             </p>
           </button>
         )}
-      </>
-    );
-  };
-
-  return (
-    <>
-      <SmartHeader
-        icon={<Icon color="blue" icon="CreateApplication" size="54" />}
-        text="Создание / Редактирование заявки"
-        // filter={
-        //   <Filter
-        //     items={{ userCategories: true }}
-        //     setFilteres={setSearchRole}
-        //   />
-        // }
-      />
-      <div className={styles.menu_block}>
-        <PageSubMenu
-          links={
-            <>
-              <PageSubMenuLink
-                to="/profile/tasks/recipients"
-                text="Реципиенты"
-              />
-              <PageSubMenuLink
-                to="/profile/tasks/volunteers"
-                text="Волонтеры"
-              />
-            </>
-          }
-        />
-        {configurePointsButton('Настроить баллы')}
       </div>
-      <div>
-        <Input
-          value={searchName}
-          label="Введите имя "
-          name="Name"
-          onChange={(e) => setSearchName(e.target.value)}
-          extClassName={styles.input}
-          type="name"
-        />
+      {hasTasksPermission && (
+        <div>
+          <Input
+            value={searchName}
+            label="Введите имя "
+            name="Name"
+            onChange={(e) => setSearchName(e.target.value)}
+            extClassName={styles.input}
+            type="name"
+          />
 
-        {filteredUsers && (
-          <TasksTab data={filteredUsers} onUserClick={handleUserClick} />
-        )}
-      </div>
+          {filteredData && (
+            <TasksTab data={filteredData} onUserClick={handleUserClick} />
+          )}
+        </div>
+      )}
     </>
   );
 }
