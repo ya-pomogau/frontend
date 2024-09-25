@@ -18,7 +18,7 @@ export const postsApi = createApi({
   }),
   endpoints: (build) => ({
     getPosts: build.query<PostProps[], number>({
-      query: () => `system/posts`, // ?${limit && `_limit=${limit}`}`,
+      query: () => `system/posts`,
       providesTags: (result) =>
         result
           ? [

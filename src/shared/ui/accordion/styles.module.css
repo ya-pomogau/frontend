@@ -27,6 +27,7 @@
   font-weight: var(--font-weight-regular);
   line-height: 20px; /* 166.667% */
   letter-spacing: -0.32px;
+  text-align: start;
 }
 
 .icon_arrow {
@@ -76,4 +77,16 @@
   border: 0;
   margin: 0;
   padding: 0;
+}
+
+@media (max-width: 400px) {
+  .list_label_text {
+    font-size: small;
+  }
+}
+
+@media (max-width: 350px) {
+  .list_label_text {
+    font-size: x-small;
+  }
 }

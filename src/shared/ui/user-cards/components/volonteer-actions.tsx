@@ -6,15 +6,17 @@ import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
 
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../../app/hooks';
-import { adminPermission } from '../../../types/common.types';
+import { adminPermission, UserStatus } from '../../../types/common.types';
 
 interface VolunteerActionsProps {
   isVolonteerAcceptButtonDisabled: boolean;
   isUserBlocked: boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
   score: number;
+  status: UserStatus;
   extClassName?: string;
   keys: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
@@ -29,8 +31,10 @@ const VolunteerActions = ({
   isUserBlocked,
   getButtonTypeFromScore,
   score,
+  status,
   extClassName,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   onAcceptButtonClick,
   onBlockButtonClick,
   onGiveKeysButtonClick,
@@ -45,6 +49,9 @@ const VolunteerActions = ({
   );
   const keysPermission = adminPermissions?.includes(adminPermission.KEYS);
 
+  const isGiveKeysButtonDisabled = score < 60 || keysPermission|| isKeysNullOrOne;
+
+
   return (
     <div className={classnames(extClassName, styles.buttons_div)}>
       <div className={classnames(styles.volunteer_info)}>
@@ -57,11 +64,11 @@ const VolunteerActions = ({
       <div className={classnames(styles.exclamation_point_div)}>
         <Button
           disabled={isVolonteerAcceptButtonDisabled || !approvePermission}
-          buttonType={getButtonTypeFromScore(score)}
+          buttonType={getButtonTypeFromScore(score, status)}
           label="Подтвердить"
           onClick={onAcceptButtonClick}
         />
-        {/* {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />} */}
+        { isAcceptButtonExclamationPointIcon && <ExclamationPointIcon /> }
       </div>
       <Button
         disabled={!approvePermission}
@@ -74,7 +81,7 @@ const VolunteerActions = ({
           buttonType="secondary"
           label="Дать ключи"
           onClick={onGiveKeysButtonClick}
-          disabled={!keysPermission}
+          disabled={isGiveKeysButtonDisabled}
         />
         {isKeyButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>

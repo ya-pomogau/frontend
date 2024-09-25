@@ -2,7 +2,6 @@ import { Middleware } from 'redux';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { io, Socket } from 'socket.io-client';
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { API_HOST } from '../config/api-config';
@@ -32,7 +31,6 @@ const testEventObj = {
     array: ['item1', 'item2'],
   },
 };
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export const websocketMiddleware: Middleware = (store) => {
