@@ -5,6 +5,6 @@ interface PropsGradientDivider {
   extClassName?: string;
 }
 
-export const GradientDivider = ({extClassName}: PropsGradientDivider) => {
+export const GradientDivider = ({ extClassName }: PropsGradientDivider) => {
   return <div className={cn(extClassName, styles.border)} />;
 };

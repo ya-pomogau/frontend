@@ -75,7 +75,7 @@ export function ProfileMapPage() {
     ? 'clamp(60dvh,75dvh - 10vw, 75dvh)'
     : 'clamp(70dvh,85dvh - 10vw, 85dvh)';
 
-    console.log(user);
+  console.log(user);
   return (
     <>
       <SmartHeader

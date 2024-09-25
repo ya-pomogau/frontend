@@ -44,8 +44,8 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
 
   useEffect(() => {
     const dateNow = new Date();
-    const currentTime = format(dateNow, 'HH:mm'); 
-    const currentDate = dateNow.toLocaleDateString(); 
+    const currentTime = format(dateNow, 'HH:mm');
+    const currentDate = dateNow.toLocaleDateString();
 
     if (
       (time && time < currentTime && date && currentDate === date) ||
@@ -84,7 +84,9 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
                 handleAcceptTime={() => handleAcceptTime}
               />
             )}
-            <p className={classNames(styles.time, 'text', 'text_type_regular ')}>
+            <p
+              className={classNames(styles.time, 'text', 'text_type_regular ')}
+            >
               Время
             </p>
             <div className={styles.headerWrapper} />
@@ -107,7 +109,9 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
             />
           </div>
           <div className={styles.wrapperForDate}>
-            <p className={classNames('text', 'text_type_regular ', styles.date)}>
+            <p
+              className={classNames('text', 'text_type_regular ', styles.date)}
+            >
               Дата
             </p>
             <div className={styles.headerWrapperForDatePicker} />
@@ -129,12 +133,24 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
           </div>
         </div>
         <div className={styles.button}>
-            <p className={classNames(styles.validationMessage, (timeValidation || !time) && !termlessRequest && styles.validationMessageActive)}>
-                {
-                  'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
-                }
-              </p>
-          <div className={classNames(styles.buttonWrapper, 'buttonWithRightMargin')}>
+          <p
+            className={classNames(
+              styles.validationMessage,
+              (timeValidation || !time) &&
+                !termlessRequest &&
+                styles.validationMessageActive
+            )}
+          >
+            {
+              'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
+            }
+          </p>
+          <div
+            className={classNames(
+              styles.buttonWrapper,
+              'buttonWithRightMargin'
+            )}
+          >
             <Button
               buttonType="primary"
               disabled={(timeValidation || !time) && !termlessRequest}
