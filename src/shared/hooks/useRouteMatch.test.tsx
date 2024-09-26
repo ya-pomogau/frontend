@@ -4,9 +4,10 @@ import { describe, expect, it } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
+const patterns = [Routes.BLOG, Routes.LOGIN, Routes.VK_AUTH];
+
 describe('check useRouteMatch', () => {
   it('should return null if pathname and one or few patterns not matched', () => {
-    const patterns = [Routes.BLOG, Routes.LOGIN, Routes.VK_AUTH];
     const { result } = renderHook(() => useRouteMatch(patterns), {
       wrapper: ({ children }) => (
         <MemoryRouter initialEntries={[Routes.REGISTER]}>
@@ -27,7 +28,6 @@ describe('check useRouteMatch', () => {
         path: '/blog',
       },
     };
-    const patterns = [Routes.BLOG, Routes.LOGIN, Routes.VK_AUTH];
     const { result } = renderHook(() => useRouteMatch(patterns), {
       wrapper: ({ children }) => (
         <MemoryRouter initialEntries={[Routes.BLOG]}>{children}</MemoryRouter>
