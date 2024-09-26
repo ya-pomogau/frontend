@@ -37,7 +37,7 @@ const store = configureStore({
 });
 
 describe('check useUser', () => {
-  it('', () => {
+  it('should return actual user data', () => {
     const { result } = renderHook(() => useUser(), {
       wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     });

@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import useFormField from './use-form-field';
 import { useForm } from 'react-hook-form';
 import { IBlogForm } from 'shared/types/blog.types';
@@ -13,17 +13,18 @@ const TEXT_VALIDATION_RULES = {
   },
 };
 
+const control = renderHook(() =>
+  useForm<IBlogForm>({
+    mode: 'onChange',
+    defaultValues: {
+      title: '',
+      text: '',
+    },
+  })
+);
+
 describe('useFormField check', () => {
   it('should return an error and its type when it failed validation', async () => {
-    const control = renderHook(() =>
-      useForm<IBlogForm>({
-        mode: 'onChange',
-        defaultValues: {
-          title: '',
-          text: '',
-        },
-      })
-    );
     const { result } = renderHook(() =>
       useFormField(
         'text',
@@ -40,15 +41,6 @@ describe('useFormField check', () => {
     );
   });
   it('should return undefiend in error and correct value when validation passed', async () => {
-    const control = renderHook(() =>
-      useForm<IBlogForm>({
-        mode: 'onChange',
-        defaultValues: {
-          title: '',
-          text: '',
-        },
-      })
-    );
     const { result } = renderHook(() =>
       useFormField(
         'text',
