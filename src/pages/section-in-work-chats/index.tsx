@@ -2,19 +2,15 @@ import { ChangeEvent, useState } from 'react';
 
 import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { Message } from 'shared/ui/message';
+import { IMessageHub, messageHub } from 'shared/libs/utils';
 import { MessageCard } from 'shared/ui/message-card';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import styles from './styles.module.css';
 import WrapperMessage from 'shared/ui/wrapper-messages';
-import { TaskChatContent, TaskChatMetaInterface } from 'shared/types/chat.types';
-import { mockChatMessages } from 'entities/chat/mock-messages';
-import { mockAdminChatsResponse, mockUserChatsResponse } from 'entities/chat/mock-response';
 
 export const SectionInWorkChats = () => {
   const [isOpen, setIpOpen] = useState<boolean>(false);
-  const [infoMessage, setInfoMessage] = useState<TaskChatContent | null>(
-    null
-  );
+  const [infoMessage, setInfoMessage] = useState<IMessageHub | null>(null);
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [inputValue, setInputValue] = useState<string>('');
   const [_, setFileInput] = useState<string>('');
@@ -23,10 +19,10 @@ export const SectionInWorkChats = () => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);
   };
 
-  const handleClickCard = (task: TaskChatMetaInterface) => {
-    setSelectedCard(task._id);
+  const handleClickCard = (task: IMessageHub) => {
+    setSelectedCard(task.id);
     setIpOpen(true);
-    setInfoMessage(mockChatMessages);
+    setInfoMessage(task);
   };
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -41,32 +37,29 @@ export const SectionInWorkChats = () => {
 
   return (
     <div className={styles.picker}>
-      
       <WrapperMessage
-        information={!!mockUserChatsResponse.task.length}
+        information={!!messageHub.length}
         title="У Вас пока нет чатов в работе"
       >
-        {mockUserChatsResponse.task?.map(
-          ({ meta: item }: { meta: TaskChatMetaInterface }) => (
+        {messageHub?.map((item) => (
           <MessageCard
-            key={item._id}
-            statusConflict={!item.isActive}
-            description={item.volunteer.phone}
-            action={selectedCard === item._id}
-            user={item.recipient}
+            key={item.id}
+            statusConflict
+            description={item.user.phone}
+            action={selectedCard === item.id}
+            user={item.user}
             handleClickCard={() => handleClickCard(item)}
-            unreads={item.unreads}
+            message={item.messages}
           />
         ))}
       </WrapperMessage>
-
       {isOpen && (
         <WindowInteractionUsers
           closeConflict={handelCloseWrapper}
           option="chat"
           isOpen={isOpen}
           onClick={handleVisibleMessage}
-          chatmateInfo={infoMessage?.}
+          chatmateInfo={infoMessage?.user}
           boxButton={
             <InputWrapper
               placeholder="Напишите сообщение..."
@@ -79,12 +72,12 @@ export const SectionInWorkChats = () => {
             />
           }
         >
-          {infoMessage?.map((m) => (
+          {infoMessage?.messages.map((m) => (
             <Message
-              type={m.author._id === ___.user._id ? 'incoming' : 'outgoing'}
-              messageText={m.body}
-              avatarLink={m.author.avatar}
-              key={m._id}
+              type={m.userId === infoMessage.user._id ? 'incoming' : 'outgoing'}
+              messageText={m.message}
+              avatarLink={m.userAvatarLink}
+              key={m.id}
             />
           ))}
         </WindowInteractionUsers>

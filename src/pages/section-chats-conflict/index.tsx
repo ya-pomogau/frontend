@@ -14,15 +14,6 @@ import {
 } from 'services/admin-api';
 import { TaskConflict } from 'entities/task/types';
 import WrapperMessage from 'shared/ui/wrapper-messages';
-import {
-  ConflictChatInfo,
-  ConflictChatsTupleMetaInterface,
-  TaskChatMetaInterface,
-} from 'shared/types/chat.types';
-import {
-  mockAdminChatsResponse,
-  mockUserChatsResponse,
-} from 'entities/chat/mock-response';
 
 export const SectionChatsConflict = () => {
   const location = useLocation();
@@ -31,14 +22,13 @@ export const SectionChatsConflict = () => {
   const [takeConflictTask] = useTakeConflictTaskMutation();
   const [resolСonflict] = useResolСonflictMutation();
 
-  const dataMessage: ConflictChatInfo[] | undefined =
+  const dataMessage: TaskConflict[] | undefined =
     location.pathname === '/available-chats' ? tasks : tasksWork;
-  const [getInfoTask, setGetInfoTask] =
-    useState<ConflictChatsTupleMetaInterface>();
+  const [getInfoTask, setGetInfoTask] = useState<TaskConflict>();
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [isOpenConflict, setIsOpenConflict] = useState<boolean>(false);
 
-  const handleClickCard = (task: TaskChatMetaInterface) => {
+  const handleClickCard = (task: TaskConflict) => {
     setSelectedCard(task._id);
     setGetInfoTask(task);
     setIsOpenConflict(true);
@@ -67,23 +57,21 @@ export const SectionChatsConflict = () => {
   return (
     <div className={styles.conflict}>
       <WrapperMessage
-        information={!!mockUserChatsResponse.task.length}
+        information={dataMessage && dataMessage.length > 0 ? true : false}
         title="У Вас пока нет конфликтов"
       >
-        {mockUserChatsResponse.task?.map(
-          ({ meta: item }: { meta: TaskChatMetaInterface }) => (
-            <div key={item._id}>
-              <MessageCard
-                statusConflict={!item.isActive}
-                description={item.volunteer.phone}
-                action={selectedCard === item._id}
-                user={item.recipient}
-                handleClickCard={() => handleClickCard(item)}
-                unreads={item.unreads}
-              />
-            </div>
-          )
-        )}
+        {dataMessage?.map((item) => (
+          <div key={item._id}>
+            <MessageCard
+              statusConflict
+              description={item.description}
+              action={selectedCard === item._id}
+              user={item.recipient}
+              handleClickCard={() => handleClickCard(item)}
+              task={item}
+            />
+          </div>
+        ))}
       </WrapperMessage>
 
       <div className={styles.boxConflict}>
@@ -99,7 +87,7 @@ export const SectionChatsConflict = () => {
                     label="Взять в работу"
                     buttonType="primary"
                     actionType="button"
-                    onClick={() => getWorkTask(getInfoTask?.taskId)}
+                    onClick={() => getWorkTask(getInfoTask?._id)}
                     customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
                   />
                 ) : (
@@ -108,9 +96,7 @@ export const SectionChatsConflict = () => {
                       label="Конфликт решен"
                       buttonType="secondary"
                       actionType="button"
-                      onClick={() =>
-                        handleResolutionConflict(getInfoTask?.taskId)
-                      }
+                      onClick={() => handleResolutionConflict(getInfoTask?._id)}
                     />
                     <Button
                       label="Ответить"

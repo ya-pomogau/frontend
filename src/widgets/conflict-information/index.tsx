@@ -6,7 +6,6 @@ import { CategoriesBackground } from 'shared/ui/categories-background';
 import cn from 'classnames';
 import { TaskConflict, TaskReport } from 'entities/task/types';
 import { format } from 'date-fns';
-import { ConflictChatsTupleMetaInterface } from 'shared/types/chat.types';
 
 interface IUser {
   user: {
@@ -22,17 +21,17 @@ interface IUser {
 }
 
 export interface PropsInfoConflict {
-  info: ConflictChatsTupleMetaInterface;
+  info: TaskConflict;
 }
 
 export const InfoConflict: FC<PropsInfoConflict> = (props) => {
   const infoVolonter: IUser = {
-    user: props.info.meta[0].volunteer,
+    user: props.info.volunteer,
     role: 'volunteer',
     report: props.info.volunteerReport,
   };
   const infoRecepient: IUser = {
-    user: props.info.meta[1].recipient,
+    user: props.info.recipient,
     role: 'recipient',
     report: props.info.recipientReport,
   };
