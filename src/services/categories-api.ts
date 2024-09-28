@@ -23,7 +23,7 @@ export const categoriesApi = createApi({
     }),
     updatePoints: build.mutation<Category, TPoints<string>>({
       query: (points) => ({
-        url: `admin/categories/points`,
+        url: `admin/categories`,
         method: 'PATCH',
         body: points,
       }),
