@@ -9,6 +9,8 @@ import { LightPopup } from 'shared/ui/light-popup';
 
 import { ProfileInput } from './profile-input';
 
+
+
 import styles from './edit-viewer-info.module.css';
 
 interface EditViewerInfoForm {
@@ -52,6 +54,14 @@ export const EditViewerInfo = ({
     mode: 'onChange',
   });
 
+  const [ isChanged, setIsChanged ] = useState(false);
+
+  const handleFormChange = () => {
+    if (!isChanged) {
+      setIsChanged(true);
+    }
+  }
+
   const avatarPicker = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [fileDataURL, setFileDataURL] = useState<string | undefined>(
@@ -61,6 +71,7 @@ export const EditViewerInfo = ({
   const onSubmit: EditViewerInfoProps['onSave'] = (data) => {
     onSave(data);
     onClose();
+    setIsChanged(false);
   };
 
   const changeAvatarHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -106,7 +117,7 @@ export const EditViewerInfo = ({
       isPopupOpen={isOpen}
       onClickExit={onClose}
     >
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.editProfile}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.editProfile} onChange={handleFormChange}>
         <fieldset className={classnames(styles.fieldset, styles.avatarField)}>
           <legend className="visually-hidden">Аватар</legend>
           <Avatar
@@ -162,7 +173,7 @@ export const EditViewerInfo = ({
               rules={{
                 required: 'Неверный формат номера',
                 pattern: {
-                  value: /^([+]7|8)\d{10}$/,
+                  value: /^((8|\+374|\+994|\+995|\+375|\+7|\+380|\+38|\+996|\+998|\+993)[\- ]?)?\(?\d{3,5}\)?[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}(([\- ]?\d{1})?[\- ]?\d{1})?$/,
                   message: 'Неверный формат номера',
                 },
               }}
@@ -184,7 +195,7 @@ export const EditViewerInfo = ({
         </fieldset>
         <Button
           type="submit"
-          disabled={Object.keys(errors).length > 0}
+          disabled={Object.keys(errors).length > 0 || !isChanged}
           extClassName={styles.button}
           buttonType="primary"
           label="Сохранить"
