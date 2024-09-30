@@ -9,15 +9,16 @@
 
 .task_container {
   position: relative;
-  font-family: var(--font-family-golos);
+  font-family: var(--font-family-inter);
   width: 370px;
   padding: 30px 30px 20px 30px;
   background-color: var(--colors-interface-white);
+  color: var(--colors-interface-black);
 }
 
 @media screen and (max-width: 735px) {
   .task_container {
-    width: 270px;
+    width: 330px;
   }
 }
 
@@ -86,20 +87,20 @@
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
   padding-bottom: 15px;
+  color: var(--colors-interface-dark-gray);
 }
 
 .task_description {
-  font: 16px/20px var(--font-family-golos);
+  font: 16px/20px var(--font-family-inter);
+  line-height: 19.36px;
   margin: 0;
   margin-top: 10px;
 }
 
 .task_description_hidden {
+  height: 76px;
   margin: 0;
   margin-top: 10px;
-  -webkit-line-clamp: 4;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -111,6 +112,7 @@
   color: var(--colors-interface-primary);
   font-size: var(--font-size-s);
   line-height: var(--line-height-small);
+  float: right;
 }
 
 .task_button:hover {
@@ -189,7 +191,7 @@
 .task_box {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 5px;
 }
 
 .task_date_text {
