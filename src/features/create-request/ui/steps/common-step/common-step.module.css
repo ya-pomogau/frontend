@@ -44,8 +44,8 @@
   margin-top: 5px;
   height: auto;
   overflow: hidden;
-  max-height: 64px; 
-  transition: max-height 0.3s ease; 
+  max-height: 64px;
+  transition: max-height 0.3s ease;
 }
 
 .descriptionForTask.expanded {

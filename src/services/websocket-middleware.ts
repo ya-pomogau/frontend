@@ -12,19 +12,17 @@ import { getTokenAccess, setTokenAccess } from '../shared/libs/utils';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {
-  SocketConnectionStatus,
-  wsMessageKind,
-  wsTokenPayload,
-} from '../shared/types/websocket.types';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { setUser } from '../entities/user/model';
+  socketConnectionStatus,
+  socketEvent,
+} from '../shared/types/store.types';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { User } from '../entities/user/types';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { actions } from './system-slice';
+import { wsMessageKind, wsTokenPayload } from '../shared/types/websocket.types';
+import { setUser } from '../entities';
 
 // Объект для отправки тестового message. Удалить после реализации продовой версии
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -54,7 +52,7 @@ export const websocketMiddleware: Middleware = (store) => {
     const isSocketConnected =
       socket &&
       store.getState().system.socketConnectionStatus ===
-        SocketConnectionStatus.CONNECTED;
+        socketConnectionStatus.CONNECTED;
 
     if (!socket && actions.startSocketConnection.match(action)) {
       console.log(`-> Starting connection to socket on ${WS_HOST}:`, action);
@@ -65,10 +63,10 @@ export const websocketMiddleware: Middleware = (store) => {
         },
       });
 
-      socket.on(wsMessageKind.CONNECT, () => {
+      socket.on(socketEvent.CONNECT, () => {
         console.log(`-> Connected to socket on ${WS_HOST}`);
         dispatch(
-          actions.setSocketConnectionStatus(SocketConnectionStatus.CONNECTED)
+          actions.setSocketConnectionStatus(socketConnectionStatus.CONNECTED)
         );
       });
 
@@ -104,7 +102,7 @@ export const websocketMiddleware: Middleware = (store) => {
 
       socket.on(wsMessageKind.DISCONNECT, (reason) => {
         dispatch(
-          actions.setSocketConnectionStatus(SocketConnectionStatus.DISCONNECTED)
+          actions.setSocketConnectionStatus(socketConnectionStatus.DISCONNECTED)
         );
         console.log(`-> Socket connection was dropped: ${reason}`);
       });

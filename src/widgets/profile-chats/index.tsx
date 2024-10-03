@@ -10,7 +10,7 @@ import {
   useGetTasksConfilctQuery,
   useGetTasksWorkConflictQuery,
 } from 'services/admin-api';
-import { AdminPermission, UserRole } from 'shared/types/common.types';
+import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -23,8 +23,8 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   const currentPath = location.pathname;
 
   const isConflictsPermissionGranted = usePermission(
-    [AdminPermission.CONFLICTS],
-    UserRole.ADMIN
+    [adminPermission.CONFLICTS],
+    userRole.ADMIN
   );
 
   // TODO: Добавить хуки для работы с обращениями (нерассмотренные, в работе, завершенные)
@@ -38,6 +38,12 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   const { data: conflictIsWork } = useGetTasksWorkConflictQuery('', {
     skip: !isConflictsPermissionGranted,
   });
+
+  console.log(
+    `this is conflict, conflictIsWork ===>`,
+    conflict,
+    conflictIsWork
+  );
 
   // TODO: добавить данные для раздела "Конфликты" "Завершенные"
   // const { data: conflictCompleted } = useGetTasksConflictCompletedQuery('', {

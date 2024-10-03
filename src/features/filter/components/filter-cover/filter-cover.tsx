@@ -103,11 +103,7 @@ export const FilterCover = ({
       extClassName={styles.tooltip}
       visible
     >
-      <form
-        name="formFilter"
-        onSubmit={handleSubmit}
-        onReset={resetFilter}
-      >
+      <form name="formFilter" onSubmit={handleSubmit} onReset={resetFilter}>
         <div className={styles.wrapper}>
           {filterMenu}
           <div
@@ -129,7 +125,7 @@ export const FilterCover = ({
               buttonType="primary"
               size="medium"
               actionType="submit"
-              disabled={!isFilterSelected()} 
+              disabled={!isFilterSelected()}
             />
           </div>
         </div>

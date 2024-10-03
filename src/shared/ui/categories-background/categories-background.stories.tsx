@@ -52,19 +52,47 @@ export const Example: Story = {
   args: {
     theme: 'primary',
     size: 'medium',
-    extClassName: `${styles.storybookCategory}`
+    extClassName: `${styles.storybookCategory}`,
   },
   render: (args) => (
     <>
-      <CategoriesBackground content='сопровождение' {...args}></CategoriesBackground>
-      <CategoriesBackground content='покупка вещей' {...args}></CategoriesBackground>
-      <CategoriesBackground content='покупка вещей/техники' {...args}></CategoriesBackground>
-      <CategoriesBackground content='помощь в уборке' {...args}></CategoriesBackground>
-      <CategoriesBackground content='ремонт техники/жилья' {...args}></CategoriesBackground>
-      <CategoriesBackground content='первеозка в личном транспорте' {...args} size='large'></CategoriesBackground>
-      <CategoriesBackground content='помощь в подъёме/спуске' {...args}></CategoriesBackground>
-      <CategoriesBackground content='Помощь в готовке' {...args}></CategoriesBackground>
-      <CategoriesBackground content='Организация досуга' {...args}></CategoriesBackground>
+      <CategoriesBackground
+        content="сопровождение"
+        {...args}
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="покупка вещей"
+        {...args}
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="покупка вещей/техники"
+        {...args}
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="помощь в уборке"
+        {...args}
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="ремонт техники/жилья"
+        {...args}
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="первеозка в личном транспорте"
+        {...args}
+        size="large"
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="помощь в подъёме/спуске"
+        {...args}
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="Помощь в готовке"
+        {...args}
+      ></CategoriesBackground>
+      <CategoriesBackground
+        content="Организация досуга"
+        {...args}
+      ></CategoriesBackground>
     </>
   ),
 };

@@ -1,5 +1,5 @@
 import { User } from 'entities/user/types';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import { userRole, UserStatus, userStatus } from 'shared/types/common.types';
 import VolunteerActions from '../components/volonteer-actions';
 import RecipientActions from '../components/recipient-actions';
 import UserInfo from '../components/user-info';
@@ -14,8 +14,10 @@ interface UserCardListProps {
   handleBlockClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
+  isAcceptButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
 }
 
@@ -25,6 +27,7 @@ export const UserCardList = ({
   handleBlockClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   getButtonTypeFromScore,
 }: UserCardListProps) => {
   const { name, role, avatar, phone, _id, score, keys, status } = user;
@@ -45,7 +48,7 @@ export const UserCardList = ({
         role={role}
         extraClasses={styles.user_info_space}
       >
-        {(role === UserRole.VOLUNTEER || role === UserRole.RECIPIENT) && (
+        {(role === userRole.VOLUNTEER || role === userRole.RECIPIENT) && (
           <div className={styles.icons_div}>
             <RoundButton
               buttonType="phone"
@@ -61,14 +64,15 @@ export const UserCardList = ({
         )}
       </UserInfo>
 
-      {role === UserRole.VOLUNTEER && (
+      {role === userRole.VOLUNTEER && (
         <VolunteerActions
           extClassName={styles.buttons_div_list_volunteers}
           isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
-          isUserBlocked={status === UserStatus.BLOCKED}
+          isUserBlocked={status === userStatus.BLOCKED}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
-          isAcceptButtonExclamationPointIcon={true}
+          status={ status || 0}
+          isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={handleBlockClick}
@@ -79,12 +83,12 @@ export const UserCardList = ({
         />
       )}
 
-      {role === UserRole.RECIPIENT && (
+      {role === userRole.RECIPIENT && (
         <RecipientActions
           viewMode="list"
           extClassName={styles.buttons_div_list_recipients}
-          approved={status !== UserStatus.UNCONFIRMED}
-          isUserBlocked={status === UserStatus.BLOCKED}
+          approved={status !== userStatus.UNCONFIRMED}
+          isUserBlocked={status === userStatus.BLOCKED}
           onConfirmClick={handleConfirmClick}
           onBlockClick={handleBlockClick}
         />

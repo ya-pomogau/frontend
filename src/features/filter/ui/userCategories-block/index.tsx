@@ -8,7 +8,7 @@ import styles from '../styles.module.css';
 
 interface UserCategoriesBlockProps {
   filter: string[];
-  onChange: (value: string[]) => void;  
+  onChange: (value: string[]) => void;
 }
 
 export const UserCategoriesBlock = ({
@@ -18,7 +18,7 @@ export const UserCategoriesBlock = ({
   const handleCheckboxChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.checked) {
       const newValue = [target.id];
-      onChange(newValue);  
+      onChange(newValue);
     }
   };
 
