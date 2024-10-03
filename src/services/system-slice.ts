@@ -161,9 +161,6 @@ const systemSlice = createSlice({
     setSocketConnectionStatus: (state, action) => {
       state.socketConnectionStatus = action.payload;
     },
-    setSocketMessage: (state, action) => {
-      state.socketMessage = action.payload;
-    },
     closeSocketConnection: (state) => {
       state.socketConnectionStatus = socketConnectionStatus.CLOSED;
     },
@@ -284,7 +281,6 @@ export const {
   resetUser,
   startSocketConnection,
   setSocketConnectionStatus,
-  setSocketMessage,
   closeSocketConnection,
 } = systemSlice.actions;
 export default systemSlice.reducer;
