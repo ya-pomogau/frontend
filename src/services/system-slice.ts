@@ -147,6 +147,7 @@ const systemSliceInitialState: TSystemSliceState = {
   isPending: false,
   isNew: false,
   socketConnectionStatus: null,
+  socketMessage: null,
 };
 
 const systemSlice = createSlice({
