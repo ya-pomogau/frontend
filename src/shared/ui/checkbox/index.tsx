@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useState, useEffect } from 'react';
+import { InputHTMLAttributes } from 'react';
 import classnames from 'classnames';
 
 import { DefaultCheckboxIcon } from './checkbox-icon';
@@ -9,6 +9,7 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   extClassName?: string;
   defaultChecked?: boolean;
+  checked?: boolean;
 }
 
 const Checkbox = ({
@@ -21,19 +22,6 @@ const Checkbox = ({
   name,
   ...props
 }: CheckboxProps) => {
-  const [isChecked, setIsChecked] = useState(defaultChecked || false);
-
-  useEffect(() => {
-    setIsChecked(defaultChecked || false);
-  }, [defaultChecked]);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
-    if (onChange) {
-      onChange(event);
-    }
-  };
-
   return (
     <>
       <input
@@ -41,8 +29,8 @@ const Checkbox = ({
         type="checkbox"
         id={id}
         name={name || id}
-        onChange={handleChange}
-        checked={checked ?? isChecked}
+        onChange={onChange}
+        checked={checked !== undefined ? checked : defaultChecked}
         value={id}
         {...props}
       />
