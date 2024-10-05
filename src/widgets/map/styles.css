@@ -101,6 +101,9 @@
   height: 76px;
   margin: 0;
   margin-top: 10px;
+  -webkit-line-clamp: 4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -112,7 +115,6 @@
   color: var(--colors-interface-primary);
   font-size: var(--font-size-s);
   line-height: var(--line-height-small);
-  float: right;
 }
 
 .task_button:hover {

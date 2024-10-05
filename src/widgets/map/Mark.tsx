@@ -100,7 +100,7 @@ const Mark: FC<MarkProps> = ({
           <p class="task_description task_description_hidden" >
             {{properties.description}}
           </p>
-
+          <button type="button" class="task_button">Читать</button>
         </div>
         <div class="task_icon_container">
           <div class="task_icon_date_count">
@@ -168,7 +168,7 @@ const Mark: FC<MarkProps> = ({
           <p class="task_description task_description_hidden" >
             {{properties.category.title}}
           </p>
-
+          <button type="button" class="task_button">Читать</button>
         </div>
         <div class="task_icon_box">
           <p class={% if properties.isUrgentTask %} "task_count_urgent" {% else %} "task_count" {% endif %}>{{properties.category.count}}</p>
@@ -219,44 +219,29 @@ const Mark: FC<MarkProps> = ({
           '.task_description_hidden'
         );
 
-        const descriptionContainer =
-          taskContainer.querySelector('.task_description');
+        // Добавляем слушатель на кпонку "читать"
+        const buttonRead = taskContainer.querySelector('.task_button');
 
-        (function hendleDescriptionText() {
-          if (onOpenTask) onOpenTask(task);
-          if (description.length > 120) {
-            if (window.innerWidth <= 735) {
-              descriptionContainerHidden.textContent = description
-                .slice(0, 100)
-                .concat('...');
-            } else {
-              descriptionContainerHidden.textContent = description
-                .slice(0, 120)
-                .concat('...');
-            }
+        // Изменяем видимость кнопки "читать" в зависимости от длины контента
+        const hendleReadButton = () => {
+          if (description.length < 140) {
+            buttonRead.textContent = '';
+          }
+        };
 
-            const button = document.createElement('button');
-            button.classList.add('task_button');
-            button.setAttribute('type', 'button');
-            button.textContent = 'Читать';
-            descriptionContainerHidden.appendChild(button);
-          }
-          if (description.length < 120) {
-            descriptionContainerHidden.textContent = description;
-          }
-        })();
+        hendleReadButton();
 
         const onReadClick = () => {
           descriptionContainerHidden.classList.toggle(
             'task_description_hidden'
           );
           // eslint-disable-next-line no-unused-expressions
-          descriptionContainer.textContent = description;
+          buttonRead.textContent === 'Читать'
+            ? (buttonRead.textContent = 'Свернуть')
+            : (buttonRead.textContent = 'Читать');
         };
 
-        const buttonRead =
-          descriptionContainerHidden.querySelector('.task_button');
-        buttonRead?.addEventListener('click', onReadClick);
+        buttonRead.addEventListener('click', onReadClick);
 
         // Добавляем слушатель на кпонку "Закрыть окно".
         const buttonClose = taskContainer.querySelector('.close_icon');
