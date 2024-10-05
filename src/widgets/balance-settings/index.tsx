@@ -31,11 +31,13 @@ export const BalanceSettings = () => {
   const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
     const formattedData = Object.keys(formData).map((title) => {
       const category = data?.find((cat) => cat.title === title);
-      return category ? { id: category._id, points: Number(formData[title]) } : null;
+      return category
+        ? { id: category._id, points: Number(formData[title]) }
+        : null;
     });
     try {
       await updatePoints({ data: formattedData });
-      reset(formData); 
+      reset(formData);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
