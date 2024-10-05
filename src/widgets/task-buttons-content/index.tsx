@@ -69,7 +69,9 @@ export const ModalContent = ({
   };
 
   const handleSetReason = (reasonType: ReasonType) => {
-    if (reasonType !== null) {
+    if (reason === reasonType) {
+      setReason(null);
+    } else {
       setReason(reasonType);
     }
   };
