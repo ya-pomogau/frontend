@@ -10,6 +10,8 @@ interface ModalProps {
   setClicked?: Dispatch<SetStateAction<boolean>>;
   extClassName?: string;
   closeButton?: boolean;
+  conflictModalVisible?: boolean;
+  setConflictModalVisible?: Dispatch<SetStateAction<boolean>>;
 }
 
 interface Coords {
@@ -23,6 +25,8 @@ export const ButtonWithModal = ({
   setClicked,
   extClassName,
   closeButton = false,
+  conflictModalVisible,
+  setConflictModalVisible
 }: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -32,6 +36,11 @@ export const ButtonWithModal = ({
 
   const getCoords = () => {
     setVisible(true);
+
+    if (!conflictModalVisible) {
+      setConflictModalVisible && setConflictModalVisible(true)
+    }
+
     const box = buttonRef.current?.getBoundingClientRect();
 
     if (box) {
@@ -50,7 +59,7 @@ export const ButtonWithModal = ({
   return (
     <div ref={buttonRef} onClick={getCoords} className={extClassName}>
       {children}
-      {visible && (
+      {(conflictModalVisible === undefined ? visible : (visible && conflictModalVisible)) && (
         <Tooltip
           visible={visible}
           changeVisible={hideModal}

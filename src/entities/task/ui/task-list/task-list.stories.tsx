@@ -16,7 +16,6 @@ const MockedState = {
   isFailed: false,
 };
 
-// eslint-disable-next-line react/prop-types
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
   <Provider
     store={configureStore({

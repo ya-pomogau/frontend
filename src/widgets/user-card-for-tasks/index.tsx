@@ -17,7 +17,7 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
   const { name, role, avatar, _id, phone } = user;
 
   return (
-    <div
+    <li
       className={classnames(
         styles.content,
         role === userRole.ADMIN && styles.admin_content
@@ -47,6 +47,6 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
       )}
 
       <UserInfo userName={name} userId={_id} userNumber={phone} />
-    </div>
+    </li>
   );
 };

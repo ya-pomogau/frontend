@@ -17,6 +17,7 @@ export const BalanceSettings = () => {
     control,
     handleSubmit,
     formState: { isDirty, isValid },
+    reset,
   } = useForm<Record<string, number>>({
     values: (data || []).reduce((acc, value) => {
       const { title, points } = value;
@@ -28,18 +29,22 @@ export const BalanceSettings = () => {
 
   //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
   const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
+    const formattedData = Object.keys(formData).map((title) => {
+      const category = data?.find((cat) => cat.title === title);
+      return category
+        ? { id: category._id, points: Number(formData[title]) }
+        : null;
+    });
     try {
-      await updatePoints(formData);
+      await updatePoints({ data: formattedData });
+      reset(formData);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
   };
 
   return (
-    <form
-      className={styles.container}
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.balances_box}>
         {data &&
           data.map((item, index) => (

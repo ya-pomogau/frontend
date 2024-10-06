@@ -44,6 +44,7 @@ export const taskButtonType = {
   confirm: 'confirm',
   phone: 'phone',
   cancel: 'cancel',
+  message: 'message',
 } as const;
 
 export type TaskButtonType = ValueOf<typeof taskButtonType>;

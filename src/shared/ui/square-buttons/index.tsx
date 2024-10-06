@@ -7,21 +7,23 @@ import { DoneIcon } from '../icons/done-icon';
 
 import styles from './styles.module.css';
 import { ConflictIcon } from '../icons/conflict-icon';
+import { ConflictMessageIcon } from '../icons/conflict-message-icon';
 
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   taskId?: number;
   extClassName?: string;
-  buttonType: 'close' | 'edit' | 'confirm' | 'conflict';
+  buttonType: 'close' | 'edit' | 'confirm' | 'conflict' | 'message';
   onClick?: () => void;
   customIcon?: ReactNode;
   disabledColor?: boolean;
 }
 
-const defautlIcons = {
+const defaultIcons = {
   close: <CloseIcon size="24" color="white" />,
   edit: <EditIcon size="24" color="white" />,
   confirm: <DoneIcon size="24" color="white" />,
   conflict: <ConflictIcon size="24" color="white" />,
+  message: <ConflictMessageIcon size="24" color="white" />,
 };
 
 export const SquareButton = ({
@@ -43,7 +45,7 @@ export const SquareButton = ({
     {...props}
   >
     <div className={styles['square-buttonImg']}>
-      {customIcon || defautlIcons[buttonType]}
+      {customIcon || defaultIcons[buttonType]}
     </div>
   </button>
 );

@@ -27,6 +27,7 @@ export function ProfileMapPage() {
   }, [user]);
 
   const isVolunteer = user?.role === userRole.VOLUNTEER;
+
   const MAP_ZOOM = 15;
   let latitude = 0;
   let longitude = 0;
@@ -51,7 +52,9 @@ export function ProfileMapPage() {
 
   if (user && user.location) {
     // обязателен именно такой порядок
-    [longitude, latitude] = user.location;
+    // [longitude, latitude] = user.location;
+    longitude = user.location[0];
+    latitude = user.location[1];
   }
 
   const { data: tasks, isLoading } = useGetTaskVirginQuery([
@@ -64,6 +67,7 @@ export function ProfileMapPage() {
     ? 'clamp(60dvh,75dvh - 10vw, 75dvh)'
     : 'clamp(70dvh,85dvh - 10vw, 85dvh)';
 
+  console.log(user);
   return (
     <>
       <SmartHeader

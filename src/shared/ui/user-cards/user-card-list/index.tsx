@@ -1,5 +1,5 @@
 import { User } from 'entities/user/types';
-import { userRole, userStatus } from 'shared/types/common.types';
+import { userRole, UserStatus, userStatus } from 'shared/types/common.types';
 import VolunteerActions from '../components/volonteer-actions';
 import RecipientActions from '../components/recipient-actions';
 import UserInfo from '../components/user-info';
@@ -14,8 +14,10 @@ interface UserCardListProps {
   handleBlockClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
+  isAcceptButtonExclamationPointIcon: boolean;
   getButtonTypeFromScore: (
-    score: number
+    score: number,
+    status?: UserStatus
   ) => 'primary' | 'partial' | 'secondary';
 }
 
@@ -25,6 +27,7 @@ export const UserCardList = ({
   handleBlockClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
+  isAcceptButtonExclamationPointIcon,
   getButtonTypeFromScore,
 }: UserCardListProps) => {
   const { name, role, avatar, phone, _id, score, keys, status } = user;
@@ -68,7 +71,8 @@ export const UserCardList = ({
           isUserBlocked={status === userStatus.BLOCKED}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
-          isAcceptButtonExclamationPointIcon={true}
+          status={ status || 0}
+          isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={handleBlockClick}
