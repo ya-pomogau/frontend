@@ -13,8 +13,7 @@
 
 .button--partial,
 .button--partial:disabled,
-.button--partial:active 
- {
+.button--partial:active {
   background: linear-gradient(
     to right,
     var(--colors-interface-white) 50%,

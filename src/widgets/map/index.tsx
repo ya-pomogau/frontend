@@ -76,6 +76,11 @@ export const YandexMap = ({
     setThankPopupVisible(true);
   };
 
+  const showPopup = (isVolunteerSelected: boolean) => {
+    if (!isGranted) showUnauthorithedPopup();
+    isVolunteerSelected ? showThankPopup() : showSorryPopup();
+  };
+
   const onClickExit = () => {
     setVisibility(false);
     setSorryPopupVisible(false);
@@ -119,9 +124,6 @@ export const YandexMap = ({
           <GeolocationControl options={{ float: 'left' }} />
           <ZoomControl options={{ position: { top: 5, right: 5 } }} />
           {tasks?.map((task) => {
-            let showPopup = showThankPopup;
-            if (task.volunteer !== null) showPopup = showSorryPopup;
-            if (!isGranted) showPopup = showUnauthorithedPopup;
             return (
               <Mark
                 task={task}
@@ -173,11 +175,12 @@ export const YandexMap = ({
             isPopupOpen={isThankPopupVisible}
             onClickExit={onClickExit}
             hasCloseButton={true}
+            extClassName={styles.container_thank}
           >
             <p
               className={classNames(
                 styles.popupTitle,
-                'text_size_medium',
+                styles.popupTitle_thank,
                 'text_type_bold'
               )}
             >
@@ -191,12 +194,13 @@ export const YandexMap = ({
             isPopupOpen={isSorryPopupVisible}
             onClickExit={onClickExit}
             hasCloseButton={true}
+            extClassName={styles.container_sorry}
           >
             <p className={classNames(styles.popupTitle, 'text_size_large')}>
               <ConflictIcon color="orange" />
               Извините
             </p>
-            <p className={classNames(styles.popupText, 'text_size_medium')}>
+            <p className={classNames(styles.popupText)}>
               {cantAssignTaskMessage}
             </p>
           </LightPopup>

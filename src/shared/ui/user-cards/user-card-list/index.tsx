@@ -71,8 +71,10 @@ export const UserCardList = ({
           isUserBlocked={status === userStatus.BLOCKED}
           getButtonTypeFromScore={getButtonTypeFromScore}
           score={score || 0}
-          status={ status || 0}
-          isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
+          status={status || 0}
+          isAcceptButtonExclamationPointIcon={
+            isAcceptButtonExclamationPointIcon
+          }
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={handleBlockClick}
