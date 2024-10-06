@@ -35,7 +35,6 @@ export interface WatermarkInterface {
 
 export interface MessageInterface {
   _id: string;
-  title: string;
   body: string;
   attaches: string[];
   createdAt: Date;

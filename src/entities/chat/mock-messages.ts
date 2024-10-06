@@ -5,7 +5,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '1',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Добрый день!',
@@ -14,7 +13,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '2',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Здравствуйте.',
@@ -23,7 +21,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '3',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Я буду сопровождать Вас. Уточните, пожалуйста, точное место встречи.',
@@ -32,7 +29,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '4',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Встречаемся у автобусной остановки напротив пенсионного фонда. ',
@@ -41,7 +37,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '5',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Отлично, спасибо.',
@@ -50,7 +45,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '6',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Куда Вас надо будет сопровождать?',
@@ -59,7 +53,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '7',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'В библиотеку, хочу отнести туда старые книги.',
@@ -68,7 +61,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '8',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Понятно, Вы знаете знаете поэму А.С. Пушкина "Руслан и Людмила?"',
@@ -77,7 +69,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '9',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Конечно - У лукоморья дуб зелёный;',
@@ -86,7 +77,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '10',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Златая цепь на дубе том:',
@@ -95,7 +85,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '11',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И днём и ночью кот учёный',
@@ -104,7 +93,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '12',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Всё ходит по цепи кругом;',
@@ -113,7 +101,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '13',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Идёт направо — песнь заводит,',
@@ -122,7 +109,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '14',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Налево — сказку говорит.',
@@ -131,7 +117,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '15',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там чудеса: там леший бродит,',
@@ -140,7 +125,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '16',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Русалка на ветвях сидит;',
@@ -149,7 +133,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '17',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там на неведомых дорожках',
@@ -158,7 +141,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '18',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Следы невиданных зверей;',
@@ -167,7 +149,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '19',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Избушка там на курьих ножках',
@@ -176,7 +157,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '20',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Стоит без окон, без дверей;',
@@ -185,7 +165,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '21',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там лес и дол видений полны;',
@@ -194,7 +173,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '22',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там о заре прихлынут волны',
@@ -203,7 +181,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '23',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'На брег песчаный и пустой,',
@@ -212,7 +189,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '24',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И тридцать витязей прекрасных',
@@ -221,7 +197,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '25',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Чредой из вод выходят ясных,',
@@ -230,7 +205,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '26',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И с ними дядька их морской',
@@ -239,7 +213,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '27',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там королевич мимоходом',
@@ -248,7 +221,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '28',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Пленяет грозного царя;',
@@ -257,7 +229,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '29',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там в облаках перед народом',
@@ -266,7 +237,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '30',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Через леса, через моря',
@@ -275,7 +245,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '31',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Колдун несёт богатыря;',
@@ -284,7 +253,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '32',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'В темнице там царевна тужит,',
@@ -293,7 +261,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '33',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'А бурый волк ей верно служит;',
@@ -302,7 +269,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '34',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там ступа с Бабою Ягой',
@@ -311,7 +277,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '35',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Идёт, бредёт сама собой,',
@@ -320,7 +285,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '36',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там царь Кащей над златом чахнет;',
@@ -329,7 +293,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '37',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Там русский дух… там Русью пахнет!',
@@ -338,7 +301,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '38',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И там я был, и мёд я пил;',
@@ -347,7 +309,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '39',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'У моря видел дуб зелёный;',
@@ -356,7 +317,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '40',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Под ним сидел, и кот учёный',
@@ -365,7 +325,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '41',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Свои мне сказки говорил.',
@@ -374,7 +333,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '42',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Одну я помню: сказку эту',
@@ -383,7 +341,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '43',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Поведаю теперь я свету…',
@@ -392,7 +349,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '44',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Дела давно минувших дней,',
@@ -401,7 +357,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '45',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Преданья старины глубокой.',
@@ -410,7 +365,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '46',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'В толпе могучих сыновей,',
@@ -419,7 +373,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '47',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'С друзьями, в гриднице высокой',
@@ -428,7 +381,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '48',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Владимир-солнце пировал;',
@@ -437,7 +389,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '49',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Меньшую дочь он выдавал',
@@ -446,7 +397,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '50',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'За князя храброго Руслана',
@@ -455,7 +405,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '51',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И мед из тяжкого стакана',
@@ -464,7 +413,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '52',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'За их здоровье выпивал.',
@@ -473,7 +421,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '53',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Не скоро ели предки наши,',
@@ -482,7 +429,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '54',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Не скоро двигались кругом',
@@ -491,7 +437,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '55',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Ковши, серебряные чаши',
@@ -500,7 +445,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '56',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'С кипящим пивом и вином.',
@@ -509,7 +453,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '57',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Они веселье в сердце лили,',
@@ -518,7 +461,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '58',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Шипела пена по краям,',
@@ -527,7 +469,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '59',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Их важно чашники носили',
@@ -536,7 +477,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '60',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И низко кланялись гостям.',
@@ -545,7 +485,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '61',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Слилися речи в шум невнятный;',
@@ -554,7 +493,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '62',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Жужжит гостей веселый круг;',
@@ -563,7 +501,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '63',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Но вдруг раздался глас приятный',
@@ -572,7 +509,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '64',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И звонких гуслей беглый звук;',
@@ -581,7 +517,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '65',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Все смолкли, слушают Баяна:',
@@ -590,7 +525,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '66',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И славит сладостный певец',
@@ -599,7 +533,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '67',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Людмилу-прелесть, и Руслана,',
@@ -608,7 +541,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '68',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И Лелем свитый им венец.',
@@ -617,7 +549,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '69',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Но, страстью пылкой утомленный,',
@@ -626,7 +557,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '70',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Не ест, не пьет Руслан влюбленный;',
@@ -635,7 +565,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '71',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'На друга милого глядит,',
@@ -644,7 +573,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '72',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Вздыхает, сердится, горит',
@@ -653,7 +581,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '73',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И, щипля ус от нетерпенья,',
@@ -662,7 +589,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '74',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Считает каждые мгновенья.',
@@ -671,7 +597,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '75',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'В уныньи, с пасмурным челом,',
@@ -680,7 +605,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '76',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'За шумным, свадебным столом',
@@ -689,7 +613,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '77',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Сидят три витязя младые;',
@@ -698,7 +621,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '78',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Безмолвны, за ковшом пустым,',
@@ -707,7 +629,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '79',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Забыли кубки круговые,',
@@ -716,7 +637,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '80',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И брашна неприятны им;',
@@ -725,7 +645,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '81',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Не слышат вещего Баяна;',
@@ -734,7 +653,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '82',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Потупили смущенный взгляд:',
@@ -743,7 +661,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '83',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'То три соперника Руслана;',
@@ -752,7 +669,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '84',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'В душе несчастные таят',
@@ -761,7 +677,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '85',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Любви и ненависти яд.',
@@ -770,7 +685,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '86',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Один — Рогдай, воитель смелый,',
@@ -779,7 +693,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '87',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Мечом раздвинувший пределы',
@@ -788,7 +701,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '88',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Богатых киевских полей;',
@@ -797,7 +709,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '89',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Другой — Фарлаф, крикун надменный,',
@@ -806,7 +717,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '90',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'В пирах никем не побежденный,',
@@ -815,7 +725,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '91',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Но воин скромный средь мечей;',
@@ -824,7 +733,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '92',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Последний, полный страстной думы,',
@@ -833,7 +741,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '93',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Младой хазарский хан Ратмир:',
@@ -842,7 +749,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '94',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Все трое бледны и угрюмы,',
@@ -851,7 +757,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '95',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И пир веселый им не в пир.',
@@ -860,7 +765,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '96',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Вот кончен он; встают рядами,',
@@ -869,7 +773,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '97',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Смешались шумными толпами,',
@@ -878,7 +781,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '98',
     author: mockRecipient,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И все глядят на молодых:',
@@ -887,7 +789,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '99',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Невеста очи опустила,',
@@ -896,7 +797,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '100',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'Как будто сердцем приуныла,',
@@ -905,7 +805,6 @@ export const mockChatMessages: MessageInterface[] = [
   {
     _id: '101',
     author: mockVolunteer,
-    title: 'Пушкачат',
     attaches: [],
     chatId: '42',
     body: 'И светел радостный жених.',
