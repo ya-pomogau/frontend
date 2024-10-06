@@ -50,36 +50,41 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   //   skip: !isConflictsPermissionGranted,
   // });
   // TODO: изменить тип notificationsData
-  const renderSubMenuLinks = (basePath: string, notificationsData: any) => (
-    <>
-      <PageSubMenuLink
-        text="Нерассмотренные"
-        to={`${basePath}/unreviewed`}
-        // TODO: подключить данные количества обращений
-        // notifications={
-        //   notificationsData.unreviewed ? notificationsData.unreviewed.length : 0
-        // }
-      />
-      <PageSubMenuLink
-        text="В работе"
-        to={`${basePath}/in-work`}
-        // TODO: подключить данные количества обращений
-        // notifications={
-        //   notificationsData.inWork ? notificationsData.inWork.length : 0
-        // }
-        styleSpan={styles['style-span']}
-      />
-      <PageSubMenuLink
-        text="Завершенные"
-        to={`${basePath}/completed`}
-        // TODO: подключить данные количества обращений
-        // notifications={
-        //   notificationsData.completed ? notificationsData.completed.length : 0
-        // }
-        styleSpan={styles['style-span']}
-      />
-    </>
-  );
+  const renderSubMenuLinks = (basePath: string, notificationsData: any) => {
+    // TODO: FIX THIS
+    console.log('notificationsData', notificationsData);
+
+    return (
+      <>
+        <PageSubMenuLink
+          text="Нерассмотренные"
+          to={`${basePath}/unreviewed`}
+          // TODO: подключить данные количества обращений
+          // notifications={
+          //   notificationsData.unreviewed ? notificationsData.unreviewed.length : 0
+          // }
+        />
+        <PageSubMenuLink
+          text="В работе"
+          to={`${basePath}/in-work`}
+          // TODO: подключить данные количества обращений
+          // notifications={
+          //   notificationsData.inWork ? notificationsData.inWork.length : 0
+          // }
+          styleSpan={styles['style-span']}
+        />
+        <PageSubMenuLink
+          text="Завершенные"
+          to={`${basePath}/completed`}
+          // TODO: подключить данные количества обращений
+          // notifications={
+          //   notificationsData.completed ? notificationsData.completed.length : 0
+          // }
+          styleSpan={styles['style-span']}
+        />
+      </>
+    );
+  };
 
   return (
     <>
