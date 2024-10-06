@@ -1,4 +1,4 @@
-import { IMessage } from 'entities/chat/ui/chat/types';
+import { MessageInterface } from './chat.types';
 
 export interface IChatmateInfo {
   name: string;
@@ -43,7 +43,7 @@ export interface IConflict {
 export interface IUsers {
   id: number;
   chatmateInfo: IChatmateInfo;
-  messages: IMessage[];
+  messages: MessageInterface[];
 }
 
 export interface IInfoConflicts {
