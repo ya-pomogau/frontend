@@ -3,19 +3,19 @@ import classnames from 'classnames';
 import { Avatar } from 'shared/ui/avatar';
 import { SquareButton } from 'shared/ui/square-buttons';
 
+import { MessageInterface } from 'shared/types/chat.types';
 import { InputWrapper, GradientDivider } from 'shared/ui';
 import { useMediaQuery, useForm } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
-import { IMessage } from 'shared/types/message';
-import { IChatmateInfo } from 'shared/types/conflict';
 import { MessagesList } from './components/messages-list';
 import { Breakpoints } from 'shared/config';
 
 import styles from './styles.module.css';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 interface PopupChatProps {
-  messages: IMessage[];
-  chatmateInfo: IChatmateInfo;
+  messages: MessageInterface[];
+  chatmateInfo: AnyUserInterface;
   onAttachFileClick: () => void;
   onMessageSend?: (message: string) => void;
   isOpen: boolean;
@@ -67,7 +67,7 @@ export const PopupChat = ({
         )}
         <Avatar
           avatarName="Фотография собеседника"
-          avatarLink={chatmateInfo.userAvatarLink}
+          avatarLink={chatmateInfo.avatar}
           extClassName={styles.avatar}
         />
 

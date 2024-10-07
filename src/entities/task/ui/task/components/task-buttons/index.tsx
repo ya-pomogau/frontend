@@ -78,6 +78,8 @@ export const TaskButtons = ({
   //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
   const [clicked, setClicked] = useState<boolean>(false);
 
+  const [conflictModalIsVisible, setConflictModalIsVisible] = useState<boolean>(true);
+
   const initialData = {
     taskId,
     address,
@@ -205,6 +207,8 @@ export const TaskButtons = ({
         <ButtonWithModal
           closeButton
           setClicked={isPageActive ? setClicked : undefined}
+          conflictModalVisible={conflictModalIsVisible}
+          setConflictModalVisible={setConflictModalIsVisible}
           extClassName={styles.conflict}
           modalContent={
             <ModalContent
@@ -225,6 +229,9 @@ export const TaskButtons = ({
               taskId={taskId}
               userRole={userRole}
               volunteer={!!volunteer}
+              volunteerReport={volunteerReport}
+              recipientReport={recipientReport}
+              setConflictModalVisible={setConflictModalIsVisible}
             />
           }
         >

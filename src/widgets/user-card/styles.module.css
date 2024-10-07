@@ -203,6 +203,23 @@
   display: -webkit-box;
 }
 
+.id:last-child {
+  display: inline-block;
+  width: 190px;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+.name_text {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-medium);
+  width: 190px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
 @media all and (max-width: 1150px) {
   .buttons_div {
     padding-bottom: 10px;
@@ -214,6 +231,7 @@
 
   .name_text {
     font-size: var(--font-size-small);
+    width: 140px; 
   }
 
   .recipient_input {
@@ -240,6 +258,10 @@
 
   .id {
     font-size: 10px;
+  }
+
+  .id:last-child {
+    width: 140px;
   }
 
   .tel {

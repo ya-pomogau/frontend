@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { differenceInHours, parseISO } from 'date-fns';
 import Checkbox from 'shared/ui/checkbox';
 import styles from './styles.module.css';
@@ -19,6 +19,7 @@ import {
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { useControlModal } from 'shared/hooks';
 import { infoAdmin, PopupChat } from 'entities';
+import { taskReport, TaskReport } from 'entities/task/types';
 
 interface ModalContentProps {
   type: ModalContentType;
@@ -28,6 +29,9 @@ interface ModalContentProps {
   userRole?: UserRole | null;
   taskId?: string;
   volunteer?: boolean;
+  volunteerReport?: TaskReport | null;
+  recipientReport?: TaskReport | null;
+  setConflictModalVisible?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ModalContent = ({
@@ -38,6 +42,9 @@ export const ModalContent = ({
   userRole,
   taskId,
   volunteer,
+  volunteerReport,
+  recipientReport, 
+  setConflictModalVisible
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
@@ -48,6 +55,8 @@ export const ModalContent = ({
     if (userRole && taskId) {
       rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
+
+    setConflictModalVisible && setConflictModalVisible(false)
   };
 
   const isRemainLessThanDay = (taskDeadline: string | null | undefined) => {
@@ -60,7 +69,9 @@ export const ModalContent = ({
   };
 
   const handleSetReason = (reasonType: ReasonType) => {
-    if (reasonType !== null) {
+    if (reason === reasonType) {
+      setReason(null);
+    } else {
       setReason(reasonType);
     }
   };
@@ -170,11 +181,24 @@ export const ModalContent = ({
                 <div
                   className={classNames(styles.modalContent, styles.flexRow)}
                 >
-                  <Button buttonType="secondary" label="Отменить" />
+                  <Button
+                    buttonType="secondary"
+                    label="Отменить"
+                    onClick={() =>
+                      setConflictModalVisible && setConflictModalVisible(false)
+                    }
+                  />
                   <Button
                     buttonType="primary"
                     label="Подтвердить"
                     onClick={handleRejectClick}
+                    disabled={
+                      conflict ||
+                      (userRole === userRoles.VOLUNTEER &&
+                        volunteerReport === taskReport.REJECTED) ||
+                      (userRole === userRoles.RECIPIENT &&
+                        recipientReport === taskReport.REJECTED)
+                    }
                   />
                 </div>
               )}
