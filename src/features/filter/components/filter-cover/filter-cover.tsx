@@ -48,7 +48,7 @@ export const FilterCover = ({
 
   const dispatch = useAppDispatch();
 
-  const someFilterData = useAppSelector(filterDataSelector);
+  const currentFilterData = useAppSelector(filterDataSelector);
 
   const defaultValues = {
     categories: { value: [], component: CategoriesBlock },
@@ -72,7 +72,7 @@ export const FilterCover = ({
     if (filterParams)
       Object.keys(filterParams).map((item) => {
         if (filterParams[item]) {
-          ret.values[item] = someFilterData[item];
+          ret.values[item] = currentFilterData[item];
           ret.components[item] = defaultValues[item].component;
         }
       });

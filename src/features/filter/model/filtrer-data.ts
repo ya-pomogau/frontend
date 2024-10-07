@@ -2,10 +2,6 @@ import { IFilterValues } from '../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TCustomSelector } from '../../../shared/types/store.types';
 
-export type TInitialFilterData = {
-  filterData: IFilterValues;
-};
-
 export const emptyFilterData: IFilterValues = {
   categories: [],
   searchRadius: '',
@@ -15,19 +11,19 @@ export const emptyFilterData: IFilterValues = {
   userCategories: [],
 };
 
-export const InitialStateFilterData: TInitialFilterData = {
-  filterData: emptyFilterData,
-};
+export const InitialStateFilterData: IFilterValues = emptyFilterData;
 
 export const filterDataSelector: TCustomSelector<IFilterValues> = (state) =>
-  state.filterData.filterData;
+  state.filterData;
 
 export const filterDataModel = createSlice({
   name: 'filter-data',
   initialState: InitialStateFilterData,
   reducers: {
     setFilterData: (state, action: PayloadAction<IFilterValues>) => {
-      state.filterData = action.payload;
+      Object.keys(state).forEach(
+        (key: keyof IFilterValues) => (state[key] = action.payload[key])
+      );
     },
     resetFilterData: () => InitialStateFilterData,
   },
