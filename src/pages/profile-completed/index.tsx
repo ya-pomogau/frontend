@@ -46,8 +46,6 @@ export function ProfileCompletedPage() {
               items={{
                 sortBy: true,
                 categories: true,
-                searchRadius: false,
-                date: false,
               }}
               setFilteres={setInfoFilterTasks}
             />

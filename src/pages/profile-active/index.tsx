@@ -58,8 +58,6 @@ export function ProfileActivePage() {
               items={{
                 sortBy: true,
                 categories: true,
-                searchRadius: false,
-                date: false,
               }}
               setFilteres={setInfoFilterTasks}
             />

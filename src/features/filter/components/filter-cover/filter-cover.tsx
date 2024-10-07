@@ -1,4 +1,4 @@
-import { useEffect, ReactElement, FormEvent } from 'react';
+import { useEffect, ReactElement } from 'react';
 
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
@@ -21,6 +21,14 @@ import { defaultObjFilteres } from 'features/filter/consts';
 import { useSearchParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import {
+  emptyFilterData,
+  filterDataSelector,
+  resetFilterData,
+  setFilterData,
+} from '../../model';
+
 interface FilterCoverProps {
   filterMenu: FilterProps['items'];
   closeFilterMenu: () => void;
@@ -37,6 +45,10 @@ export const FilterCover = ({
   const [_, setSearchParams] = useSearchParams();
   const newSearchParams = new URLSearchParams();
   const isMobile = useMediaQuery(Breakpoints.L);
+
+  const dispatch = useAppDispatch();
+
+  const someFilterData = useAppSelector(filterDataSelector);
 
   const defaultValues = {
     categories: { value: [], component: CategoriesBlock },
@@ -60,7 +72,7 @@ export const FilterCover = ({
     if (filterParams)
       Object.keys(filterParams).map((item) => {
         if (filterParams[item]) {
-          ret.values[item] = defaultValues[item].value;
+          ret.values[item] = someFilterData[item];
           ret.components[item] = defaultValues[item].component;
         }
       });
@@ -106,6 +118,11 @@ export const FilterCover = ({
     });
     setSearchParams(newSearchParams);
     setFilteres?.(filterValues);
+    const newFilterData = {
+      ...emptyFilterData,
+      ...filterValues,
+    };
+    dispatch(setFilterData(newFilterData));
     closeFilterMenu();
   };
 
@@ -113,6 +130,7 @@ export const FilterCover = ({
 
   const resetFilter = () => {
     reset(values);
+    dispatch(resetFilterData());
     setSearchParams(defaultObjFilteres);
     setFilteres?.(defaultObjFilteres);
     closeFilterMenu();
