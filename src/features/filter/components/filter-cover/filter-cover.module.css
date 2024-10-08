@@ -23,6 +23,11 @@
   gap: 11px;
 }
 
+.buttonStyle {
+  margin-top: -15px
+}
+
+
 @media screen and (max-width: 920px) {
   .tooltip {
     max-width: 343px;

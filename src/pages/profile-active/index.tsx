@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Icon, Loader, SmartHeader } from 'shared/ui';
@@ -6,8 +6,6 @@ import { useMediaQuery } from 'shared/hooks';
 import { isUnConfirmedSelector, TaskList } from 'entities';
 import { Breakpoints } from 'shared/config';
 import { Task } from '../../entities/task/types';
-import { IFilterValues } from '../../features/filter/types';
-import { defaultObjFilteres } from '../../features/filter/consts';
 import { openPopup } from '../../features/create-request/model';
 import { Request } from '../../features/create-request';
 import { useGetTaskActiveQuery } from '../../services/user-task-api';
@@ -15,14 +13,12 @@ import { startSocketConnection } from '../../services/system-slice';
 import { getRoleForRequest, handleFilterTasks } from '../../shared/libs/utils';
 
 import { Filter } from '../../features/filter';
+import { filterDataSelector } from '../../features/filter/model';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user.data);
 
-  const [infoFilterTasks, setInfoFilterTasks] =
-    useState<IFilterValues>(defaultObjFilteres);
-  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
   const isMobile = useMediaQuery(Breakpoints.XL);
   const isMobileForPopup = useMediaQuery(Breakpoints.M);
 
@@ -37,9 +33,18 @@ export function ProfileActivePage() {
     }
   );
 
-  useEffect(() => {
-    tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
-  }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
+  const { sortBy, categories } = useAppSelector(filterDataSelector);
+
+  const currentTask: Task[] = useMemo(() => {
+    if (Boolean(sortBy) || Boolean(categories.length)) {
+      if (tasks)
+        return handleFilterTasks(tasks, {
+          sortBy,
+          categories,
+        });
+    }
+    return tasks;
+  }, [sortBy, categories, tasks]);
 
   useEffect(() => {
     if (user) {
@@ -59,7 +64,6 @@ export function ProfileActivePage() {
                 sortBy: true,
                 categories: true,
               }}
-              setFilteres={setInfoFilterTasks}
             />
           ) : (
             <></>
@@ -74,7 +78,7 @@ export function ProfileActivePage() {
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive={isUnConfirmed}
-          tasks={!isUnConfirmed ? filterTasks : []}
+          tasks={!isUnConfirmed ? currentTask : []}
           isLoading={isLoading}
         />
       )}

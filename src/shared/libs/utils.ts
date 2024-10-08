@@ -84,17 +84,11 @@ export const sortTasks = (
 
 export const handleFilterTasks = (
   tasks: Task[],
-  setFilterTasks: (date: Task[]) => void,
-  infoFilterTasks: IFilterValues
+  data: { sortBy: string; categories: string[] }
 ) => {
   const handleTasksFilter = (arr: Task[]) =>
-    arr.filter((task: Task) =>
-      infoFilterTasks.categories.includes(task.category.title)
-    );
+    arr.filter((task: Task) => data.categories.includes(task.category.title));
 
-  if (tasks) {
-    setFilterTasks(tasks);
-  }
   const sortDisplay = (arr: Task[], text: string): Task[] => {
     let sortedTasks: Task[] = [];
     switch (text) {
@@ -113,26 +107,27 @@ export const handleFilterTasks = (
     }
     return sortedTasks;
   };
-  if (infoFilterTasks?.categories.length) {
-    const filteredTasks = tasks.filter((task: Task) => {
-      return infoFilterTasks.categories.includes(task.category.title);
-    });
-    if (infoFilterTasks?.sortBy) {
-      sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy);
+
+  let ret: Task[] = tasks;
+  if (data?.categories.length) {
+    if (data?.sortBy) {
+      ret = sortDisplay(handleTasksFilter(tasks), data.sortBy);
     } else {
-      setFilterTasks(filteredTasks);
+      ret = handleTasksFilter(tasks);
     }
   }
-  if (infoFilterTasks?.sortBy) {
-    if (infoFilterTasks?.categories.length > 0) {
-      setFilterTasks(
-        sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy)
-      );
+
+  if (data?.sortBy) {
+    if (data?.categories.length > 0) {
+      ret = sortDisplay(handleTasksFilter(tasks), data.sortBy);
     } else {
-      setFilterTasks(sortDisplay(tasks, infoFilterTasks.sortBy));
+      ret = sortDisplay(tasks, data.sortBy);
     }
   }
+
+  return ret;
 };
+
 const degrToRadians = (degrees: number): number => {
   return degrees * RADIANS_IN_DEGREE;
 };
