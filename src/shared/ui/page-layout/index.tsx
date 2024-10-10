@@ -58,9 +58,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
             </div>
             {location.pathname === '/contacts' ||
             location.pathname === '/feedback' ? (
-              userRole ? (
-                ''
-              ) : (
+              userRole === null ? null : (
                 <FeedbackSideMenu />
               )
             ) : (

@@ -5,7 +5,7 @@ import { SideMenuLink } from './side-menu-link';
 export const FeedbackSideMenu = () => {
   return (
     <SideMenu
-      authRequired={false}
+      authRequired={true}
       links={
         <>
           <SideMenuLink
