@@ -4,7 +4,7 @@ import { useAppSelector } from 'app/hooks';
 
 import styles from './styles.module.css';
 import { UserInfo } from 'entities/user';
-import { FeedbackSideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
+import { SideMenuForAuthorized } from 'widgets/side-menu';
 import { useLocation } from 'react-router-dom';
 import { NoConnectionPage } from 'features/error-boundary/pages/noConnectionPage';
 import { RegistrationNotice } from '../registration-notice';
@@ -58,9 +58,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
             </div>
             {location.pathname === '/contacts' ||
             location.pathname === '/feedback' ? (
-              userRole === null ? null : (
-                <FeedbackSideMenu />
-              )
+              userRole
             ) : (
               <SideMenuForAuthorized />
             )}

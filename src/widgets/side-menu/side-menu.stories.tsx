@@ -10,7 +10,6 @@ import { VolunteerSideMenu } from 'widgets/side-menu/components/volunter-side-me
 import { RecipientSideMenu } from 'widgets/side-menu/components/recipient-side-menu';
 import { AdminSideMenu } from 'widgets/side-menu/components/admin-side-menu';
 import { MasterSideMenu } from 'widgets/side-menu/components/master-side-menu';
-import { FeedbackSideMenu } from './components/feedback-side-menu';
 import { userRole } from 'shared/types/common.types';
 
 const mockedVolunteerState = {
@@ -245,20 +244,6 @@ export const MasterSideMenuExample: Story = {
   render: () => (
     <Mockstore initialState={mockedMasterState}>
       <MasterSideMenu />
-    </Mockstore>
-  ),
-};
-
-export const FeedbackSideMenuExample: Story = {
-  argTypes: {
-    ...SidemenuDefault.argTypes,
-  },
-  args: {
-    authRequired: false,
-  },
-  render: () => (
-    <Mockstore initialState={mockedMasterState}>
-      <FeedbackSideMenu />
     </Mockstore>
   ),
 };
