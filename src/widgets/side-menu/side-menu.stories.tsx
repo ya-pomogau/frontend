@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { withRouter } from 'storybook-addon-remix-react-router';
-
 import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Icon } from 'shared/ui/icons';
