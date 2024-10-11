@@ -114,6 +114,7 @@ export const TaskItem = ({
           status={status}
         />
         <TaskButtons
+          userRole={userRole}
           //TODO: заменить completed conflict на правильные поля
           location={location}
           taskId={_id}
