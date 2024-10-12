@@ -41,7 +41,7 @@ import { CheckIcon } from './check-icon';
 import { ArrowDownIcon } from './arrow-down-icon';
 import { ArrowNotify } from './arrow-notify';
 import { ExcelIcon } from './excel-icon';
-import { AddMediumIcon} from './add-icon'
+import { AddMediumIcon } from './add-icon';
 
 import { ExclamationPointIcon } from './exclamation-point-icon';
 import { ExclamationPMark } from './excalamation-mark';
@@ -55,6 +55,7 @@ import { PlusFilledIcon } from './plus-filled-icon';
 import { NewAdminIcon } from './new-admin-icon';
 import { CloseIconThin } from './close-icon-thin';
 import { UnionIcon } from './union-icon';
+import { FileAttachmentIcon } from './file-attachment-icon';
 
 const icons = {
   ExcelIcon,
@@ -110,6 +111,7 @@ const icons = {
   TilesIcon,
   ListIcon,
   AddMediumIcon,
+  FileAttachmentIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
