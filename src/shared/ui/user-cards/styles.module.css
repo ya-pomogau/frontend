@@ -283,6 +283,10 @@
   height: 52px;
 }
 
+.input_with_label label {
+  color: var(--colors-interface-primary)
+}
+
 /* Стили для поля */
 .input_field {
   width: 236px;
