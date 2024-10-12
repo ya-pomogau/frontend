@@ -38,7 +38,7 @@
   font-size: var(--font-size-small);
   line-height: var(--line-height-middle);
   font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-black);
+  color: var(--colors-interface-primary);
   margin-bottom: 8px;
 }
 
