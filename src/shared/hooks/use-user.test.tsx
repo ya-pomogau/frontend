@@ -26,13 +26,27 @@ const defaultRecipient: UserState = {
   },
 };
 
+const userWithoutData: UserState = {
+  isFailed: false,
+  isLoading: false,
+  _id: 'recipient',
+  role: null,
+  data: null,
+};
+
 const store = configureStore({
   reducer: { user: userModel.reducer },
   preloadedState: {
     user: {
       ...defaultRecipient,
-      role: UserRole.RECIPIENT,
     },
+  },
+});
+
+const storeWithoutUserData = configureStore({
+  reducer: { user: userModel.reducer },
+  preloadedState: {
+    user: userWithoutData,
   },
 });
 
@@ -42,5 +56,13 @@ describe('check useUser', () => {
       wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     });
     expect(result.current).toBe(defaultRecipient.data);
+  });
+  it('should return null when user does not exist', () => {
+    const { result } = renderHook(() => useUser(), {
+      wrapper: ({ children }) => (
+        <Provider store={storeWithoutUserData}>{children}</Provider>
+      ),
+    });
+    expect(result.current).toBe(null);
   });
 });

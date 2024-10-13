@@ -11,12 +11,16 @@ describe('check useControlModal', () => {
 
   it('should return true when handleOpen called', () => {
     const { result } = renderHook(() => useControlModal());
+    expect(result.current.isOpen).toBe(false);
     act(() => result.current.handleOpen());
     expect(result.current.isOpen).toBe(true);
   });
 
   it('should return true when handleClose called', () => {
     const { result } = renderHook(() => useControlModal());
+    expect(result.current.isOpen).toBe(false);
+    act(() => result.current.handleOpen());
+    expect(result.current.isOpen).toBe(true);
     act(() => result.current.handleClose());
     expect(result.current.isOpen).toBe(false);
   });

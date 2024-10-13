@@ -26,7 +26,6 @@ const newValue = {
 describe('check useForm', () => {
   it('should return correct value after setValues call', () => {
     const { result } = renderHook(() => useForm(defaultValues));
-    console.log(result);
     act(() => result.current.setValues(newValue));
     expect(result.current.values).toBe(newValue);
   });

@@ -15,6 +15,7 @@ describe('check useTruncatedText', () => {
 
   it('isExpanded should return true when toggleIsShowingMore active', () => {
     const { result } = renderHook(() => useTruncatedText(ref));
+    expect(result.current.isExpanded).toBe(false);
     act(() => result.current.toggleIsShowingMore());
     expect(result.current.isExpanded).toBe(true);
   });
