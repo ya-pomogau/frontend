@@ -1,49 +1,36 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
 
-type TTypographyTag =
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6'
-  | 'p'
-  | 'span'
-  | 'a'
-  | 'ul'
-  | 'li'
-  | 'ol'
-  | 'cite'
-  | 'blockquote';
-type TTypographyVariant =
-  | 'primary_title'
-  | 'primary_paragraph-bold'
-  | 'primary_paragraph'
-  | 'primary_support-bold'
-  | 'primary_support'
-  | 'primary_helperText'
-  | 'primary_input-title'
-  | 'primary_servicesText'
-  | 'secondary_title'
-  | 'secondary_subtitle'
-  | 'secondary_paragraph'
-  | 'secondary_paragraph-bold'
-  | 'secondary_support';
-type TTypographyColor =
+type TypographyTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
+type TypographyVariant =
+  | 'title'
+  | 'subtitle'
+  | 'paragraph'
+  | 'paragraph-bold'
+  | 'support'
+  | 'support-bold'
+  | 'helperText'
+  | 'input-title'
+  | 'servicesText';
+type TypographyColor =
   | 'primary'
   | 'white'
   | 'black'
   | 'primary-additional'
   | 'blue-navy'
   | 'interface-additional'
-  | 'ID-text';
+  | 'ID-text'
+  | 'fuchsia'
+  | 'red'
+  | 'orange';
+type TypographyFontFamily = 'primaryFont' | 'secondaryFont';
 
 interface TypographyProps {
-  tag?: TTypographyTag;
+  tag?: TypographyTag;
   extraClass?: string;
-  variant: TTypographyVariant;
-  color?: TTypographyColor;
+  variant: TypographyVariant;
+  fontFamily: TypographyFontFamily;
+  color?: TypographyColor;
   content: string;
 }
 
@@ -53,12 +40,14 @@ export const Typography = ({
   variant,
   content,
   color,
+  fontFamily,
 }: TypographyProps) => {
   const textStyles = classNames(
     styles.text,
     styles[variant],
-    color ? styles[color] : '',
-    extraClass ? extraClass : ''
+    styles[fontFamily],
+    color ? styles[color] : false,
+    extraClass
   );
 
   const Tag = tag ? tag : 'p';

@@ -10,6 +10,14 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.primaryFont {
+  font-family: var(--font-family-golos);
+}
+
+.secondaryFont {
+  font-family: var(--font-family-inter);
+}
+
 .white {
   color: var(--colors-interface-white);
 }
@@ -34,99 +42,76 @@
   color: var(--colors-interface-additional);
 }
 
+.fuchsia {
+  color: var(--colors-interface-fuchsia);
+}
+
+.orange {
+  color: var(--colors-interface-orange-dark);
+}
+
+.red {
+  color: #e64646;
+}
+
 .ID-text {
   /* Используется только для id */
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--colors-interface-primary);
+  opacity: 0.5;
 }
 
-.primary_title {
-  font-family: var(--font-family-golos);
+.title {
   font-size: var(--font-size-medium); /* 24px */
-  line-height: 28.8px; /* 28.8 */
+  line-height: var(--line-height-large); /* 28.8px */
 }
 
-.primary_paragraph-bold {
-  font-family: var(--font-family-golos);
-  font-size: var(--font-size-s); /* 16px */
-  font-weight: var(--font-weight-bold);
-  line-height: 19.2px; /* 19.2 */
-}
-
-.primary_paragraph {
-  font-family: var(--font-family-golos);
-  font-size: var(--font-size-s); /* 16px */
-  line-height: var(--line-height-medium); /* 22.4 */
-}
-
-.primary_support-bold {
-  font-family: var(--font-family-golos);
-  font-size: var(--font-size-small); /* 12px */
-  font-weight: var(--font-weight-bold);
-  line-height: 14.4px;
-}
-
-.primary_support {
-  font-family: var(--font-family-golos);
-  font-size: var(--font-size-small); /* 12px */
-  line-height: 14.4px;
-}
-
-.primary_helperText {
-  font-family: var(--font-family-golos);
-  font-size: 17px;
-  line-height: 22px;
-  letter-spacing: -0.41px;
-}
-
-.primary_input-title {
-  /* Используется только для заголовков инпута */
-  font-family: var(--font-family-golos);
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.15px;
-}
-
-.primary_servicesText {
-  font-family: var(--font-family-golos);
-  font-size: var(--font-size-s); /* 16px */
-  line-height: 20px;
-  letter-spacing: -0.32px;
-}
-
-.secondary_title {
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-medium); /* 24px */
-  line-height: 29.05px;
-}
-
-.secondary_subtitle {
-  font-family: var(--font-family-inter);
+.subtitle {
   font-size: 20px;
   line-height: 24.2px;
 }
 
-.secondary_paragraph {
-  font-family: var(--font-family-inter);
+.paragraph {
   font-size: var(--font-size-s); /* 16px */
-  line-height: 19.36px;
+  line-height: var(--line-height-medium); /* 22.4 */
 }
 
-.secondary_paragraph-bold {
-  font-family: var(--font-family-inter);
+.paragraph-bold {
   font-size: var(--font-size-s); /* 16px */
   font-weight: var(--font-weight-bold);
-  line-height: 19.36px;
+  line-height: var(--line-height-m); /* 19.2px */
 }
 
-.secondary_support {
-  font-family: var(--font-family-inter);
+.support {
   font-size: var(--font-size-small); /* 12px */
-  line-height: 14.52px;
+  line-height: var(--line-height-xs); /* 14.4px */
+}
+
+.support-bold {
+  font-size: var(--font-size-small); /* 12px */
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-xs); /* 14.4px */
+}
+
+.helperText {
+  font-size: 17px;
+  line-height: var(--line-height-medium);
+  letter-spacing: -0.41px;
+}
+
+.input-title {
+  /* Используется только для заголовков инпута */
+  font-size: var(--font-size-middle); /* 14px */
+  line-height: var(--line-height-middle); /* 18px */
+  letter-spacing: -0.15px;
+}
+
+.servicesText {
+  font-size: var(--font-size-small); /* 12px */
+  line-height: 20px;
 }
 
 @media screen and (max-width: 550px) {
-  .primary_servicesText {
-    font-family: var(--font-family-golos);
+  .servicesText {
     font-size: 8px;
     line-height: 9.6px;
     letter-spacing: normal;
