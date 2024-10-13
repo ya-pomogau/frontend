@@ -56,8 +56,7 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
             <div className={styles.user}>
               <UserInfo />
             </div>
-            {location.pathname === '/contacts' ||
-            location.pathname === '/feedback' ? (
+            {location.pathname === '/contacts' ? (
               userRole
             ) : (
               <SideMenuForAuthorized />
