@@ -1,7 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
-
-import { EditIcon } from '../icons/edit-icon';
+import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -28,7 +27,7 @@ export const EditButton = ({
     {...props}
   >
     <div className={styles['edit-buttonContent']}>
-      <EditIcon size="24" color="blue" />
+      <Icon icon="EditIcon" size="24" color="blue" />
       <span>{label}</span>
     </div>
   </button>

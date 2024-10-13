@@ -1,7 +1,5 @@
 import { SyntheticEvent } from 'react';
-
-import { MenuIcon } from 'shared/ui/icons/menu-icon';
-import { UnionIcon } from 'shared/ui/icons/union-icon';
+import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -13,12 +11,12 @@ interface IMenuButtonProps {
 const MenuButton = ({ onClick, isMobile }: IMenuButtonProps) => {
   return (
     <button onClick={onClick} className={styles.header__button}>
-      {isMobile && <MenuIcon color="blue" />}
+      {isMobile && <Icon icon="MenuIcon" color="blue" />}
 
       {!isMobile && (
         <div className={styles.header__button__container}>
           <span className={styles.header__button__text}>Меню</span>
-          <UnionIcon color="blue" />
+          <Icon icon="UnionIcon" color="blue" />
         </div>
       )}
     </button>

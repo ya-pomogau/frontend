@@ -17,8 +17,7 @@ import {
   cantAssignTaskMessage,
   unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
-import { ConflictIcon } from 'shared/ui/icons/conflict-icon';
-import { FinishedApplicationIcon } from 'shared/ui/icons/finished-application-icon';
+import { Icon } from 'shared/ui';
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
@@ -187,7 +186,7 @@ export const YandexMap = ({
               {thankForAssignTaskMessage}
             </p>
             <p className={classNames(styles.popupIcon, 'text_size_large')}>
-              <FinishedApplicationIcon color="#9798C9" size="101" />
+              <Icon icon="FinishedApplicationIcon" color="#9798C9" size="101" />
             </p>
           </LightPopup>
           <LightPopup
@@ -197,7 +196,7 @@ export const YandexMap = ({
             extClassName={styles.container_sorry}
           >
             <p className={classNames(styles.popupTitle, 'text_size_large')}>
-              <ConflictIcon color="orange" />
+              <Icon icon="ConflictIcon" color="orange" />
               Извините
             </p>
             <p className={classNames(styles.popupText)}>
