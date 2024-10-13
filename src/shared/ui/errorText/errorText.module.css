@@ -1,0 +1,8 @@
+.error {
+    font-family: 'Golos', sans-serif;
+    margin-top: 8px;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-xs);
+    font-weight: var(--font-weight-regular);
+    color: var(--colors-interface-orange);
+  }

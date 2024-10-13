@@ -10,6 +10,7 @@ import {
 } from 'react-hook-form';
 
 import styles from './styles.module.css';
+import { Label } from '../label';
 
 const DEFAULT_MASK = [
   '+',
@@ -61,9 +62,9 @@ export const FormInputPhone = <T extends FieldValues>({
   return (
     <div className={extClassName} data-testid={'div'}>
       {label && (
-        <label className={cn(styles.label, 'phone')} htmlFor={field.name}>
+        <Label  htmlFor={field.name}>
           {label}
-        </label>
+        </Label>
       )}
       <div className={styles.container}>
         <MaskedInput
