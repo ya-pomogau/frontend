@@ -15,7 +15,7 @@ import {
   taskButtonType,
   userRole as userRoles,
 } from 'shared/types/common.types';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useAppDispatch } from 'app/hooks';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
 import { SquareButton } from 'shared/ui/square-buttons';
@@ -26,6 +26,7 @@ import { useFulfillTaskMutation } from 'services/user-task-api';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { TaskButtonsProps } from '../../types';
+
 export const TaskButtonsRecipient = ({
   taskId,
   address,
@@ -41,7 +42,7 @@ export const TaskButtonsRecipient = ({
 }: TaskButtonsProps) => {
   const locationPath = useLocation();
   const dispatch = useAppDispatch();
-  const userRole = useAppSelector((state) => state.user.role);
+  const userRole = userRoles.RECIPIENT;
   const parsedDate = parseISO(date!);
   const isTaskExpired = isAfter(new Date(), parsedDate);
   const isTaskUrgent = checkTaskUrgency(date!);
@@ -62,9 +63,7 @@ export const TaskButtonsRecipient = ({
   };
   const [fulfillTask] = useFulfillTaskMutation();
   const handleFulfillClick = () => {
-    const shouldFulfillTask =
-      (userRole === userRoles.VOLUNTEER && !volunteerReport) ||
-      (userRole === userRoles.RECIPIENT && !recipientReport && volunteer);
+    const shouldFulfillTask = !recipientReport && volunteer;
     if (shouldFulfillTask) {
       fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
@@ -95,7 +94,7 @@ export const TaskButtonsRecipient = ({
             <ModalContent
               volunteer={!!volunteer}
               type={
-                !volunteer && userRole === userRoles.RECIPIENT
+                !volunteer
                   ? modalContentType.confirm
                   : clicked
                   ? modalContentType.admin
@@ -111,16 +110,14 @@ export const TaskButtonsRecipient = ({
             onClick={handleFulfillClick}
             buttonType={taskButtonType.confirm}
             disabledColor={
-              !volunteer && userRole === userRoles.RECIPIENT
+              !volunteer
                 ? true
-                : (userRole === userRoles.VOLUNTEER && !!volunteerReport) ||
-                  (userRole === userRoles.RECIPIENT && !!recipientReport) ||
-                  clicked
+                : !!volunteerReport || !!recipientReport || clicked
             }
           />
         </ButtonWithModal>
       )}
-      {userRole === userRoles.RECIPIENT && isPageActive && (
+      {isPageActive && (
         <ButtonWithModal
           closeButton
           extClassName={styles.close}
@@ -153,7 +150,7 @@ export const TaskButtonsRecipient = ({
           modalContent={
             <ModalContent
               type={
-                isPageActive && !volunteer && userRole === userRoles.RECIPIENT
+                isPageActive && !volunteer
                   ? modalContentType.conflict
                   : isPageActive
                   ? clicked
@@ -178,20 +175,16 @@ export const TaskButtonsRecipient = ({
           <SquareButton
             buttonType={taskButtonType.conflict}
             disabledColor={
-              !volunteer && userRole === userRoles.RECIPIENT
+              !volunteer
                 ? true
-                : (userRole === userRoles.VOLUNTEER &&
-                    !!volunteerReport &&
-                    isPageActive) ||
-                  (userRole === userRoles.RECIPIENT &&
-                    !!recipientReport &&
-                    isPageActive) ||
+                : (!!volunteerReport && isPageActive) ||
+                  (!!recipientReport && isPageActive) ||
                   (clicked && isPageActive)
             }
           />
         </ButtonWithModal>
       )}
-      {userRole === userRoles.RECIPIENT && !volunteer && isPageActive && (
+      {!volunteer && isPageActive && (
         <SquareButton
           onClick={handleEditButton}
           buttonType="edit"

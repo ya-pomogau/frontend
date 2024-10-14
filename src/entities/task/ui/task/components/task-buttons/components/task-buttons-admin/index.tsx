@@ -17,6 +17,7 @@ import { useControlModal } from 'shared/hooks';
 import { useGetAllAdminsQuery } from 'services/admin-api';
 import { TaskButtonsProps } from '../../types';
 import { useAppSelector } from 'app/hooks';
+
 export const TaskButtonsAdmin = ({
   taskId,
   date,
@@ -79,7 +80,6 @@ export const TaskButtonsAdmin = ({
           />
         </ButtonWithModal>
       )}
-
       {rootAdminRole && (
         <ConflictRootAdminButton
           extClassName={styles.rootConflict}
