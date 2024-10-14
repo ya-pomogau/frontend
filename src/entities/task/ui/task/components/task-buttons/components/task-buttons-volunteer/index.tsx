@@ -4,7 +4,6 @@ import {
   taskButtonType,
   userRole as userRoles,
 } from 'shared/types/common.types';
-import { useAppSelector } from 'app/hooks';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
 import { SquareButton } from 'shared/ui/square-buttons';
@@ -15,7 +14,6 @@ import { useState } from 'react';
 import { TaskButtonsProps } from '../../types';
 import classNames from 'classnames';
 import styles from '../../styles.module.css';
-
 export const TaskButtonsVolunteer = ({
   taskId,
   date,
@@ -26,7 +24,7 @@ export const TaskButtonsVolunteer = ({
   volunteer,
 }: TaskButtonsProps) => {
   const locationPath = useLocation();
-  const userRole = useAppSelector((state) => state.user.role);
+  const userRole = userRoles.VOLUNTEER;
   const parsedDate = parseISO(date!);
   const isTaskExpired = isAfter(new Date(), parsedDate);
   const isTaskUrgent = checkTaskUrgency(date!);
@@ -38,11 +36,9 @@ export const TaskButtonsVolunteer = ({
     useState<boolean>(true);
   const [fulfillTask] = useFulfillTaskMutation();
   const handleFulfillClick = () => {
-    const shouldFulfillTask =
-      (userRole === userRoles.VOLUNTEER && !volunteerReport) ||
-      (userRole === userRoles.RECIPIENT && !recipientReport && volunteer);
+    const shouldFulfillTask = !volunteerReport;
     if (shouldFulfillTask) {
-      fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
+      fulfillTask({ role: userRole.toLowerCase(), id: taskId });
     }
   };
   return (
@@ -54,13 +50,7 @@ export const TaskButtonsVolunteer = ({
           modalContent={
             <ModalContent
               volunteer={!!volunteer}
-              type={
-                !volunteer && userRole === userRoles.RECIPIENT
-                  ? modalContentType.confirm
-                  : clicked
-                  ? modalContentType.admin
-                  : modalContentType.confirm
-              }
+              type={clicked ? modalContentType.admin : modalContentType.confirm}
               userRole={userRole}
               taskId={taskId}
             />
@@ -70,18 +60,11 @@ export const TaskButtonsVolunteer = ({
           <SquareButton
             onClick={handleFulfillClick}
             buttonType={taskButtonType.confirm}
-            disabledColor={
-              !volunteer && userRole === userRoles.RECIPIENT
-                ? true
-                : (userRole === userRoles.VOLUNTEER && !!volunteerReport) ||
-                  (userRole === userRoles.RECIPIENT && !!recipientReport) ||
-                  clicked
-            }
+            disabledColor={!!volunteerReport || clicked}
           />
         </ButtonWithModal>
       )}
-
-      {userRole === userRoles.VOLUNTEER && isPageActive && (
+      {isPageActive && (
         <ButtonWithModal
           closeButton
           extClassName={styles.close}
@@ -114,9 +97,7 @@ export const TaskButtonsVolunteer = ({
           modalContent={
             <ModalContent
               type={
-                isPageActive && !volunteer && userRole === userRoles.RECIPIENT
-                  ? modalContentType.conflict
-                  : isPageActive
+                isPageActive
                   ? clicked
                     ? modalContentType.admin
                     : modalContentType.conflict
@@ -139,15 +120,9 @@ export const TaskButtonsVolunteer = ({
           <SquareButton
             buttonType={taskButtonType.conflict}
             disabledColor={
-              !volunteer && userRole === userRoles.RECIPIENT
-                ? true
-                : (userRole === userRoles.VOLUNTEER &&
-                    !!volunteerReport &&
-                    isPageActive) ||
-                  (userRole === userRoles.RECIPIENT &&
-                    !!recipientReport &&
-                    isPageActive) ||
-                  (clicked && isPageActive)
+              (!!volunteerReport && isPageActive) ||
+              (!!recipientReport && isPageActive) ||
+              (clicked && isPageActive)
             }
           />
         </ButtonWithModal>

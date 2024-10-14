@@ -26,7 +26,6 @@ import { useFulfillTaskMutation } from 'services/user-task-api';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { TaskButtonsProps } from '../../types';
-
 export const TaskButtonsRecipient = ({
   taskId,
   address,
@@ -86,7 +85,6 @@ export const TaskButtonsRecipient = ({
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
-
   return (
     <div className={classNames(extClassName, styles.buttons)}>
       {(isTaskExpired || !date) && isPageActive && (

@@ -4,7 +4,6 @@ import {
   taskButtonType,
   userRole as userRoles,
 } from 'shared/types/common.types';
-import { useAppSelector } from 'app/hooks';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ConflictRootAdminButton } from 'shared/ui/conflict-button';
 import { ModalContent } from 'widgets/task-buttons-content';
@@ -17,7 +16,7 @@ import { AdminSelectModal } from 'widgets';
 import { useControlModal } from 'shared/hooks';
 import { useGetAllAdminsQuery } from 'services/admin-api';
 import { TaskButtonsProps } from '../../types';
-
+import { useAppSelector } from 'app/hooks';
 export const TaskButtonsAdmin = ({
   taskId,
   date,
@@ -28,7 +27,7 @@ export const TaskButtonsAdmin = ({
   volunteer,
 }: TaskButtonsProps) => {
   const locationPath = useLocation();
-  const userRole = useAppSelector((state) => state.user.role);
+  const userRole = userRoles.ADMIN;
   const rootAdminRole = useAppSelector((state) => state.user.data?.isRoot);
   const parsedDate = parseISO(date!);
   const isTaskExpired = isAfter(new Date(), parsedDate);
@@ -36,12 +35,10 @@ export const TaskButtonsAdmin = ({
   const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
   const { isOpen, handleOpen, handleClose } = useControlModal();
   const { data: admins } = useGetAllAdminsQuery('');
-  //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
   const [clicked, setClicked] = useState<boolean>(false);
   const [conflictModalIsVisible, setConflictModalIsVisible] =
     useState<boolean>(true);
   const handleConflictRootAdminButton = () => {
-    console.log('Нажата кнопка инициации конфликта');
     handleOpen();
   };
   return (
@@ -56,9 +53,7 @@ export const TaskButtonsAdmin = ({
           modalContent={
             <ModalContent
               type={
-                isPageActive && !volunteer && userRole === userRoles.RECIPIENT
-                  ? modalContentType.conflict
-                  : isPageActive
+                isPageActive
                   ? clicked
                     ? modalContentType.admin
                     : modalContentType.conflict
@@ -80,21 +75,12 @@ export const TaskButtonsAdmin = ({
         >
           <SquareButton
             buttonType={taskButtonType.conflict}
-            disabledColor={
-              !volunteer && userRole === userRoles.RECIPIENT
-                ? true
-                : (userRole === userRoles.VOLUNTEER &&
-                    !!volunteerReport &&
-                    isPageActive) ||
-                  (userRole === userRoles.RECIPIENT &&
-                    !!recipientReport &&
-                    isPageActive) ||
-                  (clicked && isPageActive)
-            }
+            disabledColor={!!volunteerReport || !!recipientReport || clicked}
           />
         </ButtonWithModal>
       )}
-      {userRole === userRoles.ADMIN && rootAdminRole && (
+
+      {rootAdminRole && (
         <ConflictRootAdminButton
           extClassName={styles.rootConflict}
           onClick={handleConflictRootAdminButton}
