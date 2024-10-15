@@ -9,6 +9,10 @@ import {
 } from 'shared/types/chat.types';
 import { mockChatMessages } from './mock-messages';
 import { mockAdmin, mockRecipient, mockVolunteer } from './mock-users';
+import {
+  mockConflictRecipientMessages,
+  mockConflictVolunteerMessages,
+} from './mock-conflict-messages';
 
 /* #####################
 ################### USER
@@ -70,5 +74,5 @@ export const mockMetaConflictChatsMessage: ConflictChatsTupleMetaInterface = {
 
 export const mockConflict: ConflictChatInfo = {
   meta: mockMetaConflictChatsMessage,
-  chats: [mockChatMessages, mockChatMessages],
+  chats: [mockConflictVolunteerMessages, mockConflictRecipientMessages],
 };
