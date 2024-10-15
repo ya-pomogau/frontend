@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
 import { DatePicker } from 'shared/ui/date-picker';
 import { useMediaQuery } from 'shared/hooks';
@@ -7,11 +6,11 @@ import styles from '../styles.module.css';
 import classNames from 'classnames';
 
 interface CalenderBlockProps {
-  onChange: (value: string) => void;
   value: string;
+  onChange: (value: string) => void;
 }
 
-export const CalenderBlock = ({ onChange, value }: CalenderBlockProps) => {
+export const CalenderBlock = ({ value, onChange }: CalenderBlockProps) => {
   const isCalenderMobil = useMediaQuery(Breakpoints.L);
 
   const handleDateChange = (date: Date) => {

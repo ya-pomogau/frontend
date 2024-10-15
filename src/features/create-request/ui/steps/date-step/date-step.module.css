@@ -29,6 +29,7 @@
 
 .button {
   display: flex;
+  gap: 10px;
   justify-content: end;
 }
 
@@ -77,7 +78,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
     font-size: var(--font-size-medium);
     line-height: var(--line-height-large);
     position: relative;
-    top: 11px;
+    top: 9px;
   }
 
   .date {
@@ -96,7 +97,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
     );
     width: 240px;
     height: 1px;
-    margin-top: 4px;
+    margin-top: 8px;
   }
 
   .headerWrapperForDatePicker {
@@ -122,11 +123,8 @@ input[type='time']::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 29px;
-    margin-bottom: 10px;
-    transform: translateY(20px);
+    margin-top: 15px;
     position: relative;
-    top: -30px;
   }
 
   .inputForTime {
@@ -140,27 +138,36 @@ input[type='time']::-webkit-calendar-picker-indicator {
   }
 
   .checkbox {
+    margin: 8px 0 15px;
     min-width: 150px;
     position: relative;
-    top: -26px;
   }
 
   .button {
+    display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
     position: relative;
-    top: -33px;
+    gap: 10px;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .dateWithButtonContainer {
     max-width: 526px;
+    min-height:min-content;
     position: relative;
     top: 10px;
   }
 
   .validationMessage {
     position: relative;
-    top: 32px;
-    left: 50px;
+    /* top: 32px; */
+    width: 100%;
   }
 }
 

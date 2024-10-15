@@ -1,4 +1,4 @@
-import { ConflictIcon } from '../icons/conflict-icon';
+import { ConflictMessageIcon } from '../icons/conflict-message-icon';
 import classnames from 'classnames';
 import styles from './styles.module.css';
 
@@ -21,7 +21,7 @@ export const ConflictRootAdminButton = (
       )}
     >
       <div className={styles.buttonIcon}>
-        <ConflictIcon color="red" />
+        <ConflictMessageIcon size="24" color="red" />
       </div>
     </button>
   );

@@ -8,7 +8,7 @@ export const emptyFilterData: IFilterValues = {
   sortBy: '',
   date: '',
   time: [],
-  userCategories: [],
+  userCategories: ['all'],
 };
 
 export const InitialStateFilterData: IFilterValues = emptyFilterData;
