@@ -1,0 +1,16 @@
+.label {
+    font-family: 'Golos', sans-serif;
+    display: inline-block;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-middle);
+    font-weight: var(--font-weight-regular);
+    color: var(--colors-interface-black);
+    margin-bottom: 8px;
+}
+
+@media screen and (max-width: 550px) {
+    .label {
+        font-size: var(--font-size-small);
+        line-height: var(--line-height-xs);
+    }
+}

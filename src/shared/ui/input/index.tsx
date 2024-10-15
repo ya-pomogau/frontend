@@ -5,6 +5,8 @@ import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
+import { Label } from '../label';
+import { ErrorText } from '../errorText';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -49,9 +51,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={extClassName} data-testid={'div'}>
         {label && (
-          <label className={cn(styles.label, 'text')} htmlFor={id}>
+          <Label htmlFor={id}>
             {label}
-          </label>
+          </Label>
         )}
         <div className={styles.container}>
           <input
@@ -65,9 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={id}
             {...props}
           />
-          <span className={cn(styles.error, 'text')}>
-            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
-          </span>
+          <ErrorText error={errorText}/>         
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>

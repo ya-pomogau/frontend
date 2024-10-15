@@ -9,6 +9,7 @@ import {
 } from 'react-hook-form';
 
 import styles from './styles.module.css';
+import { Label } from '../label';
 
 export interface FormInputProps<FormInputs extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -47,9 +48,9 @@ export const FormInput = <T extends FieldValues>({
   return (
     <div className={extClassName} data-testid={'div'}>
       {label && (
-        <label className={cn(styles.label, 'text')} htmlFor={field.name}>
+        <Label htmlFor={field.name}>
           {label}
-        </label>
+        </Label>
       )}
       <div className={styles.container}>
         <input

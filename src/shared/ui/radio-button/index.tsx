@@ -2,6 +2,7 @@ import { InputHTMLAttributes } from 'react';
 import classnames from 'classnames';
 
 import styles from './style.module.css';
+import { Label } from '../label';
 
 interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -25,9 +26,9 @@ const RadioButton = ({
       className={styles.radiobutton}
       {...props}
     />
-    <label
+    <Label
       htmlFor={id}
-      className={classnames(
+      extClassName={classnames(
         styles.fakeRadiobutton,
         'text',
         'text_type_regular',
@@ -35,7 +36,7 @@ const RadioButton = ({
       )}
     >
       {label}
-    </label>
+    </Label>
   </>
 );
 

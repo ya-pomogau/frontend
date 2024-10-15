@@ -33,23 +33,6 @@
   border-color: var(--colors-interface-blue-navy);
 }
 
-.label {
-  display: inline-block;
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-middle);
-  font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-black);
-  margin-bottom: 8px;
-}
-
-.error {
-  margin-top: 8px;
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-xs);
-  font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-orange);
-}
-
 .for_storybook {
   width: 350px;
 }
@@ -75,11 +58,6 @@
 }
 
 @media screen and (max-width: 550px) {
-  .label {
-    font-size: var(--font-size-small);
-    line-height: var(--line-height-xs);
-  }
-
   .input {
     font-size: var(--font-size-small);
     line-height: var(--line-height-xs);
