@@ -36,7 +36,7 @@ export const useLazyScroll = ({
     const { clientHeight, scrollHeight, scrollTop } =
       openedChatPopupRef.current as HTMLDivElement;
 
-    if (clientHeight + scrollTop >= scrollHeight - 5) {
+    if (-1 * scrollTop + clientHeight >= scrollHeight - 5) {
       setCurrentMessagesPage((prevState) => prevState + 1);
     }
   };

@@ -1,32 +1,46 @@
 import cn from 'classnames';
-import { ReactElement, ReactNode, FC } from 'react';
+import { ReactElement, ReactNode, FC, useRef } from 'react';
 import styles from './styles.module.css';
 import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { UserProfile } from 'entities/user/types';
 import { Breakpoints } from 'shared/config';
+import { useLazyScroll } from 'entities/chat/ui/chat/hooks/useLazyScroll';
+import { MessageInterface } from 'shared/types/chat.types';
+import { Message } from 'shared/ui';
 
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
   isOpen: boolean;
   onClick?: (text: string) => void;
-  children: ReactNode;
+
   chatmateInfo?: UserProfile;
   boxButton: ReactElement;
   closeConflict: () => void;
+  messages: MessageInterface[];
 }
 
-export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
+export const WindowInteractionUsers: FC<IWindowInteractionUsers> = ({
+  messages,
+  isOpen,
+  closeConflict,
+  chatmateInfo,
+  boxButton,
+  option,
+}) => {
+  const openedChatPopupRef = useRef<HTMLDivElement>(null);
+  const currentMessages = useLazyScroll({ messages, openedChatPopupRef });
+
   const isMobile = useMediaQuery(Breakpoints.S);
 
   const handleClick = () => {
-    props.closeConflict();
+    closeConflict();
   };
 
   return (
-    <article className={cn(styles.box, { [styles.box_action]: props.isOpen })}>
-      {props.option === 'chat' ? (
+    <article className={cn(styles.box, { [styles.box_action]: isOpen })}>
+      {option === 'chat' ? (
         <div className={styles['user-info']}>
           {isMobile && (
             <Icon
@@ -37,11 +51,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
               size="32"
             />
           )}
-          <img
-            className={styles.img}
-            src={props.chatmateInfo?.avatar}
-            alt="фото"
-          />
+          <img className={styles.img} src={chatmateInfo?.avatar} alt="фото" />
           <div className={styles.container}>
             <p
               className={cn(
@@ -52,7 +62,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
                 styles.name
               )}
             >
-              {props.chatmateInfo?.name}
+              {chatmateInfo?.name}
             </p>
             <p
               className={cn(
@@ -62,7 +72,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
                 styles.id,
                 styles['display-none']
               )}
-            >{`ID ${props.chatmateInfo?._id}`}</p>
+            >{`ID ${chatmateInfo?._id}`}</p>
             <p
               className={cn(
                 'text-inter',
@@ -84,7 +94,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
               >
                 Тел.:
               </span>
-              {props.chatmateInfo?.phone}
+              {chatmateInfo?.phone}
             </p>
           </div>
           {isMobile && (
@@ -117,7 +127,22 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
           )}
         </div>
       )}
-      <div className={styles['content-container']}>{props.children}</div>
+      <div ref={openedChatPopupRef} className={styles['content-container']}>
+        {chatmateInfo &&
+          currentMessages?.map((message) => (
+            <Message
+              type={
+                message.author._id === chatmateInfo._id
+                  ? 'incoming'
+                  : 'outgoing'
+              }
+              messageText={message.body}
+              avatarLink={message.author.avatar}
+              key={message._id}
+              createdAt={message.createdAt}
+            />
+          ))}
+      </div>
       {!isMobile && (
         <Icon
           onClick={handleClick}
@@ -128,7 +153,7 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
         />
       )}
       {isMobile && <GradientDivider />}
-      <div className={styles.isMobile}>{props.boxButton}</div>
+      <div className={styles.isMobile}>{boxButton}</div>
     </article>
   );
 };

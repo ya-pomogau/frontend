@@ -53,13 +53,14 @@ export const SectionInWorkChats = () => {
           />
         ))}
       </WrapperMessage>
-      {isOpen && (
+      {isOpen && infoMessage && (
         <WindowInteractionUsers
           closeConflict={handelCloseWrapper}
           option="chat"
           isOpen={isOpen}
           onClick={handleVisibleMessage}
           chatmateInfo={infoMessage?.user}
+          messages={infoMessage?.messages}
           boxButton={
             <InputWrapper
               placeholder="Напишите сообщение..."
@@ -71,18 +72,7 @@ export const SectionInWorkChats = () => {
               containerMessages={true}
             />
           }
-        >
-          {infoMessage?.messages.map((m) => (
-            <Message
-              type={
-                m.author._id === infoMessage.user._id ? 'incoming' : 'outgoing'
-              }
-              messageText={m.body}
-              avatarLink={m.author.avatar}
-              key={m._id}
-            />
-          ))}
-        </WindowInteractionUsers>
+        />
       )}
     </div>
   );

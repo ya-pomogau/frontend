@@ -2,7 +2,7 @@
   right: 0;
 }
 
-.input_container_mobile > :nth-child(2n) {
+.input_container_mobile> :nth-child(2n) {
   margin-left: -8px;
 }
 
@@ -89,7 +89,7 @@
   background-color: var(--colors-interface-white);
   border: 1px solid var(--colors-interface-ford-white);
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   padding: 20px;
   overflow-y: auto;
 }
@@ -126,6 +126,7 @@
     gap: 0;
     align-content: flex-start;
   }
+
   .container-chat {
     max-height: 100%;
   }

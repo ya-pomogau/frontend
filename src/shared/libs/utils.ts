@@ -17,6 +17,7 @@ import { UserProfile } from 'entities/user/types';
 import { MessageInterface } from '../types/chat.types';
 import { mockRecipient, mockVolunteer } from '../../entities/chat/mock-users';
 import { mockChatMessages } from '../../entities/chat/mock-messages';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -272,7 +273,7 @@ export const getTokenAccess = () => {
 };
 
 export interface IMessageHub {
-  user: UserProfile;
+  user: AnyUserInterface;
   messages: MessageInterface[];
   id: string;
 }

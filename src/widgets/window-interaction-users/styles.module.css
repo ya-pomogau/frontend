@@ -68,6 +68,10 @@
   height: 412px;
   border: 1px solid var(--colors-interface-additional);
   padding: 20px 15px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .container-btn {

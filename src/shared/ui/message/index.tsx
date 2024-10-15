@@ -10,6 +10,7 @@ interface MessageProps {
   type: 'incoming' | 'outgoing' | 'achievement' | 'send';
   messageText: string;
   avatarLink: string;
+  createdAt: Date;
 }
 
 export const Message = ({
@@ -17,6 +18,7 @@ export const Message = ({
   type,
   messageText,
   avatarLink,
+  createdAt,
 }: MessageProps) => {
   const getAvatar = () =>
     type !== 'achievement' &&
@@ -35,6 +37,17 @@ export const Message = ({
         <div className={classnames(styles.message, styles[`message--${type}`])}>
           <span className={classnames(styles.text, 'text', 'text_size_small')}>
             {messageText}
+            <br />
+            <i style={{ opacity: '.5' }}>
+              {createdAt.toLocaleString('ru-Ru', {
+                day: 'numeric',
+                year: '2-digit',
+                month: 'numeric',
+                timeZone: 'UTC',
+                hour: 'numeric',
+                minute: 'numeric',
+              })}
+            </i>
           </span>
         </div>
       </div>
