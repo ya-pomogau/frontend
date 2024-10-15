@@ -206,17 +206,17 @@
 .id:last-child {
   display: inline-block;
   width: 190px;
-  white-space: nowrap; 
-  overflow: hidden; 
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .name_text {
   font-size: var(--font-size-s);
   line-height: var(--line-height-medium);
-  width: 190px; 
-  white-space: nowrap; 
-  overflow: hidden; 
+  width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -231,7 +231,7 @@
 
   .name_text {
     font-size: var(--font-size-small);
-    width: 140px; 
+    width: 140px;
   }
 
   .recipient_input {

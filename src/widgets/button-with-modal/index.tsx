@@ -26,7 +26,7 @@ export const ButtonWithModal = ({
   extClassName,
   closeButton = false,
   conflictModalVisible,
-  setConflictModalVisible
+  setConflictModalVisible,
 }: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
 
@@ -38,7 +38,7 @@ export const ButtonWithModal = ({
     setVisible(true);
 
     if (!conflictModalVisible) {
-      setConflictModalVisible && setConflictModalVisible(true)
+      setConflictModalVisible && setConflictModalVisible(true);
     }
 
     const box = buttonRef.current?.getBoundingClientRect();
@@ -59,7 +59,9 @@ export const ButtonWithModal = ({
   return (
     <div ref={buttonRef} onClick={getCoords} className={extClassName}>
       {children}
-      {(conflictModalVisible === undefined ? visible : (visible && conflictModalVisible)) && (
+      {(conflictModalVisible === undefined
+        ? visible
+        : visible && conflictModalVisible) && (
         <Tooltip
           visible={visible}
           changeVisible={hideModal}
