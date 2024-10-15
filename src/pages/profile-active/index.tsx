@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Icon, Loader, SmartHeader } from 'shared/ui';
@@ -36,6 +36,7 @@ export function ProfileActivePage() {
   const { sortBy, categories } = useAppSelector(filterDataSelector);
 
   const currentTask: Task[] = useMemo(() => {
+    if (tasks === undefined) return [];
     if (Boolean(sortBy) || Boolean(categories.length)) {
       if (tasks)
         return handleFilterTasks(tasks, {

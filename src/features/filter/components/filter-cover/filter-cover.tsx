@@ -1,17 +1,8 @@
-import { ReactElement } from 'react';
-
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
 
 import { useMediaQuery } from 'shared/hooks';
 import { Breakpoints } from 'shared/config';
-
-import { SortByBlock } from 'features/filter/ui/sortBy-block';
-import { RadiusBlock } from 'features/filter/ui/radius-block';
-import { CalenderBlock } from 'features/filter/ui/calender-block';
-import { UserCategoriesBlock } from 'features/filter/ui/userCategories-block';
-import { TimeBlock } from 'features/filter/ui/time-block';
-import { CategoriesBlock } from 'features/filter/ui/categories-block';
 
 import type { FilterProps, IFilterValues } from 'features/filter/types';
 
@@ -26,6 +17,7 @@ import {
   resetFilterData,
   setFilterData,
 } from '../../model';
+import { getDefaultValues } from '../../../../shared/libs/utils';
 
 interface FilterCoverProps {
   filterMenu: FilterProps['items'];
@@ -44,36 +36,11 @@ export const FilterCover = ({
 
   const currentFilterData = useAppSelector(filterDataSelector);
 
-  const defaultValues = {
-    categories: { value: [], component: CategoriesBlock },
-    searchRadius: { value: '', component: RadiusBlock },
-    sortBy: { value: '', component: SortByBlock },
-    date: { value: '', component: CalenderBlock },
-    time: { value: [], component: TimeBlock },
-    userCategories: { value: [], component: UserCategoriesBlock },
-  };
-
-  const getDefaultValues = (filterParams: FilterProps['items']) => {
-    const ret: {
-      values: Partial<IFilterValues>;
-      components: {
-        [key in keyof Partial<IFilterValues>]?: ReactElement;
-      };
-    } = {
-      values: {},
-      components: {},
-    };
-    if (filterParams)
-      Object.keys(filterParams).map((item) => {
-        if (filterParams[item]) {
-          ret.values[item] = currentFilterData[item];
-          ret.components[item] = defaultValues[item].component;
-        }
-      });
-    return ret;
-  };
-
   const { values, components } = getDefaultValues(filterMenu);
+
+  (Object.keys(values) as (keyof Partial<IFilterValues>)[]).map((item) => {
+    values[item] = currentFilterData[item] as string & string[];
+  });
 
   const {
     control,
@@ -125,7 +92,10 @@ export const FilterCover = ({
               render={({ field }) => {
                 const Component = components[name as keyof IFilterValues];
                 return (
-                  <Component onChange={field.onChange} value={field.value} />
+                  <Component
+                    onChange={field.onChange}
+                    value={field.value as string & string[]}
+                  />
                 );
               }}
             />

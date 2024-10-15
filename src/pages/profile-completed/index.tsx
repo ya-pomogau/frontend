@@ -31,6 +31,7 @@ export function ProfileCompletedPage() {
   const { sortBy, categories } = useAppSelector(filterDataSelector);
 
   const currentTask: Task[] = useMemo(() => {
+    if (tasks === undefined) return [];
     if (Boolean(sortBy) || Boolean(categories.length)) {
       if (tasks)
         return handleFilterTasks(tasks, {

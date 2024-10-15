@@ -1,7 +1,7 @@
 import { FRONT_URL, LOCAL_STORAGE_TOKEN_ACCESS } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import { Task } from 'entities/task/types';
-import { IFilterValues } from 'features/filter/types';
+import { type FilterProps, IFilterValues } from 'features/filter/types';
 
 import {
   DAYS_IN_MONTH,
@@ -17,6 +17,12 @@ import { UserProfile } from 'entities/user/types';
 import { MessageInterface } from '../types/chat.types';
 import { mockRecipient, mockVolunteer } from '../../entities/chat/mock-users';
 import { mockChatMessages } from '../../entities/chat/mock-messages';
+import { CategoriesBlock } from '../../features/filter/ui/categories-block';
+import { RadiusBlock } from '../../features/filter/ui/radius-block';
+import { SortByBlock } from '../../features/filter/ui/sortBy-block';
+import { CalenderBlock } from '../../features/filter/ui/calender-block';
+import { TimeBlock } from '../../features/filter/ui/time-block';
+import { UserCategoriesBlock } from '../../features/filter/ui/userCategories-block';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -82,50 +88,98 @@ export const sortTasks = (
   return sortedTasks;
 };
 
+const sortDisplay = (arr: Task[], text: string): Task[] => {
+  let sortedTasks: Task[] = [];
+  switch (text) {
+    case 'date':
+      sortedTasks = sortTasks(arr, 'date');
+      break;
+    case 'decreasingPoints':
+      sortedTasks = sortTasks(arr, 'decreasing');
+      break;
+    case 'increasingPoints':
+      sortedTasks = sortTasks(arr, 'increasing');
+      break;
+    default:
+      sortedTasks = arr;
+      break;
+  }
+  return sortedTasks;
+};
+
 export const handleFilterTasks = (
   tasks: Task[],
   data: { sortBy: string; categories: string[] }
 ) => {
-  const handleTasksFilter = (arr: Task[]) =>
-    arr.filter((task: Task) => data.categories.includes(task.category.title));
-
-  const sortDisplay = (arr: Task[], text: string): Task[] => {
-    let sortedTasks: Task[] = [];
-    switch (text) {
-      case 'date':
-        sortedTasks = sortTasks(arr, 'date');
-        break;
-      case 'decreasingPoints':
-        sortedTasks = sortTasks(arr, 'decreasing');
-        break;
-      case 'increasingPoints':
-        sortedTasks = sortTasks(arr, 'increasing');
-        break;
-      default:
-        sortedTasks = arr;
-        break;
-    }
-    return sortedTasks;
-  };
-
   let ret: Task[] = tasks;
   if (data?.categories.length) {
     if (data?.sortBy) {
-      ret = sortDisplay(handleTasksFilter(tasks), data.sortBy);
+      ret = sortDisplay(
+        tasks.filter((task) => data.categories.includes(task.category.title)),
+        data.sortBy
+      );
     } else {
-      ret = handleTasksFilter(tasks);
+      ret = tasks.filter((task) =>
+        data.categories.includes(task.category.title)
+      );
     }
   }
 
   if (data?.sortBy) {
     if (data?.categories.length > 0) {
-      ret = sortDisplay(handleTasksFilter(tasks), data.sortBy);
+      ret = sortDisplay(
+        tasks.filter((task) => data.categories.includes(task.category.title)),
+        data.sortBy
+      );
     } else {
       ret = sortDisplay(tasks, data.sortBy);
     }
   }
 
   return ret;
+};
+
+export const defaultFilterData: {
+  values: IFilterValues;
+  components: {
+    categories: typeof CategoriesBlock;
+    searchRadius: typeof RadiusBlock;
+    sortBy: typeof SortByBlock;
+    date: typeof CalenderBlock;
+    time: typeof TimeBlock;
+    userCategories: typeof UserCategoriesBlock;
+  };
+} = {
+  values: {
+    categories: [],
+    searchRadius: '',
+    sortBy: '',
+    date: '',
+    time: [],
+    userCategories: [],
+  },
+  components: {
+    categories: CategoriesBlock,
+    searchRadius: RadiusBlock,
+    sortBy: SortByBlock,
+    date: CalenderBlock,
+    time: TimeBlock,
+    userCategories: UserCategoriesBlock,
+  },
+};
+
+export const getDefaultValues = (filterParams: FilterProps['items']) => {
+  if (filterParams) {
+    (
+      Object.keys(defaultFilterData.values) as (keyof Partial<IFilterValues>)[]
+    ).map((item) => {
+      if (!filterParams[item]) {
+        delete defaultFilterData.values[item];
+        delete defaultFilterData.components[item];
+      }
+    });
+  }
+  return defaultFilterData;
 };
 
 const degrToRadians = (degrees: number): number => {

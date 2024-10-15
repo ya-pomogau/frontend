@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { PageSubMenuForAdmins } from 'widgets';
 import { Icon, SmartHeader, Input, GradientDivider } from 'shared/ui';
@@ -73,7 +73,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
 
   const { userCategories } = useAppSelector(filterDataSelector);
 
-  useEffect(() => {
+  useMemo(() => {
     if (incomeTab === tabs.NOTPROCESSED) {
       const filteredData = getFilteredTabData()?.filter(
         (card) =>
