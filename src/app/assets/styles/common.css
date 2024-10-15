@@ -181,6 +181,13 @@ h6 {
   text-decoration: none;
 }
 
+/* отключения взаимодействия с активными NavLink */
+.active {
+  pointer-events: none;
+  cursor: default;
+  touch-action: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
