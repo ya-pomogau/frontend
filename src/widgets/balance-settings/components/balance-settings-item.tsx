@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 import { Input } from 'shared/ui';
-import { BallsIcon } from 'shared/ui/icons/balls-icon';
+import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -28,7 +28,7 @@ const BalanceSettingsItem = ({
         min="1"
         step="1"
       />
-      <BallsIcon color="blue" size="46" />
+      <Icon icon="BallsIcon" color="blue" size="46" />
     </div>
   );
 };

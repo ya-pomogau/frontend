@@ -11,7 +11,7 @@ import {
   clearState,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
-import { LocationIcon } from 'shared/ui/icons/location-icon';
+import { Icon } from 'shared/ui';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
@@ -160,7 +160,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             </div>
             <div className={styles.addressWrapper}>
-              <LocationIcon color="blue" />
+              <Icon icon="LocationIcon" color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
             </div>
             <CategoriesBackground
@@ -220,7 +220,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               ) : null}
             </div>
             <div className={styles.addressWrapper}>
-              <LocationIcon color="blue" />
+              <Icon icon="LocationIcon" color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
               {isTypeEdit && (
                 <EditButton

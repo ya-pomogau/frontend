@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SmartHeader } from '.';
-
-import { ActiveApplicationIcon } from '../icons/active-application-icon';
+import { Icon } from 'shared/ui';
 
 const meta: Meta<typeof SmartHeader> = {
   title: 'uikit/SmartHeader',
@@ -25,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Filled: Story = {
   args: {
-    icon: <ActiveApplicationIcon color="blue" />,
+    icon: <Icon icon="ActiveApplicationIcon" color="blue" />,
     text: 'Активные заявки',
   },
 };

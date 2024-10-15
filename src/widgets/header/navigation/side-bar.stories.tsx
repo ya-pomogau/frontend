@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { WriteMessageIcon } from 'shared/ui/icons/write-message-icon';
-import { PersonIcon } from 'shared/ui/icons/person-icon';
-import { LockIcon } from 'shared/ui/icons/lock-icon';
-import { LocationIcon } from 'shared/ui/icons/location-icon';
+import { Icon } from 'shared/ui';
 
 import { SideBar } from './index';
 
@@ -30,22 +27,22 @@ export const Playground: Story = {
       {
         title: 'Личный кабинет',
         to: '/profile',
-        icon: <PersonIcon color="blue" />,
+        icon: <Icon icon="PersonIcon" color="blue" />,
       },
       {
         title: 'Блог',
         to: '/blog',
-        icon: <WriteMessageIcon color="blue" />,
+        icon: <Icon icon="WriteMessageIcon" color="blue" />,
       },
       {
         title: 'Политика конфиденциальности',
         to: '/policy',
-        icon: <LockIcon color="blue" />,
+        icon: <Icon icon="LockIcon" color="blue" />,
       },
       {
         title: 'Контакты',
         to: '/contacts',
-        icon: <LocationIcon color="blue" />,
+        icon: <Icon icon="LocationIcon" color="blue" />,
       },
     ],
     position: {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CardButton } from '.';
-import { CompletedApplicationIcon } from '../icons/completed-application-icon';
+import { Icon } from 'shared/ui';
 
 const meta: Meta<typeof CardButton> = {
   title: 'uikit/Buttons/CardButton',
@@ -14,18 +14,18 @@ const meta: Meta<typeof CardButton> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const Icon = <CompletedApplicationIcon size="54" color="white" />;
+const Icon_ = <Icon icon="CompletedApplicationIcon" size="54" color="white" />;
 
 export const Default: Story = {
   args: {
     text: 'Обозначение карточки',
-    customIcon: Icon,
+    customIcon: Icon_,
   },
 };
 
 export const Pressed: Story = {
   args: {
     text: 'Обозначение карточки',
-    customIcon: Icon,
+    customIcon: Icon_,
   },
 };
