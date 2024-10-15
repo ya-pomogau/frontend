@@ -1,0 +1,51 @@
+.buttons_div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding-bottom: 25px;
+  }
+  
+  .recipient_input {
+    width: 196px;
+    height: 37px;
+    border: 0.5px solid var(--colors-interface-primary);
+    font-size: var(--font-size-small);
+    color: var(--colors-interface-primary);
+    padding-left: 10px;
+  }
+  
+  .recipient_textarea {
+    height: 90px;
+    width: 186px;
+    border: 0.5px solid var(--colors-interface-primary);
+    font-size: var(--font-size-small);
+    color: var(--colors-interface-primary);
+    resize: none;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+  
+  @media all and (max-width: 1150px) {
+    .recipient_input {
+      width: 140px;
+      height: 30px;
+      border: 0.5px solid var(--colors-interface-primary);
+      font-size: 8px;
+      color: var(--colors-interface-primary);
+      line-height: 37px;
+    }
+  
+    .recipient_textarea {
+      height: 60px;
+      width: 140px;
+      padding-left: 5px;
+      padding-top: 5px;
+    }
+  
+    .recipient_input::placeholder {
+      font-size: 8px;
+      padding: 10px;
+    }
+  }
+  

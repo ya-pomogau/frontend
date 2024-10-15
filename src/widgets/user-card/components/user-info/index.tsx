@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 interface UserInfoProps {
   userName: string;

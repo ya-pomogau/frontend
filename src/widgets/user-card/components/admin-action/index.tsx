@@ -7,7 +7,7 @@ import { EditIcon } from 'shared/ui/icons/edit-icon';
 import { Button } from 'shared/ui/button';
 import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 interface AdminActionsProps {
   onAdminSaveClick: () => void;

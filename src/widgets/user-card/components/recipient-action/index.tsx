@@ -4,9 +4,9 @@ import classnames from 'classnames';
 import { Button } from 'shared/ui/button';
 import { Input } from 'shared/ui/input';
 
-import styles from '../styles.module.css';
-import { useAppSelector } from '../../../app/hooks';
-import { adminPermission } from '../../../shared/types/common.types';
+import styles from './styles.module.css';
+import { useAppSelector } from '../../../../app/hooks';
+import { adminPermission } from '../../../../shared/types/common.types';
 
 interface RecipientActionsProps {
   approved: boolean;
