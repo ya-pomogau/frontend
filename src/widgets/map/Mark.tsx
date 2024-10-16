@@ -118,14 +118,14 @@ const Mark: FC<MarkProps> = ({
 
         buttonRead.addEventListener('click', onReadClick);
 
-        // Добавляем слушатель на кпонку "Закрыть окно".
+        // Добавляем слушатель на иконку "Закрыть окно".
         const buttonClose = taskContainer.querySelector('.close_icon');
         const onCloseClick = () => {
           this.getData().map.balloon.close();
         };
         buttonClose.addEventListener('click', onCloseClick);
 
-        // Добавляем слушатель на кпонку "Отклинуться". Колбэк берем из пропсов
+        // Добавляем слушатель на иконку "Отклинуться". Колбэк берем из пропсов
         const button = taskContainer.querySelector(
           '.task_button_container > button'
         );

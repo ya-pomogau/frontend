@@ -15,7 +15,7 @@ type UserMarkProps = {
   draggable?: boolean;
 };
 
-const UserMark: FC<UserMarkProps> = ({ location, draggable }: MarkProps) => {
+const UserMark: FC<UserMarkProps> = ({ location, draggable }: UserMarkProps) => {
   const dispatch = useAppDispatch();
   const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
 
