@@ -11,14 +11,11 @@ import { useAppSelector } from 'app/hooks';
 import { useGetCategoriesQuery } from 'services/categories-api';
 
 interface CategoriesBlockProps {
-  selectedServies: string[];
+  value: string[];
   onChange: (value: string[]) => void;
 }
 
-export const CategoriesBlock = ({
-  selectedServies,
-  onChange,
-}: CategoriesBlockProps) => {
+export const CategoriesBlock = ({ value, onChange }: CategoriesBlockProps) => {
   const categoriesBlockRef = useRef<HTMLDivElement>(null);
 
   const categories = useGetCategoriesQuery().currentData;
@@ -44,9 +41,9 @@ export const CategoriesBlock = ({
     let newValue: string[];
 
     if (target.checked) {
-      newValue = [...selectedServies, target.id];
+      newValue = [...value, target.id];
     } else {
-      newValue = selectedServies.filter((item) => item !== target.id);
+      newValue = value.filter((item) => item !== target.id);
     }
     onChange(newValue);
   };
@@ -96,7 +93,7 @@ export const CategoriesBlock = ({
               key={category._id}
               name="taskCategory"
               label={category.title}
-              checked={selectedServies.includes(category.title)}
+              checked={value.includes(category.title)}
               id={category.title}
               onChange={handleCheckboxChange}
               disabled={(isVolunteer && checkAccess(category.title)) || false}

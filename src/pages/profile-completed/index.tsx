@@ -44,10 +44,8 @@ export function ProfileCompletedPage() {
           !isUnConfirmed ? (
             <Filter
               items={{
-                sort: true,
+                sortBy: true,
                 categories: true,
-                radius: false,
-                date: false,
               }}
               setFilteres={setInfoFilterTasks}
             />
