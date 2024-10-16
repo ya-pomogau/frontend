@@ -50,17 +50,40 @@ export function RequestsPage({ incomeTab }: PageProps) {
   const [viewMode, setViewMode] = useState<'tiles' | 'list'>('tiles');
 
   const sortByStatus = (u1: User, u2: User) => {
-    if (!u1.status) return 1;
-    if (!u2.status) return -1;
-    return u2.status - u1.status;
+    const st1 = u1.status ?? -1;
+    const st2 = u2.status ?? -1;
+    return st2 - st1;
+  };
+
+  const sortByScore = (u1: User, u2: User) => {
+    const sc1 = u1.score ?? 0;
+    const sc2 = u2.score ?? 0;
+    return sc2 - sc1;
+  };
+
+  const sortByCreate = (u1: User, u2: User) => {
+    const d1 = new Date(u1.createdAt);
+    const d2 = new Date(u2.createdAt);
+    return d1.getTime() - d2.getTime();
   };
 
   const getFilteredTabData = () => {
+    const sortedVols = volunteers?.slice().sort(sortByScore).sort(sortByStatus);
+    const sortedRecips = recipients
+      ?.slice()
+      .sort(sortByCreate)
+      .sort(sortByStatus);
+    const sortedUncomfs = unconfirmed
+      ?.slice()
+      .sort(sortByCreate)
+      .sort(sortByStatus);
+    const sortedAdms = admins?.slice().sort(sortByCreate);
+
     const dataMap: Record<string, User[] | undefined> = {
-      [tabs.VOLUNTEERS]: volunteers,
-      [tabs.RECIPIENTS]: recipients,
-      [tabs.NOTPROCESSED]: unconfirmed,
-      [tabs.ADMINS]: admins,
+      [Tabs.VOLUNTEERS]: sortedVols,
+      [Tabs.RECIPIENTS]: sortedRecips,
+      [Tabs.NOTPROCESSED]: sortedUncomfs,
+      [Tabs.ADMINS]: sortedAdms,
     };
 
     return dataMap[incomeTab as keyof typeof dataMap]
