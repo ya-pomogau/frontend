@@ -28,6 +28,7 @@ interface ModalContentProps {
   userRole?: UserRole | null;
   taskId?: string;
   volunteer?: boolean;
+  phoneNumber?: string;
 }
 
 export const ModalContent = ({
@@ -38,6 +39,7 @@ export const ModalContent = ({
   userRole,
   taskId,
   volunteer,
+  phoneNumber,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
@@ -251,8 +253,8 @@ export const ModalContent = ({
       return (
         <div className={styles.modalTooltip}>
           <h3 className={titleStyle}>Номер телефона:</h3>
-          <a className={textStyle} href="tel: +7 (800) 555-35-35">
-            +7 (800) 555-35-35
+          <a className={textStyle} href={`tel:${phoneNumber}`}>
+            {phoneNumber}
           </a>
         </div>
       );
