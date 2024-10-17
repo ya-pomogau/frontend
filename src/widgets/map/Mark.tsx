@@ -39,6 +39,23 @@ const Mark: FC<MarkProps> = ({
   );
   const [responseTask] = useResponseTaskMutation();
 
+  const properties = Object.assign(
+    { ...task },
+    {
+      isAuthorised: isAuthorised,
+      isUrgentTask: date ? isTaskUrgent(date!) : false,
+      date: date ? new Date(date!).toLocaleDateString() : 'Бессрочно',
+      time: date
+        ? new Date(date!).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+        : '00:00',
+      isDisabled: !isGranted,
+    }
+  );
+
+
   const onClickButton = () => {
     // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
     isAuthorised &&
@@ -131,22 +148,6 @@ const Mark: FC<MarkProps> = ({
         );
         button.addEventListener('click', onClickButton);
       },
-    }
-  );
-
-  const properties = Object.assign(
-    { ...task },
-    {
-      isAuthorised: isAuthorised,
-      isUrgentTask: date ? isTaskUrgent(date!) : false,
-      date: date ? new Date(date!).toLocaleDateString() : 'Бессрочно',
-      time: date
-        ? new Date(date!).toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-          })
-        : '00:00',
-      isDisabled: !isGranted,
     }
   );
 
