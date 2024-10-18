@@ -15,7 +15,8 @@ export const BlockedPage = () => {
       iconConfig={iconConfig}
       headerText={'Блокировка'}
       imageSrc={image}
-      imageAlt="disconnection_image"
+      imageAlt="blocked_image"
+      centered={false}
     >
       <h3 className={styles.text_blocked}>Вы заблокированы</h3>
       <a className={styles.link} href="mailto:test@ya.ru">

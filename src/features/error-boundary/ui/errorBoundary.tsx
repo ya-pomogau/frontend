@@ -1,3 +1,5 @@
+import classnames from 'classnames';
+
 import { ErrorDialog, Icon, SmartHeader } from '../../../shared/ui';
 import { Filter } from '../../filter';
 import styles from '../styles.module.css';
@@ -12,6 +14,7 @@ interface IErrorBoundaryUI {
   filterItemsConfig?: TFilterItems;
   imageSrc: string;
   imageAlt: string;
+  centered?: boolean;
   children?: ReactNode;
 }
 
@@ -22,6 +25,7 @@ export const ErrorBoundaryUI: FC<IErrorBoundaryUI> = ({
   filterItemsConfig,
   imageSrc,
   imageAlt,
+  centered=true,
   children,
 }) => {
   return (
@@ -32,7 +36,7 @@ export const ErrorBoundaryUI: FC<IErrorBoundaryUI> = ({
         text={headerText}
         filter={filterItemsConfig && <Filter items={filterItemsConfig} />}
       />
-      <div className={styles.content_box}>
+      <div className={classnames(styles.content_box, {[styles.centered]: centered})}>
         <img className={styles.image} src={imageSrc} alt={imageAlt}></img>
         {children && children}
       </div>

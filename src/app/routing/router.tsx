@@ -30,6 +30,7 @@ import {
   VKAuthPage,
   RegisterPage,
 } from 'pages';
+import { BlockedPage } from 'features/error-boundary/pages/blockedPage';
 import { tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
 
@@ -62,6 +63,18 @@ export const router = createBrowserRouter([
         element: (
           <RoutesGroup
             allowed={{ Volunteer: true, Recipient: true, Admin: true }}
+            onlyBlocked
+          />
+        ),
+        children: [
+          { path: Routes.PROFILE_BLOCKED, element: <BlockedPage /> },
+        ],
+      },
+      {
+        element: (
+          <RoutesGroup
+            allowed={{ Volunteer: true, Recipient: true, Admin: true }}
+            allowBlocked
           />
         ),
         children: [

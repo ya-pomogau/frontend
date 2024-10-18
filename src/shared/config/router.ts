@@ -11,6 +11,7 @@ export const Routes = {
   OUT: '/out',
   PROFILE_MAP: '/profile/map',
   PROFILE_ACTIVE: '/profile/active',
+  PROFILE_BLOCKED: '/profile/blocked',
   PROFILE_COMPLETED: '/profile/completed',
   PROFILE_REQUESTS: '/profile/requests',
   PROFILE_REQUESTS_VOLUNTEERS: '/profile/requests/volunteers',
