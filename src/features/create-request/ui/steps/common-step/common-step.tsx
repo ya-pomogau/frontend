@@ -15,7 +15,7 @@ import { LocationIcon } from 'shared/ui/icons/location-icon';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
-import { useCreateTaskMutation } from 'services/user-task-api';
+import { CreateTaskDto, useCreateTaskMutation, useUpdateTaskMutation } from 'services/user-task-api';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -24,6 +24,7 @@ interface ICommonStepProps {
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
   const [createTask] = useCreateTaskMutation();
+  const [updateTask] = useUpdateTaskMutation();
   const {
     taskId,
     time,
@@ -45,7 +46,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
-  const categorySize = category.title.length > 22 ? 'large' : 'medium';
+  const categorySize = category.title.length > 22 ? "large" : "medium";
 
   const handleSubmitClick = () => {
     let requestData = {};
@@ -62,13 +63,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-      createTask({
-        categoryId: category._id,
-        location: location,
-        date: dateObject,
-        address,
-        description,
-      });
       dispatch(clearState());
       dispatch(closePopup());
     } else {
@@ -79,21 +73,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-      createTask({
-        categoryId: category._id,
-        location: location,
-        date: null,
-        address,
-        description,
-      });
       dispatch(clearState());
       dispatch(closePopup());
     }
     if (isTypeEdit) {
-      const updateTask = { ...requestData, taskId: taskId };
-      console.log('это редактирование', updateTask);
+      updateTask({ id: taskId, dto: requestData as CreateTaskDto });
     } else {
-      console.log('это новая таска', requestData);
+      createTask(requestData as CreateTaskDto);
     }
   };
 
@@ -180,13 +166,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               {description}
             </p>
             {[...description].length > 170 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={styles.readMoreButton}
-              >
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
-            )}
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className={styles.readMoreButton}
+                >
+                  {isExpanded ? 'Скрыть' : 'Читать'}
+                </button>
+              )}
           </>
         ) : (
           <>
@@ -253,13 +239,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               ) : null}
             </p>
             {[...description].length > 160 && (
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className={styles.readMoreButton}
-              >
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
-            )}
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className={styles.readMoreButton}
+                >
+                  {isExpanded ? 'Скрыть' : 'Читать'}
+                </button>
+              )}
           </>
         )}
       </div>
