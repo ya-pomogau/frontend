@@ -14,6 +14,9 @@ export const balloonMarker = (properties: any) => {
   const urgencyDateClass = properties.isUrgentTask ? "task_date_text_urgent" : "task_date_text";
   const urgencyCountClass = properties.isUrgentTask ? "task_count_urgent" : "task_count";
   const urgentFill = properties.isUrgentTask ? "#D60080" : "#2E3192";
+  const submitUrgentClass = properties.isUrgentTask ? "submit_button_urgent" : "";
+  const submitDisabledClass = properties.isDisabled ? "submit_button_disabled" : "";
+
   const authorizedMarker = `<div class="task_container">
 
   <div class="close_icon">
@@ -22,17 +25,17 @@ export const balloonMarker = (properties: any) => {
     </svg>
   </div>
   <div class="task_bio">
-    <img src="{{properties.recipient.avatar}}" alt={{properties.recipient.name}} class="task_avatar"/>
+    <img src="${properties.recipient.avatar}" alt="${properties.recipient.name}" class="task_avatar"/>
     <div>
       <p class="task_recipient_name">
-        {{properties.recipient.name}}
+        ${properties.recipient.name}
       </p>
-      <p class="task_recipient_phone">{{properties.recipient.phone}}</p>
+      <p class="task_recipient_phone">${properties.recipient.phone}</p>
     </div>
   </div>
   <div class="task_description_container">
     <p class="task_description task_description_hidden" >
-      {{properties.description}}
+      ${properties.description}
     </p>
     <button type="button" class="task_button">Читать</button>
   </div>
@@ -47,10 +50,10 @@ export const balloonMarker = (properties: any) => {
           <path d="M9.39895 8.58402C9.72588 8.33645 10.0528 8.25391 10.5432 8.25391C10.9518 8.25391 11.3605 8.33645 11.6057 8.58402C11.8509 8.8316 12.0143 9.16167 12.0143 9.49177C12.0143 9.73935 11.9326 9.98694 11.7691 10.2345C11.6057 10.4821 11.4422 10.5646 11.1153 10.6471C11.4422 10.7297 11.6057 10.8947 11.7691 11.1423C11.9326 11.3898 12.0143 11.7199 12.0143 12.05C12.0143 12.4626 11.8509 12.7103 11.6057 13.0404C11.3605 13.2879 10.9518 13.453 10.4614 13.453C9.97106 13.453 9.56241 13.3704 9.31722 13.1229C8.99029 12.8753 8.82683 12.5452 8.82683 12.1326H9.23548C9.23548 12.3802 9.39894 12.6277 9.64414 12.7927C9.88933 12.9578 10.1345 13.0404 10.4614 13.0404C10.7884 13.0404 11.1153 12.9578 11.2788 12.7927C11.4422 12.6277 11.524 12.3801 11.524 12.05C11.524 11.6374 11.3605 11.3898 11.1153 11.2248C10.8701 11.0597 10.4615 10.9773 9.97108 10.9773H9.80761V10.5646H9.97108C10.9518 10.5646 11.3605 10.2346 11.3605 9.65688C11.3605 9.40931 11.2788 9.16169 11.1153 8.99665C10.9518 8.8316 10.7067 8.74903 10.3797 8.74903C10.0528 8.74903 9.80762 8.8316 9.56243 8.99665C9.39896 9.16169 9.23548 9.3267 9.23548 9.57428H8.74512C8.90858 9.07913 9.07203 8.8316 9.39895 8.58402Z" />
           <path d="M16.7549 5.36549H0.408757C0.245295 5.36549 0.163574 5.28302 0.163574 5.11797C0.163574 4.95293 0.245295 4.87036 0.408757 4.87036H16.7549C16.9184 4.87036 17.0001 4.95293 17.0001 5.11797C16.9184 5.2005 16.8367 5.36549 16.7549 5.36549Z" />
         </svg>
-        <p class="${urgencyDateClass}">{{properties.date}}</p>
+        <p class="${urgencyDateClass}">${properties.date}</p>
       </div>
       <div class="task_box">
-        <p class="${urgencyCountClass}">{{properties.category.points}}</p>
+        <p class="${urgencyCountClass}">${properties.category.points}</p>
         <svg width="42" height="30" viewBox="0 0 42 30" fill="${urgentFill}" xmlns="http://www.w3.org/2000/svg">
           <path d="M21 30C28.1787 30 34.2025 26.4333 35.8504 19.6839C35.8565 19.6839 35.8626 19.684 35.8687 19.684L35.8815 19.684C39.2606 19.684 42 16.4326 42 13.0131C42 9.59347 39.2606 6.34212 35.8815 6.34212C35.1872 6.34212 34.2355 6.26746 33.6134 6.48308C30.8962 2.18119 26.4195 0 21 0C15.5805 0 11.1038 2.18119 8.38659 6.48308C7.76452 6.26746 6.81281 6.34212 6.11852 6.34212C2.73935 6.34212 0 9.59347 0 13.0131C0 16.4326 2.73935 19.2047 6.11852 19.2047C6.12889 19.2047 6.13926 19.2047 6.14962 19.2047C7.79754 25.9541 13.8213 30 21 30Z"/>
           <path d="M32.6 15.5909C32.6 21.9924 27.4513 27.1818 21.1 27.1818C14.7487 27.1818 9.6 21.9924 9.6 15.5909C9.6 9.18943 14.7487 4 21.1 4C27.4513 4 32.6 9.18943 32.6 15.5909Z" stroke="white" stroke-width="0.5"/>
@@ -76,7 +79,7 @@ export const balloonMarker = (properties: any) => {
   <div class="task_button_container">
     <button
       type="button"
-      class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
+      class="submit_button ${submitUrgentClass} ${submitDisabledClass}"
     >
       Откликнуться
     </button>
@@ -90,7 +93,7 @@ export const balloonMarker = (properties: any) => {
           </svg>
         </div>
         <div class="task_bio">
-          <img src="{{properties.recipient.avatar}}" alt={{properties.recipient.name}} class="task_avatar"/>
+          <img src="${properties.recipient.avatar}" alt="${properties.recipient.name}" class="task_avatar"/>
           <div>
             <p class="task_recipient_name">
                Нужна помощь
@@ -100,13 +103,13 @@ export const balloonMarker = (properties: any) => {
         </div>
         <div class="task_description_container">
           <p class="task_description task_description_hidden" >
-            {{properties.category.title}}
+            ${properties.category.title}
           </p>
           <button type="button" class="task_button">Читать</button>
         </div>
         <div class="task_icon_box">
-          <p class="${urgencyCountClass}">{{properties.category.count}}</p>
-          <svg width="47" height="36" viewBox="0 0 47 36" fill=${urgentFill} xmlns="http://www.w3.org/2000/svg">
+          <p class="${urgencyCountClass}">${properties.category.count}</p>
+          <svg width="47" height="36" viewBox="0 0 47 36" fill="${urgentFill}" xmlns="http://www.w3.org/2000/svg">
             <path d="M22.5 33C29.8497 33 36.0168 29.1956 37.704 21.9962C37.7102 21.9962 37.7165 21.9962 37.7228 21.9962L37.7358 21.9962C41.1954 21.9962 44 18.5281 44 14.8806C44 11.233 41.1954 7.76493 37.7358 7.76493C37.025 7.76493 36.0506 7.68529 35.4137 7.91528C32.6319 3.3266 28.0485 1 22.5 1C16.9515 1 12.3681 3.3266 9.58627 7.91528C8.94939 7.68529 7.97502 7.76493 7.2642 7.76493C3.80458 7.76493 1 11.233 1 14.8806C1 18.5281 3.80458 21.4851 7.2642 21.4851C7.27482 21.4851 7.28543 21.485 7.29604 21.485C8.98319 28.6844 15.1503 33 22.5 33Z"/>
             <path d="M33.5569 17.7272C33.5569 24.5554 28.2856 30.0908 21.7831 30.0908C15.2806 30.0908 10.0093 24.5554 10.0093 17.7272C10.0093 10.8989 15.2806 5.36353 21.7831 5.36353C28.2856 5.36353 33.5569 10.8989 33.5569 17.7272Z" stroke="white" stroke-width="0.5"/>
             <path d="M27.6403 17.1069C27.7228 17.9658 27.6331 18.8332 27.377 19.6534C27.1208 20.4736 26.704 21.2284 26.1532 21.8692C25.6024 22.5099 24.93 23.0225 24.1792 23.3738C23.4283 23.7251 22.6158 23.9074 21.7938 23.909C20.9718 23.9105 20.1586 23.7313 19.4065 23.3828C18.6545 23.0344 17.9803 22.5244 17.4273 21.8857C16.8744 21.247 16.4549 20.4938 16.196 19.6746C15.937 18.8553 15.8443 17.9882 15.9238 17.1291L16.5493 17.193C16.4782 17.9604 16.561 18.7349 16.7924 19.4667C17.0237 20.1985 17.3983 20.8713 17.8923 21.4418C18.3862 22.0123 18.9884 22.4679 19.6602 22.7791C20.332 23.0904 21.0584 23.2505 21.7926 23.2491C22.5269 23.2477 23.2527 23.0849 23.9234 22.7711C24.5941 22.4572 25.1948 21.9994 25.6867 21.427C26.1787 20.8547 26.5511 20.1804 26.7799 19.4478C27.0087 18.7151 27.0888 17.9403 27.0151 17.1731L27.6403 17.1069Z" stroke="white" stroke-width="0.5"/>
@@ -119,7 +122,7 @@ export const balloonMarker = (properties: any) => {
         <div class="task_button_container">
           <button
             type="button"
-            class="submit_button {% if properties.isUrgentTask %} submit_button_urgent {% endif %}{% if properties.isDisabled %} submit_button_disabled {% endif %}"
+            class="submit_button ${submitUrgentClass} ${submitDisabledClass}"
           >
             Откликнуться
           </button>
