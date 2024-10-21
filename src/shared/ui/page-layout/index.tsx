@@ -10,7 +10,7 @@ import {
   unauthorizedRecipientMessage,
   unauthorizedVolunteerMessage,
 } from 'shared/libs/constants';
-import { useMediaQuery, usePermission, useRouteMatch } from 'shared/hooks';
+import { useMediaQuery, useRouteMatch, useUser } from 'shared/hooks';
 import { Breakpoints, Routes } from 'shared/config';
 import { userRole as userRoles, userStatus } from 'shared/types/common.types';
 import { BlockedPage } from 'features/error-boundary/pages/blockedPage';
@@ -24,6 +24,7 @@ interface PageLayoutProps {
 }
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
+  const user = useUser();
   const { isError, errorText } = useAppSelector((state) => state.error);
   const isBlockedSelector = useAppSelector(isUserBlockedSelector);
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
@@ -32,14 +33,14 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
   const isProfilePage = location.pathname === Routes.PROFILE;
   const isMobile = useMediaQuery(Breakpoints.L);
 
-  const isUnconfirmedRecipient = usePermission(
-    [userStatus.UNCONFIRMED],
-    userRoles.RECIPIENT
-  );
-  const isUnconfirmedVolunteer = usePermission(
-    [userStatus.UNCONFIRMED],
-    userRoles.VOLUNTEER
-  );
+  const isUnconfirmedRecipient =
+    user?.role === userRoles.RECIPIENT &&
+    user.status === userStatus.UNCONFIRMED;
+  const isUnconfirmedVolunteer =
+    user?.role === userRoles.VOLUNTEER &&
+    user.status === userStatus.UNCONFIRMED;
+
+  console.log(`this is  ===>`, isUnconfirmedRecipient, isUnconfirmedVolunteer);
 
   const isPageWithoutSidebar = useRouteMatch([
     Routes.POLICY,
