@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 
 import { Avatar } from '../../shared/ui/avatar';
-
-import styles from './styles.module.css';
 import { RoundButton } from '../../shared/ui/round-button';
 import { UserInfo } from '../user-card/components/index'
 import { userRole } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
+
+import styles from './styles.module.css';
 
 interface UserCardProps {
   user: User;
@@ -18,10 +18,7 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
 
   return (
     <li
-      className={classnames(
-        styles.content,
-        role === userRole.ADMIN && styles.admin_content
-      )}
+      className={classnames(styles.content)}
       onClick={onClick}
     >
       <Avatar
