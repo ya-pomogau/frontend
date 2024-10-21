@@ -12,10 +12,26 @@
 
 .input {
   padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 34px;
+  margin-bottom: 40px;
+}
+
+.input label {
+  color: var(--colors-interface-black);
+}
+
+.input ::placeholder {
+  font-size: var(--font-size-small);  
 }
 
 .text-block {
   position: relative;
+}
+
+.text-block ::placeholder {
+  font-size: var(--font-size-small);  
 }
 
 .attachment-button {

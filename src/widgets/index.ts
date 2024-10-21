@@ -6,7 +6,6 @@ export {
   AdminSideMenu,
   MasterSideMenu,
   SideMenuForAuthorized,
-  FeedbackSideMenu,
 } from './side-menu';
 export { BalanceSettings } from './balance-settings';
 export { ButtonWithModal } from './button-with-modal';

@@ -1,5 +1,5 @@
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
-import { CloseCrossIcon } from '../icons/close-cross-icon';
+import { Icon } from 'shared/ui';
 import { ReactNode } from 'react';
 import classNames from 'classnames';
 
@@ -29,7 +29,7 @@ export const LightPopup = ({
       <div className={classNames(styles.container, extClassName, 'text')}>
         {hasCloseButton && (
           <button className={styles.closeButton} onClick={onClickExit}>
-            <CloseCrossIcon color={'blue'} />
+            <Icon icon="CloseCrossIcon" color={'blue'} />
           </button>
         )}
         {children}

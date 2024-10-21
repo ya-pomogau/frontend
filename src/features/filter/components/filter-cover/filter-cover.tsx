@@ -7,7 +7,7 @@ import { Breakpoints } from 'shared/config';
 import type { FilterProps, IFilterValues } from 'features/filter/types';
 
 import styles from './filter-cover.module.css';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { Icon } from 'shared/ui';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -111,7 +111,7 @@ export const FilterCover = ({
               buttonType="secondary"
               size="medium"
               actionType="reset"
-              customIcon={<CloseCrossIcon color={'blue'} />}
+              customIcon={<Icon icon="CloseCrossIcon" color={'blue'} />}
             />
             <Button
               extClassName={styles.buttonStyle}
