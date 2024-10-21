@@ -2,12 +2,11 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { initTitleMarkdown, initDescriptionMarkdown } from './content';
 import style from './markdown-style.module.css';
-import { EditIcon } from '../../shared/ui/icons/edit-icon';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Button } from '../../shared/ui/button';
-import { CloseIconThin } from '../../shared/ui/icons/close-icon-thin';
 import { SmartHeader } from '../../shared/ui/smart-header';
-import { LockIcon } from '../../shared/ui/icons/lock-icon';
+import { Icon } from 'shared/ui';
+
 import { useMediaQuery } from '../../shared/hooks';
 import usePermission from '../../shared/hooks/use-permission';
 import { userRole } from 'shared/types/common.types';
@@ -49,7 +48,7 @@ export function PolicyPage() {
   return (
     <div className={style.wrapper}>
       <SmartHeader
-        icon={<LockIcon color="blue" size="32" />}
+        icon={<Icon icon="LockIcon" color="blue" size="32" />}
         text="Политика конфиденциальности"
         extClassName={isMobile ? style.smartHeaderOn : style.smartHeaderOff}
       />
@@ -64,7 +63,7 @@ export function PolicyPage() {
             </ReactMarkdown>
             {isMainAdmin && (
               <button className={style.editButton} onClick={handleEditButton}>
-                <EditIcon color={'blue'} size={'20'} height="18" />
+                <Icon icon="EditIcon" color={'blue'} size={'20'} height="18" />
                 <p className={style.editButtonText}>Редактировать</p>
               </button>
             )}
@@ -102,7 +101,7 @@ export function PolicyPage() {
               size="extraLarge"
             />
             <button className={style.closeButton} onClick={handleCloseButton}>
-              <CloseIconThin color={'blue'}></CloseIconThin>
+              <Icon icon="CloseIconThin" color={'blue'} />
               <p className={style.closeButtonText}>Закрыть без изменений</p>
             </button>
           </div>
