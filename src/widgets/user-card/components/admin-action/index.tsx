@@ -6,7 +6,7 @@ import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { Icon } from 'shared/ui';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 interface AdminActionsProps {
   onAdminSaveClick: () => void;
