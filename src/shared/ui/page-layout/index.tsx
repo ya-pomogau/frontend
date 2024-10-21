@@ -40,8 +40,6 @@ export const PageLayout = ({ content }: PageLayoutProps) => {
     user?.role === userRoles.VOLUNTEER &&
     user.status === userStatus.UNCONFIRMED;
 
-  console.log(`this is  ===>`, isUnconfirmedRecipient, isUnconfirmedVolunteer);
-
   const isPageWithoutSidebar = useRouteMatch([
     Routes.POLICY,
     Routes.BLOG,
