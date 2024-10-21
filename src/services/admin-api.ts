@@ -161,6 +161,7 @@ export const adminsApi = createApi({
         method: 'PATCH',
         body: { privileges: body },
       }),
+      invalidatesTags: [{ type: 'Admins' }],
     }),
     blockAdmin: build.mutation<{ id: string }, string>({
       query: (id) => ({
