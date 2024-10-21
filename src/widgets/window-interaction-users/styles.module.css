@@ -107,7 +107,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-color: white;
+    background-color: var(--colors-interface-white);
   }
 
   .container {

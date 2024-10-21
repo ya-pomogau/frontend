@@ -1,4 +1,4 @@
-import { UserRole } from 'shared/types/common.types';
+import { userRole, UserRole } from 'shared/types/common.types';
 
 export interface IDateUser {
   role: UserRole;
@@ -17,7 +17,7 @@ export interface IDateUser {
 
 export const testUsers: IDateUser[] = [
   {
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'VИванов Иван Иванович',
     userId: 123,
@@ -31,7 +31,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'RСеменов Петр Игоревич',
     userId: 124,
@@ -46,7 +46,7 @@ export const testUsers: IDateUser[] = [
   },
 
   {
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'VИванов Иван Иванович',
     userId: 125,
@@ -60,7 +60,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'RИванов Иван Иванович',
     userId: 126,
@@ -74,7 +74,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.ADMIN,
+    role: userRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'AИванов Иван Иванович',
     userId: 127,
@@ -88,7 +88,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.ADMIN,
+    role: userRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'AИванов Иван Иванович',
     userId: 128,
@@ -102,7 +102,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.ADMIN,
+    role: userRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'AИванов Иван Иванович',
     userId: 129,
@@ -116,7 +116,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.ADMIN,
+    role: userRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'AИванов Иван Иванович',
     userId: 130,
@@ -130,7 +130,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'VИванов Иван Иванович',
     userId: 131,
@@ -144,7 +144,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'RИванов Иван Иванович',
     userId: 132,
@@ -159,7 +159,7 @@ export const testUsers: IDateUser[] = [
   },
 
   {
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'VИванов Иван Иванович',
     userId: 133,
@@ -173,7 +173,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'RИванов Иван Иванович',
     userId: 134,
@@ -188,7 +188,7 @@ export const testUsers: IDateUser[] = [
   },
 
   {
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     avatarName: 'Volunteer Avatar',
     userName: 'VИванов Иван Иванович',
     userId: 135,
@@ -202,7 +202,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'RИванов Иван Иванович',
     userId: 136,
@@ -216,7 +216,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.ADMIN,
+    role: userRole.ADMIN,
     avatarName: 'Volunteer Avatar',
     userName: 'AИванов Иван Иванович',
     userId: 137,
@@ -230,7 +230,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'VИванов Иван Иванович',
     userId: 138,
@@ -244,7 +244,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'RИванов Иван Иванович',
     userId: 139,
@@ -258,7 +258,7 @@ export const testUsers: IDateUser[] = [
     },
   },
   {
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     avatarName: 'Volunteer Avatar',
     userName: 'AИванов Иван Иванович',
     userId: 140,

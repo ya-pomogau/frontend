@@ -11,11 +11,15 @@ import {
   clearState,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
-import { LocationIcon } from 'shared/ui/icons/location-icon';
+import { Icon } from 'shared/ui';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
-import { CreateTaskDto, useCreateTaskMutation, useUpdateTaskMutation } from 'services/user-task-api';
+import {
+  CreateTaskDto,
+  useCreateTaskMutation,
+  useUpdateTaskMutation,
+} from 'services/user-task-api';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -46,7 +50,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
-  const categorySize = category.title.length > 22 ? "large" : "medium";
+  const categorySize = category.title.length > 22 ? 'large' : 'medium';
 
   const handleSubmitClick = () => {
     let requestData = {};
@@ -146,7 +150,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             </div>
             <div className={styles.addressWrapper}>
-              <LocationIcon color="blue" />
+              <Icon icon="LocationIcon" color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
             </div>
             <CategoriesBackground
@@ -166,13 +170,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               {description}
             </p>
             {[...description].length > 170 && (
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className={styles.readMoreButton}
-                >
-                  {isExpanded ? 'Скрыть' : 'Читать'}
-                </button>
-              )}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className={styles.readMoreButton}
+              >
+                {isExpanded ? 'Скрыть' : 'Читать'}
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -206,7 +210,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               ) : null}
             </div>
             <div className={styles.addressWrapper}>
-              <LocationIcon color="blue" />
+              <Icon icon="LocationIcon" color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
               {isTypeEdit && (
                 <EditButton
@@ -239,13 +243,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               ) : null}
             </p>
             {[...description].length > 160 && (
-                <button
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className={styles.readMoreButton}
-                >
-                  {isExpanded ? 'Скрыть' : 'Читать'}
-                </button>
-              )}
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className={styles.readMoreButton}
+              >
+                {isExpanded ? 'Скрыть' : 'Читать'}
+              </button>
+            )}
           </>
         )}
       </div>

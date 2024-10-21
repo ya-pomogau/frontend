@@ -5,7 +5,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { Button, FormInput, FormInputPhone, FormInputAddress } from 'shared/ui';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, userRole as userRoles } from 'shared/types/common.types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { schema } from './schema';
 
@@ -50,7 +50,7 @@ const RegisterForm = () => {
         },
         name: FIO,
         phone: '',
-        role: UserRole.VOLUNTEER,
+        role: userRoles.VOLUNTEER,
       }),
       [FIO]
     ),
@@ -100,19 +100,19 @@ const RegisterForm = () => {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.buttonContainer}>
         <Button
-          buttonType={getRoleButtonType(UserRole.VOLUNTEER)}
+          buttonType={getRoleButtonType(userRoles.VOLUNTEER)}
           size="extraLarge"
           label="Хочу помочь"
-          id={UserRole.VOLUNTEER}
-          onClick={() => handleRoleButtonClick(UserRole.VOLUNTEER)}
+          id={userRoles.VOLUNTEER}
+          onClick={() => handleRoleButtonClick(userRoles.VOLUNTEER)}
           actionType="button"
         />
         <Button
-          buttonType={getRoleButtonType(UserRole.RECIPIENT)}
+          buttonType={getRoleButtonType(userRoles.RECIPIENT)}
           size="extraLarge"
           label="Нужна помощь"
-          id={UserRole.RECIPIENT}
-          onClick={() => handleRoleButtonClick(UserRole.RECIPIENT)}
+          id={userRoles.RECIPIENT}
+          onClick={() => handleRoleButtonClick(userRoles.RECIPIENT)}
           actionType="button"
         />
       </div>
@@ -122,12 +122,14 @@ const RegisterForm = () => {
         placeholder="ФИО"
         type="text"
         control={control}
+        extClassName={styles.input}
       />
       <FormInputPhone
         name="phone"
         label="Телефон"
         placeholder="+7 (000) 000-00-00"
         control={control}
+        extClassName={styles.input}
       />
       <div>
         <FormInputAddress
@@ -136,6 +138,7 @@ const RegisterForm = () => {
           placeholder="Адрес"
           control={control}
           setAddress={handleAddressValueChange}
+          extClassName={styles.input}
         />
 
         <p className={styles.text}>

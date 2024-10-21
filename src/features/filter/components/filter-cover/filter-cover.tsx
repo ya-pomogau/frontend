@@ -9,7 +9,7 @@ import { Breakpoints } from 'shared/config';
 import type { IFilterValues } from 'features/filter/types';
 
 import styles from './filter-cover.module.css';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { Icon } from 'shared/ui';
 import { defaultObjFilteres } from 'features/filter/consts';
 import { useSearchParams } from 'react-router-dom';
 
@@ -103,11 +103,7 @@ export const FilterCover = ({
       extClassName={styles.tooltip}
       visible
     >
-      <form
-        name="formFilter"
-        onSubmit={handleSubmit}
-        onReset={resetFilter}
-      >
+      <form name="formFilter" onSubmit={handleSubmit} onReset={resetFilter}>
         <div className={styles.wrapper}>
           {filterMenu}
           <div
@@ -121,7 +117,7 @@ export const FilterCover = ({
               buttonType="secondary"
               size="medium"
               actionType="reset"
-              customIcon={<CloseCrossIcon color={'blue'} />}
+              customIcon={<Icon icon="CloseCrossIcon" color={'blue'} />}
             />
             <Button
               style={buttonStyle}
@@ -129,7 +125,7 @@ export const FilterCover = ({
               buttonType="primary"
               size="medium"
               actionType="submit"
-              disabled={!isFilterSelected()} 
+              disabled={!isFilterSelected()}
             />
           </div>
         </div>

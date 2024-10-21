@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 
 import { useControlModal, useMediaQuery, useUser } from 'shared/hooks';
@@ -12,7 +12,7 @@ import { SideBar } from './navigation';
 import { DropDownMenu } from './DropDownMenu';
 import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
 import { MenuButton } from './components';
-import { UserRole } from '../../shared/types/common.types';
+import { userRole } from '../../shared/types/common.types';
 
 import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import styles from './styles.module.css';
@@ -20,10 +20,11 @@ import styles from './styles.module.css';
 const Header = () => {
   const [menuActive, setMenuActive] = useState<boolean>(false);
   const { isOpen, handleOpen, handleClose } = useControlModal();
+  const location = useLocation();
 
   const isMobile = useMediaQuery(Breakpoints.L);
   const user = useUser();
-  const isAdmin = user?.role === UserRole.ADMIN;
+  const isAdmin = user?.role === userRole.ADMIN;
 
   const handleClick = (evt: SyntheticEvent) => {
     evt.stopPropagation();
@@ -42,12 +43,14 @@ const Header = () => {
   return (
     <header className={headerStyles}>
       <div className={styles.header__container}>
-        {isMobile && user && (
-          <Avatar
-            extClassName={styles.header__avatar}
-            avatarName={user.name}
-            avatarLink={user.avatar || defaultAvatar}
-          />
+        {isMobile && user && location.pathname !== Routes.PROFILE && (
+          <Link to="/profile">
+            <Avatar
+              extClassName={styles.header__avatar}
+              avatarName={user.name}
+              avatarLink={user.avatar || defaultAvatar}
+            />
+          </Link>
         )}
         {isMobile && !user && (
           <Button

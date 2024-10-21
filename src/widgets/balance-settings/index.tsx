@@ -1,9 +1,7 @@
-import classnames from 'classnames';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from 'shared/ui';
-import { usePermission } from 'shared/hooks';
-import { AdminPermission, UserRole, TPoints } from 'shared/types/common.types';
+import { TPoints } from 'shared/types/common.types';
 import {
   useGetCategoriesQuery,
   useUpdatePointsMutation,
@@ -12,21 +10,14 @@ import BalanceSettingsItem from './components/balance-settings-item';
 
 import styles from './styles.module.css';
 
-interface BalanceSettingsProps {
-  extClassName?: string;
-}
-
-export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
-  const isEditAllowed = usePermission(
-    [AdminPermission.CATEGORIES],
-    UserRole.ADMIN
-  );
+export const BalanceSettings = () => {
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();
   const {
     control,
     handleSubmit,
     formState: { isDirty, isValid },
+    reset,
   } = useForm<Record<string, number>>({
     values: (data || []).reduce((acc, value) => {
       const { title, points } = value;
@@ -38,19 +29,23 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
 
   //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
   const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
+    const formattedData = Object.keys(formData).map((title) => {
+      const category = data?.find((cat) => cat.title === title);
+      return category
+        ? { id: category._id, points: Number(formData[title]) }
+        : null;
+    });
     try {
-      await updatePoints(formData);
+      await updatePoints({ data: formattedData });
+      reset(formData);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
   };
 
   return (
-    <form
-      className={classnames(styles.container, extClassName)}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className={classnames(styles.balances_box)}>
+    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+      <div className={styles.balances_box}>
         {data &&
           data.map((item, index) => (
             <Controller
@@ -69,12 +64,12 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
       </div>
 
       <Button
-        extClassName={classnames(styles.save_btn)}
+        extClassName={styles.save_btn}
         buttonType="primary"
         label="Сохранить"
         size="large"
         actionType="submit"
-        disabled={!isEditAllowed || !isDirty || !isValid}
+        disabled={!isDirty || !isValid}
       />
     </form>
   );

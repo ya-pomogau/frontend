@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Icon, SmartHeader } from 'shared/ui';
 import { usePermission } from 'shared/hooks';
@@ -9,7 +10,7 @@ import {
   useGetTasksConfilctQuery,
   useGetTasksWorkConflictQuery,
 } from 'services/admin-api';
-import { AdminPermission, UserRole } from 'shared/types/common.types';
+import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
 
@@ -18,10 +19,18 @@ interface ProfileChatsPagesProps {
 }
 
 export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const isConflictsPermissionGranted = usePermission(
-    [AdminPermission.CONFLICTS],
-    UserRole.ADMIN
+    [adminPermission.CONFLICTS],
+    userRole.ADMIN
   );
+
+  // TODO: Добавить хуки для работы с обращениями (нерассмотренные, в работе, завершенные)
+  // const { data: hubUnreviewed } = useGetTasksHubUnreviewedQuery();
+  // const { data: hubInWork } = useGetTasksHubInWorkQuery();
+  // const { data: hubCompleted } = useGetTasksHubCompletedQuery();
 
   const { data: conflict } = useGetTasksConfilctQuery('', {
     skip: !isConflictsPermissionGranted,
@@ -30,8 +39,52 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
     skip: !isConflictsPermissionGranted,
   });
 
-  // TODO: добавить данные для раздела "В работе"
-  // const { data: conflictInProgress } = useGetTasksProgressConflictQuery('');
+  console.log(
+    `this is conflict, conflictIsWork ===>`,
+    conflict,
+    conflictIsWork
+  );
+
+  // TODO: добавить данные для раздела "Конфликты" "Завершенные"
+  // const { data: conflictCompleted } = useGetTasksConflictCompletedQuery('', {
+  //   skip: !isConflictsPermissionGranted,
+  // });
+  // TODO: изменить тип notificationsData
+  const renderSubMenuLinks = (basePath: string, notificationsData: any) => {
+    // TODO: FIX THIS
+    console.log('notificationsData', notificationsData);
+
+    return (
+      <>
+        <PageSubMenuLink
+          text="Нерассмотренные"
+          to={`${basePath}/unreviewed`}
+          // TODO: подключить данные количества обращений
+          // notifications={
+          //   notificationsData.unreviewed ? notificationsData.unreviewed.length : 0
+          // }
+        />
+        <PageSubMenuLink
+          text="В работе"
+          to={`${basePath}/in-work`}
+          // TODO: подключить данные количества обращений
+          // notifications={
+          //   notificationsData.inWork ? notificationsData.inWork.length : 0
+          // }
+          styleSpan={styles['style-span']}
+        />
+        <PageSubMenuLink
+          text="Завершенные"
+          to={`${basePath}/completed`}
+          // TODO: подключить данные количества обращений
+          // notifications={
+          //   notificationsData.completed ? notificationsData.completed.length : 0
+          // }
+          styleSpan={styles['style-span']}
+        />
+      </>
+    );
+  };
 
   return (
     <>
@@ -44,25 +97,43 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
         links={
           <>
             <PageSubMenuLink
-              text="Ждут ответа"
+              text="Обращения"
               to="/chats-hub"
-              notifications={conflict ? conflict?.length : 0}
+              // TODO: подключить данные количества обращений
+              // notifications={hubUnreviewed ? hubUnreviewed.length : 0}
             />
             <PageSubMenuLink
-              text="В работе"
-              to="/chats-in-work"
-              // TODO: подключить данные количества конфликтов в работе
-              // notifications={conflictInProgress ? conflictInProgress?.length : 0}
-            />
-            <PageSubMenuLink
-              text="Конфликтное закрытие"
+              text="Конфликты"
               to="/chats-conflict"
-              notifications={conflictIsWork ? conflictIsWork?.length : 0}
+              // TODO: подключить данные количества конфликтов
+              // notifications={conflictUnreviewed ? conflictUnreviewed.length : 0}
               styleSpan={styles['style-span']}
             />
           </>
         }
       />
+      {currentPath.startsWith('/chats-hub') && (
+        <PageSubMenu
+          style={styles['sub-menu']}
+          links={renderSubMenuLinks('/chats-hub', {
+            // TODO: подключить данные количества обращений
+            // unreviewed: hubUnreviewed,
+            // inWork: hubInWork,
+            // completed: hubCompleted,
+          })}
+        />
+      )}
+      {currentPath.startsWith('/chats-conflict') && (
+        <PageSubMenu
+          style={styles['sub-menu']}
+          links={renderSubMenuLinks('/chats-conflict', {
+            // TODO: подключить данные количества конфликтов
+            // unreviewed: conflictUnreviewed,
+            // inWork: conflictInWork,
+            // completed: conflictCompleted
+          })}
+        />
+      )}
       {children}
     </>
   );

@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { PopupChat } from '.';
-import { getMockMessages } from './libs/utils';
+import { mockChatMessages } from 'entities/chat/mock-messages';
+import { mockVolunteer } from 'entities/chat/mock-users';
 
 const meta: Meta<typeof PopupChat> = {
   title: 'entities/PopupChat',
@@ -10,16 +11,12 @@ const meta: Meta<typeof PopupChat> = {
   argTypes: {
     messages: {
       description: 'Массив с сообщениями',
-      defaultValue: [{}],
+      defaultValue: mockChatMessages,
     },
     chatmateInfo: {
       description: 'Информация пользователя который нам написал',
       type: 'function',
-      defaultValue: {
-        userId: '1',
-        name: 'Иванов Иван Иванович',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-      },
+      defaultValue: mockVolunteer,
     },
     onAttachFileClick: {
       description: 'Функция которая закрепляет файл',
@@ -49,12 +46,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Popup: Story = {
   args: {
-    messages: getMockMessages(),
-    chatmateInfo: {
-      userId: '1',
-      name: 'Иванов Иван Иванович',
-      userAvatarLink: 'https://i.pravatar.cc/300',
-    },
+    messages: mockChatMessages,
+    chatmateInfo: mockVolunteer,
     onAttachFileClick: () => {},
     onMessageSend: () => {},
     isOpen: true,

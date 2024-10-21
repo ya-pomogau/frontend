@@ -1,16 +1,19 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
-
-import { PhoneIcon } from '../icons/phone-icon';
-import { EmptyMessageIcon } from '../icons/empty-message-icon';
-import { LocationIcon } from '../icons/location-icon';
-import { AddIcon } from '../icons/add-icon';
+import { AddLargeIcon } from '../icons/add-icon';
+import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
 
 interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
-  buttonType: 'phone' | 'message' | 'location' | 'add' | 'default';
+  buttonType:
+    | 'phone'
+    | 'message'
+    | 'location'
+    | 'addMedium'
+    | 'addLarge'
+    | 'default';
   onClick?: () => void;
   customIcon?: ReactNode;
   size?: 'small' | 'medium' | 'large';
@@ -18,10 +21,11 @@ interface RoundButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const defautlIcons = {
-  phone: <PhoneIcon size="24" color="white" />,
-  message: <EmptyMessageIcon size="24" color="white" />,
-  location: <LocationIcon size="54" color="white" />,
-  add: <AddIcon size="66" color="white" />,
+  phone: <Icon icon="PhoneIcon" size="24" color="white" />,
+  message: <Icon icon="EmptyMessageIcon" size="24" color="white" />,
+  location: <Icon icon="LocationIcon" size="54" color="white" />,
+  addMedium: <Icon icon="AddMediumIcon" size="48" color="white" />,
+  addLarge: <AddLargeIcon size="66" color="white" />,
   default: null,
 };
 

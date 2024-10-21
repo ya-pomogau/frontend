@@ -5,8 +5,8 @@ import { PageSubMenuAdminStatistics } from 'widgets/page-sub-menu/components/pag
 import { Accordion } from 'shared/ui/accordion';
 import { Button } from 'shared/ui/button';
 import Fieldset from 'shared/ui/fieldset';
-import { FieldsetView } from 'shared/ui/fieldset/utils';
-import { ButtonsNameForStatisticsPage } from 'pages/application-statistics';
+import { fieldsetView } from 'shared/ui/fieldset/utils';
+import { buttonsNameForStatisticsPage } from 'pages/application-statistics';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 interface IUsersRoleOptions {
@@ -38,16 +38,15 @@ export const usersStatusOptions: Array<IUsersStatusOptions> = [
 
 export const UsersStatisticsPage = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const formData = {
-      userStatus: watch('usersStatusOptions'),
-      userRole: watch('usersRoleOptions'),
-    };
+    console.log(`this is data ===>`, data);
   };
 
-  const { control, handleSubmit, watch } = useForm<IFormInput>({defaultValues: {
-    usersRoleOptions: '',
-    usersStatusOptions: ''
-  }});
+  const { control, handleSubmit, watch } = useForm<IFormInput>({
+    defaultValues: {
+      usersRoleOptions: '',
+      usersStatusOptions: '',
+    },
+  });
 
   const disabledButton =
     !watch('usersStatusOptions') || !watch('usersRoleOptions');
@@ -65,7 +64,7 @@ export const UsersStatisticsPage = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.role}>
-          <Fieldset title="Роль" view={FieldsetView.ROW}>
+          <Fieldset title="Роль" view={fieldsetView.ROW}>
             <div className={styles.role__fields}>
               <Controller
                 name="usersRoleOptions"
@@ -86,7 +85,7 @@ export const UsersStatisticsPage = () => {
           </Fieldset>
         </div>
         <div className={styles.status}>
-          <Fieldset title="Статус" view={FieldsetView.COLUMN}>
+          <Fieldset title="Статус" view={fieldsetView.COLUMN}>
             <div className={styles.status_fields}>
               <Controller
                 name="usersStatusOptions"
@@ -111,16 +110,16 @@ export const UsersStatisticsPage = () => {
             buttonType="primary"
             label="Сформировать отчет"
             actionType="submit"
-            id={ButtonsNameForStatisticsPage.generateReport}
-            name={ButtonsNameForStatisticsPage.generateReport}
+            id={buttonsNameForStatisticsPage.generateReport}
+            name={buttonsNameForStatisticsPage.generateReport}
             disabled={disabledButton}
           />
           <Button
             buttonType="secondary"
             label="Скачать отчет"
             actionType="submit"
-            id={ButtonsNameForStatisticsPage.downloadReport}
-            name={ButtonsNameForStatisticsPage.downloadReport}
+            id={buttonsNameForStatisticsPage.downloadReport}
+            name={buttonsNameForStatisticsPage.downloadReport}
             disabled={disabledButton}
             customIcon={<Icon color="blue" icon="ExcelIcon" />}
           />

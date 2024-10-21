@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 import { InfoContainer } from '.';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 
 const mockedVolunteerState = {
-  role: UserRole.VOLUNTEER,
+  role: userRole.VOLUNTEER,
   data: {
     id: 7,
     fullname: 'Волонтеров Петр Петрович',
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     vk: 'https://vk.com/id123456789',
     avatar:
       'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',

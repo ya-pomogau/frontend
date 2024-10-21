@@ -9,7 +9,7 @@ import { InputAddress } from 'shared/ui/input-address';
 
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 
 import styles from './address-step.module.css';
 
@@ -59,90 +59,93 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
       }
     : undefined;
 
-    return (
-      <>
-        <div className={styles.addressContainer}>
-          {isMobile ? (
-            <>
-              <p className={placeTitleStyles}>Место встречи</p>
-              <div className={styles.headerWrapper} />
-              <InputAddress
-                address={{ address, coords: location || [] }}
-                setAddress={handleAddressValueChange}
-                name="address"
-                extClassName={styles.input}
-              />
-    
-              <div className={styles.map}>
-                <YandexMap
-                  width="260px"
-                  height="350px"
-                  coordinates={location}
-                  role={UserRole.RECIPIENT}
-                  mapSettings={mapSettings}
-                />
-                <div className={styles.alertWrapper}>
-                  <p className={`${warningTextStyles} ${styles.text}`}>
-                    * Будьте осторожны, если указываете
-                    <br />
-                    домашний адрес,
-                    <span className={`${warningTextStyles} ${styles.selectedText}`}>
-                      &nbsp;не&nbsp;
-                    </span>
-                    пишите его полностью.
-                  </p>
-                </div>
-                <div className={styles.wrapperForGradient} />
-              </div>
-            </>
-          ) : (
-            <>
-              <InputAddress
-                label="Укажите место встречи"
-                address={{ address, coords: location || [] }}
-                setAddress={handleAddressValueChange}
-                name="address"
-                extClassName={styles.input}
-              />
-              <p className={`${warningTextStyles} ${styles.text}`}>
-                * Рекомендуем
-                <span className={`${warningTextStyles} ${styles.selectedText}`}>
-                  &nbsp;не&nbsp;
-                </span>
-                указывать полный домашний адрес с номером квартиры
-                <br />
-                в целях безопасности. Достаточно улицы, номера дома и подъезда.
-              </p>
-              <div className={styles.map}>
-                <YandexMap
-                  width="100%"
-                  height="159px"
-                  coordinates={location}
-                  role={UserRole.RECIPIENT}
-                  mapSettings={mapSettings}
-                />
-              </div>
-            </>
-          )}
-        </div>
-        {isEmptyAddress && (
-          <p className={styles.messageAlert}>Укажите место встречи</p>
-        )}
-        <div className={styles.buttonWrapper}>
-          {!isTypeEdit && (
-            <Button
-              buttonType="secondary"
-              label={propsButton.backlabel}
-              onClick={propsButton.backonClick}
-              extClassName={styles.prevButton}
+  return (
+    <>
+      <div className={styles.addressContainer}>
+        {isMobile ? (
+          <>
+            <p className={placeTitleStyles}>Место встречи</p>
+            <div className={styles.headerWrapper} />
+            <InputAddress
+              address={{ address, coords: location || [] }}
+              setAddress={handleAddressValueChange}
+              name="address"
+              extClassName={styles.input}
             />
-          )}
+
+            <div className={styles.map}>
+              <YandexMap
+                width="260px"
+                height="350px"
+                coordinates={location}
+                role={userRole.RECIPIENT}
+                mapSettings={mapSettings}
+              />
+              <div className={styles.alertWrapper}>
+                <p className={`${warningTextStyles} ${styles.text}`}>
+                  * Будьте осторожны, если указываете
+                  <br />
+                  домашний адрес,
+                  <span
+                    className={`${warningTextStyles} ${styles.selectedText}`}
+                  >
+                    &nbsp;не&nbsp;
+                  </span>
+                  пишите его полностью.
+                </p>
+              </div>
+              <div className={styles.wrapperForGradient} />
+            </div>
+          </>
+        ) : (
+          <>
+            <InputAddress
+              label="Укажите место встречи"
+              address={{ address, coords: location || [] }}
+              setAddress={handleAddressValueChange}
+              name="address"
+              extClassName={styles.input}
+            />
+            <p className={`${warningTextStyles} ${styles.text}`}>
+              * Рекомендуем
+              <span className={`${warningTextStyles} ${styles.selectedText}`}>
+                &nbsp;не&nbsp;
+              </span>
+              указывать полный домашний адрес с номером квартиры
+              <br />в целях безопасности. Достаточно улицы, номера дома и
+              подъезда.
+            </p>
+            <div className={styles.map}>
+              <YandexMap
+                width="100%"
+                height="159px"
+                coordinates={location}
+                role={userRole.RECIPIENT}
+                mapSettings={mapSettings}
+              />
+            </div>
+          </>
+        )}
+      </div>
+      {isEmptyAddress && (
+        <p className={styles.messageAlert}>Укажите место встречи</p>
+      )}
+      <div className={styles.buttonWrapper}>
+        {!isTypeEdit && (
           <Button
-            disabled={isEmptyAddress}
-            buttonType="primary"
-            label={propsButton.label}
-            onClick={propsButton.onClick}
+            buttonType="secondary"
+            label={propsButton.backlabel}
+            onClick={propsButton.backonClick}
+            extClassName={styles.prevButton}
           />
-        </div>
-      </>
-    ); }    
+        )}
+        <Button
+          disabled={isEmptyAddress}
+          buttonType="primary"
+          label={propsButton.label}
+          onClick={propsButton.onClick}
+        />
+      </div>
+    </>
+  );
+};

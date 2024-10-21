@@ -6,7 +6,7 @@
   cursor: pointer;
   width: 169px;
   border: none;
-  font-size: 14px;
+  font-size: var(--font-size-middle);
   margin-left: 20px;
   padding: 0;
   background-repeat: no-repeat; /* Запрет повторения фона */

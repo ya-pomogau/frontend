@@ -21,14 +21,15 @@
 }
 
 .time {
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-size-small);
+  line-height: var(--font-size-middle);
   margin: 0;
   margin-bottom: 5px;
 }
 
 .button {
   display: flex;
+  gap: 10px;
   justify-content: end;
 }
 
@@ -49,8 +50,8 @@ input[type='time']::-webkit-calendar-picker-indicator {
 }
 
 .date {
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
   margin: 0;
   margin-bottom: 5px;
 }
@@ -74,15 +75,15 @@ input[type='time']::-webkit-calendar-picker-indicator {
   }
 
   .time {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
     position: relative;
-    top: 11px;
+    top: 9px;
   }
 
   .date {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
     position: relative;
     top: 5px;
   }
@@ -91,19 +92,19 @@ input[type='time']::-webkit-calendar-picker-indicator {
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      #2e3192 49.28%,
+      var(--colors-interface-primary) 49.28%,
       rgba(255, 255, 255, 0) 100%
     );
     width: 240px;
     height: 1px;
-    margin-top: 4px;
+    margin-top: 8px;
   }
 
   .headerWrapperForDatePicker {
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      #2e3192 49.28%,
+      var(--colors-interface-primary) 49.28%,
       rgba(255, 255, 255, 0) 100%
     );
     width: 240px;
@@ -122,11 +123,8 @@ input[type='time']::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 29px;
-    margin-bottom: 10px;
-    transform: translateY(20px);
+    margin-top: 15px;
     position: relative;
-    top: -30px;
   }
 
   .inputForTime {
@@ -140,35 +138,49 @@ input[type='time']::-webkit-calendar-picker-indicator {
   }
 
   .checkbox {
+    margin: 8px 0 15px;
     min-width: 150px;
     position: relative;
-    top: -26px;
   }
 
   .button {
+    display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
     position: relative;
-    top: -33px;
+    gap: 10px;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .dateWithButtonContainer {
     max-width: 526px;
+    min-height:min-content;
     position: relative;
     top: 10px;
   }
 
   .validationMessage {
     position: relative;
-    top: 32px;
-    left: 50px;
+    /* top: 32px; */
+    width: 100%;
   }
 }
 
 .validationMessage {
-  font-family: 'Golos', sans-serif;
+  font-family: var(--font-family-golos);
+  opacity: 0;
   margin: 0;
-  color: red;
+  color: var(--colors-interface-red);
   text-align: center;
+}
+
+.validationMessageActive {
+  opacity: 1;
 }
 
 .dateWithButtonContainer {
