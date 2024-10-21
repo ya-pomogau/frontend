@@ -16,7 +16,8 @@ import { AdminSelectModal } from 'widgets';
 import { useControlModal } from 'shared/hooks';
 import { useGetAllAdminsQuery } from 'services/admin-api';
 import { TaskButtonsProps } from '../../types';
-import { useAppSelector } from 'app/hooks';
+import usePermission from 'shared/hooks/use-permission';
+import { adminPermission } from 'shared/types/common.types';
 
 export const TaskButtonsAdmin = ({
   taskId,
@@ -28,26 +29,25 @@ export const TaskButtonsAdmin = ({
   volunteer,
 }: TaskButtonsProps) => {
   const locationPath = useLocation();
-  const userRole = userRoles.ADMIN;
-  const rootAdminRole = useAppSelector((state) => state.user.data?.isRoot);
+  const isRootAdmin = usePermission(
+    [adminPermission.CONFLICTS],
+    userRoles.ADMIN
+  );
   const parsedDate = parseISO(date!);
   const isTaskExpired = isAfter(new Date(), parsedDate);
   const isPageActive = locationPath.pathname === '/profile/active';
   const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
   const { isOpen, handleOpen, handleClose } = useControlModal();
-  const { data: admins } = useGetAllAdminsQuery('');
-  const [clicked, setClicked] = useState<boolean>(false);
+  const { data: admins } = isRootAdmin
+    ? useGetAllAdminsQuery('')
+    : { data: undefined };
   const [conflictModalIsVisible, setConflictModalIsVisible] =
     useState<boolean>(true);
-  const handleConflictRootAdminButton = () => {
-    handleOpen();
-  };
   return (
     <div className={classNames(extClassName, styles.buttons)}>
       {(isTaskExpired || !date) && (
         <ButtonWithModal
           closeButton
-          setClicked={isPageActive ? setClicked : undefined}
           conflictModalVisible={conflictModalIsVisible}
           setConflictModalVisible={setConflictModalIsVisible}
           extClassName={styles.conflict}
@@ -55,9 +55,7 @@ export const TaskButtonsAdmin = ({
             <ModalContent
               type={
                 isPageActive
-                  ? clicked
-                    ? modalContentType.admin
-                    : modalContentType.conflict
+                  ? modalContentType.admin
                   : unfulfilledTask
                   ? modalContentType.unfulfilled
                   : modalContentType.conflict
@@ -66,7 +64,6 @@ export const TaskButtonsAdmin = ({
               conflict={conflict}
               date={date}
               taskId={taskId}
-              userRole={userRole}
               volunteer={!!volunteer}
               volunteerReport={volunteerReport}
               recipientReport={recipientReport}
@@ -76,14 +73,14 @@ export const TaskButtonsAdmin = ({
         >
           <SquareButton
             buttonType={taskButtonType.conflict}
-            disabledColor={!!volunteerReport || !!recipientReport || clicked}
+            disabledColor={!!volunteerReport || !!recipientReport}
           />
         </ButtonWithModal>
       )}
-      {rootAdminRole && (
+      {isRootAdmin && (
         <ConflictRootAdminButton
           extClassName={styles.rootConflict}
-          onClick={handleConflictRootAdminButton}
+          onClick={handleOpen}
         />
       )}
       <AdminSelectModal

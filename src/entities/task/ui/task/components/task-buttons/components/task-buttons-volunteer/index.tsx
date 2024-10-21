@@ -30,9 +30,6 @@ export const TaskButtonsVolunteer = ({
   const isTaskExpired = isAfter(new Date(), parsedDate);
   const isTaskUrgent = checkTaskUrgency(date!);
   const isPageActive = locationPath.pathname === '/profile/active';
-  const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
-  //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
-  const [clicked, setClicked] = useState<boolean>(false);
   const [conflictModalIsVisible, setConflictModalIsVisible] =
     useState<boolean>(true);
   const [fulfillTask] = useFulfillTaskMutation();
@@ -46,12 +43,15 @@ export const TaskButtonsVolunteer = ({
     <div className={classNames(extClassName, styles.buttons)}>
       {(isTaskExpired || !date) && isPageActive && (
         <ButtonWithModal
-          setClicked={setClicked}
           closeButton
           modalContent={
             <ModalContent
               volunteer={!!volunteer}
-              type={clicked ? modalContentType.admin : modalContentType.confirm}
+              type={
+                !volunteerReport
+                  ? modalContentType.admin
+                  : modalContentType.confirm
+              }
               userRole={userRole}
               taskId={taskId}
             />
@@ -61,7 +61,9 @@ export const TaskButtonsVolunteer = ({
           <SquareButton
             onClick={handleFulfillClick}
             buttonType={taskButtonType.confirm}
-            disabledColor={!!volunteerReport || clicked}
+            disabledColor={
+              !volunteer ? true : !!volunteerReport || !!recipientReport
+            }
           />
         </ButtonWithModal>
       )}
@@ -91,19 +93,16 @@ export const TaskButtonsVolunteer = ({
       {(isTaskExpired || !date) && (
         <ButtonWithModal
           closeButton
-          setClicked={isPageActive ? setClicked : undefined}
           conflictModalVisible={conflictModalIsVisible}
           setConflictModalVisible={setConflictModalIsVisible}
           extClassName={styles.conflict}
           modalContent={
             <ModalContent
               type={
-                isPageActive
-                  ? clicked
-                    ? modalContentType.admin
-                    : modalContentType.conflict
-                  : unfulfilledTask
-                  ? modalContentType.unfulfilled
+                isPageActive && !volunteer
+                  ? modalContentType.conflict
+                  : isPageActive
+                  ? modalContentType.admin
                   : modalContentType.conflict
               }
               active={isPageActive}
@@ -121,9 +120,10 @@ export const TaskButtonsVolunteer = ({
           <SquareButton
             buttonType={taskButtonType.conflict}
             disabledColor={
-              (!!volunteerReport && isPageActive) ||
-              (!!recipientReport && isPageActive) ||
-              (clicked && isPageActive)
+              !volunteer ||
+              (volunteerReport && isPageActive) ||
+              (recipientReport && isPageActive) ||
+              isPageActive
             }
           />
         </ButtonWithModal>
