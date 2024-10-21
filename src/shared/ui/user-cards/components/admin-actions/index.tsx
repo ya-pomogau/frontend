@@ -71,7 +71,7 @@ const AdminActions = ({
 
     const result = keysArray.filter((key) => values[key]);
 
-    await addAdminPrivileges({ _id: id, result });
+    await addAdminPrivileges({ _id: id, body: result });
   };
 
   const handleBlock = async () => {
