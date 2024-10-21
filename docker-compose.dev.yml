@@ -14,5 +14,5 @@ services:
     ports:
       - ${CONTAINER_PORT}:${PORT}
     env_file:
-      - .env
+      - .env.dev
     restart: on-failure
