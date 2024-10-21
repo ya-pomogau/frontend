@@ -1,6 +1,6 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { Icon } from 'shared/ui';
 import { Tooltip } from 'shared/ui/tooltip';
 import styles from './styles.module.css';
 
@@ -73,7 +73,7 @@ export const ButtonWithModal = ({
           }}
         >
           {closeButton && (
-            <CloseCrossIcon
+            <Icon icon="CloseCrossIcon"
               color="blue"
               className={`${styles.closeButton} close`}
             />
