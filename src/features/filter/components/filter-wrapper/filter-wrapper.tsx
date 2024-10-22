@@ -1,21 +1,18 @@
-import { useState, useRef, ReactElement, useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FilterButton } from 'features/filter/components/filter-button';
 import { FilterCover } from 'features/filter/components/filter-cover';
-import { IFilterValues } from 'features/filter/types';
+import { FilterProps, IFilterValues } from 'features/filter/types';
 
 interface FilterWrapperProps {
-  filterMenu: ReactElement;
-  filterValues: IFilterValues;
+  // filterMenu: { [key in keyof IFilterValues]?: boolean } | undefined;
+  filterMenu: FilterProps['items'];
   setFilteres?: (data: IFilterValues) => void;
-  onReset: () => void;
 }
 
 export const FilterWrapper = ({
   filterMenu,
-  filterValues,
   setFilteres,
-  onReset,
 }: FilterWrapperProps) => {
   const [isFilterMenuVisible, setFilterMenuVisible] = useState(false);
 
@@ -58,9 +55,7 @@ export const FilterWrapper = ({
           closeFilterMenu={toggleFilterMenu}
           position={filterPosition}
           filterMenu={filterMenu}
-          filterValues={filterValues}
           setFilteres={setFilteres}
-          onReset={onReset}
         />
       )}
     </>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { SmartHeader, Icon, Loader } from 'shared/ui';
+import { Icon, Loader, SmartHeader } from 'shared/ui';
 import { useMediaQuery } from 'shared/hooks';
 import { isUnConfirmedSelector, TaskList } from 'entities';
 import { Breakpoints } from 'shared/config';
@@ -56,10 +56,8 @@ export function ProfileActivePage() {
           !isUnConfirmed ? (
             <Filter
               items={{
-                sort: true,
+                sortBy: true,
                 categories: true,
-                radius: false,
-                date: false,
               }}
               setFilteres={setInfoFilterTasks}
             />
