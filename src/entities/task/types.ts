@@ -51,6 +51,14 @@ export type Task = {
   moderator: UserProfile | null; //указывает на админа который решает конфликт
 };
 
+export interface TaskProperties extends Task {
+  isAuthorised: boolean;
+  isUrgentTask: boolean;
+  date: string;
+  time: string;
+  isDisabled: boolean;
+};
+
 export type TaskConflict = Omit<
   Task,
   'volunteer' | 'recipientReport' | 'volunteerReport'

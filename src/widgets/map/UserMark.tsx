@@ -21,10 +21,8 @@ const UserMark: FC<UserMarkProps> = ({ location, draggable }: UserMarkProps) => 
 
   if (!ymaps) return null;
 
-  const isUrgentTask = false; // TODO: разобраться с тем, что имелось в виду. Кажется что для пользовательской метки срочность таски не релевантна.
-
   const Iconlayout = ymaps.templateLayoutFactory.createClass(
-    taskMarker(isUrgentTask),
+    taskMarker(false),
     {
       build() {
         Iconlayout.superclass.build.call(this);
