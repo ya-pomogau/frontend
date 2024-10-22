@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -36,7 +36,7 @@ export function ProfileMapPage() {
     const [userLatitude, userLongitude] =
       user && Array.isArray(user.location)
         ? [user.location[0], user.location[1]]
-        : [59.938955, 30.315644];
+        : [55.890017, 37.621157];
 
     return {
       latitude: userLatitude,
@@ -96,7 +96,7 @@ export function ProfileMapPage() {
             radius={radius}
             width="100%"
             height={containerHeight}
-            onClick={() => 3}
+            onClick={() => console.log('1sad')}
             coordinates={user?.location}
             role={user && user.role}
             isAuthorised={true}

@@ -11,10 +11,11 @@ import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
 import { useResponseTaskMutation } from 'services/user-task-api';
 import type { Dispatch, SetStateAction } from 'react';
+// import YMapsMap from '@pbe/react-yandex-maps/typings/Map';
 
 type MarkProps = {
   task: Task;
-  onClick?: () => void;
+  onClick?: (e: ymaps.IEvent) => void;
   onOpenTask?: (task: Task) => void;
   showPopup?: (isVolunteerSelected: boolean) => void;
   onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
@@ -275,8 +276,24 @@ const Mark: FC<MarkProps> = ({
     }
   );
 
+  // const handleBallonClick = (e) => {
+  //   console.log('12');
+  //   // ymaps.geoObject.setCenter([55.88803899527533, 37.624997923309316]);
+  //   // ymaps.setCenter([40, 50], 3, {
+  //   //   checkZoomRange: true,
+  //   // });
+  //   // const current_coords = [55.88803899527533, 37.624997923309316];
+  //   const placemarkCoords = e.get('coords');
+  //   console.log(placemarkCoords);
+  //   // if (map.current) {
+  //   // ymaps.current.setCenter(placemarkCoords);
+  //   // }
+  // };
+
   return (
     <Placemark
+      // onClick={handleBallonClick}
+      onClick={onClick}
       geometry={location}
       options={{
         iconLayout: Iconlayout,

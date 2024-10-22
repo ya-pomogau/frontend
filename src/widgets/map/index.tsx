@@ -30,6 +30,7 @@ import styles from './styles.module.css';
 import UserMark from './UserMark';
 import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
+// import YMapsMap from '@pbe/react-yandex-maps/typings/Map';
 
 interface YandexMapProps {
   width?: string | number;
@@ -70,10 +71,11 @@ export const YandexMap = ({
   const [coords, setCoords] = useState(coordinates);
   const ref = useRef<any>(null);
   const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+  const [mapCenterSettings, setMapCenterSettings] = useState(mapSettings);
 
   useEffect(() => {
     setCoords(coordinates);
-  }, [coordinates])
+  }, [coordinates]);
 
   const showUnauthorithedPopup = () => {
     setVisibility(true);
@@ -105,8 +107,29 @@ export const YandexMap = ({
     }
   };
 
+  const handeleBallonclickOne = (e: ymaps.IEvent) => {
+    console.log('22222222');
+    const placemarkCoords = e.get('coords');
+    const [x, y] = placemarkCoords;
+    // [mapSettings.latitude, mapSettings.longitude] = placemarkCoords;
+    setMapCenterSettings({
+      ...mapSettings,
+      latitude: x,
+      longitude: y,
+    });
+    // { latitude: 55.890017, longitude: 37.621157, zoom: 15 }
+    // const [x, y] = placemarkCoords;
+    // console.log('1-' + placemarkCoords);
+    // if (ref.current) {
+    //   ref.current.setCenter([x - 0.15, y], 12);
+    // }
+    // console.log('2-' + [x - 0.15, y]);
+  };
+
   const handleMapClick = (event: ymaps.IEvent) => {
-    const clickedCoordinates = event.get('coords'); 
+    const clickedCoordinates = event.get('coords');
+    console.log(event.getSourceEvent());
+    console.log(clickedCoordinates);
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
@@ -114,7 +137,10 @@ export const YandexMap = ({
         const geo = ymaps.geocode(clickedCoordinates);
         geo.then((res) => {
           const geoObject = res.geoObjects.get(0);
-
+          console.log(geoObject.properties._data.text);
+          console.log(geoObject.getAddressLine());
+          // console.log(event.get('globalPixels'));
+          console.log({ ...geoObject });
           dispatch(
             setAddress({
               additinalAddress: geoObject.getAddressLine(),
@@ -125,7 +151,6 @@ export const YandexMap = ({
       }
     }
   };
-  
 
   return (
     <>
@@ -139,10 +164,13 @@ export const YandexMap = ({
         <Map
           state={{
             bounds: radius
-              ? getBounds([mapSettings.latitude, mapSettings.longitude], radius)
+              ? getBounds(
+                  [mapCenterSettings.latitude, mapCenterSettings.longitude],
+                  radius
+                )
               : undefined,
-            center: [mapSettings.latitude, mapSettings.longitude],
-            zoom: mapSettings.zoom,
+            center: [mapCenterSettings.latitude, mapCenterSettings.longitude],
+            zoom: mapCenterSettings.zoom,
           }}
           options={{
             suppressMapOpenBlock: true,
@@ -152,6 +180,7 @@ export const YandexMap = ({
           height={height}
           instanceRef={ref}
           onClick={handleMapClick}
+          // onClick={handeleBallonclick}
         >
           <GeolocationControl options={{ float: 'left' }} />
           <ZoomControl options={{ position: { top: 5, right: 5 } }} />
@@ -159,7 +188,9 @@ export const YandexMap = ({
             return (
               <Mark
                 task={task}
-                onClick={onClick}
+                onClick={handeleBallonclickOne}
+                // onClick={onClick}
+                // onClick={handeleBallonclick}
                 showPopup={showPopup}
                 key={task._id}
                 onOpenTask={onOpenTask}
@@ -175,9 +206,10 @@ export const YandexMap = ({
           }
           {radius && (
             <Circle
+              // onClick={() => console.log('QQQQQQQQ')}
               geometry={[
-                [mapSettings.latitude, mapSettings.longitude],
-                radius * 1000,
+                [mapCenterSettings.latitude, mapCenterSettings.longitude],
+                radius * 100,
               ]}
               options={{
                 draggable: false,
