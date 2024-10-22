@@ -57,7 +57,7 @@ export interface TaskProperties extends Task {
   date: string;
   time: string;
   isDisabled: boolean;
-};
+}
 
 export type TaskConflict = Omit<
   Task,

@@ -55,7 +55,6 @@ const Mark: FC<MarkProps> = ({
     }
   );
 
-
   const onClickButton = () => {
     // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
     isAuthorised &&

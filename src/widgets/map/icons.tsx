@@ -1,6 +1,8 @@
-import { TaskProperties } from "entities/task/types";
+import { TaskProperties } from 'entities/task/types';
 
-const circleWithBalloonSvg = (urgentColor: string) => `<svg width="53" height="53" viewBox="0 0 53 53" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
+const circleWithBalloonSvg = (
+  urgentColor: string
+) => `<svg width="53" height="53" viewBox="0 0 53 53" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
   <circle cx="26.5" cy="26.5" r="26.5" />
   <path fill-rule="evenodd" clip-rule="evenodd" d="M20.3135 18.7243C20.3135 22.1202 23.1941 24.801 26.8427 24.801C30.4914 24.801 33.3719 22.1202 33.3719 18.7243C33.3719 15.3285 30.4914 12.6475 26.8427 12.6475C23.1941 12.6475 20.3135 15.3285 20.3135 18.7243ZM21.4658 18.7243C21.4658 16.0434 23.7702 13.7198 26.8427 13.7198C29.9153 13.7198 32.4117 16.0434 32.2197 18.7243C32.2197 21.4053 29.9153 23.7286 26.8427 23.7286C23.9622 23.7286 21.4658 21.584 21.4658 18.7243Z" fill="#FBFDFF"/>
   <path fill-rule="evenodd" clip-rule="evenodd" d="M26.2664 44.1036C26.4584 44.2824 26.6504 44.461 26.8425 44.461C27.2264 44.461 27.4186 44.461 27.6106 44.1036L37.7885 23.7283C39.3248 20.3325 39.1327 16.4004 37.0203 13.1832C34.908 10.1448 31.4513 8.17873 27.6106 8H26.2664C22.4257 8.17873 18.969 9.96608 16.8566 13.1832C14.7442 16.4004 14.3601 20.3325 16.0884 23.7283L26.2664 44.1036ZM26.2664 8.89365H27.8027C31.2593 9.07238 34.3318 10.8598 36.2522 13.7195C38.1725 16.5792 38.3646 20.3326 36.8284 23.371L27.0345 42.8524L17.2407 23.371C15.7044 20.3326 15.8964 16.5792 17.8168 13.7195C19.5451 10.8598 22.8098 9.07238 26.2664 8.89365Z" fill="#FBFDFF"/>
@@ -10,7 +12,9 @@ const crossSvg = `<svg width="16" height="16" viewBox="0 0 16 16" fill="#2E3192"
       <path d="M16 14.4L9.6 8L16 1.6L14.4 0L8 6.4L1.6 0L0 1.6L6.4 8L0 14.4L1.6 16L8 9.6L14.4 16L16 14.4Z" />
     </svg>`;
 
-const urgentCalendarIconSvg = (urgentColor: string) => `<svg width="17" height="18" viewBox="0 0 17 18" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
+const urgentCalendarIconSvg = (
+  urgentColor: string
+) => `<svg width="17" height="18" viewBox="0 0 17 18" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
 <path d="M16.7548 17.7441H0.245182C0.0817208 17.7441 0 17.6616 0 17.4966V2.80718C0 2.64213 0.0817208 2.55957 0.245182 2.55957H16.7548C16.9183 2.55957 17 2.64213 17 2.80718V17.4966C16.9183 17.6616 16.8365 17.7441 16.7548 17.7441ZM0.408654 17.2489H16.5096V2.97219H0.408654V17.2489Z" />
 <path d="M12.668 4.29273C12.5046 4.29273 12.4229 4.21016 12.4229 4.04512V0.991754C12.4229 0.826705 12.5046 0.744141 12.668 0.744141C12.8315 0.744141 12.9132 0.826705 12.9132 0.991754V4.04512C12.9132 4.21016 12.7498 4.29273 12.668 4.29273Z" />
 <path d="M4.16855 4.29273C4.00509 4.29273 3.92334 4.21016 3.92334 4.04512V0.991754C3.92334 0.826705 4.00509 0.744141 4.16855 0.744141C4.33201 0.744141 4.41373 0.826705 4.41373 0.991754V4.04512C4.41373 4.21016 4.25028 4.29273 4.16855 4.29273Z" />
@@ -19,7 +23,9 @@ const urgentCalendarIconSvg = (urgentColor: string) => `<svg width="17" height="
 <path d="M16.7549 5.36549H0.408757C0.245295 5.36549 0.163574 5.28302 0.163574 5.11797C0.163574 4.95293 0.245295 4.87036 0.408757 4.87036H16.7549C16.9184 4.87036 17.0001 4.95293 17.0001 5.11797C16.9184 5.2005 16.8367 5.36549 16.7549 5.36549Z" />
 </svg>`;
 
-const smilingFaceSvg = (urgentColor: string) => `<svg width="42" height="30" viewBox="0 0 42 30" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
+const smilingFaceSvg = (
+  urgentColor: string
+) => `<svg width="42" height="30" viewBox="0 0 42 30" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
           <path d="M21 30C28.1787 30 34.2025 26.4333 35.8504 19.6839C35.8565 19.6839 35.8626 19.684 35.8687 19.684L35.8815 19.684C39.2606 19.684 42 16.4326 42 13.0131C42 9.59347 39.2606 6.34212 35.8815 6.34212C35.1872 6.34212 34.2355 6.26746 33.6134 6.48308C30.8962 2.18119 26.4195 0 21 0C15.5805 0 11.1038 2.18119 8.38659 6.48308C7.76452 6.26746 6.81281 6.34212 6.11852 6.34212C2.73935 6.34212 0 9.59347 0 13.0131C0 16.4326 2.73935 19.2047 6.11852 19.2047C6.12889 19.2047 6.13926 19.2047 6.14962 19.2047C7.79754 25.9541 13.8213 30 21 30Z"/>
           <path d="M32.6 15.5909C32.6 21.9924 27.4513 27.1818 21.1 27.1818C14.7487 27.1818 9.6 21.9924 9.6 15.5909C9.6 9.18943 14.7487 4 21.1 4C27.4513 4 32.6 9.18943 32.6 15.5909Z" stroke="white" stroke-width="0.5"/>
           <path d="M26.821 15.0094C26.9015 15.8146 26.8139 16.6278 26.5637 17.3968C26.3136 18.1657 25.9064 18.8733 25.3684 19.474C24.8305 20.0747 24.1737 20.5553 23.4403 20.8846C22.7069 21.214 21.9132 21.3849 21.1104 21.3864C20.3075 21.3878 19.5132 21.2198 18.7787 20.8931C18.0441 20.5664 17.3856 20.0883 16.8455 19.4895C16.3054 18.8908 15.8957 18.1846 15.6428 17.4166C15.3898 16.6486 15.2993 15.8357 15.377 15.0302L15.9879 15.0901C15.9185 15.8096 15.9993 16.5357 16.2253 17.2217C16.4512 17.9078 16.8172 18.5385 17.2996 19.0734C17.7821 19.6082 18.3703 20.0353 19.0264 20.3271C19.6826 20.619 20.3921 20.769 21.1093 20.7677C21.8264 20.7664 22.5354 20.6138 23.1905 20.3196C23.8456 20.0254 24.4323 19.5961 24.9128 19.0595C25.3933 18.5229 25.7571 17.8909 25.9805 17.204C26.204 16.5171 26.2823 15.7907 26.2103 15.0715L26.821 15.0094Z" stroke="white" stroke-width="0.5"/>
@@ -29,7 +35,9 @@ const smilingFaceSvg = (urgentColor: string) => `<svg width="42" height="30" vie
           <path d="M9.9511 17.8956C9.2441 17.9501 8.53416 17.8392 7.87673 17.5715C7.21929 17.3037 6.63217 16.8864 6.16121 16.3522C5.69026 15.8179 5.34822 15.1811 5.16181 14.4916C4.9754 13.8021 4.94967 13.0784 5.08662 12.3772C5.22358 11.676 5.51952 11.0162 5.95132 10.4493C6.38312 9.88244 6.9391 9.42385 7.57583 9.10937C8.21256 8.79488 8.9128 8.63302 9.62186 8.63642C10.3309 8.63981 11.0296 8.80838 11.6633 9.12895L10.495 11.4754C10.2201 11.3363 9.91704 11.2632 9.60948 11.2617C9.30193 11.2602 8.9982 11.3305 8.72201 11.4669C8.44583 11.6033 8.20467 11.8022 8.01738 12.0481C7.83008 12.2939 7.70172 12.5801 7.64231 12.8843C7.58291 13.1884 7.59407 13.5023 7.67492 13.8014C7.75578 14.1005 7.90414 14.3767 8.10842 14.6084C8.3127 14.8402 8.56736 15.0212 8.85253 15.1373C9.13769 15.2534 9.44563 15.3016 9.75229 15.2779L9.9511 17.8956Z" stroke="white" stroke-width="0.5"/>
         </svg>`;
 
-const urgentClockSvg = (urgentColor: string) => `<svg width="17" height="17" viewBox="0 0 17 17" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
+const urgentClockSvg = (
+  urgentColor: string
+) => `<svg width="17" height="17" viewBox="0 0 17 17" fill="${urgentColor}" xmlns="http://www.w3.org/2000/svg">
         <path d="M8.49936 17C3.75934 17 0 13.1587 0 8.50005C0 3.75965 3.84107 0 8.49936 0C13.2394 0 16.9987 3.84138 16.9987 8.50005C17.0804 13.2405 13.2394 17 8.49936 17ZM8.49936 0.408655C4.08624 0.408655 0.408622 4.00484 0.408622 8.50005C0.408622 12.9135 4.00452 16.5913 8.49936 16.5913C12.9125 16.5913 16.5901 12.9953 16.5901 8.50005C16.5901 4.08657 12.9942 0.408655 8.49936 0.408655Z" />
         <path d="M5.88393 11.2788C5.80221 11.2788 5.72047 11.2789 5.72047 11.1971C5.63875 11.1154 5.63875 10.9519 5.72047 10.8702L7.76358 8.90871C7.84531 8.82698 8.00878 8.82698 8.0905 8.90871C8.17223 8.99044 8.17223 9.15382 8.0905 9.23555L6.04739 11.1971C5.96567 11.2789 5.96566 11.2788 5.88393 11.2788Z" />
         <path d="M8.49907 7.92789C8.33562 7.92789 8.25391 7.84621 8.25391 7.68275V2.37023C8.25391 2.20677 8.33562 2.125 8.49907 2.125C8.66252 2.125 8.74423 2.20677 8.74423 2.37023V7.68275C8.74423 7.84621 8.66252 7.92789 8.49907 7.92789Z" />
@@ -37,18 +45,26 @@ const urgentClockSvg = (urgentColor: string) => `<svg width="17" height="17" vie
       </svg>`;
 
 export const taskMarker = (isUrgentTask: boolean) => {
-  const urgentColor = isUrgentTask ? "#D60080" : "#2E3192";
+  const urgentColor = isUrgentTask ? '#D60080' : '#2E3192';
   return `<div class="mark_container">
     ${circleWithBalloonSvg(urgentColor)}
   </div>`;
 };
 
 export const balloonMarker = (properties: TaskProperties) => {
-  const urgencyDateClass = properties.isUrgentTask ? "task_date_text_urgent" : "task_date_text";
-  const urgencyCountClass = properties.isUrgentTask ? "task_count_urgent" : "task_count";
-  const urgentColor = properties.isUrgentTask ? "#D60080" : "#2E3192";
-  const submitUrgentClass = properties.isUrgentTask ? "submit_button_urgent" : "";
-  const submitDisabledClass = properties.isDisabled ? "submit_button_disabled" : "";
+  const urgencyDateClass = properties.isUrgentTask
+    ? 'task_date_text_urgent'
+    : 'task_date_text';
+  const urgencyCountClass = properties.isUrgentTask
+    ? 'task_count_urgent'
+    : 'task_count';
+  const urgentColor = properties.isUrgentTask ? '#D60080' : '#2E3192';
+  const submitUrgentClass = properties.isUrgentTask
+    ? 'submit_button_urgent'
+    : '';
+  const submitDisabledClass = properties.isDisabled
+    ? 'submit_button_disabled'
+    : '';
 
   const authorizedMarker = `<div class="task_container">
 
@@ -56,7 +72,9 @@ export const balloonMarker = (properties: TaskProperties) => {
     ${crossSvg}
   </div>
   <div class="task_bio">
-    <img src="${properties.recipient.avatar}" alt="${properties.recipient.name}" class="task_avatar"/>
+    <img src="${properties.recipient.avatar}" alt="${
+    properties.recipient.name
+  }" class="task_avatar"/>
     <div>
       <p class="task_recipient_name">
         ${properties.recipient.name}
@@ -101,7 +119,9 @@ export const balloonMarker = (properties: TaskProperties) => {
           ${crossSvg}
         </div>
         <div class="task_bio">
-          <img src="${properties.recipient.avatar}" alt="${properties.recipient.name}" class="task_avatar"/>
+          <img src="${properties.recipient.avatar}" alt="${
+    properties.recipient.name
+  }" class="task_avatar"/>
           <div>
             <p class="task_recipient_name">
                Нужна помощь
@@ -129,5 +149,5 @@ export const balloonMarker = (properties: TaskProperties) => {
         </div>
       </div>`;
 
-  return  properties.isAuthorised ? authorizedMarker : notAuthorizedMarker;
-}
+  return properties.isAuthorised ? authorizedMarker : notAuthorizedMarker;
+};
