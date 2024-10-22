@@ -1,78 +1,80 @@
 import { ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
+import cn from 'classnames';
 
 import { useAppSelector } from 'app/hooks';
-
-import styles from './styles.module.css';
+import { isUserBlockedSelector } from 'entities/user/model';
 import { UserInfo } from 'entities/user';
-import { FeedbackSideMenu, SideMenuForAuthorized } from 'widgets/side-menu';
-import { useLocation } from 'react-router-dom';
-import { NoConnectionPage } from 'features/error-boundary/pages/noConnectionPage';
-import { RegistrationNotice } from '../registration-notice';
+import { SideMenuForAuthorized } from 'widgets/side-menu';
 import {
   unauthorizedRecipientMessage,
   unauthorizedVolunteerMessage,
 } from 'shared/libs/constants';
+import { useMediaQuery, useRouteMatch, useUser } from 'shared/hooks';
+import { Breakpoints, Routes } from 'shared/config';
+import { userRole as userRoles, userStatus } from 'shared/types/common.types';
+import { BlockedPage } from 'features/error-boundary/pages/blockedPage';
+import { NoConnectionPage } from 'features/error-boundary/pages/noConnectionPage';
+import { RegistrationNotice } from '../registration-notice';
 
-import { userRole as userRoles } from 'shared/types/common.types';
-import {
-  isUnConfirmedSelector,
-  isUserBlockedSelector,
-} from 'entities/user/model';
-import { useMediaQuery } from 'shared/hooks';
-import { Breakpoints } from 'shared/config';
-import { BlockedPage } from '../../../features/error-boundary/pages/blockedPage';
+import styles from './styles.module.css';
 
 interface PageLayoutProps {
   content?: ReactNode;
 }
 
 export const PageLayout = ({ content }: PageLayoutProps) => {
+  const user = useUser();
   const { isError, errorText } = useAppSelector((state) => state.error);
-  const userRole = useAppSelector((state) => state.user.role);
-  const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
   const isBlockedSelector = useAppSelector(isUserBlockedSelector);
   // TODO: Добавить другие случаи сообщений (потеря связи и пр.)
-  const hasMessage = isUnConfirmed;
+
   const location = useLocation();
-  const isProfilePage = location.pathname === '/profile';
+  const isProfilePage = location.pathname === Routes.PROFILE;
   const isMobile = useMediaQuery(Breakpoints.L);
+
+  const isUnconfirmedRecipient =
+    user?.role === userRoles.RECIPIENT &&
+    user.status === userStatus.UNCONFIRMED;
+  const isUnconfirmedVolunteer =
+    user?.role === userRoles.VOLUNTEER &&
+    user.status === userStatus.UNCONFIRMED;
+
+  const isPageWithoutSidebar = useRouteMatch([
+    Routes.POLICY,
+    Routes.BLOG,
+    Routes.PICK,
+    Routes.CONTACTS,
+  ]);
+
+  const hasUnconfirmedMessage =
+    isUnconfirmedRecipient || isUnconfirmedVolunteer;
+
+  const mainStyles = cn(styles.main, {
+    [styles.mainWithMessage]: hasUnconfirmedMessage,
+  });
+  const sideStyles = cn(styles.side, {
+    [styles.hidden]: isMobile && !isProfilePage,
+  });
 
   return (
     <>
-      {/* {isLoadingUserData && <Loader />} */}
-      {location.pathname === '/policy' ||
-      location.pathname === '/blog' ||
-      location.pathname === '/pick' ? (
+      {isPageWithoutSidebar ? (
         <div className={styles.content}> {content} </div>
       ) : (
-        <div
-          className={styles.main + ' ' + (hasMessage && styles.mainWithMessage)}
-        >
-          <div
-            className={`${styles.side} ${
-              isMobile && !isProfilePage ? styles.hidden : ''
-            }`}
-          >
+        <div className={mainStyles}>
+          <div className={sideStyles}>
             <div className={styles.user}>
               <UserInfo />
             </div>
-            {location.pathname === '/contacts' ||
-            location.pathname === '/feedback' ? (
-              userRole ? (
-                ''
-              ) : (
-                <FeedbackSideMenu />
-              )
-            ) : (
-              <SideMenuForAuthorized />
-            )}
+            <SideMenuForAuthorized />
           </div>
-          {isUnConfirmed && userRole === userRoles.RECIPIENT && (
+          {isUnconfirmedRecipient && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedRecipientMessage} />
             </div>
           )}
-          {isUnConfirmed && userRole === userRoles.VOLUNTEER && (
+          {isUnconfirmedVolunteer && (
             <div className={styles.message}>
               <RegistrationNotice settingText={unauthorizedVolunteerMessage} />
             </div>
