@@ -88,7 +88,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
             ]}
             onChange={onChange}
           />
-          {errorText && <ErrorText error = {errorText} />}          
+          <ErrorText error = {errorText} />          
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>

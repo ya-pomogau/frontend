@@ -1,5 +1,5 @@
 .error {
-    font-family: 'Golos', sans-serif;
+    font-family: var(--font-family-golos);
     margin-top: 8px;
     font-size: var(--font-size-small);
     line-height: var(--line-height-xs);
