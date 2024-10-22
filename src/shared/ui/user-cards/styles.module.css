@@ -204,9 +204,9 @@
 .name_text {
   font-size: var(--font-size-s);
   line-height: var(--line-height-medium);
-  width: 190px; 
-  white-space: nowrap; 
-  overflow: hidden; 
+  width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -283,6 +283,10 @@
   height: 52px;
 }
 
+.input_with_label label {
+  color: var(--colors-interface-primary)
+}
+
 /* Стили для поля */
 .input_field {
   width: 236px;
@@ -327,7 +331,7 @@
 
   .name_text {
     font-size: var(--font-size-small);
-    width: 140px; 
+    width: 140px;
   }
 
   .admin_password_input {

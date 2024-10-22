@@ -1,13 +1,8 @@
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-
-import { CheckIcon } from '../icons/check-icon';
-import { ArrowDownIcon } from '../icons/arrow-down-icon';
-
+import { Icon } from 'shared/ui';
 import styles from './styles.module.css';
 import { useAppSelector } from 'app/hooks';
-
-import { CloseCrossIcon } from '../icons/close-cross-icon';
 import { Tooltip } from '../tooltip';
 import { Task } from 'entities/task/types';
 import { useGetTaskActiveQuery } from 'services/user-task-api';
@@ -100,7 +95,7 @@ const Dropdown = ({
         {!isActive && (
           <>
             {selected?.title || placeholder}
-            {selected && <ArrowDownIcon color={'white'} />}
+            {selected && <Icon icon="ArrowDownIcon" color={'white'} />}
           </>
         )}
       </div>
@@ -124,7 +119,7 @@ const Dropdown = ({
                 }}
               >
                 {item?.title}
-                {selected?._id === item._id && <CheckIcon color={'blue'} />}
+                {selected?._id === item._id && <Icon icon="CheckIcon" color={'blue'} />}
               </li>
             );
           })}
@@ -142,7 +137,7 @@ const Dropdown = ({
           }}
         >
           <div className={styles.closeWrapper}>
-            <CloseCrossIcon
+            <Icon icon="CloseCrossIcon"
               className={styles.closeIcon}
               size="14"
               color="blue"

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '.';
-import { VkIcon } from '../icons/vk-icon';
+import { Icon } from 'shared/ui';
 
 const meta: Meta<typeof Button> = {
   title: 'uikit/Buttons/Button',
@@ -51,6 +51,6 @@ export const WithIcon: Story = {
     buttonType: 'primary',
     label: 'Войти через ВКонтакте',
     size: 'extraLarge',
-    customIcon: <VkIcon size="24" color="white" />,
+    customIcon: <Icon icon="VkIcon" size="24" color="white" />,
   },
 };
