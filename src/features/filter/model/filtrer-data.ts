@@ -8,7 +8,7 @@ export const emptyFilterData: IFilterValues = {
   sortBy: '',
   date: '',
   time: [],
-  userCategories: [],
+  userCategories: ['all'],
 };
 
 export const InitialStateFilterData: IFilterValues = emptyFilterData;
@@ -21,9 +21,9 @@ export const filterDataModel = createSlice({
   initialState: InitialStateFilterData,
   reducers: {
     setFilterData: (state, action: PayloadAction<IFilterValues>) => {
-      Object.keys(state).forEach(
-        (key: keyof IFilterValues) => (state[key] = action.payload[key])
-      );
+      (Object.keys(state) as (keyof IFilterValues)[]).forEach((key) => {
+        state[key] = action.payload[key] as string & string[];
+      });
     },
     resetFilterData: () => InitialStateFilterData,
   },

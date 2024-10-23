@@ -100,6 +100,7 @@ export function TasksPage({ incomeTab }: PageProps) {
             value={searchName}
             label="Введите имя "
             name="Name"
+            placeholder="Введите имя "
             onChange={(e) => setSearchName(e.target.value)}
             extClassName={styles.input}
             type="name"

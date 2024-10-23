@@ -13,13 +13,11 @@ export type TFilterItems = {
 
 export interface FilteringProps {
   items: TFilterItems;
-  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
 }
 
 export interface NotFoundFilterProps {
   items?: never;
-  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter: boolean;
 }
 
