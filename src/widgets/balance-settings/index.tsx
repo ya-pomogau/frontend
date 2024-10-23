@@ -29,12 +29,17 @@ export const BalanceSettings = () => {
 
   //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
   const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
-    const formattedData = Object.keys(formData).map((title) => {
-      const category = data?.find((cat) => cat.title === title);
+    const formatData = Object.entries(formData).map((formCategoryArr) => {
+      const category = data?.find(
+        (cat) =>
+          cat.title === formCategoryArr[0] &&
+          cat.points !== Number(formCategoryArr[1])
+      );
       return category
-        ? { id: category._id, points: Number(formData[title]) }
+        ? { id: category._id, points: Number(formCategoryArr[1]) }
         : null;
     });
+    const formattedData = formatData.filter((elem) => elem != null);
     try {
       await updatePoints({ data: formattedData });
       reset(formData);
