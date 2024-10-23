@@ -7,7 +7,7 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   htmlFor?: string;
 }
 
-export const Label: React.FC<LabelProps> = ({ extClassName, children, htmlFor, ...props }) => {
+export const Label = ({ extClassName, children, htmlFor, ...props }: LabelProps) => {
   return (
     <label className={classnames(styles.label, extClassName)} htmlFor={htmlFor} {...props}>
       {children}

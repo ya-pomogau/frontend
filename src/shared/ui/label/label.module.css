@@ -1,5 +1,5 @@
 .label {
-    font-family: 'Golos', sans-serif;
+    font-family: var(--font-family-golos);
     display: inline-block;
     font-size: var(--font-size-small);
     line-height: var(--line-height-middle);
