@@ -21,7 +21,7 @@ export const filterDataModel = createSlice({
   initialState: InitialStateFilterData,
   reducers: {
     setFilterData: (state, action: PayloadAction<IFilterValues>) => {
-      (Object.keys(state) as (keyof IFilterValues)[]).map((key) => {
+      (Object.keys(state) as (keyof IFilterValues)[]).forEach((key) => {
         state[key] = action.payload[key] as string & string[];
       });
     },
