@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 import { AccordionIconArrow } from '../icons/accordion-arrow';
+import { Label } from '../label';
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   options: Array<{ value: string; label: string }>;
@@ -37,9 +38,9 @@ export const Select = forwardRef<HTMLSelectElement, Props>(
     return (
       <div className={cn(styles.container, extClassName)}>
         {label && (
-          <label className={cn(styles.label, 'text')} htmlFor={id}>
+          <Label htmlFor={id}>
             {label}
-          </label>
+          </Label>
         )}
         <select
           ref={ref}

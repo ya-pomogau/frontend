@@ -76,11 +76,6 @@
 }
 
 @media screen and (max-width: 550px) {
-  .label {
-    font-size: var(--font-size-small);
-    line-height: 14px;
-  }
-
   .input {
     font-size: var(--font-size-small);
     line-height: 14px;

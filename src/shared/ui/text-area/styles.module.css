@@ -44,15 +44,6 @@
   border-color: var(--colors-interface-blue-navy);
 }
 
-.label {
-  display: inline-block;
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-middle);
-  font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-black);
-  margin-bottom: 8px;
-}
-
 .sign {
   position: absolute;
   bottom: 12px;

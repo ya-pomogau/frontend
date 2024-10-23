@@ -10,6 +10,8 @@ import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 import MaskedInput from 'react-text-mask';
+import { Label } from '../label';
+import { ErrorText } from '../errorText';
 
 export interface InputPhoneProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -53,9 +55,9 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
     return (
       <div className={extClassName} data-testid={'div'}>
         {label && (
-          <label className={cn(styles.label, 'phone')} htmlFor={id}>
+          <Label htmlFor={id}>
             {label}
-          </label>
+          </Label>
         )}
         <div ref={ref} className={styles.container}>
           <MaskedInput
@@ -86,9 +88,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
             ]}
             onChange={onChange}
           />
-          <span className={cn(styles.error, 'text')}>
-            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
-          </span>
+          <ErrorText error = {errorText} />          
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>
