@@ -19,8 +19,8 @@ const useGeolocation = (
   const [apiError, setApiError] = useState('');
   const [geolocation, setGeolocation] = useState<GeolocationPosition>({
     coords: {
-      latitude: 0,
-      longitude: 0,
+      latitude: 55.755819,
+      longitude: 37.61771,
     },
   });
 

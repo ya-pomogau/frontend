@@ -30,6 +30,7 @@ import styles from './styles.module.css';
 import UserMark from './UserMark';
 import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
+// import YMapsMap from '@pbe/react-yandex-maps/typings/Map';
 
 interface YandexMapProps {
   width?: string | number;
@@ -50,7 +51,7 @@ interface YandexMapProps {
 export const YandexMap = ({
   width = 500,
   height = 500,
-  mapSettings = { latitude: 55.890017, longitude: 37.621157, zoom: 15 },
+  mapSettings = { latitude: 55.755819, longitude: 37.617713, zoom: 15 },
   radius,
   onClick,
   tasks,
@@ -70,10 +71,11 @@ export const YandexMap = ({
   const [coords, setCoords] = useState(coordinates);
   const ref = useRef<any>(null);
   const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+  const [mapCenterSettings, setMapCenterSettings] = useState(mapSettings);
 
   useEffect(() => {
     setCoords(coordinates);
-  }, [coordinates])
+  }, [coordinates]);
 
   const showUnauthorithedPopup = () => {
     setVisibility(true);
@@ -105,8 +107,20 @@ export const YandexMap = ({
     }
   };
 
+  const handeleBallonclick = (e: ymaps.IEvent) => {
+    const placemarkCoords = e.get('coords');
+    const [x, y] = placemarkCoords;
+    setMapCenterSettings({
+      ...mapSettings,
+      latitude: x,
+      longitude: y,
+    });
+  };
+
   const handleMapClick = (event: ymaps.IEvent) => {
-    const clickedCoordinates = event.get('coords'); 
+    const clickedCoordinates = event.get('coords');
+    // console.log(event.getSourceEvent());
+    // console.log(clickedCoordinates);
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
@@ -114,7 +128,8 @@ export const YandexMap = ({
         const geo = ymaps.geocode(clickedCoordinates);
         geo.then((res) => {
           const geoObject = res.geoObjects.get(0);
-
+          // console.log(geoObject.properties._data.text);
+          // console.log(geoObject.getAddressLine());
           dispatch(
             setAddress({
               additinalAddress: geoObject.getAddressLine(),
@@ -125,7 +140,6 @@ export const YandexMap = ({
       }
     }
   };
-  
 
   return (
     <>
@@ -139,10 +153,13 @@ export const YandexMap = ({
         <Map
           state={{
             bounds: radius
-              ? getBounds([mapSettings.latitude, mapSettings.longitude], radius)
+              ? getBounds(
+                  [mapCenterSettings.latitude, mapCenterSettings.longitude],
+                  radius
+                )
               : undefined,
-            center: [mapSettings.latitude, mapSettings.longitude],
-            zoom: mapSettings.zoom,
+            center: [mapCenterSettings.latitude, mapCenterSettings.longitude],
+            zoom: mapCenterSettings.zoom,
           }}
           options={{
             suppressMapOpenBlock: true,
@@ -159,7 +176,7 @@ export const YandexMap = ({
             return (
               <Mark
                 task={task}
-                onClick={onClick}
+                onClick={handeleBallonclick}
                 showPopup={showPopup}
                 key={task._id}
                 onOpenTask={onOpenTask}
@@ -176,8 +193,8 @@ export const YandexMap = ({
           {radius && (
             <Circle
               geometry={[
-                [mapSettings.latitude, mapSettings.longitude],
-                radius * 1000,
+                [mapCenterSettings.latitude, mapCenterSettings.longitude],
+                radius * 100,
               ]}
               options={{
                 draggable: false,
