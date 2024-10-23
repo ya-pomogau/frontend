@@ -51,7 +51,7 @@ interface YandexMapProps {
 export const YandexMap = ({
   width = 500,
   height = 500,
-  mapSettings = { latitude: 55.890017, longitude: 37.621157, zoom: 15 },
+  mapSettings = { latitude: 55.755819, longitude: 37.617713, zoom: 15 },
   radius,
   onClick,
   tasks,
@@ -107,29 +107,20 @@ export const YandexMap = ({
     }
   };
 
-  const handeleBallonclickOne = (e: ymaps.IEvent) => {
-    console.log('22222222');
+  const handeleBallonclick = (e: ymaps.IEvent) => {
     const placemarkCoords = e.get('coords');
     const [x, y] = placemarkCoords;
-    // [mapSettings.latitude, mapSettings.longitude] = placemarkCoords;
     setMapCenterSettings({
       ...mapSettings,
       latitude: x,
       longitude: y,
     });
-    // { latitude: 55.890017, longitude: 37.621157, zoom: 15 }
-    // const [x, y] = placemarkCoords;
-    // console.log('1-' + placemarkCoords);
-    // if (ref.current) {
-    //   ref.current.setCenter([x - 0.15, y], 12);
-    // }
-    // console.log('2-' + [x - 0.15, y]);
   };
 
   const handleMapClick = (event: ymaps.IEvent) => {
     const clickedCoordinates = event.get('coords');
-    console.log(event.getSourceEvent());
-    console.log(clickedCoordinates);
+    // console.log(event.getSourceEvent());
+    // console.log(clickedCoordinates);
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
@@ -137,10 +128,8 @@ export const YandexMap = ({
         const geo = ymaps.geocode(clickedCoordinates);
         geo.then((res) => {
           const geoObject = res.geoObjects.get(0);
-          console.log(geoObject.properties._data.text);
-          console.log(geoObject.getAddressLine());
-          // console.log(event.get('globalPixels'));
-          console.log({ ...geoObject });
+          // console.log(geoObject.properties._data.text);
+          // console.log(geoObject.getAddressLine());
           dispatch(
             setAddress({
               additinalAddress: geoObject.getAddressLine(),
@@ -180,7 +169,6 @@ export const YandexMap = ({
           height={height}
           instanceRef={ref}
           onClick={handleMapClick}
-          // onClick={handeleBallonclick}
         >
           <GeolocationControl options={{ float: 'left' }} />
           <ZoomControl options={{ position: { top: 5, right: 5 } }} />
@@ -188,9 +176,7 @@ export const YandexMap = ({
             return (
               <Mark
                 task={task}
-                onClick={handeleBallonclickOne}
-                // onClick={onClick}
-                // onClick={handeleBallonclick}
+                onClick={handeleBallonclick}
                 showPopup={showPopup}
                 key={task._id}
                 onOpenTask={onOpenTask}
@@ -206,7 +192,6 @@ export const YandexMap = ({
           }
           {radius && (
             <Circle
-              // onClick={() => console.log('QQQQQQQQ')}
               geometry={[
                 [mapCenterSettings.latitude, mapCenterSettings.longitude],
                 radius * 100,

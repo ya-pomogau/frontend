@@ -292,7 +292,6 @@ const Mark: FC<MarkProps> = ({
 
   return (
     <Placemark
-      // onClick={handleBallonClick}
       onClick={onClick}
       geometry={location}
       options={{

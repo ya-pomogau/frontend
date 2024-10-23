@@ -12,6 +12,8 @@ import { Filter } from '../../features/filter';
 import { SmartHeader } from '../../shared/ui/smart-header';
 import { Icon } from '../../shared/ui/icons';
 import { Loader } from '../../shared/ui/loader';
+import { useMediaQuery } from 'shared/hooks';
+import { Breakpoints } from 'shared/config';
 
 export function ProfileMapPage() {
   const dispatch = useAppDispatch();
@@ -19,6 +21,7 @@ export function ProfileMapPage() {
   const location = useLocation();
   const query = queryString.parse(location.search);
   const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
+  const mediaQuery = useMediaQuery(Breakpoints.L);
 
   useEffect(() => {
     if (user) {
@@ -36,7 +39,7 @@ export function ProfileMapPage() {
     const [userLatitude, userLongitude] =
       user && Array.isArray(user.location)
         ? [user.location[0], user.location[1]]
-        : [55.890017, 37.621157];
+        : [55.755819, 37.617713];
 
     return {
       latitude: userLatitude,
@@ -62,9 +65,10 @@ export function ProfileMapPage() {
     longitude,
   ]);
 
-  const containerHeight = isUnconfirmed
-    ? 'clamp(60dvh,75dvh - 10vw, 75dvh)'
-    : 'clamp(70dvh,85dvh - 10vw, 85dvh)';
+  // const containerHeight = isUnconfirmed
+  //   ? 'clamp(60dvh, 75dvh - 10vw, 75dvh)'
+  //   : // : 'clamp(37.5rem, 36.298rem + 4.808vw, 40.625rem)';
+  //     'clamp(78dvh, 85dvh - 10vw, 85dvh)';
 
   return (
     <>
@@ -95,7 +99,8 @@ export function ProfileMapPage() {
             mapSettings={mapSettings}
             radius={radius}
             width="100%"
-            height={containerHeight}
+            // height={containerHeight}
+            height={mediaQuery ? '75vh' : '709px'}
             onClick={() => console.log('1sad')}
             coordinates={user?.location}
             role={user && user.role}
