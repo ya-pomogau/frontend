@@ -47,13 +47,15 @@
 .message {
   width: 100%;
   font-size: var(--font-size-small);
-  -webkit-line-clamp: 1; /* Количество строк */
+  -webkit-line-clamp: 1;
+  /* Количество строк */
 }
 
 .counter {
   background: var(--colors-interface-fuchsia);
   color: var(--colors-interface-white);
   text-align: center;
+  line-height: 18px;
 }
 
 .radius {

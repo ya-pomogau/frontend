@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
-import { TaskConflict } from 'entities/task/types';
 import { AnyUserInterface } from 'shared/types/user.type';
 
 interface PropsMessageCard {
   statusConflict?: boolean | undefined;
-  description: string;
+  description?: string | undefined;
   onClick: () => void;
   action: boolean;
   user: AnyUserInterface;
@@ -24,25 +22,7 @@ export const MessageCard = ({
   statusConflict,
   description,
 }: PropsMessageCard) => {
-  const [hasNewMessage, setHasNewMessage] = useState(false);
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
-  const location = useLocation();
-
-  useEffect(() => {
-    setHasNewMessage(true);
-  }, [unreads]);
-
-  // function handelClick() {
-  //   if (task) {
-  //     handleClickCard(task);
-  //   } else if (unreads) {
-  //     handleClickCard({
-  //       user,
-  //       messages: unreads,
-  //       id: user._id,
-  //     });
-  //   }
-  // }
 
   return (
     <article
@@ -60,31 +40,30 @@ export const MessageCard = ({
       ) : (
         <div className={cn(styles.img, { [styles.img_action]: action })} />
       )}
+
       <div className={styles.userInfo}>
         <p className={cn(defultStyle, styles.name, styles.lengthLimitation)}>
           {statusConflict ? 'Оповещение о конфликте' : user.name}
         </p>
         <p className={cn(defultStyle, styles.message, styles.lengthLimitation)}>
-          {description}
+          {description ?? user.phone}
         </p>
       </div>
-      {location.pathname === '/chat-conflict'
-        ? hasNewMessage && (
-            <div
-              className={cn(styles.notification, styles.radius, {
-                [styles.vizabiliti]: !hasNewMessage,
-              })}
-            />
-          )
-        : hasNewMessage && (
-            <span
-              className={cn(styles.counter, styles.radius, {
-                [styles.vizabiliti]: !hasNewMessage,
-              })}
-            >
-              {/* {message.length > 10 ? '+9' : message.length} */}
-            </span>
-          )}
+      {statusConflict ? (
+        <div
+          className={cn(styles.notification, styles.radius, {
+            [styles.vizabiliti]: unreads > 0,
+          })}
+        />
+      ) : (
+        <span
+          className={cn(styles.counter, styles.radius, {
+            [styles.vizabiliti]: unreads > 0,
+          })}
+        >
+          {unreads > 10 ? '+9' : unreads}
+        </span>
+      )}
     </article>
   );
 };
