@@ -3,9 +3,8 @@ import classnames from 'classnames';
 
 import Checkbox from 'shared/ui/checkbox';
 import { Input } from 'shared/ui/input';
-import { EditIcon } from 'shared/ui/icons/edit-icon';
 import { Button } from 'shared/ui/button';
-import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
+import { Icon } from 'shared/ui';
 
 import styles from '../styles.module.css';
 
@@ -46,7 +45,7 @@ const AdminActions = ({
           placeholder="Пароль"
           type="password"
         />
-        <EditIcon
+        <Icon icon="EditIcon"
           className={classnames(styles.admin_edit_icon)}
           color={'blue'}
         />
@@ -66,7 +65,7 @@ const AdminActions = ({
               className={classnames(styles.admin_arrow_down)}
               onClick={() => setAdminDropdownListClosed(false)}
             >
-              <ArrowDownIcon color={'blue'} />
+              <Icon icon="ArrowDownIcon" color={'blue'} />
             </div>
           </div>
         </>
@@ -76,7 +75,7 @@ const AdminActions = ({
             className={classnames(styles.admin_arrow_up)}
             onClick={() => setAdminDropdownListClosed(true)}
           >
-            <ArrowDownIcon color={'blue'} />
+            <Icon icon="ArrowDownIcon" color={'blue'} />
           </div>
           <div className={classnames(styles.admin_checkboxes)}>
             <Checkbox

@@ -18,9 +18,10 @@ export const OverlayingPopup = ({
   isOpened,
   extClassName,
 }: OverlayingPopupProps) => {
-  
   useEffect(() => {
-    isOpened ? document.body.style.overflow = "hidden" : document.body.style.overflow = "visible";
+    isOpened
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'visible');
   }, [isOpened]);
 
   if (!isOpened) {

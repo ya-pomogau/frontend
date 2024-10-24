@@ -1,7 +1,7 @@
 import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import styles from '../../styles.module.css';
-import { CloseIconThin } from 'shared/ui/icons/close-icon-thin';
+import { Icon } from 'shared/ui';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 interface ResetPasswordProps {
@@ -26,7 +26,7 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
     <div className={styles.modalContainer}>
       <div className={styles.modalContent}>
         <h2 className={styles.modalTitle}>Смена пароля</h2>
-        <CloseIconThin
+        <Icon icon="CloseIconThin"
           className={styles.close}
           onClick={handleModalClose}
           color="blue"
