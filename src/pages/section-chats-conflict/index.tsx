@@ -14,8 +14,13 @@ import {
 } from 'services/admin-api';
 import { TaskConflict } from 'entities/task/types';
 import WrapperMessage from 'shared/ui/wrapper-messages';
+import { mockAdminChatsResponse } from 'entities/chat/mock-response';
 
 export const SectionChatsConflict = () => {
+  // Получаем метаданные по конфликтным чатам
+  const conflictChats = mockAdminChatsResponse.conflict;
+  const moderatedChats = mockAdminChatsResponse.moderated;
+
   const location = useLocation();
   const { data: tasks } = useGetTasksConfilctQuery('');
   const { data: tasksWork } = useGetTasksWorkConflictQuery('');
