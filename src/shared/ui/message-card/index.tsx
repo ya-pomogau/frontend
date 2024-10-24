@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { AnyUserInterface } from 'shared/types/user.type';
@@ -57,7 +56,7 @@ export const MessageCard = ({
         />
       ) : (
         <span
-          className={cn(styles.counter, styles.radius, {
+          className={cn('text-inter', styles.counter, styles.radius, {
             [styles.vizabiliti]: unreads > 0,
           })}
         >

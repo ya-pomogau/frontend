@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 import styles from './page-sub-menu-link.module.css';
@@ -22,13 +22,13 @@ export const PageSubMenuLink = ({
     <NavLink to={to} className="link">
       {({ isActive }) => (
         <div
-          className={classnames(
+          className={cn(
             styles.tabContainer__item,
             isActive ? styles.tabContainer__itemActive : ''
           )}
         >
           <p
-            className={classnames(
+            className={cn(
               'text',
               'p-0',
               'm-0',
@@ -40,7 +40,11 @@ export const PageSubMenuLink = ({
           </p>
           {areNotificationsVisible && (
             <span
-              className={classnames(styles.tabContainer__number, styleSpan)}
+              className={cn(
+                'text-inter',
+                styles.tabContainer__number,
+                styleSpan
+              )}
             >
               {notifications}
             </span>

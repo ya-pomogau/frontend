@@ -23,8 +23,10 @@
   border-radius: 9px;
   min-width: 18px;
   height: 18px;
+  line-height: 18px;
   color: var(--colors-interface-white);
   text-align: center;
+  font-size: 14px;
 }
 
 .tabContainer__itemActive::before {
