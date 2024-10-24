@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { Message } from 'shared/ui/message';
-import { IMessageHub, messageHub } from 'shared/libs/utils';
 import { MessageCard } from 'shared/ui/message-card';
 import styles from './styles.module.css';
 import { Button } from 'shared/ui/button';

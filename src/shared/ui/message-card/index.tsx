@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { TaskConflict } from 'entities/task/types';
-import { IMessageHub } from 'shared/libs/utils';
 import { MessageInterface } from '../../types/chat.types';
 import { AnyUserInterface } from 'shared/types/user.type';
 

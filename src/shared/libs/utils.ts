@@ -13,11 +13,6 @@ import {
 } from './constants';
 import { IDateUser } from 'pages/requests/test-users';
 import { UserRole, userRole } from 'shared/types/common.types';
-import { UserProfile } from 'entities/user/types';
-import { MessageInterface } from '../types/chat.types';
-import { mockRecipient, mockVolunteer } from '../../entities/chat/mock-users';
-import { mockChatMessages } from '../../entities/chat/mock-messages';
-import { AnyUserInterface } from 'shared/types/user.type';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -271,25 +266,6 @@ export const setTokenAccess = (token: string) => {
 export const getTokenAccess = () => {
   return localStorage.getItem(LOCAL_STORAGE_TOKEN_ACCESS);
 };
-
-export interface IMessageHub {
-  user: AnyUserInterface;
-  messages: MessageInterface[];
-  id: string;
-}
-
-export const messageHub: IMessageHub[] = [
-  {
-    user: mockRecipient,
-    messages: mockChatMessages,
-    id: '2',
-  },
-  {
-    user: mockVolunteer,
-    messages: mockChatMessages,
-    id: '1',
-  },
-];
 
 export const dataImages = [
   {
