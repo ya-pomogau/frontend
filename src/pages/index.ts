@@ -18,7 +18,7 @@ export { RequestsPage } from './requests';
 export { RequestsTab } from './requests-tab';
 export { SectionChatHub } from './section-chat-hub';
 export { SectionChatsConflict } from './section-chats-conflict';
-export { SectionInWorkChats } from './section-in-work-chats';
+export { SectionSystemChats } from './section-system-chats';
 export { StatisticsPage } from './statistics';
 export { TasksPage } from './tasks';
 export { TasksProfilePage } from './tasks-profile';

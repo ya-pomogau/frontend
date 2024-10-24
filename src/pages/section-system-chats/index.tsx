@@ -1,14 +1,16 @@
 import { ChangeEvent, useState } from 'react';
 
 import { WindowInteractionUsers } from 'widgets/window-interaction-users';
-import { Message } from 'shared/ui/message';
-import { IMessageHub, messageHub } from 'shared/libs/utils';
 import { MessageCard } from 'shared/ui/message-card';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import styles from './styles.module.css';
 import WrapperMessage from 'shared/ui/wrapper-messages';
+import { mockAdminChatsResponse } from 'entities/chat/mock-response';
+import { SystemChatInfo } from 'shared/types/chat.types';
 
-export const SectionInWorkChats = () => {
+export const SectionSystemChats = () => {
+  const systemChats = mockAdminChatsResponse.system;
+
   const [isOpen, setIpOpen] = useState<boolean>(false);
   const [infoMessage, setInfoMessage] = useState<IMessageHub | null>(null);
   const [selectedCard, setSelectedCard] = useState<string>('');
@@ -19,10 +21,10 @@ export const SectionInWorkChats = () => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);
   };
 
-  const handleClickCard = (task: IMessageHub) => {
-    setSelectedCard(task.id);
+  const handleClickCard = ({ meta }: SystemChatInfo) => {
+    setSelectedCard(meta._id);
     setIpOpen(true);
-    setInfoMessage(task);
+    setInfoMessage(meta);
   };
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -38,18 +40,18 @@ export const SectionInWorkChats = () => {
   return (
     <div className={styles.picker}>
       <WrapperMessage
-        information={!!messageHub.length}
+        information={!!systemChats.length}
         title="У Вас пока нет чатов в работе"
       >
-        {messageHub?.map((item) => (
+        {systemChats?.map(({ meta, chats }) => (
           <MessageCard
-            key={item.id}
+            key={meta._id}
             statusConflict
-            description={item.user.phone}
-            action={selectedCard === item.id}
-            user={item.user}
-            handleClickCard={() => handleClickCard(item)}
-            message={item.messages}
+            description={meta.user.phone}
+            action={selectedCard === meta._id}
+            user={meta.user}
+            handleClickCard={() => handleClickCard({ meta, chats })}
+            message={chats}
           />
         ))}
       </WrapperMessage>
