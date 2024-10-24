@@ -1,24 +1,24 @@
 import cn from 'classnames';
-import { ReactElement, ReactNode, FC, useRef } from 'react';
+import { ReactElement, FC, useRef } from 'react';
 import styles from './styles.module.css';
 import { useMediaQuery } from 'shared/hooks';
 import { Icon } from 'shared/ui/icons';
 import { GradientDivider } from 'shared/ui/gradient-divider';
-import { UserProfile } from 'entities/user/types';
 import { Breakpoints } from 'shared/config';
 import { useLazyScroll } from 'entities/chat/ui/chat/hooks/useLazyScroll';
 import { MessageInterface } from 'shared/types/chat.types';
 import { Message } from 'shared/ui';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
   isOpen: boolean;
   onClick?: (text: string) => void;
 
-  chatmateInfo?: UserProfile;
+  chatmateInfo?: AnyUserInterface;
   boxButton: ReactElement;
   closeConflict: () => void;
-  messages: MessageInterface[];
+  messages: MessageInterface[] | null;
 }
 
 export const WindowInteractionUsers: FC<IWindowInteractionUsers> = ({

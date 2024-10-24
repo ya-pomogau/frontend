@@ -4,7 +4,7 @@ import { sortMessages } from '../libs/utils';
 import { MessageInterface } from 'shared/types/chat.types';
 
 interface useLazyScrollProps {
-  messages: MessageInterface[];
+  messages: MessageInterface[] | null;
   openedChatPopupRef: RefObject<HTMLElement>;
 }
 
@@ -14,7 +14,7 @@ export const useLazyScroll = ({
   messages,
   openedChatPopupRef,
 }: useLazyScrollProps) => {
-  const sortedMessages = sortMessages(messages);
+  const sortedMessages = messages && sortMessages(messages);
 
   const [messagesInChat] = useState(sortedMessages);
   const [currentMessagesPage, setCurrentMessagesPage] = useState(1);

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { MessageCard } from 'shared/ui/message-card';
@@ -8,35 +8,47 @@ import WrapperMessage from 'shared/ui/wrapper-messages';
 import { mockAdminChatsResponse } from 'entities/chat/mock-response';
 import {
   MessageInterface,
-  SystemChatInfo,
   SystemChatMetaInterface,
 } from 'shared/types/chat.types';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 export const SectionSystemChats = () => {
-  // Получаем метаданные
+  // Получаем метаданные по доступным чатам
   const systemChats = mockAdminChatsResponse.system;
 
   // Объявляем переменные
-  const [infoMessage, setInfoMessage] =
-    useState<SystemChatMetaInterface | null>(null);
-  const [selectedCard, setSelectedCard] = useState<string>('');
+  const [chatmateInfo, setСhatmateInfo] = useState<AnyUserInterface | null>(
+    null
+  );
+  const [chatMessage, setChatMessage] = useState<MessageInterface[] | null>(
+    null
+  );
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [isOpen, setIpOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
   const [_, setFileInput] = useState<string>('');
 
   // Обработка клика по карточке
   const handleClickCard = (meta: SystemChatMetaInterface) => {
+    // Закрываем старый чат
+    chatMessage && setChatMessage(null);
+
+    // Открываем новый
     setSelectedCard(meta._id);
-    setIpOpen(true);
-    setInfoMessage(meta);
+    setСhatmateInfo(meta.user);
+
+    // TODO: Стираем данные о непрочитанных сообщениях через websocket
+    meta.unreads = 0;
   };
 
-  // Загрузка сообщений по id из метаданных
-  const handleGetMessage = (id: string) => {
+  // Загрузка сообщений по id-чата из метаданных
+  useEffect(() => {
     // TODO: Загрузка с сервера через websocket, а не из моков
-    const match = systemChats.find(({ meta }) => meta._id === id);
-    return match?.chats as MessageInterface[];
-  };
+    const match = systemChats.find(({ meta }) => meta._id === selectedCard);
+    setChatMessage(match?.chats as MessageInterface[]);
+
+    selectedCard && setIpOpen(true);
+  }, [selectedCard, isOpen, systemChats]);
 
   //Механизмы отображения чата
   const handleVisibleMessage = (text: string) => {
@@ -62,7 +74,6 @@ export const SectionSystemChats = () => {
         {systemChats?.map(({ meta }) => (
           <MessageCard
             key={meta._id}
-            description={meta.user.phone}
             action={selectedCard === meta._id}
             user={meta.user}
             unreads={meta.unreads}
@@ -70,14 +81,14 @@ export const SectionSystemChats = () => {
           />
         ))}
       </WrapperMessage>
-      {isOpen && infoMessage && (
+      {isOpen && chatmateInfo && chatMessage && (
         <WindowInteractionUsers
           closeConflict={handelCloseWrapper}
           option="chat"
           isOpen={isOpen}
           onClick={handleVisibleMessage}
-          chatmateInfo={infoMessage?.user}
-          messages={handleGetMessage(infoMessage._id)}
+          chatmateInfo={chatmateInfo}
+          messages={chatMessage}
           boxButton={
             <InputWrapper
               placeholder="Напишите сообщение..."

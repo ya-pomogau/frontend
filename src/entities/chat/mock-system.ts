@@ -20,7 +20,7 @@ export const mockMetaSystemVolunteerChatMessage: SystemChatMetaInterface = {
   createdAt: new Date(2024, 10, 13, 0, 0, 0),
   updatedAt: new Date(2024, 10, 14, 0, 0, 0),
   unreads: 2,
-  watermark: '101',
+  watermark: '0',
 };
 
 export const mockVolunteerToAdminMessages: MessageInterface[] = [
@@ -55,7 +55,7 @@ export const mockMetaSystemRecipientChatMessage: SystemChatMetaInterface = {
   createdAt: new Date(2024, 10, 12, 0, 0, 0),
   updatedAt: new Date(2024, 10, 13, 5, 0, 0),
   unreads: 0,
-  watermark: '808',
+  watermark: '2',
 };
 
 export const mockRecipientToAdminMessages: MessageInterface[] = [
