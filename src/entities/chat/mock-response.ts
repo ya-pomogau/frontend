@@ -12,7 +12,7 @@ import { mockConflict } from './mock-conflict';
 
 export const mockUserChatsResponse: GetUserChatsResponseInterface = {
   task: [mockTasks],
-  system: [mockSystem],
+  system: [],
   // conflict: [],
 };
 
@@ -21,8 +21,8 @@ export const mockUserChatsResponse: GetUserChatsResponseInterface = {
 ##################### */
 
 export const mockAdminChatsResponse: GetAdminChatsResponseInterface = {
-  my: [mockSystem],
-  system: [mockSystem],
+  my: [],
+  system: mockSystem,
   conflict: [mockConflict],
   moderated: [mockConflict],
 };
