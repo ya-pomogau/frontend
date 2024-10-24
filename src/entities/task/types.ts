@@ -1,6 +1,10 @@
-import { UserProfile } from 'entities/user/types';
 import { UserStatus, ValueOf } from 'shared/types/common.types';
 import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
+import {
+  AdminInterface,
+  RecipientInterface,
+  VolunteerInterface,
+} from 'shared/types/user.type';
 
 export const taskStatus = {
   CREATED: 'created', // только созданная заявка
@@ -42,20 +46,20 @@ export type Task = {
   status: TaskStatus;
   category: Category;
   date: string | null;
-  recipient: UserProfile;
+  recipient: RecipientInterface;
   recipientReport: TaskReport | null;
-  volunteer: UserProfile | null;
+  volunteer: VolunteerInterface | null;
   volunteerReport: TaskReport | null;
   adminResolve: ResolveStatus | null; // null - вмешательства не требуется админа.
   isPendingChanges: boolean; //показывает что один участник ответил по выполнению заявки
-  moderator: UserProfile | null; //указывает на админа который решает конфликт
+  moderator: AdminInterface | null; //указывает на админа который решает конфликт
 };
 
 export type TaskConflict = Omit<
   Task,
   'volunteer' | 'recipientReport' | 'volunteerReport'
 > & {
-  volunteer: UserProfile;
+  volunteer: VolunteerInterface;
   recipientReport: TaskReport;
   volunteerReport: TaskReport;
 };

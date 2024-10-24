@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { TaskConflict } from 'entities/task/types';
-import { UserProfile } from 'entities/user/types';
 import { IMessageHub } from 'shared/libs/utils';
 import { MessageInterface } from '../../types/chat.types';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 interface PropsMessageCard {
   statusConflict: boolean;
@@ -13,7 +13,7 @@ interface PropsMessageCard {
   handleClickCard: (task: TaskConflict | IMessageHub) => void;
   message?: MessageInterface[];
   action: boolean;
-  user: UserProfile;
+  user: AnyUserInterface;
   task?: TaskConflict;
   position?: boolean;
 }
