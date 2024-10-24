@@ -3,65 +3,69 @@ import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { TaskConflict } from 'entities/task/types';
-import { MessageInterface } from '../../types/chat.types';
 import { AnyUserInterface } from 'shared/types/user.type';
 
 interface PropsMessageCard {
-  statusConflict: boolean;
+  statusConflict?: boolean | undefined;
   description: string;
-  handleClickCard: (task: TaskConflict | IMessageHub) => void;
-  message?: MessageInterface[];
+  onClick: () => void;
   action: boolean;
   user: AnyUserInterface;
-  task?: TaskConflict;
   position?: boolean;
+  unreads: number;
 }
 
-export const MessageCard = (props: PropsMessageCard) => {
+export const MessageCard = ({
+  unreads,
+  position,
+  action,
+  user,
+  onClick,
+  statusConflict,
+  description,
+}: PropsMessageCard) => {
   const [hasNewMessage, setHasNewMessage] = useState(false);
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
   const location = useLocation();
 
   useEffect(() => {
     setHasNewMessage(true);
-  }, [props.message]);
+  }, [unreads]);
 
-  function handelClick() {
-    if (props.task) {
-      props.handleClickCard(props.task);
-    } else if (props.message) {
-      props.handleClickCard({
-        user: props.user,
-        messages: props.message,
-        id: props.user._id,
-      });
-    }
-  }
+  // function handelClick() {
+  //   if (task) {
+  //     handleClickCard(task);
+  //   } else if (unreads) {
+  //     handleClickCard({
+  //       user,
+  //       messages: unreads,
+  //       id: user._id,
+  //     });
+  //   }
+  // }
 
   return (
     <article
-      onClick={handelClick}
+      onClick={onClick}
       className={cn(
         styles.card,
-        { [styles.card_action]: props.action },
+        { [styles.card_action]: action },
         {
-          [styles.cardSwipe]: props.position,
+          [styles.cardSwipe]: position,
         }
       )}
     >
-      {props.user.avatar ? (
-        <img src={props.user.avatar} alt="фото" className={styles.img} />
+      {user.avatar ? (
+        <img src={user.avatar} alt="фото" className={styles.img} />
       ) : (
-        <div
-          className={cn(styles.img, { [styles.img_action]: props.action })}
-        />
+        <div className={cn(styles.img, { [styles.img_action]: action })} />
       )}
       <div className={styles.userInfo}>
         <p className={cn(defultStyle, styles.name, styles.lengthLimitation)}>
-          {props.statusConflict ? 'Оповещение о конфликте' : props.user.name}
+          {statusConflict ? 'Оповещение о конфликте' : user.name}
         </p>
         <p className={cn(defultStyle, styles.message, styles.lengthLimitation)}>
-          {props.description}
+          {description}
         </p>
       </div>
       {location.pathname === '/chat-conflict'
@@ -78,7 +82,7 @@ export const MessageCard = (props: PropsMessageCard) => {
                 [styles.vizabiliti]: !hasNewMessage,
               })}
             >
-              {/* {props.message.length > 10 ? '+9' : props.message.length} */}
+              {/* {message.length > 10 ? '+9' : message.length} */}
             </span>
           )}
     </article>

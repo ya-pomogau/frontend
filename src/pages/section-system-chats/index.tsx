@@ -6,25 +6,41 @@ import { InputWrapper } from 'shared/ui/input-wrapper';
 import styles from './styles.module.css';
 import WrapperMessage from 'shared/ui/wrapper-messages';
 import { mockAdminChatsResponse } from 'entities/chat/mock-response';
-import { SystemChatInfo } from 'shared/types/chat.types';
+import {
+  MessageInterface,
+  SystemChatInfo,
+  SystemChatMetaInterface,
+} from 'shared/types/chat.types';
 
 export const SectionSystemChats = () => {
+  // Получаем метаданные
   const systemChats = mockAdminChatsResponse.system;
 
-  const [isOpen, setIpOpen] = useState<boolean>(false);
-  const [infoMessage, setInfoMessage] = useState<IMessageHub | null>(null);
+  // Объявляем переменные
+  const [infoMessage, setInfoMessage] =
+    useState<SystemChatMetaInterface | null>(null);
   const [selectedCard, setSelectedCard] = useState<string>('');
+  const [isOpen, setIpOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
   const [_, setFileInput] = useState<string>('');
 
-  const handleVisibleMessage = (text: string) => {
-    text === 'close' ? setIpOpen(false) : setIpOpen(true);
-  };
-
-  const handleClickCard = ({ meta }: SystemChatInfo) => {
+  // Обработка клика по карточке
+  const handleClickCard = (meta: SystemChatMetaInterface) => {
     setSelectedCard(meta._id);
     setIpOpen(true);
     setInfoMessage(meta);
+  };
+
+  // Загрузка сообщений по id из метаданных
+  const handleGetMessage = (id: string) => {
+    // TODO: Загрузка с сервера через websocket, а не из моков
+    const match = systemChats.find(({ meta }) => meta._id === id);
+    return match?.chats as MessageInterface[];
+  };
+
+  //Механизмы отображения чата
+  const handleVisibleMessage = (text: string) => {
+    text === 'close' ? setIpOpen(false) : setIpOpen(true);
   };
 
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -43,15 +59,14 @@ export const SectionSystemChats = () => {
         information={!!systemChats.length}
         title="У Вас пока нет чатов в работе"
       >
-        {systemChats?.map(({ meta, chats }) => (
+        {systemChats?.map(({ meta }) => (
           <MessageCard
             key={meta._id}
-            statusConflict
             description={meta.user.phone}
             action={selectedCard === meta._id}
             user={meta.user}
-            handleClickCard={() => handleClickCard({ meta, chats })}
-            message={chats}
+            unreads={meta.unreads}
+            onClick={() => handleClickCard(meta)}
           />
         ))}
       </WrapperMessage>
@@ -62,7 +77,7 @@ export const SectionSystemChats = () => {
           isOpen={isOpen}
           onClick={handleVisibleMessage}
           chatmateInfo={infoMessage?.user}
-          messages={infoMessage?.messages}
+          messages={handleGetMessage(infoMessage._id)}
           boxButton={
             <InputWrapper
               placeholder="Напишите сообщение..."
