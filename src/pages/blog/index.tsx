@@ -17,6 +17,7 @@ import { IValuesBlog } from 'shared/types/blog.types';
 import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 const postsPerPage = 10;
 
@@ -131,7 +132,14 @@ export function BlogPage() {
           onClickExit={handleClose}
           extClassName={styles.popup}
         >
-          <h4 className={`${styles.textWarning} text`}>Удалить публикацию?</h4>
+          <Typography
+            tag={'h4'}
+            color={'black'}
+            fontFamily={'primaryFont'}
+            variant={'paragraph'}
+            content={'Удалить публикацию?'}
+            extraClass={styles.textWarning}
+          />
           <div className={styles.btnContainer}>
             <Button
               actionType="button"

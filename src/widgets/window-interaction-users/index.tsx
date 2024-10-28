@@ -6,6 +6,7 @@ import { Icon } from 'shared/ui/icons';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { UserProfile } from 'entities/user/types';
 import { Breakpoints } from 'shared/config';
+import { Typography } from 'shared/ui/typography';
 
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
@@ -43,49 +44,38 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
             alt="фото"
           />
           <div className={styles.container}>
-            <p
-              className={cn(
-                'text-inter',
-                'm-0',
-                'text_size_large',
-                'text_type_regular',
-                styles.name
-              )}
-            >
-              {props.chatmateInfo?.name}
-            </p>
-            <p
-              className={cn(
-                'text',
-                'm-0',
-                'text_type_regular',
-                styles.id,
-                styles['display-none']
-              )}
-            >{`ID ${props.chatmateInfo?._id}`}</p>
-            <p
-              className={cn(
-                'text-inter',
-                'm-0',
-                'text_size_medium',
-                'text_type_regular',
-                styles['display-none'],
-                styles.phone
-              )}
-            >
-              <span
-                className={cn(
-                  'text_size_medium',
-                  'text-inter',
-                  'text_type_bold',
-                  styles['display-none'],
-                  styles.span
-                )}
-              >
-                Тел.:
-              </span>
-              {props.chatmateInfo?.phone}
-            </p>
+            <Typography
+              tag={'h3'}
+              color={'black'}
+              variant={'titleResize'}
+              fontFamily="secondaryFont"
+              content={`${props.chatmateInfo?.name}`}
+              extraClass={styles.name}
+            />
+            <Typography
+              tag={'p'}
+              color={'ID-text'}
+              variant={'servicesText'}
+              fontFamily={'primaryFont'}
+              content={`ID ${props.chatmateInfo?._id}`}
+              extraClass={styles['display-none']}
+            />
+            <div className={cn(styles.phone, styles['display-none'])}>
+              <Typography
+                tag={'p'}
+                fontFamily={'secondaryFont'}
+                variant={'paragraph-bold'}
+                color={'black'}
+                content={'Тел.:'}
+              />
+              <Typography
+                tag={'p'}
+                fontFamily={'secondaryFont'}
+                variant={'paragraph'}
+                color={'black'}
+                content={`${props.chatmateInfo?.phone}`}
+              />
+            </div>
           </div>
           {isMobile && (
             <GradientDivider extClassName={styles['gradient-divider']} />
@@ -102,16 +92,13 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
               size="32"
             />
           )}
-          <h4
-            className={cn(
-              'm-0',
-              'text-inter',
-              'text_size_large',
-              'text_type_regular'
-            )}
-          >
-            Конфликт
-          </h4>
+          <Typography
+            tag={'h4'}
+            color={'black'}
+            fontFamily={'secondaryFont'}
+            variant={'title'}
+            content={'Конфликт'}
+          />
           {isMobile && (
             <GradientDivider extClassName={styles['gradient-divider']} />
           )}

@@ -12,6 +12,7 @@ import { Breakpoints } from 'shared/config';
 
 import styles from './styles.module.css';
 import { AnyUserInterface } from 'shared/types/user.type';
+import { Typography } from 'shared/ui/typography';
 
 interface PopupChatProps {
   messages: MessageInterface[];
@@ -70,10 +71,13 @@ export const PopupChat = ({
           avatarLink={chatmateInfo.avatar}
           extClassName={styles.avatar}
         />
-
-        <h4 className={classnames('text', 'text_type_regular', styles.name)}>
-          {chatmateInfo.name}
-        </h4>
+        <Typography
+          tag={'h4'}
+          color={'black'}
+          fontFamily={'primaryFont'}
+          variant={'titleResize'}
+          content={chatmateInfo.name}
+        />
       </div>
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>

@@ -4,6 +4,7 @@ import { Accordion, Button } from 'shared/ui';
 import { LightPopup } from 'shared/ui/light-popup';
 import styles from './styles.module.css';
 import { User } from 'entities/user/types';
+import { Typography } from 'shared/ui/typography';
 
 type Props = {
   isOpen: boolean;
@@ -101,9 +102,14 @@ export const AdminSelectModal = ({ isOpen, onClose, admins }: Props) => {
                 );
               } else {
                 return (
-                  <p className={styles.description}>
-                    {'Доступные для выбора администраторы отсутвуют'}
-                  </p>
+                  <Typography
+                    tag={'p'}
+                    color={'interface-additional'}
+                    fontFamily={'primaryFont'}
+                    variant={'paragraph'}
+                    content={'Доступные для выбора администраторы отсутвуют'}
+                    extraClass={styles.description}
+                  />
                 );
               }
             }}

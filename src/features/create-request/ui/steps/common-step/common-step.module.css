@@ -100,8 +100,6 @@
     bottom: -140px;
   }
   .task {
-    font-size: var(--font-size-medium);
-    line-height: var(--line-height-large);
     align-self: center;
     position: relative;
     bottom: -10px;
@@ -197,4 +195,5 @@
   cursor: pointer;
   padding: 0;
   align-self: flex-start;
+  margin-top: 5px;
 }

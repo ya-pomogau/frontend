@@ -15,6 +15,7 @@ import { mockChatMessages } from '../../../../../chat/mock-messages';
 
 import placeholder from '../../img/placeholder.svg';
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface TaskUserProps {
   user: UserProfile | null;
@@ -48,8 +49,22 @@ export const TaskUser = ({
         <DefaultAvatar isTaskAvatar />
       )}
       <div className={styles.info}>
-        <p className={styles.name}>{user ? user.name : ''}</p>
-        <p className={styles.phone}>{user ? user.phone : ''}</p>
+        <Typography
+          tag={'h4'}
+          color={'black'}
+          fontFamily={'primaryFont'}
+          variant={'paragraph'}
+          content={user ? user.name : ''}
+          extraClass={styles.name}
+        />
+        <Typography
+          tag={'p'}
+          color={'primary'}
+          fontFamily={'primaryFont'}
+          variant={'paragraph'}
+          content={user ? user.phone : ''}
+          extraClass={styles.phone}
+        />
       </div>
       <div className={styles.buttons}>
         <ButtonWithModal

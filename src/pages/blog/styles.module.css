@@ -49,9 +49,6 @@
 
 .textWarning {
   margin: 0 0 20px;
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-small);
   text-align: left;
 }
 

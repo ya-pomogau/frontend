@@ -16,6 +16,7 @@ import {
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface TaskListProps {
   userRole: UserRole | null;
@@ -92,15 +93,6 @@ export const TaskList = ({
     styles.medium_add_button
   );
 
-  const titleAddListStyles = classNames(
-    styles.title_add_list,
-    {
-      text_size_medium: isMobile,
-      text_size_large: !isMobile,
-    },
-    'text_type_regular'
-  );
-
   const contentEmptyStyles = classNames(
     styles.content_empty,
     {
@@ -108,16 +100,6 @@ export const TaskList = ({
       [styles.content_empty_desktop]: !isMobile,
     },
     extClassName
-  );
-
-  const titleAddEmptyStyles = classNames(
-    styles.title_add_empty,
-    'text_size_large',
-    'text_type_regular',
-    {
-      [styles.title_add_empty_mobile]: isMobile,
-      [styles.title_add_empty_desktop]: !isMobile,
-    }
   );
 
   const getCoords = () => {
@@ -159,7 +141,13 @@ export const TaskList = ({
                 size={'medium'}
                 extClassName={addTaskIconStyles}
               />
-              <h2 className={titleAddListStyles}>Создать заявку</h2>
+              <Typography
+                tag={'h2'}
+                content={'Создать заявку'}
+                fontFamily={'primaryFont'}
+                color={'primary-additional'}
+                variant={'titleResize'}
+              />
             </li>
           )}
           {tasks.map((item, index) => (
@@ -178,8 +166,14 @@ export const TaskList = ({
           />
 
           {isRecipient && (
-            <>
-              <p className={titleAddEmptyStyles}>Хотите создать заявку?</p>
+            <div className={styles.content_add_task}>
+              <Typography
+                tag={'h2'}
+                fontFamily={'secondaryFont'}
+                color={'primary'}
+                variant={'title'}
+                content={'Хотите создать заявку?'}
+              />
               <div className={styles.wrapperBtn} ref={buttonRef}>
                 <Icon
                   className={styles.content_empty_arrow}
@@ -208,7 +202,8 @@ export const TaskList = ({
                   }}
                 >
                   <div className={styles.closeWrapper}>
-                    <Icon icon="CloseCrossIcon"
+                    <Icon
+                      icon="CloseCrossIcon"
                       className={styles.closeIcon}
                       size="14"
                       color="blue"
@@ -220,7 +215,7 @@ export const TaskList = ({
                   </div>
                 </Tooltip>
               )}
-            </>
+            </div>
           )}
         </div>
       )}

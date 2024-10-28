@@ -10,6 +10,7 @@ import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
 import MaskedInput from 'react-text-mask';
+import { Typography } from '../typography';
 
 export interface InputPhoneProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -86,9 +87,14 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
             ]}
             onChange={onChange}
           />
-          <span className={cn(styles.error, 'text')}>
-            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
-          </span>
+          <Typography
+            tag={'span'}
+            color={'orange'}
+            fontFamily={'primaryFont'}
+            variant={'support'}
+            content={errorText === ' ' ? <span>&nbsp;</span> : errorText}
+            extraClass={styles.error}
+          />
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>

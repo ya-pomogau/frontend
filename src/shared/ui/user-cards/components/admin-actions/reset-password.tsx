@@ -3,6 +3,7 @@ import { Button } from 'shared/ui/button';
 import styles from '../../styles.module.css';
 import { Icon } from 'shared/ui';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Typography } from 'shared/ui/typography';
 
 interface ResetPasswordProps {
   handleModalClose: () => void;
@@ -25,8 +26,16 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
   return (
     <div className={styles.modalContainer}>
       <div className={styles.modalContent}>
-        <h2 className={styles.modalTitle}>Смена пароля</h2>
-        <Icon icon="CloseIconThin"
+        <Typography
+          tag={'h3'}
+          color={'black'}
+          fontFamily={'primaryFont'}
+          variant={'paragraph-bold'}
+          content={'Смена пароля'}
+          extraClass={styles.modalTitle}
+        />
+        <Icon
+          icon="CloseIconThin"
           className={styles.close}
           onClick={handleModalClose}
           color="blue"
@@ -45,10 +54,8 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
               })}
               placeholder="Введите новый пароль"
               type="password"
+              errorText={errors.newPassword ? errors.newPassword.message : ''}
             />
-            {errors.newPassword && (
-              <span className={styles.error}>{errors.newPassword.message}</span>
-            )}
           </div>
           <div className={styles.input_with_label}>
             <Input
@@ -59,12 +66,10 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
               })}
               placeholder="Повторите пароль"
               type="password"
+              errorText={
+                errors.repeatPassword ? errors.repeatPassword.message : ''
+              }
             />
-            {errors.repeatPassword && (
-              <span className={styles.error}>
-                {errors.repeatPassword.message}
-              </span>
-            )}
           </div>
           <Button
             buttonType="primary"

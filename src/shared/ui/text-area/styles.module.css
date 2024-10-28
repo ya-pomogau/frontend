@@ -58,9 +58,6 @@
   bottom: 12px;
   right: 12px;
   font-size: 10px;
-  line-height: 12px;
-  font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-additional);
 }
 
 .for_storybook {
@@ -70,15 +67,11 @@
 
 .error {
   margin-top: 8px;
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-xs);
-  font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-orange);
 }
 
 @media (max-width: 550px) {
   .input {
     font-size: 12px;
-    height: 104px;
+    height: 125px;
   }
 }

@@ -5,12 +5,6 @@
   column-gap: 10px;
 }
 
-.balance_text {
-  font-family: var(--font-family-golos);
-  font-size: var(--font-size-s);
-  line-height: 22px;
-}
-
 .balance_input {
   outline: none;
   width: 41px;
@@ -38,11 +32,4 @@
 .balance_input::placeholder {
   color: var(--colors-interface-primary-additional);
   -webkit-text-stroke: 0.5px var(--colors-interface-primary);
-}
-
-@media screen and (max-width: 920px) {
-  .balance_text {
-    font-size: var(--font-size-middle);
-    line-height: var(--line-height-medium);
-  }
 }

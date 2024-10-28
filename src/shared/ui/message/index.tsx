@@ -4,6 +4,7 @@ import { Avatar } from '../avatar';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
 import { GradientDivider } from '../gradient-divider';
+import { Typography } from '../typography';
 
 interface MessageProps {
   extClassName?: string;
@@ -33,38 +34,41 @@ export const Message = ({
     type !== 'send' && (
       <div className={styles.messageBlock}>
         <div className={classnames(styles.message, styles[`message--${type}`])}>
-          <span className={classnames(styles.text, 'text', 'text_size_small')}>
-            {messageText}
-          </span>
+          <Typography
+            tag={'span'}
+            color={'white'}
+            fontFamily={'secondaryFont'}
+            variant={'support'}
+            content={messageText}
+            extraClass={styles.text}
+          />
         </div>
       </div>
     );
 
   const getAchievement = () => (
-    <p
-      className={classnames(
-        styles['achievement-title'],
-        'text',
-        'text_size_small'
-      )}
-    >
-      {messageText}
-      <GradientDivider extClassName={styles['gradient-divider']} />
-      <Icon color="blue" icon="KeyIcon" />
-    </p>
+    <Typography
+      tag={'p'}
+      fontFamily={'secondaryFont'}
+      variant={'support'}
+      extraClass={styles['achievement-title']}
+      content={
+        <>
+          {messageText}
+          <GradientDivider extClassName={styles['gradient-divider']} />
+          <Icon color="blue" icon="KeyIcon" />
+        </>
+      }
+    />
   );
 
   const getSendMeassage = () => (
-    <p
-      className={classnames(
-        'm-0',
-        'text',
-        'text_size_small',
-        'text_type_regular'
-      )}
-    >
-      {messageText}
-    </p>
+    <Typography
+      tag={'p'}
+      fontFamily={'secondaryFont'}
+      variant={'support'}
+      content={messageText}
+    />
   );
 
   return (

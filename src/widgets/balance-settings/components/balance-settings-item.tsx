@@ -4,6 +4,7 @@ import { Input } from 'shared/ui';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface BalanceSettingsItemProps {
   title: string;
@@ -18,7 +19,13 @@ const BalanceSettingsItem = ({
 }: BalanceSettingsItemProps) => {
   return (
     <div className={styles.balance_box}>
-      <p className={styles.balance_text}>{title}</p>
+      <Typography
+        tag={'p'}
+        color={'black'}
+        fontFamily={'primaryFont'}
+        variant={'paragraph'}
+        content={title}
+      />
       <Input
         className={styles.balance_input}
         defaultValue={inputValue}

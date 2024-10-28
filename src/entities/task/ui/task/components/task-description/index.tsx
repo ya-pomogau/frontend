@@ -5,6 +5,7 @@ import { useTruncatedText } from 'shared/hooks';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface TaskDescriptionProps {
   description: string;
@@ -28,18 +29,38 @@ export const TaskDescription = ({
   return (
     <div className={classNames(extClassName, styles.taskDescription)}>
       <div className={styles.card__expandable}>
-        <p ref={textRef} className={textStyles}>
-          {description}
-        </p>
+        <Typography
+          tag={'span'}
+          color={'black'}
+          fontFamily={'primaryFont'}
+          variant={'paragraph'}
+          content={
+            <p ref={textRef} className={textStyles}>
+              {description}
+            </p>
+          }
+        />
         {isTruncated && (
           <button onClick={toggleIsShowingMore} className={styles.expandBtn}>
-            {isExpanded ? 'Свернуть' : 'Читать'}
+            <Typography
+              tag={'span'}
+              color={'primary'}
+              fontFamily={'primaryFont'}
+              variant={'paragraph'}
+              content={isExpanded ? 'Свернуть' : 'Читать'}
+            />
           </button>
         )}
       </div>
       <div className={styles.score}>
         <Icon color="blue" icon="BallsIcon" size="46" />
-        <span className={styles.scoreText}>{count}</span>
+        <Typography
+          tag={'span'}
+          color={'primary'}
+          fontFamily={'primaryFont'}
+          variant={'support'}
+          content={`${count}`}
+        />
       </div>
     </div>
   );

@@ -1,11 +1,14 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
+import { ReactNode } from 'react';
 
 type TypographyTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 type TypographyVariant =
   | 'title'
+  | 'titleResize'
   | 'subtitle'
   | 'paragraph'
+  | 'paragraphResize'
   | 'paragraph-bold'
   | 'support'
   | 'support-bold'
@@ -16,6 +19,7 @@ type TypographyColor =
   | 'primary'
   | 'white'
   | 'black'
+  | 'darkGray'
   | 'primary-additional'
   | 'blue-navy'
   | 'interface-additional'
@@ -31,7 +35,7 @@ interface TypographyProps {
   variant: TypographyVariant;
   fontFamily: TypographyFontFamily;
   color?: TypographyColor;
-  content: string;
+  content: string | ReactNode;
 }
 
 export const Typography = ({

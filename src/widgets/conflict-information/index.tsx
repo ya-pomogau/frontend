@@ -3,9 +3,9 @@ import styles from './styles.module.css';
 import { FC } from 'react';
 import { Icon } from 'shared/ui/icons';
 import { CategoriesBackground } from 'shared/ui/categories-background';
-import cn from 'classnames';
 import { TaskConflict, TaskReport } from 'entities/task/types';
 import { format } from 'date-fns';
+import { Typography } from 'shared/ui/typography';
 
 interface IUser {
   user: {
@@ -51,30 +51,52 @@ export const InfoConflict: FC<PropsInfoConflict> = (props) => {
       </div>
       {props && (
         <div className={styles.boxInfo}>
-          <p className={cn('text', 'm-0', styles.text)}>
-            <Icon color="blue" icon="CalendarIcon" size="14" />
-            {` ${
-              props.info.date
-                ? format(new Date(props.info.date), 'dd.MM.yyyy')
-                : 'бессрочно'
-            } `}
-            {props.info.date && (
+          <Typography
+            tag={'p'}
+            color={'primary'}
+            fontFamily={'primaryFont'}
+            variant={'paragraph-bold'}
+            content={
               <>
-                <Icon color="blue" icon="ClockIcon" size="14" />
-                {` ${format(new Date(props.info.date), 'HH.MM')}`}
+                <Icon color="blue" icon="CalendarIcon" size="14" />
+                {` ${
+                  props.info.date
+                    ? format(new Date(props.info.date), 'dd.MM.yyyy')
+                    : 'бессрочно'
+                } `}
+                {props.info.date && (
+                  <>
+                    <Icon color="blue" icon="ClockIcon" size="14" />
+                    {` ${format(new Date(props.info.date), 'HH.MM')}`}
+                  </>
+                )}
               </>
-            )}
-          </p>
-          <p className={cn('text', 'm-0', styles.text)}>
-            <Icon color="blue" icon="LocationIcon" size="14" />
-            {` ${props.info.address}`}
-          </p>
+            }
+          />
+          <Typography
+            tag={'p'}
+            color={'primary'}
+            fontFamily={'primaryFont'}
+            variant={'paragraph-bold'}
+            content={
+              <>
+                {' '}
+                <Icon color="blue" icon="LocationIcon" size="14" />
+                {` ${props.info.address}`}
+              </>
+            }
+          />
           <CategoriesBackground
             theme="primary"
             size="medium"
             content={props.info.category.title}
           />
-          <p className={cn('text', 'm-0')}>{props.info.description}</p>
+          <Typography
+            tag={'p'}
+            fontFamily={'primaryFont'}
+            variant={'paragraph'}
+            content={props.info.description}
+          />
         </div>
       )}
     </article>

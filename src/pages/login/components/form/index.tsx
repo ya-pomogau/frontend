@@ -9,6 +9,7 @@ import useAsyncAction from 'shared/hooks/useAsyncAction';
 import { schema } from './schema';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 export interface ILoginForm {
   login: string;
@@ -79,7 +80,14 @@ const LoginForm = () => {
         extClassName={styles.button}
         disabled={!isValid}
       />
-      <span className={`${styles.error} text`}>{errorText}</span>
+      <Typography
+        tag={'span'}
+        color={'orange'}
+        fontFamily={'primaryFont'}
+        variant={'support'}
+        content={errorText}
+        extraClass={styles.error}
+      />
     </form>
   );
 };

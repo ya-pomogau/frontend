@@ -5,6 +5,7 @@ import { SquareButton } from '../square-buttons';
 
 import styles from './main-popup.module.css';
 import { ReactNode } from 'react';
+import { Typography } from '../typography';
 
 interface MainPopupProps {
   extClassName?: string;
@@ -42,38 +43,30 @@ export const MainPopup = ({
             extClassName={styles.avatar}
           />
           <div className={classNames(styles.profileDesc)}>
-            <p
-              className={classNames(
-                'm-0',
-                'text_size_large',
-                'text_type_regular',
-                'text',
-                styles['info-name-wrapper']
-              )}
-            >
-              {name}
-            </p>
+            <Typography
+              tag={'h2'}
+              color={'black'}
+              fontFamily={'secondaryFont'}
+              variant={'title'}
+              content={name}
+              extraClass={styles['info-name-wrapper']}
+            />
             <div className={classNames(styles.phoneWrapper)}>
-              <span
-                className={classNames(
-                  'text_size_medium',
-                  'text_type_bold',
-                  'text'
-                )}
-              >
-                Тел.: &nbsp;
-              </span>
-              <p
-                className={classNames(
-                  'm-0',
-                  'text_size_medium',
-                  'text_type_regular',
-                  'text',
-                  styles.phoneNumber
-                )}
-              >
-                {phoneNumber}
-              </p>
+              <Typography
+                tag={'span'}
+                color={'black'}
+                variant={'paragraph-bold'}
+                fontFamily={'secondaryFont'}
+                content={'Тел.: '}
+              />
+              <Typography
+                tag={'span'}
+                color={'black'}
+                variant={'paragraph'}
+                fontFamily={'secondaryFont'}
+                content={phoneNumber}
+                extraClass={styles.phoneNumber}
+              />
             </div>
           </div>
         </div>

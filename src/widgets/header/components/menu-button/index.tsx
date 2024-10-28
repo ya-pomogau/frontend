@@ -2,6 +2,7 @@ import { SyntheticEvent } from 'react';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface IMenuButtonProps {
   onClick: (evt: SyntheticEvent) => void;
@@ -15,7 +16,13 @@ const MenuButton = ({ onClick, isMobile }: IMenuButtonProps) => {
 
       {!isMobile && (
         <div className={styles.header__button__container}>
-          <span className={styles.header__button__text}>Меню</span>
+          <Typography
+            tag={'span'}
+            color={'primary'}
+            fontFamily={'primaryFont'}
+            variant={'support'}
+            content={'Меню'}
+          />
           <Icon icon="UnionIcon" color="blue" />
         </div>
       )}

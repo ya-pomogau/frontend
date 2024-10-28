@@ -6,6 +6,7 @@ import { TaskConflict } from 'entities/task/types';
 import { UserProfile } from 'entities/user/types';
 import { IMessageHub } from 'shared/libs/utils';
 import { MessageInterface } from '../../types/chat.types';
+import { Typography } from '../typography';
 
 interface PropsMessageCard {
   statusConflict: boolean;
@@ -20,7 +21,6 @@ interface PropsMessageCard {
 
 export const MessageCard = (props: PropsMessageCard) => {
   const [hasNewMessage, setHasNewMessage] = useState(false);
-  const defultStyle = cn('m-0', 'text', 'text_type_regular');
   const location = useLocation();
 
   useEffect(() => {
@@ -58,12 +58,22 @@ export const MessageCard = (props: PropsMessageCard) => {
         />
       )}
       <div className={styles.userInfo}>
-        <p className={cn(defultStyle, styles.name, styles.lengthLimitation)}>
-          {props.statusConflict ? 'Оповещение о конфликте' : props.user.name}
-        </p>
-        <p className={cn(defultStyle, styles.message, styles.lengthLimitation)}>
-          {props.description}
-        </p>
+        <Typography
+          tag={'p'}
+          fontFamily={'primaryFont'}
+          variant={'paragraphResize'}
+          content={
+            props.statusConflict ? 'Оповещение о конфликте' : props.user.name
+          }
+          extraClass={cn(styles.name, styles.lengthLimitation)}
+        />
+        <Typography
+          tag={'p'}
+          fontFamily={'primaryFont'}
+          variant={'support'}
+          content={props.description}
+          extraClass={cn(styles.message, styles.lengthLimitation)}
+        />
       </div>
       {location.pathname === '/chat-conflict'
         ? hasNewMessage && (
@@ -81,6 +91,7 @@ export const MessageCard = (props: PropsMessageCard) => {
             >
               {/* {props.message.length > 10 ? '+9' : props.message.length} */}
             </span>
+            // <Typography tag={'span'} color={'white'} fontFamily={'primaryFont'} variant={'input-title'} content={props.message.length > 10 ? '+9' : props.message.length} extraClass={cn(styles.counter, styles.radius, {[styles.vizabiliti]: !hasNewMessage})}/>
           )}
     </article>
   );

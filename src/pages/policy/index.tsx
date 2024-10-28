@@ -11,6 +11,7 @@ import { useMediaQuery } from '../../shared/hooks';
 import usePermission from '../../shared/hooks/use-permission';
 import { userRole } from 'shared/types/common.types';
 import { Breakpoints } from 'shared/config';
+import { Typography } from 'shared/ui/typography';
 
 export function PolicyPage() {
   const isMainAdmin = usePermission([], userRole.ADMIN);
@@ -64,7 +65,13 @@ export function PolicyPage() {
             {isMainAdmin && (
               <button className={style.editButton} onClick={handleEditButton}>
                 <Icon icon="EditIcon" color={'blue'} size={'20'} height="18" />
-                <p className={style.editButtonText}>Редактировать</p>
+                <Typography
+                  tag={'p'}
+                  color={'primary'}
+                  fontFamily={'primaryFont'}
+                  variant={'support'}
+                  content={'Редактировать'}
+                />
               </button>
             )}
           </div>
@@ -78,7 +85,14 @@ export function PolicyPage() {
       )}
       {editState && (
         <form className={style.editForm} onSubmit={onSubmit}>
-          <p className={style.editTitleText}>Заголовок</p>
+          <Typography
+            tag={'h5'}
+            color={'black'}
+            fontFamily={'primaryFont'}
+            variant={'support'}
+            content={'Заголовок'}
+            extraClass={style.editTitleText}
+          />
           <input
             type={'text'}
             name={'title'}
@@ -86,7 +100,14 @@ export function PolicyPage() {
             className={style.titleInput}
             onChange={onChangeTitleInput}
           />
-          <p className={style.editDescriptionText}>Текст</p>
+          <Typography
+            tag={'h5'}
+            color={'black'}
+            fontFamily={'primaryFont'}
+            variant={'support'}
+            content={'Текст'}
+            extraClass={style.editDescriptionText}
+          />
           <textarea
             className={style.descriptionInput}
             name={'description'}
@@ -102,7 +123,13 @@ export function PolicyPage() {
             />
             <button className={style.closeButton} onClick={handleCloseButton}>
               <Icon icon="CloseIconThin" color={'blue'} />
-              <p className={style.closeButtonText}>Закрыть без изменений</p>
+              <Typography
+                tag={'p'}
+                color={'primary'}
+                fontFamily={'primaryFont'}
+                variant={'support'}
+                content={'Закрыть без изменений'}
+              />
             </button>
           </div>
         </form>

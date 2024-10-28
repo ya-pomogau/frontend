@@ -1,7 +1,3 @@
-.selectedText {
-  color: var(--colors-interface-orange);
-}
-
 .text {
   margin: 5px 0;
   grid-column-start: 2;
@@ -19,11 +15,6 @@
   grid-column-start: 2;
   position: relative;
   bottom: 8px;
-}
-
-.place {
-  font-size: var(--font-size-small);
-  line-height: 14px;
 }
 
 .map {
@@ -45,10 +36,7 @@
 .messageAlert {
   opacity: 0;
   text-align: center;
-  color: var(--colors-interface-red);
   margin: 10px auto 0 auto;
-  font-family: var(--font-family-golos);
-  font-size: var(--font-size-middle);
   grid-column-start: 2;
 }
 
@@ -64,10 +52,7 @@
     margin: 0;
     z-index: 9;
   }
-  .place {
-    font-size: var(--font-size-medium);
-    line-height: var(--line-height-large);
-  }
+
   .headerWrapper {
     background: linear-gradient(
       90deg,

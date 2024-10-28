@@ -73,7 +73,8 @@ export const ButtonWithModal = ({
           }}
         >
           {closeButton && (
-            <Icon icon="CloseCrossIcon"
+            <Icon
+              icon="CloseCrossIcon"
               color="blue"
               className={`${styles.closeButton} close`}
             />

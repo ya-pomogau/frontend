@@ -3,6 +3,7 @@ import { NavLink, NavLinkRenderProps } from 'react-router-dom';
 import type { ISideBarElementProps } from './../types';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 export const SideBarItem = ({
   title,
@@ -23,7 +24,14 @@ export const SideBarItem = ({
   return (
     <NavLink to={to} className={navLinkStyles} style={navLinkConfig}>
       <div className={styles.link__icon}>{icon}</div>
-      <p className={styles.link__title}>{title}</p>
+      <Typography
+        tag={'p'}
+        color={'black'}
+        fontFamily={'primaryFont'}
+        variant={'paragraph'}
+        content={title}
+        extraClass={styles.link__title}
+      />
     </NavLink>
   );
 };

@@ -17,10 +17,7 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
   const { name, role, avatar, _id, phone } = user;
 
   return (
-    <li
-      className={classnames(styles.content)}
-      onClick={onClick}
-    >
+    <li className={classnames(styles.content)} onClick={onClick}>
       <Avatar
         extClassName={styles.avatar}
         avatarName={`аватар пользователя ${name}`}

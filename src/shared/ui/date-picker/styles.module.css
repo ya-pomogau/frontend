@@ -34,10 +34,6 @@
 
 .datePicker__headerMonth {
   margin-right: 4px;
-  font-family: var(--font-family-golos);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-s);
-  color: var(--colors-interface-primary);
 }
 
 .dataPicker__calendarWeekDay {
@@ -53,10 +49,8 @@
 .customInput {
   display: block;
   width: 283px;
-  text-align: left;
   border: none;
   padding: 0 0 0 10px;
   background-color: inherit;
-  color: var(--colors-interface-additional);
   height: 34px;
 }

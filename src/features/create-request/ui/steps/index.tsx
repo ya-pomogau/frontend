@@ -27,6 +27,7 @@ import { Tooltip } from '../../../../shared/ui/tooltip';
 import styles from './styles.module.css';
 import { Button } from '../../../../shared/ui/button';
 import { format } from 'date-fns';
+import { Typography } from 'shared/ui/typography';
 
 export interface RequestProps {
   isMobile?: boolean;
@@ -125,9 +126,16 @@ export const Request = ({ isMobile = true }: RequestProps) => {
                 idForModalRoot="mainPopupOuterDiv"
               >
                 <div className={styles.tooltipContent}>
-                  <p className={styles.text}>
-                    Закрыть окно сейчас и удалить ранее внесенную информацию?
-                  </p>
+                  <Typography
+                    tag={'p'}
+                    color={'darkGray'}
+                    fontFamily={'primaryFont'}
+                    variant={'paragraph'}
+                    content={
+                      'Закрыть окно сейчас и удалить ранее внесенную информацию?'
+                    }
+                    extraClass={styles.text}
+                  />
                   <div className={styles.buttonWrapper}>
                     <Button
                       buttonType="secondary"

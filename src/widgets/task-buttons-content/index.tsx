@@ -20,6 +20,7 @@ import { ButtonWithModal } from 'widgets/button-with-modal';
 import { useControlModal } from 'shared/hooks';
 import { infoAdmin, PopupChat } from 'entities';
 import { taskReport, TaskReport } from 'entities/task/types';
+import { Typography } from 'shared/ui/typography';
 
 interface ModalContentProps {
   type: ModalContentType;
@@ -90,7 +91,14 @@ export const ModalContent = ({
     case modalContentType.close:
       return (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>Укажите причину отмены</h3>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'Укажите причину отмены'}
+            extraClass={titleStyle}
+          />
           <div className={classNames(styles.modalContent, styles.flexColumn)}>
             <Checkbox
               label="Не смогу прийти"
@@ -110,6 +118,7 @@ export const ModalContent = ({
               onChange={() => handleSetReason(reasonTypes.third)}
               checked={reason === reasonTypes.third}
             />
+            T
           </div>
           <div className={styles.modalButtons}>
             <Button
@@ -160,21 +169,41 @@ export const ModalContent = ({
     case modalContentType.conflict:
       return userRole === userRoles.RECIPIENT && volunteer === false ? (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
-          <p className={textStyle}>
-            Вы не можете подтвердить не выполнение заявки, пока у заявки нет
-            волонтера.
-          </p>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'Волонтер пока не откликнулся'}
+            extraClass={titleStyle}
+          />
+          <Typography
+            tag={'p'}
+            color={'black'}
+            fontFamily={'secondaryFont'}
+            variant={'paragraph'}
+            content={
+              'Вы не можете подтвердить не выполнение заявки, пока у заявки нет волонтера.'
+            }
+            extraClass={textStyle}
+          />
         </div>
       ) : (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>
-            {active
-              ? 'Подтвердите, что заявка не выполнена'
-              : conflict
-              ? 'Не выполнена'
-              : 'Выполнена'}
-          </h3>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={
+              active
+                ? 'Подтвердите, что заявка не выполнена'
+                : conflict
+                ? 'Не выполнена'
+                : 'Выполнена'
+            }
+            extraClass={titleStyle}
+          />
           {
             <>
               {active && (
@@ -231,28 +260,60 @@ export const ModalContent = ({
     case modalContentType.confirm:
       return userRole === userRoles.RECIPIENT && volunteer === false ? (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
-          <p className={textStyle}>
-            Вы не можете подтвердить выполнение заявки, пока у заявки нет
-            волонтера.
-          </p>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'Волонтер пока не откликнулся'}
+            extraClass={titleStyle}
+          />
+          <Typography
+            tag={'p'}
+            color={'black'}
+            fontFamily={'secondaryFont'}
+            variant={'paragraph'}
+            content={
+              'Вы не можете подтвердить выполнение заявки, пока у заявки нет волонтера.'
+            }
+            extraClass={textStyle}
+          />
         </div>
       ) : (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>Благодарим за отзывчивость</h3>
-          <p className={textStyle}>
-            {`Мы ждем ответ ${
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'Благодарим за отзывчивость'}
+            extraClass={titleStyle}
+          />
+          <Typography
+            tag={'p'}
+            color={'black'}
+            fontFamily={'secondaryFont'}
+            variant={'paragraph'}
+            content={`Мы ждем ответ ${
               userRole === userRoles.RECIPIENT
                 ? 'от волонтера'
                 : 'от реципиента'
             }`}
-          </p>
+            extraClass={textStyle}
+          />
         </div>
       );
     case modalContentType.admin:
       return (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>Связь с администратором</h3>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'Связь с администратором'}
+            extraClass={titleStyle}
+          />
           <div className={styles.modalButtons}>
             <Button
               buttonType="secondary"
@@ -274,9 +335,23 @@ export const ModalContent = ({
     case modalContentType.phone:
       return (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>Номер телефона:</h3>
-          <a className={textStyle} href="tel: +7 (800) 555-35-35">
-            +7 (800) 555-35-35
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'Номер телефона:'}
+            extraClass={titleStyle}
+          />
+          <a href="tel: +7 (800) 555-35-35">
+            <Typography
+              tag={'span'}
+              color={'black'}
+              fontFamily={'secondaryFont'}
+              variant={'paragraph'}
+              content={'+7 (800) 555-35-35'}
+              extraClass={textStyle}
+            />
           </a>
         </div>
       );
@@ -285,10 +360,22 @@ export const ModalContent = ({
       if (!date || !isRemainLessThanDay(date)) {
         return (
           <div className={styles.modalTooltip}>
-            <h3 className={titleStyle}>Подтвердите удаление заявки</h3>
-            <p className={textStyle}>
-              Заявка будет отменена без возможности восстановления.
-            </p>
+            <Typography
+              tag={'h3'}
+              fontFamily={'primaryFont'}
+              color={'black'}
+              variant={'paragraph-bold'}
+              content={'Подтвердите удаление заявки'}
+              extraClass={titleStyle}
+            />
+            <Typography
+              tag={'p'}
+              color={'black'}
+              fontFamily={'secondaryFont'}
+              variant={'paragraph'}
+              content={'Заявка будет отменена без возможности восстановления.'}
+              extraClass={textStyle}
+            />
             <div className={styles.modalButtons}>
               <Button
                 buttonType="primary"
@@ -302,10 +389,22 @@ export const ModalContent = ({
 
       return (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>До начала заявки менее 24 часа</h3>
-          <p className={textStyle}>
-            Вы не можете отменить заявку самостоятельно.
-          </p>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'До начала заявки менее 24 часа'}
+            extraClass={titleStyle}
+          />
+          <Typography
+            tag={'p'}
+            color={'black'}
+            fontFamily={'secondaryFont'}
+            variant={'paragraph'}
+            content={'Вы не можете отменить заявку самостоятельно.'}
+            extraClass={textStyle}
+          />
           <div className={styles.modalButtons}>
             <Button
               buttonType="primary"
@@ -327,10 +426,24 @@ export const ModalContent = ({
     case modalContentType.responded:
       return (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>На заявку откликнулись</h3>
-          <p className={textStyle}>
-            Вы не можете отменить или отредактировать заявку самостоятельно.
-          </p>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'На заявку откликнулись'}
+            extraClass={titleStyle}
+          />
+          <Typography
+            tag={'p'}
+            color={'black'}
+            fontFamily={'secondaryFont'}
+            variant={'paragraph'}
+            content={
+              'Вы не можете отменить или отредактировать заявку самостоятельно.'
+            }
+            extraClass={textStyle}
+          />
           <div className={styles.modalButtons}>
             <Button
               buttonType="primary"
@@ -352,7 +465,14 @@ export const ModalContent = ({
     case modalContentType.unfulfilled:
       return (
         <div className={styles.modalTooltip}>
-          <h3 className={titleStyle}>На заявку не откликнулись</h3>
+          <Typography
+            tag={'h3'}
+            fontFamily={'primaryFont'}
+            color={'black'}
+            variant={'paragraph-bold'}
+            content={'На заявку не откликнулись'}
+            extraClass={titleStyle}
+          />
         </div>
       );
   }

@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import styles from '../styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface UserInfoProps {
   userName: string;
@@ -9,49 +10,39 @@ interface UserInfoProps {
 
 const UserInfo = ({ userName, userId, userNumber }: UserInfoProps) => (
   <div className={styles.user_info}>
-    <h2
-      className={classnames(
-        styles.name_text,
-        'm-0 text text_size_medium text_type_regular'
-      )}
-    >
-      {userName}
-    </h2>
-    <div className={classnames(styles.grid_ID, styles.id_color)}>
-      <p
-        className={classnames(
-          styles.id,
-          'm-0 text text_size_small text_type_regular'
-        )}
-      >
-        ID
-      </p>
-      <p
-        className={classnames(
-          styles.id,
-          'm-0 text text_size_small text_type_regular'
-        )}
-      >
-        {userId}
-      </p>
+    <Typography
+      tag={'h2'}
+      color={'black'}
+      fontFamily={'primaryFont'}
+      variant={'paragraphResize'}
+      content={userName}
+      extraClass={styles.name_text}
+    />
+    <div className={classnames(styles.grid_ID)}>
+      <Typography
+        tag={'p'}
+        color={'ID-text'}
+        fontFamily={'primaryFont'}
+        variant={'servicesText'}
+        content={`${'ID'} ${userId}`}
+        extraClass={styles.id}
+      />
     </div>
     <div className={styles.grid_phone}>
-      <p
-        className={classnames(
-          styles.tel,
-          'm-0 text text_size_small text_type_regular text_type_bold '
-        )}
-      >
-        тел:
-      </p>
-      <p
-        className={classnames(
-          styles.tel,
-          'm-0 text text_size_small text_type_regular text_type_regular '
-        )}
-      >
-        {userNumber}
-      </p>
+      <Typography
+        tag={'p'}
+        color={'black'}
+        fontFamily={'primaryFont'}
+        variant={'support-bold'}
+        content={'Тел.:'}
+      />
+      <Typography
+        tag={'p'}
+        color={'black'}
+        fontFamily={'primaryFont'}
+        variant={'support'}
+        content={userNumber}
+      />
     </div>
   </div>
 );

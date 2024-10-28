@@ -159,7 +159,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
 
   .dateWithButtonContainer {
     max-width: 526px;
-    min-height:min-content;
+    min-height: min-content;
     position: relative;
     top: 10px;
   }

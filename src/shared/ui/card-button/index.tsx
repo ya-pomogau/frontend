@@ -2,6 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
 
 import styles from './styles.module.css';
+import { Typography } from '../typography';
 
 interface CardButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -26,15 +27,20 @@ export const CardButton = ({
       className={classnames(
         styles['card-button'],
         buttonActiveClass,
-        extClassName,
-        'text',
-        'text_size_medium'
+        extClassName
       )}
       {...props}
     >
       <div className={styles['card-buttonContent']}>
         <div className={styles['card-buttonImg']}>{customIcon}</div>
-        <span className={styles['card-buttonLabel']}>{text}</span>
+        <Typography
+          tag={'span'}
+          color={'white'}
+          fontFamily={'primaryFont'}
+          variant={'paragraphResize'}
+          content={text}
+          extraClass={styles['card-buttonLabel']}
+        />
       </div>
     </button>
   );

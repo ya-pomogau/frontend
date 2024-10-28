@@ -1,7 +1,6 @@
 .user_info {
   display: grid;
-  row-gap: 12px;
-  margin-left: 8px;
+  row-gap: 5px;
 }
 
 .grid_two_list {
@@ -26,11 +25,8 @@
 .grid_phone {
   display: flex;
   flex-direction: row;
-  gap: 20px;
-}
-
-.id_color {
-  opacity: 0.5;
+  align-items: center;
+  gap: 12px;
 }
 
 .buttons_div {
@@ -212,8 +208,6 @@
 }
 
 .name_text {
-  font-size: var(--font-size-s);
-  line-height: var(--line-height-medium);
   width: 190px;
   white-space: nowrap;
   overflow: hidden;
@@ -230,7 +224,6 @@
   }
 
   .name_text {
-    font-size: var(--font-size-small);
     width: 140px;
   }
 
@@ -256,15 +249,7 @@
     padding: 10px;
   }
 
-  .id {
-    font-size: 10px;
-  }
-
   .id:last-child {
     width: 140px;
-  }
-
-  .tel {
-    font-size: 10px;
   }
 }

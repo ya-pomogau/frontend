@@ -3,6 +3,7 @@ import styles from '../styles.module.css';
 
 import { userRole, UserRole } from '../../../types/common.types';
 import { ReactNode } from 'react';
+import { Typography } from 'shared/ui/typography';
 
 interface UserInfoProps {
   role: UserRole;
@@ -28,11 +29,14 @@ const UserInfo = ({
   return (
     <div className={classnames(styles.user_info, extraClasses)}>
       <div>
-        <h2
-          className={classnames(styles.name_text, 'm-0 text text_type_regular')}
-        >
-          {userName}
-        </h2>
+        <Typography
+          tag={'h3'}
+          color={'black'}
+          variant={'paragraphResize'}
+          fontFamily={'primaryFont'}
+          content={userName}
+          extraClass={styles.name_text}
+        />
         {(role === userRole.RECIPIENT || viewMode === 'list') && (
           <div
             className={classnames(
@@ -42,22 +46,14 @@ const UserInfo = ({
               styles.id_color
             )}
           >
-            <p
-              className={classnames(
-                styles.id,
-                'm-0 text text_size_small text_type_regular'
-              )}
-            >
-              ID
-            </p>
-            <p
-              className={classnames(
-                styles.id,
-                'm-0 text text_size_small text_type_regular'
-              )}
-            >
-              {formatUserId(userId)}
-            </p>
+            <Typography
+              tag={'p'}
+              variant={'servicesText'}
+              color={'ID-text'}
+              fontFamily={'primaryFont'}
+              content={`${'ID'} ${formatUserId(userId)}`}
+              extraClass={styles.id}
+            />
           </div>
         )}
       </div>
@@ -67,22 +63,20 @@ const UserInfo = ({
           viewMode === 'list' ? styles.grid_two_list : styles.grid_two_tiles
         )}
       >
-        <p
-          className={classnames(
-            styles.tel,
-            'm-0 text text_size_small text_type_regular text_type_bold '
-          )}
-        >
-          Тел.:
-        </p>
-        <p
-          className={classnames(
-            styles.tel,
-            'm-0 text text_size_small text_type_regular text_type_regular '
-          )}
-        >
-          {userNumber}
-        </p>
+        <Typography
+          tag={'p'}
+          fontFamily={'primaryFont'}
+          variant={'support-bold'}
+          color={'black'}
+          content={'Тел.:'}
+        />
+        <Typography
+          tag={'p'}
+          fontFamily={'primaryFont'}
+          variant={'support'}
+          color={'black'}
+          content={userNumber}
+        />
       </div>
     </div>
   );

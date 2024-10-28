@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -22,6 +21,7 @@ import { IFilterValues } from 'features/filter/types';
 import { FilterItemsIds } from 'features/filter/consts';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface PageProps {
   incomeTab: string;
@@ -143,17 +143,13 @@ export function RequestsPage({ incomeTab }: PageProps) {
           <GradientDivider />
           <div className={styles.addNewAdminSectionInner}>
             <Icon color="blue" icon="PlusFilledIcon" />
-            <h2
-              className={classNames(
-                'text',
-                'text_size_large',
-                'text_type_regular',
-                'm-0',
-                styles.title
-              )}
-            >
-              Создать администратора
-            </h2>
+            <Typography
+              tag={'h2'}
+              fontFamily={'primaryFont'}
+              variant={'titleResize'}
+              color={'primary-additional'}
+              content={'Создать администратора'}
+            />
           </div>
           <GradientDivider />
         </NavLink>

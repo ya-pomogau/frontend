@@ -45,7 +45,8 @@ const AdminActions = ({
           placeholder="Пароль"
           type="password"
         />
-        <Icon icon="EditIcon"
+        <Icon
+          icon="EditIcon"
           className={classnames(styles.admin_edit_icon)}
           color={'blue'}
         />

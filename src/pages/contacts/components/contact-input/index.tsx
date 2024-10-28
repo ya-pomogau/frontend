@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 type InputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -35,7 +36,7 @@ export const ContactInput = ({
     [styles.input_mode_edit]: isEditable,
     [styles.input_mode_link]: !isEditable,
   });
-  const errorTextStyles = cn(styles.error_text, {
+  const errorTextStyles = cn({
     [styles.edit_box_hidden]: !isEditable,
   });
 
@@ -47,7 +48,13 @@ export const ContactInput = ({
   return (
     <div className={styles.container}>
       <div className={styles.element_box}>
-        <h2 className={styles.title}>{label}</h2>
+        <Typography
+          tag={'h2'}
+          fontFamily={'primaryFont'}
+          color={'primary-additional'}
+          variant={'title'}
+          content={label}
+        />
         <input
           type={type}
           name={name}
@@ -65,9 +72,22 @@ export const ContactInput = ({
             className={isEditable ? styles.edit_box_hidden : styles.edit_box}
           >
             <Icon color="blue" icon="EditIcon" />
-            <p className={styles.edit_text}>{editText}</p>
+            <Typography
+              tag={'p'}
+              fontFamily={'primaryFont'}
+              variant={'support'}
+              color={'primary'}
+              content={editText}
+            />
           </div>
-          <span className={errorTextStyles}>{errorText}</span>
+          <Typography
+            tag={'span'}
+            fontFamily={'primaryFont'}
+            variant={'support'}
+            color={'orange'}
+            content={errorText ? errorText : ''}
+            extraClass={errorTextStyles}
+          />
         </>
       )}
     </div>

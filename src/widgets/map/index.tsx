@@ -30,6 +30,7 @@ import styles from './styles.module.css';
 import UserMark from './UserMark';
 import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
+import { Typography } from 'shared/ui/typography';
 
 interface YandexMapProps {
   width?: string | number;
@@ -73,7 +74,7 @@ export const YandexMap = ({
 
   useEffect(() => {
     setCoords(coordinates);
-  }, [coordinates])
+  }, [coordinates]);
 
   const showUnauthorithedPopup = () => {
     setVisibility(true);
@@ -106,7 +107,7 @@ export const YandexMap = ({
   };
 
   const handleMapClick = (event: ymaps.IEvent) => {
-    const clickedCoordinates = event.get('coords'); 
+    const clickedCoordinates = event.get('coords');
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
@@ -125,7 +126,6 @@ export const YandexMap = ({
       }
     }
   };
-  
 
   return (
     <>
@@ -209,18 +209,20 @@ export const YandexMap = ({
             hasCloseButton={true}
             extClassName={styles.container_thank}
           >
-            <p
-              className={classNames(
+            <Typography
+              tag={'h3'}
+              color={'black'}
+              fontFamily={'primaryFont'}
+              variant={'paragraph-bold'}
+              content={thankForAssignTaskMessage}
+              extraClass={classNames(
                 styles.popupTitle,
-                styles.popupTitle_thank,
-                'text_type_bold'
+                styles.popupTitle_thank
               )}
-            >
-              {thankForAssignTaskMessage}
-            </p>
-            <p className={classNames(styles.popupIcon, 'text_size_large')}>
+            />
+            <div className={classNames(styles.popupIcon)}>
               <Icon icon="FinishedApplicationIcon" color="#9798C9" size="101" />
-            </p>
+            </div>
           </LightPopup>
           <LightPopup
             isPopupOpen={isSorryPopupVisible}
@@ -228,13 +230,27 @@ export const YandexMap = ({
             hasCloseButton={true}
             extClassName={styles.container_sorry}
           >
-            <p className={classNames(styles.popupTitle, 'text_size_large')}>
-              <Icon icon="ConflictIcon" color="orange" />
-              Извините
-            </p>
-            <p className={classNames(styles.popupText)}>
-              {cantAssignTaskMessage}
-            </p>
+            <Typography
+              tag={'h3'}
+              color={'black'}
+              fontFamily={'primaryFont'}
+              variant={'titleResize'}
+              content={
+                <>
+                  <Icon icon="ConflictIcon" color="orange" />
+                  Извините
+                </>
+              }
+              extraClass={styles.popupTitle}
+            />
+            <Typography
+              tag={'p'}
+              color={'darkGray'}
+              fontFamily={'primaryFont'}
+              variant={'paragraph'}
+              content={cantAssignTaskMessage}
+              extraClass={styles.popupText}
+            />
           </LightPopup>
         </>
       )}

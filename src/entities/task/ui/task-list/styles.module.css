@@ -29,10 +29,19 @@
 
 .content_empty_desktop {
   padding-top: 126px;
+  row-gap: 75px;
 }
 
 .content_empty_mobile {
   padding-top: 80px;
+  row-gap: 20px;
+}
+
+.content_add_task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .add_task_icon {
@@ -71,24 +80,8 @@
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
-}
-
-.title_add_list {
-  color: var(--colors-interface-primary-additional);
-  font-family: var(--font-family-golos);
-}
-
-.title_add_empty {
-  color: var(--colors-interface-primary);
-  font-family: var(--font-family-inter);
-}
-
-.title_add_empty_mobile {
-  margin-top: 20px;
-}
-
-.title_add_empty_desktop {
-  margin-top: 87px;
+  row-gap: 10px;
+  padding: 9.5px;
 }
 
 .modal {

@@ -10,6 +10,7 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { schema } from './schema';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 export interface IRegisterForm {
   name: string;
@@ -141,9 +142,14 @@ const RegisterForm = () => {
           extClassName={styles.input}
         />
 
-        <p className={styles.text}>
-          Укажите адрес и мы подберем ближайшее к вам задание
-        </p>
+        <Typography
+          tag={'p'}
+          color={'black'}
+          fontFamily={'primaryFont'}
+          variant={'support'}
+          content={'Укажите адрес и мы подберем ближайшее к вам задание'}
+          extraClass={styles.text}
+        />
       </div>
 
       <Button

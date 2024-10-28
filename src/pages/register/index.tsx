@@ -3,6 +3,7 @@ import { SmartHeader, Icon } from 'shared/ui';
 import { RegisterForm } from './components';
 
 import styles from './styles.module.css';
+import { Typography } from 'shared/ui/typography';
 
 export function RegisterPage() {
   return (
@@ -11,7 +12,14 @@ export function RegisterPage() {
         icon={<Icon color="blue" icon="RegistrationIcon" size="54" />}
         text="Регистрация"
       />
-      <p className={styles.titlePrimary}>Зарегистрироваться</p>
+      <Typography
+        tag={'h2'}
+        color={'primary'}
+        fontFamily={'primaryFont'}
+        variant={'title'}
+        content={'Зарегистрироваться'}
+        extraClass={styles.titlePrimary}
+      />
       <RegisterForm />
     </>
   );

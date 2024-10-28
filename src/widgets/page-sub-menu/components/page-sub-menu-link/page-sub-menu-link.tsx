@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 import styles from './page-sub-menu-link.module.css';
+import { Typography } from 'shared/ui/typography';
 
 interface PageSubMenuLinkProps {
   to: string;
@@ -27,23 +28,26 @@ export const PageSubMenuLink = ({
             isActive ? styles.tabContainer__itemActive : ''
           )}
         >
-          <p
-            className={classnames(
-              'text',
-              'p-0',
-              'm-0',
-              styles.tabContainer__text,
-              isActive ? styles.tabContainer__textActive : ''
+          <Typography
+            tag={'p'}
+            color={'interface-additional'}
+            fontFamily={'primaryFont'}
+            variant={'paragraphResize'}
+            content={text}
+            extraClass={classnames(
+              isActive ? styles.tabContainer__textActive : false,
+              styles.tabContainer__text
             )}
-          >
-            {text}
-          </p>
+          />
           {areNotificationsVisible && (
-            <span
-              className={classnames(styles.tabContainer__number, styleSpan)}
-            >
-              {notifications}
-            </span>
+            <Typography
+              tag={'span'}
+              color={'white'}
+              variant={'support'}
+              fontFamily={'primaryFont'}
+              content={notifications}
+              extraClass={classnames(styles.tabContainer__number, styleSpan)}
+            />
           )}
         </div>
       )}
