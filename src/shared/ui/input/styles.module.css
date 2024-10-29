@@ -71,7 +71,7 @@
   right: 12px;
   top: 12%;
   cursor: pointer;
-  transition: var(--transition-hover); 
+  transition: var(--transition-hover);
 }
 
 @media screen and (max-width: 550px) {

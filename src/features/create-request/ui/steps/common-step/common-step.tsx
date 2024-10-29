@@ -11,11 +11,15 @@ import {
   clearState,
 } from 'features/create-request/model';
 import { Button } from 'shared/ui/button';
-import { LocationIcon } from 'shared/ui/icons/location-icon';
+import { Icon } from 'shared/ui';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import styles from './common-step.module.css';
 import { EditButton } from 'shared/ui/edit-button';
-import { useCreateTaskMutation } from 'services/user-task-api';
+import {
+  CreateTaskDto,
+  useCreateTaskMutation,
+  useUpdateTaskMutation,
+} from 'services/user-task-api';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -24,6 +28,7 @@ interface ICommonStepProps {
 export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const dispatch = useAppDispatch();
   const [createTask] = useCreateTaskMutation();
+  const [updateTask] = useUpdateTaskMutation();
   const {
     taskId,
     time,
@@ -62,13 +67,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-      createTask({
-        categoryId: category._id,
-        location: location,
-        date: dateObject,
-        address,
-        description,
-      });
       dispatch(clearState());
       dispatch(closePopup());
     } else {
@@ -79,21 +77,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
         address,
         description,
       };
-      createTask({
-        categoryId: category._id,
-        location: location,
-        date: null,
-        address,
-        description,
-      });
       dispatch(clearState());
       dispatch(closePopup());
     }
     if (isTypeEdit) {
-      const updateTask = { ...requestData, taskId: taskId };
-      console.log('это редактирование', updateTask);
+      updateTask({ id: taskId, dto: requestData as CreateTaskDto });
     } else {
-      console.log('это новая таска', requestData);
+      createTask(requestData as CreateTaskDto);
     }
   };
 
@@ -160,7 +150,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               )}
             </div>
             <div className={styles.addressWrapper}>
-              <LocationIcon color="blue" />
+              <Icon icon="LocationIcon" color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
             </div>
             <CategoriesBackground
@@ -220,7 +210,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               ) : null}
             </div>
             <div className={styles.addressWrapper}>
-              <LocationIcon color="blue" />
+              <Icon icon="LocationIcon" color="blue" />
               <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
               {isTypeEdit && (
                 <EditButton

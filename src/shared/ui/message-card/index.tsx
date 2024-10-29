@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
-import { IMessage } from 'shared/types/message';
 import { TaskConflict } from 'entities/task/types';
 import { UserProfile } from 'entities/user/types';
 import { IMessageHub } from 'shared/libs/utils';
+import { MessageInterface } from '../../types/chat.types';
 
 interface PropsMessageCard {
   statusConflict: boolean;
   description: string;
   handleClickCard: (task: TaskConflict | IMessageHub) => void;
-  message?: IMessage[];
+  message?: MessageInterface[];
   action: boolean;
   user: UserProfile;
   task?: TaskConflict;

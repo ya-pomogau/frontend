@@ -75,10 +75,12 @@ export const SectionChatHub = () => {
         >
           {infoMessage?.messages.map((m) => (
             <Message
-              type={m.userId === infoMessage.user._id ? 'incoming' : 'outgoing'}
-              messageText={m.message}
-              avatarLink={m.userAvatarLink}
-              key={m.id}
+              type={
+                m.author._id === infoMessage.user._id ? 'incoming' : 'outgoing'
+              }
+              messageText={m.body}
+              avatarLink={m.author.avatar}
+              key={m._id}
             />
           ))}
         </WindowInteractionUsers>

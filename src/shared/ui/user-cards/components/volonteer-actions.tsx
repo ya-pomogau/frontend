@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import { ExclamationPointIcon } from 'shared/ui/icons/exclamation-point-icon';
 import { Button } from 'shared/ui/button';
 import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
-
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../../app/hooks';
 import { adminPermission, UserStatus } from '../../../types/common.types';
@@ -49,8 +48,8 @@ const VolunteerActions = ({
   );
   const keysPermission = adminPermissions?.includes(adminPermission.KEYS);
 
-  const isGiveKeysButtonDisabled = score < 60 || keysPermission|| isKeysNullOrOne;
-
+  const isGiveKeysButtonDisabled =
+    score < 60 || keysPermission || isKeysNullOrOne;
 
   return (
     <div className={classnames(extClassName, styles.buttons_div)}>
@@ -68,7 +67,7 @@ const VolunteerActions = ({
           label="Подтвердить"
           onClick={onAcceptButtonClick}
         />
-        { isAcceptButtonExclamationPointIcon && <ExclamationPointIcon /> }
+        {isAcceptButtonExclamationPointIcon && <ExclamationPointIcon />}
       </div>
       <Button
         disabled={!approvePermission}

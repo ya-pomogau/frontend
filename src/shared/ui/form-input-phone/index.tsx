@@ -61,7 +61,7 @@ export const FormInputPhone = <T extends FieldValues>({
   return (
     <div className={extClassName} data-testid={'div'}>
       {label && (
-        <label className={cn(styles.label, 'phone')} htmlFor={field.name}>
+        <label className={cn(styles.label, 'text')} htmlFor={field.name}>
           {label}
         </label>
       )}

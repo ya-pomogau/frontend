@@ -1,10 +1,10 @@
 import { RefObject, useEffect, useState } from 'react';
 
-import { IMessage } from 'shared/types/message';
 import { sortMessages } from '../libs/utils';
+import { MessageInterface } from 'shared/types/chat.types';
 
 interface useLazyScrollProps {
-  messages: IMessage[];
+  messages: MessageInterface[];
   openedChatPopupRef: RefObject<HTMLElement>;
 }
 
