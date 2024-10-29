@@ -46,6 +46,7 @@ export const ModalContent = ({
   volunteerReport,
   recipientReport,
   setConflictModalVisible,
+  phoneNumber,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
