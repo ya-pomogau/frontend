@@ -3,6 +3,7 @@ import { ChangeEvent, forwardRef, TextareaHTMLAttributes, useId } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import styles from './styles.module.css';
+import { Label } from '../label';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
@@ -40,9 +41,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       <>
         <div className={cn(styles.container, extClassName)}>
           {label && (
-            <label className={cn(styles.label, 'text')} htmlFor={id}>
+            <Label htmlFor={id}>
               {label}
-            </label>
+            </Label>
           )}
           <textarea
             ref={ref}

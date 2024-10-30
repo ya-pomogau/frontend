@@ -3,14 +3,16 @@ import { useArgs } from '@storybook/preview-api';
 import { PostForm } from './PostForm';
 import { nanoid } from 'nanoid';
 import { ChangeEvent } from 'react';
+import { Provider } from 'react-redux';
+import { store } from 'app/store';
 
 const meta: Meta<typeof PostForm> = {
   component: PostForm,
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: '919px' }}>
+      <Provider store={store}>
         <Story />
-      </div>
+      </Provider>
     ),
     function Component(Story, ctx) {
       const [args, setArgs] = useArgs<typeof ctx.args>();

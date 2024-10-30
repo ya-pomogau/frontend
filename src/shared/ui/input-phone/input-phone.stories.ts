@@ -22,7 +22,7 @@ export const Default: Story = {
     name: 'phone',
     label: 'Телефон',
     error: false,
-    errorText: 'Некорректный номер телефона',
+    placeholder: '+7 000 000000',
   },
 };
 
