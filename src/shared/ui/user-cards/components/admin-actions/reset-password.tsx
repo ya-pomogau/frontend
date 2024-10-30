@@ -15,18 +15,31 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TPassword>();
+    watch,
+  } = useForm<TPassword>({
+    mode: 'onChange',
+  });
 
   const onSubmit: SubmitHandler<TPassword> = (data) => {
     console.log(data);
     handleModalClose();
   };
+  // watch, чтобы следить за изменениями значений полей
+  const newPassword = watch('newPassword');
+  const repeatPassword = watch('repeatPassword');
+
+  const isButtonDisabled =
+    !newPassword ||
+    !repeatPassword ||
+    newPassword.length < 6 ||
+    repeatPassword.length < 6;
 
   return (
     <div className={styles.modalContainer}>
       <div className={styles.modalContent}>
         <h2 className={styles.modalTitle}>Смена пароля</h2>
-        <Icon icon="CloseIconThin"
+        <Icon
+          icon="CloseIconThin"
           className={styles.close}
           onClick={handleModalClose}
           color="blue"
@@ -71,6 +84,7 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
             actionType="submit"
             className={styles.modalBtn}
             label="Cохранить"
+            disabled={isButtonDisabled}
           />
         </form>
       </div>
