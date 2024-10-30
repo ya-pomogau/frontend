@@ -33,8 +33,8 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
       extClassName,
       extClassNameInput,
       placeholder,
-      error,
-      errorText,
+      error = false,
+      errorText = 'Введите номер телефона полностью',
       customIcon,
       onIconClick,
     },
@@ -87,7 +87,7 @@ export const InputPhone = forwardRef<HTMLInputElement, InputPhoneProps>(
             onChange={onChange}
           />
           <span className={cn(styles.error, 'text')}>
-            {errorText === ' ' ? <span>&nbsp;</span> : errorText}
+            {errorText && !error ? <span>&nbsp;</span> : errorText}
           </span>
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
