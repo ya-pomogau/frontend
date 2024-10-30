@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { UserState, userModel } from '../../entities/user/model';
 import { User } from '../../entities/user/types';
-import { AdminPermission, UserRole, UserStatus } from '../types/common.types';
+import { adminPermission, userRole, userStatus } from '../types/common.types';
 import usePermission from './use-permission';
 
 // Создаем тут пользователя, тип его обязательно UserState, иначе TS ругаться будет
@@ -13,7 +13,7 @@ const defaultVolunteer: UserState = {
   isFailed: false,
   isLoading: false,
   _id: 'volunteer',
-  role: UserRole.VOLUNTEER,
+  role: userRole.VOLUNTEER,
   data: {
     _id: 'string',
     name: 'string',
@@ -21,7 +21,7 @@ const defaultVolunteer: UserState = {
     avatar: 'string',
     address: 'string',
     vkId: 'string',
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     permissions: [],
     password: 'string',
     isRoot: false,
@@ -33,7 +33,7 @@ const defaultRecipient: UserState = {
   isFailed: false,
   isLoading: false,
   _id: 'recipient',
-  role: UserRole.RECIPIENT,
+  role: userRole.RECIPIENT,
   data: {
     _id: 'string',
     name: 'string',
@@ -41,7 +41,7 @@ const defaultRecipient: UserState = {
     avatar: 'string',
     address: 'string',
     vkId: 'string',
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     permissions: [],
     password: 'string',
     isRoot: false,
@@ -53,7 +53,7 @@ const defaultAdmin: UserState = {
   isFailed: false,
   isLoading: false,
   _id: 'admin',
-  role: UserRole.ADMIN,
+  role: userRole.ADMIN,
   data: {
     _id: 'string',
     name: 'string',
@@ -61,8 +61,8 @@ const defaultAdmin: UserState = {
     avatar: 'string',
     address: 'string',
     vkId: 'string',
-    role: UserRole.ADMIN,
-    permissions: [AdminPermission.BLOG],
+    role: userRole.ADMIN,
+    permissions: [adminPermission.BLOG],
     password: 'string',
     isRoot: false,
     isActive: true,
@@ -76,7 +76,7 @@ describe('check how usePermission works with rootUser', () => {
       preloadedState: {
         user: {
           ...defaultAdmin,
-          role: UserRole.ADMIN,
+          role: userRole.ADMIN,
           data: {
             ...defaultAdmin.data,
             permissions: [],
@@ -86,7 +86,7 @@ describe('check how usePermission works with rootUser', () => {
       },
     });
 
-    const { result } = renderHook(() => usePermission([], UserRole.ADMIN), {
+    const { result } = renderHook(() => usePermission([], userRole.ADMIN), {
       wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     });
 
@@ -99,7 +99,7 @@ describe('check how usePermission works with rootUser', () => {
       preloadedState: {
         user: {
           ...defaultAdmin,
-          role: UserRole.ADMIN,
+          role: userRole.ADMIN,
           data: {
             ...defaultAdmin.data,
             isRoot: true,
@@ -109,7 +109,7 @@ describe('check how usePermission works with rootUser', () => {
     });
 
     const { result } = renderHook(
-      () => usePermission([AdminPermission.BLOG], UserRole.ADMIN),
+      () => usePermission([adminPermission.BLOG], userRole.ADMIN),
       {
         wrapper: ({ children }) => (
           <Provider store={store}>{children}</Provider>
@@ -128,7 +128,7 @@ describe('check how usePermission works with admin', () => {
       preloadedState: {
         user: {
           ...defaultAdmin,
-          role: UserRole.ADMIN,
+          role: userRole.ADMIN,
           data: {
             ...defaultAdmin.data,
             permissions: [],
@@ -137,7 +137,7 @@ describe('check how usePermission works with admin', () => {
       },
     });
 
-    const { result } = renderHook(() => usePermission([], UserRole.ADMIN), {
+    const { result } = renderHook(() => usePermission([], userRole.ADMIN), {
       wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     });
 
@@ -150,13 +150,13 @@ describe('check how usePermission works with admin', () => {
       preloadedState: {
         user: {
           ...defaultAdmin,
-          role: UserRole.ADMIN,
+          role: userRole.ADMIN,
         },
       },
     });
 
     const { result } = renderHook(
-      () => usePermission([AdminPermission.BLOG], UserRole.ADMIN),
+      () => usePermission([adminPermission.BLOG], userRole.ADMIN),
       {
         wrapper: ({ children }) => (
           <Provider store={store}>{children}</Provider>
@@ -175,13 +175,13 @@ describe('check how usePermission works with volunteer', () => {
       preloadedState: {
         user: {
           ...defaultVolunteer,
-          role: UserRole.VOLUNTEER,
+          role: userRole.VOLUNTEER,
         },
       },
     });
 
     const { result } = renderHook(
-      () => usePermission([UserStatus.ACTIVATED], UserRole.VOLUNTEER),
+      () => usePermission([userStatus.ACTIVATED], userRole.VOLUNTEER),
       {
         wrapper: ({ children }) => (
           <Provider store={store}>{children}</Provider>
@@ -200,13 +200,13 @@ describe('check how usePermission works with recipient', () => {
       preloadedState: {
         user: {
           ...defaultRecipient,
-          role: UserRole.RECIPIENT,
+          role: userRole.RECIPIENT,
         },
       },
     });
 
     const { result } = renderHook(
-      () => usePermission([UserStatus.ACTIVATED], UserRole.RECIPIENT),
+      () => usePermission([userStatus.ACTIVATED], userRole.RECIPIENT),
       {
         wrapper: ({ children }) => (
           <Provider store={store}>{children}</Provider>

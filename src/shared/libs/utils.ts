@@ -12,18 +12,20 @@ import {
   RADIANS_IN_DEGREE,
 } from './constants';
 import { IDateUser } from 'pages/requests/test-users';
-import { UserRole } from 'shared/types/common.types';
+import { UserRole, userRole } from 'shared/types/common.types';
 import { UserProfile } from 'entities/user/types';
-import { IMessage } from 'shared/types/message';
+import { MessageInterface } from '../types/chat.types';
+import { mockRecipient, mockVolunteer } from '../../entities/chat/mock-users';
+import { mockChatMessages } from '../../entities/chat/mock-messages';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
 export const getRoleForRequest = (role: UserRole | null) => {
   let query = '';
-  if (role === UserRole.RECIPIENT) {
-    query = UserRole.RECIPIENT.toLowerCase();
+  if (role === userRole.RECIPIENT) {
+    query = userRole.RECIPIENT.toLowerCase();
   } else {
-    query = UserRole.VOLUNTEER.toLowerCase();
+    query = userRole.VOLUNTEER.toLowerCase();
   }
   return query;
 };
@@ -230,10 +232,10 @@ export const filterCardsUsersPageAdmin = (
   switch (search.categories[0]) {
     case 'all':
       return setDate(array);
-    case UserRole.VOLUNTEER:
-      return setDate(filterCardsPageAdmin(array, UserRole.VOLUNTEER));
-    case UserRole.RECIPIENT:
-      return setDate(filterCardsPageAdmin(array, UserRole.RECIPIENT));
+    case userRole.VOLUNTEER:
+      return setDate(filterCardsPageAdmin(array, userRole.VOLUNTEER));
+    case userRole.RECIPIENT:
+      return setDate(filterCardsPageAdmin(array, userRole.RECIPIENT));
     default:
       return setDate(array);
   }
@@ -257,7 +259,7 @@ export const filterUsersNamePageAdmin = (
   return array.filter(
     (user: UserProps) =>
       user.userName.toLowerCase().includes(searchName.toLowerCase()) &&
-      user.role !== UserRole.ADMIN
+      user.role !== userRole.ADMIN
   );
 };
 
@@ -271,79 +273,19 @@ export const getTokenAccess = () => {
 
 export interface IMessageHub {
   user: UserProfile;
-  messages: IMessage[];
+  messages: MessageInterface[];
   id: string;
 }
 
 export const messageHub: IMessageHub[] = [
   {
-    user: {
-      name: 'Вася Пупкин Аркадьевич',
-      phone: '+7(777) 77-77-77',
-      avatar: 'https://i.pravatar.cc/300',
-      address: 'Puscino',
-      vkId: 'asd2342',
-      role: UserRole.RECIPIENT,
-      _id: '1234',
-    },
-    messages: [
-      {
-        date: new Date('2023-05-14T21:00:00.000Z'),
-        id: 12,
-        message: 'Здравствуйте',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '234',
-      },
-      {
-        date: new Date('2023-05-15T21:00:00.000Z'),
-        id: 23,
-        message: ' Я не смогу прийти',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '214',
-      },
-      {
-        date: new Date('2023-05-14T21:05:00.000Z'),
-        id: 34,
-        message: 'Мурку нужно подоить',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '3442',
-      },
-    ],
+    user: mockRecipient,
+    messages: mockChatMessages,
     id: '2',
   },
   {
-    user: {
-      name: 'Иванов Иван Иванович',
-      phone: '+7(987) 11-00-02',
-      avatar: 'https://i.pravatar.cc/300',
-      address: 'Puscino 213',
-      vkId: '12',
-      role: UserRole.RECIPIENT,
-      _id: 'asd123',
-    },
-    messages: [
-      {
-        date: new Date('2023-05-14T21:00:00.000Z'),
-        id: 41,
-        message: 'Здравствуйте, я буду сопровождать вас на мероприятии',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '1',
-      },
-      {
-        date: new Date('2023-05-15T21:00:00.000Z'),
-        id: 32,
-        message: 'Договорились так и сделаем',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '2',
-      },
-      {
-        date: new Date('2023-05-14T21:05:00.000Z'),
-        id: 23,
-        message: 'Отлично, спасибо, встретимся у 3-го подъезда',
-        userAvatarLink: 'https://i.pravatar.cc/300',
-        userId: '2',
-      },
-    ],
+    user: mockVolunteer,
+    messages: mockChatMessages,
     id: '1',
   },
 ];

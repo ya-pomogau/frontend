@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
-import { UserRole } from '../../../shared/types/common.types';
+import { userRole, UserRole } from '../../../shared/types/common.types';
 import { useAppDispatch } from '../../../app/hooks';
 import { useMediaQuery, useUser } from '../../../shared/hooks';
 import { Routes, Breakpoints } from '../../../shared/config';
@@ -13,7 +13,6 @@ import { closeSocketConnection } from '../../../services/system-slice';
 import { SideBar } from '../navigation';
 import { DropDownMenuButton } from '../../../shared/ui';
 import { positionConfigMenu, linksTopAuthAdmin, linksTop } from '../utils';
-
 
 import styles from './styles.module.css';
 
@@ -35,7 +34,7 @@ export const DropDownMenu = ({
   const ref = useRef(null);
 
   const isAuth = useUser();
-  const isAdmin = role === UserRole.ADMIN;
+  const isAdmin = role === userRole.ADMIN;
 
   const closeByOverlay = (evt: MouseEvent) => {
     if (evt.target !== ref.current) {

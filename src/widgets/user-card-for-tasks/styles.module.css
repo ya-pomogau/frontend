@@ -21,23 +21,6 @@
   transform: translate(107px, -31px);
 }
 
-.user_info {
-  display: flex;
-  row-gap: 12px;
-  margin-left: 8px;
-}
-
-.grid_two {
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 28px;
-}
-
-.id_color {
-  opacity: 0.5;
-}
-
 .icons_div {
   width: 100%;
   margin: 0;
@@ -46,14 +29,6 @@
   align-items: center;
   flex-direction: row;
   gap: 8px;
-}
-
-.id {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
 }
 
 @media all and (max-width: 1150px) {
@@ -69,17 +44,5 @@
     width: 62px;
     height: 62px;
     transform: translate(-50%, -31px);
-  }
-
-  .name_text {
-    font-size: 12px;
-  }
-
-  .id {
-    font-size: 10px;
-  }
-
-  .tel {
-    font-size: 10px;
   }
 }

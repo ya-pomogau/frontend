@@ -22,7 +22,7 @@
 }
 
 .place {
-  font-size: 12px;
+  font-size: var(--font-size-small);
   line-height: 14px;
 }
 
@@ -43,12 +43,17 @@
 }
 
 .messageAlert {
+  opacity: 0;
   text-align: center;
-  color: red;
+  color: var(--colors-interface-red);
   margin: 10px auto 0 auto;
-  font-family: 'Golos', sans-serif;
-  font-size: 14px;
+  font-family: var(--font-family-golos);
+  font-size: var(--font-size-middle);
   grid-column-start: 2;
+}
+
+.messageAlertActive {
+  opacity: 1;
 }
 
 @media (max-width: 735px) {
@@ -60,8 +65,8 @@
     z-index: 9;
   }
   .place {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
   }
   .headerWrapper {
     background: linear-gradient(
@@ -80,7 +85,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    bottom: 30px;
+    bottom: 52px;
     z-index: -0.1;
   }
   .buttonWrapper {
@@ -94,7 +99,7 @@
   .alertWrapper {
     width: 270px;
     position: absolute;
-    bottom: -50px;
+    bottom: -45px;
     left: 0;
     z-index: 3;
   }
@@ -108,10 +113,10 @@
     z-index: 2;
   }
   .input {
-    width: 100%;
+    width: 260px;
     margin-top: 10px;
     position: relative;
-    bottom: -25px;
+    bottom: -18px;
     z-index: 2;
     border: none;
   }

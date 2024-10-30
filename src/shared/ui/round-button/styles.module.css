@@ -75,11 +75,11 @@
 
 .messages {
   border-radius: 50px;
-  background-color: #d60080;
+  background-color: var(--colors-interface-fuchsia);
   color: var(--colors-interface-white);
   position: absolute;
-  font-size: 12px;
-  line-height: 17px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
   top: 50%;
   left: 50%;
   width: 16px;
@@ -88,7 +88,7 @@
 
 .messages_additional {
   border-radius: 50px;
-  background-color: #d60080;
+  background-color: var(--colors-interface-fuchsia);
   color: var(--colors-interface-white);
   position: absolute;
   font-size: 9px;

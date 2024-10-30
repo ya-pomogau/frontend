@@ -22,11 +22,12 @@
   --font-size-medium: 24px;
 
   --line-height-s: 36px;
-  --line-height-xs: 14px;
+  --line-height-xs: 14.4px;
   --line-height-small: 16.8px;
   --line-height-middle: 18px;
   --line-height-medium: 22.4px;
-  --line-height-large: 29px;
+  --line-height-large: 28.8px;
+  --line-height-m: 19.2px;
 
   --colors-interface-white: #ffffff;
   --colors-interface-black: #000000;
@@ -59,6 +60,8 @@
   --colors-interface-red-soft: #fd6868;
   --colors-interface-ford-white: #e0e0e0;
   --colors-interface-dark-gray: #2c2d2e;
+  --color-interface-turquoise: #acdfdb;
+  --color-interface-orange-very-soft: #f7e4d7;
 
   --transition-hover: all 100ms ease-out;
   --common-element-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),

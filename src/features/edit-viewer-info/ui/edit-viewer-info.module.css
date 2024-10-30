@@ -79,8 +79,8 @@
 
 .input span {
   margin: 0;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
   color: var(--colors-interface-orange);
   position: absolute;
   top: 26px;

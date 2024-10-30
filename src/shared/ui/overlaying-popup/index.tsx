@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { Portal } from '../portal';
@@ -18,6 +18,12 @@ export const OverlayingPopup = ({
   isOpened,
   extClassName,
 }: OverlayingPopupProps) => {
+  useEffect(() => {
+    isOpened
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'visible');
+  }, [isOpened]);
+
   if (!isOpened) {
     return null;
   }

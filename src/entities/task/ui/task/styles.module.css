@@ -12,11 +12,11 @@
 }
 
 .container_main_confirmed {
-  background-color: #acdfdb;
+  background-color: var(--color-interface-turquoise);
 }
 
 .container_main_conflict {
-  background-color: #f7e4d7;
+  background-color: var(--color-interface-orange-very-soft);
 }
 
 .container_main_default {

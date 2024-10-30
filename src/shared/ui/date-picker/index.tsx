@@ -84,6 +84,7 @@ export function DatePicker({
   extClassName,
   minDate = subDays(new Date(), 0),
   inline = true,
+  disabled = false,
 }: IDatePickerProps) {
   const handleOnChange = (date: Date) => {
     if (date) onChangeValue(date);
@@ -91,7 +92,7 @@ export function DatePicker({
 
   return (
     <ReactDatePicker
-      selected={value}
+      selected={!disabled ? value : null}
       className={extClassName}
       onChange={handleOnChange}
       filterDate={filter}
@@ -110,6 +111,7 @@ export function DatePicker({
       renderCustomHeader={customHeader}
       dayClassName={() => styles.dataPicker__calendarWeekDay}
       minDate={minDate}
+      maxDate={!disabled ? null : minDate}
       customInput={<CustomInput value={undefined} onClick={undefined} />}
     />
   );

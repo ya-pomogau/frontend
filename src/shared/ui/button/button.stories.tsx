@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '.';
-import { VkIcon } from '../icons/vk-icon';
+import { Icon } from 'shared/ui';
 
 const meta: Meta<typeof Button> = {
   title: 'uikit/Buttons/Button',
@@ -10,6 +10,11 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     disabled: { type: 'boolean' },
     customIcon: { type: 'string' },
+    actionType: { 
+      type: 'string', 
+      options: ['submit', 'reset', 'button'], 
+      control: { type: 'radio'} 
+    }
   },
 };
 
@@ -18,8 +23,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    buttonType: 'primary',
+    buttonType: "partial",
     label: 'Применить',
+    actionType: "reset"
   },
 };
 
@@ -51,6 +57,6 @@ export const WithIcon: Story = {
     buttonType: 'primary',
     label: 'Войти через ВКонтакте',
     size: 'extraLarge',
-    customIcon: <VkIcon size="24" color="white" />,
+    customIcon: <Icon icon="VkIcon" size="24" color="white" />,
   },
 };

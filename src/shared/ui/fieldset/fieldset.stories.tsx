@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Fieldset from './index';
-import { FieldsetView } from './utils';
+import { fieldsetView } from './utils';
 import Checkbox from '../checkbox';
 import RadioButton from '../radio-button';
 
@@ -29,12 +29,12 @@ const meta: Meta<typeof Fieldset> = {
       name: 'view',
       type: { name: 'string', required: true },
       options: [
-        FieldsetView.ROW,
-        FieldsetView.COLUMN,
-        FieldsetView.TWO_COLUMNS,
+        fieldsetView.ROW,
+        fieldsetView.COLUMN,
+        fieldsetView.TWO_COLUMNS,
       ],
       control: { type: 'select' },
-      defaultValue: { summary: FieldsetView.ROW },
+      defaultValue: { summary: fieldsetView.ROW },
       description:
         'Один из возможных типов отображения: 1 строка, 1 столбец, 2 столбца',
       table: {
@@ -46,63 +46,49 @@ const meta: Meta<typeof Fieldset> = {
 
 export default meta;
 type Story = StoryObj<typeof Fieldset>;
-
-export const DefaultFieldset: Story = {
+export const DedaultFieldset: Story = {
   args: {
     title: 'Заголовок',
-    view: FieldsetView.COLUMN,
-    children: (
-      <>
-        <Checkbox label="Первый элемент" id="1" checked />
-        <Checkbox label="Второй элемент" id="2" />
-        <Checkbox label="Третий элемент" id="3" />
-        <Checkbox label="Четвертый элемент" id="4" />
-      </>
-    ),
   },
 };
-
 export const FieldsetOneColumn: Story = {
+  render: (args) => (
+    <Fieldset {...args} view={fieldsetView.COLUMN}>
+      <Checkbox label="По дате" id="11" />
+      <Checkbox label="По убывающей цене" id="12" checked />
+      <Checkbox label="По возрастающей цене" id="13" />
+    </Fieldset>
+  ),
   args: {
     title: 'Отображать',
-    view: FieldsetView.COLUMN,
-    children: (
-      <>
-        <Checkbox label="По дате" id="11" />
-        <Checkbox label="По убывающей цене" id="12" checked />
-        <Checkbox label="По возрастающей цене" id="13" />
-      </>
-    ),
   },
 };
 
 export const FieldsetOneRow: Story = {
+  render: (args) => (
+    <Fieldset {...args} view={fieldsetView.ROW}>
+      <RadioButton label="1км" id="31" name="3" defaultChecked />
+      <RadioButton label="2км" id="32" name="3" />
+      <RadioButton label="5км" id="33" name="3" />
+    </Fieldset>
+  ),
   args: {
     title: 'Радиус поиска',
-    view: FieldsetView.ROW,
-    children: (
-      <>
-        <RadioButton label="1км" id="31" name="3" defaultChecked />
-        <RadioButton label="2км" id="32" name="3" />
-        <RadioButton label="5км" id="33" name="3" />
-      </>
-    ),
   },
 };
 
 export const FieldsetTwoColumns: Story = {
+  render: (args) => (
+    <Fieldset {...args} view={fieldsetView.TWO_COLUMNS}>
+      <Checkbox label="Категория 1" id="21" checked />
+      <Checkbox label="Категория 2" id="22" />
+      <Checkbox label="Категория 3" id="23" />
+      <Checkbox label="Категория 4" id="24" checked />
+      <Checkbox label="Категория 5" id="25" />
+      <Checkbox label="Категория 6" id="26" />
+    </Fieldset>
+  ),
   args: {
     title: 'Категория',
-    view: FieldsetView.TWO_COLUMNS,
-    children: (
-      <>
-        <Checkbox label="Категория 1" id="21" checked />
-        <Checkbox label="Категория 2" id="22" />
-        <Checkbox label="Категория 3" id="23" />
-        <Checkbox label="Категория 4" id="24" checked />
-        <Checkbox label="Категория 5" id="25" />
-        <Checkbox label="Категория 6" id="26" />
-      </>
-    ),
   },
 };

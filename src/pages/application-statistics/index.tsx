@@ -3,33 +3,40 @@ import { SmartHeader } from 'shared/ui/smart-header';
 import { PageSubMenuAdminStatistics } from 'widgets/page-sub-menu/components/page-sub-menu-admin-statistics/page-sub-menu-admin-statistics';
 import styles from './styles.module.css';
 import Fieldset from 'shared/ui/fieldset';
-import { FieldsetView } from 'shared/ui/fieldset/utils';
+import { fieldsetView } from 'shared/ui/fieldset/utils';
 import { Accordion } from 'shared/ui/accordion';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
-import { ReactNode } from 'react';
-import DatePicker, { ReactDatePickerCustomHeaderProps } from 'react-datepicker';
+import DatePicker from 'react-datepicker';
+// eslint-disable-next-line import/no-duplicates
+import { ru } from 'date-fns/locale';
+// eslint-disable-next-line import/no-duplicates
 import { addYears } from 'date-fns';
-import { StepButton } from 'shared/ui/step-button';
-import { getMonth } from 'shared/ui/date-picker/lib';
-import ru from 'date-fns/locale/ru';
+
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { customHeader } from 'shared/ui/date-picker';
+import { ValueOf } from 'shared/types/common.types';
 
 interface IStatusApplicationOptions {
   value: 'open' | 'atWork' | 'close';
   label: 'Открытые' | 'В работе' | 'Закрытые';
 }
 
-export enum ButtonsNameForStatisticsPage {
-  generateReport = 'generateReport',
-  downloadReport = 'downloadReport',
-}
+export const buttonsNameForStatisticsPage = {
+  generateReport: 'generateReport',
+  downloadReport: 'downloadReport',
+} as const;
 
-export enum FieldsName {
-  to = 'to',
-  from = 'from',
-}
+export type ButtonsNameForStatisticsPage = ValueOf<
+  typeof buttonsNameForStatisticsPage
+>;
+
+export const fieldsName = {
+  to: 'to',
+  from: 'from',
+} as const;
+
+export type FieldsName = ValueOf<typeof fieldsName>;
 
 interface IFormInput {
   period: {
@@ -50,24 +57,19 @@ const templateDateFormat = 'dd.MM.yyyy';
 
 export const ApplicationsStatisticsPage = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    const formData = {
-      period: {
-        from: watch('period.from'),
-        to: watch('period.from'),
-      },
-      statusApplication: watch('statusApplication'),
-      currentStatusApplication: watch('currentStatusApplication'),
-    };
+    console.log(`this is data ===>`, data);
   };
 
-  const { control, watch, handleSubmit } = useForm<IFormInput>({defaultValues: {
-    period: {
-      from: null,
-      to: null,
+  const { control, watch, handleSubmit } = useForm<IFormInput>({
+    defaultValues: {
+      period: {
+        from: null,
+        to: null,
+      },
+      statusApplication: '',
+      currentStatusApplication: false,
     },
-    statusApplication: '',
-    currentStatusApplication: false
-  }});
+  });
 
   const disabledButton =
     !watch('period.from') || !watch('period.to') || !watch('statusApplication');
@@ -86,7 +88,7 @@ export const ApplicationsStatisticsPage = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className={styles.period}>
-          <Fieldset title="Период" view={FieldsetView.ROW}>
+          <Fieldset title="Период" view={fieldsetView.ROW}>
             <div className={styles.period__fields}>
               <p className={styles.period__points}>от</p>
               <Controller
@@ -132,7 +134,7 @@ export const ApplicationsStatisticsPage = () => {
           </Fieldset>
         </div>
         <div className={styles.status_application}>
-          <Fieldset title="Статус заявки" view={FieldsetView.COLUMN}>
+          <Fieldset title="Статус заявки" view={fieldsetView.COLUMN}>
             <Controller
               name="statusApplication"
               control={control}
@@ -168,16 +170,16 @@ export const ApplicationsStatisticsPage = () => {
             buttonType="primary"
             label="Сформировать отчет"
             actionType="submit"
-            id={ButtonsNameForStatisticsPage.generateReport}
-            name={ButtonsNameForStatisticsPage.generateReport}
+            id={buttonsNameForStatisticsPage.generateReport}
+            name={buttonsNameForStatisticsPage.generateReport}
             disabled={disabledButton}
           />
           <Button
             buttonType="secondary"
             label="Скачать отчет"
             actionType="submit"
-            id={ButtonsNameForStatisticsPage.downloadReport}
-            name={ButtonsNameForStatisticsPage.downloadReport}
+            id={buttonsNameForStatisticsPage.downloadReport}
+            name={buttonsNameForStatisticsPage.downloadReport}
             disabled={disabledButton}
             customIcon={<Icon icon="ExcelIcon" color="blue" />}
           />

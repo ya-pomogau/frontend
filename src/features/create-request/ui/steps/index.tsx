@@ -16,7 +16,7 @@ import {
 } from 'features/create-request/model';
 import { MainPopup } from 'shared/ui/main-popup';
 import { OverlayingPopup } from 'shared/ui/overlaying-popup';
-import { CurrentPage } from '../../types';
+import { currentPage } from '../../types';
 
 import { AddressStep } from './address-step/address-step';
 import { CommonStep } from './common-step/common-step';
@@ -147,16 +147,16 @@ export const Request = ({ isMobile = true }: RequestProps) => {
             </div>
           )}
 
-          {currentStep === CurrentPage.DATE_STEP && (
+          {currentStep === currentPage.DATE_STEP && (
             <DateStep isMobile={isMobile} />
           )}
-          {currentStep === CurrentPage.ADDRESS_STEP && (
+          {currentStep === currentPage.ADDRESS_STEP && (
             <AddressStep isMobile={isMobile} />
           )}
-          {currentStep === CurrentPage.TASK_STEP && (
+          {currentStep === currentPage.TASK_STEP && (
             <TaskStep isMobile={isMobile} />
           )}
-          {currentStep === CurrentPage.COMMON_STEP && (
+          {currentStep === currentPage.COMMON_STEP && (
             <CommonStep isMobile={isMobile} />
           )}
         </MainPopup>

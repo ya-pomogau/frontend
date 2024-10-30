@@ -7,7 +7,7 @@ import styles from '../styles.module.css';
 import { TimePickerElement } from 'shared/ui/time-picker';
 
 interface TimeBlockProps {
-  onChange: (value: string[]) => void;  
+  onChange: (value: string[]) => void;
   filterTime: Array<string>;
 }
 
@@ -18,7 +18,7 @@ export const TimeBlock = ({ onChange }: TimeBlockProps) => {
   const [endTime, setEndTime] = useState<string>('00:00');
 
   useEffect(() => {
-    onChange([startTime, endTime]); 
+    onChange([startTime, endTime]);
   }, [startTime, endTime]);
 
   return (

@@ -1,15 +1,4 @@
-import {
-  ModalContentType,
-  TaskButtonType,
-  UserRole,
-} from 'shared/types/common.types';
-import { SquareButton } from 'shared/ui/square-buttons';
-import { ButtonWithModal } from 'widgets/button-with-modal';
-import { ModalContent } from 'widgets/task-buttons-content';
-import styles from './styles.module.css';
-import { format, isAfter, parseISO } from 'date-fns';
-import classNames from 'classnames';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { Category, ResolveStatus, TaskReport } from 'entities/task/types';
 import {
   changeCheckbox,
   changeCurrentStep,
@@ -21,13 +10,29 @@ import {
   setTemporary,
   setTime,
 } from 'features/create-request/model';
-import { Category, ResolveStatus, TaskReport } from 'entities/task/types';
-import { useLocation } from 'react-router-dom';
+import { format, isAfter, parseISO } from 'date-fns';
+import {
+  modalContentType,
+  taskButtonType,
+  userRole as userRoles,
+} from 'shared/types/common.types';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+
+import { ButtonWithModal } from 'widgets/button-with-modal';
+import { ConflictRootAdminButton } from 'shared/ui/conflict-button';
+import { ModalContent } from 'widgets/task-buttons-content';
+import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
+import { SquareButton } from 'shared/ui/square-buttons';
 import { UserProfile } from 'entities/user/types';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
-import { useState } from 'react';
-import { PointGeoJSONInterface } from 'shared/types/point-geojson.types';
+import classNames from 'classnames';
+import styles from './styles.module.css';
 import { useFulfillTaskMutation } from 'services/user-task-api';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { AdminSelectModal } from 'widgets';
+import { useControlModal } from 'shared/hooks';
+import { useGetAllAdminsQuery } from 'services/admin-api';
 
 interface TaskButtonsProps {
   taskId: string;
@@ -60,15 +65,21 @@ export const TaskButtons = ({
   const locationPath = useLocation();
   const dispatch = useAppDispatch();
   const userRole = useAppSelector((state) => state.user.role);
+  const rootAdminRole = useAppSelector((state) => state.user.data?.isRoot);
   const parsedDate = parseISO(date!);
   // const additinalAddress = address;
   const isTaskExpired = isAfter(new Date(), parsedDate);
   const isTaskUrgent = checkTaskUrgency(date!);
   const isPageActive = locationPath.pathname === '/profile/active';
   const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
+  const { isOpen, handleOpen, handleClose } = useControlModal();
+  const { data: admins } = useGetAllAdminsQuery('');
 
   //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
   const [clicked, setClicked] = useState<boolean>(false);
+
+  const [conflictModalIsVisible, setConflictModalIsVisible] =
+    useState<boolean>(true);
 
   const initialData = {
     taskId,
@@ -83,8 +94,8 @@ export const TaskButtons = ({
 
   const handleFulfillClick = () => {
     const shouldFulfillTask =
-      (userRole === UserRole.VOLUNTEER && !volunteerReport) ||
-      (userRole === UserRole.RECIPIENT && !recipientReport && volunteer);
+      (userRole === userRoles.VOLUNTEER && !volunteerReport) ||
+      (userRole === userRoles.RECIPIENT && !recipientReport && volunteer);
 
     if (shouldFulfillTask) {
       fulfillTask({ role: userRole.toLocaleLowerCase(), id: taskId });
@@ -106,6 +117,12 @@ export const TaskButtons = ({
     dispatch(changeCurrentStep(4));
     dispatch(openPopup());
   };
+
+  const handleConflictRootAdminButton = () => {
+    console.log('Нажата кнопка инициации конфликта');
+    handleOpen();
+  };
+
   return (
     <div className={classNames(extClassName, styles.buttons)}>
       {(isTaskExpired || !date) && isPageActive && (
@@ -116,11 +133,11 @@ export const TaskButtons = ({
             <ModalContent
               volunteer={!!volunteer}
               type={
-                !volunteer && userRole === UserRole.RECIPIENT
-                  ? ModalContentType.confirm
+                !volunteer && userRole === userRoles.RECIPIENT
+                  ? modalContentType.confirm
                   : clicked
-                  ? ModalContentType.admin
-                  : ModalContentType.confirm
+                  ? modalContentType.admin
+                  : modalContentType.confirm
               }
               userRole={userRole}
               taskId={taskId}
@@ -130,18 +147,18 @@ export const TaskButtons = ({
         >
           <SquareButton
             onClick={handleFulfillClick}
-            buttonType={TaskButtonType.confirm}
+            buttonType={taskButtonType.confirm}
             disabledColor={
-              !volunteer && userRole === UserRole.RECIPIENT
+              !volunteer && userRole === userRoles.RECIPIENT
                 ? true
-                : (userRole === UserRole.VOLUNTEER && !!volunteerReport) ||
-                  (userRole === UserRole.RECIPIENT && !!recipientReport) ||
+                : (userRole === userRoles.VOLUNTEER && !!volunteerReport) ||
+                  (userRole === userRoles.RECIPIENT && !!recipientReport) ||
                   clicked
             }
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.VOLUNTEER && isPageActive && (
+      {userRole === userRoles.VOLUNTEER && isPageActive && (
         <ButtonWithModal
           closeButton
           extClassName={styles.close}
@@ -149,22 +166,22 @@ export const TaskButtons = ({
             <ModalContent
               type={
                 isTaskExpired || !date
-                  ? ModalContentType.responded
+                  ? modalContentType.responded
                   : isTaskUrgent
-                  ? ModalContentType.cancel
-                  : ModalContentType.close
+                  ? modalContentType.cancel
+                  : modalContentType.close
               }
               date={date}
             />
           }
         >
           <SquareButton
-            buttonType={TaskButtonType.close}
+            buttonType={taskButtonType.close}
             disabledColor={isTaskUrgent}
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.RECIPIENT && isPageActive && (
+      {userRole === userRoles.RECIPIENT && isPageActive && (
         <ButtonWithModal
           closeButton
           extClassName={styles.close}
@@ -174,15 +191,15 @@ export const TaskButtons = ({
               taskId={taskId}
               type={
                 isTaskExpired || volunteer
-                  ? ModalContentType.responded
-                  : ModalContentType.close
+                  ? modalContentType.responded
+                  : modalContentType.close
               }
               date={date}
             />
           }
         >
           <SquareButton
-            buttonType={TaskButtonType.close}
+            buttonType={taskButtonType.close}
             disabledColor={isTaskUrgent}
           />
         </ButtonWithModal>
@@ -191,19 +208,21 @@ export const TaskButtons = ({
         <ButtonWithModal
           closeButton
           setClicked={isPageActive ? setClicked : undefined}
+          conflictModalVisible={conflictModalIsVisible}
+          setConflictModalVisible={setConflictModalIsVisible}
           extClassName={styles.conflict}
           modalContent={
             <ModalContent
               type={
-                isPageActive && !volunteer && userRole === UserRole.RECIPIENT
-                  ? ModalContentType.conflict
+                isPageActive && !volunteer && userRole === userRoles.RECIPIENT
+                  ? modalContentType.conflict
                   : isPageActive
                   ? clicked
-                    ? ModalContentType.admin
-                    : ModalContentType.conflict
+                    ? modalContentType.admin
+                    : modalContentType.conflict
                   : unfulfilledTask
-                  ? ModalContentType.unfulfilled
-                  : ModalContentType.conflict
+                  ? modalContentType.unfulfilled
+                  : modalContentType.conflict
               }
               active={isPageActive}
               conflict={conflict}
@@ -211,18 +230,21 @@ export const TaskButtons = ({
               taskId={taskId}
               userRole={userRole}
               volunteer={!!volunteer}
+              volunteerReport={volunteerReport}
+              recipientReport={recipientReport}
+              setConflictModalVisible={setConflictModalIsVisible}
             />
           }
         >
           <SquareButton
-            buttonType={TaskButtonType.conflict}
+            buttonType={taskButtonType.conflict}
             disabledColor={
-              !volunteer && userRole === UserRole.RECIPIENT
+              !volunteer && userRole === userRoles.RECIPIENT
                 ? true
-                : (userRole === UserRole.VOLUNTEER &&
+                : (userRole === userRoles.VOLUNTEER &&
                     !!volunteerReport &&
                     isPageActive) ||
-                  (userRole === UserRole.RECIPIENT &&
+                  (userRole === userRoles.RECIPIENT &&
                     !!recipientReport &&
                     isPageActive) ||
                   (clicked && isPageActive)
@@ -230,13 +252,24 @@ export const TaskButtons = ({
           />
         </ButtonWithModal>
       )}
-      {userRole === UserRole.RECIPIENT && !volunteer && isPageActive && (
+      {userRole === userRoles.RECIPIENT && !volunteer && isPageActive && (
         <SquareButton
           onClick={handleEditButton}
           buttonType="edit"
           extClassName={styles.edit}
         />
       )}
+      {userRole === userRoles.ADMIN && rootAdminRole && (
+        <ConflictRootAdminButton
+          extClassName={styles.rootConflict}
+          onClick={handleConflictRootAdminButton}
+        />
+      )}
+      <AdminSelectModal
+        isOpen={isOpen}
+        onClose={handleClose}
+        admins={admins}
+      ></AdminSelectModal>
     </div>
   );
 };

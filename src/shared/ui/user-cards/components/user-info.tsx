@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import styles from '../styles.module.css';
 
-import { UserRole } from '../../../types/common.types';
+import { userRole, UserRole } from '../../../types/common.types';
 import { ReactNode } from 'react';
 
 interface UserInfoProps {
@@ -33,7 +33,7 @@ const UserInfo = ({
         >
           {userName}
         </h2>
-        {(role === UserRole.RECIPIENT || viewMode === 'list') && (
+        {(role === userRole.RECIPIENT || viewMode === 'list') && (
           <div
             className={classnames(
               viewMode === 'list'

@@ -90,6 +90,10 @@
   background-color: var(--colors-interface-red-soft);
 }
 
+.square-button--message.square-button::before {
+  background-color: var(--colors-interface-fuchsia);
+}
+
 .disabledColor.square-button::before {
   background-color: var(--colors-interface-additional);
 }

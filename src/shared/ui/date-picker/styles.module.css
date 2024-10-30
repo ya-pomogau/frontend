@@ -7,9 +7,9 @@
   width: 308px;
   padding: 10px;
   border-radius: 0;
-  font-family: 'Golos', sans-serif;
-  line-height: 14px;
-  background-color: white;
+  font-family: var(--font-family-golos);
+  line-height: var(--line-height-xs);
+  background-color: var(--colors-interface-white);
   border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -20,9 +20,9 @@
   height: 248px;
   padding: 10px;
   border-radius: 0;
-  font-family: 'Golos', sans-serif;
-  line-height: 14px;
-  background-color: white;
+  font-family: var(--font-family-golos);
+  line-height: var(--line-height-xs);
+  background-color: var(--colors-interface-white);
   border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -34,15 +34,15 @@
 
 .datePicker__headerMonth {
   margin-right: 4px;
-  font-family: 'Golos', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family: var(--font-family-golos);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-s);
   color: var(--colors-interface-primary);
 }
 
 .dataPicker__calendarWeekDay {
-  font-weight: 400;
-  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-small);
   border-radius: 2px;
 }
 

@@ -1,7 +1,7 @@
 .timePicker {
   width: 86px;
   height: 34px;
-  border: 1px solid #818c99;
+  border: 1px solid var(--colors-interface-additional);
   display: flex;
   align-items: center;
   padding-left: 10px;
@@ -14,7 +14,7 @@
 .timePickerContainer {
   display: flex;
   padding: 10px 36px 10px 10px;
-  border: 1px solid #818c99;
+  border: 1px solid var(--colors-interface-additional);
   margin: 0 10px;
 }
 
@@ -23,15 +23,15 @@
   height: 15px;
   padding: 0;
   border: none;
-  font-family: 'Golos', sans-serif;
-  font-size: 14px;
-  line-height: 14px;
+  font-family: var(--font-family-golos);
+  font-size: var(--font-size-middle);
+  line-height: var(--line-height-xs);
 }
 
 input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
 }
- 
+
 input[type='time']:focus {
   outline: none;
 }

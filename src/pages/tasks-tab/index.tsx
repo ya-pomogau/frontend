@@ -9,7 +9,7 @@ interface TabProps {
 
 export function TasksTab({ data, onUserClick }: TabProps) {
   return (
-    <div className={styles.userCards}>
+    <ul className={styles.userCards}>
       {data.map((user: User) => (
         <UserCardForTasks
           key={user._id}
@@ -17,6 +17,6 @@ export function TasksTab({ data, onUserClick }: TabProps) {
           onClick={() => onUserClick(user)}
         />
       ))}
-    </div>
+    </ul>
   );
 }

@@ -9,8 +9,6 @@ interface ErrorDialogProps {
 export const ErrorDialog = ({ text }: ErrorDialogProps) => (
   <div className={classNames(styles.container)}>
     <Icon color="blue" icon="ExclamationPMark" size="54" />
-    <p className={classNames('text', 'text_size_medium', styles.headerText)}>
-      {text}
-    </p>
+    <p className={classNames('text', styles['header-text'])}>{text}</p>
   </div>
 );

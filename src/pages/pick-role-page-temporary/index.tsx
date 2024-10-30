@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from 'app/hooks';
 import { isRootSelector } from 'entities/user/model';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 import { actions, checkTokenThunk } from 'services/system-slice';
 import { getTokenAccess } from 'shared/libs/utils';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
@@ -39,9 +39,9 @@ export function PickRolePage() {
       return '/profile/requests';
     }
     switch (role) {
-      case UserRole.VOLUNTEER:
+      case userRole.VOLUNTEER:
         return '/profile/map';
-      case UserRole.RECIPIENT:
+      case userRole.RECIPIENT:
         return '/profile/active';
       default:
         return '/';

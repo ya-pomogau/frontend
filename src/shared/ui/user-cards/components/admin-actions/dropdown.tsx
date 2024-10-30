@@ -1,9 +1,8 @@
 import { Control, Controller } from 'react-hook-form';
 
 import { Button, Checkbox } from 'shared/ui';
-import { ArrowDownIcon } from 'shared/ui/icons/arrow-down-icon';
-import { AdminPermission } from 'shared/types/common.types';
-
+import { adminPermission, AdminPermission } from 'shared/types/common.types';
+import { Icon } from 'shared/ui';
 import styles from '../../styles.module.css';
 
 interface AdminDropdownMenuProps {
@@ -25,12 +24,12 @@ export const AdminDropdownMenu = ({
         className={styles.admin_arrow_up}
         onClick={() => setAdminDropdownListClosed(true)}
       >
-        <ArrowDownIcon color="blue" onClick={onSwitchArrow} />
+        <Icon icon="ArrowDownIcon" color="blue" onClick={onSwitchArrow} />
       </div>
       <div className={styles.admin_checkboxes}>
         <Controller
           control={control}
-          name={AdminPermission.CONFIRMATION}
+          name={adminPermission.CONFIRMATION}
           render={({ field }) => (
             <Checkbox
               id={field.name}
@@ -43,7 +42,7 @@ export const AdminDropdownMenu = ({
         />
         <Controller
           control={control}
-          name={AdminPermission.TASKS}
+          name={adminPermission.TASKS}
           render={({ field }) => (
             <Checkbox
               id={field.name}
@@ -56,7 +55,7 @@ export const AdminDropdownMenu = ({
         />
         <Controller
           control={control}
-          name={AdminPermission.KEYS}
+          name={adminPermission.KEYS}
           render={({ field }) => (
             <Checkbox
               id={field.name}
@@ -69,7 +68,7 @@ export const AdminDropdownMenu = ({
         />
         <Controller
           control={control}
-          name={AdminPermission.CONFLICTS}
+          name={adminPermission.CONFLICTS}
           render={({ field }) => (
             <Checkbox
               id={field.name}
@@ -82,7 +81,7 @@ export const AdminDropdownMenu = ({
         />
         <Controller
           control={control}
-          name={AdminPermission.BLOG}
+          name={adminPermission.BLOG}
           render={({ field }) => (
             <Checkbox
               id={field.name}
@@ -95,7 +94,7 @@ export const AdminDropdownMenu = ({
         />
         <Controller
           control={control}
-          name={AdminPermission.CATEGORIES}
+          name={adminPermission.CATEGORIES}
           render={({ field }) => (
             <Checkbox
               id={field.name}

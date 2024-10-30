@@ -13,7 +13,7 @@
 }
 
 .checkbox:disabled + label {
-  color: #818c99;
+  color: var(--colors-interface-additional);
 }
 
 .checkboxIconWrapper {
@@ -68,7 +68,7 @@
   left: 50%;
   z-index: 2;
   transform: translate(-50%, 0%);
-  background-color: #fbfdff;
+  background-color: var(--colors-interface-background);
   color: var(--colors-interface-black);
   display: inline-block;
   padding: 5px;

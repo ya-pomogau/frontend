@@ -28,7 +28,7 @@
 
 .name {
   width: 100%;
-  font-size: 16px;
+  font-size: var(--font-size-s);
   -webkit-line-clamp: 1;
 }
 
@@ -46,7 +46,7 @@
 
 .message {
   width: 100%;
-  font-size: 12px;
+  font-size: var(--font-size-small);
   -webkit-line-clamp: 1; /* Количество строк */
 }
 
@@ -57,7 +57,7 @@
 }
 
 .radius {
-  font-size: 14px;
+  font-size: var(--font-size-middle);
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -105,7 +105,7 @@
   }
 
   .name {
-    font-size: 12px;
+    font-size: var(--font-size-small);
   }
 
   .userInfo {

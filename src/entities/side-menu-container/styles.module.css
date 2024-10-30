@@ -1,5 +1,7 @@
 .button__container {
-  gap: 5px;
+  gap: 8px;
+  height: 426px;
+  padding: 28px 10px;
   width: 100%;
   box-sizing: border-box;
   display: flex;
@@ -31,22 +33,31 @@
   max-width: 354px;
 }
 
-@media (min-width: 550px) {
+.button__container--web {
+  max-width: 295px;
+}
+
+.button__container--sea {
+  border: 2px solid var(--colors-interface-blue-strong);
+}
+
+.button__container--main {
+  border: 2px solid var(--colors-interface-primary);
+}
+
+@media (max-width: 920px) {
   .button__container {
-    gap: 8px;
-    height: 426px;
-    padding: 28px 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    padding: 0;
+    margin-top: 15px;
+    gap: 12px;
+    height: auto;
   }
 
-  .button__container--web {
-    max-width: 295px;
-  }
-
+  .button__container--main,
   .button__container--sea {
-    border: 2px solid var(--colors-interface-blue-strong);
-  }
-
-  .button__container--main {
-    border: 2px solid var(--colors-interface-primary);
+    border: none;
   }
 }

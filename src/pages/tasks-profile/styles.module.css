@@ -14,47 +14,5 @@
 
 .taskContainer {
   padding-left: 30px;
-  font-family: 'Golos', sans-serif;
+  font-family: var(--font-family-golos);
 }
-
-.input {
-  margin: 28px 0 0 42px;
-  width: 351px;
-}
-.wrapper_btn {
-  display: flex;
-}
-
-.add_task_icon {
-  justify-self: center;
-}
-
-.add_task_icon_unconf {
-  justify-self: center;
-  background-color: var(--colors-interface-additional);
-}
-
-.add_task_icon_unconf:hover {
-  background-color: var(--colors-interface-yorkshire-cloud);
-}
-
-.add_task_icon_unconf {
-  justify-self: center;
-  background-color: var(--colors-interface-additional);
-}
-
-.add_task_icon_unconf:hover {
-  background-color: var(--colors-interface-yorkshire-cloud);
-}
-
-.title_add_list {
-  color: var(--colors-interface-primary-additional);
-  font-family: 'Golos', sans-serif;
-  max-width: 294px;
-  margin: auto;
-}
-
-.wrapper_btn {
-  position: relative;
-}
-

@@ -2,7 +2,7 @@
 
 .header {
   margin-top: 30px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--colors-interface-ford-white);
   position: relative;
 }
 
@@ -21,7 +21,12 @@
 .header__gradient-divider {
   height: 1px;
   width: 100%;
-  background: linear-gradient(to right, #fff 0%, #2e3192 50%, #fff 100%);
+  background: linear-gradient(
+    to right,
+    var(--colors-interface-white) 0%,
+    var(--colors-interface-primary) 50%,
+    var(--colors-interface-white) 100%
+  );
 }
 
 .header_title {
@@ -76,7 +81,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   width: 200px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--colors-interface-ford-white);
   margin-bottom: 20px;
   text-decoration: none;
   list-style: none;
@@ -85,10 +90,9 @@
 
 .menu__title {
   color: var(--colors-interface-primary);
-  font-family: 'Golos';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
+  font-family: var(--font-family-golos);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-s);
   line-height: 19px;
   margin: 0 0 0 auto;
   width: 132px;

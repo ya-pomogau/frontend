@@ -22,7 +22,7 @@
 }
 
 .input {
-  font-size: 24px;
+  font-size: var(--font-size-medium);
   border: none;
   background-color: transparent;
   outline: none;
@@ -37,7 +37,7 @@
 }
 
 .input_mode_edit {
-  color: #000;
+  color: var(--colors-interface-black);
 }
 
 .input_mode_edit:hover {

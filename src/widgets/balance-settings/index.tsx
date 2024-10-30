@@ -1,67 +1,61 @@
-import classnames from 'classnames';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from 'shared/ui';
-import { usePermission } from 'shared/hooks';
-import { AdminPermission, UserRole, TPoints } from 'shared/types/common.types';
-import {
-  useGetCategoriesQuery,
-  useUpdatePointsMutation,
-} from 'services/categories-api';
+import { useGetCategoriesQuery, useUpdatePointsMutation } from 'services';
 import BalanceSettingsItem from './components/balance-settings-item';
 
 import styles from './styles.module.css';
 
-interface BalanceSettingsProps {
-  extClassName?: string;
-}
+type BalanceSettingsForm = Record<string, { _id: string; points: number }>;
 
-export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
-  const isEditAllowed = usePermission(
-    [AdminPermission.CATEGORIES],
-    UserRole.ADMIN
-  );
+export const BalanceSettings = () => {
   const { data } = useGetCategoriesQuery();
   const [updatePoints] = useUpdatePointsMutation();
   const {
     control,
     handleSubmit,
-    formState: { isDirty, isValid },
-  } = useForm<Record<string, number>>({
+    formState: { isDirty, isValid, dirtyFields },
+    reset,
+  } = useForm<BalanceSettingsForm>({
     values: (data || []).reduce((acc, value) => {
-      const { title, points } = value;
-      acc[title] = points;
+      const { title, points, _id } = value;
+      acc[title] = { points, _id };
 
       return acc;
-    }, {} as Record<string, number>),
+    }, {} as BalanceSettingsForm),
   });
 
-  //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
-  const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
+  const onSubmit: SubmitHandler<BalanceSettingsForm> = async (formData) => {
+    const formattedData = Object.keys(dirtyFields).reduce((acc, key) => {
+      if (dirtyFields[key]) {
+        const { points, _id } = formData[key];
+        acc.push({ id: _id, points });
+      }
+      return acc;
+    }, [] as Array<{ id: string; points: number }>);
+
     try {
-      await updatePoints(formData);
+      await updatePoints({ data: formattedData });
+      reset(formData);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
   };
 
   return (
-    <form
-      className={classnames(styles.container, extClassName)}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className={classnames(styles.balances_box)}>
+    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
+      <div className={styles.balances_box}>
         {data &&
-          data.map((item, index) => (
+          data.map(({ title }, index) => (
             <Controller
               control={control}
-              name={item.title}
+              name={`${title}.points`}
               key={index}
               render={({ field }) => (
                 <BalanceSettingsItem
-                  title={item.title}
+                  title={title}
                   inputValue={field.value}
-                  handleChange={field.onChange}
+                  handleChange={(e) => field.onChange(e.target.valueAsNumber)}
                 />
               )}
             />
@@ -69,12 +63,12 @@ export const BalanceSettings = ({ extClassName }: BalanceSettingsProps) => {
       </div>
 
       <Button
-        extClassName={classnames(styles.save_btn)}
+        extClassName={styles.save_btn}
         buttonType="primary"
         label="Сохранить"
         size="large"
         actionType="submit"
-        disabled={!isEditAllowed || !isDirty || !isValid}
+        disabled={!isDirty || !isValid}
       />
     </form>
   );

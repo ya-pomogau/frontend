@@ -17,8 +17,8 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
   background-color: transparent;
 }
 
@@ -27,8 +27,8 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
   margin-left: 28px;
   background-color: transparent;
 }
@@ -38,8 +38,8 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
   background-color: transparent;
 }
 
@@ -70,6 +70,6 @@
   }
 
   .address {
-    font-weight: 400;
+    font-weight: var(--font-weight-regular);
   }
 }

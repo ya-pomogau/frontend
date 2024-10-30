@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 import { RoundButton } from '../round-button';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
-import { ModalContentType, TaskButtonType } from 'shared/types/common.types';
+import { modalContentType, taskButtonType } from 'shared/types/common.types';
 import { TaskReport } from 'entities/task/types';
 
 interface IUser {
@@ -47,9 +47,9 @@ export function ConflictCard({ user, role, status }: PropsConflictCard) {
       <img className={styles.img} src={user.avatar} alt="фото" />
       <div className={styles.conteiner}>
         <ButtonWithModal
-          modalContent={<ModalContent type={ModalContentType.phone} />}
+          modalContent={<ModalContent type={modalContentType.phone} />}
         >
-          <RoundButton buttonType={TaskButtonType.phone} />
+          <RoundButton buttonType={taskButtonType.phone} />
         </ButtonWithModal>
         <RoundButton buttonType="message" onClick={handelClickChat} />
       </div>

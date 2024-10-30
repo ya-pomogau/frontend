@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 import { TaskList } from '.';
-import { UserRole } from 'shared/types/common.types';
-import { TaskStatus } from 'entities/task/types';
+import { userRole } from 'shared/types/common.types';
+import { taskStatus } from 'entities/task/types';
 
 const MockedState = {
   tasks: {
@@ -16,7 +16,6 @@ const MockedState = {
   isFailed: false,
 };
 
-// eslint-disable-next-line react/prop-types
 const Mockstore = ({ initialState, children }: Record<any, any>) => (
   <Provider
     store={configureStore({
@@ -78,7 +77,7 @@ export const ExampleActive: Story = {
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
           vkId: '123456789',
-          role: UserRole.RECIPIENT,
+          role: userRole.RECIPIENT,
           _id: '4',
         },
         volunteer: {
@@ -88,7 +87,7 @@ export const ExampleActive: Story = {
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
           vkId: '123456789',
-          role: UserRole.VOLUNTEER,
+          role: userRole.VOLUNTEER,
           _id: '2',
         },
         address: 'переулок Каховского, 3',
@@ -96,7 +95,7 @@ export const ExampleActive: Story = {
           type: 'Point',
           coordinates: [59.95252, 30.243239],
         },
-        status: TaskStatus.ACCEPTED,
+        status: taskStatus.ACCEPTED,
         recipientReport: null,
         volunteerReport: null,
         adminResolve: null,
@@ -120,7 +119,7 @@ export const ExampleActive: Story = {
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
           vkId: '123456789',
-          role: UserRole.RECIPIENT,
+          role: userRole.RECIPIENT,
           _id: '2',
         },
         volunteer: {
@@ -130,7 +129,7 @@ export const ExampleActive: Story = {
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
           vkId: '123456789',
-          role: UserRole.VOLUNTEER,
+          role: userRole.VOLUNTEER,
           _id: '1',
         },
         address: 'переулок Каховского, 3',
@@ -138,7 +137,7 @@ export const ExampleActive: Story = {
           type: 'Point',
           coordinates: [59.95252, 30.243239],
         },
-        status: TaskStatus.ACCEPTED,
+        status: taskStatus.ACCEPTED,
         recipientReport: null,
         volunteerReport: null,
         adminResolve: null,
@@ -171,7 +170,7 @@ export const ExampleNotActive: Story = {
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
           vkId: '123456789',
-          role: UserRole.RECIPIENT,
+          role: userRole.RECIPIENT,
           _id: '5',
         },
         volunteer: {
@@ -181,7 +180,7 @@ export const ExampleNotActive: Story = {
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
           vkId: '123456789',
-          role: UserRole.VOLUNTEER,
+          role: userRole.VOLUNTEER,
           _id: '4',
         },
         address: 'переулок Каховского, 3',
@@ -189,7 +188,7 @@ export const ExampleNotActive: Story = {
           type: 'Point',
           coordinates: [59.95252, 30.243239],
         },
-        status: TaskStatus.ACCEPTED,
+        status: taskStatus.ACCEPTED,
         recipientReport: null,
         volunteerReport: null,
         adminResolve: null,
@@ -210,7 +209,7 @@ export const ExampleNotActive: Story = {
           type: 'Point',
           coordinates: [59.95252, 30.243239],
         },
-        status: TaskStatus.ACCEPTED,
+        status: taskStatus.ACCEPTED,
         description:
           'Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.',
         recipient: {
@@ -219,7 +218,7 @@ export const ExampleNotActive: Story = {
           phone: '+7 (999) 123-45-67',
           address: 'переулок Каховского, 3',
           vkId: '123456789',
-          role: UserRole.RECIPIENT,
+          role: userRole.RECIPIENT,
           _id: '2',
         },
         volunteer: {
@@ -229,7 +228,7 @@ export const ExampleNotActive: Story = {
           phone: '+7 (926) 123-45-67',
           address: 'ул. Кораблестроителей, 19к1',
           vkId: '123456789',
-          role: UserRole.VOLUNTEER,
+          role: userRole.VOLUNTEER,
           _id: '1',
         },
         recipientReport: null,

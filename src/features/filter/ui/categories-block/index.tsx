@@ -6,13 +6,13 @@ import { FilterItemsIds } from '../../consts';
 
 import styles from '../styles.module.css';
 import usePermission from 'shared/hooks/use-permission';
-import { UserRole, UserStatus } from 'shared/types/common.types';
+import { userRole as userRoles, userStatus } from 'shared/types/common.types';
 import { useAppSelector } from 'app/hooks';
 import { useGetCategoriesQuery } from 'services/categories-api';
 
 interface CategoriesBlockProps {
   selectedServies: string[];
-  onChange: (value: string[]) => void;  
+  onChange: (value: string[]) => void;
 }
 
 export const CategoriesBlock = ({
@@ -24,17 +24,17 @@ export const CategoriesBlock = ({
   const categories = useGetCategoriesQuery().currentData;
 
   const volunteerMainGuard = usePermission(
-    [UserStatus.CONFIRMED, UserStatus.VERIFIED, UserStatus.ACTIVATED],
-    UserRole.VOLUNTEER
+    [userStatus.CONFIRMED, userStatus.VERIFIED, userStatus.ACTIVATED],
+    userRoles.VOLUNTEER
   );
 
   const volunteerHigherGuard = usePermission(
-    [UserStatus.CONFIRMED, UserStatus.VERIFIED],
-    UserRole.VOLUNTEER
+    [userStatus.CONFIRMED, userStatus.VERIFIED],
+    userRoles.VOLUNTEER
   );
   const volunteerSpecialGuard = usePermission(
-    [UserStatus.CONFIRMED],
-    UserRole.VOLUNTEER
+    [userStatus.CONFIRMED],
+    userRoles.VOLUNTEER
   );
 
   const userRole = useAppSelector((state) => state.user.data?.role);
@@ -48,7 +48,7 @@ export const CategoriesBlock = ({
     } else {
       newValue = selectedServies.filter((item) => item !== target.id);
     }
-    onChange(newValue);  
+    onChange(newValue);
   };
 
   const checkAccess = (category: string) => {

@@ -1,12 +1,12 @@
 .buttons {
   display: grid;
-  grid-template-columns: repeat(2, 32px);
+  grid-template-columns: repeat(3, 32px);
   grid-template-rows: repeat(2, 32px);
   gap: 10px;
   max-width: 82px;
   justify-content: end;
   align-content: start;
-  grid-template-areas: 'confirm close' 'conflict edit';
+  grid-template-areas: 'none confirm close' 'rootConflict conflict edit';
 }
 
 .confirm {
@@ -25,6 +25,19 @@
   grid-area: edit;
 }
 
+.rootConflict {
+  grid-area: rootConflict;
+  align-self: center;
+}
+
 .item_hidden {
   visibility: hidden;
+}
+
+@media screen and (min-width: 1150px) {
+  .buttons {
+    grid-template-columns: repeat(2, 32px);
+    grid-template-rows: repeat(2, 32px) 64px;
+    grid-template-areas: 'confirm close' 'conflict edit' 'rootConflict none';
+  }
 }

@@ -74,7 +74,7 @@
 }
 
 .calendar {
-  border: 0.5px solid #818c99;
+  border: 0.5px solid var(--colors-interface-additional);
 }
 
 .box {

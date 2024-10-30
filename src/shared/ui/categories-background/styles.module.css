@@ -45,3 +45,7 @@
 .categories-background-content {
   z-index: 10;
 }
+
+.storybookCategory {
+  margin-bottom: 10px;
+}

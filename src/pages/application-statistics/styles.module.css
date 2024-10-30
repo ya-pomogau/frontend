@@ -17,10 +17,7 @@
   box-sizing: border-box;
   padding-left: 14px;
   align-items: center;
-  font-family: Golos, 'sans-serif';
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
+  font: var(--font-golos-12-16);
   line-height: 140%;
 }
 
@@ -45,9 +42,7 @@
 
 .datePicker__headerMonth {
   margin-right: 4px;
-  font-family: 'Golos', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font: var(--font-golos-16-22);
   color: var(--colors-interface-primary);
 }
 
@@ -56,9 +51,9 @@
   width: 250px;
   padding: 10px;
   border-radius: 0;
-  font-family: 'Golos', sans-serif;
-  line-height: 14px;
-  background-color: white;
+  font-family: var(--font-family-golos);
+  line-height: var(--line-height-xs);
+  background-color: var(--colors-interface-white);
   border: 0.5px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -69,11 +64,11 @@
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
-  font-size: 12px;
+  font-size: var(--font-size-small);
   line-height: 12px;
   max-width: 96px;
-  font-family: Golos, 'sans-serif';
-  border: 0.5px solid var(--color, #818c99);
+  font-family: var(--font-family-golos);
+  border: 0.5px solid var(--colors-interface-additional);
 }
 
 .status_application {

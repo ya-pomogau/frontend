@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { withRouter } from 'storybook-addon-remix-react-router';
-
 import { SideMenu } from 'widgets/side-menu/components/side-menu';
 import { SideMenuLink } from 'widgets/side-menu/components/side-menu-link';
 import { Icon } from 'shared/ui/icons';
@@ -10,11 +9,10 @@ import { VolunteerSideMenu } from 'widgets/side-menu/components/volunter-side-me
 import { RecipientSideMenu } from 'widgets/side-menu/components/recipient-side-menu';
 import { AdminSideMenu } from 'widgets/side-menu/components/admin-side-menu';
 import { MasterSideMenu } from 'widgets/side-menu/components/master-side-menu';
-import { FeedbackSideMenu } from './components/feedback-side-menu';
-import { UserRole } from 'shared/types/common.types';
+import { userRole } from 'shared/types/common.types';
 
 const mockedVolunteerState = {
-  role: UserRole.VOLUNTEER,
+  role: userRole.VOLUNTEER,
   data: {
     id: '7',
     name: 'Волонтеров Петр Петрович',
@@ -23,7 +21,7 @@ const mockedVolunteerState = {
       'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
     address: 'ул. Кораблестроителей, 19к1',
     vkId: '123456789',
-    role: UserRole.VOLUNTEER,
+    role: userRole.VOLUNTEER,
     score: 2500,
     status: 2,
     location: [59.942575, 30.216757],
@@ -34,7 +32,7 @@ const mockedVolunteerState = {
 };
 
 const mockedRecipientState = {
-  role: UserRole.RECIPIENT,
+  role: userRole.RECIPIENT,
   data: {
     id: '4',
     name: 'Реципиентов Алексей Борисович',
@@ -43,7 +41,7 @@ const mockedRecipientState = {
       'https://www.kinogallery.com/img/wallpaper/kinogallery-wallpaper-1600x1200-19242.jpg',
     address: 'ул. Нахимова, д. 9',
     vkId: '123456789',
-    role: UserRole.RECIPIENT,
+    role: userRole.RECIPIENT,
     status: 1,
     location: [59.942575, 30.216757],
   },
@@ -52,7 +50,7 @@ const mockedRecipientState = {
 };
 
 const mockedAdminState = {
-  role: UserRole.ADMIN,
+  role: userRole.ADMIN,
   data: {
     id: '2',
     name: 'Админов Семен Семенович',
@@ -61,7 +59,7 @@ const mockedAdminState = {
       'https://w-dog.ru/wallpapers/4/16/424328707515423/mel-gibson-xrabroe-serdce-geroj-akter-muzhchina-lico-fon-voin-mel-gibson-chelovek-soldat-direktor.jpg',
     address: 'ул. Стойкости, 17',
     vkId: '123456789',
-    role: UserRole.ADMIN,
+    role: userRole.ADMIN,
     login: 'admin2@mail.com',
     password: 'uoeft839',
     isActive: true,
@@ -76,7 +74,7 @@ const mockedAdminState = {
 };
 
 const mockedMasterState = {
-  role: UserRole.ADMIN,
+  role: userRole.ADMIN,
   data: {
     id: '1',
     name: 'Админов Главный Админович',
@@ -84,7 +82,7 @@ const mockedMasterState = {
     avatar: 'https://www.amica.it/wp-content/uploads/2020/07/mel-gibson-4.jpg',
     address: 'ул. Поселковая, д. 5',
     vkId: '123456789',
-    role: UserRole.ADMIN,
+    role: userRole.ADMIN,
     login: 'root@mail.com',
     password: '459670778',
     isActive: true,
@@ -245,20 +243,6 @@ export const MasterSideMenuExample: Story = {
   render: () => (
     <Mockstore initialState={mockedMasterState}>
       <MasterSideMenu />
-    </Mockstore>
-  ),
-};
-
-export const FeedbackSideMenuExample: Story = {
-  argTypes: {
-    ...SidemenuDefault.argTypes,
-  },
-  args: {
-    authRequired: false,
-  },
-  render: () => (
-    <Mockstore initialState={mockedMasterState}>
-      <FeedbackSideMenu />
     </Mockstore>
   ),
 };

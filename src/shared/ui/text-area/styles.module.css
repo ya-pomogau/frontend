@@ -3,7 +3,7 @@
 }
 
 .input {
-  font-size: 16px;
+  font-size: var(--font-size-s);
   width: 100%;
   height: calc(100% - 26px);
   resize: none;
@@ -46,10 +46,10 @@
 
 .label {
   display: inline-block;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
-  color: #000000;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-middle);
+  font-weight: var(--font-weight-regular);
+  color: var(--colors-interface-black);
   margin-bottom: 8px;
 }
 
@@ -59,7 +59,7 @@
   right: 12px;
   font-size: 10px;
   line-height: 12px;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
   color: var(--colors-interface-additional);
 }
 
@@ -70,9 +70,9 @@
 
 .error {
   margin-top: 8px;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-regular);
   color: var(--colors-interface-orange);
 }
 

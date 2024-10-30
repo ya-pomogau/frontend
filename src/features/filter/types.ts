@@ -7,15 +7,17 @@ export interface IFilterValues {
   userCategories: string[];
 }
 
+export type TFilterItems = {
+  categories?: boolean;
+  radius?: boolean;
+  sort?: boolean;
+  date?: boolean;
+  time?: boolean;
+  userCategories?: boolean;
+};
+
 export interface FilteringProps {
-  items: {
-    categories?: boolean;
-    radius?: boolean;
-    sort?: boolean;
-    date?: boolean;
-    time?: boolean;
-    userCategories?: boolean;
-  };
+  items: TFilterItems;
   setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
 }

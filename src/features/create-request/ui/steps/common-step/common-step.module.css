@@ -7,13 +7,13 @@
   display: flex;
   flex-direction: column;
   width: 450px;
-  min-height: 221px;
+  min-height: 150px;
 }
 
 .buttonsWrapper {
   display: flex;
   justify-content: flex-end;
-  margin-top: 55px;
+  margin-top: 45px;
 }
 
 .prevButton {
@@ -28,6 +28,10 @@
 .addressWrapper {
   display: flex;
   margin-top: 20px;
+}
+
+.address {
+  width: min-content;
 }
 
 .typeOfTask {
@@ -45,7 +49,7 @@
 }
 
 .descriptionForTask.expanded {
-  min-height: 195px;
+  max-height: min-content;
   resize: none;
   transition: var(--transition-hover);
   box-sizing: border-box;
@@ -71,14 +75,16 @@
 }
 
 .categories {
+  padding: 7px 2px 5px 10px;
   margin-top: 20px;
 }
 
 @media (max-width: 735px) {
   .container {
     align-items: flex-start;
-    margin: 0;
-    width: 260px;
+    margin: 3px 0 0 0;
+    width: 270px;
+    height: 300px;
   }
   .mainWrapper {
     display: flex;
@@ -86,24 +92,30 @@
     align-items: center;
   }
   .buttonsWrapper {
-    margin-top: 50px;
+    gap: 10px;
+    margin-top: 80px;
     justify-content: center;
     width: 260px;
     position: relative;
     bottom: -140px;
   }
   .task {
-    font-size: 24px;
-    line-height: 29px;
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
     align-self: center;
     position: relative;
     bottom: -10px;
   }
+
+  .time {
+    margin-left: 45px;
+  }
+
   .headerWrapper {
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      #2e3192 49.28%,
+      var(--colors-interface-primary) 49.28%,
       rgba(255, 255, 255, 0) 100%
     );
     width: 240px;
@@ -115,14 +127,14 @@
   }
   .dateWrapper {
     margin: 0;
-    margin-top: 30px;
+    margin-top: 40px;
     position: relative;
-    bottom: -12px;
   }
 
   .addressWrapper {
     position: relative;
-    bottom: -15px;
+    margin-top: 17px;
+    left: -4px;
   }
   .typeOfTask {
     margin-top: 5px;
@@ -140,7 +152,7 @@
   }
 
   .descriptionForTask.expanded {
-    min-height: 170px;
+    min-height: 185px;
     resize: none;
     transition: var(--transition-hover);
     box-sizing: border-box;
@@ -162,7 +174,13 @@
   }
 
   .categories {
-    width: 169px;
+    width: 250px;
+    margin-top: 17px;
+    margin-bottom: 13px;
+  }
+
+  .prevButton {
+    margin-right: 0px;
   }
 }
 .edit_button {
@@ -178,5 +196,5 @@
   color: var(--colors-interface-primary);
   cursor: pointer;
   padding: 0;
-  margin-left: 5px;
+  align-self: flex-start;
 }

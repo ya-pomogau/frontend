@@ -1,8 +1,8 @@
 /* eslint-disable import/no-named-as-default */
 import type { Meta, StoryObj } from '@storybook/react';
 import YandexMap from '.';
-import { TaskStatus } from 'entities/task/types';
-import { UserRole } from 'shared/types/common.types';
+import { taskStatus } from 'entities/task/types';
+import { userRole } from 'shared/types/common.types';
 
 const meta = {
   title: 'widgets/YandexMap',
@@ -38,7 +38,7 @@ export const Default: Story = {
           type: 'Point',
           coordinates: [60.699788, 40.557059],
         },
-        status: TaskStatus.CREATED,
+        status: taskStatus.CREATED,
         category: {
           _id: '5',
           title: 'Название категории 5',
@@ -52,7 +52,7 @@ export const Default: Story = {
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
           vkId: '123456789',
-          role: UserRole.RECIPIENT,
+          role: userRole.RECIPIENT,
           _id: '2',
         },
         recipientReport: null,
@@ -70,7 +70,7 @@ export const Default: Story = {
           type: 'Point',
           coordinates: [60.699788, 40.557059],
         },
-        status: TaskStatus.CREATED,
+        status: taskStatus.CREATED,
         category: {
           _id: '5',
           title: 'Название категории 5',
@@ -84,7 +84,7 @@ export const Default: Story = {
           phone: '+7 (916) 123-45-67',
           address: 'переулок Каховского, 3',
           vkId: '123456789',
-          role: UserRole.RECIPIENT,
+          role: userRole.RECIPIENT,
           _id: '1',
         },
         recipientReport: null,

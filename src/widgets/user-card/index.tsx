@@ -1,7 +1,16 @@
 import { useCallback } from 'react';
-import { UserRole, UserStatus } from '../../shared/types/common.types';
+import {
+  userStatus,
+  userRole,
+  UserStatus,
+  UserRole,
+} from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
-import { useConfirmUserMutation } from 'services/admin-api';
+import {
+  useBlockUserMutation,
+  useConfirmUserMutation,
+  usePromoteUserMutation,
+} from 'services/admin-api';
 import { UserCardTiles } from 'shared/ui/user-cards/user-card-tiles';
 import { UserCardList } from 'shared/ui/user-cards/user-card-list';
 import { useMediaQuery } from 'shared/hooks';
@@ -12,50 +21,96 @@ interface UserCardProps {
   viewMode: 'tiles' | 'list';
 }
 
+const belowScoreAccept = 30;
+const passScoreAccept = 60;
+
 const getButtonTypeFromScore = (
-  score: number
+  score: number,
+  status?: UserStatus
 ): 'primary' | 'partial' | 'secondary' => {
-  if (score < 30) {
+  if (!score && !status) {
     return 'primary';
-  } else if (score < 60) {
+  }
+  if (score < 60 && status && status > userStatus.UNCONFIRMED) {
     return 'partial';
   } else {
     return 'secondary';
   }
 };
 
+const AcceptButtonDisabled = (
+  status?: UserStatus,
+  score?: number,
+  role?: UserRole
+) => {
+  if (!status) {
+    return false;
+  }
+
+  if (!score || !role) {
+    return true;
+  }
+
+  return (
+    score < belowScoreAccept ||
+    (score >= passScoreAccept &&
+      status === userStatus.CONFIRMED &&
+      role === userRole.VOLUNTEER)
+  );
+};
+
 export const UserCard = ({ user, viewMode }: UserCardProps) => {
   const mediaQuery = useMediaQuery(Breakpoints.L);
   const { score, status, keys, role } = user;
-  const isVolonteerAcceptButtonDisabled = !!(
-    status &&
-    status > UserStatus.UNCONFIRMED &&
-    role === UserRole.VOLUNTEER
-  );
 
+  const isVolunteerAcceptButtonDisabled = AcceptButtonDisabled(
+    status,
+    score,
+    role
+  );
   const [confirmUser] = useConfirmUserMutation();
+  const [blockUser] = useBlockUserMutation();
+  const [promoteUser] = usePromoteUserMutation();
 
   const handleConfirmClick = useCallback(() => {
     confirmUser(user._id);
   }, [confirmUser, user._id]);
 
+  const handleBlockClick = () => {
+    if (status === userStatus.BLOCKED) {
+      promoteUser(user._id);
+    } else {
+      blockUser(user._id);
+    }
+  };
+
   const isKeyButtonExclamationPointIcon = !!(score && score >= 60 && !keys);
+  const isAcceptButtonExclamationPointIcon = !!(
+    score &&
+    score >= 30 &&
+    score < 60 &&
+    !keys
+  );
 
   return viewMode === 'tiles' || mediaQuery ? (
     <UserCardTiles
       user={user}
       handleConfirmClick={handleConfirmClick}
-      isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
+      handleBlockClick={handleBlockClick}
+      isVolonteerAcceptButtonDisabled={isVolunteerAcceptButtonDisabled}
       isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
+      isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
       getButtonTypeFromScore={getButtonTypeFromScore}
     />
   ) : (
     <UserCardList
       user={user}
       handleConfirmClick={handleConfirmClick}
-      isVolonteerAcceptButtonDisabled={isVolonteerAcceptButtonDisabled}
+      handleBlockClick={handleBlockClick}
+      isVolonteerAcceptButtonDisabled={isVolunteerAcceptButtonDisabled}
       isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
       getButtonTypeFromScore={getButtonTypeFromScore}
+      isAcceptButtonExclamationPointIcon={isAcceptButtonExclamationPointIcon}
     />
   );
 };

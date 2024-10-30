@@ -11,7 +11,7 @@
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: var(--font-size-s);
   line-height: 19px;
 }
 
@@ -35,18 +35,18 @@
 
 .label {
   display: inline-block;
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
-  color: #000000;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-middle);
+  font-weight: var(--font-weight-regular);
+  color: var(--colors-interface-primary);
   margin-bottom: 8px;
 }
 
 .error {
   margin-top: 8px;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-regular);
   color: var(--colors-interface-orange);
 }
 
@@ -76,13 +76,13 @@
 
 @media screen and (max-width: 550px) {
   .label {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-xs);
   }
 
   .input {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-xs);
   }
 }
 
