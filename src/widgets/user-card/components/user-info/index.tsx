@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import styles from '../styles.module.css';
 import { Typography } from 'shared/ui';
+import styles from './styles.module.css';
 
 interface UserInfoProps {
   userName: string;

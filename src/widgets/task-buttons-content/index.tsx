@@ -33,6 +33,7 @@ interface ModalContentProps {
   volunteerReport?: TaskReport | null;
   recipientReport?: TaskReport | null;
   setConflictModalVisible?: Dispatch<SetStateAction<boolean>>;
+  phoneNumber?: string;
 }
 
 export const ModalContent = ({
@@ -46,6 +47,7 @@ export const ModalContent = ({
   volunteerReport,
   recipientReport,
   setConflictModalVisible,
+  phoneNumber,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
@@ -116,7 +118,6 @@ export const ModalContent = ({
               onChange={() => handleSetReason(reasonTypes.third)}
               checked={reason === reasonTypes.third}
             />
-            T
           </div>
           <div className={styles.modalButtons}>
             <Button
@@ -320,11 +321,11 @@ export const ModalContent = ({
             content={'Номер телефона:'}
             extraClass={titleStyle}
           />
-          <a href="tel: +7 (800) 555-35-35">
+          <a href={`tel:${phoneNumber}`}>
             <Typography
               tag={'span'}
               fontFamily={'secondaryFont'}
-              content={'+7 (800) 555-35-35'}
+              content={phoneNumber}
               extraClass={textStyle}
             />
           </a>

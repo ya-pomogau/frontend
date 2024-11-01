@@ -4,6 +4,8 @@ import { Icon } from 'shared/ui';
 import { Tooltip } from 'shared/ui/tooltip';
 import styles from './styles.module.css';
 
+let tooltipModalRefCount = 0;
+
 interface ModalProps {
   children: ReactNode;
   modalContent: ReactNode;
@@ -29,13 +31,17 @@ export const ButtonWithModal = ({
   setConflictModalVisible,
 }: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
-
   const [coords, setCoords] = useState<Coords | null>(null);
 
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const getCoords = () => {
-    setVisible(true);
+    if (!visible) {
+      setVisible(true);
+
+      tooltipModalRefCount += 1;
+      document.body.style.overflowY = 'hidden';
+    }
 
     if (!conflictModalVisible) {
       setConflictModalVisible && setConflictModalVisible(true);
@@ -52,8 +58,14 @@ export const ButtonWithModal = ({
   };
 
   const hideModal = () => {
-    setVisible(false);
-    setClicked && setClicked(true);
+    if (visible) {
+      setVisible(false);
+
+      tooltipModalRefCount -= 1;
+      if (tooltipModalRefCount === 0) document.body.style.overflowY = 'visible';
+
+      setClicked && setClicked(true);
+    }
   };
 
   return (

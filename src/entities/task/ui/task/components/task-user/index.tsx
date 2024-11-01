@@ -64,7 +64,11 @@ export const TaskUser = ({
         <ButtonWithModal
           closeButton
           modalContent={
-            <ModalContent type={modalContentType.phone} date={date} />
+            <ModalContent
+              type={modalContentType.phone}
+              date={date}
+              phoneNumber={user ? user.phone : ''}
+            />
           }
         >
           <RoundButton
