@@ -45,11 +45,11 @@
 }
 
 @media screen and (max-width: 1150px) {
-  .dateText {
+  div .dateText {
     font-size: var(--font-size-s);
     font-weight: var(--font-weight-bold);
   }
-  .addressText {
+  div .addressText {
     font-weight: var(--font-weight-bold);
   }
 }
@@ -60,7 +60,6 @@
     margin-top: 44px;
     grid-template-areas: 'date' 'time' 'address';
     grid-auto-columns: auto;
-    font: var(--font-golos-24-28);
   }
 
   .time {

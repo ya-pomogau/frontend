@@ -131,10 +131,9 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
         color={'red'}
         variant={'input-title'}
         content={'Укажите место встречи'}
-        extraClass={`${classNames(
-          styles.messageAlert,
-          isEmptyAddress ? styles.messageAlertActive : false
-        )}`}
+        extraClass={classNames(styles.messageAlert, {
+          [styles.messageAlertActive]: isEmptyAddress,
+        })}
       />
       <div className={styles.buttonWrapper}>
         {!isTypeEdit && (

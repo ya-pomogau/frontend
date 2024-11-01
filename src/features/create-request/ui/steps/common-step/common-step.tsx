@@ -112,9 +112,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
   return (
     <div className={styles.mainWrapper}>
-      <div
-        className={classNames('text', 'text_type_regular', styles.container)}
-      >
+      <div className={classNames(styles.container)}>
         {isMobile ? (
           <>
             <Typography
@@ -141,25 +139,25 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                   content={'Заявка без срока'}
                 />
               )}
-              {isTypeEdit ? (
-                <EditButton
-                  extClassName={styles.edit_button}
-                  label="Изменить дату и время"
-                  onClick={() => handleEditButton('date')}
-                />
-              ) : null}
             </div>
+            {isTypeEdit ? (
+              <EditButton
+                extClassName={styles.edit_button}
+                label="Изменить дату и время"
+                onClick={() => handleEditButton('date')}
+              />
+            ) : null}
             <div className={styles.addressWrapper}>
               <Icon icon="LocationIcon" color="blue" />
               <Typography variant={'support'} content={address} />
-              {isTypeEdit && (
-                <EditButton
-                  extClassName={styles.edit_button}
-                  label="Изменить адрес"
-                  onClick={() => handleEditButton('coordinates')}
-                />
-              )}
             </div>
+            {isTypeEdit && (
+              <EditButton
+                extClassName={styles.edit_button}
+                label="Изменить адрес"
+                onClick={() => handleEditButton('coordinates')}
+              />
+            )}
             <CategoriesBackground
               theme="primary"
               size={categorySize}

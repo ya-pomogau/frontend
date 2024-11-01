@@ -37,13 +37,13 @@
 }
 
 @media screen and (max-width: 1150px) {
-  .name {
+  div .name {
     font-family: var(--font-family-inter);
     font-size: 20px;
     text-align: start;
   }
 
-  .phone {
+  div .phone {
     font-family: var(--font-family-inter);
     color: var(--colors-interface-black);
     text-align: start;

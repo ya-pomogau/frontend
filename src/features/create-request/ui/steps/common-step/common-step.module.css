@@ -20,11 +20,6 @@
   margin-right: 20px;
 }
 
-.time {
-  margin: 0;
-  margin-left: 20px;
-}
-
 .addressWrapper {
   display: flex;
   margin-top: 20px;
@@ -40,8 +35,6 @@
 }
 
 .descriptionForTask {
-  margin: 0;
-  margin-top: 5px;
   height: auto;
   overflow: hidden;
   max-height: 64px;
@@ -72,6 +65,7 @@
 
 .dateWrapper {
   display: flex;
+  column-gap: 20px;
 }
 
 .categories {
@@ -105,10 +99,6 @@
     bottom: -10px;
   }
 
-  .time {
-    margin-left: 45px;
-  }
-
   .headerWrapper {
     background: linear-gradient(
       90deg,
@@ -123,10 +113,12 @@
     position: relative;
     bottom: -10px;
   }
+
   .dateWrapper {
     margin: 0;
     margin-top: 40px;
     position: relative;
+    column-gap: 45px;
   }
 
   .addressWrapper {
@@ -140,8 +132,6 @@
   }
 
   .descriptionForTask {
-    margin: 0;
-    margin-top: 5px;
     height: auto;
     overflow: hidden;
     max-height: 64px;

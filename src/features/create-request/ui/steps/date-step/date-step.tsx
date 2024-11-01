@@ -15,6 +15,7 @@ import { DatePicker } from 'shared/ui/date-picker';
 import styles from './date-step.module.css';
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
+import { Typography } from 'shared/ui';
 
 interface IDateStepProps {
   isMobile?: boolean;
@@ -84,11 +85,12 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
                 handleAcceptTime={() => handleAcceptTime}
               />
             )}
-            <p
-              className={classNames(styles.time, 'text', 'text_type_regular ')}
-            >
-              Время
-            </p>
+            <Typography
+              tag={'h3'}
+              variant={'support'}
+              content={'Время'}
+              extraClass={styles.time}
+            />
             <div className={styles.headerWrapper} />
 
             <input
@@ -109,11 +111,12 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
             />
           </div>
           <div className={styles.wrapperForDate}>
-            <p
-              className={classNames('text', 'text_type_regular ', styles.date)}
-            >
-              Дата
-            </p>
+            <Typography
+              tag={'h3'}
+              variant={'support'}
+              content={'Дата'}
+              extraClass={styles.date}
+            />
             <div className={styles.headerWrapperForDatePicker} />
             <DatePicker
               onChangeValue={handleDateValueChange}
@@ -133,18 +136,18 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
           </div>
         </div>
         <div className={styles.button}>
-          <p
-            className={classNames(
+          <Typography
+            color={'red'}
+            content={
+              'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
+            }
+            extraClass={classNames(
               styles.validationMessage,
               (timeValidation || !time) &&
                 !termlessRequest &&
                 styles.validationMessageActive
             )}
-          >
-            {
-              'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
-            }
-          </p>
+          />
           <div
             className={classNames(
               styles.buttonWrapper,

@@ -23,7 +23,7 @@
 .input_error {
   composes: input;
   border-color: var(--colors-interface-orange) !important;
-  color: var(--colors-interface-red) !important;
+  color: var(--colors-interface-red);
 }
 
 .input_without_label {
