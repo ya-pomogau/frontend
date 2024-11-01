@@ -10,7 +10,7 @@ import {
 } from 'react-hook-form';
 
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 const DEFAULT_MASK = [
   '+',
@@ -80,7 +80,6 @@ export const FormInputPhone = <T extends FieldValues>({
           <Typography
             tag={'span'}
             color={'orange'}
-            fontFamily={'primaryFont'}
             variant={'support'}
             content={error?.message}
             extraClass={styles.error}

@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import { useState } from 'react';
 import { Icon } from '../icons';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface IAccordionProps {
   extraClasses?: {
@@ -84,9 +84,6 @@ export const Accordion = ({
                     />
                     <Typography
                       tag={'span'}
-                      color={'black'}
-                      fontFamily={'primaryFont'}
-                      variant={'paragraph'}
                       content={option.label}
                       extraClass={classLabelText}
                     />

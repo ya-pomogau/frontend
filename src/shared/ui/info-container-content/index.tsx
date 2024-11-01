@@ -1,5 +1,5 @@
 import styles from './info-container-content.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface InfoContainerContentProps {
   name?: string;
@@ -16,17 +16,12 @@ export const InfoContainerContent = ({
 }: InfoContainerContentProps) => (
   <>
     <Typography
-      tag={'p'}
       color={'primary'}
-      fontFamily={'primaryFont'}
-      variant={'paragraph'}
       content={name}
       extraClass={styles['info-name-wrapper']}
     />
     <Typography
-      tag={'p'}
       color={'ID-text'}
-      fontFamily={'primaryFont'}
       variant={'support'}
       content={`ID ${id}`}
       extraClass={styles['info-id-wrapper']}
@@ -35,7 +30,6 @@ export const InfoContainerContent = ({
       <Typography
         tag={'span'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'support-bold'}
         content={'Тел.: '}
         extraClass={styles['info-field-title']}
@@ -43,7 +37,6 @@ export const InfoContainerContent = ({
       <Typography
         tag={'span'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'support'}
         content={phone}
         extraClass={styles['info-phone-wrapper']}
@@ -53,7 +46,6 @@ export const InfoContainerContent = ({
       <Typography
         tag={'span'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'support-bold'}
         content={'Адрес: '}
         extraClass={styles['info-field-title']}
@@ -61,7 +53,6 @@ export const InfoContainerContent = ({
       <Typography
         tag={'span'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'support'}
         content={address}
         extraClass={styles['info-address-wrapper']}

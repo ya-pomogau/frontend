@@ -2,7 +2,7 @@ import image from '../assets/privacy.png';
 import styles from '../styles.module.css';
 import { IconProps } from 'shared/ui/icons';
 import { ErrorBoundaryUI } from '../ui/errorBoundary';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 export const BlockedPage = () => {
   const iconConfig: IconProps = {

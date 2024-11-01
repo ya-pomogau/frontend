@@ -6,7 +6,7 @@ import { TaskConflict } from 'entities/task/types';
 import { UserProfile } from 'entities/user/types';
 import { IMessageHub } from 'shared/libs/utils';
 import { MessageInterface } from '../../types/chat.types';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface PropsMessageCard {
   statusConflict: boolean;
@@ -59,8 +59,6 @@ export const MessageCard = (props: PropsMessageCard) => {
       )}
       <div className={styles.userInfo}>
         <Typography
-          tag={'p'}
-          fontFamily={'primaryFont'}
           variant={'paragraphResize'}
           content={
             props.statusConflict ? 'Оповещение о конфликте' : props.user.name
@@ -68,8 +66,6 @@ export const MessageCard = (props: PropsMessageCard) => {
           extraClass={cn(styles.name, styles.lengthLimitation)}
         />
         <Typography
-          tag={'p'}
-          fontFamily={'primaryFont'}
           variant={'support'}
           content={props.description}
           extraClass={cn(styles.message, styles.lengthLimitation)}
@@ -83,15 +79,17 @@ export const MessageCard = (props: PropsMessageCard) => {
               })}
             />
           )
-        : hasNewMessage && (
-            <span
-              className={cn(styles.counter, styles.radius, {
+        : hasNewMessage &&
+          props.message && (
+            <Typography
+              tag={'span'}
+              color={'white'}
+              variant={'input-title'}
+              content={props.message.length > 10 ? '+9' : props.message.length}
+              extraClass={cn(styles.counter, styles.radius, {
                 [styles.vizabiliti]: !hasNewMessage,
               })}
-            >
-              {/* {props.message.length > 10 ? '+9' : props.message.length} */}
-            </span>
-            // <Typography tag={'span'} color={'white'} fontFamily={'primaryFont'} variant={'input-title'} content={props.message.length > 10 ? '+9' : props.message.length} extraClass={cn(styles.counter, styles.radius, {[styles.vizabiliti]: !hasNewMessage})}/>
+            />
           )}
     </article>
   );

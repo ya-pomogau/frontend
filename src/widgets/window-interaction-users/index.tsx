@@ -6,7 +6,7 @@ import { Icon } from 'shared/ui/icons';
 import { GradientDivider } from 'shared/ui/gradient-divider';
 import { UserProfile } from 'entities/user/types';
 import { Breakpoints } from 'shared/config';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface IWindowInteractionUsers {
   option: 'conflict' | 'chat';
@@ -46,33 +46,25 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
           <div className={styles.container}>
             <Typography
               tag={'h3'}
-              color={'black'}
               variant={'titleResize'}
-              fontFamily="secondaryFont"
+              fontFamily={'secondaryFont'}
               content={`${props.chatmateInfo?.name}`}
               extraClass={styles.name}
             />
             <Typography
-              tag={'p'}
               color={'ID-text'}
               variant={'servicesText'}
-              fontFamily={'primaryFont'}
               content={`ID ${props.chatmateInfo?._id}`}
               extraClass={styles['display-none']}
             />
             <div className={cn(styles.phone, styles['display-none'])}>
               <Typography
-                tag={'p'}
                 fontFamily={'secondaryFont'}
                 variant={'paragraph-bold'}
-                color={'black'}
                 content={'Тел.:'}
               />
               <Typography
-                tag={'p'}
                 fontFamily={'secondaryFont'}
-                variant={'paragraph'}
-                color={'black'}
                 content={`${props.chatmateInfo?.phone}`}
               />
             </div>
@@ -94,7 +86,6 @@ export const WindowInteractionUsers: FC<IWindowInteractionUsers> = (props) => {
           )}
           <Typography
             tag={'h4'}
-            color={'black'}
             fontFamily={'secondaryFont'}
             variant={'title'}
             content={'Конфликт'}

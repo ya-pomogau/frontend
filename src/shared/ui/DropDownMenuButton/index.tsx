@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, forwardRef } from 'react';
 import { Icon } from 'shared/ui/icons';
 
 import styles from './DropDownMenuButton.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 type DropDownMenuButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isMobile?: boolean;
@@ -40,9 +40,7 @@ export const DropDownMenuButton = forwardRef<
         {buttonType ? (
           <div className={styles.wrapper}>
             <Typography
-              tag={'p'}
               color={'primary'}
-              fontFamily={'primaryFont'}
               variant={'paragraphResize'}
               content={children}
               extraClass={styles.title}
@@ -53,14 +51,7 @@ export const DropDownMenuButton = forwardRef<
           </div>
         ) : (
           <div className={styles.wrapper}>
-            <Typography
-              tag={'p'}
-              color={'black'}
-              fontFamily={'primaryFont'}
-              variant={'paragraph'}
-              content={children}
-              extraClass={styles.title_logout}
-            />
+            <Typography content={children} extraClass={styles.title_logout} />
             {logoutIcon}
           </div>
         )}

@@ -9,7 +9,7 @@ import {
 } from 'react-hook-form';
 
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 export interface FormInputProps<FormInputs extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -68,7 +68,6 @@ export const FormInput = <T extends FieldValues>({
           <Typography
             tag={'span'}
             color={'orange'}
-            fontFamily={'primaryFont'}
             variant={'support'}
             content={error?.message}
             extraClass={styles.error}

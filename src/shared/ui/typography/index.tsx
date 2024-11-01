@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
-import { ReactNode } from 'react';
+import { LegacyRef, ReactNode, forwardRef } from 'react';
 
 type TypographyTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 type TypographyVariant =
@@ -31,30 +31,37 @@ type TypographyFontFamily = 'primaryFont' | 'secondaryFont';
 
 interface TypographyProps {
   tag?: TypographyTag;
-  extraClass?: string;
-  variant: TypographyVariant;
-  fontFamily: TypographyFontFamily;
+  variant?: TypographyVariant;
+  fontFamily?: TypographyFontFamily;
   color?: TypographyColor;
-  content: string | ReactNode;
+  content: string | ReactNode | number;
+  extraClass?: string;
 }
 
-export const Typography = ({
-  tag,
-  extraClass,
-  variant,
-  content,
-  color,
-  fontFamily,
-}: TypographyProps) => {
+export const Typography = forwardRef(function Typography(
+  {
+    tag = 'p',
+    extraClass,
+    variant = 'paragraph',
+    content,
+    color = 'black',
+    fontFamily = 'primaryFont',
+  }: TypographyProps,
+  ref: LegacyRef<HTMLHeadingElement>
+) {
   const textStyles = classNames(
     styles.text,
     styles[variant],
     styles[fontFamily],
-    color ? styles[color] : false,
+    styles[color],
     extraClass
   );
 
-  const Tag = tag ? tag : 'p';
+  const Tag = tag;
 
-  return <Tag className={textStyles}>{content}</Tag>;
-};
+  return (
+    <Tag ref={ref} className={textStyles}>
+      {content}
+    </Tag>
+  );
+});

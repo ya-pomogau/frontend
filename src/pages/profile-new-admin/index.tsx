@@ -2,7 +2,7 @@ import { Icon, SmartHeader } from 'shared/ui';
 import { NewAdminForm } from './components';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 export function CreateNewAdminPage() {
   return (
@@ -13,7 +13,6 @@ export function CreateNewAdminPage() {
       />
       <Typography
         tag={'h2'}
-        fontFamily={'primaryFont'}
         color={'primary-additional'}
         variant={'titleResize'}
         content={'Добавить администратора'}

@@ -13,7 +13,7 @@ import { useOutsideClick } from 'shared/hooks/use-outside-click';
 import './styles.css';
 import { useAppDispatch } from '../../../app/hooks';
 import { setTime } from '../../../features/create-request/model';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface ITimePickerPopup {
   isPopupOpen: boolean;
@@ -155,8 +155,6 @@ export function TimePickerPopup({
       <div ref={modalRef} id="clock-element" className={styles.timePickerPopup}>
         <Typography
           tag={'h3'}
-          color={'black'}
-          fontFamily={'primaryFont'}
           variant={'title'}
           content={'Время'}
           extraClass={styles.timePickerPopup__header}

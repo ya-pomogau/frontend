@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface TaskInfoProps {
   date: string | null;
@@ -29,7 +29,6 @@ export const TaskInfo = ({ date, address, extClassName }: TaskInfoProps) => {
         <Typography
           tag={'span'}
           color={'primary'}
-          fontFamily={'primaryFont'}
           variant={'titleResize'}
           content={currentDate}
           extraClass={styles.dateText}
@@ -40,7 +39,6 @@ export const TaskInfo = ({ date, address, extClassName }: TaskInfoProps) => {
         <Typography
           tag={'span'}
           color={'primary'}
-          fontFamily={'primaryFont'}
           variant={'titleResize'}
           content={currentTime}
           extraClass={styles.dateText}
@@ -56,8 +54,6 @@ export const TaskInfo = ({ date, address, extClassName }: TaskInfoProps) => {
         <Typography
           tag={'span'}
           color={'primary'}
-          fontFamily={'primaryFont'}
-          variant={'paragraph'}
           content={address}
           extraClass={styles.addressText}
         />

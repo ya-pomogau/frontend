@@ -11,7 +11,7 @@ import { useMediaQuery } from '../../shared/hooks';
 import usePermission from '../../shared/hooks/use-permission';
 import { userRole } from 'shared/types/common.types';
 import { Breakpoints } from 'shared/config';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 export function PolicyPage() {
   const isMainAdmin = usePermission([], userRole.ADMIN);
@@ -66,9 +66,7 @@ export function PolicyPage() {
               <button className={style.editButton} onClick={handleEditButton}>
                 <Icon icon="EditIcon" color={'blue'} size={'20'} height="18" />
                 <Typography
-                  tag={'p'}
                   color={'primary'}
-                  fontFamily={'primaryFont'}
                   variant={'support'}
                   content={'Редактировать'}
                 />
@@ -87,8 +85,6 @@ export function PolicyPage() {
         <form className={style.editForm} onSubmit={onSubmit}>
           <Typography
             tag={'h5'}
-            color={'black'}
-            fontFamily={'primaryFont'}
             variant={'support'}
             content={'Заголовок'}
             extraClass={style.editTitleText}
@@ -102,8 +98,6 @@ export function PolicyPage() {
           />
           <Typography
             tag={'h5'}
-            color={'black'}
-            fontFamily={'primaryFont'}
             variant={'support'}
             content={'Текст'}
             extraClass={style.editDescriptionText}
@@ -124,9 +118,7 @@ export function PolicyPage() {
             <button className={style.closeButton} onClick={handleCloseButton}>
               <Icon icon="CloseIconThin" color={'blue'} />
               <Typography
-                tag={'p'}
                 color={'primary'}
-                fontFamily={'primaryFont'}
                 variant={'support'}
                 content={'Закрыть без изменений'}
               />

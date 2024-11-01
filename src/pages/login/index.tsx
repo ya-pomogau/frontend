@@ -3,7 +3,7 @@ import { SmartHeader, Icon } from 'shared/ui';
 import { LoginForm } from './components';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 export function LoginPage() {
   return (
@@ -15,7 +15,6 @@ export function LoginPage() {
       <Typography
         tag={'h3'}
         color={'primary-additional'}
-        fontFamily={'primaryFont'}
         variant={'titleResize'}
         content={'Войти'}
         extraClass={styles.title}

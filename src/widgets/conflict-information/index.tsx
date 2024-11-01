@@ -5,7 +5,7 @@ import { Icon } from 'shared/ui/icons';
 import { CategoriesBackground } from 'shared/ui/categories-background';
 import { TaskConflict, TaskReport } from 'entities/task/types';
 import { format } from 'date-fns';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface IUser {
   user: {
@@ -52,9 +52,7 @@ export const InfoConflict: FC<PropsInfoConflict> = (props) => {
       {props && (
         <div className={styles.boxInfo}>
           <Typography
-            tag={'p'}
             color={'primary'}
-            fontFamily={'primaryFont'}
             variant={'paragraph-bold'}
             content={
               <>
@@ -74,9 +72,7 @@ export const InfoConflict: FC<PropsInfoConflict> = (props) => {
             }
           />
           <Typography
-            tag={'p'}
             color={'primary'}
-            fontFamily={'primaryFont'}
             variant={'paragraph-bold'}
             content={
               <>
@@ -91,12 +87,7 @@ export const InfoConflict: FC<PropsInfoConflict> = (props) => {
             size="medium"
             content={props.info.category.title}
           />
-          <Typography
-            tag={'p'}
-            fontFamily={'primaryFont'}
-            variant={'paragraph'}
-            content={props.info.description}
-          />
+          <Typography content={props.info.description} />
         </div>
       )}
     </article>

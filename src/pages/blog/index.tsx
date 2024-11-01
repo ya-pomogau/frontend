@@ -17,7 +17,7 @@ import { IValuesBlog } from 'shared/types/blog.types';
 import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 const postsPerPage = 10;
 
@@ -134,9 +134,6 @@ export function BlogPage() {
         >
           <Typography
             tag={'h4'}
-            color={'black'}
-            fontFamily={'primaryFont'}
-            variant={'paragraph'}
             content={'Удалить публикацию?'}
             extraClass={styles.textWarning}
           />

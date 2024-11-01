@@ -5,7 +5,7 @@ import { SquareButton } from '../square-buttons';
 
 import styles from './main-popup.module.css';
 import { ReactNode } from 'react';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface MainPopupProps {
   extClassName?: string;
@@ -45,7 +45,6 @@ export const MainPopup = ({
           <div className={classNames(styles.profileDesc)}>
             <Typography
               tag={'h2'}
-              color={'black'}
               fontFamily={'secondaryFont'}
               variant={'title'}
               content={name}
@@ -54,15 +53,12 @@ export const MainPopup = ({
             <div className={classNames(styles.phoneWrapper)}>
               <Typography
                 tag={'span'}
-                color={'black'}
                 variant={'paragraph-bold'}
                 fontFamily={'secondaryFont'}
                 content={'Тел.: '}
               />
               <Typography
                 tag={'span'}
-                color={'black'}
-                variant={'paragraph'}
                 fontFamily={'secondaryFont'}
                 content={phoneNumber}
                 extraClass={styles.phoneNumber}

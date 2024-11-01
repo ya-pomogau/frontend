@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface SmartHeaderProps {
   text: string;
@@ -22,7 +22,6 @@ export const SmartHeader = ({
       <Typography
         tag={'h2'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'titleResize'}
         content={text}
       />

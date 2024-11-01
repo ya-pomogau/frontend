@@ -20,7 +20,7 @@ import {
   useCreateTaskMutation,
   useUpdateTaskMutation,
 } from 'services/user-task-api';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -121,7 +121,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               tag={'h2'}
               color={'black'}
               fontFamily={'primaryFont'}
-              variant={'title'}
               content={'Дело'}
               extraClass={styles.task}
             />
@@ -129,17 +128,8 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <div className={styles.dateWrapper}>
               {!termlessRequest ? (
                 <>
+                  <Typography variant={'paragraph-bold'} content={date} />
                   <Typography
-                    tag={'p'}
-                    color={'black'}
-                    fontFamily={'primaryFont'}
-                    variant={'paragraph-bold'}
-                    content={date}
-                  />
-                  <Typography
-                    tag={'p'}
-                    color={'black'}
-                    fontFamily={'primaryFont'}
                     variant={'paragraph-bold'}
                     content={time}
                     extraClass={styles.time}
@@ -147,9 +137,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 </>
               ) : (
                 <Typography
-                  tag={'p'}
-                  color={'black'}
-                  fontFamily={'primaryFont'}
                   variant={'paragraph-bold'}
                   content={'Заявка без срока'}
                 />
@@ -164,13 +151,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <div className={styles.addressWrapper}>
               <Icon icon="LocationIcon" color="blue" />
-              <Typography
-                tag={'p'}
-                color={'black'}
-                fontFamily={'primaryFont'}
-                variant={'support'}
-                content={address}
-              />
+              <Typography variant={'support'} content={address} />
               {isTypeEdit && (
                 <EditButton
                   extClassName={styles.edit_button}
@@ -186,10 +167,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               extClassName={styles.categories}
             />
             <Typography
-              tag={'p'}
               color={'darkGray'}
-              fontFamily={'primaryFont'}
-              variant={'paragraph'}
               extraClass={classNames(styles.descriptionForTask, {
                 [styles.expanded]: isExpanded,
               })}
@@ -220,30 +198,15 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             <div className={styles.dateWrapper}>
               {!termlessRequest ? (
                 <>
+                  <Typography variant={'title'} content={date} />
                   <Typography
-                    tag={'p'}
-                    color={'black'}
-                    fontFamily={'primaryFont'}
-                    variant={'title'}
-                    content={date}
-                  />
-                  <Typography
-                    tag={'p'}
-                    color={'black'}
-                    fontFamily={'primaryFont'}
                     variant={'title'}
                     content={[time, termlessRequest]}
                     extraClass={styles.time}
                   />
                 </>
               ) : (
-                <Typography
-                  tag={'p'}
-                  color={'black'}
-                  fontFamily={'primaryFont'}
-                  variant={'title'}
-                  content={'Заявка без срока'}
-                />
+                <Typography variant={'title'} content={'Заявка без срока'} />
               )}
               {isTypeEdit ? (
                 <EditButton
@@ -255,13 +218,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <div className={styles.addressWrapper}>
               <Icon icon="LocationIcon" color="blue" />
-              <Typography
-                tag={'p'}
-                color={'black'}
-                fontFamily={'primaryFont'}
-                variant={'paragraph'}
-                content={address}
-              />
+              <Typography content={address} />
               {isTypeEdit && (
                 <EditButton
                   extClassName={styles.edit_button}
@@ -277,10 +234,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               extClassName={styles.categories}
             />
             <Typography
-              tag={'p'}
               color={'darkGray'}
-              fontFamily={'primaryFont'}
-              variant={'paragraph'}
               extraClass={classNames(styles.descriptionForTask, {
                 [styles.expanded]: isExpanded,
               })}

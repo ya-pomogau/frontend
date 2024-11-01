@@ -3,7 +3,7 @@ import { Button } from 'shared/ui/button';
 import styles from '../../styles.module.css';
 import { Icon } from 'shared/ui';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface ResetPasswordProps {
   handleModalClose: () => void;
@@ -28,8 +28,6 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
       <div className={styles.modalContent}>
         <Typography
           tag={'h3'}
-          color={'black'}
-          fontFamily={'primaryFont'}
           variant={'paragraph-bold'}
           content={'Смена пароля'}
           extraClass={styles.modalTitle}

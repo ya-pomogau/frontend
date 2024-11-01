@@ -5,7 +5,7 @@ import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
 import { modalContentType, taskButtonType } from 'shared/types/common.types';
 import { TaskReport } from 'entities/task/types';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface IUser {
   address: string;
@@ -35,8 +35,6 @@ export function ConflictCard({ user, role, status }: PropsConflictCard) {
       />
       <Typography
         tag={'h4'}
-        color={'black'}
-        fontFamily={'primaryFont'}
         variant={'support-bold'}
         content={role === 'volunteer' ? 'Волонтер' : 'Реципиент'}
         extraClass={styles.specialization}
@@ -52,15 +50,11 @@ export function ConflictCard({ user, role, status }: PropsConflictCard) {
       </div>
       <Typography
         tag={'h5'}
-        fontFamily={'primaryFont'}
-        color={'black'}
         variant={'paragraphResize'}
         content={user.name}
         extraClass={styles.name}
       />
       <Typography
-        tag={'p'}
-        fontFamily={'primaryFont'}
         color={'ID-text'}
         variant={'servicesText'}
         content={`ID ${user._id}`}

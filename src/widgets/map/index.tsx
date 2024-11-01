@@ -30,7 +30,7 @@ import styles from './styles.module.css';
 import UserMark from './UserMark';
 import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface YandexMapProps {
   width?: string | number;
@@ -211,8 +211,6 @@ export const YandexMap = ({
           >
             <Typography
               tag={'h3'}
-              color={'black'}
-              fontFamily={'primaryFont'}
               variant={'paragraph-bold'}
               content={thankForAssignTaskMessage}
               extraClass={classNames(
@@ -232,22 +230,15 @@ export const YandexMap = ({
           >
             <Typography
               tag={'h3'}
-              color={'black'}
-              fontFamily={'primaryFont'}
               variant={'titleResize'}
-              content={
-                <>
-                  <Icon icon="ConflictIcon" color="orange" />
-                  Извините
-                </>
-              }
+              content={[
+                <Icon icon="ConflictIcon" color="orange" />,
+                'Извините',
+              ]}
               extraClass={styles.popupTitle}
             />
             <Typography
-              tag={'p'}
               color={'darkGray'}
-              fontFamily={'primaryFont'}
-              variant={'paragraph'}
               content={cantAssignTaskMessage}
               extraClass={styles.popupText}
             />

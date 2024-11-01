@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface VolunteerInfoProps {
   score: number;
@@ -21,7 +21,6 @@ export const VolunteerInfo = ({
       <Typography
         tag={'span'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'support'}
         content={score}
       />
@@ -32,7 +31,6 @@ export const VolunteerInfo = ({
         <Typography
           tag={'span'}
           color={'primary'}
-          fontFamily={'primaryFont'}
           variant={'support'}
           content={hasKey}
         />

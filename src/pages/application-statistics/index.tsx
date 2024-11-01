@@ -16,7 +16,7 @@ import { addYears } from 'date-fns';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { customHeader } from 'shared/ui/date-picker';
 import { ValueOf } from 'shared/types/common.types';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface IStatusApplicationOptions {
   value: 'open' | 'atWork' | 'close';
@@ -92,9 +92,6 @@ export const ApplicationsStatisticsPage = () => {
           <Fieldset title="Период" view={fieldsetView.ROW}>
             <div className={styles.period__fields}>
               <Typography
-                tag={'p'}
-                color={'black'}
-                fontFamily={'primaryFont'}
                 variant={'support'}
                 content={'от'}
                 extraClass={styles.period__points}
@@ -119,9 +116,6 @@ export const ApplicationsStatisticsPage = () => {
                 )}
               />
               <Typography
-                tag={'p'}
-                color={'black'}
-                fontFamily={'primaryFont'}
                 variant={'support'}
                 content={'до'}
                 extraClass={styles.period__points}

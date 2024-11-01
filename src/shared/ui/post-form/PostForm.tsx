@@ -10,7 +10,7 @@ import useFormField from 'shared/hooks/use-form-field';
 import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
 import { IBlogForm } from 'shared/types/blog.types';
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 const TITLE_VALIDATION_RULES = {
   required: 'Обязательное поле',
@@ -141,8 +141,6 @@ export const PostForm: FC<PostFormProps> = ({
             <div className={styles.image} key={id}>
               <Icon icon="FileAttachmentIcon" size="14" color="white" />
               <Typography
-                tag={'p'}
-                fontFamily={'primaryFont'}
                 color={'primary'}
                 variant={'support'}
                 content={name}

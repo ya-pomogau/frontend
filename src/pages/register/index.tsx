@@ -3,7 +3,7 @@ import { SmartHeader, Icon } from 'shared/ui';
 import { RegisterForm } from './components';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 export function RegisterPage() {
   return (
@@ -15,7 +15,6 @@ export function RegisterPage() {
       <Typography
         tag={'h2'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'title'}
         content={'Зарегистрироваться'}
         extraClass={styles.titlePrimary}

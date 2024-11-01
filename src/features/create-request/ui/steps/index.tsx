@@ -27,7 +27,7 @@ import { Tooltip } from '../../../../shared/ui/tooltip';
 import styles from './styles.module.css';
 import { Button } from '../../../../shared/ui/button';
 import { format } from 'date-fns';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 export interface RequestProps {
   isMobile?: boolean;
@@ -127,10 +127,7 @@ export const Request = ({ isMobile = true }: RequestProps) => {
               >
                 <div className={styles.tooltipContent}>
                   <Typography
-                    tag={'p'}
                     color={'darkGray'}
-                    fontFamily={'primaryFont'}
-                    variant={'paragraph'}
                     content={
                       'Закрыть окно сейчас и удалить ранее внесенную информацию?'
                     }

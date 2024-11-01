@@ -6,7 +6,7 @@ import { Avatar } from '../avatar';
 import { SquareButton } from '../square-buttons';
 import { User } from 'entities/user/types';
 import { dataImages } from 'shared/libs/utils';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface ImageProps {
   id: string;
@@ -73,18 +73,10 @@ export const Post: FC<PostProps> = ({
           extClassName={styles.author_avatar}
         />
         <div className={styles.author_info}>
+          <Typography content={author.name} />
           <Typography
-            tag={'p'}
-            color={'black'}
-            variant={'paragraph'}
-            fontFamily={'primaryFont'}
-            content={author.name}
-          />
-          <Typography
-            tag={'p'}
             color={'ID-text'}
             variant={'support'}
-            fontFamily={'primaryFont'}
             content={`${'ID'} ${author._id}`}
           />
         </div>
@@ -93,9 +85,7 @@ export const Post: FC<PostProps> = ({
       <div className={styles['text-block']}>
         <Typography
           tag={'h2'}
-          fontFamily={'primaryFont'}
           variant={'title'}
-          color={'black'}
           content={title}
           extraClass={styles.title}
         />

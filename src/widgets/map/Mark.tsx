@@ -11,7 +11,6 @@ import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
 import { useResponseTaskMutation } from 'services/user-task-api';
 import type { Dispatch, SetStateAction } from 'react';
-import { Typography } from 'shared/ui/typography';
 
 type MarkProps = {
   task: Task;

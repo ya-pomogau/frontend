@@ -16,7 +16,7 @@ import {
 import type { Task } from 'entities/task/types';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface TaskListProps {
   userRole: UserRole | null;
@@ -144,7 +144,6 @@ export const TaskList = ({
               <Typography
                 tag={'h2'}
                 content={'Создать заявку'}
-                fontFamily={'primaryFont'}
                 color={'primary-additional'}
                 variant={'titleResize'}
               />

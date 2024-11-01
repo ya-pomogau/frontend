@@ -15,10 +15,6 @@
   white-space: nowrap;
 }
 
-.tabContainer__textActive {
-  color: var(--colors-interface-black) !important;
-}
-
 .tabContainer__number {
   display: flex;
   align-items: center;

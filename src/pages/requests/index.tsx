@@ -21,7 +21,7 @@ import { IFilterValues } from 'features/filter/types';
 import { FilterItemsIds } from 'features/filter/consts';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface PageProps {
   incomeTab: string;
@@ -145,7 +145,6 @@ export function RequestsPage({ incomeTab }: PageProps) {
             <Icon color="blue" icon="PlusFilledIcon" />
             <Typography
               tag={'h2'}
-              fontFamily={'primaryFont'}
               variant={'titleResize'}
               color={'primary-additional'}
               content={'Создать администратора'}

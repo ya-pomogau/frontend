@@ -12,7 +12,7 @@ import { Breakpoints } from 'shared/config';
 
 import styles from './styles.module.css';
 import { AnyUserInterface } from 'shared/types/user.type';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface PopupChatProps {
   messages: MessageInterface[];
@@ -73,8 +73,6 @@ export const PopupChat = ({
         />
         <Typography
           tag={'h4'}
-          color={'black'}
-          fontFamily={'primaryFont'}
           variant={'titleResize'}
           content={chatmateInfo.name}
         />

@@ -12,7 +12,7 @@ import { StepButton } from '../step-button';
 
 import './react-datepicker.css';
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 export function customHeader({
   date,
@@ -35,8 +35,6 @@ export function customHeader({
         <Typography
           tag={'span'}
           color={'primary'}
-          fontFamily={'primaryFont'}
-          variant={'paragraph'}
           content={month}
           extraClass={styles.datePicker__headerMonth}
         />
@@ -65,7 +63,6 @@ const CustomInput = forwardRef(
       <Typography
         tag={'span'}
         color={'interface-additional'}
-        fontFamily={'primaryFont'}
         variant={'support'}
         content={value}
       />

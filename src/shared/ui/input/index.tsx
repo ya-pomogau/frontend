@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -69,7 +69,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <Typography
             tag={'span'}
             color={'orange'}
-            fontFamily={'primaryFont'}
             variant={'support'}
             content={errorText === ' ' ? <span>&nbsp;</span> : errorText}
             extraClass={styles.error}

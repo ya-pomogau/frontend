@@ -15,7 +15,7 @@ import { mockChatMessages } from '../../../../../chat/mock-messages';
 
 import placeholder from '../../img/placeholder.svg';
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface TaskUserProps {
   user: UserProfile | null;
@@ -51,17 +51,11 @@ export const TaskUser = ({
       <div className={styles.info}>
         <Typography
           tag={'h4'}
-          color={'black'}
-          fontFamily={'primaryFont'}
-          variant={'paragraph'}
           content={user ? user.name : ''}
           extraClass={styles.name}
         />
         <Typography
-          tag={'p'}
           color={'primary'}
-          fontFamily={'primaryFont'}
-          variant={'paragraph'}
           content={user ? user.phone : ''}
           extraClass={styles.phone}
         />

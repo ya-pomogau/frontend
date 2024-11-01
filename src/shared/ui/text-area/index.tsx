@@ -3,7 +3,7 @@ import { ChangeEvent, forwardRef, TextareaHTMLAttributes, useId } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
@@ -60,7 +60,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           />
           {maxLength && (
             <Typography
-              tag={'p'}
               color={'interface-additional'}
               fontFamily={'secondaryFont'}
               variant={'support'}
@@ -73,7 +72,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           <Typography
             tag={'span'}
             color={'orange'}
-            fontFamily={'primaryFont'}
             variant={'support'}
             content={error?.message}
             extraClass={styles.error}

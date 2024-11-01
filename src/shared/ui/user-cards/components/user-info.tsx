@@ -3,7 +3,7 @@ import styles from '../styles.module.css';
 
 import { userRole, UserRole } from '../../../types/common.types';
 import { ReactNode } from 'react';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 interface UserInfoProps {
   role: UserRole;
@@ -31,9 +31,7 @@ const UserInfo = ({
       <div>
         <Typography
           tag={'h3'}
-          color={'black'}
           variant={'paragraphResize'}
-          fontFamily={'primaryFont'}
           content={userName}
           extraClass={styles.name_text}
         />
@@ -47,10 +45,8 @@ const UserInfo = ({
             )}
           >
             <Typography
-              tag={'p'}
               variant={'servicesText'}
               color={'ID-text'}
-              fontFamily={'primaryFont'}
               content={`${'ID'} ${formatUserId(userId)}`}
               extraClass={styles.id}
             />
@@ -63,20 +59,8 @@ const UserInfo = ({
           viewMode === 'list' ? styles.grid_two_list : styles.grid_two_tiles
         )}
       >
-        <Typography
-          tag={'p'}
-          fontFamily={'primaryFont'}
-          variant={'support-bold'}
-          color={'black'}
-          content={'Тел.:'}
-        />
-        <Typography
-          tag={'p'}
-          fontFamily={'primaryFont'}
-          variant={'support'}
-          color={'black'}
-          content={userNumber}
-        />
+        <Typography variant={'support-bold'} content={'Тел.:'} />
+        <Typography variant={'support'} content={userNumber} />
       </div>
     </div>
   );

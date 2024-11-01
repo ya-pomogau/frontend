@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 import HeartIcon from './assets/heart-icon.png';
 import { ReactNode } from 'react';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface InformerProps {
   extClassName?: string;

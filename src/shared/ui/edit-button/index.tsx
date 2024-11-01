@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface EditButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -26,7 +26,6 @@ export const EditButton = ({
       <Typography
         tag={'span'}
         color={'primary'}
-        fontFamily={'primaryFont'}
         variant={'support'}
         content={label}
       />

@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui/typography';
+import { Typography } from 'shared/ui';
 
 type InputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -50,7 +50,6 @@ export const ContactInput = ({
       <div className={styles.element_box}>
         <Typography
           tag={'h2'}
-          fontFamily={'primaryFont'}
           color={'primary-additional'}
           variant={'title'}
           content={label}
@@ -73,8 +72,6 @@ export const ContactInput = ({
           >
             <Icon color="blue" icon="EditIcon" />
             <Typography
-              tag={'p'}
-              fontFamily={'primaryFont'}
               variant={'support'}
               color={'primary'}
               content={editText}
@@ -82,7 +79,6 @@ export const ContactInput = ({
           </div>
           <Typography
             tag={'span'}
-            fontFamily={'primaryFont'}
             variant={'support'}
             color={'orange'}
             content={errorText ? errorText : ''}

@@ -4,7 +4,7 @@ import { Avatar } from '../avatar';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
 import { GradientDivider } from '../gradient-divider';
-import { Typography } from '../typography';
+import { Typography } from '../../ui';
 
 interface MessageProps {
   extClassName?: string;
@@ -48,10 +48,10 @@ export const Message = ({
 
   const getAchievement = () => (
     <Typography
-      tag={'p'}
       fontFamily={'secondaryFont'}
       variant={'support'}
       extraClass={styles['achievement-title']}
+      color={'white'}
       content={
         <>
           {messageText}
@@ -64,10 +64,10 @@ export const Message = ({
 
   const getSendMeassage = () => (
     <Typography
-      tag={'p'}
       fontFamily={'secondaryFont'}
       variant={'support'}
       content={messageText}
+      color={'white'}
     />
   );
 
