@@ -65,11 +65,6 @@ export function ProfileMapPage() {
     longitude,
   ]);
 
-  // const containerHeight = isUnconfirmed
-  //   ? 'clamp(60dvh, 75dvh - 10vw, 75dvh)'
-  //   : // : 'clamp(37.5rem, 36.298rem + 4.808vw, 40.625rem)';
-  //     'clamp(78dvh, 85dvh - 10vw, 85dvh)';
-
   return (
     <>
       <SmartHeader
@@ -99,7 +94,6 @@ export function ProfileMapPage() {
             mapSettings={mapSettings}
             radius={radius}
             width="100%"
-            // height={containerHeight}
             height={mediaQuery ? '75vh' : '709px'}
             onClick={() => console.log('1sad')}
             coordinates={user?.location}

@@ -107,7 +107,7 @@ export const YandexMap = ({
     }
   };
 
-  const handeleBallonclick = (e: ymaps.IEvent) => {
+  const handeleBalloonClick = (e: ymaps.IEvent) => {
     const placemarkCoords = e.get('coords');
     const [x, y] = placemarkCoords;
     setMapCenterSettings({
@@ -176,7 +176,7 @@ export const YandexMap = ({
             return (
               <Mark
                 task={task}
-                onClick={handeleBallonclick}
+                onClick={handeleBalloonClick}
                 showPopup={showPopup}
                 key={task._id}
                 onOpenTask={onOpenTask}

@@ -276,20 +276,6 @@ const Mark: FC<MarkProps> = ({
     }
   );
 
-  // const handleBallonClick = (e) => {
-  //   console.log('12');
-  //   // ymaps.geoObject.setCenter([55.88803899527533, 37.624997923309316]);
-  //   // ymaps.setCenter([40, 50], 3, {
-  //   //   checkZoomRange: true,
-  //   // });
-  //   // const current_coords = [55.88803899527533, 37.624997923309316];
-  //   const placemarkCoords = e.get('coords');
-  //   console.log(placemarkCoords);
-  //   // if (map.current) {
-  //   // ymaps.current.setCenter(placemarkCoords);
-  //   // }
-  // };
-
   return (
     <Placemark
       onClick={onClick}
