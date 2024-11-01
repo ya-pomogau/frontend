@@ -21,14 +21,13 @@ export const SectionChatsConflict = () => {
   const conflictChats = mockAdminChatsResponse.conflict;
   const moderatedChats = mockAdminChatsResponse.moderated;
 
-  const location = useLocation();
-  const { data: tasks } = useGetTasksConfilctQuery('');
-  const { data: tasksWork } = useGetTasksWorkConflictQuery('');
+  // const { data: tasks } = useGetTasksConfilctQuery('');
+  // const { data: tasksWork } = useGetTasksWorkConflictQuery('');
   const [takeConflictTask] = useTakeConflictTaskMutation();
   const [resolСonflict] = useResolСonflictMutation();
 
-  const dataMessage: TaskConflict[] | undefined =
-    location.pathname === '/available-chats' ? tasks : tasksWork;
+  // const dataMessage: TaskConflict[] | undefined =
+  //   location.pathname === '/available-chats' ? tasks : tasksWork;
   const [getInfoTask, setGetInfoTask] = useState<TaskConflict>();
   const [selectedCard, setSelectedCard] = useState<string>('');
   const [isOpenConflict, setIsOpenConflict] = useState<boolean>(false);
@@ -62,24 +61,23 @@ export const SectionChatsConflict = () => {
   return (
     <div className={styles.conflict}>
       <WrapperMessage
-        information={dataMessage && dataMessage.length > 0 ? true : false}
+        information={!!conflictChats.length}
         title="У Вас пока нет конфликтов"
       >
-        {dataMessage?.map((item) => (
-          <div key={item._id}>
+        {conflictChats?.map(({ meta }) => (
+          <div key={meta.taskId}>
             <MessageCard
               statusConflict
-              description={item.description}
-              action={selectedCard === item._id}
-              user={item.recipient}
-              handleClickCard={() => handleClickCard(item)}
-              task={item}
+              action={selectedCard === meta.taskId}
+              user={meta.moderator}
+              onClick={() => handleClickCard(meta)}
+              task={meta}
             />
           </div>
         ))}
       </WrapperMessage>
 
-      <div className={styles.boxConflict}>
+      {/* <div className={styles.boxConflict}>
         {isOpenConflict && (
           <WindowInteractionUsers
             closeConflict={handleCloseConflict}
@@ -120,7 +118,7 @@ export const SectionChatsConflict = () => {
             {getInfoTask && <InfoConflict info={getInfoTask} />}
           </WindowInteractionUsers>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
