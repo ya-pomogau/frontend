@@ -50,7 +50,6 @@ export const PostForm: FC<PostFormProps> = ({
   addAttachment,
   removeAttachment,
   refPostForm,
-  loading,
   images,
   title,
   text,
@@ -163,7 +162,6 @@ export const PostForm: FC<PostFormProps> = ({
         type="submit"
         label="Опубликовать"
         buttonType="primary"
-        isLoading={loading}
         disabled={!isValid}
       />
     </form>
