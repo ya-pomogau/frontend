@@ -7,7 +7,7 @@ interface PropsMessageCard {
   description?: string | undefined;
   onClick: () => void;
   action: boolean;
-  user: AnyUserInterface;
+  user?: AnyUserInterface | null;
   position?: boolean;
   unreads: number;
 }
@@ -23,6 +23,52 @@ export const MessageCard = ({
 }: PropsMessageCard) => {
   const defultStyle = cn('m-0', 'text', 'text_type_regular');
 
+  /* #####################
+  Варианты отображения карточки сообщения 
+  при конфликте и в системном чате
+  ##################### */
+  const variant = (children: (name: string, desc: string) => JSX.Element) =>
+    statusConflict ? (
+      // Карточка оповещения о новом конфликтном чате
+      <>
+        <div className={cn(styles.img, { [styles.img_action]: action })} />
+
+        {
+          //передаём описание в общий элемент верстки
+          children('Оповещение о конфликте', description ?? 'Дата конфликта')
+        }
+
+        <div
+          className={cn(styles.notification, styles.radius, {
+            [styles.vizabiliti]: unreads > 0,
+          })}
+        />
+      </>
+    ) : (
+      // Карточка системного чата с пользователем
+      user && (
+        <>
+          <img src={user.avatar} alt={user.name} className={styles.img} />
+
+          {
+            //передаём имя и телефон в общий элемент верстки
+            children(user.name, user.phone)
+          }
+
+          <span
+            className={cn('text-inter', styles.counter, styles.radius, {
+              [styles.vizabiliti]: unreads > 0,
+            })}
+          >
+            {unreads > 10 ? '+9' : unreads}
+          </span>
+        </>
+      )
+    );
+
+  /* #####################
+  ################# RETURN
+  ##################### */
   return (
     <article
       onClick={onClick}
@@ -34,35 +80,18 @@ export const MessageCard = ({
         }
       )}
     >
-      {user.avatar ? (
-        <img src={user.avatar} alt="фото" className={styles.img} />
-      ) : (
-        <div className={cn(styles.img, { [styles.img_action]: action })} />
-      )}
-
-      <div className={styles.userInfo}>
-        <p className={cn(defultStyle, styles.name, styles.lengthLimitation)}>
-          {statusConflict ? 'Оповещение о конфликте' : user.name}
-        </p>
-        <p className={cn(defultStyle, styles.message, styles.lengthLimitation)}>
-          {description ?? user.phone}
-        </p>
-      </div>
-      {statusConflict ? (
-        <div
-          className={cn(styles.notification, styles.radius, {
-            [styles.vizabiliti]: unreads > 0,
-          })}
-        />
-      ) : (
-        <span
-          className={cn('text-inter', styles.counter, styles.radius, {
-            [styles.vizabiliti]: unreads > 0,
-          })}
-        >
-          {unreads > 10 ? '+9' : unreads}
-        </span>
-      )}
+      {variant((name, desc) => (
+        <div className={styles.userInfo}>
+          <p className={cn(defultStyle, styles.name, styles.lengthLimitation)}>
+            {name}
+          </p>
+          <p
+            className={cn(defultStyle, styles.message, styles.lengthLimitation)}
+          >
+            {desc}
+          </p>
+        </div>
+      ))}
     </article>
   );
 };
