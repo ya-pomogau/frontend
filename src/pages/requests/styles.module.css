@@ -17,10 +17,6 @@
   margin-top: 15px;
 }
 
-.title {
-  color: var(--colors-interface-primary-additional);
-}
-
 .tabContainer__text {
   margin-right: 6px;
   color: var(--colors-interface-additional);
@@ -69,6 +65,10 @@
   border-radius: 10px;
   margin: 25px 0 0 43px;
   width: 351px;
+}
+
+.input label {
+  color: var(--colors-interface-primary);
 }
 
 @media (max-width: 550px) {

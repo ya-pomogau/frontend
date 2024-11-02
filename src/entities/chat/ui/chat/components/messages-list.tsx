@@ -1,15 +1,15 @@
 import { useRef } from 'react';
 
 import { Message } from 'shared/ui';
-import { IMessage } from 'shared/types/message';
-import { IChatmateInfo } from 'shared/types/conflict';
 import { useLazyScroll } from '../hooks/useLazyScroll';
 
 import styles from '../styles.module.css';
+import { MessageInterface } from 'shared/types/chat.types';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 interface MessagesListProps {
-  messages: IMessage[];
-  chatmateInfo: IChatmateInfo;
+  messages: MessageInterface[];
+  chatmateInfo: AnyUserInterface;
 }
 
 export const MessagesList = ({ messages, chatmateInfo }: MessagesListProps) => {
@@ -22,11 +22,11 @@ export const MessagesList = ({ messages, chatmateInfo }: MessagesListProps) => {
       {currentMessages?.map((message) => (
         <Message
           type={
-            message.userId === chatmateInfo.userId ? 'incoming' : 'outgoing'
+            message.author._id === chatmateInfo._id ? 'incoming' : 'outgoing'
           }
-          messageText={message.message}
-          avatarLink={message.userAvatarLink}
-          key={message.id}
+          messageText={message.body}
+          avatarLink={message.author.avatar}
+          key={message._id}
         />
       ))}
     </div>

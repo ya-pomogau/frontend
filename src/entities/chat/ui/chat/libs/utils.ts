@@ -1,36 +1,11 @@
-import { IChatmateInfo } from 'shared/types/conflict';
-import { IMessage } from '../types';
+import { mockChatMessages } from 'entities/chat/mock-messages';
+import { mockAdmin } from 'entities/chat/mock-users';
+import { MessageInterface } from 'shared/types/chat.types';
+import { AdminInterface } from 'shared/types/user.type';
 
-export const getMockMessages = (): IMessage[] => [
-  {
-    id: 1,
-    userId: '1',
-    userAvatarLink: 'https://i.pravatar.cc/300',
-    message: 'Здравствуйте, я буду сопровождать вас на мероприятии',
-    date: new Date(2023, 4, 15, 0, 0, 0),
-  },
-  {
-    id: 2,
-    userId: '1',
-    userAvatarLink: 'https://i.pravatar.cc/300',
-    message: 'Договорились так и сделаем',
-    date: new Date(2023, 4, 15, 24, 0, 0),
-  },
-  {
-    id: 3,
-    userId: '2',
-    userAvatarLink: 'https://i.pravatar.cc/300',
-    message: 'Отлично, спасибо, встретимся у 3-го подъезда',
-    date: new Date(2023, 4, 15, 0, 5, 0),
-  },
-];
+export const getMockMessages = (): MessageInterface[] => mockChatMessages;
 
-export const infoAdmin: IChatmateInfo = {
-  name: 'Vlad',
-  phone: '+7 (993) 993 32 12',
-  userAvatarLink: 'https://i.pravatar.cc/300',
-  userId: '9212144444',
-};
+export const infoAdmin: AdminInterface = mockAdmin;
 
-export const sortMessages = (messages: IMessage[]) =>
-  messages.sort((a, b) => (a.date > b.date ? 1 : -1));
+export const sortMessages = (messages: MessageInterface[]) =>
+  messages.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1));

@@ -41,7 +41,7 @@ export const EditViewerInfo = ({
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
   } = useForm({
     defaultValues: {
@@ -162,7 +162,8 @@ export const EditViewerInfo = ({
               rules={{
                 required: 'Неверный формат номера',
                 pattern: {
-                  value: /^([+]7|8)\d{10}$/,
+                  value:
+                    /^((8|\+374|\+994|\+995|\+375|\+7|\+380|\+38|\+996|\+998|\+993)[\- ]?)?\(?\d{3,5}\)?[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}[\- ]?\d{1}(([\- ]?\d{1})?[\- ]?\d{1})?$/,
                   message: 'Неверный формат номера',
                 },
               }}
@@ -184,7 +185,7 @@ export const EditViewerInfo = ({
         </fieldset>
         <Button
           type="submit"
-          disabled={Object.keys(errors).length > 0}
+          disabled={Object.keys(errors).length > 0 || !isDirty}
           extClassName={styles.button}
           buttonType="primary"
           label="Сохранить"

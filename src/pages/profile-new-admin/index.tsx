@@ -1,4 +1,4 @@
-import { Icon, SmartHeader } from 'shared/ui';
+import { Icon, SmartHeader, Typography } from 'shared/ui';
 import { NewAdminForm } from './components';
 
 import styles from './styles.module.css';
@@ -10,7 +10,13 @@ export function CreateNewAdminPage() {
         icon={<Icon color="white" icon="NewAdminIcon" size="54" />}
         text="Добавление администраторов"
       />
-      <h2 className={styles.titlePrimary}>Добавить администратора</h2>
+      <Typography
+        tag={'h2'}
+        color={'primary-additional'}
+        variant={'titleResize'}
+        content={'Добавить администратора'}
+        extraClass={styles.titlePrimary}
+      />
       <NewAdminForm />
     </>
   );

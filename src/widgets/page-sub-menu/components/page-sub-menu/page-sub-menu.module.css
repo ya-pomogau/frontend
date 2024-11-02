@@ -4,11 +4,13 @@
   gap: 47px;
   padding: 13px 0 13px 10px;
   margin-left: 36px;
+  margin-right: 10px;
+  max-width: 100%;
+  overflow: auto;
 }
 
 @media screen and (max-width: 550px) {
   .tabContainer {
-    flex-wrap: wrap;
     padding: 16px 0 13px 14px;
     margin-left: 10px;
     gap: 10px;

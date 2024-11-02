@@ -12,6 +12,14 @@
   display: flex;
 }
 
+.headerWrapper {
+  margin-top: 5px;
+}
+
+.headerWrapperForDatePicker {
+  margin-top: 5px;
+}
+
 .wrapperForDate {
   grid-column-start: 4;
 }
@@ -20,15 +28,9 @@
   grid-column-start: 2;
 }
 
-.time {
-  font-size: var(--font-size-small);
-  line-height: var(--font-size-middle);
-  margin: 0;
-  margin-bottom: 5px;
-}
-
 .button {
   display: flex;
+  gap: 10px;
   justify-content: end;
 }
 
@@ -46,13 +48,6 @@
 
 input[type='time']::-webkit-calendar-picker-indicator {
   background: none;
-}
-
-.date {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-xs);
-  margin: 0;
-  margin-bottom: 5px;
 }
 
 .button--primary:disabled {
@@ -77,7 +72,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
     font-size: var(--font-size-medium);
     line-height: var(--line-height-large);
     position: relative;
-    top: 11px;
+    top: 9px;
   }
 
   .date {
@@ -96,7 +91,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
     );
     width: 240px;
     height: 1px;
-    margin-top: 4px;
+    margin-top: 8px;
   }
 
   .headerWrapperForDatePicker {
@@ -122,11 +117,8 @@ input[type='time']::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 29px;
-    margin-bottom: 10px;
-    transform: translateY(20px);
+    margin-top: 15px;
     position: relative;
-    top: -30px;
   }
 
   .inputForTime {
@@ -140,35 +132,35 @@ input[type='time']::-webkit-calendar-picker-indicator {
   }
 
   .checkbox {
+    margin: 8px 0 15px;
     min-width: 150px;
     position: relative;
-    top: -26px;
   }
 
   .button {
+    display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
     position: relative;
-    top: -33px;
+    gap: 10px;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .dateWithButtonContainer {
     max-width: 526px;
+    min-height: min-content;
     position: relative;
     top: 10px;
-  }
-
-  .validationMessage {
-    position: relative;
-    top: 32px;
-    left: 50px;
   }
 }
 
 .validationMessage {
-  font-family: var(--font-family-golos);
   opacity: 0;
-  margin: 0;
-  color: var(--colors-interface-red);
   text-align: center;
 }
 

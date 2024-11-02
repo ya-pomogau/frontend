@@ -1,21 +1,24 @@
 import classnames from 'classnames';
 
-import { Avatar } from 'shared/ui/avatar';
-import { SquareButton } from 'shared/ui/square-buttons';
-
-import { InputWrapper, GradientDivider } from 'shared/ui';
+import { MessageInterface } from 'shared/types/chat.types';
+import {
+  InputWrapper,
+  GradientDivider,
+  Typography,
+  Icon,
+  Avatar,
+  SquareButton,
+} from 'shared/ui';
 import { useMediaQuery, useForm } from 'shared/hooks';
-import { Icon } from 'shared/ui/icons';
-import { IMessage } from 'shared/types/message';
-import { IChatmateInfo } from 'shared/types/conflict';
-import { MessagesList } from './components/messages-list';
+import { AnyUserInterface } from 'shared/types/user.type';
 import { Breakpoints } from 'shared/config';
+import { MessagesList } from './components/messages-list';
 
 import styles from './styles.module.css';
 
 interface PopupChatProps {
-  messages: IMessage[];
-  chatmateInfo: IChatmateInfo;
+  messages: MessageInterface[];
+  chatmateInfo: AnyUserInterface;
   onAttachFileClick: () => void;
   onMessageSend?: (message: string) => void;
   isOpen: boolean;
@@ -67,13 +70,14 @@ export const PopupChat = ({
         )}
         <Avatar
           avatarName="Фотография собеседника"
-          avatarLink={chatmateInfo.userAvatarLink}
+          avatarLink={chatmateInfo.avatar}
           extClassName={styles.avatar}
         />
-
-        <h4 className={classnames('text', 'text_type_regular', styles.name)}>
-          {chatmateInfo.name}
-        </h4>
+        <Typography
+          tag={'h4'}
+          variant={'titleResize'}
+          content={chatmateInfo.name}
+        />
       </div>
       {isMobile && <GradientDivider />}
       <div className={styles['container-chat']}>

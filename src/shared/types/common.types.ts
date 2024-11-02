@@ -87,3 +87,10 @@ export const fileTypes = {
 } as const;
 
 export type FileTypes = ValueOf<typeof fileTypes>;
+
+export interface DatabaseIdAndTimestampsInterface {
+  _id: string;
+  // id?: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+}
