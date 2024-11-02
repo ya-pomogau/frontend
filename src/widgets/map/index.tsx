@@ -1,9 +1,8 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import {
   Circle,
   GeolocationControl,
   Map,
-  useYMaps,
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
@@ -68,8 +67,8 @@ export const YandexMap = ({
   const [isSorryPopupVisible, setSorryPopupVisible] = useState(false);
   const [isThankPopupVisible, setThankPopupVisible] = useState(false);
   const [coords, setCoords] = useState(coordinates);
-  const ref = useRef<any>(null);
-  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+  const mapRef = useRef<any>(null);
+  const ymap = useRef<any>(null);
 
   useEffect(() => {
     setCoords(coordinates);
@@ -97,22 +96,26 @@ export const YandexMap = ({
   };
 
   const onOpenTask = (task: Task) => {
-    if (ref.current) {
+    if (mapRef.current) {
       const [x, y] = task.location.coordinates;
-      ref.current.setCenter([x - 0.004, y], 15, {
+      mapRef.current.setCenter([x - 0.004, y], 15, {
         checkZoomRange: true,
       });
     }
   };
+
+  const onMapLoad = useCallback((ref: any) => {
+    ymap.current = ref;
+  }, []);
 
   const handleMapClick = (event: ymaps.IEvent) => {
     const clickedCoordinates = event.get('coords'); 
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
-      if (ymaps) {
-        const geo = ymaps.geocode(clickedCoordinates);
-        geo.then((res) => {
+      if (ymap.current) {
+        const geo = ymap.current.geocode(clickedCoordinates);
+        geo.then((res: ymaps.IGeocodeResult) => {
           const geoObject = res.geoObjects.get(0);
 
           dispatch(
@@ -150,7 +153,8 @@ export const YandexMap = ({
           }}
           width={width}
           height={height}
-          instanceRef={ref}
+          instanceRef={mapRef}
+          onLoad={onMapLoad}
           onClick={handleMapClick}
         >
           <GeolocationControl options={{ float: 'left' }} />
