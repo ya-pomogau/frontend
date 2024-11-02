@@ -113,34 +113,34 @@ export const YandexMap = ({
     const [x, y]: [number, number] = placemarkCoords;
     setMapCenterSettings({
       ...mapSettings,
-      latitude: x - 0.025,
+      latitude: x - 0.023,
       longitude: y,
     });
   };
 
-  const handleMapClick = (event: ymaps.IEvent) => {
-    const clickedCoordinates = event.get('coords');
-    // console.log(event.getSourceEvent());
-    // console.log(clickedCoordinates);
-    if (clickedCoordinates) {
-      setCoords(clickedCoordinates);
+  // const handleMapClick = (event: ymaps.IEvent) => {
+  //   const clickedCoordinates = event.get('coords');
+  //   // console.log(event.getSourceEvent());
+  //   // console.log(clickedCoordinates);
+  //   if (clickedCoordinates) {
+  //     setCoords(clickedCoordinates);
 
-      if (ymaps) {
-        const geo = ymaps.geocode(clickedCoordinates);
-        geo.then((res) => {
-          const geoObject = res.geoObjects.get(0);
-          // console.log(geoObject.properties._data.text);
-          // console.log(geoObject.getAddressLine());
-          dispatch(
-            setAddress({
-              additinalAddress: geoObject.getAddressLine(),
-              coords: clickedCoordinates,
-            })
-          );
-        });
-      }
-    }
-  };
+  //     if (ymaps) {
+  //       const geo = ymaps.geocode(clickedCoordinates);
+  //       geo.then((res) => {
+  //         const geoObject = res.geoObjects.get(0);
+  //         // console.log(geoObject.properties._data.text);
+  //         // console.log(geoObject.getAddressLine());
+  //         dispatch(
+  //           setAddress({
+  //             additinalAddress: geoObject.getAddressLine(),
+  //             coords: clickedCoordinates,
+  //           })
+  //         );
+  //       });
+  //     }
+  //   }
+  // };
 
   return (
     <>
@@ -169,7 +169,8 @@ export const YandexMap = ({
           width={width}
           height={height}
           instanceRef={ref}
-          onClick={handleMapClick}
+          // onClick={handleMapClick}
+          onClick={() => 1}
         >
           <GeolocationControl options={{ float: 'left' }} />
           <ZoomControl options={{ position: { top: 5, right: 5 } }} />
