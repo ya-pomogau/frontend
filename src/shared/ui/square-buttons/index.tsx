@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 import { ConflictMessageIcon } from '../icons/conflict-message-icon';
 
 interface SquareButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  taskId?: number;
   extClassName?: string;
   buttonType: 'close' | 'edit' | 'confirm' | 'conflict' | 'message';
   onClick?: () => void;
@@ -23,7 +22,6 @@ const defaultIcons = {
 };
 
 export const SquareButton = ({
-  taskId,
   extClassName,
   buttonType,
   customIcon,

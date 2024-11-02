@@ -16,11 +16,6 @@
   row-gap: 20px;
 }
 
-.title {
-  font: var(--font-golos-24-28);
-  color: var(--colors-interface-primary-additional);
-}
-
 .input {
   font-size: var(--font-size-medium);
   border: none;
@@ -47,7 +42,7 @@
 .edit_box {
   color: var(--colors-interface-primary);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 10px;
 }
 
@@ -57,15 +52,6 @@
 
 .edit_box_hidden {
   display: none;
-}
-
-.edit_text {
-  font: var(--font-golos-12-16);
-}
-
-.error_text {
-  color: var(--colors-interface-orange);
-  font: var(--font-golos-14-16);
 }
 
 @media (max-width: 550px) {

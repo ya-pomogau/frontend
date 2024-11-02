@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
 import { useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDate,
@@ -10,16 +11,20 @@ import {
   openPopup,
   clearState,
 } from 'features/create-request/model';
-import { Button } from 'shared/ui/button';
-import { Icon } from 'shared/ui';
-import { CategoriesBackground } from 'shared/ui/categories-background';
-import styles from './common-step.module.css';
-import { EditButton } from 'shared/ui/edit-button';
+import {
+  Button,
+  Icon,
+  Typography,
+  EditButton,
+  CategoriesBackground,
+} from 'shared/ui';
 import {
   CreateTaskDto,
   useCreateTaskMutation,
   useUpdateTaskMutation,
 } from 'services/user-task-api';
+
+import styles from './common-step.module.css';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -111,65 +116,77 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
   return (
     <div className={styles.mainWrapper}>
-      <div
-        className={classNames('text', 'text_type_regular', styles.container)}
-      >
+      <div className={classNames(styles.container)}>
         {isMobile ? (
           <>
-            <p
-              className={classNames(
-                'text',
-                'text_type_regular',
-                'm-0',
-                styles.task
-              )}
-            >
-              Дело
-            </p>
+            <Typography
+              tag={'h2'}
+              color={'black'}
+              fontFamily={'primaryFont'}
+              content={'Дело'}
+              extraClass={styles.task}
+            />
             <div className={styles.headerWrapper} />
-            <div
-              className={classNames(
-                'text',
-                'text_type_bold',
-                styles.dateWrapper
-              )}
-            >
+            <div className={styles.dateWrapper}>
               {!termlessRequest ? (
                 <>
-                  <p className={classNames('text_size_medium', 'm-0')}>
-                    {date}
-                  </p>
-                  <p className={classNames('text_size_medium', styles.time)}>
-                    {time}
-                  </p>
+                  <Typography variant={'paragraph-bold'} content={date} />
+                  <Typography
+                    variant={'paragraph-bold'}
+                    content={time}
+                    extraClass={styles.time}
+                  />
                 </>
               ) : (
-                <p className={classNames('text_size_medium', 'm-0')}>
-                  Заявка без срока
-                </p>
+                <Typography
+                  variant={'paragraph-bold'}
+                  content={'Заявка без срока'}
+                />
               )}
             </div>
+            {isTypeEdit && (
+              <EditButton
+                extClassName={styles.edit_button}
+                label="Изменить дату и время"
+                onClick={() => handleEditButton('date')}
+              />
+            )}
             <div className={styles.addressWrapper}>
               <Icon icon="LocationIcon" color="blue" />
-              <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
+              <Typography variant={'support'} content={address} />
             </div>
+            {isTypeEdit && (
+              <EditButton
+                extClassName={styles.edit_button}
+                label="Изменить адрес"
+                onClick={() => handleEditButton('coordinates')}
+              />
+            )}
             <CategoriesBackground
               theme="primary"
               size={categorySize}
               content={category.title}
               extClassName={styles.categories}
             />
-            <p
-              className={classNames(
-                'text_size_medium',
-                'm-0',
-                styles.descriptionForTask,
-                { [styles.expanded]: isExpanded }
-              )}
-            >
-              {description}
-            </p>
-            {[...description].length > 170 && (
+            <Typography
+              color={'darkGray'}
+              extraClass={classNames(styles.descriptionForTask, {
+                [styles.expanded]: isExpanded,
+              })}
+              content={
+                <>
+                  {description}
+                  {isTypeEdit && (
+                    <EditButton
+                      extClassName={styles.edit_button}
+                      label="Изменить задание"
+                      onClick={() => handleEditButton('description')}
+                    />
+                  )}
+                </>
+              }
+            />
+            {description.length > 170 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={styles.readMoreButton}
@@ -180,26 +197,18 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
           </>
         ) : (
           <>
-            <div
-              className={classNames(
-                'text',
-                'text_type_regular',
-                'm-0',
-                styles.dateWrapper
-              )}
-            >
+            <div className={styles.dateWrapper}>
               {!termlessRequest ? (
                 <>
-                  <p className={classNames('text_size_large', 'm-0')}>{date}</p>
-                  <p className={classNames('text_size_large', styles.time)}>
-                    {time}
-                    {termlessRequest}
-                  </p>
+                  <Typography variant={'title'} content={date} />
+                  <Typography
+                    variant={'title'}
+                    content={[time, termlessRequest]}
+                    extraClass={styles.time}
+                  />
                 </>
               ) : (
-                <p className={classNames('text_size_large', 'm-0')}>
-                  Заявка без срока
-                </p>
+                <Typography variant={'title'} content={'Заявка без срока'} />
               )}
               {isTypeEdit ? (
                 <EditButton
@@ -211,7 +220,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <div className={styles.addressWrapper}>
               <Icon icon="LocationIcon" color="blue" />
-              <p className={classNames('m-0', 'text_size_medium')}>{address}</p>
+              <Typography content={address} />
               {isTypeEdit && (
                 <EditButton
                   extClassName={styles.edit_button}
@@ -226,23 +235,25 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               content={category.title}
               extClassName={styles.categories}
             />
-            <p
-              className={classNames(
-                'text_size_medium',
-                styles.descriptionForTask,
-                { [styles.expanded]: isExpanded }
-              )}
-            >
-              {description}
-              {isTypeEdit ? (
-                <EditButton
-                  extClassName={styles.edit_button}
-                  label="Изменить задание"
-                  onClick={() => handleEditButton('description')}
-                />
-              ) : null}
-            </p>
-            {[...description].length > 160 && (
+            <Typography
+              color={'darkGray'}
+              extraClass={classNames(styles.descriptionForTask, {
+                [styles.expanded]: isExpanded,
+              })}
+              content={
+                <>
+                  {description}
+                  {isTypeEdit && (
+                    <EditButton
+                      extClassName={styles.edit_button}
+                      label="Изменить задание"
+                      onClick={() => handleEditButton('description')}
+                    />
+                  )}
+                </>
+              }
+            />
+            {description.length > 160 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={styles.readMoreButton}

@@ -6,7 +6,7 @@ import { Input } from 'shared/ui/input';
 import { Button } from 'shared/ui/button';
 import { Icon } from 'shared/ui';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 interface AdminActionsProps {
   onAdminSaveClick: () => void;
@@ -45,7 +45,8 @@ const AdminActions = ({
           placeholder="Пароль"
           type="password"
         />
-        <Icon icon="EditIcon"
+        <Icon
+          icon="EditIcon"
           className={classnames(styles.admin_edit_icon)}
           color={'blue'}
         />

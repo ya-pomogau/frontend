@@ -56,8 +56,6 @@
 
   .card-buttonLabel {
     flex: 1;
-    font-size: var(--font-size-small);
-    line-height: var(--line-height-xs);
     text-align: center;
   }
 
