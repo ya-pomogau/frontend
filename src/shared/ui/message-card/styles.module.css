@@ -28,7 +28,6 @@
 
 .name {
   width: 100%;
-  font-size: var(--font-size-s);
   -webkit-line-clamp: 1;
 }
 
@@ -52,12 +51,10 @@
 
 .counter {
   background: var(--colors-interface-fuchsia);
-  color: var(--colors-interface-white);
   text-align: center;
 }
 
 .radius {
-  font-size: var(--font-size-middle);
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -102,10 +99,6 @@
   .img {
     width: 40px;
     height: 40px;
-  }
-
-  .name {
-    font-size: var(--font-size-small);
   }
 
   .userInfo {

@@ -9,7 +9,6 @@
 
 .text {
   padding-top: 10px;
-  font: var(--font-golos-12-14);
   padding-bottom: 6px;
 }
 
@@ -20,5 +19,5 @@
 }
 
 .input label {
-  color: var(--colors-interface-primary)
+  color: var(--colors-interface-primary);
 }

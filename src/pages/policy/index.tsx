@@ -1,16 +1,14 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { initTitleMarkdown, initDescriptionMarkdown } from './content';
-import style from './markdown-style.module.css';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { Button } from '../../shared/ui/button';
-import { SmartHeader } from '../../shared/ui/smart-header';
-import { Icon } from 'shared/ui';
 
-import { useMediaQuery } from '../../shared/hooks';
-import usePermission from '../../shared/hooks/use-permission';
+import { Button, Icon, Typography, SmartHeader } from 'shared/ui';
+import { useMediaQuery, usePermission } from 'shared/hooks';
 import { userRole } from 'shared/types/common.types';
 import { Breakpoints } from 'shared/config';
+import { initTitleMarkdown, initDescriptionMarkdown } from './content';
+
+import style from './markdown-style.module.css';
 
 export function PolicyPage() {
   const isMainAdmin = usePermission([], userRole.ADMIN);
@@ -64,7 +62,11 @@ export function PolicyPage() {
             {isMainAdmin && (
               <button className={style.editButton} onClick={handleEditButton}>
                 <Icon icon="EditIcon" color={'blue'} size={'20'} height="18" />
-                <p className={style.editButtonText}>Редактировать</p>
+                <Typography
+                  color={'primary'}
+                  variant={'support'}
+                  content={'Редактировать'}
+                />
               </button>
             )}
           </div>
@@ -78,7 +80,12 @@ export function PolicyPage() {
       )}
       {editState && (
         <form className={style.editForm} onSubmit={onSubmit}>
-          <p className={style.editTitleText}>Заголовок</p>
+          <Typography
+            tag={'h5'}
+            variant={'support'}
+            content={'Заголовок'}
+            extraClass={style.editTitleText}
+          />
           <input
             type={'text'}
             name={'title'}
@@ -86,7 +93,12 @@ export function PolicyPage() {
             className={style.titleInput}
             onChange={onChangeTitleInput}
           />
-          <p className={style.editDescriptionText}>Текст</p>
+          <Typography
+            tag={'h5'}
+            variant={'support'}
+            content={'Текст'}
+            extraClass={style.editDescriptionText}
+          />
           <textarea
             className={style.descriptionInput}
             name={'description'}
@@ -102,7 +114,11 @@ export function PolicyPage() {
             />
             <button className={style.closeButton} onClick={handleCloseButton}>
               <Icon icon="CloseIconThin" color={'blue'} />
-              <p className={style.closeButtonText}>Закрыть без изменений</p>
+              <Typography
+                color={'primary'}
+                variant={'support'}
+                content={'Закрыть без изменений'}
+              />
             </button>
           </div>
         </form>
