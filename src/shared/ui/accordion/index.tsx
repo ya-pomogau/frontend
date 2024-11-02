@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 import { useState } from 'react';
 import { Icon } from '../icons';
+import { Typography } from '../../ui';
 
 interface IAccordionProps {
   extraClasses?: {
@@ -81,7 +82,11 @@ export const Accordion = ({
                       className={classListInput}
                       defaultChecked={option.value === selectedCategory}
                     />
-                    <span className={classLabelText}>{option.label}</span>
+                    <Typography
+                      tag={'span'}
+                      content={option.label}
+                      extraClass={classLabelText}
+                    />
                   </label>
                 </li>
               );

@@ -11,8 +11,6 @@
 
 .error {
   margin-top: 8px;
-  font: var(--font-golos-12-14);
-  color: var(--colors-interface-orange);
 }
 
 .field label {

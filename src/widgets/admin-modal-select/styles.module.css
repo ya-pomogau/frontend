@@ -34,7 +34,6 @@
 .description {
   opacity: 0.6;
   text-align: center;
-  color: var(--colors-interface-additional);
 }
 
 @media (max-width: 400px) {
