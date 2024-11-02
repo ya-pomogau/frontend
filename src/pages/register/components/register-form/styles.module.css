@@ -9,7 +9,6 @@
 
 .text {
   padding-top: 10px;
-  font: var(--font-golos-12-14);
   padding-bottom: 6px;
 }
 
@@ -17,4 +16,8 @@
   display: flex;
   flex-direction: row;
   column-gap: 20px;
+}
+
+.input label {
+  color: var(--colors-interface-primary);
 }

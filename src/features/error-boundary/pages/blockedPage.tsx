@@ -2,6 +2,7 @@ import image from '../assets/privacy.png';
 import styles from '../styles.module.css';
 import { IconProps } from 'shared/ui/icons';
 import { ErrorBoundaryUI } from '../ui/errorBoundary';
+import { Typography } from 'shared/ui';
 
 export const BlockedPage = () => {
   const iconConfig: IconProps = {
@@ -18,9 +19,22 @@ export const BlockedPage = () => {
       imageAlt="blocked_image"
       centered={false}
     >
-      <h3 className={styles.text_blocked}>Вы заблокированы</h3>
-      <a className={styles.link} href="mailto:test@ya.ru">
-        Нужно связаться с администратором
+      <Typography
+        tag={'h3'}
+        color={'primary-additional'}
+        fontFamily={'secondaryFont'}
+        variant={'title'}
+        content={'Вы заблокированы'}
+        extraClass={styles.text_blocked}
+      />
+      <a href="mailto:test@ya.ru">
+        <Typography
+          tag={'span'}
+          color={'primary'}
+          fontFamily={'secondaryFont'}
+          variant={'title'}
+          content={'Нужно связаться с администратором'}
+        />
       </a>
     </ErrorBoundaryUI>
   );

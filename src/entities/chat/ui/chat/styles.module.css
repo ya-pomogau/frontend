@@ -44,12 +44,6 @@
   height: 52px;
 }
 
-.name {
-  margin: 0;
-  font-size: clamp(16px, 2vw, 24px);
-  line-height: 40px;
-}
-
 .container-chat {
   width: 88%;
   max-height: 252px;

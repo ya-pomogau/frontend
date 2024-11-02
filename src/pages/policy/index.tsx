@@ -1,17 +1,14 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { initTitleMarkdown, initDescriptionMarkdown } from './content';
-import style from './markdown-style.module.css';
-import { EditIcon } from '../../shared/ui/icons/edit-icon';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { Button } from '../../shared/ui/button';
-import { CloseIconThin } from '../../shared/ui/icons/close-icon-thin';
-import { SmartHeader } from '../../shared/ui/smart-header';
-import { LockIcon } from '../../shared/ui/icons/lock-icon';
-import { useMediaQuery } from '../../shared/hooks';
-import usePermission from '../../shared/hooks/use-permission';
+
+import { Button, Icon, Typography, SmartHeader } from 'shared/ui';
+import { useMediaQuery, usePermission } from 'shared/hooks';
 import { userRole } from 'shared/types/common.types';
 import { Breakpoints } from 'shared/config';
+import { initTitleMarkdown, initDescriptionMarkdown } from './content';
+
+import style from './markdown-style.module.css';
 
 export function PolicyPage() {
   const isMainAdmin = usePermission([], userRole.ADMIN);
@@ -49,7 +46,7 @@ export function PolicyPage() {
   return (
     <div className={style.wrapper}>
       <SmartHeader
-        icon={<LockIcon color="blue" size="32" />}
+        icon={<Icon icon="LockIcon" color="blue" size="32" />}
         text="Политика конфиденциальности"
         extClassName={isMobile ? style.smartHeaderOn : style.smartHeaderOff}
       />
@@ -64,8 +61,12 @@ export function PolicyPage() {
             </ReactMarkdown>
             {isMainAdmin && (
               <button className={style.editButton} onClick={handleEditButton}>
-                <EditIcon color={'blue'} size={'20'} height="18" />
-                <p className={style.editButtonText}>Редактировать</p>
+                <Icon icon="EditIcon" color={'blue'} size={'20'} height="18" />
+                <Typography
+                  color={'primary'}
+                  variant={'support'}
+                  content={'Редактировать'}
+                />
               </button>
             )}
           </div>
@@ -79,7 +80,12 @@ export function PolicyPage() {
       )}
       {editState && (
         <form className={style.editForm} onSubmit={onSubmit}>
-          <p className={style.editTitleText}>Заголовок</p>
+          <Typography
+            tag={'h5'}
+            variant={'support'}
+            content={'Заголовок'}
+            extraClass={style.editTitleText}
+          />
           <input
             type={'text'}
             name={'title'}
@@ -87,7 +93,12 @@ export function PolicyPage() {
             className={style.titleInput}
             onChange={onChangeTitleInput}
           />
-          <p className={style.editDescriptionText}>Текст</p>
+          <Typography
+            tag={'h5'}
+            variant={'support'}
+            content={'Текст'}
+            extraClass={style.editDescriptionText}
+          />
           <textarea
             className={style.descriptionInput}
             name={'description'}
@@ -102,8 +113,12 @@ export function PolicyPage() {
               size="extraLarge"
             />
             <button className={style.closeButton} onClick={handleCloseButton}>
-              <CloseIconThin color={'blue'}></CloseIconThin>
-              <p className={style.closeButtonText}>Закрыть без изменений</p>
+              <Icon icon="CloseIconThin" color={'blue'} />
+              <Typography
+                color={'primary'}
+                variant={'support'}
+                content={'Закрыть без изменений'}
+              />
             </button>
           </div>
         </form>

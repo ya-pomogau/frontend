@@ -6,6 +6,7 @@ import { Avatar } from '../avatar';
 import { SquareButton } from '../square-buttons';
 import { User } from 'entities/user/types';
 import { dataImages } from 'shared/libs/utils';
+import { Typography } from '../../ui';
 
 interface ImageProps {
   id: string;
@@ -37,13 +38,6 @@ export const Post: FC<PostProps> = ({
   const MAX_CHARACTERS = 400;
   const dataImg = files.length > 0 ? files : dataImages;
 
-  const titleStyle = classnames(
-    styles.title,
-    'text',
-    'text_size_large',
-    'text_type_regular'
-  );
-
   const descriptionStyle = classnames(
     styles.description,
     'text',
@@ -55,20 +49,6 @@ export const Post: FC<PostProps> = ({
   const fullDescriptionButtonStyle = classnames(
     styles['full-description-button'],
     'text',
-    'text_type_regular'
-  );
-
-  const authorNameStyle = classnames(
-    styles.author_name,
-    'text',
-    'text_size_medium',
-    'text_type_regular'
-  );
-
-  const authorIdStyle = classnames(
-    styles.author_id,
-    'text',
-    'text_size_small',
     'text_type_regular'
   );
 
@@ -93,18 +73,24 @@ export const Post: FC<PostProps> = ({
           extClassName={styles.author_avatar}
         />
         <div className={styles.author_info}>
-          <p className={authorNameStyle}>{author.name}</p>
-          <p className={authorIdStyle}>
-            <span>ID </span>
-            {author._id}
-          </p>
+          <Typography content={author.name} />
+          <Typography
+            color={'ID-text'}
+            variant={'support'}
+            content={`${'ID'} ${author._id}`}
+          />
         </div>
       </div>
 
       <div className={styles['text-block']}>
-        <h2 className={titleStyle}>{title}</h2>
+        <Typography
+          tag={'h2'}
+          variant={'title'}
+          content={title}
+          extraClass={styles.title}
+        />
         <div ref={descriptionRef} className={descriptionStyle}>
-          <ReactMarkdown>{showFullText ? text : truncatedText}</ReactMarkdown>
+          <ReactMarkdown>{showFullText ? text : truncatedText}</ReactMarkdown>T
         </div>
         {text.length > MAX_CHARACTERS && (
           <button

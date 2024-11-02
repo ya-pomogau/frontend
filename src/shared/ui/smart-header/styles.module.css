@@ -14,12 +14,6 @@
   column-gap: 10px;
 }
 
-.settingText {
-  color: var(--colors-interface-primary);
-  font-size: var(--font-size-medium);
-  line-height: var(--line-height-large);
-}
-
 .settingIcon {
   display: flex;
   box-sizing: border-box;
@@ -38,10 +32,5 @@
     margin-right: 10px;
     max-width: 35px;
     max-height: 35px;
-  }
-
-  .settingText {
-    font-size: var(--font-size-s);
-    line-height: 19px;
   }
 }

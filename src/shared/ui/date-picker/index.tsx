@@ -4,7 +4,6 @@ import { ReactNode, forwardRef, Ref } from 'react';
 import ReactDatePicker, {
   ReactDatePickerCustomHeaderProps,
 } from 'react-datepicker';
-import classnames from 'classnames';
 import ru from 'date-fns/locale/ru';
 import { subDays } from 'date-fns';
 
@@ -13,6 +12,7 @@ import { StepButton } from '../step-button';
 
 import './react-datepicker.css';
 import styles from './styles.module.css';
+import { Typography } from '../../ui';
 
 export function customHeader({
   date,
@@ -32,7 +32,12 @@ export function customHeader({
         disabled={prevMonthButtonDisabled}
       />
       <div>
-        <span className={styles.datePicker__headerMonth}>{month}</span>
+        <Typography
+          tag={'span'}
+          color={'primary'}
+          content={month}
+          extraClass={styles.datePicker__headerMonth}
+        />
       </div>
       <StepButton
         direction="right"
@@ -51,16 +56,16 @@ const CustomInput = forwardRef(
   ) => (
     <button
       type="button"
-      className={classnames(
-        styles.customInput,
-        'text',
-        'text_size_small',
-        'text_type_regular'
-      )}
+      className={styles.customInput}
       onClick={onClick}
       ref={ref}
     >
-      {value}
+      <Typography
+        tag={'span'}
+        color={'interface-additional'}
+        variant={'support'}
+        content={value}
+      />
     </button>
   )
 );

@@ -1,17 +1,16 @@
 import { ChangeEvent, Ref, useEffect, type FC } from 'react';
-import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '../button';
 import { TextArea } from '../text-area';
-import { FileAttachmentIcon } from '../icons/file-attachment-icon';
-import { CloseCrossIcon } from '../icons/close-cross-icon';
+import { Icon } from 'shared/ui';
 import { fileTypes } from 'shared/types/common.types';
 import { FormInput } from '../form-input';
 import useFormField from 'shared/hooks/use-form-field';
 import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
 import { IBlogForm } from 'shared/types/blog.types';
 import styles from './styles.module.css';
+import { Typography } from '../../ui';
 
 const TITLE_VALIDATION_RULES = {
   required: 'Обязательное поле',
@@ -51,7 +50,6 @@ export const PostForm: FC<PostFormProps> = ({
   addAttachment,
   removeAttachment,
   refPostForm,
-  loading,
   images,
   title,
   text,
@@ -94,13 +92,6 @@ export const PostForm: FC<PostFormProps> = ({
     reset();
   };
 
-  const imageTitleStyle = classNames(
-    styles['image-title'],
-    'text',
-    'text_size_small',
-    'text_type_regular'
-  );
-
   return (
     <form
       className={styles.form}
@@ -129,7 +120,7 @@ export const PostForm: FC<PostFormProps> = ({
           error={textField.error}
         />
         <label className={styles['attachment-button']}>
-          <FileAttachmentIcon size="24" color="white" />
+          <Icon icon="FileAttachmentIcon" size="24" color="white" />
           <input
             className={styles['input-file']}
             type="file"
@@ -147,11 +138,17 @@ export const PostForm: FC<PostFormProps> = ({
         {images &&
           images.map(({ id, name }) => (
             <div className={styles.image} key={id}>
-              <FileAttachmentIcon size="14" color="white" />
-              <p className={imageTitleStyle}>{name}</p>
+              <Icon icon="FileAttachmentIcon" size="14" color="white" />
+              <Typography
+                color={'primary'}
+                variant={'support'}
+                content={name}
+              />
               <Button
                 buttonType="secondary"
-                customIcon={<CloseCrossIcon size="14" color="blue" />}
+                customIcon={
+                  <Icon icon="CloseCrossIcon" size="14" color="blue" />
+                }
                 extClassName={styles['close-cross-button']}
                 onClick={() => removeAttachment(id)}
                 type="button"
@@ -164,7 +161,6 @@ export const PostForm: FC<PostFormProps> = ({
         type="submit"
         label="Опубликовать"
         buttonType="primary"
-        isLoading={loading}
         disabled={!isValid}
       />
     </form>

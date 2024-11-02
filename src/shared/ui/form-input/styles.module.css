@@ -7,7 +7,6 @@
 .input {
   padding: 12px;
   transition: var(--transition-hover);
-  height: 30px;
   color: var(--colors-interface-primary);
   border: 1px solid var(--colors-interface-primary-additional);
   box-sizing: border-box;
@@ -18,7 +17,7 @@
 .input_error {
   composes: input;
   border-color: var(--colors-interface-orange) !important;
-  color: var(--colors-interface-red) !important;
+  color: var(--colors-interface-red);
 }
 
 .input::placeholder {
@@ -45,10 +44,6 @@
 
 .error {
   margin-top: 8px;
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-xs);
-  font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-orange);
 }
 
 .for_storybook {

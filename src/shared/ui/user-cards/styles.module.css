@@ -13,7 +13,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: 28px;
+  column-gap: 10px;
 }
 
 .id_color {
@@ -202,11 +202,9 @@
 }
 
 .name_text {
-  font-size: var(--font-size-s);
-  line-height: var(--line-height-medium);
-  width: 190px; 
-  white-space: nowrap; 
-  overflow: hidden; 
+  width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -264,8 +262,6 @@
   height: 45px;
   padding: 5px 0px 5px 0px;
   border-bottom: 1px solid rgb(224, 224, 224);
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-bold);
   line-height: 19.2px;
   display: flex;
   flex-direction: row;
@@ -281,6 +277,10 @@
   gap: 5px;
   width: 236px;
   height: 52px;
+}
+
+.input_with_label label {
+  color: var(--colors-interface-primary);
 }
 
 /* Стили для поля */
@@ -326,8 +326,7 @@
   }
 
   .name_text {
-    font-size: var(--font-size-small);
-    width: 140px; 
+    width: 140px;
   }
 
   .admin_password_input {
@@ -362,13 +361,5 @@
   .recipient_input::placeholder {
     font-size: 8px;
     padding: 10px;
-  }
-
-  .id {
-    font-size: 10px;
-  }
-
-  .tel {
-    font-size: 10px;
   }
 }

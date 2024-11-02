@@ -71,7 +71,6 @@
 
 .text {
   position: relative;
-  color: var(--colors-interface-white);
   z-index: 10;
 }
 
