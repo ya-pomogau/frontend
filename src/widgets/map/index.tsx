@@ -30,6 +30,7 @@ import styles from './styles.module.css';
 import UserMark from './UserMark';
 import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
+import { number } from 'joi';
 // import YMapsMap from '@pbe/react-yandex-maps/typings/Map';
 
 interface YandexMapProps {
@@ -109,10 +110,10 @@ export const YandexMap = ({
 
   const handeleBalloonClick = (e: ymaps.IEvent) => {
     const placemarkCoords = e.get('coords');
-    const [x, y] = placemarkCoords;
+    const [x, y]: [number, number] = placemarkCoords;
     setMapCenterSettings({
       ...mapSettings,
-      latitude: x,
+      latitude: x - 0.025,
       longitude: y,
     });
   };
