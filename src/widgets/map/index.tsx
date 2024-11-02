@@ -1,9 +1,8 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import {
   Circle,
   GeolocationControl,
   Map,
-  useYMaps,
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
@@ -30,6 +29,7 @@ import styles from './styles.module.css';
 import UserMark from './UserMark';
 import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
+import ymaps from 'yandex-maps';
 
 interface YandexMapProps {
   width?: string | number;
@@ -68,8 +68,8 @@ export const YandexMap = ({
   const [isSorryPopupVisible, setSorryPopupVisible] = useState(false);
   const [isThankPopupVisible, setThankPopupVisible] = useState(false);
   const [coords, setCoords] = useState(coordinates);
-  const ref = useRef<any>(null);
-  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+  const mapRef = useRef<ymaps.Map>();
+  const ymap = useRef<typeof ymaps>();
 
   useEffect(() => {
     setCoords(coordinates);
@@ -97,27 +97,31 @@ export const YandexMap = ({
   };
 
   const onOpenTask = (task: Task) => {
-    if (ref.current) {
+    if (mapRef.current) {
       const [x, y] = task.location.coordinates;
-      ref.current.setCenter([x - 0.004, y], 15, {
+      mapRef.current.setCenter([x - 0.004, y], 15, {
         checkZoomRange: true,
       });
     }
   };
+
+  const onMapLoad = useCallback((refApi: typeof ymaps) => {
+    ymap.current = refApi;
+  }, []);
 
   const handleMapClick = (event: ymaps.IEvent) => {
     const clickedCoordinates = event.get('coords'); 
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
-      if (ymaps) {
-        const geo = ymaps.geocode(clickedCoordinates);
-        geo.then((res) => {
+      if (ymap.current) {
+        const geo = ymap.current.geocode(clickedCoordinates);
+        geo.then((res: ymaps.IGeocodeResult) => {
           const geoObject = res.geoObjects.get(0);
 
           dispatch(
             setAddress({
-              additinalAddress: geoObject.getAddressLine(),
+              additinalAddress: (geoObject as ymaps.GeocodeResult).getAddressLine(),
               coords: clickedCoordinates,
             })
           );
@@ -150,7 +154,8 @@ export const YandexMap = ({
           }}
           width={width}
           height={height}
-          instanceRef={ref}
+          instanceRef={mapRef}
+          onLoad={onMapLoad}
           onClick={handleMapClick}
         >
           <GeolocationControl options={{ float: 'left' }} />
