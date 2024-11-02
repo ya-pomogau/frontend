@@ -3,6 +3,8 @@ import { Button } from 'shared/ui/button';
 import styles from '../../styles.module.css';
 import { Icon } from 'shared/ui';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 
 interface ResetPasswordProps {
   handleModalClose: () => void;
@@ -10,29 +12,35 @@ interface ResetPasswordProps {
 
 type TPassword = { newPassword: string; repeatPassword: string };
 
+const resetPasswordSchema = Joi.object<TPassword>({
+  newPassword: Joi.string().required().min(6).max(40).messages({
+    'string.empty': 'Пароль обязателен',
+    'string.min': 'Пароль должен быть не менее 6 символов',
+    'string.max': 'Пароль должен быть не более 40 символов',
+  }),
+  repeatPassword: Joi.string()
+    .required()
+    .equal(Joi.ref('newPassword'))
+    .messages({
+      'string.empty': 'Повторите пароль обязателен',
+      'any.only': 'Пароли не совпадают',
+    }),
+});
+
 export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch,
+    formState: { errors, isValid },
   } = useForm<TPassword>({
     mode: 'onChange',
+    resolver: joiResolver(resetPasswordSchema),
   });
 
   const onSubmit: SubmitHandler<TPassword> = (data) => {
     console.log(data);
     handleModalClose();
   };
-  // watch, чтобы следить за изменениями значений полей
-  const newPassword = watch('newPassword');
-  const repeatPassword = watch('repeatPassword');
-
-  const isButtonDisabled =
-    !newPassword ||
-    !repeatPassword ||
-    newPassword.length < 6 ||
-    repeatPassword.length < 6;
 
   return (
     <div className={styles.modalContainer}>
@@ -84,7 +92,7 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
             actionType="submit"
             className={styles.modalBtn}
             label="Cохранить"
-            disabled={isButtonDisabled}
+            disabled={!isValid}
           />
         </form>
       </div>

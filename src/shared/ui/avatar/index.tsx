@@ -1,35 +1,37 @@
 import { ImgHTMLAttributes, useState } from 'react';
 import classnames from 'classnames';
-
+import { DefaultAvatar } from '../../../entities/task/ui/task/img/default-avatar';
 import styles from './styles.module.css';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
-  avatarLink: string | undefined;
+  avatarLink: string;
   avatarName: string;
+  isTaskAvatar: boolean;
 }
 
 export const Avatar = ({
   extClassName,
   avatarLink,
   avatarName,
+  isTaskAvatar,
   ...props
 }: AvatarProps) => {
-  const [imgSrc, setImgSrc] = useState(
-    avatarLink || 'https://i.pravatar.cc/100'
-  );
+  const [imgSrc, setImgSrc] = useState<string | null>(avatarLink || null);
 
   const handleError = () => {
-    setImgSrc('https://i.pravatar.cc/100'); // Дефолтный аватар
+    setImgSrc(null);
   };
 
-  return (
+  return imgSrc ? (
     <img
       src={imgSrc}
       alt={avatarName}
       className={classnames(styles.avatar, extClassName)}
-      onError={handleError} // Обрабатываем ошибку
+      onError={handleError}
       {...props}
     />
+  ) : (
+    <DefaultAvatar isTaskAvatar={isTaskAvatar} />
   );
 };
