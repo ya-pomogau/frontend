@@ -1,13 +1,16 @@
-import TaskButtonsRecipient from './components/task-buttons-recipient';
-import TaskButtonsVolunteer from './components/task-buttons-volunteer';
-import TaskButtonsAdmin from './components/task-buttons-admin';
+import { useUser } from 'shared/hooks';
 import { userRole as userRoles } from 'shared/types/common.types';
+import {
+  TaskButtonsRecipient,
+  TaskButtonsVolunteer,
+  TaskButtonsAdmin,
+} from './components';
 import { TaskButtonsProps } from './types';
-import { useAppSelector } from 'app/hooks';
 
 export const TaskButtons = (props: TaskButtonsProps) => {
-  const userRole = useAppSelector((state) => state.user.role);
-  switch (userRole) {
+  const { role = null } = useUser() || {};
+
+  switch (role) {
     case userRoles.VOLUNTEER:
       return <TaskButtonsVolunteer {...props} />;
     case userRoles.RECIPIENT:

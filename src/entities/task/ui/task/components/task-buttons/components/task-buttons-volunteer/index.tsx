@@ -1,18 +1,19 @@
 import { isAfter, parseISO } from 'date-fns';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import classNames from 'classnames';
+
 import {
   modalContentType,
   taskButtonType,
   userRole as userRoles,
 } from 'shared/types/common.types';
-import { ButtonWithModal } from 'widgets/button-with-modal';
-import { ModalContent } from 'widgets/task-buttons-content';
+import { ButtonWithModal, ModalContent } from 'widgets';
 import { SquareButton } from 'shared/ui/square-buttons';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
 import { useFulfillTaskMutation } from 'services/user-task-api';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import { TaskButtonsProps } from '../../types';
-import classNames from 'classnames';
+
 import styles from '../../styles.module.css';
 
 export const TaskButtonsVolunteer = ({
@@ -131,5 +132,3 @@ export const TaskButtonsVolunteer = ({
     </div>
   );
 };
-
-export default TaskButtonsVolunteer;

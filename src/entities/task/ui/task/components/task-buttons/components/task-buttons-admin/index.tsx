@@ -1,23 +1,23 @@
 import { isAfter, parseISO } from 'date-fns';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import classNames from 'classnames';
+
 import {
   modalContentType,
   taskButtonType,
   userRole as userRoles,
+  adminPermission,
 } from 'shared/types/common.types';
 import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ConflictRootAdminButton } from 'shared/ui/conflict-button';
-import { ModalContent } from 'widgets/task-buttons-content';
+import { ModalContent, AdminSelectModal } from 'widgets';
 import { SquareButton } from 'shared/ui/square-buttons';
-import classNames from 'classnames';
-import styles from '../../styles.module.css';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { AdminSelectModal } from 'widgets';
-import { useControlModal } from 'shared/hooks';
+import { useControlModal, usePermission } from 'shared/hooks';
 import { useGetAllAdminsQuery } from 'services/admin-api';
 import { TaskButtonsProps } from '../../types';
-import usePermission from 'shared/hooks/use-permission';
-import { adminPermission } from 'shared/types/common.types';
+
+import styles from '../../styles.module.css';
 
 export const TaskButtonsAdmin = ({
   taskId,
@@ -38,9 +38,7 @@ export const TaskButtonsAdmin = ({
   const isPageActive = locationPath.pathname === '/profile/active';
   const unfulfilledTask = volunteer === null && isTaskExpired && !conflict;
   const { isOpen, handleOpen, handleClose } = useControlModal();
-  const { data: admins } = isRootAdmin
-    ? useGetAllAdminsQuery('')
-    : { data: undefined };
+  const { data: admins } = useGetAllAdminsQuery('', { skip: !isRootAdmin });
   const [conflictModalIsVisible, setConflictModalIsVisible] =
     useState<boolean>(true);
   return (
@@ -91,5 +89,3 @@ export const TaskButtonsAdmin = ({
     </div>
   );
 };
-
-export default TaskButtonsAdmin;

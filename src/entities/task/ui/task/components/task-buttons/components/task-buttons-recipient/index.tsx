@@ -1,3 +1,8 @@
+import classNames from 'classnames';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { format, isAfter, parseISO } from 'date-fns';
+
 import {
   changeCheckbox,
   changeCurrentStep,
@@ -9,23 +14,19 @@ import {
   setTemporary,
   setTime,
 } from 'features/create-request/model';
-import { format, isAfter, parseISO } from 'date-fns';
 import {
   modalContentType,
   taskButtonType,
   userRole as userRoles,
 } from 'shared/types/common.types';
 import { useAppDispatch } from 'app/hooks';
-import { ButtonWithModal } from 'widgets/button-with-modal';
-import { ModalContent } from 'widgets/task-buttons-content';
+import { ButtonWithModal, ModalContent } from 'widgets';
 import { SquareButton } from 'shared/ui/square-buttons';
 import { isTaskUrgent as checkTaskUrgency } from 'shared/libs/utils';
-import classNames from 'classnames';
-import styles from '../../styles.module.css';
 import { useFulfillTaskMutation } from 'services/user-task-api';
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import { TaskButtonsProps } from '../../types';
+
+import styles from '../../styles.module.css';
 
 export const TaskButtonsRecipient = ({
   taskId,
@@ -181,5 +182,3 @@ export const TaskButtonsRecipient = ({
     </div>
   );
 };
-
-export default TaskButtonsRecipient;
