@@ -6,7 +6,6 @@ import { usePermission, useUser, useControlModal } from 'shared/hooks';
 import { RoundButton, Informer, Tooltip, Icon } from 'shared/ui';
 import { Routes } from 'shared/config';
 import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
 import { TaskItem } from '../task';
 import {
   UserRole,
@@ -209,7 +208,7 @@ export const TaskList = ({
                   }}
                 >
                   <div className={styles.closeWrapper}>
-                    <CloseCrossIcon
+                    <Icon icon="CloseCrossIcon"
                       className={styles.closeIcon}
                       size="14"
                       color="blue"

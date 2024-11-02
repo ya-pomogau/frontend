@@ -78,7 +78,8 @@ export const TaskButtons = ({
   //можно убрать этот useState после подключения бэка, т.к. кнопки будут закрашены в зависимости от репортов
   const [clicked, setClicked] = useState<boolean>(false);
 
-  const [conflictModalIsVisible, setConflictModalIsVisible] = useState<boolean>(true);
+  const [conflictModalIsVisible, setConflictModalIsVisible] =
+    useState<boolean>(true);
 
   const initialData = {
     taskId,

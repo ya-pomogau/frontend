@@ -122,12 +122,14 @@ const RegisterForm = () => {
         placeholder="ФИО"
         type="text"
         control={control}
+        extClassName={styles.input}
       />
       <FormInputPhone
         name="phone"
         label="Телефон"
         placeholder="+7 (000) 000-00-00"
         control={control}
+        extClassName={styles.input}
       />
       <div>
         <FormInputAddress
@@ -136,6 +138,7 @@ const RegisterForm = () => {
           placeholder="Адрес"
           control={control}
           setAddress={handleAddressValueChange}
+          extClassName={styles.input}
         />
 
         <p className={styles.text}>

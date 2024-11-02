@@ -4,11 +4,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { resetFilterData } from './model';
 
-export const Filter = ({
-  items,
-  notFoundFilter = false,
-  setFilteres,
-}: FilterProps) => {
+export const Filter = ({ items, notFoundFilter = false }: FilterProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -21,5 +17,5 @@ export const Filter = ({
     return null;
   }
 
-  return <FilterWrapper filterMenu={items} setFilteres={setFilteres} />;
+  return <FilterWrapper filterMenu={items} />;
 };

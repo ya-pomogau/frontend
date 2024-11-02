@@ -82,8 +82,8 @@
 @media (max-width: 735px) {
   .container {
     align-items: flex-start;
-    margin: 0;
-    width: 260px;
+    margin: 3px 0 0 0;
+    width: 270px;
     height: 300px;
   }
   .mainWrapper {
@@ -92,6 +92,7 @@
     align-items: center;
   }
   .buttonsWrapper {
+    gap: 10px;
     margin-top: 80px;
     justify-content: center;
     width: 260px;
@@ -105,6 +106,11 @@
     position: relative;
     bottom: -10px;
   }
+
+  .time {
+    margin-left: 45px;
+  }
+
   .headerWrapper {
     background: linear-gradient(
       90deg,
@@ -121,14 +127,14 @@
   }
   .dateWrapper {
     margin: 0;
-    margin-top: 30px;
+    margin-top: 40px;
     position: relative;
-    bottom: -12px;
   }
 
   .addressWrapper {
     position: relative;
-    bottom: -15px;
+    margin-top: 17px;
+    left: -4px;
   }
   .typeOfTask {
     margin-top: 5px;
@@ -169,6 +175,12 @@
 
   .categories {
     width: 250px;
+    margin-top: 17px;
+    margin-bottom: 13px;
+  }
+
+  .prevButton {
+    margin-right: 0px;
   }
 }
 .edit_button {

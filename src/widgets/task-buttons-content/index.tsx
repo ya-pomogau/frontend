@@ -43,8 +43,8 @@ export const ModalContent = ({
   taskId,
   volunteer,
   volunteerReport,
-  recipientReport, 
-  setConflictModalVisible
+  recipientReport,
+  setConflictModalVisible,
 }: ModalContentProps) => {
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [rejectTask] = useRejectTaskMutation();
@@ -56,7 +56,7 @@ export const ModalContent = ({
       rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
 
-    setConflictModalVisible && setConflictModalVisible(false)
+    setConflictModalVisible && setConflictModalVisible(false);
   };
 
   const isRemainLessThanDay = (taskDeadline: string | null | undefined) => {

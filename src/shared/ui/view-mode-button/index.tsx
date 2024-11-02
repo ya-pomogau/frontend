@@ -1,8 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 import classnames from 'classnames';
 
-import { ListIcon } from '../icons/list-icon';
-import { TilesIcon } from '../icons/tiles-icon';
+import { Icon } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -14,8 +13,8 @@ interface ViewModeButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const iconMap = {
-  list: <ListIcon color="blue" />,
-  tiles: <TilesIcon color="blue" />,
+  list: <Icon icon="ListIcon" color="blue" />,
+  tiles: <Icon icon="TilesIcon" color="blue" />,
 };
 
 export const ViewModeButton = ({

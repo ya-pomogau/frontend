@@ -7,8 +7,8 @@ import styles from '../styles.module.css';
 import { TimePickerElement } from 'shared/ui/time-picker';
 
 interface TimeBlockProps {
+  value: string[];
   onChange: (value: string[]) => void;
-  filterTime: Array<string>;
 }
 
 export const TimeBlock = ({ onChange }: TimeBlockProps) => {
