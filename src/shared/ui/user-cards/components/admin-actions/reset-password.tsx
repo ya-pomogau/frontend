@@ -1,9 +1,8 @@
-import { Input } from 'shared/ui/input';
-import { Button } from 'shared/ui/button';
-import styles from '../../styles.module.css';
-import { Icon } from 'shared/ui';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Typography } from 'shared/ui';
+
+import { Input, Icon, Typography, Button } from 'shared/ui';
+
+import styles from '../../styles.module.css';
 
 interface ResetPasswordProps {
   handleModalClose: () => void;

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
 import { useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import {
   setDate,
@@ -10,17 +11,20 @@ import {
   openPopup,
   clearState,
 } from 'features/create-request/model';
-import { Button } from 'shared/ui/button';
-import { Icon } from 'shared/ui';
-import { CategoriesBackground } from 'shared/ui/categories-background';
-import styles from './common-step.module.css';
-import { EditButton } from 'shared/ui/edit-button';
+import {
+  Button,
+  Icon,
+  Typography,
+  EditButton,
+  CategoriesBackground,
+} from 'shared/ui';
 import {
   CreateTaskDto,
   useCreateTaskMutation,
   useUpdateTaskMutation,
 } from 'services/user-task-api';
-import { Typography } from 'shared/ui';
+
+import styles from './common-step.module.css';
 
 interface ICommonStepProps {
   isMobile?: boolean;
@@ -140,13 +144,13 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
                 />
               )}
             </div>
-            {isTypeEdit ? (
+            {isTypeEdit && (
               <EditButton
                 extClassName={styles.edit_button}
                 label="Изменить дату и время"
                 onClick={() => handleEditButton('date')}
               />
-            ) : null}
+            )}
             <div className={styles.addressWrapper}>
               <Icon icon="LocationIcon" color="blue" />
               <Typography variant={'support'} content={address} />
@@ -172,17 +176,17 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               content={
                 <>
                   {description}
-                  {isTypeEdit ? (
+                  {isTypeEdit && (
                     <EditButton
                       extClassName={styles.edit_button}
                       label="Изменить задание"
                       onClick={() => handleEditButton('description')}
                     />
-                  ) : null}
+                  )}
                 </>
               }
             />
-            {[...description].length > 170 && (
+            {description.length > 170 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={styles.readMoreButton}
@@ -239,17 +243,17 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               content={
                 <>
                   {description}
-                  {isTypeEdit ? (
+                  {isTypeEdit && (
                     <EditButton
                       extClassName={styles.edit_button}
                       label="Изменить задание"
                       onClick={() => handleEditButton('description')}
                     />
-                  ) : null}
+                  )}
                 </>
               }
             />
-            {[...description].length > 160 && (
+            {description.length > 160 && (
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className={styles.readMoreButton}

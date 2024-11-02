@@ -2,7 +2,13 @@ import { useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { Button, FormInput, FormInputPhone, FormInputAddress } from 'shared/ui';
+import {
+  Button,
+  FormInput,
+  FormInputPhone,
+  FormInputAddress,
+  Typography,
+} from 'shared/ui';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole, userRole as userRoles } from 'shared/types/common.types';
@@ -10,7 +16,6 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { schema } from './schema';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 export interface IRegisterForm {
   name: string;

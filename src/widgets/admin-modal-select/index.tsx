@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { Accordion, Button } from 'shared/ui';
-import { LightPopup } from 'shared/ui/light-popup';
-import styles from './styles.module.css';
+
+import { Accordion, Button, Typography, LightPopup } from 'shared/ui';
 import { User } from 'entities/user/types';
-import { Typography } from 'shared/ui';
+
+import styles from './styles.module.css';
 
 type Props = {
   isOpen: boolean;

@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import { format } from 'date-fns';
 
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 interface TaskInfoProps {
   date: string | null;

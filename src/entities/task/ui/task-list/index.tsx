@@ -3,20 +3,18 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { usePermission, useUser, useControlModal } from 'shared/hooks';
-import { RoundButton, Informer, Tooltip, Icon } from 'shared/ui';
+import { RoundButton, Informer, Tooltip, Icon, Typography } from 'shared/ui';
 import { Routes } from 'shared/config';
 import { unauthorizedRecipientPopupMessage } from 'shared/libs/constants';
-import { TaskItem } from '../task';
 import {
   UserRole,
   userRole as userRoles,
   userStatus,
 } from 'shared/types/common.types';
-
 import type { Task } from 'entities/task/types';
+import { TaskItem } from '../task';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 interface TaskListProps {
   userRole: UserRole | null;

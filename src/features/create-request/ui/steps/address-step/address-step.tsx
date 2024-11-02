@@ -2,17 +2,15 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Button } from 'shared/ui/button';
+import { Button, Typography, InputAddress } from 'shared/ui';
 import { setAddress } from 'features/create-request/model';
 import YandexMap from 'widgets/map';
-import { InputAddress } from 'shared/ui/input-address';
 
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { userRole } from 'shared/types/common.types';
 
 import styles from './address-step.module.css';
-import { Typography } from 'shared/ui';
 
 interface IAddressProps {
   isMobile?: boolean;
@@ -79,18 +77,15 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               />
               <div className={styles.alertWrapper}>
                 <div className={styles.text}>
-                  <Typography
-                    variant={'support'}
-                    content={[
-                      '* Будьте осторожны, если указываете домашний адрес,',
-                      <Typography
-                        tag={'span'}
-                        color={'orange'}
-                        content={' не '}
-                      />,
-                      'пишите его полностью.',
-                    ]}
-                  />
+                  <Typography variant={'support'}>
+                    * Будьте осторожны, если указываете домашний адрес,
+                    <Typography
+                      tag={'span'}
+                      color={'orange'}
+                      content={' не '}
+                    />
+                    пишите его полностью.
+                  </Typography>
                 </div>
               </div>
               <div className={styles.wrapperForGradient} />
@@ -106,14 +101,12 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               extClassName={styles.input}
             />
             <div className={styles.text}>
-              <Typography
-                variant={'support'}
-                content={[
-                  '* Рекомендуем',
-                  <Typography tag={'span'} color={'orange'} content={' не '} />,
-                  'указывать полный домашний адрес с номером квартиры в целях безопасности. Достаточно улицы, номера дома и подъезда.',
-                ]}
-              />
+              <Typography variant={'support'}>
+                * Рекомендуем
+                <Typography tag={'span'} color={'orange'} content={' не '} />
+                указывать полный домашний адрес с номером квартиры в целях
+                безопасности. Достаточно улицы, номера дома и подъезда.
+              </Typography>
             </div>
             <div className={styles.map}>
               <YandexMap

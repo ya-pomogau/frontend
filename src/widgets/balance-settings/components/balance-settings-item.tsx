@@ -1,10 +1,8 @@
 import { ChangeEvent } from 'react';
 
-import { Input } from 'shared/ui';
-import { Icon } from 'shared/ui';
+import { Input, Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 interface BalanceSettingsItemProps {
   title: string;

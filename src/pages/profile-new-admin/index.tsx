@@ -1,8 +1,7 @@
-import { Icon, SmartHeader } from 'shared/ui';
+import { Icon, SmartHeader, Typography } from 'shared/ui';
 import { NewAdminForm } from './components';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 export function CreateNewAdminPage() {
   return (

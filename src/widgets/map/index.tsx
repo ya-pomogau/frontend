@@ -1,4 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
 import {
   Circle,
   GeolocationControl,
@@ -7,30 +8,28 @@ import {
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
+
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
-import usePermission from 'shared/hooks/use-permission';
+import { usePermission } from 'shared/hooks';
+import { LightPopup, Icon, Typography } from 'shared/ui';
 import { getBounds } from 'shared/libs/utils';
-import Mark from './Mark';
-import { LightPopup } from 'shared/ui/light-popup';
 import {
   unauthorizedVolunteerPopupMessage,
   thankForAssignTaskMessage,
   cantAssignTaskMessage,
   unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
-import { Icon } from 'shared/ui';
-
+import { setAddress } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { userRole, UserRole, userStatus } from 'shared/types/common.types';
 
-import classNames from 'classnames';
+import UserMark from './UserMark';
+import Mark from './Mark';
+
 import './styles.css';
 import styles from './styles.module.css';
-import UserMark from './UserMark';
-import { setAddress } from 'features/create-request/model';
-import { useAppDispatch } from 'app/hooks';
-import { Typography } from 'shared/ui';
 
 interface YandexMapProps {
   width?: string | number;
@@ -231,12 +230,11 @@ export const YandexMap = ({
             <Typography
               tag={'h3'}
               variant={'titleResize'}
-              content={[
-                <Icon icon="ConflictIcon" color="orange" />,
-                'Извините',
-              ]}
               extraClass={styles.popupTitle}
-            />
+            >
+              <Icon icon="ConflictIcon" color="orange" />
+              Извините
+            </Typography>
             <Typography
               color={'darkGray'}
               content={cantAssignTaskMessage}

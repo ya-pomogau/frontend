@@ -2,7 +2,13 @@ import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { PageSubMenuForAdmins } from 'widgets';
-import { Icon, SmartHeader, Input, GradientDivider } from 'shared/ui';
+import {
+  Icon,
+  SmartHeader,
+  Input,
+  GradientDivider,
+  Typography,
+} from 'shared/ui';
 import { usePermission } from 'shared/hooks';
 import { Filter } from '../../features/filter';
 import { RequestsTab } from '../requests-tab';
@@ -21,7 +27,6 @@ import { IFilterValues } from 'features/filter/types';
 import { FilterItemsIds } from 'features/filter/consts';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 interface PageProps {
   incomeTab: string;

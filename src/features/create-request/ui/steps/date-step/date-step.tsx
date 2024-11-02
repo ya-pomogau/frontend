@@ -8,14 +8,16 @@ import {
   setTime,
   changeCheckbox,
 } from 'features/create-request/model';
-import { Button } from 'shared/ui/button';
-import Checkbox from 'shared/ui/checkbox';
-import { DatePicker } from 'shared/ui/date-picker';
+import {
+  Checkbox,
+  Button,
+  TimePickerPopup,
+  Typography,
+  DatePicker,
+} from 'shared/ui';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 import styles from './date-step.module.css';
-import usePropsButtonCustom from '../useButtonPropsCustom';
-import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
-import { Typography } from 'shared/ui';
 
 interface IDateStepProps {
   isMobile?: boolean;
@@ -141,12 +143,10 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
             content={
               'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
             }
-            extraClass={classNames(
-              styles.validationMessage,
-              (timeValidation || !time) &&
-                !termlessRequest &&
-                styles.validationMessageActive
-            )}
+            extraClass={classNames(styles.validationMessage, {
+              [styles.validationMessageActive]:
+                (timeValidation || !time) && !termlessRequest,
+            })}
           />
           <div
             className={classNames(

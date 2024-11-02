@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useLocation } from 'react-router-dom';
 
 import { ButtonWithModal, ModalContent } from 'widgets';
-import { RoundButton, Avatar } from 'shared/ui';
+import { RoundButton, Avatar, Typography } from 'shared/ui';
 import { Routes } from 'shared/config';
 import { useControlModal } from 'shared/hooks';
 import { modalContentType, taskButtonType } from 'shared/types/common.types';
@@ -15,7 +15,6 @@ import { mockChatMessages } from '../../../../../chat/mock-messages';
 
 import placeholder from '../../img/placeholder.svg';
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 interface TaskUserProps {
   user: UserProfile | null;

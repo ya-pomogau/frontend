@@ -1,18 +1,20 @@
 import classnames from 'classnames';
 
-import { Avatar } from 'shared/ui/avatar';
-import { SquareButton } from 'shared/ui/square-buttons';
-
 import { MessageInterface } from 'shared/types/chat.types';
-import { InputWrapper, GradientDivider } from 'shared/ui';
+import {
+  InputWrapper,
+  GradientDivider,
+  Typography,
+  Icon,
+  Avatar,
+  SquareButton,
+} from 'shared/ui';
 import { useMediaQuery, useForm } from 'shared/hooks';
-import { Icon } from 'shared/ui/icons';
-import { MessagesList } from './components/messages-list';
+import { AnyUserInterface } from 'shared/types/user.type';
 import { Breakpoints } from 'shared/config';
+import { MessagesList } from './components/messages-list';
 
 import styles from './styles.module.css';
-import { AnyUserInterface } from 'shared/types/user.type';
-import { Typography } from 'shared/ui';
 
 interface PopupChatProps {
   messages: MessageInterface[];

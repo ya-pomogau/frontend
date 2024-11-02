@@ -1,9 +1,10 @@
 import classnames from 'classnames';
-import styles from '../styles.module.css';
+import { ReactNode } from 'react';
 
 import { userRole, UserRole } from '../../../types/common.types';
-import { ReactNode } from 'react';
 import { Typography } from 'shared/ui';
+
+import styles from '../styles.module.css';
 
 interface UserInfoProps {
   role: UserRole;

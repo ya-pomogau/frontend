@@ -1,8 +1,9 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
 
-import styles from './styles.module.css';
 import { Typography } from '../../ui';
+
+import styles from './styles.module.css';
 
 interface CardButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extClassName?: string;
@@ -19,14 +20,12 @@ export const CardButton = ({
   isActive,
   ...props
 }: CardButtonProps) => {
-  const buttonActiveClass = isActive ? styles['card-button-active'] : '';
-
   return (
     <button
       type="button"
       className={classnames(
         styles['card-button'],
-        buttonActiveClass,
+        { [styles['card-button-active']]: isActive },
         extClassName
       )}
       {...props}

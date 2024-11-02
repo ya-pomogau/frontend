@@ -1,11 +1,9 @@
 import classNames from 'classnames';
 import { useState, Dispatch, SetStateAction } from 'react';
 import { differenceInHours, parseISO } from 'date-fns';
-import Checkbox from 'shared/ui/checkbox';
-import styles from './styles.module.css';
-import { Button } from 'shared/ui/button';
+
+import { Button, Typography, Checkbox } from 'shared/ui';
 import { reasonType as reasonTypes, ReasonType } from './types';
-import { textStyle, titleStyle } from './utils';
 import {
   UserRole,
   userRole as userRoles,
@@ -20,7 +18,8 @@ import { ButtonWithModal } from 'widgets/button-with-modal';
 import { useControlModal } from 'shared/hooks';
 import { infoAdmin, PopupChat } from 'entities';
 import { taskReport, TaskReport } from 'entities/task/types';
-import { Typography } from 'shared/ui';
+
+import styles from './styles.module.css';
 
 interface ModalContentProps {
   type: ModalContentType;
@@ -97,7 +96,7 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'Укажите причину отмены'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <div className={classNames(styles.modalContent, styles.flexColumn)}>
             <Checkbox
@@ -172,14 +171,14 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'Волонтер пока не откликнулся'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <Typography
             fontFamily={'secondaryFont'}
             content={
               'Вы не можете подтвердить не выполнение заявки, пока у заявки нет волонтера.'
             }
-            extraClass={textStyle}
+            extraClass={styles.modalContent}
           />
         </div>
       ) : (
@@ -194,7 +193,7 @@ export const ModalContent = ({
                 ? 'Не выполнена'
                 : 'Выполнена'
             }
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           {
             <>
@@ -256,14 +255,14 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'Волонтер пока не откликнулся'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <Typography
             fontFamily={'secondaryFont'}
             content={
               'Вы не можете подтвердить выполнение заявки, пока у заявки нет волонтера.'
             }
-            extraClass={textStyle}
+            extraClass={styles.modalContent}
           />
         </div>
       ) : (
@@ -272,7 +271,7 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'Благодарим за отзывчивость'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <Typography
             fontFamily={'secondaryFont'}
@@ -281,7 +280,7 @@ export const ModalContent = ({
                 ? 'от волонтера'
                 : 'от реципиента'
             }`}
-            extraClass={textStyle}
+            extraClass={styles.modalContent}
           />
         </div>
       );
@@ -292,7 +291,7 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'Связь с администратором'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <div className={styles.modalButtons}>
             <Button
@@ -319,14 +318,14 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'Номер телефона:'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <a href={`tel:${phoneNumber}`}>
             <Typography
               tag={'span'}
               fontFamily={'secondaryFont'}
               content={phoneNumber}
-              extraClass={textStyle}
+              extraClass={styles.modalContent}
             />
           </a>
         </div>
@@ -340,12 +339,12 @@ export const ModalContent = ({
               tag={'h3'}
               variant={'paragraph-bold'}
               content={'Подтвердите удаление заявки'}
-              extraClass={titleStyle}
+              extraClass={styles.modalTitle}
             />
             <Typography
               fontFamily={'secondaryFont'}
               content={'Заявка будет отменена без возможности восстановления.'}
-              extraClass={textStyle}
+              extraClass={styles.modalContent}
             />
             <div className={styles.modalButtons}>
               <Button
@@ -364,12 +363,12 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'До начала заявки менее 24 часа'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <Typography
             fontFamily={'secondaryFont'}
             content={'Вы не можете отменить заявку самостоятельно.'}
-            extraClass={textStyle}
+            extraClass={styles.modalContent}
           />
           <div className={styles.modalButtons}>
             <Button
@@ -396,14 +395,14 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'На заявку откликнулись'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
           <Typography
             fontFamily={'secondaryFont'}
             content={
               'Вы не можете отменить или отредактировать заявку самостоятельно.'
             }
-            extraClass={textStyle}
+            extraClass={styles.modalContent}
           />
           <div className={styles.modalButtons}>
             <Button
@@ -430,7 +429,7 @@ export const ModalContent = ({
             tag={'h3'}
             variant={'paragraph-bold'}
             content={'На заявку не откликнулись'}
-            extraClass={titleStyle}
+            extraClass={styles.modalTitle}
           />
         </div>
       );

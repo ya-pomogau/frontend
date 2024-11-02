@@ -1,9 +1,10 @@
 import { NavLink, NavLinkRenderProps } from 'react-router-dom';
 
-import type { ISideBarElementProps } from './../types';
+import { Typography } from 'shared/ui';
+
+import type { ISideBarElementProps } from '../types';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 export const SideBarItem = ({
   title,

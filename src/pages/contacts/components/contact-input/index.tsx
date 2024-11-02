@@ -1,10 +1,9 @@
 import { DetailedHTMLProps, InputHTMLAttributes, MouseEvent } from 'react';
 import cn from 'classnames';
 
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 type InputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,

@@ -45,11 +45,11 @@
 }
 
 @media screen and (max-width: 1150px) {
-  div .dateText {
+  .date .dateText {
     font-size: var(--font-size-s);
     font-weight: var(--font-weight-bold);
   }
-  div .addressText {
+  .date .addressText {
     font-weight: var(--font-weight-bold);
   }
 }

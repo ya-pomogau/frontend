@@ -2,10 +2,9 @@ import classNames from 'classnames';
 import { useRef } from 'react';
 
 import { useTruncatedText } from 'shared/hooks';
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 interface TaskDescriptionProps {
   description: string;

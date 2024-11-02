@@ -1,9 +1,8 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-import { Icon } from 'shared/ui/icons';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './DropDownMenuButton.module.css';
-import { Typography } from '../../ui';
 
 type DropDownMenuButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isMobile?: boolean;

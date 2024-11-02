@@ -1,17 +1,14 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { initTitleMarkdown, initDescriptionMarkdown } from './content';
-import style from './markdown-style.module.css';
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { Button } from '../../shared/ui/button';
-import { SmartHeader } from '../../shared/ui/smart-header';
-import { Icon } from 'shared/ui';
 
-import { useMediaQuery } from '../../shared/hooks';
-import usePermission from '../../shared/hooks/use-permission';
+import { Button, Icon, Typography, SmartHeader } from 'shared/ui';
+import { useMediaQuery, usePermission } from 'shared/hooks';
 import { userRole } from 'shared/types/common.types';
 import { Breakpoints } from 'shared/config';
-import { Typography } from 'shared/ui';
+import { initTitleMarkdown, initDescriptionMarkdown } from './content';
+
+import style from './markdown-style.module.css';
 
 export function PolicyPage() {
   const isMainAdmin = usePermission([], userRole.ADMIN);

@@ -1,11 +1,16 @@
-import { ConflictCard } from 'shared/ui/conflict-card';
-import styles from './styles.module.css';
 import { FC } from 'react';
-import { Icon } from 'shared/ui/icons';
-import { CategoriesBackground } from 'shared/ui/categories-background';
-import { TaskConflict, TaskReport } from 'entities/task/types';
 import { format } from 'date-fns';
-import { Typography } from 'shared/ui';
+
+import {
+  ConflictCard,
+  Typography,
+  Icon,
+  CategoriesBackground,
+} from 'shared/ui';
+
+import { TaskConflict, TaskReport } from 'entities/task/types';
+
+import styles from './styles.module.css';
 
 interface IUser {
   user: {
@@ -24,16 +29,16 @@ export interface PropsInfoConflict {
   info: TaskConflict;
 }
 
-export const InfoConflict: FC<PropsInfoConflict> = (props) => {
+export const InfoConflict: FC<PropsInfoConflict> = ({ info }) => {
   const infoVolonter: IUser = {
-    user: props.info.volunteer,
+    user: info.volunteer,
     role: 'volunteer',
-    report: props.info.volunteerReport,
+    report: info.volunteerReport,
   };
   const infoRecepient: IUser = {
-    user: props.info.recipient,
+    user: info.recipient,
     role: 'recipient',
-    report: props.info.recipientReport,
+    report: info.recipientReport,
   };
   const users: IUser[] = [infoVolonter, infoRecepient];
 
@@ -49,45 +54,30 @@ export const InfoConflict: FC<PropsInfoConflict> = (props) => {
           />
         ))}
       </div>
-      {props && (
+      {info && (
         <div className={styles.boxInfo}>
-          <Typography
-            color={'primary'}
-            variant={'paragraph-bold'}
-            content={
+          <Typography color={'primary'} variant={'paragraph-bold'}>
+            <Icon color="blue" icon="CalendarIcon" size="14" />
+            {info.date
+              ? format(new Date(info.date), 'dd.MM.yyyy')
+              : 'бессрочно'}
+            {info.date && (
               <>
-                <Icon color="blue" icon="CalendarIcon" size="14" />
-                {` ${
-                  props.info.date
-                    ? format(new Date(props.info.date), 'dd.MM.yyyy')
-                    : 'бессрочно'
-                } `}
-                {props.info.date && (
-                  <>
-                    <Icon color="blue" icon="ClockIcon" size="14" />
-                    {` ${format(new Date(props.info.date), 'HH.MM')}`}
-                  </>
-                )}
+                <Icon color="blue" icon="ClockIcon" size="14" />
+                {` ${format(new Date(info.date), 'HH.MM')}`}
               </>
-            }
-          />
-          <Typography
-            color={'primary'}
-            variant={'paragraph-bold'}
-            content={
-              <>
-                {' '}
-                <Icon color="blue" icon="LocationIcon" size="14" />
-                {` ${props.info.address}`}
-              </>
-            }
-          />
+            )}
+          </Typography>
+          <Typography color={'primary'} variant={'paragraph-bold'}>
+            <Icon color="blue" icon="LocationIcon" size="14" />
+            {info.address}
+          </Typography>
           <CategoriesBackground
             theme="primary"
             size="medium"
-            content={props.info.category.title}
+            content={info.category.title}
           />
-          <Typography content={props.info.description} />
+          <Typography content={info.description} />
         </div>
       )}
     </article>

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './styles.module.css';
-import { LegacyRef, ReactNode, forwardRef } from 'react';
+import { LegacyRef, ReactNode, forwardRef, PropsWithChildren } from 'react';
 
 type TypographyTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
 type TypographyVariant =
@@ -34,7 +34,7 @@ interface TypographyProps {
   variant?: TypographyVariant;
   fontFamily?: TypographyFontFamily;
   color?: TypographyColor;
-  content: string | ReactNode | number;
+  content?: string | ReactNode | number;
   extraClass?: string;
 }
 
@@ -46,7 +46,8 @@ export const Typography = forwardRef(function Typography(
     content,
     color = 'black',
     fontFamily = 'primaryFont',
-  }: TypographyProps,
+    children,
+  }: PropsWithChildren<TypographyProps>,
   ref: LegacyRef<HTMLHeadingElement>
 ) {
   const textStyles = classNames(
@@ -61,7 +62,7 @@ export const Typography = forwardRef(function Typography(
 
   return (
     <Tag ref={ref} className={textStyles}>
-      {content}
+      {content || children}
     </Tag>
   );
 });

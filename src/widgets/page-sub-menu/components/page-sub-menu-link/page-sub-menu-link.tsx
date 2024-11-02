@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
-import styles from './page-sub-menu-link.module.css';
 import { Typography } from 'shared/ui';
+
+import styles from './page-sub-menu-link.module.css';
 
 interface PageSubMenuLinkProps {
   to: string;
@@ -23,10 +24,9 @@ export const PageSubMenuLink = ({
     <NavLink to={to} className="link">
       {({ isActive }) => (
         <div
-          className={classnames(
-            styles.tabContainer__item,
-            isActive ? styles.tabContainer__itemActive : ''
-          )}
+          className={classnames(styles.tabContainer__item, {
+            [styles.tabContainer__itemActive]: isActive,
+          })}
         >
           <Typography
             color={isActive ? 'black' : 'interface-additional'}

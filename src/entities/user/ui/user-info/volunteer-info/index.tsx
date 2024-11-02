@@ -1,8 +1,7 @@
 import classnames from 'classnames';
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 interface VolunteerInfoProps {
   score: number;

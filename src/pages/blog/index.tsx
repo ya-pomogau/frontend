@@ -10,6 +10,7 @@ import {
   Loader,
   LightPopup,
   Button,
+  Typography,
 } from 'shared/ui';
 import { useControlModal, usePermission } from 'shared/hooks';
 import { PostProps } from 'shared/ui/post/Post';
@@ -17,7 +18,6 @@ import { IValuesBlog } from 'shared/types/blog.types';
 import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
-import { Typography } from 'shared/ui';
 
 const postsPerPage = 10;
 
