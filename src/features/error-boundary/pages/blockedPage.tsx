@@ -16,7 +16,8 @@ export const BlockedPage = () => {
       iconConfig={iconConfig}
       headerText={'Блокировка'}
       imageSrc={image}
-      imageAlt="disconnection_image"
+      imageAlt="blocked_image"
+      centered={false}
     >
       <Typography
         tag={'h3'}
