@@ -88,7 +88,7 @@ export const adminsApi = createApi({
       },
       invalidatesTags: [{ type: 'Unconfirmed' }, { type: 'UsersByRole' }],
     }),
-    getTasksConfilct: build.query<TaskConflict[], string | undefined>({
+    getTasksConflict: build.query<TaskConflict[], string | undefined>({
       query: () => {
         return {
           url: `/admin/tasks/conflicted`,
@@ -125,7 +125,7 @@ export const adminsApi = createApi({
       },
       invalidatesTags: [{ type: 'ConflictedTasks' }, { type: 'WorkTasks' }],
     }),
-    resolСonflict: build.mutation<TaskConflict, string | undefined>({
+    resolveConflict: build.mutation<TaskConflict, string | undefined>({
       query: (id) => {
         return {
           url: `/admin/tasks/${id}/resolve/fulfill`,
@@ -196,10 +196,10 @@ export const {
   useGetAllAdminsQuery,
   useConfirmUserMutation,
   usePromoteUserMutation,
-  useGetTasksConfilctQuery,
+  useGetTasksConflictQuery,
   useGetTasksWorkConflictQuery,
   useTakeConflictTaskMutation,
-  useResolСonflictMutation,
+  useResolveConflictMutation,
   useUpdateContactsMutation,
   useCreateNewAdminMutation,
   useAddAdminPrivilegiesMutation,
