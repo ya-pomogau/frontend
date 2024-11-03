@@ -104,9 +104,9 @@ export const mockMetaConflictChatsMessage: ConflictChatsTupleMetaInterface = {
   moderator: mockAdmin,
   taskId: '222',
   adminVolunteerWatermark: 'string',
-  adminVolunteerUnreads: 0,
+  adminVolunteerUnreads: 2,
   adminRecipientWatermark: 'string',
-  adminRecipientUnreads: 0,
+  adminRecipientUnreads: 1,
   meta: [volunteerMetaConflictChat, recipientMetaConflictChat],
 };
 

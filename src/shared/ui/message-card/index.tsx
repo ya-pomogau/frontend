@@ -8,7 +8,7 @@ interface PropsMessageCard {
   onClick: () => void;
   action: boolean;
   user?: AnyUserInterface | null;
-  position?: boolean;
+  position?: 1 | 2 | undefined;
   unreads: number;
 }
 
@@ -72,13 +72,11 @@ export const MessageCard = ({
   return (
     <article
       onClick={onClick}
-      className={cn(
-        styles.card,
-        { [styles.card_action]: action },
-        {
-          [styles.cardSwipe]: position,
-        }
-      )}
+      className={cn(styles.card, {
+        [styles.card_action]: action,
+        [styles.cardSwipe]: position === 1,
+        [styles.cardConflict]: position === 2,
+      })}
     >
       {variant((name, desc) => (
         <div className={styles.userInfo}>

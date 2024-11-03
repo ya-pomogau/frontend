@@ -27,9 +27,9 @@ const meta: Meta<typeof MessageCard> = {
       defaultValue: false,
     },
     position: {
-      description: 'Позиционирование сообщения',
-      type: 'boolean',
-      defaultValue: false,
+      description: 'Позиционирование сообщения варианты — 0,1,2',
+      type: 'number',
+      defaultValue: 0,
     },
     statusConflict: {
       description: 'Заявка конфликта',
@@ -55,6 +55,5 @@ export const CardMessage: Story = {
     unreads: 10,
     statusConflict: false,
     action: false,
-    position: false,
   },
 };
