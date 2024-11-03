@@ -1,124 +1,308 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 import { MessageCard } from 'shared/ui/message-card';
-import { InfoConflict } from 'widgets/conflict-information';
-import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { Icon } from 'shared/ui/icons';
 import { Button } from 'shared/ui/button';
 import {
-  useGetTasksConfilctQuery,
+  useGetTasksConflictQuery,
   useGetTasksWorkConflictQuery,
   useTakeConflictTaskMutation,
-  useResolСonflictMutation,
+  useResolveConflictMutation,
 } from 'services/admin-api';
 import { TaskConflict } from 'entities/task/types';
 import WrapperMessage from 'shared/ui/wrapper-messages';
 import { mockAdminChatsResponse } from 'entities/chat/mock-response';
+import { usePermission } from 'shared/hooks';
+import { Routes } from 'shared/config';
+import { adminPermission, userRole } from 'shared/types/common.types';
+import { WindowChatUsers, WindowConflictUsers } from 'widgets';
+import {
+  MessageInterface,
+  RecipientConflictChatMetaInterface,
+  VolunteerConflictChatMetaInterface,
+} from 'shared/types/chat.types';
+import { InputWrapper } from 'shared/ui';
+import { AnyUserInterface } from 'shared/types/user.type';
 
 export const SectionChatsConflict = () => {
-  // Получаем метаданные по конфликтным чатам
-  const conflictChats = mockAdminChatsResponse.conflict;
-  const moderatedChats = mockAdminChatsResponse.moderated;
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const isInWorkPage = currentPath === Routes.CHAT_CONFLICT_IN_WORK;
 
-  // const { data: tasks } = useGetTasksConfilctQuery('');
-  // const { data: tasksWork } = useGetTasksWorkConflictQuery('');
-  const [takeConflictTask] = useTakeConflictTaskMutation();
-  const [resolСonflict] = useResolСonflictMutation();
+  const isConflictsPermissionGranted = usePermission(
+    [adminPermission.CONFLICTS],
+    userRole.ADMIN
+  );
 
-  // const dataMessage: TaskConflict[] | undefined =
-  //   location.pathname === '/available-chats' ? tasks : tasksWork;
+  /* #####################
+  Получаем данные о конфликтных задачах
+  ##################### */
+  // TODO: Разделить загрузку данных в зависимости от currentPath
+  const unreviewed = useGetTasksConflictQuery('', {
+    skip: !isConflictsPermissionGranted,
+  });
+  const inWork = useGetTasksWorkConflictQuery('', {
+    skip: !isConflictsPermissionGranted,
+  });
+  // TODO: Загрузить данные о завершенных конфликтах
+  const completed = { data: [], status: 'mocked' };
+
+  const mockTaskId = '222';
+
+  const [tasks, setTasks] = useState<TaskConflict[] | undefined>([]);
+  const [chatMessage, setChatMessage] = useState<MessageInterface[] | null>(
+    null
+  );
+
+  const [selectedTask, setSelectedTask] = useState<string>('');
+  const [selectedChat, setSelectedChat] = useState<string>('');
+
   const [getInfoTask, setGetInfoTask] = useState<TaskConflict>();
-  const [selectedCard, setSelectedCard] = useState<string>('');
-  const [isOpenConflict, setIsOpenConflict] = useState<boolean>(false);
+  const [chatmateInfo, setСhatmateInfo] = useState<AnyUserInterface | null>(
+    null
+  );
 
-  const handleClickCard = (task: TaskConflict) => {
-    setSelectedCard(task._id);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const [inputValue, setInputValue] = useState<string>('');
+  const [_, setFileInput] = useState<string>('');
+
+  const [takeConflictTask] = useTakeConflictTaskMutation();
+  const [resolveConflict] = useResolveConflictMutation();
+
+  const handleClickConflictCard = (task: TaskConflict) => {
+    setChatMessage(null);
+    setSelectedChat('');
+    setСhatmateInfo(null);
+
+    setSelectedTask(task._id);
     setGetInfoTask(task);
-    setIsOpenConflict(true);
+    setIsOpen(true);
+
+    // TODO: Поиск или создание чатов, через api, согласно выбранной задаче
   };
 
-  useEffect(() => {
-    setIsOpenConflict(false);
-    setSelectedCard('');
-  }, [location]);
+  const handleClickChatCard = (
+    chat:
+      | VolunteerConflictChatMetaInterface
+      | RecipientConflictChatMetaInterface
+  ) => {
+    // Закрываем старый чат
+    chatMessage && setChatMessage(null);
+    setGetInfoTask(undefined);
 
-  const handleCloseConflict = () => {
-    setIsOpenConflict((state) => !state);
-    setSelectedCard('');
+    // Открываем новый
+    setSelectedChat(chat._id);
+    setСhatmateInfo(
+      (chat as RecipientConflictChatMetaInterface).recipient ??
+        (chat as VolunteerConflictChatMetaInterface).volunteer
+    );
+    setIsOpen(true);
+
+    // TODO: Стираем данные о непрочитанных сообщениях через api
+    chat.unreads = 0;
+  };
+
+  const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { value } = target;
+    setInputValue(value);
+  };
+
+  const handleCloseWrapper = () => {
+    setIsOpen((state) => !state);
+    setSelectedTask('');
+    setSelectedChat('');
+    setChatMessage(null);
+    setGetInfoTask(undefined);
+    setСhatmateInfo(null);
   };
 
   const getWorkTask = async (id: string | undefined) => {
-    setIsOpenConflict(false);
+    setIsOpen(false);
     await takeConflictTask(id).unwrap();
   };
 
   const handleResolutionConflict = async (id: string | undefined) => {
-    setIsOpenConflict(false);
-    await resolСonflict(id).unwrap();
+    setIsOpen(false);
+    await resolveConflict(id).unwrap();
   };
 
+  /* #####################
+  Получаем данные о конфликтном чате
+  ##################### */
+  const conflictChats = mockAdminChatsResponse.conflict;
+
+  /* #####################
+  ################# Кнопки
+  ##################### */
+  const boxButton = {
+    [`${Routes.CHAT_CONFLICT_UNREVIEWED}`]: (
+      <Button
+        label="Взять в работу"
+        buttonType="primary"
+        actionType="button"
+        onClick={() => getWorkTask(getInfoTask?._id)}
+        customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
+      />
+    ),
+    [`${Routes.CHAT_CONFLICT_IN_WORK}`]: (
+      <>
+        <Button
+          label="Конфликт решен"
+          buttonType="secondary"
+          actionType="button"
+          onClick={() => handleResolutionConflict(getInfoTask?._id)}
+        />
+        <Button
+          label="Ответить"
+          buttonType="primary"
+          actionType="button"
+          disabled
+          customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
+        />
+      </>
+    ),
+    [`${Routes.CHAT_CONFLICT_COMPLETED}`]: (
+      <Button
+        label="Вернуть в работу"
+        buttonType="primary"
+        actionType="button"
+        onClick={() => {}}
+        customIcon={<Icon color="white" icon="LockIcon" />}
+      />
+    ),
+  }[currentPath];
+  /* #####################
+  ############# USE EFFECT
+  ##################### */
+  useEffect(() => {
+    // Загрузка сообщений по id-чата из метаданных
+    // TODO: Загрузка с сервера через websocket, а не из моков
+    const match = conflictChats.find(({ meta }) => meta.taskId === mockTaskId);
+
+    const newMatch = match?.chats.find(
+      (chat) => chat[0].chatId === selectedChat
+    );
+    setChatMessage(newMatch as MessageInterface[]);
+
+    selectedChat && setIsOpen(true);
+  }, [selectedChat, isOpen, conflictChats]);
+
+  useEffect(() => {
+    const RoutesNaming = {
+      [`${Routes.CHAT_CONFLICT}`]: 'Конфликты',
+      [`${Routes.CHAT_CONFLICT_UNREVIEWED}`]: 'Конфликты → Нерассмотренные',
+      [`${Routes.CHAT_CONFLICT_IN_WORK}`]: 'Конфликты → В работе',
+      [`${Routes.CHAT_CONFLICT_COMPLETED}`]: 'Конфликты → Завершенные',
+    } as const;
+
+    console.log(
+      '===============================\n',
+      `Мы находимся в разделе ${RoutesNaming[currentPath]}`,
+      '\n==============================='
+    );
+
+    // Устанавливаем конфликтные задачи, в виде списка чатов
+    setTasks(
+      {
+        [`${Routes.CHAT_CONFLICT_UNREVIEWED}`]: unreviewed.data,
+        [`${Routes.CHAT_CONFLICT_IN_WORK}`]: inWork.data,
+        [`${Routes.CHAT_CONFLICT_COMPLETED}`]: completed.data,
+      }[currentPath]
+    );
+
+    setIsOpen(false);
+    setSelectedTask('');
+    setSelectedChat('');
+  }, [currentPath, unreviewed.status, inWork.status, completed.status]);
+
+  /* #####################
+  ################# RETURN
+  ##################### */
   return (
     <div className={styles.conflict}>
       <WrapperMessage
-        information={!!conflictChats.length}
+        information={!!tasks?.length}
         title="У Вас пока нет конфликтов"
       >
-        {conflictChats?.map(({ meta }) => (
-          <div key={meta.taskId}>
+        {tasks?.map((task) => (
+          <div key={task._id}>
             <MessageCard
               statusConflict
-              action={selectedCard === meta.taskId}
-              user={meta.moderator}
-              onClick={() => handleClickCard(meta)}
-              task={meta}
+              action={false}
+              onClick={() => handleClickConflictCard(task)}
+              unreads={+task.isPendingChanges}
+              description={
+                // TODO: Добавить в тип Task, createdAt и updateAt
+                new Date(task.createdAt ?? undefined).toLocaleString('ru-Ru', {
+                  day: 'numeric',
+                  year: '2-digit',
+                  month: 'numeric',
+                  timeZone: 'UTC',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                }) +
+                ' — ' +
+                task.description
+              }
             />
+            {isOpen && isInWorkPage && task._id === selectedTask && (
+              <div className={styles['conflict-chats']}>
+                {conflictChats.map(({ meta: first }) => {
+                  if (first.taskId === mockTaskId) {
+                    const { meta } = first;
+                    return meta.map((chat) => (
+                      <MessageCard
+                        key={chat._id}
+                        action={selectedTask === chat._id}
+                        user={
+                          (chat as RecipientConflictChatMetaInterface)
+                            .recipient ??
+                          (chat as VolunteerConflictChatMetaInterface).volunteer
+                        }
+                        unreads={chat.unreads}
+                        onClick={() => handleClickChatCard(chat)}
+                        position={2}
+                      />
+                    ));
+                  } else return null;
+                })}
+              </div>
+            )}
           </div>
         ))}
       </WrapperMessage>
 
-      {/* <div className={styles.boxConflict}>
-        {isOpenConflict && (
-          <WindowInteractionUsers
-            closeConflict={handleCloseConflict}
-            option="conflict"
-            isOpen={isOpenConflict}
-            boxButton={
-              <div className={styles.boxBtn}>
-                {location.pathname === '/chat' ? (
-                  <Button
-                    label="Взять в работу"
-                    buttonType="primary"
-                    actionType="button"
-                    onClick={() => getWorkTask(getInfoTask?._id)}
-                    customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
-                  />
-                ) : (
-                  <>
-                    <Button
-                      label="Конфликт решен"
-                      buttonType="secondary"
-                      actionType="button"
-                      onClick={() => handleResolutionConflict(getInfoTask?._id)}
-                    />
-                    <Button
-                      label="Ответить"
-                      buttonType="primary"
-                      actionType="button"
-                      disabled
-                      customIcon={
-                        <Icon color="white" icon="EmptyMessageIcon" />
-                      }
-                    />
-                  </>
-                )}
-              </div>
-            }
-          >
-            {getInfoTask && <InfoConflict info={getInfoTask} />}
-          </WindowInteractionUsers>
+      <div className={styles.boxConflict}>
+        {isOpen && getInfoTask && (
+          <WindowConflictUsers
+            close={handleCloseWrapper}
+            isOpen={isOpen}
+            task={getInfoTask}
+            boxButton={<div className={styles.boxBtn}>{boxButton}</div>}
+          />
         )}
-      </div> */}
+        {isOpen && chatmateInfo && chatMessage && isInWorkPage && (
+          <WindowChatUsers
+            close={handleCloseWrapper}
+            isOpen={isOpen}
+            chatmateInfo={chatmateInfo}
+            messages={chatMessage}
+            boxButton={
+              <InputWrapper
+                placeholder="Напишите сообщение..."
+                inputValue={inputValue}
+                name="input"
+                onClickBtn={() => {}}
+                onChange={handleInputChange}
+                getFile={setFileInput}
+                containerMessages={true}
+              />
+            }
+          />
+        )}
+      </div>
     </div>
   );
 };

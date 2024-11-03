@@ -80,23 +80,23 @@ export const mockConflictRecipientMessages: MessageInterface[] = [
 
 export const volunteerMetaConflictChat: VolunteerConflictChatMetaInterface = {
   type: chatTypes.CONFLICT_CHAT_WITH_VOLUNTEER,
-  _id: '33',
+  _id: '112',
   isActive: true,
   volunteer: mockVolunteer,
   createdAt: new Date(2024, 7, 15, 0, 0, 0),
   updatedAt: new Date(2024, 7, 16, 31, 0, 0),
-  unreads: 0,
+  unreads: 2,
   watermark: '2',
 };
 
 export const recipientMetaConflictChat: RecipientConflictChatMetaInterface = {
   type: chatTypes.CONFLICT_CHAT_WITH_RECIPIENT,
-  _id: '44',
+  _id: '911',
   isActive: true,
   recipient: mockRecipient,
   createdAt: new Date(2024, 7, 15, 0, 0, 0),
   updatedAt: new Date(2024, 7, 16, 31, 0, 0),
-  unreads: 0,
+  unreads: 1,
   watermark: '2',
 };
 
