@@ -8,26 +8,24 @@ export enum SocketConnectionStatus {
   DISCONNECTED = `disconnected`, //подключение прервано
 }
 
-// TODO: Сверить и привести к единообразию интерфейсы сообщений на фронте и на бэке
 export const wsMessageKind = {
-  CONNECT: 'connect',
-  CONNECT_ERROR: 'connect_error',
-  ERROR: 'error',
-  DISCONNECT: 'disconnect',
-  REFRESH_TOKEN: 'RefreshToken',
-  REFRESH_CHATS_META: 'RefreshMeta',
-  NEW_MESSAGE: 'NewMessage',
-  REFRESH_CP: 'RefreshCP',
-  REFRESH_CONTACTS: 'RefreshContacts',
-  NEW_BLOG_POST: 'NewPost',
-  CHAT_PAGE_CONTENT: 'ChatPage',
+  REFRESH_TOKEN_COMMAND: 'RefreshToken',
+  REFRESH_CHATS_META_COMMAND: 'RefreshMeta',
+  INITIAL_CHATS_META_COMMAND: 'InitialMeta',
+  NEW_CHATS_META_COMMAND: 'NewMeta',
+  NEW_MESSAGE_COMMAND: 'NewMessage',
+  REFRESH_CP_COMMAND: 'RefreshCP',
+  REFRESH_CONTACTS_COMMAND: 'RefreshContacts',
+  NEW_BLOG_POST_COMMAND: 'NewPost',
   CHAT_PAGE_QUERY: `PageQuery`,
-  CLOSE: 'Close',
-  DISCONNECTION: 'Disconnection',
-  TEST_EVENT: 'test_event',
+  CHAT_PAGE_CONTENT: 'ChatPage',
+  DISCONNECTION_EVENT: 'Disconnection',
+  CONNECTION_EVENT: 'Connection',
+  OPEN_CHAT_EVENT: 'OpenChat',
+  CLOSE_CHAT_EVENT: 'CloseChat',
 } as const;
 
-export type wsMessageKind = keyof typeof wsMessageKind;
+export type WsMessageKind = keyof typeof wsMessageKind;
 
 export type wsTokenPayload = {
   user: TUser;
