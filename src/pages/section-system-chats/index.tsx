@@ -30,7 +30,7 @@ export const SectionSystemChats = () => {
     null
   );
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
-  const [isOpen, setIpOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
   const [_, setFileInput] = useState<string>('');
 
@@ -46,17 +46,13 @@ export const SectionSystemChats = () => {
     meta.unreads = 0;
   };
 
-  const handleVisibleMessage = (text: string) => {
-    text === 'close' ? setIpOpen(false) : setIpOpen(true);
-  };
-
   const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const { value } = target;
     setInputValue(value);
   };
 
   const handelCloseWrapper = () => {
-    setIpOpen((state) => !state);
+    setIsOpen((state) => !state);
     setSelectedCard('');
   };
 
@@ -107,7 +103,7 @@ export const SectionSystemChats = () => {
     const match = systemChats.find(({ meta }) => meta._id === selectedCard);
     setChatMessage(match?.chats as MessageInterface[]);
 
-    selectedCard && setIpOpen(true);
+    selectedCard && setIsOpen(true);
   }, [selectedCard, isOpen, systemChats]);
 
   useEffect(() => {
@@ -148,7 +144,6 @@ export const SectionSystemChats = () => {
         <WindowChatUsers
           close={handelCloseWrapper}
           isOpen={isOpen}
-          onClick={handleVisibleMessage}
           chatmateInfo={chatmateInfo}
           messages={chatMessage}
           boxButton={boxButton}

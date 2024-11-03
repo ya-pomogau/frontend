@@ -12,7 +12,6 @@ import { AnyUserInterface } from 'shared/types/user.type';
 
 interface IWindowChatUsers {
   isOpen: boolean;
-  onClick?: (text: string) => void;
   chatmateInfo?: AnyUserInterface;
   boxButton: ReactElement;
   close: () => void;
