@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-import { Icon } from 'shared/ui/icons';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './DropDownMenuButton.module.css';
 
@@ -38,14 +38,19 @@ export const DropDownMenuButton = forwardRef<
       >
         {buttonType ? (
           <div className={styles.wrapper}>
-            <p className={styles.title}>{children}</p>
+            <Typography
+              color={'primary'}
+              variant={'paragraphResize'}
+              content={children}
+              extraClass={styles.title}
+            />
             <div className={isDisabled ? styles.icon_disable : styles.icon}>
               {sendMessageIcon}
             </div>
           </div>
         ) : (
           <div className={styles.wrapper}>
-            <p className={styles.title_logout}>{children}</p>
+            <Typography content={children} extraClass={styles.title_logout} />
             {logoutIcon}
           </div>
         )}

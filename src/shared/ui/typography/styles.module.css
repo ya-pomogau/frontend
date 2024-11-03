@@ -1,7 +1,4 @@
 .text {
-  margin: 0;
-  padding: 0;
-  text-align: start;
   text-decoration: none;
   text-transform: none;
   list-style: none;
@@ -24,6 +21,10 @@
 
 .black {
   color: var(--colors-interface-black);
+}
+
+.darkGray {
+  color: var(--colors-interface-dark-gray);
 }
 
 .primary {
@@ -56,11 +57,16 @@
 
 .ID-text {
   /* Используется только для id */
-  color: var(--colors-interface-primary);
+  color: var(--colors-interface-black);
   opacity: 0.5;
 }
 
 .title {
+  font-size: var(--font-size-medium); /* 24px */
+  line-height: var(--line-height-large); /* 28.8px */
+}
+
+.titleResize {
   font-size: var(--font-size-medium); /* 24px */
   line-height: var(--line-height-large); /* 28.8px */
 }
@@ -71,6 +77,11 @@
 }
 
 .paragraph {
+  font-size: var(--font-size-s); /* 16px */
+  line-height: var(--line-height-medium); /* 22.4 */
+}
+
+.paragraphResize {
   font-size: var(--font-size-s); /* 16px */
   line-height: var(--line-height-medium); /* 22.4 */
 }
@@ -110,10 +121,20 @@
   line-height: 20px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 920px) {
   .servicesText {
     font-size: 8px;
     line-height: 9.6px;
     letter-spacing: normal;
+  }
+
+  .titleResize {
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-m);
+  }
+
+  .paragraphResize {
+    font-size: var(--font-size-small); /* 12px */
+    line-height: var(--line-height-xs); /* 14.4px */
   }
 }

@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { AnyUserInterface } from 'shared/types/user.type';
+import { Typography } from '../../ui';
 
 interface PropsMessageCard {
   statusConflict?: boolean | undefined;
@@ -54,14 +55,15 @@ export const MessageCard = ({
             //передаём имя и телефон в общий элемент верстки
             children(user.name, user.phone)
           }
-
-          <span
-            className={cn('text-inter', styles.counter, styles.radius, {
+          <Typography
+            tag={'span'}
+            color={'white'}
+            variant={'input-title'}
+            content={unreads > 10 ? '+9' : unreads}
+            extraClass={cn(styles.counter, styles.radius, {
               [styles.vizabiliti]: unreads > 0,
             })}
-          >
-            {unreads > 10 ? '+9' : unreads}
-          </span>
+          />
         </>
       )
     );
@@ -80,14 +82,16 @@ export const MessageCard = ({
     >
       {variant((name, desc) => (
         <div className={styles.userInfo}>
-          <p className={cn(defultStyle, styles.name, styles.lengthLimitation)}>
-            {name}
-          </p>
-          <p
-            className={cn(defultStyle, styles.message, styles.lengthLimitation)}
-          >
-            {desc}
-          </p>
+          <Typography
+            variant={'paragraphResize'}
+            content={name}
+            extraClass={cn(styles.name, styles.lengthLimitation)}
+          />
+          <Typography
+            variant={'support'}
+            content={desc}
+            extraClass={cn(styles.message, styles.lengthLimitation)}
+          />
         </div>
       ))}
     </article>

@@ -2,10 +2,9 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Button } from 'shared/ui/button';
+import { Button, Typography, InputAddress } from 'shared/ui';
 import { setAddress } from 'features/create-request/model';
 import YandexMap from 'widgets/map';
-import { InputAddress } from 'shared/ui/input-address';
 
 import usePropsButtonCustom from '../useButtonPropsCustom';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
@@ -42,15 +41,6 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   const propsButton = usePropsButtonCustom();
 
-  const placeTitleStyles = classNames(
-    'text',
-    'text_type_regular ',
-    'm-0',
-    styles.place
-  );
-
-  const warningTextStyles = 'text text_size_small text_type_regular m-0';
-
   const mapSettings = location
     ? {
         latitude: location[0],
@@ -64,7 +54,11 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
       <div className={styles.addressContainer}>
         {isMobile ? (
           <>
-            <p className={placeTitleStyles}>Место встречи</p>
+            <Typography
+              tag={'h2'}
+              variant={'title'}
+              content={'Место встречи'}
+            />
             <div className={styles.headerWrapper} />
             <InputAddress
               address={{ address, coords: location || [] }}
@@ -82,17 +76,17 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
                 mapSettings={mapSettings}
               />
               <div className={styles.alertWrapper}>
-                <p className={`${warningTextStyles} ${styles.text}`}>
-                  * Будьте осторожны, если указываете
-                  <br />
-                  домашний адрес,
-                  <span
-                    className={`${warningTextStyles} ${styles.selectedText}`}
-                  >
-                    &nbsp;не&nbsp;
-                  </span>
-                  пишите его полностью.
-                </p>
+                <div className={styles.text}>
+                  <Typography variant={'support'}>
+                    * Будьте осторожны, если указываете домашний адрес,
+                    <Typography
+                      tag={'span'}
+                      color={'orange'}
+                      content={' не '}
+                    />
+                    пишите его полностью.
+                  </Typography>
+                </div>
               </div>
               <div className={styles.wrapperForGradient} />
             </div>
@@ -106,15 +100,14 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               name="address"
               extClassName={styles.input}
             />
-            <p className={`${warningTextStyles} ${styles.text}`}>
-              * Рекомендуем
-              <span className={`${warningTextStyles} ${styles.selectedText}`}>
-                &nbsp;не&nbsp;
-              </span>
-              указывать полный домашний адрес с номером квартиры
-              <br />в целях безопасности. Достаточно улицы, номера дома и
-              подъезда.
-            </p>
+            <div className={styles.text}>
+              <Typography variant={'support'}>
+                * Рекомендуем
+                <Typography tag={'span'} color={'orange'} content={' не '} />
+                указывать полный домашний адрес с номером квартиры в целях
+                безопасности. Достаточно улицы, номера дома и подъезда.
+              </Typography>
+            </div>
             <div className={styles.map}>
               <YandexMap
                 width="100%"
@@ -127,9 +120,14 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           </>
         )}
       </div>
-      {isEmptyAddress && (
-        <p className={styles.messageAlert}>Укажите место встречи</p>
-      )}
+      <Typography
+        color={'red'}
+        variant={'input-title'}
+        content={'Укажите место встречи'}
+        extraClass={classNames(styles.messageAlert, {
+          [styles.messageAlertActive]: isEmptyAddress,
+        })}
+      />
       <div className={styles.buttonWrapper}>
         {!isTypeEdit && (
           <Button

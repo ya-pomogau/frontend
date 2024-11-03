@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { nanoid } from 'nanoid';
 
 import styles from './styles.module.css';
+import { Typography } from '../../ui';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -65,10 +66,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={id}
             {...props}
           />
-
-          <span className={cn(styles.error, 'text')}>
-            {errorText && !error ? <span>&nbsp;</span> : errorText}
-          </span>
+          <Typography
+            tag={'span'}
+            color={'orange'}
+            variant={'support'}
+            content={errorText === ' ' ? <span>&nbsp;</span> : errorText}
+            extraClass={styles.error}
+          />
           <div className={iconClass} onClick={onIconClick}>
             {customIcon}
           </div>

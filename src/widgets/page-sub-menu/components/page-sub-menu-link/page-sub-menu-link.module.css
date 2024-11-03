@@ -5,28 +5,24 @@
 
 .tabContainer__item {
   display: flex;
+  align-items: center;
   flex-flow: row nowrap;
   gap: 6px;
 }
 
 .tabContainer__text {
   margin-right: 6px;
-  color: var(--colors-interface-additional);
-}
-
-.tabContainer__textActive {
-  color: var(--colors-interface-black);
+  white-space: nowrap;
 }
 
 .tabContainer__number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--colors-interface-fuchsia);
   border-radius: 9px;
   min-width: 18px;
   height: 18px;
-  line-height: 18px;
-  color: var(--colors-interface-white);
-  text-align: center;
-  font-size: 14px;
 }
 
 .tabContainer__itemActive::before {

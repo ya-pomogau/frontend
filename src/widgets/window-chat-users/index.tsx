@@ -9,6 +9,7 @@ import { useLazyScroll } from 'entities/chat/ui/chat/hooks/useLazyScroll';
 import { MessageInterface } from 'shared/types/chat.types';
 import { Message } from 'shared/ui';
 import { AnyUserInterface } from 'shared/types/user.type';
+import { Typography } from 'shared/ui';
 
 interface IWindowChatUsers {
   isOpen: boolean;
@@ -51,49 +52,30 @@ export const WindowChatUsers: FC<IWindowChatUsers> = ({
         )}
         <img className={styles.img} src={chatmateInfo?.avatar} alt="фото" />
         <div className={styles.container}>
-          <p
-            className={cn(
-              'text-inter',
-              'm-0',
-              'text_size_large',
-              'text_type_regular',
-              styles.name
-            )}
-          >
-            {chatmateInfo?.name}
-          </p>
-          <p
-            className={cn(
-              'text',
-              'm-0',
-              'text_type_regular',
-              styles.id,
-              styles['display-none']
-            )}
-          >{`ID ${chatmateInfo?._id}`}</p>
-          <p
-            className={cn(
-              'text-inter',
-              'm-0',
-              'text_size_medium',
-              'text_type_regular',
-              styles['display-none'],
-              styles.phone
-            )}
-          >
-            <span
-              className={cn(
-                'text_size_medium',
-                'text-inter',
-                'text_type_bold',
-                styles['display-none'],
-                styles.span
-              )}
-            >
-              Тел.:
-            </span>
-            {chatmateInfo?.phone}
-          </p>
+          <Typography
+            tag={'h3'}
+            variant={'titleResize'}
+            fontFamily={'secondaryFont'}
+            content={chatmateInfo?.name}
+            extraClass={styles.name}
+          />
+          <Typography
+            color={'ID-text'}
+            variant={'servicesText'}
+            content={`ID ${chatmateInfo?._id}`}
+            extraClass={styles['display-none']}
+          />
+          <div className={cn(styles.phone, styles['display-none'])}>
+            <Typography
+              fontFamily={'secondaryFont'}
+              variant={'paragraph-bold'}
+              content={'Тел.:'}
+            />
+            <Typography
+              fontFamily={'secondaryFont'}
+              content={chatmateInfo?.phone}
+            />
+          </div>
         </div>
         {isMobile && (
           <GradientDivider extClassName={styles['gradient-divider']} />

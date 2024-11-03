@@ -7,6 +7,7 @@ import { GradientDivider } from 'shared/ui/gradient-divider';
 import { Breakpoints } from 'shared/config';
 import { InfoConflict } from 'widgets/conflict-information';
 import { TaskConflict } from 'entities/task/types';
+import { Typography } from 'shared/ui';
 
 interface IWindowConflictUsers {
   isOpen: boolean;
@@ -40,16 +41,12 @@ export const WindowConflictUsers: FC<IWindowConflictUsers> = ({
             size="32"
           />
         )}
-        <h4
-          className={cn(
-            'm-0',
-            'text-inter',
-            'text_size_large',
-            'text_type_regular'
-          )}
-        >
-          Конфликт
-        </h4>
+        <Typography
+          tag={'h4'}
+          fontFamily={'secondaryFont'}
+          variant={'title'}
+          content={'Конфликт'}
+        />
         {isMobile && (
           <GradientDivider extClassName={styles['gradient-divider']} />
         )}

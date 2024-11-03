@@ -4,6 +4,7 @@ import { Avatar } from '../avatar';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
 import { GradientDivider } from '../gradient-divider';
+import { Typography } from '../../ui';
 
 interface MessageProps {
   extClassName?: string;
@@ -35,49 +36,57 @@ export const Message = ({
     type !== 'send' && (
       <div className={styles.messageBlock}>
         <div className={classnames(styles.message, styles[`message--${type}`])}>
-          <span className={classnames(styles.text, 'text', 'text_size_small')}>
-            {messageText}
-            <br />
-            <i style={{ opacity: '.5' }}>
-              {createdAt.toLocaleString('ru-Ru', {
-                day: 'numeric',
-                year: '2-digit',
-                month: 'numeric',
-                timeZone: 'UTC',
-                hour: 'numeric',
-                minute: 'numeric',
-              })}
-            </i>
-          </span>
+          <Typography
+            tag={'span'}
+            color={'white'}
+            fontFamily={'secondaryFont'}
+            variant={'support'}
+            content={messageText}
+            extraClass={styles.text}
+          />
+          <br />
+          <Typography
+            tag={'span'}
+            color={'primary-additional'}
+            fontFamily={'primaryFont'}
+            variant={'support'}
+            content={createdAt.toLocaleString('ru-Ru', {
+              day: 'numeric',
+              year: '2-digit',
+              month: 'numeric',
+              timeZone: 'UTC',
+              hour: 'numeric',
+              minute: 'numeric',
+            })}
+            extraClass={styles.text}
+          />
         </div>
       </div>
     );
 
   const getAchievement = () => (
-    <p
-      className={classnames(
-        styles['achievement-title'],
-        'text',
-        'text_size_small'
-      )}
-    >
-      {messageText}
-      <GradientDivider extClassName={styles['gradient-divider']} />
-      <Icon color="blue" icon="KeyIcon" />
-    </p>
+    <Typography
+      fontFamily={'secondaryFont'}
+      variant={'support'}
+      extraClass={styles['achievement-title']}
+      color={'white'}
+      content={
+        <>
+          {messageText}
+          <GradientDivider extClassName={styles['gradient-divider']} />
+          <Icon color="blue" icon="KeyIcon" />
+        </>
+      }
+    />
   );
 
   const getSendMeassage = () => (
-    <p
-      className={classnames(
-        'm-0',
-        'text',
-        'text_size_small',
-        'text_type_regular'
-      )}
-    >
-      {messageText}
-    </p>
+    <Typography
+      fontFamily={'secondaryFont'}
+      variant={'support'}
+      content={messageText}
+      color={'white'}
+    />
   );
 
   return (

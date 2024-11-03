@@ -10,6 +10,12 @@ const meta: Meta<typeof Typography> = {
 export default meta;
 type Story = StoryObj<typeof Typography>;
 
+export const DefaultComponentState: Story = {
+  args: {
+    content: 'Content',
+  },
+};
+
 export const PrimaryTitleText: Story = {
   args: {
     tag: 'h1',
@@ -30,7 +36,7 @@ export const SecondaryTitleText: Story = {
   },
 };
 
-export const SecondaryTitleTextnInterfaceAdditional: Story = {
+export const SecondaryTitleTextInterfaceAdditional: Story = {
   args: {
     tag: 'h1',
     content: 'Вы заблокированы ',
