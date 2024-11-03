@@ -179,6 +179,8 @@ export const SectionChatsConflict = () => {
   useEffect(() => {
     // Загрузка сообщений по id-чата из метаданных
     // TODO: Загрузка с сервера через websocket, а не из моков
+    // NOTE: Избыточная сложность добычи этих данных в текущей структуре
+
     const match = conflictChats.find(({ meta }) => meta.taskId === mockTaskId);
 
     const newMatch = match?.chats.find(

@@ -82,23 +82,26 @@ export const volunteerMetaConflictChat: VolunteerConflictChatMetaInterface = {
   type: chatTypes.CONFLICT_CHAT_WITH_VOLUNTEER,
   _id: '112',
   isActive: true,
+  // NOTE: Зачем именовать поле в волонтёра?
   volunteer: mockVolunteer,
   createdAt: new Date(2024, 7, 15, 0, 0, 0),
   updatedAt: new Date(2024, 7, 16, 31, 0, 0),
   unreads: 2,
-  watermark: '2',
+  watermark: '0',
 };
 
 export const recipientMetaConflictChat: RecipientConflictChatMetaInterface = {
   type: chatTypes.CONFLICT_CHAT_WITH_RECIPIENT,
   _id: '911',
   isActive: true,
+  // NOTE: Зачем именовать поле в реципиента?
   recipient: mockRecipient,
   createdAt: new Date(2024, 7, 15, 0, 0, 0),
   updatedAt: new Date(2024, 7, 16, 31, 0, 0),
   unreads: 1,
-  watermark: '2',
+  watermark: '1',
 };
+// NOTE: Лишние типы, лучше сделать универсальный, который хранить в соответствующем поле в метаданных, а не кортеже.
 
 export const mockMetaConflictChatsMessage: ConflictChatsTupleMetaInterface = {
   moderator: mockAdmin,
@@ -110,7 +113,10 @@ export const mockMetaConflictChatsMessage: ConflictChatsTupleMetaInterface = {
   meta: [volunteerMetaConflictChat, recipientMetaConflictChat],
 };
 
+// NOTE: Имеет смысл перенести taskId в этот слой объекта?
 export const mockConflict: ConflictChatInfo = {
   meta: mockMetaConflictChatsMessage,
   chats: [mockConflictVolunteerMessages, mockConflictRecipientMessages],
 };
+// NOTE: Кортеж не удобное решение, лучше отдельными полями передавать
+// а в метаданных указывать конкретику из какого поля брать сообщения, их одновременно всё равно не прочесть, читаешь только один чат, а потом переключаешься на другой.
