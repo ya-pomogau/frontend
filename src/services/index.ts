@@ -66,6 +66,7 @@ export {
   adminLoginThunk,
   newUserThunk,
   checkTokenThunk,
+  setChatsMeta,
 } from './system-slice';
 
 export { websocketMiddleware } from './websocket-middleware';

@@ -156,3 +156,6 @@ export interface GetAdminChatsResponseInterface {
   moderated: Array<ConflictChatInfo>;
   conflict: Array<ConflictChatInfo>;
 }
+
+export type AnyUserChatsResponseInterface = GetUserChatsResponseInterface &
+  GetAdminChatsResponseInterface;

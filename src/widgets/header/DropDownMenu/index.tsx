@@ -8,7 +8,6 @@ import { useAppDispatch } from '../../../app/hooks';
 import { useMediaQuery, useUser } from '../../../shared/hooks';
 import { Routes, Breakpoints } from '../../../shared/config';
 import { logoutUser } from '../../../entities';
-import { closeSocketConnection } from '../../../services/system-slice';
 
 import { SideBar } from '../navigation';
 import { DropDownMenuButton } from '../../../shared/ui';
@@ -63,7 +62,6 @@ export const DropDownMenu = ({
   const navigate = useNavigate();
   const handlerOnClick = () => {
     dispatch(logoutUser());
-    dispatch(closeSocketConnection());
     return navigate(Routes.ROOT);
   };
 

@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { useAppDispatch } from 'app/hooks';
 import { Input, Button, PasswordInput, Typography } from 'shared/ui';
-import { actions, startSocketConnection } from 'services/system-slice';
+import { actions } from 'services/system-slice';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
 import { schema } from './schema';
 
@@ -16,7 +15,6 @@ export interface ILoginForm {
 }
 
 const LoginForm = () => {
-  const dispatch = useAppDispatch();
   const [errorText, setErrorText] = useState('');
   const [adminLogin] = useAsyncAction(actions.adminLoginThunk);
   const {
@@ -31,7 +29,6 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<ILoginForm> = async (data) => {
     try {
       await adminLogin(data);
-      dispatch(startSocketConnection());
     } catch (err) {
       setErrorText(err as string);
     }

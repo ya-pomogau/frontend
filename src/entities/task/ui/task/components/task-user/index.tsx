@@ -4,14 +4,16 @@ import { useLocation } from 'react-router-dom';
 import { ButtonWithModal, ModalContent } from 'widgets';
 import { RoundButton, Avatar, Typography } from 'shared/ui';
 import { Routes } from 'shared/config';
-import { useControlModal } from 'shared/hooks';
+import { useControlModal, useUser } from 'shared/hooks';
 import { modalContentType, taskButtonType } from 'shared/types/common.types';
 import { DefaultAvatar } from '../../img/default-avatar';
 import { UserProfile } from 'entities/user/types';
-import { PopupChat } from '../../../../../chat/ui/chat';
-import { infoAdmin } from '../../../../../chat/ui/chat/libs/utils';
-import { taskStatus, TaskStatus } from '../../../../types';
-import { mockChatMessages } from '../../../../../chat/mock-messages';
+import { PopupChat } from 'entities/chat/ui/chat';
+import { taskStatus, TaskStatus } from 'entities/task/types';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { actions } from 'services/system-slice';
+import { TaskChatInfo } from 'shared/types/chat.types';
+import { wsMessageKind } from 'shared/types/websocket.types';
 
 import placeholder from '../../img/placeholder.svg';
 import styles from './styles.module.css';
@@ -22,6 +24,7 @@ interface TaskUserProps {
   date: string | null;
   volunteer: UserProfile | null;
   status: TaskStatus | null;
+  taskId: string;
 }
 export const TaskUser = ({
   user,
@@ -29,12 +32,55 @@ export const TaskUser = ({
   date,
   volunteer,
   status,
+  taskId,
 }: TaskUserProps) => {
-  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const currentUser = useUser();
+
+  const currentRole = currentUser?.role.toLowerCase() as
+    | 'volunteer'
+    | 'recipient';
+
+  const chatMeta = useAppSelector(
+    actions.getChatMetaByTaskId(taskId)
+  ) as TaskChatInfo;
+
+  const currentChatmateInfo = chatMeta?.meta[currentRole]
+    ? chatMeta?.meta[currentRole]
+    : null;
+
   const { isOpen, handleOpen, handleClose } = useControlModal();
+  const location = useLocation();
   const isPageCompleted = location.pathname === Routes.PROFILE_COMPLETED;
   const isButtonDisabled =
     isPageCompleted || !user || !volunteer || status === taskStatus.COMPLETED;
+
+  const handleOpenChat = () => {
+    handleOpen();
+    dispatch({
+      type: wsMessageKind.OPEN_CHAT_EVENT,
+      payload: chatMeta.meta._id,
+    });
+  };
+
+  const handleCloseChat = () => {
+    handleClose();
+    dispatch({
+      type: wsMessageKind.CLOSE_CHAT_EVENT,
+      payload: chatMeta.meta._id,
+    });
+  };
+
+  const handleSendMessage = (message: string) => {
+    dispatch({
+      type: wsMessageKind.NEW_MESSAGE_COMMAND,
+      payload: {
+        body: message,
+        author: currentUser,
+        chatId: chatMeta.meta._id,
+      },
+    });
+  };
 
   return (
     <div className={classNames(extClassName, styles.userInfo)}>
@@ -78,16 +124,20 @@ export const TaskUser = ({
         <RoundButton
           buttonType="message"
           disabled={isButtonDisabled}
-          onClick={handleOpen}
+          unreadMessages={chatMeta?.meta?.unreads}
+          onClick={handleOpenChat}
         />
       </div>
-      <PopupChat
-        isOpen={isOpen}
-        onClick={handleClose}
-        messages={mockChatMessages}
-        chatmateInfo={infoAdmin}
-        onAttachFileClick={() => {}}
-      />
+      {isOpen && currentChatmateInfo && (
+        <PopupChat
+          isOpen={isOpen}
+          messages={chatMeta?.chats || []}
+          chatmateInfo={currentChatmateInfo}
+          onClick={handleCloseChat}
+          onMessageSend={handleSendMessage}
+          onAttachFileClick={() => {}}
+        />
+      )}
     </div>
   );
 };
