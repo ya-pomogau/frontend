@@ -1,20 +1,16 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
-import { Icon, SmartHeader } from 'shared/ui';
+import { Routes } from 'shared/config';
 import { usePermission } from 'shared/hooks';
-
-import { PageSubMenu } from 'widgets/page-sub-menu';
-import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
-import {
-  useGetTasksConfilctQuery,
-  useGetTasksWorkConflictQuery,
-} from 'services/admin-api';
 import { adminPermission, userRole } from 'shared/types/common.types';
 
+import { Icon, SmartHeader } from 'shared/ui';
+import { PageSubMenu } from 'widgets/page-sub-menu';
+import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import styles from './styles.module.css';
+
+// NOTE: для чего этот импорт?
 import { id } from 'date-fns/esm/locale';
-import { Routes } from 'shared/config';
 
 interface ProfileChatsPagesProps {
   children: ReactNode;
@@ -24,15 +20,10 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const isConflictsPermissionGranted = usePermission(
-    [adminPermission.CONFLICTS],
-    userRole.ADMIN
-  );
-
-  // TODO: Добавить хуки для работы с обращениями (нерассмотренные, в работе, завершенные)
-  // const { data: hubUnreviewed } = useGetTasksHubUnreviewedQuery();
-  // const { data: hubInWork } = useGetTasksHubInWorkQuery();
-  // const { data: hubCompleted } = useGetTasksHubCompletedQuery();
+  // const isConflictsPermissionGranted = usePermission(
+  //   [adminPermission.CONFLICTS],
+  //   userRole.ADMIN
+  // );
 
   // TODO: Связать моковые данные с хуками
   const [notificationsQuantity, _] = useState({
@@ -42,18 +33,6 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
     conflictTotal: 0,
   });
 
-  const { data: conflict } = useGetTasksConfilctQuery('', {
-    skip: !isConflictsPermissionGranted,
-  });
-  const { data: conflictIsWork } = useGetTasksWorkConflictQuery('', {
-    skip: !isConflictsPermissionGranted,
-  });
-
-  // TODO: добавить данные для раздела "Конфликты" "Завершенные"
-  // const { data: conflictCompleted } = useGetTasksConflictCompletedQuery('', {
-  //   skip: !isConflictsPermissionGranted,
-  // });
-
   const renderSubMenuLinks = (
     basePath: string,
     notificationsData: { [id: string]: number }
@@ -62,52 +41,24 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
       <>
         <PageSubMenuLink
           text="Нерассмотренные"
-          to={`${basePath}/unreviewed`}
+          to={basePath + Routes.CHAT_SUB_UNREVIEWED}
           notifications={notificationsData.unreviewed}
         />
         <PageSubMenuLink
           text="В работе"
-          to={`${basePath}/in-work`}
+          to={basePath + Routes.CHAT_SUB_IN_WORK}
           notifications={notificationsData.inWork}
           styleSpan={styles['style-span']}
         />
         <PageSubMenuLink
           text="Завершенные"
-          to={`${basePath}/completed`}
+          to={basePath + Routes.CHAT_SUB_COMPLETED}
           notifications={notificationsData.completed}
           styleSpan={styles['style-span']}
         />
       </>
     );
   };
-
-  useEffect(() => {
-    const RoutesNaming = {
-      [`${Routes.CHAT_HUB}`]: 'Обращения',
-      [`${Routes.CHAT_HUB_UNREVIEWED}`]: 'Обращения → Нерассмотренные',
-      [`${Routes.CHAT_HUB_IN_WORK}`]: 'Обращения → В работе',
-      [`${Routes.CHAT_HUB_COMPLETED}`]: 'Обращения → Завершенные',
-      [`${Routes.CHAT_CONFLICT}`]: 'Конфликты',
-      [`${Routes.CHAT_CONFLICT_UNREVIEWED}`]: 'Конфликты → Нерассмотренные',
-      [`${Routes.CHAT_CONFLICT_IN_WORK}`]: 'Конфликты → В работе',
-      [`${Routes.CHAT_CONFLICT_COMPLETED}`]: 'Конфликты → Завершенные',
-    } as const;
-
-    console.log(
-      '===============================\n',
-      `Мы находимся в разделе ${RoutesNaming[currentPath]}`,
-      '\n------------------------------\n',
-      'Конфликтные задачи: ',
-      conflict,
-      '\n------------------------------\n',
-      'Конфликты в работе: ',
-      conflictIsWork,
-      '\n------------------------------\n',
-      'Кол-во  непрочитанных сообщений: ',
-      notificationsQuantity,
-      '\n==============================='
-    );
-  }, [conflict, conflictIsWork, currentPath, notificationsQuantity]);
 
   return (
     <>
@@ -121,29 +72,29 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
           <>
             <PageSubMenuLink
               text="Обращения"
-              to="/chats-hub"
+              to={Routes.CHAT_HUB}
               notifications={notificationsQuantity.hubTotal}
             />
             <PageSubMenuLink
               text="Конфликты"
-              to="/chats-conflict"
+              to={Routes.CHAT_CONFLICT}
               notifications={notificationsQuantity.conflictTotal}
               styleSpan={styles['style-span']}
             />
           </>
         }
       />
-      {currentPath.startsWith('/chats-hub') && (
+      {currentPath.startsWith(Routes.CHAT_HUB) && (
         <PageSubMenu
           style={styles['sub-menu']}
-          links={renderSubMenuLinks('/chats-hub', notificationsQuantity.hub)}
+          links={renderSubMenuLinks(Routes.CHAT_HUB, notificationsQuantity.hub)}
         />
       )}
-      {currentPath.startsWith('/chats-conflict') && (
+      {currentPath.startsWith(Routes.CHAT_CONFLICT) && (
         <PageSubMenu
           style={styles['sub-menu']}
           links={renderSubMenuLinks(
-            '/chats-conflict',
+            Routes.CHAT_CONFLICT,
             notificationsQuantity.conflict
           )}
         />
