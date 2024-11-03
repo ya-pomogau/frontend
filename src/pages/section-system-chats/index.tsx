@@ -1,6 +1,4 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-
-import { WindowInteractionUsers } from 'widgets/window-interaction-users';
 import { MessageCard } from 'shared/ui/message-card';
 import { InputWrapper } from 'shared/ui/input-wrapper';
 import styles from './styles.module.css';
@@ -11,12 +9,20 @@ import {
   SystemChatMetaInterface,
 } from 'shared/types/chat.types';
 import { AnyUserInterface } from 'shared/types/user.type';
+import { Routes } from 'shared/config';
+import { useLocation } from 'react-router-dom';
+import { WindowChatUsers } from 'widgets';
+import { Button, Icon } from 'shared/ui';
 
 export const SectionSystemChats = () => {
-  // Получаем метаданные по доступным чатам
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  /* #####################
+  Получаем метаданные по доступным чатам
+  ##################### */
   const systemChats = mockAdminChatsResponse.system;
 
-  // Объявляем переменные
   const [chatmateInfo, setСhatmateInfo] = useState<AnyUserInterface | null>(
     null
   );
@@ -28,7 +34,6 @@ export const SectionSystemChats = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [_, setFileInput] = useState<string>('');
 
-  // Обработка клика по карточке
   const handleClickCard = (meta: SystemChatMetaInterface) => {
     // Закрываем старый чат
     chatMessage && setChatMessage(null);
@@ -37,20 +42,10 @@ export const SectionSystemChats = () => {
     setSelectedCard(meta._id);
     setСhatmateInfo(meta.user);
 
-    // TODO: Стираем данные о непрочитанных сообщениях через websocket
+    // TODO: Стираем данные о непрочитанных сообщениях через api
     meta.unreads = 0;
   };
 
-  // Загрузка сообщений по id-чата из метаданных
-  useEffect(() => {
-    // TODO: Загрузка с сервера через websocket, а не из моков
-    const match = systemChats.find(({ meta }) => meta._id === selectedCard);
-    setChatMessage(match?.chats as MessageInterface[]);
-
-    selectedCard && setIpOpen(true);
-  }, [selectedCard, isOpen, systemChats]);
-
-  //Механизмы отображения чата
   const handleVisibleMessage = (text: string) => {
     text === 'close' ? setIpOpen(false) : setIpOpen(true);
   };
@@ -65,6 +60,74 @@ export const SectionSystemChats = () => {
     setSelectedCard('');
   };
 
+  /* #####################
+  ################# Кнопки
+  ##################### */
+  const boxButton = {
+    [`${Routes.CHAT_HUB_UNREVIEWED}`]: (
+      <div className={styles.boxBtn}>
+        <Button
+          label="Взять в работу"
+          buttonType="primary"
+          actionType="button"
+          onClick={() => {}}
+          customIcon={<Icon color="white" icon="EmptyMessageIcon" />}
+        />
+      </div>
+    ),
+    [`${Routes.CHAT_HUB_IN_WORK}`]: (
+      <InputWrapper
+        placeholder="Напишите сообщение..."
+        inputValue={inputValue}
+        name="input"
+        onClickBtn={() => {}}
+        onChange={handleInputChange}
+        getFile={setFileInput}
+        containerMessages={true}
+      />
+    ),
+    [`${Routes.CHAT_HUB_COMPLETED}`]: (
+      <div className={styles.boxBtn}>
+        <Button
+          label="Вернуть в работу"
+          buttonType="primary"
+          actionType="button"
+          onClick={() => {}}
+          customIcon={<Icon color="white" icon="LockIcon" />}
+        />
+      </div>
+    ),
+  }[currentPath];
+  /* #####################
+  ############# USE EFFECT
+  ##################### */
+  useEffect(() => {
+    // Загрузка сообщений по id-чата из метаданных
+    // TODO: Загрузка с сервера через websocket, а не из моков
+    const match = systemChats.find(({ meta }) => meta._id === selectedCard);
+    setChatMessage(match?.chats as MessageInterface[]);
+
+    selectedCard && setIpOpen(true);
+  }, [selectedCard, isOpen, systemChats]);
+
+  useEffect(() => {
+    const RoutesNaming = {
+      [`${Routes.CHAT_HUB}`]: 'Обращения',
+      [`${Routes.CHAT_HUB_UNREVIEWED}`]: 'Обращения → Нерассмотренные',
+      [`${Routes.CHAT_HUB_IN_WORK}`]: 'Обращения → В работе',
+      [`${Routes.CHAT_HUB_COMPLETED}`]: 'Обращения → Завершенные',
+    } as const;
+
+    console.log(
+      '===============================\n',
+      `Мы находимся в разделе ${RoutesNaming[currentPath]}`,
+      '\n==============================='
+    );
+  }, [currentPath]);
+
+  /* #####################
+  ################# RETURN
+  ##################### */
   return (
     <div className={styles.picker}>
       <WrapperMessage
@@ -82,24 +145,13 @@ export const SectionSystemChats = () => {
         ))}
       </WrapperMessage>
       {isOpen && chatmateInfo && chatMessage && (
-        <WindowInteractionUsers
-          closeConflict={handelCloseWrapper}
-          option="chat"
+        <WindowChatUsers
+          close={handelCloseWrapper}
           isOpen={isOpen}
           onClick={handleVisibleMessage}
           chatmateInfo={chatmateInfo}
           messages={chatMessage}
-          boxButton={
-            <InputWrapper
-              placeholder="Напишите сообщение..."
-              inputValue={inputValue}
-              name="input"
-              onClickBtn={() => {}}
-              onChange={handleInputChange}
-              getFile={setFileInput}
-              containerMessages={true}
-            />
-          }
+          boxButton={boxButton}
         />
       )}
     </div>
