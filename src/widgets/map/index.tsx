@@ -109,38 +109,44 @@ export const YandexMap = ({
   };
 
   const handeleBalloonClick = (e: ymaps.IEvent) => {
+    const z = ref.current.getZoom();
+    // массив значений для смещения балуна по вертикали в зависимости от всех вариаций зума
+    const arr = [
+      10, 9, 2, 1, 0.9, 0.6, 0.4, 0.3, 0.2, 0.09, 0.05, 0.04, 0.02, 0.006,
+      0.004, 0.003, 0.0007, 0.0005, 0.0003, 0.0001, 0.00005,
+    ];
     const placemarkCoords = e.get('coords');
     const [x, y]: [number, number] = placemarkCoords;
     setMapCenterSettings({
       ...mapSettings,
-      latitude: x - 0.023,
+      latitude: x - arr[z - 1],
       longitude: y,
     });
   };
 
-  // const handleMapClick = (event: ymaps.IEvent) => {
-  //   const clickedCoordinates = event.get('coords');
-  //   // console.log(event.getSourceEvent());
-  //   // console.log(clickedCoordinates);
-  //   if (clickedCoordinates) {
-  //     setCoords(clickedCoordinates);
+  const handleMapClick = (event: ymaps.IEvent) => {
+    const clickedCoordinates = event.get('coords');
+    // console.log(event.getSourceEvent());
+    // console.log(clickedCoordinates);
+    if (clickedCoordinates) {
+      setCoords(clickedCoordinates);
 
-  //     if (ymaps) {
-  //       const geo = ymaps.geocode(clickedCoordinates);
-  //       geo.then((res) => {
-  //         const geoObject = res.geoObjects.get(0);
-  //         // console.log(geoObject.properties._data.text);
-  //         // console.log(geoObject.getAddressLine());
-  //         dispatch(
-  //           setAddress({
-  //             additinalAddress: geoObject.getAddressLine(),
-  //             coords: clickedCoordinates,
-  //           })
-  //         );
-  //       });
-  //     }
-  //   }
-  // };
+      if (ymaps) {
+        const geo = ymaps.geocode(clickedCoordinates);
+        geo.then((res) => {
+          const geoObject = res.geoObjects.get(0);
+          // console.log(geoObject.properties._data.text);
+          // console.log(geoObject.getAddressLine());
+          dispatch(
+            setAddress({
+              additinalAddress: geoObject.getAddressLine(),
+              coords: clickedCoordinates,
+            })
+          );
+        });
+      }
+    }
+  };
 
   return (
     <>
