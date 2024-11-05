@@ -20,6 +20,7 @@
   align-items: center;
   border-bottom: var(--colors-interface-ford-white) 1px solid;
   margin: 0;
+  text-align: center;
 }
 
 .popupTitle_thank {
@@ -31,9 +32,6 @@
 
 .popupText {
   margin: 10px 0 0 0;
-  font-size: medium;
-  line-height: var(--line-height-medium);
-  color: var(--colors-interface-dark-gray);
 }
 
 .popupIcon {
@@ -54,8 +52,8 @@
   left: 175px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 920px) {
   .popupTitle {
-    font-size: small;
+    font-weight: 700;
   }
 }

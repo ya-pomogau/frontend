@@ -33,14 +33,11 @@
 }
 
 .name {
-  font-size: var(--font-size-s);
   margin: 5px 0 0 17px;
 }
 
 .id {
-  font-size: var(--font-size-small);
   margin: 0 0 0 17px;
-  opacity: 0.5;
 }
 
 @media screen and (max-width: 1440px) and (min-width: 1150px) {
@@ -50,16 +47,13 @@
 
   .specialization {
     left: 0;
-    font-size: var(--font-size-small);
   }
 
   .name {
-    font-size: var(--font-size-small);
     margin: 0 0 0 10px;
   }
 
   .id {
-    font-size: 8px;
     margin: 0 0 0 10px;
   }
 }
@@ -74,17 +68,14 @@
 
   .specialization {
     left: 0;
-    font-size: var(--font-size-small);
     position: static;
   }
 
   .name {
-    font-size: var(--font-size-small);
     margin: 0 0 0 10px;
   }
 
   .id {
-    font-size: 8px;
     margin: 0 0 0 10px;
   }
 }

@@ -1,6 +1,8 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
 
+import { Typography } from '../../ui';
+
 import styles from './styles.module.css';
 
 interface CardButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,23 +20,25 @@ export const CardButton = ({
   isActive,
   ...props
 }: CardButtonProps) => {
-  const buttonActiveClass = isActive ? styles['card-button-active'] : '';
-
   return (
     <button
       type="button"
       className={classnames(
         styles['card-button'],
-        buttonActiveClass,
-        extClassName,
-        'text',
-        'text_size_medium'
+        { [styles['card-button-active']]: isActive },
+        extClassName
       )}
       {...props}
     >
       <div className={styles['card-buttonContent']}>
         <div className={styles['card-buttonImg']}>{customIcon}</div>
-        <span className={styles['card-buttonLabel']}>{text}</span>
+        <Typography
+          tag={'span'}
+          color={'white'}
+          variant={'paragraphResize'}
+          content={text}
+          extraClass={styles['card-buttonLabel']}
+        />
       </div>
     </button>
   );

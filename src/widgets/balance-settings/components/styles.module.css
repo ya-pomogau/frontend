@@ -39,10 +39,3 @@
   color: var(--colors-interface-primary-additional);
   -webkit-text-stroke: 0.5px var(--colors-interface-primary);
 }
-
-@media screen and (max-width: 920px) {
-  .balance_text {
-    font-size: var(--font-size-middle);
-    line-height: var(--line-height-medium);
-  }
-}

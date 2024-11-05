@@ -8,13 +8,16 @@ import {
   setTime,
   changeCheckbox,
 } from 'features/create-request/model';
-import { Button } from 'shared/ui/button';
-import Checkbox from 'shared/ui/checkbox';
-import { DatePicker } from 'shared/ui/date-picker';
+import {
+  Checkbox,
+  Button,
+  TimePickerPopup,
+  Typography,
+  DatePicker,
+} from 'shared/ui';
+import usePropsButtonCustom from '../useButtonPropsCustom';
 
 import styles from './date-step.module.css';
-import usePropsButtonCustom from '../useButtonPropsCustom';
-import { TimePickerPopup } from '../../../../../shared/ui/time-picker-popup';
 
 interface IDateStepProps {
   isMobile?: boolean;
@@ -84,11 +87,12 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
                 handleAcceptTime={() => handleAcceptTime}
               />
             )}
-            <p
-              className={classNames(styles.time, 'text', 'text_type_regular ')}
-            >
-              Время
-            </p>
+            <Typography
+              tag={'h3'}
+              variant={'support'}
+              content={'Время'}
+              extraClass={styles.time}
+            />
             <div className={styles.headerWrapper} />
 
             <input
@@ -109,11 +113,12 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
             />
           </div>
           <div className={styles.wrapperForDate}>
-            <p
-              className={classNames('text', 'text_type_regular ', styles.date)}
-            >
-              Дата
-            </p>
+            <Typography
+              tag={'h3'}
+              variant={'support'}
+              content={'Дата'}
+              extraClass={styles.date}
+            />
             <div className={styles.headerWrapperForDatePicker} />
             <DatePicker
               onChangeValue={handleDateValueChange}
@@ -133,18 +138,16 @@ export const DateStep = ({ isMobile }: IDateStepProps) => {
           </div>
         </div>
         <div className={styles.button}>
-          <p
-            className={classNames(
-              styles.validationMessage,
-              (timeValidation || !time) &&
-                !termlessRequest &&
-                styles.validationMessageActive
-            )}
-          >
-            {
+          <Typography
+            color={'red'}
+            content={
               'Пожалуйста, выберите время, которое больше текущего или установите формат "Бессрочно"'
             }
-          </p>
+            extraClass={classNames(styles.validationMessage, {
+              [styles.validationMessageActive]:
+                (timeValidation || !time) && !termlessRequest,
+            })}
+          />
           <div
             className={classNames(
               styles.buttonWrapper,

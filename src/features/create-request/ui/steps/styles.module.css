@@ -48,9 +48,6 @@
 }
 
 .text {
-  font: var(--font-golos-16-22);
-  color: var(--colors-interface-dark-gray);
   width: 265px;
   height: 44px;
-  margin: 0;
 }
