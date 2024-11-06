@@ -207,6 +207,7 @@ export const YandexMap = ({
             onClickExit={onClickExit}
             hasCloseButton={true}
             extClassName={styles.container_thank}
+            extButtonPosition={styles.closeButton_position}
           >
             <Typography
               tag={'h3'}
