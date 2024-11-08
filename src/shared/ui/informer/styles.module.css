@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--colors-interface-primary-additional);
 }
 
 .informer--withText {

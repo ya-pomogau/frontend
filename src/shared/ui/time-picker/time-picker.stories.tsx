@@ -6,6 +6,13 @@ const meta: Meta<typeof TimePickerElement> = {
   component: TimePickerElement,
   tags: ['autodocs'],
   argTypes: {},
+  decorators: [
+    Story => (
+        <div style={{ width: '96px', height: '34px' }}>
+            <Story />
+        </div>
+    )
+  ]
 };
 
 export default meta;

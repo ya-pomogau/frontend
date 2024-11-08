@@ -1,7 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Input } from 'shared/ui';
-import { Icon } from 'shared/ui';
+import { Input, Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -18,7 +17,7 @@ const BalanceSettingsItem = ({
 }: BalanceSettingsItemProps) => {
   return (
     <div className={styles.balance_box}>
-      <p className={styles.balance_text}>{title}</p>
+      <Typography content={title} />
       <Input
         className={styles.balance_input}
         defaultValue={inputValue}

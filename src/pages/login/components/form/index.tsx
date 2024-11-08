@@ -3,7 +3,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
 import { useAppDispatch } from 'app/hooks';
-import { Input, Button, PasswordInput } from 'shared/ui';
+import { Input, Button, PasswordInput, Typography } from 'shared/ui';
 import { actions, startSocketConnection } from 'services/system-slice';
 import useAsyncAction from 'shared/hooks/useAsyncAction';
 import { schema } from './schema';
@@ -79,7 +79,13 @@ const LoginForm = () => {
         extClassName={styles.button}
         disabled={!isValid}
       />
-      <span className={`${styles.error} text`}>{errorText}</span>
+      <Typography
+        tag={'span'}
+        color={'orange'}
+        variant={'support'}
+        content={errorText}
+        extraClass={styles.error}
+      />
     </form>
   );
 };

@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import classnames from 'classnames';
 import styles from './styles.module.css';
+import { Typography } from '../../ui';
 
 interface SmartHeaderProps {
   text: string;
@@ -18,9 +19,12 @@ export const SmartHeader = ({
   <div className={classnames(styles.smartHeader__container, extClassName)}>
     <div className={styles.smartHeader__block}>
       <div className={styles.settingIcon}>{icon}</div>
-      <p className={classnames('text', 'm-0', 'p-0', styles.settingText)}>
-        {text}
-      </p>
+      <Typography
+        tag={'h2'}
+        color={'primary'}
+        variant={'titleResize'}
+        content={text}
+      />
     </div>
     {filter}
   </div>

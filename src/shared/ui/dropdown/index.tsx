@@ -119,7 +119,9 @@ const Dropdown = ({
                 }}
               >
                 {item?.title}
-                {selected?._id === item._id && <Icon icon="CheckIcon" color={'blue'} />}
+                {selected?._id === item._id && (
+                  <Icon icon="CheckIcon" color={'blue'} />
+                )}
               </li>
             );
           })}
@@ -137,7 +139,8 @@ const Dropdown = ({
           }}
         >
           <div className={styles.closeWrapper}>
-            <Icon icon="CloseCrossIcon"
+            <Icon
+              icon="CloseCrossIcon"
               className={styles.closeIcon}
               size="14"
               color="blue"

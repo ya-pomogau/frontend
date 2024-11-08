@@ -94,7 +94,7 @@ export const userTasksApi = createApi({
       },
       invalidatesTags: [{ type: 'TaskActive', id: 'recipient' }],
     }),
-    updateTask: build.mutation<Task, {id: string; dto:CreateTaskDto}>({
+    updateTask: build.mutation<Task, { id: string; dto: CreateTaskDto }>({
       query: (args) => {
         const { id, dto } = args;
         return {

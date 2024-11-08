@@ -29,7 +29,7 @@
 
 .container {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
@@ -42,14 +42,10 @@
   display: -webkit-box;
 }
 
-.id {
-  font-size: 8px;
-  opacity: 0.5;
-  text-align: end;
-}
-
-.span {
-  margin-right: 10px;
+.phone {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
 }
 
 .btn-close {

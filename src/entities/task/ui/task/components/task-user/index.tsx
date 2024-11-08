@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useLocation } from 'react-router-dom';
 
 import { ButtonWithModal, ModalContent } from 'widgets';
-import { RoundButton, Avatar } from 'shared/ui';
+import { RoundButton, Avatar, Typography } from 'shared/ui';
 import { Routes } from 'shared/config';
 import { useControlModal } from 'shared/hooks';
 import { modalContentType, taskButtonType } from 'shared/types/common.types';
@@ -48,14 +48,26 @@ export const TaskUser = ({
         <DefaultAvatar isTaskAvatar />
       )}
       <div className={styles.info}>
-        <p className={styles.name}>{user ? user.name : ''}</p>
-        <p className={styles.phone}>{user ? user.phone : ''}</p>
+        <Typography
+          tag={'h4'}
+          content={user ? user.name : ''}
+          extraClass={styles.name}
+        />
+        <Typography
+          color={'primary'}
+          content={user ? user.phone : ''}
+          extraClass={styles.phone}
+        />
       </div>
       <div className={styles.buttons}>
         <ButtonWithModal
           closeButton
           modalContent={
-            <ModalContent type={modalContentType.phone} date={date} />
+            <ModalContent
+              type={modalContentType.phone}
+              date={date}
+              phoneNumber={user ? user.phone : ''}
+            />
           }
         >
           <RoundButton

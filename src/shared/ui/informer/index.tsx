@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import styles from './styles.module.css';
 import HeartIcon from './assets/heart-icon.png';
 import { ReactNode } from 'react';
+import { Typography } from '../../ui';
 
 interface InformerProps {
   extClassName?: string;
@@ -27,10 +28,13 @@ export const Informer = ({ text, extClassName, icon }: InformerProps) => (
         />
       )}
     </div>
-    <span
-      className={classnames('text', 'text_size_large', styles.informerText)}
-    >
-      {text}
-    </span>
+    <Typography
+      tag={'span'}
+      color={'primary-additional'}
+      fontFamily={'secondaryFont'}
+      variant={'title'}
+      content={text}
+      extraClass={styles.informerText}
+    />
   </div>
 );
