@@ -9,6 +9,7 @@ import {
 } from 'react-hook-form';
 
 import styles from './styles.module.css';
+import { Typography } from '../../ui';
 
 export interface FormInputProps<FormInputs extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -64,7 +65,13 @@ export const FormInput = <T extends FieldValues>({
           placeholder={placeholder}
         />
         {Boolean(error) && error?.message && (
-          <span className={cn(styles.error, 'text')}>{error?.message}</span>
+          <Typography
+            tag={'span'}
+            color={'orange'}
+            variant={'support'}
+            content={error?.message}
+            extraClass={styles.error}
+          />
         )}
         <div className={iconClass} onClick={onIconClick}>
           {customIcon}

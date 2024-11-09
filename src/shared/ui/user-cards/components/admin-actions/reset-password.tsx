@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { Input, Icon, Button } from 'shared/ui';
+import { Input, Icon, Button, Typography } from 'shared/ui';
 import { resetPasswordSchema } from './schema';
 
 import styles from '../../styles.module.css';
@@ -30,7 +30,12 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
   return (
     <div className={styles.modalContainer}>
       <div className={styles.modalContent}>
-        <h2 className={styles.modalTitle}>Смена пароля</h2>
+        <Typography
+          tag={'h3'}
+          variant={'paragraph-bold'}
+          content={'Смена пароля'}
+          extraClass={styles.modalTitle}
+        />
         <Icon
           icon="CloseIconThin"
           className={styles.close}
@@ -50,12 +55,12 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
                   label="Пароль"
                   placeholder="Введите новый пароль"
                   type="password"
+                  errorText={
+                    errors.newPassword ? errors.newPassword.message : ''
+                  }
                 />
               )}
             />
-            {errors.newPassword && (
-              <span className={styles.error}>{errors.newPassword.message}</span>
-            )}
           </div>
           <div className={styles.input_with_label}>
             <Controller
@@ -69,14 +74,12 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
                   label="Повторите пароль"
                   placeholder="Повторите пароль"
                   type="password"
+                  errorText={
+                    errors.repeatPassword ? errors.repeatPassword.message : ''
+                  }
                 />
               )}
             />
-            {errors.repeatPassword && (
-              <span className={styles.error}>
-                {errors.repeatPassword.message}
-              </span>
-            )}
           </div>
           <Button
             buttonType="primary"

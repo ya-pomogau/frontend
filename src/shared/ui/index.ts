@@ -49,6 +49,7 @@ export { Tooltip } from './tooltip';
 export { ExcelButton } from './transforming-buttons/excel-button';
 export { SettingsButton } from './transforming-buttons/settings-button';
 export { ViewModeButton } from './view-mode-button';
+export { Typography } from './typography';
 
 export { default as Checkbox } from './checkbox';
 export { default as Dropdown } from './dropdown';

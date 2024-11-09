@@ -17,13 +17,6 @@
   margin: 52px auto 0;
 }
 
-.text {
-  font-size: var(--font-size-s);
-  line-height: 16px;
-  font-weight: var(--font-weight-bold);
-  color: var(--colors-interface-primary);
-}
-
 @media (max-width: 550px) {
   .boxInfo {
     margin: 30px auto 28px;

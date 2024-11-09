@@ -1,24 +1,27 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import {
   Circle,
   GeolocationControl,
   Map,
-  useYMaps,
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
+import { YMapsApi } from '@pbe/react-yandex-maps/typings/util/typing';
+
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
-import usePermission from 'shared/hooks/use-permission';
+import { usePermission } from 'shared/hooks';
+import { LightPopup, Icon, Typography } from 'shared/ui';
 import { getBounds } from 'shared/libs/utils';
 import Mark from './Mark';
-import { LightPopup } from 'shared/ui/light-popup';
 import {
   unauthorizedVolunteerPopupMessage,
   thankForAssignTaskMessage,
   cantAssignTaskMessage,
   unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
-import { Icon } from 'shared/ui';
+import UserMark from './UserMark';
+import { setAddress } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
@@ -27,9 +30,6 @@ import { userRole, UserRole, userStatus } from 'shared/types/common.types';
 import classNames from 'classnames';
 import './styles.css';
 import styles from './styles.module.css';
-import UserMark from './UserMark';
-import { setAddress } from 'features/create-request/model';
-import { useAppDispatch } from 'app/hooks';
 
 interface YandexMapProps {
   width?: string | number;
@@ -68,12 +68,12 @@ export const YandexMap = ({
   const [isSorryPopupVisible, setSorryPopupVisible] = useState(false);
   const [isThankPopupVisible, setThankPopupVisible] = useState(false);
   const [coords, setCoords] = useState(coordinates);
-  const ref = useRef<any>(null);
-  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+  const mapRef = useRef<ymaps.Map>();
+  const ymap = useRef<YMapsApi>();
 
   useEffect(() => {
     setCoords(coordinates);
-  }, [coordinates])
+  }, [coordinates]);
 
   const showUnauthorithedPopup = () => {
     setVisibility(true);
@@ -97,27 +97,33 @@ export const YandexMap = ({
   };
 
   const onOpenTask = (task: Task) => {
-    if (ref.current) {
+    if (mapRef.current) {
       const [x, y] = task.location.coordinates;
-      ref.current.setCenter([x - 0.004, y], 15, {
+      mapRef.current.setCenter([x - 0.004, y], 15, {
         checkZoomRange: true,
       });
     }
   };
 
+  const onMapLoad = useCallback((refApi: YMapsApi) => {
+    ymap.current = refApi;
+  }, []);
+
   const handleMapClick = (event: ymaps.IEvent) => {
-    const clickedCoordinates = event.get('coords'); 
+    const clickedCoordinates = event.get('coords');
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
-      if (ymaps) {
-        const geo = ymaps.geocode(clickedCoordinates);
+      if (ymap.current) {
+        const geo = ymap.current.geocode(clickedCoordinates);
         geo.then((res) => {
           const geoObject = res.geoObjects.get(0);
 
           dispatch(
             setAddress({
-              additinalAddress: geoObject.getAddressLine(),
+              additinalAddress: (
+                geoObject as ymaps.GeocodeResult
+              ).getAddressLine(),
               coords: clickedCoordinates,
             })
           );
@@ -125,7 +131,6 @@ export const YandexMap = ({
       }
     }
   };
-  
 
   return (
     <>
@@ -150,7 +155,8 @@ export const YandexMap = ({
           }}
           width={width}
           height={height}
-          instanceRef={ref}
+          instanceRef={mapRef}
+          onLoad={onMapLoad}
           onClick={handleMapClick}
         >
           <GeolocationControl options={{ float: 'left' }} />
@@ -208,19 +214,20 @@ export const YandexMap = ({
             onClickExit={onClickExit}
             hasCloseButton={true}
             extClassName={styles.container_thank}
+            extButtonPosition={styles.closeButton_position}
           >
-            <p
-              className={classNames(
+            <Typography
+              tag={'h3'}
+              variant={'paragraph-bold'}
+              content={thankForAssignTaskMessage}
+              extraClass={classNames(
                 styles.popupTitle,
-                styles.popupTitle_thank,
-                'text_type_bold'
+                styles.popupTitle_thank
               )}
-            >
-              {thankForAssignTaskMessage}
-            </p>
-            <p className={classNames(styles.popupIcon, 'text_size_large')}>
+            />
+            <div className={classNames(styles.popupIcon)}>
               <Icon icon="FinishedApplicationIcon" color="#9798C9" size="101" />
-            </p>
+            </div>
           </LightPopup>
           <LightPopup
             isPopupOpen={isSorryPopupVisible}
@@ -228,13 +235,19 @@ export const YandexMap = ({
             hasCloseButton={true}
             extClassName={styles.container_sorry}
           >
-            <p className={classNames(styles.popupTitle, 'text_size_large')}>
+            <Typography
+              tag={'h3'}
+              variant={'titleResize'}
+              extraClass={styles.popupTitle}
+            >
               <Icon icon="ConflictIcon" color="orange" />
               Извините
-            </p>
-            <p className={classNames(styles.popupText)}>
-              {cantAssignTaskMessage}
-            </p>
+            </Typography>
+            <Typography
+              color={'darkGray'}
+              content={cantAssignTaskMessage}
+              extraClass={styles.popupText}
+            />
           </LightPopup>
         </>
       )}
