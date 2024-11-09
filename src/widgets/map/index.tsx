@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import {
   Circle,
@@ -30,9 +30,10 @@ import Mark from './Mark';
 
 import './styles.css';
 import styles from './styles.module.css';
-import { number } from 'joi';
+import { YMapsApi } from '@pbe/react-yandex-maps/typings/util/typing';
 
-const arrayValuesForCenteringPlacemark = [
+
+const valuesForCenteringPlacemark = [
   10, 9, 2, 1, 0.9, 0.6, 0.4, 0.3, 0.2, 0.09, 0.05, 0.04, 0.02, 0.006, 0.004,
   0.003, 0.0007, 0.0005, 0.0003, 0.0001, 0.00005,
 ];
@@ -74,6 +75,8 @@ export const YandexMap = ({
   const [isSorryPopupVisible, setSorryPopupVisible] = useState(false);
   const [isThankPopupVisible, setThankPopupVisible] = useState(false);
   const [coords, setCoords] = useState(coordinates);
+  const mapRef = useRef<ymaps.Map>();
+  const ymap = useRef<YMapsApi>();
   const ref = useRef<any>(null);
   const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
   const [mapCenterSettings, setMapCenterSettings] = useState(mapSettings);
@@ -112,13 +115,17 @@ export const YandexMap = ({
     }
   };
 
+  const onMapLoad = useCallback((refApi: YMapsApi) => {
+    ymap.current = refApi;
+  }, []);
+
   const handlePlacemarkClick = (e: ymaps.IEvent) => {
     const z = ref.current.getZoom();
     const placemarkCoords = e.get('coords');
     const [x, y]: [number, number] = placemarkCoords;
     setMapCenterSettings({
       ...mapSettings,
-      latitude: x - arrayValuesForCenteringPlacemark[z - 1],
+      latitude: x - valuesForCenteringPlacemark[z - 1],
       longitude: y,
     });
   };
@@ -171,8 +178,7 @@ export const YandexMap = ({
           width={width}
           height={height}
           instanceRef={ref}
-          // onClick={handleMapClick}
-          onClick={() => 1}
+          onClick={handleMapClick}
         >
           <GeolocationControl options={{ float: 'left' }} />
           <ZoomControl options={{ position: { top: 5, right: 5 } }} />

@@ -26,10 +26,10 @@ const meta: Meta<typeof Tooltip> = {
       description: 'Определяет видимость модального окна.',
     },
     pointerPosition: {
-      type: 'string', 
+      type: 'string',
       description: 'Определяет расположение уголка компонента Tooltip.',
       options: ['left', 'right', 'center'],
-      control: { type: 'radio'} 
+      control: { type: 'radio' },
     },
     changeVisible: {
       description:
