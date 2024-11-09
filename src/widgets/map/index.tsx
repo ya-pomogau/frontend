@@ -30,13 +30,7 @@ import Mark from './Mark';
 
 import './styles.css';
 import styles from './styles.module.css';
-
-import UserMark from './UserMark';
-import { setAddress } from 'features/create-request/model';
-import { useAppDispatch } from 'app/hooks';
 import { number } from 'joi';
-// import YMapsMap from '@pbe/react-yandex-maps/typings/Map';
-
 
 interface YandexMapProps {
   width?: string | number;
