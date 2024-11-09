@@ -2,6 +2,8 @@ import { Outlet, Navigate } from 'react-router-dom';
 
 import { useAppSelector } from 'app/hooks';
 import { UserRole } from 'shared/types/common.types';
+import { isUserBlockedSelector } from 'entities/user/model';
+import { Routes } from 'shared/config';
 
 interface CommonRouteProps {
   someflag?: never;
@@ -12,6 +14,8 @@ interface PublicRouteProps extends CommonRouteProps {
   allowed?: never;
   onlyUnauthorized?: never;
   isRoot?: never;
+  onlyBlocked?: never;
+  allowBlocked?: never;
 }
 
 interface OnlyUnauthorizedRouteProps extends CommonRouteProps {
@@ -19,6 +23,8 @@ interface OnlyUnauthorizedRouteProps extends CommonRouteProps {
   allowed?: never;
   publicRoutes?: never;
   isRoot?: never;
+  onlyBlocked?: never;
+  allowBlocked?: never;
 }
 
 interface RoledRouteProps extends CommonRouteProps {
@@ -28,6 +34,8 @@ interface RoledRouteProps extends CommonRouteProps {
   publicRoutes?: never;
   onlyUnauthorized?: never;
   isRoot?: boolean;
+  onlyBlocked?: boolean;
+  allowBlocked?: boolean;
 }
 
 type RoutesGroupProps =
@@ -40,11 +48,34 @@ export const RoutesGroup = ({
   onlyUnauthorized,
   allowed,
   isRoot,
+  onlyBlocked,
+  allowBlocked
 }: RoutesGroupProps) => {
   const { isLoading, role } = useAppSelector((state) => state.user);
+  const isBlockedSelector = useAppSelector(isUserBlockedSelector);
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (isRoot) {
+    return <Outlet />;
+  }
 
   if (publicRoutes) {
     return <Outlet />;
+  }
+
+  if (onlyBlocked && isBlockedSelector) {
+    return <Outlet />;
+  }
+
+  if (onlyBlocked) {
+    return <Navigate to="/" replace />;
+  }
+
+  if (!allowBlocked && isBlockedSelector) {
+    return <Navigate to={Routes.PROFILE_BLOCKED} replace />;
   }
 
   if (onlyUnauthorized) {
@@ -53,14 +84,6 @@ export const RoutesGroup = ({
     } else {
       return <Navigate to="/" replace />;
     }
-  }
-
-  if (isLoading) {
-    return null;
-  }
-
-  if (isRoot) {
-    return <Outlet />;
   }
 
   if (allowed === undefined) {

@@ -17,10 +17,6 @@
   margin-top: 15px;
 }
 
-.title {
-  color: var(--colors-interface-primary-additional);
-}
-
 .tabContainer__text {
   margin-right: 6px;
   color: var(--colors-interface-additional);

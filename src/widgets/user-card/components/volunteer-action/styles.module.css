@@ -1,0 +1,25 @@
+.buttons_div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding-bottom: 25px;
+  }
+  
+  .volunteer_info {
+    display: flex;
+  }
+  
+  .exclamation_point_div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row;
+  }
+  
+  @media all and (max-width: 1150px) {
+    .volunteer_info {
+      margin-bottom: 2px;
+    }
+  }
+  

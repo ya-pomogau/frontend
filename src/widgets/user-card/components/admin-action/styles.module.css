@@ -1,0 +1,109 @@
+.buttons_div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding-bottom: 25px;
+  }
+  
+  .admin_login_input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    pointer-events: none;
+    cursor: not-allowed;
+    padding-left: 5px;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-small);
+    color: var(--colors-interface-primary);
+  }
+  
+  .admin_password_box {
+    position: relative;
+  }
+  
+  .admin_edit_icon {
+    position: absolute;
+    top: 70%;
+    right: 10px;
+    width: 20px;
+  }
+  
+  .admin_password_input {
+    width: 216px;
+    height: 30px;
+    border: 0.5px solid var(--colors-interface-primary);
+    padding-left: 10px;
+  }
+  
+  .admin_save_btn {
+    padding-top: 20px;
+    margin: auto;
+  }
+  
+  .admin_dropdown_list_closed_box {
+    position: relative;
+    width: 276px;
+    margin-left: -30px;
+    border-top: 1px solid;
+    border-image-source: var(--colors-interface-line);
+    border-image-slice: 1;
+  }
+  
+  .admin_arrow_down {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+  }
+  
+  .admin_dropdown_list_opened_box {
+    position: relative;
+    width: 276px;
+    margin-left: -30px;
+    margin-top: 10px;
+    border-top: 1px solid;
+    border-image-source: linear-gradient(
+      90deg,
+      var(--colors-interface-white) 0%,
+      var(--colors-interface-primary) 49.28%,
+      var(--colors-interface-white) 100%
+    );
+    border-image-slice: 1;
+  }
+  
+  .admin_arrow_up {
+    position: absolute;
+    top: -20px;
+    right: 8px;
+    transform: rotate(180deg);
+    cursor: pointer;
+  }
+  
+  .admin_checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 30px;
+  }
+  
+  .admin_checkbox {
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-small);
+  }
+  
+  .admin_block_btn {
+    margin: auto;
+    display: flex;
+    padding-left: 30px;
+    padding-bottom: 20px;
+  }
+  
+  @media all and (max-width: 1150px) {
+    .buttons_div {
+      padding-bottom: 10px;
+    }
+  }
+  

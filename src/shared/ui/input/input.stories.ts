@@ -10,6 +10,7 @@ const meta = {
   argTypes: {
     error: {
       control: 'boolean',
+      defaultValue: false,
     },
     customIcon: {
       type: 'string',
@@ -28,6 +29,8 @@ export const Default: Story = {
     label: 'Имя',
     placeholder: 'Введите имя',
     error: false,
+    errorText:
+      'Имя должно содержать какие-то символы, а оно содержит что-то не то. Какая длинная ошибка, ого!',
   },
 };
 

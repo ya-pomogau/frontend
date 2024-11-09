@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { Accordion, Button } from 'shared/ui';
-import { LightPopup } from 'shared/ui/light-popup';
-import styles from './styles.module.css';
+
+import { Accordion, Button, Typography, LightPopup } from 'shared/ui';
 import { User } from 'entities/user/types';
+
+import styles from './styles.module.css';
 
 type Props = {
   isOpen: boolean;
@@ -101,9 +102,11 @@ export const AdminSelectModal = ({ isOpen, onClose, admins }: Props) => {
                 );
               } else {
                 return (
-                  <p className={styles.description}>
-                    {'Доступные для выбора администраторы отсутвуют'}
-                  </p>
+                  <Typography
+                    color={'interface-additional'}
+                    content={'Доступные для выбора администраторы отсутвуют'}
+                    extraClass={styles.description}
+                  />
                 );
               }
             }}

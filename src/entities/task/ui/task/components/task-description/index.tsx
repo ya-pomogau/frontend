@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useRef } from 'react';
 
 import { useTruncatedText } from 'shared/hooks';
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -28,18 +28,29 @@ export const TaskDescription = ({
   return (
     <div className={classNames(extClassName, styles.taskDescription)}>
       <div className={styles.card__expandable}>
-        <p ref={textRef} className={textStyles}>
-          {description}
-        </p>
+        <Typography
+          content={description}
+          ref={textRef}
+          extraClass={textStyles}
+        />
         {isTruncated && (
           <button onClick={toggleIsShowingMore} className={styles.expandBtn}>
-            {isExpanded ? 'Свернуть' : 'Читать'}
+            <Typography
+              tag={'span'}
+              color={'primary'}
+              content={isExpanded ? 'Свернуть' : 'Читать'}
+            />
           </button>
         )}
       </div>
       <div className={styles.score}>
         <Icon color="blue" icon="BallsIcon" size="46" />
-        <span className={styles.scoreText}>{count}</span>
+        <Typography
+          tag={'span'}
+          color={'primary'}
+          variant={'support'}
+          content={count}
+        />
       </div>
     </div>
   );

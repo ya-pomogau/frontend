@@ -1,14 +1,12 @@
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Button } from 'shared/ui';
-import { TPoints } from 'shared/types/common.types';
-import {
-  useGetCategoriesQuery,
-  useUpdatePointsMutation,
-} from 'services/categories-api';
+import { useGetCategoriesQuery, useUpdatePointsMutation } from 'services';
 import BalanceSettingsItem from './components/balance-settings-item';
 
 import styles from './styles.module.css';
+
+type BalanceSettingsForm = Record<string, { _id: string; points: number }>;
 
 export const BalanceSettings = () => {
   const { data } = useGetCategoriesQuery();
@@ -16,25 +14,26 @@ export const BalanceSettings = () => {
   const {
     control,
     handleSubmit,
-    formState: { isDirty, isValid },
+    formState: { isDirty, isValid, dirtyFields },
     reset,
-  } = useForm<Record<string, number>>({
+  } = useForm<BalanceSettingsForm>({
     values: (data || []).reduce((acc, value) => {
-      const { title, points } = value;
-      acc[title] = points;
+      const { title, points, _id } = value;
+      acc[title] = { points, _id };
 
       return acc;
-    }, {} as Record<string, number>),
+    }, {} as BalanceSettingsForm),
   });
 
-  //при сохранении будет ошибка, так как updatePoints обращается к пока несуществующему эндпоинту
-  const onSubmit: SubmitHandler<TPoints<string>> = async (formData) => {
-    const formattedData = Object.keys(formData).map((title) => {
-      const category = data?.find((cat) => cat.title === title);
-      return category
-        ? { id: category._id, points: Number(formData[title]) }
-        : null;
-    });
+  const onSubmit: SubmitHandler<BalanceSettingsForm> = async (formData) => {
+    const formattedData = Object.keys(dirtyFields).reduce((acc, key) => {
+      if (dirtyFields[key]) {
+        const { points, _id } = formData[key];
+        acc.push({ id: _id, points });
+      }
+      return acc;
+    }, [] as Array<{ id: string; points: number }>);
+
     try {
       await updatePoints({ data: formattedData });
       reset(formData);
@@ -47,16 +46,16 @@ export const BalanceSettings = () => {
     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.balances_box}>
         {data &&
-          data.map((item, index) => (
+          data.map(({ title }, index) => (
             <Controller
               control={control}
-              name={item.title}
+              name={`${title}.points`}
               key={index}
               render={({ field }) => (
                 <BalanceSettingsItem
-                  title={item.title}
+                  title={title}
                   inputValue={field.value}
-                  handleChange={field.onChange}
+                  handleChange={(e) => field.onChange(e.target.valueAsNumber)}
                 />
               )}
             />

@@ -13,20 +13,8 @@
 }
 
 .modalContent {
-  padding: 20px 0;
+  padding: 20px 0 !important;
   display: flex;
-}
-
-.flexColumn {
-  flex-direction: column;
-  justify-content: center;
-  gap: 15px;
-}
-
-.flexRow {
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
 }
 
 .modalButtons {

@@ -22,19 +22,11 @@
 }
 
 .name {
-  margin: 0;
-  font-size: 20px;
-  font-weight: var(--font-weight-regular);
-  text-align: start;
-  background-color: transparent;
+  text-align: center;
 }
 
 .phone {
-  margin: 0;
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-regular);
-  color: var(--colors-interface-black);
-  background-color: transparent;
+  text-align: center;
 }
 
 .buttons {
@@ -42,6 +34,20 @@
   display: flex;
   gap: 8px;
   margin-top: 8px;
+}
+
+@media screen and (max-width: 1150px) {
+  div .name {
+    font-family: var(--font-family-inter);
+    font-size: 20px;
+    text-align: start;
+  }
+
+  div .phone {
+    font-family: var(--font-family-inter);
+    color: var(--colors-interface-black);
+    text-align: start;
+  }
 }
 
 @media screen and (min-width: 1150px) {
@@ -63,15 +69,6 @@
 
   .info {
     text-align: center;
-  }
-
-  .name {
-    font-size: var(--font-size-s);
-    text-align: start;
-  }
-
-  .phone {
-    color: var(--colors-interface-primary);
   }
 
   .buttons {
