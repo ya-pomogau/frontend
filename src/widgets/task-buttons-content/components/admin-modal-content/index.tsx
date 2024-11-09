@@ -1,23 +1,24 @@
-import { FC } from 'react';
-
 import { useControlModal } from 'shared/hooks';
-import { titleStyle } from 'widgets/task-buttons-content/utils';
-import { Button } from 'shared/ui';
+import { Button, Typography } from 'shared/ui';
 import { infoAdmin, PopupChat } from 'entities';
-import { ModalContentProps } from 'widgets/task-buttons-content';
 
 import styles from './styles.module.css';
 
-export const AdminModalContent: FC<ModalContentProps> = () => {
+export const AdminModalContent = () => {
   const { isOpen, handleOpen, handleClose } = useControlModal();
   return (
     <div className={styles.modalTooltip}>
-      <h3 className={titleStyle}>Связь с администратором</h3>
+      <Typography
+        tag={'h3'}
+        variant={'paragraph-bold'}
+        content={'Связь с администратором'}
+        extraClass={styles.modalTitle}
+      />
       <div className={styles.modalButtons}>
         <Button
           buttonType="secondary"
           label={'Написать администратору'}
-          onClick={() => handleOpen()}
+          onClick={handleOpen}
         />
         {isOpen && (
           <PopupChat

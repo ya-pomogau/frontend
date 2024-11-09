@@ -1,19 +1,16 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 
-import Checkbox from 'shared/ui/checkbox';
-import { Button } from 'shared/ui/button';
-import { PopupChat } from 'entities';
+import { Typography, Checkbox, Button } from 'shared/ui';
 import { useControlModal } from 'shared/hooks';
-import { infoAdmin } from 'entities';
-import { ModalContent, ModalContentProps } from 'widgets/task-buttons-content';
-import { ButtonWithModal } from 'widgets/button-with-modal';
+import { PopupChat, infoAdmin } from 'entities';
+import { ButtonWithModal } from 'widgets';
+import { ModalContentProps } from 'widgets/task-buttons-content';
 import {
   reasonType as reasonTypes,
   ReasonType,
 } from 'widgets/task-buttons-content/types';
-import { titleStyle } from 'widgets/task-buttons-content/utils';
-import { modalContentType } from 'shared/types/common.types';
+import { CancelModalContent } from '../index';
 
 import styles from './styles.module.css';
 
@@ -34,7 +31,12 @@ const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
 
   return (
     <div className={styles.modalTooltip}>
-      <h3 className={titleStyle}>Укажите причину отмены</h3>
+      <Typography
+        tag={'h3'}
+        variant={'paragraph-bold'}
+        content={'Укажите причину отмены'}
+        extraClass={styles.modalTitle}
+      />
       <div className={classNames(styles.modalContent, styles.flexColumn)}>
         <Checkbox
           label="Не смогу прийти"
@@ -73,20 +75,10 @@ const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
         <ButtonWithModal
           closeButton
           modalContent={
-            // TODO: проверить оба варианта
-            // <ModalContent
-            //   type={
-            //     isRemainLessThanDay(date)
-            //       ? modalContentType.cancel
-            //       : modalContentType.confirm
-            //   }
-            //   date={date}
-            // />
-            <ModalContent
-              type={modalContentType.cancel}
-              taskId={taskId}
-              userRole={userRole}
+            <CancelModalContent
               date={date}
+              userRole={userRole}
+              taskId={taskId}
             />
           }
         >
@@ -94,8 +86,6 @@ const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
             buttonType="primary"
             label="Отменить заявку"
             disabled={isReasonUnselected()}
-            // TODO: проверить оба варианта
-            // onClick={handleDeleteClick}
           />
         </ButtonWithModal>
       </div>

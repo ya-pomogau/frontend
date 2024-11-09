@@ -1,14 +1,16 @@
-import { FC } from 'react';
-
-import { titleStyle } from 'widgets/task-buttons-content/utils';
-import { ModalContentProps } from 'widgets/task-buttons-content';
+import { Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
 
-export const UnfulfilledModalContent: FC<ModalContentProps> = () => {
+export const UnfulfilledModalContent = () => {
   return (
     <div className={styles.modalTooltip}>
-      <h3 className={titleStyle}>На заявку не откликнулись</h3>
+      <Typography
+        tag={'h3'}
+        variant={'paragraph-bold'}
+        content={'На заявку откликнулись'}
+        extraClass={styles.modalTitle}
+      />
     </div>
   );
 };

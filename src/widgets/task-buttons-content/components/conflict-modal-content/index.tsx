@@ -2,8 +2,7 @@ import classNames from 'classnames';
 
 import { ModalContentProps } from 'widgets/task-buttons-content';
 import { userRole as userRoles } from 'shared/types/common.types';
-import { textStyle, titleStyle } from 'widgets/task-buttons-content/utils';
-import { Button } from 'shared/ui';
+import { Button, Typography } from 'shared/ui';
 import { useRejectTaskMutation } from 'services';
 import { taskReport } from 'entities/task/types';
 import { useControlModal } from 'shared/hooks';
@@ -32,21 +31,34 @@ export const ConflictModalContent = ({
   };
   return userRole === userRoles.RECIPIENT && volunteer === false ? (
     <div className={styles.modalTooltip}>
-      <h3 className={titleStyle}>Волонтер пока не откликнулся</h3>
-      <p className={textStyle}>
-        Вы не можете подтвердить не выполнение заявки, пока у заявки нет
-        волонтера.
-      </p>
+      <Typography
+        tag={'h3'}
+        variant={'paragraph-bold'}
+        content={'Волонтер пока не откликнулся'}
+        extraClass={styles.modalTitle}
+      />
+      <Typography
+        fontFamily={'secondaryFont'}
+        content={
+          'Вы не можете подтвердить не выполнение заявки, пока у заявки нет волонтера.'
+        }
+        extraClass={styles.modalContent}
+      />
     </div>
   ) : (
     <div className={styles.modalTooltip}>
-      <h3 className={titleStyle}>
-        {active
-          ? 'Подтвердите, что заявка не выполнена'
-          : conflict
-          ? 'Не выполнена'
-          : 'Выполнена'}
-      </h3>
+      <Typography
+        tag={'h3'}
+        variant={'paragraph-bold'}
+        content={
+          active
+            ? 'Подтвердите, что заявка не выполнена'
+            : conflict
+            ? 'Не выполнена'
+            : 'Выполнена'
+        }
+        extraClass={styles.modalTitle}
+      />
       {
         <>
           {active && (

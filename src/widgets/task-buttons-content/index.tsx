@@ -28,6 +28,7 @@ export interface ModalContentProps {
   volunteerReport?: TaskReport | null;
   recipientReport?: TaskReport | null;
   setConflictModalVisible?: Dispatch<SetStateAction<boolean>>;
+  phoneNumber?: string;
 }
 
 export const ModalContent = ({
@@ -58,5 +59,7 @@ export const ModalContent = ({
       return <RespondedModalContent />;
     case modalContentType.unfulfilled:
       return <UnfulfilledModalContent />;
+    default:
+      return null;
   }
 };

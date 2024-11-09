@@ -1,12 +1,10 @@
 import { differenceInHours, parseISO } from 'date-fns';
 
 import { ModalContentProps } from 'widgets/task-buttons-content';
-import { textStyle, titleStyle } from 'widgets/task-buttons-content/utils';
-import { Button } from 'shared/ui';
+import { Button, Typography } from 'shared/ui';
 import { useCancelTaskMutation } from 'services';
 import { userRole as userRoles } from 'shared/types/common.types';
-import { PopupChat } from 'entities';
-import { infoAdmin } from 'entities';
+import { infoAdmin, PopupChat } from 'entities';
 import { useControlModal } from 'shared/hooks';
 
 import styles from './styles.module.css';
@@ -34,10 +32,17 @@ export const CancelModalContent = ({
   if (!date || !isRemainLessThanDay(date)) {
     return (
       <div className={styles.modalTooltip}>
-        <h3 className={titleStyle}>Подтвердите удаление заявки</h3>
-        <p className={textStyle}>
-          Заявка будет отменена без возможности восстановления.
-        </p>
+        <Typography
+          tag={'h3'}
+          variant={'paragraph-bold'}
+          content={'Подтвердите удаление заявки'}
+          extraClass={styles.modalTitle}
+        />
+        <Typography
+          fontFamily={'secondaryFont'}
+          content={'Заявка будет отменена без возможности восстановления.'}
+          extraClass={styles.modalContent}
+        />
         <div className={styles.modalButtons}>
           <Button
             buttonType="primary"
@@ -51,8 +56,17 @@ export const CancelModalContent = ({
 
   return (
     <div className={styles.modalTooltip}>
-      <h3 className={titleStyle}>До начала заявки менее 24 часа</h3>
-      <p className={textStyle}>Вы не можете отменить заявку самостоятельно.</p>
+      <Typography
+        tag={'h3'}
+        variant={'paragraph-bold'}
+        content={'До начала заявки менее 24 часа'}
+        extraClass={styles.modalTitle}
+      />
+      <Typography
+        fontFamily={'secondaryFont'}
+        content={'Вы не можете отменить заявку самостоятельно.'}
+        extraClass={styles.modalContent}
+      />
       <div className={styles.modalButtons}>
         <Button
           buttonType="primary"
