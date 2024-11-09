@@ -1,35 +1,20 @@
-import { Input } from 'shared/ui/input';
-import { Button } from 'shared/ui/button';
-import styles from '../../styles.module.css';
-import { Icon } from 'shared/ui';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
-import Joi from 'joi';
+
+import { Input, Icon, Button } from 'shared/ui';
+import { resetPasswordSchema } from './schema';
+
+import styles from '../../styles.module.css';
 
 interface ResetPasswordProps {
   handleModalClose: () => void;
 }
 
-type TPassword = { newPassword: string; repeatPassword: string };
-
-const resetPasswordSchema = Joi.object<TPassword>({
-  newPassword: Joi.string().required().min(6).max(40).messages({
-    'string.empty': 'Пароль обязателен',
-    'string.min': 'Пароль должен быть не менее 6 символов',
-    'string.max': 'Пароль должен быть не более 40 символов',
-  }),
-  repeatPassword: Joi.string()
-    .required()
-    .equal(Joi.ref('newPassword'))
-    .messages({
-      'string.empty': 'Повторите пароль обязателен',
-      'any.only': 'Пароли не совпадают',
-    }),
-});
+export type TPassword = { newPassword: string; repeatPassword: string };
 
 export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<TPassword>({
@@ -54,32 +39,38 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
         />
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.input_with_label}>
-            <Input
-              className={styles.input_field}
-              label="Пароль"
-              {...register('newPassword', {
-                required: 'Пароль обязателен',
-                minLength: {
-                  value: 6,
-                  message: 'Минимальная длина 6 символов',
-                },
-              })}
-              placeholder="Введите новый пароль"
-              type="password"
+            <Controller
+              control={control}
+              name={'newPassword'}
+              render={({ field }) => (
+                <Input
+                  name={field.name}
+                  className={styles.input_field}
+                  onChange={field.onChange}
+                  label="Пароль"
+                  placeholder="Введите новый пароль"
+                  type="password"
+                />
+              )}
             />
             {errors.newPassword && (
               <span className={styles.error}>{errors.newPassword.message}</span>
             )}
           </div>
           <div className={styles.input_with_label}>
-            <Input
-              className={styles.input_field}
-              label="Повторите пароль"
-              {...register('repeatPassword', {
-                required: 'Повторите пароль обязателен',
-              })}
-              placeholder="Повторите пароль"
-              type="password"
+            <Controller
+              control={control}
+              name={'repeatPassword'}
+              render={({ field }) => (
+                <Input
+                  name={field.name}
+                  className={styles.input_field}
+                  onChange={field.onChange}
+                  label="Повторите пароль"
+                  placeholder="Повторите пароль"
+                  type="password"
+                />
+              )}
             />
             {errors.repeatPassword && (
               <span className={styles.error}>
@@ -99,5 +90,3 @@ export const ResetPassword = ({ handleModalClose }: ResetPasswordProps) => {
     </div>
   );
 };
-
-export default ResetPassword;

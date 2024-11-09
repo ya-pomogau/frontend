@@ -1,6 +1,8 @@
 import { ImgHTMLAttributes, useState } from 'react';
 import classnames from 'classnames';
-import { DefaultAvatar } from '../../../entities/task/ui/task/img/default-avatar';
+
+import { DefaultAvatar } from 'entities';
+
 import styles from './styles.module.css';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
