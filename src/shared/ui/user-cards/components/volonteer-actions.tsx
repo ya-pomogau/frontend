@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import { ExclamationPointIcon } from 'shared/ui/icons/exclamation-point-icon';
 import { Button } from 'shared/ui/button';
 import { VolunteerInfo } from 'entities/user/ui/user-info/volunteer-info';
-
 import styles from '../styles.module.css';
 import { useAppSelector } from '../../../../app/hooks';
 import { adminPermission, UserStatus } from '../../../types/common.types';

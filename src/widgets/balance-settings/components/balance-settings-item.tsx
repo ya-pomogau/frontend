@@ -1,7 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Input } from 'shared/ui';
-import { BallsIcon } from 'shared/ui/icons/balls-icon';
+import { Input, Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -18,7 +17,7 @@ const BalanceSettingsItem = ({
 }: BalanceSettingsItemProps) => {
   return (
     <div className={styles.balance_box}>
-      <p className={styles.balance_text}>{title}</p>
+      <Typography content={title} />
       <Input
         className={styles.balance_input}
         defaultValue={inputValue}
@@ -28,7 +27,7 @@ const BalanceSettingsItem = ({
         min="1"
         step="1"
       />
-      <BallsIcon color="blue" size="46" />
+      <Icon icon="BallsIcon" color="blue" size="46" />
     </div>
   );
 };

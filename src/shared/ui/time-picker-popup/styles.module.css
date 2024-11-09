@@ -70,9 +70,6 @@
 }
 
 .timePickerPopup__header {
-  font-family: var(--font-family-golos);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-medium);
   margin: 30px auto 0 auto;
 }
 

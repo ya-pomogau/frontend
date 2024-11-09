@@ -1,8 +1,10 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 import { useRef, useState } from 'react';
-import { CloseCrossIcon } from 'shared/ui/icons/close-cross-icon';
+import { Icon } from 'shared/ui';
 import { Tooltip } from 'shared/ui/tooltip';
 import styles from './styles.module.css';
+
+let tooltipModalRefCount = 0;
 
 interface ModalProps {
   children: ReactNode;
@@ -26,19 +28,23 @@ export const ButtonWithModal = ({
   extClassName,
   closeButton = false,
   conflictModalVisible,
-  setConflictModalVisible
+  setConflictModalVisible,
 }: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
-
   const [coords, setCoords] = useState<Coords | null>(null);
 
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const getCoords = () => {
-    setVisible(true);
+    if (!visible) {
+      setVisible(true);
+
+      tooltipModalRefCount += 1;
+      document.body.style.overflowY = 'hidden';
+    }
 
     if (!conflictModalVisible) {
-      setConflictModalVisible && setConflictModalVisible(true)
+      setConflictModalVisible && setConflictModalVisible(true);
     }
 
     const box = buttonRef.current?.getBoundingClientRect();
@@ -52,14 +58,22 @@ export const ButtonWithModal = ({
   };
 
   const hideModal = () => {
-    setVisible(false);
-    setClicked && setClicked(true);
+    if (visible) {
+      setVisible(false);
+
+      tooltipModalRefCount -= 1;
+      if (tooltipModalRefCount === 0) document.body.style.overflowY = 'visible';
+
+      setClicked && setClicked(true);
+    }
   };
 
   return (
     <div ref={buttonRef} onClick={getCoords} className={extClassName}>
       {children}
-      {(conflictModalVisible === undefined ? visible : (visible && conflictModalVisible)) && (
+      {(conflictModalVisible === undefined
+        ? visible
+        : visible && conflictModalVisible) && (
         <Tooltip
           visible={visible}
           changeVisible={hideModal}
@@ -71,7 +85,8 @@ export const ButtonWithModal = ({
           }}
         >
           {closeButton && (
-            <CloseCrossIcon
+            <Icon
+              icon="CloseCrossIcon"
               color="blue"
               className={`${styles.closeButton} close`}
             />

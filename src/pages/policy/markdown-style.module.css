@@ -98,7 +98,7 @@
   outline: inherit;
   display: flex;
   gap: 5px;
-  align-items: end;
+  align-items: center;
 }
 
 @media (max-width: 920px) {
@@ -107,18 +107,7 @@
   }
 }
 
-.editButtonText {
-  color: var(--colors-interface-primary);
-  font: var(--font-golos-12-16);
-  margin-block-start: 0;
-  margin-block-end: 0;
-  padding-bottom: 1px;
-}
-
 .editTitleText {
-  font: var(--font-golos-12-16);
-  margin-block-start: 0;
-  margin-block-end: 0;
   padding-top: 30px;
   padding-bottom: 5px;
 }
@@ -144,9 +133,6 @@
 }
 
 .editDescriptionText {
-  font: var(--font-golos-12-16);
-  margin-block-start: 0;
-  margin-block-end: 0;
   padding-bottom: 5px;
 }
 
@@ -175,14 +161,8 @@
   cursor: pointer;
   outline: inherit;
   display: flex;
+  align-items: center;
   gap: 10px;
-}
-
-.closeButtonText {
-  color: var(--colors-interface-primary);
-  font: var(--font-golos-12-16);
-  margin-block-start: 0;
-  margin-block-end: 0;
 }
 
 .smartHeaderOn {
