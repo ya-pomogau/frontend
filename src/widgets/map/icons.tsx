@@ -79,7 +79,6 @@ export const balloonMarker = (properties: TaskProperties) => {
       <p class="task_recipient_name">
         ${properties.recipient.name}
       </p>
-      <p class="task_recipient_phone">${properties.recipient.phone}</p>
     </div>
   </div>
   <div class="task_description_container">
@@ -101,7 +100,7 @@ export const balloonMarker = (properties: TaskProperties) => {
     </div>
     <div class="task_box" >
       ${urgentClockSvg(urgentColor)}
-      <p class="${urgencyDateClass}"</p>
+      <p class="${urgencyDateClass}">${properties.time}</p>
     </div>
   </div>
   <div class="task_button_container">
@@ -126,7 +125,6 @@ export const balloonMarker = (properties: TaskProperties) => {
             <p class="task_recipient_name">
                Нужна помощь
             </p>
-            <p class="task_recipient_phone">+7 (000) ***-**-**</p>
           </div>
         </div>
         <div class="task_description_container">
@@ -136,7 +134,7 @@ export const balloonMarker = (properties: TaskProperties) => {
           <button type="button" class="task_button">Читать</button>
         </div>
         <div class="task_icon_box">
-          <p class="${urgencyCountClass}">${properties.category.count}</p>
+          <p class="${urgencyCountClass}">${properties.category.points}</p>
           ${smilingFaceSvg(urgentColor)}
         </div>
         <div class="task_button_container">

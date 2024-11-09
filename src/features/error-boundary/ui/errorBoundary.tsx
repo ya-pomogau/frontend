@@ -25,7 +25,7 @@ export const ErrorBoundaryUI: FC<IErrorBoundaryUI> = ({
   filterItemsConfig,
   imageSrc,
   imageAlt,
-  centered=true,
+  centered = true,
   children,
 }) => {
   return (
@@ -36,7 +36,11 @@ export const ErrorBoundaryUI: FC<IErrorBoundaryUI> = ({
         text={headerText}
         filter={filterItemsConfig && <Filter items={filterItemsConfig} />}
       />
-      <div className={classnames(styles.content_box, {[styles.centered]: centered})}>
+      <div
+        className={classnames(styles.content_box, {
+          [styles.centered]: centered,
+        })}
+      >
         <img className={styles.image} src={imageSrc} alt={imageAlt}></img>
         {children && children}
       </div>
