@@ -6,6 +6,7 @@ import {
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
+import { YMapsApi } from '@pbe/react-yandex-maps/typings/util/typing';
 
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import { usePermission } from 'shared/hooks';
@@ -18,6 +19,9 @@ import {
   cantAssignTaskMessage,
   unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
+import UserMark from './UserMark';
+import { setAddress } from 'features/create-request/model';
+import { useAppDispatch } from 'app/hooks';
 
 import type { Task } from 'entities/task/types';
 import { GeoCoordinates } from 'shared/types/point-geojson.types';
@@ -26,10 +30,6 @@ import { userRole, UserRole, userStatus } from 'shared/types/common.types';
 import classNames from 'classnames';
 import './styles.css';
 import styles from './styles.module.css';
-import UserMark from './UserMark';
-import { setAddress } from 'features/create-request/model';
-import { useAppDispatch } from 'app/hooks';
-import ymaps from 'yandex-maps';
 
 interface YandexMapProps {
   width?: string | number;
@@ -69,7 +69,7 @@ export const YandexMap = ({
   const [isThankPopupVisible, setThankPopupVisible] = useState(false);
   const [coords, setCoords] = useState(coordinates);
   const mapRef = useRef<ymaps.Map>();
-  const ymap = useRef<typeof ymaps>();
+  const ymap = useRef<YMapsApi>();
 
   useEffect(() => {
     setCoords(coordinates);
@@ -105,7 +105,7 @@ export const YandexMap = ({
     }
   };
 
-  const onMapLoad = useCallback((refApi: typeof ymaps) => {
+  const onMapLoad = useCallback((refApi: YMapsApi) => {
     ymap.current = refApi;
   }, []);
 
@@ -116,7 +116,7 @@ export const YandexMap = ({
 
       if (ymap.current) {
         const geo = ymap.current.geocode(clickedCoordinates);
-        geo.then((res: ymaps.IGeocodeResult) => {
+        geo.then((res) => {
           const geoObject = res.geoObjects.get(0);
 
           dispatch(
