@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { useTruncatedText } from 'shared/hooks';
 import {
-  setDate,
   changeCurrentStep,
   changeStepDecrement,
   closePopup,
@@ -98,7 +97,6 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const handleEditButton = (typeButton: string) => {
     switch (typeButton) {
       case 'date':
-        dispatch(setDate(format(new Date(), 'dd.MM.yyyy')));
         dispatch(changeCurrentStep(1));
         dispatch(openPopup());
         break;

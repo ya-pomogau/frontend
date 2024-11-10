@@ -66,9 +66,7 @@ export const router = createBrowserRouter([
             onlyBlocked
           />
         ),
-        children: [
-          { path: Routes.PROFILE_BLOCKED, element: <BlockedPage /> },
-        ],
+        children: [{ path: Routes.PROFILE_BLOCKED, element: <BlockedPage /> }],
       },
       {
         element: (

@@ -11,12 +11,12 @@ import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
 import { useResponseTaskMutation } from 'services/user-task-api';
 import type { Dispatch, SetStateAction } from 'react';
+
 import { balloonMarker, taskMarker } from './icons';
 
 type MarkProps = {
   task: Task;
-  onClick?: () => void;
-  onOpenTask?: (task: Task) => void;
+  onClick?: (e: ymaps.IEvent) => void;
   showPopup?: (isVolunteerSelected: boolean) => void;
   onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
@@ -26,7 +26,6 @@ const Mark: FC<MarkProps> = ({
   task,
   onClick,
   showPopup,
-  onOpenTask,
   isAuthorised,
 }: MarkProps) => {
   const { description, location, date } = task;
@@ -50,7 +49,7 @@ const Mark: FC<MarkProps> = ({
             hour: '2-digit',
             minute: '2-digit',
           })
-        : '00:00',
+        : 'Бессрочно',
       isDisabled: !isGranted,
     }
   );
@@ -90,21 +89,6 @@ const Mark: FC<MarkProps> = ({
 
         const mainContainer = this.getParentElement();
         const taskContainer = mainContainer.querySelector('.task_container');
-        const recipientPhone = mainContainer.querySelector(
-          '.task_recipient_phone'
-        );
-
-        (function isValidPhone(): void {
-          const phone: string = recipientPhone.textContent;
-          const isValid = /^((\+7|7|8)+([0-9]){10})$/.test(phone);
-          isValid
-            ? (recipientPhone.textContent = `+7(${phone.slice(2, 5)})`.concat(
-                ' *** - ** - **'
-              ))
-            : (recipientPhone.textContent = phone
-                .slice(0, 8)
-                .concat(' *** - ** - **'));
-        })();
 
         const descriptionContainerHidden = taskContainer.querySelector(
           '.task_description_hidden'
@@ -152,6 +136,7 @@ const Mark: FC<MarkProps> = ({
 
   return (
     <Placemark
+      onClick={onClick}
       geometry={location}
       options={{
         iconLayout: Iconlayout,
