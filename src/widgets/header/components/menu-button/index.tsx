@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -15,7 +15,12 @@ const MenuButton = ({ onClick, isMobile }: IMenuButtonProps) => {
 
       {!isMobile && (
         <div className={styles.header__button__container}>
-          <span className={styles.header__button__text}>Меню</span>
+          <Typography
+            tag={'span'}
+            color={'primary'}
+            variant={'support'}
+            content={'Меню'}
+          />
           <Icon icon="UnionIcon" color="blue" />
         </div>
       )}

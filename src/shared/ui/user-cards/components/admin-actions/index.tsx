@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Input, Button } from 'shared/ui';
+import { Input, Button, Icon } from 'shared/ui';
 import { useControlModal } from 'shared/hooks';
-import { Icon } from 'shared/ui';
+
 import { AdminPermission } from 'shared/types/common.types';
 import {
   useAddAdminPrivilegiesMutation,
@@ -70,7 +70,7 @@ const AdminActions = ({
 
     const result = keysArray.filter((key) => values[key]);
 
-    await addAdminPrivileges({ _id: id, result });
+    await addAdminPrivileges({ _id: id, body: result });
   };
 
   const handleBlock = async () => {
@@ -105,7 +105,8 @@ const AdminActions = ({
           type={'password'}
           disabled
         />
-        <Icon icon="EditIcon"
+        <Icon
+          icon="EditIcon"
           onClick={handleModalOpen}
           className={styles.admin_edit_icon}
           color={'blue'}
@@ -127,7 +128,11 @@ const AdminActions = ({
               className={styles.admin_arrow_down}
               onClick={() => setAdminDropdownListClosed(false)}
             >
-              <Icon icon="ArrowDownIcon" color={'blue'} onClick={onSwitchArrow} />
+              <Icon
+                icon="ArrowDownIcon"
+                color={'blue'}
+                onClick={onSwitchArrow}
+              />
             </div>
           </div>
         </>

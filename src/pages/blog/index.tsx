@@ -10,6 +10,7 @@ import {
   Loader,
   LightPopup,
   Button,
+  Typography,
 } from 'shared/ui';
 import { useControlModal, usePermission } from 'shared/hooks';
 import { PostProps } from 'shared/ui/post/Post';
@@ -131,7 +132,11 @@ export function BlogPage() {
           onClickExit={handleClose}
           extClassName={styles.popup}
         >
-          <h4 className={`${styles.textWarning} text`}>Удалить публикацию?</h4>
+          <Typography
+            tag={'h4'}
+            content={'Удалить публикацию?'}
+            extraClass={styles.textWarning}
+          />
           <div className={styles.btnContainer}>
             <Button
               actionType="button"

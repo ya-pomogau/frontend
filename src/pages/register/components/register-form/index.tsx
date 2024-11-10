@@ -2,7 +2,13 @@ import { useMemo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { Button, FormInput, FormInputPhone, FormInputAddress } from 'shared/ui';
+import {
+  Button,
+  FormInput,
+  FormInputPhone,
+  FormInputAddress,
+  Typography,
+} from 'shared/ui';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { newUserThunk, vkUserSelector } from 'services/system-slice';
 import { UserRole, userRole as userRoles } from 'shared/types/common.types';
@@ -141,9 +147,11 @@ const RegisterForm = () => {
           extClassName={styles.input}
         />
 
-        <p className={styles.text}>
-          Укажите адрес и мы подберем ближайшее к вам задание
-        </p>
+        <Typography
+          variant={'support'}
+          content={'Укажите адрес и мы подберем ближайшее к вам задание'}
+          extraClass={styles.text}
+        />
       </div>
 
       <Button

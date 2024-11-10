@@ -7,7 +7,6 @@
     'address address';
   align-items: start;
   grid-auto-rows: min-content;
-  color: var(--colors-interface-primary);
   margin-top: 10px;
   grid-auto-columns: min-content;
 }
@@ -17,8 +16,6 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-bold);
   background-color: transparent;
 }
 
@@ -27,8 +24,6 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-bold);
   margin-left: 28px;
   background-color: transparent;
 }
@@ -38,8 +33,6 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-bold);
   background-color: transparent;
 }
 
@@ -51,25 +44,31 @@
   width: 22px;
 }
 
+@media screen and (max-width: 1150px) {
+  .date .dateText {
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .time .dateText {
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .address .addressText {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
 @media screen and (min-width: 1150px) {
   .taskInfo {
     gap: 5px;
     margin-top: 44px;
     grid-template-areas: 'date' 'time' 'address';
     grid-auto-columns: auto;
-    font: var(--font-golos-24-28);
-  }
-
-  .date {
-    font: inherit;
   }
 
   .time {
-    font: inherit;
     margin-left: 0;
-  }
-
-  .address {
-    font-weight: var(--font-weight-regular);
   }
 }

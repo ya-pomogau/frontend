@@ -23,7 +23,7 @@
 }
 
 .input ::placeholder {
-  font-size: var(--font-size-small);  
+  font-size: var(--font-size-small);
 }
 
 .text-block {
@@ -31,7 +31,7 @@
 }
 
 .text-block ::placeholder {
-  font-size: var(--font-size-small);  
+  font-size: var(--font-size-small);
 }
 
 .attachment-button {
@@ -62,13 +62,9 @@
   align-items: center;
 }
 
-.image-title {
-  margin: 0;
-  color: var(--colors-interface-primary);
-}
-
 .close-cross-button {
   border-style: none;
+  background: transparent;
   text-align: right;
   padding: 0;
   height: 14px;

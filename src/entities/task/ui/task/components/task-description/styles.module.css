@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   grid-area: description;
   width: 100%;
   border-bottom: 1px solid;
@@ -16,13 +17,10 @@
 
 .card__task {
   overflow: hidden;
-  font: var(--font-golos-16-22);
-  color: var(--colors-interface-dark-gray);
   background-color: transparent;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
-  margin: 0;
   overflow-wrap: anywhere;
 }
 
@@ -33,13 +31,13 @@
 
 .expandBtn {
   appearance: none;
-  font: var(--font-golos-16-22);
-  color: var(--colors-interface-primary);
   width: fit-content;
   border: none;
   background-color: transparent;
   cursor: pointer;
   float: right;
+  margin: 0 0 0 10px;
+  padding: 0;
 }
 
 .score {
@@ -48,12 +46,6 @@
   gap: 3px;
   align-items: center;
   margin: 4px 6px 0 0;
-}
-
-.scoreText {
-  font: var(--font-golos-12-14);
-  color: var(--colors-interface-primary);
-  background-color: transparent;
 }
 
 @media screen and (min-width: 1150px) {

@@ -1,10 +1,17 @@
+div .container_thank {
+  padding: 10px 30px 30px;
+}
+
 .container_thank {
-  padding: 20px 44.5px 24px 44.5px;
-  width: 100%;
+  width: 370px;
 }
 
 .container_sorry {
   padding: 20px 115px 20px 30px;
+}
+
+div .closeButton_position {
+  top: 15px;
 }
 
 @media screen and (max-width: 735px) {
@@ -12,28 +19,28 @@
   .container_sorry {
     width: 330px;
   }
+
+  div .closeButton_position {
+    top: 10px;
+    right: 10px;
+  }
 }
 
 .popupTitle {
   display: flex;
-  gap: 10px;
   align-items: center;
   border-bottom: var(--colors-interface-ford-white) 1px solid;
-  margin: 0;
+  text-align: center;
 }
 
 .popupTitle_thank {
-  height: 40px;
+  height: 45px;
   justify-content: center;
-  font-size: medium;
-  line-height: 19.2px;
+  text-wrap: nowrap;
 }
 
 .popupText {
   margin: 10px 0 0 0;
-  font-size: medium;
-  line-height: var(--line-height-medium);
-  color: var(--colors-interface-dark-gray);
 }
 
 .popupIcon {
@@ -54,8 +61,8 @@
   left: 175px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 920px) {
   .popupTitle {
-    font-size: small;
+    font-weight: 700;
   }
 }

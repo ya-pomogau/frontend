@@ -1,4 +1,4 @@
-import { SmartHeader, Icon } from 'shared/ui';
+import { SmartHeader, Icon, Typography } from 'shared/ui';
 
 import { LoginForm } from './components';
 
@@ -11,7 +11,13 @@ export function LoginPage() {
         text="Вход"
         icon={<Icon color="blue" icon="LoginIcon" size="54" />}
       />
-      <p className={styles.title}>Войти</p>
+      <Typography
+        tag={'h3'}
+        color={'primary-additional'}
+        variant={'titleResize'}
+        content={'Войти'}
+        extraClass={styles.title}
+      />
       <LoginForm />
     </>
   );
