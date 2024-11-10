@@ -11,12 +11,12 @@ import { Task } from 'entities/task/types';
 import { isTaskUrgent } from 'shared/libs/utils';
 import { useResponseTaskMutation } from 'services/user-task-api';
 import type { Dispatch, SetStateAction } from 'react';
+
 import { balloonMarker, taskMarker } from './icons';
 
 type MarkProps = {
   task: Task;
-  onClick?: () => void;
-  onOpenTask?: (task: Task) => void;
+  onClick?: (e: ymaps.IEvent) => void;
   showPopup?: (isVolunteerSelected: boolean) => void;
   onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
@@ -26,7 +26,6 @@ const Mark: FC<MarkProps> = ({
   task,
   onClick,
   showPopup,
-  onOpenTask,
   isAuthorised,
 }: MarkProps) => {
   const { description, location, date } = task;
@@ -137,6 +136,7 @@ const Mark: FC<MarkProps> = ({
 
   return (
     <Placemark
+      onClick={onClick}
       geometry={location}
       options={{
         iconLayout: Iconlayout,
