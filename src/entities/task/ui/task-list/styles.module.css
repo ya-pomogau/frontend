@@ -12,7 +12,18 @@
 }
 
 .content_default {
-  max-height: 65vh;
+  max-height: calc(65vh + 40px);
+}
+
+.content_default:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 16px);
+  height: 19%;
+  background: linear-gradient(transparent, rgb(255, 255, 255));
+  pointer-events: none;
 }
 
 .content:last-child {
@@ -97,7 +108,7 @@
 
 .closeWrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-;
 }
 
 .closeIcon:hover {
