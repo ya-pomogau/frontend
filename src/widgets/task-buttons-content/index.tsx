@@ -111,9 +111,10 @@ export const ModalContent = ({
               checked={reason === reasonTypes.third}
             />
           </div>
-          <div className={styles.modalButtons}>
+          <div className={classNames(styles.modalButtons, styles.mt20)}>
             <Button
               buttonType="secondary"
+              extClassName={styles.fitWidth}
               label="Помощь администратора"
               onClick={() => handleOpen()}
             />
@@ -206,6 +207,7 @@ export const ModalContent = ({
                 <div className={styles.modalButtons}>
                   <Button
                     buttonType="secondary"
+                    extClassName={classNames(styles.fitWidth, styles.centered)}
                     label={
                       active
                         ? 'Помощь администратора'
@@ -257,6 +259,7 @@ export const ModalContent = ({
             <Button
               buttonType="secondary"
               label={'Написать администратору'}
+              extClassName={classNames(styles.fitWidth, styles.centered)}
               onClick={() => handleOpen()}
             />
             {isOpen && (
@@ -306,9 +309,10 @@ export const ModalContent = ({
           <p className={textStyle}>
             Вы не можете отменить заявку самостоятельно.
           </p>
-          <div className={styles.modalButtons}>
+          <div className={classNames(styles.modalButtons, styles.mt20)}>
             <Button
               buttonType="primary"
+              extClassName={classNames(styles.fitWidth, styles.centered)}
               label="Написать администратору"
               onClick={() => handleOpen()}
             />
@@ -331,9 +335,10 @@ export const ModalContent = ({
           <p className={textStyle}>
             Вы не можете отменить или отредактировать заявку самостоятельно.
           </p>
-          <div className={styles.modalButtons}>
+          <div className={classNames(styles.modalButtons, styles.mt20)}>
             <Button
               buttonType="primary"
+              extClassName={classNames(styles.fitWidth, styles.centered)}
               label="Написать администратору"
               onClick={() => handleOpen()}
             />
