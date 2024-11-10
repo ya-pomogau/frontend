@@ -1,19 +1,17 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { useGetTaskVirginQuery } from '../../services/user-task-api';
-import { isUnConfirmedSelector } from '../../entities/user/model';
-import { userRole } from '../../shared/types/common.types';
-import { startSocketConnection } from '../../services/system-slice';
-import { YandexMap } from '../../widgets/map';
-import { Filter } from '../../features/filter';
-import { SmartHeader } from '../../shared/ui/smart-header';
-import { Icon } from '../../shared/ui/icons';
-import { Loader } from '../../shared/ui/loader';
+import { SmartHeader, Icon, Loader } from 'shared/ui';
 import { useMediaQuery } from 'shared/hooks';
 import { Breakpoints } from 'shared/config';
+import { userRole } from 'shared/types/common.types';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useGetTaskVirginQuery } from 'services';
+import { startSocketConnection } from 'services/system-slice';
+import { isUnConfirmedSelector } from 'entities';
+import { YandexMap } from 'widgets';
+import { Filter } from 'features/filter';
 
 export function ProfileMapPage() {
   const dispatch = useAppDispatch();
@@ -95,7 +93,6 @@ export function ProfileMapPage() {
             radius={radius}
             width="100%"
             height={mediaQuery ? '75vh' : '709px'}
-            onClick={() => console.log('1sad')}
             coordinates={user?.location}
             role={user && user.role}
             isAuthorised={true}

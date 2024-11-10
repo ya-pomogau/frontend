@@ -14,11 +14,9 @@ import type { Dispatch, SetStateAction } from 'react';
 
 import { balloonMarker, taskMarker } from './icons';
 
-
 type MarkProps = {
   task: Task;
   onClick?: (e: ymaps.IEvent) => void;
-  onOpenTask?: (task: Task) => void;
   showPopup?: (isVolunteerSelected: boolean) => void;
   onUnconfirmedClick?: Dispatch<SetStateAction<boolean>>;
   isAuthorised?: boolean;
@@ -28,7 +26,6 @@ const Mark: FC<MarkProps> = ({
   task,
   onClick,
   showPopup,
-  onOpenTask,
   isAuthorised,
 }: MarkProps) => {
   const { description, location, date } = task;

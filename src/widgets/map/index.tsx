@@ -4,10 +4,10 @@ import {
   Circle,
   GeolocationControl,
   Map,
-  useYMaps,
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
+import { YMapsApi } from '@pbe/react-yandex-maps/typings/util/typing';
 
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import { usePermission } from 'shared/hooks';
@@ -30,8 +30,6 @@ import Mark from './Mark';
 
 import './styles.css';
 import styles from './styles.module.css';
-import { YMapsApi } from '@pbe/react-yandex-maps/typings/util/typing';
-
 
 const valuesForCenteringPlacemark = [
   10, 9, 2, 1, 0.9, 0.6, 0.4, 0.3, 0.2, 0.09, 0.05, 0.04, 0.02, 0.006, 0.004,
@@ -59,7 +57,6 @@ export const YandexMap = ({
   height = 500,
   mapSettings = { latitude: 55.755819, longitude: 37.617713, zoom: 15 },
   radius,
-  onClick,
   tasks,
   coordinates,
   role,
@@ -77,9 +74,6 @@ export const YandexMap = ({
   const [coords, setCoords] = useState(coordinates);
   const mapRef = useRef<ymaps.Map>();
   const ymap = useRef<YMapsApi>();
-  const ref = useRef<any>(null);
-  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
-  const [mapCenterSettings, setMapCenterSettings] = useState(mapSettings);
 
   useEffect(() => {
     setCoords(coordinates);
@@ -106,28 +100,17 @@ export const YandexMap = ({
     setThankPopupVisible(false);
   };
 
-  const onOpenTask = (task: Task) => {
-    if (ref.current) {
-      const [x, y] = task.location.coordinates;
-      ref.current.setCenter([x - 0.004, y], 15, {
-        checkZoomRange: true,
-      });
-    }
-  };
-
   const onMapLoad = useCallback((refApi: YMapsApi) => {
     ymap.current = refApi;
   }, []);
 
   const handlePlacemarkClick = (e: ymaps.IEvent) => {
-    const z = ref.current.getZoom();
-    const placemarkCoords = e.get('coords');
-    const [x, y]: [number, number] = placemarkCoords;
-    setMapCenterSettings({
-      ...mapSettings,
-      latitude: x - valuesForCenteringPlacemark[z - 1],
-      longitude: y,
-    });
+    if (mapRef.current) {
+      const zoom = mapRef.current.getZoom();
+      const [x, y] = e.get('coords');
+
+      mapRef.current.setCenter([x - valuesForCenteringPlacemark[zoom - 1], y]);
+    }
   };
 
   const handleMapClick = (event: ymaps.IEvent) => {
@@ -136,10 +119,10 @@ export const YandexMap = ({
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
-      if (ymaps) {
-        const geo = ymaps.geocode(clickedCoordinates);
+      if (ymap.current) {
+        const geo = ymap.current.geocode(clickedCoordinates);
         geo.then((res) => {
-          const geoObject = res.geoObjects.get(0);
+          const geoObject = res.geoObjects.get(0) as ymaps.GeocodeResult;
           dispatch(
             setAddress({
               additinalAddress: geoObject.getAddressLine(),
@@ -163,13 +146,10 @@ export const YandexMap = ({
         <Map
           state={{
             bounds: radius
-              ? getBounds(
-                  [mapCenterSettings.latitude, mapCenterSettings.longitude],
-                  radius
-                )
+              ? getBounds([mapSettings.latitude, mapSettings.longitude], radius)
               : undefined,
-            center: [mapCenterSettings.latitude, mapCenterSettings.longitude],
-            zoom: mapCenterSettings.zoom,
+            center: [mapSettings.latitude, mapSettings.longitude],
+            zoom: mapSettings.zoom,
           }}
           options={{
             suppressMapOpenBlock: true,
@@ -177,7 +157,8 @@ export const YandexMap = ({
           }}
           width={width}
           height={height}
-          instanceRef={ref}
+          instanceRef={mapRef}
+          onLoad={onMapLoad}
           onClick={handleMapClick}
         >
           <GeolocationControl options={{ float: 'left' }} />
@@ -189,7 +170,6 @@ export const YandexMap = ({
                 onClick={handlePlacemarkClick}
                 showPopup={showPopup}
                 key={task._id}
-                onOpenTask={onOpenTask}
                 isAuthorised={isAuthorised}
               />
             );
@@ -203,7 +183,7 @@ export const YandexMap = ({
           {radius && (
             <Circle
               geometry={[
-                [mapCenterSettings.latitude, mapCenterSettings.longitude],
+                [mapSettings.latitude, mapSettings.longitude],
                 radius * 100,
               ]}
               options={{
