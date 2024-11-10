@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { format, parse } from 'date-fns';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useTruncatedText } from 'shared/hooks';
 import {
   changeCurrentStep,
   changeStepDecrement,
@@ -45,7 +46,9 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
     location,
   } = useAppSelector((state) => state.createRequest);
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const { isTruncated, isExpanded, toggleIsShowingMore } =
+    useTruncatedText(textRef);
 
   const handlePreviousStepClick = () => {
     dispatch(changeStepDecrement());
@@ -171,26 +174,23 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               extraClass={classNames(styles.descriptionForTask, {
                 [styles.expanded]: isExpanded,
               })}
-              content={
-                <>
-                  {description}
-                  {isTypeEdit && (
-                    <EditButton
-                      extClassName={styles.edit_button}
-                      label="Изменить задание"
-                      onClick={() => handleEditButton('description')}
-                    />
-                  )}
-                </>
-              }
+              ref={textRef}
+              content={description}
             />
-            {description.length > 170 && (
+            {isTruncated && (
               <button
-                onClick={() => setIsExpanded(!isExpanded)}
+                onClick={toggleIsShowingMore}
                 className={styles.readMoreButton}
               >
                 {isExpanded ? 'Скрыть' : 'Читать'}
               </button>
+            )}
+            {isTypeEdit && (
+              <EditButton
+                extClassName={styles.edit_button}
+                label="Изменить задание"
+                onClick={() => handleEditButton('description')}
+              />
             )}
           </>
         ) : (
@@ -238,26 +238,23 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
               extraClass={classNames(styles.descriptionForTask, {
                 [styles.expanded]: isExpanded,
               })}
-              content={
-                <>
-                  {description}
-                  {isTypeEdit && (
-                    <EditButton
-                      extClassName={styles.edit_button}
-                      label="Изменить задание"
-                      onClick={() => handleEditButton('description')}
-                    />
-                  )}
-                </>
-              }
+              ref={textRef}
+              content={description}
             />
-            {description.length > 160 && (
+            {isTruncated && (
               <button
-                onClick={() => setIsExpanded(!isExpanded)}
+                onClick={toggleIsShowingMore}
                 className={styles.readMoreButton}
               >
                 {isExpanded ? 'Скрыть' : 'Читать'}
               </button>
+            )}
+            {isTypeEdit && (
+              <EditButton
+                extClassName={styles.edit_button}
+                label="Изменить задание"
+                onClick={() => handleEditButton('description')}
+              />
             )}
           </>
         )}
