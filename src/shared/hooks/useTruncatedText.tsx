@@ -5,19 +5,28 @@ export const useTruncatedText = (ref: RefObject<HTMLParagraphElement>) => {
   const [isTruncated, setIsTruncated] = useState(false);
 
   useLayoutEffect(() => {
-    const { offsetHeight, scrollHeight } = ref.current || {};
+    const element = ref.current;
+    if (!element) return;
 
-    if (offsetHeight && scrollHeight && offsetHeight < scrollHeight) {
-      setIsTruncated(true);
-    } else {
-      setIsTruncated(false);
-    }
-  }, [ref]);
+    const checkTruncation = () => {
+      const { offsetHeight, scrollHeight } = element;
+      if (!isExpanded) {
+        setIsTruncated(offsetHeight < scrollHeight);
+      }
+    };
+
+    checkTruncation();
+
+    const resizeObserver = new ResizeObserver(checkTruncation);
+    resizeObserver.observe(element);
+
+    return () => resizeObserver.disconnect();
+  }, [ref, isExpanded]);
 
   const toggleIsShowingMore = () => setIsExpanded((prev) => !prev);
 
   return {
-    isTruncated,
+    isTruncated: isTruncated || isExpanded,
     isExpanded,
     toggleIsShowingMore,
   };

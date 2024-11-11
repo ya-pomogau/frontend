@@ -49,7 +49,7 @@ export const RoutesGroup = ({
   allowed,
   isRoot,
   onlyBlocked,
-  allowBlocked
+  allowBlocked,
 }: RoutesGroupProps) => {
   const { isLoading, role } = useAppSelector((state) => state.user);
   const isBlockedSelector = useAppSelector(isUserBlockedSelector);

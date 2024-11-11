@@ -10,11 +10,11 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     disabled: { type: 'boolean' },
     customIcon: { type: 'string' },
-    actionType: { 
-      type: 'string', 
-      options: ['submit', 'reset', 'button'], 
-      control: { type: 'radio'} 
-    }
+    actionType: {
+      type: 'string',
+      options: ['submit', 'reset', 'button'],
+      control: { type: 'radio' },
+    },
   },
 };
 
@@ -23,9 +23,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    buttonType: "partial",
+    buttonType: 'partial',
     label: 'Применить',
-    actionType: "reset"
+    actionType: 'reset',
   },
 };
 
