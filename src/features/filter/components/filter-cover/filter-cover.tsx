@@ -17,7 +17,7 @@ import {
   resetFilterData,
   setFilterData,
 } from '../../model';
-import { getDefaultValues } from '../../../../shared/libs/utils';
+import { getDefaultFilterComponents } from '../../../../shared/libs/utils';
 
 interface FilterCoverProps {
   filterMenu: FilterProps['items'];
@@ -34,13 +34,8 @@ export const FilterCover = ({
 
   const dispatch = useAppDispatch();
 
-  const currentFilterData = useAppSelector(filterDataSelector);
-
-  const { values, components } = getDefaultValues(filterMenu);
-
-  (Object.keys(values) as (keyof Partial<IFilterValues>)[]).map((item) => {
-    values[item] = currentFilterData[item] as string & string[];
-  });
+  const { components } = getDefaultFilterComponents(filterMenu);
+  const values = useAppSelector(filterDataSelector);
 
   const {
     control,

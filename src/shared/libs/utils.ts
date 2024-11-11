@@ -140,7 +140,6 @@ export const handleFilterTasks = (
 };
 
 export const defaultFilterData: {
-  values: IFilterValues;
   components: {
     categories: typeof CategoriesBlock;
     searchRadius: typeof RadiusBlock;
@@ -150,14 +149,6 @@ export const defaultFilterData: {
     userCategories: typeof UserCategoriesBlock;
   };
 } = {
-  values: {
-    categories: [],
-    searchRadius: '',
-    sortBy: '',
-    date: '',
-    time: [],
-    userCategories: [],
-  },
   components: {
     categories: CategoriesBlock,
     searchRadius: RadiusBlock,
@@ -168,13 +159,16 @@ export const defaultFilterData: {
   },
 };
 
-export const getDefaultValues = (filterParams: FilterProps['items']) => {
+export const getDefaultFilterComponents = (
+  filterParams: FilterProps['items']
+) => {
   if (filterParams) {
     (
-      Object.keys(defaultFilterData.values) as (keyof Partial<IFilterValues>)[]
+      Object.keys(
+        defaultFilterData.components
+      ) as (keyof Partial<IFilterValues>)[]
     ).map((item) => {
       if (!filterParams[item]) {
-        delete defaultFilterData.values[item];
         delete defaultFilterData.components[item];
       }
     });
