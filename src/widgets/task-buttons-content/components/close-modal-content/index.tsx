@@ -60,6 +60,7 @@ const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
       <div className={styles.modalButtons}>
         <Button
           buttonType="secondary"
+          extClassName={styles.fitWidth}
           label="Помощь администратора"
           onClick={() => handleOpen()}
         />

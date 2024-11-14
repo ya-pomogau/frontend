@@ -5,8 +5,7 @@
 }
 
 .modalTitle {
-  max-width: 310px;
-  padding: 13px 0 12px 0;
+  padding: 13px 0 10px 0;
   width: 100%;
   text-align: center;
   border-bottom: 1px solid var(--colors-interface-ford-white);
@@ -17,10 +16,10 @@
   display: flex;
 }
 
-.flexColumn {
-  flex-direction: column;
+.flexRow {
+  flex-direction: row;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
 }
 
 .modalButtons {
@@ -34,4 +33,20 @@
   border-top: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
+}
+
+@media (max-width: 550px) {
+  .modalButtons {
+    padding-top: 25px;
+    margin-top: 20px;
+  }
+
+  .modalContent {
+    padding: 20px 0px 0px 0px;
+  }
+
+  .modalTooltip {
+    width: 280px;
+  }
+
 }
