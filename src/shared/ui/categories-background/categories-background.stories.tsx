@@ -57,32 +57,32 @@ export const Example: Story = {
   render: (args) => (
     <>
       <CategoriesBackground
-        content="сопровождение"
+        content="Сопровождение"
         {...args}
       ></CategoriesBackground>
       <CategoriesBackground
-        content="покупка вещей"
+        content="Покупка продуктов"
         {...args}
       ></CategoriesBackground>
       <CategoriesBackground
-        content="покупка вещей/техники"
+        content="Покупка вещей/техники"
         {...args}
       ></CategoriesBackground>
       <CategoriesBackground
-        content="помощь в уборке"
+        content="Помощь в уборке"
         {...args}
       ></CategoriesBackground>
       <CategoriesBackground
-        content="ремонт техники/жилья"
+        content="Ремонт техники/жилья"
         {...args}
       ></CategoriesBackground>
       <CategoriesBackground
-        content="первеозка в личном транспорте"
+        content="Перевозка в личном транспорте"
         {...args}
         size="large"
       ></CategoriesBackground>
       <CategoriesBackground
-        content="помощь в подъёме/спуске"
+        content="Помощь в подъёме/спуске"
         {...args}
       ></CategoriesBackground>
       <CategoriesBackground
