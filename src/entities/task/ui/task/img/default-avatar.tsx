@@ -1,5 +1,5 @@
 interface IDefaultAvatar {
-  isTaskAvatar: boolean;
+  isTaskAvatar?: boolean;
 }
 
 export const DefaultAvatar = ({ isTaskAvatar }: IDefaultAvatar) => {
