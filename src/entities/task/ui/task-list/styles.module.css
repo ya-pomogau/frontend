@@ -108,7 +108,7 @@
 
 .closeWrapper {
   display: flex;
-  justify-content: flex-;
+  justify-content: flex-end;
 }
 
 .closeIcon:hover {
