@@ -11,6 +11,7 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { userRole } from 'shared/types/common.types';
 
 import styles from './address-step.module.css';
+import { add } from 'date-fns';
 
 interface IAddressProps {
   isMobile?: boolean;
@@ -26,7 +27,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
 
   useEffect(() => {
     if (!address) {
-      dispatch(setAddress({ additinalAddress: '', coords: coord }));
+      dispatch(setAddress({ additinalAddress: address, coords: coord }));
     }
   }, []);
 
@@ -37,7 +38,10 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
 
+  // Проверяем, пуст ли инпут или отсутствуют координаты
   const isEmptyAddress = address === '';
+  const hasCoordinates = location && location.length > 0;
+  const showError = (isEmptyAddress || !hasCoordinates) && !isEmptyAddress;
 
   const propsButton = usePropsButtonCustom();
 
@@ -120,14 +124,16 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           </>
         )}
       </div>
-      <Typography
-        color={'red'}
-        variant={'input-title'}
-        content={'Укажите место встречи'}
-        extraClass={classNames(styles.messageAlert, {
-          [styles.messageAlertActive]: isEmptyAddress,
-        })}
-      />
+      {showError && (
+        <Typography
+          color={'red'}
+          variant={'input-title'}
+          content={'Укажите место встречи'}
+          extraClass={classNames(styles.messageAlert, {
+            [styles.messageAlertActive]: true,
+          })}
+        />
+      )}
       <div className={styles.buttonWrapper}>
         {!isTypeEdit && (
           <Button
@@ -138,7 +144,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           />
         )}
         <Button
-          disabled={isEmptyAddress}
+          disabled={showError}
           buttonType="primary"
           label={propsButton.label}
           onClick={propsButton.onClick}
