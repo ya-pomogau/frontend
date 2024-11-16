@@ -27,6 +27,7 @@ export const MessagesList = ({ messages, chatmateInfo }: MessagesListProps) => {
           messageText={message.body}
           avatarLink={message.author.avatar}
           key={message._id}
+          createdAt={message.createdAt}
         />
       ))}
     </div>

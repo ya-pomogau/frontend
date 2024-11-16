@@ -19,7 +19,7 @@ import {
   StatisticsPage,
   ApplicationsStatisticsPage,
   SectionChatsConflict,
-  SectionInWorkChats,
+  SectionSystemChats,
   CreateNewAdminPage,
   UsersStatisticsPage,
   TasksPage,
@@ -158,7 +158,7 @@ export const router = createBrowserRouter([
             path: Routes.CHAT_HUB_UNREVIEWED,
             element: (
               <ProfileChatsPages>
-                <SectionInWorkChats />
+                <SectionSystemChats />
               </ProfileChatsPages>
             ),
           },
@@ -166,7 +166,7 @@ export const router = createBrowserRouter([
             path: Routes.CHAT_HUB_IN_WORK,
             element: (
               <ProfileChatsPages>
-                <SectionInWorkChats />
+                <SectionSystemChats />
               </ProfileChatsPages>
             ),
           },
@@ -174,7 +174,7 @@ export const router = createBrowserRouter([
             path: Routes.CHAT_HUB_COMPLETED,
             element: (
               <ProfileChatsPages>
-                <SectionInWorkChats />
+                <SectionSystemChats />
               </ProfileChatsPages>
             ),
           },
