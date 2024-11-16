@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { authApi } from './auth';
 import {
   ErrorDto,
@@ -8,7 +13,6 @@ import {
   TMockLoginRequestDto,
 } from './auth.types';
 import {
-  socketConnectionStatus,
   TCustomSelector,
   TSystemSliceState,
 } from '../shared/types/store.types';
@@ -16,6 +20,12 @@ import { RootState } from '../app/store';
 import { TUser, TVKUser } from '../entities/user/types';
 import { AdminPermission } from '../shared/types/common.types';
 import { setTokenAccess } from 'shared/libs/utils';
+import {
+  AnyUserChatsResponseInterface,
+  MessageInterface,
+  SystemChatInfo,
+  TaskChatInfo,
+} from '../shared/types/chat.types';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
   state.system.isPending;
@@ -141,13 +151,35 @@ export const mockUserLoginThunk = createAsyncThunk(
   }
 );
 
+const taskChatAdapter = createEntityAdapter<TaskChatInfo>({
+  selectId: (entity) => entity.meta._id,
+});
+
+const systemChatAdapter = createEntityAdapter<SystemChatInfo>({
+  selectId: (entity) => entity.meta._id,
+});
+
+const taskChatSelectors = taskChatAdapter.getSelectors(
+  (state: RootState) => state?.system?.chats.task
+);
+
+const getChatMetaByTaskId = (taskId: string) => (state: RootState) => {
+  const allTaskMeta = taskChatSelectors.selectAll(state);
+
+  const filteredMeta = allTaskMeta.filter(({ meta }) => meta.taskId === taskId);
+
+  return filteredMeta.length ? filteredMeta[0] : null;
+};
+
 const systemSliceInitialState: TSystemSliceState = {
   user: null,
   vkUser: null,
   isPending: false,
   isNew: false,
-  socketConnectionStatus: null,
-  socketMessage: null,
+  chats: {
+    task: taskChatAdapter.getInitialState(),
+    system: systemChatAdapter.getInitialState(),
+  },
 };
 
 const systemSlice = createSlice({
@@ -155,17 +187,44 @@ const systemSlice = createSlice({
   initialState: systemSliceInitialState,
   reducers: {
     resetUser: () => systemSliceInitialState,
-    startSocketConnection: (state) => {
-      state.socketConnectionStatus = socketConnectionStatus.INIT;
+    setChatsMeta: (
+      state,
+      { payload }: PayloadAction<AnyUserChatsResponseInterface>
+    ) => {
+      const { system, task } = payload;
+
+      taskChatAdapter.setAll(state.chats.task, task);
+      systemChatAdapter.setAll(state.chats.system, system);
     },
-    setSocketConnectionStatus: (state, action) => {
-      state.socketConnectionStatus = action.payload;
+    addChatMeta: (
+      state,
+      { payload }: PayloadAction<AnyUserChatsResponseInterface>
+    ) => {
+      const { system, task } = payload;
+
+      if (task.length) {
+        task.forEach((newMeta) => {
+          taskChatAdapter.addOne(state.chats.task, newMeta);
+        });
+      }
+
+      if (system.length) {
+        system.forEach((newMeta) => {
+          systemChatAdapter.addOne(state.chats.system, newMeta);
+        });
+      }
     },
-    setSocketMessage: (state, action) => {
-      state.socketMessage = action.payload;
-    },
-    closeSocketConnection: (state) => {
-      state.socketConnectionStatus = socketConnectionStatus.CLOSED;
+    addMessageToChat: (state, { payload }: PayloadAction<MessageInterface>) => {
+      const allEntities = {
+        ...state.chats.task.entities,
+        ...state.chats.system.entities,
+      };
+
+      const chat = allEntities[payload.chatId];
+
+      if (chat) {
+        chat.chats.push(payload);
+      }
     },
   },
   extraReducers: (builder) =>
@@ -280,17 +339,13 @@ const systemSlice = createSlice({
       })),
 });
 
-export const {
-  resetUser,
-  startSocketConnection,
-  setSocketConnectionStatus,
-  setSocketMessage,
-  closeSocketConnection,
-} = systemSlice.actions;
+export const { resetUser, setChatsMeta, addMessageToChat, addChatMeta } =
+  systemSlice.actions;
 export default systemSlice.reducer;
 
 export const actions = {
   ...systemSlice.actions,
+  getChatMetaByTaskId,
   adminLoginThunk,
   mockUserLoginThunk,
 };

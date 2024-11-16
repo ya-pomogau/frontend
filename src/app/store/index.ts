@@ -12,7 +12,8 @@ import {
 import { userModel } from 'entities/user/model';
 import { errorModel } from 'entities/error/model';
 import { createRequestModel } from 'features/create-request/model/create-request';
-import systemSliceReducer from '../../services/system-slice';
+import systemSliceReducer from 'services/system-slice';
+import { wsMessageKind } from 'shared/types/websocket.types';
 
 export const store = configureStore({
   reducer: {
@@ -35,7 +36,7 @@ export const store = configureStore({
       .concat(userTasksApi.middleware)
       .concat(adminsApi.middleware)
       .concat(postsApi.middleware)
-      .concat(websocketMiddleware),
+      .concat(websocketMiddleware(wsMessageKind)),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,96 +1,85 @@
 import { Middleware } from 'redux';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { io, Socket } from 'socket.io-client';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { API_HOST } from '../config/api-config';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import {
-  socketConnectionStatus,
-  socketEvent,
-} from '../shared/types/store.types';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
+import { WS_HOST } from '../config/api-config';
 import { getTokenAccess } from '../shared/libs/utils';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { actions } from './system-slice';
-import { mockChatMessages } from 'entities/chat/mock-messages';
-import { WsMessageData } from 'shared/types/websockets.types';
+import { addChatMeta, addMessageToChat, setChatsMeta } from './system-slice';
+import { wsMessageKind } from '../shared/types/websocket.types';
+import { AnyUserChatsResponseInterface } from '../shared/types/chat.types';
 
-// Объект для отправки тестового message. Удалить после реализации продовой версии
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const testMessage: WsMessageData = {
-  data: {
-    messages: mockChatMessages,
-  },
-};
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-export const websocketMiddleware: Middleware = (store) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  let socket: Socket;
+export const websocketMiddleware = (
+  wsActions: typeof wsMessageKind
+): Middleware<unknown> => {
+  return (store) => {
+    let socket: Socket | null = null;
+    let isConnected = false;
 
-  return (next) => (action) => {
-    // const { dispatch } = store;
-    // const token = getTokenAccess();
-    //
-    // const isSocketConnected =
-    //   socket &&
-    //   store.getState().system.socketConnectionStatus ===
-    //     socketConnectionStatus.CONNECTED;
-    //
-    // if (!socket && actions.startSocketConnection.match(action)) {
-    //   console.log(`-> Starting connection to socket on ${API_HOST}:`, action);
-    //
-    //   socket = io(API_HOST, {
-    //     extraHeaders: {
-    //       authorization: token as string,
-    //     },
-    //   });
-    //
-    //   socket.on(socketEvent.CONNECT, () => {
-    //     console.log(`-> Connected to socket on ${API_HOST}`);
-    //     dispatch(
-    //       actions.setSocketConnectionStatus(socketConnectionStatus.CONNECTED)
-    //     );
-    //   });
-    //
-    //   socket.on(socketEvent.CONNECT_USER_MESSAGE, ({ data }) => {
-    //     console.log(`-> The server has a message for you: ${data.message}`);
-    //     dispatch(actions.setSocketMessage(data));
-    //   });
-    //
-    //   socket.emit(socketEvent.TEST, testEventObj);
-    // }
-    //
-    // if (isSocketConnected) {
-    //   socket.on(socketEvent.MESSAGE, ({ data }) => {
-    //     console.log(`-> The server has a message for you: ${data.message}`);
-    //     dispatch(actions.setSocketMessage(data));
-    //   });
-    //
-    //   socket.on(socketEvent.CONNECT_ERROR, (error) => {
-    //     console.log(`-> Connection error: ${error.message}`);
-    //   });
-    //
-    //   if (actions.closeSocketConnection.match(action)) {
-    //     console.log(`-> Socket connection is closing`);
-    //     socket.disconnect();
-    //   }
-    //
-    //   socket.on(socketEvent.DISCONNECT, (reason) => {
-    //     dispatch(
-    //       actions.setSocketConnectionStatus(socketConnectionStatus.DISCONNECTED)
-    //     );
-    //     console.log(`-> Socket connection was dropped: ${reason}`);
-    //   });
-    // }
+    const {
+      CONNECTION_EVENT,
+      OPEN_CHAT_EVENT,
+      CLOSE_CHAT_EVENT,
+      NEW_MESSAGE_COMMAND,
+      INITIAL_CHATS_META_COMMAND,
+      NEW_CHATS_META_COMMAND,
+    } = wsActions;
 
-    next(action);
+    return (next) => (action) => {
+      const { dispatch } = store;
+      const { type, payload } = action;
+
+      const token = getTokenAccess();
+
+      if (type === CONNECTION_EVENT) {
+        socket = io(WS_HOST, {
+          extraHeaders: {
+            authorization: token as string,
+          },
+        });
+
+        isConnected = true;
+
+        socket.on(
+          INITIAL_CHATS_META_COMMAND,
+          (event: { data: AnyUserChatsResponseInterface }) => {
+            const { data } = event;
+            dispatch(setChatsMeta(data));
+          }
+        );
+
+        socket.on(
+          NEW_CHATS_META_COMMAND,
+          (event: { data: AnyUserChatsResponseInterface }) => {
+            const { data } = event;
+            dispatch(addChatMeta(data));
+          }
+        );
+
+        socket.on(wsMessageKind.NEW_MESSAGE_COMMAND, ({ data }) => {
+          dispatch(addMessageToChat(data));
+        });
+      }
+
+      if (type === NEW_MESSAGE_COMMAND && isConnected) {
+        socket?.emit(NEW_MESSAGE_COMMAND, {
+          data: payload,
+        });
+      }
+
+      if (type === OPEN_CHAT_EVENT && isConnected) {
+        socket?.emit(OPEN_CHAT_EVENT, {
+          data: payload,
+        });
+      }
+
+      if (type === CLOSE_CHAT_EVENT && isConnected) {
+        socket?.emit(CLOSE_CHAT_EVENT, {
+          data: payload,
+        });
+      }
+
+      // TODO: добавить обработку успешного/ неуспешного подключения, дисконекта и т.д.
+
+      next(action);
+    };
   };
 };

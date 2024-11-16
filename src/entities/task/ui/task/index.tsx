@@ -107,6 +107,7 @@ export const TaskItem = ({
           extClassName={styles.description}
         />
         <TaskUser
+          taskId={_id}
           user={userRoles.RECIPIENT === userRole ? volunteer : recipient}
           extClassName={styles.user}
           date={date}

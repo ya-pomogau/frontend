@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -6,26 +6,18 @@ import { SmartHeader, Icon, Loader } from 'shared/ui';
 import { useMediaQuery } from 'shared/hooks';
 import { Breakpoints } from 'shared/config';
 import { userRole } from 'shared/types/common.types';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useAppSelector } from 'app/hooks';
 import { useGetTaskVirginQuery } from 'services';
-import { startSocketConnection } from 'services/system-slice';
 import { isUnConfirmedSelector } from 'entities';
 import { YandexMap } from 'widgets';
 import { Filter } from 'features/filter';
 
 export function ProfileMapPage() {
-  const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
   const query = queryString.parse(location.search);
   const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
   const mediaQuery = useMediaQuery(Breakpoints.L);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(startSocketConnection());
-    }
-  }, [user]);
 
   const isVolunteer = user?.role === userRole.VOLUNTEER;
 

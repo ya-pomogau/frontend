@@ -10,6 +10,7 @@ import ErrorBoundary from 'features/error-boundary';
 import { useEffect } from 'react';
 import { useAppDispatch } from './hooks';
 import { checkTokenThunk } from 'services/system-slice';
+import { wsMessageKind } from '../shared/types/websocket.types';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,6 +21,10 @@ function App() {
     const token = getTokenAccess();
     if (token) {
       dispatch(checkTokenThunk(token));
+
+      dispatch({
+        type: wsMessageKind.CONNECTION_EVENT,
+      });
     }
   }, []);
 
