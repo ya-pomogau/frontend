@@ -19,7 +19,7 @@ import {
   StatisticsPage,
   ApplicationsStatisticsPage,
   SectionChatsConflict,
-  SectionInWorkChats,
+  SectionSystemChats,
   CreateNewAdminPage,
   UsersStatisticsPage,
   TasksPage,
@@ -30,6 +30,7 @@ import {
   VKAuthPage,
   RegisterPage,
 } from 'pages';
+import { BlockedPage } from 'features/error-boundary/pages/blockedPage';
 import { tabs } from '../../shared/types/common.types';
 import { ProfileChatsPages } from 'widgets/profile-chats';
 
@@ -62,6 +63,16 @@ export const router = createBrowserRouter([
         element: (
           <RoutesGroup
             allowed={{ Volunteer: true, Recipient: true, Admin: true }}
+            onlyBlocked
+          />
+        ),
+        children: [{ path: Routes.PROFILE_BLOCKED, element: <BlockedPage /> }],
+      },
+      {
+        element: (
+          <RoutesGroup
+            allowed={{ Volunteer: true, Recipient: true, Admin: true }}
+            allowBlocked
           />
         ),
         children: [
@@ -147,7 +158,7 @@ export const router = createBrowserRouter([
             path: Routes.CHAT_HUB_UNREVIEWED,
             element: (
               <ProfileChatsPages>
-                <SectionInWorkChats />
+                <SectionSystemChats />
               </ProfileChatsPages>
             ),
           },
@@ -155,7 +166,7 @@ export const router = createBrowserRouter([
             path: Routes.CHAT_HUB_IN_WORK,
             element: (
               <ProfileChatsPages>
-                <SectionInWorkChats />
+                <SectionSystemChats />
               </ProfileChatsPages>
             ),
           },
@@ -163,7 +174,7 @@ export const router = createBrowserRouter([
             path: Routes.CHAT_HUB_COMPLETED,
             element: (
               <ProfileChatsPages>
-                <SectionInWorkChats />
+                <SectionSystemChats />
               </ProfileChatsPages>
             ),
           },

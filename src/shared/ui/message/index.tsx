@@ -11,6 +11,7 @@ interface MessageProps {
   type: 'incoming' | 'outgoing' | 'achievement' | 'send';
   messageText: string;
   avatarLink: string;
+  createdAt: Date;
 }
 
 export const Message = ({
@@ -18,6 +19,7 @@ export const Message = ({
   type,
   messageText,
   avatarLink,
+  createdAt,
 }: MessageProps) => {
   const getAvatar = () =>
     type !== 'achievement' &&
@@ -40,6 +42,22 @@ export const Message = ({
             fontFamily={'secondaryFont'}
             variant={'support'}
             content={messageText}
+            extraClass={styles.text}
+          />
+          <br />
+          <Typography
+            tag={'span'}
+            color={'primary-additional'}
+            fontFamily={'primaryFont'}
+            variant={'support'}
+            content={createdAt.toLocaleString('ru-Ru', {
+              day: 'numeric',
+              year: '2-digit',
+              month: 'numeric',
+              timeZone: 'UTC',
+              hour: 'numeric',
+              minute: 'numeric',
+            })}
             extraClass={styles.text}
           />
         </div>

@@ -111,7 +111,7 @@ export const EditViewerInfo = ({
           <legend className="visually-hidden">Аватар</legend>
           <Avatar
             extClassName={styles.avatarField__image}
-            avatarLink={fileDataURL}
+            avatarLink={fileDataURL as string}
             avatarName="Аватар пользователя"
           />
           <label htmlFor="avatarUpload" className="visually-hidden">

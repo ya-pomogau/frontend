@@ -5,15 +5,14 @@
 }
 
 .modalTitle {
-  max-width: 310px;
-  padding: 13px 0 12px 0;
+  padding: 13px 0 10px 0;
   width: 100%;
   text-align: center;
   border-bottom: 1px solid var(--colors-interface-ford-white);
 }
 
 .modalContent {
-  padding: 20px 0 !important;
+  padding: 20px 0px;
   display: flex;
 }
 
@@ -21,12 +20,6 @@
   flex-direction: column;
   justify-content: center;
   gap: 15px;
-}
-
-.flexRow {
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
 }
 
 .modalButtons {
@@ -40,4 +33,31 @@
   border-top: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
+}
+
+@media (max-width: 550px) {
+  .fitWidth {
+    width: fit-content;
+  }
+
+  .flexColumn {
+    gap: 10px;
+  }
+
+  .modalButtons {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .modalContent {
+    padding: 20px 0px 0px 0px;
+  }
+
+  .modalTooltip {
+    width: 280px;
+  }
 }

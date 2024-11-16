@@ -1,13 +1,13 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import {
   Circle,
   GeolocationControl,
   Map,
-  useYMaps,
   YMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
+import { YMapsApi } from '@pbe/react-yandex-maps/typings/util/typing';
 
 import { YMAPS_API_KEY } from 'config/ymaps/api-keys';
 import { usePermission } from 'shared/hooks';
@@ -31,6 +31,11 @@ import Mark from './Mark';
 import './styles.css';
 import styles from './styles.module.css';
 
+const valuesForCenteringPlacemark = [
+  10, 9, 2, 1, 0.9, 0.6, 0.4, 0.3, 0.2, 0.09, 0.05, 0.04, 0.02, 0.006, 0.004,
+  0.003, 0.0007, 0.0005, 0.0003, 0.0001, 0.00005,
+];
+
 interface YandexMapProps {
   width?: string | number;
   height?: string | number;
@@ -50,9 +55,8 @@ interface YandexMapProps {
 export const YandexMap = ({
   width = 500,
   height = 500,
-  mapSettings = { latitude: 55.890017, longitude: 37.621157, zoom: 15 },
+  mapSettings = { latitude: 55.755819, longitude: 37.617713, zoom: 15 },
   radius,
-  onClick,
   tasks,
   coordinates,
   role,
@@ -68,8 +72,8 @@ export const YandexMap = ({
   const [isSorryPopupVisible, setSorryPopupVisible] = useState(false);
   const [isThankPopupVisible, setThankPopupVisible] = useState(false);
   const [coords, setCoords] = useState(coordinates);
-  const ref = useRef<any>(null);
-  const ymaps = useYMaps(['templateLayoutFactory', 'geocode']);
+  const mapRef = useRef<ymaps.Map>();
+  const ymap = useRef<YMapsApi>();
 
   useEffect(() => {
     setCoords(coordinates);
@@ -96,25 +100,29 @@ export const YandexMap = ({
     setThankPopupVisible(false);
   };
 
-  const onOpenTask = (task: Task) => {
-    if (ref.current) {
-      const [x, y] = task.location.coordinates;
-      ref.current.setCenter([x - 0.004, y], 15, {
-        checkZoomRange: true,
-      });
+  const onMapLoad = useCallback((refApi: YMapsApi) => {
+    ymap.current = refApi;
+  }, []);
+
+  const handlePlacemarkClick = (e: ymaps.IEvent) => {
+    if (mapRef.current) {
+      const zoom = mapRef.current.getZoom();
+      const [x, y] = e.get('coords');
+
+      mapRef.current.setCenter([x - valuesForCenteringPlacemark[zoom - 1], y]);
     }
   };
 
   const handleMapClick = (event: ymaps.IEvent) => {
     const clickedCoordinates = event.get('coords');
+
     if (clickedCoordinates) {
       setCoords(clickedCoordinates);
 
-      if (ymaps) {
-        const geo = ymaps.geocode(clickedCoordinates);
+      if (ymap.current) {
+        const geo = ymap.current.geocode(clickedCoordinates);
         geo.then((res) => {
-          const geoObject = res.geoObjects.get(0);
-
+          const geoObject = res.geoObjects.get(0) as ymaps.GeocodeResult;
           dispatch(
             setAddress({
               additinalAddress: geoObject.getAddressLine(),
@@ -149,7 +157,8 @@ export const YandexMap = ({
           }}
           width={width}
           height={height}
-          instanceRef={ref}
+          instanceRef={mapRef}
+          onLoad={onMapLoad}
           onClick={handleMapClick}
         >
           <GeolocationControl options={{ float: 'left' }} />
@@ -158,10 +167,9 @@ export const YandexMap = ({
             return (
               <Mark
                 task={task}
-                onClick={onClick}
+                onClick={handlePlacemarkClick}
                 showPopup={showPopup}
                 key={task._id}
-                onOpenTask={onOpenTask}
                 isAuthorised={isAuthorised}
               />
             );
@@ -176,7 +184,7 @@ export const YandexMap = ({
             <Circle
               geometry={[
                 [mapSettings.latitude, mapSettings.longitude],
-                radius * 1000,
+                radius * 100,
               ]}
               options={{
                 draggable: false,
