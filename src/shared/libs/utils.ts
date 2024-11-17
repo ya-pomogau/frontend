@@ -13,10 +13,6 @@ import {
 } from './constants';
 import { IDateUser } from 'pages/requests/test-users';
 import { UserRole, userRole } from 'shared/types/common.types';
-import { UserProfile } from 'entities/user/types';
-import { MessageInterface } from '../types/chat.types';
-import { mockRecipient, mockVolunteer } from '../../entities/chat/mock-users';
-import { mockChatMessages } from '../../entities/chat/mock-messages';
 import { CategoriesBlock } from '../../features/filter/ui/categories-block';
 import { RadiusBlock } from '../../features/filter/ui/radius-block';
 import { SortByBlock } from '../../features/filter/ui/sortBy-block';
@@ -313,25 +309,6 @@ export const setTokenAccess = (token: string) => {
 export const getTokenAccess = () => {
   return localStorage.getItem(LOCAL_STORAGE_TOKEN_ACCESS);
 };
-
-export interface IMessageHub {
-  user: UserProfile;
-  messages: MessageInterface[];
-  id: string;
-}
-
-export const messageHub: IMessageHub[] = [
-  {
-    user: mockRecipient,
-    messages: mockChatMessages,
-    id: '2',
-  },
-  {
-    user: mockVolunteer,
-    messages: mockChatMessages,
-    id: '1',
-  },
-];
 
 export const dataImages = [
   {

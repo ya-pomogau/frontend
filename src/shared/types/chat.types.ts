@@ -79,6 +79,11 @@ export interface TaskChatInterface extends ChatInterface {
   recipientLastReadAt: Date | null;
 }
 
+export type CreateTaskChatInterface = Pick<
+  TaskChatInterface,
+  'taskId' | 'type' | 'volunteer' | 'recipient'
+>;
+
 export interface TaskChatMetaInterface
   extends ChatInterface,
     Omit<TaskChatInterface, 'volunteerLastReadAt' | 'recipientLastReadAt'>,
@@ -156,3 +161,6 @@ export interface GetAdminChatsResponseInterface {
   moderated: Array<ConflictChatInfo>;
   conflict: Array<ConflictChatInfo>;
 }
+
+export type AnyUserChatsResponseInterface = GetUserChatsResponseInterface &
+  GetAdminChatsResponseInterface;

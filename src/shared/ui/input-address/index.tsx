@@ -109,6 +109,7 @@ export const InputAddress = (props: InputAddressProps) => {
   return (
     <Input
       defaultValue={address.address}
+      value={address.address}
       error={props.error}
       ref={suggestInputRef}
       type="text"

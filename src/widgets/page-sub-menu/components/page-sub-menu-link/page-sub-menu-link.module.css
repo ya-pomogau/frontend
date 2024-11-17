@@ -22,7 +22,7 @@
   background: var(--colors-interface-fuchsia);
   border-radius: 9px;
   min-width: 18px;
-  height: 21px;
+  height: 18px;
 }
 
 .tabContainer__itemActive::before {

@@ -8,4 +8,4 @@ export const getMockMessages = (): MessageInterface[] => mockChatMessages;
 export const infoAdmin: AdminInterface = mockAdmin;
 
 export const sortMessages = (messages: MessageInterface[]) =>
-  messages.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1));
+  messages.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));

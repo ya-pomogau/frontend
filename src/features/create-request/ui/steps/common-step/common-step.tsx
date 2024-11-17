@@ -218,7 +218,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
             </div>
             <div className={styles.addressWrapper}>
               <Icon icon="LocationIcon" color="blue" />
-              <Typography content={address} />
+              <Typography content={address} extraClass={classNames({[styles.address]: isTypeEdit})}/>
               {isTypeEdit && (
                 <EditButton
                   extClassName={styles.edit_button}

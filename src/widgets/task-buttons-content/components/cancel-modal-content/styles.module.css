@@ -13,7 +13,7 @@
 }
 
 .modalContent {
-  padding: 20px 0 !important;
+  padding: 20px 0px;
   display: flex;
 }
 
@@ -28,4 +28,19 @@
   border-top: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
+}
+
+@media (max-width: 550px) {
+  .modalButtons {
+    margin-top: 10px;
+    padding-top: 20px;
+  }
+
+  .modalContent {
+    padding: 20px 0px 0px 0px;
+  }
+
+  .modalTooltip {
+    width: 280px;
+  }
 }

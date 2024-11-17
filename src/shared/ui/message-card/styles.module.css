@@ -9,7 +9,7 @@
 }
 
 .img {
-  width: 50px;
+  min-width: 50px;
   height: 50px;
   border-radius: 50%;
   background: var(--colors-interface-primary-additional);
@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex-grow: 1;
 }
 
 .name {
@@ -46,16 +47,18 @@
 .message {
   width: 100%;
   font-size: var(--font-size-small);
-  -webkit-line-clamp: 1; /* Количество строк */
+  -webkit-line-clamp: 1;
+  /* Количество строк */
 }
 
 .counter {
   background: var(--colors-interface-fuchsia);
   text-align: center;
+  line-height: 18px;
 }
 
 .radius {
-  width: 18px;
+  min-width: 18px;
   height: 18px;
   border-radius: 50%;
   visibility: hidden;
@@ -70,7 +73,8 @@
   border-top: 0.5px solid var(--colors-interface-primary-additional);
   border-bottom: 0.5px solid var(--colors-interface-primary-additional);
   display: flex;
-  justify-content: space-around;
+  padding: 0 10px;
+  gap: 10px;
   align-items: center;
   cursor: pointer;
 }
@@ -79,6 +83,11 @@
   width: 429px;
   border: none;
   padding-left: 70px;
+}
+
+.cardConflict {
+  padding-left: 70px;
+  padding-right: 10px;
 }
 
 .notification {

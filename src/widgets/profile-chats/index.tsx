@@ -1,18 +1,16 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
-import { Icon, SmartHeader } from 'shared/ui';
+import { Routes } from 'shared/config';
 import { usePermission } from 'shared/hooks';
-
-import { PageSubMenu } from 'widgets/page-sub-menu';
-import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
-import {
-  useGetTasksConfilctQuery,
-  useGetTasksWorkConflictQuery,
-} from 'services/admin-api';
 import { adminPermission, userRole } from 'shared/types/common.types';
 
+import { Icon, SmartHeader } from 'shared/ui';
+import { PageSubMenu } from 'widgets/page-sub-menu';
+import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import styles from './styles.module.css';
+
+// NOTE: для чего этот импорт?
+import { id } from 'date-fns/esm/locale';
 
 interface ProfileChatsPagesProps {
   children: ReactNode;
@@ -22,64 +20,40 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const isConflictsPermissionGranted = usePermission(
-    [adminPermission.CONFLICTS],
-    userRole.ADMIN
-  );
+  // const isConflictsPermissionGranted = usePermission(
+  //   [adminPermission.CONFLICTS],
+  //   userRole.ADMIN
+  // );
 
-  // TODO: Добавить хуки для работы с обращениями (нерассмотренные, в работе, завершенные)
-  // const { data: hubUnreviewed } = useGetTasksHubUnreviewedQuery();
-  // const { data: hubInWork } = useGetTasksHubInWorkQuery();
-  // const { data: hubCompleted } = useGetTasksHubCompletedQuery();
-
-  const { data: conflict } = useGetTasksConfilctQuery('', {
-    skip: !isConflictsPermissionGranted,
-  });
-  const { data: conflictIsWork } = useGetTasksWorkConflictQuery('', {
-    skip: !isConflictsPermissionGranted,
+  // TODO: Связать моковые данные с хуками
+  const [notificationsQuantity, _] = useState({
+    hub: { unreviewed: 2, inWork: 0, completed: 1 },
+    hubTotal: 3,
+    conflict: { unreviewed: 0, inWork: 0, completed: 0 },
+    conflictTotal: 0,
   });
 
-  console.log(
-    `this is conflict, conflictIsWork ===>`,
-    conflict,
-    conflictIsWork
-  );
-
-  // TODO: добавить данные для раздела "Конфликты" "Завершенные"
-  // const { data: conflictCompleted } = useGetTasksConflictCompletedQuery('', {
-  //   skip: !isConflictsPermissionGranted,
-  // });
-  // TODO: изменить тип notificationsData
-  const renderSubMenuLinks = (basePath: string, notificationsData: any) => {
-    // TODO: FIX THIS
-    console.log('notificationsData', notificationsData);
-
+  const renderSubMenuLinks = (
+    basePath: string,
+    notificationsData: { [id: string]: number }
+  ) => {
     return (
       <>
         <PageSubMenuLink
           text="Нерассмотренные"
-          to={`${basePath}/unreviewed`}
-          // TODO: подключить данные количества обращений
-          // notifications={
-          //   notificationsData.unreviewed ? notificationsData.unreviewed.length : 0
-          // }
+          to={basePath + Routes.CHAT_SUB_UNREVIEWED}
+          notifications={notificationsData.unreviewed}
         />
         <PageSubMenuLink
           text="В работе"
-          to={`${basePath}/in-work`}
-          // TODO: подключить данные количества обращений
-          // notifications={
-          //   notificationsData.inWork ? notificationsData.inWork.length : 0
-          // }
+          to={basePath + Routes.CHAT_SUB_IN_WORK}
+          notifications={notificationsData.inWork}
           styleSpan={styles['style-span']}
         />
         <PageSubMenuLink
           text="Завершенные"
-          to={`${basePath}/completed`}
-          // TODO: подключить данные количества обращений
-          // notifications={
-          //   notificationsData.completed ? notificationsData.completed.length : 0
-          // }
+          to={basePath + Routes.CHAT_SUB_COMPLETED}
+          notifications={notificationsData.completed}
           styleSpan={styles['style-span']}
         />
       </>
@@ -98,40 +72,31 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
           <>
             <PageSubMenuLink
               text="Обращения"
-              to="/chats-hub"
-              // TODO: подключить данные количества обращений
-              // notifications={hubUnreviewed ? hubUnreviewed.length : 0}
+              to={Routes.CHAT_HUB}
+              notifications={notificationsQuantity.hubTotal}
             />
             <PageSubMenuLink
               text="Конфликты"
-              to="/chats-conflict"
-              // TODO: подключить данные количества конфликтов
-              // notifications={conflictUnreviewed ? conflictUnreviewed.length : 0}
+              to={Routes.CHAT_CONFLICT}
+              notifications={notificationsQuantity.conflictTotal}
               styleSpan={styles['style-span']}
             />
           </>
         }
       />
-      {currentPath.startsWith('/chats-hub') && (
+      {currentPath.startsWith(Routes.CHAT_HUB) && (
         <PageSubMenu
           style={styles['sub-menu']}
-          links={renderSubMenuLinks('/chats-hub', {
-            // TODO: подключить данные количества обращений
-            // unreviewed: hubUnreviewed,
-            // inWork: hubInWork,
-            // completed: hubCompleted,
-          })}
+          links={renderSubMenuLinks(Routes.CHAT_HUB, notificationsQuantity.hub)}
         />
       )}
-      {currentPath.startsWith('/chats-conflict') && (
+      {currentPath.startsWith(Routes.CHAT_CONFLICT) && (
         <PageSubMenu
           style={styles['sub-menu']}
-          links={renderSubMenuLinks('/chats-conflict', {
-            // TODO: подключить данные количества конфликтов
-            // unreviewed: conflictUnreviewed,
-            // inWork: conflictInWork,
-            // completed: conflictCompleted
-          })}
+          links={renderSubMenuLinks(
+            Routes.CHAT_CONFLICT,
+            notificationsQuantity.conflict
+          )}
         />
       )}
       {children}

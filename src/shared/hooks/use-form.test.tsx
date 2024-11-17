@@ -45,6 +45,8 @@ describe('check useForm', () => {
       } as HTMLFormElement;
     });
     const value: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> = {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       target: {
         validationMessage: 'OK',
         name: 'Имя',

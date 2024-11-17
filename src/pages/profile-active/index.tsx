@@ -8,8 +8,7 @@ import { Breakpoints } from 'shared/config';
 import { Task } from '../../entities/task/types';
 import { openPopup } from '../../features/create-request/model';
 import { Request } from '../../features/create-request';
-import { useGetTaskActiveQuery } from '../../services/user-task-api';
-import { startSocketConnection } from '../../services/system-slice';
+import { useGetTaskActiveQuery } from '../../services';
 import { getRoleForRequest, handleFilterTasks } from '../../shared/libs/utils';
 
 import { Filter } from '../../features/filter';
@@ -17,7 +16,6 @@ import { filterDataSelector } from '../../features/filter/model';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.user.data);
 
   const isMobile = useMediaQuery(Breakpoints.XL);
   const isMobileForPopup = useMediaQuery(Breakpoints.M);
@@ -46,12 +44,6 @@ export function ProfileActivePage() {
     }
     return tasks;
   }, [sortBy, categories, tasks]);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(startSocketConnection());
-    }
-  }, [user]);
 
   return (
     <>

@@ -29,3 +29,7 @@ storybook-static
 *storybook.log
 
 .env.dev
+
+# non npm lock files
+pnpm-lock.yaml
+yarn.lock

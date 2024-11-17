@@ -9,7 +9,7 @@ interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
-  isTaskAvatar: boolean;
+  isTaskAvatar?: boolean;
 }
 
 export const Avatar = ({
