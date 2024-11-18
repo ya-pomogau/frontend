@@ -147,9 +147,6 @@ const Dropdown = ({
               onClick={() => setIsOpen(false)}
             />
           </div>
-          {/* <div className={styles.text}>
-            Такая заявка уже существует. Дождитесь ее выполнения.
-          </div> */}
           <Typography variant={'paragraphResize'}>
             Такая заявка уже существует. <br />
             Дождитесь ее выполнения.

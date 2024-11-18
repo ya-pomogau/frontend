@@ -65,11 +65,7 @@
   align-items: center;
   border-bottom: solid 1px var(--colors-interface-additional);
 }
-/* .text {
-  font-family: var(--font-family-golos);
-  max-width: 294px;
-  margin: auto;
-} */
+
 .closeWrapper {
   display: flex;
   justify-content: flex-end;
