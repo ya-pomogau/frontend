@@ -1,6 +1,6 @@
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 import styles from './styles.module.css';
 import { useAppSelector } from 'app/hooks';
 import { Tooltip } from '../tooltip';
@@ -147,9 +147,13 @@ const Dropdown = ({
               onClick={() => setIsOpen(false)}
             />
           </div>
-          <div className={styles.text}>
+          {/* <div className={styles.text}>
             Такая заявка уже существует. Дождитесь ее выполнения.
-          </div>
+          </div> */}
+          <Typography variant={'paragraphResize'}>
+            Такая заявка уже существует. <br />
+            Дождитесь ее выполнения.
+          </Typography>
         </Tooltip>
       )}
     </div>
