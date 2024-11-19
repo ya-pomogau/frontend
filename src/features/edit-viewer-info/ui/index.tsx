@@ -76,7 +76,13 @@ export const EditViewerInfo = ({
   const handlePickAvatar = () =>
     avatarPicker.current && avatarPicker.current.click();
 
-  useEffect(() => reset(), [isOpen]);
+  useEffect(() => {
+    reset({
+      name: userName,
+      phone: userPhone,
+      address: userAddress,
+    });
+  }, [isOpen, userName, userPhone, userAddress, reset]);
 
   useEffect(() => {
     let fileReader: FileReader;
