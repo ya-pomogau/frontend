@@ -118,7 +118,9 @@ export const TaskButtonsRecipient = ({
               userRole={userRole}
               taskId={taskId}
               type={
-                isTaskExpired || volunteer
+                isTaskUrgent
+                  ? modalContentType.cancel
+                  : volunteer
                   ? modalContentType.responded
                   : modalContentType.close
               }
@@ -128,7 +130,7 @@ export const TaskButtonsRecipient = ({
         >
           <SquareButton
             buttonType={taskButtonType.close}
-            disabledColor={isTaskUrgent}
+            disabledColor={isTaskUrgent || !!volunteer}
           />
         </ButtonWithModal>
       )}

@@ -52,9 +52,7 @@ export const ModalContent = ({
     case modalContentType.phone:
       return <PhoneModalContent />;
     case modalContentType.cancel:
-      return (
-        <CancelModalContent date={date} userRole={userRole} taskId={taskId} />
-      );
+      return <CancelModalContent />;
     case modalContentType.responded:
       return <RespondedModalContent />;
     case modalContentType.unfulfilled:

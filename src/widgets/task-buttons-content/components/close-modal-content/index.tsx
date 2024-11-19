@@ -2,20 +2,21 @@ import classNames from 'classnames';
 import { useState } from 'react';
 
 import { Typography, Checkbox, Button } from 'shared/ui';
+import { useCancelTaskMutation } from 'services';
+import { userRole as userRoles } from 'shared/types/common.types';
 import { useControlModal } from 'shared/hooks';
 import { PopupChat, infoAdmin } from 'entities';
-import { ButtonWithModal } from 'widgets';
 import { ModalContentProps } from 'widgets/task-buttons-content';
 import {
   reasonType as reasonTypes,
   ReasonType,
 } from 'widgets/task-buttons-content/types';
-import { CancelModalContent } from '../index';
 
 import styles from './styles.module.css';
 
-const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
+const CloseModalContent = ({ userRole, taskId }: ModalContentProps) => {
   const { isOpen, handleOpen, handleClose } = useControlModal();
+  const [cancelTask] = useCancelTaskMutation();
   const [reason, setReason] = useState<ReasonType | null>(null);
   const isReasonUnselected = () => {
     return !reason;
@@ -26,6 +27,12 @@ const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
       setReason(null);
     } else {
       setReason(reasonType);
+    }
+  };
+
+  const handleCancelClick = () => {
+    if (userRole === userRoles.RECIPIENT && taskId) {
+      cancelTask({ id: taskId });
     }
   };
 
@@ -73,22 +80,12 @@ const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
             onAttachFileClick={() => {}}
           />
         )}
-        <ButtonWithModal
-          closeButton
-          modalContent={
-            <CancelModalContent
-              date={date}
-              userRole={userRole}
-              taskId={taskId}
-            />
-          }
-        >
-          <Button
-            buttonType="primary"
-            label="Отменить заявку"
-            disabled={isReasonUnselected()}
-          />
-        </ButtonWithModal>
+        <Button
+          buttonType="primary"
+          label="Отменить заявку"
+          disabled={isReasonUnselected()}
+          onClick={handleCancelClick}
+        />
       </div>
     </div>
   );
