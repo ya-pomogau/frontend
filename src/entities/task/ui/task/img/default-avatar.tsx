@@ -1,10 +1,19 @@
+import classnames from 'classnames';
+import styles from '../../../../../shared/ui/avatar/styles.module.css'
+
 interface IDefaultAvatar {
   isTaskAvatar?: boolean;
+  extClassName?: string;
 }
 
-export const DefaultAvatar = ({ isTaskAvatar }: IDefaultAvatar) => {
+export const DefaultAvatar = ({
+  isTaskAvatar,
+  extClassName,
+}: IDefaultAvatar) => {
+  const defaultAvatarClass = classnames(styles.avatar, extClassName);
   return isTaskAvatar ? (
     <svg
+      className={defaultAvatarClass}
       width="100"
       height="100"
       viewBox="0 0 100 100"
@@ -33,6 +42,7 @@ export const DefaultAvatar = ({ isTaskAvatar }: IDefaultAvatar) => {
     </svg>
   ) : (
     <svg
+      className={defaultAvatarClass}
       width="175"
       height="175"
       viewBox="0 0 175 175"

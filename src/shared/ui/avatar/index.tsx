@@ -34,6 +34,6 @@ export const Avatar = ({
       {...props}
     />
   ) : (
-    <DefaultAvatar isTaskAvatar={isTaskAvatar} />
+    <DefaultAvatar isTaskAvatar={isTaskAvatar} extClassName={extClassName} />
   );
 };
