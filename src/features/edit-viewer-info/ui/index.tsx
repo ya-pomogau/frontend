@@ -99,6 +99,20 @@ export const EditViewerInfo = ({
     };
   }, [file]);
 
+  const closeByEsc = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+      (document.activeElement as HTMLElement)?.blur();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', closeByEsc);
+    return () => {
+      document.removeEventListener('keydown', closeByEsc);
+    };
+  }, []);
+
   return (
     <LightPopup
       extClassName={classnames(styles.container, extClassName)}
