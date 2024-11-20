@@ -10,15 +10,13 @@ import { IFilterValues } from '../../features/filter/types';
 import { defaultObjFilteres } from '../../features/filter/consts';
 import { openPopup } from '../../features/create-request/model';
 import { Request } from '../../features/create-request';
-import { useGetTaskActiveQuery } from '../../services/user-task-api';
-import { startSocketConnection } from '../../services/system-slice';
+import { useGetTaskActiveQuery } from '../../services';
 import { getRoleForRequest, handleFilterTasks } from '../../shared/libs/utils';
 
 import { Filter } from '../../features/filter';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store) => store.user.data);
 
   const [infoFilterTasks, setInfoFilterTasks] =
     useState<IFilterValues>(defaultObjFilteres);
@@ -40,12 +38,6 @@ export function ProfileActivePage() {
   useEffect(() => {
     tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
   }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(startSocketConnection());
-    }
-  }, [user]);
 
   return (
     <>

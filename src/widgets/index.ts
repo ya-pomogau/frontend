@@ -21,5 +21,6 @@ export { ProfileChatsPages } from './profile-chats';
 export { ModalContent } from './task-buttons-content';
 export { UserCard } from './user-card';
 export { UserCardForTasks } from './user-card-for-tasks';
-export { WindowInteractionUsers } from './window-interaction-users';
+export { WindowChatUsers } from './window-chat-users';
+export { WindowConflictUsers } from './window-conflict-users';
 export { AdminSelectModal } from './admin-modal-select';

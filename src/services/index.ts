@@ -5,10 +5,10 @@ export {
   useGetAllAdminsQuery,
   useConfirmUserMutation,
   usePromoteUserMutation,
-  useGetTasksConfilctQuery,
+  useGetTasksConflictQuery,
   useGetTasksWorkConflictQuery,
   useTakeConflictTaskMutation,
-  useResolСonflictMutation,
+  useResolveConflictMutation,
   useUpdateContactsMutation,
   useCreateNewAdminMutation,
   useAddAdminPrivilegiesMutation,
@@ -66,6 +66,7 @@ export {
   adminLoginThunk,
   newUserThunk,
   checkTokenThunk,
+  setChatsMeta,
 } from './system-slice';
 
 export { websocketMiddleware } from './websocket-middleware';

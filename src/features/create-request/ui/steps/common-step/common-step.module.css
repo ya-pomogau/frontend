@@ -26,19 +26,22 @@
 }
 
 .address {
-  width: min-content;
+  max-width: 269px;
 }
 
 .typeOfTask {
-  margin: 0;
-  margin-top: 15px;
+  margin: 15px 0 0;
 }
 
 .descriptionForTask {
   height: auto;
-  overflow: hidden;
   max-height: 64px;
   transition: max-height 0.3s ease;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
 }
 
 .descriptionForTask.expanded {
@@ -51,16 +54,16 @@
   word-spacing: normal;
   line-height: normal;
   text-transform: none;
-  text-indent: 0px;
+  text-indent: 0;
   text-shadow: none;
   display: inline-block;
   text-align: start;
   appearance: auto;
   -webkit-rtl-ordering: logical;
-  resize: -internal-textarea-auto;
   cursor: text;
   overflow-wrap: break-word;
   background-color: field;
+  -webkit-line-clamp: unset;
 }
 
 .dateWrapper {
@@ -115,8 +118,7 @@
   }
 
   .dateWrapper {
-    margin: 0;
-    margin-top: 40px;
+    margin: 40px 0 0;
     position: relative;
     column-gap: 45px;
   }
@@ -134,28 +136,22 @@
   .descriptionForTask {
     height: auto;
     overflow: hidden;
+    text-overflow: ellipsis;
     max-height: 64px;
     max-width: 250px;
     transition: max-height 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
   }
 
   .descriptionForTask.expanded {
     min-height: 185px;
-    resize: none;
-    transition: var(--transition-hover);
-    box-sizing: border-box;
-    white-space: pre-wrap;
-    letter-spacing: normal;
-    word-spacing: normal;
-    line-height: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
+    -webkit-line-clamp: unset;
     text-align: start;
     appearance: auto;
     -webkit-rtl-ordering: logical;
-    resize: -internal-textarea-auto;
     cursor: text;
     overflow-wrap: break-word;
     background-color: field;
@@ -168,7 +164,7 @@
   }
 
   .prevButton {
-    margin-right: 0px;
+    margin-right: 0;
   }
 }
 .edit_button {

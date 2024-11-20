@@ -34,13 +34,14 @@ export const PopupChat = ({
 }: PopupChatProps) => {
   const isMobile = useMediaQuery(Breakpoints.S);
 
-  const { values, handleChange } = useForm({
+  const { values, handleChange, resetForm } = useForm({
     message: '',
   });
 
   const handleSendClick = () => {
     if (onMessageSend) {
       onMessageSend(values.message);
+      resetForm();
     }
   };
 

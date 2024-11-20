@@ -85,11 +85,8 @@ export const Tooltip = ({
       const tooltipWidth = rect.width;
 
       if (leftEdgeDistance < tooltipWidth) {
-        tooltipRef.current.style.transform = `translateX(87%)`;
         setPointerPositionState('left');
       } else {
-        tooltipRef.current.style.left = '';
-        tooltipRef.current.style.transform = '';
         setPointerPositionState(pointerPosition);
       }
     }

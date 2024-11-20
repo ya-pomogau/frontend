@@ -112,6 +112,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
           extClassName={cn(styles.button, props.extClassButton)}
           disabled={!props.inputValue}
           actionType="button"
+          onClick={props.onClickBtn}
         />
       </form>
 

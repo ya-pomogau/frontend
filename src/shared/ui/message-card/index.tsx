@@ -1,96 +1,99 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './styles.module.css';
-import { TaskConflict } from 'entities/task/types';
-import { UserProfile } from 'entities/user/types';
-import { IMessageHub } from 'shared/libs/utils';
-import { MessageInterface } from '../../types/chat.types';
+import { AnyUserInterface } from 'shared/types/user.type';
 import { Typography } from '../../ui';
 
 interface PropsMessageCard {
-  statusConflict: boolean;
-  description: string;
-  handleClickCard: (task: TaskConflict | IMessageHub) => void;
-  message?: MessageInterface[];
+  statusConflict?: boolean | undefined;
+  description?: string | undefined;
+  onClick: () => void;
   action: boolean;
-  user: UserProfile;
-  task?: TaskConflict;
-  position?: boolean;
+  user?: AnyUserInterface | null;
+  position?: 1 | 2 | undefined;
+  unreads: number;
 }
 
-export const MessageCard = (props: PropsMessageCard) => {
-  const [hasNewMessage, setHasNewMessage] = useState(false);
-  const location = useLocation();
+export const MessageCard = ({
+  unreads,
+  position,
+  action,
+  user,
+  onClick,
+  statusConflict,
+  description,
+}: PropsMessageCard) => {
+  const defultStyle = cn('m-0', 'text', 'text_type_regular');
 
-  useEffect(() => {
-    setHasNewMessage(true);
-  }, [props.message]);
+  /* #####################
+  Варианты отображения карточки сообщения 
+  при конфликте и в системном чате
+  ##################### */
+  const variant = (children: (name: string, desc: string) => JSX.Element) =>
+    statusConflict ? (
+      // Карточка оповещения о новом конфликтном чате
+      <>
+        <div className={cn(styles.img, { [styles.img_action]: action })} />
 
-  function handelClick() {
-    if (props.task) {
-      props.handleClickCard(props.task);
-    } else if (props.message) {
-      props.handleClickCard({
-        user: props.user,
-        messages: props.message,
-        id: props.user._id,
-      });
-    }
-  }
+        {
+          //передаём описание в общий элемент верстки
+          children('Оповещение о конфликте', description ?? 'Дата конфликта')
+        }
 
+        <div
+          className={cn(styles.notification, styles.radius, {
+            [styles.vizabiliti]: unreads > 0,
+          })}
+        />
+      </>
+    ) : (
+      // Карточка системного чата с пользователем
+      user && (
+        <>
+          <img src={user.avatar} alt={user.name} className={styles.img} />
+
+          {
+            //передаём имя и телефон в общий элемент верстки
+            children(user.name, user.phone)
+          }
+          <Typography
+            tag={'span'}
+            color={'white'}
+            variant={'input-title'}
+            content={unreads > 10 ? '+9' : unreads}
+            extraClass={cn(styles.counter, styles.radius, {
+              [styles.vizabiliti]: unreads > 0,
+            })}
+          />
+        </>
+      )
+    );
+
+  /* #####################
+  ################# RETURN
+  ##################### */
   return (
     <article
-      onClick={handelClick}
-      className={cn(
-        styles.card,
-        { [styles.card_action]: props.action },
-        {
-          [styles.cardSwipe]: props.position,
-        }
-      )}
+      onClick={onClick}
+      className={cn(styles.card, {
+        [styles.card_action]: action,
+        [styles.cardSwipe]: position === 1,
+        [styles.cardConflict]: position === 2,
+      })}
     >
-      {props.user.avatar ? (
-        <img src={props.user.avatar} alt="фото" className={styles.img} />
-      ) : (
-        <div
-          className={cn(styles.img, { [styles.img_action]: props.action })}
-        />
-      )}
-      <div className={styles.userInfo}>
-        <Typography
-          variant={'paragraphResize'}
-          content={
-            props.statusConflict ? 'Оповещение о конфликте' : props.user.name
-          }
-          extraClass={cn(styles.name, styles.lengthLimitation)}
-        />
-        <Typography
-          variant={'support'}
-          content={props.description}
-          extraClass={cn(styles.message, styles.lengthLimitation)}
-        />
-      </div>
-      {location.pathname === '/chat-conflict'
-        ? hasNewMessage && (
-            <div
-              className={cn(styles.notification, styles.radius, {
-                [styles.vizabiliti]: !hasNewMessage,
-              })}
-            />
-          )
-        : hasNewMessage &&
-          props.message && (
-            <Typography
-              tag={'span'}
-              color={'white'}
-              variant={'input-title'}
-              content={props.message.length > 10 ? '+9' : props.message.length}
-              extraClass={cn(styles.counter, styles.radius, {
-                [styles.vizabiliti]: !hasNewMessage,
-              })}
-            />
-          )}
+      {variant((name, desc) => (
+        <div className={styles.userInfo}>
+          <Typography
+            variant={'paragraphResize'}
+            content={name}
+            extraClass={cn(styles.name, styles.lengthLimitation)}
+          />
+          <Typography
+            variant={'support'}
+            content={desc}
+            extraClass={cn(styles.message, styles.lengthLimitation)}
+          />
+        </div>
+      ))}
     </article>
   );
 };

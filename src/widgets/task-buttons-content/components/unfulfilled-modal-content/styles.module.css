@@ -1,0 +1,18 @@
+.modalTooltip {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.modalTitle {
+  padding: 13px 0 10px 0;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid var(--colors-interface-ford-white);
+}
+
+@media (max-width: 550px) {
+  .modalTooltip {
+    width: 280px;
+  }
+}

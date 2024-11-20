@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import useUser from './use-user';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { UserRole } from 'shared/types/common.types';
+import { userRole as UserRole } from 'shared/types/common.types';
 import { userModel, UserState } from 'entities/user/model';
 
 const defaultRecipient: UserState = {

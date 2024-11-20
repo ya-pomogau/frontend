@@ -1,30 +1,23 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { useGetTaskVirginQuery } from '../../services/user-task-api';
-import { isUnConfirmedSelector } from '../../entities/user/model';
-import { userRole } from '../../shared/types/common.types';
-import { startSocketConnection } from '../../services/system-slice';
-import { YandexMap } from '../../widgets/map';
-import { Filter } from '../../features/filter';
-import { SmartHeader } from '../../shared/ui/smart-header';
-import { Icon } from '../../shared/ui/icons';
-import { Loader } from '../../shared/ui/loader';
+import { SmartHeader, Icon, Loader } from 'shared/ui';
+import { useMediaQuery } from 'shared/hooks';
+import { Breakpoints } from 'shared/config';
+import { userRole } from 'shared/types/common.types';
+import { useAppSelector } from 'app/hooks';
+import { useGetTaskVirginQuery } from 'services';
+import { isUnConfirmedSelector } from 'entities';
+import { YandexMap } from 'widgets';
+import { Filter } from 'features/filter';
 
 export function ProfileMapPage() {
-  const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user.data);
   const location = useLocation();
   const query = queryString.parse(location.search);
   const isUnconfirmed = useAppSelector(isUnConfirmedSelector);
-
-  useEffect(() => {
-    if (user) {
-      dispatch(startSocketConnection());
-    }
-  }, [user]);
+  const mediaQuery = useMediaQuery(Breakpoints.L);
 
   const isVolunteer = user?.role === userRole.VOLUNTEER;
 
@@ -36,7 +29,7 @@ export function ProfileMapPage() {
     const [userLatitude, userLongitude] =
       user && Array.isArray(user.location)
         ? [user.location[0], user.location[1]]
-        : [59.938955, 30.315644];
+        : [55.755819, 37.617713];
 
     return {
       latitude: userLatitude,
@@ -61,10 +54,6 @@ export function ProfileMapPage() {
     latitude,
     longitude,
   ]);
-
-  const containerHeight = isUnconfirmed
-    ? 'clamp(60dvh,75dvh - 10vw, 75dvh)'
-    : 'clamp(70dvh,85dvh - 10vw, 85dvh)';
 
   return (
     <>
@@ -95,8 +84,7 @@ export function ProfileMapPage() {
             mapSettings={mapSettings}
             radius={radius}
             width="100%"
-            height={containerHeight}
-            onClick={() => 3}
+            height={mediaQuery ? '75vh' : '709px'}
             coordinates={user?.location}
             role={user && user.role}
             isAuthorised={true}
