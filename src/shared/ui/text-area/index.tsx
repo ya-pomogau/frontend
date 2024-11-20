@@ -1,9 +1,9 @@
 import cn from 'classnames';
 import { ChangeEvent, forwardRef, TextareaHTMLAttributes, useId } from 'react';
-import { FieldError } from 'react-hook-form';
+import { type FieldError as FieldErrorEntities } from 'react-hook-form';
 
 import styles from './styles.module.css';
-import { Typography } from '../../ui';
+import { FieldError, Typography } from '../../ui';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
@@ -12,7 +12,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   extClassName?: string;
   maxLength?: number;
-  error?: FieldError;
+  error?: FieldErrorEntities;
 }
 
 // eslint-disable-next-line react/display-name
@@ -38,13 +38,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const sign = Math.max((maxLength ?? 0) - (value?.length ?? 0), 0);
 
     return (
-      <>
-        <div className={cn(styles.container, extClassName)}>
-          {label && (
-            <label className={cn(styles.label, 'text')} htmlFor={id}>
-              {label}
-            </label>
-          )}
+      <div className={cn(styles.container, extClassName)}>
+        {label && (
+          <label className={cn(styles.label, 'text')} htmlFor={id}>
+            {label}
+          </label>
+        )}
+
+        <div className={styles.textarea}>
           <textarea
             ref={ref}
             value={value}
@@ -68,16 +69,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             />
           )}
         </div>
-        {Boolean(error) && error?.message && (
-          <Typography
-            tag={'span'}
-            color={'orange'}
-            variant={'support'}
-            content={error?.message}
-            extraClass={styles.error}
-          />
-        )}
-      </>
+
+        <FieldError message={error?.message} />
+      </div>
     );
   }
 );

@@ -1,11 +1,11 @@
-.container {
+.textarea {
   position: relative;
+  width: 100%;
 }
 
 .input {
   font-size: var(--font-size-s);
   width: 100%;
-  height: calc(100% - 26px);
   resize: none;
   padding: 12px;
   transition: var(--transition-hover);
@@ -65,13 +65,9 @@
   height: 170px;
 }
 
-.error {
-  margin-top: 8px;
-}
-
 @media (max-width: 550px) {
   .input {
     font-size: 12px;
-    height: 125px;
+    min-height: 145px;
   }
 }
