@@ -35,7 +35,7 @@ export const Post: FC<PostProps> = ({
 }) => {
   const [showFullText, setShowFullText] = useState(false);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const MAX_CHARACTERS = 400;
+  const MAX_CHARACTERS = 100;
   const dataImg = files.length > 0 ? files : dataImages;
 
   const descriptionStyle = classnames(

@@ -3,28 +3,27 @@ import { useForm } from 'react-hook-form';
 
 import { Button } from '../button';
 import { TextArea } from '../text-area';
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 import { fileTypes } from 'shared/types/common.types';
 import { FormInput } from '../form-input';
 import useFormField from 'shared/hooks/use-form-field';
 import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
 import { IBlogForm } from 'shared/types/blog.types';
 import styles from './styles.module.css';
-import { Typography } from '../../ui';
 
 const TITLE_VALIDATION_RULES = {
   required: 'Обязательное поле',
   minLength: {
     value: 4,
-    message: 'Имя должно быть больше 4 символов',
+    message: 'Минимальная длина - 4 символа',
   },
 };
 
 const TEXT_VALIDATION_RULES = {
   required: 'Обязательное поле',
   minLength: {
-    value: 100,
-    message: 'Имя должно быть больше 100 символов',
+    value: 4,
+    message: 'Минимальная длина - 4 символа',
   },
 };
 
