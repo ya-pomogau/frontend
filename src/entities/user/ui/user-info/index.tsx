@@ -32,7 +32,7 @@ export const UserInfo = () => {
     try {
       const resultAction = await updateUserProfile(userData);
       if ('data' in resultAction) {
-        dispatch(setUser(resultAction.data));
+        dispatch(setUser(resultAction.data?.user));
         setTokenAccess(resultAction.data?.token);
       } else {
         console.error('Ошибка при обновлении профиля:', resultAction.error);

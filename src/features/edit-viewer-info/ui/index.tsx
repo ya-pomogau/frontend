@@ -76,7 +76,13 @@ export const EditViewerInfo = ({
   const handlePickAvatar = () =>
     avatarPicker.current && avatarPicker.current.click();
 
-  useEffect(() => reset(), [isOpen]);
+  useEffect(() => {
+    reset({
+      name: userName,
+      phone: userPhone,
+      address: userAddress,
+    });
+  }, [isOpen, userName, userPhone, userAddress, reset]);
 
   useEffect(() => {
     let fileReader: FileReader;
@@ -98,6 +104,20 @@ export const EditViewerInfo = ({
       }
     };
   }, [file]);
+
+  const closeByEsc = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+      (document.activeElement as HTMLElement)?.blur();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', closeByEsc);
+    return () => {
+      document.removeEventListener('keydown', closeByEsc);
+    };
+  }, []);
 
   return (
     <LightPopup
