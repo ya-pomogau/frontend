@@ -1,3 +1,8 @@
+.mainWrapper {
+  position: relative;
+  top: 12px;
+}
+
 .taskContainer {
   display: grid;
   grid-template-columns: 76px 450px;
@@ -11,16 +16,14 @@
   line-height: 14px;
 }
 
-.select {
+.form {
   grid-column-start: 2;
+  display: flex;
+  flex-direction: column;
 }
 
-.textarea {
-  grid-column-start: 2;
-  margin-top: 20px;
-  min-height: 195px;
-  position: relative;
-  bottom: 20px;
+.textarea textarea {
+  min-height: 151px;
 }
 
 .buttonsWrapper {
@@ -28,36 +31,11 @@
   justify-content: flex-end;
   margin-top: 20px;
   position: relative;
-  bottom: 6px;
-  right: -15px;
-}
-
-.mainWrapper {
-  position: relative;
-  top: 12px;
+  margin-bottom: 20px;
 }
 
 .prevButton {
   margin-right: 20px;
-}
-
-.messageAlert {
-  color: var(--colors-interface-red);
-  margin: 0 46px 0 0;
-  font: var(--font-golos-14-16);
-  grid-column-start: 2;
-  min-height: 20px;
-  opacity: 0;
-}
-
-.messageAlertActive {
-  opacity: 1;
-}
-
-.alertWrapper {
-  display: flex;
-  flex-direction: column;
-  max-height: 15px;
 }
 
 .closeWrapper {
@@ -69,7 +47,15 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
 @media (max-width: 735px) {
+  .mainWrapper {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   .taskContainer {
     display: flex;
     flex-direction: column;
@@ -77,14 +63,21 @@
     margin: 0 auto;
     position: relative;
     bottom: 8px;
-    left: -40px;
+    left: -15px;
   }
-  .mainWrapper {
-    width: 260px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+
+  .task {
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-large);
+    position: relative;
+    bottom: -1px;
+    text-align: center;
   }
+
+  .form {
+    gap: 20px;
+  }
+
   .headerWrapper {
     background: linear-gradient(
       90deg,
@@ -98,42 +91,22 @@
     margin-bottom: 17px;
     position: relative;
     bottom: 1px;
-    left: 12px;
   }
+
   .select {
     position: relative;
     left: 28px;
     bottom: -1px;
   }
-  .task {
-    font-size: var(--font-size-medium);
-    line-height: var(--line-height-large);
-    position: relative;
-    bottom: -1px;
-    left: 25px;
+
+  .textarea textarea {
+    min-height: 151px;
   }
-  .textarea {
-    min-height: 0;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    width: 270px;
-    position: relative;
-    bottom: -1px;
-    left: 28px;
-  }
+
   .buttonsWrapper {
-    margin-top: 180px;
+    margin-top: 214px;
     justify-content: center;
     margin-bottom: 8px;
     position: relative;
-    bottom: 10px;
-    left: -7px;
-  }
-
-  .messageAlert {
-    position: relative;
-    bottom: -10px;
-    left: 10px;
   }
 }
