@@ -3,29 +3,34 @@ import { useState } from 'react';
 
 import { Typography, Checkbox, Button } from 'shared/ui';
 import { useControlModal } from 'shared/hooks';
+import { userRole as userRoles } from 'shared/types/common.types';
 import { PopupChat, infoAdmin } from 'entities';
-import { ButtonWithModal } from 'widgets';
+import { useCancelTaskMutation } from 'services';
+
 import { ModalContentProps } from 'widgets/task-buttons-content';
 import {
   reasonType as reasonTypes,
   ReasonType,
 } from 'widgets/task-buttons-content/types';
-import { CancelModalContent } from '../index';
 
 import styles from './styles.module.css';
 
-const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
+const CloseModalContent = ({ userRole, taskId }: ModalContentProps) => {
   const { isOpen, handleOpen, handleClose } = useControlModal();
   const [reason, setReason] = useState<ReasonType | null>(null);
-  const isReasonUnselected = () => {
-    return !reason;
-  };
+  const [cancelTask] = useCancelTaskMutation();
 
   const handleSetReason = (reasonType: ReasonType) => {
     if (reason === reasonType) {
       setReason(null);
     } else {
       setReason(reasonType);
+    }
+  };
+
+  const handleCancelClick = () => {
+    if (userRole === userRoles.RECIPIENT && taskId) {
+      cancelTask({ id: taskId });
     }
   };
 
@@ -73,22 +78,12 @@ const CloseModalContent = ({ date, userRole, taskId }: ModalContentProps) => {
             onAttachFileClick={() => {}}
           />
         )}
-        <ButtonWithModal
-          closeButton
-          modalContent={
-            <CancelModalContent
-              date={date}
-              userRole={userRole}
-              taskId={taskId}
-            />
-          }
-        >
-          <Button
-            buttonType="primary"
-            label="Отменить заявку"
-            disabled={isReasonUnselected()}
-          />
-        </ButtonWithModal>
+        <Button
+          buttonType="primary"
+          label="Отменить заявку"
+          disabled={!reason}
+          onClick={handleCancelClick}
+        />
       </div>
     </div>
   );
