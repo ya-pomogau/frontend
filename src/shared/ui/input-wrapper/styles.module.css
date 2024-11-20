@@ -1,5 +1,4 @@
 .inputWrapper {
-  margin: 5px auto 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -37,7 +36,6 @@
 }
 
 .file-box {
-  margin-top: 10px;
   display: flex;
   align-items: center;
   height: 17px;
@@ -46,7 +44,6 @@
 
 .file-name {
   max-width: 90%;
-  color: var(--colors-interface-primary);
 }
 
 .btn-close {
@@ -67,15 +64,6 @@
   .box {
     width: 100%;
     margin: 0 auto;
-  }
-
-  .inputWrapper {
-    margin: 20px auto 0;
-  }
-
-  .file-box {
-    width: 85%;
-    margin: 10px auto 0;
   }
 
   .box-message {

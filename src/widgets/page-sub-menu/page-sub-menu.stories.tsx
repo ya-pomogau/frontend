@@ -48,8 +48,8 @@ export const SubmenuDefault: Story = {
     },
     style: {
       description:
-        'Аргумент для подключения дополнительных стилей. Пример: style={styles[имя css-свойства]}'
-    }
+        'Аргумент для подключения дополнительных стилей. Пример: style={styles[имя css-свойства]}',
+    },
   },
   render: ({ ...args }) => (
     <Mockstore initialState={mockedUnauthorizedState}>

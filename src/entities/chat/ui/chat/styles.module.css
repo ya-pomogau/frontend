@@ -8,21 +8,19 @@
 
 .chatWrapper {
   width: 586px;
-  min-height: 374px;
-  max-height: 391px;
   position: fixed;
   bottom: 0;
   right: 0;
   display: flex;
   z-index: 1000;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 30px;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.4s ease;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: 20px 30px 15px;
   background-color: var(--colors-interface-white);
   box-shadow: var(--common-element-shadow);
 }
@@ -34,7 +32,6 @@
 
 .mainBlock {
   display: flex;
-  flex-direction: row;
   gap: 20px;
   width: 100%;
 }
@@ -44,13 +41,28 @@
   height: 52px;
 }
 
-.container-chat {
-  width: 88%;
-  max-height: 252px;
+.chatmateInfo {
   display: flex;
   flex-direction: column;
+  row-gap: 5px;
+}
+
+.chatmatePhone {
+  margin-inline-start: 42px;
+}
+
+.border {
+  flex-shrink: 0;
+}
+
+.container-chat {
+  width: 88%;
+  min-height: 252px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
-  margin-top: 20px;
+  flex-grow: 1;
 }
 
 .chat-container {
@@ -84,6 +96,7 @@
   border: 1px solid var(--colors-interface-ford-white);
   display: flex;
   flex-direction: column;
+  row-gap: 5px;
   padding: 20px;
   overflow-y: auto;
 }
@@ -108,20 +121,14 @@
 @media (max-width: 550px) {
   .chatWrapper {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
-    height: auto;
-    min-height: 95%;
     box-shadow: none;
-    padding: 10px 15px;
+    padding: 10px 30px 20px;
     gap: 0;
-    align-content: flex-start;
-  }
-  .container-chat {
-    max-height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 97dvh; /* чтобы чат не перекрывал footer */
   }
 
   .avatar {
@@ -131,23 +138,15 @@
   }
 
   .mainBlock {
-    height: 43px;
-    display: flex;
-    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 5px;
-    margin-left: 10px;
     gap: 5px;
   }
 
   .messagesBlock {
-    min-height: 69vh;
+    margin-top: 5px;
+    padding: 0;
+    height: 100%;
     border: none;
-  }
-
-  .container-chat {
-    width: 92%;
-    gap: 0;
-    margin: 0 auto;
   }
 }
