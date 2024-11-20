@@ -1,11 +1,12 @@
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui';
+import { FieldError, Icon } from 'shared/ui';
 import styles from './styles.module.css';
 import { useAppSelector } from 'app/hooks';
 import { Tooltip } from '../tooltip';
 import { Task } from 'entities/task/types';
 import { useGetTaskActiveQuery } from 'services/user-task-api';
+import { type FieldError as FieldErrorEntities } from 'react-hook-form';
 
 export type Option = { _id: string; title: string };
 
@@ -16,6 +17,7 @@ interface IDropdownProps {
   selected: Option | undefined;
   onChange: (item: Option) => void;
   extClassName?: string;
+  error?: FieldErrorEntities;
 }
 interface Coords {
   right: number;
@@ -28,6 +30,7 @@ const Dropdown = ({
   onChange,
   label,
   extClassName,
+  error,
 }: IDropdownProps) => {
   const [isActive, setIsActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -42,13 +45,10 @@ const Dropdown = ({
 
   const commonIds = categories?.filter((obj) => categoryId?.includes(obj._id));
 
-  const handleOnChange = useCallback(
-    (item: Option) => {
-      onChange(item);
-      setIsActive(false);
-    },
-    [onChange, setIsActive]
-  );
+  const handleOnChange = (item: Option) => {
+    onChange(item);
+    setIsActive(false);
+  };
 
   const refMap = useRef<{
     [key: string]: React.MutableRefObject<HTMLLIElement | null>;
@@ -86,7 +86,8 @@ const Dropdown = ({
         className={classNames(
           `text`,
           styles.button,
-          selected ? undefined : styles.placeholder
+          selected ? undefined : styles.placeholder,
+          error?.message && styles.errorBorder
         )}
         onClick={() => {
           setIsActive(!isActive);
@@ -95,7 +96,7 @@ const Dropdown = ({
         {!isActive && (
           <>
             {selected?.title || placeholder}
-            {selected && <Icon icon="ArrowDownIcon" color={'white'} />}
+            <Icon icon="ArrowDownIcon" color={'white'} />
           </>
         )}
       </div>
@@ -152,6 +153,7 @@ const Dropdown = ({
           </div>
         </Tooltip>
       )}
+      <FieldError message={error?.message} />
     </div>
   );
 };

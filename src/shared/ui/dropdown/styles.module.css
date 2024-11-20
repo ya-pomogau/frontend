@@ -29,7 +29,6 @@
 .list {
   position: absolute;
   width: 100%;
-  top: 100%;
   left: 0;
   list-style: none;
   max-height: 200px;
@@ -89,6 +88,14 @@
 
 .item:last-child {
   border-bottom: none;
+}
+
+.errorBorder {
+  border: 1px var(--colors-interface-orange) solid;
+}
+
+.reverseIcon {
+  transform: rotate(180deg);
 }
 
 @media (max-width: 735px) {
