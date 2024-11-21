@@ -1,6 +1,7 @@
 import { ImgHTMLAttributes, useState } from 'react';
 import classnames from 'classnames';
 
+import defaultAvatar from './placeholder.svg';
 import styles from './styles.module.css';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -20,7 +21,7 @@ export const Avatar = ({
   const [imgSrc, setImgSrc] = useState<string>(avatarLink);
 
   const handleError = () => {
-    setImgSrc('/android-chrome-192x192.png');
+    setImgSrc(defaultAvatar);
   };
 
   return (
