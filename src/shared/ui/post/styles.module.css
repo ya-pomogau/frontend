@@ -54,6 +54,7 @@
 .description_visible {
   max-height: none;
   overflow: visible;
+  overflow-wrap: break-word;
 }
 
 .description p:first-child {
