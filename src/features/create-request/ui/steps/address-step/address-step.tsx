@@ -21,13 +21,16 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
   const dispatch = useAppDispatch();
 
   const coord = useAppSelector((store) => store.user.data?.location);
+  const initPlaceholder = useAppSelector((store) => store.user.data?.address);
   const { address, location, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
 
   useEffect(() => {
     if (!address) {
-      dispatch(setAddress({ additinalAddress: address, coords: coord }));
+      dispatch(
+        setAddress({ additinalAddress: initPlaceholder, coords: coord })
+      );
     }
   }, []);
 
@@ -41,7 +44,6 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
   // Проверяем, пуст ли инпут или отсутствуют координаты
   const isEmptyAddress = address === '';
   const hasCoordinates = location && location.length > 0;
-  const showError = (isEmptyAddress || !hasCoordinates) && !isEmptyAddress;
 
   const propsButton = usePropsButtonCustom();
 
@@ -124,16 +126,14 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           </>
         )}
       </div>
-      {showError && (
-        <Typography
-          color={'red'}
-          variant={'input-title'}
-          content={'Укажите место встречи'}
-          extraClass={classNames(styles.messageAlert, {
-            [styles.messageAlertActive]: true,
-          })}
-        />
-      )}
+      <Typography
+        color={'red'}
+        variant={'input-title'}
+        content={'Укажите место встречи'}
+        extraClass={classNames(styles.messageAlert, {
+          [styles.messageAlertActive]: isEmptyAddress,
+        })}
+      />
       <div className={styles.buttonWrapper}>
         {!isTypeEdit && (
           <Button
@@ -144,7 +144,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           />
         )}
         <Button
-          disabled={showError}
+          disabled={(isEmptyAddress || !hasCoordinates) && !isEmptyAddress}
           buttonType="primary"
           label={propsButton.label}
           onClick={propsButton.onClick}
