@@ -5,8 +5,6 @@ import { userRole as userRoles } from 'shared/types/common.types';
 import { Button, Typography } from 'shared/ui';
 import { useRejectTaskMutation } from 'services';
 import { taskReport } from 'entities/task/types';
-import { useControlModal } from 'shared/hooks';
-import { PopupChat, infoAdmin } from 'entities';
 
 import styles from './styles.module.css';
 
@@ -19,8 +17,8 @@ export const ConflictModalContent = ({
   volunteerReport,
   recipientReport,
   setConflictModalVisible,
+  openChat,
 }: ModalContentProps) => {
-  const { isOpen, handleOpen, handleClose } = useControlModal();
   const [rejectTask] = useRejectTaskMutation();
   const handleRejectClick = () => {
     if (userRole && taskId) {
@@ -91,17 +89,8 @@ export const ConflictModalContent = ({
                 label={
                   active ? 'Помощь администратора' : 'Написать администратору'
                 }
-                onClick={() => handleOpen()}
+                onClick={openChat}
               />
-              {isOpen && (
-                <PopupChat
-                  isOpen={isOpen}
-                  onClick={handleClose}
-                  messages={[]}
-                  chatmateInfo={infoAdmin}
-                  onAttachFileClick={() => {}}
-                />
-              )}
             </div>
           )}
         </>

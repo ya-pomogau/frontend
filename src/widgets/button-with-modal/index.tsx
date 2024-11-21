@@ -1,8 +1,18 @@
-import type { Dispatch, ReactNode, SetStateAction } from 'react';
-import { useRef, useState } from 'react';
+import * as React from 'react';
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+
 import { Icon } from 'shared/ui';
 import { Tooltip } from 'shared/ui/tooltip';
 import styles from './styles.module.css';
+import { PopupChat, infoAdmin } from 'entities';
+import { useControlModal } from 'shared/hooks';
 
 let tooltipModalRefCount = 0;
 
@@ -32,10 +42,22 @@ export const ButtonWithModal = ({
 }: ModalProps) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [coords, setCoords] = useState<Coords | null>(null);
-
+  const { isOpen, handleOpen, handleClose } = useControlModal();
+  const [isTooltipBlocked, setIsTooltipBlocked] = useState(false);
+  const handleOpenChat = () => {
+    setIsTooltipBlocked(true);
+    handleOpen();
+    hideModal();
+  };
+  const handleCloseChat = () => {
+    handleClose();
+    setTimeout(() => setIsTooltipBlocked(false), 300);
+  };
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const getCoords = () => {
+    if (isTooltipBlocked) return;
+
     if (!visible) {
       setVisible(true);
 
@@ -68,6 +90,10 @@ export const ButtonWithModal = ({
     }
   };
 
+  useEffect(() => {
+    setVisible(false);
+  }, [modalContent]);
+
   return (
     <div ref={buttonRef} onClick={getCoords} className={extClassName}>
       {children}
@@ -91,8 +117,20 @@ export const ButtonWithModal = ({
               className={`${styles.closeButton} close`}
             />
           )}
-          {modalContent}
+          {modalContent &&
+            React.cloneElement(modalContent as React.ReactElement, {
+              openChat: handleOpenChat,
+            })}
         </Tooltip>
+      )}
+      {isOpen && (
+        <PopupChat
+          isOpen={isOpen}
+          onClick={handleCloseChat}
+          messages={[]}
+          chatmateInfo={infoAdmin}
+          onAttachFileClick={() => {}}
+        />
       )}
     </div>
   );

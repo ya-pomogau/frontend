@@ -1,11 +1,9 @@
-import { useControlModal } from 'shared/hooks';
 import { Button, Typography } from 'shared/ui';
-import { infoAdmin, PopupChat } from 'entities';
 
 import styles from './styles.module.css';
+import { ModalContentProps } from 'widgets/task-buttons-content/index';
 
-export const AdminModalContent = () => {
-  const { isOpen, handleOpen, handleClose } = useControlModal();
+export const AdminModalContent = ({ openChat }: ModalContentProps) => {
   return (
     <div className={styles.modalTooltip}>
       <Typography
@@ -18,17 +16,8 @@ export const AdminModalContent = () => {
         <Button
           buttonType="secondary"
           label={'Написать администратору'}
-          onClick={handleOpen}
+          onClick={openChat}
         />
-        {isOpen && (
-          <PopupChat
-            isOpen={isOpen}
-            onClick={handleClose}
-            messages={[]}
-            chatmateInfo={infoAdmin}
-            onAttachFileClick={() => {}}
-          />
-        )}
       </div>
     </div>
   );

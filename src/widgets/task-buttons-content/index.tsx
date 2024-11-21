@@ -29,6 +29,7 @@ export interface ModalContentProps {
   recipientReport?: TaskReport | null;
   setConflictModalVisible?: Dispatch<SetStateAction<boolean>>;
   phoneNumber?: string;
+  openChat?: () => void;
 }
 
 export const ModalContent = ({
@@ -37,24 +38,30 @@ export const ModalContent = ({
   userRole,
   taskId,
   volunteer,
+  openChat,
 }: ModalContentProps) => {
   switch (type) {
     case modalContentType.close:
       return (
-        <CloseModalContent date={date} userRole={userRole} taskId={taskId} />
+        <CloseModalContent
+          openChat={openChat}
+          date={date}
+          userRole={userRole}
+          taskId={taskId}
+        />
       );
     case modalContentType.conflict:
       return <ConflictModalContent userRole={userRole} volunteer={volunteer} />;
     case modalContentType.confirm:
       return <ConfirmModalContent userRole={userRole} volunteer={volunteer} />;
     case modalContentType.admin:
-      return <AdminModalContent />;
+      return <AdminModalContent openChat={openChat} />;
     case modalContentType.phone:
       return <PhoneModalContent />;
     case modalContentType.cancel:
-      return <CancelModalContent />;
+      return <CancelModalContent openChat={openChat} />;
     case modalContentType.responded:
-      return <RespondedModalContent />;
+      return <RespondedModalContent openChat={openChat} />;
     case modalContentType.unfulfilled:
       return <UnfulfilledModalContent />;
     default:
