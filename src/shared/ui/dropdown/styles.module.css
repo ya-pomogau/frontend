@@ -87,6 +87,19 @@
   border-bottom: none;
 }
 
+.preWrap {
+  white-space: pre-line;
+}
+
+.tooltip {
+  width: 370px;
+}
+
+.paragraphResize {
+  font-size: var(--font-size-s); /* 16px */
+  line-height: var(--line-height-medium); /* 22.4 */
+}
+
 @media (max-width: 735px) {
   .dropdown {
     width: 271px;
@@ -100,5 +113,9 @@
   .label {
     top: 2px;
     left: 0;
+  }
+
+  .tooltip {
+    width: 343px;
   }
 }

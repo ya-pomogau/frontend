@@ -130,6 +130,7 @@ const Dropdown = ({
       {isOpen && (
         <Tooltip
           visible
+          extClassName={styles.tooltip}
           pointerPosition={'right'}
           changeVisible={() => setIsOpen(false)}
           elementStyles={{
@@ -147,9 +148,11 @@ const Dropdown = ({
               onClick={() => setIsOpen(false)}
             />
           </div>
-          <Typography variant={'paragraphResize'}>
-            Такая заявка уже существует. <br />
-            Дождитесь ее выполнения.
+          <Typography
+            variant="paragraphResize"
+            extraClass={classNames(styles.preWrap, styles.paragraphResize)}
+          >
+            {'Такая заявка уже существует.\nДождитесь ее выполнения.'}
           </Typography>
         </Tooltip>
       )}
