@@ -46,6 +46,15 @@
   max-width: 90%;
 }
 
+.pinIcon {
+  top: 50%;
+  transform: translateY(-55%);
+}
+
+.pinIconCursor {
+  cursor: pointer;
+}
+
 .btn-close {
   cursor: pointer;
 }

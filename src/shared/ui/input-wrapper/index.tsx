@@ -90,9 +90,10 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
           value={props.inputValue}
           name={props.name}
           extClassName={cn(styles.input, props.extClassInput)}
+          extClassNameCustomIcon={styles.pinIcon}
           onChange={props.onChange}
           customIcon={
-            <label>
+            <label className={styles.pinIconCursor}>
               <input
                 id="input-image"
                 type="file"
@@ -101,7 +102,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
                 onInput={handleFile}
                 onChange={handleFileChange}
               />
-              <Icon color="blue" icon="PinIcon" size={props.customIconSize} />
+              <Icon color="blue" icon="PinIcon" size={props.customIconSize}/>
             </label>
           }
         />
