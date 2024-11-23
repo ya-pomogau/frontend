@@ -58,7 +58,7 @@ export const TaskList = ({
   const isRecipient = userRole === userRoles.RECIPIENT;
   const isTaskListEmpty = tasks && tasks.length === 0;
   const isRecipientAndNoTasks =
-    isTaskListEmpty && isRecipient && isStatusActive && !isAdmin;
+    isTaskListEmpty && isRecipient && !isCompletedPage && !isAdmin;
   const hasAccess =
     (!isStatusActive && isRecipient && !isCompletedPage) ||
     (isRecipient && isTabPage);
@@ -127,7 +127,7 @@ export const TaskList = ({
   return (
     <>
       {!tasks && <p>список тасок, которые будут получены с сервера</p>}
-      {!isLoading && tasks && (
+      {!isLoading && tasks && !isRecipientAndNoTasks && (
         <ul className={contentStyles}>
           {hasAccess && (
             <li className={addTaskStyles}>
@@ -231,15 +231,9 @@ export const TaskList = ({
         </div>
       )}
 
-      {isTaskListEmpty && !isStatusActive && (
+      {isTaskListEmpty && isCompletedPage && !isStatusActive && (
         <div className={contentEmptyStyles}>
-          <Informer
-            text={
-              isCompletedPage
-                ? 'У Вас нет завершенных заявок'
-                : 'У Вас пока нет заявок'
-            }
-          />
+          <Informer text={'У Вас нет завершенных заявок'} />
         </div>
       )}
     </>
