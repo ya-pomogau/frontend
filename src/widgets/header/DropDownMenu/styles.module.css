@@ -1,11 +1,11 @@
 .header__sidebar__container {
   position: absolute;
-  box-sizing: border-box;
   right: 2vw;
   top: 100px;
   background-color: var(--colors-interface-white);
-  padding-right: 30px;
-  width: 250px;
+  padding: 20px 30px;
+  width: 100%;
+  max-width: 252px;
   box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.16),
     0px 0px 4px 0px rgba(0, 0, 0, 0.04);
 }
@@ -13,15 +13,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  row-gap: 30px;
 }
 
 .line {
   background: var(--colors-interface-ford-white);
   height: 1px;
-  width: 90%;
-  margin-left: 20px;
-  margin-top: 0;
+  flex-shrink: 0;
 }
 
 .line_admin {
@@ -34,10 +32,14 @@
   }
 }
 
+@media screen and (min-width: 920px) {
+  .wrapper {
+    row-gap: 15px;
+  }
+}
+
 .header__sidebar__container_mobile {
   right: 13px;
   top: 44px;
-  background-color: var(--colors-interface-white);
-  padding: 11px 28px 20px 30px;
-  width: 252px;
+  padding: 30px 30px 20px 20px;
 }

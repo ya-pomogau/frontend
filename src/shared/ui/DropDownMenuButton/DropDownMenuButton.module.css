@@ -1,26 +1,16 @@
 .wrapper {
   display: flex;
-  width: 100%;
-  border: none;
-  padding: 0;
-  background-color: transparent;
-  cursor: pointer;
+  column-gap: 5px;
   justify-content: right;
   align-items: center;
 }
 
 .adminButton {
-  margin-bottom: 20px;
-  margin-top: 20px;
-  border-bottom: 1px solid var(--colors-interface-ford-white);
-  display: flex;
-  color: var(--colors-interface-primary);
+  position: relative;
   border: none;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
-  justify-content: center;
-  align-items: center;
 }
 
 .title {
@@ -31,7 +21,6 @@
   min-width: 32px;
   height: 32px;
   background-color: var(--colors-interface-primary);
-  margin-left: 5px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -49,19 +38,12 @@
 
 .title__background {
   position: absolute;
-  right: -5px;
-  top: 21px;
-}
-
-.title_logout {
-  margin-right: 5px;
-  justify-content: end;
+  left: 0;
+  bottom: -4px;
 }
 
 @media (max-width: 920px) {
   .title {
-    width: 100%;
-    color: var(--colors-interface-background);
     z-index: 2;
     background-color: transparent;
   }

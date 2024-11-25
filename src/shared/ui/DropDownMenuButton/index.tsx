@@ -19,11 +19,7 @@ export const DropDownMenuButton = forwardRef<
     ref
   ) => {
     const sendMessageIcon = (
-      <Icon
-        color="white"
-        icon={isMobile ? 'ReadMessageIcon' : 'EmptyMessageIcon'}
-        size="24"
-      />
+      <Icon color="white" icon={'EmptyMessageIcon'} size="24" />
     );
     const logoutIcon = (
       <Icon color="blue" icon="ExitIcon" size="24" height="20" />
@@ -39,7 +35,7 @@ export const DropDownMenuButton = forwardRef<
         {buttonType ? (
           <div className={styles.wrapper}>
             <Typography
-              color={'primary'}
+              color={isMobile ? 'white' : 'primary'}
               variant={'paragraphResize'}
               content={children}
               extraClass={styles.title}
@@ -50,7 +46,7 @@ export const DropDownMenuButton = forwardRef<
           </div>
         ) : (
           <div className={styles.wrapper}>
-            <Typography content={children} extraClass={styles.title_logout} />
+            <Typography content={children} />
             {logoutIcon}
           </div>
         )}
