@@ -1,6 +1,6 @@
 .buttons_div_list_volunteers {
-  margin-left: clamp(10px, 5vw, 60px);
-  margin-top: 20px;
+  margin-left: clamp(15px, 5vw, 60px);
+  margin-top: 30px;
   display: grid;
   grid-template-columns: auto auto auto auto;
   row-gap: 5px;
@@ -26,13 +26,14 @@
 }
 
 .content {
-  margin-top: 4px;
+  margin-top: 0px;
+  padding-top: -10px;
   width: 100%;
   box-sizing: border-box;
   max-height: 100px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 0px;
   height: auto;
 }
 
@@ -44,10 +45,12 @@
 
 .icons_div {
   width: 100%;
-  margin: 0;
+  margin: 0px;
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 10px;
+  margin-left: 6px;
+  padding-bottom: 10px;
 }
 
 .admin_content {
@@ -57,8 +60,8 @@
 .user_info_space {
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
-  margin: -5px 0 2px 2px;
+  row-gap: 0px;
+  margin: 0px 0px 0px 8px;
   min-width: 180px;
 }
 

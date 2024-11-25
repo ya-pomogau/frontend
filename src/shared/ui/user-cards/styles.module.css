@@ -1,7 +1,7 @@
 .user_info {
   display: grid;
-  row-gap: 11px;
-  margin-left: 9px;
+  row-gap: 0px;
+  margin-left: 0px;
 }
 
 .grid_two_list {
