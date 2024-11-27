@@ -36,10 +36,9 @@
   flex-direction: row;
   gap: 20px;
 }
-.user_info {
-  display: grid;
-  row-gap: 12px;
-  margin-left: 8px;
+
+.user_info_list {
+  row-gap: 0px;
 }
 
 .grid_ID {

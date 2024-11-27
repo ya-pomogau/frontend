@@ -46,3 +46,9 @@
     transform: translate(-50%, -31px);
   }
 }
+
+@media screen and (max-width: 550px) {
+  .content {
+    width: 276px;
+  } 
+}

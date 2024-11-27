@@ -9,10 +9,26 @@
   overflow: auto;
 }
 
+.tabContainer__applications {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 28px;
+  padding: 13px 0 13px 10px;
+  margin-left: 36px;
+  margin-right: 10px;
+  max-width: 100%;
+  overflow: auto
+}
+
 @media screen and (max-width: 550px) {
   .tabContainer {
     padding: 16px 0 13px 14px;
     margin-left: 10px;
     gap: 10px;
+  }
+
+  .tabContainer__applications {
+    padding: 0;
+    margin: 0;
   }
 }
