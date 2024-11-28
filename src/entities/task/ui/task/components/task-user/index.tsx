@@ -1,11 +1,10 @@
 import classNames from 'classnames';
 import { useLocation } from 'react-router-dom';
 
-import { ButtonWithModal, ModalContent } from 'widgets';
 import { RoundButton, Avatar, Typography } from 'shared/ui';
 import { Routes } from 'shared/config';
 import { useControlModal, useUser } from 'shared/hooks';
-import { modalContentType, taskButtonType } from 'shared/types/common.types';
+import { taskButtonType } from 'shared/types/common.types';
 import { DefaultAvatar } from '../../img/default-avatar';
 import { UserProfile } from 'entities/user/types';
 import { PopupChat } from 'entities/chat/ui/chat';
@@ -29,7 +28,6 @@ interface TaskUserProps {
 export const TaskUser = ({
   user,
   extClassName,
-  date,
   volunteer,
   status,
   taskId,
@@ -106,21 +104,19 @@ export const TaskUser = ({
         />
       </div>
       <div className={styles.buttons}>
-        <ButtonWithModal
-          closeButton
-          modalContent={
-            <ModalContent
-              type={modalContentType.phone}
-              date={date}
-              phoneNumber={user ? user.phone : ''}
+        {user ? (
+          <a href={`tel:${user.phone}`} style={{ borderRadius: '50%' }}>
+            <RoundButton
+              buttonType={taskButtonType.phone}
+              disabled={isPageCompleted}
             />
-          }
-        >
+          </a>
+        ) : (
           <RoundButton
             buttonType={taskButtonType.phone}
             disabled={isPageCompleted || !user}
           />
-        </ButtonWithModal>
+        )}
         <RoundButton
           buttonType="message"
           disabled={isButtonDisabled}
