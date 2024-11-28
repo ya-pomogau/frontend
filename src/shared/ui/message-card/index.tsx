@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { AnyUserInterface } from 'shared/types/user.type';
-import { Typography } from '../../ui';
+import { Avatar, Typography } from '../../ui';
 
 interface PropsMessageCard {
   statusConflict?: boolean | undefined;
@@ -22,7 +22,6 @@ export const MessageCard = ({
   statusConflict,
   description,
 }: PropsMessageCard) => {
-  const defultStyle = cn('m-0', 'text', 'text_type_regular');
 
   /* #####################
   Варианты отображения карточки сообщения 
@@ -41,7 +40,7 @@ export const MessageCard = ({
 
         <div
           className={cn(styles.notification, styles.radius, {
-            [styles.vizabiliti]: unreads > 0,
+            [styles.visibility]: unreads > 0,
           })}
         />
       </>
@@ -49,7 +48,7 @@ export const MessageCard = ({
       // Карточка системного чата с пользователем
       user && (
         <>
-          <img src={user.avatar} alt={user.name} className={styles.img} />
+          <Avatar avatarLink={user.avatar} avatarName={user.name} className={styles.img} />
 
           {
             //передаём имя и телефон в общий элемент верстки
@@ -61,7 +60,7 @@ export const MessageCard = ({
             variant={'input-title'}
             content={unreads > 10 ? '+9' : unreads}
             extraClass={cn(styles.counter, styles.radius, {
-              [styles.vizabiliti]: unreads > 0,
+              [styles.visibility]: unreads > 0,
             })}
           />
         </>
@@ -86,6 +85,12 @@ export const MessageCard = ({
             variant={'paragraphResize'}
             content={name}
             extraClass={cn(styles.name, styles.lengthLimitation)}
+          />
+          <Typography
+            variant={'support'}
+            content={`ID ${user?._id}`}
+            color={"primary"}
+            extraClass={cn(styles.message, styles.lengthLimitation, styles.id)}
           />
           <Typography
             variant={'support'}

@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
-  avatarLink: string;
+  avatarLink: string | undefined;
   avatarName: string;
   isTaskAvatar?: boolean;
 }
@@ -18,7 +18,7 @@ export const Avatar = ({
   isTaskAvatar,
   ...props
 }: AvatarProps) => {
-  const [imgSrc, setImgSrc] = useState<string>(avatarLink);
+  const [imgSrc, setImgSrc] = useState<string | undefined>(avatarLink);
 
   const handleError = () => {
     setImgSrc(defaultAvatar);
