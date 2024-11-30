@@ -148,7 +148,7 @@ const Dropdown = ({
               onClick={() => setIsOpen(false)}
             />
           </div>
-          <Typography>
+          <Typography color={'darkGray'}>
             Такая заявка уже существует. Дождитесь ее выполнения.
           </Typography>
         </Tooltip>
