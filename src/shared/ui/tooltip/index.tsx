@@ -84,7 +84,7 @@ export const Tooltip = ({
       const leftEdgeDistance = rect.left;
       const tooltipWidth = rect.width;
 
-      if (leftEdgeDistance > tooltipWidth) {
+      if (leftEdgeDistance < tooltipWidth) {
         setPointerPositionState('center');
       } else {
         setPointerPositionState(pointerPosition);
