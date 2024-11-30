@@ -20,13 +20,16 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
   const dispatch = useAppDispatch();
 
   const coord = useAppSelector((store) => store.user.data?.location);
+  const initPlaceholder = useAppSelector((store) => store.user.data?.address);
   const { address, location, isTypeEdit } = useAppSelector(
     (state) => state.createRequest
   );
 
   useEffect(() => {
     if (!address) {
-      dispatch(setAddress({ additinalAddress: '', coords: coord }));
+      dispatch(
+        setAddress({ additinalAddress: initPlaceholder, coords: coord })
+      );
     }
   }, []);
 
@@ -37,7 +40,9 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
     dispatch(setAddress({ additinalAddress, coords }));
   };
 
+  // Проверяем, пуст ли инпут или отсутствуют координаты
   const isEmptyAddress = address === '';
+  const hasCoordinates = location && location.length > 0;
 
   const propsButton = usePropsButtonCustom();
 
@@ -138,7 +143,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           />
         )}
         <Button
-          disabled={isEmptyAddress}
+          disabled={!hasCoordinates || isEmptyAddress}
           buttonType="primary"
           label={propsButton.label}
           onClick={propsButton.onClick}
