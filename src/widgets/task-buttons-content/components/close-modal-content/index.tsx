@@ -2,11 +2,8 @@ import classNames from 'classnames';
 import { useState } from 'react';
 
 import { Typography, Checkbox, Button } from 'shared/ui';
-import { useControlModal } from 'shared/hooks';
+import { useCancelTaskMutation, useRejectTaskMutation } from 'services';
 import { userRole as userRoles } from 'shared/types/common.types';
-import { PopupChat, infoAdmin } from 'entities';
-import { useCancelTaskMutation } from 'services';
-
 import { ModalContentProps } from 'widgets/task-buttons-content';
 import {
   reasonType as reasonTypes,
@@ -15,10 +12,17 @@ import {
 
 import styles from './styles.module.css';
 
-const CloseModalContent = ({ userRole, taskId }: ModalContentProps) => {
-  const { isOpen, handleOpen, handleClose } = useControlModal();
-  const [reason, setReason] = useState<ReasonType | null>(null);
+const CloseModalContent = ({
+  userRole,
+  taskId,
+  openChat,
+}: ModalContentProps) => {
   const [cancelTask] = useCancelTaskMutation();
+  const [rejectTask] = useRejectTaskMutation();
+  const [reason, setReason] = useState<ReasonType | null>(null);
+  const isReasonUnselected = () => {
+    return !reason;
+  };
 
   const handleSetReason = (reasonType: ReasonType) => {
     if (reason === reasonType) {
@@ -29,8 +33,12 @@ const CloseModalContent = ({ userRole, taskId }: ModalContentProps) => {
   };
 
   const handleCancelClick = () => {
-    if (userRole === userRoles.RECIPIENT && taskId) {
+    if (!taskId) return;
+
+    if (userRole === userRoles.RECIPIENT) {
       cancelTask({ id: taskId });
+    } else if (userRole === userRoles.VOLUNTEER) {
+      rejectTask({ role: userRole.toLocaleLowerCase(), id: taskId });
     }
   };
 
@@ -67,21 +75,12 @@ const CloseModalContent = ({ userRole, taskId }: ModalContentProps) => {
           buttonType="secondary"
           extClassName={styles.fitWidth}
           label="Помощь администратора"
-          onClick={() => handleOpen()}
+          onClick={openChat}
         />
-        {isOpen && (
-          <PopupChat
-            isOpen={isOpen}
-            onClick={handleClose}
-            messages={[]}
-            chatmateInfo={infoAdmin}
-            onAttachFileClick={() => {}}
-          />
-        )}
         <Button
           buttonType="primary"
           label="Отменить заявку"
-          disabled={!reason}
+          disabled={isReasonUnselected()}
           onClick={handleCancelClick}
         />
       </div>

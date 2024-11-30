@@ -75,13 +75,11 @@ export const TaskButtonsVolunteer = ({
           modalContent={
             <ModalContent
               type={
-                isTaskExpired || !date
-                  ? modalContentType.responded
-                  : isTaskUrgent
-                  ? modalContentType.cancel
-                  : modalContentType.close
+                isTaskUrgent ? modalContentType.cancel : modalContentType.close
               }
               date={date}
+              taskId={taskId}
+              userRole={userRole}
             />
           }
         >
