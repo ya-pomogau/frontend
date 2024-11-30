@@ -11,7 +11,5 @@
 @media (max-width: 920px) {
   .links {
     align-items: flex-end;
-    margin-left: 0;
-    padding: 0;
   }
 }

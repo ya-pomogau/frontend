@@ -23,7 +23,7 @@ export const positionConfigMenu: ISideBarPosition = {
   element: {
     flexDirection: 'row-reverse',
     justifyContent: 'flex-start',
-    gap: 0,
+    gap: 5,
     textAlign: 'right',
   },
 };

@@ -2,9 +2,7 @@ interface IDefaultAvatar {
   isTaskAvatar?: boolean;
 }
 
-export const DefaultAvatar = ({
-  isTaskAvatar,
-}: IDefaultAvatar) => {
+export const DefaultAvatar = ({ isTaskAvatar }: IDefaultAvatar) => {
   return isTaskAvatar ? (
     <svg
       width="100"
