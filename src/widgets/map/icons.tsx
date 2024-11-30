@@ -1,4 +1,5 @@
 import { TaskProperties } from 'entities/task/types';
+import defaultAvatar from '../../entities/task/ui/task/img/placeholder.svg'
 
 const circleWithBalloonSvg = (
   urgentColor: string
@@ -74,7 +75,7 @@ export const balloonMarker = (properties: TaskProperties) => {
   <div class="task_bio">
     <img src="${properties.recipient.avatar}" alt="${
     properties.recipient.name
-  }" class="task_avatar"/>
+  }" class="task_avatar" onerror="this.src='${defaultAvatar}'"/>
     <div>
       <p class="task_recipient_name">
         ${properties.recipient.name}
@@ -82,10 +83,10 @@ export const balloonMarker = (properties: TaskProperties) => {
     </div>
   </div>
   <div class="task_description_container">
-    <p class="task_description task_description_hidden" >
-      ${properties.description}
-    </p>
-    <button type="button" class="task_button">Читать</button>
+      <p class="task_description task_description_hidden" >
+        ${properties.description}
+      </p>
+      <button type="button" class="task_button">Читать</button>
   </div>
   <div class="task_icon_container">
     <div class="task_icon_date_count">
@@ -118,9 +119,9 @@ export const balloonMarker = (properties: TaskProperties) => {
           ${crossSvg}
         </div>
         <div class="task_bio">
-          <img src="${properties.recipient.avatar}" alt="${
+          <img src="${properties.recipient.avatar }" alt="${
     properties.recipient.name
-  }" class="task_avatar"/>
+  }" class="task_avatar" onerror="this.src='${defaultAvatar}'"/>
           <div>
             <p class="task_recipient_name">
                Нужна помощь
