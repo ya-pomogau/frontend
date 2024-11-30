@@ -3,9 +3,9 @@
   margin: 0;
   padding: 0;
   border: none;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  border-radius: 512px;
+  width: 62px;
+  height: 62px;
   object-fit: cover;
   object-position: center;
   overflow: hidden;

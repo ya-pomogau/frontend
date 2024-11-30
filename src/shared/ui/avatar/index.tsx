@@ -1,8 +1,7 @@
 import { ImgHTMLAttributes, useState } from 'react';
 import classnames from 'classnames';
 
-import { DefaultAvatar } from 'entities';
-
+import defaultAvatar from './placeholder.svg';
 import styles from './styles.module.css';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -19,13 +18,13 @@ export const Avatar = ({
   isTaskAvatar,
   ...props
 }: AvatarProps) => {
-  const [imgSrc, setImgSrc] = useState<string | null>(avatarLink || null);
+  const [imgSrc, setImgSrc] = useState<string>(avatarLink);
 
   const handleError = () => {
-    setImgSrc(null);
+    setImgSrc(defaultAvatar);
   };
 
-  return imgSrc ? (
+  return (
     <img
       src={imgSrc}
       alt={avatarName}
@@ -33,7 +32,5 @@ export const Avatar = ({
       onError={handleError}
       {...props}
     />
-  ) : (
-    <DefaultAvatar isTaskAvatar={isTaskAvatar} />
   );
 };
