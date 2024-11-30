@@ -11,7 +11,6 @@ import { GeoCoordinates } from 'shared/types/point-geojson.types';
 import { userRole } from 'shared/types/common.types';
 
 import styles from './address-step.module.css';
-import { add } from 'date-fns';
 
 interface IAddressProps {
   isMobile?: boolean;
@@ -144,7 +143,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           />
         )}
         <Button
-          disabled={(isEmptyAddress || !hasCoordinates) && !isEmptyAddress}
+          disabled={!hasCoordinates || isEmptyAddress}
           buttonType="primary"
           label={propsButton.label}
           onClick={propsButton.onClick}
