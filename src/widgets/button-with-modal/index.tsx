@@ -74,25 +74,27 @@ export const ButtonWithModal = ({
       {(conflictModalVisible === undefined
         ? visible
         : visible && conflictModalVisible) && (
-        <Tooltip
-          visible={visible}
-          changeVisible={hideModal}
-          pointerPosition="right"
-          elementStyles={{
-            position: 'absolute',
-            top: `${coords?.top}px`,
-            right: `${coords?.right}px`,
-          }}
-        >
-          {closeButton && (
-            <Icon
-              icon="CloseCrossIcon"
-              color="blue"
-              className={`${styles.closeButton} close`}
-            />
-          )}
-          {modalContent}
-        </Tooltip>
+        <div className={styles.fixBackground}>
+          <Tooltip
+            visible={visible}
+            changeVisible={hideModal}
+            pointerPosition="right"
+            elementStyles={{
+              position: 'absolute',
+              top: `${coords?.top}px`,
+              right: `${coords?.right}px`,
+            }}
+          >
+            {closeButton && (
+              <Icon
+                icon="CloseCrossIcon"
+                color="blue"
+                className={`${styles.closeButton} close`}
+              />
+            )}
+            {modalContent}
+          </Tooltip>
+        </div>
       )}
     </div>
   );

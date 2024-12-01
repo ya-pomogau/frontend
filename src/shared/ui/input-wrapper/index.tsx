@@ -5,6 +5,7 @@ import { Button } from 'shared/ui/button';
 import styles from './styles.module.css';
 import { Icon } from '../icons';
 import { Message } from '../message';
+import { Typography } from '../typography';
 
 interface PropsInputWrapper {
   placeholder: string;
@@ -89,9 +90,10 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
           value={props.inputValue}
           name={props.name}
           extClassName={cn(styles.input, props.extClassInput)}
+          extClassNameCustomIcon={styles.pinIcon}
           onChange={props.onChange}
           customIcon={
-            <label>
+            <label className={styles.pinIconCursor}>
               <input
                 id="input-image"
                 type="file"
@@ -100,7 +102,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
                 onInput={handleFile}
                 onChange={handleFileChange}
               />
-              <Icon color="blue" icon="PinIcon" size={props.customIconSize} />
+              <Icon color="blue" icon="PinIcon" size={props.customIconSize}/>
             </label>
           }
         />
@@ -114,28 +116,27 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
           onClick={props.onClickBtn}
         />
       </form>
-      {fileInput && (
-        <div className={styles['file-box']}>
-          <Icon color="blue" icon="PinIcon" size="24" />
-          <p
-            className={cn(
-              'm-0',
-              'text',
-              'text_size_small',
-              styles['file-name']
-            )}
-          >
-            {fileName}
-          </p>
-          <Icon
-            color="blue"
-            icon="CloseCrossIcon"
-            size="14"
-            className={styles['btn-close']}
-            onClick={hendleDeleteFile}
-          />
-        </div>
-      )}
+
+      <div className={styles['file-box']}>
+        {fileInput && (
+          <>
+            <Icon color="blue" icon="PinIcon" size="24" />
+            <Typography
+              color={'primary'}
+              variant={'support'}
+              content={fileName}
+              extraClass={styles['file-name']}
+            />
+            <Icon
+              color="blue"
+              icon="CloseCrossIcon"
+              size="14"
+              className={styles['btn-close']}
+              onClick={hendleDeleteFile}
+            />
+          </>
+        )}
+      </div>
       {props.containerMessages && (
         <div className={styles['box-message']}>
           {dataMessage.map((m) => (

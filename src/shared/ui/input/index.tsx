@@ -17,6 +17,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   customIcon?: React.ReactNode;
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   extClassNameInput?: string;
+  extClassNameCustomIcon?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -28,6 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       label,
       extClassName,
       extClassNameInput,
+      extClassNameCustomIcon,
       placeholder,
       error,
       errorText,
@@ -73,7 +75,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             content={errorText === ' ' ? <span>&nbsp;</span> : errorText}
             extraClass={styles.error}
           />
-          <div className={iconClass} onClick={onIconClick}>
+          <div className={cn(iconClass, extClassNameCustomIcon)} onClick={onIconClick}>
             {customIcon}
           </div>
         </div>

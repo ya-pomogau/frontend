@@ -74,13 +74,25 @@ export const PopupChat = ({
           avatarLink={chatmateInfo.avatar}
           extClassName={styles.avatar}
         />
-        <Typography
-          tag={'h4'}
-          variant={'titleResize'}
-          content={chatmateInfo.name}
-        />
+        <div className={styles.chatmateInfo}>
+          <Typography
+            tag={'h4'}
+            variant={'titleResize'}
+            content={chatmateInfo.name}
+          />
+          {!isMobile && (
+            <Typography variant={'paragraph-bold'}>
+              Тел:{' '}
+              <Typography
+                tag={'span'}
+                content={chatmateInfo.phone}
+                extraClass={styles.chatmatePhone}
+              />
+            </Typography>
+          )}
+        </div>
       </div>
-      {isMobile && <GradientDivider />}
+      {isMobile && <GradientDivider extClassName={styles.border} />}
       <div className={styles['container-chat']}>
         <MessagesList messages={messages} chatmateInfo={chatmateInfo} />
 

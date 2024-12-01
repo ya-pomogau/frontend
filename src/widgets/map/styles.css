@@ -81,8 +81,8 @@
   border-bottom: 1px solid;
   border-image-source: var(--colors-interface-line);
   border-image-slice: 1;
-  padding-bottom: 15px;
   color: var(--colors-interface-dark-gray);
+  padding-bottom: 5px;
 }
 
 .task_description {
@@ -90,26 +90,32 @@
   line-height: 19.36px;
   margin: 0;
   margin-top: 10px;
+  display: inline;
+  overflow-wrap: anywhere;
 }
 
 .task_description_hidden {
-  height: 76px;
+  min-height: min-content;
+  max-height: 76px;
   margin: 0;
   margin-top: 10px;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
   overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .task_button {
   background: none;
-  display: block;
   border: none;
   padding: 0;
   color: var(--colors-interface-primary);
   font-size: var(--font-size-s);
   line-height: var(--line-height-small);
+  display: inline;
 }
 
 .task_button:hover {
