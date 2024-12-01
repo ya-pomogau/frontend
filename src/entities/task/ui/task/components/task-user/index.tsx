@@ -104,19 +104,15 @@ export const TaskUser = ({
         />
       </div>
       <div className={styles.buttons}>
-        {user ? (
-          <a href={`tel:${user.phone}`} style={{ borderRadius: '50%' }}>
-            <RoundButton
-              buttonType={taskButtonType.phone}
-              disabled={isPageCompleted}
-            />
-          </a>
-        ) : (
+        <a
+          href={user ? `tel:${user.phone}` : `#`}
+          style={{ borderRadius: '50%' }}
+        >
           <RoundButton
             buttonType={taskButtonType.phone}
-            disabled={isPageCompleted || !user}
+            disabled={!user || isPageCompleted}
           />
-        )}
+        </a>
         <RoundButton
           buttonType="message"
           disabled={isButtonDisabled}
