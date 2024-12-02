@@ -3,75 +3,75 @@
   margin: 0;
   padding: 0;
   border: none;
-  border-radius: 50%;
   object-fit: cover;
   object-position: center;
   overflow: hidden;
   aspect-ratio: 1/1;
 }
 
-.mainProfile {
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: 2px;
+  background-color: #9798c9;
+}
+
+.large {
   width: 175px;
 }
 
-.mapTask {
-  width: 60px;
-}
-
-.taskList {
+.big {
   width: 100px;
 }
 
-.headerAvatar {
+.bigResize {
+  width: 100px;
+}
+
+.average {
+  width: 62px;
+}
+
+.averageResizeSmall {
+  width: 62px;
+}
+
+.averageResizeBig {
+  width: 62px;
+}
+
+.medium {
+  width: 52px;
+}
+
+.mediumResize {
+  width: 52px;
+}
+
+.small {
   width: 43px;
 }
 
-.conflictList {
-  width: 50px;
-}
-
-.userCard {
-  width: 62px;
-}
-
-.userList {
-  width: 100px;
-}
-
-.chatAvatar {
+.tiny {
   width: 30px;
 }
 
-.chatTitle {
-  width: 52px;
-}
-
-.editProfile {
-  width: 100px;
-}
-
-.createTask {
-  width: 52px;
-}
-
-.blog {
-  width: 62px;
-}
-
 @media (max-width: 550px) {
-  .mapTask {
+  .averageResizeSmall {
     width: 44px;
   }
 
-  .taskList {
+  .bigResize {
     width: 60px;
   }
 
-  .chatTitle {
+  .mediumResize {
     width: 44px;
   }
 
-  .editProfile {
+  .averageResizeBig {
     width: 51px;
   }
 }

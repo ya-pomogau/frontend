@@ -17,9 +17,11 @@ const meta: Meta<typeof Avatar> = {
     extClassName: {
       description: 'классы для дополнительной стилизации',
     },
+    size: {
+      description: 'размеры аватара, мобильное разрешение учтено',
+    },
     variant: {
-      description:
-        'варианты аватара в завсисмости от места использования, мобильное разрешение учтено',
+      description: 'форма аватара',
     },
     extSize: {
       description:
@@ -31,11 +33,20 @@ const meta: Meta<typeof Avatar> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const SquareAvatar: Story = {
+  args: {
+    avatarName: 'Avatar',
+    avatarLink: 'https://i.pravatar.cc/300',
+    size: 'large',
+    variant: 'square',
+  },
+};
+
 export const MainProfileAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'mainProfile',
+    size: 'large',
   },
 };
 
@@ -43,7 +54,7 @@ export const UserCardAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'userCard',
+    size: 'big',
   },
 };
 
@@ -51,7 +62,7 @@ export const UserListAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'userList',
+    size: 'bigResize',
   },
 };
 
@@ -59,7 +70,7 @@ export const TaskListAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'taskList',
+    size: 'small',
   },
 };
 
@@ -67,7 +78,7 @@ export const MapTaskAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'mapTask',
+    size: 'mediumResize',
   },
 };
 
@@ -75,7 +86,7 @@ export const HeaderAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'headerAvatar',
+    size: 'mediumResize',
   },
 };
 
@@ -83,7 +94,7 @@ export const ChatTitleAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'chatTitle',
+    size: 'small',
   },
 };
 
@@ -91,7 +102,7 @@ export const ChatAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'chatAvatar',
+    size: 'tiny',
   },
 };
 
@@ -99,7 +110,7 @@ export const ConflictChatListAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'conflictList',
+    size: 'average',
   },
 };
 
@@ -107,7 +118,7 @@ export const CreateTaskAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'createTask',
+    size: 'averageResizeBig',
   },
 };
 
@@ -115,7 +126,7 @@ export const EditProfileAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'editProfile',
+    size: 'averageResizeSmall',
   },
 };
 
@@ -123,6 +134,6 @@ export const BlogAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
-    variant: 'blog',
+    size: 'medium',
   },
 };
