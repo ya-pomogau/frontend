@@ -42,15 +42,6 @@
   box-sizing: border-box;
 }
 
-/* для скроллбара списка */
-.list::-webkit-scrollbar {
-  /* display: none; */
-  /* overflow-y: hidden; */
-  /* position: relative; */
- /* width: 0;   Скрыть вертикальную полосу прокрутки */
- /* background: transparent;   Прозрачный фон */
-}
-
 .item {
   border-bottom: solid 1px var(--colors-interface-additional);
   height: 48px;
