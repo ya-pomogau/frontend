@@ -182,7 +182,11 @@ export const TaskList = ({
                   onClick={
                     buttonGuard ? handleClickAddTaskButton : handleDeniedAccess
                   }
-                  extClassName={styles.add_task_icon_unconf}
+                  extClassName={
+                    buttonGuard
+                      ? styles.add_task_icon
+                      : styles.add_task_icon_unconf
+                  }
                   size="large"
                 />
               </div>
