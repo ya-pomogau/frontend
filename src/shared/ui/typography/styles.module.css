@@ -120,6 +120,10 @@
   font-size: var(--font-size-small); /* 12px */
   line-height: 20px;
 }
+.servicesText {
+  font-size: var(--font-size-small); /* 12px */
+  line-height: var(--line-height-small); /* 16.8px */
+}
 
 @media screen and (max-width: 920px) {
   .servicesText {
