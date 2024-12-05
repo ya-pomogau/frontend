@@ -26,19 +26,7 @@
   width: 100px;
 }
 
-.bigResize {
-  width: 100px;
-}
-
 .average {
-  width: 62px;
-}
-
-.averageResizeSmall {
-  width: 62px;
-}
-
-.averageResizeBig {
   width: 62px;
 }
 
@@ -46,35 +34,10 @@
   width: 52px;
 }
 
-.mediumResize {
-  width: 52px;
-}
-
 .small {
-  width: 43px;
+  width: 44px;
 }
 
 .tiny {
   width: 30px;
 }
-
-@media (max-width: 550px) {
-  .averageResizeSmall {
-    width: 44px;
-  }
-
-  .bigResize {
-    width: 60px;
-  }
-
-  .mediumResize {
-    width: 44px;
-  }
-
-  .averageResizeBig {
-    width: 51px;
-  }
-}
-/*
-120*120 - main avatar mob встретилось в макете 1 раз, но потом везде используется 175 на 175
-*/

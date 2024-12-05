@@ -18,7 +18,7 @@ const meta: Meta<typeof Avatar> = {
       description: 'классы для дополнительной стилизации',
     },
     size: {
-      description: 'размеры аватара, мобильное разрешение учтено',
+      description: 'размеры аватара, мобильное разрешение не учтено',
     },
     variant: {
       description: 'форма аватара',
@@ -36,13 +36,14 @@ type Story = StoryObj<typeof meta>;
 export const SquareAvatar: Story = {
   args: {
     avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
+    avatarLink:
+      'https://ltdfoto.ru/images/2024/12/05/FOTO-06.11.2023-00.52.jpg',
     size: 'large',
     variant: 'square',
   },
 };
 
-export const MainProfileAvatar: Story = {
+export const LargeAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
@@ -50,7 +51,7 @@ export const MainProfileAvatar: Story = {
   },
 };
 
-export const UserCardAvatar: Story = {
+export const BigAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
@@ -58,55 +59,7 @@ export const UserCardAvatar: Story = {
   },
 };
 
-export const UserListAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'bigResize',
-  },
-};
-
-export const TaskListAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'small',
-  },
-};
-
-export const MapTaskAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'mediumResize',
-  },
-};
-
-export const HeaderAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'mediumResize',
-  },
-};
-
-export const ChatTitleAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'small',
-  },
-};
-
-export const ChatAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'tiny',
-  },
-};
-
-export const ConflictChatListAvatar: Story = {
+export const AverageAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
@@ -114,26 +67,26 @@ export const ConflictChatListAvatar: Story = {
   },
 };
 
-export const CreateTaskAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'averageResizeBig',
-  },
-};
-
-export const EditProfileAvatar: Story = {
-  args: {
-    avatarName: 'Avatar',
-    avatarLink: 'https://i.pravatar.cc/300',
-    size: 'averageResizeSmall',
-  },
-};
-
-export const BlogAvatar: Story = {
+export const MediumAvatar: Story = {
   args: {
     avatarName: 'Avatar',
     avatarLink: 'https://i.pravatar.cc/300',
     size: 'medium',
+  },
+};
+
+export const SmallAvatar: Story = {
+  args: {
+    avatarName: 'Avatar',
+    avatarLink: 'https://i.pravatar.cc/300',
+    size: 'small',
+  },
+};
+
+export const TinyAvatar: Story = {
+  args: {
+    avatarName: 'Avatar',
+    avatarLink: 'https://i.pravatar.cc/300',
+    size: 'tiny',
   },
 };

@@ -1,21 +1,12 @@
-import { ImgHTMLAttributes, useEffect, useState } from 'react';
+import { ImgHTMLAttributes } from 'react';
 import classnames from 'classnames';
 
 import defaultAvatar from './placeholder.svg';
 import skeleton from './skeleton.svg';
 import styles from './styles.module.css';
+import { useLoaded } from 'shared/hooks';
 
-type AvatarSize =
-  | 'large'
-  | 'big'
-  | 'bigResize'
-  | 'average'
-  | 'averageResizeSmall'
-  | 'averageResizeBig'
-  | 'medium'
-  | 'mediumResize'
-  | 'small'
-  | 'tiny';
+type AvatarSize = 'large' | 'big' | 'average' | 'medium' | 'small' | 'tiny';
 
 type AvatarVariant = 'circle' | 'square';
 
@@ -37,17 +28,12 @@ export const Avatar = ({
   extSize,
   ...props
 }: AvatarProps) => {
-  const [imgSrc, setImgSrc] = useState<string>(skeleton);
-
-  useEffect(() => {
-    const timeout = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Timeout')), 3000)
-    );
-    const fetchData = fetch(avatarLink, { method: 'GET', mode: 'no-cors' });
-    Promise.race([fetchData, timeout])
-      .then(() => setImgSrc(avatarLink))
-      .catch(() => setImgSrc(defaultAvatar));
-  }, []);
+  const loaded = useLoaded(avatarLink);
+  const currentImage = !loaded
+    ? skeleton
+    : loaded === 'loaded'
+    ? avatarLink
+    : defaultAvatar;
 
   const avatarStyles = classnames(
     styles.avatar,
@@ -58,7 +44,7 @@ export const Avatar = ({
 
   return (
     <img
-      src={imgSrc}
+      src={currentImage}
       alt={avatarName}
       className={avatarStyles}
       {...props}
