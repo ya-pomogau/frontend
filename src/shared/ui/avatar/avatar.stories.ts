@@ -36,8 +36,7 @@ type Story = StoryObj<typeof meta>;
 export const SquareAvatar: Story = {
   args: {
     avatarName: 'Avatar',
-    avatarLink:
-      'https://ltdfoto.ru/images/2024/12/05/FOTO-06.11.2023-00.52.jpg',
+    avatarLink: 'https://i.pravatar.cc/300',
     size: 'large',
     variant: 'square',
   },
