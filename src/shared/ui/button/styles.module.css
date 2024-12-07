@@ -19,7 +19,8 @@
     var(--colors-interface-white) 50%,
     var(--colors-interface-primary) 50%
   );
-  border: 1px solid var(--colors-interface-primary);
+  outline: 1px solid var(--colors-interface-primary);
+ 
 }
 .button--partial:hover:enabled {
   background: var(--colors-interface-blue-strong);
@@ -69,6 +70,7 @@
 
 .button--small {
   padding: 8px 16px;
+  white-space: nowrap
 }
 
 .button--medium {

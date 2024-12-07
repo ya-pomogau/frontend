@@ -43,6 +43,7 @@
   font-weight: var(--font-weight-regular);
   color: var(--colors-interface-black);
   margin-bottom: 6px;
+  letter-spacing: 1px;
 }
 .error {
   margin-top: 8px;

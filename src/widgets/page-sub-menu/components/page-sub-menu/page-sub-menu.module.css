@@ -1,10 +1,10 @@
 .tabContainer {
   display: flex;
   flex-flow: row nowrap;
-  gap: 47px;
-  padding: 13px 0 13px 10px;
-  margin-left: 36px;
-  margin-right: 10px;
+  gap: 35px;
+  padding: 12px 0px 16px 47px;
+  margin-left: 0px;
+  margin-right: 0px;
   max-width: 100%;
   overflow: auto;
 }
