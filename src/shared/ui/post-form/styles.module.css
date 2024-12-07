@@ -1,21 +1,18 @@
 .form {
   width: 50%;
   padding-left: 30px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  align-self: flex-start;
 }
 
 @media (max-width: 920px) {
   .form {
     width: 94%;
   }
-}
-
-.input {
-  padding-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  height: 34px;
-  margin-bottom: 40px;
 }
 
 .input label {

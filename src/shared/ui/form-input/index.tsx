@@ -64,15 +64,14 @@ export const FormInput = <T extends FieldValues>({
           className={cn('text', inputClass)}
           placeholder={placeholder}
         />
-        {Boolean(error) && error?.message && (
-          <Typography
-            tag={'span'}
-            color={'orange'}
-            variant={'support'}
-            content={error?.message}
-            extraClass={styles.error}
-          />
-        )}
+        <Typography
+          tag={'span'}
+          color={'orange'}
+          variant={'support'}
+          extraClass={styles.error}
+        >
+          {error?.message || <>&nbsp;</>}
+        </Typography>
         <div className={iconClass} onClick={onIconClick}>
           {customIcon}
         </div>
