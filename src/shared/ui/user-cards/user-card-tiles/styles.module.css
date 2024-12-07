@@ -71,6 +71,10 @@
 
 @media screen and (max-width: 415px) {
   .content {
-    width: 100%;
+    width: 45%;
+  }
+  .icons_div {
+    margin-top: 0px;
+    margin-left: 0px;
   }
 }
