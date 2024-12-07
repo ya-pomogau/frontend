@@ -65,11 +65,7 @@
   align-items: center;
   border-bottom: solid 1px var(--colors-interface-additional);
 }
-.text {
-  font-family: var(--font-family-golos);
-  max-width: 294px;
-  margin: auto;
-}
+
 .closeWrapper {
   display: flex;
   justify-content: flex-end;
@@ -91,6 +87,10 @@
   border-bottom: none;
 }
 
+.tooltip {
+  width: 370px;
+} 
+
 @media (max-width: 735px) {
   .dropdown {
     width: 271px;
@@ -104,5 +104,9 @@
   .label {
     top: 2px;
     left: 0;
+  }
+
+  .tooltip {
+    width: 343px;
   }
 }
