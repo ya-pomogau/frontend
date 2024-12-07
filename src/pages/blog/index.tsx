@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 
 import { useDeletePostMutation, useGetPostsQuery } from 'services/posts-api';
@@ -14,6 +14,7 @@ import {
 } from 'shared/ui';
 import { useControlModal, usePermission } from 'shared/hooks';
 import { PostProps } from 'shared/ui/post/Post';
+import { IValuesBlog } from 'shared/types/blog.types';
 import { adminPermission, userRole } from 'shared/types/common.types';
 
 import styles from './styles.module.css';
@@ -29,9 +30,16 @@ export function BlogPage() {
   const [attachments, setAttachments] = useState<
     { file: File; id: string; name: string }[]
   >([]);
+  const [idEditedPost, setIdEditedPost] = useState<string | undefined>(
+    undefined
+  );
 
-  const [selectedPost, setSelectedPost] =
-    useState<Omit<PostProps, 'handleEditButton' | 'handleDeleteButton'>>();
+  const [values, setValues] = useState<IValuesBlog>({
+    title: '',
+    text: '',
+  });
+
+  const refPostForm = useRef<HTMLFormElement>(null);
 
   const handleAddAttachment = (fileList: FileList | null) => {
     if (!fileList) return;
@@ -49,27 +57,29 @@ export function BlogPage() {
     setAttachments(attachments.filter((attachment) => attachment.id !== id));
   };
 
+  const handleGetIdPost = async (id: string) => {
+    handleOpen();
+    setIdEditedPost(id);
+  };
+
   const handleDeletePost = async () => {
-    if (selectedPost?._id) {
-      await deletePost(selectedPost._id);
+    if (idEditedPost) {
+      await deletePost(idEditedPost);
     }
     handleClose();
   };
 
-  const handleSelectPost = (
-    post: Omit<PostProps, 'handleEditButton' | 'handleDeleteButton'>,
-    isDelete?: boolean
-  ) => {
-    setSelectedPost(post);
+  const handleEditPost = (post: Partial<PostProps>) => {
+    setValues({
+      title: post.title as string,
+      text: post.text as string,
+    });
 
-    if (isDelete) {
-      handleOpen();
-    }
-  };
+    setIdEditedPost(post._id);
 
-  const handleCloseModal = () => {
-    setSelectedPost(undefined);
-    handleClose();
+    refPostForm.current?.scrollIntoView({
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -82,9 +92,19 @@ export function BlogPage() {
         />
         {isAdmin && (
           <PostForm
-            selectedPost={!isOpen ? selectedPost : undefined}
+            handleSubmit={() => {
+              setValues({
+                title: '',
+                text: '',
+              });
+            }}
+            idEditedPost={idEditedPost}
+            refPostForm={refPostForm}
+            title={values.title}
+            text={values.text}
             addAttachment={handleAddAttachment}
             removeAttachment={handleRemoveAttachment}
+            images={attachments}
           />
         )}
 
@@ -100,8 +120,8 @@ export function BlogPage() {
                 text={text}
                 files={files}
                 author={author}
-                handleDeleteButton={isAdmin ? handleSelectPost : undefined}
-                handleEditButton={isAdmin ? handleSelectPost : undefined}
+                handleDeleteButton={isAdmin ? handleGetIdPost : undefined}
+                handleEditButton={isAdmin ? handleEditPost : undefined}
               />
             ))}
           </div>
@@ -109,7 +129,7 @@ export function BlogPage() {
         <LightPopup
           hasCloseButton={true}
           isPopupOpen={isOpen}
-          onClickExit={handleCloseModal}
+          onClickExit={handleClose}
           extClassName={styles.popup}
         >
           <Typography

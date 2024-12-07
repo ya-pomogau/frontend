@@ -20,13 +20,8 @@ export interface PostProps {
   text: string;
   files: ImageProps[];
   author: Pick<User, '_id' | 'name' | 'avatar'>;
-  handleDeleteButton?: (
-    post: Omit<PostProps, 'handleEditButton' | 'handleDeleteButton'>,
-    isDelete: boolean
-  ) => void;
-  handleEditButton?: (
-    post: Omit<PostProps, 'handleEditButton' | 'handleDeleteButton'>
-  ) => void;
+  handleDeleteButton?: (id: string) => void;
+  handleEditButton?: (post: Partial<PostProps>) => void;
 }
 
 export const Post: FC<PostProps> = ({
@@ -109,18 +104,7 @@ export const Post: FC<PostProps> = ({
         <div className={styles.buttons}>
           {handleDeleteButton && (
             <SquareButton
-              onClick={() =>
-                handleDeleteButton(
-                  {
-                    _id,
-                    title,
-                    text,
-                    files,
-                    author,
-                  },
-                  true
-                )
-              }
+              onClick={() => handleDeleteButton(_id!)}
               buttonType={'close'}
             />
           )}
@@ -132,7 +116,6 @@ export const Post: FC<PostProps> = ({
                   title,
                   text,
                   files,
-                  author,
                 })
               }
               buttonType={'edit'}

@@ -1,50 +1,63 @@
-import { useRef } from 'react';
+import { ChangeEvent, Ref, useEffect, type FC } from 'react';
 import { useForm } from 'react-hook-form';
-
-import useFormField from 'shared/hooks/use-form-field';
-import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
-import { IBlogForm } from 'shared/types/blog.types';
-import { fileTypes } from 'shared/types/common.types';
 
 import { Button } from '../button';
 import { TextArea } from '../text-area';
+import { Icon } from 'shared/ui';
+import { fileTypes } from 'shared/types/common.types';
 import { FormInput } from '../form-input';
-import { PostProps } from '../post/Post';
-import { Icon, Typography } from 'shared/ui';
-
+import useFormField from 'shared/hooks/use-form-field';
+import { useAddPostMutation, useEditPostMutation } from 'services/posts-api';
+import { IBlogForm } from 'shared/types/blog.types';
 import styles from './styles.module.css';
+import { Typography } from '../../ui';
 
 const TITLE_VALIDATION_RULES = {
   required: 'Обязательное поле',
   minLength: {
     value: 4,
-    message: 'Минимальная длина должна быть более 4 символов',
+    message: 'Имя должно быть больше 4 символов',
   },
 };
 
 const TEXT_VALIDATION_RULES = {
   required: 'Обязательное поле',
   minLength: {
-    value: 10,
-    message: 'Минимальная длина должна быть более 10 символов',
+    value: 100,
+    message: 'Имя должно быть больше 100 символов',
   },
 };
 
 interface PostFormProps {
   loading?: boolean;
+  refPostForm?: Ref<HTMLFormElement>;
+  title?: string;
+  text?: string;
+  images?: {
+    id: string;
+    name: string;
+  }[];
   addAttachment: (fileList: FileList | null) => void;
   removeAttachment: (id: string) => void;
-  selectedPost?: Omit<PostProps, 'handleEditButton' | 'handleDeleteButton'>;
+  handleChange?: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleSubmit: () => void;
+  idEditedPost: string | undefined;
 }
 
-export const PostForm = ({
-  selectedPost,
+export const PostForm: FC<PostFormProps> = ({
   addAttachment,
   removeAttachment,
-}: PostFormProps) => {
+  refPostForm,
+  images,
+  title,
+  text,
+  handleSubmit,
+  idEditedPost,
+}) => {
   const [addPost] = useAddPostMutation();
   const [editPost] = useEditPostMutation();
-  const refPostForm = useRef<HTMLFormElement>(null);
   const {
     control,
     handleSubmit: onSubmit,
@@ -52,32 +65,30 @@ export const PostForm = ({
     reset,
   } = useForm<IBlogForm>({
     mode: 'onChange',
-    values: {
-      title: selectedPost?.title,
-      text: selectedPost?.text,
-      id: selectedPost?._id,
-    },
     defaultValues: {
       title: '',
       text: '',
     },
   });
 
+  useEffect(() => {
+    if (title !== undefined && text !== undefined) {
+      reset({ title, text });
+    }
+  }, [title, text, reset]);
+
   const titleField = useFormField('title', control, TITLE_VALIDATION_RULES);
   const textField = useFormField('text', control, TEXT_VALIDATION_RULES);
 
-  const hasSelectedPost = selectedPost?._id;
-
   const handleSubmitForm = (data: IBlogForm) => {
-    if (hasSelectedPost) {
-      editPost({
-        title: data.title,
-        text: data.text,
-        _id: data.id as string,
-      });
-    } else {
-      addPost({ title: data.title, text: data.text });
-    }
+    idEditedPost
+      ? editPost({
+          title: data.title,
+          text: data.text,
+          _id: idEditedPost,
+        })
+      : addPost({ title: data.title, text: data.text });
+    handleSubmit();
     reset();
   };
 
@@ -124,11 +135,15 @@ export const PostForm = ({
         </label>
       </div>
       <div className={styles.images}>
-        {selectedPost?.files &&
-          selectedPost?.files.map(({ id, alt }) => (
+        {images &&
+          images.map(({ id, name }) => (
             <div className={styles.image} key={id}>
               <Icon icon="FileAttachmentIcon" size="14" color="white" />
-              <Typography color={'primary'} variant={'support'} content={alt} />
+              <Typography
+                color={'primary'}
+                variant={'support'}
+                content={name}
+              />
               <Button
                 buttonType="secondary"
                 customIcon={
@@ -143,7 +158,6 @@ export const PostForm = ({
       </div>
 
       <Button
-        extClassName={styles.button}
         type="submit"
         label="Опубликовать"
         buttonType="primary"

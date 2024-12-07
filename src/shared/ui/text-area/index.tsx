@@ -2,9 +2,8 @@ import cn from 'classnames';
 import { ChangeEvent, forwardRef, TextareaHTMLAttributes, useId } from 'react';
 import { FieldError } from 'react-hook-form';
 
-import { Typography } from '../typography';
-
 import styles from './styles.module.css';
+import { Typography } from '../../ui';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
@@ -69,13 +68,15 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             />
           )}
         </div>
-        <Typography
-          tag={'span'}
-          color={'orange'}
-          variant={'support'}
-          content={error?.message || <>&nbsp;</>}
-          extraClass={styles.error}
-        />
+        {Boolean(error) && error?.message && (
+          <Typography
+            tag={'span'}
+            color={'orange'}
+            variant={'support'}
+            content={error?.message}
+            extraClass={styles.error}
+          />
+        )}
       </>
     );
   }
