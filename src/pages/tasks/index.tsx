@@ -98,9 +98,9 @@ export function TasksPage({ incomeTab }: PageProps) {
         <div>
           <Input
             value={searchName}
-            label="Введите имя "
+            label="Введите имя"
             name="Name"
-            placeholder="Введите имя "
+            placeholder="Введите имя"
             onChange={(e) => setSearchName(e.target.value)}
             extClassName={styles.input}
             type="name"

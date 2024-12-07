@@ -12,6 +12,12 @@
   cursor: pointer;
 }
 
+.contentCardsList {
+  margin-top: 32px;
+  padding:  32px 30px 18px 30px;
+  gap: 0;
+}
+
 .avatar {
   position: absolute;
   left: 0;
@@ -31,6 +37,10 @@
   gap: 8px;
 }
 
+.icons_divCardsList {
+  margin-top: 2px;
+}
+
 @media all and (max-width: 1150px) {
   .content {
     width: 175px;
@@ -44,5 +54,18 @@
     width: 62px;
     height: 62px;
     transform: translate(-50%, -31px);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .content {
+    width: 276px;
+  }
+
+  .icons_div {
+    display: none;
+  }
+  .contentCardsList {
+    padding:  32px 30px 38px 30px;
   }
 }
