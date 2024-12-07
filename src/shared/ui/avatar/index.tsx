@@ -15,7 +15,7 @@ interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   avatarLink: string;
   avatarName: string;
   size: AvatarSize;
-  variant: AvatarVariant;
+  variant?: AvatarVariant;
   extSize?: number;
 }
 

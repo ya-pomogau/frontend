@@ -46,6 +46,7 @@ export const InfoContainer = ({
       <div className={styles['info-container-avatarWrapper']}>
         {avatar ? (
           <Avatar
+            size="medium"
             avatarLink={avatar || placeholder}
             avatarName={name}
             extClassName={styles['info-container-avatar']}
