@@ -75,7 +75,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             content={errorText === ' ' ? <span>&nbsp;</span> : errorText}
             extraClass={styles.error}
           />
-          <div className={cn(iconClass, extClassNameCustomIcon)} onClick={onIconClick}>
+          <div
+            className={cn(iconClass, extClassNameCustomIcon)}
+            onClick={onIconClick}
+          >
             {customIcon}
           </div>
         </div>

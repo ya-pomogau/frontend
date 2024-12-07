@@ -3,13 +3,41 @@
   margin: 0;
   padding: 0;
   border: none;
-  border-radius: 512px;
-  width: 62px;
-  height: 62px;
   object-fit: cover;
   object-position: center;
   overflow: hidden;
-  /*сделала два варианта, с фоном и без*/
-  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3CradialGradient id='a9' cx='.66' fx='.66' cy='.3125' fy='.3125' gradientTransform='scale(1.5)'%3E%3Cstop offset='0' stop-color='%232E3192'%3E%3C/stop%3E%3Cstop offset='.3' stop-color='%232E3192' stop-opacity='.9'%3E%3C/stop%3E%3Cstop offset='.6' stop-color='%232E3192' stop-opacity='.6'%3E%3C/stop%3E%3Cstop offset='.8' stop-color='%232E3192' stop-opacity='.3'%3E%3C/stop%3E%3Cstop offset='1' stop-color='%232E3192' stop-opacity='0'%3E%3C/stop%3E%3C/radialGradient%3E%3Ccircle transform-origin='center' fill='none' stroke='url(%23a9)' stroke-width='15' stroke-linecap='round' stroke-dasharray='200 1000' stroke-dashoffset='0' cx='100' cy='100' r='70'%3E%3CanimateTransform type='rotate' attributeName='transform' calcMode='spline' dur='2' values='360;0' keyTimes='0;1' keySplines='0 0 1 1' repeatCount='indefinite'%3E%3C/animateTransform%3E%3C/circle%3E%3Ccircle transform-origin='center' fill='none' opacity='.2' stroke='%232E3192' stroke-width='15' stroke-linecap='round' cx='100' cy='100' r='70'%3E%3C/circle%3E%3C/svg%3E");*/
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect fill='%239798C9' width='100%25' height='100%25'/%3E%3CradialGradient id='a12' cx='.66' fx='.66' cy='.3125' fy='.3125' gradientTransform='scale(1.5)'%3E%3Cstop offset='0' stop-color='%23FBFDFF'%3E%3C/stop%3E%3Cstop offset='.3' stop-color='%23FBFDFF' stop-opacity='.9'%3E%3C/stop%3E%3Cstop offset='.6' stop-color='%23FBFDFF' stop-opacity='.6'%3E%3C/stop%3E%3Cstop offset='.8' stop-color='%23FBFDFF' stop-opacity='.3'%3E%3C/stop%3E%3Cstop offset='1' stop-color='%23FBFDFF' stop-opacity='0'%3E%3C/stop%3E%3C/radialGradient%3E%3Ccircle transform-origin='center' fill='none' stroke='url(%23a12)' stroke-width='15' stroke-linecap='round' stroke-dasharray='200 1000' stroke-dashoffset='0' cx='100' cy='100' r='70'%3E%3CanimateTransform type='rotate' attributeName='transform' calcMode='spline' dur='2' values='360;0' keyTimes='0;1' keySplines='0 0 1 1' repeatCount='indefinite'%3E%3C/animateTransform%3E%3C/circle%3E%3Ccircle transform-origin='center' fill='none' opacity='.2' stroke='%23FBFDFF' stroke-width='15' stroke-linecap='round' cx='100' cy='100' r='70'%3E%3C/circle%3E%3C/svg%3E");
+  aspect-ratio: 1/1;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: 2px;
+  background-color: #9798c9;
+}
+
+.large {
+  width: 175px;
+}
+
+.big {
+  width: 100px;
+}
+
+.average {
+  width: 62px;
+}
+
+.medium {
+  width: 52px;
+}
+
+.small {
+  width: 44px;
+}
+
+.tiny {
+  width: 30px;
 }

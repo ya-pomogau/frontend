@@ -1,36 +1,54 @@
-import { ImgHTMLAttributes, useState } from 'react';
+import { ImgHTMLAttributes } from 'react';
 import classnames from 'classnames';
 
 import defaultAvatar from './placeholder.svg';
+import skeleton from './skeleton.svg';
 import styles from './styles.module.css';
+import { useLoaded } from 'shared/hooks';
+
+type AvatarSize = 'large' | 'big' | 'average' | 'medium' | 'small' | 'tiny';
+
+type AvatarVariant = 'circle' | 'square';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
   avatarLink: string;
   avatarName: string;
-  isTaskAvatar?: boolean;
+  size: AvatarSize;
+  variant?: AvatarVariant;
+  extSize?: number;
 }
 
 export const Avatar = ({
   extClassName,
   avatarLink,
   avatarName,
-  isTaskAvatar,
+  size,
+  variant = 'circle',
+  extSize,
   ...props
 }: AvatarProps) => {
-  const [imgSrc, setImgSrc] = useState<string>(avatarLink);
+  const loaded = useLoaded(avatarLink);
+  const currentImage = !loaded
+    ? skeleton
+    : loaded === 'loaded'
+    ? avatarLink
+    : defaultAvatar;
 
-  const handleError = () => {
-    setImgSrc(defaultAvatar);
-  };
+  const avatarStyles = classnames(
+    styles.avatar,
+    styles[size],
+    styles[variant],
+    extClassName
+  );
 
   return (
     <img
-      src={imgSrc}
+      src={currentImage}
       alt={avatarName}
-      className={classnames(styles.avatar, extClassName)}
-      onError={handleError}
+      className={avatarStyles}
       {...props}
+      style={{ width: extSize }}
     />
   );
 };
