@@ -17,12 +17,9 @@ export const VolunteerInfo = ({
   <div className={classnames(extClassName, styles.volunteerInfo)}>
     <div className={styles.dataWrapper}>
       <Icon icon="BallsIcon" size="32" color="blue" />
-      <Typography
-        tag={'span'}
-        color={'primary'}
-        variant={'support'}
-        content={score}
-      />
+      <Typography tag={'span'} color={'primary'} variant={'support'}>
+        {score}
+      </Typography>
     </div>
     {hasKey && (
       <div className={styles.dataWrapper}>

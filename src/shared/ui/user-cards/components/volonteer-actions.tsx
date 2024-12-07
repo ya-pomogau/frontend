@@ -49,14 +49,14 @@ const VolunteerActions = ({
   const keysPermission = adminPermissions?.includes(adminPermission.KEYS);
 
   const isGiveKeysButtonDisabled =
-  (score ?? 0) < 60 || keysPermission || isKeysNullOrOne;
+    (score ?? 0) < 60 || keysPermission || isKeysNullOrOne;
 
   return (
     <div className={classnames(extClassName, styles.buttons_div)}>
       <div className={classnames(styles.volunteer_info)}>
         <VolunteerInfo
           extClassName={styles.customVolunteerInfo}
-          score={score ||'0'}
+          score={score}
           hasKey={isKeysNullOrOne}
         />
       </div>
