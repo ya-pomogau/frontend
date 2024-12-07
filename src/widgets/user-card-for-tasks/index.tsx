@@ -1,11 +1,11 @@
 import { Avatar, RoundButton } from 'shared/ui';
+import cn from 'classnames';
 
 import { UserInfo } from '../user-card/components/index';
 import { userRole } from '../../shared/types/common.types';
 import { User } from 'entities/user/types';
 
 import styles from './styles.module.css';
-import cn from 'classnames';
 
 interface UserCardProps {
   user: User;

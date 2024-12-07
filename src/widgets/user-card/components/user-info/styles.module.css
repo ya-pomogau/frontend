@@ -27,14 +27,6 @@
   opacity: 0.5;
 }
 
-/* .id { ЛИШНЕЕ
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-} */
-
 .grid_phone {
   display: flex;
   flex-direction: row;

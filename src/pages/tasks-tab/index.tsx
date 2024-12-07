@@ -1,7 +1,7 @@
 import { UserCardForTasks } from 'widgets/user-card-for-tasks';
 import { User } from 'entities/user/types';
+
 import styles from './styles.module.css';
-import cn from 'classnames';
 
 interface TabProps {
   data: User[];
@@ -10,7 +10,7 @@ interface TabProps {
 
 export function TasksTab({ data, onUserClick }: TabProps) {
   return (
-    <ul className={cn(styles.userCards, styles.userCardsList)}>
+    <ul className={`${styles.userCards} ${styles.userCardsList}`}>
       {data.map((user: User) => (
         <UserCardForTasks
           key={user._id}
