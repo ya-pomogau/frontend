@@ -1,6 +1,6 @@
 import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { Icon } from 'shared/ui';
+import { Icon, Typography } from 'shared/ui';
 import styles from './styles.module.css';
 import { useAppSelector } from 'app/hooks';
 import { Tooltip } from '../tooltip';
@@ -72,10 +72,14 @@ const Dropdown = ({
   useEffect(() => {
     window.addEventListener('resize', () => setIsOpen(false));
 
+    isOpen
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'visible');
+
     return () => {
       window.removeEventListener('resize', () => setIsOpen(false));
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className={classNames(styles.dropdown, extClassName)}>
@@ -100,7 +104,10 @@ const Dropdown = ({
         )}
       </div>
       {isActive && (
-        <ul className={classNames('text', 'text_size_middle', styles.list)}>
+        <ul
+          className={classNames('text', 'text_size_middle', styles.list)}
+          style={{ pointerEvents: isOpen ? 'none' : 'auto' }} // Блокируем интерактивность во время открытия тултипа
+        >
           {items?.map((item) => {
             const itemSelect = commonIds?.find((obj) => {
               return obj._id === item._id;
@@ -130,7 +137,8 @@ const Dropdown = ({
       {isOpen && (
         <Tooltip
           visible
-          pointerPosition={'right'}
+          extClassName={styles.tooltip}
+          pointerPosition={'center'}
           changeVisible={() => setIsOpen(false)}
           elementStyles={{
             position: 'absolute',
@@ -147,9 +155,9 @@ const Dropdown = ({
               onClick={() => setIsOpen(false)}
             />
           </div>
-          <div className={styles.text}>
+          <Typography color={'darkGray'}>
             Такая заявка уже существует. Дождитесь ее выполнения.
-          </div>
+          </Typography>
         </Tooltip>
       )}
     </div>
