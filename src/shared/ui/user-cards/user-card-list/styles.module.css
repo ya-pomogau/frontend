@@ -2,7 +2,7 @@
   margin-left: clamp(15px, 5vw, 55px);
   margin-top: 25px;
   display: grid;
-  grid-template-columns: auto auto auto ;
+  grid-template-columns: auto auto auto;
   row-gap: 15px;
   column-gap: 50px;
 }
@@ -37,11 +37,11 @@
   height: auto;
 }
 
-.avatar {
+/* .avatar {
   width: 100px;
   height: 100px;
   overflow: hidden;
-}
+} */
 
 .icons_div {
   width: 100%;
@@ -80,11 +80,5 @@
 
   .buttons_div_list_volunteers {
     column-gap: 20px;
-  }
-
-  .avatar {
-    width: 62px;
-    height: 62px;
-    margin: 0 10px 0 0;
   }
 }

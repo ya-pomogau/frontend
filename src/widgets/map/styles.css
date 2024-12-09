@@ -105,7 +105,7 @@
   -webkit-box-orient: vertical;
   overflow-wrap: anywhere;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 
 .task_button {

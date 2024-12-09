@@ -14,7 +14,7 @@
 
 .contentCardsList {
   margin-top: 32px;
-  padding:  32px 30px 18px 30px;
+  padding: 32px 30px 18px 30px;
   gap: 0;
 }
 
@@ -22,8 +22,6 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 62px;
-  height: 62px;
   transform: translate(107px, -31px);
 }
 
@@ -48,11 +46,7 @@
   }
 
   .avatar {
-    position: absolute;
     left: 50%;
-    top: 0;
-    width: 62px;
-    height: 62px;
     transform: translate(-50%, -31px);
   }
 }
@@ -66,6 +60,6 @@
     display: none;
   }
   .contentCardsList {
-    padding:  32px 30px 38px 30px;
+    padding: 32px 30px 38px 30px;
   }
 }

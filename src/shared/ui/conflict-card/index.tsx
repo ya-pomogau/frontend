@@ -4,7 +4,7 @@ import { ButtonWithModal } from 'widgets/button-with-modal';
 import { ModalContent } from 'widgets/task-buttons-content';
 import { modalContentType, taskButtonType } from 'shared/types/common.types';
 import { TaskReport } from 'entities/task/types';
-import { Typography } from '../../ui';
+import { Avatar, Typography } from '../../ui';
 
 import styles from './styles.module.css';
 
@@ -40,7 +40,12 @@ export function ConflictCard({ user, role, status }: PropsConflictCard) {
         content={role === 'volunteer' ? 'Волонтер' : 'Реципиент'}
         extraClass={styles.specialization}
       />
-      <img className={styles.img} src={user.avatar} alt="фото" />
+      <Avatar
+        avatarLink={user.avatar}
+        avatarName={'фото'}
+        size={'average'}
+        extClassName={styles.img}
+      />
       <div className={styles.conteiner}>
         <ButtonWithModal
           modalContent={<ModalContent type={modalContentType.phone} />}

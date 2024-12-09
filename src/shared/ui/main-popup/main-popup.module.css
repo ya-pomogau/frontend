@@ -15,27 +15,17 @@
 
 .headerWrapper {
   display: flex;
+  align-items: center;
+  column-gap: 20px;
 }
 
-.avatar {
-  width: 52px;
-  height: 52px;
-}
-
-.profileDesc {
-  margin-left: 20px;
+.profileDesc .phoneWrapper {
+  margin-top: 5px;
 }
 
 .phoneWrapper {
   display: flex;
-  margin-top: 5px;
-  align-items: center;
-  position: relative;
-  top: -2px;
-}
-
-.phoneNumber {
-  padding-left: 36px;
+  column-gap: 36px;
 }
 
 @media (max-width: 735px) {

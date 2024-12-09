@@ -5,7 +5,6 @@ import { RoundButton, Avatar, Typography } from 'shared/ui';
 import { Routes } from 'shared/config';
 import { useControlModal, useUser } from 'shared/hooks';
 import { taskButtonType } from 'shared/types/common.types';
-import { DefaultAvatar } from '../../img/default-avatar';
 import { UserProfile } from 'entities/user/types';
 import { PopupChat } from 'entities/chat/ui/chat';
 import { taskStatus, TaskStatus } from 'entities/task/types';
@@ -14,7 +13,6 @@ import { actions } from 'services/system-slice';
 import { TaskChatInfo } from 'shared/types/chat.types';
 import { wsMessageKind } from 'shared/types/websocket.types';
 
-import placeholder from '../../img/placeholder.svg';
 import styles from './styles.module.css';
 
 interface TaskUserProps {
@@ -84,12 +82,17 @@ export const TaskUser = ({
     <div className={classNames(extClassName, styles.userInfo)}>
       {user !== null ? (
         <Avatar
-          avatarName={user.name || 'Пользователь не назначен'}
-          avatarLink={user.avatar ? user.avatar : placeholder}
+          avatarName={user.name}
+          avatarLink={user.avatar}
           extClassName={styles.avatar}
+          size={'average'}
         />
       ) : (
-        <DefaultAvatar isTaskAvatar />
+        <Avatar
+          avatarName={'Пользователь не назначен'}
+          extClassName={styles.avatar}
+          size={'average'}
+        />
       )}
       <div className={styles.info}>
         <Typography

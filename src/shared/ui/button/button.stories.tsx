@@ -41,7 +41,7 @@ export const PartialFill: Story = {
   args: {
     buttonType: 'partial',
     label: 'Подтвердить',
-    actionType: "submit"
+    actionType: 'submit',
   },
 };
 

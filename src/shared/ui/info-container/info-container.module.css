@@ -2,6 +2,9 @@
   max-width: 295px;
   min-height: 362px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .info-container-border {
@@ -11,17 +14,8 @@
   z-index: -1;
 }
 
-.info-container-avatarWrapper {
-  width: 175px;
-  height: 175px;
-  margin: 0 auto;
-  border-radius: 512px;
-  background-color: var(--colors-interface-primary-additional);
-}
-
 .info-container-avatar {
-  min-width: 175px;
-  min-height: 175px;
+  align-self: center;
 }
 
 .info-container-content {
@@ -50,9 +44,6 @@
 @media (max-width: 920px) {
   .info-container-frame {
     max-width: 354px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
   }
 
   .info-container-content {

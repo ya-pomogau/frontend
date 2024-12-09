@@ -53,6 +53,7 @@ export const UserCardTiles = ({
     >
       <Avatar
         extClassName={styles.avatar}
+        size={'average'}
         avatarName={`аватар пользователя ${name}`}
         avatarLink={avatar}
       />

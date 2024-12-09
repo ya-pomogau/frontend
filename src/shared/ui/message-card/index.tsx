@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import styles from './styles.module.css';
 import { AnyUserInterface } from 'shared/types/user.type';
-import { Typography } from '../../ui';
+import { Avatar, Typography } from '../../ui';
 
 interface PropsMessageCard {
   statusConflict?: boolean | undefined;
@@ -22,8 +22,6 @@ export const MessageCard = ({
   statusConflict,
   description,
 }: PropsMessageCard) => {
-  const defultStyle = cn('m-0', 'text', 'text_type_regular');
-
   /* #####################
   Варианты отображения карточки сообщения 
   при конфликте и в системном чате
@@ -32,8 +30,12 @@ export const MessageCard = ({
     statusConflict ? (
       // Карточка оповещения о новом конфликтном чате
       <>
-        <div className={cn(styles.img, { [styles.img_action]: action })} />
-
+        {/* <div className={cn(styles.img, { [styles.img_action]: action })} /> */}
+        <Avatar
+          avatarName={'user.name'}
+          size={'medium'}
+          extClassName={cn(styles.img, { [styles.img_action]: action })}
+        />
         {
           //передаём описание в общий элемент верстки
           children('Оповещение о конфликте', description ?? 'Дата конфликта')
@@ -49,8 +51,11 @@ export const MessageCard = ({
       // Карточка системного чата с пользователем
       user && (
         <>
-          <img src={user.avatar} alt={user.name} className={styles.img} />
-
+          <Avatar
+            avatarLink={user.avatar}
+            avatarName={user.name}
+            size={'medium'}
+          />
           {
             //передаём имя и телефон в общий элемент верстки
             children(user.name, user.phone)

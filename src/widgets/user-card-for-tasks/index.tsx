@@ -24,6 +24,7 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
         extClassName={styles.avatar}
         avatarName={`аватар пользователя ${name}`}
         avatarLink={avatar}
+        size={'average'}
       />
       {(role === userRole.VOLUNTEER || role === userRole.RECIPIENT) && (
         <div className={cn(styles.icons_div, styles.icons_divCardsList)}>

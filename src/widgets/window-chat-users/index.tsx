@@ -7,7 +7,7 @@ import { GradientDivider } from 'shared/ui/gradient-divider';
 import { Breakpoints } from 'shared/config';
 import { useLazyScroll } from 'entities/chat/ui/chat/hooks/useLazyScroll';
 import { MessageInterface } from 'shared/types/chat.types';
-import { Message } from 'shared/ui';
+import { Avatar, Message } from 'shared/ui';
 import { AnyUserInterface } from 'shared/types/user.type';
 import { Typography } from 'shared/ui';
 
@@ -50,7 +50,12 @@ export const WindowChatUsers: FC<IWindowChatUsers> = ({
             size="32"
           />
         )}
-        <img className={styles.img} src={chatmateInfo?.avatar} alt="фото" />
+        <Avatar
+          avatarLink={styles.img}
+          avatarName={'фото'}
+          size={'average'}
+          extClassName={styles.img}
+        />
         <div className={styles.container}>
           <Typography
             tag={'h3'}

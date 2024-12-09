@@ -72,7 +72,7 @@ export const PopupChat = ({
         <Avatar
           avatarName="Фотография собеседника"
           avatarLink={chatmateInfo.avatar}
-          extClassName={styles.avatar}
+          size={'medium'}
         />
         <div className={styles.chatmateInfo}>
           <Typography
