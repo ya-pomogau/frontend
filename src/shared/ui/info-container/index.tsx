@@ -1,17 +1,16 @@
 import { ReactNode } from 'react';
 import classNames from 'classnames';
+
+import { useAppSelector } from 'app/hooks';
+import { isUserBlockedSelector } from 'entities/user/model';
+import { useMediaQuery, useUser } from 'shared/hooks';
+import { Breakpoints } from 'shared/config';
+
 import { SettingsButton } from '../transforming-buttons';
 import { Avatar } from '../avatar';
-import imageFrameProfile from '../../../app/assets/images/frame_profile.png';
 
+import imageFrameProfile from 'app/assets/images/frame_profile.png';
 import styles from './info-container.module.css';
-import placeholder from './img/placeholder.svg';
-import useUser from 'shared/hooks/use-user';
-import { DefaultAvatar } from 'entities/task/ui/task/img/default-avatar';
-import { useMediaQuery } from 'shared/hooks';
-import { Breakpoints } from 'shared/config';
-import { useAppSelector } from '../../../app/hooks';
-import { isUserBlockedSelector } from '../../../entities/user/model';
 
 interface InfoContainerProps {
   extClassName?: string;
@@ -43,17 +42,14 @@ export const InfoContainer = ({
         }`}
         alt="Граница профиля"
       />
-      <div className={styles['info-container-avatarWrapper']}>
-        {avatar ? (
-          <Avatar
-            avatarLink={avatar || placeholder}
-            avatarName={name}
-            extClassName={styles['info-container-avatar']}
-          />
-        ) : (
-          <DefaultAvatar isTaskAvatar={false} />
-        )}
-      </div>
+      <Avatar
+        size={'large'}
+        avatarLink={avatar}
+        avatarName={name}
+        extClassName={
+          styles['info-container-avatar']
+        } /* Можно удалить после правок в верстке всего компонента */
+      />
       <div className={styles['info-container-content']}>{children}</div>
       {isAuth && !isBlockedSelector && (
         <SettingsButton

@@ -8,23 +8,20 @@
 
 .content {
   position: relative;
-  margin-top: 33px;
-  padding: 32px 30px 0 30px;
+  margin-top: 40px;
+  padding: 0px 40px 0px 30px;
   min-height: 128px;
   width: 276px;
   border: 1px solid var(--colors-interface-blue-strong);
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  max-height: 513px;
+  gap: 5px;
 }
 
 .avatar {
   position: absolute;
   left: 0;
-  top: 0;
-  width: 62px;
-  height: 62px;
+  top: 0px;
   transform: translate(107px, -31px);
 }
 
@@ -35,12 +32,15 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 14px;
+  margin-left: 5px;
 }
 
 .admin_content {
   min-height: 256px;
   height: min-content;
+  padding-top: 30px;
 }
 
 @media screen and (min-width: 920px) and (max-width: 1150px),
@@ -57,7 +57,6 @@
   }
 
   .avatar {
-    position: absolute;
     left: 50%;
     transform: translate(-50%, -31px);
   }
@@ -69,6 +68,10 @@
 
 @media screen and (max-width: 415px) {
   .content {
-    width: 100%;
+    width: 45%;
+  }
+  .icons_div {
+    margin-top: 0px;
+    margin-left: 0px;
   }
 }

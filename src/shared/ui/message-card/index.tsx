@@ -1,7 +1,9 @@
 import cn from 'classnames';
-import styles from './styles.module.css';
+
 import { AnyUserInterface } from 'shared/types/user.type';
 import { Avatar, Typography } from '../../ui';
+
+import styles from './styles.module.css';
 
 interface PropsMessageCard {
   statusConflict?: boolean | undefined;
@@ -22,21 +24,20 @@ export const MessageCard = ({
   statusConflict,
   description,
 }: PropsMessageCard) => {
-
   /* #####################
-  Варианты отображения карточки сообщения 
+  Варианты отображения карточки сообщения
   при конфликте и в системном чате
   ##################### */
   const variant = (children: (name: string, desc: string) => JSX.Element) =>
     statusConflict ? (
       // Карточка оповещения о новом конфликтном чате
       <>
-        <div className={cn(styles.img, { [styles.img_action]: action })} />
-
-        {
-          //передаём описание в общий элемент верстки
-          children('Оповещение о конфликте', description ?? 'Дата конфликта')
-        }
+        <Avatar
+          avatarName={'user.name'}
+          size={'medium'}
+          extClassName={cn(styles.img, { [styles.img_action]: action })}
+        />
+        {children('Оповещение о конфликте', description ?? 'Дата конфликта')}
 
         <div
           className={cn(styles.notification, styles.radius, {
@@ -45,15 +46,14 @@ export const MessageCard = ({
         />
       </>
     ) : (
-      // Карточка системного чата с пользователем
       user && (
         <>
-          <Avatar avatarLink={user.avatar} avatarName={user.name} className={styles.img} />
-
-          {
-            //передаём имя и телефон в общий элемент верстки
-            children(user.name, user.phone)
-          }
+          <Avatar
+            avatarLink={user.avatar}
+            avatarName={user.name}
+            size={'medium'}
+          />
+          {children(user.name, user.phone)}
           <Typography
             tag={'span'}
             color={'white'}
@@ -89,7 +89,7 @@ export const MessageCard = ({
           <Typography
             variant={'support'}
             content={`ID ${user?._id}`}
-            color={"primary"}
+            color={'primary'}
             extraClass={cn(styles.message, styles.lengthLimitation, styles.id)}
           />
           <Typography

@@ -31,6 +31,7 @@ div .closeButton_position {
   align-items: center;
   border-bottom: var(--colors-interface-ford-white) 1px solid;
   text-align: center;
+  gap: 10px;
 }
 
 .popupTitle_thank {

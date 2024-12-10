@@ -7,9 +7,8 @@ import { GradientDivider } from 'shared/ui/gradient-divider';
 import { Breakpoints } from 'shared/config';
 import { useLazyScroll } from 'entities/chat/ui/chat/hooks/useLazyScroll';
 import { MessageInterface } from 'shared/types/chat.types';
-import { Avatar, Message } from 'shared/ui';
+import { Avatar, Message, Typography } from 'shared/ui';
 import { AnyUserInterface } from 'shared/types/user.type';
-import { Typography } from 'shared/ui';
 
 interface IWindowChatUsers {
   isOpen: boolean;
@@ -50,21 +49,26 @@ export const WindowChatUsers: FC<IWindowChatUsers> = ({
             size="32"
           />
         )}
-        <Avatar className={styles.img} avatarLink={chatmateInfo?.avatar} avatarName="фото" />
+        <Avatar
+          avatarLink={styles.img}
+          avatarName={'фото'}
+          size={'average'}
+          extClassName={styles.img}
+        />
         <div className={styles.container}>
           <div className={styles.container_name}>
             <Typography
-            tag={'h3'}
-            variant={'titleResize'}
-            fontFamily={'secondaryFont'}
-            content={chatmateInfo?.name}
-            extraClass={styles.name}
+              tag={'h3'}
+              variant={'titleResize'}
+              fontFamily={'secondaryFont'}
+              content={chatmateInfo?.name}
+              extraClass={styles.name}
             />
             <Typography
-            color={'ID-text'}
-            variant={'servicesText'}
-            content={`ID ${chatmateInfo?._id}`}
-            extraClass={styles['display-none']}
+              color={'ID-text'}
+              variant={'servicesText'}
+              content={`ID ${chatmateInfo?._id}`}
+              extraClass={styles['display-none']}
             />
           </div>
           <div className={cn(styles.phone, styles['display-none'])}>

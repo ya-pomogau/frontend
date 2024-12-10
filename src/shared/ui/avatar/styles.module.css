@@ -3,10 +3,41 @@
   margin: 0;
   padding: 0;
   border: none;
-  border-radius: 512px;
-  width: 62px;
-  height: 62px;
   object-fit: cover;
   object-position: center;
   overflow: hidden;
+  aspect-ratio: 1/1;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: 2px;
+  background-color: #9798c9;
+}
+
+.large {
+  width: 175px;
+}
+
+.big {
+  width: 100px;
+}
+
+.average {
+  width: 62px;
+}
+
+.medium {
+  width: 52px;
+}
+
+.small {
+  width: 44px;
+}
+
+.tiny {
+  width: 30px;
 }

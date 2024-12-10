@@ -3,6 +3,10 @@
   margin: 30px 0 0 40px;
 }
 
+.input label {
+  color: var(--colors-interface-primary);
+}
+
 .menu_block {
   display: flex;
   justify-content: space-between;
@@ -27,4 +31,11 @@
   text-decoration: underline;
   text-decoration-color: var(--colors-interface-primary);
   text-underline-offset: 5px;
+}
+
+@media screen and (max-width: 550px) {
+  .input {
+    max-width: 365px;
+    margin: 30px 0 0 0;
+  }
 }

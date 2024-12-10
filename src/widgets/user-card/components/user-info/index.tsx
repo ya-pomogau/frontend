@@ -9,7 +9,7 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({ userName, userId, userNumber }: UserInfoProps) => (
-  <div className={styles.user_info}>
+  <div className={classnames(styles.user_info, styles.user_info_list)}>
     <Typography
       tag={'h2'}
       variant={'paragraphResize'}

@@ -4,6 +4,10 @@
   margin-left: 8px;
 }
 
+.user_info_list {
+  row-gap: 0;
+}
+
 .name_text {
   font-size: var(--font-size-s);
   line-height: var(--line-height-medium);
@@ -21,31 +25,6 @@
 
 .id_color {
   opacity: 0.5;
-}
-
-.id {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-}
-
-.grid_phone {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-.user_info {
-  display: grid;
-  row-gap: 12px;
-  margin-left: 8px;
-}
-
-.grid_ID {
-  display: flex;
-  flex-direction: row;
-  gap: 3px;
 }
 
 .grid_phone {
@@ -88,5 +67,10 @@
 
   .tel {
     font-size: 10px;
+  }
+
+  .user_info_list {
+    margin: 10px 0 0;
+    gap: 5px;
   }
 }

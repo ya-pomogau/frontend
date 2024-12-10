@@ -1,4 +1,5 @@
 import { Avatar, RoundButton } from 'shared/ui';
+import cn from 'classnames';
 
 import { UserInfo } from '../user-card/components/index';
 import { userRole } from '../../shared/types/common.types';
@@ -15,14 +16,18 @@ export const UserCardForTasks = ({ user, onClick }: UserCardProps) => {
   const { name, role, avatar, _id, phone } = user;
 
   return (
-    <li className={styles.content} onClick={onClick}>
+    <li
+      className={cn(styles.content, styles.contentCardsList)}
+      onClick={onClick}
+    >
       <Avatar
         extClassName={styles.avatar}
         avatarName={`аватар пользователя ${name}`}
         avatarLink={avatar}
+        size={'average'}
       />
       {(role === userRole.VOLUNTEER || role === userRole.RECIPIENT) && (
-        <div className={styles.icons_div}>
+        <div className={cn(styles.icons_div, styles.icons_divCardsList)}>
           <RoundButton
             buttonType="phone"
             onClick={() => {

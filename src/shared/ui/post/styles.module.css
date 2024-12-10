@@ -19,11 +19,6 @@
   flex-direction: column;
 }
 
-.author .author_avatar {
-  width: 62px;
-  height: 62px;
-}
-
 .text-block {
   width: 100%;
 }

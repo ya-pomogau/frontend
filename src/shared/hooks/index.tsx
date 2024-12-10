@@ -9,3 +9,4 @@ export { default as usePermission } from './use-permission';
 export { useRouteMatch } from './useRouteMatch';
 export { useTruncatedText } from './useTruncatedText';
 export { default as useUser } from './use-user';
+export { useLoaded } from './use-loaded';

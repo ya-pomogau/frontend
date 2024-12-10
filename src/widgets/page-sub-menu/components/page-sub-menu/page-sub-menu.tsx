@@ -9,5 +9,7 @@ interface PageSubMenuProps {
 }
 
 export const PageSubMenu = ({ links, style }: PageSubMenuProps) => {
-  return <div className={cn(styles.tabContainer, style)}>{links}</div>;
+  return (
+    <div className={cn(styles.tabContainer__applications, style)}>{links}</div>
+  );
 };

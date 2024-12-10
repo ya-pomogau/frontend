@@ -1,8 +1,8 @@
 .text {
-  margin: 5px 0;
+  margin-bottom: 5px;
   grid-column-start: 2;
   position: relative;
-  bottom: 5px;
+  bottom: 15px;
 }
 
 .addressContainer {

@@ -59,7 +59,6 @@
     right: 0;
     background-color: var(--colors-interface-white);
   }
-
 }
 
 @media (max-width: 550px) {

@@ -27,7 +27,7 @@ export const Message = ({
       <Avatar
         avatarName="Фотография пользователя"
         avatarLink={avatarLink}
-        extClassName={styles.avatar}
+        size={'tiny'}
       />
     );
 
