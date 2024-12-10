@@ -1,7 +1,9 @@
 import cn from 'classnames';
-import styles from './styles.module.css';
+
 import { AnyUserInterface } from 'shared/types/user.type';
 import { Avatar, Typography } from '../../ui';
+
+import styles from './styles.module.css';
 
 interface PropsMessageCard {
   statusConflict?: boolean | undefined;
@@ -23,23 +25,19 @@ export const MessageCard = ({
   description,
 }: PropsMessageCard) => {
   /* #####################
-  Варианты отображения карточки сообщения 
+  Варианты отображения карточки сообщения
   при конфликте и в системном чате
   ##################### */
   const variant = (children: (name: string, desc: string) => JSX.Element) =>
     statusConflict ? (
       // Карточка оповещения о новом конфликтном чате
       <>
-        {/* <div className={cn(styles.img, { [styles.img_action]: action })} /> */}
         <Avatar
           avatarName={'user.name'}
           size={'medium'}
           extClassName={cn(styles.img, { [styles.img_action]: action })}
         />
-        {
-          //передаём описание в общий элемент верстки
-          children('Оповещение о конфликте', description ?? 'Дата конфликта')
-        }
+        {children('Оповещение о конфликте', description ?? 'Дата конфликта')}
 
         <div
           className={cn(styles.notification, styles.radius, {
@@ -48,7 +46,6 @@ export const MessageCard = ({
         />
       </>
     ) : (
-      // Карточка системного чата с пользователем
       user && (
         <>
           <Avatar
@@ -56,10 +53,7 @@ export const MessageCard = ({
             avatarName={user.name}
             size={'medium'}
           />
-          {
-            //передаём имя и телефон в общий элемент верстки
-            children(user.name, user.phone)
-          }
+          {children(user.name, user.phone)}
           <Typography
             tag={'span'}
             color={'white'}

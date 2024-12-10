@@ -1,5 +1,4 @@
-import { Button } from 'shared/ui';
-import { Icon } from 'shared/ui';
+import { Button, Icon } from 'shared/ui';
 import { handleRedirectVK } from 'shared/libs/utils';
 
 import styles from './styles.module.css';

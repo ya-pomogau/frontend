@@ -80,20 +80,12 @@ export const TaskUser = ({
 
   return (
     <div className={classNames(extClassName, styles.userInfo)}>
-      {user !== null ? (
-        <Avatar
-          avatarName={user.name}
-          avatarLink={user.avatar}
-          extClassName={styles.avatar}
-          size={'average'}
-        />
-      ) : (
-        <Avatar
-          avatarName={'Пользователь не назначен'}
-          extClassName={styles.avatar}
-          size={'average'}
-        />
-      )}
+      <Avatar
+        avatarName={user?.name ?? 'Пользователь не назначен'}
+        avatarLink={user?.avatar}
+        extClassName={styles.avatar}
+        size={'average'}
+      />
       <div className={styles.info}>
         <Typography
           tag={'h4'}

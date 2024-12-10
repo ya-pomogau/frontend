@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 
-export function useLoaded(src: string | undefined) {
+export function useLoaded(src?: string) {
   const [loaded, setLoaded] = useState<boolean | 'loaded' | 'error'>(false);
 
   useEffect(() => {
     setLoaded(false);
 
     if (!src) {
-      return setLoaded('error');
+      setLoaded('error');
+      return;
     }
 
     let active = true;
