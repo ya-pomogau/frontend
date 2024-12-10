@@ -12,7 +12,7 @@ type AvatarVariant = 'circle' | 'square';
 
 interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
   extClassName?: string;
-  avatarLink: string;
+  avatarLink?: string;
   avatarName: string;
   size: AvatarSize;
   variant?: AvatarVariant;

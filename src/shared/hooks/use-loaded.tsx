@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 
-export function useLoaded(src: string) {
+export function useLoaded(src?: string) {
   const [loaded, setLoaded] = useState<boolean | 'loaded' | 'error'>(false);
 
   useEffect(() => {
     setLoaded(false);
+
+    if (!src) {
+      setLoaded('error');
+      return;
+    }
 
     let active = true;
     const image = new Image();

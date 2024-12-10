@@ -38,9 +38,9 @@ export const MainPopup = ({
         />
         <div className={classNames(styles.headerWrapper)}>
           <Avatar
-            avatarLink={avatarLink ? avatarLink : ''}
+            avatarLink={avatarLink}
             avatarName={avatarName}
-            extClassName={styles.avatar}
+            size={'medium'}
           />
           <div className={classNames(styles.profileDesc)}>
             <Typography
@@ -48,7 +48,6 @@ export const MainPopup = ({
               fontFamily={'secondaryFont'}
               variant={'title'}
               content={name}
-              extraClass={styles['info-name-wrapper']}
             />
             <div className={classNames(styles.phoneWrapper)}>
               <Typography
@@ -61,7 +60,6 @@ export const MainPopup = ({
                 tag={'span'}
                 fontFamily={'secondaryFont'}
                 content={phoneNumber}
-                extraClass={styles.phoneNumber}
               />
             </div>
           </div>

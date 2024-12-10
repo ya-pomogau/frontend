@@ -27,11 +27,6 @@
   align-self: flex-start;
 }
 
-.avatarField__image {
-  max-width: 100px;
-  max-height: 100px;
-}
-
 .avatarField__uploadButton {
   border: none;
   padding: 0;
@@ -39,6 +34,7 @@
   cursor: pointer;
   transition: var(--transition-hover);
   color: var(--colors-interface-primary);
+  white-space: nowrap;
   border-bottom: 1px solid var(--colors-interface-primary);
 }
 

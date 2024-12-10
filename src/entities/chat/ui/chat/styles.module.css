@@ -36,11 +36,6 @@
   width: 100%;
 }
 
-.mainBlock .avatar {
-  width: 52px;
-  height: 52px;
-}
-
 .chatmateInfo {
   display: flex;
   flex-direction: column;

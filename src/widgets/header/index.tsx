@@ -14,7 +14,6 @@ import { linksTop, linksTopAuthAdmin, positionConfigTop } from './utils';
 import { MenuButton } from './components';
 import { userRole } from '../../shared/types/common.types';
 
-import defaultAvatar from 'shared/ui/info-container/img/placeholder.svg';
 import styles from './styles.module.css';
 
 const Header = () => {
@@ -46,9 +45,9 @@ const Header = () => {
         {isMobile && user && location.pathname !== Routes.PROFILE && (
           <Link to="/profile">
             <Avatar
-              extClassName={styles.header__avatar}
+              size={'small'}
               avatarName={user.name}
-              avatarLink={user.avatar || defaultAvatar}
+              avatarLink={user.avatar}
             />
           </Link>
         )}

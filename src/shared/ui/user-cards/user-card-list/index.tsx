@@ -35,7 +35,7 @@ export const UserCardList = ({
   return (
     <div className={styles.content}>
       <Avatar
-        extClassName={styles.avatar}
+        size={'big'}
         avatarName={`аватар пользователя ${name}`}
         avatarLink={avatar}
       />

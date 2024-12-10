@@ -2,7 +2,7 @@
   margin-left: clamp(15px, 5vw, 55px);
   margin-top: 25px;
   display: grid;
-  grid-template-columns: auto auto auto ;
+  grid-template-columns: auto auto auto;
   row-gap: 15px;
   column-gap: 50px;
 }
@@ -26,30 +26,23 @@
 }
 
 .content {
-  margin-top: 0px;
+  margin-top: 0;
   padding-top: -10px;
   width: 100%;
   box-sizing: border-box;
   max-height: 100px;
   display: flex;
   flex-direction: row;
-  gap: 0px;
+  gap: 0;
   height: auto;
-}
-
-.avatar {
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
 }
 
 .icons_div {
   width: 100%;
-  margin: 0px;
   display: flex;
   flex-direction: row;
   gap: 10px;
-  margin-top: 10px;
+  margin: 10px 0 0;
 }
 
 .admin_content {
@@ -59,8 +52,8 @@
 .user_info_space {
   display: flex;
   flex-direction: column;
-  row-gap: 0px;
-  margin: -10px 0px 0px 12px;
+  row-gap: 0;
+  margin: -10px 0 0 12px;
   min-width: 180px;
 }
 
@@ -80,11 +73,5 @@
 
   .buttons_div_list_volunteers {
     column-gap: 20px;
-  }
-
-  .avatar {
-    width: 62px;
-    height: 62px;
-    margin: 0 10px 0 0;
   }
 }

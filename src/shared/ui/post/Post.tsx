@@ -75,7 +75,7 @@ export const Post: FC<PostProps> = ({
         <Avatar
           avatarLink={author.avatar}
           avatarName={author.name}
-          extClassName={styles.author_avatar}
+          size={'average'}
         />
         <div className={styles.author_info}>
           <Typography content={author.name} />

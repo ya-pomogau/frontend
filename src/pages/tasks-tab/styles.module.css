@@ -9,12 +9,12 @@
   max-height: calc(65vh - 141px);
 }
 
-.userCardsList{
+.userCardsList {
   margin: 22px 0 0 30px;
 }
 
 @media screen and (max-width: 550px) {
-  .userCardsList{
+  .userCardsList {
     margin: 35px 0 0 44px;
-  }  
+  }
 }

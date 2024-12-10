@@ -112,11 +112,6 @@
   z-index: 2;
 }
 
-.header__avatar {
-  max-width: 43px;
-  max-height: 43px;
-}
-
 @media (max-width: 1150px) {
   .header__container {
     max-width: 1000px;

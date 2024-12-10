@@ -9,7 +9,8 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     avatarLink: {
       defaultValue: { summary: 'https://i.pravatar.cc/300' },
-      description: 'ссылка на картинку аватара',
+      description:
+        'ссылка на картинку аватара, если ссылка отсутсвует, выводится дефолтный аватар',
     },
     avatarName: {
       description: 'значение поля alt',
@@ -32,6 +33,13 @@ const meta: Meta<typeof Avatar> = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const UndefinedAvatar: Story = {
+  args: {
+    avatarName: 'Avatar',
+    size: 'large',
+  },
+};
 
 export const SquareAvatar: Story = {
   args: {

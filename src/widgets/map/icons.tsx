@@ -1,5 +1,5 @@
 import { TaskProperties } from 'entities/task/types';
-import defaultAvatar from '../../entities/task/ui/task/img/placeholder.svg'
+import defaultAvatar from '../../entities/task/ui/task/img/placeholder.svg';
 
 const circleWithBalloonSvg = (
   urgentColor: string
@@ -119,7 +119,7 @@ export const balloonMarker = (properties: TaskProperties) => {
           ${crossSvg}
         </div>
         <div class="task_bio">
-          <img src="${properties.recipient.avatar }" alt="${
+          <img src="${properties.recipient.avatar}" alt="${
     properties.recipient.name
   }" class="task_avatar" onerror="this.src='${defaultAvatar}'"/>
           <div>

@@ -130,7 +130,7 @@ export const EditViewerInfo = ({
         <fieldset className={classnames(styles.fieldset, styles.avatarField)}>
           <legend className="visually-hidden">Аватар</legend>
           <Avatar
-            extClassName={styles.avatarField__image}
+            size={'big'}
             avatarLink={fileDataURL as string}
             avatarName="Аватар пользователя"
           />
