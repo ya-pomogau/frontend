@@ -41,7 +41,7 @@ export const MessageCard = ({
 
         <div
           className={cn(styles.notification, styles.radius, {
-            [styles.vizabiliti]: unreads > 0,
+            [styles.visibility]: unreads > 0,
           })}
         />
       </>
@@ -60,7 +60,7 @@ export const MessageCard = ({
             variant={'input-title'}
             content={unreads > 10 ? '+9' : unreads}
             extraClass={cn(styles.counter, styles.radius, {
-              [styles.vizabiliti]: unreads > 0,
+              [styles.visibility]: unreads > 0,
             })}
           />
         </>
@@ -85,6 +85,12 @@ export const MessageCard = ({
             variant={'paragraphResize'}
             content={name}
             extraClass={cn(styles.name, styles.lengthLimitation)}
+          />
+          <Typography
+            variant={'support'}
+            content={`ID ${user?._id}`}
+            color={'primary'}
+            extraClass={cn(styles.message, styles.lengthLimitation, styles.id)}
           />
           <Typography
             variant={'support'}

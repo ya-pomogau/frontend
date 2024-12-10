@@ -7,9 +7,8 @@ import { GradientDivider } from 'shared/ui/gradient-divider';
 import { Breakpoints } from 'shared/config';
 import { useLazyScroll } from 'entities/chat/ui/chat/hooks/useLazyScroll';
 import { MessageInterface } from 'shared/types/chat.types';
-import { Avatar, Message } from 'shared/ui';
+import { Avatar, Message, Typography } from 'shared/ui';
 import { AnyUserInterface } from 'shared/types/user.type';
-import { Typography } from 'shared/ui';
 
 interface IWindowChatUsers {
   isOpen: boolean;
@@ -57,19 +56,21 @@ export const WindowChatUsers: FC<IWindowChatUsers> = ({
           extClassName={styles.img}
         />
         <div className={styles.container}>
-          <Typography
-            tag={'h3'}
-            variant={'titleResize'}
-            fontFamily={'secondaryFont'}
-            content={chatmateInfo?.name}
-            extraClass={styles.name}
-          />
-          <Typography
-            color={'ID-text'}
-            variant={'servicesText'}
-            content={`ID ${chatmateInfo?._id}`}
-            extraClass={styles['display-none']}
-          />
+          <div className={styles.container_name}>
+            <Typography
+              tag={'h3'}
+              variant={'titleResize'}
+              fontFamily={'secondaryFont'}
+              content={chatmateInfo?.name}
+              extraClass={styles.name}
+            />
+            <Typography
+              color={'ID-text'}
+              variant={'servicesText'}
+              content={`ID ${chatmateInfo?._id}`}
+              extraClass={styles['display-none']}
+            />
+          </div>
           <div className={cn(styles.phone, styles['display-none'])}>
             <Typography
               fontFamily={'secondaryFont'}
@@ -107,7 +108,7 @@ export const WindowChatUsers: FC<IWindowChatUsers> = ({
         <Icon
           onClick={handleClick}
           className={cn(styles['btn-close'], styles.cursor)}
-          color="#9798C9"
+          color="blue"
           icon="CloseCrossIcon"
           size="14"
         />

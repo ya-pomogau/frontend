@@ -16,7 +16,6 @@
   width: 230px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   flex-grow: 1;
 }
 
@@ -28,6 +27,7 @@
 .id {
   font-size: 8px;
   color: var(--colors-interface-primary);
+  opacity: 0.5;
 }
 
 .lengthLimitation {
@@ -87,7 +87,7 @@
   background: var(--colors-interface-orange-dark);
 }
 
-.vizabiliti {
+.visibility {
   visibility: visible;
   opacity: 1;
 }
@@ -96,11 +96,6 @@
   .card {
     margin: 0;
     width: 100%;
-  }
-
-  .img {
-    width: 40px;
-    height: 40px;
   }
 
   .userInfo {

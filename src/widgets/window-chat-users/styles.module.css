@@ -28,7 +28,6 @@
 }
 
 .name {
-  width: 325px;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 1;
@@ -48,7 +47,7 @@
   right: 0;
 }
 
-.btn-close :hover {
+.btn-close:hover {
   opacity: 0.8;
 }
 
@@ -94,6 +93,12 @@
 
 .cursor {
   cursor: pointer;
+}
+
+.container_name {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
 }
 
 @media (max-width: 1150px) {
