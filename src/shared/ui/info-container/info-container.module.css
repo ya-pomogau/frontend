@@ -4,7 +4,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 
 .info-container-border {
@@ -24,7 +24,6 @@
   min-height: 147px;
   box-sizing: border-box;
   padding: 0 20px 0 30px;
-  margin-top: 3px;
   color: var(--colors-interface-primary);
 }
 

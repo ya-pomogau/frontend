@@ -1,9 +1,15 @@
-.info-id-wrapper {
-  padding-bottom: 9px;
+.info-top-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 
-.info-name-wrapper {
-  padding-bottom: 2px;
+.info-address-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 29px;
 }
 
 .info-field-title {
@@ -11,14 +17,6 @@
   min-width: 53px;
   padding-right: 8px;
   box-sizing: border-box;
-}
-
-.info-phone-wrapper {
-  padding-bottom: 8px;
-}
-
-.info-address-wrapper {
-  padding-bottom: 8px;
 }
 
 .info-address-container {
