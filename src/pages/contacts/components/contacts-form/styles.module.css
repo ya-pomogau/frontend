@@ -2,12 +2,11 @@
   padding: 0 30px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   row-gap: 20px;
 }
 
-@media (max-width: 550px) {
+@media all and (max-width: 920px) {
   .form {
-    padding: 0;
+    padding: 0 10px;
   }
 }

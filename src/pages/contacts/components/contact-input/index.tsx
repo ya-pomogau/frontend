@@ -46,23 +46,21 @@ export const ContactInput = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.element_box}>
-        <Typography
-          tag={'h2'}
-          color={'primary-additional'}
-          variant={'title'}
-          content={label}
-        />
-        <input
-          type={type}
-          name={name}
-          className={inputStyles}
-          onChange={onChange}
-          value={value || ''}
-          readOnly={!isEditable}
-          onClick={!isEditable ? handleClick : undefined}
-        />
-      </div>
+      <Typography
+        tag={'h2'}
+        color={'primary-additional'}
+        variant={'title'}
+        content={label}
+      />
+      <input
+        type={type}
+        name={name}
+        className={inputStyles}
+        onChange={onChange}
+        value={value || ''}
+        readOnly={!isEditable}
+        onClick={!isEditable ? handleClick : undefined}
+      />
       {isEditAllowed && (
         <>
           <div
