@@ -100,7 +100,7 @@ export const TaskButtonsVolunteer = ({
           modalContent={
             <ModalContent
               type={
-                isPageActive && !volunteer
+                isPageActive && !volunteerReport
                   ? modalContentType.conflict
                   : isPageActive
                   ? modalContentType.admin
@@ -122,9 +122,8 @@ export const TaskButtonsVolunteer = ({
             buttonType={taskButtonType.conflict}
             disabledColor={
               !volunteer ||
-              (volunteerReport && isPageActive) ||
-              (recipientReport && isPageActive) ||
-              isPageActive
+              (!!volunteerReport && isPageActive) ||
+              (!!recipientReport && isPageActive)
             }
           />
         </ButtonWithModal>
