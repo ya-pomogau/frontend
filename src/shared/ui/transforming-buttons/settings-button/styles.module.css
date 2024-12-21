@@ -1,17 +1,18 @@
 .setting-button {
-  width: 45px;
-  height: 43px;
+  padding: 0;
+  width: 32px;
+  height: 32px;
   border: none;
-  background: none;
-  background-image: url(./img/default.svg);
-  background-repeat: no-repeat;
+  background: url(./img/normal.svg) no-repeat;
   transition: var(--transition-hover);
+  cursor: pointer;
 }
 
 .setting-button:hover {
+  width: 36px;
+  height: 35px;
   background-image: url(./img/hover.svg);
   transform: translate(7px, -7px);
-  cursor: pointer;
 }
 
 .setting-button:disabled {

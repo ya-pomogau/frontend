@@ -1,37 +1,28 @@
 .info-container-frame {
-  max-width: 295px;
-  min-height: 362px;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  gap: 6px;
+  background: url("./profile_border.png") no-repeat center bottom;
+  min-height: 362px;
 }
 
-.info-container-border {
-  display: block;
-  position: absolute;
-  top: 88px;
-  z-index: -1;
-}
-
-.info-container-avatar {
-  align-self: center;
+.infoContainerFrame-unauth {
+  gap: 30px;
 }
 
 .info-container-content {
   display: flex;
   flex-direction: column;
-  min-height: 147px;
-  box-sizing: border-box;
-  padding: 0 20px 0 30px;
-  margin-top: 3px;
   color: var(--colors-interface-primary);
+  gap: 10px;
 }
 
 .info-container-settings-button {
   position: absolute;
-  bottom: -8px;
-  left: -7px;
+  bottom: 0;
+  left: 0;
   z-index: 10;
 }
 
@@ -43,11 +34,6 @@
 
 @media (max-width: 920px) {
   .info-container-frame {
-    max-width: 354px;
-  }
-
-  .info-container-content {
-    max-width: 354px;
-    padding: 0 60px;
+    background: url("./frame_profile.png") no-repeat center bottom;
   }
 }

@@ -1,8 +1,6 @@
 import { Button, Icon } from 'shared/ui';
 import { handleRedirectVK } from 'shared/libs/utils';
 
-import styles from './styles.module.css';
-
 export const UnauthorizedUser = () => {
   return (
     <Button
@@ -12,7 +10,6 @@ export const UnauthorizedUser = () => {
       label="Войти через ВКонтакте"
       size="extraLarge"
       onClick={() => handleRedirectVK()}
-      extClassName={styles.buttonsWrapper}
     />
   );
 };
