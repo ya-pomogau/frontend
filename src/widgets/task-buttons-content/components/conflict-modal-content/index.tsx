@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 export const ConflictModalContent = ({
   active = true,
-  conflict = true,
+  conflict,
   taskId,
   userRole,
   volunteer,

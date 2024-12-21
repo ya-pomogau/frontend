@@ -141,7 +141,7 @@ export const TaskButtonsRecipient = ({
           modalContent={
             <ModalContent
               type={
-                isPageActive && !volunteer
+                isPageActive && !recipientReport
                   ? modalContentType.conflict
                   : isPageActive
                   ? modalContentType.admin
