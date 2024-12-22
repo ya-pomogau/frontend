@@ -6,11 +6,11 @@ import styles from '../styles.module.css';
 import classNames from 'classnames';
 
 interface CalenderBlockProps {
+  value: string;
   onChange: (value: string) => void;
-  filterDate: string;
 }
 
-export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
+export const CalenderBlock = ({ value, onChange }: CalenderBlockProps) => {
   const isCalenderMobil = useMediaQuery(Breakpoints.L);
 
   const handleDateChange = (date: Date) => {
@@ -54,7 +54,7 @@ export const CalenderBlock = ({ onChange, filterDate }: CalenderBlockProps) => {
       </p>
       <div className={styles.calendar}>
         <DatePicker
-          value={filterDate ? parseISO(filterDate) : new Date()}
+          value={value ? parseISO(value) : new Date()}
           isMobile={isCalenderMobil}
           onChangeValue={handleDateChange}
           inline={!isCalenderMobil}

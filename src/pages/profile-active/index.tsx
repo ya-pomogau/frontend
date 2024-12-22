@@ -1,26 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { SmartHeader, Icon, Loader } from 'shared/ui';
+import { Icon, Loader, SmartHeader } from 'shared/ui';
 import { useMediaQuery } from 'shared/hooks';
 import { isUnConfirmedSelector, TaskList } from 'entities';
 import { Breakpoints } from 'shared/config';
 import { Task } from '../../entities/task/types';
-import { IFilterValues } from '../../features/filter/types';
-import { defaultObjFilteres } from '../../features/filter/consts';
 import { openPopup } from '../../features/create-request/model';
 import { Request } from '../../features/create-request';
 import { useGetTaskActiveQuery } from '../../services';
 import { getRoleForRequest, handleFilterTasks } from '../../shared/libs/utils';
 
 import { Filter } from '../../features/filter';
+import { filterDataSelector } from '../../features/filter/model';
 
 export function ProfileActivePage() {
   const dispatch = useAppDispatch();
 
-  const [infoFilterTasks, setInfoFilterTasks] =
-    useState<IFilterValues>(defaultObjFilteres);
-  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
   const isMobile = useMediaQuery(Breakpoints.XL);
   const isMobileForPopup = useMediaQuery(Breakpoints.M);
 
@@ -35,9 +31,19 @@ export function ProfileActivePage() {
     }
   );
 
-  useEffect(() => {
-    tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
-  }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
+  const { sortBy, categories } = useAppSelector(filterDataSelector);
+
+  const currentTask: Task[] = useMemo(() => {
+    if (tasks === undefined) return [];
+    if (Boolean(sortBy) || Boolean(categories.length)) {
+      if (tasks)
+        return handleFilterTasks(tasks, {
+          sortBy,
+          categories,
+        });
+    }
+    return tasks;
+  }, [sortBy, categories, tasks]);
 
   return (
     <>
@@ -48,12 +54,9 @@ export function ProfileActivePage() {
           !isUnConfirmed ? (
             <Filter
               items={{
-                sort: true,
+                sortBy: true,
                 categories: true,
-                radius: false,
-                date: false,
               }}
-              setFilteres={setInfoFilterTasks}
             />
           ) : (
             <></>
@@ -68,7 +71,7 @@ export function ProfileActivePage() {
           isMobile={isMobile}
           handleClickAddTaskButton={() => dispatch(openPopup())}
           isStatusActive={isUnConfirmed}
-          tasks={!isUnConfirmed ? filterTasks : []}
+          tasks={!isUnConfirmed ? currentTask : []}
           isLoading={isLoading}
         />
       )}

@@ -1,77 +1,62 @@
-import { useEffect, ReactElement, FormEvent } from 'react';
-
 import { Tooltip } from 'shared/ui/tooltip';
 import { Button } from 'shared/ui/button';
 
 import { useMediaQuery } from 'shared/hooks';
 import { Breakpoints } from 'shared/config';
 
-import type { IFilterValues } from 'features/filter/types';
+import type { FilterProps, IFilterValues } from 'features/filter/types';
 
 import styles from './filter-cover.module.css';
 import { Icon } from 'shared/ui';
-import { defaultObjFilteres } from 'features/filter/consts';
-import { useSearchParams } from 'react-router-dom';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import {
+  emptyFilterData,
+  filterDataSelector,
+  resetFilterData,
+  setFilterData,
+} from '../../model';
+import { getDefaultFilterComponents } from '../../../../shared/libs/utils';
 
 interface FilterCoverProps {
+  filterMenu: FilterProps['items'];
   closeFilterMenu: () => void;
   position: { top: number; right: number };
-  filterMenu: ReactElement;
-  filterValues: IFilterValues;
-  setFilteres?: (item: IFilterValues) => void;
-  onReset: () => void;
 }
 
 export const FilterCover = ({
+  filterMenu,
   closeFilterMenu,
   position,
-  filterMenu,
-  filterValues,
-  onReset,
-  setFilteres,
 }: FilterCoverProps) => {
-  const [_, setSearchParams] = useSearchParams();
-  const newSearchParams = new URLSearchParams();
   const isMobile = useMediaQuery(Breakpoints.L);
 
-  useEffect(() => {
-    if (!isMobile) {
-      setFilteres?.({
-        ...filterValues,
-      });
-    } else {
-      setTimeout(() => {
-        setFilteres?.({
-          ...filterValues,
-        });
-      }, 0);
-    }
-    // eslint-disable-next-line
-  }, []);
+  const dispatch = useAppDispatch();
 
-  const buttonStyle = { marginTop: '-15px' };
+  const { components } = getDefaultFilterComponents(filterMenu);
+  const values = useAppSelector(filterDataSelector);
 
-  const applyFilter = () => {
-    Object.entries(filterValues).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        if (value[0] !== '00:00' && value[1] !== '00:00' && value.length > 0) {
-          newSearchParams.set(key, value.toString());
-        }
-      }
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm<Partial<IFilterValues>>({ values });
 
-      if (typeof value === 'string' && value.length > 0) {
-        newSearchParams.set(key, value);
-      }
-    });
-    setSearchParams(newSearchParams);
-    setFilteres?.(filterValues);
+  const onSubmit: SubmitHandler<Partial<IFilterValues>> = (data) => {
+    dispatch(
+      setFilterData({
+        ...emptyFilterData,
+        ...data,
+      })
+    );
     closeFilterMenu();
   };
 
   const resetFilter = () => {
-    onReset();
-    setSearchParams(defaultObjFilteres);
-    setFilteres?.(defaultObjFilteres);
+    reset(values);
+    dispatch(resetFilterData());
     closeFilterMenu();
   };
 
@@ -80,21 +65,6 @@ export const FilterCover = ({
     right: `${window.innerWidth - position.right - 10}px`,
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    applyFilter();
-  };
-
-  const isFilterSelected = () => {
-    return (
-      filterValues.categories.length > 0 ||
-      filterValues.searchRadius.length > 0 ||
-      filterValues.sortBy.length > 0 ||
-      filterValues.date.length > 0 ||
-      filterValues.time.length > 0 ||
-      filterValues.userCategories.length > 0
-    );
-  };
   return (
     <Tooltip
       pointerPosition="right"
@@ -103,16 +73,35 @@ export const FilterCover = ({
       extClassName={styles.tooltip}
       visible
     >
-      <form name="formFilter" onSubmit={handleSubmit} onReset={resetFilter}>
+      <form
+        name="formFilter"
+        onSubmit={handleSubmit(onSubmit)}
+        onReset={resetFilter}
+      >
         <div className={styles.wrapper}>
-          {filterMenu}
+          {Object.keys(components).map((name, i) => (
+            <Controller
+              key={i}
+              name={name as keyof IFilterValues}
+              control={control}
+              render={({ field }) => {
+                const Component = components[name as keyof IFilterValues];
+                return (
+                  <Component
+                    onChange={field.onChange}
+                    value={field.value as string & string[]}
+                  />
+                );
+              }}
+            />
+          ))}
           <div
             className={`${styles.buttonWrapper} ${
               isMobile ? styles.buttonWrapper__mobile : null
             }`}
           >
             <Button
-              style={buttonStyle}
+              extClassName={styles.buttonStyle}
               label="Сбросить фильтры"
               buttonType="secondary"
               size="medium"
@@ -120,12 +109,12 @@ export const FilterCover = ({
               customIcon={<Icon icon="CloseCrossIcon" color={'blue'} />}
             />
             <Button
-              style={buttonStyle}
+              extClassName={styles.buttonStyle}
               label="Применить"
               buttonType="primary"
               size="medium"
               actionType="submit"
-              disabled={!isFilterSelected()}
+              disabled={!isDirty}
             />
           </div>
         </div>

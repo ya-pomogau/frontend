@@ -57,9 +57,9 @@ type Story = StoryObj<typeof meta>;
 export const DefaultFilter: Story & any = {
   args: {
     items: {
-      sort: false,
+      sortBy: false,
       categories: true,
-      radius: true,
+      searchRadius: true,
       time: true,
       date: true,
     },

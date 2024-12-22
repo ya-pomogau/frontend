@@ -5,26 +5,26 @@ import styles from '../styles.module.css';
 import { useLocation } from 'react-router-dom';
 
 interface RadiusBlockProps {
-  filter: string;
+  value: string;
   onChange: (value: string) => void;
 }
 
-export const RadiusBlock = ({ filter, onChange }: RadiusBlockProps) => {
+export const RadiusBlock = ({ value, onChange }: RadiusBlockProps) => {
   const location = useLocation();
 
   const getRadiusButtonType = (id: string) =>
-    filter === id ? 'primary' : 'secondary';
+    value === id ? 'primary' : 'secondary';
 
   const handleRadiusButtonClick = (id: string) => {
-    if (filter === id && location.pathname !== '/profile/map') {
+    if (value === id && location.pathname !== '/profile/map') {
       onChange('');
     } else {
       onChange(id);
     }
   };
 
-  if (filter === '' && location.pathname === '/profile/map') {
-    filter = FilterItemsIds.RADIUS_5;
+  if (value === '' && location.pathname === '/profile/map') {
+    value = FilterItemsIds.RADIUS_5;
     setTimeout(() => {
       handleRadiusButtonClick(FilterItemsIds.RADIUS_5);
     });

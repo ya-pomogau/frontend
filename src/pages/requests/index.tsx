@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { PageSubMenuForAdmins } from 'widgets';
 import {
@@ -23,10 +23,11 @@ import {
   useGetUnconfirmedUsersQuery,
 } from 'services/admin-api';
 import { User } from 'entities/user/types';
-import { IFilterValues } from 'features/filter/types';
 import { FilterItemsIds } from 'features/filter/consts';
 
 import styles from './styles.module.css';
+import { useAppSelector } from '../../app/hooks';
+import { filterDataSelector } from '../../features/filter/model';
 
 interface PageProps {
   incomeTab: string;
@@ -75,29 +76,34 @@ export function RequestsPage({ incomeTab }: PageProps) {
       .sort(sortByStatus);
   };
 
-  const handleApplyFilters = (filter: IFilterValues) => {
-    if (incomeTab === tabs.NOTPROCESSED) {
-      const { userCategories } = filter;
+  const { userCategories } = useAppSelector(filterDataSelector);
 
+  useMemo(() => {
+    if (incomeTab === tabs.NOTPROCESSED) {
       const filteredData = getFilteredTabData()?.filter(
         (card) =>
           userCategories.includes(FilterItemsIds.ALL) ||
           userCategories.includes(card.role)
       );
+      if (filteredData) {
+        setFilteredName(filteredData);
+      }
+    } else {
+      const filteredData = getFilteredTabData();
 
       if (filteredData) {
         setFilteredName(filteredData);
       }
     }
-  };
-
-  useEffect(() => {
-    const filteredData = getFilteredTabData();
-
-    if (filteredData) {
-      setFilteredName(filteredData);
-    }
-  }, [searchName, incomeTab, volunteers, recipients, unconfirmed, admins]);
+  }, [
+    searchName,
+    incomeTab,
+    volunteers,
+    recipients,
+    unconfirmed,
+    admins,
+    userCategories,
+  ]);
 
   return (
     <>
@@ -122,10 +128,7 @@ export function RequestsPage({ incomeTab }: PageProps) {
         filter={
           incomeTab === tabs.NOTPROCESSED ? (
             getFilteredTabData()?.length ? (
-              <Filter
-                items={{ userCategories: true }}
-                setFilteres={handleApplyFilters}
-              />
+              <Filter items={{ userCategories: true }} />
             ) : (
               <Filter notFoundFilter={true} />
             )

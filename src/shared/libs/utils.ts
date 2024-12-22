@@ -1,7 +1,7 @@
 import { FRONT_URL, LOCAL_STORAGE_TOKEN_ACCESS } from 'config/api-config';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import { Task } from 'entities/task/types';
-import { IFilterValues } from 'features/filter/types';
+import { type FilterProps, IFilterValues } from 'features/filter/types';
 
 import {
   DAYS_IN_MONTH,
@@ -13,6 +13,12 @@ import {
 } from './constants';
 import { IDateUser } from 'pages/requests/test-users';
 import { UserRole, userRole } from 'shared/types/common.types';
+import { CategoriesBlock } from '../../features/filter/ui/categories-block';
+import { RadiusBlock } from '../../features/filter/ui/radius-block';
+import { SortByBlock } from '../../features/filter/ui/sortBy-block';
+import { CalenderBlock } from '../../features/filter/ui/calender-block';
+import { TimeBlock } from '../../features/filter/ui/time-block';
+import { UserCategoriesBlock } from '../../features/filter/ui/userCategories-block';
 
 export const isTaskUrgent = (date: string): boolean =>
   differenceInMilliseconds(new Date(date), new Date()) < 86400000;
@@ -78,57 +84,94 @@ export const sortTasks = (
   return sortedTasks;
 };
 
+const sortDisplay = (arr: Task[], text: string): Task[] => {
+  let sortedTasks: Task[] = [];
+  switch (text) {
+    case 'date':
+      sortedTasks = sortTasks(arr, 'date');
+      break;
+    case 'decreasingPoints':
+      sortedTasks = sortTasks(arr, 'decreasing');
+      break;
+    case 'increasingPoints':
+      sortedTasks = sortTasks(arr, 'increasing');
+      break;
+    default:
+      sortedTasks = arr;
+      break;
+  }
+  return sortedTasks;
+};
+
 export const handleFilterTasks = (
   tasks: Task[],
-  setFilterTasks: (date: Task[]) => void,
-  infoFilterTasks: IFilterValues
+  data: { sortBy: string; categories: string[] }
 ) => {
-  const handleTasksFilter = (arr: Task[]) =>
-    arr.filter((task: Task) =>
-      infoFilterTasks.categories.includes(task.category.title)
-    );
-
-  if (tasks) {
-    setFilterTasks(tasks);
-  }
-  const sortDisplay = (arr: Task[], text: string): Task[] => {
-    let sortedTasks: Task[] = [];
-    switch (text) {
-      case 'date':
-        sortedTasks = sortTasks(arr, 'date');
-        break;
-      case 'decreasingPoints':
-        sortedTasks = sortTasks(arr, 'decreasing');
-        break;
-      case 'increasingPoints':
-        sortedTasks = sortTasks(arr, 'increasing');
-        break;
-      default:
-        sortedTasks = arr;
-        break;
-    }
-    return sortedTasks;
-  };
-  if (infoFilterTasks?.categories.length) {
-    const filteredTasks = tasks.filter((task: Task) => {
-      return infoFilterTasks.categories.includes(task.category.title);
-    });
-    if (infoFilterTasks?.sortBy) {
-      sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy);
-    } else {
-      setFilterTasks(filteredTasks);
-    }
-  }
-  if (infoFilterTasks?.sortBy) {
-    if (infoFilterTasks?.categories.length > 0) {
-      setFilterTasks(
-        sortDisplay(handleTasksFilter(tasks), infoFilterTasks.sortBy)
+  let ret: Task[] = tasks;
+  if (data?.categories.length) {
+    if (data?.sortBy) {
+      ret = sortDisplay(
+        tasks.filter((task) => data.categories.includes(task.category.title)),
+        data.sortBy
       );
     } else {
-      setFilterTasks(sortDisplay(tasks, infoFilterTasks.sortBy));
+      ret = tasks.filter((task) =>
+        data.categories.includes(task.category.title)
+      );
     }
   }
+
+  if (data?.sortBy) {
+    if (data?.categories.length > 0) {
+      ret = sortDisplay(
+        tasks.filter((task) => data.categories.includes(task.category.title)),
+        data.sortBy
+      );
+    } else {
+      ret = sortDisplay(tasks, data.sortBy);
+    }
+  }
+
+  return ret;
 };
+
+export const defaultFilterData: {
+  components: {
+    categories: typeof CategoriesBlock;
+    searchRadius: typeof RadiusBlock;
+    sortBy: typeof SortByBlock;
+    date: typeof CalenderBlock;
+    time: typeof TimeBlock;
+    userCategories: typeof UserCategoriesBlock;
+  };
+} = {
+  components: {
+    categories: CategoriesBlock,
+    searchRadius: RadiusBlock,
+    sortBy: SortByBlock,
+    date: CalenderBlock,
+    time: TimeBlock,
+    userCategories: UserCategoriesBlock,
+  },
+};
+
+export const getDefaultFilterComponents = (
+  filterParams: FilterProps['items']
+) => {
+  if (filterParams) {
+    (
+      Object.keys(
+        defaultFilterData.components
+      ) as (keyof Partial<IFilterValues>)[]
+    ).map((item) => {
+      if (!filterParams[item]) {
+        delete defaultFilterData.components[item];
+      }
+    });
+  }
+  return defaultFilterData;
+};
+
 const degrToRadians = (degrees: number): number => {
   return degrees * RADIANS_IN_DEGREE;
 };

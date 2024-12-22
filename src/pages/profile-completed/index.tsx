@@ -6,20 +6,17 @@ import { Icon } from 'shared/ui/icons';
 
 import { Filter } from 'features/filter';
 import { Loader } from 'shared/ui/loader';
-import { IFilterValues } from 'features/filter/types';
+
 import { Task } from 'entities/task/types';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { getRoleForRequest, handleFilterTasks } from 'shared/libs/utils';
-import { defaultObjFilteres } from 'features/filter/consts';
+
 import { useGetTaskCompletedQuery } from 'services/user-task-api';
 import { isUnConfirmedSelector } from 'entities/user/model';
 import { Breakpoints } from 'shared/config';
+import { filterDataSelector } from '../../features/filter/model';
 
 export function ProfileCompletedPage() {
-  const [infoFilterTasks, setInfoFilterTasks] =
-    useState<IFilterValues>(defaultObjFilteres);
-  const [filterTasks, setFilterTasks] = useState<Task[]>([]);
-
   const { role } = useAppSelector((state) => state.user);
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
@@ -31,9 +28,19 @@ export function ProfileCompletedPage() {
     }
   );
 
-  useEffect(() => {
-    tasks && handleFilterTasks(tasks, setFilterTasks, infoFilterTasks);
-  }, [tasks, infoFilterTasks.sortBy, infoFilterTasks.categories]);
+  const { sortBy, categories } = useAppSelector(filterDataSelector);
+
+  const currentTask: Task[] = useMemo(() => {
+    if (tasks === undefined) return [];
+    if (Boolean(sortBy) || Boolean(categories.length)) {
+      if (tasks)
+        return handleFilterTasks(tasks, {
+          sortBy,
+          categories,
+        });
+    }
+    return tasks;
+  }, [sortBy, categories, tasks]);
 
   return (
     <>
@@ -44,12 +51,9 @@ export function ProfileCompletedPage() {
           !isUnConfirmed ? (
             <Filter
               items={{
-                sort: true,
+                sortBy: true,
                 categories: true,
-                radius: false,
-                date: false,
               }}
-              setFilteres={setInfoFilterTasks}
             />
           ) : (
             <></>
@@ -63,7 +67,7 @@ export function ProfileCompletedPage() {
           userRole={role}
           isMobile={isMobile}
           isStatusActive={false}
-          tasks={!isUnConfirmed ? filterTasks : []}
+          tasks={!isUnConfirmed ? currentTask : []}
           isLoading={isLoading}
         />
       )}

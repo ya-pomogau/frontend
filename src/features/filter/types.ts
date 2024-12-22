@@ -8,23 +8,16 @@ export interface IFilterValues {
 }
 
 export type TFilterItems = {
-  categories?: boolean;
-  radius?: boolean;
-  sort?: boolean;
-  date?: boolean;
-  time?: boolean;
-  userCategories?: boolean;
+  [key in keyof IFilterValues]?: boolean;
 };
 
 export interface FilteringProps {
   items: TFilterItems;
-  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter?: never;
 }
 
 export interface NotFoundFilterProps {
   items?: never;
-  setFilteres?: (date: IFilterValues) => void;
   notFoundFilter: boolean;
 }
 
