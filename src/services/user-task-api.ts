@@ -114,6 +114,15 @@ export const userTasksApi = createApi({
       },
       invalidatesTags: [{ type: 'TaskVirgin' }, { type: 'TaskActive' }],
     }),
+    releaseTask: build.mutation<boolean, string>({
+      query: (id) => {
+        return {
+          url: `/volunteer/tasks/${id}`,
+          method: 'DELETE',
+        };
+      },
+      invalidatesTags: [{ type: 'TaskVirgin' }, { type: 'TaskActive' }],
+    }),
     fulfillTask: build.mutation<Task, { role: string; id: string }>({
       query: (args) => {
         const { role, id } = args;
@@ -154,4 +163,5 @@ export const {
   useRejectTaskMutation,
   useGetTaskQuery,
   useCancelTaskMutation,
+  useReleaseTaskMutation,
 } = userTasksApi;

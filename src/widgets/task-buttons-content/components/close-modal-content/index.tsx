@@ -5,7 +5,7 @@ import { Typography, Checkbox, Button } from 'shared/ui';
 import { useControlModal } from 'shared/hooks';
 import { userRole as userRoles } from 'shared/types/common.types';
 import { PopupChat, infoAdmin } from 'entities';
-import { useCancelTaskMutation } from 'services';
+import { useCancelTaskMutation, useReleaseTaskMutation } from 'services';
 
 import { ModalContentProps } from 'widgets/task-buttons-content';
 import {
@@ -19,6 +19,7 @@ const CloseModalContent = ({ userRole, taskId }: ModalContentProps) => {
   const { isOpen, handleOpen, handleClose } = useControlModal();
   const [reason, setReason] = useState<ReasonType | null>(null);
   const [cancelTask] = useCancelTaskMutation();
+  const [releaseTask] = useReleaseTaskMutation();
 
   const handleSetReason = (reasonType: ReasonType) => {
     if (reason === reasonType) {
@@ -31,6 +32,8 @@ const CloseModalContent = ({ userRole, taskId }: ModalContentProps) => {
   const handleCancelClick = () => {
     if (userRole === userRoles.RECIPIENT && taskId) {
       cancelTask({ id: taskId });
+    } else if (userRole === userRoles.VOLUNTEER && taskId) {
+      releaseTask(taskId);
     }
   };
 

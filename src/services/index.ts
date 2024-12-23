@@ -52,6 +52,7 @@ export {
   useRejectTaskMutation,
   useGetTaskQuery,
   useCancelTaskMutation,
+  useReleaseTaskMutation,
 } from './user-task-api';
 
 export {

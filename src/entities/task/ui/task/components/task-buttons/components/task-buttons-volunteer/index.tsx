@@ -82,6 +82,8 @@ export const TaskButtonsVolunteer = ({
                   : modalContentType.close
               }
               date={date}
+              taskId={taskId}
+              userRole={userRole}
             />
           }
         >
