@@ -26,6 +26,23 @@ export const userTasksApi = createApi({
     },
   }),
   endpoints: (build) => ({
+    getActiveTasksForUnauth: build.query<
+      Array<Task>,
+      { latitude: number; longitude: number }
+    >({
+      query: ({ latitude, longitude }) => {
+        return {
+          url: `system/tasks/virgin?distance=100000&latitude=${latitude}&longitude=${longitude}`,
+          method: 'GET',
+        };
+      },
+      providesTags: (result, error) => {
+        if (error) {
+          console.error('Error occurred:', error);
+        }
+        return result ? [{ type: 'TaskVirgin' }] : [];
+      },
+    }),
     getTaskActive: build.query<Array<Task>, string>({
       query: (role) => {
         return {
@@ -164,4 +181,5 @@ export const {
   useGetTaskQuery,
   useCancelTaskMutation,
   useReleaseTaskMutation,
+  useGetActiveTasksForUnauthQuery,
 } = userTasksApi;

@@ -53,6 +53,7 @@ export {
   useGetTaskQuery,
   useCancelTaskMutation,
   useReleaseTaskMutation,
+  useGetActiveTasksForUnauthQuery,
 } from './user-task-api';
 
 export {

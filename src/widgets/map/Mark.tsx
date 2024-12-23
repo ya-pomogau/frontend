@@ -8,7 +8,7 @@ import { Placemark, useYMaps } from '@pbe/react-yandex-maps';
 import usePermission from 'shared/hooks/use-permission';
 import { userRole, userStatus } from 'shared/types/common.types';
 import { Task } from 'entities/task/types';
-import { isTaskUrgent } from 'shared/libs/utils';
+import { handleRedirectVK, isTaskUrgent } from 'shared/libs/utils';
 import { useResponseTaskMutation } from 'services/user-task-api';
 import type { Dispatch, SetStateAction } from 'react';
 
@@ -50,17 +50,20 @@ const Mark: FC<MarkProps> = ({
             minute: '2-digit',
           })
         : 'Бессрочно',
-      isDisabled: !isGranted,
+      isDisabled: !isGranted && isAuthorised,
     }
   );
 
   const onClickButton = () => {
-    // TODO: переделать showPopup чтобы в зависимости от ответа сервера открывались разные попапы
-    isAuthorised &&
-      isGranted &&
+    if (!isAuthorised) {
+      handleRedirectVK();
+    }
+
+    if (isAuthorised && isGranted) {
       responseTask(task._id).then((data) =>
         data.error ? showPopup(false) : showPopup(true)
       );
+    }
   };
 
   if (!ymaps) return null;

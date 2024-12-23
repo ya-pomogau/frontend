@@ -17,7 +17,6 @@ import {
   unauthorizedVolunteerPopupMessage,
   thankForAssignTaskMessage,
   cantAssignTaskMessage,
-  unauthorizedUserPopupMessage,
 } from 'shared/libs/constants';
 import { setAddress } from 'features/create-request/model';
 import { useAppDispatch } from 'app/hooks';
@@ -46,7 +45,6 @@ interface YandexMapProps {
   };
   radius?: number;
   tasks?: Task[];
-  onClick?: () => void;
   coordinates?: GeoCoordinates;
   role?: UserRole | null;
   isAuthorised?: boolean;
@@ -203,9 +201,7 @@ export const YandexMap = ({
           onClickExit={onClickExit}
           hasCloseButton={true}
         >
-          {isAuthorised
-            ? unauthorizedVolunteerPopupMessage
-            : unauthorizedUserPopupMessage}
+          {unauthorizedVolunteerPopupMessage}
         </LightPopup>
       )}
       {isGranted && (
