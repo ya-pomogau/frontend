@@ -1,41 +1,52 @@
 .mainWrapper {
-  position: relative;
-  top: -8px;
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  grid-template-columns: 52px 1fr;
+  grid-template-areas:
+    '. content'
+    '. button';
+  row-gap: 40px;
+  column-gap: 20px;
+  margin-top: 40px;
 }
-.container {
-  margin: 50px 0 0 76px;
+
+.content {
+  grid-area: content;
   display: flex;
   flex-direction: column;
-  width: 450px;
-  min-height: 150px;
+  row-gap: 20px;
+}
+
+.content__item_wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.content__item_description {
+  display: grid;
+  row-gap: 5px;
+  grid-template-areas:
+    'category category'
+    'description description'
+    'moreButton .'
+    '. editButton';
+  grid-template-rows: min-content 1fr repeat(2, min-content);
+  grid-template-columns: 1fr min-content;
 }
 
 .buttonsWrapper {
+  grid-area: button;
   display: flex;
   justify-content: flex-end;
-  margin-top: 45px;
-}
-
-.prevButton {
-  display: none;
-}
-
-.addressWrapper {
-  display: flex;
-  margin-top: 20px;
-}
-
-.address {
-  max-width: 269px;
-}
-
-.typeOfTask {
-  margin: 15px 0 0;
+  gap: 10px;
 }
 
 .descriptionForTask {
-  height: auto;
-  max-height: 64px;
+  grid-area: description;
+  width: 454px;
+  height: 65px;
   transition: max-height 0.3s ease;
   overflow: hidden;
   display: -webkit-box;
@@ -45,7 +56,7 @@
 }
 
 .descriptionForTask.expanded {
-  max-height: min-content;
+  height: min-content;
   resize: none;
   transition: var(--transition-hover);
   box-sizing: border-box;
@@ -66,127 +77,84 @@
   -webkit-line-clamp: unset;
 }
 
-.dateWrapper {
-  display: flex;
-  column-gap: 20px;
-}
-
-.categories {
-  padding: 7px 2px 5px 10px;
-  margin-top: 20px;
-}
-
-.edit_button {
-  padding-left: 10px;
-  padding-bottom: 0;
-  display: flex;
-  align-items: flex-end;
-}
-
 .readMoreButton {
+  grid-area: moreButton;
+  justify-self: start;
   background: none;
   border: none;
   color: var(--colors-interface-primary);
   cursor: pointer;
-  padding: 0;
   align-self: flex-start;
-  margin-top: 5px;
+}
+
+.content__item_description .editButton {
+  grid-area: editButton;
+  white-space: nowrap;
+}
+
+.category {
+  grid-area: category;
+}
+
+.addressOutput {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 300px;
+}
+
+.addressOutput svg {
+  flex-shrink: 0;
+}
+
+.dateAndTime {
+  display: flex;
+  gap: 30px;
 }
 
 @media (max-width: 735px) {
   .mainWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .container {
-    margin: 20px 0 0 0;
-    width: 270px;
-    height: 300px;
-    gap: 30px;
-  }
-
-  .headerText {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .task {
-    font-size: var(--font-size-medium);
-  }
-
-  .headerWrapper {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0%,
-      var(--colors-interface-primary) 49.28%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    width: 240px;
-  }
-
-  .mainText {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .dateWrapper {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .dateAndTime {
-    display: flex;
-    gap: 47px;
-  }
-
-  .edit_button{
-    padding-left: 0;
-  }
-
-  .addressWrapper {
-    flex-direction: column;
     margin-top: 0;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'title'
+      'content'
+      'button';
+    justify-items: center;
+    height: 550px;
+    row-gap: 30px;
   }
 
-  .addressOutput{
-    display: flex;
-  }
-  .addressOutput svg {
-    flex: 0 0 auto; /* Не растягивать и не сжимать */
-    margin-left: -4px;
-  }
-
-  .testWrapper {
-    display: flex;
+  .content__item_wrapper {
     flex-direction: column;
-    gap: 10px;
   }
 
-  .categories {
-    margin: 0;
+  .title__mobile {
+    grid-area: title;
+    width: 240px;
+    position: relative;
+    text-align: center;
+  }
+
+  .gradient {
+    position: absolute;
+    bottom: -4px;
+  }
+
+  .content__item_description {
+    grid-template-areas:
+      'category category'
+      'description description'
+      'moreButton .'
+      'editButton .';
   }
 
   .descriptionForTask {
-    text-overflow: ellipsis;
-    max-width: 250px;
-    -webkit-line-clamp: 4;
-    line-height: var(--line-height-m);
-  }
-
-  .prevButton {
-    display: block;
+    width: 100%;
   }
 
   .buttonsWrapper {
-    gap: 10px;
-    margin-top: 193px;
-    justify-content: center;
-    width: 260px;
-    position: relative;
+    align-self: flex-end;
   }
 }

@@ -125,7 +125,7 @@
   line-height: var(--line-height-small); /* 16.8px */
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 735px) {
   .servicesText {
     font-size: 8px;
     line-height: 9.6px;

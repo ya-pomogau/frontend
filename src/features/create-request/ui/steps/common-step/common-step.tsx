@@ -16,6 +16,7 @@ import {
   Typography,
   EditButton,
   CategoriesBackground,
+  GradientDivider,
 } from 'shared/ui';
 import {
   CreateTaskDto,
@@ -56,7 +57,7 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
   const parseDate = parse(date, 'dd.MM.yyyy', new Date());
   const formattedDate = format(parseDate, 'yyyy.MM.dd');
 
-  const categorySize = category.title.length > 22 ? 'large' : 'medium';
+  const categorySize = category.title.length > 15 ? 'large' : 'medium';
 
   const handleSubmitClick = () => {
     let requestData = {};
@@ -116,164 +117,92 @@ export const CommonStep = ({ isMobile }: ICommonStepProps) => {
 
   return (
     <div className={styles.mainWrapper}>
-      <div className={classNames(styles.container)}>
-        {isMobile ? (
-          <>
-            <div className={styles.headerText}>
-              <Typography
-                tag={'h2'}
-                color={'black'}
-                fontFamily={'primaryFont'}
-                content={'Дело'}
-                extraClass={styles.task}
-              />
-              <div className={styles.headerWrapper} />
-            </div>
+      {isMobile && (
+        <>
+          <Typography
+            tag={'h2'}
+            variant={'title'}
+            extraClass={styles.title__mobile}
+          >
+            Дело
+            <GradientDivider extClassName={styles.gradient} />
+          </Typography>
+        </>
+      )}
 
-            <div className={styles.mainText}>
-              <div className={styles.dateWrapper}>
-                {!termlessRequest ? (
-                  <div className={styles.dateAndTime}>
-                    <Typography variant={'paragraph-bold'} content={date} />
-                    <Typography variant={'paragraph-bold'} content={time} />
-                  </div>
-                ) : (
-                  <Typography
-                    variant={'paragraph-bold'}
-                    content={'Заявка без срока'}
-                  />
-                )}
-                {isTypeEdit && (
-                  <EditButton
-                    extClassName={styles.edit_button}
-                    label="Изменить дату и время"
-                    onClick={() => handleEditButton('date')}
-                  />
-                )}
-              </div>
-
-              <div className={styles.addressWrapper}>
-                <div className={styles.addressOutput}>
-                  <Icon icon="LocationIcon" color="blue" />
-                  <Typography variant={'support'} content={address} />
-                </div>
-                {isTypeEdit && (
-                  <EditButton
-                    extClassName={styles.edit_button}
-                    label="Изменить адрес"
-                    onClick={() => handleEditButton('coordinates')}
-                  />
-                )}
-              </div>
-
-              <div className={styles.testWrapper}>
-                <CategoriesBackground
-                  theme="primary"
-                  size={categorySize}
-                  content={category.title}
-                  extClassName={styles.categories}
-                />
-                <Typography
-                  color={'darkGray'}
-                  extraClass={classNames(styles.descriptionForTask, {
-                    [styles.expanded]: isExpanded,
-                  })}
-                  ref={textRef}
-                  content={description}
-                />
-                {isTruncated && (
-                  <button
-                    onClick={toggleIsShowingMore}
-                    className={styles.readMoreButton}
-                  >
-                    {isExpanded ? 'Скрыть' : 'Читать'}
-                  </button>
-                )}
-                {isTypeEdit && (
-                  <EditButton
-                    extClassName={styles.edit_button}
-                    label="Изменить задание"
-                    onClick={() => handleEditButton('description')}
-                  />
-                )}
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className={styles.dateWrapper}>
-              {!termlessRequest ? (
-                <>
-                  <Typography variant={'title'} content={date} />
-                  <Typography
-                    variant={'title'}
-                    content={[time, termlessRequest]}
-                    extraClass={styles.time}
-                  />
-                </>
-              ) : (
-                <Typography variant={'title'} content={'Заявка без срока'} />
-              )}
-              {isTypeEdit ? (
-                <EditButton
-                  extClassName={styles.edit_button}
-                  label="Изменить дату и время"
-                  onClick={() => handleEditButton('date')}
-                />
-              ) : null}
-            </div>
-            <div className={styles.addressWrapper}>
-              <Icon icon="LocationIcon" color="blue" />
-              <Typography
-                content={address}
-                extraClass={classNames({ [styles.address]: isTypeEdit })}
-              />
-              {isTypeEdit && (
-                <EditButton
-                  extClassName={styles.edit_button}
-                  label="Изменить адрес"
-                  onClick={() => handleEditButton('coordinates')}
-                />
-              )}
-            </div>
-            <CategoriesBackground
-              theme="primary"
-              size={categorySize}
-              content={category.title}
-              extClassName={styles.categories}
-            />
-            <Typography
-              color={'darkGray'}
-              extraClass={classNames(styles.descriptionForTask, {
-                [styles.expanded]: isExpanded,
-              })}
-              ref={textRef}
-              content={description}
-            />
-            {isTruncated && (
-              <button
-                onClick={toggleIsShowingMore}
-                className={styles.readMoreButton}
-              >
-                {isExpanded ? 'Скрыть' : 'Читать'}
-              </button>
+      <div className={styles.content}>
+        <div className={styles.content__item_wrapper}>
+          <Typography
+            variant={isMobile ? 'paragraph-bold' : 'subtitle'}
+            extraClass={styles.dateAndTime}
+          >
+            {!termlessRequest ? (
+              <>
+                <span>{date}</span>
+                <span>{time}</span>
+              </>
+            ) : (
+              'Заявка без срока'
             )}
-            {isTypeEdit && (
-              <EditButton
-                extClassName={styles.edit_button}
-                label="Изменить задание"
-                onClick={() => handleEditButton('description')}
-              />
-            )}
-          </>
-        )}
+          </Typography>
+          {isTypeEdit && (
+            <EditButton
+              label="Изменить дату и время"
+              onClick={() => handleEditButton('date')}
+            />
+          )}
+        </div>
+
+        <div className={styles.content__item_wrapper}>
+          <div className={styles.addressOutput}>
+            <Icon icon="LocationIcon" color="blue" />
+            <Typography variant={'paragraphResize'} content={address} />
+          </div>
+          {isTypeEdit && (
+            <EditButton
+              label="Изменить адрес"
+              onClick={() => handleEditButton('coordinates')}
+            />
+          )}
+        </div>
+
+        <div className={styles.content__item_description}>
+          <CategoriesBackground
+            theme="primary"
+            size={categorySize}
+            content={category.title}
+            extClassName={styles.category}
+          />
+          <Typography
+            color={'darkGray'}
+            extraClass={classNames(styles.descriptionForTask, {
+              [styles.expanded]: isExpanded,
+            })}
+            ref={textRef}
+            content={description}
+          />
+          {isTruncated && (
+            <button
+              onClick={toggleIsShowingMore}
+              className={styles.readMoreButton}
+            >
+              {isExpanded ? 'Скрыть' : 'Читать'}
+            </button>
+          )}
+          {isTypeEdit && (
+            <EditButton
+              label="Изменить задание"
+              onClick={() => handleEditButton('description')}
+              extClassName={styles.editButton}
+            />
+          )}
+        </div>
       </div>
       <div className={styles.buttonsWrapper}>
         <Button
           buttonType="secondary"
           label="Вернуться"
           onClick={handleClosePopup}
-          extClassName={styles.prevButton}
         />
         <Button
           buttonType="primary"

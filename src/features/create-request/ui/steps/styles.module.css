@@ -8,6 +8,11 @@
   height: auto;
   width: 300px;
   min-height: 600px;
+  padding: 30px 15px 45px 15px;
+}
+
+.mainPopUpWrapper {
+  padding: 20px 30px 45px 30px;
 }
 
 .mainPopupOuterDiv {
