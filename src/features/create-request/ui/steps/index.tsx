@@ -110,7 +110,9 @@ export const Request = ({ isMobile = true }: RequestProps) => {
           phoneNumber={data.phone}
           handleCloseClick={() => setIsOpen(true)}
           isMobile={isMobile}
-          extClassName={isMobile ? styles.mainPopUpWrapperMobile : undefined}
+          extClassName={
+            isMobile ? styles.mainPopUpWrapperMobile : styles.mainPopUpWrapper
+          }
         >
           {isOpen && (
             <div className={styles.tooltipOverlay}>
