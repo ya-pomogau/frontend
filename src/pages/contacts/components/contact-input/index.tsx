@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, InputHTMLAttributes, MouseEvent } from 'react';
 import cn from 'classnames';
 
-import { Icon, Typography } from 'shared/ui';
+import { GradientDivider, Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -35,7 +35,7 @@ export const ContactInput = ({
     [styles.input_mode_edit]: isEditable,
     [styles.input_mode_link]: !isEditable,
   });
-  const errorTextStyles = cn({
+  const errorTextStyles = cn(styles.edit_box_error, {
     [styles.edit_box_hidden]: !isEditable,
   });
 
@@ -46,23 +46,23 @@ export const ContactInput = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.element_box}>
-        <Typography
-          tag={'h2'}
-          color={'primary-additional'}
-          variant={'title'}
-          content={label}
-        />
-        <input
-          type={type}
-          name={name}
-          className={inputStyles}
-          onChange={onChange}
-          value={value || ''}
-          readOnly={!isEditable}
-          onClick={!isEditable ? handleClick : undefined}
-        />
-      </div>
+      <Typography
+        tag={'h2'}
+        color={'primary-additional'}
+        variant={'title'}
+        content={label}
+        extraClass={styles.label}
+      />
+      <input
+        type={type}
+        name={name}
+        className={inputStyles}
+        onChange={onChange}
+        value={value || ''}
+        readOnly={!isEditable}
+        onClick={!isEditable ? handleClick : undefined}
+      />
+      <GradientDivider extClassName={styles.gradient} />
       {isEditAllowed && (
         <>
           <div
