@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, InputHTMLAttributes, MouseEvent } from 'react';
 import cn from 'classnames';
 
-import { Icon, Typography } from 'shared/ui';
+import { GradientDivider, Icon, Typography } from 'shared/ui';
 
 import styles from './styles.module.css';
 
@@ -35,7 +35,7 @@ export const ContactInput = ({
     [styles.input_mode_edit]: isEditable,
     [styles.input_mode_link]: !isEditable,
   });
-  const errorTextStyles = cn({
+  const errorTextStyles = cn(styles.edit_box_error, {
     [styles.edit_box_hidden]: !isEditable,
   });
 
@@ -51,6 +51,7 @@ export const ContactInput = ({
         color={'primary-additional'}
         variant={'title'}
         content={label}
+        extraClass={styles.label}
       />
       <input
         type={type}
@@ -61,6 +62,7 @@ export const ContactInput = ({
         readOnly={!isEditable}
         onClick={!isEditable ? handleClick : undefined}
       />
+      <GradientDivider extClassName={styles.gradient} />
       {isEditAllowed && (
         <>
           <div

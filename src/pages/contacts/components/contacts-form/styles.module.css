@@ -1,12 +1,12 @@
 .form {
-  padding: 0 30px;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 40px;
 }
 
 @media all and (max-width: 920px) {
   .form {
-    padding: 0 10px;
+    padding: 20px 10px;
   }
 }

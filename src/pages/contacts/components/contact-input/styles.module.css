@@ -1,47 +1,70 @@
 .container {
-  padding: 20px 0;
-  border-bottom: 1px solid;
-  border-image-source: var(--colors-interface-line);
-  border-image-slice: 1;
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
+  display: grid;
+  grid-template-areas:
+    'label .'
+    'input edit'
+    'error .'
+    'gradient gradient';
+  grid-template-columns: 1fr min-content;
+  grid-template-rows: min-content 40px 5px min-content;
+  align-items: end;
+  row-gap: 10px;
+}
+
+.label {
+  grid-area: label;
 }
 
 .input {
+  grid-area: input;
   font-size: var(--font-size-medium);
   border: none;
   background-color: transparent;
   outline: none;
 }
 
-.input_mode_link {
-  color: var(--colors-interface-primary);
+.gradient {
+  grid-area: gradient;
 }
 
-.input_mode_link:hover {
+.input_mode_link {
+  color: var(--colors-interface-primary);
   cursor: pointer;
 }
 
 .input_mode_edit {
   color: var(--colors-interface-black);
-}
-
-.input_mode_edit:hover {
   cursor: text;
 }
 
+.edit_box_error {
+  grid-area: error;
+}
+
 .edit_box {
+  grid-area: edit;
   color: var(--colors-interface-primary);
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.edit_box:hover {
   cursor: pointer;
 }
 
 .edit_box_hidden {
   display: none;
+}
+
+@media (max-width: 735px) {
+  .container {
+    grid-template-areas:
+      'label '
+      'input '
+      'gradient '
+      'edit ';
+    grid-template-rows: min-content 40px 15px 10px;
+  }
+
+  .edit_box_error {
+    grid-area: edit;
+  }
 }
