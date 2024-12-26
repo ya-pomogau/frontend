@@ -5,4 +5,14 @@
 
 .button {
   display: inline;
+  border: none;
+  background-color: transparent;
+  color: var(--colors-interface-primary);
+  border-radius: 5px;
+}
+
+.button:hover {
+  color: white;
+  background-color: var(--colors-interface-primary);
+  transition: 0.2s;
 }

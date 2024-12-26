@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "../button";
 import { Typography } from "../typography";
 import styles from "./styles.module.css"
 
@@ -23,15 +22,15 @@ export const WrapperTruncate = ({ symbolsForCutting, textButtonForReading, textB
   }
 
   return (
-    <div className={styles.container}>
-      <Typography>
-        {text.length < symbolsForCutting ? text : (
-          <>
-            {handleLimitation(text, symbolsForCutting)}
-            <Button buttonType="primary" onClick={() => setOpenedText(!openedText)} label={openedText ? textButtonForCollapsing : textButtonForReading} extClassName={styles.button} />
-          </>
-        )}
-      </Typography>
-    </div>
+
+    <Typography>
+      {text.length < symbolsForCutting ? text : (
+        <>
+          {handleLimitation(text, symbolsForCutting)}
+          <button onClick={() => setOpenedText(!openedText)} className={styles.button}>{openedText ? textButtonForCollapsing : textButtonForReading}</button>
+        </>
+      )}
+    </Typography>
+
   )
 }
