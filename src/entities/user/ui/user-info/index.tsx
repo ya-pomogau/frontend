@@ -55,6 +55,7 @@ export const UserInfo = () => {
         userPhone={user.phone}
         userAvatar={user.avatar}
         userAddress={user.address}
+        userCoords={user.location as number[]}
         onSave={handleSaveViewerSettings}
         isOpen={isOpen}
         onClose={handleClose}

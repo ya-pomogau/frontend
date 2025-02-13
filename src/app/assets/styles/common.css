@@ -84,6 +84,8 @@
     var(--line-height-small) var(--font-family-golos);
   --font-golos-14-16: var(--font-weight-regular) var(--font-size-middle) /
     var(--line-height-small) var(--font-family-golos);
+  --font-golos-14-18: var(--font-weight-regular) var(--font-size-middle) /
+    var(--line-height-middle) var(--font-family-golos);
   --font-golos-16-22: var(--font-weight-regular) var(--font-size-s) /
     var(--line-height-medium) var(--font-family-golos);
   --font-golos-24-28: var(--font-weight-regular) var(--font-size-medium) /

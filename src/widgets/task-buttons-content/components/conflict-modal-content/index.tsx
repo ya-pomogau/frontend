@@ -11,8 +11,8 @@ import { PopupChat, infoAdmin } from 'entities';
 import styles from './styles.module.css';
 
 export const ConflictModalContent = ({
-  active = true,
-  conflict = true,
+  active = false,
+  conflict,
   taskId,
   userRole,
   volunteer,

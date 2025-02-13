@@ -11,6 +11,7 @@ import {
   userSelector,
   vkUserSelector,
 } from 'services/system-slice';
+import { Routes } from '../../shared/config';
 
 export const VKAuthPage = () => {
   const navigate = useNavigate();
@@ -45,10 +46,10 @@ export const VKAuthPage = () => {
   }, [dto, dispatch]);
 
   useEffect(() => {
-    if (!user && !!vkUser) {
-      navigate('/register');
+    if (!user && !vkUser) {
+      navigate(Routes.REGISTER);
     } else if (user) {
-      navigate('/profile');
+      navigate(Routes.PROFILE);
     }
   }, [user, vkUser, navigate]);
   //TODO: реализовать вывод ошибки при запросе и лоадер

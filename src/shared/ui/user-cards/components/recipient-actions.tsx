@@ -46,8 +46,8 @@ const RecipientActions = ({
         />
       ) : (
         <Input
-          className={classnames(styles.recipient_input)}
           name="name"
+          extClassName={styles.recipient_input}
           onChange={(e) => {
             setRecipientValue(e.target.value);
           }}
