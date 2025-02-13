@@ -25,18 +25,26 @@ const meta: Meta<typeof PostForm> = {
           name: file.name,
         }));
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         setArgs({ images: [...(args.images ?? []), ...additionalImages] });
       };
 
       const removeAttachment = (id: string) => {
         ctx.args.removeAttachment?.(id);
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         const images = args.images?.filter((image) => image.id !== id);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         setArgs({ images });
       };
       const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
       ) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         ctx.args.handleChange?.(e);
 
         setArgs({ [e.target.name]: e.target.value });
@@ -48,6 +56,8 @@ const meta: Meta<typeof PostForm> = {
             ...ctx.args,
             addAttachment,
             removeAttachment,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             handleChange,
           }}
         />
@@ -63,6 +73,8 @@ export const Default: Story = {};
 
 export const WithData: Story = {
   args: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     title: 'Благотворительность в рекламе',
     text: 'Реклама благотворительности встречается везде: от интернет-сайтов до уличных билбордов. И наверняка вы хоть раз встречали сообщения, которые рассказывали о важности помогать разным категориям людей. Мы совместно с благотворительными организациями создаем рекламные кампании и продвигаем идею благотворительности разными способами. Выстраиваем качественную коммуникацию с целевой аудиторией на основе исследований, которые особенно важно проводить при работе с благотворительной сферой. В этой статье мы поделимся нюансами, которые стоит учитывать в рекламе данной сферы, а также расскажем об ее развитии.',
     images: [

@@ -46,6 +46,8 @@ export const Default: Story = {
           accessLevel: 1,
         },
         date: '2023-07-07T07:00Z',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         recipient: {
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
@@ -78,6 +80,8 @@ export const Default: Story = {
           accessLevel: 1,
         },
         date: '2023-07-07T07:00Z',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         recipient: {
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',

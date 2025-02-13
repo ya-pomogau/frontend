@@ -16,7 +16,7 @@ export const MapWithTasks = () => {
   const isUnConfirmed = useAppSelector(isUnConfirmedSelector);
 
   const [longitude, latitude] = !apiError
-    ? [coords.latitude, coords.longitude]
+    ? [coords.longitude, coords.latitude]
     : user && user.location
     ? user.location
     : [37.621157, 55.890017];

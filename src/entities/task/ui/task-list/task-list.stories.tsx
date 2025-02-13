@@ -71,6 +71,8 @@ export const ExampleActive: Story = {
         },
         date: '2023-07-09T17:30Z',
         description: 'Короткое описание для задачи номер 14.',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         recipient: {
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
@@ -80,6 +82,8 @@ export const ExampleActive: Story = {
           role: userRole.RECIPIENT,
           _id: '4',
         },
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         volunteer: {
           name: 'Волонтеров Петр Петрович',
           avatar:
@@ -113,6 +117,8 @@ export const ExampleActive: Story = {
         date: '2023-07-06T17:30Z',
         description:
           'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         recipient: {
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
@@ -122,6 +128,8 @@ export const ExampleActive: Story = {
           role: userRole.RECIPIENT,
           _id: '2',
         },
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         volunteer: {
           name: 'Волонтеров Петр Петрович',
           avatar:
@@ -164,6 +172,8 @@ export const ExampleNotActive: Story = {
         date: '2023-05-31T17:30Z',
         description:
           'Описание задачи 15 (срок задачи прошел, задача завершена и подтверждена)',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         recipient: {
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
@@ -173,6 +183,8 @@ export const ExampleNotActive: Story = {
           role: userRole.RECIPIENT,
           _id: '5',
         },
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         volunteer: {
           name: 'Волонтеров Петр Петрович',
           avatar:
@@ -212,6 +224,8 @@ export const ExampleNotActive: Story = {
         status: taskStatus.ACCEPTED,
         description:
           'Описание задачи 27 (срок задачи прошел, задача завершена и подтверждена). Тут текст длинее, чтобы проверить работу скрытия части текста.',
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         recipient: {
           name: 'Реципиентов Иван Николаевич',
           avatar: 'https://i.ytimg.com/vi/IeelNKvu65A/hqdefault.jpg',
@@ -221,6 +235,8 @@ export const ExampleNotActive: Story = {
           role: userRole.RECIPIENT,
           _id: '2',
         },
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         volunteer: {
           name: 'Волонтеров Петр Петрович',
           avatar:

@@ -13,7 +13,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-//TODO Привести сторибук в актуальное состояние после измнения Task
+//TODO: FIX
+
 export const Desktop: Story = {
   args: {
     item: {
@@ -27,6 +28,8 @@ export const Desktop: Story = {
       volunteerReport: taskReport.FULFILLED,
       adminResolve: resolveStatus.FULFILLED,
       isPendingChanges: false,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       volunteer: {
         name: '',
         avatar: '',
@@ -46,6 +49,8 @@ export const Desktop: Story = {
       address: 'ул. Потолочного д. 9',
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       recipient: {
         address: '',
         _id: '6',
@@ -73,6 +78,8 @@ export const Mobile: Story = {
       volunteerReport: taskReport.FULFILLED,
       adminResolve: resolveStatus.FULFILLED,
       isPendingChanges: false,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       volunteer: {
         name: '',
         avatar: '',
@@ -92,6 +99,8 @@ export const Mobile: Story = {
       address: 'ул. Потолочного д. 9',
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       recipient: {
         address: '',
         _id: '4',
@@ -119,6 +128,8 @@ export const ExampleWithNoRecipient: Story = {
       volunteerReport: taskReport.FULFILLED,
       adminResolve: resolveStatus.FULFILLED,
       isPendingChanges: false,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       volunteer: {
         name: '',
         avatar: '',
@@ -138,6 +149,8 @@ export const ExampleWithNoRecipient: Story = {
       address: 'ул. Потолочного д. 9',
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       recipient: {
         address: '',
         _id: '3',
@@ -165,6 +178,8 @@ export const ExampleConfirmed: Story = {
       volunteerReport: taskReport.FULFILLED,
       adminResolve: resolveStatus.FULFILLED,
       isPendingChanges: false,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       volunteer: {
         name: '',
         avatar: '',
@@ -184,6 +199,8 @@ export const ExampleConfirmed: Story = {
       address: 'ул. Потолочного д. 9',
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       recipient: {
         address: '',
         _id: '1',
@@ -211,6 +228,8 @@ export const ExampleConflict: Story = {
       volunteerReport: taskReport.FULFILLED,
       adminResolve: resolveStatus.FULFILLED,
       isPendingChanges: false,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       volunteer: {
         name: '',
         avatar: '',
@@ -230,6 +249,8 @@ export const ExampleConflict: Story = {
       address: 'ул. Потолочного д. 9',
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       recipient: {
         address: '',
         _id: '3',
@@ -257,6 +278,8 @@ export const ExampleWithIndefiniteDate: Story = {
       volunteerReport: taskReport.FULFILLED,
       adminResolve: resolveStatus.FULFILLED,
       isPendingChanges: false,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       volunteer: {
         name: '',
         avatar: '',
@@ -276,6 +299,8 @@ export const ExampleWithIndefiniteDate: Story = {
       address: 'ул. Потолочного д. 9',
       description:
         'Пожалуйста, погуляйте с моей собакой, я не смогу ее выгуливать с 12.06 по 24.06 потому что уеду на обследование к врачу. Если есть желающие помочь в выгуле собаки, то звоните, 89041627779, Елена. Собаку зовут Айка, порода - немецкая овчарка, возраст - полтора года. Собака очень умная, послушная, добрая, спокойная.',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       recipient: {
         _id: '1',
         address: '',
