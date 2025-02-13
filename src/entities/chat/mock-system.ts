@@ -31,6 +31,7 @@ export const mockVolunteerToAdminMessages: MessageInterface[] = [
     chatId: '42',
     body: 'Я готов помогать, но не могу!',
     createdAt: new Date(2024, 10, 13, 0, 0, 0),
+    timestamp: new Date(),
   },
   {
     _id: '2',
@@ -39,6 +40,7 @@ export const mockVolunteerToAdminMessages: MessageInterface[] = [
     chatId: '42',
     body: 'Куда тут жать, чтобы помогать?',
     createdAt: new Date(2024, 10, 14, 0, 0, 0),
+    timestamp: new Date(),
   },
 ];
 
@@ -66,6 +68,7 @@ export const mockRecipientToAdminMessages: MessageInterface[] = [
     chatId: '53',
     body: 'Мне нужна помощь!',
     createdAt: new Date(2024, 10, 12, 0, 0, 0),
+    timestamp: new Date(),
   },
   {
     _id: '2',
@@ -74,6 +77,7 @@ export const mockRecipientToAdminMessages: MessageInterface[] = [
     chatId: '53',
     body: 'Как мне создать заявку?',
     createdAt: new Date(2024, 10, 13, 5, 0, 0),
+    timestamp: new Date(),
   },
 ];
 

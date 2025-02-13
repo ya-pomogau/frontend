@@ -44,6 +44,7 @@ export const mockConflictVolunteerMessages: MessageInterface[] = [
     chatId: '112',
     body: 'Он не пришёл!',
     createdAt: new Date(2024, 10, 15, 0, 0, 0),
+    timestamp: new Date(),
   },
   {
     _id: '1',
@@ -52,6 +53,7 @@ export const mockConflictVolunteerMessages: MessageInterface[] = [
     chatId: '112',
     body: 'Я всё облазил!',
     createdAt: new Date(2024, 10, 16, 0, 0, 0),
+    timestamp: new Date(),
   },
 ];
 
@@ -63,6 +65,7 @@ export const mockConflictRecipientMessages: MessageInterface[] = [
     chatId: '911',
     body: 'Волонтёр не пришёл!',
     createdAt: new Date(2024, 10, 15, 0, 0, 0),
+    timestamp: new Date(),
   },
   {
     _id: '2',
@@ -71,6 +74,7 @@ export const mockConflictRecipientMessages: MessageInterface[] = [
     chatId: '911',
     body: 'Я замерз.',
     createdAt: new Date(2024, 10, 16, 5, 0, 0),
+    timestamp: new Date(),
   },
 ];
 

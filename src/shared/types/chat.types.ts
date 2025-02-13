@@ -38,6 +38,7 @@ export interface MessageInterface {
   body: string;
   attaches: string[];
   createdAt: Date;
+  timestamp: Date | string;
   author: AnyUserInterface;
   chatId: string;
 }

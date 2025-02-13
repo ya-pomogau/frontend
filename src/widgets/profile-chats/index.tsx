@@ -1,16 +1,11 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Routes } from 'shared/config';
-import { usePermission } from 'shared/hooks';
-import { adminPermission, userRole } from 'shared/types/common.types';
 
 import { Icon, SmartHeader } from 'shared/ui';
 import { PageSubMenu } from 'widgets/page-sub-menu';
 import { PageSubMenuLink } from 'widgets/page-sub-menu/components/page-sub-menu-link/page-sub-menu-link';
 import styles from './styles.module.css';
-
-// NOTE: для чего этот импорт?
-import { id } from 'date-fns/esm/locale';
 
 interface ProfileChatsPagesProps {
   children: ReactNode;
@@ -20,12 +15,6 @@ export const ProfileChatsPages = ({ children }: ProfileChatsPagesProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  // const isConflictsPermissionGranted = usePermission(
-  //   [adminPermission.CONFLICTS],
-  //   userRole.ADMIN
-  // );
-
-  // TODO: Связать моковые данные с хуками
   const [notificationsQuantity, _] = useState({
     hub: { unreviewed: 2, inWork: 0, completed: 1 },
     hubTotal: 3,

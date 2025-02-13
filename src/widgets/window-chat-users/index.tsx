@@ -99,7 +99,7 @@ export const WindowChatUsers: FC<IWindowChatUsers> = ({
               messageText={message.body}
               avatarLink={message.author.avatar}
               key={message._id}
-              createdAt={message.createdAt}
+              timestamp={message.timestamp}
             />
           ))}
       </div>

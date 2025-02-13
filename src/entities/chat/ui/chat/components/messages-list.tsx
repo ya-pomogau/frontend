@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 
 import { Message } from 'shared/ui';
-// import { useLazyScroll } from '../hooks/useLazyScroll';
 
 import styles from '../styles.module.css';
 import { MessageInterface } from 'shared/types/chat.types';
 import { AnyUserInterface } from 'shared/types/user.type';
+import { sortMessages } from '../libs/utils';
 
 interface MessagesListProps {
   messages: MessageInterface[];
@@ -15,12 +15,11 @@ interface MessagesListProps {
 export const MessagesList = ({ messages, chatmateInfo }: MessagesListProps) => {
   const openedChatPopupRef = useRef<HTMLDivElement>(null);
 
-  // TODO: починить
-  // const currentMessages = useLazyScroll({ messages, openedChatPopupRef });
+  const currentMessages = sortMessages(messages);
 
   return (
     <div ref={openedChatPopupRef} className={styles.messagesBlock}>
-      {messages?.map((message) => (
+      {currentMessages?.map((message) => (
         <Message
           type={
             message.author._id === chatmateInfo._id ? 'incoming' : 'outgoing'
@@ -28,7 +27,7 @@ export const MessagesList = ({ messages, chatmateInfo }: MessagesListProps) => {
           messageText={message.body}
           avatarLink={message.author.avatar}
           key={message._id}
-          createdAt={message.createdAt}
+          timestamp={message.timestamp}
         />
       ))}
     </div>
