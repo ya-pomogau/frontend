@@ -45,7 +45,6 @@ const LoginForm = () => {
             name={field.name}
             onChange={field.onChange}
             placeholder="ФИО / Телефон / Логин"
-            extClassName={styles.field}
             error={!!errors?.login?.message}
             errorText={errors.login?.message || ' '}
           />
@@ -56,7 +55,6 @@ const LoginForm = () => {
         control={control}
         render={({ field }) => (
           <PasswordInput
-            extClassName={styles.field}
             name={field.name}
             onChange={field.onChange}
             required

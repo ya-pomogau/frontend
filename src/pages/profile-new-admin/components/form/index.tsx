@@ -190,6 +190,7 @@ export const NewAdminForm = () => {
         )}
       />
       <Button
+        extClassName={styles.save_button}
         buttonType="primary"
         actionType="submit"
         label="Добавить"

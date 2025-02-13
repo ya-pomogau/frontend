@@ -128,14 +128,22 @@ const RegisterForm = () => {
         placeholder="ФИО"
         type="text"
         control={control}
-        extClassName={styles.input}
+        slotProps={{
+          label: {
+            className: styles.label,
+          },
+        }}
       />
       <FormInputPhone
         name="phone"
         label="Телефон"
         placeholder="+7 (000) 000-00-00"
         control={control}
-        extClassName={styles.input}
+        slotProps={{
+          label: {
+            className: styles.label,
+          },
+        }}
       />
       <div>
         <FormInputAddress
@@ -144,7 +152,11 @@ const RegisterForm = () => {
           placeholder="Адрес"
           control={control}
           setAddress={handleAddressValueChange}
-          extClassName={styles.input}
+          slotProps={{
+            label: {
+              className: styles.label,
+            },
+          }}
         />
 
         <Typography
