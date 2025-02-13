@@ -10,19 +10,26 @@ import { LightPopup } from 'shared/ui/light-popup';
 import { ProfileInput } from './profile-input';
 
 import styles from './edit-viewer-info.module.css';
+import { FormInputAddress } from '../../../shared/ui';
+import { GeoCoordinates } from '../../../shared/types/point-geojson.types';
 
-interface EditViewerInfoForm {
+export interface EditViewerInfoForm {
   name: string;
   phone: string;
   address: string;
+  location: {
+    coordinates: GeoCoordinates;
+    type: 'Point';
+  };
 }
 
-interface EditViewerInfoProps {
+export interface EditViewerInfoProps {
   extClassName?: string;
   userAvatar: string;
   userName: string;
   userPhone: string;
   userAddress: string;
+  userCoords: GeoCoordinates;
   onSave: SubmitHandler<EditViewerInfoForm>;
   isOpen: boolean;
   onClose: () => void;
@@ -32,6 +39,7 @@ export const EditViewerInfo = ({
   userName,
   userPhone,
   userAddress,
+  userCoords,
   userAvatar,
   onSave,
   isOpen,
@@ -41,13 +49,18 @@ export const EditViewerInfo = ({
   const {
     handleSubmit,
     control,
+    setValue,
     formState: { errors, isDirty },
     reset,
-  } = useForm({
+  } = useForm<EditViewerInfoForm>({
     defaultValues: {
       name: userName,
       phone: userPhone,
       address: userAddress,
+      location: {
+        coordinates: userCoords,
+        type: 'Point',
+      },
     },
     mode: 'onChange',
   });
@@ -81,6 +94,10 @@ export const EditViewerInfo = ({
       name: userName,
       phone: userPhone,
       address: userAddress,
+      location: {
+        coordinates: userCoords,
+        type: 'Point',
+      },
     });
   }, [isOpen, userName, userPhone, userAddress, reset]);
 
@@ -118,6 +135,18 @@ export const EditViewerInfo = ({
       document.removeEventListener('keydown', closeByEsc);
     };
   }, []);
+
+  const handleAddressValueChange = (
+    newAddress: string,
+    coords?: GeoCoordinates
+  ) => {
+    setValue('address', newAddress, { shouldValidate: true });
+    setValue(
+      'location',
+      { coordinates: coords || [], type: 'Point' },
+      { shouldValidate: true }
+    );
+  };
 
   return (
     <LightPopup
@@ -193,13 +222,12 @@ export const EditViewerInfo = ({
             />
           </ProfileInput>
           <ProfileInput label="Адрес:">
-            <FormInput
-              type="text"
+            <FormInputAddress
               name="address"
-              rules={{ required: 'Адрес не может быть пустым' }}
+              placeholder="Адрес"
               control={control}
-              extClassName={classnames(styles.input, 'text_size_medium')}
-              placeholder="Введите адрес"
+              extClassName={styles.input}
+              setAddress={handleAddressValueChange}
             />
           </ProfileInput>
         </fieldset>
