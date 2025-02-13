@@ -3,7 +3,12 @@ import { io, Socket } from 'socket.io-client';
 
 import { WS_HOST } from '../config/api-config';
 import { getTokenAccess } from '../shared/libs/utils';
-import { addChatMeta, addMessageToChat, setChatsMeta } from './system-slice';
+import {
+  addChatMeta,
+  addMessageToChat,
+  setChatsMeta,
+  updateMeta,
+} from './system-slice';
 import { wsMessageKind } from '../shared/types/websocket.types';
 import { AnyUserChatsResponseInterface } from '../shared/types/chat.types';
 
@@ -21,6 +26,8 @@ export const websocketMiddleware = (
       NEW_MESSAGE_COMMAND,
       INITIAL_CHATS_META_COMMAND,
       NEW_CHATS_META_COMMAND,
+      CHAT_PAGE_QUERY,
+      UPDATE_LASTREAD_COMMAND,
     } = wsActions;
 
     return (next) => (action) => {
@@ -56,6 +63,22 @@ export const websocketMiddleware = (
 
         socket.on(wsMessageKind.NEW_MESSAGE_COMMAND, ({ data }) => {
           dispatch(addMessageToChat(data));
+
+          dispatch({
+            type: wsMessageKind.UPDATE_LASTREAD_COMMAND,
+            payload: {
+              chatId: data.chatId,
+              lastread: data.timestamp,
+            },
+          });
+        });
+
+        socket.on(wsMessageKind.CHAT_PAGE_CONTENT, ({ data }) => {
+          dispatch(addMessageToChat(data));
+        });
+
+        socket.on(wsMessageKind.REFRESH_CHATS_META_COMMAND, ({ data }) => {
+          dispatch(updateMeta(data));
         });
       }
 
@@ -73,6 +96,18 @@ export const websocketMiddleware = (
 
       if (type === CLOSE_CHAT_EVENT && isConnected) {
         socket?.emit(CLOSE_CHAT_EVENT, {
+          data: payload,
+        });
+      }
+
+      if (type === CHAT_PAGE_QUERY && isConnected) {
+        socket?.emit(CHAT_PAGE_QUERY, {
+          data: payload,
+        });
+      }
+
+      if (type === UPDATE_LASTREAD_COMMAND && isConnected) {
+        socket?.emit(UPDATE_LASTREAD_COMMAND, {
           data: payload,
         });
       }
