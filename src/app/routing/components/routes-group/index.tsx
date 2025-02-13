@@ -4,6 +4,7 @@ import { useAppSelector } from 'app/hooks';
 import { UserRole } from 'shared/types/common.types';
 import { isUserBlockedSelector } from 'entities/user/model';
 import { Routes } from 'shared/config';
+import { Loader } from '../../../../shared/ui';
 
 interface CommonRouteProps {
   someflag?: never;
@@ -51,11 +52,12 @@ export const RoutesGroup = ({
   onlyBlocked,
   allowBlocked,
 }: RoutesGroupProps) => {
-  const { isLoading, role } = useAppSelector((state) => state.user);
+  const { role } = useAppSelector((state) => state.user);
+  const isPending = useAppSelector((state) => state.system.isPending);
   const isBlockedSelector = useAppSelector(isUserBlockedSelector);
 
-  if (isLoading) {
-    return null;
+  if (isPending) {
+    return <Loader />;
   }
 
   if (isRoot) {
