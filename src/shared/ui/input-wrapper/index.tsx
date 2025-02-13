@@ -93,7 +93,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
           extClassNameCustomIcon={styles.pinIcon}
           onChange={props.onChange}
           customIcon={
-            <label className={styles.pinIconCursor}>
+            <>
               <input
                 id="input-image"
                 type="file"
@@ -103,7 +103,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
                 onChange={handleFileChange}
               />
               <Icon color="blue" icon="PinIcon" size={props.customIconSize} />
-            </label>
+            </>
           }
         />
         <Button
@@ -145,6 +145,7 @@ export const InputWrapper: React.FC<PropsInputWrapper> = (props) => {
               type="send"
               messageText={m.messageText}
               avatarLink=""
+              timestamp={new Date()}
             />
           ))}
         </div>

@@ -10,10 +10,8 @@
 }
 
 .input > div > input {
-  height: 37px;
   font-size: var(--font-size-small);
   line-height: var(--line-height-xs);
-  border: 1px solid var(--colors-interface-ford-white);
 }
 
 .input > div > input::placeholder {
@@ -47,8 +45,7 @@
 }
 
 .pinIcon {
-  top: 50%;
-  transform: translateY(-55%);
+  display: flex;
 }
 
 .pinIconCursor {

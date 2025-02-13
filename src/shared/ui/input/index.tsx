@@ -9,7 +9,7 @@ import { Typography } from '../../ui';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   extClassName?: string;
   error?: boolean;
@@ -18,6 +18,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onIconClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   extClassNameInput?: string;
   extClassNameCustomIcon?: string;
+  extClassNameContainer?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -28,6 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       onChange,
       label,
       extClassName,
+      extClassNameContainer,
       extClassNameInput,
       extClassNameCustomIcon,
       placeholder,
@@ -35,19 +37,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       errorText,
       customIcon,
       onIconClick,
+      disabled,
       ...props
     },
     ref
   ) => {
     const id = nanoid();
 
-    const inputClass = error
-      ? styles.input_error
-      : extClassNameInput
-      ? extClassNameInput
-      : styles.input;
+    const inputStyles = cn(styles.input, extClassNameInput, {
+      [styles.input_error]: error,
+    });
 
     const iconClass = error ? styles.icon_error : styles.icon;
+
+    const containerStyles = cn(styles.container, extClassNameContainer, {
+      [styles.disabled]: disabled,
+    });
 
     return (
       <div className={extClassName} data-testid={'div'}>
@@ -56,24 +61,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
-        <div className={styles.container}>
+        <div className={containerStyles}>
           <input
             data-testid={'input'}
             ref={ref}
             type={type}
             name={name}
-            className={cn('text', inputClass)}
+            className={inputStyles}
             onChange={onChange}
             placeholder={placeholder}
             id={id}
+            disabled={disabled}
             {...props}
-          />
-          <Typography
-            tag={'span'}
-            color={'orange'}
-            variant={'support'}
-            content={errorText === ' ' ? <span>&nbsp;</span> : errorText}
-            extraClass={styles.error}
           />
           <div
             className={cn(iconClass, extClassNameCustomIcon)}
@@ -82,6 +81,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {customIcon}
           </div>
         </div>
+        <Typography
+          tag={'span'}
+          color={'orange'}
+          variant={'support'}
+          content={errorText === ' ' ? <span>&nbsp;</span> : errorText}
+          extraClass={styles.error}
+        />
       </div>
     );
   }

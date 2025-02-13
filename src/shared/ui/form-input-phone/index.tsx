@@ -40,6 +40,11 @@ export interface FormInputPhoneProps<FormInputs extends FieldValues>
   rules?: RegisterOptions<FormInputs>;
   label?: string;
   extClassName?: string;
+  slotProps?: {
+    label?: {
+      className?: string;
+    };
+  };
 }
 
 export const FormInputPhone = <T extends FieldValues>({
@@ -49,6 +54,7 @@ export const FormInputPhone = <T extends FieldValues>({
   label,
   extClassName,
   placeholder,
+  slotProps,
 }: FormInputPhoneProps<T>) => {
   const {
     field,
@@ -62,7 +68,10 @@ export const FormInputPhone = <T extends FieldValues>({
   return (
     <div className={extClassName} data-testid={'div'}>
       {label && (
-        <label className={cn(styles.label, 'text')} htmlFor={field.name}>
+        <label
+          className={cn(styles.label, slotProps?.label?.className, 'text')}
+          htmlFor={field.name}
+        >
           {label}
         </label>
       )}
@@ -76,15 +85,14 @@ export const FormInputPhone = <T extends FieldValues>({
           mask={DEFAULT_MASK}
           onChange={field.onChange}
         />
-        {Boolean(error) && error?.message && (
-          <Typography
-            tag={'span'}
-            color={'orange'}
-            variant={'support'}
-            content={error?.message}
-            extraClass={styles.error}
-          />
-        )}
+        <Typography
+          tag={'span'}
+          color={'orange'}
+          variant={'support'}
+          extraClass={styles.error}
+        >
+          {error?.message || <>&nbsp;</>}
+        </Typography>
       </div>
     </div>
   );

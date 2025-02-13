@@ -1,20 +1,26 @@
 .container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   position: relative;
+  border: 1px solid var(--colors-interface-primary);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.container.disabled {
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .input {
+  width: 100%;
+  border: none;
+  background: none;
+  outline: none;
   padding: 12px;
   transition: var(--transition-hover);
   color: var(--colors-interface-primary);
-  border: 1px solid var(--colors-interface-primary-additional);
-  box-sizing: border-box;
+  box-sizing: content-box;
   font-size: var(--font-size-s);
   line-height: 19px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 }
 
 .input_error {
@@ -28,12 +34,12 @@
 }
 
 .input:hover {
-  border-color: var(--colors-interface-blue-navy);
+  /*border-color: var(--colors-interface-blue-navy);*/
 }
 
 .input:focus-visible {
   outline: none;
-  border-color: var(--colors-interface-blue-navy);
+  /*border-color: var(--colors-interface-blue-navy);*/
 }
 
 .label {
@@ -54,12 +60,8 @@
 }
 
 .icon {
-  display: flex;
-  position: absolute;
-  right: 12px;
   cursor: pointer;
   transition: var(--transition-hover);
-  top: 12%;
 }
 
 .icon_error {

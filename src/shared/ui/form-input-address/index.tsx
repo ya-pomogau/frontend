@@ -19,6 +19,11 @@ interface FormInputAddressProps<FormInputs extends FieldValues>
   setAddress: (address: string, coords?: GeoCoordinates) => void;
   label?: string;
   extClassName?: string;
+  slotProps?: {
+    label?: {
+      className?: string;
+    };
+  };
 }
 
 export const FormInputAddress = <T extends FieldValues>({
@@ -29,6 +34,7 @@ export const FormInputAddress = <T extends FieldValues>({
   setAddress,
   placeholder,
   extClassName,
+  slotProps,
 }: FormInputAddressProps<T>) => {
   const { field } = useController({
     name,
@@ -85,6 +91,7 @@ export const FormInputAddress = <T extends FieldValues>({
       control={control}
       name={name}
       rules={rules}
+      slotProps={slotProps}
     />
   );
 };

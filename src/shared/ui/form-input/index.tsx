@@ -20,6 +20,11 @@ export interface FormInputProps<FormInputs extends FieldValues>
   customIcon?: ReactNode;
   onIconClick?: (e: MouseEvent<HTMLDivElement>) => void;
   extClassName?: string;
+  slotProps?: {
+    label?: {
+      className?: string;
+    };
+  };
 }
 
 export const FormInput = <T extends FieldValues>({
@@ -32,6 +37,7 @@ export const FormInput = <T extends FieldValues>({
   placeholder,
   customIcon,
   onIconClick,
+  slotProps,
 }: FormInputProps<T>) => {
   const {
     field,
@@ -48,7 +54,10 @@ export const FormInput = <T extends FieldValues>({
   return (
     <div className={extClassName} data-testid={'div'}>
       {label && (
-        <label className={cn(styles.label, 'text')} htmlFor={field.name}>
+        <label
+          className={cn(styles.label, slotProps?.label?.className, 'text')}
+          htmlFor={field.name}
+        >
           {label}
         </label>
       )}
