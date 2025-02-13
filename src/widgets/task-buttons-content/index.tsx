@@ -44,7 +44,13 @@ export const ModalContent = ({
         <CloseModalContent date={date} userRole={userRole} taskId={taskId} />
       );
     case modalContentType.conflict:
-      return <ConflictModalContent userRole={userRole} volunteer={volunteer} />;
+      return (
+        <ConflictModalContent
+          userRole={userRole}
+          volunteer={volunteer}
+          taskId={taskId}
+        />
+      );
     case modalContentType.confirm:
       return <ConfirmModalContent userRole={userRole} volunteer={volunteer} />;
     case modalContentType.admin:

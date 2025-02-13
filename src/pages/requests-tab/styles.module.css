@@ -3,11 +3,8 @@
   display: flex;
   gap: 20px;
   margin: 35px 0 0 30px;
-  width: 95%;
-  max-height: 65vh;
   overflow-y: auto;
-  max-height: calc(65vh - 141px);
-  box-sizing: border-box;
+  max-height: calc(65vh - 90px);
 }
 
 .userCardsList {

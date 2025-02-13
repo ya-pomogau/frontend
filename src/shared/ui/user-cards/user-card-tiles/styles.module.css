@@ -3,44 +3,32 @@
 }
 
 .buttons_volunteers > :first-child {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 
 .content {
   position: relative;
   margin-top: 40px;
-  padding: 0px 40px 0px 30px;
-  min-height: 128px;
-  width: 276px;
+  padding: 37px 40px 20px 40px;
   border: 1px solid var(--colors-interface-blue-strong);
   display: flex;
   flex-direction: column;
+  align-self: flex-start;
   gap: 5px;
 }
 
 .avatar {
   position: absolute;
-  left: 0;
-  top: 0px;
-  transform: translate(107px, -31px);
+  left: 25%;
+  top: 0;
+  transform: translate(50%, -31px);
 }
 
 .icons_div {
-  width: 100%;
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  gap: 10px;
-  margin-top: 14px;
-  margin-left: 5px;
-}
-
-.admin_content {
-  min-height: 256px;
-  height: min-content;
-  padding-top: 30px;
+  gap: 8px;
 }
 
 @media screen and (min-width: 920px) and (max-width: 1150px),
@@ -50,10 +38,6 @@
     height: 310px;
     padding: 41px 10px 0 10px;
     gap: 10px;
-  }
-
-  .admin_content_action {
-    height: 545px;
   }
 
   .avatar {
@@ -71,7 +55,7 @@
     width: 45%;
   }
   .icons_div {
-    margin-top: 0px;
-    margin-left: 0px;
+    margin-top: 0;
+    margin-left: 0;
   }
 }

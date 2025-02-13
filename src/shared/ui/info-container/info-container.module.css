@@ -17,6 +17,7 @@
   flex-direction: column;
   color: var(--colors-interface-primary);
   gap: 10px;
+  max-width: calc(100% - 34px);
 }
 
 .info-container-settings-button {

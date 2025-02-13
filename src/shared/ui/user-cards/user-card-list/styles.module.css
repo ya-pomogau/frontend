@@ -29,12 +29,11 @@
   margin-top: 0;
   padding-top: -10px;
   width: 100%;
-  box-sizing: border-box;
-  max-height: 100px;
   display: flex;
   flex-direction: row;
   gap: 0;
   height: auto;
+  align-items: center
 }
 
 .icons_div {
@@ -53,7 +52,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 0;
-  margin: -10px 0 0 12px;
+  margin: 0 0 0 12px;
   min-width: 180px;
 }
 

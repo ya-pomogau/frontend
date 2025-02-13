@@ -235,19 +235,7 @@ export const SectionChatsConflict = () => {
               action={false}
               onClick={() => handleClickConflictCard(task)}
               unreads={+task.isPendingChanges}
-              description={
-                // TODO: Добавить в тип Task, createdAt и updateAt
-                new Date(task.createdAt ?? undefined).toLocaleString('ru-Ru', {
-                  day: 'numeric',
-                  year: '2-digit',
-                  month: 'numeric',
-                  timeZone: 'UTC',
-                  hour: 'numeric',
-                  minute: 'numeric',
-                }) +
-                ' — ' +
-                task.description
-              }
+              description={task.description}
             />
             {isOpen && isInWorkPage && task._id === selectedTask && (
               <div className={styles['conflict-chats']}>

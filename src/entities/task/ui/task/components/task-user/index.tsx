@@ -33,9 +33,8 @@ export const TaskUser = ({
   const dispatch = useAppDispatch();
   const currentUser = useUser();
 
-  const currentRole = currentUser?.role.toLowerCase() as
-    | 'volunteer'
-    | 'recipient';
+  const currentRole =
+    currentUser?.role.toLowerCase() === 'recipient' ? 'volunteer' : 'recipient';
 
   const chatMeta = useAppSelector(
     actions.getChatMetaByTaskId(taskId)
@@ -57,6 +56,21 @@ export const TaskUser = ({
       type: wsMessageKind.OPEN_CHAT_EVENT,
       payload: chatMeta.meta._id,
     });
+
+    dispatch({
+      type: wsMessageKind.CHAT_PAGE_QUERY,
+      payload: {
+        chatId: chatMeta.meta._id,
+      },
+    });
+
+    dispatch({
+      type: wsMessageKind.UPDATE_LASTREAD_COMMAND,
+      payload: {
+        chatId: chatMeta.meta._id,
+        lastread: chatMeta.chats.at(-1)?.timestamp,
+      },
+    });
   };
 
   const handleCloseChat = () => {
@@ -68,12 +82,15 @@ export const TaskUser = ({
   };
 
   const handleSendMessage = (message: string) => {
+    const date = new Date().toISOString();
+
     dispatch({
       type: wsMessageKind.NEW_MESSAGE_COMMAND,
       payload: {
         body: message,
         author: currentUser,
         chatId: chatMeta.meta._id,
+        timestamp: date,
       },
     });
   };
