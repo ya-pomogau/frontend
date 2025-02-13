@@ -29,31 +29,26 @@ const UserInfo = ({
 
   return (
     <div className={classnames(styles.user_info, extraClasses)}>
-      <div>
-        <Typography
-          tag={'h3'}
-          variant={'paragraphResize'}
-          content={userName}
-          extraClass={styles.name_text}
-        />
-        {(role === userRole.RECIPIENT || viewMode === 'list') && (
-          <div
-            className={classnames(
-              viewMode === 'list'
-                ? styles.grid_two_list
-                : styles.grid_two_tiles,
-              styles.id_color
-            )}
-          >
-            <Typography
-              variant={'servicesText'}
-              color={'ID-text'}
-              content={`${'ID'} ${formatUserId(userId)}`}
-              extraClass={styles.id}
-            />
-          </div>
-        )}
-      </div>
+      <Typography
+        tag={'h3'}
+        variant={'paragraphResize'}
+        content={userName}
+        extraClass={styles.name_text}
+      />
+      {(role === userRole.RECIPIENT || viewMode === 'list') && (
+        <div
+          className={classnames(
+            viewMode === 'list' ? styles.grid_two_list : styles.grid_two_tiles
+          )}
+        >
+          <Typography
+            variant={'servicesText'}
+            color={'ID-text'}
+            content={`${'ID'} ${formatUserId(userId)}`}
+            extraClass={styles.id}
+          />
+        </div>
+      )}
       {children && <>{children}</>}
       <div
         className={classnames(
