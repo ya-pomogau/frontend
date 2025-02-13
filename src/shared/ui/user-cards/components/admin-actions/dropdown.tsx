@@ -2,38 +2,28 @@ import { Control, Controller } from 'react-hook-form';
 
 import { Button, Checkbox } from 'shared/ui';
 import { adminPermission, AdminPermission } from 'shared/types/common.types';
-import { Icon } from 'shared/ui';
-import styles from '../../styles.module.css';
+
+import styles from './styles.module.css';
 
 interface AdminDropdownMenuProps {
   onAdminBlockClick: () => void;
-  onSwitchArrow: () => void;
-  setAdminDropdownListClosed: (closed: boolean) => void;
   control: Control<Record<AdminPermission, boolean>, unknown>;
 }
 
 export const AdminDropdownMenu = ({
   onAdminBlockClick,
-  onSwitchArrow,
-  setAdminDropdownListClosed,
   control,
 }: AdminDropdownMenuProps) => {
   return (
-    <div className={styles.admin_dropdown_list_opened_box}>
-      <div
-        className={styles.admin_arrow_up}
-        onClick={() => setAdminDropdownListClosed(true)}
-      >
-        <Icon icon="ArrowDownIcon" color="blue" onClick={onSwitchArrow} />
-      </div>
-      <div className={styles.admin_checkboxes}>
+    <div className={styles.dropdown}>
+      <div className={styles.container}>
         <Controller
           control={control}
           name={adminPermission.CONFIRMATION}
           render={({ field }) => (
             <Checkbox
               id={field.name}
-              extClassName={styles.admin_checkbox}
+              extClassName={styles.checkbox}
               label="Подтверждать аккаунты"
               checked={field.value}
               onChange={field.onChange}
@@ -46,7 +36,7 @@ export const AdminDropdownMenu = ({
           render={({ field }) => (
             <Checkbox
               id={field.name}
-              extClassName={styles.admin_checkbox}
+              extClassName={styles.checkbox}
               label="Создавать заявки"
               checked={field.value}
               onChange={field.onChange}
@@ -59,7 +49,7 @@ export const AdminDropdownMenu = ({
           render={({ field }) => (
             <Checkbox
               id={field.name}
-              extClassName={styles.admin_checkbox}
+              extClassName={styles.checkbox}
               label="Раздавать ключи"
               checked={field.value}
               onChange={field.onChange}
@@ -72,7 +62,7 @@ export const AdminDropdownMenu = ({
           render={({ field }) => (
             <Checkbox
               id={field.name}
-              extClassName={styles.admin_checkbox}
+              extClassName={styles.checkbox}
               label="Решать споры"
               checked={field.value}
               onChange={field.onChange}
@@ -85,7 +75,7 @@ export const AdminDropdownMenu = ({
           render={({ field }) => (
             <Checkbox
               id={field.name}
-              extClassName={styles.admin_checkbox}
+              extClassName={styles.checkbox}
               label="Контент блог"
               checked={field.value}
               onChange={field.onChange}
@@ -98,7 +88,7 @@ export const AdminDropdownMenu = ({
           render={({ field }) => (
             <Checkbox
               id={field.name}
-              extClassName={styles.admin_checkbox}
+              extClassName={styles.checkbox}
               label="Повышение балов"
               checked={field.value}
               onChange={field.onChange}
@@ -106,15 +96,12 @@ export const AdminDropdownMenu = ({
           )}
         />
       </div>
-      <div className={styles.admin_block_btn}>
-        <Button
-          buttonType="secondary"
-          label="Заблокировать"
-          onClick={onAdminBlockClick}
-        />
-      </div>
+      <Button
+        extClassName={styles.button}
+        buttonType="secondary"
+        label="Заблокировать"
+        onClick={onAdminBlockClick}
+      />
     </div>
   );
 };
-
-export default AdminDropdownMenu;

@@ -1,0 +1,32 @@
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.checkbox {
+    font-family: Nunito Sans, sans-serif;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--font-size-s);
+    letter-spacing: 0;
+    text-align: left;
+    cursor: pointer;
+}
+
+.button {
+    padding: 11px 16px;
+    align-self: flex-start;
+}
+
+@media all and (max-width: 1150px) {
+    .checkbox {
+        font-size: 10px;
+    }
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import cn from 'classnames';
 
 import { Input, Button, Icon } from 'shared/ui';
 import { useControlModal } from 'shared/hooks';
@@ -37,14 +38,9 @@ const getDefaultValues = (initialValues: AdminPermission[]) => {
 interface AdminActionsProps {
   id: string;
   permissions: AdminPermission[];
-  onSwitchArrow: () => void;
 }
 
-const AdminActions = ({
-  id,
-  onSwitchArrow,
-  permissions,
-}: AdminActionsProps) => {
+const AdminActions = ({ id, permissions }: AdminActionsProps) => {
   const [addAdminPrivileges] = useAddAdminPrivilegiesMutation();
   const [blockAdmin] = useBlockAdminMutation();
 
@@ -77,72 +73,53 @@ const AdminActions = ({
     await blockAdmin(id);
   };
 
+  const handleToggleDropdown = () => {
+    setAdminDropdownListClosed((prev) => !prev);
+  };
+
   return (
     <div className={styles.buttons_div}>
-      <div className={styles.admin_login_box}>
-        <Input
-          className={styles.admin_login_input}
-          label="Логин"
-          name="login"
-          onChange={(e) => {
-            console.log(e);
-          }}
-          value="Login"
-          placeholder="Логин"
-          type="text"
+      <Input
+        extClassNameContainer={styles.admin_login_container}
+        label="Логин"
+        name="login"
+        value="Login"
+        placeholder="Логин"
+        type="text"
+      />
+      <Input
+        customIcon={
+          <Icon icon="EditIcon" onClick={handleModalOpen} color={'blue'} />
+        }
+        extClassNameInput={styles.admin_password_input}
+        label="Пароль"
+        name="password"
+        value={'Пароль'}
+        placeholder="Пароль"
+        type={'password'}
+        disabled
+      />
+      {isDirty && isAdminDropdownListClosed && (
+        <Button
+          extClassName={styles.save_button}
+          buttonType="primary"
+          label="Сохранить"
+          onClick={handleSubmit}
         />
-      </div>
-      <div className={styles.admin_password_box}>
-        <Input
-          className={styles.admin_password_input}
-          label="Пароль"
-          name="password"
-          onChange={(e) => {
-            console.log(e);
-          }}
-          value={'Пароль'}
-          placeholder="Пароль"
-          type={'password'}
-          disabled
-        />
+      )}
+      <div
+        className={cn(styles.admin_dropdown_list_closed_box, {
+          [styles.expanded]: !isAdminDropdownListClosed,
+        })}
+      >
         <Icon
-          icon="EditIcon"
-          onClick={handleModalOpen}
-          className={styles.admin_edit_icon}
-          color={'blue'}
+          icon="ArrowDownIcon"
+          color="blue"
+          onClick={handleToggleDropdown}
         />
       </div>
-      {isAdminDropdownListClosed ? (
-        <>
-          {isDirty && (
-            <div className={styles.admin_save_btn}>
-              <Button
-                buttonType="primary"
-                label="Сохранить"
-                onClick={handleSubmit}
-              />
-            </div>
-          )}
-          <div className={styles.admin_dropdown_list_closed_box}>
-            <div
-              className={styles.admin_arrow_down}
-              onClick={() => setAdminDropdownListClosed(false)}
-            >
-              <Icon
-                icon="ArrowDownIcon"
-                color={'blue'}
-                onClick={onSwitchArrow}
-              />
-            </div>
-          </div>
-        </>
-      ) : (
-        <AdminDropdownMenu
-          control={control}
-          onAdminBlockClick={handleBlock}
-          onSwitchArrow={onSwitchArrow}
-          setAdminDropdownListClosed={setAdminDropdownListClosed}
-        />
+      {!isAdminDropdownListClosed && (
+        <AdminDropdownMenu control={control} onAdminBlockClick={handleBlock} />
       )}
       {isModalOpen && <ResetPassword handleModalClose={handleModalClose} />}
     </div>
