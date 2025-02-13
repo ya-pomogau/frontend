@@ -74,6 +74,10 @@ export type UpdateUserInfo = {
   address: string;
   avatar?: null | FormData;
   _id: string;
+  location?: {
+    coordinates: GeoCoordinates;
+    type: 'Point';
+  };
 };
 
 export type TVolunteerInfo = {
