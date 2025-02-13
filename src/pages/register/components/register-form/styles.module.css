@@ -2,7 +2,7 @@
   max-width: 377px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 17px;
   padding-left: 18px;
   justify-items: flex-start;
 }
@@ -18,6 +18,8 @@
   column-gap: 20px;
 }
 
-.input label {
+.label {
   color: var(--colors-interface-primary);
+  font: var(--font-golos-14-18);
+  margin-bottom: 8px;
 }
