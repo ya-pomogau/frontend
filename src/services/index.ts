@@ -14,6 +14,7 @@ export {
   useAddAdminPrivilegiesMutation,
   useBlockAdminMutation,
   useBlockUserMutation,
+  useGrantKeysMutation,
 } from './admin-api';
 
 export { authApi } from './auth';

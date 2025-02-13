@@ -12,6 +12,7 @@ interface UserCardListProps {
   user: User;
   handleConfirmClick: () => void;
   handleBlockClick: () => void;
+  handleGrantKeysClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
@@ -25,6 +26,7 @@ export const UserCardList = ({
   user,
   handleConfirmClick,
   handleBlockClick,
+  handleGrantKeysClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
   isAcceptButtonExclamationPointIcon,
@@ -78,9 +80,7 @@ export const UserCardList = ({
           isKeyButtonExclamationPointIcon={isKeyButtonExclamationPointIcon}
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={handleBlockClick}
-          onGiveKeysButtonClick={() =>
-            console.log('"Дать ключи" button pressed')
-          }
+          onGiveKeysButtonClick={handleGrantKeysClick}
           keys={keys || false}
         />
       )}

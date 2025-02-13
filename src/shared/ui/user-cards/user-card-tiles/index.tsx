@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import classnames from 'classnames';
 
 import VolunteerActions from 'shared/ui/user-cards/components/volonteer-actions';
@@ -16,6 +15,7 @@ export interface UserCardTilesProps {
   user: User;
   handleConfirmClick: () => void;
   handleBlockClick: () => void;
+  handleGrantKeysClick: () => void;
   isVolonteerAcceptButtonDisabled: boolean;
   isKeyButtonExclamationPointIcon: boolean;
   isAcceptButtonExclamationPointIcon: boolean;
@@ -29,6 +29,7 @@ export const UserCardTiles = ({
   user,
   handleConfirmClick,
   handleBlockClick,
+  handleGrantKeysClick,
   isVolonteerAcceptButtonDisabled,
   isKeyButtonExclamationPointIcon,
   isAcceptButtonExclamationPointIcon,
@@ -36,19 +37,12 @@ export const UserCardTiles = ({
 }: UserCardTilesProps) => {
   const { name, role, avatar, phone, _id, score, keys, status, permissions } =
     user;
-  const [isActon, setIsAction] = useState<boolean>(false);
-
-  const handleClick = () => {
-    setIsAction((state) => !state);
-  };
 
   return (
     <div
       className={classnames(
         styles.content,
-        role === userRole.ADMIN && isActon
-          ? styles.admin_content_action
-          : styles.admin_content
+        role === userRole.ADMIN && styles.admin_content
       )}
     >
       <Avatar
@@ -87,9 +81,7 @@ export const UserCardTiles = ({
           }
           onAcceptButtonClick={handleConfirmClick}
           onBlockButtonClick={handleBlockClick}
-          onGiveKeysButtonClick={() =>
-            console.log('"Дать ключи" button pressed')
-          }
+          onGiveKeysButtonClick={handleGrantKeysClick}
           keys={keys || false}
         />
       )}
@@ -105,11 +97,7 @@ export const UserCardTiles = ({
       )}
 
       {role === userRole.ADMIN && (
-        <AdminActions
-          id={_id}
-          permissions={permissions || []}
-          onSwitchArrow={handleClick}
-        />
+        <AdminActions id={_id} permissions={permissions || []} />
       )}
     </div>
   );

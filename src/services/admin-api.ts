@@ -187,6 +187,18 @@ export const adminsApi = createApi({
         return result ? [{ type: 'Unconfirmed' }, { type: 'UsersByRole' }] : [];
       },
     }),
+    grantKeys: build.mutation<{ id: string }, string>({
+      query: (id) => ({
+        url: `admin/users/${id}/keys`,
+        method: 'PUT',
+      }),
+      invalidatesTags: (result, error) => {
+        if (error) {
+          console.log('🚀 ~ error:', error);
+        }
+        return result ? [{ type: 'UsersByRole' }] : [];
+      },
+    }),
   }),
 });
 
@@ -205,4 +217,5 @@ export const {
   useAddAdminPrivilegiesMutation,
   useBlockAdminMutation,
   useBlockUserMutation,
+  useGrantKeysMutation,
 } = adminsApi;

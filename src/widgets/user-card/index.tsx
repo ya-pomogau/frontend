@@ -9,6 +9,7 @@ import { User } from 'entities/user/types';
 import {
   useBlockUserMutation,
   useConfirmUserMutation,
+  useGrantKeysMutation,
   usePromoteUserMutation,
 } from 'services/admin-api';
 import { UserCardTiles } from 'shared/ui/user-cards/user-card-tiles';
@@ -71,6 +72,11 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   const [confirmUser] = useConfirmUserMutation();
   const [blockUser] = useBlockUserMutation();
   const [promoteUser] = usePromoteUserMutation();
+  const [grantKeys] = useGrantKeysMutation();
+
+  const handleGrantKeys = () => {
+    grantKeys(user._id);
+  };
 
   const handleConfirmClick = useCallback(() => {
     confirmUser(user._id);
@@ -85,6 +91,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   };
 
   const isKeyButtonExclamationPointIcon = !!(score && score >= 60 && !keys);
+
   const isAcceptButtonExclamationPointIcon = !!(
     score &&
     score >= 30 &&
@@ -95,6 +102,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   return viewMode === 'tiles' || mediaQuery ? (
     <UserCardTiles
       user={user}
+      handleGrantKeysClick={handleGrantKeys}
       handleConfirmClick={handleConfirmClick}
       handleBlockClick={handleBlockClick}
       isVolonteerAcceptButtonDisabled={isVolunteerAcceptButtonDisabled}
@@ -105,6 +113,7 @@ export const UserCard = ({ user, viewMode }: UserCardProps) => {
   ) : (
     <UserCardList
       user={user}
+      handleGrantKeysClick={handleGrantKeys}
       handleConfirmClick={handleConfirmClick}
       handleBlockClick={handleBlockClick}
       isVolonteerAcceptButtonDisabled={isVolunteerAcceptButtonDisabled}
