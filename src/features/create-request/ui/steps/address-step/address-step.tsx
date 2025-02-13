@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -104,6 +103,7 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
               setAddress={handleAddressValueChange}
               name="address"
               extClassName={styles.input}
+              errorText={isEmptyAddress ? 'Укажите место встречи' : ''}
             />
             <div className={styles.text}>
               <Typography variant={'support'}>
@@ -125,14 +125,6 @@ export const AddressStep = ({ isMobile }: IAddressProps) => {
           </>
         )}
       </div>
-      <Typography
-        color={'red'}
-        variant={'input-title'}
-        content={'Укажите место встречи'}
-        extraClass={classNames(styles.messageAlert, {
-          [styles.messageAlertActive]: isEmptyAddress,
-        })}
-      />
       <div className={styles.buttonWrapper}>
         {!isTypeEdit && (
           <Button
