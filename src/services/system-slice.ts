@@ -25,6 +25,7 @@ import {
   MessageInterface,
   SystemChatInfo,
   TaskChatInfo,
+  TaskChatMetaInterface,
 } from '../shared/types/chat.types';
 
 export const isPendingSelector: TCustomSelector<boolean> = (state: RootState) =>
@@ -214,7 +215,35 @@ const systemSlice = createSlice({
         });
       }
     },
-    addMessageToChat: (state, { payload }: PayloadAction<MessageInterface>) => {
+    updateMeta: (
+      state,
+      { payload }: PayloadAction<{ tasks: TaskChatMetaInterface[] }>
+    ) => {
+      const { tasks } = payload;
+
+      if (tasks.length) {
+        tasks.forEach((newMeta) => {
+          taskChatAdapter.updateOne(state.chats.task, {
+            id: newMeta._id,
+            changes: {
+              meta: newMeta as TaskChatInfo['meta'],
+            },
+          });
+        });
+      }
+    },
+    addMessageToChat: (
+      state,
+      {
+        payload,
+      }: PayloadAction<
+        | MessageInterface
+        | {
+            chatId: string;
+            messages: MessageInterface[];
+          }
+      >
+    ) => {
       const allEntities = {
         ...state.chats.task.entities,
         ...state.chats.system.entities,
@@ -223,7 +252,11 @@ const systemSlice = createSlice({
       const chat = allEntities[payload.chatId];
 
       if (chat) {
-        chat.chats.push(payload);
+        if ('messages' in payload) {
+          chat.chats = payload.messages;
+        } else {
+          chat.chats.push(payload);
+        }
       }
     },
   },
@@ -339,8 +372,13 @@ const systemSlice = createSlice({
       })),
 });
 
-export const { resetUser, setChatsMeta, addMessageToChat, addChatMeta } =
-  systemSlice.actions;
+export const {
+  resetUser,
+  setChatsMeta,
+  addMessageToChat,
+  addChatMeta,
+  updateMeta,
+} = systemSlice.actions;
 export default systemSlice.reducer;
 
 export const actions = {
